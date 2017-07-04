@@ -1,6 +1,6 @@
 var path = require('path')
 var containerized = require('containerized')()
-var clientConfig = require('../../config/client-config')
+var clientConfig = require('../../config')
 
 var API_PREFIX = '/api'
 
