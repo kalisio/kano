@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - '7'
+services:
+  - mongodb
+addons:
+  code_climate:
+    repo_token: '5e883a7898139b78ac51c988da88d83ea58d6ab45dcf54ea51ffe3c77c084860'
+notifications:
+  email: false
+before_install:
+  - npm install -g quasar-cli
+install:
+  - npm install
+  - quasar build
+  - cd api
+  - npm install
+  - npm run build
+before_script:
+  - npm install -g codeclimate-test-reporter
+  - npm install -g quasar-cli
+after_script:
+  - codeclimate-test-reporter < api/coverage/lcov.info
+

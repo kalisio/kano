@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  kapp:
+    build: .
+    container_name: kapp
+    image: kaelia-tech/kapp
+    links:
+      - mongodb-kapp:mongodb
+    ports:
+      - 8081:8081
+    networks:
+      - kapp
+  mongodb-kapp:
+    container_name: mongodb-kapp
+    image: mongo
+    volumes:
+      - mongodb_weacast:/data/db
+    networks:
+      - kapp
+
+volumes:
+  mongodb_weacast:
+
+networks:
+  kapp:

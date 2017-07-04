@@ -1,0 +1,4 @@
+{
+  "plugins": [ "transform-runtime", "add-module-exports", "transform-export-extensions" ],
+  "presets": [ "es2015", "es2017-node7" ]
+}
