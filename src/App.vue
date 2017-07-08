@@ -1,18 +1,21 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <q-ajax-bar ref="bar" position="bottom" size="8px" color="#027be3" :delay="250"></q-ajax-bar>
+    <q-ajax-bar ref="bar" position="bottom" size="8px" color="#027be3" :delay="250" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { Toast, Events } from 'quasar'
+import { Toast, Events, QAjaxBar } from 'quasar'
 
 /*
  * Root component
  */
 export default {
+  components: {
+    QAjaxBar
+  },
   methods: {
     startProgress () {
       let progressBar = this.$refs.bar
@@ -49,5 +52,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// FIXME: using an imported function to loadComponent make Webpack unable to correctly process the components
-// import { utils } from 'kClient'
+
 function loadComponent (component) {
   return () => System.import(`components/${component}.vue`)
 }

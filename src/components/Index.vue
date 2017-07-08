@@ -1,13 +1,15 @@
 <template>
-  <h1>
-    Hello world !
-  </h1>
+  <k-layout />
 </template>
 
 <script>
 import config from 'config'
+import { KLayout } from 'kClient'
 
 export default {
+  components: {
+    KLayout
+  },
   data () {
     return {
       appName: 'kApp'
@@ -27,7 +29,3 @@ export default {
   }
 }
 </script>
-
-<style lang="styl">
-
-</style>
