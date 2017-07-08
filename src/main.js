@@ -12,7 +12,9 @@ import Quasar from 'quasar'
 import 'quasar-extras/material-icons'
 import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
+import config from 'config'
 import router from './router'
+import { Store } from 'kClient'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -25,13 +27,23 @@ Vue.use(Quasar)
 Vue.use(router)
 
 // Setup and install Vue-inject
-function loadClientComponent () {
+function loaderService () {
   return function (component) {
     return () => System.import(`kClient/src/components/${component}.vue`)
   }
 }
-injector.factory('componentLoader', '', loadClientComponent)
+injector.factory('loader', '', loaderService)
+function storeService () {
+  return function () {
+    return Store
+  }
+}
+injector.factory('store', '', storeService)
 Vue.use(injector)
+
+// Set the configuration
+Store.set('config', config)
+console.log(Store.get('config'))
 
 Quasar.start(() => {
   /* eslint-disable no-new */
