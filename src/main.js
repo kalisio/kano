@@ -14,6 +14,7 @@ import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
 import config from 'config'
 import router from './router'
+import api from './api'
 import { Store } from 'kClient'
 
 // Required IE 11 polyfill
@@ -32,18 +33,23 @@ function loaderService () {
     return () => System.import(`kClient/src/components/${component}.vue`)
   }
 }
-injector.factory('loader', '', loaderService)
 function storeService () {
   return function () {
     return Store
   }
 }
+function apiService () {
+  return function () {
+    return api
+  }
+}
+injector.factory('loader', '', loaderService)
 injector.factory('store', '', storeService)
+injector.factory('api', '', apiService)
 Vue.use(injector)
 
 // Set the configuration
 Store.set('config', config)
-console.log(Store.get('config'))
 
 Quasar.start(() => {
   /* eslint-disable no-new */

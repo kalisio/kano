@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 function loadComponent (component) {
-  return () => System.import(`components/${component}.vue`)
+  return () => System.import(`kClient/src/components/authentication/${component}.vue`)
 }
 
 Vue.use(VueRouter)
@@ -23,7 +23,15 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      component: loadComponent('Index')
+      component: loadComponent('KLogin')
+    },
+    {
+      path: '/login',
+      component: loadComponent('KLogin')
+    },
+    {
+      path: '/register',
+      component: loadComponent('KRegister')
     },
     {
       path: '*',
