@@ -6,11 +6,15 @@ module.exports = {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
   layout: {
-    appBar: 'KAppBar',
-    sideNav: 'KSideNav'
+    appBar: 'layout/KAppBar',
+    sideNav: 'layout/KSideNav'
+  },
+  appBar: {
+    title: 'kApp',
+    subtitle: 'A template application powered by Kaelia'
   },
   sideNav: {
-    idenity: 'KIdentity',
+    identity: 'layout/KIdentity',
     links: [
       { label: 'Users', icon: 'person', route: 'users' },
       { label: 'Groups', icon: 'group', route: 'groups' },
