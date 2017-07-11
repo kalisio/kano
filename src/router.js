@@ -44,6 +44,11 @@ export default new VueRouter({
           component: utils.loadClientComponent('authentication/KResetPassword')
         },
         {
+          path: '/user/:id',
+          name: 'user',
+          component: utils.loadClientComponent('users/KUser')
+        },
+        {
           path: '/home',
           name: 'home',
           component: utils.loadComponent('Home')

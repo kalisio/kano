@@ -17,7 +17,6 @@ module.exports = {
     identity: 'layout/KIdentity',
     links: [
       { label: 'Users', icon: 'person', route: 'users' },
-      { label: 'Groups', icon: 'group', route: 'groups' },
       { label: 'Organizations', icon: 'domain', route: 'organizations' },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
@@ -25,11 +24,6 @@ module.exports = {
   },
   users: {
     renderer: 'users/UserCardItem',
-    // nbItemsPerPage: '8',
-    mixins: [ 'collectionBase', 'createItem', 'editItem', 'deleteItem' ]
-  },
-  groups: {
-    renderer: 'collection/CardItem',
     // nbItemsPerPage: '8',
     mixins: [ 'collectionBase', 'createItem', 'editItem', 'deleteItem' ]
   },
