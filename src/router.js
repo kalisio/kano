@@ -49,6 +49,11 @@ export default new VueRouter({
           component: utils.loadClientComponent('users/KUser')
         },
         {
+          path: '/users',
+          name: 'users',
+          component: utils.loadClientComponent('users/KUsers')
+        },
+        {
           path: '/home',
           name: 'home',
           component: utils.loadComponent('Home')
