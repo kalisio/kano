@@ -1,31 +1,54 @@
 <template>
-  <k-layout />
+  <div>
+    <div v-if="isAuthenticated">
+      <k-layout />
+    </div>
+    <div v-else>
+      <router-view class="layout-view"></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-import config from 'config'
-import { KLayout } from 'kClient'
+import { Toast, Events } from 'quasar'
+import { authenticationMixin, KLayout } from 'kClient'
 
 export default {
+  name: 'index',
   components: {
     KLayout
   },
+  dependencies: ['store', 'api'],
   data () {
     return {
-      appName: 'kApp'
+      user: null
     }
   },
+  mixins: [authenticationMixin],
   computed: {
-  },
-  methods: {
+    isAuthenticated () {
+      return this.user !== null
+    }
   },
   created () {
-    // Apply app name if given
-    if (config.appName) this.appName = config.appName
+    Events.$on('user-changed', user => {
+      if (user) {
+        this.user = user
+        this.$router.push({name: 'home'})
+      }
+      else {
+        this.user = null
+      }
+    })
   },
   mounted () {
-  },
-  beforeDestroy () {
+    this.restoreSession()
+      .then(user => {
+        Toast.create.positive('Restoring previous session')
+      })
+      .catch(_ => {
+        this.$router.push({name: 'login'})
+      })
   }
 }
 </script>

@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-function loadComponent (component) {
-  return () => System.import(`kClient/src/components/authentication/${component}.vue`)
-}
+import utils from './utils'
 
 Vue.use(VueRouter)
 
@@ -23,19 +20,39 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      component: loadComponent('KLogin')
-    },
-    {
-      path: '/login',
-      component: loadComponent('KLogin')
-    },
-    {
-      path: '/register',
-      component: loadComponent('KRegister')
+      name: 'index',
+      component: utils.loadComponent('Index'),
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: utils.loadClientComponent('authentication/KLogin')
+        },
+        {
+          path: '/logout',
+          name: 'logout',
+          component: utils.loadClientComponent('authentication/KLogout')
+        },
+        {
+          path: '/register',
+          name: 'register',
+          component: utils.loadClientComponent('authentication/KRegister')
+        },
+        {
+          path: '/resetpassword',
+          name: 'resetPassword',
+          component: utils.loadClientComponent('authentication/KResetPassword')
+        },
+        {
+          path: '/home',
+          name: 'home',
+          component: utils.loadComponent('Home')
+        }
+      ]
     },
     {
       path: '*',
-      component: loadComponent('Error404')
+      component: utils.loadComponent('Error404')
     } // Not found
   ]
 })

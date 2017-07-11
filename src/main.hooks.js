@@ -1,9 +1,9 @@
 // Application hooks that run for every service
-import { hooks } from 'kClient'
+import { logHook, emitHook } from 'kClient'
 
 module.exports = {
   before: {
-    all: [ hooks.log, hooks.emit ],
+    all: [ logHook, emitHook ],
     find: [],
     get: [],
     create: [],
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   after: {
-    all: [ hooks.log, hooks.emit ],
+    all: [ logHook, emitHook ],
     find: [],
     get: [],
     create: [],
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   error: {
-    all: [ hooks.log, hooks.emit ],
+    all: [ logHook, emitHook ],
     find: [],
     get: [],
     create: [],

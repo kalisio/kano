@@ -15,6 +15,7 @@ import 'quasar-extras/fontawesome'
 import config from 'config'
 import router from './router'
 import api from './api'
+import utils from './utils'
 import { Store } from 'kClient'
 
 // Required IE 11 polyfill
@@ -28,11 +29,6 @@ Vue.use(Quasar)
 Vue.use(router)
 
 // Setup and install Vue-inject
-function loaderService () {
-  return function (component) {
-    return () => System.import(`kClient/src/components/${component}.vue`)
-  }
-}
 function storeService () {
   return function () {
     return Store
@@ -43,13 +39,13 @@ function apiService () {
     return api
   }
 }
-injector.factory('loader', '', loaderService)
 injector.factory('store', '', storeService)
 injector.factory('api', '', apiService)
 Vue.use(injector)
 
-// Set the configuration
+// Setup the Store
 Store.set('config', config)
+Store.set('clientComponentLoader', utils.loadClientComponent)
 
 Quasar.start(() => {
   /* eslint-disable no-new */

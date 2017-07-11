@@ -36,16 +36,16 @@ export default {
     this.nbCompletedRequests = 0
   },
   mounted () {
-    Events.$on('errorHook', hook => {
+    Events.$on('error-hook', hook => {
       Toast.create.negative(hook.error.message)
       this.nbCompletedRequests++
       this.stopProgress()
     })
-    Events.$on('beforeHook', hook => {
+    Events.$on('before-hook', hook => {
       this.nbRequests++
       this.startProgress()
     })
-    Events.$on('afterHook', hook => {
+    Events.$on('after-hook', hook => {
       this.nbCompletedRequests++
       this.stopProgress()
     })
