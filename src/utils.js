@@ -6,9 +6,14 @@ function loadClientComponent (component) {
   return () => System.import(`kComponents/src/components/${component}.vue`)
 }
 
+function resolveAsset (asset) {
+  return require('./assets/' + asset)
+}
+
 let utils = {
   loadComponent,
-  loadClientComponent
+  loadClientComponent,
+  resolveAsset
 }
 
 export default utils

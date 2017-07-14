@@ -46,6 +46,7 @@ Vue.use(injector)
 // Setup the Store
 Store.set('config', config)
 Store.set('clientComponentLoader', utils.loadClientComponent)
+Store.set('resolveAsset', utils.resolveAsset)
 
 Quasar.start(() => {
   /* eslint-disable no-new */

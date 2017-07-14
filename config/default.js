@@ -2,7 +2,7 @@ module.exports = {
   apiPath: '/api',
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'weacast',
-  appLogo: 'weacast-logo',
+  appLogo: 'weacast-logo.png',
   publisher: {
     name: 'Kaelia Tech',
     website: 'https://www.kaelia-tech.com',
