@@ -1,9 +1,22 @@
 module.exports = {
   apiPath: '/api',
   transport: 'websocket', // Could be 'http' or 'websocket',
-  appName: 'kApp',
+  appName: 'weacast',
+  appLogo: 'weacast-logo',
+  publisher: {
+    name: 'Kaelia Tech',
+    website: 'https://www.kaelia-tech.com',
+    contact: 'support@kaelia-tech.com'
+  },
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
+  },
+  screen: {
+    footer: [
+      { label: 'About Kaelia Tech', url: 'https://www.kaelia-tech.com' },
+      { label: 'Contact', url: 'https://www.kaelia-tech.com/terms/contact' },
+      { label: 'Terms & Policies', url: 'https://www.kaelia-tech.com/terms' },
+    ]
   },
   layout: {
     appBar: 'layout/KAppBar',
@@ -24,6 +37,6 @@ module.exports = {
   users: {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '8',
-    mixins: [ 'collectionBase', 'createItem', 'editItem', 'deleteItem' ]
+    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem']
   }
 }

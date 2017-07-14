@@ -11,14 +11,14 @@
 
 <script>
 import { Toast, Events } from 'quasar'
-import { authenticationMixin, KLayout } from 'kClient'
+import { authenticationMixin, KLayout } from 'kComponents'
 
 export default {
   name: 'index',
   components: {
     KLayout
   },
-  dependencies: ['store', 'api'],
+  dependencies: ['api'],
   data () {
     return {
       user: null

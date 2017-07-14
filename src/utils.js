@@ -3,7 +3,7 @@ function loadComponent (component) {
 }
 
 function loadClientComponent (component) {
-  return () => System.import(`kClient/src/components/${component}.vue`)
+  return () => System.import(`kComponents/src/components/${component}.vue`)
 }
 
 let utils = {
