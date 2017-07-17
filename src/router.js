@@ -40,7 +40,7 @@ export default new VueRouter({
           component: utils.loadClientComponent('authentication/KRegister')
         },
         {
-          path: 'resetpassword',
+          path: 'reset-password',
           name: 'resetPassword',
           component: utils.loadClientComponent('authentication/KResetPassword')
         },
@@ -57,6 +57,11 @@ export default new VueRouter({
             {
               path: 'users',
               name: 'users',
+              component: utils.loadClientComponent('users/KUsers')
+            },
+            {
+              path: 'user-identity',
+              name: 'userIdentity',
               component: utils.loadClientComponent('users/KUsers')
             }
           ]

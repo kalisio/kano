@@ -36,7 +36,8 @@ module.exports = {
   },
   users: {
     // renderer: 'users/UserCardItem',
-    // nbItemsPerPage: '8',
-    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem']
+    // nbItemsPerPage: '12',
+    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
+    form: 'user'
   }
 }

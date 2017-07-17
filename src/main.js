@@ -28,18 +28,11 @@ Vue.use(Quasar)
 // Setup Vue router
 Vue.use(router)
 
-// Setup and install Vue-inject
-function storeService () {
-  return function () {
-    return Store
-  }
-}
 function apiService () {
   return function () {
     return api
   }
 }
-injector.factory('store', '', storeService)
 injector.factory('api', '', apiService)
 Vue.use(injector)
 
