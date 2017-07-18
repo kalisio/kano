@@ -32,7 +32,7 @@ module.exports = {
     defaultUsers: [
       {
         email: 'kaelia@kaelia-tech.com',
-        password: 'kaelia'
+        password: 'kaelia-tech'
       }
     ]
   },
