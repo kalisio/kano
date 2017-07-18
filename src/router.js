@@ -43,28 +43,29 @@ export default new VueRouter({
           component: utils.loadClientComponent('authentication/KResetPassword')
         },
         {
-          path: 'home',
           name: 'home',
+          path: 'home',
           component: utils.loadClientComponent('layout/KHome'),
           children: [
             {
-              path: 'users',
               name: 'users',
+              path: 'users',
               component: utils.loadClientComponent('users/KUsers')
             },
             {
-              path: 'user-details/:id',
-              name: 'userDetails',
-              component: utils.loadClientComponent('users/KUserDetails')
+              name: 'editUser',
+              path: 'edit-user/:id',
+              component: utils.loadClientComponent('editor/KEditor'),
+              props: true
             },
             {
-              path: 'user-security/:id',
               name: 'userSecurity',
+              path: 'user-security/:id',
               component: utils.loadClientComponent('users/KUserSecurity')
             },
             {
-              path: 'user-sessions/:id',
               name: 'userSessions',
+              path: 'user-sessions/:id',
               component: utils.loadClientComponent('users/KUserSessions')
             }
           ]

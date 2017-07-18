@@ -45,6 +45,6 @@ module.exports = {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '12',
     mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'userDetails'
+    form: 'editUser'
   }
 }
