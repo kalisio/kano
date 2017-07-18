@@ -26,6 +26,13 @@ module.exports = {
     title: 'kApp',
     subtitle: 'A template application powered by Kaelia'
   },
+  tabNav: {
+    User: [
+      { icon: 'account_box', route: 'user-details' },
+      { icon: 'security', route: 'user-security' },
+      { icon: 'devices_other', route: 'user-session' }
+    ]
+  },
   sideNav: {
     identity: 'layout/KIdentity',
     links: [
@@ -38,6 +45,6 @@ module.exports = {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '12',
     mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'user'
+    form: 'userDetails'
   }
 }
