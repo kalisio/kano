@@ -16,7 +16,8 @@ module.exports = {
       { label: 'About Kaelia Tech', url: 'https://www.kaelia-tech.com' },
       { label: 'Contact', url: 'https://www.kaelia-tech.com/terms/contact' },
       { label: 'Terms & Policies', url: 'https://www.kaelia-tech.com/terms' },
-    ]
+    ],
+    header: 'kaelia-banner.png'
   },
   layout: {
     appBar: 'layout/KAppBar',
