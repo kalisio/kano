@@ -4,7 +4,7 @@
 
 <script>
 import { Toast, Events } from 'quasar'
-import { authenticationMixin } from 'kComponents'
+import { mixins } from 'kComponents'
 
 export default {
   name: 'index',
@@ -13,7 +13,7 @@ export default {
     return {
     }
   },
-  mixins: [authenticationMixin],
+  mixins: [mixins.authentication],
   created () {
     Events.$on('user-changed', user => {
       if (user) {
