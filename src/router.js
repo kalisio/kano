@@ -16,8 +16,6 @@ export default new VueRouter({
    * If switching back to default "hash" mode, don't forget to set the
    * build publicPath back to '' so Cordova builds work again.
    */
-  hashbang: false,
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -45,24 +43,30 @@ export default new VueRouter({
           component: utils.loadClientComponent('authentication/KResetPassword')
         },
         {
-          path: 'home',
           name: 'home',
+          path: 'home',
           component: utils.loadClientComponent('layout/KHome'),
           children: [
             {
-              path: 'user/:id',
-              name: 'user',
-              component: utils.loadClientComponent('users/KUser')
-            },
-            {
-              path: 'users',
               name: 'users',
+              path: 'users',
               component: utils.loadClientComponent('users/KUsers')
             },
             {
-              path: 'user-identity',
-              name: 'userIdentity',
-              component: utils.loadClientComponent('users/KUsers')
+              name: 'editUser',
+              path: 'edit-user/:id',
+              component: utils.loadClientComponent('editor/KEditor'),
+              props: true
+            },
+            {
+              name: 'userSecurity',
+              path: 'user-security/:id',
+              component: utils.loadClientComponent('users/KUserSecurity')
+            },
+            {
+              name: 'userSessions',
+              path: 'user-sessions/:id',
+              component: utils.loadClientComponent('users/KUserSessions')
             }
           ]
         }

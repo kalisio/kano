@@ -16,7 +16,8 @@ module.exports = {
       { label: 'About Kaelia Tech', url: 'https://www.kaelia-tech.com' },
       { label: 'Contact', url: 'https://www.kaelia-tech.com/terms/contact' },
       { label: 'Terms & Policies', url: 'https://www.kaelia-tech.com/terms' },
-    ]
+    ],
+    header: 'kaelia-banner.png'
   },
   login: {
     providers: ['github']
@@ -28,6 +29,13 @@ module.exports = {
   appBar: {
     title: 'kApp',
     subtitle: 'A template application powered by Kaelia'
+  },
+  tabNav: {
+    User: [
+      { icon: 'account_box', route: 'user-details' },
+      { icon: 'security', route: 'user-security' },
+      { icon: 'devices_other', route: 'user-session' }
+    ]
   },
   sideNav: {
     identity: 'layout/KIdentity',
@@ -41,6 +49,6 @@ module.exports = {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '12',
     mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'user'
+    form: 'editUser'
   }
 }
