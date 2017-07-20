@@ -60,3 +60,5 @@ typings/
 # Distribution files
 dist
 
+# Generated config
+config/client-config.json
