@@ -18,6 +18,9 @@ module.exports = {
       { label: 'Terms & Policies', url: 'https://www.kaelia-tech.com/terms' },
     ]
   },
+  login: {
+    providers: ['github']
+  },
   layout: {
     appBar: 'layout/KAppBar',
     sideNav: 'layout/KSideNav'

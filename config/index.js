@@ -59,7 +59,13 @@ module.exports = {
         changeOrigin: true,
         ws: true,
         logLevel: 'debug'
-      }
+      },
+      // The auth endpoints are not easy to prefix so we manage it manually
+      '/auth': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        logLevel: 'debug'
+      },
     }
   }
 }

@@ -34,7 +34,13 @@ module.exports = {
         email: 'kaelia@kaelia-tech.com',
         password: 'kaelia-tech'
       }
-    ]
+    ],
+    github: {
+      clientID: '157fe8bd095367192168',
+      clientSecret: '5dd578eb36bf00d0c7c8dbee6ea36d44529d97cf',
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/auth/github/callback' : '/auth/github/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/home' : '/home')
+    }
   },
   logs: {
     Console: {
