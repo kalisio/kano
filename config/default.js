@@ -20,7 +20,7 @@ module.exports = {
     header: 'kaelia-banner.png'
   },
   login: {
-    providers: ['github']
+    providers: ['google', 'github']
   },
   layout: {
     appBar: 'layout/KAppBar',

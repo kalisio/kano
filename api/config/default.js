@@ -41,6 +41,13 @@ module.exports = {
       callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/auth/github/callback' : '/auth/github/callback'),
       successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/' : '/')
     },
+    google: {
+      clientID: '761859104517-4j6qul9rds52immbhm0ggrq2jbb4fvqk.apps.googleusercontent.com',
+      clientSecret: 'a03PrspLJLIUqnJ7ANtLgutd',
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/auth/google/callback' : '/auth/google/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/' : '/'),
+      scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
+    },
     cookie: {
       enabled: true,
       name: 'feathers-jwt',
