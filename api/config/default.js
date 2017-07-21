@@ -32,7 +32,8 @@ module.exports = {
     defaultUsers: [
       {
         email: 'kaelia@kaelia-tech.com',
-        password: 'kaelia-tech'
+        password: 'kaelia-tech',
+        name: 'Kaelia Tech'
       }
     ],
     github: {

@@ -22,10 +22,7 @@ module.exports = function () {
       let createdUser = users.find(user => user.email === defaultUser.email)
       if (!createdUser) {
         logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
-        usersService.create({
-          email: defaultUser.email,
-          password: defaultUser.password
-        })
+        usersService.create(defaultUser)
       }
     })
   })
