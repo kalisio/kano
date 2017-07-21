@@ -53,19 +53,19 @@ export default new VueRouter({
               component: utils.loadClientComponent('users/KUsers')
             },
             {
-              name: 'editUser',
-              path: 'edit-user/:id',
+              name: 'profile',
+              path: 'profile/:id',
               component: utils.loadClientComponent('editor/KEditor'),
               props: true
             },
             {
-              name: 'userSecurity',
-              path: 'user-security/:id',
+              name: 'security',
+              path: 'security/:id',
               component: utils.loadClientComponent('users/KUserSecurity')
             },
             {
-              name: 'userSessions',
-              path: 'user-sessions/:id',
+              name: 'sessions',
+              path: 'sessions/:id',
               component: utils.loadClientComponent('users/KUserSessions')
             }
           ]

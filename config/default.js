@@ -28,13 +28,16 @@ module.exports = {
   },
   appBar: {
     title: 'kApp',
-    subtitle: 'A template application powered by Kaelia'
+    subtitle: 'A template application powered by Kaelia',
+    speech: {
+      language: 'en'
+    }
   },
   tabNav: {
     User: [
-      { icon: 'account_box', route: 'user-details' },
-      { icon: 'security', route: 'user-security' },
-      { icon: 'devices_other', route: 'user-session' }
+      { icon: 'account_box', route: 'profile' },
+      { icon: 'security', route: 'security' },
+      { icon: 'devices_other', route: 'sessions' }
     ]
   },
   sideNav: {

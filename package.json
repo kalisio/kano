@@ -33,6 +33,7 @@
     "test": "cd api && npm run test && cd .. && npm run build && npm run lint"
   },
   "dependencies": {
+    "annyang": "^2.6.0",
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.0.0",
     "fastclick": "^1.0.6",
