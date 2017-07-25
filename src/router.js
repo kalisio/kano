@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import utils from './utils'
-// import config from 'config'
+import config from 'config'
 
 Vue.use(VueRouter)
 
@@ -17,65 +17,5 @@ export default new VueRouter({
    * If switching back to default "hash" mode, don't forget to set the
    * build publicPath back to '' so Cordova builds work again.
    */
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: utils.loadComponent('Index'),
-      children: [
-        {
-          path: 'login',
-          name: 'login',
-          component: utils.loadClientComponent('authentication/KLogin')
-        },
-        {
-          path: 'logout',
-          name: 'logout',
-          component: utils.loadClientComponent('authentication/KLogout')
-        },
-        {
-          path: 'register',
-          name: 'register',
-          component: utils.loadClientComponent('authentication/KRegister')
-        },
-        {
-          path: 'reset-password',
-          name: 'resetPassword',
-          component: utils.loadClientComponent('authentication/KResetPassword')
-        },
-        {
-          name: 'home',
-          path: 'home',
-          component: utils.loadClientComponent('layout/KHome'),
-          children: [
-            {
-              name: 'users',
-              path: 'users',
-              component: utils.loadClientComponent('users/KUsers')
-            },
-            {
-              name: 'profile',
-              path: 'profile/:id',
-              component: utils.loadClientComponent('editor/KEditor'),
-              props: true
-            },
-            {
-              name: 'security',
-              path: 'security/:id',
-              component: utils.loadClientComponent('users/KUserSecurity')
-            },
-            {
-              name: 'sessions',
-              path: 'sessions/:id',
-              component: utils.loadClientComponent('users/KUserSessions')
-            }
-          ]
-        }
-      ]
-    },
-    {
-      path: '*',
-      component: utils.loadComponent('Error404')
-    } // Not found
-  ]
+  routes: utils.buildRoutes(config.routes)
 })

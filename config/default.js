@@ -50,6 +50,28 @@ module.exports = {
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
   },
+  routes: {
+    '/' : {
+      name: 'index',
+      component: 'Index',
+      children: {
+        'login': 'authentication/KLogin',
+        'logout': 'authentication/KLogout',
+        'register': 'authentication/KRegister',
+        'reset-password': 'authentication/KResetPassword',
+        'home': {
+          component: 'layout/KHome',
+          children: {
+            'users': 'users/KUsers',
+            'profile/:id': 'editor/KEditor',
+            'security/:id': 'users/KUserSecurity',
+            'sessions/:id': 'users/KUserSessions'
+          }
+        }
+      }
+    },
+    '*': 'Error404'
+  },
   organisations: {
     // renderer: 'organisations/OrganisationCardItem',
     // nbItemsPerPage: '12',
