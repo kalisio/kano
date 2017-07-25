@@ -43,10 +43,24 @@ module.exports = {
   sideNav: {
     identity: 'layout/KIdentity',
     links: [
+      { label: 'Organisations', icon: 'group_work', route: 'organisations' },
+      { label: 'Groups', icon: 'group', route: 'groups' },
       { label: 'Users', icon: 'person', route: 'users' },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
+  },
+  organisations: {
+    // renderer: 'organisations/OrganisationCardItem',
+    // nbItemsPerPage: '12',
+    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
+    form: 'editOrganisation'
+  },
+  groups: {
+    // renderer: 'groups/GroupCardItem',
+    // nbItemsPerPage: '12',
+    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
+    form: 'editGroup'
   },
   users: {
     // renderer: 'users/UserCardItem',

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import utils from './utils'
+// import config from 'config'
 
 Vue.use(VueRouter)
 
