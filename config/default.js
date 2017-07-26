@@ -42,9 +42,31 @@ module.exports = {
   },
   sideNav: {
     identity: 'layout/KIdentity',
-    links: [
-      { label: 'Organisations', icon: 'group_work', route: 'organisations' },
-      { label: 'Groups', icon: 'group', route: 'groups' },
+    organizations: 'layout/KLinkGroup',
+    actions: 'layout/KLinkList'
+  },
+  identity: {
+  },
+  organizations: {
+    icon: 'domain',
+    label: 'Organizations',
+    bgColor: 'bg-faded',
+    textColor: 'text-light',
+    content: [
+      'organizationList',
+      'organizationActions' 
+    ]
+  },
+  organizationList: {
+    data: 'user.organizations'
+  },
+  organizationActions: {
+    data: [
+      { label: 'Organizations', icon: 'build', route: 'organizations' },
+    ]
+  },
+  actions: {
+    data: [
       { label: 'Users', icon: 'person', route: 'users' },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
