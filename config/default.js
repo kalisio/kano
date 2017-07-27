@@ -85,9 +85,15 @@ module.exports = {
           component: 'layout/KHome',
           children: {
             'users': 'users/KUsers',
-            'profile/:id': 'editor/KEditor',
             'security/:id': 'users/KUserSecurity',
-            'sessions/:id': 'users/KUserSessions'
+            'sessions/:id': 'users/KUserSessions',
+            'user/profile/:id': {
+              name: 'profile',
+              component: 'editor/KEditor',
+              perspective: 'profile',
+              id: 'user._id',
+              service: 'users'
+            }
           }
         }
       }
