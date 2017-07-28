@@ -37,7 +37,10 @@ export default {
   },
   mounted () {
     Events.$on('error-hook', hook => {
-      Toast.create.negative(hook.error.message)
+      Toast.create.negative({
+        html: hook.error.message,
+        timeout: 10000
+      })
       this.nbCompletedRequests++
       this.stopProgress()
     })
