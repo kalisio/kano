@@ -42,27 +42,27 @@ module.exports = {
   },
   sideNav: {
     identity: 'layout/KIdentity',
-    organizations: 'layout/KLinkGroup',
+    organisations: 'layout/KLinkGroup',
     actions: 'layout/KLinkList'
   },
   identity: {
   },
-  organizations: {
+  organisations: {
     icon: 'domain',
-    label: 'Organizations',
+    label: 'Organisations',
     bgColor: 'bg-faded',
     textColor: 'text-light',
     content: [
-      'organizationList',
-      'organizationActions' 
+      'organisationList',
+      'organisationActions' 
     ]
   },
-  organizationList: {
-    data: 'user.organizations'
+  organisationList: {
+    data: 'user.organisations'
   },
-  organizationActions: {
+  organisationActions: {
     data: [
-      { label: 'Organizations', icon: 'build', route: 'organizations' },
+      { label: 'Organisations', icon: 'build', route: 'organisations' },
     ]
   },
   actions: {
