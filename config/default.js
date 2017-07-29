@@ -35,9 +35,9 @@ module.exports = {
   },
   tabNav: {
     User: [
-      { icon: 'account_box', route: 'profile' },
-      { icon: 'security', route: 'security' },
-      { icon: 'devices_other', route: 'sessions' }
+      { icon: 'account_box', label: 'Profile', route: 'profile' },
+      { icon: 'security', label: 'Security', route: 'security' },
+      { icon: 'devices_other', label: 'Sessions', route: 'sessions' }
     ]
   },
   sideNav: {
