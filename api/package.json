@@ -65,6 +65,8 @@
     "feathers-mongodb": "^2.8.0",
     "fs-extra": "^3.0.1",
     "http-proxy-middleware": "^0.17.4",
+    "kCore": "git://github.com/kaelia-tech/kCore.git#master",
+    "kTeam": "git://github.com/kaelia-tech/kTeam.git#master",
     "moment": "^2.18.1",
     "mongodb": "^2.2.26",
     "request": "^2.81.0",

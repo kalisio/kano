@@ -1,11 +1,13 @@
 import logger from 'winston'
 import kCore from 'kCore'
+import kTeam from 'kTeam'
 
 module.exports = function () {
   const app = this
   // Set up our plugin services
   try {
     app.configure(kCore)
+    app.configure(kTeam)
   }
   catch (error) {
     logger.error(error.message)

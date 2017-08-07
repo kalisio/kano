@@ -56,6 +56,11 @@ module.exports = {
       secure: false
     }
   },
+  authorisation: {
+    cache: {
+      maxUsers: 1000
+    }
+  },
   logs: {
     Console: {
       colorize: true,
