@@ -41,31 +41,31 @@ module.exports = {
     ]
   },
   sideNav: {
-    identity: 'layout/KIdentity',
-    organisations: 'layout/KLinkGroup',
-    actions: 'layout/KLinkList'
+    user_identity: 'layout/KIdentity',
+    user_organisations: 'layout/KLinkGroup',
+    user_actions: 'layout/KLinkList'
   },
-  identity: {
+  user_identity: {
   },
-  organisations: {
+  user_organisations: {
     icon: 'domain',
     label: 'Organisations',
     bgColor: 'bg-faded',
     textColor: 'text-light',
     content: [
-      'organisationList',
-      'organisationActions' 
+      'user_organisationList',
+      'user_organisationActions' 
     ]
   },
-  organisationList: {
+  user_organisationList: {
     data: 'user.organisations'
   },
-  organisationActions: {
+  user_organisationActions: {
     data: [
       { label: 'Organisations', icon: 'build', route: 'organisations' },
     ]
   },
-  actions: {
+  user_actions: {
     data: [
       { label: 'Users', icon: 'person', route: 'users' },
       { }, // separator
