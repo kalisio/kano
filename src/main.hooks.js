@@ -1,5 +1,5 @@
 // Application hooks that run for every service
-import { hooks } from 'kClient'
+import { hooks } from 'kCore/client'
 
 module.exports = {
   before: {

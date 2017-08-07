@@ -1,5 +1,5 @@
 import apiHooks from './main.hooks'
-import { kaelia } from 'kClient'
+import { kaelia } from 'kCore/client'
 
 let api = kaelia()
 // Setup app hooks

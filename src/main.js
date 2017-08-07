@@ -16,7 +16,7 @@ import config from 'config'
 import router from './router'
 import api from './api'
 import utils from './utils'
-import { Store } from 'kClient'
+import { Store } from 'kCore/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
