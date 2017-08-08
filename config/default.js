@@ -100,22 +100,18 @@ module.exports = {
     },
     '*': 'Error404'
   },
-  organisations: {
-    // renderer: 'organisations/OrganisationCardItem',
-    // nbItemsPerPage: '12',
-    mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'editOrganisation'
-  },
   groups: {
     // renderer: 'groups/GroupCardItem',
     // nbItemsPerPage: '12',
     mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'editGroup'
+    form: 'editGroup',
+    context: 'organisation'
   },
   users: {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '12',
     mixins: ['baseCollection', 'createItem', 'deleteItem', 'editItem'],
-    form: 'editUser'
+    form: 'editUser',
+    context: 'organisation'
   }
 }

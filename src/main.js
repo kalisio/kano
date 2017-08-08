@@ -6,6 +6,7 @@
 require(`quasar/dist/quasar.${__THEME}.css`)
 // ==============================
 
+import logger from 'loglevel'
 import Vue from 'vue'
 import injector from 'vue-inject'
 import Quasar from 'quasar'
@@ -16,16 +17,15 @@ import config from 'config'
 import router from './router'
 import api from './api'
 import utils from './utils'
-import { Store } from 'kCore/client'
+import kCore, { Store } from 'kCore/client'
+import kTeam from 'kTeam/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
 import 'whatwg-fetch'
 
-// Install Quasar Framework
+// Set up Vue
 Vue.use(Quasar)
-
-// Setup Vue router
 Vue.use(router)
 
 function apiService () {
@@ -36,16 +36,25 @@ function apiService () {
 injector.factory('api', '', apiService)
 Vue.use(injector)
 
-// Setup the Store
+// Set up the Store
 Store.set('config', config)
 Store.set('loadComponent', utils.loadComponent)
 Store.set('resolveAsset', utils.resolveAsset)
 
 Quasar.start(() => {
+  // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
     router,
     el: '#q-app',
     render: h => h(require('./App'))
   })
+  // Set up our plugin services
+  try {
+    api.configure(kCore)
+    api.configure(kTeam)
+  }
+  catch (error) {
+    logger.error(error.message)
+  }
 })
