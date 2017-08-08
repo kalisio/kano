@@ -2,22 +2,22 @@ module.exports = {
   apiPath: '/api',
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'kApp',
-  appLogo: 'kaelia-logo.png',
+  appLogo: 'kalisio-logo.png',
   publisher: {
-    name: 'Kaelia Tech',
-    website: 'https://www.kaelia-tech.com',
-    contact: 'support@kaelia-tech.com'
+    name: 'Kalisio',
+    website: 'https://www.kalisio.xyz',
+    contact: 'support@kalisio.xyz'
   },
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
   screen: {
     footer: [
-      { label: 'About Kaelia Tech', url: 'https://www.kaelia-tech.com' },
-      { label: 'Contact', url: 'https://www.kaelia-tech.com/terms/contact' },
-      { label: 'Terms & Policies', url: 'https://www.kaelia-tech.com/terms' },
+      { label: 'About Kalisio', url: 'https://www.kalisio.xyz' },
+      { label: 'Contact', url: 'https://www.kalisio.xyz/contact' },
+      { label: 'Terms & Policies', url: 'https://www.kalisio.xyz/terms' },
     ],
-    header: 'kaelia-banner.png'
+    header: 'kalisio-banner.png'
   },
   login: {
     providers: ['google', 'github']
@@ -28,7 +28,7 @@ module.exports = {
   },
   appBar: {
     title: 'kApp',
-    subtitle: 'A template application powered by Kaelia',
+    subtitle: 'A template application powered by Kalisio',
     speech: {
       language: 'en'
     }
