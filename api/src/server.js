@@ -38,7 +38,7 @@ export class Server {
     const port = this.app.get('port')
 
     // Set up our services (see `services/index.js`)
-    this.app.configure(services)
+    await this.app.configure(services)
     // Configure middleware (see `middleware/index.js`) - always has to be last
     this.app.configure(middleware)
     this.app.hooks(appHooks)

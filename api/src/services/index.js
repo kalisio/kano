@@ -2,12 +2,12 @@ import logger from 'winston'
 import kCore from 'kCore'
 import kTeam from 'kTeam'
 
-module.exports = function () {
+module.exports = async function () {
   const app = this
   // Set up our plugin services
   try {
-    app.configure(kCore)
-    app.configure(kTeam)
+    await app.configure(kCore)
+    await app.configure(kTeam)
   }
   catch (error) {
     logger.error(error.message)
@@ -16,7 +16,7 @@ module.exports = function () {
   let usersService = app.getService('users')
 
   // Create default users if not already done
-  usersService.find({
+  await usersService.find({
     paginate: false
   })
   .then(users => {
