@@ -87,12 +87,16 @@ module.exports = {
             'users': 'users/KUsers',
             'security/:id': 'users/KUserSecurity',
             'sessions/:id': 'users/KUserSessions',
-            'user/profile/:id': {
+            'user/profile': {
               name: 'profile',
               component: 'editor/KEditor',
-              perspective: 'profile',
-              id: 'user._id',
-              service: 'users'
+              props: {
+                parameters: {
+                  service: 'users',
+                  id: 'user._id',
+                  perspective: 'profile'
+                }
+              }
             }
           }
         }

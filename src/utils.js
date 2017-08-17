@@ -33,6 +33,9 @@ function buildRoutes (config) {
         route.path = key || value.path
         route.name = value.name || route.path
         route.component = loadComponent(value.component)
+        if (_.has(value, 'props')) {
+          route.props = value.props
+        }
       }
       // Check for any children to recurse
       if (value.children) {
