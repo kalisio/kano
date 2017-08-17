@@ -79,6 +79,7 @@ module.exports = {
       children: {
         'login': 'authentication/KLogin',
         'logout': 'authentication/KLogout',
+
         'register': 'authentication/KRegister',
         'reset-password': 'authentication/KResetPassword',
         'home': {
@@ -94,7 +95,8 @@ module.exports = {
                 parameters: {
                   service: 'users',
                   id: 'user._id',
-                  perspective: 'profile'
+                  perspective: 'profile',
+                  schema: 'schema.user-profile'
                 }
               }
             }
