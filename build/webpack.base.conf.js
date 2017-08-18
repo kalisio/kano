@@ -44,7 +44,7 @@ webpackConfig = {
         test: /\.(vue|js)$/,
         loader: 'eslint-loader',
         include: projectRoot,
-        exclude: [/node_modules/, /kClient/],
+        exclude: [/node_modules/],
         options: {
           formatter: require('eslint-friendly-formatter')
         }

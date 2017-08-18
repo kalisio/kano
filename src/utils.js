@@ -3,7 +3,7 @@ import _ from 'lodash'
 function loadComponent (component) {
   return () => {
     // try first in component library
-    return System.import(`kComponents/src/components/${component}.vue`)
+    return System.import(`kCore/src/client/components/${component}.vue`)
     .catch(_ => {
       // Otherwise this should be app component
       return System.import(`src/components/${component}.vue`)

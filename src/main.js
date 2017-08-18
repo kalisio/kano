@@ -28,12 +28,21 @@ import 'whatwg-fetch'
 Vue.use(Quasar)
 Vue.use(router)
 
+// Setup vue-inject (see: https://github.com/jpex-js/vue-inject)
+// As most of our Vue components are dynamically loaded, we inject
+// into Vue a way to access the API and the Store
 function apiService () {
   return function () {
     return api
   }
 }
+function storeService () {
+  return function () {
+    return Store
+  }
+}
 injector.factory('api', '', apiService)
+injector.factory('store', '', storeService)
 Vue.use(injector)
 
 // Set up the Store

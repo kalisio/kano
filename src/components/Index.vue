@@ -4,7 +4,7 @@
 
 <script>
 import { Toast, Events } from 'quasar'
-import { mixins } from 'kComponents'
+import { mixins as authMixins } from 'kCore/client'
 import { mixins as teamMixins } from 'kTeam/client'
 
 export default {
@@ -14,7 +14,7 @@ export default {
     return {
     }
   },
-  mixins: [mixins.authentication, teamMixins.authorisation],
+  mixins: [authMixins.authentication, teamMixins.authorisation],
   created () {
     Events.$on('user-changed', user => {
       if (user) {
