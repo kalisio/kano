@@ -68,6 +68,7 @@ module.exports = {
   user_actions: {
     data: [
       { label: 'Users', icon: 'person', route: 'users' },
+      { label: 'Groups', icon: 'group', route: 'groups' },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
@@ -79,7 +80,6 @@ module.exports = {
       children: {
         'login': 'authentication/KLogin',
         'logout': 'authentication/KLogout',
-
         'register': 'authentication/KRegister',
         'reset-password': 'authentication/KResetPassword',
         'home': {
@@ -99,7 +99,8 @@ module.exports = {
                   schema: 'schema.user-profile'
                 }
               }
-            }
+            },
+            'groups': 'groups/KGroups'
           }
         }
       }
