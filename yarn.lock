@@ -470,6 +470,14 @@ babel-loader@^6.0.0:
     mkdirp "^0.5.1"
     object-assign "^4.0.1"
 
+babel-loader@^7.1.1, babel-loader@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.2.tgz#f6cbe122710f1aa2af4d881c6d5b54358ca24126"
+  dependencies:
+    find-cache-dir "^1.0.0"
+    loader-utils "^1.0.2"
+    mkdirp "^0.5.1"
+
 babel-messages@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
@@ -2671,12 +2679,26 @@ find-cache-dir@^0.1.1:
     mkdirp "^0.5.1"
     pkg-dir "^1.0.0"
 
+find-cache-dir@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-1.0.0.tgz#9288e3e9e3cc3748717d39eade17cf71fc30ee6f"
+  dependencies:
+    commondir "^1.0.1"
+    make-dir "^1.0.0"
+    pkg-dir "^2.0.0"
+
 find-up@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-1.1.2.tgz#6b2e9822b1a2ce0a60ab64d610eccad53cb24d0f"
   dependencies:
     path-exists "^2.0.0"
     pinkie-promise "^2.0.0"
+
+find-up@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
+  dependencies:
+    locate-path "^2.0.0"
 
 flat-cache@^1.2.1:
   version "1.2.2"
@@ -3590,10 +3612,55 @@ jwt-decode@^2.1.0:
     winston "^2.3.1"
     winston-daily-rotate-file "^1.4.6"
 
-"kTeam@git://github.com/kaelia-tech/kTeam.git#master":
+"kCore@git://github.com/kalisio/kCore.git#master":
   version "0.1.0"
-  resolved "git://github.com/kaelia-tech/kTeam.git#ae1eb1470801b574561cd04337eec2bcb995d514"
+  resolved "git://github.com/kalisio/kCore.git#8ec392cbc7cca2aaf828c5ef77857d2ae1b45cf1"
   dependencies:
+    ajv "^5.2.2"
+    annyang "^2.6.0"
+    babel-loader "^7.1.1"
+    body-parser "^1.17.1"
+    compression "^1.6.2"
+    cors "^2.8.1"
+    debug "^2.6.4"
+    feathers "^2.1.4"
+    feathers-authentication "^1.2.2"
+    feathers-authentication-jwt "^0.3.1"
+    feathers-authentication-local "^0.4.3"
+    feathers-authentication-oauth2 "^0.2.5"
+    feathers-client "^2.2.0"
+    feathers-configuration "^0.4.1"
+    feathers-errors "^2.6.3"
+    feathers-hooks "^2.0.1"
+    feathers-hooks-common "^3.0.0"
+    feathers-mongodb "^2.8.0"
+    feathers-reactive "^0.4.1"
+    feathers-rest "^1.7.1"
+    feathers-socketio "^2.0.0"
+    fs-extra "^3.0.0"
+    helmet "^3.5.0"
+    lodash "^4.17.4"
+    loglevel "^1.4.1"
+    moment "^2.18.1"
+    mongodb "^2.2.26"
+    passport-github "^1.1.0"
+    passport-google-oauth20 "^1.0.0"
+    quasar-extras "^0.0.7"
+    quasar-framework "git+https://git@github.com/quasarframework/quasar-edge.git"
+    request "^2.81.0"
+    rxjs "^5.4.1"
+    socket.io-client "^1.7.3"
+    uberproto "^1.2.0"
+    vue-avatar "^2.0.0"
+    vue-router "^2.7.0"
+    winston "^2.3.1"
+    winston-daily-rotate-file "^1.4.6"
+
+"kTeam@git://github.com/kalisio/kTeam.git#master":
+  version "0.1.0"
+  resolved "git://github.com/kalisio/kTeam.git#93d9cf3c5c491010563f36874531be9d16237d84"
+  dependencies:
+    babel-loader "^7.1.2"
     casl "^1.0.0"
     debug "^2.6.4"
     feathers "^2.1.4"
@@ -3723,6 +3790,13 @@ loader-utils@^1.0.2:
     emojis-list "^2.0.0"
     json5 "^0.5.0"
 
+locate-path@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
+  dependencies:
+    p-locate "^2.0.0"
+    path-exists "^3.0.0"
+
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
@@ -3809,6 +3883,12 @@ lru-cache@^4.0.1, lru-cache@^4.1.1:
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
+
+make-dir@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.0.0.tgz#97a011751e91dd87cfadef58832ebb04936de978"
+  dependencies:
+    pify "^2.3.0"
 
 material-design-icons@^3.0.1:
   version "3.0.1"
@@ -4199,6 +4279,16 @@ osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
+p-limit@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-1.1.0.tgz#b07ff2d9a5d88bec806035895a2bab66a27988bc"
+
+p-locate@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-2.0.0.tgz#20a0103b222a70c8fd39cc2e580680f3dde5ec43"
+  dependencies:
+    p-limit "^1.1.0"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -4311,6 +4401,10 @@ path-exists@^2.0.0:
   dependencies:
     pinkie-promise "^2.0.0"
 
+path-exists@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
@@ -4353,7 +4447,7 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
-pify@^2.0.0:
+pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -4372,6 +4466,12 @@ pkg-dir@^1.0.0:
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-1.0.0.tgz#7a4b508a8d5bb2d629d447056ff4e9c9314cf3d4"
   dependencies:
     find-up "^1.0.0"
+
+pkg-dir@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-2.0.0.tgz#f6d5d1109e19d63edf428e0bd57e12777615334b"
+  dependencies:
+    find-up "^2.1.0"
 
 platform@1.3.4:
   version "1.3.4"
@@ -5921,7 +6021,7 @@ vue-loader@11.1.4:
     vue-style-loader "^2.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-vue-router@^2.0.0:
+vue-router@^2.0.0, vue-router@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.7.0.tgz#16d424493aa51c3c8cce8b7c7210ea4c3a89aff1"
 

@@ -1,23 +1,23 @@
 {
   "name": "kApp-api",
-  "description": "Kaelia Web Services",
+  "description": "Kalisio Web Services",
   "version": "0.1.0",
-  "homepage": "https://github.com/kaelia-tech/kApp",
+  "homepage": "https://github.com/kalisio/kApp",
   "keywords": [
-    "kaelia"
+    "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaelia-tech/kApp.git"
+    "url": "git://github.com/kalisio/kApp.git"
   },
   "author": {
-    "name": "Kaelia contributors",
-    "url": "https://github.com/kaelia-tech"
+    "name": "Kalisio contributors",
+    "url": "https://github.com/kalisio"
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kaelia-tech/kApp/issues"
+    "url": "https://github.com/kalisio/kApp/issues"
   },
   "main": "main.js",
   "scripts": {
@@ -65,8 +65,8 @@
     "feathers-mongodb": "^2.8.0",
     "fs-extra": "^3.0.1",
     "http-proxy-middleware": "^0.17.4",
-    "kCore": "git://github.com/kaelia-tech/kCore.git#master",
-    "kTeam": "git://github.com/kaelia-tech/kTeam.git#master",
+    "kCore": "git://github.com/kalisio/kCore.git#master",
+    "kTeam": "git://github.com/kalisio/kTeam.git#master",
     "moment": "^2.18.1",
     "mongodb": "^2.2.26",
     "request": "^2.81.0",

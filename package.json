@@ -1,23 +1,23 @@
 {
   "name": "kApp",
-  "description": "Kaelia App Template",
+  "description": "Kalisio App Template",
   "version": "0.1.0",
-  "homepage": "https://github.com/kaelia-tech/kApp",
+  "homepage": "https://github.com/kalisio/kApp",
   "keywords": [
-    "kaelia"
+    "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaelia-tech/kApp.git"
+    "url": "git://github.com/kalisio/kApp.git"
   },
   "author": {
-    "name": "Kaelia contributors",
-    "url": "https://github.com/kaelia-tech"
+    "name": "Kalisio contributors",
+    "url": "https://github.com/kalisio"
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kaelia-tech/kApp/issues"
+    "url": "https://github.com/kalisio/kApp/issues"
   },
   "scripts": {
     "prepublish": "npm run build",
@@ -43,8 +43,8 @@
     "feathers-hooks": "^2.0.1",
     "feathers-reactive": "^0.4.1",
     "jquery": "^3.2.1",
-    "kCore": "git://github.com/kaelia-tech/kCore.git#master",
-    "kTeam": "git://github.com/kaelia-tech/kTeam.git#master",
+    "kCore": "git://github.com/kalisio/kCore.git#master",
+    "kTeam": "git://github.com/kalisio/kTeam.git#master",
     "leaflet": "^1.0.3",
     "leaflet-basemaps": "^0.2.0",
     "leaflet-filelayer": "^0.6.0",

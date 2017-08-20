@@ -1,6 +1,6 @@
 FROM  node:7
 
-MAINTAINER Luc Claustres <luc.claustres@kaelia-tech.com>
+MAINTAINER Luc Claustres <luc.claustres@kalisio.xyz>
 
 WORKDIR /opt/app
 COPY . /opt/app

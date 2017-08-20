@@ -6,11 +6,11 @@ const middleware = require('./middleware')
 const services = require('./services')
 const appHooks = require('./main.hooks')
 
-import { kaelia } from 'kCore'
+import { kalisio } from 'kCore'
 
 export class Server {
   constructor () {
-    this.app = kaelia()
+    this.app = kalisio()
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
       this.app.use(this.app.get('client').build.publicPath, feathers.static('../dist'))

@@ -31,9 +31,9 @@ module.exports = {
     service: API_PREFIX + '/users',
     defaultUsers: [
       {
-        email: 'kaelia@kaelia-tech.com',
-        password: 'Kaelia*2017',
-        name: 'Kaelia Tech'
+        email: 'kalisio@kalisio.xyz',
+        password: 'kalisio',
+        name: 'Kalisio'
       }
     ],
     github: {
