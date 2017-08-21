@@ -2,11 +2,11 @@
 
 ## Kalisio application template
 
-[![Build Status](https://travis-ci.org/kaelia-tech/kApp.png?branch=master)](https://travis-ci.org/kaelia-tech/kApp)
+[![Build Status](https://travis-ci.org/kalisio/kApp.png?branch=master)](https://travis-ci.org/kalisio/kApp)
 [![Code Climate](https://codeclimate.com/github/kaelia-tech/kApp/badges/gpa.svg)](https://codeclimate.com/github/kaelia-tech/kApp)
 [![Test Coverage](https://codeclimate.com/github/kaelia-tech/kApp/badges/coverage.svg)](https://codeclimate.com/github/kaelia-tech/kApp/coverage)
-[![Dependency Status](https://img.shields.io/david/kaelia-tech/kApp.svg?style=flat-square)](https://david-dm.org/kaelia-tech/kApp)
-[![Docker Pulls](https://img.shields.io/docker/pulls/kaelia-tech/kApp.svg?style=plastic)](https://hub.docker.com/r/kaelia-tech/kApp/)
+[![Dependency Status](https://img.shields.io/david/kalisio/kApp.svg?style=flat-square)](https://david-dm.org/kalisio/kApp)
+[![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kApp.svg?style=plastic)](https://hub.docker.com/r/kalisio/kapp/)
 
 ### Under Development
 
@@ -16,9 +16,9 @@ Although we try to avoid this wherever possible, `0.x` versions on the master br
 
 ### Documentation
 
-The [kDocs](https://kaelia-tech.gitbooks.io/kaelia/) are loaded with awesome stuff and tell you everything you need to know about using and configuring Kaelia.
+The [kDocs](https://kaelia-tech.gitbooks.io/kaelia/) are loaded with awesome stuff and tell you everything you need to know about using and configuring Kalisio.
 
-Take also a look at the [roadmap](https://github.com/orgs/kaelia-tech/projects/1).
+Take also a look at the [roadmap](https://github.com/orgs/kalisio/projects/1).
 
 ### License
 

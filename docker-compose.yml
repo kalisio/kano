@@ -4,7 +4,7 @@ services:
   kapp:
     build: .
     container_name: kapp
-    image: kaelia-tech/kapp
+    image: kalisio/kapp
     links:
       - mongodb-kapp:mongodb
     ports:
@@ -15,12 +15,12 @@ services:
     container_name: mongodb-kapp
     image: mongo
     volumes:
-      - mongodb_weacast:/data/db
+      - mongodb_kapp:/data/db
     networks:
       - kapp
 
 volumes:
-  mongodb_weacast:
+  mongodb_kapp:
 
 networks:
   kapp:
