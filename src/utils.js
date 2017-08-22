@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 function loadComponent (component) {
   return () => {
-    // try first in component library
+    // try first in core library
     return System.import(`kCore/src/client/components/${component}.vue`)
     .catch(_ => {
       return System.import(`kTeam/src/client/components/${component}.vue`)
@@ -12,6 +12,17 @@ function loadComponent (component) {
       })
     })
   }
+}
+
+function loadSchema (schema) {
+  return System.import(`kCore/src/schemas/${schema}.json`)
+  .catch(_ => {
+    return System.import(`kTeam/src/schemas/${schema}.json`)
+    .catch(_ => {
+      // Otherwise this should be app component
+      return System.import(`src/statics/${schema}.json`)
+    })
+  })
 }
 
 function resolveAsset (asset) {
@@ -56,6 +67,7 @@ function buildRoutes (config) {
 
 let utils = {
   loadComponent,
+  loadSchema,
   resolveAsset,
   buildRoutes
 }

@@ -86,8 +86,27 @@ module.exports = {
           component: 'layout/KHome',
           children: {
             'users': 'users/KUsers',
-            'security/:id': 'users/KUserSecurity',
-            'sessions/:id': 'users/KUserSessions',
+            'users/create': {
+              name: 'create-user',
+              component: 'editor/KEditor',
+              props: {
+                parameters: {
+                  service: 'users',
+                  schema: 'user.create'
+                }
+              }
+            },
+            'user/edit': {
+              name: 'edit-user',
+              component: 'editor/KEditor',
+              props: {
+                parameters: {
+                  service: 'users',
+                  id: 'user._id',
+                  schema: 'user.profile.update'
+                }
+              }
+            },
             'user/profile': {
               name: 'profile',
               component: 'editor/KEditor',
@@ -95,12 +114,31 @@ module.exports = {
                 parameters: {
                   service: 'users',
                   id: 'user._id',
-                  perspective: 'profile',
-                  schema: 'schema.user-profile'
+                  schema: 'user.profile.update'
                 }
               }
             },
-            'groups': 'groups/KGroups'
+            'groups': 'groups/KGroups',
+            'group/create': {
+              name: 'create-group',
+              component: 'editor/KEditor',
+              props: {
+                parameters: {
+                  service: 'groups',
+                  schema: 'group.update'
+                }
+              }
+            },
+            'group/edit': {
+              name: 'edit-group',
+              component: 'editor/KEditor',
+              props: {
+                parameters: {
+                  service: 'groups',
+                  schema: 'group.update'
+                }
+              }
+            }
           }
         }
       }
@@ -108,15 +146,16 @@ module.exports = {
     '*': 'Error404'
   },
   groups: {
-    // renderer: 'groups/GroupCardItem',
     // nbItemsPerPage: '12',
-    form: 'editGroup',
-    context: 'organisation'
+    context: 'organisation',
+    createItem: 'create-group',
+    editItem: 'edit-group'
   },
   users: {
     // renderer: 'users/UserCardItem',
     // nbItemsPerPage: '12',
-    form: 'editUser',
-    context: 'organisation'
+    context: 'organisation',
+    createItem: 'create-user',
+    editItem: 'edit-user'
   }
 }
