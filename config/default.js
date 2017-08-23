@@ -125,6 +125,7 @@ module.exports = {
               props: {
                 parameters: {
                   service: 'groups',
+                  context: 'organisation',
                   schema: 'group.update'
                 }
               }
@@ -135,6 +136,7 @@ module.exports = {
               props: {
                 parameters: {
                   service: 'groups',
+                  context: 'organisation',
                   schema: 'group.update'
                 }
               }
