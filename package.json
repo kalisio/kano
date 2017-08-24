@@ -43,8 +43,6 @@
     "feathers-hooks": "^2.0.1",
     "feathers-reactive": "^0.4.1",
     "jquery": "^3.2.1",
-    "kCore": "git://github.com/kalisio/kCore.git#master",
-    "kTeam": "git://github.com/kalisio/kTeam.git#master",
     "leaflet": "^1.0.3",
     "leaflet-basemaps": "^0.2.0",
     "leaflet-filelayer": "^0.6.0",
