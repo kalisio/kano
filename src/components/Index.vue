@@ -17,7 +17,10 @@ export default {
   created () {
     Events.$on('user-changed', user => {
       if (user) {
-        this.$router.push({name: 'home'})
+        // If no route, otherwise keep it so that links work out-of-the-box
+        if (!this.$route.name) {
+          this.$router.push({ name: 'home' })
+        }
       }
     })
   },
