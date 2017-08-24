@@ -85,7 +85,12 @@ module.exports = {
         'home': {
           component: 'layout/KHome',
           children: {
-            'users': 'users/KUsers',
+            'users':  {
+              component: 'collection/KCollection',
+              props: {
+                service: { path: 'users', context: 'organisation' }
+              }
+            },
             'users/create': {
               name: 'create-user',
               component: 'editor/KEditor',
@@ -99,7 +104,7 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'users' },
-                object: 'user',
+                subject: 'user',
                 parameters: { schema: 'user.profile.update' }
               }
             },
@@ -108,11 +113,16 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'users' },
-                object: 'user',
+                subject: 'user',
                 parameters: { schema: 'user.profile.update' }
               }
             },
-            'groups': 'groups/KGroups',
+            'groups': {
+              component: 'collection/KCollection',
+              props: {
+                service: { path: 'groups', context: 'organisation' }
+              }
+            },
             'group/create': {
               name: 'create-group',
               component: 'editor/KEditor',
@@ -126,7 +136,7 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'groups', context: 'organisation' },
-                object: 'selection',
+                subject: 'selection',
                 parameters: { schema: 'group.update' }
               }
             }
@@ -137,15 +147,10 @@ module.exports = {
     '*': 'Error404'
   },
   groups: {
-    // nbItemsPerPage: '12',
-    context: 'organisation',
     createItem: 'create-group',
     editItem: 'edit-group'
   },
   users: {
-    // renderer: 'users/UserCardItem',
-    // nbItemsPerPage: '12',
-    context: 'organisation',
     createItem: 'create-user',
     editItem: 'edit-user'
   }
