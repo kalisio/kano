@@ -49,6 +49,7 @@ module.exports = {
       successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/' : '/'),
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
     },
+    // Required for OAuth2 to work correctly
     cookie: {
       enabled: true,
       name: 'feathers-jwt',

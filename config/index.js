@@ -65,7 +65,7 @@ module.exports = {
         target: 'http://localhost:8081',
         changeOrigin: true,
         logLevel: 'debug'
-      },
+      }
     }
   }
 }
