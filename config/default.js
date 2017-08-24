@@ -38,6 +38,10 @@ module.exports = {
       { icon: 'account_box', label: 'Profile', route: 'profile' },
       { icon: 'security', label: 'Security', route: 'security' },
       { icon: 'devices_other', label: 'Sessions', route: 'sessions' }
+    ],
+    Group: [
+      { icon: 'description', label: 'Group', route: 'edit-group' },
+      { icon: 'group', label: 'Members', route: 'list-group-members' },
     ]
   },
   sideNav: {
@@ -73,6 +77,14 @@ module.exports = {
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
   },
+  groups: {
+    createItem: 'create-group',
+    editItem: 'edit-group'
+  },
+  users: {
+    createItem: 'create-user',
+    editItem: 'edit-user'
+  },
   routes: {
     '/' : {
       name: 'index',
@@ -91,7 +103,7 @@ module.exports = {
                 service: { path: 'users', context: 'organisation' }
               }
             },
-            'users/create': {
+            'user/create': {
               name: 'create-user',
               component: 'editor/KEditor',
               props: {
@@ -104,7 +116,7 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'users' },
-                subject: 'user',
+                object: 'user',
                 parameters: { schema: 'user.profile.update' }
               }
             },
@@ -113,7 +125,7 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'users' },
-                subject: 'user',
+                object: 'user',
                 parameters: { schema: 'user.profile.update' }
               }
             },
@@ -136,7 +148,7 @@ module.exports = {
               component: 'editor/KEditor',
               props: {
                 service: { path: 'groups', context: 'organisation' },
-                subject: 'selection',
+                object: 'selection',
                 parameters: { schema: 'group.update' }
               }
             }
@@ -145,13 +157,5 @@ module.exports = {
       }
     },
     '*': 'Error404'
-  },
-  groups: {
-    createItem: 'create-group',
-    editItem: 'edit-group'
-  },
-  users: {
-    createItem: 'create-user',
-    editItem: 'edit-user'
   }
 }
