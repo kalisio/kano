@@ -8,7 +8,6 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import logger from 'loglevel'
 import Vue from 'vue'
-import injector from 'vue-inject'
 import Quasar from 'quasar'
 import 'quasar-extras/material-icons'
 import 'quasar-extras/ionicons'
@@ -28,23 +27,6 @@ import 'whatwg-fetch'
 Vue.use(Quasar)
 Vue.use(router)
 
-// Setup vue-inject (see: https://github.com/jpex-js/vue-inject)
-// As most of our Vue components are dynamically loaded, we inject
-// into Vue a way to access the API and the Store
-function apiService () {
-  return function () {
-    return api
-  }
-}
-function storeService () {
-  return function () {
-    return Store
-  }
-}
-injector.factory('api', '', apiService)
-injector.factory('store', '', storeService)
-Vue.use(injector)
-
 // Set up the Store
 Store.set('config', config)
 Store.set('loadComponent', utils.loadComponent)
@@ -52,6 +34,13 @@ Store.set('loadSchema', utils.loadSchema)
 Store.set('resolveAsset', utils.resolveAsset)
 
 Quasar.start(() => {
+  // Inject in Vue the Kalisio features
+  Object.defineProperty(Vue.prototype, '$store', {
+    get () { return Store }
+  })
+  Object.defineProperty(Vue.prototype, '$api', {
+    get () { return api }
+  })
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({

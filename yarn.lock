@@ -3423,21 +3423,6 @@ joi@^6.10.1:
     moment "2.x.x"
     topo "1.x.x"
 
-jpex-defaults@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jpex-defaults/-/jpex-defaults-2.0.0.tgz#cfee993bcf704103eb79851a376a41423645601a"
-
-jpex-web@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jpex-web/-/jpex-web-2.0.0.tgz#978c5ee46244673cdaaf0102fea80810d4fac53b"
-  dependencies:
-    jpex-defaults "^2.0.0"
-    promise-polyfill "^6.0.2"
-
-jpex@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jpex/-/jpex-2.0.0.tgz#d1c6726d539fde2c169089d7d54af0381241e389"
-
 jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
@@ -4827,10 +4812,6 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
-promise-polyfill@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.0.2.tgz#d9c86d3dc4dc2df9016e88946defd69b49b41162"
-
 proto-list@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
@@ -6000,13 +5981,6 @@ vue-avatar@^2.0.0:
 vue-hot-reload-api@^2.0.11:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
-
-vue-inject@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-inject/-/vue-inject-1.0.1.tgz#7db366a089df6879f23c80e8cc9cf26e6834f5f2"
-  dependencies:
-    jpex "^2.0.0"
-    jpex-web "^2.0.0"
 
 vue-loader@11.1.4:
   version "11.1.4"

@@ -9,7 +9,6 @@ import { mixins as teamMixins } from 'kTeam/client'
 
 export default {
   name: 'index',
-  dependencies: ['api'],
   data () {
     return {
     }

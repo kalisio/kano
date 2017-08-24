@@ -62,7 +62,6 @@
     "socket.io-client": "^2.0.1",
     "vue": "^2.2.2",
     "vue-avatar": "^2.0.0",
-    "vue-inject": "^1.0.1",
     "vue-router": "^2.0.0",
     "whatwg-fetch": "^2.0.3"
   },

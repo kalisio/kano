@@ -90,32 +90,26 @@ module.exports = {
               name: 'create-user',
               component: 'editor/KEditor',
               props: {
-                parameters: {
-                  service: 'users',
-                  schema: 'user.create'
-                }
+                service: { path: 'users' },
+                parameters: { schema: 'user.create' }
               }
             },
             'user/edit': {
               name: 'edit-user',
               component: 'editor/KEditor',
               props: {
-                parameters: {
-                  service: 'users',
-                  id: 'user._id',
-                  schema: 'user.profile.update'
-                }
+                service: { path: 'users' },
+                object: 'user',
+                parameters: { schema: 'user.profile.update' }
               }
             },
             'user/profile': {
               name: 'profile',
               component: 'editor/KEditor',
               props: {
-                parameters: {
-                  service: 'users',
-                  id: 'user._id',
-                  schema: 'user.profile.update'
-                }
+                service: { path: 'users' },
+                object: 'user',
+                parameters: { schema: 'user.profile.update' }
               }
             },
             'groups': 'groups/KGroups',
@@ -123,22 +117,17 @@ module.exports = {
               name: 'create-group',
               component: 'editor/KEditor',
               props: {
-                parameters: {
-                  service: 'groups',
-                  context: 'organisation',
-                  schema: 'group.update'
-                }
+                service: { path: 'groups', context: 'organisation' },
+                parameters: { schema: 'group.update' }
               }
             },
             'group/edit': {
               name: 'edit-group',
               component: 'editor/KEditor',
               props: {
-                parameters: {
-                  service: 'groups',
-                  context: 'organisation',
-                  schema: 'group.update'
-                }
+                service: { path: 'groups', context: 'organisation' },
+                object: 'selection',
+                parameters: { schema: 'group.update' }
               }
             }
           }
