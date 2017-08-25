@@ -18,6 +18,7 @@ import api from './api'
 import utils from './utils'
 import kCore, { Store } from 'kCore/client'
 import kTeam from 'kTeam/client'
+import kMap from 'kMap/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -52,6 +53,7 @@ Quasar.start(() => {
   try {
     api.configure(kCore)
     api.configure(kTeam)
+    api.configure(kMap)
   }
   catch (error) {
     logger.error(error.message)

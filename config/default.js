@@ -74,6 +74,8 @@ module.exports = {
       { label: 'Users', icon: 'person', route: 'users' },
       { label: 'Groups', icon: 'group', route: 'groups' },
       { }, // separator
+      { label: 'Map', icon: 'map', route: 'map' },
+      { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
   },
@@ -84,6 +86,9 @@ module.exports = {
   users: {
     createItem: 'create-user',
     editItem: 'edit-user'
+  },
+  map: {
+
   },
   routes: {
     '/' : {
@@ -151,6 +156,9 @@ module.exports = {
                 object: 'selection',
                 parameters: { schema: 'group.update' }
               }
+            },
+            'map': {
+              component: 'KMap'
             }
           }
         }
