@@ -7,6 +7,10 @@ const services = require('./services')
 const appHooks = require('./main.hooks')
 
 import { kalisio } from 'kCore'
+import { defineAbilitiesForSubject, hooks } from 'kTeam'
+
+// Register all default hooks for authorisation
+defineAbilitiesForSubject.registerDefaultHooks()
 
 export class Server {
   constructor () {
@@ -39,9 +43,12 @@ export class Server {
 
     // Set up our services (see `services/index.js`)
     await this.app.configure(services)
+    // And hooks
+    this.app.hooks(appHooks)
+    // Register authorisation hook
+    this.app.hooks({ before: { all: hooks.authorise } })
     // Configure middleware (see `middleware/index.js`) - always has to be last
     this.app.configure(middleware)
-    this.app.hooks(appHooks)
 
     // Last lauch server
     await this.app.listen(port)
