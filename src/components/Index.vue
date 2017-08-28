@@ -18,7 +18,7 @@ export default {
     Events.$on('user-changed', user => {
       if (user) {
         // If no route, otherwise keep it so that links work out-of-the-box
-        if (this.$route.path === '/' || this.$route.path === '/login') {
+        if (this.$route.path === '/' || this.$route.path === '/login' || this.$route.path === '/register') {
           this.$router.push({ name: 'home' })
         }
       }
