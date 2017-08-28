@@ -71,24 +71,15 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'users' },
-      { label: 'Groups', icon: 'group', route: 'groups' },
+      { label: 'Users', icon: 'person', route: 'find' },
+      { label: 'Groups', icon: 'group', route: 'find' },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
     ]
   },
-  groups: {
-    createItem: 'create-group',
-    editItem: 'edit-group'
-  },
-  users: {
-    createItem: 'create-user',
-    editItem: 'edit-user'
-  },
   map: {
-
   },
   routes: {
     '/' : {
@@ -102,60 +93,20 @@ module.exports = {
         'home': {
           component: 'layout/KHome',
           children: {
-            'users':  {
+            ':context?/:service': {
+              name: 'find',
               component: 'collection/KCollection',
-              props: {
-                service: { path: 'users', context: 'organisation' }
-              }
+              props: true
             },
-            'user/create': {
-              name: 'create-user',
+            ':context?/:service/create': {
+              name: 'create',
               component: 'editor/KEditor',
-              props: {
-                service: { path: 'users' },
-                parameters: { schema: 'user.create' }
-              }
+              props: true
             },
-            'user/edit': {
-              name: 'edit-user',
+            ':context?/:service/update/:id/:perspective?': {
+              name: 'update',
               component: 'editor/KEditor',
-              props: {
-                service: { path: 'users' },
-                object: 'user',
-                parameters: { schema: 'user.profile.update' }
-              }
-            },
-            'user/profile': {
-              name: 'profile',
-              component: 'editor/KEditor',
-              props: {
-                service: { path: 'users' },
-                object: 'user',
-                parameters: { schema: 'user.profile.update' }
-              }
-            },
-            'groups': {
-              component: 'collection/KCollection',
-              props: {
-                service: { path: 'groups', context: 'organisation' }
-              }
-            },
-            'group/create': {
-              name: 'create-group',
-              component: 'editor/KEditor',
-              props: {
-                service: { path: 'groups', context: 'organisation' },
-                parameters: { schema: 'group.update' }
-              }
-            },
-            'group/edit': {
-              name: 'edit-group',
-              component: 'editor/KEditor',
-              props: {
-                service: { path: 'groups', context: 'organisation' },
-                object: 'selection',
-                parameters: { schema: 'group.update' }
-              }
+              props: true
             },
             'map': {
               component: 'KMap'
