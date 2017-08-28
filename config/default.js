@@ -71,8 +71,8 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'find' },
-      { label: 'Groups', icon: 'group', route: 'find' },
+      { label: 'Users', icon: 'person', route: 'find', params: { context: 'organisation._id', service: 'users' } },
+      { label: 'Groups', icon: 'group', route: 'find', params: { context: 'organisation._id', service: 'groups' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
