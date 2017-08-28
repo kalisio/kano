@@ -18,15 +18,16 @@ function loadComponent (component) {
 }
 
 function loadSchema (schema) {
-  return System.import(`kCore/src/schemas/${schema}.json`)
+  return System.import(`kCore/lib/schemas/${schema}.json`)
   .catch(_ => {
-    return System.import(`kTeam/src/schemas/${schema}.json`)
+    return System.import(`kTeam/lib/schemas/${schema}.json`)
     .catch(_ => {
-      return System.import(`kMap/src/schemas/${schema}.json`)
-      .catch(_ => {
-        // Otherwise this should be app component
-        return System.import(`src/statics/${schema}.json`)
-      })
+      // FIXME: When we will have some schema here
+      // return System.import(`kMap/lib/schemas/${schema}.json`)
+      // .catch(_ => {
+      // Otherwise this should be app component
+      return System.import(`src/statics/${schema}.json`)
+      // })
     })
   })
 }
