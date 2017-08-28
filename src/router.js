@@ -5,7 +5,7 @@ import config from 'config'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   /*
    * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
    * it is only to be used only for websites.
@@ -19,3 +19,5 @@ export default new VueRouter({
    */
   routes: utils.buildRoutes(config.routes)
 })
+
+export default router

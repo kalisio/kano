@@ -14,15 +14,19 @@ import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
 import config from 'config'
 import router from './router'
-import api from './api'
+import appHooks from './main.hooks'
 import utils from './utils'
-import kCore, { Store } from 'kCore/client'
-import kTeam from 'kTeam/client'
+import kCore, { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
+import kTeam, { authorisationGuard } from 'kTeam/client'
 import kMap from 'kMap/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
 import 'whatwg-fetch'
+
+let api = kalisio()
+// Setup app hooks
+api.hooks(appHooks)
 
 // Set up Vue
 Vue.use(Quasar)
@@ -33,6 +37,11 @@ Store.set('config', config)
 Store.set('loadComponent', utils.loadComponent)
 Store.set('loadSchema', utils.loadSchema)
 Store.set('resolveAsset', utils.resolveAsset)
+
+// Add global guards
+beforeGuard.registerGuard(authenticationGuard)
+beforeGuard.registerGuard(authorisationGuard(api))
+router.beforeEach(beforeGuard)
 
 Quasar.start(() => {
   // Inject in Vue the Kalisio features
