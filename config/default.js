@@ -71,8 +71,8 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'find', params: { context: 'organisation._id', service: 'users' } },
-      { label: 'Groups', icon: 'group', route: 'find', params: { context: 'organisation._id', service: 'groups' } },
+      { label: 'Users', icon: 'person', route: 'collection', params: { context: 'organisation._id', service: 'users' } },
+      { label: 'Groups', icon: 'group', route: 'collection', params: { context: 'organisation._id', service: 'groups' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
@@ -80,6 +80,14 @@ module.exports = {
     ]
   },
   map: {
+  },
+  users_collection: {
+    browser: 'item/KGrid', 
+    editor: 'editor/KEditor'
+  },
+  groups_collection: {
+    browser: 'item/KGrid', 
+    editor: 'editor/KEditor'
   },
   routes: {
     '/' : {
@@ -93,19 +101,9 @@ module.exports = {
         'home': {
           component: 'layout/KHome',
           children: {
-            ':context?/:service': {
-              name: 'find',
+            ':context?/:service/:action?/:id?/:perspective?': {
+              name: 'collection',
               component: 'collection/KCollection',
-              props: true
-            },
-            ':context?/:service/create': {
-              name: 'create',
-              component: 'editor/KEditor',
-              props: true
-            },
-            ':context?/:service/update/:id/:perspective?': {
-              name: 'update',
-              component: 'editor/KEditor',
               props: true
             },
             'map': {
