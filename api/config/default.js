@@ -12,11 +12,18 @@ module.exports = {
   // https://github.com/chimurai/http-proxy-middleware
   proxyTable: {},
 
+  host: 'localhost',
   port: process.env.PORT || 8081,
+  /* To enable HTTPS
+  https: {
+    key: path.join(__dirname, 'server.key'),
+    cert: path.join(__dirname, 'server.crt'),
+    port: process.env.HTTPS_PORT || 8084
+  },
+  */
 
   apiPath: API_PREFIX,
 
-  host: 'localhost',
   paginate: {
     default: 10,
     max: 50
