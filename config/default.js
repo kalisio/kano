@@ -71,8 +71,8 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'collection', params: { context: 'organisation._id', service: 'users' } },
-      { label: 'Groups', icon: 'group', route: 'collection', params: { context: 'organisation._id', service: 'groups' } },
+      { label: 'Users', icon: 'person', route: 'switch', params: { context: 'organisation._id', service: 'users' } },
+      { label: 'Groups', icon: 'group', route: 'switch', params: { context: 'organisation._id', service: 'groups' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
@@ -81,13 +81,23 @@ module.exports = {
   },
   map: {
   },
-  users_collection: {
-    browser: 'item/KGrid', 
-    editor: 'editor/KEditor'
+  switch: {
+    create: 'editor/KEditor',
+    edit: 'editor/KEditor',
+    default: 'collection/KGrid'
   },
-  groups_collection: {
-    browser: 'item/KGrid', 
-    editor: 'editor/KEditor'
+  users_grid: {
+    actions: [
+      { label: 'Edit', icon: 'create', scope: 'item', handler: 'editItem' },
+      { label: 'Delete', icon: 'delete', scope: 'item', handler: 'deleteItem' }
+    ]
+  },
+  groups_grid: {
+    actions: [
+      { label: 'Edit', icon: 'create', scope: 'item', handler: 'editItem' },
+      { label: 'Delete', icon: 'delete', scope: 'item', handler: 'deleteItem' },
+      { label: 'Create', icon: 'add', scope: 'fab', handler: 'createItem' }
+    ]
   },
   routes: {
     '/' : {
@@ -102,8 +112,8 @@ module.exports = {
           component: 'layout/KHome',
           children: {
             ':context?/:service/:action?/:id?/:perspective?': {
-              name: 'collection',
-              component: 'collection/KCollection',
+              name: 'switch',
+              component: 'functional/KSwitch',
               props: true
             },
             'map': {
