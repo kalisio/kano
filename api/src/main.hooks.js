@@ -1,10 +1,11 @@
 // Application hooks that run for every service
+import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import { hooks } from 'kCore'
 
 module.exports = {
   before: {
     all: [ hooks.log ],
-    find: [],
+    find: [ fuzzySearch() ],
     get: [],
     create: [],
     update: [],

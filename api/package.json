@@ -63,6 +63,7 @@
     "feathers-hooks": "^2.0.1",
     "feathers-hooks-common": "^3.0.0",
     "feathers-mongodb": "^2.8.0",
+    "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git",
     "fs-extra": "^3.0.1",
     "http-proxy-middleware": "^0.17.4",
     "moment": "^2.18.1",

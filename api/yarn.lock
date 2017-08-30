@@ -1432,6 +1432,13 @@ feathers-hooks@^2.0.1:
     feathers-commons "^0.8.6"
     uberproto "^1.2.0"
 
+"feathers-mongodb-fuzzy-search@https://github.com/kalisio/feathers-mongodb-fuzzy-search.git":
+  version "1.0.1"
+  resolved "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git#0e5cd7bf21b78615a20d44ed373317b800b41724"
+  dependencies:
+    escape-string-regexp "^1.0.5"
+    feathers-commons "^0.8.7"
+
 feathers-mongodb@^2.8.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/feathers-mongodb/-/feathers-mongodb-2.9.0.tgz#c5672c9f74db97c17792ea0c7bb22c3cfd82ada0"
