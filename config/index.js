@@ -35,7 +35,14 @@ module.exports = {
     // auto open browser or not
     openBrowser: true,
     publicPath: '/',
-    port: 8080,
+    port: process.env.PORT || 8080,
+    /* To enable HTTPS
+    https: {
+      key: path.join(__dirname, 'server.key'),
+      cert: path.join(__dirname, 'server.crt'),
+      port: process.env.HTTPS_PORT || 8083
+    },
+    */
 
     // If for example you are using Quasar Play
     // to generate a QR code then on each dev (re)compilation
