@@ -33,17 +33,6 @@ module.exports = {
       language: 'en'
     }
   },
-  tabNav: {
-    User: [
-      { icon: 'account_box', label: 'Profile', route: 'profile' },
-      { icon: 'security', label: 'Security', route: 'security' },
-      { icon: 'devices_other', label: 'Sessions', route: 'sessions' }
-    ],
-    Group: [
-      { icon: 'description', label: 'Group', route: 'edit-group' },
-      { icon: 'group', label: 'Members', route: 'list-group-members' },
-    ]
-  },
   sideNav: {
     user_identity: 'layout/KIdentity',
     user_organisations: 'layout/KLinkGroup',
@@ -71,8 +60,8 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'switch', params: { context: 'organisation._id', service: 'users' } },
-      { label: 'Groups', icon: 'group', route: 'switch', params: { context: 'organisation._id', service: 'groups' } },
+      { label: 'Users', icon: 'person', route: 'users-activity', params: { context: 'organisation._id', } },
+      { label: 'Groups', icon: 'group', route: 'groups-activity', params: { context: 'organisation._id' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
@@ -118,24 +107,6 @@ module.exports = {
       }
     ]
   },
-  switch: {
-    create: 'editor/KEditor',
-    edit: 'editor/KEditor',
-    default: 'collection/KGrid'
-  },
-  users_grid: {
-    actions: [
-      { label: 'Edit', icon: 'create', scope: 'item', handler: 'editItem' },
-      { label: 'Delete', icon: 'delete', scope: 'item', handler: 'deleteItem' }
-    ]
-  },
-  groups_grid: {
-    actions: [
-      { label: 'Edit', icon: 'create', scope: 'item', handler: 'editItem' },
-      { label: 'Delete', icon: 'delete', scope: 'item', handler: 'deleteItem' },
-      { label: 'Create', icon: 'add', scope: 'fab', handler: 'createItem' }
-    ]
-  },
   routes: {
     '/' : {
       name: 'index',
@@ -148,9 +119,14 @@ module.exports = {
         'home': {
           component: 'layout/KHome',
           children: {
-            ':context?/:service/:action?/:id?/:perspective?': {
-              name: 'switch',
-              component: 'functional/KSwitch',
+            ':context?/users/:operation?/:id?/:perspective?': {
+              name: 'users-activity',
+              component: 'activity/KUsersActivity',
+              props: true
+            },
+            ':context?/groups/:operation?/:id?': {
+              name: 'groups-activity',
+              component: 'KGroupsActivity',
               props: true
             },
             'map': {
