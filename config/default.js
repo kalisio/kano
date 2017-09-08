@@ -119,12 +119,17 @@ module.exports = {
         'home': {
           component: 'layout/KHome',
           children: {
+            'identity/:operation/:id/:perspective?': {
+              name: 'identity-activity',
+              component: 'activity/KIdentityActivity',
+              props: true
+            },
             ':context?/users/:operation?/:id?/:perspective?': {
               name: 'users-activity',
               component: 'activity/KUsersActivity',
               props: true
             },
-            ':context?/groups/:operation?/:id?': {
+            ':context?/groups/:operation?/:id?/:perspective?': {
               name: 'groups-activity',
               component: 'KGroupsActivity',
               props: true
