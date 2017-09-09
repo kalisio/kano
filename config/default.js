@@ -60,8 +60,8 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'person', route: 'users-activity', params: { context: 'organisation._id', } },
-      { label: 'Groups', icon: 'group', route: 'groups-activity', params: { context: 'organisation._id' } },
+      { label: 'Users', icon: 'group', route: 'users-activity', params: { context: 'organisation._id', } },
+      { label: 'Groups', icon: 'folder', route: 'groups-activity', params: { context: 'organisation._id' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
       { }, // separator
