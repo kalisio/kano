@@ -49,7 +49,6 @@ compiler.plugin('compilation', function (compilation) {
 
 // proxy requests like API. See /config/index.js -> dev.proxyTable
 // https://github.com/chimurai/http-proxy-middleware
-var wsProxy = null
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
@@ -79,7 +78,7 @@ app.use(express.static(env.platform.cordovaAssets))
 function handler(err) {
   if (err) {
     console.log(err)
-    return
+    process.exit(1)
   }
 
   // open browser if set so in /config/index.js

@@ -1,7 +1,7 @@
 // Application hooks that run for every service
 import { hooks } from 'kCore/client'
 
-module.exports = {
+export default {
   before: {
     all: [ hooks.log, hooks.emit ],
     find: [],

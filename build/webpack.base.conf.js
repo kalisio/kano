@@ -19,7 +19,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-webpackConfig = {
+module.exports = {
   entry: {
     app: './src/main.js'
   },
@@ -44,7 +44,7 @@ webpackConfig = {
         test: /\.(vue|js)$/,
         loader: 'eslint-loader',
         include: projectRoot,
-        exclude: [/node_modules/],
+        exclude: /node_modules/,
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -89,13 +89,6 @@ webpackConfig = {
     ]
   },
   plugins: [
-    /*
-      Take note!
-      Uncomment if you wish to load only one Moment locale:
-
-      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    */
-
     new webpack.DefinePlugin({
       'process.env': config[env.prod ? 'build' : 'dev'].env,
       'DEV': env.dev,
@@ -126,5 +119,3 @@ webpackConfig = {
 // Note: If '/build' does not exist, this command will error; alternatively, write to '/config'.
 // The webpack alias below will then build that file into the client build.
 fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
-
-module.exports = webpackConfig

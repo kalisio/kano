@@ -6,12 +6,13 @@
 require(`quasar/dist/quasar.${__THEME}.css`)
 // ==============================
 
+// Uncomment the following lines if you need IE11/Edge support
+// require(`quasar/dist/quasar.ie`)
+// require(`quasar/dist/quasar.ie.${__THEME}.css`)
+
 import logger from 'loglevel'
 import Vue from 'vue'
 import Quasar from 'quasar'
-import 'quasar-extras/material-icons'
-import 'quasar-extras/ionicons'
-import 'quasar-extras/fontawesome'
 import config from 'config'
 import router from './router'
 import appHooks from './main.hooks'
@@ -31,6 +32,13 @@ api.hooks(appHooks)
 // Set up Vue
 Vue.use(Quasar)
 Vue.use(router)
+
+if (__THEME === 'mat') {
+  require('quasar-extras/roboto-font')
+}
+import 'quasar-extras/material-icons'
+import 'quasar-extras/ionicons'
+import 'quasar-extras/fontawesome'
 
 // Set up the Store
 Store.set('config', config)
