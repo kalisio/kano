@@ -26,12 +26,12 @@ export default {
   },
   mounted () {
     this.restoreSession()
-    .then(user => {
-      Toast.create.positive('Restoring previous session')
-    })
-    .catch(_ => {
-      this.$router.push({name: 'login'})
-    })
+      .then(user => {
+        Toast.create.positive('Restoring previous session')
+      })
+      .catch(_ => {
+        this.$router.push({name: 'login'})
+      })
   }
 }
 </script>
