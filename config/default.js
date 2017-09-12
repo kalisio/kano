@@ -35,7 +35,7 @@ module.exports = {
   },
   sideNav: {
     user_identity: 'layout/KIdentity',
-    user_organisations: 'layout/KLinkGroup',
+    user_organisation: 'KOrganisationsPanel',
     user_actions: 'layout/KLinkList'
   },
   user_identity: {
@@ -44,19 +44,7 @@ module.exports = {
     icon: 'domain',
     label: 'Organisations',
     bgColor: 'bg-faded',
-    textColor: 'text-light',
-    content: [
-      'user_organisationList',
-      'user_organisationActions' 
-    ]
-  },
-  user_organisationList: {
-    data: 'user.organisations'
-  },
-  user_organisationActions: {
-    data: [
-      { label: 'Organisations', icon: 'build', route: 'organisations' },
-    ]
+    textColor: 'text-light'
   },
   user_actions: {
     data: [
@@ -122,6 +110,11 @@ module.exports = {
             'identity/:operation/:id/:perspective?': {
               name: 'identity-activity',
               component: 'activity/KIdentityActivity',
+              props: true
+            },
+            'organisations/:operation/:id?/:perspective?': {
+              name: 'organisations-activity',
+              component: 'KOrganisationsActivity',
               props: true
             },
             ':context?/users/:operation?/:id?/:perspective?': {
