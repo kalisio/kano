@@ -10,13 +10,13 @@
 
 ### Under Development
 
-**Kalisio is under heavy development, updates will be pushed frequently.
+**Kalisio framework is under heavy development, updates will be pushed frequently.
 As a consequence it should be considered unstable, not yet ready for production use.
 Although we try to avoid this wherever possible, `0.x` versions on the master branch can promote breaking changes in the API.**
 
 ### Documentation
 
-The [kDocs](https://kalisio.gitbooks.io/kalisio/) are loaded with awesome stuff and tell you everything you need to know about using and configuring Kalisio.
+The [kDocs](https://kalisio.gitbooks.io/kalisio/) are loaded with awesome stuff and tell you everything you need to know about using and configuring it.
 
 Take also a look at the [roadmap](https://github.com/orgs/kalisio/projects/1).
 
