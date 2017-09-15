@@ -9,8 +9,8 @@ const services = require('./services')
 const appHooks = require('./main.hooks')
 
 import logger from 'winston'
-import { kalisio } from 'kCore'
-import { defineAbilitiesForSubject, hooks } from 'kTeam'
+import { kalisio, hooks as coreHooks } from 'kCore'
+import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
 
 // Register all default hooks for authorisation
 defineAbilitiesForSubject.registerDefaultHooks()
@@ -48,7 +48,15 @@ export class Server {
     // And hooks
     this.app.hooks(appHooks)
     // Register authorisation hook
-    this.app.hooks({ before: { all: hooks.authorise } })
+    this.app.hooks({
+      before: {
+        all: teamHooks.authorise,
+        update: coreHooks.preventUpdatePerspectives,
+      },
+      after: {
+        all: coreHooks.processPerspectives
+      }
+    })
     // Configure middleware (see `middleware/index.js`) - always has to be last
     this.app.configure(middleware)
 
