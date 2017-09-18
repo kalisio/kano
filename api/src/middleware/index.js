@@ -7,6 +7,7 @@ module.exports = function () {
   // the error handler have to go last.
   const app = this
 
-  app.use(notFound())
+  // FIXME: https://github.com/kalisio/kTeam/issues/1
+  //app.use(notFound())
   app.use(handler())
 }

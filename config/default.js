@@ -104,7 +104,12 @@ module.exports = {
         'login': 'authentication/KLogin',
         'logout': 'authentication/KLogout',
         'register': 'authentication/KRegister',
-        'reset-password': 'authentication/KResetPassword',
+        'change-endpoint': 'authentication/KChangeEndpoint',
+        'resend-verify-signup': 'account/KResendVerifySignup',
+        'verify-signup/:token': 'account/KVerifySignup',
+        'send-reset-password': 'account/KSendResetPassword',
+        'reset-password/:token': 'account/KResetPassword',
+        'change-identity/:token': 'account/KChangeIdentity',
         'home': {
           component: 'layout/KHome',
           children: {

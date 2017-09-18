@@ -1,0 +1,5 @@
+<h1><%= email.subject %></h1>
+
+<p>Hi <%= user.name %>, the password associated to your email <%= user.email %> was just reset.</p>
+
+<p>If you didn't request this change please let us know by following <a href='mailto:<%= email.from %>?subject=I did not reset my password&body=Someone unauthorized reset my password.'>this link</a>.</p>

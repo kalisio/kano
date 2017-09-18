@@ -19,6 +19,7 @@ import appHooks from './main.hooks'
 import utils from './utils'
 import kCore, { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
 import kTeam, { authorisationGuard } from 'kTeam/client'
+import kNotify from 'kNotify/client'
 import kMap from 'kMap/client'
 
 // Required IE 11 polyfill
@@ -70,6 +71,7 @@ Quasar.start(() => {
   try {
     api.configure(kCore)
     api.configure(kTeam)
+    api.configure(kNotify)
     api.configure(kMap)
   }
   catch (error) {

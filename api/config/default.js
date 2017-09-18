@@ -12,6 +12,7 @@ module.exports = {
   // https://github.com/chimurai/http-proxy-middleware
   proxyTable: {},
 
+  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port : 'http://www.kalisio.xyz'),
   host: 'localhost',
   port: process.env.PORT || 8081,
   /* To enable HTTPS
@@ -68,6 +69,14 @@ module.exports = {
     cache: {
       maxUsers: 1000
     }
+  },
+  mailer: {
+    service: 'gmail',
+    auth: {
+      user: 'support@kalisio.xyz',
+      pass: 'kalisio2017'
+    },
+    templateDir: path.join(__dirname, 'email-templates')
   },
   logs: {
     Console: {

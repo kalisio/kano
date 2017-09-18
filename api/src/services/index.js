@@ -1,6 +1,7 @@
 import logger from 'winston'
 import kCore from 'kCore'
 import kTeam from 'kTeam'
+import kNotify from 'kNotify'
 
 module.exports = async function () {
   const app = this
@@ -8,6 +9,7 @@ module.exports = async function () {
   try {
     await app.configure(kCore)
     await app.configure(kTeam)
+    await app.configure(kNotify)
   }
   catch (error) {
     logger.error(error.message)
