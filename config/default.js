@@ -109,6 +109,8 @@ module.exports = {
         'verify-signup/:token': 'account/KVerifySignup',
         'send-reset-password': 'account/KSendResetPassword',
         'reset-password/:token': 'account/KResetPassword',
+        'change-password': 'account/KChangePassword',
+        'send-change-identity': 'account/KSendChangeIdentity',
         'change-identity/:token': 'account/KChangeIdentity',
         'home': {
           component: 'layout/KHome',
