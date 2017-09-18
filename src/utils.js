@@ -7,10 +7,13 @@ function loadComponent (component) {
       .catch(_ => {
         return import(`kTeam/lib/client/components/${component}.vue`)
           .catch(_ => {
-            return import(`kMap/lib/client/components/${component}.vue`)
+            return import(`kNotify/lib/client/components/${component}.vue`)
               .catch(_ => {
-                // Otherwise this should be app component
-                return import(`@/${component}.vue`)
+                return import(`kMap/lib/client/components/${component}.vue`)
+                  .catch(_ => {
+                    // Otherwise this should be app component
+                    return import(`@/${component}.vue`)
+                  })
               })
           })
       })
@@ -39,7 +42,7 @@ function resolveAsset (asset) {
 }
 
 function buildRoutes (config) {
-  function buildRoutesRecursively (config, routes) {
+  function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
       // The key is always the path for the route
       let route = { path: key }
@@ -60,10 +63,14 @@ function buildRoutes (config) {
           route.props = value.props
         }
       }
+      // Check for public routes which are at top-level excpet everything under /home
+      if (parentRoute && parentRoute.path === '/' && route.name !== 'home') {
+        route.meta = { public: true }
+      }
       // Check for any children to recurse
       if (value.children) {
         route.children = []
-        buildRoutesRecursively(value.children, route.children)
+        buildRoutesRecursively(value.children, route.children, route)
       }
       routes.push(route)
     })

@@ -17,8 +17,7 @@ export default {
   created () {
     Events.$on('user-changed', user => {
       if (user) {
-        // If no route, otherwise keep it so that links work out-of-the-box
-        if (this.$route.path === '/' || this.$route.path === '/login' || this.$route.path === '/register') {
+        if (this.$route.path === '/') {
           this.$router.push({ name: 'home' })
         }
       }
@@ -30,7 +29,10 @@ export default {
         Toast.create.positive('Restoring previous session')
       })
       .catch(_ => {
-        this.$router.push({name: 'login'})
+        // If private routes while not logged in redirect to login
+        if (!this.$route.meta || !this.$route.meta.public) {
+          this.$router.push({ name: 'login' })
+        }
       })
   }
 }
