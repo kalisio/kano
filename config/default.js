@@ -49,7 +49,7 @@ module.exports = {
   },
   user_actions: {
     data: [
-      { label: 'Users', icon: 'group', route: 'users-activity', params: { context: 'organisation._id', } },
+      { label: 'Members', icon: 'group', route: 'members-activity', params: { context: 'organisation._id', } },
       { label: 'Groups', icon: 'folder', route: 'groups-activity', params: { context: 'organisation._id' } },
       { }, // separator
       { label: 'Map', icon: 'map', route: 'map' },
@@ -119,8 +119,8 @@ module.exports = {
               props: true
             },
             ':context?/users/:operation?/:id?/:perspective?': {
-              name: 'users-activity',
-              component: 'activity/KUsersActivity',
+              name: 'members-activity',
+              component: 'KMembersActivity',
               props: true
             },
             ':context?/groups/:operation?/:id?/:perspective?': {
