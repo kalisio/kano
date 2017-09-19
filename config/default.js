@@ -101,16 +101,26 @@ module.exports = {
       name: 'index',
       component: 'Index',
       children: {
+        // By default root routes are considered unauthenticated
         'login': 'authentication/KLogin',
-        'logout': 'authentication/KLogout',
+        'logout': {
+          component: 'authentication/KLogout',
+          meta: { authenticated: true }
+        },
         'register': 'authentication/KRegister',
         'change-endpoint': 'authentication/KChangeEndpoint',
         'resend-verify-signup': 'account/KResendVerifySignup',
         'verify-signup/:token': 'account/KVerifySignup',
         'send-reset-password': 'account/KSendResetPassword',
+        'change-password': {
+          component: 'account/KChangePassword',
+          meta: { authenticated: true }
+        },
         'reset-password/:token': 'account/KResetPassword',
-        'change-password': 'account/KChangePassword',
-        'send-change-identity': 'account/KSendChangeIdentity',
+        'send-change-identity': {
+          component: 'account/KSendChangeIdentity',
+          meta: { authenticated: true }
+        },
         'change-identity/:token': 'account/KChangeIdentity',
         'home': {
           component: 'layout/KHome',

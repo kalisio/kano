@@ -45,7 +45,10 @@ function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
       // The key is always the path for the route
-      let route = { path: key }
+      let route = {
+        path: key,
+        meta: {}
+      }
       // If value is a simple string this is a shortcut:
       // - name = path
       // - component = value
@@ -62,11 +65,11 @@ function buildRoutes (config) {
         if (_.has(value, 'props')) {
           route.props = value.props
         }
+        if (_.has(value, 'meta')) {
+          route.meta = value.meta
+        }
       }
-      // Check for public routes which are at top-level excpet everything under /home
-      if (parentRoute && parentRoute.path === '/' && route.name !== 'home') {
-        route.meta = { public: true }
-      }
+
       // Check for any children to recurse
       if (value.children) {
         route.children = []
