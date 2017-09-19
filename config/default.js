@@ -100,8 +100,10 @@ module.exports = {
     '/' : {
       name: 'index',
       component: 'Index',
+      // By default all child routes are considered unauthenticated,
+      // will be overriden when required
+      meta: { unauthenticated: true },
       children: {
-        // By default root routes are considered unauthenticated
         'login': 'authentication/KLogin',
         'logout': {
           component: 'authentication/KLogout',
@@ -114,16 +116,17 @@ module.exports = {
         'send-reset-password': 'account/KSendResetPassword',
         'change-password': {
           component: 'account/KChangePassword',
-          meta: { authenticated: true }
+          meta: { authenticated: true, unauthenticated: false }
         },
         'reset-password/:token': 'account/KResetPassword',
         'send-change-identity': {
           component: 'account/KSendChangeIdentity',
-          meta: { authenticated: true }
+          meta: { authenticated: true, unauthenticated: false }
         },
         'change-identity/:token': 'account/KChangeIdentity',
         'home': {
           component: 'layout/KHome',
+          meta: { authenticated: true, unauthenticated: false },
           children: {
             'identity/:operation/:id/:perspective?': {
               name: 'identity-activity',

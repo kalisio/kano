@@ -16,13 +16,16 @@ export default {
   // authorisation mixin is required to automatically update user' abilities on update
   mixins: [authMixins.authentication, teamMixins.authorisation],
   methods: {
-    redirect () {
-      console.log(this.$route)
+    redirect (user) {
       // Run registered guards to redirect accordingly if required
       const result = beforeGuard(this.$route)
-      console.log('redirect to', result)
       if (typeof result === 'string') {
+        // Redirect to a given route based on authentication state
         this.$router.push({ name: result })
+      }
+      else if (!result) {
+        // This route was previously allowed but due to changes in authorisations it is not anymore
+        this.$router.push({ name: (user ? 'home' : 'login') })
       }
       // The first time initialize guards after the app has been correctly setup,
       // ie either with or without a restored user
@@ -33,20 +36,19 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route)
     this.restoreSession()
       .then(user => {
-        console.log('restore')
         Toast.create.positive('Restoring previous session')
+        // No need to redirect here since the user should be set thus managed by event handler below
       })
       .catch(_ => {
-        console.log('norestore')
+        // Check if we need to redirect based on the fact there is no authenticated user
         this.redirect()
       })
 
     Events.$on('user-changed', user => {
-      console.log('user')
-      this.redirect()
+      // Check if we need to redirect based on the fact there is an authenticated user
+      this.redirect(user)
     })
   }
 }

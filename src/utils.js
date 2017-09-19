@@ -47,7 +47,8 @@ function buildRoutes (config) {
       // The key is always the path for the route
       let route = {
         path: key,
-        meta: {}
+        // "Inherit" meta data on nested routes
+        meta: (parentRoute ? Object.assign({}, parentRoute.meta) : {})
       }
       // If value is a simple string this is a shortcut:
       // - name = path
@@ -66,7 +67,8 @@ function buildRoutes (config) {
           route.props = value.props
         }
         if (_.has(value, 'meta')) {
-          route.meta = value.meta
+          // Override parent meta if child meta given
+          Object.assign(route.meta, value.meta)
         }
       }
 
