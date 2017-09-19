@@ -50,7 +50,8 @@ Store.set('resolveAsset', utils.resolveAsset)
 // Add global guards
 beforeGuard.registerGuard(authenticationGuard)
 beforeGuard.registerGuard(authorisationGuard(api))
-router.beforeEach(beforeGuard)
+// Now done in index to ensure the session has been correctly restored before registering guards
+// router.beforeEach(beforeGuard)
 
 Quasar.start(() => {
   // Inject in Vue the Kalisio features

@@ -100,20 +100,33 @@ module.exports = {
     '/' : {
       name: 'index',
       component: 'Index',
+      // By default all child routes are considered unauthenticated,
+      // will be overriden when required
+      meta: { unauthenticated: true },
       children: {
         'login': 'authentication/KLogin',
-        'logout': 'authentication/KLogout',
+        'logout': {
+          component: 'authentication/KLogout',
+          meta: { authenticated: true }
+        },
         'register': 'authentication/KRegister',
         'change-endpoint': 'authentication/KChangeEndpoint',
         'resend-verify-signup': 'account/KResendVerifySignup',
         'verify-signup/:token': 'account/KVerifySignup',
         'send-reset-password': 'account/KSendResetPassword',
+        'change-password': {
+          component: 'account/KChangePassword',
+          meta: { authenticated: true, unauthenticated: false }
+        },
         'reset-password/:token': 'account/KResetPassword',
-        'change-password': 'account/KChangePassword',
-        'send-change-identity': 'account/KSendChangeIdentity',
+        'send-change-identity': {
+          component: 'account/KSendChangeIdentity',
+          meta: { authenticated: true, unauthenticated: false }
+        },
         'change-identity/:token': 'account/KChangeIdentity',
         'home': {
           component: 'layout/KHome',
+          meta: { authenticated: true, unauthenticated: false },
           children: {
             'identity/:operation/:id/:perspective?': {
               name: 'identity-activity',
