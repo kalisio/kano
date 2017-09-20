@@ -35,9 +35,9 @@ module.exports = {
     }
   },
   sideNav: {
-    user_identity: 'identity/KIdentity',
+    user_identity: 'identity/KIdentityPanel',
     user_organisation: 'KOrganisationsPanel',
-    user_actions: 'layout/KLinkList'
+    user_actions: 'layout/KLinksPanel'
   },
   user_identity: {
   },
@@ -48,13 +48,13 @@ module.exports = {
     textColor: 'text-light'
   },
   user_actions: {
-    data: [
-      { label: 'Members', icon: 'group', route: 'members-activity', params: { context: 'organisation._id', } },
-      { label: 'Groups', icon: 'folder', route: 'groups-activity', params: { context: 'organisation._id' } },
+    links: [
+      { label: 'Members', icon: 'group', route: { name: 'members-activity', params: { context: 'organisation._id' } } },
+      { label: 'Groups', icon: 'folder', route: { name: 'groups-activity', params: { context: 'organisation._id' } } },
       { }, // separator
-      { label: 'Map', icon: 'map', route: 'map' },
+      { label: 'Map', icon: 'map', route: { name: 'map' } },
       { }, // separator
-      { label: 'Logout', icon: 'exit_to_app', route: 'logout' }
+      { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
   map: {
@@ -138,12 +138,12 @@ module.exports = {
               component: 'KOrganisationsActivity',
               props: true
             },
-            ':context?/users/:operation?/:id?/:perspective?': {
+            ':context/users/:operation?/:id?/:perspective?': {
               name: 'members-activity',
               component: 'KMembersActivity',
               props: true
             },
-            ':context?/groups/:operation?/:id?/:perspective?': {
+            ':context/groups/:operation?/:id?/:perspective?': {
               name: 'groups-activity',
               component: 'KGroupsActivity',
               props: true
