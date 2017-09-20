@@ -35,7 +35,7 @@ module.exports = {
     }
   },
   sideNav: {
-    user_identity: 'layout/KIdentity',
+    user_identity: 'identity/KIdentity',
     user_organisation: 'KOrganisationsPanel',
     user_actions: 'layout/KLinkList'
   },
@@ -130,7 +130,7 @@ module.exports = {
           children: {
             'identity/:operation/:id/:perspective?': {
               name: 'identity-activity',
-              component: 'activity/KIdentityActivity',
+              component: 'identity/KIdentityActivity',
               props: true
             },
             'organisations/:operation/:id?/:perspective?': {
