@@ -18,10 +18,14 @@ install:
   - npm run build
 before_script:
   - npm install -g codeclimate-test-reporter
-  - npm install -g quasar-cli
   - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
   - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
   - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
+  - cd ..
+  - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
+  - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
+  - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
+  - git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn link && cd .. && yarn link kMap
 after_script:
   - codeclimate-test-reporter < api/coverage/lcov.info
 
