@@ -1,3 +1,7 @@
+import logger from 'winston'
+import { kalisio, hooks as coreHooks } from 'kCore'
+import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
+
 const path = require('path')
 const fs = require('fs-extra')
 const https = require('https')
@@ -7,10 +11,6 @@ const feathers = require('feathers')
 const middleware = require('./middleware')
 const services = require('./services')
 const appHooks = require('./main.hooks')
-
-import logger from 'winston'
-import { kalisio, hooks as coreHooks } from 'kCore'
-import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
 
 // Register all default hooks for authorisation
 defineAbilitiesForSubject.registerDefaultHooks()
@@ -47,11 +47,11 @@ export class Server {
     await this.app.configure(services)
     // And hooks
     this.app.hooks(appHooks)
-    // Register authorisation hook
+    // Register authorisation, perspective, etc. hooks
     this.app.hooks({
       before: {
         all: teamHooks.authorise,
-        update: coreHooks.preventUpdatePerspectives,
+        update: coreHooks.preventUpdatePerspectives
       },
       after: {
         all: coreHooks.processPerspectives
@@ -70,7 +70,8 @@ export class Server {
       }, this.app)
       logger.info('Configuring HTTPS server at port ' + port.toString())
       await server.listen(port)
-    } else {
+    }
+    else {
       const port = this.app.get('port')
       logger.info('Configuring HTTP server at port ' + port.toString())
       await this.app.listen(port)

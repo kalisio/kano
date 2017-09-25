@@ -1,5 +1,5 @@
 const handler = require('feathers-errors/handler')
-const notFound = require('feathers-errors/not-found')
+// const notFound = require('feathers-errors/not-found')
 
 module.exports = function () {
   // Add your custom middleware here. Remember, that
@@ -8,6 +8,6 @@ module.exports = function () {
   const app = this
 
   // FIXME: https://github.com/kalisio/kTeam/issues/1
-  //app.use(notFound())
+  // app.use(notFound())
   app.use(handler())
 }
