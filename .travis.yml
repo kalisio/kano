@@ -12,20 +12,19 @@ before_install:
   - npm install -g quasar-cli
 install:
   - npm install
-  - quasar build
-  - cd api
-  - npm install
-  - npm run build
-before_script:
-  - npm install -g codeclimate-test-reporter
-  - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
-  - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
-  - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
-  - cd ..
   - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
   - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
   - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
   - git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn link && cd .. && yarn link kMap
+  - quasar build
+  - cd api
+  - npm install
+  - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
+  - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
+  - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
+  - npm run build
+before_script:
+  - npm install -g codeclimate-test-reporter
 after_script:
   - codeclimate-test-reporter < api/coverage/lcov.info
 
