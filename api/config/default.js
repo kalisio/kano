@@ -78,6 +78,15 @@ module.exports = {
     },
     templateDir: path.join(__dirname, 'email-templates')
   },
+  pusher: {
+    accessKeyId: 'AKIAJFKD4XALWT7LKJNQ',
+    secretAccessKey: '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',
+    region: 'eu-west-1',
+    apiVersion: '2010-03-31',
+    platforms: {
+      ANDROID: 'arn:aws:sns:eu-west-1:348995669582:app/GCM/kApp'
+    }
+  },
   logs: {
     Console: {
       colorize: true,
