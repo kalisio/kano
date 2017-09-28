@@ -62,6 +62,3 @@ dist
 
 # Generated config
 config/client-config.json
-
-# Wrapper files
-cordova
