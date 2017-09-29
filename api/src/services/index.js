@@ -56,8 +56,7 @@ module.exports = async function () {
           if (defaultUser.device) {
             pusherService.create({
               action: 'device',
-              deviceId: defaultUser.device.registrationId,
-              devicePlatform: defaultUser.device.platform
+              device: defaultUser.device
             }, {
               user
             })
