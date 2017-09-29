@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "761859104517",
+    "firebase_url": "https://kapp-174406.firebaseio.com",
+    "project_id": "kapp-174406",
+    "storage_bucket": "kapp-174406.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761859104517:android:19c19dd9c160e70e",
+        "android_client_info": {
+          "package_name": "xyz.kalisio.kapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761859104517-0vdufroe8f1gujsp15u4ib0c4hm119iv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "761859104517-nfb61gi0nah14i9c667bfe0st80rn17t.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "761859104517-4j6qul9rds52immbhm0ggrq2jbb4fvqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdeQ-YUj5Ce8RmZd26Dj29Ewx-92Qfv-Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
