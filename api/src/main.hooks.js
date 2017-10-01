@@ -1,20 +1,24 @@
 // Application hooks that run for every service
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
-import { hooks } from 'kCore'
+import { hooks as coreHooks } from 'kCore'
+import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
+
+// Register all default hooks for authorisation
+defineAbilitiesForSubject.registerDefaultHooks()
 
 module.exports = {
   before: {
-    all: [ hooks.log ],
+    all: [ coreHooks.log, teamHooks.authorise ],
     find: [ fuzzySearch() ],
     get: [],
     create: [],
-    update: [],
+    update: [ coreHooks.preventUpdatePerspectives ],
     patch: [],
     remove: []
   },
 
   after: {
-    all: [ hooks.log ],
+    all: [ coreHooks.log, coreHooks.processPerspectives ],
     find: [],
     get: [],
     create: [],
@@ -24,7 +28,7 @@ module.exports = {
   },
 
   error: {
-    all: [ hooks.log ],
+    all: [ coreHooks.log ],
     find: [],
     get: [],
     create: [],

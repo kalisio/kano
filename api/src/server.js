@@ -1,6 +1,5 @@
 import logger from 'winston'
-import { kalisio, hooks as coreHooks } from 'kCore'
-import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
+import { kalisio } from 'kCore'
 
 const path = require('path')
 const fs = require('fs-extra')
@@ -11,9 +10,6 @@ const feathers = require('feathers')
 const middleware = require('./middleware')
 const services = require('./services')
 const appHooks = require('./main.hooks')
-
-// Register all default hooks for authorisation
-defineAbilitiesForSubject.registerDefaultHooks()
 
 export class Server {
   constructor () {
@@ -45,18 +41,8 @@ export class Server {
 
     // Set up our services (see `services/index.js`)
     await this.app.configure(services)
-    // And hooks
-    this.app.hooks(appHooks)
     // Register authorisation, perspective, etc. hooks
-    this.app.hooks({
-      before: {
-        all: teamHooks.authorise,
-        update: coreHooks.preventUpdatePerspectives
-      },
-      after: {
-        all: coreHooks.processPerspectives
-      }
-    })
+    this.app.hooks(appHooks)
     // Configure middleware (see `middleware/index.js`) - always has to be last
     this.app.configure(middleware)
 
