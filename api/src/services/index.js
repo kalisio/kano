@@ -20,7 +20,6 @@ module.exports = async function () {
   
     // Add hooks for topic creation/removal on org/group object creation/removal
     app.on('service', service => {
-      console.log(service.name)
       if (service.name === 'groups' || service.name === 'organisations') {
         app.configureService(service.name, service, servicesPath)
       }
