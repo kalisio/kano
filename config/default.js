@@ -49,9 +49,6 @@ module.exports = {
   },
   user_actions: {
     links: [
-      { label: 'Members', icon: 'group', route: { name: 'members-activity', params: { context: 'context._id' } } },
-      { label: 'Groups', icon: 'folder', route: { name: 'groups-activity', params: { context: 'context._id' } } },
-      { }, // separator
       { label: 'Map', icon: 'map', route: { name: 'map' } },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
@@ -133,23 +130,30 @@ module.exports = {
               component: 'account/KAccountActivity',
               props: true
             },
-            'organisations/:operation/:id?/:perspective?': {
-              name: 'organisations-activity',
-              component: 'KOrganisationsActivity',
-              props: true
-            },
-            ':context/users/:operation?/:id?/:perspective?': {
-              name: 'members-activity',
-              component: 'KMembersActivity',
-              props: true
-            },
-            ':context/groups/:operation?/:id?/:perspective?': {
-              name: 'groups-activity',
-              component: 'KGroupsActivity',
-              props: true
-            },
             'map': {
               component: 'KMap'
+            },
+            ':contextId': {
+              name: 'organisation',
+              component: 'KOrganisationActivity',
+              props: true,
+              children: {
+                'members/:id?/:perspective?': {
+                  name: 'members-activity',
+                  component: 'KMembersActivity',
+                  props: true
+                },
+                'groups/:id?/:perspective?': {
+                  name: 'groups-activity',
+                  component: 'KGroupsActivity',
+                  props: true
+                },
+                ':perspective': {
+                  name: 'settings-activity',
+                  component: 'KSettingsActivity',
+                  props: true
+                }
+              }
             }
           }
         }
