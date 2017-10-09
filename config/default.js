@@ -1,5 +1,10 @@
 module.exports = {
-  domain: 'http://10.0.2.2:8081', // Special alias to host loopback interface in cordova
+  // Special alias to host loopback interface in cordova
+  //domain: 'http://10.0.2.2:8081',
+  // If using port forwarding
+  //domain: 'http://localhost:8081',
+  // If using local IP on WiFi router
+  domain: 'http://192.168.1.16:8081',
   apiPath: '/api',
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'kApp',

@@ -42,7 +42,6 @@ module.exports = {
         email: 'kalisio@kalisio.xyz',
         password: 'kalisio',
         name: 'Kalisio'
-      }
     ],
     github: {
       clientID: '157fe8bd095367192168',
@@ -95,7 +94,8 @@ module.exports = {
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
       filename: 'kApp-',
-      datePattern: 'yyyy-MM-dd.log'
+      datePattern: 'yyyy-MM-dd.log',
+      maxDays: 30
       /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
       filename: path.join(__dirname, '..', 'logs'),
       datePattern: '/yyyy/MM/dd.log',
