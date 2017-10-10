@@ -42,6 +42,7 @@ module.exports = {
         email: 'kalisio@kalisio.xyz',
         password: 'kalisio',
         name: 'Kalisio'
+      }
     ],
     github: {
       clientID: '157fe8bd095367192168',
