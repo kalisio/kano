@@ -3455,8 +3455,8 @@ lcid@^1.0.0:
     invert-kv "^1.0.0"
 
 leaflet-basemaps@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/leaflet-basemaps/-/leaflet-basemaps-0.2.0.tgz#29b851a8963ed6d7784c38eebd7df9468aad4c1a"
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/leaflet-basemaps/-/leaflet-basemaps-0.2.3.tgz#8bf57ae0f225ae4359e4d54749859d58d0ec1bde"
 
 leaflet-filelayer@^0.6.0:
   version "0.6.0"

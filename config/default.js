@@ -95,7 +95,27 @@ module.exports = {
                          'NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
           }
         ]
-      }
+      },
+      {
+        type: 'tileLayer.wms',
+        arguments: [
+          'https://geoservices.meteofrance.fr/api/__1sTDhRuCpiY-Be1-yROnR2E4VKXbZk46Ry3oeZjBNSg__/PPERO_01WMS',
+          {
+            layers: 'FL__ISO_0',
+            version: '1.3.0',
+            transparent: true,
+            crs: 'EPSG3857',
+            format: 'image/png',
+            dim_reference_time: '2017-10-12T00:00:00Z',
+            time: '2017-10-13T00:00:00Z',
+            styles: 'FLP__ISO_0__NO_SHADING',
+            //  elevation: '100',
+            uppercase: true,
+            maxZoom: 20,
+            label: 'MF-FL_ISO_0'
+          }
+        ]
+      }   
     ]
   },
   routes: {
