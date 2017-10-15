@@ -4585,9 +4585,9 @@ quasar-extras@0.x:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/quasar-extras/-/quasar-extras-0.0.8.tgz#0defa7f982cbba185e3142b7eee9d3829928212a"
 
-quasar-framework@^0.14.1:
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/quasar-framework/-/quasar-framework-0.14.1.tgz#93ba5d8638da7233626d7d599914a9d758c2b148"
+quasar-framework@0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/quasar-framework/-/quasar-framework-0.14.5.tgz#277d40a6577509aaddb1528078ef7620cfd50571"
 
 query-string@^4.1.0:
   version "4.3.4"
@@ -5734,8 +5734,8 @@ vue-loader@~12.2.2:
     vue-template-es2015-compiler "^1.2.2"
 
 vue-router@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.7.0.tgz#16d424493aa51c3c8cce8b7c7210ea4c3a89aff1"
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.8.1.tgz#9833c9ee57ac83beb0269056fefee71713f20695"
 
 vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
   version "3.0.1"
@@ -5744,9 +5744,9 @@ vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@~2.3.4:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.3.4.tgz#5a88ac2c5e4d5d6218e6aa80e7e221fb7e67894c"
+vue-template-compiler@2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.2.tgz#6f198ebc677b8f804315cd33b91e849315ae7177"
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -5755,7 +5755,11 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.3.tgz#22787de4e37ebd9339b74223bc467d1adee30545"
 
-vue@^2.0.0, vue@~2.3.4:
+vue@2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
+
+vue@^2.0.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.4.tgz#5ec3b87a191da8090bbef56b7cfabd4158038171"
 
