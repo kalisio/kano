@@ -127,7 +127,10 @@ module.exports = {
       homeButton : false,
       geocoder : false,
       navigationHelpButton : true,
-      baseLayerPicker : true
+      baseLayerPicker : true,
+      vrButton: true,
+      animation: false,
+      timeline: false
     },
     baseLayers: [{
       name: 'Mapbox Satellite',
@@ -135,12 +138,26 @@ module.exports = {
       iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
       type: 'Mapbox',
       mapId: 'mapbox.satellite'
+    }, {
+      name: 'Mapbox Streets',
+      tooltip: 'Mapbox streets imagery https://www.mapbox.com/maps/',
+      iconUrl: 'Widgets/Images/ImageryProviders/mapboxTerrain.png',
+      type: 'Mapbox',
+      mapId: 'mapbox.streets'
     }],
     terrainLayers: [{
       name : 'WGS84 Ellipsoid',
       iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
       tooltip : 'WGS84 standard ellipsoid, also known as EPSG:4326',
       type: 'Ellipsoid'
+    }, {
+      name : 'STK World Terrain meshes',
+      iconUrl : 'Widgets/Images/TerrainProviders/STK.png',
+      tooltip : 'High-resolution, mesh-based terrain for the entire globe. Free for use on the Internet. Closed-network options are available.\nhttp://www.agi.com',
+      type: 'Cesium',
+      url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
+      requestWaterMask : true,
+      requestVertexNormals : true
     }]
   },
   routes: {
