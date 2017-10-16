@@ -46,7 +46,7 @@ Store.set('config', config)
 Store.set('loadComponent', utils.loadComponent)
 Store.set('loadSchema', utils.loadSchema)
 Store.set('resolveAsset', utils.resolveAsset)
-Store.set('context.service', 'organisations')
+Store.set('context', { contextId: '', service: 'organisations', subject: null })
 
 // Add global guards
 beforeGuard.registerGuard(authenticationGuard)
