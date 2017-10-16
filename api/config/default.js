@@ -41,7 +41,15 @@ module.exports = {
       {
         email: 'kalisio@kalisio.xyz',
         password: 'kalisio',
-        name: 'Kalisio'
+        name: 'Kalisio',
+        device: {
+          registrationId:
+          // 'fqCC2wksC0Y:APA91bEv74blXL1hzznVkkJPXcipbmRj39YSefTwrKxcNoluoiIOMO_JXkfeXc10fxZ2btF3XCGf3LEm_b58wbm',
+          //'fS9k3HI8qJY:APA91bEGkUL_GGZ45Hsy8GLtMGtgBeTkPa7wwYqYHjB0YZuXISijP3UC3sjoXd0naUFfTOUJmAq2oh-1hfoYENW8LSqukqv0g36kd-mAllCUq6oFMQO-QTT4Wgwq0TBx-MHrUgvCEkNa',
+          'fuWNXTfa6UQ:APA91bEuRjITw_EOACVS-oBVnmelvoCGkgdFers3UFjO5QBtxwaIblLVfgO867wyAqYxxI18mcRlDjeyP27HE_PfodDV-kR6xoaG-6TPTGsgXKtYmQUjBnabtQ6ceiI--9Y_v5uREhzr',
+          number: '+33615340150',
+          platform: 'ANDROID'
+        }
       }
     ],
     github: {

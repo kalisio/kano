@@ -54,10 +54,17 @@ module.exports = {
   },
   user_actions: {
     links: [
-      { label: 'Map', icon: 'map', route: { name: 'map' } },
-      { label: 'Globe', icon: 'terrain', route: { name: 'globe' } },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
+    ]
+  },
+  organisationView: {
+    actions: [
+      { icon: 'map', route: { name: 'map', params: {} } },
+      { icon: 'terrain', route: { name: 'globe', params: {} } },
+      { icon: 'group', route: { name: 'members-activity', params: {} } },
+      { icon: 'folder', route: { name: 'groups-activity', params: {} } },
+      { icon: 'settings', route: { name: 'settings-activity', params: { perspective: 'properties' } } }
     ]
   },
   map: {
@@ -197,17 +204,17 @@ module.exports = {
               component: 'account/KAccountActivity',
               props: true
             },
-            'map': {
-              component: 'KMap'
-            },
-            'globe': {
-              component: 'KGlobe'
-            },
             ':contextId': {
-              name: 'organisation',
-              component: 'KOrganisationActivity',
+              name: 'organisation-view',
+              component: 'KOrganisationView',
               props: true,
               children: {
+                'map': {
+                  component: 'KMap'
+                },
+                'globe': {
+                  component: 'KGlobe'
+                },
                 'members/:id?/:perspective?': {
                   name: 'members-activity',
                   component: 'KMembersActivity',
