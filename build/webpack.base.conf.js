@@ -27,7 +27,8 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: config[env.prod ? 'build' : 'dev'].publicPath,
     filename: 'js/[name].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    chunkFilename: 'js/[id].[chunkhash].js',
+    sourcePrefix : '' // Required for Cesium, see https://github.com/AnalyticalGraphicsInc/cesium/issues/4876
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -37,7 +38,12 @@ module.exports = {
     ],
     alias: config.aliases
   },
+  externals: {
+    'fs': true // Required for Cesium, https://github.com/AnalyticalGraphicsInc/cesium/issues/4838
+  },
   module: {
+    unknownContextCritical: false, // Required for Cesium, see https://github.com/AnalyticalGraphicsInc/cesium/issues/4876
+    unknownContextRegExp: /^.\/.*$/, // Required for Cesium, https://github.com/mmacaula/cesium-webpack/issues/4
     rules: [
       { // eslint
         enforce: 'pre',
@@ -54,6 +60,10 @@ module.exports = {
         loader: 'babel-loader',
         include: projectRoot,
         exclude: /node_modules/
+      },
+      {
+        test: /statics\/Cesium\.js$/,
+        loader: 'script'
       },
       {
         test: /\.vue$/,

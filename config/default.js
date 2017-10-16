@@ -55,6 +55,7 @@ module.exports = {
   user_actions: {
     links: [
       { label: 'Map', icon: 'map', route: { name: 'map' } },
+      { label: 'Globe', icon: 'terrain', route: { name: 'globe' } },
       { }, // separator
       { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
@@ -118,6 +119,30 @@ module.exports = {
       }   
     ]
   },
+  globe: {
+    options: {
+      sceneMode : 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
+      sceneModePicker : false,
+      scene3DOnly : true,
+      homeButton : false,
+      geocoder : false,
+      navigationHelpButton : true,
+      baseLayerPicker : true
+    },
+    baseLayers: [{
+      name: 'Mapbox Satellite',
+      tooltip: 'Mapbox satellite imagery https://www.mapbox.com/maps/',
+      iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
+      type: 'Mapbox',
+      mapId: 'mapbox.satellite'
+    }],
+    terrainLayers: [{
+      name : 'WGS84 Ellipsoid',
+      iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
+      tooltip : 'WGS84 standard ellipsoid, also known as EPSG:4326',
+      type: 'Ellipsoid'
+    }]
+  },
   routes: {
     '/' : {
       name: 'index',
@@ -157,6 +182,9 @@ module.exports = {
             },
             'map': {
               component: 'KMap'
+            },
+            'globe': {
+              component: 'KGlobe'
             },
             ':contextId': {
               name: 'organisation',
