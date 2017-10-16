@@ -18,10 +18,7 @@ export class Server {
     if (process.env.NODE_ENV === 'production') {
       this.app.use(this.app.get('client').build.publicPath, feathers.static('../dist'))
     }
-    else {
-      const staticsPath = path.posix.join(this.app.get('client').dev.publicPath, 'statics/')
-      this.app.use(staticsPath, feathers.static('../dist/statics'))
-    }
+    // In dev this is done by the webpack server
 
     // Define HTTP proxies to your custom API backend. See /config/index.js -> proxyTable
     // https://github.com/chimurai/http-proxy-middleware
