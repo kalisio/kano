@@ -124,10 +124,31 @@ module.exports = {
           }
         ]
       }   
-    ]
+    ],
+    // Default GeoJSON layer style for polygons/lines
+    featureStyle: {
+      opacity: 1,
+      radius: 6,
+      color: 'red',
+      fillOpacity: 0.5,
+      fillColor: 'green',
+      popup: {
+        excludedProperties: ['wikipedia']
+      }
+    },
+    // Default GeoJSON layer style for points
+    pointStyle: {
+      type: 'circleMarker',
+      options: {
+        opacity: 1,
+        color: 'red',
+        fillOpacity: 0.5,
+        fillColor: 'green'
+      }
+    }
   },
   globe: {
-    options: {
+    viewer: {
       sceneMode : 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
       sceneModePicker : false,
       scene3DOnly : true,
@@ -137,6 +158,7 @@ module.exports = {
       baseLayerPicker : true,
       vrButton: true,
       animation: false,
+      //creditContainer: 'xxx',
       timeline: false
     },
     baseLayers: [{
@@ -165,7 +187,17 @@ module.exports = {
       url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
       requestWaterMask : true,
       requestVertexNormals : true
-    }]
+    }],
+    fileLayers: {
+      clearOnDrop : false,
+      flyToOnDrop: true,
+      clampToGround: true
+    },
+    // Default GeoJSON layer style for points/polygons/lines in simple style spec
+    featureStyle: {
+      'marker-symbol': 'airport',
+      'marker-color': '#57D824'
+    }
   },
   routes: {
     '/' : {

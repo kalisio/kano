@@ -3464,12 +3464,9 @@ leaflet-basemaps@^0.2.0:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/leaflet-basemaps/-/leaflet-basemaps-0.2.3.tgz#8bf57ae0f225ae4359e4d54749859d58d0ec1bde"
 
-leaflet-filelayer@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/leaflet-filelayer/-/leaflet-filelayer-0.6.0.tgz#dca2c7eb346dcd76e01f16d517d0b5464d16e2d8"
-  dependencies:
-    leaflet "^0.7.7"
-    togeojson "^0.14.0"
+leaflet-filelayer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/leaflet-filelayer/-/leaflet-filelayer-1.0.0.tgz#c0d86548d57de793738de70c1125ee3bdd5dd893"
 
 leaflet-fullscreen@^1.0.2:
   version "1.0.2"
@@ -3489,10 +3486,6 @@ leaflet-measure@^2.1.7:
 leaflet.markercluster@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/leaflet.markercluster/-/leaflet.markercluster-1.0.6.tgz#2d8069ef7881142e71173d86fb55d332af4742d7"
-
-leaflet@^0.7.7:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-0.7.7.tgz#1e352ba54e63d076451fa363c900890cb2cf75ee"
 
 leaflet@^1.0.3:
   version "1.1.0"
@@ -5511,9 +5504,9 @@ to-fast-properties@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
 
-togeojson@^0.14.0:
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/togeojson/-/togeojson-0.14.2.tgz#8400d8fa55c4526a40dfdfbc20aea448cc3de159"
+togeojson@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/togeojson/-/togeojson-0.16.0.tgz#ab5729e4f8c9920e6da5f08fd82490a1d16aca6d"
   dependencies:
     concat-stream "~1.5.1"
     minimist "1.2.0"
