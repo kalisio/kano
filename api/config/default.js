@@ -1,18 +1,17 @@
 var path = require('path')
 var containerized = require('containerized')()
-var clientConfig = require('../../config')
 
+// Required to know webpack port so that in dev we can build correct URLs
+var clientPort = process.env.CLIENT_PORT || 8080
 var API_PREFIX = '/api'
 
 module.exports = {
-  client: clientConfig,
-
   // Proxy your API if using any.
   // Also see /build/script.dev.js and search for "proxy api requests"
   // https://github.com/chimurai/http-proxy-middleware
   proxyTable: {},
 
-  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port : 'http://www.kalisio.xyz'),
+  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort : 'http://www.kalisio.xyz'),
   host: 'localhost',
   port: process.env.PORT || 8081,
   /* To enable HTTPS
@@ -55,14 +54,14 @@ module.exports = {
     github: {
       clientID: '157fe8bd095367192168',
       clientSecret: '5dd578eb36bf00d0c7c8dbee6ea36d44529d97cf',
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/auth/github/callback' : '/auth/github/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/' : '/')
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : '/auth/github/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/')
     },
     google: {
       clientID: '761859104517-4j6qul9rds52immbhm0ggrq2jbb4fvqk.apps.googleusercontent.com',
       clientSecret: 'a03PrspLJLIUqnJ7ANtLgutd',
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/auth/google/callback' : '/auth/google/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientConfig.dev.port + '/' : '/'),
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : '/auth/google/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
     },
     // Required for OAuth2 to work correctly
