@@ -43,7 +43,7 @@ module.exports = {
         /*
         device: {
           registrationId: 'xxx',
-          umber: '+xxx',
+          number: '+xxx',
           platform: 'ANDROID'
         }
         */
