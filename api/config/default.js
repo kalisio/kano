@@ -40,26 +40,25 @@ module.exports = {
       {
         email: 'kalisio@kalisio.xyz',
         password: 'kalisio',
-        name: 'Kalisio',
+        /*
         device: {
-          registrationId:
-          // 'fqCC2wksC0Y:APA91bEv74blXL1hzznVkkJPXcipbmRj39YSefTwrKxcNoluoiIOMO_JXkfeXc10fxZ2btF3XCGf3LEm_b58wbm',
-          //'fS9k3HI8qJY:APA91bEGkUL_GGZ45Hsy8GLtMGtgBeTkPa7wwYqYHjB0YZuXISijP3UC3sjoXd0naUFfTOUJmAq2oh-1hfoYENW8LSqukqv0g36kd-mAllCUq6oFMQO-QTT4Wgwq0TBx-MHrUgvCEkNa',
-          'fuWNXTfa6UQ:APA91bEuRjITw_EOACVS-oBVnmelvoCGkgdFers3UFjO5QBtxwaIblLVfgO867wyAqYxxI18mcRlDjeyP27HE_PfodDV-kR6xoaG-6TPTGsgXKtYmQUjBnabtQ6ceiI--9Y_v5uREhzr',
-          number: '+33615340150',
+          registrationId: 'xxx',
+          umber: '+xxx',
           platform: 'ANDROID'
         }
+        */
+        name: 'Kalisio'
       }
     ],
     github: {
-      clientID: '157fe8bd095367192168',
-      clientSecret: '5dd578eb36bf00d0c7c8dbee6ea36d44529d97cf',
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : '/auth/github/callback'),
       successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/')
     },
     google: {
-      clientID: '761859104517-4j6qul9rds52immbhm0ggrq2jbb4fvqk.apps.googleusercontent.com',
-      clientSecret: 'a03PrspLJLIUqnJ7ANtLgutd',
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : '/auth/google/callback'),
       successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
@@ -80,18 +79,18 @@ module.exports = {
   mailer: {
     service: 'gmail',
     auth: {
-      user: 'support@kalisio.xyz',
-      pass: 'kalisio2017'
+      user: process.env.GOOGLE_MAIL_USER,
+      pass: process.env.GOOGLE_MAIL_PASSWORD
     },
     templateDir: path.join(__dirname, 'email-templates')
   },
   pusher: {
-    accessKeyId: 'AKIAJFKD4XALWT7LKJNQ',
-    secretAccessKey: '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',
+    accessKeyId: process.env.SNS_ACCESS_KEY,
+    secretAccessKey: process.env.SNS_SECRET_ACCESS_KEY,
     region: 'eu-west-1',
     apiVersion: '2010-03-31',
     platforms: {
-      ANDROID: 'arn:aws:sns:eu-west-1:348995669582:app/GCM/kApp'
+      ANDROID: process.env.SNS_ANDROID_ARN
     }
   },
   logs: {
