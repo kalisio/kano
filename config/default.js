@@ -215,7 +215,10 @@ module.exports = {
         'register': 'authentication/KRegister',
         'change-endpoint': 'authentication/KChangeEndpoint',
         'resend-verify-signup': 'account/KResendVerifySignup',
-        'verify-signup/:token': 'account/KVerifySignup',
+        'verify-signup/:token': {
+          component: 'account/KVerifySignup',
+          meta: { authenticated: true }
+        },
         'send-reset-password': 'account/KSendResetPassword',
         'change-password': {
           component: 'account/KChangePassword',
@@ -226,7 +229,10 @@ module.exports = {
           component: 'account/KSendChangeIdentity',
           meta: { authenticated: true, unauthenticated: false }
         },
-        'change-identity/:token': 'account/KChangeIdentity',
+        'change-identity/:token': {
+          component: 'account/KChangeIdentity',
+          meta: { authenticated: true }
+        },
         'home': {
           component: 'layout/KHome',
           meta: { authenticated: true, unauthenticated: false },
