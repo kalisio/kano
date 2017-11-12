@@ -17,22 +17,13 @@ import config from 'config'
 import router from './router'
 import appHooks from './main.hooks'
 import utils from './utils'
-import kCore, { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
-import kTeam, { authorisationGuard } from 'kTeam/client'
-import kNotify from 'kNotify/client'
-import kMap from 'kMap/client'
+import services from './services'
+import { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
+import { authorisationGuard } from 'kTeam/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
 import 'whatwg-fetch'
-
-let api = kalisio()
-// Setup app hooks
-api.hooks(appHooks)
-
-// Set up Vue
-Vue.use(Quasar)
-Vue.use(router)
 
 if (__THEME === 'mat') {
   require('quasar-extras/roboto-font')
@@ -40,6 +31,16 @@ if (__THEME === 'mat') {
 import 'quasar-extras/material-icons'
 import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
+
+let api = kalisio()
+// Setup app hooks
+api.hooks(appHooks)
+// Then all services
+services.call(api)
+
+// Set up Vue
+Vue.use(Quasar)
+Vue.use(router)
 
 // Set up the Store
 Store.set('config', config)
@@ -55,6 +56,7 @@ beforeGuard.registerGuard(authorisationGuard(api))
 // router.beforeEach(beforeGuard)
 
 Quasar.start(() => {
+  logger.info('Starting application')
   // Inject in Vue the Kalisio features
   Object.defineProperty(Vue.prototype, '$store', {
     get () { return Store }
@@ -69,14 +71,4 @@ Quasar.start(() => {
     el: '#q-app',
     render: h => h(require('./App'))
   })
-  // Set up our plugin services
-  try {
-    api.configure(kCore)
-    api.configure(kTeam)
-    api.configure(kNotify)
-    api.configure(kMap)
-  }
-  catch (error) {
-    logger.error(error.message)
-  }
 })
