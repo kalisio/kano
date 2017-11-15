@@ -15,12 +15,14 @@ install:
   - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
   - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
   - git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn link && cd .. && yarn link kMap
+  - git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install && yarn link && cd .. && yarn link kEvent
   - yarn install
   - quasar build
   - cd api
   - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
   - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
   - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
+  - git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install && yarn link && cd .. && yarn link kEvent
   - yarn install
   - npm run build
 before_script:

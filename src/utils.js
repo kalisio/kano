@@ -2,7 +2,6 @@ import _ from 'lodash'
 
 function loadComponent (component) {
   return () => {
-    // try first in core library
     return import(`kCore/lib/client/components/${component}.vue`)
       .catch(_ => {
         return import(`kTeam/lib/client/components/${component}.vue`)
@@ -11,8 +10,11 @@ function loadComponent (component) {
               .catch(_ => {
                 return import(`kMap/lib/client/components/${component}.vue`)
                   .catch(_ => {
-                    // Otherwise this should be app component
-                    return import(`@/${component}.vue`)
+                    return import(`kEvent/lib/client/components/${component}.vue`)
+                      .catch(_ => {
+                        // Otherwise this should be app component
+                        return import(`@/${component}.vue`)
+                      })
                   })
               })
           })
@@ -21,20 +23,15 @@ function loadComponent (component) {
 }
 
 function loadSchema (schema) {
-  return import(`kCore/lib/schemas/${schema}.json`)
-    .catch(_ => {
-      return import(`kTeam/lib/schemas/${schema}.json`)
-      // FIXME: When we will have some schema here
-      /*
+  return () => {
+    return import(`kCore/lib/schemas/${schema}.json`)
       .catch(_ => {
-        return import(`kMap/lib/schemas/${schema}.json`)
-        .catch(_ => {
-          // Otherwise this should be app component
-          return import(`schemas/${schema}.json`)
-        })
+        return import(`kTeam/lib/schemas/${schema}.json`)
+          .catch(_ => {
+            return import(`kEvent/lib/schemas/${schema}.json`)
+          })
       })
-      */
-    })
+  }
 }
 
 function resolveAsset (asset) {

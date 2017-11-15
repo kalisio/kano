@@ -4,6 +4,7 @@ import logger from 'winston'
 import kCore from 'kCore'
 import kTeam from 'kTeam'
 import kNotify, { hooks } from 'kNotify'
+import kEvent from 'kEvent'
 
 const servicesPath = path.join(__dirname, '..', 'services')
 
@@ -33,6 +34,7 @@ module.exports = async function () {
     //app.configureService('authorisations', app.getService('authorisations'), servicesPath)
 
     await app.configure(kNotify)
+    await app.configure(kEvent)
   }
   catch (error) {
     logger.error(error.message)

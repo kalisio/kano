@@ -62,6 +62,7 @@ module.exports = {
     actions: [
       { icon: 'map', route: { name: 'map', params: {} } },
       { icon: 'terrain', route: { name: 'globe', params: {} } },
+      { icon: 'whatshot', route: { name: 'events-activity', params: {} } },
       { icon: 'group', route: { name: 'members-activity', params: {} } },
       { icon: 'folder', route: { name: 'groups-activity', params: {} } },
       { icon: 'settings', route: { name: 'settings-activity', params: { perspective: 'properties' } } }
@@ -261,6 +262,11 @@ module.exports = {
                 'groups/:id?/:perspective?': {
                   name: 'groups-activity',
                   component: 'KGroupsActivity',
+                  props: true
+                },
+                'events/:id?/:perspective?': {
+                  name: 'events-activity',
+                  component: 'KEventsActivity',
                   props: true
                 },
                 ':perspective': {

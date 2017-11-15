@@ -1,4 +1,5 @@
-import { hooks } from 'kNotify'
+import { notifyHooks } from 'kNotify'
+import { eventHooks } from 'kEvent'
 
 module.exports = {
   before: {
@@ -15,10 +16,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ hooks.createTopic ],
+    create: [ eventHooks.createOrganisationServices, notifyHooks.createTopic ],
     update: [],
     patch: [],
-    remove: [ hooks.removeTopic ]
+    remove: [ eventHooks.removeOrganisationServices, notifyHooks.removeTopic ]
   },
 
   error: {
