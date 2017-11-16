@@ -3,24 +3,19 @@ import _ from 'lodash'
 function loadComponent (component) {
   return () => {
     return import(`kCore/lib/client/components/${component}.vue`)
-      .catch(error => {
-        console.log(error)
+      .catch(errorCore => {
         return import(`kTeam/lib/client/components/${component}.vue`)
-          .catch(error => {
-            console.log(error)
+          .catch(errorTeam => {
             return import(`kNotify/lib/client/components/${component}.vue`)
-              .catch(error => {
-                console.log(error)
+              .catch(errorNotify => {
                 return import(`kMap/lib/client/components/${component}.vue`)
-                  .catch(error => {
-                    console.log(error)
+                  .catch(errorMap => {
                     return import(`kEvent/lib/client/components/${component}.vue`)
-                      .catch(error => {
-                        console.log(error)
+                      .catch(errorEvent => {
                         // Otherwise this should be app component
                         return import(`@/${component}.vue`)
-                          .catch(error => {
-                            console.log(error)
+                          .catch(errorApp => {
+                            console.log(errorCore, errorTeam, errorNotify, errorMap, errorEvent, errorApp)
                           })
                       })
                   })
@@ -32,14 +27,12 @@ function loadComponent (component) {
 
 function loadSchema (schema) {
   return import(`kCore/lib/schemas/${schema}.json`)
-    .catch(error => {
-      console.log(error)
+    .catch(errorCore => {
       return import(`kTeam/lib/schemas/${schema}.json`)
-        .catch(error => {
-          console.log(error)
+        .catch(errorTeam => {
           return import(`kEvent/lib/schemas/${schema}.json`)
-            .catch(error => {
-              console.log(error)
+            .catch(errorEvent => {
+              console.log(errorCore, errorTeam, errorEvent)
             })
         })
     })
