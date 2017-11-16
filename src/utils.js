@@ -3,17 +3,25 @@ import _ from 'lodash'
 function loadComponent (component) {
   return () => {
     return import(`kCore/lib/client/components/${component}.vue`)
-      .catch(_ => {
+      .catch(error => {
+        console.log(error)
         return import(`kTeam/lib/client/components/${component}.vue`)
-          .catch(_ => {
+          .catch(error => {
+            console.log(error)
             return import(`kNotify/lib/client/components/${component}.vue`)
-              .catch(_ => {
+              .catch(error => {
+                console.log(error)
                 return import(`kMap/lib/client/components/${component}.vue`)
-                  .catch(_ => {
+                  .catch(error => {
+                    console.log(error)
                     return import(`kEvent/lib/client/components/${component}.vue`)
-                      .catch(_ => {
+                      .catch(error => {
+                        console.log(error)
                         // Otherwise this should be app component
                         return import(`@/${component}.vue`)
+                          .catch(error => {
+                            console.log(error)
+                          })
                       })
                   })
               })
@@ -23,15 +31,18 @@ function loadComponent (component) {
 }
 
 function loadSchema (schema) {
-  return () => {
-    return import(`kCore/lib/schemas/${schema}.json`)
-      .catch(_ => {
-        return import(`kTeam/lib/schemas/${schema}.json`)
-          .catch(_ => {
-            return import(`kEvent/lib/schemas/${schema}.json`)
-          })
-      })
-  }
+  return import(`kCore/lib/schemas/${schema}.json`)
+    .catch(error => {
+      console.log(error)
+      return import(`kTeam/lib/schemas/${schema}.json`)
+        .catch(error => {
+          console.log(error)
+          return import(`kEvent/lib/schemas/${schema}.json`)
+            .catch(error => {
+              console.log(error)
+            })
+        })
+    })
 }
 
 function resolveAsset (asset) {
