@@ -45,6 +45,7 @@
     "feathers-hooks": "^2.0.1",
     "feathers-reactive": "^0.4.1",
     "jquery": "^3.2.1",
+    "js-yaml": "^3.10.0",
     "leaflet": "^1.0.3",
     "leaflet-basemaps": "^0.2.0",
     "leaflet-filelayer": "^1.0.0",
