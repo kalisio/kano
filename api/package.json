@@ -31,8 +31,8 @@
     "build": "npm run clean && babel src -d dist -s",
     "prod": "cross-env NODE_ENV=production node dist/main.js",
     "lint": "eslint --ext .js src --fix",
-    "mocha": "mocha --opts mocha.opts",
-    "coverage": "node node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts mocha.opts",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha --opts mocha.opts",
+    "coverage": "cross-env NODE_CONFIG_DIR=./test/config/ node node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts mocha.opts",
     "test": "npm run build && npm run lint && npm run coverage"
   },
   "devDependencies": {
