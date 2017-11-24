@@ -254,12 +254,12 @@ module.exports = {
                 'globe': {
                   component: 'KGlobe'
                 },
-                'members/:id?/:perspective?': {
+                'members/:operation?/:id?/:perspective?': {
                   name: 'members-activity',
                   component: 'KMembersActivity',
                   props: true
                 },
-                'groups/:id?/:perspective?': {
+                'groups/:operation?/:id?/:perspective?': {
                   name: 'groups-activity',
                   component: 'KGroupsActivity',
                   props: true
