@@ -1,10 +1,18 @@
 // Application hooks that run for every service
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import { hooks as coreHooks } from 'kCore'
-import { defineAbilitiesForSubject, hooks as teamHooks } from 'kTeam'
+import { permissions as teamPermissions, hooks as teamHooks } from 'kTeam'
+import { permissions as eventPermissions } from 'kEvent'
 
 // Register all default hooks for authorisation
-defineAbilitiesForSubject.registerDefaultHooks()
+// Default rules for all users
+teamPermissions.defineAbilities.registerHook(teamPermissions.defineUserAbilities)
+// Then rules for organisations
+teamPermissions.defineAbilities.registerHook(teamPermissions.defineOrganisationAbilities)
+// Then rules for groups
+teamPermissions.defineAbilities.registerHook(teamPermissions.defineGroupAbilities)
+// Then rules for events
+teamPermissions.defineAbilities.registerHook(eventPermissions.defineEventAbilities)
 
 module.exports = {
   before: {
