@@ -6,6 +6,8 @@
 [![Code Climate](https://codeclimate.com/github/kalisio/kApp/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kApp)
 [![Test Coverage](https://codeclimate.com/github/kalisio/kApp/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kApp/coverage)
 [![Dependency Status](https://img.shields.io/david/kalisio/kApp.svg?style=flat-square)](https://david-dm.org/kalisio/kApp)
+[![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.gitbooks.io/kalisio)
+[![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kApp/badge.svg)](https://snyk.io/test/github/kalisio/kApp)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kApp.svg?style=plastic)](https://hub.docker.com/r/kalisio/kapp/)
 
 ### Under Development
