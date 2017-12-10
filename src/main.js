@@ -19,7 +19,7 @@ import appHooks from './main.hooks'
 import utils from './utils'
 import services from './services'
 import { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
-import { authorisationGuard } from 'kTeam/client'
+import { permissions, authorisationGuard } from 'kTeam/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -64,6 +64,17 @@ Quasar.start(() => {
   Object.defineProperty(Vue.prototype, '$api', {
     get () { return api }
   })
+  Vue.prototype.$can = (operation, service, context, resource) => {
+    let abilities = Store.get('user.abilities')
+    if (!abilities) return false
+    // Check for access to service fisrt
+    if (!permissions.hasServiceAbilities(abilities, api.getServicePath(service, context, false))) {
+      return false
+    }
+    // Then for access to resource
+    let result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)
+    return result
+  }
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
