@@ -66,13 +66,26 @@ Quasar.start(() => {
   })
   Vue.prototype.$can = (operation, service, context, resource) => {
     let abilities = Store.get('user.abilities')
-    if (!abilities) return false
+    logger.debug('Check for abilities ', operation, service, context, resource, abilities)
+    if (!abilities) {
+      logger.debug('Access denied without abilities')
+      return false
+    }
     // Check for access to service fisrt
-    if (!permissions.hasServiceAbilities(abilities, api.getServicePath(service, context, false))) {
+    const path = api.getServicePath(service, context, false)
+    let result = permissions.hasServiceAbilities(abilities, path)
+    if (!result) {
+      logger.debug('Access to service path ' + path + ' denied')
       return false
     }
     // Then for access to resource
-    let result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)
+    result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)
+    if (!result) {
+      logger.debug('Access to resource denied')
+    }
+    else {
+      logger.debug('Access to resource granted')
+    }
     return result
   }
   // Create the Vue instance

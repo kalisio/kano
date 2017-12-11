@@ -37,12 +37,20 @@ export default {
   },
   mounted () {
     Events.$on('error-hook', hook => {
-      Toast.create.negative({
-        html: hook.error.message,
-        timeout: 10000
-      })
       this.nbCompletedRequests++
       this.stopProgress()
+      // Forward to global error handler
+      Events.$emit('error', hook.error)
+    })
+    Events.$on('error', error => {
+      // When trying to access an unauthorized resource redirect to home
+      if (error.code === 403) {
+        this.$router.push({ name: 'home' })
+      }
+      Toast.create.negative({
+        html: error.message,
+        timeout: 5000
+      })
     })
     Events.$on('before-hook', hook => {
       this.nbRequests++
