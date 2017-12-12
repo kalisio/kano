@@ -58,7 +58,8 @@ module.exports = {
       { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
-  organisationView: {
+  context: {
+    service: 'organisations',
     actions: [
       { icon: 'map', route: { name: 'map', params: {} } },
       { icon: 'terrain', route: { name: 'globe', params: {} } },

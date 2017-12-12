@@ -42,8 +42,8 @@ module.exports = {
             props: true
           },
           ':contextId': {
-            name: 'organisation-view',
-            component: 'KOrganisationView',
+            name: 'context',
+            component: 'layout/KContext',
             props: true,
             children: {
               'map': {
