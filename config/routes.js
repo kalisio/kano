@@ -33,20 +33,32 @@ module.exports = {
         meta: { authenticated: true }
       },
       'home': {
+        // The name of the route has to be set the default child
+        name: '',
         component: 'layout/KHome',
         meta: { authenticated: true, unauthenticated: false },
         children: {
+          'dashboard': {
+            // Because this child is the default one path is empty and name is the one of the parent route
+            path: '',
+            name: 'home',
+            component: 'KMap'
+          },
           'account/:perspective': {
             name: 'account-activity',
             component: 'account/KAccountActivity',
             props: true
           },
           ':contextId': {
-            name: 'context',
+            // The name of the route has to be set the default child
+            name: '',
             component: 'layout/KContext',
             props: true,
             children: {
               'map': {
+                // Because this child is the default one path is empty and name is the one of the parent route
+                path: '',
+                name: 'context',
                 component: 'KMap'
               },
               'globe': {

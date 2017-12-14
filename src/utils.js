@@ -48,6 +48,7 @@ function buildRoutes (config) {
       // The key is always the path for the route
       let route = {
         path: key,
+        name: key,
         // "Inherit" meta data on nested routes
         meta: (parentRoute ? Object.assign({}, parentRoute.meta) : {})
       }
@@ -57,12 +58,17 @@ function buildRoutes (config) {
       // Otherwise we have an object similar to what expect vue-router,
       // we simply return the async component loading function with the given component value
       if (typeof value === 'string') {
-        route.name = key
         route.component = loadComponent(value)
       }
       else {
-        route.path = key || value.path
-        route.name = value.name || route.path
+        // Take care that path can be empty so we cannot just check with a if
+        if (value.hasOwnProperty('path')) {
+          route.path = value.path
+        }
+        // Take care that name can be empty so we cannot just check with a if
+        if (value.hasOwnProperty('name')) {
+          route.name = value.name
+        }
         route.component = loadComponent(value.component)
         if (_.has(value, 'props')) {
           route.props = value.props
