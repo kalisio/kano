@@ -2,11 +2,13 @@
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import { hooks as coreHooks } from 'kCore'
 import { permissions as teamPermissions, hooks as teamHooks } from 'kTeam'
+import { permissions as notifyPermissions } from 'kNotify'
 import { permissions as eventPermissions } from 'kEvent'
 
 // Register all default hooks for authorisation
 // Default rules for all users
 teamPermissions.defineAbilities.registerHook(teamPermissions.defineUserAbilities)
+teamPermissions.defineAbilities.registerHook(notifyPermissions.defineUserAbilities)
 // Then rules for organisations
 teamPermissions.defineAbilities.registerHook(teamPermissions.defineOrganisationAbilities)
 // Then rules for groups
