@@ -7,14 +7,13 @@
 
 <script>
 import { Toast, Events } from 'quasar'
-import { mixins as authMixins, beforeGuard } from 'kCore/client'
-import { mixins as teamMixins } from 'kTeam/client'
+import { mixins, beforeGuard } from 'kCore/client'
 import utils from '../utils'
 
 export default {
   name: 'index',
   // authorisation mixin is required to automatically update user' abilities on update
-  mixins: [authMixins.authentication, teamMixins.authorisation],
+  mixins: [mixins.authentication, mixins.authorisation],
   methods: {
     redirect () {
       // Run registered guards to redirect accordingly if required
