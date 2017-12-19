@@ -75,6 +75,10 @@ Quasar.start(() => {
       logger.debug('Access to service path ' + path + ' denied')
       return false
     }
+    else if (operation === 'service') {
+      // When we only check for service-level access return
+      return true
+    }
     // Then for access to resource
     result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)
     if (!result) {
