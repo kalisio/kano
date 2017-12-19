@@ -18,8 +18,7 @@ import router from './router'
 import appHooks from './main.hooks'
 import utils from './utils'
 import services from './services'
-import { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
-import { permissions, authorisationGuard } from 'kTeam/client'
+import { kalisio, Store, permissions, beforeGuard, authenticationGuard } from 'kCore/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -48,9 +47,8 @@ Store.set('loadComponent', utils.loadComponent)
 Store.set('loadSchema', utils.loadSchema)
 Store.set('resolveAsset', utils.resolveAsset)
 
-// Add global guards
+// Add global guard
 beforeGuard.registerGuard(authenticationGuard)
-beforeGuard.registerGuard(authorisationGuard(api))
 // Now done in index to ensure the session has been correctly restored before registering guards
 // router.beforeEach(beforeGuard)
 
@@ -76,6 +74,10 @@ Quasar.start(() => {
     if (!result) {
       logger.debug('Access to service path ' + path + ' denied')
       return false
+    }
+    else if (operation === 'service') {
+      // When we only check for service-level access return
+      return true
     }
     // Then for access to resource
     result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)

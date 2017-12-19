@@ -60,14 +60,9 @@ module.exports = {
   },
   context: {
     service: 'organisations',
-    actions: [
-      { icon: 'map', route: { name: 'map', params: {} } },
-      { icon: 'terrain', route: { name: 'globe', params: {} } },
-      { icon: 'whatshot', route: { name: 'events-activity', params: { operation: 'current-events' } } },
-      { icon: 'group', route: { name: 'members-activity', params: {} } },
-      { icon: 'folder', route: { name: 'groups-activity', params: {} } },
-      { icon: 'settings', route: { name: 'settings-activity', params: { perspective: 'properties' } } }
-    ]
+    /* Due to complex authorisation management this is now done in the Context app component
+    actions: [ ... ]
+    */
   },
   map: require('./map'),
   globe: require('./globe'),

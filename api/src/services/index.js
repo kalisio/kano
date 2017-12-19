@@ -7,7 +7,6 @@ import kNotify from 'kNotify'
 import kEvent from 'kEvent'
 
 const servicesPath = path.join(__dirname, '..', 'services')
-
 module.exports = async function () {
   const app = this
 
@@ -44,7 +43,7 @@ module.exports = async function () {
   let pusherService = app.getService('pusher')
 
   // Create default users if not already done
-  let users = await usersService.find({ paginate: false })
+  const users = await usersService.find({ paginate: false })
 
   app.get('authentication').defaultUsers.forEach(defaultUser => {
     let createdUser = users.find(user => user.email === defaultUser.email)

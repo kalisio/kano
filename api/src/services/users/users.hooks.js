@@ -16,7 +16,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ notifyHooks.sendVerificationEmail, notifyHooks.removeVerification, teamHooks.updateAbilities, teamHooks.createPrivateOrganisation ],
+    create: [ notifyHooks.sendVerificationEmail, notifyHooks.removeVerification, teamHooks.createPrivateOrganisation ],
     update: [],
     patch: [],
     remove: [ teamHooks.removePrivateOrganisation ]
