@@ -52,7 +52,7 @@ module.exports = {
           ':contextId': {
             // The name of the route has to be set the default child
             name: '',
-            component: 'layout/KContext',
+            component: 'Context',
             props: true,
             children: {
               'map': {
