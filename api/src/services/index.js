@@ -20,13 +20,11 @@ module.exports = async function () {
 
     // Add hooks for topic creation/removal on org/group object creation/removal
     // FIXME: to activate when notifications will be fine
-    /*
     app.on('service', service => {
-      if (service.name === 'groups' || service.name === 'organisations') {
+      if (service.name === 'groups' || service.name === 'organisations' || service.name === 'members') {
         app.configureService(service.name, service, servicesPath)
       }
     })
-    */
     await app.configure(kTeam)
     // Add hooks for topic (un)subscription on (un)authorisation
     // FIXME: to activate when notifications will be fine
