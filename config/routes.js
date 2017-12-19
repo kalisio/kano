@@ -64,10 +64,25 @@ module.exports = {
               'globe': {
                 component: 'KGlobe'
               },
-              'members/:operation?/:id?/:perspective?': {
+              'members': {
                 name: 'members-activity',
                 component: 'KMembersActivity',
-                props: true
+                props: true,
+                children: {
+                  'invite': {
+                    name: 'invite-member',
+                    component: 'KInviteMember',
+                  },
+                  'add': {
+                    name: 'add-member',
+                    component: 'KAddMember'
+                  },
+                  'edit/:id/:perspective?': {
+                    name: 'edit-member',
+                    component: 'editor/KModalEditor',
+                    props: true
+                  }
+                }
               },
               'groups/:operation?/:id?/:perspective?': {
                 name: 'groups-activity',
