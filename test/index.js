@@ -4,13 +4,12 @@ import VueSelector from 'testcafe-vue-selectors'
 fixture `Login`// declare the fixture
   .page `http://localhost:8080`  // specify the start page
 
-//then create a test and place your code there
-test('My first test', async t => {
+test('Local login', async t => {
   const emailInput = VueSelector('k-email-field')
   const passwordInput = VueSelector('k-password-field')
-  const submit = VueSelector('q-btn').nth(2)
+  const submit = VueSelector('q-btn').withText('Log in')
   await t
-    .typeText(emailInput, 'kalisio@kalisio.com')
+    .typeText(emailInput, 'kalisio@kalisio.xyz')
     .typeText(passwordInput, 'kalisio')
     .click(submit)
 
