@@ -4,15 +4,20 @@ import VueSelector from 'testcafe-vue-selectors'
 fixture `Login`// declare the fixture
   .page `http://localhost:8080`  // specify the start page
 
-test('Local login', async t => {
+test('Local login', async test => {
   const emailInput = VueSelector('k-email-field')
   const passwordInput = VueSelector('k-password-field')
-  const submit = VueSelector('q-btn').withText('Log in')
-  await t
+  const submit = VueSelector('q-btn').nth(2)
+
+  await test
     .typeText(emailInput, 'kalisio@kalisio.xyz')
     .typeText(passwordInput, 'kalisio')
     .click(submit)
+    // Need this so that dynamic components are loaded
+    .wait(5000)
 
-    // Use the assertion to check if the actual header text is equal to the expected one
-    .expect(Selector('#article-header').innerText).eql('Thank you, John Smith!');
+  let orgPanel = VueSelector('k-organisations-panel')
+  orgPanel = await orgPanel.getVue()
+  
+  await test.expect(orgPanel.state.items.length).eql(1)
 })
