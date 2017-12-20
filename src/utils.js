@@ -42,6 +42,20 @@ function resolveAsset (asset) {
   return require('./assets/' + asset)
 }
 
+// We need this so that we can dynamically load the components
+// with a function that has previously been statically analyzed by the bundler (eg webpack)
+function load (name, type = 'component') {
+  switch (type) {
+    case 'asset':
+      return resolveAsset(name)
+    case 'schema':
+      return loadSchema(name)
+    case 'component':
+    default:
+      return loadComponent(name)
+  }
+}
+
 function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
@@ -97,6 +111,7 @@ let utils = {
   loadComponent,
   loadSchema,
   resolveAsset,
+  load,
   buildRoutes
 }
 

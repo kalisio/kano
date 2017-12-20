@@ -13,12 +13,11 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 import logger from 'loglevel'
 import Vue from 'vue'
 import Quasar from 'quasar'
-import config from 'config'
 import router from './router'
 import appHooks from './main.hooks'
-import utils from './utils'
 import services from './services'
-import { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
+import { kalisio, beforeGuard, authenticationGuard } from 'kCore/client'
+import plugin from './vue-kalisio'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -40,12 +39,7 @@ services.call(api)
 // Set up Vue
 Vue.use(Quasar)
 Vue.use(router)
-
-// Set up the Store
-Store.set('config', config)
-Store.set('loadComponent', utils.loadComponent)
-Store.set('loadSchema', utils.loadSchema)
-Store.set('resolveAsset', utils.resolveAsset)
+Vue.use(plugin, { api })
 
 // Add global guard
 beforeGuard.registerGuard(authenticationGuard)
@@ -54,14 +48,6 @@ beforeGuard.registerGuard(authenticationGuard)
 
 Quasar.start(() => {
   logger.info('Starting application')
-  // Inject in Vue the Kalisio features
-  Object.defineProperty(Vue.prototype, '$store', {
-    get () { return Store }
-  })
-  Object.defineProperty(Vue.prototype, '$api', {
-    get () { return api }
-  })
-  Vue.prototype.$can = api.can
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
