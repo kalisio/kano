@@ -18,7 +18,7 @@ import router from './router'
 import appHooks from './main.hooks'
 import utils from './utils'
 import services from './services'
-import { kalisio, Store, permissions, beforeGuard, authenticationGuard } from 'kCore/client'
+import { kalisio, Store, beforeGuard, authenticationGuard } from 'kCore/client'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -61,34 +61,7 @@ Quasar.start(() => {
   Object.defineProperty(Vue.prototype, '$api', {
     get () { return api }
   })
-  Vue.prototype.$can = (operation, service, context, resource) => {
-    let abilities = Store.get('user.abilities')
-    logger.debug('Check for abilities ', operation, service, context, resource, abilities)
-    if (!abilities) {
-      logger.debug('Access denied without abilities')
-      return false
-    }
-    // Check for access to service fisrt
-    const path = api.getServicePath(service, context, false)
-    let result = permissions.hasServiceAbilities(abilities, path)
-    if (!result) {
-      logger.debug('Access to service path ' + path + ' denied')
-      return false
-    }
-    else if (operation === 'service') {
-      // When we only check for service-level access return
-      return true
-    }
-    // Then for access to resource
-    result = permissions.hasResourceAbilities(abilities, operation, service, context, resource)
-    if (!result) {
-      logger.debug('Access to resource denied')
-    }
-    else {
-      logger.debug('Access to resource granted')
-    }
-    return result
-  }
+  Vue.prototype.$can = api.can
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
