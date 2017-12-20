@@ -65,29 +65,23 @@ module.exports = {
                 component: 'KGlobe'
               },
               'members': {
-                name: 'members-activity',
-                component: 'KMembersActivity',
+                name: 'members-activity', 
+                component: 'KMembersActivity', 
                 props: true,
                 children: {
-                  'invite': {
-                    name: 'invite-member',
-                    component: 'KInviteMember',
-                  },
-                  'add': {
-                    name: 'add-member',
-                    component: 'KAddMember'
-                  },
-                  'edit/:id/:perspective?': {
-                    name: 'edit-member',
-                    component: 'editor/KModalEditor',
-                    props: true
-                  }
+                  'invite': { name: 'invite-member', component: 'KInviteMember' },
+                  'add': { name: 'add-member', component: 'KAddMember' },
+                  'edit/:id/:perspective?': { name: 'edit-member', component: 'editor/KModalEditor', props: true }
                 }
               },
-              'groups/:operation?/:id?/:perspective?': {
+              'groups': {
                 name: 'groups-activity',
                 component: 'KGroupsActivity',
-                props: true
+                props: true,
+                children: {
+                  'create': { name: 'create-group', component: 'editor/KModalEditor' },
+                  'edit/:id/:perspective': { name: 'edit-group', component: 'editor/KModalEditor', props: true }
+                }
               },
               'events/:operation?/:id?/:perspective?': {
                 name: 'events-activity',
