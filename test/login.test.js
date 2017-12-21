@@ -1,23 +1,34 @@
-import { Selector } from 'testcafe' // first import testcafe selectors
-import VueSelector from 'testcafe-vue-selectors'
+import { ClientFunction } from 'testcafe'
+// Page models
+import * as pages from './page-models'
 
-fixture `Login`// declare the fixture
+// FIXME: Test to retrive our store
+// Where does global imports go with webpack ?
+const getStore = ClientFunction(() => window.Store)
+
+fixture `Authentication`// declare the fixture
   .page `http://localhost:8080`  // specify the start page
 
+const app = new pages.ApplicationLayout()
+const auth = new pages.Authentication()
+
 test('Local login', async test => {
-  const emailInput = VueSelector('k-email-field')
-  const passwordInput = VueSelector('k-password-field')
-  const submit = VueSelector('q-btn').nth(2)
+  //let screen = await auth.screen.getVue()
+  // The home page should be the login screen
+  //await test.expect(screen.props.title).ok('Log in with')
 
-  await test
-    .typeText(emailInput, 'kalisio@kalisio.xyz')
-    .typeText(passwordInput, 'kalisio')
-    .click(submit)
-    // Need this so that dynamic components are loaded
-    .wait(5000)
+  await auth.logIn(test)
 
-  let orgPanel = VueSelector('k-organisations-panel')
-  orgPanel = await orgPanel.getVue()
-  
-  await test.expect(orgPanel.state.items.length).eql(1)
+  const signupAlert = await app.signupAlert.getVue()
+  // We should have at least a populated user and an unverified email
+  //await test.expect(await getStore().get('user')).eql(1, 'User should be populated')
+  await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
+
+  await auth.logOut(test)
+
+  let screen = await auth.screen.getVue()
+  // The home page should be the logout screen
+  await test.expect(screen.props.title).ok('Your are now logged out')
+  // We should have at least a private org and unverified email
+  //await test.expect(await getStore().get('user')).notOk('User should not be populated')
 })
