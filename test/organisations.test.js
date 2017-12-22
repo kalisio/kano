@@ -8,11 +8,11 @@ const auth = new pages.Authentication()
 const organisations = new pages.Organisations()
 
 test
-.before(async test => await auth.logIn(test))
+.before(async test => await auth.doLogIn(test))
 ('Default organisation', async test => {
   const orgPanel = await organisations.orgPanel.getVue()
 
   // We should have at least a private org
   await test.expect(orgPanel.state.items.length).eql(1, 'Private organisation should be created')
 })
-.after(async test => await auth.logOut(test))
+.after(async test => await auth.doLogOut(test))
