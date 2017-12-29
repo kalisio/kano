@@ -83,13 +83,18 @@ function buildRoutes (config) {
         if (value.hasOwnProperty('name')) {
           route.name = value.name
         }
-        route.component = loadComponent(value.component)
+        if (value.hasOwnProperty('component')) {
+          route.component = loadComponent(value.component)
+        }
         if (_.has(value, 'props')) {
           route.props = value.props
         }
         if (_.has(value, 'meta')) {
           // Override parent meta if child meta given
           Object.assign(route.meta, value.meta)
+        }
+        if (_.has(value, 'redirect')) {
+          _.set(route, 'redirect', value.redirect)
         }
       }
 

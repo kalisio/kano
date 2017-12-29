@@ -38,15 +38,24 @@ module.exports = {
         component: 'layout/KHome',
         meta: { authenticated: true, unauthenticated: false },
         children: {
-          'dashboard': {
+          'default-home-view': {
             // Because this child is the default one path is empty and name is the one of the parent route
             path: '',
             name: 'home',
-            component: 'KMap'
+            redirect: { name: 'dashboard' }
+          },
+          'dashboard': {
+            path: 'dashboard',
+            component: 'DashboardActivity'
           },
           'account/:perspective': {
             name: 'account-activity',
             component: 'account/KAccountActivity',
+            props: true
+          },
+          'create-organisation' : {
+            name: 'create-organisation',
+            component: 'editor/KModalEditor',
             props: true
           },
           ':contextId': {
@@ -55,23 +64,20 @@ module.exports = {
             component: 'Context',
             props: true,
             children: {
-              'map': {
+              'default-context-view': {
                 // Because this child is the default one path is empty and name is the one of the parent route
                 path: '',
                 name: 'context',
-                component: 'KMap'
-              },
-              'globe': {
-                component: 'KGlobe'
+                redirect: { name: 'events-activity' }
               },
               'members': {
                 name: 'members-activity', 
                 component: 'KMembersActivity', 
                 props: true,
                 children: {
-                  'invite': { name: 'invite-member', component: 'KInviteMember' },
-                  'add': { name: 'add-member', component: 'KAddMember' },
-                  'edit/:id/:perspective?': { name: 'edit-member', component: 'editor/KModalEditor', props: true }
+                  'invite': { name: 'invite-member', component: 'KInviteMember', props: true },
+                  'add': { name: 'add-member', component: 'KAddMember', props: true },
+                  'edit/:id/:perspective': { name: 'edit-member', component: 'editor/KModalEditor', props: true }
                 }
               },
               'groups': {
@@ -79,14 +85,27 @@ module.exports = {
                 component: 'KGroupsActivity',
                 props: true,
                 children: {
-                  'create': { name: 'create-group', component: 'editor/KModalEditor' },
+                  'create': { name: 'create-group', component: 'editor/KModalEditor', props: true },
                   'edit/:id/:perspective?': { name: 'edit-group', component: 'editor/KModalEditor', props: true }
                 }
               },
-              'events/:operation?/:id?/:perspective?': {
+              'events': {
                 name: 'events-activity',
                 component: 'KEventsActivity',
-                props: true
+                props: true,
+                children: {
+                  'create:/templateId': { name: 'create-event', component: 'KModalEventEditor', props: true },
+                  'edit/:id/:perspective?': { name: 'edit-event', component: 'KModalEventEditor', props: true }
+                }
+              },
+              'event-templates': {
+                name: 'event-templates-activity',
+                component: 'KEventTemplatesActivity',
+                props: true,
+                children: {
+                  'create': { name: 'create-event-template', component: 'KModalEventTemplateEditor', props: true },
+                  'edit/:id/:perspective?': { name: 'edit-event-template', component: 'KModalEventTemplateEditor', props: true }
+                }
               },
               ':perspective': {
                 name: 'settings-activity',

@@ -41,10 +41,16 @@ module.exports = {
   },
   sideNav: {
     user_identity: 'account/KIdentityPanel',
+    user_dashboard: 'layout/KLinksPanel',
     user_organisation: 'KOrganisationsPanel',
     user_actions: 'layout/KLinksPanel'
   },
   user_identity: {
+  },
+  user_dashboard: {
+    links: [
+      { label: 'Dashboard', icon: 'dashboard', route: { name: 'home' } }
+    ]
   },
   user_organisations: {
     icon: 'domain',
