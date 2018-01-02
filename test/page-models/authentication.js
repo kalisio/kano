@@ -51,13 +51,13 @@ export default class Authentication extends ApplicationLayout {
   }
   async doRegister (test, identity) {
     await test
-      .typeText(this.registerNameInput, identity ? identity.name : 'Kalisio', { replace: true })
-      .typeText(this.registerEmailInput, identity ? identity.email : 'kalisio@kalisio.xyz', { replace: true })
-      .typeText(this.registerPasswordInput, identity ? identity.password : 'kalisio', { replace: true })
-      .typeText(this.registerConfirmPasswordInput, identity ? identity.password : 'kalisio', { replace: true })
+      .typeText(this.registerNameInput, identity ? identity.name : 'Test', { replace: true })
+      .typeText(this.registerEmailInput, identity ? identity.email : 'test@kalisio.xyz', { replace: true })
+      .typeText(this.registerPasswordInput, identity ? identity.password : 'test', { replace: true })
+      .typeText(this.registerConfirmPasswordInput, identity ? identity.password : 'test', { replace: true })
       .click(this.register)
       // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
+      .wait(5000)
   }
   async doLogInGoogle (test) {
     await test

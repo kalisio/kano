@@ -30,6 +30,13 @@ test.skip('Local login', async test => {
 test.page `http://localhost:8080/#/register`    
 ('Registration', async test => {
   await auth.doRegister(test)
+
+  let store = await pages.getStore()
+
+  const signupAlert = await app.signupAlert.getVue()
+  // We should have at least a populated user and an unverified email
+  await test.expect(store.user).ok('User should be populated')
+  await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
 })
 
 test.skip('Google login', async test => {
