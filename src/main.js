@@ -17,7 +17,7 @@ import router from './router'
 import appHooks from './main.hooks'
 import services from './services'
 import { kalisio, beforeGuard, authenticationGuard } from 'kCore/client'
-import plugin from './vue-kalisio'
+import plugin from './vue-kdk'
 
 // Required IE 11 polyfill
 import 'babel-polyfill'
@@ -52,7 +52,7 @@ Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
     router,
-    el: '#q-app',
+    el: '#kapp',
     render: h => h(require('./App'))
   })
 })
