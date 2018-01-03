@@ -28,34 +28,28 @@ export default class Account extends ApplicationLayout {
     // Danger Zone
     this.dz = Selector('.q-tab-label').nth(2)
     this.deleteAccount = VueSelector('k-account-dz k-block q-btn')
-    this.confirmAccountName = VueSelector('k-account-dz k-confirm q-input')
-    this.confirmDeleteAccount = VueSelector('k-account-dz k-confirm q-btn')
+    this.confirmAccountName = Selector('.modal, input[type=text]')
+    this.confirmDeleteAccount = Selector('.modal button').nth(0)
   }
   async doEditProfile (test, profile) {
     await this.openMenu(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .click(this.profile)
       .typeText(this.nameInput, profile.name, { replace: true })
       .typeText(this.phoneInput, profile.phone, { replace: true })
       .click(this.updateProfile)
       // Need this so that we are sure request is finished
-      .wait(2000)
+      .wait(5000)
   }
   async doUpdatePassword (test, identity) {
     await this.openMenu(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .click(this.security)
       .click(this.changePassword)
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .typeText(this.passwordInput, identity.password, { replace: true })
       .typeText(this.newPasswordInput, identity.newPassword, { replace: true })
       .typeText(this.newPasswordConfirm, identity.newPassword, { replace: true })
@@ -68,12 +62,8 @@ export default class Account extends ApplicationLayout {
 
     await test
       .click(this.identity) // Ensure identity activity is open
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .click(this.security)
       .click(this.changeEmail)
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .typeText(this.passwordInput, identity.password, { replace: true })
       .typeText(this.newEmailInput, identity.newEmail, { replace: true })
       .click(this.updateEmail)
@@ -85,13 +75,11 @@ export default class Account extends ApplicationLayout {
 
     await test
       .click(this.identity) // Ensure identity activity is open
-      // Need this so that we are sure dynamic components are loaded
-      .wait(2000)
       .click(this.dz) // Ensure danger zone tab is selected
       .click(this.deleteAccount)
       .typeText(this.confirmAccountName, name)
       .click(this.confirmDeleteAccount)
-      // Need this so that we are sure dynamic components are loaded
+      // Need this so that we are sure request is finished
       .wait(5000)
   }
 }

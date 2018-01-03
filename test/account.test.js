@@ -2,12 +2,22 @@
 import * as pages from './page-models'
 
 fixture `Account management`// declare the fixture
-  .page `http://localhost:8080`  // specify the start page
+  .page `${pages.getUrl()}`  // specify the start page
+  .afterEach(pages.checkNoClientError)  // check for console error messages
 
+const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
 const account = new pages.Account()
 
-test.skip
+const newPassword = 'kalisio-new'
+const newEmail = 'kalisio@kalisio.com'
+
+test.page `${pages.getUrl('register')}`
+('Registration', async test => {
+  await auth.doRegister(test)
+})
+
+test
 .before(async test => await auth.doLogIn(test))
 ('Edit profile', async test => {
   await account.doEditProfile(test, { name: 'toto', phone: '0123456789' })
@@ -18,33 +28,42 @@ test.skip
 })
 .after(async test => await auth.doLogOut(test))
 
-test.skip
+test
 .before(async test => await auth.doLogIn(test))
 ('Edit password', async test => {
-  await account.doUpdatePassword(test, { password: 'kalisio', newPassword: 'kalisio' })
+  await account.doUpdatePassword(test, { password: 'kalisio', newPassword })
+  await pages.goBack()
+  await auth.doLogOut(test)
   // We should login with new credentials
-  await auth.doLogIn(test)
+  await test.navigateTo(pages.getUrl('login'))
+  await auth.doLogIn(test, { password: newPassword })
 })
 .after(async test => await auth.doLogOut(test))
 
-test.skip
-.before(async test => await auth.doLogIn(test))
+test
+.before(async test => await auth.doLogIn(test, { password: newPassword }))
 ('Edit email', async test => {
-  await account.doUpdateEmail(test, { password: 'kalisio', newEmail: 'kalisio@kalisio.com' })
-  // We should login with new email
-  await auth.doLogIn(test)
+  await account.doUpdateEmail(test, { password: newPassword, newEmail })
+  await pages.goBack()
+  await auth.doLogOut(test)
+  // We should not be able to login with new email because it requires validation
+  await test.navigateTo(pages.getUrl('login'))
+  await auth.doLogIn(test, { email: newEmail, password: newPassword })
+  await test.expect(app.isErrorVisible()).ok('Error should be displayed')
+  // FIXME: how could we validate the change ?
 })
-.after(async test => await auth.doLogOut(test))
 
-test.skip
-.before(async test => await auth.doLogIn(test))
+test
+.before(async test => await auth.doLogIn(test, { password: newPassword }))
 ('Delete account', async test => {
   await account.doRemoveAccount(test, 'toto')
 
-  let screen = await auth.screen.getVue()
+  let screen = await auth.logoutScreen.getVue()
   // The home page should be the logout screen
   await test.expect(screen.props.title).ok('Your are now logged out')
   // And we cannot login anymore
-  await auth.doLogIn(test)
+  await test.navigateTo(pages.getUrl('login'))
+  await auth.doLogIn(test, { password: newPassword })
+  await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
 

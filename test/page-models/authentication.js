@@ -40,10 +40,10 @@ export default class Authentication extends ApplicationLayout {
     this.signInGitHub = Selector('input[type=submit]')
     this.authorizeGitHub = Selector('button[type=submit]')
   }
-  async doLogIn (test, credentials) {
+  async doLogIn (test, credentials = {}) {
     await test
-      .typeText(this.emailInput, credentials ? credentials.email : defaultTestUser.email, { replace: true })
-      .typeText(this.passwordInput, credentials ? credentials.password : defaultTestUser.password, { replace: true })
+      .typeText(this.emailInput, credentials.email || defaultTestUser.email, { replace: true })
+      .typeText(this.passwordInput, credentials.password || defaultTestUser.password, { replace: true })
       .click(this.loginLocal)
       // Need this so that we are sure dynamic components, user, etc. have been loaded
       .wait(2000)
@@ -53,12 +53,12 @@ export default class Authentication extends ApplicationLayout {
     await test
       .click(this.logout)
   }
-  async doRegister (test, identity) {
+  async doRegister (test, identity = {}) {
     await test
-      .typeText(this.registerNameInput, identity ? identity.name : defaultTestUser.name, { replace: true })
-      .typeText(this.registerEmailInput, identity ? identity.email : defaultTestUser.email, { replace: true })
-      .typeText(this.registerPasswordInput, identity ? identity.password : defaultTestUser.password, { replace: true })
-      .typeText(this.registerConfirmPasswordInput, identity ? identity.password : defaultTestUser.password, { replace: true })
+      .typeText(this.registerNameInput, identity.name || defaultTestUser.name, { replace: true })
+      .typeText(this.registerEmailInput, identity.email || defaultTestUser.email, { replace: true })
+      .typeText(this.registerPasswordInput, identity.password || defaultTestUser.password, { replace: true })
+      .typeText(this.registerConfirmPasswordInput, identity.password || defaultTestUser.password, { replace: true })
       .click(this.register)
       // Need this so that we are sure dynamic components, user, etc. have been loaded
       .wait(2000)

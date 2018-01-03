@@ -2,7 +2,8 @@
 import * as pages from './page-models'
 
 fixture `Authentication`// declare the fixture
-  .page `http://localhost:8080`  // specify the start page
+  .page `${pages.getUrl()}`  // specify the start page
+  .afterEach(pages.checkNoClientError)  // check for console error messages
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
@@ -14,7 +15,7 @@ test('Invalid login', async test => {
   await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
 
-test.page `http://localhost:8080/#/register`    
+test.page `${pages.getUrl('register')}`
 ('Registration', async test => {
   await auth.doRegister(test)
 
@@ -24,12 +25,6 @@ test.page `http://localhost:8080/#/register`
   await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
 })
-/* Cleanup user, kept as sample code
-.after(async test => {
-  let user = await pages.getFromStore('user')
-  await pages.api.remove('users', user._id)
-})
-*/
 
 test('Local login', async test => {
   await auth.doLogIn(test)
@@ -50,6 +45,12 @@ test('Local login', async test => {
   await test.expect(screen.props.title).ok('Your are now logged out')
 })
 
+('Cleanup local user', async test => {
+  await auth.doLogIn(test)
+  let user = await pages.getFromStore('user')
+  await pages.api.remove('users', user._id)
+})
+
 test('Google login', async test => {
   await auth.doLogInGoogle(test)
   
@@ -60,6 +61,12 @@ test('Google login', async test => {
   await test.expect(signupAlert.props.isVerified).ok('User should be verified')
 
   await auth.doLogOut(test)
+})
+
+('Cleanup Google user', async test => {
+  await auth.doLogIn(test)
+  let user = await pages.getFromStore('user')
+  await pages.api.remove('users', user._id)
 })
 
 test('GitHub login', async test => {
@@ -74,3 +81,8 @@ test('GitHub login', async test => {
   await auth.doLogOut(test)
 })
 
+('Cleanup GitHub user', async test => {
+  await auth.doLogIn(test)
+  let user = await pages.getFromStore('user')
+  await pages.api.remove('users', user._id)
+})
