@@ -1,4 +1,3 @@
-import { ClientFunction } from 'testcafe'
 // Page models
 import * as pages from './page-models'
 
@@ -8,56 +7,68 @@ fixture `Authentication`// declare the fixture
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
 
-test.skip('Local login', async test => {
+test('Invalid login', async test => {
   await auth.doLogIn(test)
-  let store = await pages.getStore()
-
-  const signupAlert = await app.signupAlert.getVue()
-  // We should have at least a populated user and an unverified email
-  await test.expect(store.user).ok('User should be populated')
-  await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
-
-  await auth.doLogOut(test)
-
-  let screen = await auth.logoutScreen.getVue()
-  // We should have at least an unpopulated user
-  store = await pages.getStore()
-  await test.expect(store.user).notOk('User should not be populated')
-  // The home page should be the logout screen
-  await test.expect(screen.props.title).ok('Your are now logged out')
+  let user = await pages.getFromStore('user')
+  await test.expect(user).notOk('User should not be populated')
+  await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
 
 test.page `http://localhost:8080/#/register`    
 ('Registration', async test => {
   await auth.doRegister(test)
 
-  let store = await pages.getStore()
-
   const signupAlert = await app.signupAlert.getVue()
+  let user = await pages.getFromStore('user')
   // We should have at least a populated user and an unverified email
-  await test.expect(store.user).ok('User should be populated')
+  await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
 })
+/* Cleanup user, kept as sample code
+.after(async test => {
+  let user = await pages.getFromStore('user')
+  await pages.api.remove('users', user._id)
+})
+*/
 
-test.skip('Google login', async test => {
-  await auth.doLogInGoogle(test)
-  let store = await pages.getStore()
-
+test('Local login', async test => {
+  await auth.doLogIn(test)
+  
   const signupAlert = await app.signupAlert.getVue()
+  let user = await pages.getFromStore('user')
+  // We should have at least a populated user and an unverified email
+  await test.expect(user).ok('User should be populated')
+  await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
+
+  await auth.doLogOut(test)
+
+  let screen = await auth.logoutScreen.getVue()
+  // We should have at least an unpopulated user
+  user = await pages.getFromStore('user')
+  await test.expect(user).notOk('User should not be populated')
+  // The home page should be the logout screen
+  await test.expect(screen.props.title).ok('Your are now logged out')
+})
+
+test('Google login', async test => {
+  await auth.doLogInGoogle(test)
+  
+  const signupAlert = await app.signupAlert.getVue()
+  let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email
-  await test.expect(store.user).ok('User should be populated')
+  await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).ok('User should be verified')
 
   await auth.doLogOut(test)
 })
 
-test.skip('GitHub login', async test => {
+test('GitHub login', async test => {
   await auth.doLogInGitHub(test)
-  let store = await pages.getStore()
-
+  
   const signupAlert = await app.signupAlert.getVue()
+  let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email
-  await test.expect(store.user).ok('User should be populated')
+  await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).ok('User should be verified')
 
   await auth.doLogOut(test)

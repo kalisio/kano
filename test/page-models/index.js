@@ -13,4 +13,9 @@ export {
 }
 
 // Then util functions
-export const getStore = ClientFunction(() => window.$store)
+export const getFromStore = ClientFunction((path) => window.$store.get(path))
+export const api = {
+	get: ClientFunction((service, id) => window.$api.getService(service).get(id)),
+	find: ClientFunction((service, params) => window.$api.getService(service).find(params)),
+	remove: ClientFunction((service, id) => window.$api.getService(service).remove(id))
+}

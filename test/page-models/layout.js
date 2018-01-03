@@ -3,6 +3,7 @@ import VueSelector from 'testcafe-vue-selectors'
 
 export default class ApplicationLayout {
   constructor () {
+    this.error = VueSelector('q-toast')
     this.menu = Selector('#menu')
     this.sideNav = VueSelector('k-side-nav')
     this.tabBar = VueSelector('k-tab-bar')
@@ -20,5 +21,8 @@ export default class ApplicationLayout {
     if (!isMenuVisible) {
       await test.click(this.menu) // Ensure menu is open
     }
+  }
+  async isErrorVisible () {
+    return await this.error.visible
   }
 }
