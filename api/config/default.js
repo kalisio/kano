@@ -54,13 +54,15 @@ module.exports = {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : '/auth/github/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/')
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/')
     },
     google: {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : '/auth/google/callback'),
       successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
     },
     // Required for OAuth2 to work correctly
