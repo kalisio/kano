@@ -17,6 +17,20 @@ export default {
     QAjaxBar
   },
   methods: {
+    showError (message) {
+      Toast.create.negative({
+        html: message,
+        timeout: 5000
+      })
+    },
+    showRouteError (route) {
+      // We handle error on any page with query string
+      if (route.query) {
+        if (route.query.error_message) {
+          this.showError(route.query.error_message)
+        }
+      }
+    },
     startProgress () {
       let progressBar = this.$refs.bar
       if (progressBar && !progressBar.active && (this.nbRequests > this.nbCompletedRequests)) {
@@ -30,12 +44,20 @@ export default {
       }
     }
   },
+  watch: {
+    '$route' (to, from) {
+      // Check for error when navigating
+      this.showRouteError(to)
+    }
+  },
   beforeCreate () {
     // Request counter used to display progress bar
     this.nbRequests = 0
     this.nbCompletedRequests = 0
   },
   mounted () {
+    // Check for error on refresh
+    this.showRouteError(this.$route)
     Events.$on('error-hook', hook => {
       this.nbCompletedRequests++
       this.stopProgress()
@@ -47,10 +69,7 @@ export default {
       if (error.code === 403) {
         this.$router.push({ name: 'home' })
       }
-      Toast.create.negative({
-        html: error.message,
-        timeout: 5000
-      })
+      this.showError(error.message)
     })
     Events.$on('before-hook', hook => {
       this.nbRequests++
