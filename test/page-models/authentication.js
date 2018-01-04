@@ -46,7 +46,7 @@ export default class Authentication extends ApplicationLayout {
       .typeText(this.passwordInput, credentials.password || defaultTestUser.password, { replace: true })
       .click(this.loginLocal)
       // Need this so that we are sure dynamic components, user, etc. have been loaded
-      .wait(2000)
+      .wait(5000)
   }
   async doLogOut (test) {
     await this.openMenu(test)
@@ -61,7 +61,7 @@ export default class Authentication extends ApplicationLayout {
       .typeText(this.registerConfirmPasswordInput, identity.password || defaultTestUser.password, { replace: true })
       .click(this.register)
       // Need this so that we are sure dynamic components, user, etc. have been loaded
-      .wait(2000)
+      .wait(5000)
   }
   async doLogInGoogle (test) {
     await test
@@ -82,14 +82,14 @@ export default class Authentication extends ApplicationLayout {
       .typeText(this.passwordInputGitHub, process.env.GITHUB_PASSWORD, { replace: true })
       .click(this.signInGitHub)
       // Need this so that we are sure github authorize page or user has been loaded
-      .wait(2000)
+      .wait(5000)
       // Check if we need to authorize the app
       const authorize = await this.authorizeGitHub()
       if (authorize) {
         await test
           .click(this.authorizeGitHub)
           // Need this so that we are sure dynamic components, user, etc. have been loaded
-          .wait(2000)
+          .wait(5000)
       }
   }
 }

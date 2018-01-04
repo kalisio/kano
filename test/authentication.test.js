@@ -45,7 +45,7 @@ test('Local login', async test => {
   await test.expect(screen.props.title).ok('Your are now logged out')
 })
 
-('Cleanup local user', async test => {
+test('Cleanup local user', async test => {
   await auth.doLogIn(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
@@ -63,8 +63,8 @@ test('Google login', async test => {
   await auth.doLogOut(test)
 })
 
-('Cleanup Google user', async test => {
-  await auth.doLogIn(test)
+test('Cleanup Google user', async test => {
+  await auth.doLogInGoogle(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })
@@ -81,8 +81,8 @@ test('GitHub login', async test => {
   await auth.doLogOut(test)
 })
 
-('Cleanup GitHub user', async test => {
-  await auth.doLogIn(test)
+test('Cleanup GitHub user', async test => {
+  await auth.doLogInGitHub(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })
