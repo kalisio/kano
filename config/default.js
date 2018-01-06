@@ -17,6 +17,11 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
+  roles: {
+    // Member/Manager/Owner
+    colors: ['amber', 'orange', 'deep-orange'],
+    icons: ['person', 'work', 'verified_user']
+  },
   screen: {
     footer: [
       { label: 'About Kalisio', url: 'https://www.kalisio.xyz' },

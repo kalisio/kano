@@ -11,10 +11,9 @@ export default {
   name: 'dashboard',
   mixins: [mixins.baseActivity],
   methods: {
-    refreshActions () {
-      this.clearActions()
-      // Update the AppBar
-      this.$store.patch('appBar', { title: 'Dashboard', subtitle: '', toolbar: [], actions: [] })
+    refreshActivity () {
+      this.clearActivity()
+      this.setTitle('Dashboard')
     }
   }
 }
