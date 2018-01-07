@@ -32,8 +32,9 @@ module.exports = {
               // If not exception perform authentication
               return true
             }, authenticate('jwt')),
+            coreHooks.processObjectIDs,
             coreHooks.authorise ],
-    find: [  coreHooks.processObjectIDs, fuzzySearch() ],
+    find: [ fuzzySearch() ],
     get: [],
     create: [],
     update: [ coreHooks.preventUpdatePerspectives ],
