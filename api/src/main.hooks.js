@@ -1,9 +1,11 @@
 // Application hooks that run for every service
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
+import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from 'kCore'
 import { permissions as teamPermissions, hooks as teamHooks } from 'kTeam'
 import { permissions as notifyPermissions } from 'kNotify'
 import { permissions as eventPermissions } from 'kEvent'
+const { authenticate } = require('feathers-authentication').hooks
 
 // Register all default hooks for authorisation
 // Default rules for all users
@@ -18,7 +20,20 @@ corePermissions.defineAbilities.registerHook(eventPermissions.defineEventAbiliti
 
 module.exports = {
   before: {
-    all: [ coreHooks.log, coreHooks.authorise ],
+    all: [  coreHooks.log,
+            // We skip authentication in some cases
+            commonHooks.when(hook => {
+              // First built-in Feathers services like authentication
+              if (typeof hook.service.getPath !== 'function') return false
+              // Then user creation
+              if ((hook.service.name === 'users') && (hook.method === 'create')) return false
+              // Password reset, verify sign in, etc.
+              if ((hook.service.name === 'account') && (hook.data.action !== 'passwordChange') && (hook.data.action !== 'identityChange')) return false
+              // If not exception perform authentication
+              return true
+            }, authenticate('jwt')),
+            coreHooks.processObjectIDs,
+            coreHooks.authorise ],
     find: [ fuzzySearch() ],
     get: [],
     create: [],
