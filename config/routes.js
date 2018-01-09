@@ -87,8 +87,7 @@ module.exports = {
                 props: true,
                 children: {
                   'create': { name: 'create-group', component: 'editor/KModalEditor', props: true },
-                  'edit/:id/:perspective?': { name: 'edit-group', component: 'editor/KModalEditor', props: true },
-                  'explore/:id/:perspective': { name: 'explore-group', component: 'KGroupExplorer', props: true }
+                  'edit/:id/:perspective': { name: 'edit-group', component: 'KGroupEditor', props: true }
                 }
               },
               'events': {
