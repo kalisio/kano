@@ -18,7 +18,7 @@ export default {
         // actions.toolbar.push({ scope: 'toolbar', icon: 'map', route: { name: 'map', params: { contextId: context._id } } })
         // actions.push({ icon: 'terrain', route: { name: 'globe', params: { contextId: context._id } } })
       }
-      if (this.$can('create', 'authorisations', context._id, { resource: context._id })) {
+      if (this.$can('service', 'members', context._id)) {
         actions.toolbar.push({ icon: 'group', label: 'Members & groups', route: { name: 'members-activity', params: { contextId: context._id } } })
       }
       if (this.$can('update', 'organisations', context._id, { _id: context._id })) {
