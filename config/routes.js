@@ -95,9 +95,13 @@ module.exports = {
                 component: 'KEventsActivity',
                 props: true,
                 children: {
-                  'create/:templateId': { name: 'create-event', component: 'KModalEventEditor', props: true },
-                  'edit/:id/:perspective?': { name: 'edit-event', component: 'KModalEventEditor', props: true }
+                  'create/:templateId': { name: 'create-event', component: 'KModalEventEditor', props: true }
                 }
+              },
+              'events/:id/:pane': {
+                name: 'event-activity',
+                component: 'KEventActivity',
+                props: true,
               },
               'event-templates': {
                 name: 'event-templates-activity',
