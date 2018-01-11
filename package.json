@@ -30,6 +30,9 @@
     "dev": "node build/script.dev.js",
     "prod": "cd api && npm run prod",
     "build": "node build/script.build.js",
+    "analyze:stats": "webpack --config build/webpack.prod.conf.js --profile --json > build-stats.json",
+    "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
+    "analyze": "npm run analyze:stats && npm run analyze:treemap",
     "lint": "eslint --ext .js,.vue src/",
     "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
@@ -120,6 +123,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "2.5.2",
     "webpack": "^3.5.2",
+    "webpack-bundle-analyzer": "^2.9.2",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-merge": "^4.1.0"
