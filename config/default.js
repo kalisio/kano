@@ -45,10 +45,13 @@ module.exports = {
     }
   },
   sideNav: {
-    user_identity: 'account/KIdentityPanel',
-    user_dashboard: 'layout/KLinksPanel',
-    user_organisation: 'KOrganisationsPanel',
-    user_actions: 'layout/KLinksPanel'
+    banner: 'kalisio-banner.png',
+    components: {
+      user_identity: 'account/KIdentityPanel',
+      user_dashboard: 'layout/KLinksPanel',
+      user_organisation: 'KOrganisationsPanel',
+      user_actions: 'layout/KLinksPanel'
+    }
   },
   user_identity: {
   },
