@@ -10,7 +10,7 @@ module.exports = {
     create: [ notifyHooks.addVerification ],
     update: [],
     patch: [],
-    remove: [ notifyHooks.unregisterDevices ]
+    remove: []
   },
 
   after: {
@@ -20,7 +20,7 @@ module.exports = {
     create: [ notifyHooks.sendVerificationEmail, iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation) ],
     update: [],
     patch: [],
-    remove: [ teamHooks.removePrivateOrganisation ]
+    remove: [ teamHooks.removePrivateOrganisation, notifyHooks.unregisterDevices ]
   },
 
   error: {
