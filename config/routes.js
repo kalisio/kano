@@ -96,15 +96,15 @@ module.exports = {
                 props: true,
                 children: {
                   'create/:templateId': { name: 'create-event', component: 'KModalEventEditor', props: true },
-                  'add-media': { name: 'add-media', component: 'KAddMedia', props: true },
+                  ':id/add-media': { name: 'add-media', component: 'KAddEventMedia', props: true },
                 }
               },
               'events/:id': {
                 name: 'event-activity',
                 component: 'KEventActivity',
                 props: true,
-                chlidren: {
-                  'edit': { name: 'edit-event', component: 'KModalEditor', props: true },
+                children: {
+                  'edit': { name: 'edit-event', component: 'editor/KModalEditor', props: true },
                   'browse-media': { name: 'browse-media', component: 'KGallery', props: true }
                 }
               },
