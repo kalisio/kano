@@ -77,7 +77,7 @@ module.exports = {
                 children: {
                   'invite': { name: 'invite-member', component: 'KInviteMember', props: true },
                   'add': { name: 'add-member', component: 'KAddMember', props: true },
-                  ':id/edit-tags': { name: 'edit-tags', component: 'editor/KModalEditor', props: true },
+                  ':id/tag': { name: 'tag-member', component: 'editor/KModalEditor', props: true },
                   ':id/join-group': { name: 'join-group', component: 'KJoinGroup', props: true }
                 }
               },
