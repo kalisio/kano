@@ -26,11 +26,11 @@ function loadComponent (component) {
 }
 
 function loadSchema (schema) {
-  return import(`kCore/lib/schemas/${schema}.json`)
+  return import(`kCore/lib/common/schemas/${schema}.json`)
     .catch(errorCore => {
-      return import(`kTeam/lib/schemas/${schema}.json`)
+      return import(`kTeam/lib/common/schemas/${schema}.json`)
         .catch(errorTeam => {
-          return import(`kEvent/lib/schemas/${schema}.json`)
+          return import(`kEvent/lib/common/schemas/${schema}.json`)
             .catch(errorEvent => {
               console.log(errorCore, errorTeam, errorEvent)
             })
