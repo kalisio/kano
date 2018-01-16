@@ -32,6 +32,10 @@ module.exports = {
         component: 'account/KChangeIdentity',
         meta: { authenticated: true }
       },
+      'confirm-invitation/:token': {
+        component: 'account/KConfirmInvitation',
+        props: true
+      },
       'home': {
         // The name of the route has to be set the default child
         name: '',
@@ -96,6 +100,7 @@ module.exports = {
                 props: true,
                 children: {
                   'create/:templateId': { name: 'create-event', component: 'KEventEditor', props: true },
+                  ':id/tag': { name: 'tag-event', component: 'editor/KModalEditor', props: true },
                   ':id/add-media': { name: 'add-media', component: 'KAddEventMedia', props: true },
                 }
               },

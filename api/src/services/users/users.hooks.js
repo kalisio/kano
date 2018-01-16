@@ -14,10 +14,10 @@ module.exports = {
   },
 
   after: {
-    all: [ notifyHooks.removeVerification ],
+    all: [],
     find: [],
     get: [],
-    create: [ notifyHooks.sendVerificationEmail, iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation) ],
+    create: [ notifyHooks.sendVerificationEmail, notifyHooks.removeVerification, iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation) ],
     update: [],
     patch: [],
     remove: [ teamHooks.removePrivateOrganisation, notifyHooks.unregisterDevices ]
