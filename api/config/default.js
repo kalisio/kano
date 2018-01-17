@@ -97,6 +97,9 @@ module.exports = {
       ANDROID: process.env.SNS_ANDROID_ARN
     }
   },
+  geocoder: {
+    provider: 'opendatafrance'
+  },
   logs: {
     Console: {
       colorize: true,

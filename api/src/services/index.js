@@ -3,6 +3,7 @@ import _ from 'lodash'
 import logger from 'winston'
 import kCore from 'kCore'
 import kTeam from 'kTeam'
+import kMap from 'kMap'
 import kNotify from 'kNotify'
 import kEvent from 'kEvent'
 
@@ -31,6 +32,7 @@ module.exports = async function () {
     // app.configureService('authorisations', app.getService('authorisations'), servicesPath)
 
     await app.configure(kNotify)
+    await app.configure(kMap)
     await app.configure(kEvent)
   }
   catch (error) {

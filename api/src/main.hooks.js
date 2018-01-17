@@ -4,6 +4,7 @@ import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from 'kCore'
 import { permissions as teamPermissions, hooks as teamHooks } from 'kTeam'
 import { permissions as notifyPermissions } from 'kNotify'
+import { permissions as mapPermissions } from 'kMap'
 import { permissions as eventPermissions } from 'kEvent'
 const { authenticate } = require('feathers-authentication').hooks
 
@@ -11,6 +12,7 @@ const { authenticate } = require('feathers-authentication').hooks
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
 corePermissions.defineAbilities.registerHook(notifyPermissions.defineUserAbilities)
+corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
 // Then rules for organisations
 corePermissions.defineAbilities.registerHook(teamPermissions.defineOrganisationAbilities)
 // Then rules for groups
