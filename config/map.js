@@ -3,10 +3,10 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+        'http://mapproxy.kalisio.xyz/wmts/osm/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 20,
-          label: 'Streets',
+          label: 'OpenStreetMap',
           attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }
       ]
