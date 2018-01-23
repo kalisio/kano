@@ -5,7 +5,7 @@ module.exports = {
       arguments: [
         'http://mapproxy.kalisio.xyz/wmts/osm/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
-          maxZoom: 20,
+          maxZoom: 18,
           label: 'OpenStreetMap',
           attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }
