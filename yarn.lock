@@ -3964,6 +3964,10 @@ leaflet-basemaps@^0.2.0:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/leaflet-basemaps/-/leaflet-basemaps-0.2.3.tgz#8bf57ae0f225ae4359e4d54749859d58d0ec1bde"
 
+leaflet-fa-markers@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/leaflet-fa-markers/-/leaflet-fa-markers-0.0.5.tgz#5ef7c974962171640a8251e2b449b96af8bed98e"
+
 leaflet-filelayer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/leaflet-filelayer/-/leaflet-filelayer-1.0.0.tgz#c0d86548d57de793738de70c1125ee3bdd5dd893"
