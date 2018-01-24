@@ -28,8 +28,7 @@ module.exports = async function () {
     })
     await app.configure(kTeam)
     // Add hooks for topic (un)subscription on (un)authorisation
-    // FIXME: to activate when notifications will be fine
-    // app.configureService('authorisations', app.getService('authorisations'), servicesPath)
+    app.configureService('authorisations', app.getService('authorisations'), servicesPath)
 
     await app.configure(kNotify)
     await app.configure(kMap)
