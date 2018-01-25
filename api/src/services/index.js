@@ -19,10 +19,10 @@ module.exports = async function () {
     app.configureService('users', app.getService('users'), servicesPath)
     app.configureService('authentication', app.getService('authentication'), servicesPath)
 
-    // Add hooks for topic creation/removal on org/group object creation/removal
-    // FIXME: to activate when notifications will be fine
+    // Add hooks for topic creation/removal on org/group/tag object creation/removal
     app.on('service', service => {
-      if (service.name === 'groups' || service.name === 'organisations' || service.name === 'members') {
+      if (service.name === 'groups' || service.name === 'organisations' ||
+          service.name === 'members' || service.name === 'tags') {
         app.configureService(service.name, service, servicesPath)
       }
     })
