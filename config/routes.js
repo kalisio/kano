@@ -109,6 +109,7 @@ module.exports = {
                 component: 'KEventActivity',
                 props: true,
                 children: {
+                  'log/:logId': { name: 'event-log', component: 'KEventLogEditor', props: true },
                   'browse-media': { name: 'browse-media', component: 'KGallery', props: true }
                 }
               },
