@@ -14,7 +14,8 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   // eval-source-map is faster for development
-  devtool: '#cheap-module-eval-source-map',
+  // cheap-module-eval-source-map does not work under chrome
+  devtool: '#source-map',
   devServer: {
     historyApiFallback: true,
     noInfo: true
