@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="xyz.kalisio.kapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.kalisio.kapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>kApp</name>
     <description>Kalisio App Template</description>
-    <author email="kalisio@kalisio.xyz" href="http://www.kalisio.xyz">Kalisio</author>
+    <author email="kalisio@kalisio.xyz" href="http://www.kalisio.com">Kalisio</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -108,7 +108,6 @@
         <splash height="1280" src="res/screens/wp8/SplashScreenImage.screen-WXGA.jpg" width="768" />
     </platform>
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="^2.3.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
     <plugin name="cordova-plugin-sim" spec="^1.3.3" />
