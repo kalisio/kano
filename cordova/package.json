@@ -1,14 +1,14 @@
 {
-    "name": "helloworld",
-    "displayName": "HelloCordova",
-    "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "name": "kApp",
+    "displayName": "kApp",
+    "version": "0.1.0",
+    "description": "Kalisio Cordova App Template.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Apache Cordova Team",
-    "license": "Apache-2.0",
+    "author": "Kalisio contributors",
+    "license": "MIT",
     "dependencies": {
         "cordova-android": "^6.4.0",
         "cordova-plugin-android-permissions": "^1.0.0",

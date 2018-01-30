@@ -2,7 +2,7 @@
 <widget id="com.kalisio.kapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>kApp</name>
     <description>Kalisio App Template</description>
-    <author email="kalisio@kalisio.xyz" href="http://www.kalisio.com">Kalisio</author>
+    <author email="support@kalisio.com" href="http://www.kalisio.com">Kalisio</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
