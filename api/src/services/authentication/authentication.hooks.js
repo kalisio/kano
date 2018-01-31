@@ -1,4 +1,4 @@
-import { hooks } from 'kNotify'
+import { hooks as notifyHooks } from 'kNotify'
 
 module.exports = {
   before: {
@@ -15,7 +15,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ hooks.registerDevice ],
+    create: [ notifyHooks.verifyGuest, notifyHooks.registerDevice ],
     update: [],
     patch: [],
     remove: []
