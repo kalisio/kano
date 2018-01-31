@@ -21,6 +21,8 @@ console.log((' Building Quasar App with "' + env.platform.theme + '" theme...\n'
 
 shell.mkdir('-p', targetPath)
 shell.cp('-R', 'src/statics', targetPath)
+// FIXME: for now avoid using Cesium to create a light package
+shell.rm('-fR', targetPath + '/statics/Cesium')
 
 function finalize () {
   console.log((
