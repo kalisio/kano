@@ -5,7 +5,6 @@ import { permissions as notifyPermissions } from 'kNotify/common'
 import { permissions as mapPermissions } from 'kMap/common'
 import { permissions as eventPermissions } from 'kEvent/common'
 
-console.log(mapPermissions)
 // Register all default hooks for authorisation
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
