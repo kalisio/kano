@@ -1,10 +1,18 @@
-<h1><%= email.subject %></h1>
+<h1>[kApp] <%= email.subject %></h1>
 
 <p>Dear <%= user.name %>.</p>
 
-<p>You'be been invited to join un on kApp.</p>
+<p>You'be been invited to join us on kApp</p> 
 
-<p>Follow <a href='<%= email.link %>'>this link</a> to finalize your registration and change the password.</p>
+<p>An account has been created for you and is ready to use with the following details:
+<ul>
+  <li>email: <%= user.email %></li>
+  <li>password: <%= user.password %></li>
+  </ul>
 
-<p>If you do not want to get registrated please let us know by following <a href='mailto:<%= email.from %>?subject=I refuse to get registrated to kApp&body=Please cancel the invitation I recevied to join the site.'>this link</a>.</p>
+</p>
+
+<p>Follow <a href='<%= email.link %>'>this link</a> to access the login page.</p>
+
+<p>If you do not want to get registrated to kApp please let us know by following <a href='mailto:<%= email.from %>?subject=I refuse to get registrated to kApp&body=Please cancel the invitation I recevied to join the kApp solution.'>this link</a>.</p>
 
