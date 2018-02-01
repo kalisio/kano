@@ -1,5 +1,5 @@
-import { notifyHooks } from 'kNotify'
-import { eventHooks } from 'kEvent'
+import { hooks as notifyHooks } from 'kNotify'
+import { hooks as eventHooks } from 'kEvent'
 
 module.exports = {
   before: {

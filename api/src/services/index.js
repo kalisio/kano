@@ -18,17 +18,17 @@ module.exports = async function () {
     // register devices, etc. when creating a new user or authenticating
     app.configureService('users', app.getService('users'), servicesPath)
     app.configureService('authentication', app.getService('authentication'), servicesPath)
+    // Add hooks for topic (un)subscription on (un)authorisation
+    app.configureService('authorisations', app.getService('authorisations'), servicesPath)
 
     // Add hooks for topic creation/removal on org/group/tag object creation/removal
     app.on('service', service => {
-      if (service.name === 'groups' || service.name === 'organisations' ||
-          service.name === 'members' || service.name === 'tags') {
+      if (service.name === 'groups' || service.name === 'members' || service.name === 'tags') {
         app.configureService(service.name, service, servicesPath)
       }
     })
     await app.configure(kTeam)
-    // Add hooks for topic (un)subscription on (un)authorisation
-    app.configureService('authorisations', app.getService('authorisations'), servicesPath)
+    app.configureService('organisations', app.getService('organisations'), servicesPath)
 
     await app.configure(kNotify)
     await app.configure(kMap)
