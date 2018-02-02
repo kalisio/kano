@@ -1,4 +1,5 @@
 import { hooks as coreHooks } from 'kCore'
+import { hooks as notifyHooks } from 'kNotify'
 
 module.exports = {
   before: {
@@ -6,8 +7,8 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
-    patch: [],
+    update: [ coreHooks.populatePreviousObject, coreHooks.updateTags, notifyHooks.updateSubjectSubscriptions('tags', 'tags') ],
+    patch: [ coreHooks.populatePreviousObject, coreHooks.updateTags, notifyHooks.updateSubjectSubscriptions('tags', 'tags') ],
     remove: []
   },
 
@@ -16,8 +17,8 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [ coreHooks.updateTags ],
-    patch: [ coreHooks.updateTags ],
+    update: [],
+    patch: [],
     remove: []
   },
 
