@@ -1,4 +1,5 @@
 import { iffElse, iff } from 'feathers-hooks-common'
+import { hooks as coreHooks } from 'kCore'
 import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
 
@@ -24,10 +25,7 @@ module.exports = {
     ],
     update: [],
     patch: [],
-    remove: [ 
-      teamHooks.removePrivateOrganisation, 
-      notifyHooks.unregisterDevices 
-    ]
+    remove: [ teamHooks.removePrivateOrganisation, notifyHooks.unregisterDevices, coreHooks.updateTags ]
   },
 
   error: {
