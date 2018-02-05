@@ -25,7 +25,7 @@ module.exports = {
     update: [],
     patch: [],
     remove: [ 
-      teamHooks.removePrivateOrganisation, 
+      iff(hook => ! hook.result.sponsor, teamHooks.removePrivateOrganisation),
       notifyHooks.unregisterDevices 
     ]
   },
