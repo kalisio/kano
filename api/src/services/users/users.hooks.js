@@ -19,16 +19,16 @@ module.exports = {
     find: [],
     get: [],
     create: [ 
-      iff(hook => ! hook.result.sponsor, notifyHooks.sendVerificationEmail), 
+      iff(hook => !hook.result.sponsor, notifyHooks.sendVerificationEmail), 
       notifyHooks.removeVerification, 
       iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation) 
     ],
     update: [],
     patch: [],
     remove: [ 
-      iff(hook => ! hook.result.sponsor, teamHooks.removePrivateOrganisation),
+      iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
       notifyHooks.unregisterDevices,
-      coreHooks.updateTag 
+      coreHooks.updateTags
     ]
   },
 
