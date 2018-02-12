@@ -40,26 +40,26 @@ module.exports = async function () {
 
   let usersService = app.getService('users')
   let pusherService = app.getService('pusher')
-
-  // Create default users if not already done
-  const users = await usersService.find({ paginate: false })
-
-  app.get('authentication').defaultUsers.forEach(defaultUser => {
-    let createdUser = users.find(user => user.email === defaultUser.email)
-    if (!createdUser) {
-      logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
-      usersService.create(_.omit(defaultUser, 'device'))
-      .then(user => {
+  let defaultUsers = app.get('authentication').defaultUsers
+  if (defaultUsers) {
+    // Create default users if not already done
+    const users = await usersService.find({ paginate: false })
+    for (let i = 0; i < defaultUsers.length; i++) {
+      const defaultUser = defaultUsers[i]
+      let createdUser = _.find(users, user => user.email === defaultUser.email)
+      if (!createdUser) {
+        logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
+        let user = await usersService.create(_.omit(defaultUser, 'device'))
         // Register user device if any
         if (defaultUser.device) {
-          pusherService.create({
+          await pusherService.create({
             action: 'device',
             device: defaultUser.device
           }, {
             user
           })
         }
-      })
+      }
     }
-  })
+  }
 }

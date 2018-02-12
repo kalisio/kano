@@ -1,4 +1,5 @@
-import { hooks } from 'kNotify'
+import { hooks as teamHooks } from 'kTeam'
+import { hooks as notifyHooks } from 'kNotify'
 
 module.exports = {
   before: {
@@ -15,10 +16,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ hooks.createTopic ],
+    create: [ notifyHooks.createTopic, teamHooks.createGroupAuthorisations ],
     update: [],
     patch: [],
-    remove: [ hooks.removeTopic ]
+    remove: [ teamHooks.removeGroupAuthorisations, notifyHooks.removeTopic ]
   },
 
   error: {

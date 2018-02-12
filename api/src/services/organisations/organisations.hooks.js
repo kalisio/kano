@@ -1,3 +1,4 @@
+import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
 import { hooks as eventHooks } from 'kEvent'
 
@@ -16,10 +17,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ eventHooks.createOrganisationServices, notifyHooks.createTopic ],
+    create: [ teamHooks.createOrganisationServices, eventHooks.createOrganisationServices, notifyHooks.createTopic, teamHooks.createOrganisationAuthorisations ],
     update: [],
     patch: [],
-    remove: [ eventHooks.removeOrganisationServices, notifyHooks.removeTopic ]
+    remove: [ teamHooks.removeOrganisationAuthorisations, notifyHooks.removeTopic, eventHooks.removeOrganisationServices, teamHooks.removeOrganisationServices ]
   },
 
   error: {
