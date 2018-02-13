@@ -5,7 +5,7 @@ import chailint from 'chai-lint'
 import server from '../src/main'
 
 describe('kApp', () => {
-  let userService, userObject, orgService, authorisationService, devicesService, pusherService, sns, orgObject
+  let userService, userObject, orgService, authorisationService, devicesService, pusherService, sns, memberService, tagService, orgObject, tagObject
   let now = new Date()
   let logFilePath = path.join(__dirname, 'logs', 'kApp-' + now.toISOString().slice(0, 10) + '.log')
   const device = {
@@ -15,6 +15,15 @@ describe('kApp', () => {
 
   before(() => {
     chailint(chai, util)
+
+    // Add hooks for contextual services
+    server.app.on('service', service => {
+      if (service.name === 'members') {
+        memberService = service
+      } else if (service.name === 'tags') {
+        tagService = service
+      }
+    })
   })
 
   it('is CommonJS compatible', () => {
@@ -46,15 +55,23 @@ describe('kApp', () => {
     expect(sns).toExist()
   })
 
-  it('creates a user with its org', (done) => {
-    userService.create({
+  it('creates a user with its org', () => {
+    let operation = userService.create({
       email: 'test@test.org',
       password: 'test-password',
       name: 'test-user'
     })
     .then(user => {
       userObject = user
-      return devicesService.update(device.registrationId, device, { user })
+      return orgService.find({ query: {}, user: userObject })
+    })
+    .then(orgs => {
+      expect(orgs.data.length > 0).beTrue()
+      orgObject = orgs.data[0]
+      expect(orgObject.name).to.equal('test-user')
+      expect(orgObject.topics).toExist()
+      expect(Object.keys(orgObject.topics).length > 0).beTrue()
+      return devicesService.update(device.registrationId, device, { user: userObject })
     })
     .then(device => {
       return userService.get(userObject._id)
@@ -67,27 +84,19 @@ describe('kApp', () => {
       expect(userObject.devices[0].registrationId).to.equal(device.registrationId)
       expect(userObject.devices[0].platform).to.equal(device.platform)
       expect(userObject.devices[0].arn).toExist()
-      return orgService.find({ query: {}, user: userObject })
     })
-    .then(orgs => {
-      expect(orgs.data.length > 0).beTrue()
-      orgObject = orgs.data[0]
-      expect(orgObject.name).to.equal('test-user')
-      expect(orgObject.topics).toExist()
-      expect(Object.keys(orgObject.topics).length > 0).beTrue()
-      done()
+    let event = new Promise((resolve, reject) => {
+      sns.once('subscribed', (subscriptionArn, endpointArn, topicArn) => {
+        expect(orgObject.topics[device.platform]).to.equal(topicArn)
+        expect(userObject.devices[0].arn).to.equal(endpointArn)
+        resolve()
+      })
     })
-    /*
-    sns.once('subscribed', (subscriptionArn, endpointArn, topicArn) => {
-      expect(orgObject.topics[device.platform]).to.equal(topicArn)
-      expect(userObject.devices[0].arn).to.equal(endpointArn)
-      done()
-    })
-    */
+    return Promise.all([operation, event])
   })
   // Let enough time to process
-  .timeout(15000)
-
+  .timeout(10000)
+/*
   it('errors appear in logs', (done) => {
     userService.create({
       email: 'test@test.org',
@@ -109,34 +118,79 @@ describe('kApp', () => {
   })
   // Let enough time to process
   .timeout(5000)
+*/
+  it('add user tags', () => {
+    let operation = memberService.patch(userObject._id.toString(), {
+      tags: [{ value: 'test', scope: 'members' }]
+    }, { user: userObject })
+    .then(user => {
+      userObject = user
+      expect(userObject.tags).toExist()
+      expect(userObject.tags.length > 0).beTrue()
+    })
+    let event = new Promise((resolve, reject) => {
+      sns.once('subscribed', (subscriptionArn, endpointArn, topicArn) => {
+        tagService.find({ query: { value: 'test', scope: 'members' }, paginate: false })
+        .then(tags => {
+          tagObject = tags[0]
+          expect(tagObject.topics[device.platform]).to.equal(topicArn)
+          expect(userObject.devices[0].arn).to.equal(endpointArn)
+          resolve()
+        })
+      })
+    })
+    return Promise.all([operation, event])
+  })
+  // Let enough time to process
+  .timeout(10000)
 
-  it('removes a user', (done) => {
-    userService.remove(userObject._id, { user: userObject })
+  it('remove user tags', () => {
+    let operation = memberService.patch(userObject._id.toString(), {
+      tags: []
+    }, { user: userObject, previousItem: userObject })
+    .then(user => {
+      userObject = user
+      expect(userObject.tags).toExist()
+      expect(userObject.tags.length === 0).beTrue()
+    })
+    let event = new Promise((resolve, reject) => {
+      sns.once('unsubscribed', (subscriptionArn) => {
+        // We do not store subscription ARN
+        resolve()
+      })
+    })
+    return Promise.all([operation, event])
+  })
+  // Let enough time to process
+  .timeout(10000)
+
+  it('removes a user', () => {
+    let operation = userService.remove(userObject._id, { user: userObject })
     .then(user => {
       return userService.find({ query: { name: 'test-user' } })
     })
     .then(users => {
       expect(users.data.length === 0).beTrue()
-      done()
     })
     // We need to synchronize 2 events
-    /*
-    let userDeleted = false
-    let unsubscribed = false
-    sns.once('userDeleted', endpointArn => {
-      expect(userObject.devices[0].arn).to.equal(endpointArn)
-      userDeleted = true
-      if (userDeleted && unsubscribed) done()
+    let events = new Promise((resolve, reject) => {
+      let userDeleted = false
+      let unsubscribed = false
+      sns.once('userDeleted', endpointArn => {
+        expect(userObject.devices[0].arn).to.equal(endpointArn)
+        userDeleted = true
+        if (userDeleted && unsubscribed) resolve()
+      })
+      sns.once('unsubscribed', (subscriptionArn) => {
+        // We do not store subscription ARN
+        unsubscribed = true
+        if (userDeleted && unsubscribed) resolve()
+      })
     })
-    sns.once('unsubscribed', (subscriptionArn) => {
-      // We do not store subscription ARN
-      unsubscribed = true
-      if (userDeleted && unsubscribed) done()
-    })
-    */
+    return Promise.all([operation, events])
   })
   // Let enough time to process
-  .timeout(15000)
+  .timeout(10000)
 
   // Cleanup
   after(() => {

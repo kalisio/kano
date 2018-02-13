@@ -31,6 +31,7 @@ module.exports = async function () {
     app.configureService('organisations', app.getService('organisations'), servicesPath)
 
     await app.configure(kNotify)
+    app.configureService('devices', app.getService('devices'), servicesPath)
     await app.configure(kMap)
     await app.configure(kEvent)
   }
