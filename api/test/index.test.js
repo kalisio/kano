@@ -5,7 +5,8 @@ import chailint from 'chai-lint'
 import server from '../src/main'
 
 describe('kApp', () => {
-  let userService, userObject, orgService, authorisationService, devicesService, pusherService, sns, memberService, tagService, orgObject, tagObject
+  let userService, userObject, orgService, orgObject, authorisationService, devicesService, pusherService, sns,
+  memberService, tagService, tagObject, groupService, groupObject
   let now = new Date()
   let logFilePath = path.join(__dirname, 'logs', 'kApp-' + now.toISOString().slice(0, 10) + '.log')
   const device = {
@@ -22,6 +23,8 @@ describe('kApp', () => {
         memberService = service
       } else if (service.name === 'tags') {
         tagService = service
+      } else if (service.name === 'groups') {
+        groupService = service
       }
     })
   })
@@ -60,10 +63,10 @@ describe('kApp', () => {
       email: 'test@test.org',
       password: 'test-password',
       name: 'test-user'
-    })
+    }, { checkAuthorisation: true })
     .then(user => {
       userObject = user
-      return orgService.find({ query: {}, user: userObject })
+      return orgService.find({ query: {}, user: userObject, checkAuthorisation: true })
     })
     .then(orgs => {
       expect(orgs.data.length > 0).beTrue()
@@ -71,10 +74,10 @@ describe('kApp', () => {
       expect(orgObject.name).to.equal('test-user')
       expect(orgObject.topics).toExist()
       expect(Object.keys(orgObject.topics).length > 0).beTrue()
-      return devicesService.update(device.registrationId, device, { user: userObject })
+      return devicesService.update(device.registrationId, device, { user: userObject, checkAuthorisation: true })
     })
     .then(device => {
-      return userService.get(userObject._id)
+      return userService.get(userObject._id, { user: userObject, checkAuthorisation: true })
     })
     .then(user => {
       // Update user with its device
@@ -102,7 +105,7 @@ describe('kApp', () => {
       email: 'test@test.org',
       password: 'test-password',
       name: 'test-user'
-    })
+    }, { checkAuthorisation: true })
     .catch(error => {
       let log = 'duplicate key error collection: kalisio-test.users'
       // FIXME: need to let some time to proceed with log file
@@ -122,7 +125,7 @@ describe('kApp', () => {
   it('add user tags', () => {
     let operation = memberService.patch(userObject._id.toString(), {
       tags: [{ value: 'test', scope: 'members' }]
-    }, { user: userObject })
+    }, { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
     .then(user => {
       userObject = user
       expect(userObject.tags).toExist()
@@ -147,7 +150,7 @@ describe('kApp', () => {
   it('remove user tags', () => {
     let operation = memberService.patch(userObject._id.toString(), {
       tags: []
-    }, { user: userObject, previousItem: userObject })
+    }, { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
     .then(user => {
       userObject = user
       expect(userObject.tags).toExist()
@@ -164,10 +167,55 @@ describe('kApp', () => {
   // Let enough time to process
   .timeout(10000)
 
+  it('creates an organisation group', () => {
+    let operation = groupService.create({ name: 'test-group' }, { user: userObject, checkAuthorisation: true })
+    .then(_ => {
+      return groupService.find({ query: { name: 'test-group' }, user: userObject, checkAuthorisation: true })
+    })
+    .then(groups => {
+      expect(groups.data.length > 0).beTrue()
+      groupObject = groups.data[0]
+      expect(groupObject.name).to.equal('test-group')
+    })
+    let event = new Promise((resolve, reject) => {
+      sns.once('subscribed', (subscriptionArn, endpointArn, topicArn) => {
+        groupService.find({ query: { name: 'test-group' }, paginate: false, user: userObject, checkAuthorisation: true })
+        .then(groups => {
+          groupObject = groups[0]
+          expect(groupObject.topics[device.platform]).to.equal(topicArn)
+          expect(userObject.devices[0].arn).to.equal(endpointArn)
+          resolve()
+        })
+      })
+    })
+    return Promise.all([operation, event])
+  })
+  // Let enough time to process
+  .timeout(10000)
+
+  it('removes an organisation group', () => {
+    let operation = groupService.remove(groupObject._id, { user: userObject, checkAuthorisation: true })
+    .then(_ => {
+      return groupService.find({ query: { name: groupObject.name }, user: userObject, checkAuthorisation: true })
+    })
+    .then(groups => {
+      expect(groups.data.length === 0).beTrue()
+    })
+    let event = new Promise((resolve, reject) => {
+      sns.once('unsubscribed', (subscriptionArn) => {
+        // We do not store subscription ARN
+        resolve()
+      })
+    })
+    return Promise.all([operation, event])
+  })
+  // Let enough time to process
+  .timeout(10000)
+
   it('removes a user', () => {
-    let operation = userService.remove(userObject._id, { user: userObject })
+    let operation = userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
     .then(user => {
-      return userService.find({ query: { name: 'test-user' } })
+      return userService.find({ query: { name: 'test-user' }, checkAuthorisation: true })
     })
     .then(users => {
       expect(users.data.length === 0).beTrue()
