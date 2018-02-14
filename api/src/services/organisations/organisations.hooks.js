@@ -17,10 +17,16 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ teamHooks.createOrganisationServices, eventHooks.createOrganisationServices, notifyHooks.createTopic, teamHooks.createOrganisationAuthorisations ],
+    create: [ teamHooks.createOrganisationServices,
+              eventHooks.createOrganisationServices,
+              notifyHooks.createTopic,
+              teamHooks.createOrganisationAuthorisations ],
     update: [],
     patch: [],
-    remove: [ teamHooks.removeOrganisationAuthorisations, notifyHooks.removeTopic, eventHooks.removeOrganisationServices, teamHooks.removeOrganisationServices ]
+    remove: [ teamHooks.removeOrganisationAuthorisations,
+              notifyHooks.removeTopic,
+              eventHooks.removeOrganisationServices,
+              teamHooks.removeOrganisationServices ]
   },
 
   error: {

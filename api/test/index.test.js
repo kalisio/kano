@@ -11,7 +11,8 @@ describe('kApp', () => {
   let logFilePath = path.join(__dirname, 'logs', 'kApp-' + now.toISOString().slice(0, 10) + '.log')
   const device = {
     registrationId: 'myfakeId',
-    platform: 'ANDROID'
+    platform: 'ANDROID',
+    uuid: 'id'
   }
 
   before(() => {
@@ -147,26 +148,6 @@ describe('kApp', () => {
   // Let enough time to process
   .timeout(10000)
 
-  it('remove user tags', () => {
-    let operation = memberService.patch(userObject._id.toString(), {
-      tags: []
-    }, { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
-    .then(user => {
-      userObject = user
-      expect(userObject.tags).toExist()
-      expect(userObject.tags.length === 0).beTrue()
-    })
-    let event = new Promise((resolve, reject) => {
-      sns.once('unsubscribed', (subscriptionArn) => {
-        // We do not store subscription ARN
-        resolve()
-      })
-    })
-    return Promise.all([operation, event])
-  })
-  // Let enough time to process
-  .timeout(10000)
-
   it('creates an organisation group', () => {
     let operation = groupService.create({ name: 'test-group' }, { user: userObject, checkAuthorisation: true })
     .then(_ => {
@@ -193,6 +174,40 @@ describe('kApp', () => {
   // Let enough time to process
   .timeout(10000)
 
+  it('updates the user device', () => {
+    const previousDevice = userObject.devices[0]
+    const newDevice = Object.assign({}, device)
+    newDevice.registrationId = 'mynewfakeId'
+    let operation = devicesService.update(newDevice.registrationId, newDevice, { user: userObject, checkAuthorisation: true })
+    .then(device => {
+      return userService.get(userObject._id, { user: userObject, checkAuthorisation: true })
+    })
+    .then(user => {
+      // Update user with its new device
+      userObject = user
+    })
+    let events = new Promise((resolve, reject) => {
+      // This should subscribe the new device to all topics: org, group, tag
+      const expectedSubscriptions = 3
+      let subscriptions = 0
+      // This should unregister the old device
+      let userDeleted = false
+      sns.on('subscribed', (subscriptionArn, endpointArn, topicArn) => {
+        expect(userObject.devices[0].arn).to.equal(endpointArn)
+        subscriptions++
+        if (userDeleted && (subscriptions === expectedSubscriptions)) resolve()
+      })
+      sns.once('userDeleted', endpointArn => {
+        expect(previousDevice.arn).to.equal(endpointArn)
+        userDeleted = true
+        if (userDeleted && (subscriptions === expectedSubscriptions)) resolve()
+      })
+    })
+    return Promise.all([operation, events])
+  })
+  // Let enough time to process
+  .timeout(10000)
+
   it('removes an organisation group', () => {
     let operation = groupService.remove(groupObject._id, { user: userObject, checkAuthorisation: true })
     .then(_ => {
@@ -200,6 +215,26 @@ describe('kApp', () => {
     })
     .then(groups => {
       expect(groups.data.length === 0).beTrue()
+    })
+    let event = new Promise((resolve, reject) => {
+      sns.once('unsubscribed', (subscriptionArn) => {
+        // We do not store subscription ARN
+        resolve()
+      })
+    })
+    return Promise.all([operation, event])
+  })
+  // Let enough time to process
+  .timeout(10000)
+
+  it('remove user tags', () => {
+    let operation = memberService.patch(userObject._id.toString(), {
+      tags: []
+    }, { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
+    .then(user => {
+      userObject = user
+      expect(userObject.tags).toExist()
+      expect(userObject.tags.length === 0).beTrue()
     })
     let event = new Promise((resolve, reject) => {
       sns.once('unsubscribed', (subscriptionArn) => {
@@ -222,17 +257,20 @@ describe('kApp', () => {
     })
     // We need to synchronize 2 events
     let events = new Promise((resolve, reject) => {
+      // This should unsubscribe the new device to all topics: org, group, tag
+      const expectedUnsubscriptions = 3
+      let unsubscriptions = 0
+      // This should unregister the device
       let userDeleted = false
-      let unsubscribed = false
       sns.once('userDeleted', endpointArn => {
         expect(userObject.devices[0].arn).to.equal(endpointArn)
         userDeleted = true
-        if (userDeleted && unsubscribed) resolve()
+        if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) resolve()
       })
       sns.once('unsubscribed', (subscriptionArn) => {
         // We do not store subscription ARN
-        unsubscribed = true
-        if (userDeleted && unsubscribed) resolve()
+        unsubscriptions++
+        if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) resolve()
       })
     })
     return Promise.all([operation, events])

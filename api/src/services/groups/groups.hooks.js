@@ -16,10 +16,12 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ notifyHooks.createTopic, teamHooks.createGroupAuthorisations ],
+    create: [ notifyHooks.createTopic,
+              teamHooks.createGroupAuthorisations ],
     update: [],
     patch: [],
-    remove: [ teamHooks.removeGroupAuthorisations, notifyHooks.removeTopic ]
+    remove: [ teamHooks.removeGroupAuthorisations,
+              notifyHooks.removeTopic ]
   },
 
   error: {

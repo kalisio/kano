@@ -7,14 +7,13 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [ coreHooks.populatePreviousObject,
+    update: [],
+    patch: [  // Required to update subscriptions correctly
+              coreHooks.populatePreviousObject,
               coreHooks.updateTags,
               // Avoid removing subscriptions on removed (ie unused) tags
-              notifyHooks.updateSubjectSubscriptions('tags', 'tags', (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics) ],
-    patch: [  coreHooks.populatePreviousObject,
-              coreHooks.updateTags,
-              // Avoid removing subscriptions on removed (ie unused) tags
-              notifyHooks.updateSubjectSubscriptions('tags', 'tags', (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics) ],
+              notifyHooks.updateSubjectSubscriptions('tags', 'tags',
+                (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics) ],
     remove: []
   },
 
