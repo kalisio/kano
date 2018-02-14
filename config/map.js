@@ -23,7 +23,7 @@ module.exports = {
         }
       ]
     },
-    {
+    /*{
       type: 'tileLayer',
       arguments: [
         'http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png',
@@ -240,7 +240,7 @@ module.exports = {
           }
         }
       ]
-    }   
+}   */
   ],
   // Default GeoJSON layer style for polygons/lines
   featureStyle: {

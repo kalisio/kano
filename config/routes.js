@@ -50,7 +50,7 @@ module.exports = {
           },
           'dashboard': {
             path: 'dashboard',
-            component: 'DashboardActivity'
+            component: 'KEventDashboard'
           },
           'account/:perspective': {
             name: 'account-activity',
