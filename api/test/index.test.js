@@ -124,9 +124,9 @@ describe('kApp', () => {
   .timeout(5000)
 */
   it('add user tags', () => {
-    let operation = memberService.patch(userObject._id.toString(), {
+    let operation = memberService.patch(userObject._id.toString(), Object.assign({ // We need at least devices for subscription
       tags: [{ value: 'test', scope: 'members' }]
-    }, { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
+    }, userObject), { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
     .then(user => {
       userObject = user
       expect(userObject.tags).toExist()
