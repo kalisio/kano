@@ -1,0 +1,11 @@
+{ 
+  "android": {
+    "release": {
+      "keystore": "kApp.keystore",
+      "storePassword": "kalisio",
+      "alias": "kApp",
+      "password" : "kalisio",
+      "keystoreType": ""
+    }
+  }
+}
