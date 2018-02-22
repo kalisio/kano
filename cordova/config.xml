@@ -2,6 +2,7 @@
 <widget id="com.kalisio.kapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>kApp</name>
     <description>Kalisio App Template</description>
+    <icon src="model/icon.png" />
     <author email="support@kalisio.com" href="http://www.kalisio.com">Kalisio</author>
     <content src="index.html" />
     <access origin="*" />
@@ -11,6 +12,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="android-minSdkVersion" value="21" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
