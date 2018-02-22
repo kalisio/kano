@@ -17,7 +17,7 @@ if (require.main === module) {
     logger.error('Unhandled Rejection at: Promise ', p, reason)
   )
 
-  server.run().then(_ => {
+  server.run().then(() => {
     logger.info('Server started listening')
   })
 }

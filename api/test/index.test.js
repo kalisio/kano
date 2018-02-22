@@ -35,7 +35,7 @@ describe('kApp', () => {
   })
 
   it('initialize the server', (done) => {
-    server.run().then(_ => done())
+    server.run().then(() => done())
   })
   // Let enough time to process
   .timeout(5000)
@@ -111,7 +111,7 @@ describe('kApp', () => {
       let log = 'duplicate key error collection: kalisio-test.users'
       // FIXME: need to let some time to proceed with log file
       // Didn't find a better way since fs.watch() does not seem to work...
-      setTimeout(_ => {
+      setTimeout(() => {
         fs.readFile(logFilePath, 'utf8', (err, content) => {
           expect(err).beNull()
           expect(content.includes(log)).to.equal(true)
@@ -150,7 +150,7 @@ describe('kApp', () => {
 
   it('creates an organisation group', () => {
     let operation = groupService.create({ name: 'test-group' }, { user: userObject, checkAuthorisation: true })
-    .then(_ => {
+    .then(() => {
       return groupService.find({ query: { name: 'test-group' }, user: userObject, checkAuthorisation: true })
     })
     .then(groups => {
@@ -210,7 +210,7 @@ describe('kApp', () => {
 
   it('removes an organisation group', () => {
     let operation = groupService.remove(groupObject._id, { user: userObject, checkAuthorisation: true })
-    .then(_ => {
+    .then(() => {
       return groupService.find({ query: { name: groupObject.name }, user: userObject, checkAuthorisation: true })
     })
     .then(groups => {
