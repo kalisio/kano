@@ -118,7 +118,7 @@ module.exports = {
                 component: 'KEventTemplatesActivity',
                 props: true,
                 children: {
-                  'create': { name: 'create-event-template', component: 'KEventTemplateEditor', props: true },
+                  'create/:templateId?': { name: 'create-event-template', component: 'KEventTemplateEditor', props: true },
                   'edit/:id/:perspective?': { name: 'edit-event-template', component: 'KEventTemplateEditor', props: true }
                 }
               },
