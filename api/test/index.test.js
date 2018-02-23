@@ -100,7 +100,7 @@ describe('kApp', () => {
   })
   // Let enough time to process
   .timeout(10000)
-/*
+
   it('errors appear in logs', (done) => {
     userService.create({
       email: 'test@test.org',
@@ -122,7 +122,7 @@ describe('kApp', () => {
   })
   // Let enough time to process
   .timeout(5000)
-*/
+
   it('add user tags', () => {
     let operation = memberService.patch(userObject._id.toString(), Object.assign({ // We need at least devices for subscription
       tags: [{ value: 'test', scope: 'members' }]
