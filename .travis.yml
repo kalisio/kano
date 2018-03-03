@@ -1,32 +1,45 @@
 language: node_js
 node_js:
-  - '8'
+- '8'
 services:
-  - mongodb
+- mongodb
 addons:
   code_climate:
-    repo_token: '0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb'
+    repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
 notifications:
   email: false
+  slack:
+    rooms:
+      secure: E2WCIbmn7S32BRfTODPI8y3p/cyQSmC3M3PFKdJARshoYsuArxuliHa57R4feIderPpbZnAiGv7WLWuL32rSR2nxZnv6KL9syrUhDct/Ak2RTNT8hTY0VeF17tK3fvQ+U2N65InVB6oHucW1PzFTPGKF8GYgarBATGNRuX/MQ0c2wnkXV8VFGTUNu39v1Z0ZcFEVLa2G/avIplPnPQykkxPA3Hoc0o/mBhDq5AStzPoAHQFWfnYzDJE/UGlqTl8j8D2F2iWlB5zDXlb9NoBHR+4YfAEsAyEuXC32ONhdw1KwuQfioZ9Y58fUQ8XC3COVRsvlFpZswzKdcqA9MUsX46mZZGjerQZPth2VNAHD26BxO3rvMFWAy32vlc3q78DVHz5VEteiD5KBWVYec7AU2gU3hE3s89v9YXOcMjPBOfzBwbSiyuz8wNeu+IUUH6mY0nuMEUHUFP9TnbspzDCcVHIqbSwcVsYVh+4YeAFKJ1FJh0TzXPLIHIF5PhjK6XsDvLS/frYKWQyfsKv/R4ciSI0XA4ZfYKaVqu+O2zoZUlWsPxF3TBJyjpCE9JpViMmVpyQ9G8VQLlsZVMuDKmRaHjzoBm6tG3F5yetNH8CD4855VH6PuuHgICsOl/IeZ1v9HtaWyjtok4Rf84yfDKEl0JZRQaUZ/rlIRdjhZ43twTI=
+    on_success: always
+    on_failure: always    
 before_install:
-  - npm install -g quasar-cli
+- npm install -g quasar-cli
 install:
-  - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
-  - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
-  - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
-  - git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn link && cd .. && yarn link kMap
-  - git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install && yarn link && cd .. && yarn link kEvent
-  - yarn install
-  - quasar build
-  - cd api
-  - git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
-  - git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn link && cd .. && yarn link kTeam
-  - git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install && yarn link && cd .. && yarn link kNotify
-  - git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install && yarn link && cd .. && yarn link kEvent
-  - yarn install
-  - npm run build
+- git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn
+  link && cd .. && yarn link kCore
+- git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn
+  link && cd .. && yarn link kTeam
+- git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install &&
+  yarn link && cd .. && yarn link kNotify
+- git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn
+  link && cd .. && yarn link kMap
+- git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install &&
+  yarn link && cd .. && yarn link kEvent
+- yarn install
+- quasar build
+- cd api
+- git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn
+  link && cd .. && yarn link kCore
+- git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn
+  link && cd .. && yarn link kTeam
+- git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install &&
+  yarn link && cd .. && yarn link kNotify
+- git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install &&
+  yarn link && cd .. && yarn link kEvent
+- yarn install
+- npm run build
 before_script:
-  - npm install -g codeclimate-test-reporter
+- npm install -g codeclimate-test-reporter
 after_script:
-  - codeclimate-test-reporter < api/coverage/lcov.info
-
+- codeclimate-test-reporter < api/coverage/lcov.info
