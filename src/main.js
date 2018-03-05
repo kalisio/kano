@@ -12,10 +12,13 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import logger from 'loglevel'
 import Vue from 'vue'
+import i18next from 'i18next'
+import VueI18next from '@panter/vue-i18next'
 import Quasar from 'quasar'
 import router from './router'
 import appHooks from './main.hooks'
 import services from './services'
+import { configureI18n } from './i18n'
 import { kalisio, beforeGuard, authenticationGuard } from 'kCore/client'
 import plugin from './vue-kdk'
 
@@ -33,12 +36,16 @@ import 'quasar-extras/animate/bounceInRight.css'
 import 'quasar-extras/animate/bounceOutRight.css'
 
 let api = kalisio()
+
 // Setup app hooks
 api.hooks(appHooks)
 // Then all services
 services.call(api)
 
+configureI18n()
+
 // Set up Vue
+Vue.use(VueI18next)
 Vue.use(Quasar)
 Vue.use(router)
 Vue.use(plugin, { api })
@@ -50,11 +57,16 @@ beforeGuard.registerGuard(authenticationGuard)
 
 Quasar.start(() => {
   logger.info('Starting application')
+
+  // Setup the internazionalization
+  const i18n = new VueI18next(i18next)
+
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
     router,
     el: '#kapp',
-    render: h => h(require('./App'))
+    render: h => h(require('./App')),
+    i18n: i18n
   })
 })

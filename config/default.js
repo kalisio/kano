@@ -24,9 +24,9 @@ module.exports = {
   },
   screen: {
     footer: [
-      { label: 'About Kalisio', url: 'https://www.kalisio.xyz' },
-      { label: 'Contact', url: 'https://www.kalisio.xyz/contact' },
-      { label: 'Terms & Policies', url: 'https://www.kalisio.xyz/terms' },
+      { label: 'ABOUT_KALISIO', url: 'https://www.kalisio.xyz' },
+      { label: 'CONTACT', url: 'https://www.kalisio.xyz/contact' },
+      { label: 'TERMS_AND_POLICIES', url: 'https://www.kalisio.xyz/terms' },
     ],
     header: 'kalisio-banner.png'
   },
