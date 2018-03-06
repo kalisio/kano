@@ -101,7 +101,6 @@ module.exports = {
                 children: {
                   'create/:templateId': { name: 'create-event', component: 'KEventEditor', props: true },
                   'edit/:id': { name: 'edit-event', component: 'KEventEditor', props: true },
-                  'add-media/:id': { name: 'add-media', component: 'KAddEventMedia', props: true },
                 }
               },
               'events/:id': {
@@ -109,8 +108,7 @@ module.exports = {
                 component: 'KEventActivity',
                 props: true,
                 children: {
-                  'log/:logId': { name: 'event-log', component: 'KEventLogEditor', props: true },
-                  'browse-media': { name: 'browse-media', component: 'KGallery', props: true }
+                  'log/:logId': { name: 'event-log', component: 'KEventLogEditor', props: true }
                 }
               },
               'event-templates': {
