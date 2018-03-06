@@ -1,5 +1,11 @@
 {
-  "ABOUT_KALISIO": "A propos de Kalisio",
-  "CONTACT": "Contact",
-  "TERMS_AND_POLICIES": "Termes et conditions"
+  "screen": {
+    "ABOUT_KALISIO": "A propos de Kalisio",
+    "CONTACT": "Contact",
+    "TERMS_AND_POLICIES": "Termes et conditions"
+  },
+  "sideNav": {
+    "DASHBOARD": "Tableau de bord",
+    "LOGOUT": "Se déconnecter"
+  }
 }

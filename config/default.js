@@ -24,9 +24,9 @@ module.exports = {
   },
   screen: {
     footer: [
-      { label: 'ABOUT_KALISIO', url: 'https://www.kalisio.xyz' },
-      { label: 'CONTACT', url: 'https://www.kalisio.xyz/contact' },
-      { label: 'TERMS_AND_POLICIES', url: 'https://www.kalisio.xyz/terms' },
+      { label: 'screen.ABOUT_KALISIO', url: 'https://www.kalisio.xyz' },
+      { label: 'screen.CONTACT', url: 'https://www.kalisio.xyz/contact' },
+      { label: 'screen.TERMS_AND_POLICIES', url: 'https://www.kalisio.xyz/terms' },
     ],
     header: 'kalisio-banner.png'
   },
@@ -57,7 +57,7 @@ module.exports = {
   },
   user_dashboard: {
     links: [
-      { label: 'Dashboard', icon: 'dashboard', route: { name: 'home' } }
+      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } }
     ]
   },
   user_organisations: {
@@ -69,7 +69,7 @@ module.exports = {
   user_actions: {
     links: [
       { }, // separator
-      { label: 'Logout', icon: 'exit_to_app', route: { name: 'logout' } }
+      { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
   context: {
