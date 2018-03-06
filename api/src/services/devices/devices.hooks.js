@@ -20,7 +20,7 @@ module.exports = {
               // Check if the device has already been registered
     update: [ when(hook => {
                 const isNotRegistered = !hook.service.isDeviceRegistered(hook.data, hook.params.user)
-                // Is a new device coming, if so update user device list so that we will only subscribe it
+                // Is a new device coming ? If so update user device list so that we will only subscribe to it
                 if (isNotRegistered) {
                   hook.params.user.devices = [hook.result]
                 }
