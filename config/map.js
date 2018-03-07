@@ -22,8 +22,9 @@ module.exports = {
                       'AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         }
       ]
-    },
-    /*{
+    }
+    /*,
+    {
       type: 'tileLayer',
       arguments: [
         'http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png',
@@ -58,7 +59,7 @@ module.exports = {
     {
       type: 'vectorGrid.protobuf',
       arguments: [
-        'http://tileservergl.kalisio.xyz/data/planet/{z}/{x}/{y}.pbf',
+        'http://tileservergl.kalisio.xyz/data/osm/{z}/{x}/{y}.pbf',
         {
           rendererFactory: 'canvas.tile',
           maxNativeZoom: 14,
@@ -240,7 +241,35 @@ module.exports = {
           }
         }
       ]
-}   */
+    }
+    */
+  ],
+  overlayLayers: [
+    {
+      type: 'vectorGrid.protobuf',
+      name: 'Airports',
+      arguments: [
+        'http://tileservergl.kalisio.xyz/data/airports/{z}/{x}/{y}.pbf',
+        {
+          rendererFactory: 'canvas.tile',
+          maxNativeZoom: 14,
+          maxZoom: 20,
+          label: 'Airports',
+          interactive: true,
+          vectorTileLayerStyles: {
+            airports: {
+              weight: 2,
+              color: 'red',
+              opacity: 1,
+              fillColor: 'yellow',
+              fill: true,
+              radius: 6,
+              fillOpacity: 0.7
+            }
+          }
+        }
+      ]
+    }
   ],
   // Default GeoJSON layer style for polygons/lines
   featureStyle: {
