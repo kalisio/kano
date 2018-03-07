@@ -58,15 +58,12 @@ beforeGuard.registerGuard(authenticationGuard)
 Quasar.start(() => {
   logger.info('Starting application')
 
-  // Setup the internazionalization
-  const i18n = new VueI18next(i18next)
-
   // Create the Vue instance
   /* eslint-disable no-new */
   new Vue({
     router,
     el: '#kapp',
     render: h => h(require('./App')),
-    i18n: i18n
+    i18n: new VueI18next(i18next)
   })
 })

@@ -25,7 +25,7 @@ function resolveTranslation (module, locale) {
     })
 }
 
-export function configureI18n () {
+export async function configureI18n () {
   // Defines the modules to be loaded
   const modules = ['kCore', 'kTeam', 'kNotify', 'kMap', 'kEvent', 'kApp']
   try {
@@ -38,14 +38,13 @@ export function configureI18n () {
       defaultNS: ['kdk']
     })
     // Build the translation resolvers
-    const resolvers = modules.map(module => {
+    const translationResolvers = modules.map(module => {
       return resolveTranslation(module, locale)
     })
     // Apply the resolvers and add the translation bundles to i18next
-    Promise.all(resolvers).then((translations) => {
-      translations.forEach((translation) => {
-        i18next.addResourceBundle(locale, 'kdk', translation, true, true)
-      })
+    let translations = await Promise.all(translationResolvers)
+    translations.forEach((translation) => {
+      i18next.addResourceBundle(locale, 'kdk', translation, true, true)
     })
   }
   catch (error) {
