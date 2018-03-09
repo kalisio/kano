@@ -116,6 +116,10 @@ after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
+ajv-i18n@2:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ajv-i18n/-/ajv-i18n-2.2.0.tgz#705f5c548b60647f40e7616b341908f60b7365d2"
+
 ajv-keywords@^1.0.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
