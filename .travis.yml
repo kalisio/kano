@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '8'
 services:
+- docker
 - mongodb
 addons:
   code_climate:
@@ -16,30 +17,10 @@ notifications:
 before_install:
 - npm install -g quasar-cli
 install:
-- git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn
-  link && cd .. && yarn link kCore
-- git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn
-  link && cd .. && yarn link kTeam
-- git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install &&
-  yarn link && cd .. && yarn link kNotify
-- git clone https://github.com/kalisio/kMap.git && cd kMap && yarn install && yarn
-  link && cd .. && yarn link kMap
-- git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install &&
-  yarn link && cd .. && yarn link kEvent
-- yarn install
-- quasar build
-- cd api
-- git clone https://github.com/kalisio/kCore.git && cd kCore && yarn install && yarn
-  link && cd .. && yarn link kCore
-- git clone https://github.com/kalisio/kTeam.git && cd kTeam && yarn install && yarn
-  link && cd .. && yarn link kTeam
-- git clone https://github.com/kalisio/kNotify.git && cd kNotify && yarn install &&
-  yarn link && cd .. && yarn link kNotify
-- git clone https://github.com/kalisio/kEvent.git && cd kEvent && yarn install &&
-  yarn link && cd .. && yarn link kEvent
-- yarn install
-- npm run build
+- docker build -t kalisio/kapp .
+- docker run -p 8081:8081 --name kapp --env GOOGLE_MAIL_USER --env GOOGLE_MAIL_PASSWORD --env GOOGLE_USER --env GOOGLE_PASSWORD --env GITHUB_USER --env GITHUB_PASSWORD --env SNS_ACCESS_KEY --env SNS_SECRET_ACCESS_KEY --env SNS_ANDROID_ARN --env S3_ACCESS_KEY --env S3_SECRET_ACCESS_KEY --env S3_BUCKET --env GITHUB_CLIENT_ID --env GITHUB_CLIENT_SECRET --env GOOGLE_CLIENT_ID --env GOOGLE_CLIENT_SECRET --env DB_URL=mongodb://mongodb:27017/kApp kalisio/kapp npm t
+- docker cp kapp:/opt/kapp/api/coverage/lcov.info .
 before_script:
 - npm install -g codeclimate-test-reporter
 after_script:
-- codeclimate-test-reporter < api/coverage/lcov.info
+- codeclimate-test-reporter < lcov.info
