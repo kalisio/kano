@@ -11,6 +11,26 @@ services:
       - 8081:8081
     networks:
       - kapp
+    environment:
+      - GOOGLE_MAIL_USER
+      - GOOGLE_MAIL_PASSWORD
+      - GOOGLE_USER
+      - GOOGLE_PASSWORD
+      - GITHUB_USER
+      - GITHUB_PASSWORD
+      - SNS_ACCESS_KEY
+      - SNS_SECRET_ACCESS_KEY
+      - SNS_ANDROID_ARN
+      - S3_ACCESS_KEY
+      - S3_SECRET_ACCESS_KEY
+      - S3_BUCKET
+      - GITHUB_CLIENT_ID
+      - GITHUB_CLIENT_SECRET
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+      - VIRTUAL_HOST=kapp.kalisio.xyz
+      - VIRTUAL_PORT=8081
+      - DB_URL=mongodb://mongodb:27017/kApp
   mongodb-kapp:
     container_name: mongodb-kapp
     image: mongo
