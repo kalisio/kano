@@ -17,9 +17,10 @@ notifications:
 before_install:
 - npm install -g quasar-cli
 install:
-- docker-compose -f docker-compose.yml -f docker-compose.tests.yml up
-- docker cp kapp:/opt/kapp/api/coverage/lcov.info .
+- docker-compose -f docker-compose.yml -f docker-compose.tests.yml up -d mongodb-kapp
+- docker-compose -f docker-compose.yml -f docker-compose.tests.yml up kapp
+- docker-compose down -v
 before_script:
 - npm install -g codeclimate-test-reporter
 after_script:
-- codeclimate-test-reporter < lcov.info
+- codeclimate-test-reporter < coverage/lcov.info
