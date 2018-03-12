@@ -17,8 +17,7 @@ notifications:
 before_install:
 - npm install -g quasar-cli
 install:
-- docker build -t kalisio/kapp .
-- docker run -p 8081:8081 --name kapp --env GOOGLE_MAIL_USER --env GOOGLE_MAIL_PASSWORD --env GOOGLE_USER --env GOOGLE_PASSWORD --env GITHUB_USER --env GITHUB_PASSWORD --env SNS_ACCESS_KEY --env SNS_SECRET_ACCESS_KEY --env SNS_ANDROID_ARN --env S3_ACCESS_KEY --env S3_SECRET_ACCESS_KEY --env S3_BUCKET --env GITHUB_CLIENT_ID --env GITHUB_CLIENT_SECRET --env GOOGLE_CLIENT_ID --env GOOGLE_CLIENT_SECRET --env DB_URL=mongodb://mongodb:27017/kApp kalisio/kapp npm t
+- docker-compose -f docker-compose.yml -f docker-compose.tests.yml up
 - docker cp kapp:/opt/kapp/api/coverage/lcov.info .
 before_script:
 - npm install -g codeclimate-test-reporter
