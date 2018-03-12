@@ -30,7 +30,8 @@
             "cordova-plugin-device": {},
             "cordova-plugin-sim": {},
             "cordova-plugin-android-permissions": {},
-            "cordova-plugin-inappbrowser": {}
+            "cordova-plugin-inappbrowser": {},
+            "uk.co.workingedge.phonegap.plugin.launchnavigator": {}
         },
         "platforms": [
             "android"
