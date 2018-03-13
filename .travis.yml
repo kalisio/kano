@@ -22,5 +22,6 @@ script:
 before_script:
 - npm install -g codeclimate-test-reporter
 after_script:
-- docker-compose down -v
 - codeclimate-test-reporter < coverage/lcov.info
+- docker-compose down -v
+
