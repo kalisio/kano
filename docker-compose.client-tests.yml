@@ -10,6 +10,10 @@ services:
     depends_on:
       - kapp
     environment:
+      - GOOGLE_USER
+      - GOOGLE_PASSWORD
+      - GITHUB_USER
+      - GITHUB_PASSWORD
       - NODE_ENV=production
       - APP_URL=172.17.0.1:8081
     volumes:
