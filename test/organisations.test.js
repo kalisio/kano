@@ -24,7 +24,7 @@ test
 .after(async test => await auth.doLogOut(test))
 
 test
-.before(async test => await auth.doLogIn(test, { password: newPassword }))
+.before(async test => await auth.doLogIn(test))
 ('Delete account', async test => {
   await account.doRemoveAccount(test)
 })
