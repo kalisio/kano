@@ -6,9 +6,13 @@ WORKDIR /opt/testcafe
 
 # Increase privileges otherwise we can't write
 USER root
-## Add missing modules for our tests to run
+
+# Add missing modules for our tests to run
 RUN npm install testcafe-vue-selectors
-# Create a symlink so that we use the testcafe project as if installed
+# Create a symlink so that we use the testcafe project as if installed in our test code
 RUN cd node_modules && ln -nsf ../ testcafe
+# Create a folder holding screenshots
+RUN mkdir screenshots
+
 # Reset privileges
 USER user
