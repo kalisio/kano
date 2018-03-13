@@ -11,8 +11,10 @@ export default class Account extends ApplicationLayout {
     // Profile Zone
     // FIXME: don't know why but VueSelector('k-tab-bar q-route-tab') does not work
     this.profile = Selector('.q-tab-label').nth(0)
+    this.avatarInput = VueSelector('k-account-activity k-attachment-field')
+    // The file input added by drop zone is actually hidden and replaced by dropzone GUI
+    this.fileInput = Selector('.dz-hidden-input', { visibilityCheck: false })
     this.nameInput = VueSelector('k-account-activity k-text-field')
-    this.phoneInput = VueSelector('k-account-activity k-phone-field')
     this.updateProfile = VueSelector('k-account-activity').find('#apply-button')
     // Security Zone
     this.security = Selector('.q-tab-label').nth(1)
@@ -28,8 +30,8 @@ export default class Account extends ApplicationLayout {
     // Danger Zone
     this.dz = Selector('.q-tab-label').nth(2)
     this.deleteAccount = VueSelector('k-account-dz k-block q-btn')
-    this.confirmAccountName = Selector('.modal, input[type=text]')
-    this.confirmDeleteAccount = Selector('.modal button').nth(0)
+    this.confirmAccountName = Selector('.modal input[type=text]')
+    this.confirmDeleteAccount = Selector('.modal-buttons button').nth(0)
   }
   async doEditProfile (test, profile) {
     await this.openMenu(test)
@@ -37,8 +39,9 @@ export default class Account extends ApplicationLayout {
     await test
       .click(this.identity) // Ensure identity activity is open
       .click(this.profile)
+      .click(this.avatarInput)
+      .setFilesToUpload(this.fileInput, profile.avatar)
       .typeText(this.nameInput, profile.name, { replace: true })
-      .typeText(this.phoneInput, profile.phone, { replace: true })
       .click(this.updateProfile)
       // Need this so that we are sure request is finished
       .wait(5000)

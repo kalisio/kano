@@ -18,14 +18,14 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ 
-      iff(hook => !hook.result.sponsor, notifyHooks.sendVerificationEmail), 
-      notifyHooks.removeVerification, 
-      iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation) 
+    create: [
+      iff(hook => !hook.result.sponsor, notifyHooks.sendVerificationEmail),
+      notifyHooks.removeVerification,
+      iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation)
     ],
     update: [],
     patch: [],
-    remove: [ 
+    remove: [
       iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
       notifyHooks.unregisterDevices,
       coreHooks.updateTags

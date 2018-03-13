@@ -22,6 +22,7 @@ services:
       - VIRTUAL_HOST=kapp.kalisio.xyz
       - VIRTUAL_PORT=8081
       - DB_URL=mongodb://mongodb:27017/kApp
+    working_dir: /opt/kapp
     volumes:
-      - ./coverage:/opt/kapp/api/coverage
-    command: [ "npm", "run", "test" ]
+      - ./server-coverage:/opt/kapp/api/coverage
+    command: [ "npm", "run", "test:server" ]

@@ -17,11 +17,11 @@ module.exports = {
     find: [],
     get: [],
     create: [ notifyHooks.createTopic,
-              teamHooks.createGroupAuthorisations ],
+      teamHooks.createGroupAuthorisations ],
     update: [],
     patch: [],
     remove: [ teamHooks.removeGroupAuthorisations,
-              notifyHooks.removeTopic ]
+      notifyHooks.removeTopic ]
   },
 
   error: {

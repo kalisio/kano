@@ -20,7 +20,7 @@ export default class Authentication extends ApplicationLayout {
     this.loginLocal = Selector('#local')
     // Logout
     this.logoutScreen = VueSelector('k-logout k-screen')
-    this.logout = VueSelector('k-links-panel').find('.q-item-label').withText('Logout')
+    this.logout = VueSelector('k-links-panel').find('.q-item-icon').withText('exit_to_app')
     // Register
     this.registerScreen = VueSelector('k-register k-screen')
     this.registerNameInput = VueSelector('k-register k-text-field')
@@ -52,6 +52,8 @@ export default class Authentication extends ApplicationLayout {
     await this.openMenu(test)
     await test
       .click(this.logout)
+      // Need this so that we are sure the page has been loaded
+      .wait(2000)
   }
   async doRegister (test, identity = {}) {
     await test

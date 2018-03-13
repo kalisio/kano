@@ -40,9 +40,9 @@
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
     "lint": "eslint --ext .js,.vue src/",
-    "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
+    "cafe": "testcafe chrome test/*.test.js -f Basic -S -s screenshots",
     "test:server": "cd api && npm run test",
-    "test:client": "npm run lint && npm run build && testcafe chrome test/*.test.js --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
+    "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
   },
   "dependencies": {
@@ -54,6 +54,7 @@
     "babel-runtime": "^6.25.0",
     "casl": "^1.0.2",
     "cesium": "^1.38.0",
+    "cross-env": "^5.1.4",
     "fastclick": "^1.0.6",
     "feathers-authentication-management": "^1.0.0",
     "feathers-client": "^2.2.0",
@@ -73,6 +74,7 @@
     "lodash": "^4.17.4",
     "loglevel": "^1.6.0",
     "material-design-icons": "^3.0.1",
+    "npm-run-all": "^4.1.2",
     "password-generator": "^2.2.0",
     "quasar-extras": "0.0.8",
     "quasar-framework": "0.14.7",

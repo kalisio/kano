@@ -1,3 +1,4 @@
+import path from 'path'
 // Page models
 import * as pages from './page-models'
 
@@ -20,7 +21,7 @@ test.page `${pages.getUrl('register')}`
 test
 .before(async test => await auth.doLogIn(test))
 ('Edit profile', async test => {
-  await account.doEditProfile(test, { name: 'toto', phone: '0123456789' })
+  await account.doEditProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/kalisio-logo.png') })
 
   const identityPanel = await account.identityPanel.getVue()
   // We should have at least a changed user name
