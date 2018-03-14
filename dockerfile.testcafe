@@ -13,6 +13,7 @@ RUN npm install testcafe-vue-selectors
 RUN cd node_modules && ln -nsf ../ testcafe
 # Create a folder holding screenshots
 RUN mkdir screenshots
+RUN chown user screenshots
 
 # Reset privileges
 USER user

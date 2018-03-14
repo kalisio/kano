@@ -32,3 +32,8 @@ export const checkNoClientError = async (test) => {
 	const { error } = await test.getBrowserConsoleMessages()
   await test.expect(error[0]).notOk()
 }
+// Mock Geolocation API that does not work well in headless browsers
+// See https://github.com/DevExpress/testcafe/issues/1991
+export const mockLocationAPI =  ClientFunction(() => {
+	navigator.geolocation.getCurrentPosition = callback =>  callback({ coords: { latitude: 43.2996151, longitude: 1.9287062, }, timestamp: Date.now() });
+})

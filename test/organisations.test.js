@@ -4,8 +4,10 @@ import * as pages from './page-models'
 fixture `Organisations`// declare the fixture
   .page `${pages.getUrl()}`  // specify the start page
   .afterEach(pages.checkNoClientError)  // check for console error messages
+  .beforeEach(async test => await pages.mockLocationAPI()) // mock geolocation
 
 const auth = new pages.Authentication()
+const account = new pages.Account()
 const organisations = new pages.Organisations()
 
 test.page `${pages.getUrl('register')}`
@@ -26,5 +28,5 @@ test
 test
 .before(async test => await auth.doLogIn(test))
 ('Delete account', async test => {
-  await account.doRemoveAccount(test)
+  await account.doRemoveAccount(test, 'Kalisio')
 })
