@@ -40,7 +40,8 @@
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
     "lint": "eslint --ext .js,.vue src/",
-    "cafe": "testcafe chrome test/*.test.js -f Basic -S -s screenshots",
+    "benchmark": "node ./benchmark",
+    "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
@@ -102,6 +103,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "colors": "^1.1.2",
+    "commander": "^2.15.0",
     "config": "^1.26.1",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.28.0",
@@ -141,6 +143,8 @@
     "webpack-bundle-analyzer": "^2.9.2",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "winston": "^2.4.1",
+    "worker-farm": "^1.6.0"
   }
 }
