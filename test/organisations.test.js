@@ -3,8 +3,16 @@ import * as pages from './page-models'
 
 fixture `Organisations`// declare the fixture
   .page `${pages.getUrl()}`  // specify the start page
-  .afterEach(pages.checkNoClientError)  // check for console error messages
-  .beforeEach(async test => await pages.mockLocationAPI()) // mock geolocation
+  // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
+  // so implement one in your test if you'd like another behaviour
+  .beforeEach(async test => {
+    // mock geolocation
+    await pages.mockLocationAPI()
+  })
+  .afterEach(async test => {
+    // check for console error messages
+    await pages.checkNoClientError(test) 
+  })
 
 const auth = new pages.Authentication()
 const account = new pages.Account()
@@ -15,18 +23,15 @@ test.page `${pages.getUrl('register')}`
   await auth.doRegister(test)
 })
 
-test
-.before(async test => await auth.doLogIn(test))
-('Default organisation', async test => {
+test('Default organisation', async test => {
+	await auth.doLogIn(test)
   const orgPanel = await organisations.orgPanel.getVue()
 
   // We should have at least a private org
   await test.expect(orgPanel.state.items.length).eql(1, 'Private organisation should be created')
 })
-.after(async test => await auth.doLogOut(test))
 
-test
-.before(async test => await auth.doLogIn(test))
-('Delete account', async test => {
+test('Delete account', async test => {
+	await auth.doLogIn(test)
   await account.doRemoveAccount(test, 'Kalisio')
 })

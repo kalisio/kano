@@ -3,8 +3,16 @@ import * as pages from './page-models'
 
 fixture `Authentication`// declare the fixture
   .page `${pages.getUrl()}`  // specify the start page
-  .afterEach(pages.checkNoClientError)  // check for console error messages
-  .beforeEach(async test => await pages.mockLocationAPI()) // mock geolocation
+  // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
+  // so implement one in your test if you'd like another behaviour
+  .beforeEach(async test => {
+    // mock geolocation
+    await pages.mockLocationAPI()
+  })
+  .afterEach(async test => {
+    // check for console error messages
+    await pages.checkNoClientError(test) 
+  })
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()

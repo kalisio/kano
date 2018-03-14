@@ -4,8 +4,16 @@ import * as pages from './page-models'
 
 fixture `Account`// declare the fixture
   .page `${pages.getUrl()}`  // specify the start page
-  .afterEach(pages.checkNoClientError)  // check for console error messages
-  .beforeEach(async test => await pages.mockLocationAPI()) // mock geolocation
+  // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
+  // so implement one in your test if you'd like another behaviour
+  .beforeEach(async test => {
+    // mock geolocation
+    await pages.mockLocationAPI()
+  })
+  .afterEach(async test => {
+    // check for console error messages
+    await pages.checkNoClientError(test) 
+  })
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
@@ -19,20 +27,17 @@ test.page `${pages.getUrl('register')}`
   await auth.doRegister(test)
 })
 
-test
-.before(async test => await auth.doLogIn(test))
-('Edit profile', async test => {
+test('Edit profile', async test => {
+  await auth.doLogIn(test)
   await account.doEditProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/kalisio-logo.png') })
 
   const identityPanel = await account.identityPanel.getVue()
   // We should have at least a changed user name
   await test.expect(identityPanel.state.name).eql('toto', 'User name should be changed')
 })
-.after(async test => await auth.doLogOut(test))
 
-test
-.before(async test => await auth.doLogIn(test))
-('Edit password', async test => {
+test('Edit password', async test => {
+  await auth.doLogIn(test)
   await account.doUpdatePassword(test, { password: 'kalisio', newPassword })
   await pages.goBack()
   await auth.doLogOut(test)
@@ -40,11 +45,9 @@ test
   await test.navigateTo(pages.getUrl('login'))
   await auth.doLogIn(test, { password: newPassword })
 })
-.after(async test => await auth.doLogOut(test))
 
-test
-.before(async test => await auth.doLogIn(test, { password: newPassword }))
-('Edit email', async test => {
+test('Edit email', async test => {
+  await auth.doLogIn(test, { password: newPassword })
   await account.doUpdateEmail(test, { password: newPassword, newEmail })
   await pages.goBack()
   await auth.doLogOut(test)
@@ -55,9 +58,8 @@ test
   // FIXME: how could we validate the change ?
 })
 
-test
-.before(async test => await auth.doLogIn(test, { password: newPassword }))
-('Delete account', async test => {
+test('Delete account', async test => {
+  await auth.doLogIn(test, { password: newPassword })
   await account.doRemoveAccount(test, 'toto')
 
   let screen = await auth.logoutScreen.getVue()
@@ -68,4 +70,3 @@ test
   await auth.doLogIn(test, { password: newPassword })
   await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
-
