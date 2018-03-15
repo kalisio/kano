@@ -5,23 +5,24 @@ const feathersHooks = require('feathers-hooks')
 const util = require('util')
 const randomScenario = require('./scenarios')
 
+const level = process.env.LOG_LEVEL || 'info'
+const logger = new winston.Logger({ level, transports: [ new winston.transports.Console({ colorize: true }) ] })
+
 async function connectClient(url, id) {
   const start = process.hrtime()
+  // Configure our client (hooks, auth, connection)
   let client = feathers()
   client.data = { id, durations: { } }
   client.configure(feathersHooks())
-  let socket = io(url, {
-    transports: ['websocket'],
-    path: '/apiws'
-  })
+  let socket = io(url, { transports: ['websocket'], path: '/apiws' })
   client.configure(feathers.socketio(socket, { timeout: 10000 }))
-  client.configure(feathers.authentication({
-    path: '/api/authentication'
-  }))
+  client.configure(feathers.authentication({ path: '/api/authentication' }))
+  // Helper to store the duration of a particular operation giving its start time
   client.setDuration = function (key, start) {
     const end = process.hrtime()
     client.data.durations[key] = (end[0] + end[1] / 1000000000) - (start[0] + start[1] / 1000000000)
   }
+  // Helper to make the client wait simulating a "human"
   client.wait = async function (duration) {
     await util.promisify(setTimeout)(duration)
   }
@@ -36,7 +37,8 @@ async function authenticateClient(client) {
     email: 'kalisio@kalisio.xyz',
     password: 'kalisio'
   })
-  winston.verbose('Authenticated new client ' + client.data.id)
+  logger.verbose('Authenticated new client ' + client.data.id)
+  // We always need to get the user after authenticating
   const payload = await client.passport.verifyJWT(response.accessToken)
   client.data.user = await client.service('/api/users').get(payload.userId)
   client.setDuration('authenticate', start)
@@ -46,28 +48,37 @@ async function authenticateClient(client) {
 async function disconnectClient(client) {
   const start = process.hrtime()
   await client.logout()
+  logger.verbose('Closed client ' + client.data.id)
   client.setDuration('disconnect', start)
 }
 
 module.exports = async function (options, callback) {
-  const { id, nbScenarios, pause } = options
+  const { url, level, index, nbScenarios, rampUp, rampDown } = options
   try {
-    // We don't start all clients at the same time to avoid overflow
-    // but let them start continuously during the pause phase
-    await util.promisify(setTimeout)(Math.random() * pause)
-    winston.verbose('Initiating client ' + id)
-    let client = await connectClient('http://localhost:8081', id)
+    logger.verbose('Initiating client ' + index)
+    // We don't start all clients at the same time to avoid overflowing,
+    // let them start continuously during the ramp up duration
+    if (rampUp) {
+      const pause = Math.random() * 1000 * rampUp
+      logger.verbose('Pausing client ' + index + ' for ' + pause)
+      await util.promisify(setTimeout)(pause)
+    }
+    let client = await connectClient(url, index)
     await authenticateClient(client)
-    // Play random scenarios
-    for (var i = 0; i < nbScenarios; i++) {
-      const scenario = randomScenario()
-      winston.verbose('Running scenario ' + scenario + ' on client ' + id)
-      await require('./scenarios/' + scenario)(client)
-      winston.verbose('Pausing client ' + id)
+    // During the ramp down phase create "dummy" clients exiting randomly
+    if (rampDown) {
+      const pause = Math.random() * 1000 * rampDown
+      logger.verbose('Pausing client ' + index + ' for ' + pause)
       await client.wait(pause)
+    } else {
+      // Play random scenarios
+      for (var i = 0; i < nbScenarios; i++) {
+        const scenario = randomScenario()
+        logger.verbose('Running scenario ' + scenario + ' on client ' + index)
+        await require('./scenarios/' + scenario)(client, logger)
+      }
     }
     await disconnectClient(client)
-    winston.verbose('Closing client ' + id)
     callback(null, client.data)
   } catch (error) {
     callback(error)
