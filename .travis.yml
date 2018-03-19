@@ -28,7 +28,14 @@ jobs:
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
     - docker-compose build
     - docker push kalisio/kapp
-    
+    deploy:
+      provider: s3
+      access_key_id: "$S3_ACCESS_KEY"
+      secret_access_key: "$S3_SECRET_ACCESS_KEY"
+      bucket: kapp-builds
+      local_dir: dist
+      upload_dir: "$TRAVIS_BUILD_NUMBER"
+
   - stage: TEST
     language: node_js
     node_js:
