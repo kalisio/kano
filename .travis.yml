@@ -20,9 +20,6 @@ jobs:
     - '8'
     services:
     - docker
-    addons:
-      code_climate:
-        repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
     install: true #skip default installation
     script:
     - docker-compose -f docker-compose.yml up -d
@@ -44,6 +41,9 @@ jobs:
     - '8'
     services:
     - docker
+    addons:
+      code_climate:
+        repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
     install:
     - docker pull kalisio/kapp
     script:
