@@ -30,14 +30,14 @@ jobs:
     #- docker push kalisio/kapp
     - docker pull kalisio/kapp
     - docker-compose -f docker-compose.yml up -d
-    - docker cp kapp:/opt/kapp/dist build
-    - ls -al build
+    - docker cp kapp:/opt/kapp/dist dist
+    - ls -al dist
     deploy:
       provider: s3
       access_key_id: "$S3_ACCESS_KEY"
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
       bucket: kapp-builds
-      local_dir: build
+      local_dir: dist
       upload_dir: "$TRAVIS_BUILD_NUMBER"
 
   - stage: TEST
