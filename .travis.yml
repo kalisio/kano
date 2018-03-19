@@ -33,6 +33,7 @@ jobs:
     - docker cp kapp:/opt/kapp/dist dist
     - ls -al dist
     deploy:
+      skip_cleanup: true
       provider: s3
       access_key_id: "$S3_ACCESS_KEY"
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
