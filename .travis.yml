@@ -15,6 +15,7 @@ jobs:
     addons:
       code_climate:
         repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
+    install: true
     script:
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
     - docker-compose build
