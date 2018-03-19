@@ -25,19 +25,16 @@ jobs:
         repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
     install: true #skip default installation
     script:
-    #- docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-    #- docker-compose build
-    #- docker push kalisio/kapp
-    - docker pull kalisio/kapp
     - docker-compose -f docker-compose.yml up -d
     - docker cp kapp:/opt/kapp/dist dist
-    - ls -al dist
+    - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
+    - docker push kalisio/kapp
     deploy:
       skip_cleanup: true
       provider: s3
       access_key_id: "$S3_ACCESS_KEY"
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kapp-builds
+      bucket: kapp-build
       local_dir: dist
       upload_dir: "$TRAVIS_BUILD_NUMBER"
 
