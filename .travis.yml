@@ -15,11 +15,18 @@ jobs:
     addons:
       code_climate:
         repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
-    install: true
+    install: true #skip default installation
     script:
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
     - docker-compose build
     - docker push kalisio/kapp
+    notifications:
+      email: false
+      slack:
+        rooms:
+          secure: E2WCIbmn7S32BRfTODPI8y3p/cyQSmC3M3PFKdJARshoYsuArxuliHa57R4feIderPpbZnAiGv7WLWuL32rSR2nxZnv6KL9syrUhDct/Ak2RTNT8hTY0VeF17tK3fvQ+U2N65InVB6oHucW1PzFTPGKF8GYgarBATGNRuX/MQ0c2wnkXV8VFGTUNu39v1Z0ZcFEVLa2G/avIplPnPQykkxPA3Hoc0o/mBhDq5AStzPoAHQFWfnYzDJE/UGlqTl8j8D2F2iWlB5zDXlb9NoBHR+4YfAEsAyEuXC32ONhdw1KwuQfioZ9Y58fUQ8XC3COVRsvlFpZswzKdcqA9MUsX46mZZGjerQZPth2VNAHD26BxO3rvMFWAy32vlc3q78DVHz5VEteiD5KBWVYec7AU2gU3hE3s89v9YXOcMjPBOfzBwbSiyuz8wNeu+IUUH6mY0nuMEUHUFP9TnbspzDCcVHIqbSwcVsYVh+4YeAFKJ1FJh0TzXPLIHIF5PhjK6XsDvLS/frYKWQyfsKv/R4ciSI0XA4ZfYKaVqu+O2zoZUlWsPxF3TBJyjpCE9JpViMmVpyQ9G8VQLlsZVMuDKmRaHjzoBm6tG3F5yetNH8CD4855VH6PuuHgICsOl/IeZ1v9HtaWyjtok4Rf84yfDKEl0JZRQaUZ/rlIRdjhZ43twTI=
+        on_success: always
+        on_failure: always 
     
   - stage: TEST
     language: node_js
@@ -27,6 +34,7 @@ jobs:
     - '8'
     services:
     - docker
+    install: true #skip default installation
     script:
     - docker-compose -f docker-compose.yml up -d mongodb-kapp
     - docker-compose -f docker-compose.yml -f docker-compose.server-tests.yml up kapp
