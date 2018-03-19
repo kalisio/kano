@@ -29,7 +29,8 @@ jobs:
     - docker-compose build
     - docker push kalisio/kapp
     - docker-compose -f docker-compose.yml up -d
-    - docker cp kapp:/opt/kapp/dist kapp
+    - docker cp kapp:/opt/kapp kapp
+    - ls
     deploy:
       provider: s3
       access_key_id: "$S3_ACCESS_KEY"
