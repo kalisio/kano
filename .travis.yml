@@ -51,9 +51,9 @@ jobs:
     - docker-compose -f docker-compose.yml -f docker-compose.server-tests.yml up kapp
     - docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up -d kapp
     - docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up testcafe
+    - codeclimate-test-reporter < server-coverage/lcov.info
     before_script:
     - npm install -g codeclimate-test-reporter
     after_script:
-    - codeclimate-test-reporter < server-coverage/lcov.info
     - docker-compose down -v
 
