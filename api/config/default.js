@@ -11,7 +11,7 @@ module.exports = {
   // https://github.com/chimurai/http-proxy-middleware
   proxyTable: {},
 
-  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort : 'http://www.kalisio.xyz'),
+  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort : 'https://kapp.kalisio.xyz'),
   host: 'localhost',
   port: process.env.PORT || 8081,
   /* To enable HTTPS
