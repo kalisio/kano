@@ -75,8 +75,8 @@ jobs:
     install:
     - pip install --user awscli
     - gem install fastlane
-    script:
     - yarn install
+    script:
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER cordova/www
     - npm run cordova:init:android
     - npm run cordova:build:release
