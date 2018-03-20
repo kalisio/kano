@@ -71,7 +71,7 @@ jobs:
     - nvm install 8
     - yes | sdkmanager "platforms;android-27"
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
-    - tar xvf secrets.tar -C ./cordova
+    - tar xvf secrets.tar
     install:
     - pip install --user awscli
     - gem install fastlane
