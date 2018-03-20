@@ -53,17 +53,17 @@ module.exports = {
     github: {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : '/auth/github/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
-      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : '/#/login') +
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : 'https://kapp.kalisio.xyz/auth/github/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : 'https://kapp.kalisio.xyz/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : 'https://kapp.kalisio.xyz/#/login') +
         '?error_message=An error occured while authenticating with GitHub, check you correctly authorized the application and have a valid public email in your profile'
     },
     google: {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : '/auth/google/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : '/'),
-      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : '/#/login') +
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : 'https://kapp.kalisio.xyz/auth/google/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : 'https://kapp.kalisio.xyz/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : 'https://kapp.kalisio.xyz/#/login') +
         '?error_message=An error occured while authenticating with Google, check you correctly authorized the application and have a valid public email in your profile',
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
     },
