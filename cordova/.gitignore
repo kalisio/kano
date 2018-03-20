@@ -30,3 +30,11 @@ node_modules
 www
 platforms
 plugins
+
+# Secret files
+google-services.json
+google-play.json
+build.json
+kalisio.keystore
+
+
