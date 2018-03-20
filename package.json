@@ -20,7 +20,7 @@
     "url": "https://github.com/kalisio/kApp/issues"
   },
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "publish": "git push origin --tags && npm run changelog && git push origin",
     "release:patch": "cd api && npm run release:patch && cd .. && npm version --force patch && npm run publish",
     "release:minor": "cd api && npm run release:minor && cd .. && npm version --force minor && npm run publish",
@@ -30,8 +30,10 @@
     "dev": "node build/script.dev.js",
     "prod": "cd api && npm run prod",
     "build": "node build/script.build.js",
+    "cordova:init:android": "cd cordova && cordova platform add android && cd ..",
+    "cordova:init:ios": "cd cordova && cordova platform add ios && cd ..",
     "cordova:build:debug": "npm run build && cd cordova && cordova build --debug && cd ..",
-    "cordova:build:release": "npm run build && cd cordova && cordova build --release && cd ..",
+    "cordova:build:release": "cd cordova && cordova build --release && cd ..",
     "cordova:build": "npm run cordova:build:debug && npm run cordova:build:release",
     "cordova:dev": "cd cordova && cordova run --debug && cd ..",
     "cordova:prod": "cd cordova && cordova run --release && cd ..",
@@ -107,6 +109,7 @@
     "commander": "^2.15.0",
     "config": "^1.26.1",
     "connect-history-api-fallback": "^1.1.0",
+    "cordova": "^8.0.0",
     "css-loader": "^0.28.0",
     "es6-promise": "^4.1.1",
     "eslint": "^4.4.1",

@@ -74,14 +74,13 @@ jobs:
     - tar xvf secrets.tar -C ./cordova
     install:
     - pip install --user awscli
-    - npm install -g cordova
     - gem install fastlane
     script:
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER www
-    - cd cordova
-    - cordova platform add android
-    - cordova build --release
-    - fastlane deploy
+    - yarn install
+    - npm run cordova:init:android
+    - npm run cordova:build:release
+
     
 
 
