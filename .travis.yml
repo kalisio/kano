@@ -6,11 +6,6 @@ notifications:
     on_success: always
     on_failure: always 
      
-stages:
- - BUILD
- - ANDROID
- - TEST
- 
 jobs:
   include:
   - stage: BUILD
@@ -21,11 +16,10 @@ jobs:
     - docker
     install: true #skip default installation
     script:
-    - docker pull kalisio/kapp
     - docker-compose -f docker-compose.yml up -d
     - docker cp kapp:/opt/kapp/dist dist
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-    #- docker push kalisio/kapp
+    - docker push kalisio/kapp
     deploy:
       skip_cleanup: true
       provider: s3
