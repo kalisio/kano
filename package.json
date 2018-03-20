@@ -35,7 +35,7 @@
     "cordova:build:debug": "npm run build && cd cordova && cordova build --debug && cd ..",
     "cordova:build:release": "cd cordova && cordova build --release && cd ..",
     "cordova:build": "npm run cordova:build:debug && npm run cordova:build:release",
-    "cordova:deploy:android": "npm run cordova:init:android && npm run cordova:build:release && cd cordova && fastlane deploy && cd ..",
+    "cordova:supply:android": "npm run cordova:init:android && npm run cordova:build:release && cd cordova && fastlane deploy && cd ..",
     "cordova:dev": "cd cordova && cordova run --debug && cd ..",
     "cordova:prod": "cd cordova && cordova run --release && cd ..",
     "cordova": "npm run cordova:dev",
