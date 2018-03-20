@@ -50,6 +50,15 @@ jobs:
     - npm install -g codeclimate-test-reporter
     after_script:
     - docker-compose down -v
+    before_deploy:
+      - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
+      - tar xvf secrets.tar
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: bash deploy.travis.sh
+      on:
+        branch: master
     
   - stage: ANDROID
     language: android

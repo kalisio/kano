@@ -72,3 +72,4 @@ screenshots
 secrets.tar
 # SSH key
 ssh.pem
+kApp.env.sh
