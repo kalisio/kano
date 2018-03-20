@@ -72,8 +72,8 @@ jobs:
     - yarn install
     script:
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER cordova/www
-    - npm run cordova:init:android
-    - npm run cordova:build:release
+    - npm run cordova:deploy:android
+
 
     
 
