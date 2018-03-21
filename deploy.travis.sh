@@ -2,7 +2,7 @@
 eval "$(ssh-agent -s)"
 chmod 600 ssh.pem
 ssh-add ssh.pem
-ssh ${SSH_USER}@${SSH_REMOTE} mkdir -p kApp
+ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_REMOTE} mkdir -p kApp
 scp docker-compose.yml ${SSH_USER}@${SSH_REMOTE}:~/kApp/docker-compose.yml
 scp docker-compose.deploy.yml ${SSH_USER}@${SSH_REMOTE}:~/kApp/docker-compose.deploy.yml
 scp kApp.env.sh ${SSH_USER}@${SSH_REMOTE}:~/kApp/kApp.env.sh
