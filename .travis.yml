@@ -8,14 +8,10 @@ notifications:
 
 stages:  
   - name: BUILD
-    if: (NOT env(SKIP_BUILD) IS present)
   - name: TEST
-    if: (NOT env(SKIP_TEST) IS present)
   - name: DEPLOY
-    if: (NOT env(SKIP_DEPLOY) IS present)
   - name: ANDROID
-    if: (NOT env(SKIP_ANDROID) IS present)
-
+  
 jobs:
   include:
   - stage: BUILD
