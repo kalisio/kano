@@ -8,13 +8,13 @@ notifications:
 
 stages:  
   - name: BUILD
-    if: NOT (env(SKIP_BUILD) IS present)
+    if: (NOT env(SKIP_BUILD) IS present)
   - name: TEST
-    if: NOT (env(SKIP_TEST) IS present)
+    if: (NOT env(SKIP_TEST) IS present)
   - name: DEPLOY
-    if: NOT (env(SKIP_DEPLOY) IS present)
+    if: (NOT env(SKIP_DEPLOY) IS present)
   - name: ANDROID
-    if: NOT (env(SKIP_ANDROID) IS present)
+    if: (NOT env(SKIP_ANDROID) IS present)
 
 jobs:
   include:
@@ -26,7 +26,8 @@ jobs:
     - docker
     install: true #skip default installation
     script:
-    - docker pull kalisio/kapp
+    # If you'd like to simply pull existing version instead of really build it
+    #- docker pull kalisio/kapp
     - docker-compose -f docker-compose.yml up -d
     - docker cp kapp:/opt/kapp/dist dist
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
