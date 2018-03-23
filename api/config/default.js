@@ -1,6 +1,7 @@
 var path = require('path')
 var containerized = require('containerized')()
 
+const domain = 'https://kapp.kalisio.xyz'
 // Required to know webpack port so that in dev we can build correct URLs
 var clientPort = process.env.CLIENT_PORT || 8080
 var API_PREFIX = '/api'
@@ -11,7 +12,7 @@ module.exports = {
   // https://github.com/chimurai/http-proxy-middleware
   proxyTable: {},
 
-  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort : 'https://kapp.kalisio.xyz'),
+  domain: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort : domain),
   host: 'localhost',
   port: process.env.PORT || 8081,
   /* To enable HTTPS
@@ -53,17 +54,17 @@ module.exports = {
     github: {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : 'https://kapp.kalisio.xyz/auth/github/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : 'https://kapp.kalisio.xyz/'),
-      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : 'https://kapp.kalisio.xyz/#/login') +
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/github/callback' : domain + '/auth/github/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : domain + '/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : domain + '/#/login') +
         '?error_message=An error occured while authenticating with GitHub, check you correctly authorized the application and have a valid public email in your profile'
     },
     google: {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : 'https://kapp.kalisio.xyz/auth/google/callback'),
-      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : 'https://kapp.kalisio.xyz/'),
-      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : 'https://kapp.kalisio.xyz/#/login') +
+      callbackURL: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/auth/google/callback' : domain + '/auth/google/callback'),
+      successRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/' : domain + '/'),
+      failureRedirect: (process.env.NODE_ENV === 'development' ? 'http://localhost:' + clientPort + '/#/login' : domain + '/#/login') +
         '?error_message=An error occured while authenticating with Google, check you correctly authorized the application and have a valid public email in your profile',
       scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
     },

@@ -1,19 +1,19 @@
+const domain = 'https://kapp.kalisio.xyz'
+const website = 'https://www.kalisio.com'
+
 module.exports = {
   // Special alias to host loopback interface in cordova
   //domain: 'http://10.0.2.2:8081',
   // If using port forwarding
   //domain: 'http://localhost:8081',
   // If using local IP on WiFi router
-  domain: 'http://192.168.1.16:8081',
+  //domain: 'http://192.168.1.16:8081',
+  domain,
   apiPath: '/api',
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'kApp',
   appLogo: 'kalisio-logo.png',
-  publisher: {
-    name: 'Kalisio',
-    website: 'https://www.kalisio.xyz',
-    contact: 'support@kalisio.xyz'
-  },
+  publisher: 'Kalisio',
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
@@ -24,9 +24,9 @@ module.exports = {
   },
   screen: {
     footer: [
-      { label: 'screen.ABOUT_KALISIO', url: 'https://www.kalisio.xyz' },
-      { label: 'screen.CONTACT', url: 'https://www.kalisio.xyz/contact' },
-      { label: 'screen.TERMS_AND_POLICIES', url: 'https://www.kalisio.xyz/terms' },
+      { label: 'screen.ABOUT_KALISIO', url: website },
+      { label: 'screen.CONTACT', url: website + '/contact' },
+      { label: 'screen.TERMS_AND_POLICIES', url: website + '/terms' },
     ],
     header: 'kalisio-banner.png'
   },
