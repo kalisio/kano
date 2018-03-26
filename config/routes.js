@@ -81,8 +81,8 @@ module.exports = {
                 children: {
                   'invite': { name: 'invite-member', component: 'KInviteMember', props: true },
                   'add': { name: 'add-member', component: 'KAddMember', props: true },
-                  ':id/tag': { name: 'tag-member', component: 'editor/KModalEditor', props: true },
-                  ':id/join-group': { name: 'join-group', component: 'KJoinGroup', props: true }
+                  ':objectId/tag': { name: 'tag-member', component: 'editor/KModalEditor', props: true },
+                  ':objectId/join-group': { name: 'join-group', component: 'KJoinGroup', props: true }
                 }
               },
               'groups': {
@@ -91,7 +91,7 @@ module.exports = {
                 props: true,
                 children: {
                   'create': { name: 'create-group', component: 'editor/KModalEditor', props: true },
-                  'edit/:id': { name: 'edit-group', component: 'editor/KModalEditor', props: true }
+                  'edit/:objectId': { name: 'edit-group', component: 'editor/KModalEditor', props: true }
                 }
               },
               'events': {
@@ -100,10 +100,10 @@ module.exports = {
                 props: true,
                 children: {
                   'create/:templateId': { name: 'create-event', component: 'KEventEditor', props: true },
-                  'edit/:id': { name: 'edit-event', component: 'KEventEditor', props: true },
+                  'edit/:objectId': { name: 'edit-event', component: 'KEventEditor', props: true },
                 }
               },
-              'events/:id': {
+              'events/:objectId': {
                 name: 'event-activity',
                 component: 'KEventActivity',
                 props: true,
@@ -117,7 +117,7 @@ module.exports = {
                 props: true,
                 children: {
                   'create/:templateId?': { name: 'create-event-template', component: 'KEventTemplateEditor', props: true },
-                  'edit/:id/:perspective?': { name: 'edit-event-template', component: 'KEventTemplateEditor', props: true }
+                  'edit/:obejctId/:perspective?': { name: 'edit-event-template', component: 'KEventTemplateEditor', props: true }
                 }
               },
               ':perspective': {
