@@ -1,3 +1,4 @@
+import { hooks as coreHooks } from 'kCore'
 import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
 import { hooks as eventHooks } from 'kEvent'
@@ -23,7 +24,8 @@ module.exports = {
       teamHooks.createOrganisationAuthorisations ],
     update: [],
     patch: [],
-    remove: [ teamHooks.removeOrganisationAuthorisations,
+    remove: [ coreHooks.setAsDeleted,
+      teamHooks.removeOrganisationAuthorisations,
       notifyHooks.removeTopic,
       eventHooks.removeOrganisationServices,
       teamHooks.removeOrganisationServices ]
