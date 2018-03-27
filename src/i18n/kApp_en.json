@@ -7,5 +7,10 @@
   "sideNav": {
     "DASHBOARD": "Tableau de bord",
     "LOGOUT": "Se déconnecter"
+  },
+  "Context": {
+    "EVENTS": "Events & templates",
+    "MEMBERS": "Members & groups",
+    "SETTINGS": "Settings"
   }
 }

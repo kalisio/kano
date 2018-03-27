@@ -14,15 +14,13 @@ export default {
     getActionsForContext (context) {
       let actions = { toolbar: [], menu: [] }
       if (this.$can('service', 'events', context._id)) {
-        actions.toolbar.push({ icon: 'whatshot', route: { name: 'events-activity', params: { operation: 'current-events', contextId: context._id } } })
-        // actions.toolbar.push({ scope: 'toolbar', icon: 'map', route: { name: 'map', params: { contextId: context._id } } })
-        // actions.push({ icon: 'terrain', route: { name: 'globe', params: { contextId: context._id } } })
+        actions.toolbar.push({ name: 'events', icon: 'whatshot', label: this.$t('Context.EVENTS'), route: { name: 'events-activity', params: { operation: 'current-events', contextId: context._id } } })
       }
       if (this.$can('service', 'members', context._id)) {
-        actions.toolbar.push({ icon: 'group', label: 'Members & groups', route: { name: 'members-activity', params: { contextId: context._id } } })
+        actions.toolbar.push({ name: 'members', icon: 'group', label: this.$t('Context.MEMBERS'), route: { name: 'members-activity', params: { contextId: context._id } } })
       }
       if (this.$can('update', 'organisations', context._id, { _id: context._id })) {
-        actions.menu.push({ icon: 'settings', label: 'Settings', route: { name: 'settings-activity', params: { perspective: 'properties', contextId: context._id } } })
+        actions.menu.push({ name: 'settings', icon: 'settings', label: this.$t('Context.SETTINGS'), route: { name: 'settings-activity', params: { perspective: 'properties', contextId: context._id } } })
       }
       return actions
     }
