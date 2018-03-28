@@ -65,9 +65,15 @@ export default {
       Events.$emit('error', hook.error)
     })
     Events.$on('error', error => {
-      // When trying to access an unauthorized resource redirect to home
+      // When trying to access an unauthorized resource redirect to home ?
+      /*
       if (error.code === 403) {
         this.$router.push({ name: 'home' })
+      }
+      */
+      // From generic error codes to translated messages
+      if (error.code) {
+        error.message = this.$t('errors.' + error.code)
       }
       this.showError(error.message)
     })
