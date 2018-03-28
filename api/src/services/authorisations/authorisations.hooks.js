@@ -1,4 +1,6 @@
-import { hooks } from 'kNotify'
+import { hooks as teamHooks } from 'kTeam'
+import { hooks as notifyHooks } from 'kNotify'
+import { when } from 'feathers-hooks-common'
 
 module.exports = {
   before: {
@@ -8,17 +10,19 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [ when(hook => hook.params.resource && !hook.params.resource.deleted,
+      teamHooks.preventRemovingLastOwner('organisations'),
+      teamHooks.preventRemovingLastOwner('groups')) ]
   },
 
   after: {
     all: [],
     find: [],
     get: [],
-    create: [ hooks.subscribeSubjectsToResourceTopic ],
+    create: [ notifyHooks.subscribeSubjectsToResourceTopic ],
     update: [],
     patch: [],
-    remove: [ hooks.unsubscribeSubjectsFromResourceTopic ]
+    remove: [ notifyHooks.unsubscribeSubjectsFromResourceTopic ]
   },
 
   error: {
