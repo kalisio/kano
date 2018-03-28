@@ -1,3 +1,4 @@
+import _ from 'lodash'
 // Page models
 import * as pages from './page-models'
 
@@ -18,17 +19,43 @@ const auth = new pages.Authentication()
 const account = new pages.Account()
 const organisations = new pages.Organisations()
 
+const orgName = 'Test Organisation'
+const orgDescription = 'An organisation test'
+
 test.page `${pages.getUrl('register')}`
 ('Registration', async test => {
   await auth.doRegister(test)
 })
 
 test('Default organisation', async test => {
-	await auth.doLogIn(test)
-  const orgPanel = await organisations.orgPanel.getVue()
+  await auth.doLogIn(test)
+  // We should have at least the private organisation
+  const panel = await organisations.panel.getVue()
+  await test.expect(panel.state.items.length).eql(1, 'Private organisation should be created')
+})
 
-  // We should have at least a private org
-  await test.expect(orgPanel.state.items.length).eql(1, 'Private organisation should be created')
+test('Create organisation', async test => {
+  await auth.doLogIn(test)
+  await organisations.doCreateOrganisation(test, orgName, orgDescription)
+  // We should have the created organisation in the organisations panel
+  const appBarTitle = await organisations.appBarTitle
+  // FIXME: innerText contains an additionnal \n which makes the test fail
+  //await test.expect(appBarTitle.innerText).eql(orgName, 'AppBar title should be the organisation name')
+  const panel = await organisations.panel.getVue()
+  await test.expect(panel.state.items.length).eql(2, 'New organisation should be added to the panel')
+})
+
+test('Update organisation billing', async test => {
+  await auth.doLogIn(test)
+  await organisations.doUpdateOrganisationBilling(test, orgName)
+})
+
+test('Delete organisation', async test => {
+  await auth.doLogIn(test)
+  await organisations.doDeleteOrganisation(test, orgName)
+  // We should have the deleted organisation removed from the organisations panel
+  const panel = await organisations.panel.getVue()
+  await test.expect(panel.state.items.length).eql(1, 'Deleted organisation should be removed from the panel')
 })
 
 test('Delete account', async test => {

@@ -34,7 +34,7 @@ export default class Account extends ApplicationLayout {
     this.confirmDeleteAccount = Selector('.modal-buttons button').nth(0)
   }
   async doEditProfile (test, profile) {
-    await this.openMenu(test)
+    await this.openSideNav(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open
@@ -47,7 +47,7 @@ export default class Account extends ApplicationLayout {
       .wait(5000)
   }
   async doUpdatePassword (test, identity) {
-    await this.openMenu(test)
+    await this.openSideNav(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open
@@ -61,7 +61,7 @@ export default class Account extends ApplicationLayout {
       .wait(5000)
   }
   async doUpdateEmail (test, identity) {
-    await this.openMenu(test)
+    await this.openSideNav(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open
@@ -74,7 +74,7 @@ export default class Account extends ApplicationLayout {
       .wait(5000)
   }
   async doRemoveAccount (test, name) {
-    await this.openMenu(test)
+    await this.openSideNav(test)
 
     await test
       .click(this.identity) // Ensure identity activity is open

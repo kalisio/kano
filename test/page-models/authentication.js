@@ -49,7 +49,7 @@ export default class Authentication extends ApplicationLayout {
       .wait(5000)
   }
   async doLogOut (test) {
-    await this.openMenu(test)
+    await this.openSideNav(test)
     await test
       .click(this.logout)
       // Need this so that we are sure the page has been loaded
