@@ -10,6 +10,7 @@ module.exports = {
   //domain: 'http://192.168.1.16:8081',
   domain,
   apiPath: '/api',
+  apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'kApp',
   appLogo: 'kalisio-logo.png',
