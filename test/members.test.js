@@ -32,7 +32,7 @@ test.page `${pages.getUrl('login')}`
   await members.registerUsers(test, users)
 })
 
-test('Add members to organisation', async test => {
+test('Add users to organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
   await members.activeMembersTab(test)
@@ -43,11 +43,11 @@ test('Add members to organisation', async test => {
   await members.checkCount(test, 3)
 })
 
-test('Invite member to join the organisation', async test => {
+test('Invite guest to join the organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
   await members.activeMembersTab(test)
-  await members.inviteMember(test, guest, pages.Roles.member)
+  await members.inviteMember(test, guest, pages.Roles.manager)
   await members.checkCount(test, 4)
 })
 

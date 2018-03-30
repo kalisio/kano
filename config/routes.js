@@ -82,7 +82,8 @@ module.exports = {
                   'invite': { name: 'invite-member', component: 'KInviteMember', props: true },
                   'add': { name: 'add-member', component: 'KAddMember', props: true },
                   ':objectId/tag': { name: 'tag-member', component: 'editor/KModalEditor', props: true },
-                  ':objectId/join-group': { name: 'join-group', component: 'KJoinGroup', props: true }
+                  ':objectId/join-group': { name: 'join-group', component: 'KJoinGroup', props: true },
+                  ':objectId/change-role': { name: 'change-role', component: 'KChangeRole', props: true },
                 }
               },
               'groups': {
