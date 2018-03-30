@@ -35,48 +35,48 @@ test.page `${pages.getUrl('login')}`
 test('Add users to organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
-  await members.activeMembersTab(test)
-  await members.checkCount(test, 1)
+  await members.clickToolbar(test, members.getToolbarEntry())
+  await members.checkMembersCount(test, 1)
   await members.addMember(test, users[1].name, pages.Roles.manager)
-  await members.checkCount(test, 2)
+  await members.checkMembersCount(test, 2)
   await members.addMember(test, users[2].name, pages.Roles.member)
-  await members.checkCount(test, 3)
+  await members.checkMembersCount(test, 3)
 })
 
 test('Invite guest to join the organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
-  await members.activeMembersTab(test)
+  await members.clickToolbar(test, members.getToolbarEntry())
   await members.inviteMember(test, guest, pages.Roles.manager)
-  await members.checkCount(test, 4)
+  await members.checkMembersCount(test, 4)
 })
 
 test('tag member', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
-  await members.activeMembersTab(test)
+  await members.clickToolbar(test, members.getToolbarEntry())
   await members.tagMember(test, users[1].name, 'fireman')
-  await members.checkCount(test, 4)
+  await members.checkMembersCount(test, 4)
 })
 
 test('Change guest role', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
-  await members.activeMembersTab(test)
+  await members.clickToolbar(test, members.getToolbarEntry())
   await members.changeMemberRole(test, guest.name, pages.Roles.manager)
-  await members.checkCount(test, 4)
+  await members.checkMembersCount(test, 4)
 })
 
 test('Remove members from organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)
-  await members.activeMembersTab(test)
+  await members.clickToolbar(test, members.getToolbarEntry())
   await members.removeMember(test, users[1].name)
-  await members.checkCount(test, 3)
+  await members.checkMembersCount(test, 3)
   await members.removeMember(test, users[2].name)
-  await members.checkCount(test, 2)
+  await members.checkMembersCount(test, 2)
   await members.removeMember(test, guest.name)
-  await members.checkCount(test, 1)
+  await members.checkMembersCount(test, 1)
 })
 
 test('Clean registrated users', async test => {

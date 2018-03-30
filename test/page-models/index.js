@@ -4,6 +4,8 @@ import Authentication from './authentication'
 import Account from './account'
 import Organisations from './organisations'
 import Members from './members'
+import Groups from './groups'
+
 
 // Export all models
 export {

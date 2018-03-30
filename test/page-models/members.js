@@ -1,32 +1,20 @@
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
-import _ from 'lodash'
-
-const IdSelector = Selector((id) => {
-  return document.getElementById(id)
-})
 
 export default class Members extends ApplicationLayout {
   constructor (auth, account) {
     super()
     this.auth = auth
     this.account = account
-    this.menuEntry = this.appBar.find('#members')
     this.addMemberModal = VueSelector('k-members-activity k-add-member')
     this.inviteMemberModal = VueSelector('k-members-activity k-invite-member')
     this.changeMemberRoleModal = VueSelector('k-members-activity k-change-role')
     this.tagMemberModal = VueSelector('k-members-activity k-modal-editor')
     this.membersGrid = VueSelector('k-members-activity k-grid')
   }
-  async activeMembersTab (test) {
-    await test.click(this.menuEntry)
-    .wait(2000)
-  }
-  async getMemberId (test, name) {
-    const membersGrid = await this.membersGrid.getVue()
-    let card = _.find(membersGrid.state.items, { name: name })
-    return card._id
+  getToolbarEntry () {
+    return '#members'
   }
   async registerUsers (test, users) {
     for (let key in users) {
@@ -66,34 +54,33 @@ export default class Members extends ApplicationLayout {
       .wait(5000)
   }
   async removeMember (test, name) {
-    let cardId = await this.getMemberId(test, name)
+    let cardId = await this.getItemId(test, this.membersGrid, name)
     await test
-      .click(IdSelector(cardId).find('#card-overflow-menu-entry'))
+      .click(this.idSelector(cardId).find('#card-overflow-menu-entry'))
       .click(Selector('.q-popover').find('#remove-member'))
       .click(Selector('.modal-buttons button').nth(0))
       .wait(2000)
   }
   async tagMember (test, name, tag) { 
-    let cardId = await this.getMemberId(test, name)
+    let cardId = await this.getItemId(test, this.membersGrid, name)
     await test
-      .click(IdSelector(cardId).find('#tag-member'))
+      .click(this.idSelector(cardId).find('#tag-member'))
       .typeText(this.tagMemberModal.find('#tags-field'), tag, { replace: true })
       .click(Selector('.q-popover .q-item').nth(0))
       .click(this.tagMemberModal.find('#apply-button'))
       .wait(2000)
   }
   async changeMemberRole (test, name, role) { 
-    let cardId = await this.getMemberId(test, name)
+    let cardId = await this.getItemId(test, this.membersGrid, name)
     await test
-      .click(IdSelector(cardId).find('#change-role'))
+      .click(this.idSelector(cardId).find('#change-role'))
       .click(this.changeMemberRoleModal.find('#role-field'))
       .click(Selector('.q-popover .q-item').nth(role))
       .click(this.changeMemberRoleModal.find('#update-button'))
       .wait(2000)
   }
-  async checkCount (test, count) {
-    const membersGrid = await this.membersGrid.getVue()
-    await test.expect(membersGrid.state.items.length).eql(count, 'Invalid number of members')
+  async checkMembersCount (test, count) {
+    await this.checkCollectionCount(test, this.membersGrid, count)
   }
 }
 
