@@ -3,16 +3,23 @@ import ApplicationLayout from './layout'
 import Authentication from './authentication'
 import Account from './account'
 import Organisations from './organisations'
+import Members from './members'
 
 // Export all models
 export {
   ApplicationLayout,
   Authentication,
   Account,
-  Organisations
+	Organisations,
+	Members
 }
 
-// Then util functions
+// Then util constants
+export const Roles = {
+  member: 0,
+  manager: 1,
+  owner: 2
+}
 
 // Access store
 export const getFromStore = ClientFunction((path) => window.$store.get(path))

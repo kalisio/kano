@@ -47,6 +47,7 @@ export default class Authentication extends ApplicationLayout {
       .click(this.loginLocal)
       // Need this so that we are sure dynamic components, user, etc. have been loaded
       .wait(5000)
+    await this.closeSignupAlert(test)
   }
   async doLogOut (test) {
     await this.openSideNav(test)

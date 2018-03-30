@@ -11,7 +11,7 @@ export default class ApplicationLayout {
     this.SideNavToggle = this.appBar.find('#ap')
     this.sideNav = VueSelector('k-side-nav')
     this.tabBar = VueSelector('k-tab-bar')
-    this.fab = VueSelector('k-fab')
+    this.fab = Selector('.q-fab')
     this.signupAlert = VueSelector('k-signup-alert')
   }
   async isSideNavVisible () {
@@ -25,6 +25,9 @@ export default class ApplicationLayout {
     if (!isSideNavVisible) {
       await test.click(this.sideNavToggle) // Ensure menu is open
     }
+  }
+  async closeSignupAlert (test) {
+    await test.click(this.signupAlert.find('.q-alert-close').find('.cursor-pointer'))
   }
   async isErrorVisible () {
     return await this.error.visible

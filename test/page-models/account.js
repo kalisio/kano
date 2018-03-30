@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
-import Authentication from './authentication'
 
 export default class Account extends ApplicationLayout {
   constructor () {
