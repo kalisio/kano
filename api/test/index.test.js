@@ -274,13 +274,11 @@ describe('kApp', () => {
       // This should unregister the device
       let userDeleted = false
       sns.once('userDeleted', endpointArn => {
-        console.log(endpointArn)
         expect(userObject.devices[0].arn).to.equal(endpointArn)
         userDeleted = true
         if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) resolve()
       })
       sns.on('unsubscribed', (subscriptionArn) => {
-        console.log(subscriptionArn)
         // We do not store subscription ARN
         unsubscriptions++
         if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) {
