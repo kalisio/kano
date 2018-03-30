@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
 import { when } from 'feathers-hooks-common'
@@ -22,7 +23,9 @@ module.exports = {
     create: [ notifyHooks.subscribeSubjectsToResourceTopic ],
     update: [],
     patch: [],
-    remove: [ notifyHooks.unsubscribeSubjectsFromResourceTopic ]
+    remove: [ notifyHooks.unsubscribeSubjectsFromResourceTopic,
+      // Remove also auhorisations for all org groups when removing authorisation on org
+      when(hook => _.get(hook.params, 'query.scope') === 'organisations', teamHooks.removeOrganisationGroupsAuthorisations) ]
   },
 
   error: {
