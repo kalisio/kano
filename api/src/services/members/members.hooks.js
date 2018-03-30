@@ -28,7 +28,9 @@ module.exports = {
     get: [],
     create: [],
     update: [],
-    patch: [],
+    // Adding/Removing tags changes abilities, the subject is the item of the hook
+    // to update we also need to fetch the user because on patch we might only have the tags available and not permissions
+    patch: [ coreHooks.updateAbilities({ subjectAsItem: true }) ],
     remove: []
   },
 
