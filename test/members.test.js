@@ -51,6 +51,22 @@ test('Invite guest to join the organisation', async test => {
   await members.checkCount(test, 4)
 })
 
+test('tag member', async test => {
+  await auth.doLogIn(test, users[0])
+  await organisations.selectOrganisation(test, users[0].name)
+  await members.activeMembersTab(test)
+  await members.tagMember(test, users[1].name, 'fireman')
+  await members.checkCount(test, 4)
+})
+
+test('Change guest role', async test => {
+  await auth.doLogIn(test, users[0])
+  await organisations.selectOrganisation(test, users[0].name)
+  await members.activeMembersTab(test)
+  await members.changeMemberRole(test, guest.name, pages.Roles.manager)
+  await members.checkCount(test, 4)
+})
+
 test('Remove members from organisation', async test => {
   await auth.doLogIn(test, users[0])
   await organisations.selectOrganisation(test, users[0].name)

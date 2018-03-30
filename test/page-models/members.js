@@ -15,6 +15,8 @@ export default class Members extends ApplicationLayout {
     this.menuEntry = this.appBar.find('#members')
     this.addMemberModal = VueSelector('k-add-member')
     this.inviteMemberModal = VueSelector('k-invite-member')
+    this.changeMemberRoleModal = VueSelector('k-change-role')
+    this.tagMemberModal = VueSelector('k-modal-editor')
     this.membersGrid = VueSelector('k-members-activity k-grid')
   }
   async activeMembersTab (test) {
@@ -69,6 +71,26 @@ export default class Members extends ApplicationLayout {
       .click(CardSelector(cardId).find('#card-overflow-menu-entry'))
       .click(Selector('.q-popover').find('#remove-member'))
       .click(Selector('.modal-buttons button').nth(0))
+      .wait(2000)
+  }
+  async tagMember (test, name, tag) { 
+    let cardId = await this.getMemberId(test, name)
+    await test
+      .click(CardSelector(cardId).find('#tag-member'))
+      .typeText(this.tagMemberModal.find('#tags-field'), tag, { replace: true })
+      .click(Selector('.q-popover .q-item').nth(0))
+      // FIXME: don't know why it is not working :(
+      // .click(this.tagMemberModal.find('#apply-button'))
+      .wait(2000)
+  }
+  async changeMemberRole (test, name, role) { 
+    let cardId = await this.getMemberId(test, name)
+    await test
+      .click(CardSelector(cardId).find('#change-role'))
+      .wait(1000)
+      .click(this.changeMemberRoleModal.find('#role-field'))
+      .click(Selector('.q-popover .q-item').nth(role))
+      .click(this.changeMemberRoleModal.find('#update-button'))
       .wait(2000)
   }
   async checkCount (test, count) {
