@@ -86,7 +86,6 @@ export default class Members extends ApplicationLayout {
     let cardId = await this.getMemberId(test, name)
     await test
       .click(IdSelector(cardId).find('#change-role'))
-      .wait(1000)
       .click(this.changeMemberRoleModal.find('#role-field'))
       .click(Selector('.q-popover .q-item').nth(role))
       .click(this.changeMemberRoleModal.find('#update-button'))
