@@ -27,8 +27,15 @@ module.exports = {
     patch: [],
     remove: [
       iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
-      notifyHooks.unregisterDevices,
-      coreHooks.updateTags
+      coreHooks.updateTags,
+      // Avoid removing subscriptions on removed (ie unused) tags
+      notifyHooks.updateSubjectSubscriptions({
+        field: 'tags',
+        service: 'tags',
+        filter: (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics,
+        subjectAsItem: true
+      }),
+      notifyHooks.unregisterDevices
     ]
   },
 

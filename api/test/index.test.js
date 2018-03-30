@@ -38,7 +38,7 @@ describe('kApp', () => {
     server.run().then(() => done())
   })
   // Let enough time to process
-  .timeout(5000)
+  .timeout(10000)
 
   it('registers the services', () => {
     userService = server.app.getService('users')
@@ -247,6 +247,17 @@ describe('kApp', () => {
   // Let enough time to process
   .timeout(10000)
 
+  it('restore user tags, group to prepare testing user cleanup', () => {
+    return memberService.patch(userObject._id.toString(), Object.assign({ // We need at least devices for subscription
+      tags: [{ value: 'test', scope: 'members' }]
+    }, userObject), { user: userObject, previousItem: userObject, checkAuthorisation: true }) // Because we bypass populate hooks give the previousItem directly
+    .then(user => {
+      return groupService.create({ name: 'test-group' }, { user: userObject, checkAuthorisation: true })
+    })
+  })
+  // Let enough time to process
+  .timeout(10000)
+
   it('removes a user', () => {
     let operation = userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
     .then(user => {
@@ -257,20 +268,25 @@ describe('kApp', () => {
     })
     // We need to synchronize 2 events
     let events = new Promise((resolve, reject) => {
-      // This should unsubscribe the new device to all topics: org, group, tag
+      // This should unsubscribe device to all topics: org, group, tag
       const expectedUnsubscriptions = 3
       let unsubscriptions = 0
       // This should unregister the device
       let userDeleted = false
       sns.once('userDeleted', endpointArn => {
+        console.log(endpointArn)
         expect(userObject.devices[0].arn).to.equal(endpointArn)
         userDeleted = true
         if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) resolve()
       })
-      sns.once('unsubscribed', (subscriptionArn) => {
+      sns.on('unsubscribed', (subscriptionArn) => {
+        console.log(subscriptionArn)
         // We do not store subscription ARN
         unsubscriptions++
-        if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) resolve()
+        if (userDeleted && (unsubscriptions === expectedUnsubscriptions)) {
+          sns.off('unsubscribed')
+          resolve()
+        }
       })
     })
     return Promise.all([operation, events])

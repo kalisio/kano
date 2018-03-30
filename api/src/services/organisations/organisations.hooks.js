@@ -25,6 +25,7 @@ module.exports = {
     update: [],
     patch: [],
     remove: [ coreHooks.setAsDeleted,
+      teamHooks.removeOrganisationGroups,
       teamHooks.removeOrganisationAuthorisations,
       notifyHooks.removeTopic,
       eventHooks.removeOrganisationServices,
