@@ -16,7 +16,7 @@ fixture `Organisations`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account()
+const account = new pages.Account(auth)
 const organisations = new pages.Organisations()
 
 const orgName = 'Test Organisation'
@@ -24,18 +24,18 @@ const orgDescription = 'An organisation test'
 
 test.page `${pages.getUrl('register')}`
 ('Registration', async test => {
-  await auth.doRegister(test)
+  await auth.signIn(test)
 })
 
 test('Default organisation', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   // We should have at least the private organisation
   const panel = await organisations.panel.getVue()
   await test.expect(panel.state.items.length).eql(1, 'Private organisation should be created')
 })
 
 test('Create organisation', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   await organisations.createOrganisation(test, orgName, orgDescription)
   // We should have the created organisation in the organisations panel
   // FIXME: innerText contains an additionnal \n which makes the test fail
@@ -45,12 +45,12 @@ test('Create organisation', async test => {
 })
 
 test('Update organisation billing', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   await organisations.updateOrganisationBilling(test, orgName)
 })
 
 test('Delete organisation', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   await organisations.deleteOrganisation(test, orgName)
   // We should have the deleted organisation removed from the organisations panel
   const panel = await organisations.panel.getVue()
@@ -58,6 +58,6 @@ test('Delete organisation', async test => {
 })
 
 test('Delete account', async test => {
-	await auth.doLogIn(test)
-  await account.doRemoveAccount(test, 'Kalisio')
+	await auth.logIn(test)
+  await account.removeAccount(test, 'Kalisio')
 })

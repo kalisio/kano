@@ -3,10 +3,8 @@ import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
 
 export default class Members extends ApplicationLayout {
-  constructor (auth, account) {
+  constructor () {
     super()
-    this.auth = auth
-    this.account = account
     this.addMemberModal = VueSelector('k-members-activity k-add-member')
     this.inviteMemberModal = VueSelector('k-members-activity k-invite-member')
     this.changeMemberRoleModal = VueSelector('k-members-activity k-change-role')
@@ -19,26 +17,13 @@ export default class Members extends ApplicationLayout {
   getTabBarEntry () {
     return '#members'
   }
-  async registerUsers (test, users) {
-    for (let i in users) {
-      await test.click(Selector('#register-link'))
-      await this.auth.doRegister(test, users[i])
-      await this.auth.doLogOut(test)
-      await test.click(Selector('#login-link'))
-    }
-  }
-  async unregisterUsers (test, users) {
-    for (let i in users) {
-      await this.auth.doLogIn(test, users[i])
-      await this.account.doRemoveAccount(test, users[i].name)
-      await test.click('#login-link')
-    }
-  }
   async addMember (test, name, role) {
     await this.openAndClickFab(test, '#add-member')
     await test
       .typeText(this.addMemberModal.find('#user-field'), name[0], { replace: true })
+      .wait(1000)
       .click(Selector('.q-popover .q-item').nth(0))
+      .wait(1000)
       .click(this.addMemberModal.find('#role-field'))
       .click(Selector('.q-popover .q-item').nth(role))
       .click(this.addMemberModal.find('#add-button'))
@@ -67,7 +52,9 @@ export default class Members extends ApplicationLayout {
     await test
       .click(this.idSelector(cardId).find('#tag-member'))
       .typeText(this.tagMemberModal.find('#tags-field'), tag, { replace: true })
+      .wait(1000)
       .click(Selector('.q-popover .q-item').nth(0))
+      .wait(1000)
       .click(this.tagMemberModal.find('#apply-button'))
       .wait(2000)
   }

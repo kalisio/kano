@@ -15,7 +15,7 @@ fixture `EventTemplates`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account()
+const account = new pages.Account(auth)
 const organisations = new pages.Organisations()
 const templates = new pages.EventTemplates()
 
@@ -29,11 +29,11 @@ const data = {
 
 test.page `${pages.getUrl('register')}`
 ('Users registration', async test => {
-  await auth.doRegister(test, data.user)
+  await auth.signIn(test, data.user)
 })
 
 test('Create template', async test => {
-  await auth.doLogIn(test, data.user)
+  await auth.logIn(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -42,7 +42,7 @@ test('Create template', async test => {
 })
 
 test('Copy template', async test => {
-  await auth.doLogIn(test, data.user)
+  await auth.logIn(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -51,7 +51,7 @@ test('Copy template', async test => {
 })
 
 test('Update template description', async test => {
-  await auth.doLogIn(test, data.user)
+  await auth.logIn(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -59,7 +59,7 @@ test('Update template description', async test => {
 })
 
 test('Delete template', async test => {
-  await auth.doLogIn(test, data.user)
+  await auth.logIn(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -68,6 +68,6 @@ test('Delete template', async test => {
 })
 
 test('Clean registrated users', async test => {
-  await auth.doLogIn(test, data.user)
-  await account.doRemoveAccount(test, data.user)
+  await auth.logIn(test, data.user)
+  await account.removeAccount(test, data.user)
 })

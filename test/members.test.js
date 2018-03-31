@@ -15,9 +15,9 @@ fixture `Members`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account()
+const account = new pages.Account(auth)
 const organisations = new pages.Organisations()
-const members = new pages.Members(auth, account, organisations)
+const members = new pages.Members()
 
 const data = {
   users: [
@@ -30,11 +30,11 @@ const data = {
 
 test.page `${pages.getUrl('login')}`
 ('Users registration', async test => {
-  await members.registerUsers(test, data.users)
+  await account.registerUsers(test, data.users)
 })
 
 test('Add users to organisation', async test => {
-  await auth.doLogIn(test, data.users[0])
+  await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.checkMembersCount(test, 1)
@@ -45,7 +45,7 @@ test('Add users to organisation', async test => {
 })
 
 test('Invite data.guest to join the organisation', async test => {
-  await auth.doLogIn(test, data.users[0])
+  await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.inviteMember(test, data.guest, pages.Roles.manager)
@@ -53,7 +53,7 @@ test('Invite data.guest to join the organisation', async test => {
 })
 
 test('tag member', async test => {
-  await auth.doLogIn(test, data.users[0])
+  await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.tagMember(test, data.users[1].name, 'fireman')
@@ -61,7 +61,7 @@ test('tag member', async test => {
 })
 
 test('Change guest role', async test => {
-  await auth.doLogIn(test, data.users[0])
+  await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.changeMemberRole(test, data.guest.name, pages.Roles.manager)
@@ -69,7 +69,7 @@ test('Change guest role', async test => {
 })
 
 test('Remove members from organisation', async test => {
-  await auth.doLogIn(test, data.users[0])
+  await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.removeMember(test, data.users[1].name)
@@ -81,5 +81,5 @@ test('Remove members from organisation', async test => {
 })
 
 test('Clean registrated users', async test => {
-  await members.unregisterUsers(test, data.users)
+  await account.unregisterUsers(test, data.users)
 })

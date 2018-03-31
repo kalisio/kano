@@ -1,7 +1,7 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `Groups`// declare the fixture
+fixture `Events`// declare the fixture
   .page `${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
@@ -19,6 +19,8 @@ const account = new pages.Account(auth)
 const organisations = new pages.Organisations()
 const members = new pages.Members()
 const groups = new pages.Groups()
+const templates = new pages.EventTemplates()
+const events = new pages.Events()
 
 const data = {
   users: [
@@ -26,9 +28,12 @@ const data = {
     { name: 'Manager Kalisio', email: 'manager@kalisio.xyz', password: 'manager' },
     { name: 'Member Kalisio', email: 'member@kalisio.xyz', password: 'member' }
   ],
-  groups: [
-    { name: 'Group one', description: 'A first group' },
-    { name: 'Group two', description: 'A second group' }
+  group: { name: 'Group', description: 'A group' },
+  template: { name: 'Template', description: 'An event template' },
+  events: [
+    { name: 'Event to member', participants: 'Manager Kalisio'},
+    { name: 'Event to group', participants: 'Group'},
+    { name: 'Event to tag', participants: 'fireman'}
   ]
 }
 
@@ -37,46 +42,36 @@ test.page `${pages.getUrl('login')}`
   await account.registerUsers(test, data.users)
 })
 
-test('Add users to organisation', async test => {
+test('Setup organisation', async test => {
   await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.addMember(test, data.users[1].name, pages.Roles.manager)
+  await members.tagMember(test, data.users[1].name, 'fireman')
   await members.addMember(test, data.users[2].name, pages.Roles.member)
-})
-
-test('Create groups', async test => {
-  await auth.logIn(test, data.users[0])
-  await organisations.selectOrganisation(test, data.users[0].name)
-  await groups.clickToolbar(test, groups.getToolbarEntry())
   await groups.clickTabBar(test, groups.getTabBarEntry())
-  for (let i in data.groups) await groups.createGroup(test, data.groups[i])
-  await groups.checkGroupsCount(test, data.groups.length)
+  await groups.createGroup(test, data.group)
+  await templates.clickToolbar(test, templates.getToolbarEntry())
+  await templates.clickTabBar(test, templates.getTabBarEntry())
+  await templates.createTemplate(test, data.template)
 })
 
-test('Edit group', async test => {
+test('Create events', async test => {
   await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await groups.clickToolbar(test, members.getToolbarEntry())
-  await groups.clickTabBar(test, groups.getTabBarEntry())
-  await groups.editGroup(test, data.groups[0].name, 'A new description')
+  await events.clickToolbar(test, events.getToolbarEntry())
+  for (let i in data.events) await events.createEvent(test, data.template.name, data.events[i])
+  await events.checkEventsCount(test, data.events.length)
 })
 
-test('Delete group', async test => {
+test('Delete event', async test => {
   await auth.logIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await groups.clickToolbar(test, groups.getToolbarEntry())
-  await groups.clickTabBar(test, groups.getTabBarEntry())
-  await groups.deleteGroup(test, data.groups[0].name)
-  await groups.checkGroupsCount(test, 1)
-})
-
-test('Remove member from group', async test => {
-  await auth.logIn(test, data.users[0])
-  await organisations.selectOrganisation(test, data.users[0].name)
-  await members.clickToolbar(test, members.getToolbarEntry())
+  await events.clickToolbar(test, events.getToolbarEntry())
+  for (let i in data.events) await events.deleteEvent(test, data.events[i].name)
+  await events.checkEventsCount(test, 0)
 })
 
 test('Clean registrated users', async test => {
-  await account.unsignIns(test, data.users)
+  await account.unregisterUsers(test, data.users)
 })

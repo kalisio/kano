@@ -18,7 +18,7 @@ const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
 
 test('Invalid login', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   let user = await pages.getFromStore('user')
   await test.expect(user).notOk('User should not be populated')
   await test.expect(app.isErrorVisible()).ok('Error should be displayed')
@@ -26,7 +26,7 @@ test('Invalid login', async test => {
 
 test.page `${pages.getUrl('register')}`
 ('Registration', async test => {
-  await auth.doRegister(test)
+  await auth.signIn(test)
 
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
@@ -36,7 +36,7 @@ test.page `${pages.getUrl('register')}`
 })
 
 test('Local login', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
@@ -44,7 +44,7 @@ test('Local login', async test => {
   await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
 
-  await auth.doLogOut(test)
+  await auth.logOut(test)
 
   let screen = await auth.logoutScreen.getVue()
   // We should have at least an unpopulated user
@@ -55,13 +55,13 @@ test('Local login', async test => {
 })
 
 test('Cleanup local user', async test => {
-  await auth.doLogIn(test)
+  await auth.logIn(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })
 
 test('Google login', async test => {
-  await auth.doLogInGoogle(test)
+  await auth.logInGoogle(test)
   
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
@@ -69,17 +69,17 @@ test('Google login', async test => {
   await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).ok('User should be verified')
 
-  await auth.doLogOut(test)
+  await auth.logOut(test)
 })
 
 test('Cleanup Google user', async test => {
-  await auth.doLogInGoogle(test)
+  await auth.logInGoogle(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })
 
 test('GitHub login', async test => {
-  await auth.doLogInGitHub(test)
+  await auth.logInGitHub(test)
   
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
@@ -87,11 +87,11 @@ test('GitHub login', async test => {
   await test.expect(user).ok('User should be populated')
   await test.expect(signupAlert.props.isVerified).ok('User should be verified')
 
-  await auth.doLogOut(test)
+  await auth.logOut(test)
 })
 
 test('Cleanup GitHub user', async test => {
-  await auth.doLogInGitHub(test)
+  await auth.logInGitHub(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })

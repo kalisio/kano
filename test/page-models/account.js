@@ -3,8 +3,9 @@ import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
 
 export default class Account extends ApplicationLayout {
-  constructor () {
+  constructor (auth) {
     super()
+    this.auth = auth
     this.identityPanel = VueSelector('k-identity-panel')
     this.identity = Selector('#account')
     // Profile Zone
@@ -32,9 +33,8 @@ export default class Account extends ApplicationLayout {
     this.confirmAccountName = Selector('.modal input[type=text]')
     this.confirmDeleteAccount = Selector('.modal-buttons button').nth(0)
   }
-  async doEditProfile (test, profile) {
+  async editProfile (test, profile) {
     await this.openSideNav(test)
-
     await test
       .click(this.identity) // Ensure identity activity is open
       .click(this.profile)
@@ -45,9 +45,8 @@ export default class Account extends ApplicationLayout {
       // Need this so that we are sure request is finished
       .wait(5000)
   }
-  async doUpdatePassword (test, identity) {
+  async updatePassword (test, identity) {
     await this.openSideNav(test)
-
     await test
       .click(this.identity) // Ensure identity activity is open
       .click(this.security)
@@ -59,9 +58,8 @@ export default class Account extends ApplicationLayout {
       // Need this so that we are sure request is finished
       .wait(5000)
   }
-  async doUpdateEmail (test, identity) {
+  async udateEmail (test, identity) {
     await this.openSideNav(test)
-
     await test
       .click(this.identity) // Ensure identity activity is open
       .click(this.security)
@@ -72,9 +70,8 @@ export default class Account extends ApplicationLayout {
       // Need this so that we are sure request is finished
       .wait(5000)
   }
-  async doRemoveAccount (test, name) {
+  async removeAccount (test, name) {
     await this.openSideNav(test)
-
     await test
       .click(this.identity) // Ensure identity activity is open
       .click(this.dz) // Ensure danger zone tab is selected
@@ -83,6 +80,21 @@ export default class Account extends ApplicationLayout {
       .click(this.confirmDeleteAccount)
       // Need this so that we are sure request is finished
       .wait(5000)
+  }
+  async registerUsers (test, users) {
+    for (let i in users) {
+      await test.click(Selector('#register-link'))
+      await this.auth.signIn(test, users[i])
+      await this.auth.logOut(test)
+      await test.click(Selector('#login-link'))
+    }
+  }
+  async unregisterUsers (test, users) {
+    for (let i in users) {
+      await this.auth.logIn(test, users[i])
+      await this.removeAccount(test, users[i].name)
+      await test.click('#login-link')
+    }
   }
 }
 

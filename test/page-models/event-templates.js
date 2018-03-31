@@ -9,7 +9,6 @@ export default class EventTemplates extends ApplicationLayout {
     this.editTemplateModal = VueSelector('k-event-templates-activity k-event-template-editor')
     this.copyTemplateModal = VueSelector('k-event-templates-activity k-event-template-editor')
     this.templatesGrid = VueSelector('k-event-templates-activity k-grid')
-    this.fab = VueSelector('k-layout k-fab')
   }
   getToolbarEntry () {
     return '#events'  

@@ -40,7 +40,7 @@ export default class Authentication extends ApplicationLayout {
     this.signInGitHub = Selector('input[type=submit]')
     this.authorizeGitHub = Selector('button[type=submit]')
   }
-  async doLogIn (test, credentials = {}) {
+  async logIn (test, credentials = {}) {
     await test
       .typeText(this.emailInput, credentials.email || defaultTestUser.email, { replace: true })
       .typeText(this.passwordInput, credentials.password || defaultTestUser.password, { replace: true })
@@ -49,14 +49,14 @@ export default class Authentication extends ApplicationLayout {
       .wait(5000)
     await this.closeSignupAlert(test)
   }
-  async doLogOut (test) {
+  async logOut (test) {
     await this.openSideNav(test)
     await test
       .click(this.logout)
       // Need this so that we are sure the page has been loaded
       .wait(2000)
   }
-  async doRegister (test, identity = {}) {
+  async registerUser (test, identity = {}) {
     await test
       .typeText(this.registerNameInput, identity.name || defaultTestUser.name, { replace: true })
       .typeText(this.registerEmailInput, identity.email || defaultTestUser.email, { replace: true })
@@ -66,7 +66,7 @@ export default class Authentication extends ApplicationLayout {
       // Need this so that we are sure dynamic components, user, etc. have been loaded
       .wait(5000)
   }
-  async doLogInGoogle (test) {
+  async logInGoogle (test) {
     await test
       .click(this.loginGoogle)
       .typeText(this.emailInputGoogle, process.env.GOOGLE_USER, { replace: true })
@@ -78,7 +78,7 @@ export default class Authentication extends ApplicationLayout {
       // Need this so that we are sure google page is loaded & dynamic components, user, etc. have been loaded
       .wait(5000)
   }
-  async doLogInGitHub (test) {
+  async logInGitHub (test) {
     await test
       .click(this.loginGitHub)
       .typeText(this.emailInputGitHub, process.env.GITHUB_USER, { replace: true })
