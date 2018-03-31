@@ -17,24 +17,23 @@ export default class Members extends ApplicationLayout {
     return '#members'
   }
   async registerUsers (test, users) {
-    for (let key in users) {
+    for (let i in users) {
       await test.click(Selector('#register-link'))
-      await this.auth.doRegister(test, users[key])
+      await this.auth.doRegister(test, users[i])
       await this.auth.doLogOut(test)
       await test.click(Selector('#login-link'))
     }
   }
   async unregisterUsers (test, users) {
-    for (let key in users) {
-      await this.auth.doLogIn(test, users[key])
-      await this.account.doRemoveAccount(test, users[key].name)
+    for (let i in users) {
+      await this.auth.doLogIn(test, users[i])
+      await this.account.doRemoveAccount(test, users[i].name)
       await test.click('#login-link')
     }
   }
   async addMember (test, name, role) {
+    await this.openAndClickFab(test, '#add-member')
     await test
-      .click(this.fab)
-      .click(this.fab.find('#add-member'))
       .typeText(this.addMemberModal.find('#user-field'), name[0], { replace: true })
       .click(Selector('.q-popover .q-item').nth(0))
       .click(this.addMemberModal.find('#role-field'))
@@ -43,9 +42,8 @@ export default class Members extends ApplicationLayout {
       .wait(2000)
   }
   async inviteMember (test, guest, role) {
+    await this.openAndClickFab(test, '#invite-member')
     await test
-      .click(this.fab)
-      .click(this.fab.find('#invite-member'))
       .typeText(this.inviteMemberModal.find('#name-field'), guest.name, { replace: true })
       .typeText(this.inviteMemberModal.find('#email-field'), guest.email, { replace: true })
       .click(this.inviteMemberModal.find('#role-field'))

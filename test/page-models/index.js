@@ -13,7 +13,8 @@ export {
   Authentication,
   Account,
 	Organisations,
-	Members
+	Members,
+	Groups
 }
 
 // Then util constants

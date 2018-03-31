@@ -49,12 +49,24 @@ export default class ApplicationLayout {
       .click(this.tabBar.find(tab))
       .wait(250)
   }
+  async openAndClickFab (test, entry) {
+    await test
+      .click(Selector(this.fab))
+      .click(this.fab.find(entry))
+  }
+  async clickFab (test, entry) {
+    await test
+      .click(Selector(entry))
+  }
   async isErrorVisible () {
     return await this.error.visible
   }
-  async getItemId (test, collectionSelector, name) {
+  async getItem (test, collectionSelector, name) {
     const collection = await collectionSelector.getVue()
-    let item = _.find(collection.state.items, { name: name })
+    return _.find(collection.state.items, { name: name })
+  }
+  async getItemId (test, collectionSelector, name) {
+    let item = await this.getItem(test, collectionSelector, name)
     if (item) return item._id
     return undefined
   }
