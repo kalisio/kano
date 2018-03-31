@@ -48,8 +48,8 @@ test('Add users to organisation', async test => {
 test('Create group', async test => {
   await auth.doLogIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await members.clickToolbar(test, members.getToolbarEntry())
-  await groups.clickTabBar(test, '#groups')
+  await groups.clickToolbar(test, groups.getToolbarEntry())
+  await groups.clickTabBar(test, groups.getTabBarEntry())
   for (let i in data.groups) await groups.createGroup(test, data.groups[i])
   await groups.checkGroupsCount(test, data.groups.length)
 })
@@ -57,16 +57,16 @@ test('Create group', async test => {
 test('Edit group', async test => {
   await auth.doLogIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await members.clickToolbar(test, members.getToolbarEntry())
-  await groups.clickTabBar(test, '#groups')
+  await groups.clickToolbar(test, members.getToolbarEntry())
+  await groups.clickTabBar(test, groups.getTabBarEntry())
   await groups.editGroup(test, data.groups[0].name, 'A new description')
 })
 
 test('Delete group', async test => {
   await auth.doLogIn(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await members.clickToolbar(test, members.getToolbarEntry())
-  await groups.clickTabBar(test, '#groups')
+  await groups.clickToolbar(test, groups.getToolbarEntry())
+  await groups.clickTabBar(test, groups.getTabBarEntry())
   await groups.deleteGroup(test, data.groups[0].name)
   await groups.checkGroupsCount(test, 1)
 })

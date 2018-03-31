@@ -5,6 +5,7 @@ import Account from './account'
 import Organisations from './organisations'
 import Members from './members'
 import Groups from './groups'
+import EventTemplates from './event-templates'
 
 
 // Export all models
@@ -14,7 +15,8 @@ export {
   Account,
 	Organisations,
 	Members,
-	Groups
+	Groups,
+	EventTemplates
 }
 
 // Then util constants

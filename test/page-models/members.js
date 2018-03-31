@@ -16,6 +16,9 @@ export default class Members extends ApplicationLayout {
   getToolbarEntry () {
     return '#members'
   }
+  getTabBarEntry () {
+    return '#members'
+  }
   async registerUsers (test, users) {
     for (let i in users) {
       await test.click(Selector('#register-link'))

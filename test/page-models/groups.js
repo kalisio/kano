@@ -5,7 +5,7 @@ import ApplicationLayout from './layout'
 export default class Groups extends ApplicationLayout {
   constructor () {
     super()
-    this.addGroupModal = VueSelector('k-groups-activity k-modal-editor')
+    this.createGroupModal = VueSelector('k-groups-activity k-modal-editor')
     this.editGroupModal = VueSelector('k-groups-activity k-modal-editor')
     this.groupsGrid = VueSelector('k-groups-activity k-grid')
     this.fab = VueSelector('k-layout k-fab')
@@ -13,12 +13,15 @@ export default class Groups extends ApplicationLayout {
   getToolbarEntry () {
     return '#members'  
   }
+  getTabBarEntry () {
+    return '#groups'
+  }
   async createGroup (test, group) {
     await this.clickFab(test, '#create-group')
     await test
-      .typeText(this.addGroupModal.find('#name-field'), group.name, { replace: true })
-      .typeText(this.addGroupModal.find('#description-field'), group.description, { replace: true })
-      .click(this.addGroupModal.find('#apply-button'))
+      .typeText(this.createGroupModal.find('#name-field'), group.name, { replace: true })
+      .typeText(this.createGroupModal.find('#description-field'), group.description, { replace: true })
+      .click(this.createGroupModal.find('#apply-button'))
       .wait(2000)
   }
   async editGroup (test, groupName, newGroupDescription) {
