@@ -45,7 +45,6 @@ jobs:
     - npm install -g codeclimate-test-reporter
     script:
     - bash test.travis.sh
-    - codeclimate-test-reporter < server-coverage/lcov.info
   
   - stage: DEPLOY
     language: node_js

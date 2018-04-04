@@ -11,6 +11,9 @@ else
 	scp .env ${SSH_USER}@${SSH_REMOTE}:~/kApp/.env
 	scp docker-compose.yml ${SSH_USER}@${SSH_REMOTE}:~/kApp/docker-compose.yml
 	scp docker-compose.deploy.yml ${SSH_USER}@${SSH_REMOTE}:~/kApp/docker-compose.deploy.yml
+	# Add build env to remote env file
+	echo "FLAVOR=$FLAVOR" >> kApp.env.sh
+	echo "DOMAIN=$DOMAIN" >> kApp.env.sh
 	scp kApp.env.sh ${SSH_USER}@${SSH_REMOTE}:~/kApp/kApp.env.sh
 	scp kApp.deploy.sh ${SSH_USER}@${SSH_REMOTE}:~/kApp/kApp.deploy.sh
 	scp kApp.remove.sh ${SSH_USER}@${SSH_REMOTE}:~/kApp/kApp.remove.sh
