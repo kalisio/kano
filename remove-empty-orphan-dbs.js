@@ -1,5 +1,6 @@
 // Should be set by --eval
 var appDb
+var empty
 
 if (!appDb) {
 	print('You must provide a DB name holding the organisations of your app using --eval "appDb = \'name\'"')
@@ -20,14 +21,16 @@ if (!appDb) {
 			  // Check if used by app
 			  var org = orgs.findOne({ _id: id })
 			  if (!org) {
-				  // Iterate over collecitons to check if empty ?
-				  for (var j in collections) {
-				  	var collectionName = collections[j]
-				  	var collection = db.getCollection(collectionName)
-				  	if (collection.stats().count > 0) {
-				  		remove = false
-				  	}
-				  }
+				  // Iterate over collections to check if empty ?
+				  if (empty) {
+					  for (var j in collections) {
+					  	var collectionName = collections[j]
+					  	var collection = db.getCollection(collectionName)
+					  	if (collection.stats().count > 0) {
+					  		remove = false
+					  	}
+					  }
+					}
 				} else {
 					remove = false
 				}
