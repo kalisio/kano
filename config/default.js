@@ -1,5 +1,25 @@
-const domain = 'https://kapp.kalisio.xyz'
 const website = 'https://www.kalisio.com'
+
+const serverPort = process.env.PORT || 8081
+// Required to know webpack port so that in dev we can build correct URLs
+const clientPort = process.env.CLIENT_PORT || 8080
+const API_PREFIX = '/api'
+let domain
+// If we build a specific staging instance
+if (process.env.NODE_APP_INSTANCE === 'dev') {
+  domain = 'https://kapp.dev.kalisio.xyz'
+} else if (process.env.NODE_APP_INSTANCE === 'test') {
+  domain = 'https://kapp.test.kalisio.xyz'
+} else if (process.env.NODE_APP_INSTANCE === 'prod') {
+  domain = 'https://kapp.kalisio.xyz'
+} else {
+  // Otherwise we are on a developer machine
+  if (process.env.NODE_ENV === 'development') {
+    domain = 'http://localhost:' + clientPort
+  } else {
+    domain = 'http://localhost:' + serverPort
+  }
+}
 
 module.exports = {
   // Special alias to host loopback interface in cordova
@@ -9,7 +29,7 @@ module.exports = {
   // If using local IP on WiFi router
   //domain: 'http://192.168.1.16:8081',
   domain,
-  apiPath: '/api',
+  apiPath: API_PREFIX,
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'kApp',

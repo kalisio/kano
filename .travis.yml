@@ -22,12 +22,8 @@ jobs:
     - docker
     install: true #skip default installation
     script:
-    # If you'd like to simply pull existing version instead of really build it
-    #- docker pull kalisio/kapp
-    - docker-compose -f docker-compose.yml up -d
-    - docker cp kapp:/opt/kapp/dist dist
-    - docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-    - docker push kalisio/kapp
+    - bash env.travis.sh
+    - bash build.travis.sh
     deploy:
       skip_cleanup: true
       provider: s3
@@ -49,11 +45,8 @@ jobs:
     install:
     - npm install -g codeclimate-test-reporter
     script:
-    - docker pull kalisio/kapp
-    - docker-compose -f docker-compose.yml up -d mongodb-kapp
-    - docker-compose -f docker-compose.yml -f docker-compose.server-tests.yml up kapp
-    - docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up -d kapp
-    - docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up testcafe
+    - bash env.travis.sh
+    - bash test.travis.sh
     - codeclimate-test-reporter < server-coverage/lcov.info
   
   - stage: DEPLOY
@@ -66,6 +59,7 @@ jobs:
     script:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
+    - bash env.travis.sh
     deploy:
       provider: script
       skip_cleanup: true

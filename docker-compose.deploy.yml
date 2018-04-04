@@ -3,7 +3,7 @@ version: '3'
 services:
   kapp:
     environment:
-      - DEBUG=kalisio*
+      - DEBUG=${DEBUG}
     networks:
       - traefik
       - kapp
@@ -13,7 +13,7 @@ services:
       - "traefik.enable=true"
       - "traefik.port=8081"
       - "traefik.frontend.entryPoints=http,https"
-      - "traefik.frontend.rule=Host:kapp.dev.kalisio.xyz"
+      - "traefik.frontend.rule=Host:${DOMAIN}"
 
 networks:
   traefik:

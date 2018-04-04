@@ -2,7 +2,9 @@ version: '3'
 
 services:
   kapp:
-    build: .
+    build:
+      context: .
+      dockerfile: ./dockerfile.${FLAVOR}
     container_name: kapp
     image: kalisio/kapp
     depends_on:
@@ -28,8 +30,7 @@ services:
       - GITHUB_CLIENT_SECRET
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
-      - VIRTUAL_HOST=kapp.kalisio.xyz
-      - VIRTUAL_PORT=8081
+      - NODE_APP_INSTANCE=${FLAVOR}
       - DB_URL=mongodb://mongodb:27017/kApp
     networks:
       - kapp
