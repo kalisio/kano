@@ -7,8 +7,8 @@ notifications:
     on_failure: always 
 
 stages:  
-  #- name: BUILD
-  #- name: TEST
+  - name: BUILD
+  - name: TEST
   - name: DEPLOY
   - name: ANDROID
   
@@ -22,7 +22,6 @@ jobs:
     - docker
     install: true #skip default installation
     script:
-    - bash env.travis.sh
     - bash build.travis.sh
     deploy:
       skip_cleanup: true
@@ -45,7 +44,6 @@ jobs:
     install:
     - npm install -g codeclimate-test-reporter
     script:
-    - bash env.travis.sh
     - bash test.travis.sh
     - codeclimate-test-reporter < server-coverage/lcov.info
   
@@ -59,7 +57,6 @@ jobs:
     script:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
-    - bash env.travis.sh
     deploy:
       provider: script
       skip_cleanup: true
