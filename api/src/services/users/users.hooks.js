@@ -26,7 +26,7 @@ module.exports = {
     update: [],
     patch: [],
     remove: [
-      iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
+      coreHooks.setAsDeleted,
       coreHooks.updateTags,
       // Avoid removing subscriptions on removed (ie unused) tags
       notifyHooks.updateSubjectSubscriptions({
@@ -35,6 +35,8 @@ module.exports = {
         filter: (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics,
         subjectAsItem: true
       }),
+      iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
+      teamHooks.leaveOrganisations(),
       notifyHooks.unregisterDevices
     ]
   },
