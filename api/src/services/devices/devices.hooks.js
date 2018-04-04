@@ -1,4 +1,3 @@
-import { when } from 'feathers-hooks-common'
 import { hooks as notifyHooks } from 'kNotify'
 
 module.exports = {
