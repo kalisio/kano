@@ -29,7 +29,7 @@ test.page `${pages.getUrl('register')}`
 
 test('Edit profile', async test => {
   await auth.logIn(test)
-  await account.editProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/kalisio-logo.png') })
+  await account.editProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/aktnmap-logo.png') })
   await account.checkIdentity(test, 'toto')
 })
 
