@@ -8,11 +8,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kapp.dev.kalisio.xyz'
+  domain = 'https://app.dev.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kapp.test.kalisio.xyz'
+  domain = 'https://app.test.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kapp.kalisio.xyz'
+  domain = 'https://app.aktnmap.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -121,7 +121,7 @@ module.exports = {
     },
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kApp-',
+      filename: 'aktnmap-',
       datePattern: 'yyyy-MM-dd.log',
       maxDays: 30
       /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
@@ -133,7 +133,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kApp' : 'mongodb://127.0.0.1:27017/kApp')
+    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/aktnmap' : 'mongodb://127.0.0.1:27017/aktnmap')
   },
   storage: {
     accessKeyId: process.env.S3_ACCESS_KEY,

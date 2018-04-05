@@ -4,11 +4,11 @@ import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
 import server from '../src/main'
 
-describe('kApp', () => {
+describe('aktnmap', () => {
   let userService, userObject, orgService, orgObject, authorisationService, devicesService, pusherService, sns,
   memberService, tagService, tagObject, groupService, groupObject
   let now = new Date()
-  let logFilePath = path.join(__dirname, 'logs', 'kApp-' + now.toISOString().slice(0, 10) + '.log')
+  let logFilePath = path.join(__dirname, 'logs', 'aktnmap-' + now.toISOString().slice(0, 10) + '.log')
   const device = {
     registrationId: 'myfakeId',
     platform: 'ANDROID',

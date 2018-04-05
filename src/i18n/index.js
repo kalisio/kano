@@ -27,7 +27,7 @@ function resolveTranslation (module, locale) {
 
 export async function configureI18n () {
   // Defines the modules to be loaded
-  const modules = ['kCore', 'kTeam', 'kNotify', 'kMap', 'kEvent', 'kApp']
+  const modules = ['kCore', 'kTeam', 'kNotify', 'kMap', 'kEvent', 'aktnmap']
   try {
     // Retrieve the locale
     const locale = kCoreUtils.getLocale()

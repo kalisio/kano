@@ -2,13 +2,13 @@
 
 ## Kalisio application template
 
-[![Build Status](https://travis-ci.org/kalisio/kApp.png?branch=master)](https://travis-ci.org/kalisio/kApp)
-[![Code Climate](https://codeclimate.com/github/kalisio/kApp/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kApp)
-[![Test Coverage](https://codeclimate.com/github/kalisio/kApp/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kApp/coverage)
-[![Dependency Status](https://img.shields.io/david/kalisio/kApp.svg?style=flat-square)](https://david-dm.org/kalisio/kApp)
+[![Build Status](https://travis-ci.org/kalisio/aktnmap.png?branch=master)](https://travis-ci.org/kalisio/aktnmap)
+[![Code Climate](https://codeclimate.com/github/kalisio/aktnmap/badges/gpa.svg)](https://codeclimate.com/github/kalisio/aktnmap)
+[![Test Coverage](https://codeclimate.com/github/kalisio/aktnmap/badges/coverage.svg)](https://codeclimate.com/github/kalisio/aktnmap/coverage)
+[![Dependency Status](https://img.shields.io/david/kalisio/aktnmap.svg?style=flat-square)](https://david-dm.org/kalisio/aktnmap)
 [![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.gitbooks.io/kalisio)
-[![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kApp/badge.svg)](https://snyk.io/test/github/kalisio/kApp)
-[![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kApp.svg?style=plastic)](https://hub.docker.com/r/kalisio/kapp/)
+[![Known Vulnerabilities](https://snyk.io/test/github/kalisio/aktnmap/badge.svg)](https://snyk.io/test/github/kalisio/aktnmap)
+[![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/aktnmap.svg?style=plastic)](https://hub.docker.com/r/kalisio/aktnmap/)
 
 ### Under Development
 
@@ -24,6 +24,5 @@ Take also a look at the [roadmap](https://github.com/orgs/kalisio/projects/1).
 
 ### License
 
-Copyright (c) 2017 Kalisio
+Copyright (c) 2018 Kalisio
 
-Licensed under the [MIT license](LICENSE).

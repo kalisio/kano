@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-  kapp:
+  aktnmap:
     build:
       context: .
       dockerfile: ./dockerfile.${FLAVOR}
-    container_name: kapp
-    image: kalisio/kapp:${FLAVOR}
+    container_name: aktnmap
+    image: kalisio/aktnmap:${FLAVOR}
     depends_on:
-      - mongodb-kapp
+      - mongodb-aktnmap
     links:
-      - mongodb-kapp:mongodb
+      - mongodb-aktnmap:mongodb
     ports:
       - 8081:8081
     environment:
@@ -31,19 +31,19 @@ services:
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
       - NODE_APP_INSTANCE=${FLAVOR}
-      - DB_URL=mongodb://mongodb:27017/kApp
+      - DB_URL=mongodb://mongodb:27017/aktnmap
     networks:
-      - kapp
-  mongodb-kapp:
-    container_name: mongodb-kapp
+      - aktnmap
+  mongodb-aktnmap:
+    container_name: mongodb-aktnmap
     image: mongo
     volumes:
-      - mongodb_kapp:/data/db
+      - mongodb_aktnmap:/data/db
     networks:
-      - kapp
+      - aktnmap
 
 volumes:
-  mongodb_kapp:
+  mongodb_aktnmap:
 
 networks:
-  kapp:
+  aktnmap:

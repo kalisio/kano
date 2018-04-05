@@ -7,11 +7,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kapp.dev.kalisio.xyz'
+  domain = 'https://app.dev.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kapp.test.kalisio.xyz'
+  domain = 'https://app.test.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kapp.kalisio.xyz'
+  domain = 'https://app.aktnmap.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -32,8 +32,8 @@ module.exports = {
   apiPath: API_PREFIX,
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  appName: 'kApp',
-  appLogo: 'kalisio-logo.png',
+  appName: 'Akt\'n\'Map',
+  appLogo: 'aktnmap-logo.png',
   publisher: 'Kalisio',
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
@@ -49,7 +49,7 @@ module.exports = {
       { label: 'screen.CONTACT', url: website + '/contact' },
       { label: 'screen.TERMS_AND_POLICIES', url: website + '/terms' },
     ],
-    header: 'kalisio-banner.png'
+    header: 'aktnmap-banner.png'
   },
   login: {
     providers: ['google', 'github']
@@ -59,8 +59,7 @@ module.exports = {
     sideNav: 'layout/KSideNav'
   },
   appBar: {
-    title: 'kApp',
-    subtitle: 'A template application powered by Kalisio',
+    title: 'Akt\'n\'Map',
     speech: {
       language: 'en'
     }

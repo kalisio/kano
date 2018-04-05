@@ -1,15 +1,15 @@
 {
-  "name": "kApp-api",
+  "name": "aktnmap-api",
   "description": "Kalisio Web Services",
   "version": "0.1.0",
-  "homepage": "https://github.com/kalisio/kApp",
+  "homepage": "https://github.com/kalisio/aktnmap",
   "keywords": [
     "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kalisio/kApp.git"
+    "url": "git://github.com/kalisio/aktnmap.git"
   },
   "author": {
     "name": "Kalisio contributors",
@@ -17,7 +17,7 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kalisio/kApp/issues"
+    "url": "https://github.com/kalisio/aktnmap/issues"
   },
   "main": "main.js",
   "scripts": {

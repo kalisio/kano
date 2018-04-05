@@ -2,17 +2,17 @@
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export FLAVOR=dev
-	export DOMAIN=kapp.dev.kalisio.xyz
+	export DOMAIN=aktnmap.dev.kalisio.xyz
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
 	if [[ -z "$TRAVIS_TAG" ]]
 	then
 		export FLAVOR=test
-		export DOMAIN=kapp.test.kalisio.xyz
+		export DOMAIN=aktnmap.test.kalisio.xyz
 	else
 		export FLAVOR=prod
-		export DOMAIN=kapp.kalisio.xyz
+		export DOMAIN=aktnmap.kalisio.xyz
 	fi
 fi
 

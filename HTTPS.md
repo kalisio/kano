@@ -16,11 +16,11 @@ Certificate information:
 * Country Name (2 letter code) [AU]:FR
 * State or Province Name (full name) [Some-State]:Occitanie
 * Locality Name (eg, city) []:Castelnaudary
-* Organization Name (eg, company) [Internet Widgits Pty Ltd]:kApp
+* Organization Name (eg, company) [Internet Widgits Pty Ltd]:aktnamp
 * Organizational Unit Name (eg, section) []:
 * Common Name (e.g. server FQDN or YOUR name) []:localhost
 * Email Address []:kalisio@kalisio.xyz
 * A challenge password []:
 * An optional company name []:
 
-The kApp follows [Feathers guide to enable HTTPS](https://docs.feathersjs.com/api/express.html#https) and also similarly manages HTTPS on the client side when using Webpack in development.
+The Akt'n'Map follows [Feathers guide to enable HTTPS](https://docs.feathersjs.com/api/express.html#https) and also similarly manages HTTPS on the client side when using Webpack in development.

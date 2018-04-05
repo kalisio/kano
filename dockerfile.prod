@@ -2,13 +2,13 @@ FROM  node:8
 
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
-WORKDIR /opt/kapp
-COPY . /opt/kapp
+WORKDIR /opt/aktnmap
+COPY . /opt/aktnmap
 
 RUN yarn install
 RUN npm run build
 
-WORKDIR /opt/kapp/api
+WORKDIR /opt/aktnmap/api
 
 RUN yarn install
 RUN npm run build
