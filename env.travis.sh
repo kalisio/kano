@@ -3,7 +3,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*
 	export FLAVOR=dev
-	export DOMAIN=aktnmap.dev.kalisio.xyz
+	export DOMAIN=app.dev.aktnmap.xyz
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
@@ -11,11 +11,11 @@ then
 	then
 		export DEBUG=
 		export FLAVOR=test
-		export DOMAIN=aktnmap.test.kalisio.xyz
+		export DOMAIN=app.test.aktnmap.xyz
 	else
 		export DEBUG=
 		export FLAVOR=prod
-		export DOMAIN=aktnmap.kalisio.xyz
+		export DOMAIN=app.aktnmap.xyz
 	fi
 fi
 
