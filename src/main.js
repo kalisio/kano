@@ -62,7 +62,7 @@ Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
     router,
-    el: '#kapp',
+    el: '#app',
     render: h => h(require('./App')),
     i18n: new VueI18next(i18next)
   })
