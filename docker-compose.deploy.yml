@@ -11,7 +11,7 @@ services:
       - "traefik.backend=aktnmap"
       - "traefik.docker.network=traefik"
       - "traefik.enable=true"
-      - "traefik.port=8081"
+      - "traefik.port=8082"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.frontend.rule=Host:${DOMAIN}"
 
