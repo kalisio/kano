@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./dockerfile.${FLAVOR}
     container_name: kapp
-    image: kalisio/kapp
+    image: kalisio/kapp:${FLAVOR}
     depends_on:
       - mongodb-kapp
     links:
