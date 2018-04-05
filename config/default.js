@@ -65,7 +65,7 @@ module.exports = {
     }
   },
   sideNav: {
-    banner: 'kalisio-banner.png',
+    banner: 'aktnmap-banner.png',
     components: {
       user_identity: 'account/KIdentityPanel',
       user_dashboard: 'layout/KLinksPanel',
@@ -76,8 +76,7 @@ module.exports = {
   user_dashboard: {
     links: [
       { },
-      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } },
-      { }
+      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } }
     ]
   },
   user_organisations: {
