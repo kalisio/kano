@@ -17,6 +17,6 @@ else
 	scp app.env.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.env.sh
 	scp app.deploy.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.deploy.sh
 	scp app.remove.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.remove.sh
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd aktnmap; ./app.remove.sh; ./app.deploy.sh"
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd aktnmap; chmod u+x ./app.remove.sh; ./app.remove.sh; chmod u+x ./app.deploy.sh; ./app.deploy.sh"
 fi
 
