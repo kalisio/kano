@@ -76,8 +76,7 @@ module.exports = {
   user_dashboard: {
     links: [
       { },
-      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } },
-      { }
+      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } }
     ]
   },
   user_organisations: {
