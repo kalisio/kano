@@ -2,6 +2,8 @@ version: '3'
 
 services:
   kapp:
+    environment:
+      - DEBUG=
     working_dir: /opt/kapp
     volumes:
       - ./server-coverage:/opt/kapp/api/coverage
