@@ -18,18 +18,20 @@ export default class Organisations extends ApplicationLayout {
   async selectOrganisation (test, orgName) {
     await this.openSideNav(test)
     await test
-      .click(this.panel.find('#' + _.kebabCase(orgName)))   
+      .click(this.panel.find('#' + _.kebabCase(orgName)))
+      .wait(5000) 
   }
-  async createOrganisation (test, orgName, orgDescription) {
+  async createOrganisation (test, org) {
     await this.openSideNav(test)
     await test
       .click(this.newLink)
-      .typeText(this.createModal.find('#name-field'), orgName, { replace: true })
-      .typeText(this.createModal.find('#description-field'), orgDescription, { replace: true })
+      .typeText(this.createModal.find('#name-field'), org.name, { replace: true })
+      .typeText(this.createModal.find('#description-field'), org.description, { replace: true })
       .click(this.createModal.find('#apply-button'))
-      .wait(2000)
+      .wait(5000)
   }
   async updateOrganisationBilling (test, orgName) {
+    await this.openSideNav(test)
     await this.selectOrganisation(test, orgName)
     await this.clickOverflowMenu(test, '#settings')
     await this.clickTabBar(test, '#billing')
@@ -37,9 +39,10 @@ export default class Organisations extends ApplicationLayout {
       .click(this.billingEditor.find('#billing-field'))
       .click(Selector('.q-popover .q-item').nth(1))
       .click(this.billingEditor.find('#apply-button'))
-      .wait(1000)
+      .wait(5000)
   }
   async deleteOrganisation (test, orgName) {
+    await this.openSideNav(test)
     await this.selectOrganisation(test, orgName)
     await this.clickOverflowMenu(test, '#settings')
     await this.clickTabBar(test, '#danger-zone')
@@ -47,7 +50,7 @@ export default class Organisations extends ApplicationLayout {
       .click(VueSelector('k-organisation-dz k-block q-btn'))
       .typeText(Selector('.modal input[type=text]'), orgName)
       .click(Selector('.modal-buttons button').nth(0))
-      .wait(2000)
+      .wait(5000)
   }
 }
 

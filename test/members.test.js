@@ -21,11 +21,11 @@ const members = new pages.Members()
 
 const data = {
   users: [
-    { name: 'Owner Kalisio', email: 'owner@kalisio.xyz', password: 'owner' },
-    { name: 'Manager Kalisio', email: 'manager@kalisio.xyz', password: 'manager' },
-    { name: 'Member Kalisio', email: 'member@kalisio.xyz', password: 'member' }
+    { name: 'Members owner', email: 'members-owner@kalisio.xyz', password: 'owner' },
+    { name: 'Members manager', email: 'members-manager@kalisio.xyz', password: 'manager' },
+    { name: 'Members member', email: 'members-member@kalisio.xyz', password: 'member' }
   ],
-  guest: { name: 'Guest Kalisio', email: 'guest@kalisio.xyz' }
+  guest: { name: 'Members guest', email: 'members-guest@kalisio.xyz' }
 }
 
 test.page `${pages.getUrl('login')}`
@@ -34,7 +34,7 @@ test.page `${pages.getUrl('login')}`
 })
 
 test('Add users to organisation', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.checkMembersCount(test, 1)
@@ -45,7 +45,7 @@ test('Add users to organisation', async test => {
 })
 
 test('Invite data.guest to join the organisation', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.inviteMember(test, data.guest, pages.Roles.manager)
@@ -53,7 +53,7 @@ test('Invite data.guest to join the organisation', async test => {
 })
 
 test('tag member', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.tagMember(test, data.users[1].name, 'fireman')
@@ -61,7 +61,7 @@ test('tag member', async test => {
 })
 
 test('Change guest role', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.changeMemberRole(test, data.guest.name, pages.Roles.manager)
@@ -69,7 +69,7 @@ test('Change guest role', async test => {
 })
 
 test('Remove members from organisation', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.removeMember(test, data.users[1].name)
@@ -81,5 +81,6 @@ test('Remove members from organisation', async test => {
 })
 
 test('Clean registrated users', async test => {
+  // FIXME: for (let i in data.users) await organisations.deleteOrganisation(test, data.users[i].name)
   await account.unregisterUsers(test, data.users)
 })

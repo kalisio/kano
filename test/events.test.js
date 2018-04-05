@@ -24,16 +24,16 @@ const events = new pages.Events()
 
 const data = {
   users: [
-    { name: 'Owner Kalisio', email: 'owner@kalisio.xyz', password: 'owner' },
-    { name: 'Manager Kalisio', email: 'manager@kalisio.xyz', password: 'manager' },
-    { name: 'Member Kalisio', email: 'member@kalisio.xyz', password: 'member' }
+    { name: 'Events owner', email: 'events-owner@kalisio.xyz', password: 'owner' },
+    { name: 'Events manager', email: 'events-manager@kalisio.xyz', password: 'manager' },
+    { name: 'Events member', email: 'events-member@kalisio.xyz', password: 'member' }
   ],
-  group: { name: 'Group', description: 'A group' },
-  template: { name: 'Template', description: 'An event template' },
+  group: { name: 'Events group', description: 'A group' },
+  template: { name: 'Events template', description: 'An event template' },
   events: [
-    { name: 'Event to member', participants: 'Manager Kalisio'},
-    { name: 'Event to group', participants: 'Group'},
-    { name: 'Event to tag', participants: 'fireman'}
+    { name: 'Events member', participants: 'Events manager'},
+    { name: 'Events group', participants: 'Events group'},
+    { name: 'Events tag', participants: 'fireman'}
   ]
 }
 
@@ -43,7 +43,7 @@ test.page `${pages.getUrl('login')}`
 })
 
 test('Setup organisation', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.addMember(test, data.users[1].name, pages.Roles.manager)
@@ -57,7 +57,7 @@ test('Setup organisation', async test => {
 })
 
 test('Create events', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await events.clickToolbar(test, events.getToolbarEntry())
   for (let i in data.events) await events.createEvent(test, data.template.name, data.events[i])
@@ -65,7 +65,7 @@ test('Create events', async test => {
 })
 
 test('Delete event', async test => {
-  await auth.logIn(test, data.users[0])
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await events.clickToolbar(test, events.getToolbarEntry())
   for (let i in data.events) await events.deleteEvent(test, data.events[i].name)

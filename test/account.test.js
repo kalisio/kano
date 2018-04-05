@@ -30,10 +30,7 @@ test.page `${pages.getUrl('register')}`
 test('Edit profile', async test => {
   await auth.logIn(test)
   await account.editProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/kalisio-logo.png') })
-
-  const identityPanel = await account.identityPanel.getVue()
-  // We should have at least a changed user name
-  await test.expect(identityPanel.state.name).eql('toto', 'User name should be changed')
+  await account.checkIdentity(test, 'toto')
 })
 
 test('Edit password', async test => {

@@ -60,7 +60,7 @@ test('Cleanup local user', async test => {
   await pages.api.remove('users', user._id)
 })
 
-test('Google login', async test => {
+test.skip('Google login', async test => {
   await auth.logInGoogle(test)
   
   const signupAlert = await app.signupAlert.getVue()
@@ -72,13 +72,13 @@ test('Google login', async test => {
   await auth.logOut(test)
 })
 
-test('Cleanup Google user', async test => {
+test.skip('Cleanup Google user', async test => {
   await auth.logInGoogle(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)
 })
 
-test('GitHub login', async test => {
+test.skip('GitHub login', async test => {
   await auth.logInGitHub(test)
   
   const signupAlert = await app.signupAlert.getVue()
@@ -90,7 +90,7 @@ test('GitHub login', async test => {
   await auth.logOut(test)
 })
 
-test('Cleanup GitHub user', async test => {
+test.skip('Cleanup GitHub user', async test => {
   await auth.logInGitHub(test)
   let user = await pages.getFromStore('user')
   await pages.api.remove('users', user._id)

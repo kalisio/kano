@@ -6,80 +6,60 @@ export default class Account extends ApplicationLayout {
   constructor (auth) {
     super()
     this.auth = auth
-    this.identityPanel = VueSelector('k-identity-panel')
-    this.identity = Selector('#account')
     // Profile Zone
-    // FIXME: don't know why but VueSelector('k-tab-bar q-route-tab') does not work
-    this.profile = Selector('.q-tab-label').nth(0)
-    this.avatarInput = VueSelector('k-account-activity k-attachment-field')
+    this.profileEditor = VueSelector('k-account-activity k-editor')
+    //this.avatarInput = VueSelector('k-account-activity k-attachment-field')
     // The file input added by drop zone is actually hidden and replaced by dropzone GUI
-    this.fileInput = Selector('.dz-hidden-input', { visibilityCheck: false })
-    this.nameInput = VueSelector('k-account-activity k-text-field')
-    this.updateProfile = VueSelector('k-account-activity').find('#apply-button')
+    this.fileInput = Selector('.dz-hidden-input') //, { visibilityCheck: false })
+    //this.nameInput = VueSelector('k-account-activity k-text-field')
+    //this.updateProfile = VueSelector('k-account-activity').find('#apply-button')
     // Security Zone
-    this.security = Selector('.q-tab-label').nth(1)
-    this.changePassword = VueSelector('k-account-security k-block q-btn').nth(0)
-    this.passwordInput = VueSelector('k-password-field').nth(0)
-    this.newPasswordInput = VueSelector('k-password-field').nth(1)
-    this.newPasswordConfirm = VueSelector('k-password-field').nth(2)
-    this.updatePassword = VueSelector('k-change-password k-screen q-btn')
-    this.changeEmail = VueSelector('k-account-security k-block q-btn').nth(1)
-    this.passwordInput = VueSelector('k-password-field')
-    this.newEmailInput = VueSelector('k-email-field')
-    this.updateEmail = VueSelector('k-send-change-identity k-screen q-btn')
-    // Danger Zone
-    this.dz = Selector('.q-tab-label').nth(2)
-    this.deleteAccount = VueSelector('k-account-dz k-block q-btn')
-    this.confirmAccountName = Selector('.modal input[type=text]')
-    this.confirmDeleteAccount = Selector('.modal-buttons button').nth(0)
+    this.changePasswordButton = VueSelector('k-account-security k-block q-btn').nth(0)
+    this.changePasswordScreen = VueSelector('k-change-password')
+    this.changeEmailButton = VueSelector('k-account-security k-block q-btn').nth(1)
+    this.changeEmailScreen = VueSelector('k-send-change-identity')
   }
   async editProfile (test, profile) {
-    await this.openSideNav(test)
+    await this.clickIdentity(test)
+    await this.clickTabBar(test, '#profile')
     await test
-      .click(this.identity) // Ensure identity activity is open
-      .click(this.profile)
-      .click(this.avatarInput)
+      .click(this.profileEditor.find('#avatar-field'))
       .setFilesToUpload(this.fileInput, profile.avatar)
-      .typeText(this.nameInput, profile.name, { replace: true })
-      .click(this.updateProfile)
-      // Need this so that we are sure request is finished
+      .click(VueSelector('k-uploader').find('#done-button'))
+      .wait(500)
+      .typeText(this.profileEditor.find('#name-field'), profile.name, { replace: true })
+      .click(this.profileEditor.find('#apply-button'))
       .wait(5000)
   }
   async updatePassword (test, identity) {
-    await this.openSideNav(test)
+    await this.clickIdentity(test)
+    await this.clickTabBar(test, '#security')
     await test
-      .click(this.identity) // Ensure identity activity is open
-      .click(this.security)
-      .click(this.changePassword)
-      .typeText(this.passwordInput, identity.password, { replace: true })
-      .typeText(this.newPasswordInput, identity.newPassword, { replace: true })
-      .typeText(this.newPasswordConfirm, identity.newPassword, { replace: true })
-      .click(this.updatePassword)
-      // Need this so that we are sure request is finished
+      .click(this.changePasswordButton)
+      .typeText(this.changePasswordScreen.find('#oldPassword-field'), identity.password, { replace: true })
+      .typeText(this.changePasswordScreen.find('#password-field'), identity.newPassword, { replace: true })
+      .typeText(this.changePasswordScreen.find('#confirmPassword-field'), identity.newPassword, { replace: true })
+      .click(this.changePasswordScreen.find('#change-password'))
       .wait(5000)
   }
-  async udateEmail (test, identity) {
-    await this.openSideNav(test)
+  async updateEmail (test, identity) {
+    await this.clickIdentity(test)
+    await this.clickTabBar(test, '#security')
     await test
-      .click(this.identity) // Ensure identity activity is open
-      .click(this.security)
-      .click(this.changeEmail)
-      .typeText(this.passwordInput, identity.password, { replace: true })
-      .typeText(this.newEmailInput, identity.newEmail, { replace: true })
-      .click(this.updateEmail)
-      // Need this so that we are sure request is finished
+      .click(this.changeEmailButton)
+      .typeText(this.changeEmailScreen.find('#password-field'), identity.password, { replace: true })
+      .typeText(this.changeEmailScreen.find('#email-field'), identity.newEmail, { replace: true })
+      .click(this.changeEmailScreen.find('#change-identity'))
       .wait(5000)
   }
   async removeAccount (test, name) {
-    await this.openSideNav(test)
+    await this.clickIdentity(test)
+    await this.clickTabBar(test, '#danger-zone')
     await test
-      .click(this.identity) // Ensure identity activity is open
-      .click(this.dz) // Ensure danger zone tab is selected
-      .click(this.deleteAccount)
-      .typeText(this.confirmAccountName, name)
-      .click(this.confirmDeleteAccount)
-      // Need this so that we are sure request is finished
-      .wait(5000)
+      .click(VueSelector('k-account-dz k-block q-btn'))
+      .typeText(Selector('.modal input[type=text]'), name)
+      .click(Selector('.modal-buttons button').nth(0))
+      .wait(10000)
   }
   async registerUsers (test, users) {
     for (let i in users) {

@@ -22,11 +22,11 @@ export default class Events extends ApplicationLayout {
     await test
       .typeText(this.createEventModal.find('#name-field'), event.name, { replace: true })
       .typeText(this.createEventModal.find('#participants-field'), event.participants, { replace: true })
-      .wait(1000)
-      .click(Selector('.q-popover .q-item').nth(0))
-      .wait(1000)
-      .click(this.createEventModal.find('#apply-button'))
       .wait(2000)
+      .click(Selector('.q-popover .q-item').nth(0))
+      .wait(2000)
+      .click(this.createEventModal.find('#apply-button'))
+      .wait(5000)
   }
   async deleteEvent (test, eventName) {
     let eventId = await this.getItemId(test, this.eventsGrid, eventName)
@@ -34,7 +34,7 @@ export default class Events extends ApplicationLayout {
       .click(this.idSelector(eventId).find('#card-overflow-menu-entry'))
       .click(Selector('.q-popover').find('#remove-event'))
       .click(Selector('.modal-buttons button').nth(0))
-      .wait(2000)
+      .wait(5000)
   }
   async checkEventsCount (test, count) {
     await this.checkCollectionCount(test, this.eventsGrid, count)

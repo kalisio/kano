@@ -22,7 +22,7 @@ export default class Groups extends ApplicationLayout {
       .typeText(this.createGroupModal.find('#name-field'), group.name, { replace: true })
       .typeText(this.createGroupModal.find('#description-field'), group.description, { replace: true })
       .click(this.createGroupModal.find('#apply-button'))
-      .wait(2000)
+      .wait(5000)
   }
   async editGroup (test, groupName, newGroupDescription) {
     let groupId = await this.getItemId(test, this.groupsGrid, groupName)
@@ -30,7 +30,7 @@ export default class Groups extends ApplicationLayout {
       .click(this.idSelector(groupId).find('#edit-group'))
       .typeText(this.editGroupModal.find('#description-field'), newGroupDescription, { replace: true })
       .click(this.editGroupModal.find('#apply-button'))
-      .wait(2000)
+      .wait(5000)
   }
   async deleteGroup (test, groupName) {
     let groupId = await this.getItemId(test, this.groupsGrid, groupName)
@@ -38,7 +38,7 @@ export default class Groups extends ApplicationLayout {
       .click(this.idSelector(groupId).find('#card-overflow-menu-entry'))
       .click(Selector('.q-popover').find('#remove-group'))
       .click(Selector('.modal-buttons button').nth(0))
-      .wait(2000)
+      .wait(5000)
   }
   async checkGroupsCount (test, count) {
     await this.checkCollectionCount(test, this.groupsGrid, count)

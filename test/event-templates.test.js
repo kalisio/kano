@@ -20,10 +20,10 @@ const organisations = new pages.Organisations()
 const templates = new pages.EventTemplates()
 
 const data = {
-  user: { name: 'User Kalisio', email: 'user@kalisio.xyz', password: 'user' },
+  user: { name: 'Templates owner', email: 'tempaltes-owner@kalisio.xyz', password: 'user' },
   templates: [
-    { name: 'Template one', description: 'A first template without a workflow' },
-    { name: 'Template two', description: 'A second template with a workflow' }
+    { name: 'Templates one', description: 'A first template without a workflow' },
+    { name: 'Templates two', description: 'A second template with a workflow' }
   ]
 }
 
@@ -33,7 +33,7 @@ test.page `${pages.getUrl('register')}`
 })
 
 test('Create template', async test => {
-  await auth.logIn(test, data.user)
+  await auth.logInAndCloseSignupAlert(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -42,7 +42,7 @@ test('Create template', async test => {
 })
 
 test('Copy template', async test => {
-  await auth.logIn(test, data.user)
+  await auth.logInAndCloseSignupAlert(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -51,7 +51,7 @@ test('Copy template', async test => {
 })
 
 test('Update template description', async test => {
-  await auth.logIn(test, data.user)
+  await auth.logInAndCloseSignupAlert(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -59,7 +59,7 @@ test('Update template description', async test => {
 })
 
 test('Delete template', async test => {
-  await auth.logIn(test, data.user)
+  await auth.logInAndCloseSignupAlert(test, data.user)
   await organisations.selectOrganisation(test, data.user.name)
   await templates.clickToolbar(test, templates.getToolbarEntry())
   await templates.clickTabBar(test, templates.getTabBarEntry())
@@ -68,6 +68,6 @@ test('Delete template', async test => {
 })
 
 test('Clean registrated users', async test => {
-  await auth.logIn(test, data.user)
-  await account.removeAccount(test, data.user)
+  await auth.logInAndCloseSignupAlert(test, data.user)
+  await account.removeAccount(test, data.user.name)
 })

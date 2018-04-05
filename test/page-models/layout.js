@@ -13,6 +13,8 @@ export default class ApplicationLayout {
     this.sideNav = VueSelector('k-side-nav')
     this.tabBar = VueSelector('k-tab-bar')
     this.fab = Selector('.q-fab')
+    this.identityPanel = VueSelector('k-identity-panel')
+    this.identityLink = Selector('#account')
     this.signupAlert = VueSelector('k-signup-alert')
     this.idSelector = Selector((id) => { return document.getElementById(id) })
   }
@@ -27,36 +29,52 @@ export default class ApplicationLayout {
     if (!isSideNavVisible) {
       await test
         .click(this.sideNavToggle) // Ensure menu is open
-        .wait(250)
+        .wait(1000)
     }
   }
+  async clickIdentity (test) {
+    await this.openSideNav(test)
+    await test
+      .click(this.identityLink)
+      .wait(1000)
+
+  }
+  async checkIdentity (test, name) {
+    const identityPanel = await this.identityPanel.getVue()
+    await test.expect(identityPanel.state.name).eql(name, 'User name is invalid')
+  }
   async closeSignupAlert (test) {
-    await test.click(this.signupAlert.find('.q-alert-close').find('.cursor-pointer'))
+    await test
+      .click(this.signupAlert.find('.q-alert-close').find('.cursor-pointer'))
+      .wait(1000)
   }
   async clickToolbar (test, entry) {
     await test
       .click(this.appBar.find(entry))
-      .wait(250)
+      .wait(1000)
   }
   async clickOverflowMenu (test, entry) {
     await test
       .click(this.overflowMenuEntry)
       .click(this.overflowMenu.find(entry))
-      .wait(250)
+      .wait(1000)
   }
   async clickTabBar (test, tab) {
     await test
       .click(this.tabBar.find(tab))
-      .wait(250)
+      .wait(1000)
   }
   async openAndClickFab (test, entry) {
     await test
       .click(Selector(this.fab))
+      .wait(1000)
       .click(this.fab.find(entry))
+      .wait(1000)
   }
   async clickFab (test, entry) {
     await test
       .click(Selector(entry))
+      .wait(1000)
   }
   async isErrorVisible () {
     return await this.error.visible
