@@ -20,5 +20,5 @@ then
 fi
 
 echo "DEBUG=$DEBUG" > .env
-echo "FLAVOR=$FLAVOR" > .env
+echo "FLAVOR=$FLAVOR" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
