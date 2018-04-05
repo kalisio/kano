@@ -74,18 +74,16 @@ module.exports = {
       user_actions: 'layout/KLinksPanel'
     }
   },
-  user_identity: {
-  },
   user_dashboard: {
     links: [
-      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } }
+      { },
+      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } },
+      { }
     ]
   },
   user_organisations: {
     icon: 'domain',
-    label: 'Organisations',
-    bgColor: 'bg-faded',
-    textColor: 'text-light'
+    label: 'Organisations'
   },
   user_actions: {
     links: [
