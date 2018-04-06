@@ -61,7 +61,7 @@ jobs:
       skip_cleanup: true
       script: bash deploy.travis.sh
       on:
-        branch: master
+        all_branches: true
     
   - stage: ANDROID
     language: android
