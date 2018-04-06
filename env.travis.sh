@@ -18,6 +18,7 @@ then
 		export DOMAIN=app.aktnmap.xyz
 	fi
 fi
+export NODE_APP_INSTANCE=$FLAVOR
 
 echo "DEBUG=$DEBUG" > .env
 echo "FLAVOR=$FLAVOR" >> .env
