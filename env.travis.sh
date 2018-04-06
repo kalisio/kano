@@ -19,6 +19,12 @@ then
 	fi
 fi
 export NODE_APP_INSTANCE=$FLAVOR
+# These ones are just for travis to SSH to the target machine
+# Extract value from the right env variable according to flavor
+SSH_USER_ENV_VAR_NAME=SSH_USER_$FLAVOR
+export SSH_USER=${!SSH_USER_ENV_VAR_NAME}
+SSH_REMOTE_ENV_VAR_NAME=SSH_REMOTE_$FLAVOR
+export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
 
 echo "DEBUG=$DEBUG" > .env
 echo "FLAVOR=$FLAVOR" >> .env

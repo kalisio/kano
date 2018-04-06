@@ -2,7 +2,7 @@ FROM  node:8
 
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
-ENV DEBUG
+ENV DEBUG=
 ENV NODE_APP_INSTANCE=prod
 
 WORKDIR /opt/aktnmap
