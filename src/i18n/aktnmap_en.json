@@ -11,6 +11,7 @@
   "Context": {
     "EVENTS": "Events & templates",
     "MEMBERS": "Members & groups",
+    "REFRESH": "Refresh",
     "SETTINGS": "Settings"
   }
 }

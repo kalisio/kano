@@ -11,6 +11,9 @@ export default {
   name: 'context',
   mixins: [mixins.baseContext],
   methods: {
+    refresh () {
+      window.location.reload()
+    },
     getActionsForContext (context) {
       let actions = { toolbar: [], menu: [] }
       if (this.$can('service', 'events', context._id)) {
@@ -19,6 +22,7 @@ export default {
       if (this.$can('service', 'members', context._id)) {
         actions.toolbar.push({ name: 'members', icon: 'group', label: this.$t('Context.MEMBERS'), route: { name: 'members-activity', params: { contextId: context._id } } })
       }
+      actions.toolbar.push({ name: 'refresh', icon: 'refresh', label: this.$t('Context.REFRESH'), handler: this.refresh })
       if (this.$can('update', 'organisations', context._id, { _id: context._id })) {
         actions.menu.push({ name: 'settings', icon: 'settings', label: this.$t('Context.SETTINGS'), route: { name: 'settings-activity', params: { perspective: 'properties', contextId: context._id } } })
       }
