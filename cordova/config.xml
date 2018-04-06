@@ -117,5 +117,5 @@
     <plugin name="cordova-plugin-inappbrowser" spec="~2.0.2" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="~4.1.5" />
     <plugin name="phonegap-plugin-push" spec="~2.1.2" />
-    <engine name="android" spec="~6.4.0" />
+    <engine name="android" spec="^6.4.0" />
 </widget>

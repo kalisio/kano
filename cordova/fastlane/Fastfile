@@ -13,7 +13,13 @@ default_platform(:android)
 
 platform :android do
   desc "Supply a new version to the Google Play Console"
-  lane :deploy do
+  lane :dev do
     upload_to_play_store(track: 'alpha', apk: './platforms/android/build/outputs/apk/release/android-release.apk')
+  end
+  lane :test do
+    upload_to_play_store(track: 'beta', apk: './platforms/android/build/outputs/apk/release/android-release.apk')
+  end
+  lane :prod do
+    upload_to_play_store(track: 'production', apk: './platforms/android/build/outputs/apk/release/android-release.apk')
   end
 end

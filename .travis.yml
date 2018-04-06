@@ -84,8 +84,8 @@ jobs:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     - aws s3 sync s3://aktnmap-builds/$TRAVIS_BUILD_NUMBER cordova/www
-    - export ORG_GRADLE_PROJECT_cdvVersionCode=$TRAVIS_BUILD_NUMBER
-    - npm run cordova:supply:android
+    - bash android.travis.sh
+
 
 
 
