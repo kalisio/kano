@@ -11,7 +11,7 @@ module.exports = {
     create: [ notifyHooks.addVerification ],
     update: [],
     patch: [],
-    remove: []
+    remove: [ teamHooks.preventRemoveUser ]
   },
 
   after: {
@@ -35,7 +35,6 @@ module.exports = {
         filter: (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics,
         subjectAsItem: true
       }),
-      iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
       teamHooks.leaveOrganisations(),
       notifyHooks.unregisterDevices
     ]
