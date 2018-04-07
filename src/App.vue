@@ -66,8 +66,8 @@ export default {
     })
     Events.$on('error', error => {
       // Translate the message if a translation key exists
-      if (error.data.translationKey) {
-        error.message = this.$t('errors.' + error.data.translationKey, error.data.translationParams)
+      if (error.data.translation) {
+        error.message = this.$t('errors.' + error.data.translation.key, error.data.translation.params)
       }
       else {
         // Overwrite the message using error code
