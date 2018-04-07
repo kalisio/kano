@@ -11,7 +11,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [ teamHooks.preventRemoveOrganisation ]
   },
 
   after: {
@@ -26,6 +26,7 @@ module.exports = {
     patch: [],
     remove: [ coreHooks.setAsDeleted,
       teamHooks.removeOrganisationGroups,
+      teamHooks.removeOrganisationTags,
       teamHooks.removeOrganisationAuthorisations,
       notifyHooks.removeTopic,
       eventHooks.removeOrganisationServices,
