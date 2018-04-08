@@ -15,7 +15,7 @@ fixture `EventTemplates`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
 const templates = new pages.EventTemplates()
 
@@ -69,5 +69,6 @@ test('Delete template', async test => {
 
 test('Clean registrated users', async test => {
   await auth.logInAndCloseSignupAlert(test, data.user)
+  await organisations.deleteOrganisation(test, data.user.name)
   await account.removeAccount(test, data.user.name)
 })

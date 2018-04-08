@@ -1,0 +1,30 @@
+import { Selector } from 'testcafe'
+import VueSelector from 'testcafe-vue-selectors'
+import ApplicationLayout from './layout'
+import _ from 'lodash'
+
+export default class Users extends ApplicationLayout {
+  constructor (authentication, account, organisations) {
+    super()
+    this.auth = authentication
+    this.account = account
+    this.org = organisations
+  }
+  async registerUsers (test, users) {
+    for (let i in users) {
+      await test.click(Selector('#register-link'))
+      await this.auth.signIn(test, users[i])
+      await this.auth.logOut(test)
+      await test.click(Selector('#login-link'))
+    }
+  }
+  async unregisterUsers (test, users) {
+    for (let i in users) {
+      await this.auth.logIn(test, users[i])
+      await this.org.deleteOrganisation(test, users[i].name)
+      await this.account.removeAccount(test, users[i].name)
+      await test.click('#login-link')
+    }
+  }
+}
+

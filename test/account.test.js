@@ -17,7 +17,8 @@ fixture `Account`// declare the fixture
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const organisations = new pages.Organisations()
+const account = new pages.Account()
 
 const newPassword = 'kalisio-new'
 const newEmail = 'kalisio@kalisio.com'
@@ -57,6 +58,7 @@ test('Edit email', async test => {
 
 test('Delete account', async test => {
   await auth.logIn(test, { password: newPassword })
+  await organisations.deleteOrganisation(test, 'Kalisio')
   await account.removeAccount(test, 'toto')
 
   let screen = await auth.logoutScreen.getVue()

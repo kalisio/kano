@@ -1,4 +1,5 @@
 // Page models
+import { Selector } from 'testcafe'
 import * as pages from './page-models'
 
 fixture `Events`// declare the fixture
@@ -15,8 +16,9 @@ fixture `Events`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
+const users = new pages.Users(auth, account, organisations)
 const members = new pages.Members()
 const groups = new pages.Groups()
 const templates = new pages.EventTemplates()
@@ -38,11 +40,8 @@ const data = {
 }
 
 test.page `${pages.getUrl('login')}`
-('Users registration', async test => {
-  await account.registerUsers(test, data.users)
-})
-
-test('Setup organisation', async test => {
+('Setup context', async test => {
+  await users.registerUsers(test, data.users)
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
@@ -72,6 +71,15 @@ test('Delete event', async test => {
   await events.checkEventsCount(test, 0)
 })
 
-test('Clean registrated users', async test => {
-  await account.unregisterUsers(test, data.users)
+test('Clear context', async test => {
+  // Remove the created group
+  await auth.logInAndCloseSignupAlert(test, data.users[0])
+  await organisations.selectOrganisation(test, data.users[0].name)
+  await members.clickToolbar(test, members.getToolbarEntry())
+  await groups.clickTabBar(test, groups.getTabBarEntry())
+  await groups.deleteGroup(test, data.group.name)
+  await auth.logOut(test)
+  await test.click(Selector('#login-link'))
+  // Unregister the users
+  await users.unregisterUsers(test, data.users)
 })

@@ -15,8 +15,9 @@ fixture `Groups`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
+const users = new pages.Users(auth, account, organisations)
 const members = new pages.Members()
 const groups = new pages.Groups()
 
@@ -34,7 +35,7 @@ const data = {
 
 test.page `${pages.getUrl('login')}`
 ('Users registration', async test => {
-  await account.registerUsers(test, data.users)
+  await users.registerUsers(test, data.users)
 })
 
 test('Add users to organisation', async test => {
@@ -74,10 +75,9 @@ test('Delete group', async test => {
   await organisations.selectOrganisation(test, data.users[0].name)
   await groups.clickToolbar(test, groups.getToolbarEntry())
   await groups.clickTabBar(test, groups.getTabBarEntry())
-  await groups.deleteGroup(test, data.groups[0].name)
-  await groups.checkGroupsCount(test, 1)
+  await groups.deleteGroups(test, data.groups)
 })
 
 test('Clean registrated users', async test => {
-  await account.unregisterUsers(test, data.users)
+  await users.unregisterUsers(test, data.users)
 })

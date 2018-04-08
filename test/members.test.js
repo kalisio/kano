@@ -15,8 +15,9 @@ fixture `Members`// declare the fixture
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
+const users = new pages.Users(auth, account, organisations)
 const members = new pages.Members()
 
 const data = {
@@ -30,7 +31,7 @@ const data = {
 
 test.page `${pages.getUrl('login')}`
 ('Users registration', async test => {
-  await account.registerUsers(test, data.users)
+  await users.registerUsers(test, data.users)
 })
 
 test('Add users to organisation', async test => {
@@ -44,7 +45,7 @@ test('Add users to organisation', async test => {
   await members.checkMembersCount(test, 3)
 })
 
-test('Invite data.guest to join the organisation', async test => {
+test('Invite guest to join the organisation', async test => {
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
@@ -56,7 +57,7 @@ test('tag member', async test => {
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
-  await members.tagMember(test, data.users[1].name, 'fireman')
+  await members.tagMember(test, data.users[1].name, 'tag')
   await members.checkMembersCount(test, 4)
 })
 
@@ -81,6 +82,8 @@ test('Remove members from organisation', async test => {
 })
 
 test('Clean registrated users', async test => {
+  // await auth.logIn(test, data.users[0])
+  // await account.removeAccount(test, data.users[0].name)
   // FIXME: for (let i in data.users) await organisations.deleteOrganisation(test, data.users[i].name)
-  await account.unregisterUsers(test, data.users)
+  await users.unregisterUsers(test, data.users)
 })

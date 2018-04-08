@@ -51,7 +51,7 @@ export default class ApplicationLayout {
   async clickToolbar (test, entry) {
     await test
       .click(this.appBar.find(entry))
-      .wait(1000)
+      .wait(2000)
   }
   async clickOverflowMenu (test, entry) {
     await test
@@ -62,7 +62,7 @@ export default class ApplicationLayout {
   async clickTabBar (test, tab) {
     await test
       .click(this.tabBar.find(tab))
-      .wait(1000)
+      .wait(2000)
   }
   async openAndClickFab (test, entry) {
     await test

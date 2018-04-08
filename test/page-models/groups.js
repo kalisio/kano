@@ -40,6 +40,14 @@ export default class Groups extends ApplicationLayout {
       .click(Selector('.modal-buttons button').nth(0))
       .wait(5000)
   }
+  async deleteGroups (test, groups) {
+    let count = groups.length
+    for (let i in groups) {
+      await this.deleteGroup(test, groups[i].name)
+      count--
+      await this.checkGroupsCount(test, count)
+    }
+  }
   async checkGroupsCount (test, count) {
     await this.checkCollectionCount(test, this.groupsGrid, count)
   }

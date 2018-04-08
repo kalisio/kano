@@ -7,6 +7,7 @@ import Members from './members'
 import Groups from './groups'
 import EventTemplates from './event-templates'
 import Events from './events'
+import Users from './users'
 
 // Export all models
 export {
@@ -17,7 +18,8 @@ export {
 	Members,
 	Groups,
 	EventTemplates,
-	Events
+	Events,
+	Users
 }
 
 // Then util constants
@@ -44,6 +46,10 @@ export const goBack = ClientFunction(() => window.history.back())
 export const checkNoClientError = async (test) => {
 	const { error } = await test.getBrowserConsoleMessages()
   await test.expect(error[0]).notOk()
+}
+export const checkClientError = async (test) => {
+	const { error } = await test.getBrowserConsoleMessages()
+  await test.expect(error[0]).ok()
 }
 // Mock Geolocation API that does not work well in headless browsers
 // See https://github.com/DevExpress/testcafe/issues/1991

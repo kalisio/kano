@@ -3,9 +3,8 @@ import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
 
 export default class Account extends ApplicationLayout {
-  constructor (auth) {
+  constructor () {
     super()
-    this.auth = auth
     // Profile Zone
     this.profileEditor = VueSelector('k-account-activity k-editor')
     //this.avatarInput = VueSelector('k-account-activity k-attachment-field')
@@ -60,21 +59,6 @@ export default class Account extends ApplicationLayout {
       .typeText(Selector('.modal input[type=text]'), name)
       .click(Selector('.modal-buttons button').nth(0))
       .wait(10000)
-  }
-  async registerUsers (test, users) {
-    for (let i in users) {
-      await test.click(Selector('#register-link'))
-      await this.auth.signIn(test, users[i])
-      await this.auth.logOut(test)
-      await test.click(Selector('#login-link'))
-    }
-  }
-  async unregisterUsers (test, users) {
-    for (let i in users) {
-      await this.auth.logIn(test, users[i])
-      await this.removeAccount(test, users[i].name)
-      await test.click('#login-link')
-    }
   }
 }
 
