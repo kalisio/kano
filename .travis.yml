@@ -40,7 +40,7 @@ jobs:
     - docker
     addons:
       code_climate:
-        repo_token: 0c731245ebc783e72b0ac56a58e7e9bc8b01550754ff01301212b3f32ac98dcb
+        repo_token: 19d3ef0c5e4541c913514b7a3a3825829e5e354f08dc39fd2c03b7898958d597
     install:
     - npm install -g codeclimate-test-reporter
     script:
