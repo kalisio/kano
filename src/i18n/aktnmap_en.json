@@ -13,5 +13,9 @@
     "MEMBERS": "Members & groups",
     "REFRESH": "Refresh",
     "SETTINGS": "Settings"
+  },
+  "Index": {
+    "DISCONNECT": "The server connection has been lost, please wait until reconnection...",
+    "RECONNECT": "We are trying to reconnect..."
   }
 }

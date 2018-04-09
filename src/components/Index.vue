@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Toast, Events } from 'quasar'
+import { Toast, Events, Loading, Alert } from 'quasar'
 import { mixins, beforeGuard } from 'kCore/client'
 import utils from '../utils'
 
@@ -70,6 +70,29 @@ export default {
       // Check if we need to redirect based on the fact there is an authenticated user
       this.redirect()
     })
+
+    if (this.$api.socket) {
+      // Display error message if we cannot contact the server
+      this.$api.socket.on('reconnect_error', () => {
+        // Display it only the first time the error appears because multiple attempts will be tried
+        if (!this.pendingReconnection) {
+          this.pendingReconnection = Alert.create({html: this.$t('Index.DISCONNECT')})
+        }
+      })
+      // Handle reconnection correctly, otherwise auth seems to be lost
+      // Also easier to perform a full refresh instead of handling this specifically on each activity
+      this.$api.socket.on('reconnect', () => {
+        // Dismiss pending reconnection error message
+        if (this.pendingReconnection) {
+          this.pendingReconnection.dismiss()
+          this.pendingReconnection = null
+        }
+        Loading.show({message: this.$t('Index.RECONNECT')})
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000)
+      })
+    }
   }
 }
 </script>

@@ -13,5 +13,9 @@
     "MEMBERS": "Membres & groupes",
     "REFRESH": "Rafraîchir",
     "SETTINGS": "Paramètres"
+  },
+  "Index": {
+    "DISCONNECT": "La connexion au serveur a été interrompue, merci de patienter jusqu'à la reconnexion...",
+    "RECONNECT": "Tentative de reconnection en cours..."
   }
 }

@@ -30,7 +30,7 @@ module.exports = {
   //domain: 'http://192.168.1.16:8081',
   domain,
   apiPath: API_PREFIX,
-  apiTimeout: 30000,
+  apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'Akt\'n\'Map',
   appLogo: 'aktnmap-logo.png',

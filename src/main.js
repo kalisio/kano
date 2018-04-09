@@ -43,7 +43,6 @@ api.hooks(appHooks)
 services.call(api)
 
 configureI18n()
-
 // Set up Vue
 Vue.use(VueI18next)
 Vue.use(Quasar)
