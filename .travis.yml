@@ -31,6 +31,8 @@ jobs:
       bucket: aktnmap-builds
       local_dir: dist
       upload_dir: "$TRAVIS_BUILD_NUMBER"
+      on:
+        all_branches: true
 
   - stage: TEST
     language: node_js
