@@ -15,6 +15,7 @@
     "SETTINGS": "Settings"
   },
   "Index": {
+    "VERSION_MISMATCH": "Application version mismatch, please install the latest available version or check your end point",
     "DISCONNECT": "The server connection has been lost, please wait until reconnection...",
     "RECONNECT": "We are trying to reconnect..."
   }

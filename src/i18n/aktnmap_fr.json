@@ -15,6 +15,7 @@
     "SETTINGS": "Paramètres"
   },
   "Index": {
+    "VERSION_MISMATCH": "Discordance de version, merci d'installer la dernière version disponible ou de vérifier votre point d'accès",
     "DISCONNECT": "La connexion au serveur a été interrompue, merci de patienter jusqu'à la reconnexion...",
     "RECONNECT": "Tentative de reconnection en cours..."
   }

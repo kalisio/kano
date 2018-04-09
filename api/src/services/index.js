@@ -6,6 +6,7 @@ import kTeam from 'kTeam'
 import kMap from 'kMap'
 import kNotify from 'kNotify'
 import kEvent from 'kEvent'
+import packageInfo from '../../package.json'
 
 const servicesPath = path.join(__dirname, '..', 'services')
 module.exports = async function () {
@@ -13,6 +14,17 @@ module.exports = async function () {
 
   // Set up our plugin services
   try {
+    app.use(app.get('apiPath') + '/about', (req, res, next) => {
+      let response = {
+        name: 'aktnmap',
+        domain: app.get('domain'),
+        version: packageInfo.version
+      }
+      if (process.env.BUILD_NUMBER) {
+        response.buildNumber = process.env.BUILD_NUMBER
+      }
+      res.json(response)
+    })
     await app.configure(kCore)
     // Add hook to automatically create a new organisation, add verification, send verification email,
     // register devices, etc. when creating a new user or authenticating

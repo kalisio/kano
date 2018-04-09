@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile.${FLAVOR}
+      args:
+        BUILD_NUMBER: ${BUILD_NUMBER}
     container_name: aktnmap
     image: kalisio/aktnmap:${FLAVOR}
     depends_on:
@@ -30,6 +32,7 @@ services:
       - GITHUB_CLIENT_SECRET
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
+      - BUILD_NUMBER
       - NODE_APP_INSTANCE=${FLAVOR}
       - DB_URL=mongodb://mongodb:27017/aktnmap
     networks:

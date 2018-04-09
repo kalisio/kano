@@ -8,6 +8,7 @@
 <script>
 import { Toast, Events, Loading, Alert } from 'quasar'
 import { mixins, beforeGuard } from 'kCore/client'
+import config from 'config'
 import utils from '../utils'
 
 export default {
@@ -93,6 +94,23 @@ export default {
         }, 3000)
       })
     }
+    // Check for API version, this one is not a service but a basic route so we don't use Feathers client
+    this.$store.set('about.client', {
+      version: config.version,
+      buildNumber: config.buildNumber,
+      domain: config.domain
+    })
+    window.fetch(config.apiPath + '/about')
+      .then(response => response.json())
+      .then(api => {
+        this.$store.set('about.api', api)
+        // FIXME: we should elaborate a more complex check between compatible versions
+        if (api.version === config.version) {
+          if (!api.buildNumber) return
+          else if (api.buildNumber === config.buildNumber) return
+        }
+        Alert.create({html: this.$t('Index.VERSION_MISMATCH')})
+      })
   }
 }
 </script>

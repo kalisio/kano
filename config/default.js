@@ -29,6 +29,8 @@ module.exports = {
   // If using local IP on WiFi router
   //domain: 'http://192.168.1.16:8081',
   domain,
+  version: require('../package.json').version,
+  buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
   apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',

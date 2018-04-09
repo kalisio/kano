@@ -18,6 +18,7 @@ then
 		export DOMAIN=app.aktnmap.xyz
 	fi
 fi
+export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
 export NODE_APP_INSTANCE=$FLAVOR
 # These ones are just for travis to SSH to the target machine
 # Extract value from the right env variable according to flavor
@@ -30,6 +31,7 @@ echo "DEBUG=$DEBUG" > .env
 echo "FLAVOR=$FLAVOR" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
+echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
 echo "GOOGLE_MAIL_USER=$GOOGLE_MAIL_USER" >> .env
 echo "GOOGLE_MAIL_PASSWORD=$GOOGLE_MAIL_PASSWORD" >> .env
 echo "SNS_ACCESS_KEY=$SNS_ACCESS_KEY" >> .env
