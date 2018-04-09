@@ -100,7 +100,7 @@ export default {
       buildNumber: config.buildNumber,
       domain: config.domain
     })
-    window.fetch(config.apiPath + '/about')
+    window.fetch(this.$api.getBaseUrl() + config.apiPath + '/about')
       .then(response => response.json())
       .then(api => {
         this.$store.set('about.api', api)
