@@ -22,10 +22,11 @@ module.exports = {
   build: {
     env: require('./prod.env'),
     publicPath: '',
-    productionSourceMap: false,
+    productionSourceMap: false
     // Remove unused CSS
     // Disable it if it has side-effects for your specific app
-    purifyCSS: true
+    // As we use dynamic components remove this 
+    //purifyCSS: true
   },
   dev: {
     env: require('./dev.env'),
