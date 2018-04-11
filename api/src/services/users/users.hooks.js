@@ -27,6 +27,7 @@ module.exports = {
     patch: [],
     remove: [
       coreHooks.setAsDeleted,
+      coreHooks.removeAttachments('avatar'),
       coreHooks.updateTags,
       // Avoid removing subscriptions on removed (ie unused) tags
       notifyHooks.updateSubjectSubscriptions({
