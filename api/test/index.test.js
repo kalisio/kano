@@ -59,7 +59,7 @@ describe('aktnmap', () => {
     expect(sns).toExist()
   })
 
-  it('creates a user with its org', () => {
+  it('creates a user with his org', () => {
     let operation = userService.create({
       email: 'test@test.org',
       password: 'test-password',
@@ -267,7 +267,7 @@ describe('aktnmap', () => {
   // Let enough time to process
   .timeout(10000)
 
-  it('restore user tags, group to prepare testing user cleanup', () => {
+  it('restore user tags, group to prepare testing cleanup', () => {
     return memberService.patch(userObject._id.toString(), { // We need at least devices for subscription
       tags: [{ value: 'test', scope: 'members' }],
       devices: userObject.devices
@@ -286,13 +286,20 @@ describe('aktnmap', () => {
   // Let enough time to process
   .timeout(10000)
 
-  it('removes a user', () => {
-    let operation = userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
-    .then(user => {
-      return userService.find({ query: { name: 'test-user' }, checkAuthorisation: true })
+  it('removes the user from his organisation', () => {
+    return authorisationService.remove(orgObject._id, {
+      query: {
+        scope: 'organisations',
+        subjects: userObject._id.toString(),
+        subjectsService: 'users',
+        resourcesService: 'organisations'
+      },
+      user: userObject,
+      checkAuthorisation: true,
+      force: true // By pass checks for tests
     })
-    .then(users => {
-      expect(users.data.length === 0).beTrue()
+    .then(authorisation => {
+      expect(authorisation).toExist()
     })
     // We need to synchronize 2 events
     let events = new Promise((resolve, reject) => {
@@ -319,6 +326,25 @@ describe('aktnmap', () => {
   })
   // Let enough time to process
   .timeout(20000)
+
+  it('removes the user and his organisation', () => {
+    userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
+    .then(user => {
+      return userService.find({ query: {}, checkAuthorisation: true })
+    })
+    .then(users => {
+      expect(users.data.length === 0).beTrue()
+      orgService.remove(orgObject._id, { user: userObject, checkAuthorisation: true })
+    })
+    .then(org => {
+      return orgService.find({ query: {}, user: userObject, checkAuthorisation: true })
+    })
+    .then(orgs => {
+      expect(orgs.data.length === 0).beTrue()
+    })
+  })
+  // Let enough time to process
+  .timeout(10000)
 
   // Cleanup
   after(() => {
