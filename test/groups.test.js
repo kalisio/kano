@@ -38,8 +38,9 @@ test.page`${pages.getUrl('login')}`
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
-  await members.addMember(test, data.users[1].name, pages.Roles.manager)
-  await members.addMember(test, data.users[2].name, pages.Roles.member)
+  await members.addMember(test, data.users[1].name, pages.Roles.member)
+  await members.addMember(test, data.users[2].name, pages.Roles.manager)
+  await members.addMember(test, data.users[3].name, pages.Roles.member)
   await pages.checkNoClientError(test) 
 })
 
@@ -53,7 +54,7 @@ test('Create groups', async test => {
   await pages.checkNoClientError(test) 
 })
 
-test.skip('Edit group', async test => {
+test('Edit group', async test => {
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await groups.clickToolbar(test, members.getToolbarEntry())
@@ -68,17 +69,18 @@ test('Add members to groups', async test => {
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.joinGroup(test, data.users[1].name, data.groups[0].name, pages.Roles.manager)
   await members.joinGroup(test, data.users[2].name, data.groups[0].name, pages.Roles.member)
+  await members.joinGroup(test, data.users[2].name, data.groups[1].name, pages.Roles.manager)
   await members.joinGroup(test, data.users[3].name, data.groups[1].name, pages.Roles.manager)
   await pages.checkNoClientError(test)
 })
 
-test('Prevent group removal', async test => {
-  await auth.logInAndCloseSignupAlert(test, data.users[0])
+test('Check group count', async test => {
+  await auth.logInAndCloseSignupAlert(test, data.users[2])
   await organisations.selectOrganisation(test, data.users[0].name)
-  await groups.clickToolbar(test, groups.getToolbarEntry())
+  await members.clickToolbar(test, members.getToolbarEntry())
   await groups.clickTabBar(test, groups.getTabBarEntry())
-  await groups.deleteGroup(test, data.groups[0].name)
-  await pages.checkClientError(test)
+  await groups.checkGroupsCount(test, 2)
+  await pages.checkNoClientError(test) 
 })
 
 test('Remove member from group', async test => {
@@ -87,6 +89,7 @@ test('Remove member from group', async test => {
   await members.clickToolbar(test, members.getToolbarEntry())
   await members.leaveGroup(test, data.users[1].name, data.groups[0].name)
   await members.leaveGroup(test, data.users[2].name, data.groups[0].name)
+  await members.leaveGroup(test, data.users[2].name, data.groups[1].name)
   await members.leaveGroup(test, data.users[3].name, data.groups[1].name)
   await pages.checkNoClientError(test) 
 })

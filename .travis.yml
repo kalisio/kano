@@ -87,6 +87,16 @@ jobs:
     - tar xvf secrets.tar
     - aws s3 sync s3://aktnmap-builds/$TRAVIS_BUILD_NUMBER cordova/www
     - bash android.travis.sh
+    deploy:
+      skip_cleanup: true
+      provider: s3
+      access_key_id: "$S3_ACCESS_KEY"
+      secret_access_key: "$S3_SECRET_ACCESS_KEY"
+      bucket: aktnmap-builds
+      local_dir: cordova/platforms/android/build/outputs/apk
+      upload_dir: "$TRAVIS_BUILD_NUMBER"
+      on:
+        all_branches: true
 
 
 

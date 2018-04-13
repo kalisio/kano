@@ -81,7 +81,7 @@ export default class Members extends ApplicationLayout {
   async leaveGroup (test, memberName, groupName) {
     let cardId = await this.getItemId(test, this.membersGrid, memberName)
     await test
-      .click(this.idSelector(cardId).find('#group-toolbar'))
+      .click(this.idSelector(cardId).find('#group-button'))
       .wait(500)
     await test
       .click(Selector('.q-toolbar').find('#leave-group'))

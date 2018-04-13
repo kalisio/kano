@@ -28,6 +28,8 @@ export default class Groups extends ApplicationLayout {
     let groupId = await this.getItemId(test, this.groupsGrid, groupName)
     await test
       .click(this.idSelector(groupId).find('#edit-group'))
+      .wait(2000)
+    await test
       .typeText(this.editGroupModal.find('#description-field'), newGroupDescription, { replace: true })
       .click(this.editGroupModal.find('#apply-button'))
       .wait(5000)
@@ -36,6 +38,8 @@ export default class Groups extends ApplicationLayout {
     let groupId = await this.getItemId(test, this.groupsGrid, groupName)
     await test
       .click(this.idSelector(groupId).find('#card-overflow-menu-entry'))
+      .wait(500)
+    await test
       .click(Selector('.q-popover').find('#remove-group'))
       .click(Selector('.modal-buttons button').nth(0))
       .wait(5000)
