@@ -1,7 +1,5 @@
 import { Selector } from 'testcafe'
-import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
-import _ from 'lodash'
 
 export default class Users extends ApplicationLayout {
   constructor (authentication, account, organisations) {
@@ -27,4 +25,3 @@ export default class Users extends ApplicationLayout {
     }
   }
 }
-

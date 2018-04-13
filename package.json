@@ -48,12 +48,28 @@
     "analyze:stats": "webpack --config build/webpack.prod.conf.js --profile --json > build-stats.json",
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
-    "lint": "eslint --ext .js,.vue src/",
+    "lint": "standard src/**/*.js test/**/*.js --fix",
     "benchmark": "node ./benchmark",
     "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "vue",
+      "testcafe"
+    ],
+    "sourceType": "module",
+    "globals": [
+      "DEV",
+      "PROD",
+      "__THEME",
+      "cordova",
+      "test",
+      "fixture"
+    ]
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.9.1",
@@ -129,6 +145,8 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "eslint-plugin-vue": "^4.4.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -145,6 +163,7 @@
     "purify-css": "^1.2.6",
     "script-loader": "^0.7.2",
     "shelljs": "^0.7.0",
+    "standard": "^10.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.7",

@@ -11,7 +11,7 @@ export default class Events extends ApplicationLayout {
     this.eventsGrid = VueSelector('k-events-activity k-grid')
   }
   getToolbarEntry () {
-    return '#events'  
+    return '#events'
   }
   getTabBarEntry () {
     return '#events'
@@ -40,4 +40,3 @@ export default class Events extends ApplicationLayout {
     await this.checkCollectionCount(test, this.eventsGrid, count)
   }
 }
-

@@ -47,7 +47,7 @@ export default class Members extends ApplicationLayout {
       .click(Selector('.modal-buttons button').nth(0))
       .wait(5000)
   }
-  async tagMember (test, name, tag) { 
+  async tagMember (test, name, tag) {
     let cardId = await this.getItemId(test, this.membersGrid, name)
     await test
       .click(this.idSelector(cardId).find('#tag-member'))
@@ -58,7 +58,7 @@ export default class Members extends ApplicationLayout {
       .click(this.tagMemberModal.find('#apply-button'))
       .wait(5000)
   }
-  async changeMemberRole (test, name, role) { 
+  async changeMemberRole (test, name, role) {
     let cardId = await this.getItemId(test, this.membersGrid, name)
     await test
       .click(this.idSelector(cardId).find('#change-role'))
@@ -71,4 +71,3 @@ export default class Members extends ApplicationLayout {
     await this.checkCollectionCount(test, this.membersGrid, count)
   }
 }
-

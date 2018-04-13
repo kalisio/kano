@@ -1,8 +1,8 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `Groups`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Groups`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,7 +11,7 @@ fixture `Groups`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const auth = new pages.Authentication()
@@ -33,7 +33,7 @@ const data = {
   ]
 }
 
-test.page `${pages.getUrl('login')}`
+test.page`${pages.getUrl('login')}`
 ('Users registration', async test => {
   await users.registerUsers(test, data.users)
 })

@@ -7,11 +7,11 @@ export default class Account extends ApplicationLayout {
     super()
     // Profile Zone
     this.profileEditor = VueSelector('k-account-activity k-editor')
-    //this.avatarInput = VueSelector('k-account-activity k-attachment-field')
+    // this.avatarInput = VueSelector('k-account-activity k-attachment-field')
     // The file input added by drop zone is actually hidden and replaced by dropzone GUI
     this.fileInput = Selector('.dz-hidden-input') //, { visibilityCheck: false })
-    //this.nameInput = VueSelector('k-account-activity k-text-field')
-    //this.updateProfile = VueSelector('k-account-activity').find('#apply-button')
+    // this.nameInput = VueSelector('k-account-activity k-text-field')
+    // this.updateProfile = VueSelector('k-account-activity').find('#apply-button')
     // Security Zone
     this.changePasswordButton = VueSelector('k-account-security k-block q-btn').nth(0)
     this.changePasswordScreen = VueSelector('k-change-password')
@@ -61,4 +61,3 @@ export default class Account extends ApplicationLayout {
       .wait(10000)
   }
 }
-
