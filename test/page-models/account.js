@@ -25,7 +25,8 @@ export default class Account extends ApplicationLayout {
       .click(this.profileEditor.find('#avatar-field'))
       .setFilesToUpload(this.fileInput, profile.avatar)
       .click(VueSelector('k-uploader').find('#done-button'))
-      .wait(500)
+      .wait(1000)
+    await test
       .typeText(this.profileEditor.find('#name-field'), profile.name, { replace: true })
       .click(this.profileEditor.find('#apply-button'))
       .wait(5000)
@@ -35,6 +36,8 @@ export default class Account extends ApplicationLayout {
     await this.clickTabBar(test, '#security')
     await test
       .click(this.changePasswordButton)
+      .wait(2000)
+    await test
       .typeText(this.changePasswordScreen.find('#oldPassword-field'), identity.password, { replace: true })
       .typeText(this.changePasswordScreen.find('#password-field'), identity.newPassword, { replace: true })
       .typeText(this.changePasswordScreen.find('#confirmPassword-field'), identity.newPassword, { replace: true })
