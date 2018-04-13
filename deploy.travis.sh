@@ -13,6 +13,8 @@ else
 	scp docker-compose.deploy.yml ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/docker-compose.deploy.yml
 	scp app.deploy.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.deploy.sh
 	scp app.remove.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.remove.sh
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd aktnmap; chmod u+x ./app.remove.sh; ./app.remove.sh; chmod u+x ./app.deploy.sh; ./app.deploy.sh"
+	scp app.backup.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.backup.sh
+	scp app.restore.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.restore.sh
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd aktnmap; chmod u+x ./app.remove.sh; chmod u+x ./app.deploy.sh; chmod u+x ./app.backup.sh; chmod u+x ./app.restore.sh; ./app.remove.sh; ./app.deploy.sh"
 fi
 
