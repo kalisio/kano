@@ -31,6 +31,7 @@ echo "DEBUG=$DEBUG" > .env
 echo "FLAVOR=$FLAVOR" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
+echo "PORT=$PORT" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
 echo "GOOGLE_MAIL_USER=$GOOGLE_MAIL_USER" >> .env
 echo "GOOGLE_MAIL_PASSWORD=$GOOGLE_MAIL_PASSWORD" >> .env

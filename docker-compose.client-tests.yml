@@ -17,7 +17,7 @@ services:
       - GITHUB_USER
       - GITHUB_PASSWORD
       - NODE_ENV=production
-      - APP_URL=aktnmap:8081
+      - APP_URL=172.17.0.1:${PORT}
     volumes:
       - ./test:/opt/testcafe/aktnmap
     command: firefox /opt/testcafe/aktnmap/*.test.js -S -s screenshots
