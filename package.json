@@ -48,7 +48,7 @@
     "analyze:stats": "webpack --config build/webpack.prod.conf.js --profile --json > build-stats.json",
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
-    "lint": "standard src/**/*.js test/**/*.js --fix",
+    "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
     "benchmark": "node ./benchmark",
     "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
@@ -58,8 +58,8 @@
   "standard": {
     "parser": "babel-eslint",
     "plugins": [
-      "vue",
-      "testcafe"
+      "testcafe",
+      "html"
     ],
     "sourceType": "module",
     "globals": [
@@ -137,7 +137,6 @@
     "css-loader": "^0.28.0",
     "es6-promise": "^4.1.1",
     "eslint": "^4.4.1",
-    "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.1.1",
@@ -146,7 +145,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-testcafe": "^0.2.1",
-    "eslint-plugin-vue": "^4.4.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",

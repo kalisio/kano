@@ -22,8 +22,7 @@ export default {
       if (typeof result === 'string') {
         // Redirect to a given route based on authentication state
         this.$router.push({ name: result })
-      }
-      else if (!result) {
+      } else if (!result) {
         // This route was previously allowed but due to changes in authorisations it is not anymore
         this.$router.push({ name: (this.user ? 'home' : 'login') })
       }
