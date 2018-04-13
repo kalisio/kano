@@ -160,7 +160,7 @@
     "progress-bar-webpack-plugin": "^1.10.0",
     "purify-css": "^1.2.6",
     "script-loader": "^0.7.2",
-    "shelljs": "^0.7.0",
+    "shelljs": "^0.8.1",
     "standard": "^10.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",

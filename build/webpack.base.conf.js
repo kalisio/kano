@@ -6,6 +6,7 @@ var
   env = require('./env-utils'),
   merge = require('webpack-merge'),
   fs = require('fs'),
+  shell = require('shelljs'),
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
   // Load config based on current NODE_ENV, etc.
   clientConfig = require('config'),
@@ -16,6 +17,11 @@ var
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
+}
+
+function copyModule(module) {
+  shell.mkdir('-p', path.resolve(__dirname, `../${module}`))
+  shell.cp('-R', path.resolve(__dirname, `../node_modules/${module}/lib`), path.resolve(__dirname, `../${module}`))
 }
 
 module.exports = {
@@ -131,3 +137,11 @@ module.exports = {
 // Note: If '/build' does not exist, this command will error; alternatively, write to '/config'.
 // The webpack alias below will then build that file into the client build.
 fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
+
+// Copy files from linked node modules otherwise they are not correctly transpiled by babel
+// see https://github.com/kalisio/kdk/issues/28 for details
+copyModule('kCore')
+copyModule('kTeam')
+copyModule('kNotify')
+copyModule('kEvent')
+copyModule('kMap')
