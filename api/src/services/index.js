@@ -47,8 +47,7 @@ module.exports = async function () {
     app.configureService('devices', app.getService('devices'), servicesPath)
     await app.configure(kMap)
     await app.configure(kEvent)
-  }
-  catch (error) {
+  } catch (error) {
     logger.error(error.message)
   }
 

@@ -9,4 +9,3 @@ config.db.url = config.db.url.replace('aktnmap', 'kalisio-test')
 delete config.authentication.defaultUsers
 
 module.exports = config
-

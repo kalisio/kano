@@ -6,7 +6,7 @@ import server from '../src/main'
 
 describe('aktnmap', () => {
   let userService, userObject, orgService, orgObject, authorisationService, devicesService, pusherService, sns,
-  memberService, tagService, tagObject, groupService, groupObject
+    memberService, tagService, tagObject, groupService, groupObject
   let now = new Date()
   let logFilePath = path.join(__dirname, 'logs', 'aktnmap-' + now.toISOString().slice(0, 10) + '.log')
   const device = {
@@ -107,7 +107,7 @@ describe('aktnmap', () => {
       password: 'test-password',
       name: 'test-user'
     }, { checkAuthorisation: true })
-    .catch(error => {
+    .catch(() => {
       let log = 'duplicate key error collection: kalisio-test.users'
       // FIXME: need to let some time to proceed with log file
       // Didn't find a better way since fs.watch() does not seem to work...
@@ -287,7 +287,7 @@ describe('aktnmap', () => {
   .timeout(10000)
 
   it('removes the user from his organisation', () => {
-    return authorisationService.remove(orgObject._id, {
+    let operation = authorisationService.remove(orgObject._id, {
       query: {
         scope: 'organisations',
         subjects: userObject._id.toString(),
