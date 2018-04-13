@@ -94,6 +94,29 @@ module.exports = {
       maxUsers: 1000
     }
   },
+  billing: {
+    bronze: {
+      limits: {
+        users: 10,
+        storage: 50
+      },
+      price: 0
+    },
+    silver: {
+      limits: {
+        users: 50,
+        storage: 250
+      },
+      price: 99
+    },
+    gold: {
+      limits: {
+        users: 250,
+        storage: 1000
+      },
+      price: 399
+    }
+  },
   mailer: {
     service: 'gmail',
     auth: {

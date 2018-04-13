@@ -14,11 +14,12 @@ module.exports = async function () {
 
   // Set up our plugin services
   try {
-    app.use(app.get('apiPath') + '/about', (req, res, next) => {
+    app.use(app.get('apiPath') + '/capabilities', (req, res, next) => {
       let response = {
         name: 'aktnmap',
         domain: app.get('domain'),
-        version: packageInfo.version
+        version: packageInfo.version,
+        pricing: app.get('pricing')
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER
