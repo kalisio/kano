@@ -30,7 +30,7 @@ jobs:
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
       bucket: aktnmap-builds
       local_dir: dist
-      upload_dir: "$TRAVIS_BUILD_NUMBER"/dist
+      upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
       on:
         all_branches: true
 
@@ -94,7 +94,7 @@ jobs:
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
       bucket: aktnmap-builds
       local_dir: cordova/platforms/android/build/outputs/apk
-      upload_dir: "$TRAVIS_BUILD_NUMBER"/apk
+      upload_dir: "$TRAVIS_BUILD_NUMBER/apk"
       on:
         all_branches: true
 
