@@ -2,8 +2,8 @@
 import { Selector } from 'testcafe'
 import * as pages from './page-models'
 
-fixture `Events`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Events`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -12,7 +12,7 @@ fixture `Events`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const auth = new pages.Authentication()
@@ -33,13 +33,13 @@ const data = {
   group: { name: 'Events group', description: 'A group' },
   template: { name: 'Events template', description: 'An event template' },
   events: [
-    { name: 'Events member', participants: 'Events manager'},
-    { name: 'Events group', participants: 'Events group'},
-    { name: 'Events tag', participants: 'fireman'}
+    { name: 'Events member', participants: 'Events manager' },
+    { name: 'Events group', participants: 'Events group' },
+    { name: 'Events tag', participants: 'fireman' }
   ]
 }
 
-test.page `${pages.getUrl('login')}`
+test.page`${pages.getUrl('login')}`
 ('Setup context', async test => {
   await users.registerUsers(test, data.users)
   await auth.logInAndCloseSignupAlert(test, data.users[0])

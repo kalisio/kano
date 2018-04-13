@@ -11,7 +11,7 @@ export default class Groups extends ApplicationLayout {
     this.fab = VueSelector('k-layout k-fab')
   }
   getToolbarEntry () {
-    return '#members'  
+    return '#members'
   }
   getTabBarEntry () {
     return '#groups'
@@ -60,4 +60,3 @@ export default class Groups extends ApplicationLayout {
     await this.checkCollectionCount(test, this.groupsGrid, count)
   }
 }
-

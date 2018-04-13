@@ -6,7 +6,7 @@ export default class ApplicationLayout {
   constructor () {
     this.error = VueSelector('q-toast')
     this.appBar = VueSelector('k-app-bar')
-    this.appBarTitle = this.appBar.find("#app-bar-title")
+    this.appBarTitle = this.appBar.find('#app-bar-title')
     this.overflowMenuEntry = this.appBar.find('#overflow-menu-entry')
     this.overflowMenu = Selector('#overflow-menu')
     this.SideNavToggle = this.appBar.find('#ap')
@@ -37,7 +37,6 @@ export default class ApplicationLayout {
     await test
       .click(this.identityLink)
       .wait(1000)
-
   }
   async checkIdentity (test, name) {
     const identityPanel = await this.identityPanel.getVue()
@@ -77,7 +76,7 @@ export default class ApplicationLayout {
       .wait(1000)
   }
   async isErrorVisible () {
-    return await this.error.visible
+    await this.error.visible
   }
   async getItem (test, collectionSelector, name) {
     const collection = await collectionSelector.getVue()

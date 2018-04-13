@@ -68,8 +68,7 @@ export default {
       // Translate the message if a translation key exists
       if (error.data && error.data.translation) {
         error.message = this.$t('errors.' + error.data.translation.key, error.data.translation.params)
-      }
-      else {
+      } else {
         // Overwrite the message using error code
         if (error.code) {
           error.message = this.$t('errors.' + error.code)

@@ -19,7 +19,7 @@ export default class Organisations extends ApplicationLayout {
     await this.openSideNav(test)
     await test
       .click(this.panel.find('#' + _.kebabCase(orgName)))
-      .wait(5000) 
+      .wait(5000)
   }
   async createOrganisation (test, org) {
     await this.openSideNav(test)
@@ -53,4 +53,3 @@ export default class Organisations extends ApplicationLayout {
       .wait(5000)
   }
 }
-

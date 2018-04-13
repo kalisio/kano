@@ -1,8 +1,8 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `Authentication`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Authentication`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,7 +11,7 @@ fixture `Authentication`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const app = new pages.ApplicationLayout()
@@ -26,7 +26,7 @@ test('Invalid login', async test => {
 
 test('Local login', async test => {
   await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'kalisio' })
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and an unverified email
@@ -45,7 +45,7 @@ test('Local login', async test => {
 
 test.skip('Google login', async test => {
   await auth.logInGoogle(test)
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email
@@ -63,7 +63,7 @@ test.skip('Cleanup Google user', async test => {
 
 test.skip('GitHub login', async test => {
   await auth.logInGitHub(test)
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email

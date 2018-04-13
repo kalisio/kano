@@ -2,8 +2,8 @@ import path from 'path'
 // Page models
 import * as pages from './page-models'
 
-fixture `Account`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Account`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -12,7 +12,7 @@ fixture `Account`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const app = new pages.ApplicationLayout()
@@ -23,7 +23,7 @@ const account = new pages.Account()
 const newPassword = 'kalisio-new'
 const newEmail = 'kalisio@kalisio.com'
 
-test.page `${pages.getUrl('register')}`
+test.page`${pages.getUrl('register')}`
 ('Registration', async test => {
   await auth.signIn(test)
 })

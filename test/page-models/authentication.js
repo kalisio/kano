@@ -3,9 +3,9 @@ import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
 
 const defaultTestUser = {
-  name : 'Kalisio',
-  email : 'test@kalisio.xyz',
-  password : 'kalisio'
+  name: 'Kalisio',
+  email: 'test@kalisio.xyz',
+  password: 'kalisio'
 }
 
 export default class Authentication extends ApplicationLayout {
@@ -90,12 +90,12 @@ export default class Authentication extends ApplicationLayout {
       // Need this so that we are sure github authorize page or user has been loaded
       .wait(5000)
       // Check if we need to authorize the app
-      const authorize = await this.authorizeGitHub()
-      if (authorize) {
-        await test
+    const authorize = await this.authorizeGitHub()
+    if (authorize) {
+      await test
           .click(this.authorizeGitHub)
           // Need this so that we are sure dynamic components, user, etc. have been loaded
           .wait(5000)
-      }
+    }
   }
 }

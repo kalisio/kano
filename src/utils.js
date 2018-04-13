@@ -38,6 +38,29 @@ function loadSchema (schema) {
     })
 }
 
+function loadTranslation (module, locale) {
+  let translation = module + '_' + locale + '.json'
+  return import(`kCore/lib/client/i18n/${translation}`)
+    .catch(errorCore => {
+      return import(`kTeam/lib/client/i18n/${translation}`)
+        .catch(errorTeam => {
+          return import(`kNotify/lib/client/i18n/${translation}`)
+            .catch(errorNotify => {
+              return import(`kMap/lib/client/i18n/${translation}`)
+                .catch(errorMap => {
+                  return import(`kEvent/lib/client/i18n/${translation}`)
+                    .catch(errorEvent => {
+                      return import(`./i18n/${translation}`)
+                        .catch(errorApp => {
+                          console.log(errorCore, errorTeam, errorNotify, errorMap, errorEvent, errorApp)
+                        })
+                    })
+                })
+            })
+        })
+    })
+}
+
 function resolveAsset (asset) {
   return require('./assets/' + asset)
 }
@@ -73,8 +96,7 @@ function buildRoutes (config) {
       // we simply return the async component loading function with the given component value
       if (typeof value === 'string') {
         route.component = loadComponent(value)
-      }
-      else {
+      } else {
         // Take care that path can be empty so we cannot just check with a if
         if (value.hasOwnProperty('path')) {
           route.path = value.path
@@ -115,6 +137,7 @@ function buildRoutes (config) {
 let utils = {
   loadComponent,
   loadSchema,
+  loadTranslation,
   resolveAsset,
   load,
   buildRoutes
