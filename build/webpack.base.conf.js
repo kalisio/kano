@@ -21,7 +21,7 @@ function resolve (dir) {
 
 function copyModule(module) {
   shell.mkdir('-p', path.resolve(__dirname, `../${module}`))
-  shell.cp('-R', path.resolve(__dirname, `../node_modules/${module}/lib`), path.resolve(__dirname, `../${module}`))
+  shell.cp('-R', path.resolve(__dirname, `../api/node_modules/${module}/lib`), path.resolve(__dirname, `../${module}`))
 }
 
 module.exports = {
