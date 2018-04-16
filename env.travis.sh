@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
-	export DEBUG=kalisio*
+	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
 	export DOMAIN=app.dev.aktnmap.xyz
 fi

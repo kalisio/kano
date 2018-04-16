@@ -4,7 +4,7 @@ MAINTAINER Kalisio <contact@kalisio.xyz>
 
 ARG BUILD_NUMBER
 ENV BUILD_NUMBER=$BUILD_NUMBER
-ENV DEBUG=kalisio*
+ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
 WORKDIR /opt/aktnmap
