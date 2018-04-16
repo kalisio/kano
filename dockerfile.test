@@ -17,7 +17,7 @@ RUN git clone https://github.com/kalisio/kNotify.git -b test --single-branch && 
 RUN git clone https://github.com/kalisio/kMap.git -b test --single-branch && cd kMap && yarn install && yarn link kCore && yarn link && cd ..
 RUN git clone https://github.com/kalisio/kEvent.git -b test --single-branch && cd kEvent && yarn install && yarn link kCore && yarn link && cd ..
 
-WORKDIR /opt/aktnmap
+WORKDIR /opt/aktnmap/api
 
 RUN yarn install
 RUN yarn link kCore
@@ -27,14 +27,9 @@ RUN yarn link kMap
 RUN yarn link kEvent
 RUN npm run build
 
-WORKDIR /opt/aktnmap/api
+WORKDIR /opt/aktnmap
 
 RUN yarn install
-RUN yarn link kCore
-RUN yarn link kTeam
-RUN yarn link kNotify
-RUN yarn link kMap
-RUN yarn link kEvent
 RUN npm run build
 
 EXPOSE 8081
