@@ -19,10 +19,27 @@ console.log(' building for Cordova or Electron.\n')
 require('./script.clean.js')
 console.log((' Building Quasar App with "' + env.platform.theme + '" theme...\n').bold)
 
+function copyModule(module) {
+  shell.mkdir('-p', path.resolve(__dirname, `../${module}`))
+  shell.cp('-R', path.resolve(__dirname, `../api/node_modules/${module}/lib`), path.resolve(__dirname, `../${module}`))
+  // Need to copy as well entry points such as kCore/client and kCore/common
+  shell.cp(path.resolve(__dirname, `../api/node_modules/${module}/client.js`), path.resolve(__dirname, `../${module}`))
+  shell.cp(path.resolve(__dirname, `../api/node_modules/${module}/common.js`), path.resolve(__dirname, `../${module}`))
+  console.log(` Copied ${module} module files to app folder.\n`)
+}
+
 shell.mkdir('-p', targetPath)
 shell.cp('-R', 'src/statics', targetPath)
 // FIXME: for now avoid using Cesium to create a light package
 shell.rm('-fR', targetPath + '/statics/Cesium')
+
+// Copy files from linked node modules otherwise they are not correctly transpiled by babel
+// see https://github.com/kalisio/kdk/issues/28 for details
+copyModule('kCore')
+copyModule('kTeam')
+copyModule('kNotify')
+copyModule('kEvent')
+copyModule('kMap')
 
 function finalize () {
   console.log((

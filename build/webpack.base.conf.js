@@ -6,7 +6,6 @@ var
   env = require('./env-utils'),
   merge = require('webpack-merge'),
   fs = require('fs'),
-  shell = require('shelljs'),
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
   // Load config based on current NODE_ENV, etc.
   clientConfig = require('config'),
@@ -17,15 +16,6 @@ var
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
-}
-
-function copyModule(module) {
-  shell.mkdir('-p', path.resolve(__dirname, `../${module}`))
-  shell.cp('-R', path.resolve(__dirname, `../api/node_modules/${module}/lib`), path.resolve(__dirname, `../${module}`))
-  // Need to copy as well entry points such as kCore/client and kCore/common
-  shell.cp(path.resolve(__dirname, `../api/node_modules/${module}/client.js`), path.resolve(__dirname, `../${module}`))
-  shell.cp(path.resolve(__dirname, `../api/node_modules/${module}/common.js`), path.resolve(__dirname, `../${module}`))
-  console.log(` Copied ${module} module files to app folder.\n`)
 }
 
 module.exports = {
@@ -142,10 +132,3 @@ module.exports = {
 // The webpack alias below will then build that file into the client build.
 fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
 
-// Copy files from linked node modules otherwise they are not correctly transpiled by babel
-// see https://github.com/kalisio/kdk/issues/28 for details
-copyModule('kCore')
-copyModule('kTeam')
-copyModule('kNotify')
-copyModule('kEvent')
-copyModule('kMap')
