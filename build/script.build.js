@@ -28,6 +28,11 @@ function copyModule(module) {
   console.log(` Copied ${module} module files to app folder.\n`)
 }
 
+function deleteModule(module) {
+  shell.rm('-rf', path.resolve(__dirname, `../${module}`))
+  console.log(` Removed ${module} module files from app folder.\n`)
+}
+
 shell.mkdir('-p', targetPath)
 shell.cp('-R', 'src/statics', targetPath)
 // FIXME: for now avoid using Cesium to create a light package
@@ -42,6 +47,12 @@ copyModule('kEvent')
 copyModule('kMap')
 
 function finalize () {
+  deleteModule('kCore')
+  deleteModule('kTeam')
+  deleteModule('kNotify')
+  deleteModule('kEvent')
+  deleteModule('kMap')
+
   console.log((
     '\n Build complete with "' + env.platform.theme.bold + '" theme in ' +
     '"/dist"'.bold + ' folder.\n').cyan)
