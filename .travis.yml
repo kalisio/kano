@@ -2,16 +2,14 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: E2WCIbmn7S32BRfTODPI8y3p/cyQSmC3M3PFKdJARshoYsuArxuliHa57R4feIderPpbZnAiGv7WLWuL32rSR2nxZnv6KL9syrUhDct/Ak2RTNT8hTY0VeF17tK3fvQ+U2N65InVB6oHucW1PzFTPGKF8GYgarBATGNRuX/MQ0c2wnkXV8VFGTUNu39v1Z0ZcFEVLa2G/avIplPnPQykkxPA3Hoc0o/mBhDq5AStzPoAHQFWfnYzDJE/UGlqTl8j8D2F2iWlB5zDXlb9NoBHR+4YfAEsAyEuXC32ONhdw1KwuQfioZ9Y58fUQ8XC3COVRsvlFpZswzKdcqA9MUsX46mZZGjerQZPth2VNAHD26BxO3rvMFWAy32vlc3q78DVHz5VEteiD5KBWVYec7AU2gU3hE3s89v9YXOcMjPBOfzBwbSiyuz8wNeu+IUUH6mY0nuMEUHUFP9TnbspzDCcVHIqbSwcVsYVh+4YeAFKJ1FJh0TzXPLIHIF5PhjK6XsDvLS/frYKWQyfsKv/R4ciSI0XA4ZfYKaVqu+O2zoZUlWsPxF3TBJyjpCE9JpViMmVpyQ9G8VQLlsZVMuDKmRaHjzoBm6tG3F5yetNH8CD4855VH6PuuHgICsOl/IeZ1v9HtaWyjtok4Rf84yfDKEl0JZRQaUZ/rlIRdjhZ43twTI=
+      secure: S3xDhrrLgQ1DSBgc42M9wkJzmqYlv/FSeKhcOxDVspy8s/N2N4z4JCGpuX3RYIPEHNIaao9gTvQJ5Ddoq5hCppXncyKsmH4NvDVQ1JdjTRk5KXp6SC0mJvJ7Vh4pKhcpJu87sh9dZs9Io6VqqG/bGpcjt9SFgVz/n24DPKgeREa351GorhncFmnG3ZtItHGe5a7n5V9sM3g5uLUf0ELPew6iPvkyx5xNvyMfMrgcJDbXKHQR6S5xvp7Pw/GkXGVR7d1nQElKMsDOlEiui+l2ctRFo0ZnNGoVzvLGKygkw717Q6k215Gq7x/eZI5//Kidwxra0ks7NYhYhzayRiy+pJ2ZYH3N8c5KL6xbVzyNn8LpP733Ra48oJZK+yjk77TAIkwvBsoH0p1Hc1fi12fdgrhACHa48zy/ILMcnGILfX5BOjVwpPy2dUbiKQHmClrq4Fe+t9vK11wqEjJr/bm2WfmbqEudWn3Kb1Vpk5ZohNZuhXcqJ/PdT9ns9ac8jNHxP3mAiCulOQbRNFq95ZjYQuMscKzlw18WUNyfi/5hsMCKgi78Kbg5Bzia1SieF0w+uo3qHDNIEPiuQevrSc0zGLUaPn+G4O08tx75Gxjg23/leBvn36qv2rXG1+RjL7saj00S2sTSKEB9rXWf8unE19Rh2gXDg4Asxyr63nOLBBI=
     on_success: always
-    on_failure: always 
-
-stages:  
-  - name: BUILD
-  - name: TEST
-  - name: DEPLOY
-  - name: ANDROID
-  
+    on_failure: always
+stages:
+- name: BUILD
+- name: TEST
+- name: DEPLOY
+- name: ANDROID
 jobs:
   include:
   - stage: BUILD
@@ -20,7 +18,7 @@ jobs:
     - '8'
     services:
     - docker
-    install: true #skip default installation
+    install: true
     script:
     - bash build.travis.sh
     deploy:
@@ -33,7 +31,6 @@ jobs:
       upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
       on:
         all_branches: true
-
   - stage: TEST
     language: node_js
     node_js:
@@ -47,16 +44,16 @@ jobs:
     - npm install -g codeclimate-test-reporter
     script:
     - bash test.travis.sh
-  
   - stage: DEPLOY
     language: node_js
     node_js:
     - '8'
     services:
     - docker
-    install: true #skip default installation
+    install: true
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
+      -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     deploy:
       provider: script
@@ -64,7 +61,6 @@ jobs:
       script: bash deploy.travis.sh
       on:
         all_branches: true
-    
   - stage: ANDROID
     language: android
     android:
@@ -83,7 +79,8 @@ jobs:
     - gem install fastlane
     - yarn install
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
+      -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     - aws s3 sync s3://aktnmap-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
     - bash android.travis.sh
@@ -97,10 +94,3 @@ jobs:
       upload_dir: "$TRAVIS_BUILD_NUMBER/apk"
       on:
         all_branches: true
-
-
-
-
-    
-
-
