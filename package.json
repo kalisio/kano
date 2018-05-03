@@ -1,7 +1,7 @@
 {
   "name": "aktnmap",
   "description": "Kalisio App Template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/kalisio/aktnmap",
   "keywords": [
     "kalisio"
@@ -20,11 +20,11 @@
     "url": "https://github.com/kalisio/aktnmap/issues"
   },
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "publish": "git push origin --tags && npm run changelog && git push origin",
-    "release:patch": "cd api && npm run release:patch && cd .. && npm version --force patch && cordova-set-version cordova/config.xml",
-    "release:minor": "cd api && npm run release:minor && cd .. && npm version --force minor && cordova-set-version cordova/config.xml",
-    "release:major": "cd api && run release:major && cd .. && npm version --force major && cordova-set-version cordova/config.xml",
+    "version": "cordova-set-version cordova/config.xml",
+    "postversion": "git push origin --tags && npm run changelog && git push origin",
+    "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
+    "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
+    "release:major": "cd api && run release:major && cd .. && npm version --no-git-tag-version --force major",
     "changelog": "github_changelog_generator -u kalisio -p aktnmap && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
