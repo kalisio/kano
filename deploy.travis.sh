@@ -15,6 +15,7 @@ else
 	scp app.remove.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.remove.sh
 	scp app.backup.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.backup.sh
 	scp app.restore.sh ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.restore.sh
+	scp app.backup.yml ${SSH_USER}@${SSH_REMOTE}:~/aktnmap/app.backup.yml
 	ssh ${SSH_USER}@${SSH_REMOTE} "cd aktnmap; chmod u+x ./app.remove.sh; chmod u+x ./app.deploy.sh; chmod u+x ./app.backup.sh; chmod u+x ./app.restore.sh; ./app.remove.sh; ./app.deploy.sh"
 fi
 
