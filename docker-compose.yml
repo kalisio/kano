@@ -44,6 +44,20 @@ services:
       - mongodb_aktnmap:/data/db
     networks:
       - aktnmap
+  mongodb-aktnmap-backup:
+    container_name: mongodb-aktnmap-backup
+    image: stefanprodan/mgob
+    depends_on:
+      - mongodb-aktnmap
+    links:
+      - mongodb-aktnmap:mongodb
+    volumes:
+      - ./app.backup.yml:/config/aktnmap.yml
+    environment:
+      - S3_ACCESS_KEY
+      - S3_SECRET_ACCESS_KEY
+    networks:
+      - aktnmap
 
 volumes:
   mongodb_aktnmap:
