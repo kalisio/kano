@@ -52,7 +52,7 @@ services:
     links:
       - mongodb-aktnmap:mongodb
     volumes:
-      - ./app.backup.yml:/config/aktnmap.yml
+      - ./app.backup.yml:/config/aktnmap-${FLAVOR}.yml
     environment:
       - S3_ACCESS_KEY
       - S3_SECRET_ACCESS_KEY
