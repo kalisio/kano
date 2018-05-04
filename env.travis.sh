@@ -1,9 +1,11 @@
 #!/bin/bash
+export VERSION=$(node -p -e "require('./package.json').version")
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
 	export DOMAIN=app.dev.aktnmap.xyz
+	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
@@ -12,10 +14,12 @@ then
 		export DEBUG=
 		export FLAVOR=test
 		export DOMAIN=app.test.aktnmap.xyz
+		export VERSION_TAG=$VERSION-test
 	else
 		export DEBUG=
 		export FLAVOR=prod
 		export DOMAIN=app.aktnmap.xyz
+		export VERSION_TAG=$VERSION
 	fi
 fi
 export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
@@ -30,6 +34,8 @@ export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
 echo "DEBUG=$DEBUG" > .env
 echo "FLAVOR=$FLAVOR" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
+echo "VERSION=$VERSION" >> .env
+echo "VERSION_TAG=$VERSION_TAG" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
 echo "PORT=$PORT" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
