@@ -28,7 +28,7 @@ s3:
 slack:
   url: "https://hooks.slack.com/services/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"
   channel: "alerts"
-  username: "luc.claustres@kalisio.com"
+  username: "BackupManager"
   # 'true' to notify only on failures 
   warnOnly: false
   
