@@ -12,6 +12,13 @@ fi
 docker-compose -f docker-compose.yml up -d
 docker cp aktnmap:/opt/aktnmap/dist dist
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-docker tag kalisio/aktnmap kalisio/aktnmap:${FLAVOR}
-docker push kalisio/aktnmap:${FLAVOR}
+VERSION=$(node -p -e "require('./package.json').version")
 
+if [[ $FLAVOR == "prod" ]]
+then
+	docker tag kalisio/aktnmap kalisio/aktnmap:${VERSION}
+	docker push kalisio/aktnmap:${VERSION}
+else
+	docker tag kalisio/aktnmap kalisio/aktnmap:${VERSION}-${FLAVOR}
+	docker push kalisio/aktnmap:${VERSION}-${FLAVOR}
+fi
