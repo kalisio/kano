@@ -86,7 +86,7 @@ module.exports = {
       enabled: true,
       name: 'feathers-jwt',
       httpOnly: false,
-      secure: false
+      secure: (process.env.NODE_ENV === 'development' ? false : true)
     }
   },
   authorisation: {
