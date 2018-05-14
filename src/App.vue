@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { Toast, Events, QAjaxBar } from 'quasar'
 
 /*
@@ -66,8 +67,14 @@ export default {
     })
     Events.$on('error', error => {
       // Translate the message if a translation key exists
-      if (error.data && error.data.translation) {
-        error.message = this.$t('errors.' + error.data.translation.key, error.data.translation.params)
+      const translation = _.get(error, 'data.translation')
+      if (translation) {
+        error.message = this.$t('errors.' + translation.key, translation.params)
+        if (translation.keys) {
+          translation.keys.forEach(key => {
+            error.message += '<br/>' + this.$t('errors.' + key, translation.params)
+          })
+        }
       } else {
         // Overwrite the message using error code
         if (error.code) {
