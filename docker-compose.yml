@@ -22,6 +22,7 @@ services:
       - GOOGLE_PASSWORD
       - GITHUB_USER
       - GITHUB_PASSWORD
+      - APP_SECRET
       - SNS_ACCESS_KEY
       - SNS_SECRET_ACCESS_KEY
       - SNS_ANDROID_ARN

@@ -44,7 +44,7 @@ module.exports = {
     max: 50
   },
   authentication: {
-    secret: 'b5KqXTye4fVxhGFpwMVZRO3R56wS5LNoJHifwgGOFkB5GfMWvIdrWyQxEJXswhAC',
+    secret: process.env.APP_SECRET,
     strategies: [
       'jwt',
       'local'
