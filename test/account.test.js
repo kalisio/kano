@@ -20,7 +20,7 @@ const auth = new pages.Authentication()
 const organisations = new pages.Organisations()
 const account = new pages.Account()
 
-const newPassword = 'kalisio-new'
+const newPassword = 'Pass;word1-new'
 const newEmail = 'kalisio@kalisio.com'
 
 test.page`${pages.getUrl('register')}`
@@ -36,7 +36,7 @@ test('Edit profile', async test => {
 
 test('Edit password', async test => {
   await auth.logIn(test)
-  await account.updatePassword(test, { password: 'kalisio', newPassword })
+  await account.updatePassword(test, { password: 'Pass;word1', newPassword })
   await pages.goBack()
   await auth.logOut(test)
   // We should login with new credentials

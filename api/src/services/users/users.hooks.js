@@ -1,4 +1,4 @@
-import { iffElse, iff } from 'feathers-hooks-common'
+import { iffElse } from 'feathers-hooks-common'
 import { hooks as coreHooks } from 'kCore'
 import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
@@ -19,7 +19,7 @@ module.exports = {
     find: [],
     get: [],
     create: [
-      iff(hook => !hook.result.sponsor, notifyHooks.sendVerificationEmail),
+      iffElse(hook => !hook.result.sponsor, notifyHooks.sendVerificationEmail, notifyHooks.sendInvitationEmail),
       notifyHooks.removeVerification,
       iffElse(hook => hook.result.sponsor, teamHooks.joinOrganisation, teamHooks.createPrivateOrganisation)
     ],

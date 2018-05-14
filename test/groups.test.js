@@ -21,10 +21,10 @@ const groups = new pages.Groups()
 
 const data = {
   users: [
-    { name: 'Groups owner', email: 'groups-owner@kalisio.xyz', password: 'owner' },
-    { name: 'Groups manager 1', email: 'groups-manager1@kalisio.xyz', password: 'manager1' },
-    { name: 'Groups member 1', email: 'groups-member1@kalisio.xyz', password: 'member1' },
-    { name: 'Groups member 2', email: 'groups-member2@kalisio.xyz', password: 'member2' }
+    { name: 'Groups owner', email: 'groups-owner@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Groups manager 1', email: 'groups-manager1@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Groups member 1', email: 'groups-member1@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Groups member 2', email: 'groups-member2@kalisio.xyz', password: 'Pass;word1' }
   ],
   groups: [
     { name: 'Groups 1', description: 'A first group' },

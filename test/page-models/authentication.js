@@ -5,7 +5,7 @@ import ApplicationLayout from './layout'
 const defaultTestUser = {
   name: 'Kalisio',
   email: 'test@kalisio.xyz',
-  password: 'kalisio'
+  password: 'Pass;word1'
 }
 
 export default class Authentication extends ApplicationLayout {

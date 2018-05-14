@@ -20,7 +20,7 @@ const organisations = new pages.Organisations()
 const templates = new pages.EventTemplates()
 
 const data = {
-  user: { name: 'Templates owner', email: 'tempaltes-owner@kalisio.xyz', password: 'user' },
+  user: { name: 'Templates owner', email: 'tempaltes-owner@kalisio.xyz', password: 'Pass;word1' },
   templates: [
     { name: 'Templates one', description: 'A first template without a workflow' },
     { name: 'Templates two', description: 'A second template with a workflow' }

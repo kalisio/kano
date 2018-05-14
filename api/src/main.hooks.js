@@ -3,7 +3,7 @@ import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from 'kCore'
 import { permissions as teamPermissions } from 'kTeam'
-import { permissions as notifyPermissions, hooks as notifyHooks } from 'kNotify'
+import { permissions as notifyPermissions } from 'kNotify'
 import { permissions as mapPermissions } from 'kMap'
 import { permissions as eventPermissions } from 'kEvent'
 const { authenticate } = require('feathers-authentication').hooks
@@ -38,7 +38,8 @@ module.exports = {
       coreHooks.authorise ],
     find: [ fuzzySearch() ],
     get: [],
-    create: [ commonHooks.when(hook => hook.service.name === 'users' && hook.data.sponsor, notifyHooks.sendInvitationEmail) ],
+    // This one cannot be registered on the user service directly because it should run before password hashing, etc.
+    create: [ commonHooks.when(hook => hook.service.name === 'users' && hook.data.sponsor, coreHooks.generatePassword) ],
     update: [ coreHooks.preventUpdatePerspectives ],
     patch: [],
     remove: []

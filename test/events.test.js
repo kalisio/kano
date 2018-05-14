@@ -26,9 +26,9 @@ const events = new pages.Events()
 
 const data = {
   users: [
-    { name: 'Events owner', email: 'events-owner@kalisio.xyz', password: 'owner' },
-    { name: 'Events manager', email: 'events-manager@kalisio.xyz', password: 'manager' },
-    { name: 'Events member', email: 'events-member@kalisio.xyz', password: 'member' }
+    { name: 'Events owner', email: 'events-owner@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Events manager', email: 'events-manager@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Events member', email: 'events-member@kalisio.xyz', password: 'Pass;word1' }
   ],
   group: { name: 'Events group', description: 'A group' },
   template: { name: 'Events template', description: 'An event template' },

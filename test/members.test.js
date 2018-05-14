@@ -22,9 +22,9 @@ const members = new pages.Members()
 
 const data = {
   users: [
-    { name: 'Members owner', email: 'members-owner@kalisio.xyz', password: 'owner' },
-    { name: 'Members manager', email: 'members-manager@kalisio.xyz', password: 'manager' },
-    { name: 'Members member', email: 'members-member@kalisio.xyz', password: 'member' }
+    { name: 'Members owner', email: 'members-owner@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Members manager', email: 'members-manager@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Members member', email: 'members-member@kalisio.xyz', password: 'Pass;word1' }
   ],
   guest: { name: 'Members guest', email: 'members-guest@kalisio.xyz' }
 }

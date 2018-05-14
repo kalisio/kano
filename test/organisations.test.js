@@ -17,7 +17,7 @@ const account = new pages.Account(auth)
 const organisations = new pages.Organisations()
 
 const data = {
-  user: { name: 'Organisations owner', email: 'organisations-owner@kalisio.xyz', password: 'kalisio' },
+  user: { name: 'Organisations owner', email: 'organisations-owner@kalisio.xyz', password: 'Pass;word1' },
   organisation: { name: 'Test Organisation', description: 'An organisation test' }
 }
 

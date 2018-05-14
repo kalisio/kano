@@ -24,8 +24,13 @@ test('Invalid login', async test => {
   await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
 
+test.page`${pages.getUrl('register')}`
+('Registration', async test => {
+  await auth.signIn(test)
+})
+
 test('Local login', async test => {
-  await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'kalisio' })
+  await auth.logIn(test)
 
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
@@ -41,6 +46,12 @@ test('Local login', async test => {
   await test.expect(user).notOk('User should not be populated')
   // The home page should be the logout screen
   await test.expect(screen.props.title).ok('Your are now logged out')
+})
+
+test('Cleanup local user', async test => {
+  await auth.logIn(test)
+  let user = await pages.getFromStore('user')
+  await pages.api.remove('users', user._id)
 })
 
 test.skip('Google login', async test => {

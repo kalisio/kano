@@ -59,10 +59,23 @@ describe('aktnmap', () => {
     expect(sns).toExist()
   })
 
+  it('cannot create a user with a weak password', (done) => {
+    userService.create({
+      email: 'test@test.org',
+      password: '12345678',
+      name: 'test-user'})
+    .catch(error => {
+      expect(error).toExist()
+      expect(error.name).to.equal('BadRequest')
+      expect(error.data.translation.params.failedRules).to.deep.equal(['uppercase', 'lowercase', 'symbols', 'oneOf'])
+      done()
+    })
+  })
+
   it('creates a user with his org', () => {
     let operation = userService.create({
       email: 'test@test.org',
-      password: 'test-password',
+      password: 'Pass;word1',
       name: 'test-user'
     }, { checkAuthorisation: true })
     .then(user => {
@@ -104,7 +117,7 @@ describe('aktnmap', () => {
   it('errors appear in logs', (done) => {
     userService.create({
       email: 'test@test.org',
-      password: 'test-password',
+      password: 'Pass;word1',
       name: 'test-user'
     }, { checkAuthorisation: true })
     .catch(() => {
@@ -347,7 +360,6 @@ describe('aktnmap', () => {
     })
     let event = new Promise((resolve, reject) => {
       // This should unregister the device
-      let userDeleted = false
       sns.once('userDeleted', endpointArn => {
         expect(userObject.devices[0].arn).to.equal(endpointArn)
         resolve()

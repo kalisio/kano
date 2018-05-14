@@ -1,4 +1,5 @@
 var path = require('path')
+var fs = require('fs')
 var containerized = require('containerized')()
 
 const serverPort = process.env.PORT || 8081
@@ -50,6 +51,16 @@ module.exports = {
     ],
     path: API_PREFIX + '/authentication',
     service: API_PREFIX + '/users',
+    passwordPolicy: {
+      minLength: 8,
+      maxLength: 128,
+      uppercase: true,
+      lowercase: true,
+      digits: true,
+      symbols: true,
+      prohibited: fs.readFileSync(path.join(__dirname, '10k_most_common_passwords.txt')).toString().split('\n'),
+      history: 5
+    },
     defaultUsers: [
       {
         email: 'kalisio@kalisio.xyz',
