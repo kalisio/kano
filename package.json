@@ -50,7 +50,7 @@
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
     "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
     "benchmark": "node ./benchmark",
-    "cafe": "testcafe firefox test/*.test.js -S -s screenshots",
+    "cafe": "cross-env NODE_ENV=production testcafe firefox test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
