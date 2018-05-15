@@ -111,6 +111,7 @@ jobs:
     - brew install awscli
     - npm install -g cordova
     - gem install fastlane
+    - pod repo update
     script:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
       -in secrets.tar.enc -out secrets.tar -d
