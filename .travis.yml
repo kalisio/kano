@@ -111,7 +111,8 @@ jobs:
     - brew install awscli
     - npm install -g cordova
     - gem install fastlane
-    - gem uninstall -n /usr/local/bin cocoapods
+    - pod --version
+    - yes | gem uninstall -n /usr/local/bin cocoapods
     - gem install -n /usr/local/bin cocoapods --version 1.1.1
     - pod --version
     script:
