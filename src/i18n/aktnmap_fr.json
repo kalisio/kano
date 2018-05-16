@@ -1,8 +1,8 @@
 {
   "screen": {
-    "ABOUT_KALISIO": "A propos de Kalisio",
+    "ABOUT_KALISIO": "A propos",
     "CONTACT": "Contact",
-    "TERMS_AND_POLICIES": "Termes et conditions"
+    "TERMS_AND_POLICIES": "Conditions générales"
   },
   "sideNav": {
     "DASHBOARD": "Tableau de bord",
@@ -18,5 +18,9 @@
     "VERSION_MISMATCH": "Discordance de version, merci d'installer la dernière version disponible ou de vérifier votre point d'accès",
     "DISCONNECT": "La connexion au serveur a été interrompue, merci de patienter jusqu'à la reconnexion...",
     "RECONNECT": "Tentative de reconnection en cours..."
+  },
+  "KRegister": {
+    "ACCEPT_TERMS_HELPER": "J'accepte les <a href='/#terms' target='_blank'>conditions générales</a>",
+    "ACCEPT_TERMS_ERROR_LABEL": "Vous devez accepter nos <a href='/#terms' target='_blank'>conditions générales</a> pour vous enregistrer"
   }
 }
