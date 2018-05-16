@@ -111,7 +111,9 @@ jobs:
     - brew install awscli
     - npm install -g cordova
     - gem install fastlane
-    - gem install cocoapods --version 1.1.1
+    - gem uninstall -n /usr/local/bin cocoapods
+    - gem install -n /usr/local/bin cocoapods --version 1.1.1
+    - pod --version
     script:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
       -in secrets.tar.enc -out secrets.tar -d
