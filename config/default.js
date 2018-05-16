@@ -48,8 +48,8 @@ module.exports = {
   screen: {
     footer: [
       { label: 'screen.ABOUT_KALISIO', url: website },
-      { label: 'screen.CONTACT', url: website + '/contact' },
-      { label: 'screen.TERMS_AND_POLICIES', url: website + '/terms' },
+      { label: 'screen.CONTACT', url: website + '/#footer' },
+      { label: 'screen.TERMS_AND_POLICIES', url: '/#terms' },
     ],
     header: 'aktnmap-banner.png'
   },
