@@ -113,6 +113,7 @@ jobs:
     - gem install fastlane
     - yes | gem uninstall cocoapods
     - gem install cocoapods --version 1.1.1
+    - pod setup
     script:
     - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
       -in secrets.tar.enc -out secrets.tar -d
