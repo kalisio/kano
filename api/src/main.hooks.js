@@ -39,7 +39,10 @@ module.exports = {
     find: [ fuzzySearch() ],
     get: [],
     // This one cannot be registered on the user service directly because it should run before password hashing, etc.
-    create: [ commonHooks.when(hook => hook.service.name === 'users' && hook.data.sponsor, coreHooks.generatePassword, notifyHooks.sendInvitationEmail) ],
+    create: [ commonHooks.when(hook => hook.service.name === 'users' && hook.data.sponsor,
+                coreHooks.setExpireAfter(48 * 60 * 60), // 48h in seconds
+                coreHooks.generatePassword,
+                notifyHooks.sendInvitationEmail) ],
     update: [ coreHooks.preventUpdatePerspectives ],
     patch: [],
     remove: []
