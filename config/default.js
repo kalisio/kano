@@ -49,7 +49,7 @@ module.exports = {
     footer: [
       { label: 'screen.ABOUT_KALISIO', url: website },
       { label: 'screen.CONTACT', url: website + '/#footer' },
-      { label: 'screen.TERMS_AND_POLICIES', url: '/#terms' },
+      { label: 'screen.TERMS_AND_POLICIES', url: domain + '/#/terms' },
     ],
     header: 'aktnmap-banner.png'
   },
