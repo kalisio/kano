@@ -1,4 +1,5 @@
 var path = require('path')
+var fs = require('fs')
 var containerized = require('containerized')()
 
 const serverPort = process.env.PORT || 8081
@@ -8,11 +9,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kapp.dev.kalisio.xyz'
+  domain = 'https://app.dev.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kapp.test.kalisio.xyz'
+  domain = 'https://app.test.aktnmap.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kapp.kalisio.xyz'
+  domain = 'https://app.aktnmap.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -43,13 +44,23 @@ module.exports = {
     max: 50
   },
   authentication: {
-    secret: 'b5KqXTye4fVxhGFpwMVZRO3R56wS5LNoJHifwgGOFkB5GfMWvIdrWyQxEJXswhAC',
+    secret: process.env.APP_SECRET,
     strategies: [
       'jwt',
       'local'
     ],
     path: API_PREFIX + '/authentication',
     service: API_PREFIX + '/users',
+    passwordPolicy: {
+      minLength: 8,
+      maxLength: 128,
+      uppercase: true,
+      lowercase: true,
+      digits: true,
+      symbols: true,
+      prohibited: fs.readFileSync(path.join(__dirname, '10k_most_common_passwords.txt')).toString().split('\n'),
+      history: 5
+    },
     defaultUsers: [
       {
         email: 'kalisio@kalisio.xyz',
@@ -86,12 +97,35 @@ module.exports = {
       enabled: true,
       name: 'feathers-jwt',
       httpOnly: false,
-      secure: false
+      secure: (process.env.NODE_ENV === 'development' ? false : true)
     }
   },
   authorisation: {
     cache: {
       maxUsers: 1000
+    }
+  },
+  billing: {
+    bronze: {
+      limits: {
+        users: 10,
+        storage: 50
+      },
+      price: 0
+    },
+    silver: {
+      limits: {
+        users: 50,
+        storage: 250
+      },
+      price: 99
+    },
+    gold: {
+      limits: {
+        users: 250,
+        storage: 1000
+      },
+      price: 399
     }
   },
   mailer: {
@@ -121,7 +155,7 @@ module.exports = {
     },
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kApp-',
+      filename: 'aktnmap-',
       datePattern: 'yyyy-MM-dd.log',
       maxDays: 30
       /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
@@ -133,7 +167,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kApp' : 'mongodb://127.0.0.1:27017/kApp')
+    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/aktnmap' : 'mongodb://127.0.0.1:27017/aktnmap')
   },
   storage: {
     accessKeyId: process.env.S3_ACCESS_KEY,

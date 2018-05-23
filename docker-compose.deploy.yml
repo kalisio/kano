@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  kapp:
+  aktnmap:
     environment:
       - DEBUG=${DEBUG}
     networks:
       - traefik
-      - kapp
+      - aktnmap
     labels:
-      - "traefik.backend=kapp"
+      - "traefik.backend=aktnmap"
       - "traefik.docker.network=traefik"
       - "traefik.enable=true"
       - "traefik.port=8081"

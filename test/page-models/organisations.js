@@ -19,12 +19,14 @@ export default class Organisations extends ApplicationLayout {
     await this.openSideNav(test)
     await test
       .click(this.panel.find('#' + _.kebabCase(orgName)))
-      .wait(5000) 
+      .wait(5000)
   }
   async createOrganisation (test, org) {
     await this.openSideNav(test)
     await test
       .click(this.newLink)
+      .wait(2000)
+    await test
       .typeText(this.createModal.find('#name-field'), org.name, { replace: true })
       .typeText(this.createModal.find('#description-field'), org.description, { replace: true })
       .click(this.createModal.find('#apply-button'))
@@ -37,6 +39,8 @@ export default class Organisations extends ApplicationLayout {
     await this.clickTabBar(test, '#billing')
     await test
       .click(this.billingEditor.find('#billing-field'))
+      .wait(500)
+    await test
       .click(Selector('.q-popover .q-item').nth(1))
       .click(this.billingEditor.find('#apply-button'))
       .wait(5000)
@@ -48,9 +52,10 @@ export default class Organisations extends ApplicationLayout {
     await this.clickTabBar(test, '#danger-zone')
     await test
       .click(VueSelector('k-organisation-dz k-block q-btn'))
+      .wait(500)
+    await test
       .typeText(Selector('.modal input[type=text]'), orgName)
       .click(Selector('.modal-buttons button').nth(0))
       .wait(5000)
   }
 }
-

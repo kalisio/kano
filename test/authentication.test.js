@@ -1,8 +1,8 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `Authentication`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Authentication`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,7 +11,7 @@ fixture `Authentication`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const app = new pages.ApplicationLayout()
@@ -24,20 +24,14 @@ test('Invalid login', async test => {
   await test.expect(app.isErrorVisible()).ok('Error should be displayed')
 })
 
-test.page `${pages.getUrl('register')}`
+test.page`${pages.getUrl('register')}`
 ('Registration', async test => {
   await auth.signIn(test)
-
-  const signupAlert = await app.signupAlert.getVue()
-  let user = await pages.getFromStore('user')
-  // We should have at least a populated user and an unverified email
-  await test.expect(user).ok('User should be populated')
-  await test.expect(signupAlert.props.isVerified).notOk('User should not be verified')
 })
 
 test('Local login', async test => {
   await auth.logIn(test)
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and an unverified email
@@ -62,7 +56,7 @@ test('Cleanup local user', async test => {
 
 test.skip('Google login', async test => {
   await auth.logInGoogle(test)
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email
@@ -80,7 +74,7 @@ test.skip('Cleanup Google user', async test => {
 
 test.skip('GitHub login', async test => {
   await auth.logInGitHub(test)
-  
+
   const signupAlert = await app.signupAlert.getVue()
   let user = await pages.getFromStore('user')
   // We should have at least a populated user and a verified email

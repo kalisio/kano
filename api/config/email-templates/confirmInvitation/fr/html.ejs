@@ -1,17 +1,14 @@
 <h1>[Akt'n'Map] Bienvenue</h1>
 
-<p>Cher <%= user.name %>.</p>
+<p>Cher <%= user.name %>,</p>
 
-<p>Vous avez été invité à nous rejoindre sur Akt'n'Map</p> 
+<p>vous avez été invité par <%= email.sponsor %> à nous rejoindre sur Akt'n'Map.</p> 
 
 <p>Un compte a été créé pour vous et attend d'être utilisé:
 <ul>
   <li>mail: <%= user.email %></li>
   <li>mot de passe: <%= user.password %></li>
   </ul>
-
 </p>
 
-<p>Suivez <a href='<%= email.link %>'>ce lien</a> pour accéder à la page de connexion.</p>
-
-<p>Si vous ne souhaitez pas être enregistré envoyez-nous un mail en cliquant sur <a href="mailto:<%= email.from %>?subject=Je ne souhaite pas être enregistré sur Akt'n'Map&body=Merci d'annuler cette invitation.">ce lien</a>.</p>
+<p>Si vous acceptez nos <a href='<%= email.domainPath + 'terms' %>'>conditions générales</a> suivez <a href='<%= email.link %>'>ce lien</a> pour accéder à la page de connexion. Si vous refusez votre compte sera automatiquement détruit dans un délai de 48h.</p>

@@ -1,4 +1,4 @@
-import { iffElse, iff } from 'feathers-hooks-common'
+import { iff, iffElse } from 'feathers-hooks-common'
 import { hooks as coreHooks } from 'kCore'
 import { hooks as teamHooks } from 'kTeam'
 import { hooks as notifyHooks } from 'kNotify'
@@ -11,7 +11,7 @@ module.exports = {
     create: [ notifyHooks.addVerification ],
     update: [],
     patch: [],
-    remove: []
+    remove: [ teamHooks.preventRemoveUser ]
   },
 
   after: {
@@ -27,6 +27,7 @@ module.exports = {
     patch: [],
     remove: [
       coreHooks.setAsDeleted,
+      coreHooks.removeAttachments('avatar'),
       coreHooks.updateTags,
       // Avoid removing subscriptions on removed (ie unused) tags
       notifyHooks.updateSubjectSubscriptions({
@@ -35,7 +36,6 @@ module.exports = {
         filter: (operation, topics) => operation === 'unsubscribe' ? topics.filter(topic => topic.count > 1) : topics,
         subjectAsItem: true
       }),
-      iff(hook => !hook.result.sponsor, teamHooks.removePrivateOrganisation),
       teamHooks.leaveOrganisations(),
       notifyHooks.unregisterDevices
     ]

@@ -2,8 +2,8 @@ import path from 'path'
 // Page models
 import * as pages from './page-models'
 
-fixture `Account`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Account`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -12,30 +12,31 @@ fixture `Account`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const organisations = new pages.Organisations()
+const account = new pages.Account()
 
-const newPassword = 'kalisio-new'
+const newPassword = 'Pass;word1-new'
 const newEmail = 'kalisio@kalisio.com'
 
-test.page `${pages.getUrl('register')}`
+test.page`${pages.getUrl('register')}`
 ('Registration', async test => {
   await auth.signIn(test)
 })
 
 test('Edit profile', async test => {
   await auth.logIn(test)
-  await account.editProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/kalisio-logo.png') })
+  await account.editProfile(test, { name: 'toto', avatar: path.join(__dirname, '..', 'src/assets/aktnmap-logo.png') })
   await account.checkIdentity(test, 'toto')
 })
 
 test('Edit password', async test => {
   await auth.logIn(test)
-  await account.updatePassword(test, { password: 'kalisio', newPassword })
+  await account.updatePassword(test, { password: 'Pass;word1', newPassword })
   await pages.goBack()
   await auth.logOut(test)
   // We should login with new credentials
@@ -57,6 +58,7 @@ test('Edit email', async test => {
 
 test('Delete account', async test => {
   await auth.logIn(test, { password: newPassword })
+  await organisations.deleteOrganisation(test, 'Kalisio')
   await account.removeAccount(test, 'toto')
 
   let screen = await auth.logoutScreen.getVue()

@@ -1,8 +1,8 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `EventTemplates`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`EventTemplates`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,23 +11,23 @@ fixture `EventTemplates`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
 const templates = new pages.EventTemplates()
 
 const data = {
-  user: { name: 'Templates owner', email: 'tempaltes-owner@kalisio.xyz', password: 'user' },
+  user: { name: 'Templates owner', email: 'tempaltes-owner@kalisio.xyz', password: 'Pass;word1' },
   templates: [
     { name: 'Templates one', description: 'A first template without a workflow' },
     { name: 'Templates two', description: 'A second template with a workflow' }
   ]
 }
 
-test.page `${pages.getUrl('register')}`
+test.page`${pages.getUrl('register')}`
 ('Users registration', async test => {
   await auth.signIn(test, data.user)
 })
@@ -69,5 +69,6 @@ test('Delete template', async test => {
 
 test('Clean registrated users', async test => {
   await auth.logInAndCloseSignupAlert(test, data.user)
+  await organisations.deleteOrganisation(test, data.user.name)
   await account.removeAccount(test, data.user.name)
 })

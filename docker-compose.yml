@@ -1,18 +1,20 @@
 version: '3'
 
 services:
-  kapp:
+  aktnmap:
     build:
       context: .
       dockerfile: ./dockerfile.${FLAVOR}
-    container_name: kapp
-    image: kalisio/kapp:${FLAVOR}
+      args:
+        BUILD_NUMBER: ${BUILD_NUMBER}
+    container_name: aktnmap
+    image: kalisio/aktnmap:${VERSION_TAG}
     depends_on:
-      - mongodb-kapp
+      - mongodb-aktnmap
     links:
-      - mongodb-kapp:mongodb
+      - mongodb-aktnmap:mongodb
     ports:
-      - 8081:8081
+      - ${PORT}:8081
     environment:
       - GOOGLE_MAIL_USER
       - GOOGLE_MAIL_PASSWORD
@@ -20,6 +22,7 @@ services:
       - GOOGLE_PASSWORD
       - GITHUB_USER
       - GITHUB_PASSWORD
+      - APP_SECRET
       - SNS_ACCESS_KEY
       - SNS_SECRET_ACCESS_KEY
       - SNS_ANDROID_ARN
@@ -30,20 +33,35 @@ services:
       - GITHUB_CLIENT_SECRET
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
+      - BUILD_NUMBER
       - NODE_APP_INSTANCE=${FLAVOR}
-      - DB_URL=mongodb://mongodb:27017/kApp
+      - DB_URL=mongodb://mongodb:27017/aktnmap
     networks:
-      - kapp
-  mongodb-kapp:
-    container_name: mongodb-kapp
+      - aktnmap
+  mongodb-aktnmap:
+    container_name: mongodb-aktnmap
     image: mongo
     volumes:
-      - mongodb_kapp:/data/db
+      - mongodb_aktnmap:/data/db
     networks:
-      - kapp
+      - aktnmap
+  mongodb-aktnmap-backup:
+    container_name: mongodb-aktnmap-backup
+    image: stefanprodan/mgob
+    depends_on:
+      - mongodb-aktnmap
+    links:
+      - mongodb-aktnmap:mongodb
+    volumes:
+      - ./app.backup.yml:/config/aktnmap-${FLAVOR}.yml
+    environment:
+      - S3_ACCESS_KEY
+      - S3_SECRET_ACCESS_KEY
+    networks:
+      - aktnmap
 
 volumes:
-  mongodb_kapp:
+  mongodb_aktnmap:
 
 networks:
-  kapp:
+  aktnmap:

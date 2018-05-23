@@ -6,6 +6,7 @@ module.exports = {
     // will be overriden when required
     meta: { unauthenticated: true },
     children: {
+      'terms': 'Terms',
       'login': 'authentication/KLogin',
       'logout': {
         component: 'authentication/KLogout',
@@ -31,10 +32,6 @@ module.exports = {
       'change-identity/:token': {
         component: 'account/KChangeIdentity',
         meta: { authenticated: true }
-      },
-      'confirm-invitation/:token': {
-        component: 'account/KConfirmInvitation',
-        props: true
       },
       'home': {
         // The name of the route has to be set the default child

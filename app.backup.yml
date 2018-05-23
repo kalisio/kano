@@ -1,0 +1,34 @@
+scheduler:
+  # run every day at 00:00 UTC
+  cron: "0 0 */1 * *"
+  # number of backups to keep locally
+  retention: 14
+  # backup operation timeout in minutes
+  timeout: 60
+target:
+  # mongod IP or host name
+  host: "mongodb"
+  # mongodb port
+  port: 27017
+  # mongodb database name, leave blank to backup all databases
+  # database: "test"
+  # leave blank if auth is not enabled
+  # username: "admin"
+  # password: "secret"
+  # add custom params to mongodump (eg. Auth or SSL support), leave blank if not needed
+  # params: "--ssl --authenticationDatabase admin"
+# S3 upload (optional)
+s3:
+  url: "https://s3.amazonaws.com"
+  bucket: "aktnmap-dumps"
+  accessKey: "$S3_ACCESS_KEY"
+  secretKey: "$S3_SECRET_ACCESS_KEY"
+  api: "S3v4"
+# Slack notifications
+slack:
+  url: "https://hooks.slack.com/services/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"
+  channel: "alerts"
+  username: "BackupManager"
+  # 'true' to notify only on failures 
+  warnOnly: false
+  

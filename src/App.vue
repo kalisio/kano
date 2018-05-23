@@ -1,12 +1,13 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <q-ajax-bar ref="bar" position="bottom" size="8px" color="#027be3" :delay="250"></q-ajax-bar>
+    <q-ajax-bar ref="bar" position="bottom" size="8px" color="primary" :delay="250"></q-ajax-bar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 import { Toast, Events, QAjaxBar } from 'quasar'
 
 /*
@@ -65,15 +66,20 @@ export default {
       Events.$emit('error', hook.error)
     })
     Events.$on('error', error => {
-      // When trying to access an unauthorized resource redirect to home ?
-      /*
-      if (error.code === 403) {
-        this.$router.push({ name: 'home' })
-      }
-      */
-      // From generic error codes to translated messages
-      if (error.code) {
-        error.message = this.$t('errors.' + error.code)
+      // Translate the message if a translation key exists
+      const translation = _.get(error, 'data.translation')
+      if (translation) {
+        error.message = this.$t('errors.' + translation.key, translation.params)
+        if (translation.keys) {
+          translation.keys.forEach(key => {
+            error.message += '<br/>' + this.$t('errors.' + key, translation.params)
+          })
+        }
+      } else {
+        // Overwrite the message using error code
+        if (error.code) {
+          error.message = this.$t('errors.' + error.code)
+        }
       }
       this.showError(error.message)
     })

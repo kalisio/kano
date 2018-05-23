@@ -1,15 +1,15 @@
 {
-  "name": "kApp",
+  "name": "aktnmap",
   "description": "Kalisio App Template",
-  "version": "0.1.0",
-  "homepage": "https://github.com/kalisio/kApp",
+  "version": "0.2.0",
+  "homepage": "https://github.com/kalisio/aktnmap",
   "keywords": [
     "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kalisio/kApp.git"
+    "url": "git://github.com/kalisio/aktnmap.git"
   },
   "author": {
     "name": "Kalisio contributors",
@@ -17,15 +17,15 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kalisio/kApp/issues"
+    "url": "https://github.com/kalisio/aktnmap/issues"
   },
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "publish": "git push origin --tags && npm run changelog && git push origin",
-    "release:patch": "cd api && npm run release:patch && cd .. && npm version --force patch && npm run publish && cordova-set-version cordova/config.xml",
-    "release:minor": "cd api && npm run release:minor && cd .. && npm version --force minor && npm run publish && cordova-set-version cordova/config.xml",
-    "release:major": "cd api && run release:major && cd .. && npm version --force major && npm run publish && cordova-set-version cordova/config.xml",
-    "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
+    "version": "cordova-set-version cordova/config.xml",
+    "postversion": "git push origin --tags && npm run changelog && git push origin",
+    "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
+    "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
+    "release:major": "cd api && run release:major && cd .. && npm version --no-git-tag-version --force major",
+    "changelog": "github_changelog_generator -u kalisio -p aktnmap && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "prod": "cd api && npm run prod",
@@ -35,24 +35,42 @@
     "cordova:remove": "npm run cordova:remove:android && npm run cordova:remove:ios",
     "cordova:clean": "cd cordova && cordova clean remove ios && cd ..",
     "cordova:add:android": "cd cordova && cordova platform add android@6.4 && cd ..",
-    "cordova:add:ios": "cd cordova && cordova platform add ios && cd ..",
+    "cordova:add:ios": "cd cordova && cordova platform add ios && cd platforms/ios && pod install && cd ../../..",
     "cordova:add": "npm run cordova:add:android && npm run cordova:add:ios",
-    "cordova:build:debug": "npm run build && cd cordova && cordova build --debug && cd ..",
+    "cordova:build:debug": "cd cordova && cordova build --debug && cd ..",
     "cordova:build:release": "cd cordova && cordova build --release && cd ..",
     "cordova:build": "npm run cordova:build:debug && npm run cordova:build:release",
-    "cordova:supply:android": "npm run cordova:add:android && npm run cordova:build:release && cd cordova && fastlane deploy && cd ..",
+    "cordova:fastlane": "cd cordova && cross-env-shell \"fastlane $NODE_APP_INSTANCE\" && cd ..",
+    "cordova:supply:android": "npm run cordova:add:android && npm run cordova:build && npm run cordova:fastlane",
+    "cordova:supply:ios": "npm run cordova:add:ios && npm run cordova:build && npm run cordova:fastlane",
     "cordova:dev": "cd cordova && cordova run --debug && cd ..",
     "cordova:prod": "cd cordova && cordova run --release && cd ..",
     "cordova": "npm run cordova:dev",
     "analyze:stats": "webpack --config build/webpack.prod.conf.js --profile --json > build-stats.json",
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
-    "lint": "eslint --ext .js,.vue src/",
+    "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
     "benchmark": "node ./benchmark",
-    "cafe": "testcafe chrome test/*.test.js -S -s screenshots",
+    "cafe": "testcafe firefox test/*.test.js -S -s screenshots",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "testcafe",
+      "html"
+    ],
+    "sourceType": "module",
+    "globals": [
+      "DEV",
+      "PROD",
+      "__THEME",
+      "cordova",
+      "test",
+      "fixture"
+    ]
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.9.1",
@@ -89,9 +107,10 @@
     "quasar-framework": "0.14.7",
     "roboto-fontface": "^0.7.0",
     "rxjs": "^5.4.1",
+    "showdown": "^1.8.6",
     "socket.io-client": "^2.0.1",
-    "testcafe": "^0.18.5",
-    "testcafe-vue-selectors": "^2.1.0",
+    "testcafe": "^0.19.2",
+    "testcafe-vue-selectors": "^3.0.0",
     "togeojson": "^0.16.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
     "vue": "2.5.2",
@@ -120,7 +139,6 @@
     "css-loader": "^0.28.0",
     "es6-promise": "^4.1.1",
     "eslint": "^4.4.1",
-    "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.1.1",
@@ -128,6 +146,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-testcafe": "^0.2.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -143,7 +162,8 @@
     "progress-bar-webpack-plugin": "^1.10.0",
     "purify-css": "^1.2.6",
     "script-loader": "^0.7.2",
-    "shelljs": "^0.7.0",
+    "shelljs": "^0.8.1",
+    "standard": "^10.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.7",

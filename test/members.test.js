@@ -1,8 +1,8 @@
 // Page models
 import * as pages from './page-models'
 
-fixture `Members`// declare the fixture
-  .page `${pages.getUrl()}`  // specify the start page
+fixture`Members`// declare the fixture
+  .page`${pages.getUrl()}`  // specify the start page
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,26 +11,27 @@ fixture `Members`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    await pages.checkNoClientError(test) 
+    await pages.checkNoClientError(test)
   })
 
 const auth = new pages.Authentication()
-const account = new pages.Account(auth)
+const account = new pages.Account()
 const organisations = new pages.Organisations()
+const users = new pages.Users(auth, account, organisations)
 const members = new pages.Members()
 
 const data = {
   users: [
-    { name: 'Members owner', email: 'members-owner@kalisio.xyz', password: 'owner' },
-    { name: 'Members manager', email: 'members-manager@kalisio.xyz', password: 'manager' },
-    { name: 'Members member', email: 'members-member@kalisio.xyz', password: 'member' }
+    { name: 'Members owner', email: 'members-owner@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Members manager', email: 'members-manager@kalisio.xyz', password: 'Pass;word1' },
+    { name: 'Members member', email: 'members-member@kalisio.xyz', password: 'Pass;word1' }
   ],
   guest: { name: 'Members guest', email: 'members-guest@kalisio.xyz' }
 }
 
-test.page `${pages.getUrl('login')}`
+test.page`${pages.getUrl('login')}`
 ('Users registration', async test => {
-  await account.registerUsers(test, data.users)
+  await users.registerUsers(test, data.users)
 })
 
 test('Add users to organisation', async test => {
@@ -44,7 +45,7 @@ test('Add users to organisation', async test => {
   await members.checkMembersCount(test, 3)
 })
 
-test('Invite data.guest to join the organisation', async test => {
+test('Invite guest to join the organisation', async test => {
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
@@ -56,7 +57,7 @@ test('tag member', async test => {
   await auth.logInAndCloseSignupAlert(test, data.users[0])
   await organisations.selectOrganisation(test, data.users[0].name)
   await members.clickToolbar(test, members.getToolbarEntry())
-  await members.tagMember(test, data.users[1].name, 'fireman')
+  await members.tagMember(test, data.users[1].name, 'tag')
   await members.checkMembersCount(test, 4)
 })
 
@@ -81,6 +82,8 @@ test('Remove members from organisation', async test => {
 })
 
 test('Clean registrated users', async test => {
+  // await auth.logIn(test, data.users[0])
+  // await account.removeAccount(test, data.users[0].name)
   // FIXME: for (let i in data.users) await organisations.deleteOrganisation(test, data.users[i].name)
-  await account.unregisterUsers(test, data.users)
+  await users.unregisterUsers(test, data.users)
 })

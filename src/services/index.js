@@ -18,8 +18,7 @@ export default function () {
     api.configure(kNotify)
     api.configure(kMap)
     api.configure(kEvent)
-  }
-  catch (error) {
+  } catch (error) {
     logger.error(error.message)
   }
 }

@@ -24,8 +24,10 @@ module.exports = {
     update: [],
     patch: [],
     remove: [ notifyHooks.unsubscribeSubjectsFromResourceTopic,
-      // Remove also auhorisations for all org groups when removing authorisation on org
-      when(hook => _.get(hook.params, 'query.scope') === 'organisations', teamHooks.removeOrganisationGroupsAuthorisations) ]
+      // Remove also auhorisations for all org groups/tags when removing authorisation on org
+      when(hook => _.get(hook.params, 'query.scope') === 'organisations',
+        teamHooks.removeOrganisationTagsAuthorisations,
+        teamHooks.removeOrganisationGroupsAuthorisations) ]
   },
 
   error: {

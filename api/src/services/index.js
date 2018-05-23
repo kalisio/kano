@@ -6,6 +6,7 @@ import kTeam from 'kTeam'
 import kMap from 'kMap'
 import kNotify from 'kNotify'
 import kEvent from 'kEvent'
+import packageInfo from '../../package.json'
 
 const servicesPath = path.join(__dirname, '..', 'services')
 module.exports = async function () {
@@ -13,6 +14,18 @@ module.exports = async function () {
 
   // Set up our plugin services
   try {
+    app.use(app.get('apiPath') + '/capabilities', (req, res, next) => {
+      let response = {
+        name: 'aktnmap',
+        domain: app.get('domain'),
+        version: packageInfo.version,
+        billing: app.get('billing')
+      }
+      if (process.env.BUILD_NUMBER) {
+        response.buildNumber = process.env.BUILD_NUMBER
+      }
+      res.json(response)
+    })
     await app.configure(kCore)
     // Add hook to automatically create a new organisation, add verification, send verification email,
     // register devices, etc. when creating a new user or authenticating
@@ -34,15 +47,15 @@ module.exports = async function () {
     app.configureService('devices', app.getService('devices'), servicesPath)
     await app.configure(kMap)
     await app.configure(kEvent)
-  }
-  catch (error) {
+  } catch (error) {
     logger.error(error.message)
   }
 
   let usersService = app.getService('users')
   let pusherService = app.getService('pusher')
   let defaultUsers = app.get('authentication').defaultUsers
-  if (defaultUsers) {
+  // Do not use exposed passwords on staging/prod environments
+  if (defaultUsers && !process.env.NODE_APP_INSTANCE) {
     // Create default users if not already done
     const users = await usersService.find({ paginate: false })
     for (let i = 0; i < defaultUsers.length; i++) {

@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import { Toast, Events } from 'quasar'
+import { Toast, Events, Loading, Alert } from 'quasar'
 import { mixins, beforeGuard } from 'kCore/client'
+import config from 'config'
 import utils from '../utils'
 
 export default {
@@ -21,8 +22,7 @@ export default {
       if (typeof result === 'string') {
         // Redirect to a given route based on authentication state
         this.$router.push({ name: result })
-      }
-      else if (!result) {
+      } else if (!result) {
         // This route was previously allowed but due to changes in authorisations it is not anymore
         this.$router.push({ name: (this.user ? 'home' : 'login') })
       }
@@ -70,6 +70,46 @@ export default {
       // Check if we need to redirect based on the fact there is an authenticated user
       this.redirect()
     })
+
+    if (this.$api.socket) {
+      // Display error message if we cannot contact the server
+      this.$api.socket.on('reconnect_error', () => {
+        // Display it only the first time the error appears because multiple attempts will be tried
+        if (!this.pendingReconnection) {
+          this.pendingReconnection = Alert.create({html: this.$t('Index.DISCONNECT')})
+        }
+      })
+      // Handle reconnection correctly, otherwise auth seems to be lost
+      // Also easier to perform a full refresh instead of handling this specifically on each activity
+      this.$api.socket.on('reconnect', () => {
+        // Dismiss pending reconnection error message
+        if (this.pendingReconnection) {
+          this.pendingReconnection.dismiss()
+          this.pendingReconnection = null
+        }
+        Loading.show({message: this.$t('Index.RECONNECT')})
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000)
+      })
+    }
+    // Check for API version, this one is not a service but a basic route so we don't use Feathers client
+    this.$store.set('capabilities.client', {
+      version: config.version,
+      buildNumber: config.buildNumber,
+      domain: config.domain
+    })
+    window.fetch(this.$api.getBaseUrl() + config.apiPath + '/capabilities')
+      .then(response => response.json())
+      .then(api => {
+        this.$store.set('capabilities.api', api)
+        // FIXME: we should elaborate a more complex check between compatible versions
+        if (api.version === config.version) {
+          if (!api.buildNumber) return
+          else if (api.buildNumber === config.buildNumber) return
+        }
+        Alert.create({html: this.$t('Index.VERSION_MISMATCH')})
+      })
   }
 }
 </script>

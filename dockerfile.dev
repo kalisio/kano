@@ -2,21 +2,22 @@ FROM  node:8
 
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
-ENV DEBUG=kalisio*
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
-WORKDIR /opt/kapp
-COPY . /opt/kapp
+WORKDIR /opt/aktnmap
+COPY . /opt/aktnmap
 
-RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd .. && yarn link kCore
-RUN git clone https://github.com/kalisio/kTeam.git -b master --single-branch && cd kTeam && yarn install && yarn link kCore && yarn link && cd .. && yarn link kTeam
-RUN git clone https://github.com/kalisio/kNotify.git -b master --single-branch && cd kNotify && yarn install && yarn link kCore && yarn link && cd .. && yarn link kNotify
-RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link kCore && yarn link && cd .. && yarn link kMap
-RUN git clone https://github.com/kalisio/kEvent.git -b master --single-branch && cd kEvent && yarn install && yarn link kCore && yarn link && cd .. && yarn link kEvent
-RUN yarn install
-RUN npm run build
+WORKDIR /opt/aktnmap/modules
+RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kTeam.git -b master --single-branch && cd kTeam && yarn install && yarn link kCore && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kNotify.git -b master --single-branch && cd kNotify && yarn install && yarn link kCore && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link kCore && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kEvent.git -b master --single-branch && cd kEvent && yarn install && yarn link kCore && yarn link && cd ..
 
-WORKDIR /opt/kapp/api
+WORKDIR /opt/aktnmap/api
 
 RUN yarn install
 RUN yarn link kCore
@@ -24,6 +25,11 @@ RUN yarn link kTeam
 RUN yarn link kNotify
 RUN yarn link kMap
 RUN yarn link kEvent
+RUN npm run build
+
+WORKDIR /opt/aktnmap
+
+RUN yarn install
 RUN npm run build
 
 EXPOSE 8081

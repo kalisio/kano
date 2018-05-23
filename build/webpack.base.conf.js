@@ -5,15 +5,14 @@ var
   cssUtils = require('./css-utils'),
   env = require('./env-utils'),
   merge = require('webpack-merge'),
-  projectRoot = path.resolve(__dirname, '../'),
+  fs = require('fs'),
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
+  // Load config based on current NODE_ENV, etc.
+  clientConfig = require('config'),
+  projectRoot = path.resolve(__dirname, '../'), 
   useCssSourceMap =
     (env.dev && config.dev.cssSourceMap) ||
     (env.prod && config.build.productionSourceMap)
-
-// Load config based on current NODE_ENV
-const clientConfig = require('config')
-const fs = require('fs')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -33,6 +32,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     modules: [
+      resolve(''),
       resolve('src'),
       resolve('node_modules')
     ],
@@ -45,6 +45,7 @@ module.exports = {
     unknownContextCritical: false, // Required for Cesium, see https://github.com/AnalyticalGraphicsInc/cesium/issues/4876
     unknownContextRegExp: /^.\/.*$/, // Required for Cesium, https://github.com/mmacaula/cesium-webpack/issues/4
     rules: [
+      /*
       { // eslint
         enforce: 'pre',
         test: /\.(vue|js)$/,
@@ -55,6 +56,7 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
+      */
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -129,3 +131,4 @@ module.exports = {
 // Note: If '/build' does not exist, this command will error; alternatively, write to '/config'.
 // The webpack alias below will then build that file into the client build.
 fs.writeFileSync(path.join('config', 'client-config.json'), JSON.stringify(clientConfig))
+

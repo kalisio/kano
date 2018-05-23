@@ -1,18 +1,16 @@
-<h1>[kApp] <%= email.subject %></h1>
+<h1>[Akt'n'Map] <%= email.subject %></h1>
 
-<p>Dear <%= user.name %>.</p>
+<p>Dear <%= user.name %>,</p>
 
-<p>You'be been invited to join us on kApp</p> 
+<p>you'be been invited by <%= email.sponsor %> to join us on Akt'n'Map.</p> 
 
 <p>An account has been created for you and is ready to use with the following details:
 <ul>
   <li>email: <%= user.email %></li>
   <li>password: <%= user.password %></li>
-  </ul>
+</ul>
 
 </p>
 
-<p>Follow <a href='<%= email.link %>'>this link</a> to access the login page.</p>
-
-<p>If you do not want to get registrated to kApp please let us know by following <a href='mailto:<%= email.from %>?subject=I refuse to get registrated to kApp&body=Please cancel the invitation I recevied to join the kApp solution.'>this link</a>.</p>
+<p>If you accept our <a href='<%= email.domainPath + 'terms' %>'>terms and policies</a> follow <a href='<%= email.link %>'>this link</a> to access the login page. If you do not accept your account will be automatically removed within 48h.</p>
 

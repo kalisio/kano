@@ -26,6 +26,10 @@ node_modules
 # dotenv environment variables file
 .env
 
+# Node files
+package.json
+package-lock.json
+
 # Distribution files
 www
 platforms
