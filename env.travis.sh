@@ -4,7 +4,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
-	export DOMAIN=app.dev.aktnmap.xyz
+	export DOMAIN=app.dev.kapp.xyz
 	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
@@ -13,12 +13,12 @@ then
 	then
 		export DEBUG=
 		export FLAVOR=test
-		export DOMAIN=app.test.aktnmap.xyz
+		export DOMAIN=app.test.kapp.xyz
 		export VERSION_TAG=$VERSION-test
 	else
 		export DEBUG=
 		export FLAVOR=prod
-		export DOMAIN=app.aktnmap.xyz
+		export DOMAIN=app.kapp.xyz
 		export VERSION_TAG=$VERSION
 	fi
 fi

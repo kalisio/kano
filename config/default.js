@@ -7,11 +7,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://app.dev.aktnmap.xyz'
+  domain = 'https://kapp.dev.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://app.test.aktnmap.xyz'
+  domain = 'https://kapp.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://app.aktnmap.xyz'
+  domain = 'https://kapp.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -34,8 +34,8 @@ module.exports = {
   apiPath: API_PREFIX,
   apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  appName: 'Akt\'n\'Map',
-  appLogo: 'aktnmap-logo.png',
+  appName: 'kApp',
+  appLogo: 'kalisio-logo.png',
   publisher: 'Kalisio',
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
@@ -51,7 +51,7 @@ module.exports = {
       { label: 'screen.CONTACT', url: website + '/#footer' },
       { label: 'screen.TERMS_AND_POLICIES', url: domain + '/#/terms' },
     ],
-    header: 'aktnmap-banner.png'
+    header: 'kalisio-banner.png'
   },
   login: {
     providers: ['google', 'github']
@@ -61,29 +61,16 @@ module.exports = {
     sideNav: 'layout/KSideNav'
   },
   appBar: {
-    title: 'Akt\'n\'Map',
+    title: 'kApp',
     speech: {
       language: 'en'
     }
   },
   sideNav: {
-    banner: 'aktnmap-banner.png',
+    banner: 'kalisio-banner.png',
     components: {
-      user_identity: 'account/KIdentityPanel',
-      user_dashboard: 'layout/KLinksPanel',
-      user_organisation: 'KOrganisationsPanel',
       user_actions: 'layout/KLinksPanel'
     }
-  },
-  user_dashboard: {
-    links: [
-      { },
-      { label: 'sideNav.DASHBOARD', icon: 'dashboard', route: { name: 'home' } }
-    ]
-  },
-  user_organisations: {
-    icon: 'domain',
-    label: 'Organisations'
   },
   user_actions: {
     links: [
@@ -91,13 +78,5 @@ module.exports = {
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
-  context: {
-    service: 'organisations',
-    /* Due to complex authorisation management this is now done in the Context app component
-    actions: [ ... ]
-    */
-  },
-  map: require('./map'),
-  globe: require('./globe'),
   routes: require('./routes')
 }

@@ -1,4 +1,3 @@
-import { hooks as notifyHooks } from 'kNotify'
 
 module.exports = {
   before: {
@@ -15,7 +14,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ notifyHooks.verifyGuest, notifyHooks.consentGuest ],
+    create: [],
     update: [],
     patch: [],
     remove: []

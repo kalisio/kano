@@ -9,11 +9,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://app.dev.aktnmap.xyz'
+  domain = 'https://kapp.dev.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://app.test.aktnmap.xyz'
+  domain = 'https://kapp.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://app.aktnmap.xyz'
+  domain = 'https://kapp.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -64,7 +64,7 @@ module.exports = {
     defaultUsers: [
       {
         email: 'kalisio@kalisio.xyz',
-        password: 'kalisio',
+        password: 'Pass;word1',
         /*
         device: {
           registrationId: 'xxx',
@@ -100,54 +100,6 @@ module.exports = {
       secure: (process.env.NODE_ENV === 'development' ? false : true)
     }
   },
-  authorisation: {
-    cache: {
-      maxUsers: 1000
-    }
-  },
-  billing: {
-    bronze: {
-      limits: {
-        users: 10,
-        storage: 50
-      },
-      price: 0
-    },
-    silver: {
-      limits: {
-        users: 50,
-        storage: 250
-      },
-      price: 99
-    },
-    gold: {
-      limits: {
-        users: 250,
-        storage: 1000
-      },
-      price: 399
-    }
-  },
-  mailer: {
-    service: 'gmail',
-    auth: {
-      user: process.env.GOOGLE_MAIL_USER,
-      pass: process.env.GOOGLE_MAIL_PASSWORD
-    },
-    templateDir: path.join(__dirname, 'email-templates')
-  },
-  pusher: {
-    accessKeyId: process.env.SNS_ACCESS_KEY,
-    secretAccessKey: process.env.SNS_SECRET_ACCESS_KEY,
-    region: 'eu-west-1',
-    apiVersion: '2010-03-31',
-    platforms: {
-      ANDROID: process.env.SNS_ANDROID_ARN
-    }
-  },
-  geocoder: {
-    provider: 'opendatafrance'
-  },
   logs: {
     Console: {
       colorize: true,
@@ -155,7 +107,7 @@ module.exports = {
     },
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'aktnmap-',
+      filename: 'kapp-',
       datePattern: 'yyyy-MM-dd.log',
       maxDays: 30
       /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
@@ -167,7 +119,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/aktnmap' : 'mongodb://127.0.0.1:27017/aktnmap')
+    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kapp' : 'mongodb://127.0.0.1:27017/kapp')
   },
   storage: {
     accessKeyId: process.env.S3_ACCESS_KEY,

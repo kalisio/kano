@@ -41,17 +41,10 @@ shell.rm('-fR', targetPath + '/statics/Cesium')
 // Copy files from linked node modules otherwise they are not correctly transpiled by babel
 // see https://github.com/kalisio/kdk/issues/28 for details
 copyModule('kCore')
-copyModule('kTeam')
-copyModule('kNotify')
-copyModule('kEvent')
-copyModule('kMap')
+
 
 function finalize () {
   deleteModule('kCore')
-  deleteModule('kTeam')
-  deleteModule('kNotify')
-  deleteModule('kEvent')
-  deleteModule('kMap')
 
   console.log((
     '\n Build complete with "' + env.platform.theme.bold + '" theme in ' +

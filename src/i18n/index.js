@@ -5,7 +5,7 @@ import { loadTranslation } from '../utils'
 
 export async function configureI18n () {
   // Defines the modules to be loaded
-  const modules = ['kCore', 'kTeam', 'kNotify', 'kMap', 'kEvent', 'aktnmap']
+  const modules = ['kCore', 'app']
   try {
     // Retrieve the locale
     const locale = kCoreUtils.getLocale()

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <k-signup-alert :isVerified="isUserVerified" :email="userEmail"></k-signup-alert>
     <router-view class="layout-view"></router-view>
   </div>
 </template>
@@ -14,7 +13,7 @@ import utils from '../utils'
 export default {
   name: 'index',
   // authorisation mixin is required to automatically update user' abilities on update
-  mixins: [mixins.authentication, mixins.authorisation],
+  mixins: [mixins.authentication],
   methods: {
     redirect () {
       // Run registered guards to redirect accordingly if required
@@ -40,17 +39,8 @@ export default {
     }
   },
   created () {
-    this.$options.components['k-signup-alert'] = utils.loadComponent('account/KSignupAlert')
     // initialize the user
     this.user = this.$store.get('user')
-  },
-  computed: {
-    isUserVerified () {
-      return (this.user ? this.user.isVerified : true)
-    },
-    userEmail () {
-      return (this.user ? this.user.email : '')
-    }
   },
   mounted () {
     this.restoreSession()

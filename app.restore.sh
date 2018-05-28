@@ -17,5 +17,5 @@ done
 
 shift $(($OPTIND - 1))
 
-docker cp ./dumps/${BACKUP_ARCHIVE} mongodb-aktnmap:/dumps/${BACKUP_ARCHIVE}
-docker exec -t mongodb-aktnmap mongorestore --gzip --archive=/dumps/${BACKUP_ARCHIVE}
+docker cp ./dumps/${BACKUP_ARCHIVE} mongodb-kapp:/dumps/${BACKUP_ARCHIVE}
+docker exec -t mongodb-kapp mongorestore --gzip --archive=/dumps/${BACKUP_ARCHIVE}

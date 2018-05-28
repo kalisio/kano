@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-  aktnmap:
+  kapp:
     environment:
       - DEBUG=
-    working_dir: /opt/aktnmap
+    working_dir: /opt/kapp
     volumes:
-      - ./server-coverage:/opt/aktnmap/api/coverage
+      - ./server-coverage:/opt/kapp/api/coverage
     command: [ "npm", "run", "test:server" ]

@@ -1,32 +1,11 @@
 import { ClientFunction } from 'testcafe'
 import ApplicationLayout from './layout'
 import Authentication from './authentication'
-import Account from './account'
-import Organisations from './organisations'
-import Members from './members'
-import Groups from './groups'
-import EventTemplates from './event-templates'
-import Events from './events'
-import Users from './users'
 
 // Export all models
 export {
   ApplicationLayout,
-  Authentication,
-  Account,
-  Organisations,
-  Members,
-  Groups,
-  EventTemplates,
-  Events,
-  Users
-}
-
-// Then util constants
-export const Roles = {
-  member: 0,
-  manager: 1,
-  owner: 2
+  Authentication
 }
 
 // Access store

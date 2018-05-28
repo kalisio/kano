@@ -7,13 +7,13 @@ ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=
 ENV NODE_APP_INSTANCE=prod
 
-WORKDIR /opt/aktnmap
-COPY . /opt/aktnmap
+WORKDIR /opt/kapp
+COPY . /opt/kapp
 
 RUN yarn install
 RUN npm run build
 
-WORKDIR /opt/aktnmap/api
+WORKDIR /opt/kapp/api
 
 RUN yarn install
 RUN npm run build

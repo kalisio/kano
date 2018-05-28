@@ -1,15 +1,15 @@
 {
-  "name": "aktnmap",
+  "name": "kapp",
   "description": "Kalisio App Template",
   "version": "0.2.0",
-  "homepage": "https://github.com/kalisio/aktnmap",
+  "homepage": "https://github.com/kalisio/kapp",
   "keywords": [
     "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kalisio/aktnmap.git"
+    "url": "git://github.com/kalisio/kapp.git"
   },
   "author": {
     "name": "Kalisio contributors",
@@ -17,7 +17,7 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kalisio/aktnmap/issues"
+    "url": "https://github.com/kalisio/kapp/issues"
   },
   "scripts": {
     "version": "cordova-set-version cordova/config.xml",
@@ -25,7 +25,7 @@
     "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
     "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
     "release:major": "cd api && run release:major && cd .. && npm version --no-git-tag-version --force major",
-    "changelog": "github_changelog_generator -u kalisio -p aktnmap && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
+    "changelog": "github_changelog_generator -u kalisio -p kapp && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "prod": "cd api && npm run prod",

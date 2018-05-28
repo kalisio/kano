@@ -16,12 +16,8 @@ fixture`Basic`// declare the fixture
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
-const org = new pages.Organisations()
 
-test.skip('Login as default user', async test => {
-  await auth.logInAndCloseSignupAlert(test, { email: 'kalisio@kalisio.xyz', password: 'kalisio' })
-  await org.selectOrganisation(test, 'kalisio')
-  await app.clickToolbar(test, '#members')
-  await app.clickTabBar(test, '#groups')
-  await app.clickFab(test, '#create-group')
+test('Login as default user', async test => {
+  await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
+  await auth.logOut(test)
 })

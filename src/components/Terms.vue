@@ -1,7 +1,7 @@
 <template>
   <q-card>
     <q-card-main>
-      <k-markdown-viewer url="statics/aktnmap-terms.md"></k-markdown-viewer>
+      <k-markdown-viewer url="statics/kapp-terms.md"></k-markdown-viewer>
     </q-card-main>
   </q-card>
 </template>

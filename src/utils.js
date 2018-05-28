@@ -4,22 +4,10 @@ function loadComponent (component) {
   return () => {
     return import(`kCore/lib/client/components/${component}.vue`)
       .catch(errorCore => {
-        return import(`kTeam/lib/client/components/${component}.vue`)
-          .catch(errorTeam => {
-            return import(`kNotify/lib/client/components/${component}.vue`)
-              .catch(errorNotify => {
-                return import(`kMap/lib/client/components/${component}.vue`)
-                  .catch(errorMap => {
-                    return import(`kEvent/lib/client/components/${component}.vue`)
-                      .catch(errorEvent => {
-                        // Otherwise this should be app component
-                        return import(`@/${component}.vue`)
-                          .catch(errorApp => {
-                            console.log(errorCore, errorTeam, errorNotify, errorMap, errorEvent, errorApp)
-                          })
-                      })
-                  })
-              })
+        // Otherwise this should be app component
+        return import(`@/${component}.vue`)
+          .catch(errorApp => {
+            console.log(errorCore, errorApp)
           })
       })
   }
@@ -28,13 +16,7 @@ function loadComponent (component) {
 function loadSchema (schema) {
   return import(`kCore/lib/common/schemas/${schema}.json`)
     .catch(errorCore => {
-      return import(`kTeam/lib/common/schemas/${schema}.json`)
-        .catch(errorTeam => {
-          return import(`kEvent/lib/common/schemas/${schema}.json`)
-            .catch(errorEvent => {
-              console.log(errorCore, errorTeam, errorEvent)
-            })
-        })
+      console.log(errorCore)
     })
 }
 
@@ -42,21 +24,9 @@ function loadTranslation (module, locale) {
   let translation = module + '_' + locale + '.json'
   return import(`kCore/lib/client/i18n/${translation}`)
     .catch(errorCore => {
-      return import(`kTeam/lib/client/i18n/${translation}`)
-        .catch(errorTeam => {
-          return import(`kNotify/lib/client/i18n/${translation}`)
-            .catch(errorNotify => {
-              return import(`kMap/lib/client/i18n/${translation}`)
-                .catch(errorMap => {
-                  return import(`kEvent/lib/client/i18n/${translation}`)
-                    .catch(errorEvent => {
-                      return import(`./i18n/${translation}`)
-                        .catch(errorApp => {
-                          console.log(errorCore, errorTeam, errorNotify, errorMap, errorEvent, errorApp)
-                        })
-                    })
-                })
-            })
+      return import(`./i18n/${translation}`)
+        .catch(errorApp => {
+          console.log(errorCore, errorTeam, errorNotify, errorMap, errorEvent, errorApp)
         })
     })
 }

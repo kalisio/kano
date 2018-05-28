@@ -35,7 +35,7 @@ async function authenticateClient(client) {
   let response = await client.authenticate({
     strategy: 'local',
     email: 'kalisio@kalisio.xyz',
-    password: 'kalisio'
+    password: 'Pass;word1'
   })
   logger.verbose('Authenticated new client ' + client.data.id)
   // We always need to get the user after authenticating
