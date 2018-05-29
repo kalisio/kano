@@ -9,9 +9,8 @@ then
 	docker pull kalisio/$APP:$VERSION_TAG
 fi
 
-cd deploy
 docker network create --attachable $NETWORK
-docker-compose -f app.yml -f app.build.yml up -d
+docker-compose -f deploy/app.yml -f deploy/app.build.yml up -d
 docker cp $APP:/opt/$APP/dist dist
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
 docker tag kalisio/$APP kalisio/$APP:$VERSION_TAG
