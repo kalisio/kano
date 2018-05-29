@@ -24,7 +24,7 @@ jobs:
     - docker
     install: true
     script:
-    - bash build.travis.sh
+    - bash travis.build.sh
     deploy:
       skip_cleanup: true
       provider: s3
@@ -48,7 +48,7 @@ jobs:
     install:
     - npm install -g codeclimate-test-reporter
     script:
-    - bash test.travis.sh
+    - bash travis.test.sh
 
   - stage: DEPLOY
     language: node_js
@@ -58,13 +58,12 @@ jobs:
     - docker
     install: true
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
-      -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     deploy:
       provider: script
       skip_cleanup: true
-      script: bash deploy.travis.sh
+      script: bash travis.deploy.sh
       on:
         all_branches: true
 
@@ -90,7 +89,7 @@ jobs:
       -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
-    - bash android.travis.sh
+    - bash travis.android.sh
     deploy:
       skip_cleanup: true
       provider: s3
@@ -117,7 +116,7 @@ jobs:
       -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
-    - bash ios.travis.sh
+    - bash travis.ios.sh
     deploy:
       skip_cleanup: true
       provider: s3

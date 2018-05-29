@@ -1,0 +1,23 @@
+FROM  node:8
+
+MAINTAINER Kalisio <contact@kalisio.xyz>
+
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV DEBUG=
+ENV NODE_APP_INSTANCE=prod
+
+WORKDIR /opt/kapp
+COPY . /opt/kapp
+
+RUN yarn install
+RUN npm run build
+
+WORKDIR /opt/kapp/api
+
+RUN yarn install
+RUN npm run build
+
+EXPOSE 8081
+
+CMD [ "npm", "run", "prod" ]

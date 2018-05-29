@@ -1,0 +1,28 @@
+FROM  node:8
+
+MAINTAINER Kalisio <contact@kalisio.xyz>
+
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV DEBUG=
+ENV NODE_APP_INSTANCE=test
+
+WORKDIR /opt/kapp
+COPY . /opt/kapp
+
+WORKDIR /opt/kapp/modules
+RUN git clone https://github.com/kalisio/kCore.git -b test --single-branch && cd kCore && yarn install && yarn link && cd ..
+
+WORKDIR /opt/kapp/api
+
+RUN yarn install
+RUN yarn link kCore
+
+WORKDIR /opt/kapp
+
+RUN yarn install
+RUN npm run build
+
+EXPOSE 8081
+
+CMD [ "npm", "run", "prod" ]

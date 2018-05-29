@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  kapp:
+    environment:
+      - DEBUG=${DEBUG}
+    networks:
+      - traefik
+      - kapp
+    labels:
+      - "traefik.backend=kapp"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=8081"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:${DOMAIN}"
+
+networks:
+  traefik:
+    external: true
