@@ -3,14 +3,12 @@ version: '3'
 services:
   testcafe:
     build:
-      context: .
+      context: ../.
       dockerfile: dockerfile.testcafe
     container_name: testcafe
     image: kalisio/testcafe
-    links:
-      - kapp:kapp
     depends_on:
-      - kapp
+      - app
     environment:
       - GOOGLE_USER
       - GOOGLE_PASSWORD
