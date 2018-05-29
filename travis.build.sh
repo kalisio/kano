@@ -11,7 +11,7 @@ fi
 
 docker network create --attachable $NETWORK
 docker-compose -f deploy/app.yml -f deploy/app.build.yml up -d
-docker cp $APP:/opt/$APP/dist dist
+docker cp ${APP}_app:/opt/${APP}/dist dist
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
 docker tag kalisio/$APP kalisio/$APP:$VERSION_TAG
 docker push kalisio/$APP:$VERSION_TAG

@@ -8,7 +8,6 @@ services:
     ports:
       - ${PORT}:8081
     environment:
-      - APP=${APP}
       - GOOGLE_MAIL_USER=${GOOGLE_MAIL_USER}
       - GOOGLE_MAIL_PASSWORD=${GOOGLE_MAIL_PASSWORD}
       - GOOGLE_USER=${GOOGLE_USER}

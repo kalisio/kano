@@ -5,12 +5,9 @@ then
 else
 	source travis.env.sh
 	# Required to avoid local build of the image
-	cd deploy
-	docker pull kalisio/kapp:${FLAVOR}
-	docker-compose -f docker-compose.yml up -d mongodb-kapp
-	docker-compose -f docker-compose.yml -f docker-compose.server-tests.yml up kapp
-	docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up -d kapp
-	docker-compose -f docker-compose.yml -f docker-compose.client-tests.yml up testcafe
-	cd ..
+	docker-compose -f deploy/app.yml up -d mongodb
+	docker-compose -f deploy/app.yml -f deploy/app.server-tests.yml up app
+	docker-compose -f deploy/app.yml -f deploy/app.client-tests.yml up -d app
+	docker-compose -f deploy/app.yml -f deploy/app.client-tests.yml up testcafe
 	codeclimate-test-reporter < server-coverage/lcov.info
 fi

@@ -32,6 +32,7 @@ SSH_REMOTE_ENV_VAR_NAME=SSH_REMOTE_$FLAVOR
 export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
 
 echo "APP=$APP" > .env
+echo "COMPOSE_PROJECT_NAME=$APP" >> .env
 echo "DEBUG=$DEBUG" >> .env
 echo "FLAVOR=$FLAVOR" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
