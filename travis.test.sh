@@ -4,7 +4,6 @@ then
 	echo "Skipping test stage"
 else
 	source travis.env.sh
-	# Required to avoid local build of the image
 	docker-compose -f deploy/app.yml up -d mongodb
 	docker-compose -f deploy/app.yml -f deploy/app.server-tests.yml up app
 	docker-compose -f deploy/app.yml -f deploy/app.client-tests.yml up -d app

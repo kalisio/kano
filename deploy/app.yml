@@ -5,8 +5,6 @@ services:
     image: kalisio/${APP}:${VERSION_TAG}
     depends_on:
       - mongodb
-    ports:
-      - ${PORT}:8081
     environment:
       - GOOGLE_MAIL_USER=${GOOGLE_MAIL_USER}
       - GOOGLE_MAIL_PASSWORD=${GOOGLE_MAIL_PASSWORD}
