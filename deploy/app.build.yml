@@ -6,4 +6,5 @@ services:
       context: .
       dockerfile: ./dockerfile.${FLAVOR}
       args:
+        APP: ${APP}
         BUILD_NUMBER: ${BUILD_NUMBER}
