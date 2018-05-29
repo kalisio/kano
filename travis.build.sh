@@ -10,6 +10,7 @@ then
 fi
 
 cd deploy
+docker netwok create -d overlay --attachable $NETWORK}
 docker-compose -f app.yml -f app.build.yml up -d
 docker cp $APP:/opt/$APP/dist dist
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"

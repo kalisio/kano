@@ -49,7 +49,7 @@ services:
       - app-network
 
 volumes:
-  mongodb_kapp:
+  mongodb_app:
 
 networks:
   app-network:
