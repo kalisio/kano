@@ -3,23 +3,24 @@ FROM  node:8
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
 ARG BUILD_NUMBER
+ENV APP=$APP
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
-WORKDIR /opt/kapp
-COPY . /opt/kapp
+WORKDIR /opt/${APP}
+COPY . /opt/${APP}
 
-WORKDIR /opt/kapp/modules
+WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
 
-WORKDIR /opt/kapp/api
+WORKDIR /opt/${APP}/api
 
 RUN yarn install
 RUN yarn link kCore
 RUN npm run build
 
-WORKDIR /opt/kapp
+WORKDIR /opt/${APP}
 
 RUN yarn install
 RUN npm run build

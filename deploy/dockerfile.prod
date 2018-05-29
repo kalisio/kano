@@ -3,17 +3,18 @@ FROM  node:8
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
 ARG BUILD_NUMBER
+ENV APP=$APP
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=
 ENV NODE_APP_INSTANCE=prod
 
-WORKDIR /opt/kapp
-COPY . /opt/kapp
+WORKDIR /opt/${APP}
+COPY . /opt/${APP}
 
 RUN yarn install
 RUN npm run build
 
-WORKDIR /opt/kapp/api
+WORKDIR /opt/${APP}/api
 
 RUN yarn install
 RUN npm run build
