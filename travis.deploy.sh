@@ -16,6 +16,6 @@ else
 	scp deploy/scripts/app.backup.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.backup.sh
 	scp deploy/scripts/app.restore.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.restore.sh
 	scp deploy/scripts/app.backup.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.backup.yml
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./app.remove.sh; chmod u+x ./app.deploy.sh; chmod u+x ./app.backup.sh; chmod u+x ./app.restore.sh; ./app.remove.sh; ./app.deploy.sh"
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove.sh; chmod u+x ./deploy.sh; chmod u+x ./backup.sh; chmod u+x ./restore.sh; ./remove.sh; ./deploy.sh"
 fi
 

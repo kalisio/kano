@@ -4,4 +4,4 @@ set -a
 . ./.env
 set +a
 
-docker stack deploy -c app.yml -c app.swarm.yml ${APP}
+docker stack deploy -c app.yml -c app.swarm.yml $APP
