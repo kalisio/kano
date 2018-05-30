@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   app:
@@ -38,13 +38,18 @@ services:
     image: stefanprodan/mgob
     depends_on:
       - mongodb
-    volumes:
-      - ./app.backup.yml:/config/${APP}-${FLAVOR}.yml
+    configs:
+      - source: mgob_config
+        target: /config/${APP}-${FLAVOR}.yml
     environment:
       - S3_ACCESS_KEY
       - S3_SECRET_ACCESS_KEY
     networks:
       - app-network
+
+configs:
+  mgob_config:
+    file: ./configs/mgob/mgob.yml
 
 volumes:
   mongodb_app:

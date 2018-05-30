@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: ../.
-      dockerfile: ./dockerfile.${FLAVOR}
+      dockerfile: ./build/dockerfile.${FLAVOR}
       args:
         APP: ${APP}
         BUILD_NUMBER: ${BUILD_NUMBER}

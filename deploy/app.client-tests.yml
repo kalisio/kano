@@ -4,7 +4,7 @@ services:
   testcafe:
     build:
       context: ../.
-      dockerfile: dockerfile.testcafe
+      dockerfile: ./build/dockerfile.testcafe
     container_name: testcafe
     image: kalisio/testcafe
     depends_on:
