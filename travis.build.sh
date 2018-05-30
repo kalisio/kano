@@ -13,7 +13,7 @@ then
 	echo "Skipping build stage"
 	# We simply pull existing version instead of really build it
 	# Indeed we cannot really skip the build otherwise the deploy step will fail due to missing artefacts
-	docker pull kalisio/$APP:$VERSION_TAG
+	docker-compose -f deploy/app.yml up -d
 else 
 	# Build the image and run the container
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml up -d
