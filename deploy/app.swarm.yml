@@ -31,7 +31,7 @@ services:
   mongodb-backup:
     deploy:
       replicas: 1
-       placement:
+      placement:
         constraints:
          - node.role == worker
       restart_policy:
