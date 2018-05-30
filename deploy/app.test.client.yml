@@ -16,7 +16,7 @@ services:
       - NODE_ENV=production
       - APP_URL=172.17.0.1:${PORT}
     volumes:
-      - ./test:/opt/testcafe/${APP}
+      - ../test:/opt/testcafe/${APP}
     command: firefox /opt/testcafe/${APP}/*.test.js -S -s screenshots
     networks:
       - app-network
