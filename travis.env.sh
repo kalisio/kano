@@ -43,6 +43,7 @@ echo "SUBDOMAIN=$SUBDOMAIN" >> .env
 echo "NETWORK=$NETWORK" >> .env
 echo "PORT=$PORT" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
+echo "REPO_DIR=$TRAVIS_BUILD_DIR" >> .env
 echo "GOOGLE_MAIL_USER=$GOOGLE_MAIL_USER" >> .env
 echo "GOOGLE_MAIL_PASSWORD=$GOOGLE_MAIL_PASSWORD" >> .env
 echo "APP_SECRET=$APP_SECRET" >> .env

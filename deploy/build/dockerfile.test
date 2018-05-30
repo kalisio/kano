@@ -3,6 +3,7 @@ FROM  node:8
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
 ARG APP
+ARG REPO_DIR
 ARG BUILD_NUMBER
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
@@ -10,7 +11,7 @@ ENV DEBUG=
 ENV NODE_APP_INSTANCE=test
 
 WORKDIR /opt/${APP}
-COPY . /opt/${APP}
+COPY ${REPO_DIR} /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b test --single-branch && cd kCore && yarn install && yarn link && cd ..
