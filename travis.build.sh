@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source travis.env.sh
 
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip build]"* ]]
 then
@@ -8,8 +8,6 @@ then
 	# Indeed we cannot really skip the build otherwise the deploy step will fail due to missing artefacts
 	docker pull kalisio/$APP:$VERSION_TAG
 else 
-	source travis.env.sh
-	
 	# NOTE: The process build the image and run the container in order to allow us to copy the 
 	# built artifact from the container to the host. Indeed the artifact is then copied to S3 
 	# (see the deploy hook) and can be used by the following stages (i.e. Android and iOS).
