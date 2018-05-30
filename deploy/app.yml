@@ -47,10 +47,6 @@ services:
     networks:
       - app-network
 
-configs:
-  mgob_config:
-    file: ./configs/mgob/mgob.yml
-
 volumes:
   mongodb_app:
 
