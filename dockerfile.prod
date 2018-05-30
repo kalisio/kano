@@ -10,7 +10,7 @@ ENV DEBUG=
 ENV NODE_APP_INSTANCE=prod
 
 WORKDIR /opt/${APP}
-COPY ../../. /opt/${APP}
+COPY . /opt/${APP}
 
 RUN yarn install
 RUN npm run build
