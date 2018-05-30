@@ -1,6 +1,8 @@
 #!/bin/bash
 source travis.env.sh
 
+cat env.sh
+
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip build]"* ]]
 then
 	echo "Skipping build stage"
@@ -8,9 +10,6 @@ then
 	# Indeed we cannot really skip the build otherwise the deploy step will fail due to missing artefacts
 	docker pull kalisio/$APP:$VERSION_TAG
 fi
-
-pwd
-echo $TRAVIS_BUIL_DIR
 
 # NOTE: The process build the image and run the container in order to allow us to copy the 
 # built artifact from the container to the host. Indeed the artifact is then copied to S3 
