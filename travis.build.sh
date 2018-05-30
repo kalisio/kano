@@ -1,7 +1,7 @@
 #!/bin/bash
 source travis.env.sh
 
-cat env.sh
+cat .env.sh
 
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip build]"* ]]
 then
