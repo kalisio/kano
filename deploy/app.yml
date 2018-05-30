@@ -24,6 +24,7 @@ services:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - BUILD_NUMBER=${BUILD_NUMBER}
+      - REPO_DIR=${REPO_DIR}
       - NODE_APP_INSTANCE=${FLAVOR}
       - DB_URL=mongodb://mongodb:27017/${APP}
     networks:
