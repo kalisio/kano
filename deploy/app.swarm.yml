@@ -15,7 +15,7 @@ services:
         - "traefik.enable=true"
         - "traefik.port=8081"
         - "traefik.frontend.entryPoints=http,https"
-        - "traefik.frontend.rule=Host:${DOMAIN}"
+        - "traefik.frontend.rule=Host:${SUBDOMAIN}"
       restart_policy:
         condition: on-failure
 
@@ -23,6 +23,15 @@ services:
     deploy:
       replicas: 1
       placement:
+        constraints:
+         - node.role == worker
+      restart_policy:
+        condition: on-failure
+
+  mongodb-backup:
+    deploy:
+      replicas: 1
+       placement:
         constraints:
          - node.role == worker
       restart_policy:
