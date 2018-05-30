@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  app:
+    environment:
+      - DEBUG=
+    working_dir: /opt/kapp
+    volumes:
+      - ./server-coverage:/opt/kapp/api/coverage
+    command: [ "npm", "run", "test:server" ]

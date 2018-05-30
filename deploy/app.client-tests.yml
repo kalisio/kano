@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  testcafe:
+    build:
+      context: ../.
+      dockerfile: dockerfile.testcafe
+    container_name: testcafe
+    image: kalisio/testcafe
+    depends_on:
+      - app
+    environment:
+      - GOOGLE_USER
+      - GOOGLE_PASSWORD
+      - GITHUB_USER
+      - GITHUB_PASSWORD
+      - NODE_ENV=production
+      - APP_URL=172.17.0.1:${PORT}
+    volumes:
+      - ./test:/opt/testcafe/kapp
+    command: firefox /opt/testcafe/kapp/*.test.js -S -s screenshots

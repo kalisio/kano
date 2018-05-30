@@ -2,9 +2,9 @@
 
 ## kApp application
 
-[![Build Status](https://travis-ci.org/kalisio/kapp.png?branch=master)](https://travis-ci.org/kalisio/kapp)
-[![Code Climate](https://codeclimate.com/github/kalisio/kapp/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kapp)
-[![Test Coverage](https://codeclimate.com/github/kalisio/kapp/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kapp/coverage)
+[![Build Status](https://travis-ci.org/kalisio/kApp.png?branch=master)](https://travis-ci.org/kalisio/kApp)
+[![Code Climate](https://codeclimate.com/github/kalisio/kApp/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kApp)
+[![Test Coverage](https://codeclimate.com/github/kalisio/kApp/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kApp/coverage)
 [![Dependency Status](https://img.shields.io/david/kalisio/kapp.svg?style=flat-square)](https://david-dm.org/kalisio/kapp)
 [![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.gitbooks.io/kalisio)
 [![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kapp/badge.svg)](https://snyk.io/test/github/kalisio/kapp)
