@@ -1,5 +1,5 @@
 #!/bin/bash
-sh travis.env.sh
+source travis.env.sh
 
 cat .env
 
