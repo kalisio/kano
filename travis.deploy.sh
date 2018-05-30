@@ -4,6 +4,7 @@ then
 	echo "Skipping deploy stage"
 else
 	source travis.env.sh
+	
 	eval "$(ssh-agent -s)"
 	chmod 600 ssh.pem
 	ssh-add ssh.pem

@@ -38,9 +38,6 @@ services:
     image: stefanprodan/mgob
     depends_on:
       - mongodb
-    configs:
-      - source: mgob_config
-        target: /config/${APP}-${FLAVOR}.yml
     environment:
       - S3_ACCESS_KEY
       - S3_SECRET_ACCESS_KEY
