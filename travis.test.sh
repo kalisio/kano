@@ -7,12 +7,12 @@ else
 
 	# It first need to create the required network 
 	docker network create --attachable $NETWORK
-	
+
   # Run the tests
 	docker-compose -f deploy/app.yml up -d mongodb
-	docker-compose -f deploy/app.yml -f deploy/app.server-tests.yml up app
-	docker-compose -f deploy/app.yml -f deploy/app.client-tests.yml up -d app
-	docker-compose -f deploy/app.yml -f deploy/app.client-tests.yml up testcafe
+	docker-compose -f deploy/app.yml -f deploy/app.test.server.yml up app
+	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up -d app
+	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
 
 	# Report the test results
 	codeclimate-test-reporter < server-coverage/lcov.info
