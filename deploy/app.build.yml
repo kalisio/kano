@@ -3,8 +3,8 @@ version: '3.3'
 services:
   app:
     build:
-      context: ../.
-      dockerfile: ./build/dockerfile.${FLAVOR}
+      context: ./build
+      dockerfile: dockerfile.${FLAVOR}
       args:
         APP: ${APP}
         BUILD_NUMBER: ${BUILD_NUMBER}
