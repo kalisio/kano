@@ -1,8 +1,6 @@
 #!/bin/bash
 source travis.env.sh
 
-cat .env
-
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip build]"* ]]
 then
 	echo "Skipping build stage"

@@ -11,7 +11,7 @@ ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
 WORKDIR /opt/${APP}
-COPY ${REPO_DIR} /opt/${APP}
+COPY /${REPO_DIR} /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
