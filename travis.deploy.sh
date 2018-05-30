@@ -23,7 +23,7 @@ else
 	scp deploy/scripts/backup_db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	scp deploy/scripts/restore_db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	scp deploy/scripts/deploy_stack.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	scp deploy/scripts/remove_statck.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
+	scp deploy/scripts/remove_stack.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	# ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove_stack.sh; chmod u+x ./deploy_stack.sh; chmod u+x ./backup_db.sh; chmod u+x ./restore_db.sh"
 
 	# Deploy the stack
