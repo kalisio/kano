@@ -4,7 +4,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
-	export SUBDOMAIN=app.dev.$DOMAIN
+	export SUBDOMAIN=$APP.dev.$DOMAIN
 	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
@@ -13,12 +13,12 @@ then
 	then
 		export DEBUG=
 		export FLAVOR=test
-		export SUBDOMAIN=app.test.$DOMAIN
+		export SUBDOMAIN=$APP.test.$DOMAIN
 		export VERSION_TAG=$VERSION-test
 	else
 		export DEBUG=
 		export FLAVOR=prod
-		export SUBDOMAIN=app.$DOMAIN
+		export SUBDOMAIN=$APP.$DOMAIN
 		export VERSION_TAG=$VERSION
 	fi
 fi
@@ -31,8 +31,8 @@ export SSH_USER=${!SSH_USER_ENV_VAR_NAME}
 SSH_REMOTE_ENV_VAR_NAME=SSH_REMOTE_$FLAVOR
 export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
 
-echo "APP=$APP" > .env
 echo "COMPOSE_PROJECT_NAME=$APP" >> .env
+echo "APP=$APP" > .env
 echo "DEBUG=$DEBUG" >> .env
 echo "FLAVOR=$FLAVOR" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
