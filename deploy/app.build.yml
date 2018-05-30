@@ -7,5 +7,4 @@ services:
       dockerfile: dockerfile.${FLAVOR}
       args:
         APP: ${APP}
-        REPO_DIR: ${REPO_DIR}
         BUILD_NUMBER: ${BUILD_NUMBER}
