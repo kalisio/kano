@@ -15,5 +15,5 @@ else
 	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
 
 	# Report the test results
-	codeclimate-test-reporter < server-coverage/lcov.info
+	codeclimate-test-reporter < deploy/server-coverage/lcov.info
 fi
