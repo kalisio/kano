@@ -51,5 +51,5 @@ volumes:
 
 networks:
   app-network:
-    external: ${DOCKER_NETWORK}
-
+    external:
+      name: ${NETWORK}
