@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.3'
 
 services:
   app:
@@ -51,6 +51,5 @@ volumes:
 
 networks:
   app-network:
-    name: ${DOCKER_NETWORK}
-    external: true
+    external: ${DOCKER_NETWORK}
 
