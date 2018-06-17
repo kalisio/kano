@@ -34,7 +34,7 @@ module.exports = {
   apiPath: API_PREFIX,
   apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  appName: 'kApp',
+  appName: 'Kargo',
   appLogo: 'kalisio-logo.png',
   publisher: 'Kalisio',
   logs: {
@@ -75,8 +75,13 @@ module.exports = {
   user_actions: {
     links: [
       { }, // separator
+      { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map' } },
+      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe' } },
+      { }, // separator
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
+  map: require('./map'),
+  globe: require('./globe'),
   routes: require('./routes')
 }

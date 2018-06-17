@@ -1689,9 +1689,9 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-cesium@^1.38.0:
-  version "1.38.0"
-  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.38.0.tgz#e4008e7b548b5a72e4f62bd6e300dadd9e448efa"
+cesium@^1.46.1:
+  version "1.46.1"
+  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.46.1.tgz#2a7259c5ac3c911aa7cc915c55f3f17fa3849706"
   dependencies:
     requirejs "^2.3.2"
 

@@ -35,16 +35,15 @@ function deleteModule(module) {
 
 shell.mkdir('-p', targetPath)
 shell.cp('-R', 'src/statics', targetPath)
-// FIXME: for now avoid using Cesium to create a light package
-shell.rm('-fR', targetPath + '/statics/Cesium')
 
 // Copy files from linked node modules otherwise they are not correctly transpiled by babel
 // see https://github.com/kalisio/kdk/issues/28 for details
 copyModule('kCore')
-
+copyModule('kMap')
 
 function finalize () {
   deleteModule('kCore')
+  deleteModule('kMap')
 
   console.log((
     '\n Build complete with "' + env.platform.theme.bold + '" theme in ' +

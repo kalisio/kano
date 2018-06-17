@@ -5,14 +5,9 @@
     "TERMS_AND_POLICIES": "Terms and Policies"
   },
   "sideNav": {
-    "DASHBOARD": "Tableau de bord",
+    "MAP": "2D View",
+    "GLOBE": "3D View",
     "LOGOUT": "Se déconnecter"
-  },
-  "Context": {
-    "EVENTS": "Events & templates",
-    "MEMBERS": "Members & groups",
-    "REFRESH": "Refresh",
-    "SETTINGS": "Settings"
   },
   "Index": {
     "VERSION_MISMATCH": "Application version mismatch, please install the latest available version or check your end point",
