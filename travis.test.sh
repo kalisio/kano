@@ -6,7 +6,7 @@ else
 	source travis.env.sh
 
 	# It first need to create the required network 
-	docker network create --attachable $NETWORK
+	docker network create --attachable $DOCKER_NETWORK
 
   # Run the tests
 	docker-compose -f deploy/app.yml up -d mongodb
