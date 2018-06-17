@@ -24,4 +24,4 @@ services:
 networks:
   app-network:
     external:
-      name: ${NETWORK}
+      name: ${DOCKER_NETWORK}
