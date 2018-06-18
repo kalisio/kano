@@ -29,7 +29,7 @@
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "prod": "cd api && npm run prod",
-    "build": "node build/script.build.js",
+    "build": "node --max_old_space_size=4096 build/script.build.js",
     "cordova:remove:android": "cd cordova && cordova platform remove android && cd ..",
     "cordova:remove:ios": "cd cordova && cordova platform remove ios && cd ..",
     "cordova:remove": "npm run cordova:remove:android && npm run cordova:remove:ios",
