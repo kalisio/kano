@@ -28,10 +28,12 @@ export default {
   mixins: [
     kMapMixins.map.baseMap,
     kMapMixins.map.baseLayers,
+    kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.fileLayers,
     kMapMixins.map.fullscreen,
-    kMapMixins.map.scalebar
+    kMapMixins.map.scalebar,
+    kMapMixins.map.measure
   ],
   computed: {
     mapStyle () {
@@ -44,28 +46,52 @@ export default {
   },
   methods: {
     getPointMarker (feature, latlng) {
-      const icon = feature.icon
-      return this.createMarkerFromStyle(latlng, {
-        icon: {
-          type: 'icon.fontAwesome',
-          options: {
-            iconClasses: 'fa ' + (icon.name || 'fa-user'),
-            markerColor: kCoreUtils.Colors[(icon.color || 'blue')],
-            iconColor: '#FFF'
+      if (_.has(feature, 'properties.icao')) {
+        return this.createMarkerFromStyle(latlng, {
+          icon: {
+            type: 'icon',
+            options: {
+              iconUrl: '/statics/paper-plane.png',
+              iconSize: [32, 32],
+              iconAnchor: [16, 32]
+            }
           }
-        }
-      })
+        })
+      }
+      return null
+    },
+    getFeatureStyle (feature) {
+      return this.convertFromSimpleStyleSpec(feature.properties || {})
     },
     getFeaturePopup (feature, layer) {
       let popup = L.popup({ autoPan: false }, layer)
-      const name = _.get(feature, 'name')
+      const name = _.get(feature, 'properties.NomEntVigiCru', _.get(feature, 'properties.icao'))
       return popup.setContent(name)
     },
     getFeatureTooltip (feature, layer) {
-      // Default content is participant name
-      let tooltip = L.tooltip({ permanent: true }, layer)
-      const name = _.get(feature, 'name')
-      return tooltip.setContent('<b>' + name + '</b>')
+      const level = _.get(feature, 'properties.NivSituVigiCruEnt')
+      if (level > 1) {
+        let tooltip = L.tooltip({ permanent: true }, layer)
+        let content
+        switch (level) {
+          case 2:
+            content = 'Risque de crue génératrice de débordements'
+            break
+          case 3:
+            content = 'Risque de crue génératrice de débordements importants'
+            break
+          case 4:
+            content = 'Risque de crue majeure'
+            break
+        }
+        return tooltip.setContent('<b>' + content + '</b>')
+      }
+      const callsign = _.get(feature, 'properties.callsign')
+      if (callsign) {
+        let tooltip = L.tooltip({ permanent: true }, layer)
+        return tooltip.setContent('<b>' + callsign + '</b>')
+      }
+      return null
     },
     onPopupOpen (event) {
       const feature = _.get(event, 'layer.feature')

@@ -64,8 +64,8 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /statics\/Cesium\.js$/,
-        loader: 'script'
+        test: /\.glsl$/,
+        use: 'file-loader'
       },
       {
         test: /\.vue$/,
