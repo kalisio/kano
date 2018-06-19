@@ -18,7 +18,7 @@ then
 	else
 		export DEBUG=
 		export FLAVOR=prod
-		export SUBDOMAIN=.$DOMAIN
+		export SUBDOMAIN=$DOMAIN
 		export VERSION_TAG=$VERSION
 	fi
 fi
