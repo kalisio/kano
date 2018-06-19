@@ -16,6 +16,8 @@ else
 	# Deploy compose files
 	scp deploy/app.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.yml
 	scp deploy/app.swarm.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.swarm.yml
+	scp deploy/mongodb.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.yml
+	scp deploy/mongodb.swarm.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.swarm.yml
 
   # Deploy configs
   scp -rp deploy/configs ${SSH_USER}@${SSH_REMOTE}:~/${APP}/configs
