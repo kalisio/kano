@@ -4,7 +4,7 @@ services:
   app:
     environment:
       - DEBUG=
-    working_dir: /opt/kapp
+    working_dir: /opt/${APP}
     volumes:
-      - ./server-coverage:/opt/kapp/api/coverage
+      - ./server-coverage:/opt/${APP}/api/coverage
     command: [ "npm", "run", "test:server" ]
