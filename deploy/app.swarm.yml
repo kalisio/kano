@@ -15,7 +15,7 @@ services:
         - "traefik.enable=true"
         - "traefik.port=8081"
         - "traefik.frontend.entryPoints=http,https"
-        - "traefik.frontend.rule=Host:${SUBDOMAIN}"
+        - "traefik.frontend.rule=Host:${HOST}.${SUBDOMAIN}"
       restart_policy:
         condition: on-failure
 
