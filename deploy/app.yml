@@ -3,8 +3,6 @@ version: '3.3'
 services:
   app:
     image: kalisio/${APP}:${VERSION_TAG}
-    depends_on:
-      - mongodb
     environment:
       - GOOGLE_MAIL_USER=${GOOGLE_MAIL_USER}
       - GOOGLE_MAIL_PASSWORD=${GOOGLE_MAIL_PASSWORD}
