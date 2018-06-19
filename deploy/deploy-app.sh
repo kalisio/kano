@@ -5,7 +5,7 @@ set -a
 set +a
 
 if [ "$FLAVOR" = "dev" ]; then
-  docker stack deploy -c app.yml -c app.swarm.yml -c app.mongodb.yml -c app.mongodb.swarm.yml $APP
+  docker stack deploy -c app.yml -c app.swarm.yml -c mongodb.yml -c mongodb.swarm.yml $APP
 else
   docker stack deploy -c app.yml -c app.swarm.yml -c $APP
 fi
