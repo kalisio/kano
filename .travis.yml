@@ -49,6 +49,27 @@ jobs:
     - npm install -g codeclimate-test-reporter
     script:
     - bash travis.test.sh
+    after_script:
+    - codeclimate-test-reporter < server-coverage/lcov.info
+    deploy:
+      - provider: s3
+        skip_cleanup: true
+        access_key_id: "$S3_ACCESS_KEY"
+        secret_access_key: "$S3_SECRET_ACCESS_KEY"
+        bucket: aktnmap-builds
+        local_dir: server-coverage
+        upload_dir: "$TRAVIS_BUILD_NUMBER/server-tests/coverage"
+        on:
+          all_branches: true
+      - provider: s3
+        skip_cleanup: true
+        access_key_id: "$S3_ACCESS_KEY"
+        secret_access_key: "$S3_SECRET_ACCESS_KEY"
+        bucket: aktnmap-builds
+        local_dir: client-screenshots
+        upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
+        on:
+          all_branches: true
 
   - stage: DEPLOY
     language: node_js

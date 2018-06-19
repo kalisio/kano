@@ -1,4 +1,11 @@
 #!/bin/bash
+# Output directory for server coverage
+mkdir server-coverage
+chmod -R 777 server-coverage
+# Output directory for client screenshots
+mkdir client-screenshots
+chmod -R 777 client-screenshots
+
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip test]"* ]]
 then
 	echo "Skipping test stage"
@@ -13,7 +20,4 @@ else
 	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.server.yml up app
 	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up -d app
 	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up testcafe
-
-	# Report the test results
-	codeclimate-test-reporter < deploy/server-coverage/lcov.info
 fi
