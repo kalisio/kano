@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  mongodb:
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+         - node.role == worker
+      restart_policy:
+        condition: on-failure
+
+  mongodb-backup:
+    image: stefanprodan/mgob
+    depends_on:
+      - mongodb
+    environment:
+      - S3_ACCESS_KEY
+      - S3_SECRET_ACCESS_KEY
+    networks:
+      - app-network
+    configs:
+      - source: mgob_config
+        target: /config/${APP}-${FLAVOR}.yml  
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+         - node.role == manager
+      restart_policy:
+        condition: on-failure
+
+configs:
+  mgob_config:
+    file: ./configs/mgob/mgob.yml

@@ -9,10 +9,10 @@ else
 	docker network create --attachable $DOCKER_NETWORK
 
   # Run the tests
-	docker-compose -f deploy/app.yml up -d mongodb
-	docker-compose -f deploy/app.yml -f deploy/app.test.server.yml up app
-	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up -d app
-	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
+	docker-compose -f deploy/app.yml -f deploy/mongodb.yml up -d mongodb
+	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.server.yml up app
+	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up -d app
+	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up testcafe
 
 	# Report the test results
 	codeclimate-test-reporter < deploy/server-coverage/lcov.info

@@ -29,23 +29,6 @@ services:
     networks:
       - app-network
 
-  mongodb:
-    image: mongo
-    volumes:
-      - mongodb_app:/data/db
-    networks:
-      - app-network
-      
-  mongodb-backup:
-    image: stefanprodan/mgob
-    depends_on:
-      - mongodb
-    environment:
-      - S3_ACCESS_KEY
-      - S3_SECRET_ACCESS_KEY
-    networks:
-      - app-network
-
 volumes:
   mongodb_app:
 

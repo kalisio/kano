@@ -4,4 +4,8 @@ set -a
 . ./.env
 set +a
 
-docker stack deploy -c app.yml -c app.swarm.yml $APP
+if [ "$FLAVOR" = "dev" ]; then
+  docker stack deploy -c app.yml -c app.swarm.yml -c app.mongodb.yml -c app.mongodb.swarm.yml $APP
+else
+  docker stack deploy -c app.yml -c app.swarm.yml -c $APP
+fi
