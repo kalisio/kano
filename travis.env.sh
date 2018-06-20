@@ -4,7 +4,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
-	export SUBDOMAIN=.dev.$DOMAIN
+	export SUBDOMAIN=dev.$DOMAIN
 	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
@@ -13,7 +13,7 @@ then
 	then
 		export DEBUG=
 		export FLAVOR=test
-		export SUBDOMAIN=.test.$DOMAIN
+		export SUBDOMAIN=test.$DOMAIN
 		export VERSION_TAG=$VERSION-test
 	else
 		export DEBUG=
