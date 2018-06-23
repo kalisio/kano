@@ -4,6 +4,7 @@ services:
   app:
     environment:
       - DEBUG=
+      - DB_URL=mongodb://mongodb:27017/${APP}
     working_dir: /opt/${APP}
     volumes:
       - ./server-coverage:/opt/${APP}/api/coverage
