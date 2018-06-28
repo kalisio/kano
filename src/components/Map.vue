@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     getPointMarker (feature, latlng) {
+      // ADS-B
       if (_.has(feature, 'properties.icao')) {
         return this.createMarkerFromStyle(latlng, {
           icon: {
@@ -58,6 +59,22 @@ export default {
           }
         })
       }
+      // Téléray
+      else if (_.has(feature, 'properties.irsnId')) {
+        const valid = _.get(feature, 'properties.libelle')
+        const icon = (valid === 'VA' ? 'info-circle' : (valid === 'NV' ? 'question-circle' : 'times-circle'))
+        const color = (valid === 'VA' ? 'darkblue' : (valid === 'NV' ? 'orange' : 'dark'))
+        return this.createMarkerFromStyle(latlng, {
+          icon: {
+            type: 'icon.fontAwesome',
+            options: {
+              iconClasses: 'fa fa-' + icon,
+              markerColor: color,
+              iconColor: '#FFF'
+            }
+          }
+        })
+      }
       return null
     },
     getFeatureStyle (feature) {
@@ -65,7 +82,7 @@ export default {
     },
     getFeaturePopup (feature, layer) {
       let popup = L.popup({ autoPan: false }, layer)
-      const name = _.get(feature, 'properties.NomEntVigiCru', _.get(feature, 'properties.icao'))
+      const name = _.get(feature, 'properties.name', _.get(feature, 'properties.NomEntVigiCru', _.get(feature, 'properties.icao')))
       return popup.setContent(name)
     },
     getFeatureTooltip (feature, layer) {
@@ -90,6 +107,11 @@ export default {
       if (callsign) {
         let tooltip = L.tooltip({ permanent: true }, layer)
         return tooltip.setContent('<b>' + callsign + '</b>')
+      }
+      const value = _.get(feature, 'properties.value')
+      if (value) {
+        let tooltip = L.tooltip({ permanent: false }, layer)
+        return tooltip.setContent('<b>' + value + ' nSv/h</b>')
       }
       return null
     },
