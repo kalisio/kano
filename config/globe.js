@@ -13,29 +13,29 @@ module.exports = {
     timeline: false
   },
   baseLayers: [{
-    name: 'Mapbox Satellite',
-    tooltip: 'Mapbox satellite imagery https://www.mapbox.com/maps/',
+    name: 'Kalisio Satellite',
+    tooltip: 'Satellite imagery data.\nBy http://www.kalisio.com',
     iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
-    type: 'Mapbox',
-    mapId: 'mapbox.satellite'
+    type: 'OpenStreetMap',
+    url: 'http://tileservergl.xwind-ai.com/styles/satellite'
   }, {
-    name: 'Mapbox Streets',
-    tooltip: 'Mapbox streets imagery https://www.mapbox.com/maps/',
-    iconUrl: 'Widgets/Images/ImageryProviders/mapboxTerrain.png',
-    type: 'Mapbox',
-    mapId: 'mapbox.streets'
+    name: 'Kalisio Open\u00adStreet\u00adMap',
+    tooltip: 'OpenStreetMap (OSM) data.\nBy http://www.kalisio.com',
+    iconUrl: 'Widgets/Images/ImageryProviders/openStreetMap.png',
+    type: 'OpenStreetMap',
+    url: 'http://tileservergl.xwind-ai.com/styles/osm-terrain'
   }],
   terrainLayers: [{
     name : 'WGS84 Ellipsoid',
     iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
-    tooltip : 'WGS84 standard ellipsoid, also known as EPSG:4326',
+    tooltip : 'WGS84 standard ellipsoid',
     type: 'Ellipsoid'
   }, {
-    name : 'STK World Terrain meshes',
-    iconUrl : 'Widgets/Images/TerrainProviders/STK.png',
-    tooltip : 'High-resolution, mesh-based terrain for the entire globe. Free for use on the Internet. Closed-network options are available.\nhttp://www.agi.com',
+    name : 'Kalisio Terrain',
+    iconUrl : 'Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
+    tooltip : 'High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com',
     type: 'Cesium',
-    url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
+    url : 'http://cesiumterrainserver.kalisio.xyz/tilesets/md15-tiles',
     requestWaterMask : true,
     requestVertexNormals : true
   }],

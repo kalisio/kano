@@ -49,6 +49,17 @@ export default {
     return {
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (!this.map) return
+      // Backup/Restore last position on change
+      if (!from.path.includes('map')) {
+        this.$store.set('bounds', this.map.getBounds())
+      } else if (!to.path.includes('map')) {
+        this.map.flyToBounds(this.$store.get('bounds'))
+      }
+    }
+  },
   methods: {
     getPointMarker (feature, latlng) {
       // ADS-B

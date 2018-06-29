@@ -3,10 +3,32 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.test.kalisio.xyz/wmts/osm/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'http://mapproxy.xwind-ai.com/wmts/satellite/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
-          label: 'OpenStreetMap',
+          label: 'Kalisio Satellite',
+          attribution: 'Data © <a href="https://openmaptiles.com">OpenMapTiles</a> contributors'
+        }
+      ]
+    },
+    {
+      type: 'tileLayer',
+      arguments: [
+        'http://mapproxy.xwind-ai.com/wmts/osm/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        {
+          maxZoom: 18,
+          label: 'Kalisio OpenStreetMap',
+          attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }
+      ]
+    },
+    {
+      type: 'tileLayer',
+      arguments: [
+        'http://mapproxy.xwind-ai.com/wmts/osm-terrain/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        {
+          maxZoom: 18,
+          label: 'Kalisio OpenStreetMap & Terrain',
           attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }
       ]
