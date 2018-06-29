@@ -57,6 +57,20 @@ module.exports = {
           id: 'properties.icao'
         }
       ]
+    },
+    {
+      type: 'timeDimension.layer.wms',
+      name: 'Wind speed isobaric surface',
+      arguments: [
+        'http://mapproxy.kalisio.xyz/service?',
+        {
+          version: '1.3.0',
+          format: 'image/png',
+          transparent: true,
+          layers: 'MF-ARPEGE_05_WIND_SPEED__ISOBARIC_SURFACE',
+          attribution: '<a href="http://www.meteofrance.com">Météo-France</a>'
+        }
+      ]
     }
   ]
 }

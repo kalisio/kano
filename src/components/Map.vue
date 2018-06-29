@@ -13,11 +13,15 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import moment from 'moment'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
 import { utils as kCoreUtils } from 'kCore/client'
 import { mixins as kMapMixins } from 'kMap/client'
 
 const { offset } = dom
+function roundHours (hours, interval) {
+  return (Math.floor(hours / interval) * interval)
+}
 
 export default {
   name: 'k-map',
@@ -32,6 +36,7 @@ export default {
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.fileLayers,
     kMapMixins.map.fullscreen,
+    kMapMixins.map.timedimension,
     kMapMixins.map.scalebar,
     kMapMixins.map.measure
   ],
@@ -134,6 +139,19 @@ export default {
   },
   mounted () {
     this.setupMap()
+    // Setup times
+    const upperLimit = 24 * 3600
+    const interval = 3 * 3600
+    // Compute nearest forecast T0
+    const now = moment.utc(now)
+    let offsetDateTime = now.clone().add({ seconds: 0.5 * interval })
+    const startTime = now.clone().hours(roundHours(offsetDateTime.hours(), interval / 3600)).minutes(0).seconds(0).milliseconds(0)
+    let times = []
+    this.setCurrentTime(startTime)
+    for (let timeOffset = 0; timeOffset <= upperLimit; timeOffset += interval) {
+      times.push(startTime.clone().add({ seconds: timeOffset }))
+    }
+    this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
     //this.addCollectionLayer('Actors', { spiderfyDistanceMultiplier: 5.0 })
     // Setup event connections
     // this.$on('popupopen', this.onPopupOpen)
