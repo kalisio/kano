@@ -12,7 +12,7 @@
 
 <script>
 import _ from 'lodash'
-import L from 'leaflet'
+import Cesium from 'cesium/Source/Cesium.js'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
 import { mixins as kMapMixins } from 'kMap/client'
 
@@ -51,6 +51,13 @@ export default {
   },
   mounted () {
     this.setupGlobe()
+    const bounds = this.$store.get('bounds')
+    if (bounds) {
+      this.viewer.camera.flyTo({
+        duration: 0,
+        destination : Cesium.Rectangle.fromDegrees(bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth())
+      })
+    }
   },
   beforeDestroy () {
   }

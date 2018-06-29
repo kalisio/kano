@@ -49,17 +49,6 @@ export default {
     return {
     }
   },
-  watch: {
-    '$route' (to, from) {
-      if (!this.map) return
-      // Backup/Restore last position on change
-      if (!from.path.includes('map')) {
-        this.$store.set('bounds', this.map.getBounds())
-      } else if (!to.path.includes('map')) {
-        this.map.flyToBounds(this.$store.get('bounds'))
-      }
-    }
-  },
   methods: {
     getPointMarker (feature, latlng) {
       // ADS-B
@@ -142,6 +131,9 @@ export default {
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshMap()
+    },
+    onMapMoved () {
+      this.$store.set('bounds', this.map.getBounds())
     }
   },
   created () {
@@ -150,6 +142,10 @@ export default {
   },
   mounted () {
     this.setupMap()
+    this.map.on('moveend', this.onMapMoved)
+    if (this.$store.has('bounds')) {
+      this.map.fitBounds(this.$store.get('bounds'))
+    }
     // Setup times
     const upperLimit = 24 * 3600
     const interval = 3 * 3600
@@ -170,6 +166,7 @@ export default {
     this.$on('collection-refreshed', this.onCollectionRefreshed)
   },
   beforeDestroy () {
+    this.map.off('moveend', this.onMapMoved)
     // No need to refresh the layout when leaving the component
     this.observe = false
     //this.removeCollectionLayer('Actors')
