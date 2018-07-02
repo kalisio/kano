@@ -133,7 +133,11 @@ export default {
       if (this.observe) this.refreshMap()
     },
     onMapMoved () {
-      this.$store.set('bounds', this.map.getBounds())
+      this.bounds = this.map.getBounds()
+      this.$store.set('bounds', [
+        [this.bounds.getSouth(), this.bounds.getWest()],
+        [this.bounds.getNorth(), this.bounds.getEast()]
+      ])
     }
   },
   created () {

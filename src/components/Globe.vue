@@ -55,9 +55,17 @@ export default {
     if (bounds) {
       this.viewer.camera.flyTo({
         duration: 0,
-        destination : Cesium.Rectangle.fromDegrees(bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth())
+        destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0])
       })
     }
+    this.bounds = new Cesium.Rectangle()
+    this.viewer.clock.onTick.addEventListener(() => {
+      this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
+      this.$store.set('bounds', [
+        [Cesium.Math.toDegrees(this.bounds.south), Cesium.Math.toDegrees(this.bounds.west)],
+        [Cesium.Math.toDegrees(this.bounds.north), Cesium.Math.toDegrees(this.bounds.east)]
+      ])
+    })
   },
   beforeDestroy () {
   }
