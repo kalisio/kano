@@ -27,6 +27,7 @@ export default {
   mixins: [
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.baseLayers,
+    kMapMixins.globe.overlayLayers,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers
   ],
@@ -43,6 +44,17 @@ export default {
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()
+    },
+    getEntityStyle (entity) {
+      return {}
+    },
+    getClusterStyle (cluster, entities) {
+      return {
+        label: {
+          show: true,
+          text: entities.length.toLocaleString()
+        }
+      }
     }
   },
   created () {
