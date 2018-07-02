@@ -3,44 +3,66 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.xwind-ai.com/wmts/satellite/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
         {
           maxZoom: 18,
-          label: 'Kalisio Satellite',
-          attribution: 'Data © <a href="https://openmaptiles.com">OpenMapTiles</a> contributors'
+          label: 'Kalisio Sentinel 2 Cloudless',
+          attribution: 'Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>'
         }
       ]
     },
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.xwind-ai.com/wmts/osm/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
-          label: 'Kalisio OpenStreetMap',
-          attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          label: 'Kalisio OpenStreetMap (bright rendering)',
+          attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }
       ]
     },
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.xwind-ai.com/wmts/osm-terrain/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        {
+          maxZoom: 18,
+          label: 'Kalisio OpenStreetMap (dark rendering)',
+          attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }
+      ]
+    },
+    {
+      type: 'tileLayer',
+      arguments: [
+        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-terrain/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'Kalisio OpenStreetMap & Terrain',
-          attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }
       ]
     },
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.xwind-ai.com/wmts/bdortho_5m-aeroway/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'http://mapproxy.kargo.dev.kalisio.xyz/wmts/bdortho-5m/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'BD Ortho (5m) & Aeroway data',
-          attribution: 'Imagery © <a href="http://ign.fr">IGN</a> & Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          attribution: 'BDORTHO © <a href="https://http://www.ign.fr/">IGN</a>'
+        }
+      ]
+    },
+    {
+      type: 'tileLayer',
+      arguments: [
+        'http://mapproxy.kargo.dev.kalisio.xyz/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
+        {
+          maxZoom: 18,
+          label: 'Kalisio Mosaik',
+          attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors & Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a> & BDORTHO © <a href="https://http://www.ign.fr/">IGN</a>'
         }
       ]
     }
@@ -82,15 +104,43 @@ module.exports = {
     },
     {
       type: 'timeDimension.layer.wms',
-      name: 'Wind speed isobaric surface',
+      name: 'Wind speed - Isobaric surface',
       arguments: [
-        'http://mapproxy.kalisio.xyz/service?',
+        'https://mapproxy.kargo.dev.kalisio.xyz/service?',
         {
           version: '1.3.0',
           format: 'image/png',
           transparent: true,
-          layers: 'MF-ARPEGE_05_WIND_SPEED__ISOBARIC_SURFACE',
-          attribution: '<a href="http://www.meteofrance.com">Météo-France</a>'
+          layers: 'ARPEGE_05_WIND_SPEED__ISOBARIC_SURFACE',
+          attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>'
+        }
+      ]
+    },
+    {
+      type: 'timeDimension.layer.wms',
+      name: 'Total water precipitation - Ground or water surface',
+      arguments: [
+        'https://mapproxy.kargo.dev.kalisio.xyz/service?',
+        {
+          version: '1.3.0',
+          format: 'image/png',
+          transparent: true,
+          layers: 'ARPEGE_05_TOTAL_WATER_PRECIPITATION__GROUND_OR_WATER_SURFACE',
+          attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>'
+        }
+      ]
+    },
+    {
+      type: 'timeDimension.layer.wms',
+      name: 'Temperature - Isobaric surface',
+      arguments: [
+        'https://mapproxy.kargo.dev.kalisio.xyz/service?',
+        {
+          version: '1.3.0',
+          format: 'image/png',
+          transparent: true,
+          layers: 'ARPEGE_05_TEMPERATURE__ISOBARIC_SURFACE',
+          attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>'
         }
       ]
     }

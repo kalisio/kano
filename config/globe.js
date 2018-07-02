@@ -13,17 +13,18 @@ module.exports = {
     timeline: false
   },
   baseLayers: [{
-    name: 'Kalisio Satellite',
-    tooltip: 'Satellite imagery data.\nBy http://www.kalisio.com',
+    name: 'Kalisio  Sentinel 2 Cloudless',
+    tooltip: 'Sentinel-2 cloudless.\nby EOX IT Services GmbH https://s2maps.eu',
     iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
     type: 'OpenStreetMap',
-    url: 'http://tileservergl.xwind-ai.com/styles/satellite'
+    url: 'https://mapproxy.kargo.dev.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR',
+    fileExtension: 'jpeg'
   }, {
     name: 'Kalisio Open\u00adStreet\u00adMap',
     tooltip: 'OpenStreetMap (OSM) data.\nBy http://www.kalisio.com',
     iconUrl: 'Widgets/Images/ImageryProviders/openStreetMap.png',
     type: 'OpenStreetMap',
-    url: 'http://tileservergl.xwind-ai.com/styles/osm-terrain'
+    url: 'http://tileservergl.xwind-ai.com/styles/osm-terrain',
   }],
   terrainLayers: [{
     name : 'WGS84 Ellipsoid',
