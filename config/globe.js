@@ -49,10 +49,8 @@ module.exports = {
         {
           interval: 10 * 60 * 1000,
           clustering: { pixelRange: 50 },
-          featureStyle: {
-            'marker-symbol': 'airport',
-            'marker-color': '#57D824'
-          }
+          'marker-symbol': 'lighthouse',
+          'marker-color': '#180EF1'
         }
       ]
     }

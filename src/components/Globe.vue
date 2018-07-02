@@ -55,6 +55,13 @@ export default {
           text: entities.length.toLocaleString()
         }
       }
+    },
+    onGlobeMoved () {
+      const cameraBounds = this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
+      this.$store.set('bounds', [
+        [Cesium.Math.toDegrees(cameraBounds.south), Cesium.Math.toDegrees(cameraBounds.west)],
+        [Cesium.Math.toDegrees(cameraBounds.north), Cesium.Math.toDegrees(cameraBounds.east)]
+      ])
     }
   },
   created () {
@@ -71,15 +78,10 @@ export default {
       })
     }
     this.bounds = new Cesium.Rectangle()
-    this.viewer.clock.onTick.addEventListener(() => {
-      this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
-      this.$store.set('bounds', [
-        [Cesium.Math.toDegrees(this.bounds.south), Cesium.Math.toDegrees(this.bounds.west)],
-        [Cesium.Math.toDegrees(this.bounds.north), Cesium.Math.toDegrees(this.bounds.east)]
-      ])
-    })
+    this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
   },
   beforeDestroy () {
+    this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
   }
 }
 </script>
