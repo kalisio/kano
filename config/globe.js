@@ -40,6 +40,23 @@ module.exports = {
     requestWaterMask : true,
     requestVertexNormals : true
   }],
+  overlayLayers: [
+    {
+      type: 'geoJson',
+      name: 'Téléray',
+      arguments: [
+        'https://s3.eu-central-1.amazonaws.com/kargo/teleray.json',
+        {
+          interval: 10 * 60 * 1000,
+          clustering: { pixelRange: 50 },
+          featureStyle: {
+            'marker-symbol': 'airport',
+            'marker-color': '#57D824'
+          }
+        }
+      ]
+    }
+  ],
   fileLayers: {
     clearOnDrop : false,
     flyToOnDrop: true,
