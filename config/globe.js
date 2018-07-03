@@ -27,11 +27,6 @@ module.exports = {
     url: 'http://tileservergl.xwind-ai.com/styles/osm-terrain',
   }],
   terrainLayers: [{
-    name : 'WGS84 Ellipsoid',
-    iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
-    tooltip : 'WGS84 standard ellipsoid',
-    type: 'Ellipsoid'
-  }, {
     name : 'Kalisio Terrain',
     iconUrl : 'Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
     tooltip : 'High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com',
@@ -39,6 +34,12 @@ module.exports = {
     url : 'http://cesiumterrainserver.kalisio.xyz/tilesets/md15-tiles',
     requestWaterMask : true,
     requestVertexNormals : true
+  },
+  {
+    name : 'WGS84 Ellipsoid',
+    iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
+    tooltip : 'WGS84 standard ellipsoid',
+    type: 'Ellipsoid'
   }],
   overlayLayers: [
     {

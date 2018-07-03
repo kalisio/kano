@@ -46,9 +46,17 @@ export default {
       if (this.observe) this.refreshGlobe()
     },
     getEntityStyle (entity) {
-      return {}
+      return {
+        billboard: {
+          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+        },
+        label: {
+          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+          verticalOrigin: Cesium.VerticalOrigin.BASELINE
+        }
+      }
     },
-    getClusterStyle (cluster, entities) {
+    getClusterStyle (entities, cluster) {
       return {
         label: {
           show: true,
