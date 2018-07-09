@@ -98,7 +98,12 @@ module.exports = {
       name: 'feathers-jwt',
       httpOnly: false,
       secure: (process.env.NODE_ENV === 'development' ? false : true)
-    }
+    },
+    authorisation: {
+      cache: {
+        maxUsers: 1000
+      }
+    },
   },
   logs: {
     Console: {
