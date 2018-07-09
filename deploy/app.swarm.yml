@@ -18,7 +18,3 @@ services:
         - "traefik.frontend.rule=Host:${HOST}.${SUBDOMAIN}"
       restart_policy:
         condition: on-failure
-
-configs:
-  mgob_config:
-    file: ./configs/mgob/mgob.yml
