@@ -103,7 +103,7 @@ module.exports = {
       cache: {
         maxUsers: 1000
       }
-    },
+    }
   },
   logs: {
     Console: {
