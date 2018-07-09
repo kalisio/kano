@@ -19,4 +19,3 @@ This application is based on the [Kalisio Development Kit](https://kalisio.gitbo
 ### License
 
 Copyright (c) 2018 Kalisio
-
