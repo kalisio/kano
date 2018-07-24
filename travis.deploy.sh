@@ -23,11 +23,8 @@ else
   scp -rp deploy/configs ${SSH_USER}@${SSH_REMOTE}:~/${APP}/configs
 
 	# Deploy utilities
-	scp deploy/backup-db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	scp deploy/restore-db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	scp deploy/deploy-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	scp deploy/remove-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh; chmod u+x ./backup-db.sh; chmod u+x ./restore-db.sh"
 
 	# Deploy the stack
 	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove-app.sh; ./deploy-app.sh"
