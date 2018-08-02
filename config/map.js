@@ -3,7 +3,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
+        'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
         {
           maxZoom: 18,
           label: 'Kalisio Sentinel 2 Cloudless',
@@ -14,7 +14,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'Kalisio OpenStreetMap (bright rendering)',
@@ -25,7 +25,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'Kalisio OpenStreetMap (dark rendering)',
@@ -36,7 +36,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.dev.kalisio.xyz/wmts/osm-terrain/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'Kalisio OpenStreetMap & Terrain',
@@ -47,7 +47,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.kargo.dev.kalisio.xyz/wmts/bdortho-5m/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        'http://mapproxy.kargo.kalisio.xyz/wmts/bdortho-5m/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
         {
           maxZoom: 18,
           label: 'BD Ortho (5m) & Aeroway data',
@@ -58,7 +58,7 @@ module.exports = {
     {
       type: 'tileLayer',
       arguments: [
-        'http://mapproxy.kargo.dev.kalisio.xyz/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
+        'http://mapproxy.kargo.kalisio.xyz/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
         {
           maxZoom: 18,
           label: 'Kalisio Mosaik',

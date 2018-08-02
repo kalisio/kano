@@ -11,35 +11,10 @@ services:
          - node.role == worker
       labels:
         - "traefik.backend=app"
-        - "traefik.docker.network=${NETWORK}"
+        - "traefik.docker.network=${DOCKER_NETWORK}"
         - "traefik.enable=true"
         - "traefik.port=8081"
         - "traefik.frontend.entryPoints=http,https"
-        - "traefik.frontend.rule=Host:${SUBDOMAIN}"
+        - "traefik.frontend.rule=Host:${HOST}.${SUBDOMAIN}"
       restart_policy:
         condition: on-failure
-
-  mongodb:
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-         - node.role == worker
-      restart_policy:
-        condition: on-failure
-
-  mongodb-backup:
-    configs:
-      - source: mgob_config
-        target: /config/${APP}-${FLAVOR}.yml  
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-         - node.role == manager
-      restart_policy:
-        condition: on-failure
-
-configs:
-  mgob_config:
-    file: ./configs/mgob/mgob.yml

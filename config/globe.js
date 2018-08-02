@@ -17,7 +17,7 @@ module.exports = {
     tooltip: 'Sentinel-2 cloudless.\nby EOX IT Services GmbH https://s2maps.eu',
     iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
     type: 'OpenStreetMap',
-    url: 'https://mapproxy.kargo.dev.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR',
+    url: 'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR',
     fileExtension: 'jpeg'
   }, {
     name: 'Kalisio Open\u00adStreet\u00adMap',

@@ -4,7 +4,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
-	export SUBDOMAIN=$APP.dev.$DOMAIN
+	export SUBDOMAIN=dev.$DOMAIN
 	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
@@ -13,12 +13,12 @@ then
 	then
 		export DEBUG=
 		export FLAVOR=test
-		export SUBDOMAIN=$APP.test.$DOMAIN
+		export SUBDOMAIN=test.$DOMAIN
 		export VERSION_TAG=$VERSION-test
 	else
 		export DEBUG=
 		export FLAVOR=prod
-		export SUBDOMAIN=$APP.$DOMAIN
+		export SUBDOMAIN=$DOMAIN
 		export VERSION_TAG=$VERSION
 	fi
 fi
@@ -30,6 +30,9 @@ SSH_USER_ENV_VAR_NAME=SSH_USER_$FLAVOR
 export SSH_USER=${!SSH_USER_ENV_VAR_NAME}
 SSH_REMOTE_ENV_VAR_NAME=SSH_REMOTE_$FLAVOR
 export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
+# Same for the DB_URL
+DB_URL_ENV_VAR_NAME=DB_URL_$FLAVOR
+export DB_URL=${!DB_URL_ENV_VAR_NAME}
 
 echo "APP=$APP" > .env
 echo "COMPOSE_PROJECT_NAME=$APP" >> .env 
@@ -40,7 +43,8 @@ echo "VERSION=$VERSION" >> .env
 echo "VERSION_TAG=$VERSION_TAG" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
 echo "SUBDOMAIN=$SUBDOMAIN" >> .env
-echo "NETWORK=$NETWORK" >> .env
+echo "HOST"=$HOST >> .env
+echo "DOCKER_NETWORK=$DOCKER_NETWORK" >> .env
 echo "PORT=$PORT" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
 echo "GOOGLE_MAIL_USER=$GOOGLE_MAIL_USER" >> .env
@@ -56,3 +60,4 @@ echo "GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID" >> .env
 echo "GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET" >> .env
 echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> .env
 echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
+echo "DB_URL=$DB_URL" >> .env

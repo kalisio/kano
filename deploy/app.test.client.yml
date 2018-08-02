@@ -8,6 +8,7 @@ services:
     image: kalisio/testcafe
     depends_on:
       - app
+      - mongodb
     environment:
       - GOOGLE_USER
       - GOOGLE_PASSWORD
@@ -24,4 +25,4 @@ services:
 networks:
   app-network:
     external:
-      name: ${NETWORK}
+      name: ${DOCKER_NETWORK}

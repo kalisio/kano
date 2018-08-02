@@ -4,7 +4,6 @@ import logger from 'winston'
 import kCore from 'kCore'
 import packageInfo from '../../package.json'
 
-const servicesPath = path.join(__dirname, '..', 'services')
 module.exports = async function () {
   const app = this
 
@@ -14,8 +13,7 @@ module.exports = async function () {
       let response = {
         name: 'kapp',
         domain: app.get('domain'),
-        version: packageInfo.version,
-        billing: app.get('billing')
+        version: packageInfo.version
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER
@@ -23,10 +21,6 @@ module.exports = async function () {
       res.json(response)
     })
     await app.configure(kCore)
-    // Add hook to automatically create a new organisation, add verification, send verification email,
-    // register devices, etc. when creating a new user or authenticating
-    app.configureService('users', app.getService('users'), servicesPath)
-    app.configureService('authentication', app.getService('authentication'), servicesPath)
   } catch (error) {
     logger.error(error.message)
   }

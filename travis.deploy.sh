@@ -16,18 +16,17 @@ else
 	# Deploy compose files
 	scp deploy/app.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.yml
 	scp deploy/app.swarm.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/app.swarm.yml
+	scp deploy/mongodb.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.yml
+	scp deploy/mongodb.swarm.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.swarm.yml
 
   # Deploy configs
   scp -rp deploy/configs ${SSH_USER}@${SSH_REMOTE}:~/${APP}/configs
 
 	# Deploy utilities
-	scp deploy/commands/backup_db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	scp deploy/commands/restore_db.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	scp deploy/commands/deploy_stack.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	scp deploy/commands/remove_stack.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove_stack.sh; chmod u+x ./deploy_stack.sh; chmod u+x ./backup_db.sh; chmod u+x ./restore_db.sh"
+	scp deploy/deploy-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
+	scp deploy/remove-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 
 	# Deploy the stack
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove_stack.sh; ./deploy_stack.sh"
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove-app.sh; ./deploy-app.sh"
 fi
 

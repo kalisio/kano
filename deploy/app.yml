@@ -3,8 +3,6 @@ version: '3.3'
 services:
   app:
     image: kalisio/${APP}:${VERSION_TAG}
-    depends_on:
-      - mongodb
     environment:
       - GOOGLE_MAIL_USER=${GOOGLE_MAIL_USER}
       - GOOGLE_MAIL_PASSWORD=${GOOGLE_MAIL_PASSWORD}
@@ -25,32 +23,11 @@ services:
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - BUILD_NUMBER=${BUILD_NUMBER}
       - NODE_APP_INSTANCE=${FLAVOR}
-      - DB_URL=mongodb://mongodb:27017/${APP}
+      - DB_URL=${DB_URL}
     networks:
       - app-network
-
-  mongodb:
-    image: mongo
-    volumes:
-      - mongodb_app:/data/db
-    networks:
-      - app-network
-      
-  mongodb-backup:
-    image: stefanprodan/mgob
-    depends_on:
-      - mongodb
-    environment:
-      - S3_ACCESS_KEY
-      - S3_SECRET_ACCESS_KEY
-    networks:
-      - app-network
-
-volumes:
-  mongodb_app:
 
 networks:
   app-network:
     external:
-      name: ${NETWORK}
-
+      name: ${DOCKER_NETWORK}

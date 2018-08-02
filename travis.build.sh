@@ -6,7 +6,7 @@ source travis.env.sh
 # (see the deploy hook) and can be used by the following stages (i.e. Android and iOS).
 
 # It first need to create the required network 
-docker network create --attachable $NETWORK
+docker network create --attachable $DOCKER_NETWORK
 
 if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip build]"* ]]
 then
