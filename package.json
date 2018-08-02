@@ -73,6 +73,7 @@
     ]
   },
   "dependencies": {
+    "@feathersjs/client": "^3.5.4",
     "@panter/vue-i18next": "^0.9.1",
     "ajv": "^5.2.2",
     "ajv-i18n": "2",
@@ -84,8 +85,6 @@
     "cross-env": "^5.1.4",
     "fastclick": "^1.0.6",
     "feathers-authentication-management": "^1.0.0",
-    "feathers-client": "^2.2.0",
-    "feathers-hooks": "^2.0.1",
     "feathers-reactive": "^0.4.1",
     "i18next": "^10.5.0",
     "jquery": "^3.2.1",
