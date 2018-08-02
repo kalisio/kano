@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="column justify-center full-width">
-      <div class="row full-width">
-        <div id="map" :style="mapStyle">
-          <q-resize-observable @resize="onMapResized" />
-        </div>
-      </div>
+    <div id="map" :style="mapStyle">
+      <q-resize-observable @resize="onMapResized" />
     </div>
   </div>
 </template>

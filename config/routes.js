@@ -32,6 +32,10 @@ module.exports = {
           'globe': {
             path: 'globe',
             component: 'Globe'
+          },
+          'panorama': {
+            path: 'panorama',
+            component: 'Panorama'
           }
         }
       }

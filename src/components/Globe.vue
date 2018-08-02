@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="column justify-center full-width">
-      <div class="row full-width">
-        <div id="globe" :style="globeStyle">
-          <q-resize-observable @resize="onGlobeResized" />
-        </div>
-      </div>
+    <div id="globe" :style="globeStyle">
+      <q-resize-observable @resize="onGlobeResized" />
     </div>
   </div>
 </template>
