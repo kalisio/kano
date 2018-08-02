@@ -112,7 +112,7 @@
     "testcafe-vue-selectors": "^3.0.0",
     "togeojson": "^0.16.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
-    "vue": "2.5.2",
+    "vue": "2.5.17",
     "vue-avatar": "^2.0.0",
     "vue-router": "^2.7.0",
     "vue2-dropzone": "^3.0.5",
