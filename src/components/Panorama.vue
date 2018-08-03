@@ -1,13 +1,10 @@
 <template>
   <div>
-    <k-modal ref="modal" :route="true" :toolbar="[]" :buttons="[]" :options="{ padding: '0px', maximized: true }">
+    <k-modal ref="modal" :route="true" :toolbar="getToolbar()" :buttons="[]" :options="{ padding: '0px', maximized: true }">
       <div slot="modal-content" class="column xs-gutter">
         <div id="panorama" ref="panorama" :style="panoramaStyle"/>
       </div>
     </k-modal>
-    <q-fixed-position corner="top-right" :offset="[0, -100]">
-      <q-btn flat big color="white" @click="doClose" icon="zoom_out" />
-    </q-fixed-position>
   </div>
 </template>
 
@@ -16,21 +13,18 @@
 // FIXME: for now we inject it in the index.html file
 //import 'three'
 //import Panolens from '../panolens.js'
-import { QFixedPosition, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from 'kCore/client'
 
 export default {
   name: 'k-panorama',
   components: {
-    QFixedPosition,
-    QBtn
   },
   mixins: [
     kCoreMixins.refsResolver(['modal', 'panorama'])
   ],
   computed: {
     panoramaStyle () {
-      return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
+      return 'width: 100%; height: 100%; position: absolute'
     }
   },
   data () {
@@ -38,6 +32,11 @@ export default {
     }
   },
   methods: {
+    getToolbar () {
+      return [
+        { name: 'close-action', label: this.$t('KIconChooser.CLOSE_ACTION'), icon: 'close', handler: () => this.doClose() }
+      ]
+    },
     doClose (event, done) {
       this.$refs.modal.close()
     }
