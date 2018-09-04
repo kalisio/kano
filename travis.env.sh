@@ -44,8 +44,8 @@ echo "VERSION_TAG=$VERSION_TAG" >> .env
 echo "DOMAIN=$DOMAIN" >> .env
 echo "SUBDOMAIN=$SUBDOMAIN" >> .env
 echo "HOST"=$HOST >> .env
-echo "DOCKER_NETWORK=$DOCKER_NETWORK" >> .env
 echo "PORT=$PORT" >> .env
+echo "DOCKER_NETWORK=$DOCKER_NETWORK" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
 echo "GOOGLE_MAIL_USER=$GOOGLE_MAIL_USER" >> .env
 echo "GOOGLE_MAIL_PASSWORD=$GOOGLE_MAIL_PASSWORD" >> .env
@@ -60,4 +60,18 @@ echo "GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID" >> .env
 echo "GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET" >> .env
 echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> .env
 echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
+# Fastlane environement
+echo "APPLE_ID"=$APPLE_ID >> .env
+echo "APPLE_TEAM_ID"=$APPLE_ID >> .env
+echo "GITHUB_TOKEN"=$GITHUB_TOKEN >> .env
+# Backend test environment
+echo "GMAIL_API_USER=$GITHUB_PASSWORD" >> .env
+echo "GMAIL_API_CLIENT_EMAIL=$GITHUB_PASSWORD" >> .env
+echo "GMAIL_API_PRIVATE_KEY=$GITHUB_PASSWORD" >> .env
+# Testcafe client test environment
+echo "GOOGLE_USER=$GOOGLE_USER" >> .env
+echo "GOOGLE_PASSWORD=$GOOGLE_PASSWORD" >> .env
+echo "GITHUB_USER=$GITHUB_USER" >> .env
+echo "GITHUB_PASSWORD=$GITHUB_PASSWORD" >> .env
+echo "TESTCAFE_SPEED=$TESTCAFE_SPEED" >> .env
 echo "DB_URL=$DB_URL" >> .env

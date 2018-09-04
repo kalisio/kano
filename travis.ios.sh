@@ -5,7 +5,6 @@ then
 else
 	source travis.env.sh
 	cd cordova/fastlane
-	source ios.sh
-	more ios.sh
+	sh ios.sh
 	npm run cordova:supply:ios
 fi
