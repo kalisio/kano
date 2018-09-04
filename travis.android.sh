@@ -5,5 +5,6 @@ then
 else
 	source travis.env.sh
 	export ORG_GRADLE_PROJECT_cdvVersionCode=$TRAVIS_BUILD_NUMBER
+	source cordova/fastlane/android.sh
 	npm run cordova:supply:android
 fi
