@@ -4,6 +4,8 @@ then
 	echo "Skipping ios stage"
 else
 	source travis.env.sh
-	source cordova/fastlane/ios.sh
+	cd cordova/fastlane
+	source ios.sh
+	more ios.sh
 	npm run cordova:supply:ios
 fi
