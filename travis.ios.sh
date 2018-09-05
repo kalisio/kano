@@ -12,11 +12,11 @@ else
 	cp kApp-secrets/cordova/* cordova/.
 	# Generate the fastlane Appfile
 	cd cordova/fastlane
-	bash android.sh
+	bash ios.sh
 	cd ../..
 	# Build and deploy the app
 	npm config set loglevel warn
-	npm run cordova:add:android 
+	npm run cordova:add:ios
 	npm run cordova:build 
 	npm run cordova:fastlane
 fi
