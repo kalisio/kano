@@ -11,5 +11,5 @@ else
 	# Install the required secret files
 	cp kApp-secrets/cordova/* cordova/.
 	# Build and deploy the app
-	npm run cordova:supply:ios
+	npm run cordova:deploy:ios
 fi

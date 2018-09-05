@@ -7,5 +7,5 @@ else
 	export ORG_GRADLE_PROJECT_cdvVersionCode=$TRAVIS_BUILD_NUMBER
 	cd cordova/fastlane
 	sh android.sh
-	npm run cordova:supply:android
+	npm run cordova:deploy:android
 fi

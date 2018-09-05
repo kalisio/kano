@@ -42,19 +42,14 @@ platform :ios do
   ios_project_path = "platforms/ios/kApp.xcodeproj"
 
   desc "Build for IOS"
-  lane :build do
-    #increment_build_number(
-    #  xcodeproj: ios_project_path,
-    #  build_number: ENV["BUILD_NUMBER"]
-    #)
-
+  lane :dev do
     # Recreate schemes to ensure a smooth transition from cordova to gym
     recreate_schemes(project: ios_project_path)
 
-    update_project_team(
-      path: ios_project_path,
-      teamid: "TEAMID"
-    )
+    #update_project_team(
+    #  path: ios_project_path,
+    #  teamid: "TEAMID"
+    #)
 
     #update_provisioning_profile_specifier(xcodeproj: ios_project_path)
 
