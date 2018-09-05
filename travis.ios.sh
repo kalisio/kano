@@ -10,6 +10,10 @@ else
 	git clone https://github.com/kalisio/kApp-secrets
 	# Install the required secret files
 	cp kApp-secrets/cordova/* cordova/.
+	# Generate the fastlane Appfile
+	cd cordova/fastlane
+	bash android.sh
+	cd ..
 	# Build and deploy the app
 	npm run cordova:deploy:ios
 fi
