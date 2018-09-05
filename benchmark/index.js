@@ -11,6 +11,7 @@ program
     .option('-s, --scenarios [scenarios]', 'Total # of scenarios performed by each virtual client before disconnecting', '100')
     .option('-r, --ramp [ramp]', 'Duration in seconds of the ramp up/down phases', '1800')
     .option('-T, --transport [transport]', 'Transport to be used (either websocket or http)', 'websocket')
+    .option('-j, --jwt [ratio]', 'Ratio of authentication using JWT instead of local login', '0.9')
     .parse(process.argv)
 
 // Parse options requiring type conversion from string
@@ -40,10 +41,11 @@ logger.info('Launching ' + cpus * options.maxConcurrentCallsPerWorker +
             ' concurrent client(s) with ' + cpus + ' CPUs until ' + total + ' have been executed')
 let countdown = new clui.Spinner('Please wait...')
 if (!process.env.LOG_LEVEL) countdown.start()
+const start = process.hrtime()
 
 for (var i = 0; i < total; i++) {
   // Default options include URL, client ID and the # of scenarios it has to execute
-  let workerOptions = { url: program.url, transport: program.transport, index: i + 1, nbScenarios }
+  let workerOptions = { url: program.url, transport: program.transport, jwtRatio: parseFloat(program.jwt), index: i + 1, nbScenarios }
   // For the first/last clients include the ramp option as well
   if (i < concurrency) workerOptions.rampUp = ramp
   if (i > total - concurrency) workerOptions.rampDown = ramp
@@ -61,9 +63,12 @@ for (var i = 0; i < total; i++) {
       logger.error(err)
     }
     if (n === total) {
+      const end = process.hrtime()
       countdown.stop()
       workerFarm.end(workers)
       // Display total/averaged durations and error ratio
+      const duration = (end[0] + end[1] / 1000000000) - (start[0] + start[1] / 1000000000)
+      logger.info('Total test time = ' + duration.toFixed(2) + ' (s)')
       Object.entries(durations).forEach(([key, value]) => {
         logger.info('Total ' + key + ' time = ' + durations[key].toFixed(2) + ' (s)')
         logger.info('Average ' + key + ' time = ' + (durations[key] / total).toFixed(2) + ' (s)')
