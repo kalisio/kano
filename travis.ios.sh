@@ -15,5 +15,8 @@ else
 	bash android.sh
 	cd ..
 	# Build and deploy the app
-	npm run cordova:deploy:ios
+	npm config set loglevel warn
+	npm run cordova:add:android 
+	npm run cordova:build 
+	npm run cordova:fastlane
 fi
