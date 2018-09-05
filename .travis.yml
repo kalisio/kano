@@ -139,7 +139,7 @@ jobs:
       access_key_id: "$S3_ACCESS_KEY"
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
       bucket: kapp-builds
-      local_dir: cordova/platforms/ios/build
+      local_dir: cordova/platforms/ios
       upload_dir: "$TRAVIS_BUILD_NUMBER/app"
       on:
         all_branches: true
