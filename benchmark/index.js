@@ -9,7 +9,8 @@ program
     .option('-t, --total [total]', 'Total # of virtual clients to be created', '1000')
     .option('-c, --concurrency [concurrency]', '# of concurrent clients during the steady phase', '100')
     .option('-s, --scenarios [scenarios]', 'Total # of scenarios performed by each virtual client before disconnecting', '100')
-    .option('-r, --ramp [ramp]', 'Duration in seconds of the ramp up/down phases', '5000')
+    .option('-r, --ramp [ramp]', 'Duration in seconds of the ramp up/down phases', '1800')
+    .option('-T, --transport [transport]', 'Transport to be used (either websocket or http)', 'websocket')
     .parse(process.argv)
 
 // Parse options requiring type conversion from string
@@ -42,7 +43,7 @@ if (!process.env.LOG_LEVEL) countdown.start()
 
 for (var i = 0; i < total; i++) {
   // Default options include URL, client ID and the # of scenarios it has to execute
-  let workerOptions = { url: program.url, index: i + 1, nbScenarios }
+  let workerOptions = { url: program.url, transport: program.transport, index: i + 1, nbScenarios }
   // For the first/last clients include the ramp option as well
   if (i < concurrency) workerOptions.rampUp = ramp
   if (i > total - concurrency) workerOptions.rampDown = ramp
