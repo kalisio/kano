@@ -11,12 +11,9 @@ else
 	# Install the required secret files
 	cp kApp-secrets/cordova/* cordova/.
 	# Generate the fastlane Appfile
-	cd cordova/fastlane
-	bash ios.sh
-	cd ../..
+	echo app_identifier\(\"com.kalisio.$APP\"\) > cordova/fastlane/Appfile
+	echo apple_id\(\"$APPLE_ID\"\) >> cordova/fastlane/Appfile
+	echo team_id\(\"$APPLE_TEAM_ID\"\) >> cordova/fastlane/Appfile
 	# Build and deploy the app
-	npm config set loglevel warn
-	npm run cordova:add:ios > /dev/null
-	npm run cordova:build > /dev/null 
-	npm run cordova:fastlane
+	npm run cordova:deploy:ios
 fi
