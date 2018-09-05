@@ -13,7 +13,7 @@ else
 	# Generate the fastlane Appfile
 	cd cordova/fastlane
 	bash android.sh
-	cd ..
+	cd ../..
 	# Build and deploy the app
 	npm config set loglevel warn
 	npm run cordova:add:android 
