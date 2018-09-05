@@ -13,6 +13,6 @@ echo username\(\"$APPLE_ID\"\) >> Matchfile
 echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
 
 fastlane match development
-fastlane match entreprise
+
 
 

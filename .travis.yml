@@ -131,12 +131,7 @@ jobs:
     - brew install awscli
     - npm install -g cordova
     - gem install fastlane
-    - pod --version
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
-      -in secrets.tar.enc -out secrets.tar -d
-    - tar xvf secrets.tar
-    - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
     - bash travis.ios.sh
     deploy:
       skip_cleanup: true

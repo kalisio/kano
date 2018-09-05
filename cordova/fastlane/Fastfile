@@ -12,7 +12,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "Supply a new version to the Google Play Console"
+  desc "Deploy a new version to the Google Play Console"
   lane :dev do
     upload_to_play_store(track: 'alpha',
       skip_upload_metadata: true,
