@@ -16,7 +16,7 @@ else
 	cd ../..
 	# Build and deploy the app
 	npm config set loglevel warn
-	npm run cordova:add:ios
-	npm run cordova:build 
+	npm run cordova:add:ios > /dev/null
+	npm run cordova:build > /dev/null 
 	npm run cordova:fastlane
 fi
