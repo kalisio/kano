@@ -22,9 +22,9 @@ async function connectClient(url, transport, id) {
   } else {
     if (url.startsWith('https')) {
       const agent = new https.Agent({ rejectUnauthorized: false })
-      client.configure(feathers.rest(url).fetch((url, options) => fetch(url, Object.assign({ agent }, options))))
+      client.configure(feathers.rest(url).fetch((url, options) => fetch(url, Object.assign({ agent, timeout: 20000 }, options))))
     } else {
-      client.configure(feathers.rest(url).fetch(fetch))
+      client.configure(feathers.rest(url).fetch((url, options) => fetch(url, Object.assign({ timeout: 20000 }, options))))
     }
   }
   client.configure(feathers.authentication({ path: '/api/authentication', timeout: 20000 }))
@@ -72,6 +72,7 @@ async function disconnectClient(client) {
 
 module.exports = async function (options, callback) {
   const { url, transport, jwtRatio, index, nbScenarios, rampUp, rampDown } = options
+  let client
   try {
     logger.verbose('Initiating client ' + index)
     // We don't start all clients at the same time to avoid overflowing,
@@ -81,7 +82,7 @@ module.exports = async function (options, callback) {
       logger.verbose('Pausing client ' + index + ' for ' + pause)
       await util.promisify(setTimeout)(pause)
     }
-    let client = await connectClient(url, transport, index)
+    client = await connectClient(url, transport, index)
     if (authenticate) {
       // Do we use local authentication or JWT based ?
       await authenticateClient(client, Math.random() <= jwtRatio ? 'jwt' : 'local')
@@ -102,6 +103,8 @@ module.exports = async function (options, callback) {
     await disconnectClient(client)
     callback(null, client.data)
   } catch (error) {
+    // If failure after connection close it
+    if (client && client.socket) client.socket.disconnect()
     callback(error)
   }
 }
