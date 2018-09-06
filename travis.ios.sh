@@ -9,11 +9,10 @@ else
 	echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
 	git clone https://github.com/kalisio/kApp-secrets
 	# Install the required secret files
-	cp kApp-secrets/cordova/* cordova/.
+	cp kApp-secrets/cordova/build.json cordova/.
 	# Generate the fastlane Appfile
-	echo app_identifier\(\"com.kalisio.$APP\"\) > cordova/fastlane/Appfile
-	echo apple_id\(\"$APPLE_ID\"\) >> cordova/fastlane/Appfile
-	echo team_id\(\"$APPLE_TEAM_ID\"\) >> cordova/fastlane/Appfile
+	mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+	cp kApp-secrets/cordova/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/.
 	# Build and deploy the app
 	npm run cordova:deploy:ios
 fi
