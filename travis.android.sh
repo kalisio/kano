@@ -16,11 +16,10 @@ else
 	cp kApp-secrets/cordova/build.json cordova/.
 	cp kApp-secrets/cordova/kalisio.keystore cordova/kalisio.keystore
 
-	# Build and deploy the mobile app
-		export ORG_GRADLE_PROJECT_cdvVersionCode=$TRAVIS_BUILD_NUMBER
-	cd cordova/fastlane
-	sh android.sh
-	cd ../..
+	# Build and deploy the mobile app	
+  echo json_key_file\(\"google-play.json\"\) > cordova/fastlane/Appfile
+  echo package_name\(\"com.kalisio.$APP\"\) >> cordova/fastlane/Appfile
+  export ORG_GRADLE_PROJECT_cdvVersionCode=$TRAVIS_BUILD_NUMBER
 	npm run cordova:deploy:android
 
 	# Store the android build to S3
