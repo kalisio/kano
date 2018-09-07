@@ -103,13 +103,9 @@ jobs:
     - yes | sdkmanager "platforms;android-26"
     install:
     - pip install --user awscli
+    - npm install -g cordova
     - gem install fastlane
-    - yarn install
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
-      -in secrets.tar.enc -out secrets.tar -d
-    - tar xvf secrets.tar
-    - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
     - bash travis.android.sh
 
   - stage: IOS
@@ -120,7 +116,7 @@ jobs:
     install:
     - brew install awscli
     - npm install -g cordova
-    - npm install -g ios-deploy
-    - gem install fastlane
+    - npm install --unsafe-perm=true --allow-root -g ios-deploy
+    - gem install fastlane        
     script:
     - bash travis.ios.sh
