@@ -104,6 +104,7 @@ jobs:
     install:
     - pip install --user awscli
     - npm install -g cordova
+    - npm install -g cross-env
     - gem install fastlane
     script:
     - bash travis.android.sh
@@ -116,7 +117,7 @@ jobs:
     install:
     - brew install awscli
     - npm install -g cordova
-    - npm install --unsafe-perm=true --allow-root -g ios-deploy
+    - npm install -g cross-env
     - gem install fastlane        
     script:
     - bash travis.ios.sh

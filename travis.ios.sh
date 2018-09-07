@@ -38,6 +38,8 @@ else
 
 	# Add certificates to keychain and allow codesign to access them
 	security import kApp-secrets/ios/AppleWWDRCA.cer AppleWWDRCA.cer -k $KEY_CHAIN -T /usr/bin/codesign
+	security import kApp-secrets/ios/ios_development.cer ios_development.cer -k $KEY_CHAIN -T /usr/bin/codesign
+	security import kApp-secrets/ios/ios_distribution.cer ios_distribution.cer -k $KEY_CHAIN -T /usr/bin/codesign
 
 	# Restore working directory
 	#cd -
