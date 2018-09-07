@@ -13,8 +13,7 @@ else
 	git clone https://github.com/kalisio/kApp-secrets
 
 		# Install the required secret files requied to sign the app
-	cp kApp-secrets/cordova/build.json cordova/.
-	cp kApp-secrets/cordova/kalisio.keystore cordova/kalisio.keystore
+	cp kApp-secrets/android/* cordova/.
 
 	# Build and deploy the mobile app	
   echo json_key_file\(\"google-play.json\"\) > cordova/fastlane/Appfile
