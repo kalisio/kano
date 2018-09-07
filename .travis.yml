@@ -111,16 +111,6 @@ jobs:
     - tar xvf secrets.tar
     - aws s3 sync s3://kapp-builds/$TRAVIS_BUILD_NUMBER/dist cordova/www
     - bash travis.android.sh
-    deploy:
-      skip_cleanup: true
-      provider: s3
-      access_key_id: "$S3_ACCESS_KEY"
-      secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kapp-builds
-      local_dir: cordova/platforms/android/build/outputs/apk
-      upload_dir: "$TRAVIS_BUILD_NUMBER/apk"
-      on:
-        all_branches: true
 
   - stage: IOS
     language: objective-c
@@ -130,16 +120,7 @@ jobs:
     install:
     - brew install awscli
     - npm install -g cordova
+    - npm install -g ios-deploy
     - gem install fastlane
     script:
     - bash travis.ios.sh
-    deploy:
-      skip_cleanup: true
-      provider: s3
-      access_key_id: "$S3_ACCESS_KEY"
-      secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kapp-builds
-      local_dir: cordova/platforms/ios
-      upload_dir: "$TRAVIS_BUILD_NUMBER/app"
-      on:
-        all_branches: true
