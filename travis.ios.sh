@@ -28,7 +28,7 @@ else
 
 	# Set keychain timeout to 1 hour for long builds
 	# see http://www.egeek.me/2013/02/23/jenkins-and-xcode-user-interaction-is-not-allowed/
-	security set-keychain-settings -t 3600 -u $KEY_CHAIN
+	security set-keychain-settings -t 1800 -u $KEY_CHAIN
 
 	# Set keychain search list
 	security list-keychains -s $KEY_CHAIN

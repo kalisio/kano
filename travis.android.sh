@@ -22,5 +22,5 @@ else
 	npm run cordova:deploy:android
 
 	# Store the android build to S3
-	aws s3 sync cordova/platforms/android/build/outputs s3://kapp-builds/$TRAVIS_BUILD_NUMBER/android
+	aws s3 sync cordova/platforms/android/build/outputs/apk s3://kapp-builds/$TRAVIS_BUILD_NUMBER/android
 fi
