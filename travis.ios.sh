@@ -16,10 +16,6 @@ else
 	KEY_CHAIN=ios-build.keychain
 	KEY_CHAIN_PASSWORD=travis
 
-	# Set working directory
-	#CWD=$(pwd)
-	#cd "$(dirname "$0")"
-
 	# Create a custom keychain
 	security create-keychain -p $KEY_CHAIN_PASSWORD $KEY_CHAIN
 
@@ -40,9 +36,7 @@ else
 	security import kApp-secrets/ios/AppleWWDRCA.cer AppleWWDRCA.cer -k $KEY_CHAIN -T /usr/bin/codesign
 	security import kApp-secrets/ios/ios_development.cer ios_development.cer -k $KEY_CHAIN -T /usr/bin/codesign
 	security import kApp-secrets/ios/ios_distribution.cer ios_distribution.cer -k $KEY_CHAIN -T /usr/bin/codesign
-
-	# Restore working directory
-	#cd -
+	security import kApp-secrets/ios/ios_distribution.p12 ios_ios_distribution.p12 -k $KEY_CHAIN -T /usr/bin/codesign
 
 	# Install the required secret files requied to sign the app
 	cp kApp-secrets/ios/build.json cordova/.
@@ -50,7 +44,8 @@ else
 	cp kApp-secrets/ios/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/.
 
 	# Build and deploy the app
-	npm run cordova:deploy:ios
+	npm run cordova:add:ios
+	rpm run cordova::build:release
 
   # Backup the ios build to S3
 	aws s3 sync cordova/platforms/ios/build s3://kapp-builds/$TRAVIS_BUILD_NUMBER/ios
