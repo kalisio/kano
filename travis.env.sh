@@ -63,8 +63,8 @@ echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
 # Fastlane environement
 echo "APPLE_ID"=$APPLE_ID >> .env
 echo "APPLE_TEAM_ID"=$APPLE_TEAM_ID >> .env
+echo "APPLE_KEY_PASSWORD"=$APPLE_KEY_PASSWORD >> .env
 echo "GITHUB_TOKEN"=$GITHUB_TOKEN >> .env
-echo "MATCH_PASSWORD"=$MATCH_PASSWORD >> .env
 # Backend test environment
 echo "GMAIL_API_USER=$GITHUB_PASSWORD" >> .env
 echo "GMAIL_API_CLIENT_EMAIL=$GITHUB_PASSWORD" >> .env
