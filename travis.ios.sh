@@ -34,7 +34,7 @@ else
 	cp kApp-secrets/ios/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/.
 
 	# Build and deploy the app
-	npm run cordova:add:ios
+	npm run cordova::add:ios
 	rpm run cordova::build:release
 
   # Backup the ios build to S3
