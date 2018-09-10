@@ -20,7 +20,9 @@ else
 	security create-keychain -p $KEY_CHAIN_PASSWORD $KEY_CHAIN
 	security unlock-keychain -p $KEY_CHAIN_PASSWORD $KEY_CHAIN
 	security default-keychain -s $KEY_CHAIN
-  security -v set-keychain-settings -lut 86400 $KEY_CHAIN
+  security set-keychain-settings -t 3600 -u $KEY_CHAIN
+
+	security list-keychains -s $KEY_CHAIN
 
 	# Add certificates to keychain and allow codesign to access them
 	security import kApp-secrets/ios/AppleWWDRCA.cer -k $KEY_CHAIN -T /usr/bin/codesign
