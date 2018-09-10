@@ -112,6 +112,7 @@ jobs:
   - stage: IOS
     language: objective-c
     osx_image: xcode10
+    sudo: false
     before_install:
     - nvm install 8
     install:
