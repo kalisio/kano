@@ -13,20 +13,37 @@ module.exports = {
     timeline: false
   },
   baseLayers: [{
-    name: 'Kalisio  Sentinel 2 Cloudless',
+    name: 'Kalisio Sentinel 2 Cloudless',
     tooltip: 'Sentinel-2 cloudless.\nby EOX IT Services GmbH https://s2maps.eu',
     iconUrl: 'Widgets/Images/ImageryProviders/mapboxSatellite.png',
     type: 'OpenStreetMap',
     url: 'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR',
     fileExtension: 'jpeg'
   }, {
-    name: 'Kalisio Open\u00adStreet\u00adMap',
+    name: 'Kalisio Open\u00adStreet\u00adMap - Satellite (dark)',
     tooltip: 'OpenStreetMap (OSM) data.\nBy http://www.kalisio.com',
     iconUrl: 'Widgets/Images/ImageryProviders/openStreetMap.png',
     type: 'OpenStreetMap',
-    url: 'http://tileservergl.xwind-ai.com/styles/osm-terrain',
+    url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-satellite-dark/GLOBAL_WEBMERCATOR',
+  }, {
+    name: 'Kalisio Open\u00adStreet\u00adMap (bright)',
+    tooltip: 'OpenStreetMap (OSM) data.\nBy http://www.kalisio.com',
+    iconUrl: 'Widgets/Images/ImageryProviders/openStreetMap.png',
+    type: 'OpenStreetMap',
+    url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR',
+  }, {
+    name: 'Kalisio Open\u00adStreet\u00adMap (dark)',
+    tooltip: 'OpenStreetMap (OSM) data.\nBy http://www.kalisio.com',
+    iconUrl: 'Widgets/Images/ImageryProviders/openStreetMap.png',
+    type: 'OpenStreetMap',
+    url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR',
   }],
   terrainLayers: [{
+    name : 'WGS84 Ellipsoid',
+    iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
+    tooltip : 'WGS84 standard ellipsoid',
+    type: 'Ellipsoid'
+  }, {
     name : 'Kalisio Terrain',
     iconUrl : 'Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
     tooltip : 'High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com',
@@ -34,12 +51,6 @@ module.exports = {
     url : 'http://cesiumterrainserver.kalisio.xyz/tilesets/md15-tiles',
     requestWaterMask : true,
     requestVertexNormals : true
-  },
-  {
-    name : 'WGS84 Ellipsoid',
-    iconUrl: 'Widgets/Images/TerrainProviders/Ellipsoid.png',
-    tooltip : 'WGS84 standard ellipsoid',
-    type: 'Ellipsoid'
   }],
   overlayLayers: [
     {

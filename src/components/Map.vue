@@ -11,6 +11,8 @@ import _ from 'lodash'
 import L from 'leaflet'
 import moment from 'moment'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
+import feathers from '@feathersjs/client'
+import weacast from 'weacast-client'
 import { utils as kCoreUtils } from 'kCore/client'
 import { mixins as kMapMixins } from 'kMap/client'
 
@@ -30,11 +32,12 @@ export default {
     kMapMixins.map.baseLayers,
     kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
-    kMapMixins.map.fileLayers,
+    //kMapMixins.map.fileLayers,
     kMapMixins.map.fullscreen,
     kMapMixins.map.timedimension,
     kMapMixins.map.scalebar,
-    kMapMixins.map.measure
+    kMapMixins.map.measure,
+    kMapMixins.map.forecastLayers
   ],
   computed: {
     mapStyle () {
@@ -134,6 +137,27 @@ export default {
         [this.bounds.getSouth(), this.bounds.getWest()],
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
+    },
+    async setupWeacast () {
+      this.weacastApi = feathers()
+      this.weacastApi.configure(feathers.rest('http://localhost:8082/api').fetch(window.fetch.bind(window)))
+      this.weacastApi.configure(feathers.authentication({
+        storage: window.localStorage,
+        storageKey: 'weacast-key'
+      }))
+      try {
+        await this.weacastApi.authenticate({
+          strategy: 'local',
+          email: 'weacast@weacast.xyz',
+          password: 'weacast'
+        })
+        console.log('Connected to weacast API')
+        await this.setupForecastModels()
+        this.setupForecastLayers()
+      }
+      catch (error) {
+        console.log('Cannot initialize weacast API', error)
+      }
     }
   },
   created () {
@@ -142,11 +166,13 @@ export default {
   },
   mounted () {
     this.setupMap()
+    this.setupWeacast()
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
       this.map.fitBounds(this.$store.get('bounds'))
     }
     // Setup times
+    /*
     const upperLimit = 24 * 3600
     const interval = 3 * 3600
     // Compute nearest forecast T0
@@ -159,6 +185,7 @@ export default {
       times.push(startTime.clone().add({ seconds: timeOffset }))
     }
     this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
+    */
     //this.addCollectionLayer('Actors', { spiderfyDistanceMultiplier: 5.0 })
     // Setup event connections
     // this.$on('popupopen', this.onPopupOpen)
