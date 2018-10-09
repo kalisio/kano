@@ -1,5 +1,10 @@
 #!/bin/bash
+export APP=kapp
+export HOST=kapp
+export PORT=8081
+export DOMAIN=kalisio.xyz
 export VERSION=$(node -p -e "require('./package.json').version")
+
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
 	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
