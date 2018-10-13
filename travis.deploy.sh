@@ -25,6 +25,6 @@ else
 
 	# Deploy the stack
 	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh"
-	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove-app.sh; k-worker-foreach \"docker image prune -a\"; ./deploy-app.sh"
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove-app.sh; k-worker-foreach \"yes | docker image prune -a\"; ./deploy-app.sh"
 fi
 
