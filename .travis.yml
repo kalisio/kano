@@ -112,7 +112,7 @@ jobs:
   - stage: IOS
     language: objective-c
     osx_image: xcode8.3
-    sudo: false
+    sudo: required
     before_install:
     - nvm install 8
     install:
