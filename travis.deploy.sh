@@ -19,14 +19,12 @@ else
 	scp deploy/mongodb.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.yml
 	scp deploy/mongodb.swarm.yml ${SSH_USER}@${SSH_REMOTE}:~/${APP}/mongodb.swarm.yml
 
-  # Deploy configs
-  scp -rp deploy/configs ${SSH_USER}@${SSH_REMOTE}:~/${APP}/configs
-
 	# Deploy utilities
 	scp deploy/deploy-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 	scp deploy/remove-app.sh ${SSH_USER}@${SSH_REMOTE}:~/${APP}
 
 	# Deploy the stack
+	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh"
 	ssh ${SSH_USER}@${SSH_REMOTE} "cd ${APP}; ./remove-app.sh; ./deploy-app.sh"
 fi
 
