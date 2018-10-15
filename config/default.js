@@ -4,20 +4,25 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
-let domain
+let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kapp.dev.kalisio.xyz'
+  weacastApi = `${domain}/api`
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kapp.test.kalisio.xyz'
+  weacastApi = `${domain}/api`
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kapp.kalisio.xyz'
+  weacastApi = `${domain}/api`
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:' + clientPort
+    domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
+    weacastApi = 'http://localhost:' + (clientPort+2) + '/api' // Weacast app client/server port = 8082/8083
   } else {
-    domain = 'http://localhost:' + serverPort
+    domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
+    weacastApi = 'http://localhost:' + (serverPort+2) + '/api' // Weacast app client/server port = 8083
   }
 }
 
@@ -80,6 +85,14 @@ module.exports = {
       { }, // separator
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
+  },
+  weacast: {
+    apiUrl: weacastApi,
+    authentication: {
+      strategy: 'local',
+      email: process.env.WEACAST_USER || 'weacast@weacast.xyz',
+      password: process.env.WEACAST_PASSWORD || 'weacast'
+    }
   },
   map: require('./map'),
   globe: require('./globe'),

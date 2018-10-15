@@ -187,15 +187,6 @@ module.exports = {
       }
     },
     {
-      type: 'ColorLayer',
-      name: 'Gust (pixel interpolated)',
-      options: {
-        elements: ['gust'],
-        attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
-        visible: false
-      }
-    },
-    {
       type: 'ScalarLayer',
       name: 'Gust (mesh interpolated)',
       options: {

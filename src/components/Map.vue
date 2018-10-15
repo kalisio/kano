@@ -9,6 +9,7 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import logger from 'loglevel'
 import moment from 'moment'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
 import feathers from '@feathersjs/client'
@@ -92,7 +93,7 @@ export default {
     getFeatureTooltip (feature, layer) {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
-        let tooltip = L.tooltip({ permanent: true }, layer)
+        let tooltip = L.tooltip({ permanent: false }, layer)
         let content
         switch (level) {
           case 2:
@@ -139,24 +140,20 @@ export default {
       ])
     },
     async setupWeacast () {
+      const config = this.$config('weacast')
       this.weacastApi = feathers()
-      this.weacastApi.configure(feathers.rest('http://demo.weacast.xyz/api').fetch(window.fetch.bind(window)))
+      this.weacastApi.configure(feathers.rest(config.apiUrl).fetch(window.fetch.bind(window)))
       this.weacastApi.configure(feathers.authentication({
         storage: window.localStorage,
         storageKey: 'weacast-key'
       }))
       try {
-        await this.weacastApi.authenticate({
-          strategy: 'local',
-          email: 'weacast@weacast.xyz',
-          password: 'weacast'
-        })
-        console.log('Connected to weacast API')
+        await this.weacastApi.authenticate(config.authentication)
         await this.setupForecastModels()
         this.setupForecastLayers()
       }
       catch (error) {
-        console.log('Cannot initialize weacast API', error)
+        logger.error('Cannot initialize weacast API', error)
       }
     }
   },
@@ -171,22 +168,6 @@ export default {
     if (this.$store.has('bounds')) {
       this.map.fitBounds(this.$store.get('bounds'))
     }
-    // Setup times
-    /*
-    const upperLimit = 24 * 3600
-    const interval = 3 * 3600
-    // Compute nearest forecast T0
-    const now = moment.utc(now)
-    let offsetDateTime = now.clone().add({ seconds: 0.5 * interval })
-    const startTime = now.clone().hours(roundHours(offsetDateTime.hours(), interval / 3600)).minutes(0).seconds(0).milliseconds(0)
-    let times = []
-    this.setCurrentTime(startTime)
-    for (let timeOffset = 0; timeOffset <= upperLimit; timeOffset += interval) {
-      times.push(startTime.clone().add({ seconds: timeOffset }))
-    }
-    this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
-    */
-    //this.addCollectionLayer('Actors', { spiderfyDistanceMultiplier: 5.0 })
     // Setup event connections
     // this.$on('popupopen', this.onPopupOpen)
     this.$on('click', this.onFeatureClicked)
