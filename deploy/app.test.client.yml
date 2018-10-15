@@ -15,7 +15,8 @@ services:
       - GITHUB_USER
       - GITHUB_PASSWORD
       - NODE_ENV=production
-      - APP_URL=172.17.0.1:${PORT}
+      - DB_URL=mongodb://mongodb:27017/${APP}
+      - APP_URL=app:${PORT}
     volumes:
       - ../test:/opt/testcafe/${APP}
     command: firefox /opt/testcafe/${APP}/*.test.js -S -s screenshots

@@ -10,7 +10,7 @@
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
-import { mixins as kMapMixins } from 'kMap/client'
+import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
 const { offset } = dom
 

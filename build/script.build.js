@@ -38,11 +38,11 @@ shell.cp('-R', 'src/statics', targetPath)
 
 // Copy files from linked node modules otherwise they are not correctly transpiled by babel
 // see https://github.com/kalisio/kdk/issues/28 for details
-copyModule('kCore')
+copyModule('@kalisio/kdk-core')
 copyModule('kMap')
 
 function finalize () {
-  deleteModule('kCore')
+  deleteModule('@kalisio/kdk-core')
   deleteModule('kMap')
 
   console.log((

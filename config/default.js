@@ -34,7 +34,7 @@ module.exports = {
   apiPath: API_PREFIX,
   apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  appName: 'Kargo',
+  appName: 'Kano',
   appLogo: 'kalisio-logo.png',
   publisher: 'Kalisio',
   logs: {

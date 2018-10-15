@@ -1,7 +1,7 @@
 import path from 'path'
 import _ from 'lodash'
 import logger from 'winston'
-import kCore from 'kCore'
+import kCore from '@kalisio/kdk-core'
 import packageInfo from '../../package.json'
 
 module.exports = async function () {

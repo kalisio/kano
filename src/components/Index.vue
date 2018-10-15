@@ -6,7 +6,7 @@
 
 <script>
 import { Toast, Events, Loading, Alert } from 'quasar'
-import { mixins, beforeGuard } from 'kCore/client'
+import { mixins, beforeGuard } from '@kalisio/kdk-core/client'
 import config from 'config'
 import utils from '../utils'
 

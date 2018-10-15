@@ -13,7 +13,7 @@
 // FIXME: for now we inject it in the index.html file
 //import 'three'
 //import Panolens from '../panolens.js'
-import { mixins as kCoreMixins } from 'kCore/client'
+import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 
 export default {
   name: 'k-panorama',

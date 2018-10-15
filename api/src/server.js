@@ -1,5 +1,5 @@
 import logger from 'winston'
-import { kalisio } from 'kCore'
+import { kalisio } from '@kalisio/kdk-core'
 
 const fs = require('fs-extra')
 const https = require('https')

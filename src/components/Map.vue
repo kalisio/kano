@@ -13,8 +13,8 @@ import moment from 'moment'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
 import feathers from '@feathersjs/client'
 import weacast from 'weacast-client'
-import { utils as kCoreUtils } from 'kCore/client'
-import { mixins as kMapMixins } from 'kMap/client'
+import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
+import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
 const { offset } = dom
 function roundHours (hours, interval) {
@@ -140,7 +140,7 @@ export default {
     },
     async setupWeacast () {
       this.weacastApi = feathers()
-      this.weacastApi.configure(feathers.rest('http://localhost:8082/api').fetch(window.fetch.bind(window)))
+      this.weacastApi.configure(feathers.rest('http://demo.weacast.xyz/api').fetch(window.fetch.bind(window)))
       this.weacastApi.configure(feathers.authentication({
         storage: window.localStorage,
         storageKey: 'weacast-key'

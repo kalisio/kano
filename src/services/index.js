@@ -1,5 +1,5 @@
 import logger from 'loglevel'
-import kCore from 'kCore/client'
+import kCore from '@kalisio/kdk-core/client'
 
 export default function () {
   const api = this
