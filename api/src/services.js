@@ -2,6 +2,7 @@ import path from 'path'
 import _ from 'lodash'
 import logger from 'winston'
 import kCore from '@kalisio/kdk-core'
+import kMap from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
 
 module.exports = async function () {
@@ -21,6 +22,7 @@ module.exports = async function () {
       res.json(response)
     })
     await app.configure(kCore)
+    await app.configure(kMap)
   } catch (error) {
     logger.error(error.message)
   }
