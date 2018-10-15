@@ -11,7 +11,7 @@ import router from './router'
 import appHooks from './main.hooks'
 import services from './services'
 import { configureI18n } from './i18n'
-import { kalisio, beforeGuard, authenticationGuard } from 'kCore/client'
+import { kalisio, beforeGuard, authenticationGuard } from '@kalisio/kdk-core/client'
 import plugin from './vue-kdk'
 
 import 'quasar-extras/material-icons'

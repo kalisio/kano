@@ -14,30 +14,21 @@ then
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
-	if [[ -z "$TRAVIS_TAG" ]]
-	then
-		export DEBUG=
-		export FLAVOR=test
-		export SUBDOMAIN=test.$DOMAIN
-		export VERSION_TAG=$VERSION-test
-	else
-		export DEBUG=
-		export FLAVOR=prod
-		export SUBDOMAIN=$DOMAIN
-		export VERSION_TAG=$VERSION
-	fi
+	export DEBUG=
+	export FLAVOR=test
+	export SUBDOMAIN=test.$DOMAIN
+	export VERSION_TAG=$VERSION-test
 fi
+if [[ -n "$TRAVIS_TAG" ]]
+then
+	export DEBUG=
+	export FLAVOR=prod
+	export SUBDOMAIN=$DOMAIN
+	export VERSION_TAG=$VERSION
+fi
+
 export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
 export NODE_APP_INSTANCE=$FLAVOR
-# These ones are just for travis to SSH to the target machine
-# Extract value from the right env variable according to flavor
-SSH_USER_ENV_VAR_NAME=SSH_USER_$FLAVOR
-export SSH_USER=${!SSH_USER_ENV_VAR_NAME}
-SSH_REMOTE_ENV_VAR_NAME=SSH_REMOTE_$FLAVOR
-export SSH_REMOTE=${!SSH_REMOTE_ENV_VAR_NAME}
-# Same for the DB_URL
-DB_URL_ENV_VAR_NAME=DB_URL_$FLAVOR
-export DB_URL=${!DB_URL_ENV_VAR_NAME}
 
 echo "APP=$APP" > .env
 echo "COMPOSE_PROJECT_NAME=$APP" >> .env 
