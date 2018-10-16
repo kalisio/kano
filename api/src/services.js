@@ -1,4 +1,3 @@
-import path from 'path'
 import _ from 'lodash'
 import logger from 'winston'
 import kCore from '@kalisio/kdk-core'
@@ -12,7 +11,7 @@ module.exports = async function () {
   try {
     app.use(app.get('apiPath') + '/capabilities', (req, res, next) => {
       let response = {
-        name: 'kapp',
+        name: 'kano',
         domain: app.get('domain'),
         version: packageInfo.version
       }
