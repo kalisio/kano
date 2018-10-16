@@ -2,18 +2,16 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: S3xDhrrLgQ1DSBgc42M9wkJzmqYlv/FSeKhcOxDVspy8s/N2N4z4JCGpuX3RYIPEHNIaao9gTvQJ5Ddoq5hCppXncyKsmH4NvDVQ1JdjTRk5KXp6SC0mJvJ7Vh4pKhcpJu87sh9dZs9Io6VqqG/bGpcjt9SFgVz/n24DPKgeREa351GorhncFmnG3ZtItHGe5a7n5V9sM3g5uLUf0ELPew6iPvkyx5xNvyMfMrgcJDbXKHQR6S5xvp7Pw/GkXGVR7d1nQElKMsDOlEiui+l2ctRFo0ZnNGoVzvLGKygkw717Q6k215Gq7x/eZI5//Kidwxra0ks7NYhYhzayRiy+pJ2ZYH3N8c5KL6xbVzyNn8LpP733Ra48oJZK+yjk77TAIkwvBsoH0p1Hc1fi12fdgrhACHa48zy/ILMcnGILfX5BOjVwpPy2dUbiKQHmClrq4Fe+t9vK11wqEjJr/bm2WfmbqEudWn3Kb1Vpk5ZohNZuhXcqJ/PdT9ns9ac8jNHxP3mAiCulOQbRNFq95ZjYQuMscKzlw18WUNyfi/5hsMCKgi78Kbg5Bzia1SieF0w+uo3qHDNIEPiuQevrSc0zGLUaPn+G4O08tx75Gxjg23/leBvn36qv2rXG1+RjL7saj00S2sTSKEB9rXWf8unE19Rh2gXDg4Asxyr63nOLBBI=
+      secure: 2wRukOpqNxWDcrPyntSXFEP/mMXIfvGKL2rAJSKsaUzEppABWxf3zoa66mdP5uC1MI6yndmirSr+0OR0KDxpOp0YytxydziSBtZYJTFKiyqsK8tzben47nP/lOrYJn5+3Vc4EIyVyAd1Jr+3M2g2wuG4/4yanPCJmrkBLDq/T7BsbHUgAU3IIuUQoFDh6BJ+HtEgprRVt1YSCDLMS9MEenvprRX3SZ88zeJZctxUe/10WhqidszLEM3r0vCXutYNiHACnaJjE/CBAL/36KMkucpjekKg0CBr3avvqPZDy8L5p87/HIPJGYHDw17TLwNG0IhlZuISSSGeL0MzY0ChTgmtZDRWWZOAtaSg5CM3SP3VQffgPv/JEyPMxtDBnWZALrt/J8iK8CqmmSncnkROi2EiJ3c5lA2U786PAwHvLCrG/CHTv9MvSmzualUxY/+a9DwqAFwBRnrBWyPWOv4/BqpZepO3LDL3GUpAC/r2w+vTYZQw/SRmR6yT4dAgHXVqvINdVhWvJnOiX7s3jaQe6DCzMSb1rTJhYyXwILnkpgVf7AsyJXQrr3rAz/KKaYCNY43/Q0bNRJmmN2QTD+kICNmQMJiWogeiJ2NfylFzU0fK66BE7LYV0GJUHB2G9SzEHmls5Ej1A86zA34yyWagQEg7AxSLMOwFfckGEh0d9JU=
     on_success: always
     on_failure: always
-
+    
 stages:
 - name: BUILD
 - name: TEST
 - name: DEPLOY
-
 jobs:
   include:
-
   - stage: BUILD
     language: node_js
     node_js:
@@ -33,7 +31,6 @@ jobs:
       upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
       on:
         all_branches: true
-
   - stage: TEST
     language: node_js
     node_js:
@@ -50,25 +47,24 @@ jobs:
     after_script:
     - codeclimate-test-reporter < server-coverage/lcov.info
     deploy:
-      - provider: s3
-        skip_cleanup: true
-        access_key_id: "$S3_ACCESS_KEY"
-        secret_access_key: "$S3_SECRET_ACCESS_KEY"
-        bucket: kano-builds
-        local_dir: server-coverage
-        upload_dir: "$TRAVIS_BUILD_NUMBER/server-tests/coverage"
-        on:
-          all_branches: true
-      - provider: s3
-        skip_cleanup: true
-        access_key_id: "$S3_ACCESS_KEY"
-        secret_access_key: "$S3_SECRET_ACCESS_KEY"
-        bucket: kano-builds
-        local_dir: client-screenshots
-        upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
-        on:
-          all_branches: true
-
+    - provider: s3
+      skip_cleanup: true
+      access_key_id: "$S3_ACCESS_KEY"
+      secret_access_key: "$S3_SECRET_ACCESS_KEY"
+      bucket: kano-builds
+      local_dir: server-coverage
+      upload_dir: "$TRAVIS_BUILD_NUMBER/server-tests/coverage"
+      on:
+        all_branches: true
+    - provider: s3
+      skip_cleanup: true
+      access_key_id: "$S3_ACCESS_KEY"
+      secret_access_key: "$S3_SECRET_ACCESS_KEY"
+      bucket: kano-builds
+      local_dir: client-screenshots
+      upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
+      on:
+        all_branches: true
   - stage: DEPLOY
     language: node_js
     node_js:
@@ -77,7 +73,8 @@ jobs:
     - docker
     install: true
     script:
-    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
+      -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     deploy:
       provider: script
@@ -85,4 +82,3 @@ jobs:
       script: bash travis.deploy.sh
       on:
         all_branches: true
-

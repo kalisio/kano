@@ -10,10 +10,6 @@ services:
       - app
       - mongodb
     environment:
-      - GOOGLE_USER
-      - GOOGLE_PASSWORD
-      - GITHUB_USER
-      - GITHUB_PASSWORD
       - NODE_ENV=production
       - DB_URL=mongodb://mongodb:27017/${APP}
       - APP_URL=app:${PORT}

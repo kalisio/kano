@@ -8,13 +8,13 @@ let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
-  weacastApi = `${domain}/api`
+  weacastApi = `http://demo.weacast.xyz/api`
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
-  weacastApi = `${domain}/api`
+  weacastApi = `http://demo.weacast.xyz/api`
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
-  weacastApi = `${domain}/api`
+  weacastApi = `http://demo.weacast.xyz/api`
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
