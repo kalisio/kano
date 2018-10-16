@@ -188,7 +188,7 @@ module.exports = {
     },
     {
       type: 'ScalarLayer',
-      name: 'Gust (mesh interpolated)',
+      name: 'Gust (interpolated)',
       options: {
         elements: ['gust'],
         attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -204,16 +204,6 @@ module.exports = {
         attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
         visible: false,
         mesh: false
-      }
-    },
-    {
-      type: 'HeatLayer',
-      name: 'Gust (heat map)',
-      options: {
-        elements: ['gust'],
-        attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
-        visible: false,
-        radius: 1.8
       }
     }
   ]

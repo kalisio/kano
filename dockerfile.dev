@@ -15,7 +15,6 @@ COPY . /opt/${APP}
 WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
 RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link && cd ..
-RUN git clone https://github.com/weacast/weacast-client.git -b master --single-branch && cd weacast-client && yarn install && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
 
@@ -27,6 +26,8 @@ RUN npm run build
 WORKDIR /opt/${APP}
 
 RUN yarn install
+RUN git clone https://github.com/weacast/weacast-client.git -b master --single-branch && cd weacast-client && yarn install && yarn link && cd ..
+RUN yarn link weacast-client
 RUN npm run build
 
 EXPOSE 8081
