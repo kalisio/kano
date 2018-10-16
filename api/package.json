@@ -1,15 +1,15 @@
 {
-  "name": "kapp-api",
-  "description": "Kalisio Web Services",
-  "version": "0.2.0",
-  "homepage": "https://github.com/kalisio/kapp",
+  "name": "kano-api",
+  "description": "Kalisio Kano Application Web Services",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kalisio/kano",
   "keywords": [
     "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kalisio/kapp.git"
+    "url": "git://github.com/kalisio/kano.git"
   },
   "author": {
     "name": "Kalisio contributors",
@@ -17,7 +17,7 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kalisio/kapp/issues"
+    "url": "https://github.com/kalisio/kano/issues"
   },
   "main": "main.js",
   "scripts": {

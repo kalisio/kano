@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kalisio.kapp" version="0.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>kApp</name>
-    <description>Kalisio App Template</description>
+<widget id="com.kalisio.kano" version="0.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>kano</name>
+    <description>Kalisio Kano Application</description>
     <icon src="model/icon.png" />
     <author email="support@kalisio.com" href="http://www.kalisio.com">Kalisio</author>
     <content src="index.html" />

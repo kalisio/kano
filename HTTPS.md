@@ -23,4 +23,4 @@ Certificate information:
 * A challenge password []:
 * An optional company name []:
 
-The kApp follows [Feathers guide to enable HTTPS](https://docs.feathersjs.com/api/express.html#https) and also similarly manages HTTPS on the client side when using Webpack in development.
+Kano follows [Feathers guide to enable HTTPS](https://docs.feathersjs.com/api/express.html#https) and also similarly manages HTTPS on the client side when using Webpack in development.

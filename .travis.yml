@@ -10,8 +10,6 @@ stages:
 - name: BUILD
 - name: TEST
 - name: DEPLOY
-- name: ANDROID
-- name: IOS
 
 jobs:
   include:
@@ -30,7 +28,7 @@ jobs:
       provider: s3
       access_key_id: "$S3_ACCESS_KEY"
       secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kapp-builds
+      bucket: kano-builds
       local_dir: dist
       upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
       on:
@@ -44,7 +42,7 @@ jobs:
     - docker
     addons:
       code_climate:
-        repo_token: 19d3ef0c5e4541c913514b7a3a3825829e5e354f08dc39fd2c03b7898958d597
+        repo_token: 30d4aec026718918864f0293f71801bef5922e57200e1901e174e1bde1562fcc
     install:
     - npm install -g codeclimate-test-reporter
     script:
@@ -56,7 +54,7 @@ jobs:
         skip_cleanup: true
         access_key_id: "$S3_ACCESS_KEY"
         secret_access_key: "$S3_SECRET_ACCESS_KEY"
-        bucket: aktnmap-builds
+        bucket: kano-builds
         local_dir: server-coverage
         upload_dir: "$TRAVIS_BUILD_NUMBER/server-tests/coverage"
         on:
@@ -65,7 +63,7 @@ jobs:
         skip_cleanup: true
         access_key_id: "$S3_ACCESS_KEY"
         secret_access_key: "$S3_SECRET_ACCESS_KEY"
-        bucket: aktnmap-builds
+        bucket: kano-builds
         local_dir: client-screenshots
         upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
         on:
@@ -88,37 +86,3 @@ jobs:
       on:
         all_branches: true
 
-  - stage: ANDROID
-    language: android
-    android:
-      components:
-      - tools
-      - platform-tools
-      - tools
-      - build-tools-26.0.2
-      - android-26
-      - extra
-    before_install:
-    - nvm install 8
-    - yes | sdkmanager "platforms;android-26"
-    install:
-    - pip install --user awscli
-    - npm install -g cordova
-    - npm install -g cross-env
-    - gem install fastlane
-    script:
-    - bash travis.android.sh
-
-  - stage: IOS
-    language: objective-c
-    osx_image: xcode8.3
-    sudo: required
-    before_install:
-    - nvm install 8
-    install:
-    - brew install awscli
-    - npm install -g cordova
-    - npm install -g cross-env
-    - gem install fastlane        
-    script:
-    - bash travis.ios.sh

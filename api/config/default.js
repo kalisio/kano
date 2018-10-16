@@ -9,11 +9,11 @@ const API_PREFIX = '/api'
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kapp.dev.kalisio.xyz'
+  domain = 'https://kano.dev.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kapp.test.kalisio.xyz'
+  domain = 'https://kano.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kapp.kalisio.xyz'
+  domain = 'https://kano.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -75,23 +75,6 @@ module.exports = {
         name: 'Kalisio'
       }
     ],
-    github: {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: domain + '/auth/github/callback',
-      successRedirect: domain + '/',
-      failureRedirect: domain + '/#/login' +
-        '?error_message=An error occured while authenticating with GitHub, check you correctly authorized the application and have a valid public email in your profile'
-    },
-    google: {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: domain + '/auth/google/callback',
-      successRedirect: domain + '/',
-      failureRedirect: domain + '/#/login' +
-        '?error_message=An error occured while authenticating with Google, check you correctly authorized the application and have a valid public email in your profile',
-      scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
-    },
     // Required for OAuth2 to work correctly
     cookie: {
       enabled: true,
@@ -112,7 +95,7 @@ module.exports = {
     },
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kapp-',
+      filename: 'kano-',
       datePattern: 'yyyy-MM-dd.log',
       maxDays: 30
       /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
@@ -124,12 +107,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kapp' : 'mongodb://127.0.0.1:27017/kapp')
-  },
-  storage: {
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-    bucket: process.env.S3_BUCKET
+    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano')
   }
 }
 

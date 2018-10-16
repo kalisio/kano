@@ -14,11 +14,13 @@ COPY . /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b test --single-branch && cd kCore && yarn install && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kMap.git -b test --single-branch && cd kMap && yarn install && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
 
 RUN yarn install
 RUN yarn link @kalisio/kdk-core
+RUN yarn link @kalisio/kdk-map
 RUN npm run build
 
 WORKDIR /opt/${APP}
