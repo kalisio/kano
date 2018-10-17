@@ -61,7 +61,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: projectRoot,
-        exclude: /node_modules(\/|\\)(?!(@feathersjs|debug))/
+        exclude: /node_modules/
       },
       {
         test: /\.glsl$/,
