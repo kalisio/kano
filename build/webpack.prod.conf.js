@@ -13,7 +13,8 @@ var
 let plugins = [
   // extract css into its own file
   new ExtractTextPlugin({
-    filename: '[name].[contenthash].css'
+    filename: '[name].[contenthash].css',
+    allChunks: true
   }),
   new HtmlWebpackPlugin({
     filename: path.resolve(__dirname, '../dist/index.html'),
