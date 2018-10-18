@@ -12,7 +12,7 @@
 
 For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
-* [kApp development build](https://kano.dev.kalisio.xyz/)
+* [Kano development build](https://kano.dev.kalisio.xyz/)
 
 This application is based on the [Kalisio Development Kit](https://kalisio.gitbooks.io/kalisio/).
 
