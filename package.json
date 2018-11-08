@@ -73,7 +73,6 @@
     ]
   },
   "dependencies": {
-    "@feathersjs/client": "^3.5.4",
     "@panter/vue-i18next": "^0.9.1",
     "ajv": "^5.2.2",
     "ajv-i18n": "2",

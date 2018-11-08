@@ -12,8 +12,8 @@ import L from 'leaflet'
 import logger from 'loglevel'
 import moment from 'moment'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
-import feathers from '@feathersjs/client'
-import weacast from 'weacast-client'
+import { weacast } from 'weacast-core/client'
+import 'weacast-leaflet'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
@@ -141,12 +141,7 @@ export default {
     },
     async setupWeacast () {
       const config = this.$config('weacast')
-      this.weacastApi = feathers()
-      this.weacastApi.configure(feathers.rest(config.apiUrl).fetch(window.fetch.bind(window)))
-      this.weacastApi.configure(feathers.authentication({
-        storage: window.localStorage,
-        storageKey: 'weacast-key'
-      }))
+      this.weacastApi = weacast(this.$config('weacast'))
       try {
         await this.weacastApi.authenticate(config.authentication)
         await this.setupForecastModels()
