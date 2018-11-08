@@ -10,7 +10,7 @@ services:
         constraints:
          - node.role == worker
       labels:
-        - "traefik.backend=app"
+        - "traefik.backend=${APP}"
         - "traefik.docker.network=${DOCKER_NETWORK}"
         - "traefik.enable=true"
         - "traefik.port=8081"
