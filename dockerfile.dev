@@ -14,7 +14,7 @@ COPY . /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
 RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
-RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link @kalisio/kdk-core && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
 
