@@ -74,6 +74,27 @@
       "type": "OpenStreetMap",
       "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR"
     }
+  },
+  {
+    "name" : "WGS84 Standard Ellipsoid",
+    "iconUrl": "Widgets/Images/TerrainProviders/Ellipsoid.png",
+    "attribution" : "",
+    "type": "TerrainLayer",
+    "cesium": {
+      "type": "Ellipsoid"
+    }
+  }, 
+  {
+    "name" : "Kalisio Terrain",
+    "iconUrl" : "Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+    "attribution" : "High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com",
+    "type": "TerrainLayer",
+    "cesium": {
+      "type": "Cesium",
+      "url" : "http://cesiumterrainserver.kalisio.xyz/tilesets/md15-tiles",
+      "requestWaterMask" : "true",
+      "requestVertexNormals" : "true"
+    }
   }
 ]
 

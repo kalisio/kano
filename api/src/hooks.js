@@ -2,11 +2,13 @@
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk-core'
+import { permissions as mapPermissions } from '@kalisio/kdk-map'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
+corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
 
 module.exports = {
   before: {

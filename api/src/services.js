@@ -1,7 +1,9 @@
 import _ from 'lodash'
+import fs from 'fs-extra'
 import logger from 'winston'
 import kCore from '@kalisio/kdk-core'
-import kMap from '@kalisio/kdk-map'
+//import kMap from '@kalisio/kdk-map'
+import kMap, { createLayersService } from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
 
 module.exports = async function () {
@@ -22,10 +24,13 @@ module.exports = async function () {
     })
     await app.configure(kCore)
     await app.configure(kMap)
+    // Create a global layers service 
+    createLayersService.call(app)
   } catch (error) {
     logger.error(error.message)
   }
 
+  // 
   let usersService = app.getService('users')
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
@@ -34,11 +39,23 @@ module.exports = async function () {
     const users = await usersService.find({ paginate: false })
     for (let i = 0; i < defaultUsers.length; i++) {
       const defaultUser = defaultUsers[i]
-      let createdUser = _.find(users, user => user.email === defaultUser.email)
+      let createdUser = _.find(users, { email: defaultUser.email })
       if (!createdUser) {
         logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
         await usersService.create(defaultUser)
       }
+    }
+  }
+
+  let layersService = app.getService('layers')
+  let defaultLayers = await fs.readJson('./config/layers.json')
+  const layers = await layersService.find({paginate: false})
+  for (let i = 0; i < defaultLayers.length; i++) {
+    const defaultLayer = defaultLayers[i]
+    let createdLayer = _.find(layers, { name: defaultLayer.name })
+    if (!createdLayer) {
+      logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
+      await layersService.create(defaultLayer)
     }
   }
 }
