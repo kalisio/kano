@@ -15,6 +15,7 @@ import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import 'weacast-leaflet'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
+import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
 const { offset } = dom
@@ -23,12 +24,13 @@ function roundHours (hours, interval) {
 }
 
 export default {
-  name: 'k-map',
+  name: 'k-map-activity',
   components: {
     QWindowResizeObservable,
     QResizeObservable
   },
   mixins: [
+    kCoreMixins.baseActivity,
     kMapMixins.map.baseMap,
     kMapMixins.map.baseLayers,
     kMapMixins.map.overlayLayers,
@@ -50,6 +52,13 @@ export default {
     }
   },
   methods: {
+    refreshActivity () {
+      this.clearActivity()
+      // Title
+      this.setTitle('Kano')
+      // RightPanel
+      this.setRightPanelContent('KMapPanel')
+    },
     getPointMarker (feature, latlng) {
       // ADS-B
       if (_.has(feature, 'properties.icao')) {

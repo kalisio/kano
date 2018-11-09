@@ -10,17 +10,19 @@
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
 import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
+import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
 const { offset } = dom
 
 export default {
-  name: 'k-globe',
+  name: 'k-globe-activity',
   components: {
     QWindowResizeObservable,
     QResizeObservable
   },
   mixins: [
+    kCoreMixins.baseActivity,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.baseLayers,
     kMapMixins.globe.overlayLayers,
@@ -37,6 +39,13 @@ export default {
     }
   },
   methods: {
+    refreshActivity () {
+      this.clearActivity()
+      // Title
+      this.setTitle('Kano')
+      // RightPanel
+      this.setRightPanelContent('KMapPanel')
+    },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()

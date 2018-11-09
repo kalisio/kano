@@ -27,11 +27,11 @@ module.exports = {
           },
           'map': {
             path: 'map',
-            component: 'Map'
+            component: 'MapActivity'
           },
           'globe': {
             path: 'globe',
-            component: 'Globe'
+            component: 'GlobeActivity'
           }
         }
       }
