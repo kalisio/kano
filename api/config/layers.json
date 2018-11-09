@@ -1,0 +1,79 @@
+[ 
+  {
+    "name": "Kalisio OpenStreetMap (bright rendering)",
+    "iconUrl": "",
+    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR"
+    }
+  },
+  {
+    "name": "Kalisio OpenStreetMap (dark rendering)",
+    "iconUrl": "",
+    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR"
+    }
+  },
+  {
+    "name": "Kalisio OpenStreetMap & Terrain (bright rendering)",
+    "iconUrl": "",
+    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR"
+    }
+  },
+  {
+    "name": "Kalisio OpenStreetMap & Terrain (dark rendering)",
+    "iconUrl": "",
+    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR"
+    }
+  }
+]
+
