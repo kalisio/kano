@@ -86,13 +86,13 @@ module.exports = {
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
-  mapActivity: {
+  mapPanel: {
     layerTypes: [
       { name: 'BaseLayer', label: 'Base Layers', icon: 'map'}, 
       { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers'}
     ]
   },
-  globeActivity: {
+  globePanel: {
     layerTypes: [
       { name: 'BaseLayer', label: 'Base Layers', icon: 'map'},
       { name: 'TerrainLayer', label: 'Terrain layers', icon: 'terrain' },

@@ -57,9 +57,8 @@ export default {
       // Title
       this.setTitle('Kano')
       // RightPanel
-      const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
-      this.setRightPanelContent('KLayersPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
+      console.log('set MapPanel')
+      this.setRightPanelContent('MapPanel', [])
       // FAB
       this.registerFabAction({
         name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen

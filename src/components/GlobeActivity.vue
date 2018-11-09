@@ -44,9 +44,8 @@ export default {
       // Title
       this.setTitle('Kano')
       // RightPanel
-      const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
-      this.setRightPanelContent('KLayersPanel', [ { layers: response.data }, { types: this.$config('globeActivity.layerTypes') } ])
+      console.log('set GlobePanel')
+      this.setRightPanelContent('GlobePanel', [])
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
