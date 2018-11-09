@@ -36,7 +36,7 @@ export default {
     kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
     //kMapMixins.map.fileLayers,
-    kMapMixins.map.fullscreen,
+    //kMapMixins.map.fullscreen,
     kMapMixins.map.timedimension,
     kMapMixins.map.scalebar,
     kMapMixins.map.measure,
@@ -60,6 +60,10 @@ export default {
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
       this.setRightPanelContent('KMapPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
+      // FAB
+      this.registerFabAction({
+        name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
+      })
     },
     getPointMarker (feature, latlng) {
       // ADS-B
@@ -149,6 +153,9 @@ export default {
         [this.bounds.getSouth(), this.bounds.getWest()],
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
+    },
+    onToggleFullscreen () {
+      this.map.toggleFullscreen()
     },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
