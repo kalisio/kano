@@ -46,7 +46,7 @@ export default {
       // RightPanel
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
-      this.setRightPanelContent('KMapPanel', [ { layers: response.data }, { types: this.$config('globeActivity.layerTypes') } ])
+      this.setRightPanelContent('KLayersPanel', [ { layers: response.data }, { types: this.$config('globeActivity.layerTypes') } ])
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component

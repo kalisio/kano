@@ -59,7 +59,7 @@ export default {
       // RightPanel
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
-      this.setRightPanelContent('KMapPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
+      this.setRightPanelContent('KLayersPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
     },
     getPointMarker (feature, latlng) {
       // ADS-B
