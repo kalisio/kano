@@ -44,7 +44,6 @@ export default {
       // Title
       this.setTitle('Kano')
       // RightPanel
-      console.log('set GlobePanel')
       this.setRightPanelContent('GlobePanel', [])
     },
     onGlobeResized (size) {

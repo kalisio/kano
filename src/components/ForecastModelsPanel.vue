@@ -30,8 +30,6 @@ export default {
       type: Array,
       default: () => []
     }
-  },
-  methods: {
   }
 }
 </script>

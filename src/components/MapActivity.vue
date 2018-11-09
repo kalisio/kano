@@ -57,10 +57,9 @@ export default {
       // Title
       this.setTitle('Kano')
       // Right Panel
-      console.log('set MapPanel')
-      this.setRightPanelContent('MapPanel', [])
       await this.setupWeacast()
-      //this.setRightPanelContent('ForecastModelsPanel', [ { forecastModels: this.forecastModels } ])
+      this.setRightPanelContent('MapPanel', [ { forecastModels: this.forecastModels } ])
+      // TimeLine
       this.setupTimeline()
       // FAB
       this.registerFabAction({

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <k-layers-panel v-if="layers.length > 0" :layers="layers" :types="layerTypes" />
+    <k-layers-panel :layers="layers" :types="layerTypes" />
   </div>
 </template>
 
@@ -15,15 +15,16 @@ export default {
     }
   },
   async created () {
+    // Load the require components
+    this.$options.components['k-layers-panel'] = this.$load('KLayersPanel')
+  },
+  async mounted () {
     // Load the layers
     const layersService = this.$api.getService('layers')
     let response = await layersService.find()
     this.layers = response.data
-    console.log(this.layers)
     // Load the layer types
     this.layerTypes = this.$config('globePanel.layerTypes')
-    // Load the require components
-    this.$options.components['k-layers-panel'] = this.$load('KLayersPanel')
   }
 }
 </script>
