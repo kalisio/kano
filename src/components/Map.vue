@@ -139,17 +139,25 @@ export default {
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
     },
-    async setupWeacast () {
+    onCurrentTimeChanged (time) {
+      this.weacastApi.setForecastTime(time)
+    },
+    setupWeacast () {
       const config = this.$config('weacast')
       this.weacastApi = weacast(this.$config('weacast'))
-      try {
-        await this.weacastApi.authenticate(config.authentication)
-        await this.setupForecastModels()
-        this.setupForecastLayers()
+      return this.weacastApi.authenticate(config.authentication)
+      .then(_ => this.setupForecastModels())
+      .then(_ => this.setupForecastLayers())
+      .catch(error => logger.error('Cannot initialize weacast API', error))
+    },
+    setupTimeline () {
+      // FIXME: to be replaced by timeline component initialization
+      const now = moment.utc().startOf('hour')
+      let times = []
+      for (let timeOffset = 0; timeOffset <= 24; timeOffset += 1) {
+        times.push(now.clone().add({ hours: timeOffset }))
       }
-      catch (error) {
-        logger.error('Cannot initialize weacast API', error)
-      }
+      this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
     }
   },
   created () {
@@ -159,6 +167,8 @@ export default {
   mounted () {
     this.setupMap()
     this.setupWeacast()
+    .then(_ => this.setupTimeline())
+    this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
       this.map.fitBounds(this.$store.get('bounds'))
@@ -169,6 +179,7 @@ export default {
     this.$on('collection-refreshed', this.onCollectionRefreshed)
   },
   beforeDestroy () {
+    this.$off('current-time-changed', this.onCurrentTimeChanged)
     this.map.off('moveend', this.onMapMoved)
     // No need to refresh the layout when leaving the component
     this.observe = false
