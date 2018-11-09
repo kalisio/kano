@@ -3,6 +3,15 @@
     <div id="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
     </div>
+    <q-btn 
+      id="map-panel-toggle"
+      color="secondary"
+      class="fixed"
+      style="right: 18px; top: 60px"
+      small
+      round 
+      icon="layers"
+      @click="layout.toggleRight()" />
   </div>
 </template>
 
@@ -11,7 +20,7 @@ import _ from 'lodash'
 import L from 'leaflet'
 import logger from 'loglevel'
 import moment from 'moment'
-import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
+import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import 'weacast-leaflet'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
@@ -27,7 +36,8 @@ export default {
   name: 'k-map-activity',
   components: {
     QWindowResizeObservable,
-    QResizeObservable
+    QResizeObservable,
+    QBtn
   },
   mixins: [
     kCoreMixins.baseActivity,
@@ -42,6 +52,7 @@ export default {
     //kMapMixins.map.measure,
     kMapMixins.map.forecastLayers
   ],
+  inject: ['layout'],
   computed: {
     mapStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
@@ -59,6 +70,7 @@ export default {
       // Right Panel
       await this.setupWeacast()
       this.setRightPanelContent('MapPanel', [ { forecastModels: this.forecastModels } ])
+      this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
       // FAB

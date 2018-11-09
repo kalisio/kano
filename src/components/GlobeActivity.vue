@@ -3,13 +3,22 @@
     <div id="globe" :style="globeStyle">
       <q-resize-observable @resize="onGlobeResized" />
     </div>
+     <q-btn 
+      id="map-panel-toggle"
+      color="secondary"
+      class="fixed"
+      style="right: 18px; top: 60px"
+      small
+      round 
+      icon="layers"
+      @click="layout.toggleRight()" />
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
-import { QWindowResizeObservable, QResizeObservable, dom } from 'quasar'
+import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
@@ -19,7 +28,8 @@ export default {
   name: 'k-globe-activity',
   components: {
     QWindowResizeObservable,
-    QResizeObservable
+    QResizeObservable,
+    QBtn
   },
   mixins: [
     kCoreMixins.baseActivity,
@@ -29,6 +39,7 @@ export default {
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers
   ],
+  inject: ['layout'],
   computed: {
     globeStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
@@ -45,6 +56,7 @@ export default {
       this.setTitle('Kano')
       // RightPanel
       this.setRightPanelContent('GlobePanel', [])
+      this.layout.hideRight()
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
