@@ -39,7 +39,7 @@ export default {
     //kMapMixins.map.fullscreen,
     kMapMixins.map.timedimension,
     kMapMixins.map.scalebar,
-    kMapMixins.map.measure,
+    //kMapMixins.map.measure,
     kMapMixins.map.forecastLayers
   ],
   computed: {
@@ -56,10 +56,13 @@ export default {
       this.clearActivity()
       // Title
       this.setTitle('Kano')
-      // RightPanel
+      // Right Panel
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
-      this.setRightPanelContent('KMapPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
+      this.setRightPanelContent('KLayersPanel', [ { layers: response.data }, { types: this.$config('mapActivity.layerTypes') } ])
+      await this.setupWeacast()
+      //this.setRightPanelContent('ForecastModelsPanel', [ { forecastModels: this.forecastModels } ])
+      this.setupTimeline()
       // FAB
       this.registerFabAction({
         name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
@@ -184,8 +187,6 @@ export default {
   },
   mounted () {
     this.setupMap()
-    this.setupWeacast()
-    .then(_ => this.setupTimeline())
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
