@@ -3,6 +3,7 @@
     "name": "Kalisio OpenStreetMap (bright rendering)",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "default": true,
     "type": "BaseLayer",
     "leaflet": {
       "type": "tileLayer",
@@ -79,6 +80,7 @@
     "name" : "WGS84 Standard Ellipsoid",
     "iconUrl": "Widgets/Images/TerrainProviders/Ellipsoid.png",
     "attribution" : "",
+    "default": true,
     "type": "TerrainLayer",
     "cesium": {
       "type": "Ellipsoid"

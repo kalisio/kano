@@ -205,7 +205,7 @@ export default {
     this.observe = true
   },
   mounted () {
-    this.setupMap(this.createLayer(this.$config('defaultBaseLayer.leaflet')))
+    this.setupMap()
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
