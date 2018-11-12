@@ -15,7 +15,8 @@
     "RECONNECT": "Tentative de reconnection en cours..."
   },
   "MapActivity": {
-    "TOGGLE_FULLSCREEN": "Plein écran"
+    "TOGGLE_FULLSCREEN": "Plein écran",
+    "GEOLOCATE": "Ma position"
   },
   "ForecastModelsPanel": {
     "LABEL": "Modèles de prévision"

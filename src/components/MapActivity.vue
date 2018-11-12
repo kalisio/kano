@@ -20,7 +20,7 @@ import _ from 'lodash'
 import L from 'leaflet'
 import logger from 'loglevel'
 import moment from 'moment'
-import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import 'weacast-leaflet'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
@@ -41,15 +41,13 @@ export default {
   },
   mixins: [
     kCoreMixins.baseActivity,
+    kMapMixins.geolocation,
     kMapMixins.map.baseMap,
     //kMapMixins.map.baseLayers,
     //kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
-    //kMapMixins.map.fileLayers,
-    //kMapMixins.map.fullscreen,
     //kMapMixins.map.timedimension,
     //kMapMixins.map.scalebar,
-    //kMapMixins.map.measure,
     kMapMixins.map.forecastLayers
   ],
   inject: ['layout'],
@@ -60,6 +58,11 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  watch: {
+    forecastModel: function (model) {
+      this.setupForecastLayers()
     }
   },
   methods: {
@@ -79,12 +82,24 @@ export default {
         }
       })
       this.setRightPanelContent('MapPanel', [ { layers: this.layers, forecastModels: this.forecastModels } ])
+      const response = await layersService.find()
+      let layers = response.data
+      _.forEach(layers, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
+      _.forEach(this.forecastModels, (model) => model['handler'] = this.onForecastModelSelected.bind(this))
+      this.setRightPanelContent('MapPanel', [{
+        layers: response.data,
+        forecastModels: this.forecastModels,
+        forecastModel: this.forecastModel
+      }])
       this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
       // FAB
       this.registerFabAction({
         name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
+      })
+      this.registerFabAction({
+        name: 'geolocate', label: this.$t('MapActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
       })
     },
     getPointMarker (feature, latlng) {
@@ -183,18 +198,27 @@ export default {
         this.hideLayer(layer.name)
       } 
     },
+    onForecastModelSelected (model) {
+      this.forecastModel = model
+    },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
+    onGeolocate () {
+      this.updatePosition()
+    },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
+    },
+    refreshOnGeolocation () {
+      const position = this.$store.get('user.position')
+      this.center(position.longitude, position.latitude)
     },
     setupWeacast () {
       const config = this.$config('weacast')
       this.weacastApi = weacast(this.$config('weacast'))
       return this.weacastApi.authenticate(config.authentication)
       .then(_ => this.setupForecastModels())
-      .then(_ => this.setupForecastLayers())
       .catch(error => logger.error('Cannot initialize weacast API', error))
     },
     setupTimeline () {
@@ -222,6 +246,8 @@ export default {
     // this.$on('popupopen', this.onPopupOpen)
     this.$on('click', this.onFeatureClicked)
     this.$on('collection-refreshed', this.onCollectionRefreshed)
+    Events.$on('user-position-changed', this.refreshOnGeolocation)
+    if (this.$store.get('user.position')) this.refreshOnGeolocation()
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
@@ -233,6 +259,7 @@ export default {
     // this.$off('popupopen', this.onPopupOpen)
     this.$off('click', this.onFeatureClicked)
     this.$off('collection-refreshed', this.onCollectionRefreshed)
+    Events.$off('user-position-changed', this.refreshOnGeolocation)
   }
 }
 </script>
