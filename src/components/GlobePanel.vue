@@ -8,9 +8,14 @@
 
 export default {
   name: 'globe-panel',
+  props: {
+    layers: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
-      layers: [],
       layerTypes: []
     }
   },
@@ -19,10 +24,6 @@ export default {
     this.$options.components['k-layers-panel'] = this.$load('KLayersPanel')
   },
   async mounted () {
-    // Load the layers
-    const layersService = this.$api.getService('layers')
-    let response = await layersService.find()
-    this.layers = response.data
     // Load the layer types
     this.layerTypes = this.$config('globePanel.layerTypes')
   }

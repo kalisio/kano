@@ -55,7 +55,9 @@ export default {
       // Title
       this.setTitle('Kano')
       // RightPanel
-      this.setRightPanelContent('GlobePanel', [])
+      const layersService = this.$api.getService('layers')
+      let response = await layersService.find()
+      this.setRightPanelContent('GlobePanel', [ { layers: response.data } ])
       this.layout.hideRight()
     },
     onGlobeResized (size) {

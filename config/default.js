@@ -86,17 +86,36 @@ module.exports = {
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
+  defaultBaseLayer: {
+    "name": "Kalisio OpenStreetMap (bright rendering)",
+    "iconUrl": "",
+    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR"
+    }
+  },
   mapPanel: {
     layerTypes: [
-      { name: 'BaseLayer', label: 'Base Layers', icon: 'map'}, 
-      { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers'}
+      { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers', exclusive: false },
+      { name: 'BaseLayer', label: 'Base Layers', icon: 'map', exclusive: true }
     ]
   },
   globePanel: {
     layerTypes: [
-      { name: 'BaseLayer', label: 'Base Layers', icon: 'map'},
-      { name: 'TerrainLayer', label: 'Terrain layers', icon: 'terrain' },
-      { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers'}
+      { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers', exclusive: false },
+      { name: 'BaseLayer', label: 'Base Layers', icon: 'map', exclusive: true },
+      { name: 'TerrainLayer', label: 'Terrain layers', icon: 'terrain', exclusive: true }
     ]
   },
   weacast: {

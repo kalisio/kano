@@ -1,7 +1,7 @@
 <template>
   <div>
-    <k-layers-panel :layers="layers" :types="layerTypes" />
     <forecastmodels-panel :forecastModels="forecastModels" />
+    <k-layers-panel :layers="layers" :types="layerTypes" />
   </div>
 </template>
 
@@ -10,6 +10,10 @@
 export default {
   name: 'map-panel',
   props: {
+    layers: {
+      type: Array,
+      default: () => []
+    },
     forecastModels: {
       type: Array,
       default: () => []
@@ -17,8 +21,12 @@ export default {
   },
   data () {
     return {
-      layers: [],
       layerTypes: []
+    }
+  },
+  methods: {
+    onLayerTriggered (layer) {
+      
     }
   },
   async created () {
@@ -26,10 +34,6 @@ export default {
     this.$options.components['forecastmodels-panel'] = this.$load('ForecastModelsPanel')
   },
   async mounted () {
-    // Load the layers
-    const layersService = this.$api.getService('layers')
-    let response = await layersService.find()
-    this.layers = response.data
     // Load the layer types
     this.layerTypes = this.$config('mapPanel.layerTypes')
   }

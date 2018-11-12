@@ -1,7 +1,7 @@
 [ 
   {
     "name": "Kalisio OpenStreetMap (bright rendering)",
-    "iconUrl": "",
+    "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -20,7 +20,7 @@
   },
   {
     "name": "Kalisio OpenStreetMap (dark rendering)",
-    "iconUrl": "",
+    "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -39,7 +39,7 @@
   },
   {
     "name": "Kalisio OpenStreetMap & Terrain (bright rendering)",
-    "iconUrl": "",
+    "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -58,7 +58,7 @@
   },
   {
     "name": "Kalisio OpenStreetMap & Terrain (dark rendering)",
-    "iconUrl": "",
+    "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {

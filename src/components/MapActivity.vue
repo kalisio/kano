@@ -42,7 +42,7 @@ export default {
   mixins: [
     kCoreMixins.baseActivity,
     kMapMixins.map.baseMap,
-    kMapMixins.map.baseLayers,
+    //kMapMixins.map.baseLayers,
     kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
     //kMapMixins.map.fileLayers,
@@ -69,7 +69,10 @@ export default {
       this.setTitle('Kano')
       // Right Panel
       await this.setupWeacast()
-      this.setRightPanelContent('MapPanel', [ { forecastModels: this.forecastModels } ])
+      const layersService = this.$api.getService('layers')
+      let response = await layersService.find()
+      _.forEach(response.data, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
+      this.setRightPanelContent('MapPanel', [ { layers: response.data, forecastModels: this.forecastModels } ])
       this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
@@ -167,6 +170,12 @@ export default {
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
     },
+    onLayerTriggered (layer) {
+      if (layer.type === 'BaseLayer') {
+        let leafletLayer = this.createLayer(layer.leaflet)
+        this.setBaseLayer(leafletLayer)
+      }
+    },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
@@ -196,7 +205,7 @@ export default {
     this.observe = true
   },
   mounted () {
-    this.setupMap()
+    this.setupMap(this.createLayer(this.$config('defaultBaseLayer.leaflet')))
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
