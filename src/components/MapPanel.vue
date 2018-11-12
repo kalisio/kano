@@ -11,8 +11,8 @@ export default {
   name: 'map-panel',
   props: {
     layers: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     },
     forecastModels: {
       type: Array,
@@ -22,11 +22,6 @@ export default {
   data () {
     return {
       layerTypes: []
-    }
-  },
-  methods: {
-    onLayerTriggered (layer) {
-      
     }
   },
   async created () {

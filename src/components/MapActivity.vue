@@ -43,12 +43,12 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.map.baseMap,
     //kMapMixins.map.baseLayers,
-    kMapMixins.map.overlayLayers,
+    //kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
     //kMapMixins.map.fileLayers,
     //kMapMixins.map.fullscreen,
-    kMapMixins.map.timedimension,
-    kMapMixins.map.scalebar,
+    //kMapMixins.map.timedimension,
+    //kMapMixins.map.scalebar,
     //kMapMixins.map.measure,
     kMapMixins.map.forecastLayers
   ],
@@ -69,10 +69,16 @@ export default {
       this.setTitle('Kano')
       // Right Panel
       await this.setupWeacast()
+      this.layers = {}
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
-      _.forEach(response.data, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
-      this.setRightPanelContent('MapPanel', [ { layers: response.data, forecastModels: this.forecastModels } ])
+      _.forEach(response.data, (layer) => {
+        if (layer.leaflet) {
+          layer['handler'] = (options) => this.onLayerTriggered(layer, options)
+          this.addLayer(layer)
+        }
+      })
+      this.setRightPanelContent('MapPanel', [ { layers: this.layers, forecastModels: this.forecastModels } ])
       this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
@@ -170,11 +176,12 @@ export default {
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
     },
-    onLayerTriggered (layer) {
-      if (layer.type === 'BaseLayer') {
-        let leafletLayer = this.createLayer(layer.leaflet)
-        this.setBaseLayer(leafletLayer)
-      }
+    onLayerTriggered (layer, options) {
+      if (options.isVisible === true) {
+        this.showLayer(layer.name)
+      } else {
+        this.hideLayer(layer.name)
+      } 
     },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
