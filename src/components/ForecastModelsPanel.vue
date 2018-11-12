@@ -2,10 +2,10 @@
   <q-collapsible icon="language" :label="$t('ForecastModelsPanel.LABEL')">
     <div class="row">
       <template v-for="model in forecastModels">
-        <q-btn :id ="model.name" :key="model.name" flat round>
-          <img src="https://s3.eu-central-1.amazonaws.com/kalisioscope/collections/sjjb/accommodation_chalet2.n.24.png" />
+        <q-btn :id="model.name" :key="model.name" @click="model.handler(model)" :flat="model.name !== selected.name" :outline="model.name === selected.name" round>
+          <img :src="model.iconUrl" width="32" height="32" />
           <q-tooltip>
-            {{model.name}}
+            {{model.label}}
           </q-tooltip>
         </q-btn>
       </template>
@@ -25,10 +25,23 @@ export default {
     QIcon,
     QTooltip
   },
+  data () {
+    return {
+      selected: {}
+    }
+  },
   props: {
     forecastModels: {
       type: Array,
       default: () => []
+    },
+    forecastModel: {
+      type: Object
+    }
+  },
+  watch: {
+    forecastModel: function (model) {
+      this.selected = model
     }
   }
 }

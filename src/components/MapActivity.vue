@@ -60,6 +60,11 @@ export default {
     return {
     }
   },
+  watch: {
+    forecastModel: function (model) {
+      this.setupForecastLayers()
+    }
+  },
   methods: {
     async refreshActivity () {
       this.clearActivity()
@@ -68,9 +73,15 @@ export default {
       // Right Panel
       await this.setupWeacast()
       const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
-      _.forEach(response.data, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
-      this.setRightPanelContent('MapPanel', [ { layers: response.data, forecastModels: this.forecastModels } ])
+      const response = await layersService.find()
+      let layers = response.data
+      _.forEach(layers, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
+      _.forEach(this.forecastModels, (model) => model['handler'] = this.onForecastModelSelected.bind(this))
+      this.setRightPanelContent('MapPanel', [{
+        layers: response.data,
+        forecastModels: this.forecastModels,
+        forecastModel: this.forecastModel
+      }])
       this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
@@ -177,6 +188,9 @@ export default {
         this.setBaseLayer(leafletLayer)
       }
     },
+    onForecastModelSelected (model) {
+      this.forecastModel = model
+    },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
@@ -195,7 +209,6 @@ export default {
       this.weacastApi = weacast(this.$config('weacast'))
       return this.weacastApi.authenticate(config.authentication)
       .then(_ => this.setupForecastModels())
-      .then(_ => this.setupForecastLayers())
       .catch(error => logger.error('Cannot initialize weacast API', error))
     },
     setupTimeline () {
