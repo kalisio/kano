@@ -86,25 +86,6 @@ module.exports = {
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
-  defaultBaseLayer: {
-    "name": "Kalisio OpenStreetMap (bright rendering)",
-    "iconUrl": "",
-    "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
-    "type": "BaseLayer",
-    "leaflet": {
-      "type": "tileLayer",
-      "arguments": [
-        "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
-        {
-          "maxZoom": 18
-        }
-      ]
-    },
-    "cesium": {
-      "type": "OpenStreetMap",
-      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR"
-    }
-  },
   mapPanel: {
     layerTypes: [
       { name: 'OverlayLayer', label: 'Overlay Layers', icon: 'layers', exclusive: false },
