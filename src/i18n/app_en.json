@@ -18,6 +18,11 @@
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position"
   },
+  "LayersPanel": {
+    "BASE_LAYERS": "Base Layers",
+    "TERRAIN_LAYERS": "Terrain layers",
+    "OVERLAY_LAYSERS": "Overlay layers"
+  },
   "ForecastModelsPanel": {
     "LABEL": "Forecast models"
   }

@@ -56,10 +56,6 @@ export default {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
     }
   },
-  data () {
-    return {
-    }
-  },
   watch: {
     forecastModel: function (model) {
       this.setupForecastLayers()
@@ -70,8 +66,7 @@ export default {
       this.clearActivity()
       // Title
       this.setTitle('Kano')
-      // Right Panel
-      await this.setupWeacast()
+      // Retrive the layers
       this.layers = {}
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
@@ -81,13 +76,12 @@ export default {
           this.addLayer(layer)
         }
       })
-      this.setRightPanelContent('MapPanel', [ { layers: this.layers, forecastModels: this.forecastModels } ])
-      const response = await layersService.find()
-      let layers = response.data
-      _.forEach(layers, (layer) => layer['handler'] = () => this.onLayerTriggered(layer))
+      // Retrieve the forecast models
+      await this.setupWeacast()
       _.forEach(this.forecastModels, (model) => model['handler'] = this.onForecastModelSelected.bind(this))
+      // Setup the right pane
       this.setRightPanelContent('MapPanel', [{
-        layers: response.data,
+        layers: this.layers,
         forecastModels: this.forecastModels,
         forecastModel: this.forecastModel
       }])
@@ -228,7 +222,7 @@ export default {
       for (let timeOffset = 0; timeOffset <= 24; timeOffset += 1) {
         times.push(now.clone().add({ hours: timeOffset }))
       }
-      this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
+      if (this.map.timeDimension) this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
     }
   },
   created () {

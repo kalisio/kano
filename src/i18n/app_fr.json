@@ -18,6 +18,11 @@
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position"
   },
+  "LayersPanel": {
+    "BASE_LAYERS": "Fonds cartographiques",
+    "TERRAIN_LAYERS": "Couches terrain",
+    "OVERLAY_LAYERS": "Couches de données"
+  },
   "ForecastModelsPanel": {
     "LABEL": "Modèles de prévision"
   }
