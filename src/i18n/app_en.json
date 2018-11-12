@@ -15,7 +15,8 @@
     "RECONNECT": "We are trying to reconnect..."
   },
   "MapActivity": {
-    "TOGGLE_FULLSCREEN": "Fullscreen"
+    "TOGGLE_FULLSCREEN": "Fullscreen",
+    "GEOLOCATE": "My position"
   },
   "ForecastModelsPanel": {
     "LABEL": "Forecast models"
