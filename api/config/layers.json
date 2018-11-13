@@ -99,15 +99,62 @@
     }
   },
   {
+    "name": "Wind",
+    "iconUrl" : "",
+    "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
+    "type" : "OverlayLayer",
+    "leaflet": {
+      "type": "weacast.flowLayer",
+      "arguments": [{
+        "elements": ["u-wind", "v-wind"],
+        "lineWidth": 4,
+        "frameRate": 20,
+        "particleMultiplier": 0.001,
+        "displayOptions": {
+          "velocityType": "Wind",
+          "position": "bottomright",
+          "emptyString": "No wind data",
+          "angleConvention": "meteoCW",
+          "speedUnit": "m/s"
+        }
+      }]
+    }
+  },
+  {
+    "name": "Gust",
+    "iconUrl" : "",
+    "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
+    "leaflet": {
+      "type": "weacast.scalarLayer",
+      "arguments": [{
+        "elements": ["gust"],
+        "mesh": true
+      }]
+    }
+  },
+  {
+    "name": "Precipitations",
+    "iconUrl" : "",
+    "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
+    "leaflet": {
+      "type": "weacast.scalarLayer",
+      "arguments": [{
+        "elements": ["precipitations"],
+        "mesh": true
+      }]
+    }
+  },
+  {
     "name": "Vigicrues",
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png",
     "attribution" : "",
     "type" : "OverlayLayer",
     "leaflet": {
-      "type": "realtime",
+      "type": "geoJson",
       "arguments": [
         "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues.json",
         {
+          "realtime": true,
           "interval": 900000,
           "id": "properties.gid"
         }
@@ -120,10 +167,11 @@
     "attribution" : "",
     "type" : "OverlayLayer",
     "leaflet": {
-      "type": "realtime",
+      "type": "geoJson",
       "arguments": [
         "https://s3.eu-central-1.amazonaws.com/kargo/teleray.json",
         {
+          "realtime": true,
           "interval": 600000,
           "id": "properties.irsnId",
           "container": "markerClusterGroup"
@@ -137,10 +185,11 @@
     "attribution": "",
     "type": "OverlayLayer",
     "leaflet": {
-      "type": "realtime",
+      "type": "geoJson",
       "arguments": [
         "https://s3-eu-west-1.amazonaws.com/gift-backbone-adsb/adsb-airline-one.json",
         {
+          "realtime": true,
           "interval": 5000,
           "id": "properties.icao"
         }
@@ -153,10 +202,11 @@
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {
-      "type": "timeDimension.layer.wms",
+      "type": "tileLayer.wms",
       "arguments": [
         "https://mapproxy.kargo.kalisio.xyz/service?",
         {
+          "timeDimension": true,
           "version": "1.3.0",
           "format": "image/png",
           "transparent": true,
@@ -171,10 +221,11 @@
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {
-      "type": "timeDimension.layer.wms",
+      "type": "tileLayer.wms",
       "arguments": [
         "https://mapproxy.kargo.kalisio.xyz/service?",
         {
+          "timeDimension": true,
           "version": "1.3.0",
           "format": "image/png",
           "transparent": true,
@@ -189,10 +240,11 @@
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {
-      "type": "timeDimension.layer.wms",
+      "type": "tileLayer.wms",
       "arguments": [
         "https://mapproxy.kargo.kalisio.xyz/service?",
         {
+          "timeDimension": true,
           "version": "1.3.0",
           "format": "image/png",
           "transparent": true,

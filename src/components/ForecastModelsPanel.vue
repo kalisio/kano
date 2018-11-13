@@ -43,8 +43,10 @@ export default {
   watch: {
     forecastModel: function (model) {
       this.selected = model
-      console.log(this.selected)
     }
+  },
+  created () {
+    this.selected = this.forecastModel
   }
 }
 </script>

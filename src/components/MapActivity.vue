@@ -18,6 +18,8 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
+import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
 import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
@@ -28,9 +30,6 @@ import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
 const { offset } = dom
-function roundHours (hours, interval) {
-  return (Math.floor(hours / interval) * interval)
-}
 
 export default {
   name: 'k-map-activity',
@@ -43,11 +42,7 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
     kMapMixins.map.baseMap,
-    //kMapMixins.map.baseLayers,
-    //kMapMixins.map.overlayLayers,
     kMapMixins.map.geojsonLayers,
-    //kMapMixins.map.timedimension,
-    //kMapMixins.map.scalebar,
     kMapMixins.map.forecastLayers
   ],
   inject: ['layout'],
@@ -58,7 +53,7 @@ export default {
   },
   watch: {
     forecastModel: function (model) {
-      this.setupForecastLayers()
+      //this.setupForecastLayers()
     }
   },
   methods: {
@@ -91,6 +86,17 @@ export default {
       this.registerFabAction({
         name: 'geolocate', label: this.$t('MapActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
       })
+    },
+    createLeafletTimedWmsLayer (options) {
+      // Check for valid type
+      if (options.type !== 'tileLayer.wms') return
+      const layerOptions = _.get(options, 'arguments[1]', {})
+      let layer = this.createLeafletLayer(options)
+      // Specific case of time dimension layer where we embed the underlying WMS layer
+      if (layerOptions.timeDimension) {
+        layer = this.createLeafletLayer({ type: 'timeDimension.layer.wms', arguments: [ layer, layerOptions.timeDimension ] })
+      }
+      return layer
     },
     getPointMarker (feature, latlng) {
       // ADS-B
@@ -213,20 +219,32 @@ export default {
     },
     setupTimeline () {
       // FIXME: to be replaced by timeline component initialization
+      let timeDimension = L.timeDimension({})
+      L.control.timeDimension({
+        timeDimension,
+        position: 'bottomright',
+        speedSlider: false,
+        playButton: false,
+        playerOptions: { minBufferReady: -1 } // This avoid preloading of next times
+      }).addTo(this.map)
       const now = moment.utc().startOf('hour')
       let times = []
       for (let timeOffset = 0; timeOffset <= 24; timeOffset += 1) {
         times.push(now.clone().add({ hours: timeOffset }))
       }
-      if (this.map.timeDimension) this.map.timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
+      timeDimension.on('timeload', data => this.setCurrentTime(data.time))
+      timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
     }
   },
   created () {
     // Enable the observers in order to refresh the layout
     this.observe = true
+    this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
   },
   mounted () {
     this.setupMap()
+    // Add aa scale control
+    L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
