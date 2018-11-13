@@ -80,7 +80,6 @@ export default {
       await this.setupWeacast()
       _.forEach(this.forecastModels, (model) => model['handler'] = () => this.onForecastModelSelected(model))
       // Setup the right pane
-      console.log(this.$data)
       this.setRightPanelContent('MapPanel', this.$data)
       this.layout.hideRight()
       // TimeLine
