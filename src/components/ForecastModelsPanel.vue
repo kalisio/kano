@@ -1,6 +1,6 @@
 <template>
   <q-collapsible icon="language" :label="$t('ForecastModelsPanel.LABEL')">
-    <div class="row">
+    <div class="row justify-around">
       <template v-for="model in forecastModels">
         <q-btn :id="model.name" :key="model.name" @click="model.handler(model)" :flat="model.name !== selected.name" :outline="model.name === selected.name" round>
           <img :src="model.iconUrl" width="32" height="32" />
@@ -36,12 +36,14 @@ export default {
       default: () => []
     },
     forecastModel: {
-      type: Object
+      type: Object,
+      default: () => {}
     }
   },
   watch: {
     forecastModel: function (model) {
       this.selected = model
+      console.log(this.selected)
     }
   }
 }

@@ -78,13 +78,10 @@ export default {
       })
       // Retrieve the forecast models
       await this.setupWeacast()
-      _.forEach(this.forecastModels, (model) => model['handler'] = this.onForecastModelSelected.bind(this))
+      _.forEach(this.forecastModels, (model) => model['handler'] = () => this.onForecastModelSelected(model))
       // Setup the right pane
-      this.setRightPanelContent('MapPanel', [{
-        layers: this.layers,
-        forecastModels: this.forecastModels,
-        forecastModel: this.forecastModel
-      }])
+      console.log(this.$data)
+      this.setRightPanelContent('MapPanel', this.$data)
       this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
