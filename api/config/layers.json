@@ -100,7 +100,7 @@
   },
   {
     "name": "Wind",
-    "iconUrl" : "",
+    "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
     "leaflet": {
@@ -122,7 +122,7 @@
   },
   {
     "name": "Gust",
-    "iconUrl" : "",
+    "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
     "leaflet": {
@@ -135,7 +135,7 @@
   },
   {
     "name": "Precipitations",
-    "iconUrl" : "",
+    "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
     "leaflet": {
