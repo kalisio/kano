@@ -124,6 +124,7 @@
     "name": "Gust",
     "iconUrl" : "",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
+    "type" : "OverlayLayer",
     "leaflet": {
       "type": "weacast.scalarLayer",
       "arguments": [{
@@ -136,6 +137,7 @@
     "name": "Precipitations",
     "iconUrl" : "",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
+    "type" : "OverlayLayer",
     "leaflet": {
       "type": "weacast.scalarLayer",
       "arguments": [{
