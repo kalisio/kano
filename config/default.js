@@ -62,11 +62,11 @@ module.exports = {
     providers: ['google', 'github']
   },
   layout: {
-    appBar: 'layout/KAppBar',
-    sideNav: 'layout/KSideNav'
+    view: 'lHh LpR lFf',
+    rightBreakpoint: 1900
   },
   appBar: {
-    title: 'kApp',
+    title: 'Kano',
     speech: {
       language: 'en'
     }
