@@ -142,7 +142,9 @@
       "type": "weacast.scalarLayer",
       "arguments": [{
         "elements": ["precipitations"],
-        "mesh": true
+        "mesh": true,
+        "colorMap": "BuPu",
+        "colorClasses": [0, 1, 2, 4, 10, 25, 50, 100, 300]
       }]
     }
   },

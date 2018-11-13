@@ -53,7 +53,9 @@ export default {
   },
   watch: {
     forecastModel: function (model) {
-      //this.setupForecastLayers()
+      _.forOwn(this.leafletLayers, layer => {
+        if (layer instanceof L.weacast.ForecastLayer) layer.setForecastModel(model)
+      })
     }
   },
   methods: {
