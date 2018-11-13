@@ -6,11 +6,11 @@
     "type": "BaseLayer",
     "leaflet": {
       "type": "tileLayer",
+      "isVisible": true,
       "arguments": [
         "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png",
         {
-          "maxZoom": 18,
-          "isVisible": true
+          "maxZoom": 18
         }
       ]
     },
