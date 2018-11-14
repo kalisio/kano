@@ -1,5 +1,26 @@
 [ 
   {
+    "name": "Kalisio Sentinel 2 Cloudless",
+    "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg",
+    "attribution": "Sentinel-2 cloudless <a href=\"https://s2maps.eu\">by EOX IT Services GmbH </a>",
+    "type": "BaseLayer",
+    "leaflet": {
+      "type": "tileLayer",
+      "arguments": [
+        "https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg",
+        {
+          "maxZoom": 18
+        }
+      ]
+    },
+    "cesium": {
+      "type": "OpenStreetMap",
+      "isVisible": true,
+      "fileExtension": "jpeg",
+      "url": "https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR"
+    }
+  },
+  {
     "name": "Kalisio OpenStreetMap (bright rendering)",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
@@ -16,7 +37,6 @@
     },
     "cesium": {
       "type": "OpenStreetMap",
-      "isVisible": true,
       "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR"
     }
   },
@@ -79,7 +99,7 @@
   },
   {
     "name": "WGS84 Standard Ellipsoid",
-    "iconUrl": "Widgets/Images/TerrainProviders/Ellipsoid.png",
+    "iconUrl": "statics/Cesium/Widgets/Images/TerrainProviders/Ellipsoid.png",
     "attribution": "",
     "default": true,
     "type": "TerrainLayer",
@@ -90,7 +110,7 @@
   }, 
   {
     "name": "Kalisio Terrain",
-    "iconUrl" : "Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+    "iconUrl" : "statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
     "attribution": "High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com",
     "type": "TerrainLayer",
     "cesium": {
@@ -165,6 +185,16 @@
           "id": "properties.gid"
         }
       ]
+    },
+    "cesium": {
+      "type": "geoJson",
+      "arguments": [
+        "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues.json",
+        {
+          "realtime": true,
+          "interval": 900000
+        }
+      ]
     }
   },
   {
@@ -213,6 +243,18 @@
           "realtime": true,
           "interval": 5000,
           "id": "properties.icao"
+        }
+      ]
+    },
+    "cesium": {
+      "type": "geoJson",
+      "arguments": [
+        "https://s3-eu-west-1.amazonaws.com/gift-backbone-adsb/adsb-airline-one.json",
+        {
+          "realtime": true,
+          "interval": 5000,
+          "marker-symbol": "airport",
+          "marker-color": "#57D824"
         }
       ]
     }
