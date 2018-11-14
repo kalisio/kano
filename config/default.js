@@ -104,7 +104,53 @@ module.exports = {
       password: process.env.WEACAST_PASSWORD || 'weacast'
     }
   },
-  map: require('./map'),
-  globe: require('./globe'),
+  map: {
+    // Default GeoJSON layer style for polygons/lines
+    featureStyle: {
+      opacity: 1,
+      radius: 6,
+      color: 'red',
+      fillOpacity: 0.5,
+      fillColor: 'green',
+      popup: {
+        excludedProperties: ['wikipedia']
+      }
+    },
+    // Default GeoJSON layer style for points
+    pointStyle: {
+      type: 'circleMarker',
+      options: {
+        opacity: 1,
+        color: 'red',
+        fillOpacity: 0.5,
+        fillColor: 'green'
+      }
+    }
+  },
+  globe: {
+    viewer: {
+      sceneMode : 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
+      sceneModePicker : false,
+      scene3DOnly : true,
+      homeButton : false,
+      geocoder : false,
+      navigationHelpButton : false,
+      baseLayerPicker : false,
+      vrButton: true,
+      animation: false,
+      //creditContainer: 'xxx',
+      timeline: false
+    },
+    fileLayers: {
+      clearOnDrop : false,
+      flyToOnDrop: true,
+      clampToGround: true
+    },
+    // Default GeoJSON layer style for points/polygons/lines in simple style spec
+    featureStyle: {
+      'marker-symbol': 'airport',
+      'marker-color': '#57D824'
+    }
+  },
   routes: require('./routes')
 }

@@ -109,6 +109,17 @@
     }
   }, 
   {
+    "name": "Cesium Terrain",
+    "iconUrl" : "statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+    "attribution": "High-resolution, mesh-based terrain for the entire globe.\nBy https://cesiumjs.org",
+    "type": "TerrainLayer",
+    "cesium": {
+      "type": "Cesium",
+      "requestWaterMask" : "true",
+      "requestVertexNormals" : "true"
+    }
+  }, 
+  {
     "name": "Kalisio Terrain",
     "iconUrl" : "statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
     "attribution": "High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com",

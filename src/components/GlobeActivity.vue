@@ -13,7 +13,7 @@
       Kano
     </q-btn>
      <q-btn 
-      id="map-panel-toggle"
+      id="globe-panel-toggle"
       color="secondary"
       class="fixed"
       style="right: 18px; top: 18px"
@@ -80,6 +80,9 @@ export default {
         label: {
           heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
           verticalOrigin: Cesium.VerticalOrigin.BASELINE
+        },
+        polyline: {
+          clampToGround: true
         }
       }
     },
