@@ -125,6 +125,10 @@ module.exports = {
         fillOpacity: 0.5,
         fillColor: 'green'
       }
+    },
+    fileLayers: {
+      fileSizeLimit : 1024 * 1024,
+      formats: [ '.geojson', '.kml', '.gpx' ]
     }
   },
   globe: {
