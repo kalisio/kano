@@ -4,10 +4,19 @@
       <q-resize-observable @resize="onMapResized" />
     </div>
     <q-btn 
+      id="side-nav-toggle"
+      color="secondary"
+      class="fixed"
+      style="left: 18px; top: 18px"
+      icon="menu"
+      @click="layout.toggleLeft()">
+      Kano
+    </q-btn>
+    <q-btn 
       id="map-panel-toggle"
       color="secondary"
       class="fixed"
-      style="right: 18px; top: 60px"
+      style="right: 18px; top: 18px"
       small
       round 
       icon="layers"
@@ -61,8 +70,7 @@ export default {
   methods: {
     async refreshActivity () {
       this.clearActivity()
-      // Title
-      this.setTitle('Kano')
+      this.layout.hideLeft()
       // Retrive the layers
       this.layers = {}
       const layersService = this.$api.getService('layers')

@@ -88,6 +88,12 @@ module.exports = {
       }
     }
   },
+  /*layers: {
+    paginate: {
+      default: 100,
+      max: 100
+    }
+  },*/
   logs: {
     Console: {
       colorize: true,

@@ -52,8 +52,6 @@ export default {
   methods: {
     async refreshActivity () {
       this.clearActivity()
-      // Title
-      this.setTitle('Kano')
       // RightPanel
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
