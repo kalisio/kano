@@ -18,6 +18,11 @@
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position"
   },
+  "GlobeActivity": {
+    "TOGGLE_FULLSCREEN": "Plein écran",
+    "TOGGLE_VR": "VR",
+    "GEOLOCATE": "Ma position"
+  },
   "LayersPanel": {
     "BASE_LAYERS": "Fonds cartographiques",
     "TERRAIN_LAYERS": "Couches terrain",

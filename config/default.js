@@ -136,7 +136,8 @@ module.exports = {
       geocoder : false,
       navigationHelpButton : false,
       baseLayerPicker : false,
-      vrButton: true,
+      vrButton: false,
+      fullscreenButton: false,
       animation: false,
       //creditContainer: 'xxx',
       timeline: false

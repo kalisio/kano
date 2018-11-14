@@ -27,7 +27,7 @@
 <script>
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
-import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 
@@ -42,6 +42,7 @@ export default {
   },
   mixins: [
     kCoreMixins.baseActivity,
+    kMapMixins.geolocation,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers
@@ -67,6 +68,16 @@ export default {
       })
       // Setup the right pane
       this.setRightPanelContent('GlobePanel', this.$data)
+      // FAB
+      this.registerFabAction({
+        name: 'toggle-fullscreen', label: this.$t('GlobeActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
+      })
+      this.registerFabAction({
+        name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
+      })
+      this.registerFabAction({
+        name: 'geolocate', label: this.$t('GlobeActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
+      })
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -107,6 +118,27 @@ export default {
       } else {
         this.hideLayer(layer.name)
       } 
+    },
+    onToggleFullscreen () {
+      if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()
+      else Cesium.Fullscreen.requestFullscreen(document.body)
+    },
+    onToggleVr () {
+      // VR requires fullscreen mode
+      if (this.viewer.scene.useWebVR) {
+        if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()
+        this.viewer.scene.useWebVR = false
+      } else {
+        if (!Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.requestFullscreen(document.body)
+        this.viewer.scene.useWebVR = true
+      }
+    },
+    onGeolocate () {
+      this.updatePosition()
+    },
+    refreshOnGeolocation () {
+      const position = this.$store.get('user.position')
+      this.center(position.longitude, position.latitude, 10000)
     }
   },
   created () {
@@ -124,9 +156,12 @@ export default {
     }
     this.bounds = new Cesium.Rectangle()
     this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
+    Events.$on('user-position-changed', this.refreshOnGeolocation)
+    if (this.$store.get('user.position')) this.refreshOnGeolocation()
   },
   beforeDestroy () {
     this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
+    Events.$off('user-position-changed', this.refreshOnGeolocation)
   }
 }
 </script>
