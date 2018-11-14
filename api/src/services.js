@@ -30,7 +30,6 @@ module.exports = async function () {
     logger.error(error.message)
   }
 
-  // 
   let usersService = app.getService('users')
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
@@ -49,7 +48,7 @@ module.exports = async function () {
 
   let layersService = app.getService('layers')
   let defaultLayers = await fs.readJson('./config/layers.json')
-  const layers = await layersService.find({paginate: false})
+  const layers = await layersService.find({ paginate: false })
   for (let i = 0; i < defaultLayers.length; i++) {
     const defaultLayer = defaultLayers[i]
     let createdLayer = _.find(layers, { name: defaultLayer.name })

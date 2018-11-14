@@ -10,8 +10,8 @@ export default {
   name: 'globe-panel',
   props: {
     layers: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     }
   },
   data () {

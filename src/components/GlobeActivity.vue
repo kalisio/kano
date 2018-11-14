@@ -34,8 +34,6 @@ export default {
   mixins: [
     kCoreMixins.baseActivity,
     kMapMixins.globe.baseGlobe,
-    kMapMixins.globe.baseLayers,
-    kMapMixins.globe.overlayLayers,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers
   ],
@@ -45,19 +43,23 @@ export default {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
     }
   },
-  data () {
-    return {
-    }
-  },
   methods: {
     async refreshActivity () {
       this.clearActivity()
       // Title
       this.setTitle('Kano')
-      // RightPanel
+      // Retrive the layers
+      this.layers = {}
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
-      this.setRightPanelContent('GlobePanel', [ { layers: response.data } ])
+      _.forEach(response.data, (layer) => {
+        if (layer.cesium) {
+          layer['handler'] = (options) => this.onLayerTriggered(layer, options)
+          this.addLayer(layer)
+        }
+      })
+      // Setup the right pane
+      this.setRightPanelContent('GlobePanel', this.$data)
       this.layout.hideRight()
     },
     onGlobeResized (size) {
@@ -89,6 +91,13 @@ export default {
         [Cesium.Math.toDegrees(cameraBounds.south), Cesium.Math.toDegrees(cameraBounds.west)],
         [Cesium.Math.toDegrees(cameraBounds.north), Cesium.Math.toDegrees(cameraBounds.east)]
       ])
+    },
+    onLayerTriggered (layer, options) {
+      if (options.isVisible === true) {
+        this.showLayer(layer.name)
+      } else {
+        this.hideLayer(layer.name)
+      } 
     }
   },
   created () {

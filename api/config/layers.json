@@ -16,6 +16,7 @@
     },
     "cesium": {
       "type": "OpenStreetMap",
+      "isVisible": true,
       "url": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR"
     }
   },
@@ -83,7 +84,8 @@
     "default": true,
     "type": "TerrainLayer",
     "cesium": {
-      "type": "Ellipsoid"
+      "type": "Ellipsoid",
+      "isVisible": true
     }
   }, 
   {
@@ -179,6 +181,21 @@
           "interval": 600000,
           "id": "properties.irsnId",
           "container": "markerClusterGroup"
+        }
+      ]
+    },
+    "cesium": {
+      "type": "geoJson",
+      "arguments": [
+        "https://s3.eu-central-1.amazonaws.com/kargo/teleray.json",
+        {
+          "realtime": true,
+          "interval": 600000,
+          "cluster": {
+            "pixelRange": 50
+          },
+          "marker-symbol": "lighthouse",
+          "marker-color": "#180EF1"
         }
       ]
     }
