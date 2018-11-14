@@ -52,7 +52,8 @@ export default {
     kMapMixins.geolocation,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
-    kMapMixins.map.forecastLayers
+    kMapMixins.map.forecastLayers,
+    kMapMixins.map.fileLayers
   ],
   inject: ['layout'],
   computed: {
