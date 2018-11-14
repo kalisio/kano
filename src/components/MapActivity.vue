@@ -70,7 +70,6 @@ export default {
   methods: {
     async refreshActivity () {
       this.clearActivity()
-      this.layout.hideLeft()
       // Retrive the layers
       this.layers = {}
       const layersService = this.$api.getService('layers')
@@ -86,7 +85,6 @@ export default {
       _.forEach(this.forecastModels, (model) => model['handler'] = () => this.onForecastModelSelected(model))
       // Setup the right pane
       this.setRightPanelContent('MapPanel', this.$data)
-      this.layout.hideRight()
       // TimeLine
       this.setupTimeline()
       // FAB
