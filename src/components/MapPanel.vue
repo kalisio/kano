@@ -1,7 +1,7 @@
 <template>
   <div>
     <forecastmodels-panel :forecastModels="forecastModels" :forecastModel="forecastModel" />
-    <k-layers-panel :layers="layers" :types="layerTypes" />
+    <k-layers-panel :layers="layers" :categories="layerCategories" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   data () {
     return {
-      layerTypes: []
+      layerCategories: []
     }
   },
   async created () {
@@ -34,7 +34,7 @@ export default {
   },
   async mounted () {
     // Load the layer types
-    this.layerTypes = this.$config('mapPanel.layerTypes')
+    this.layerCategories = this.$config('mapPanel.categories')
   }
 }
 </script>

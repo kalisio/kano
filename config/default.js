@@ -82,13 +82,13 @@ module.exports = {
     ]
   },
   mapPanel: {
-    layerTypes: [
+    categories: [
       { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', exclusive: false },
       { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', exclusive: true }
     ]
   },
   globePanel: {
-    layerTypes: [
+    categories: [
       { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', exclusive: false },
       { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', exclusive: true },
       { name: 'TerrainLayer', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain', exclusive: true }
