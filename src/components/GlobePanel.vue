@@ -1,6 +1,6 @@
 <template>
   <div>
-    <k-layers-panel :layers="layers" :categories="layerCategories" />
+    <k-layers-panel :layers="layers" :layerHandlers="layerHandlers" :categories="layerCategories" />
   </div>
 </template>
 
@@ -10,6 +10,10 @@ export default {
   name: 'globe-panel',
   props: {
     layers: {
+      type: Object,
+      default: () => {}
+    },
+    layerHandlers: {
       type: Object,
       default: () => {}
     }

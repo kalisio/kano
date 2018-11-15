@@ -48,6 +48,11 @@ export default {
     kMapMixins.globe.fileLayers
   ],
   inject: ['layout'],
+  data () {
+    return {
+      layerHandlers: {}
+    }
+  },
   computed: {
     globeStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
@@ -58,13 +63,11 @@ export default {
       this.clearActivity()
       // Retrive the layers
       this.layers = {}
+      this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
       _.forEach(response.data, (layer) => {
-        if (layer.cesium) {
-          layer['handler'] = (options) => this.onLayerTriggered(layer, options)
-          this.addLayer(layer)
-        }
+        if (layer.cesium) this.addLayer(layer)
       })
       // Setup the right pane
       this.setRightPanelContent('GlobePanel', this.$data)
@@ -112,8 +115,8 @@ export default {
         [Cesium.Math.toDegrees(cameraBounds.north), Cesium.Math.toDegrees(cameraBounds.east)]
       ])
     },
-    onLayerTriggered (layer, options) {
-      if (options.isVisible === true) {
+    onLayerTriggered (layer) {
+      if (!this.isLayerVisible(layer.name)) {
         this.showLayer(layer.name)
       } else {
         this.hideLayer(layer.name)

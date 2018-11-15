@@ -1,7 +1,7 @@
 <template>
   <div>
-    <forecastmodels-panel :forecastModels="forecastModels" :forecastModel="forecastModel" />
-    <k-layers-panel :layers="layers" :categories="layerCategories" />
+    <forecastmodels-panel :forecastModels="forecastModels" :forecastModelHandlers="forecastModelHandlers" :forecastModel="forecastModel" />
+    <k-layers-panel :layers="layers" :layerHandlers="layerHandlers" :categories="layerCategories" />
   </div>
 </template>
 
@@ -14,8 +14,16 @@ export default {
       type: Object,
       default: () => {}
     },
+    layerHandlers: {
+      type: Object,
+      default: () => {}
+    },
     forecastModels: {
       type: Array,
+      default: () => []
+    },
+    forecastModelHandlers: {
+      type: Object,
       default: () => []
     },
     forecastModel: {

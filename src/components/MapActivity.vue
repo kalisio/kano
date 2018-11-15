@@ -68,6 +68,12 @@ export default {
     kMapMixins.map.fileLayers
   ],
   inject: ['layout'],
+  data () {
+    return {
+      layerHandlers: {},
+      forecastModelHandlers: {}
+    }
+  },
   computed: {
     mapStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
@@ -92,19 +98,17 @@ export default {
   methods: {
     async refreshActivity () {
       this.clearActivity()
-      // Retrive the layers
+      // Retrieve the layers
       this.layers = {}
+      this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
       const layersService = this.$api.getService('layers')
       let response = await layersService.find()
       _.forEach(response.data, (layer) => {
-        if (layer.leaflet) {
-          layer['handler'] = (options) => this.onLayerTriggered(layer, options)
-          this.addLayer(layer)
-        }
+        if (layer.leaflet) this.addLayer(layer)
       })
       // Retrieve the forecast models
       await this.setupWeacast()
-      _.forEach(this.forecastModels, (model) => model['handler'] = () => this.onForecastModelSelected(model))
+      this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
       // Setup the right pane
       this.setRightPanelContent('MapPanel', this.$data)
       // TimeLine
@@ -217,8 +221,8 @@ export default {
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
     },
-    onLayerTriggered (layer, options) {
-      if (options.isVisible === true) {
+    onLayerTriggered (layer) {
+      if (!this.isLayerVisible(layer.name)) {
         this.showLayer(layer.name)
       } else {
         this.hideLayer(layer.name)

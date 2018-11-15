@@ -2,7 +2,7 @@
   <q-collapsible icon="language" :label="$t('ForecastModelsPanel.LABEL')">
     <div class="row justify-around">
       <template v-for="model in forecastModels">
-        <q-btn :id="model.name" :key="model.name" @click="model.handler(model)" :flat="model.name !== selected.name" :outline="model.name === selected.name" round>
+        <q-btn :id="model.name" :key="model.name" @click="onModelClicked(model)" :flat="model.name !== selected.name" :outline="model.name === selected.name" round>
           <img :src="model.iconUrl" width="32" height="32" />
           <q-tooltip>
             {{model.label}}
@@ -35,6 +35,10 @@ export default {
       type: Array,
       default: () => []
     },
+    forecastModelHandlers: {
+      type: Object,
+      default: () => []
+    },
     forecastModel: {
       type: Object,
       default: () => {}
@@ -43,6 +47,14 @@ export default {
   watch: {
     forecastModel: function (model) {
       this.selected = model
+    }
+  },
+  methods: {
+    callHandler(action, layer) {
+      if (this.forecastModelHandlers[action]) this.forecastModelHandlers[action](layer)
+    },
+    onModelClicked (model) {
+      this.callHandler('toggle', model)
     }
   },
   created () {
