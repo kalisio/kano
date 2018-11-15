@@ -37,7 +37,7 @@ export default {
     },
     forecastModelHandlers: {
       type: Object,
-      default: () => []
+      default: () => {}
     },
     forecastModel: {
       type: Object,

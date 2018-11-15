@@ -71,7 +71,12 @@ export default {
   data () {
     return {
       layerHandlers: {},
-      forecastModelHandlers: {}
+      forecastModelHandlers: {},
+      timeLine: {
+        start: Date.now(),
+        end: Date.now(),
+        current: Date.now()
+      }
     }
   },
   computed: {
@@ -84,15 +89,6 @@ export default {
       _.forOwn(this.leafletLayers, layer => {
         if (layer instanceof L.weacast.ForecastLayer) layer.setForecastModel(model)
       })
-    }
-  },
-  data () {
-    return {
-      timeLine: {
-        start: Date.now(),
-        end: Date.now(),
-        current: Date.now()
-      }
     }
   },
   methods: {
