@@ -21,6 +21,18 @@
       round 
       icon="layers"
       @click="layout.toggleRight()" />
+    <div class="row justify-center items-end window-height window-width">
+      <div class="col-8 demo-div flex items-center">
+        <k-time-controller
+          :min="timeLine.start" 
+          :max="timeLine.end" 
+          :value="timeLine.current" 
+          @change="onTimeLineUpdated"
+          :timezone="'auto'"
+          pointerColor="red" 
+          pointerTextColor="white" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -66,6 +78,15 @@ export default {
       _.forOwn(this.leafletLayers, layer => {
         if (layer instanceof L.weacast.ForecastLayer) layer.setForecastModel(model)
       })
+    }
+  },
+  data () {
+    return {
+      timeLine: {
+        start: Date.now(),
+        end: Date.now(),
+        current: Date.now()
+      }
     }
   },
   methods: {
@@ -215,6 +236,9 @@ export default {
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
     },
+    onTimeLineUpdated (time) {
+      this.setCurrentTime(moment.utc(time))
+    },
     refreshOnGeolocation () {
       const position = this.$store.get('user.position')
       this.center(position.longitude, position.latitude)
@@ -227,28 +251,22 @@ export default {
       .catch(error => logger.error('Cannot initialize weacast API', error))
     },
     setupTimeline () {
-      // FIXME: to be replaced by timeline component initialization
-      let timeDimension = L.timeDimension({})
-      L.control.timeDimension({
-        timeDimension,
-        position: 'bottomright',
-        speedSlider: false,
-        playButton: false,
-        playerOptions: { minBufferReady: -1 } // This avoid preloading of next times
-      }).addTo(this.map)
-      const now = moment.utc().startOf('hour')
-      let times = []
-      for (let timeOffset = 0; timeOffset <= 24; timeOffset += 1) {
-        times.push(now.clone().add({ hours: timeOffset }))
-      }
-      timeDimension.on('timeload', data => this.setCurrentTime(data.time))
-      timeDimension.setAvailableTimes(times.map(time => time.format()), 'replace')
+      this.timeLine.current = Date.now()
+      let startTime = new Date()
+      startTime.setDate(startTime.getDate() - 1)
+      this.timeLine.start = startTime.getTime()
+      let endTime = new Date()
+      endTime.setDate(endTime.getDate() + 1)
+      this.timeLine.end = endTime.getTime()
+      this.onTimeLineUpdated(this.timeLine.current)
     }
   },
   created () {
     // Enable the observers in order to refresh the layout
     this.observe = true
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
+    // Load the required components
+    this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
   },
   mounted () {
     this.setupMap()
@@ -280,3 +298,18 @@ export default {
   }
 }
 </script>
+
+<style>
+  .demo {
+    margin-left: 30px;
+  }
+  .demo-div {
+    height: 80px;
+    width: 100%;
+    background-color: #dedbdb;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+  }
+</style>
