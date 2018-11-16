@@ -149,7 +149,12 @@ export default {
     getPointMarker (feature, latlng) {
       // Use wind barbs on probed features
       if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
-        return this.getProbedLocationMarker(feature, latlng)
+        let marker = this.getProbedLocationMarker(feature, latlng)
+        marker.on('dragend', (event) => {
+          const position = event.target.getLatLng()
+          this.performDynamicLocationProbing(position.lng, position.lat)
+        })
+        return marker
       }
       // ADS-B
       else if (_.has(feature, 'properties.icao')) {
@@ -280,18 +285,22 @@ export default {
         }
       })
     },
+    async performDynamicLocationProbing (long, lat) {
+      this.setMapCursor('processing-cursor')
+      try {
+        await this.probeDynamicLocation(long, lat,
+          moment.utc(), moment.utc().add({ days: 5 }))
+      } catch (error) {
+        logger.error(error)
+      }
+      this.unsetMapCursor('processing-cursor')
+      this.createProbedLocationLayer()
+    },
     onProbeDynamicLocation () {
       let probe = async (event) => {
         this.unsetMapCursor('probe-cursor')
         this.map.off('click', probe)
-        this.setMapCursor('processing-cursor')
-        try {
-          await this.probeDynamicLocation(event.latlng.lng, event.latlng.lat,
-            moment.utc(), moment.utc().add({ days: 5 }))
-        } catch (error) {
-          logger.error(error)
-        }
-        this.unsetMapCursor('processing-cursor')
+        await this.performDynamicLocationProbing(event.latlng.lng, event.latlng.lat)
         // Quasar popover is not persistent and closes when clicking outside
         // We manually remove event listeners so that it becomes persistent
         setTimeout(() => {
@@ -299,7 +308,6 @@ export default {
           document.body.removeEventListener('touchstart', this.$refs.popover.close, true)
         }, 1000)
         this.$refs.popover.open()
-        this.createProbedLocationLayer()
       }
       this.setMapCursor('probe-cursor')
       this.map.on('click', probe)
