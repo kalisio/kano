@@ -337,18 +337,12 @@ export default {
       .catch(error => logger.error('Cannot initialize weacast API', error))
     },
     setupTimeline () {
-      let currentDate = this.getDate()
-      this.timeLine.current = currentDate.getTime()
-      let startTime = this.getDate()
-      startTime.setDate(startTime.getDate() - 1)
-      this.timeLine.start = startTime.getTime()
-      let endTime = this.getDate()
-      endTime.setDate(endTime.getDate() + 1)
-      this.timeLine.end = endTime.getTime()
-      this.onTimeLineUpdated(this.timeLine.current)
-    },
-    getDate () {
-      return new Date()
+      let date = moment.utc()
+      this.setCurrentTime(date.clone())
+      this.timeLine.current = date.valueOf()
+      this.timeLine.start = date.add({ days: -1 }).valueOf()
+      this.timeLine.end = date.add({ days: 7 }).valueOf()
+      
     }
   },
   created () {
