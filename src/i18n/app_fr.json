@@ -14,9 +14,15 @@
     "DISCONNECT": "La connexion au serveur a été interrompue, merci de patienter jusqu'à la reconnexion...",
     "RECONNECT": "Tentative de reconnection en cours..."
   },
+  "TimeSeries": {
+    "GRAPH": "Séries temporelles - {{location}}",
+    "WIND": "Vent"
+  },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
-    "GEOLOCATE": "Ma position"
+    "GEOLOCATE": "Ma position",
+    "PROBE": "Mesurer position",
+    "PROBED_LOCATION": "Position mesurée"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
