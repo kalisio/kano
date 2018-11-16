@@ -35,8 +35,8 @@
       round 
       icon="layers"
       @click="layout.toggleRight()" />
-    <div class="row justify-center items-end window-height window-width">
-      <div class="col-8 demo-div flex items-center">
+
+    <q-fixed-position corner="bottom-left" :offset="[110, 40]" style="width: 100%;" >
         <k-time-controller
           :min="timeLine.start" 
           :max="timeLine.end" 
@@ -44,9 +44,10 @@
           @change="onTimeLineUpdated"
           :timezone="'auto'"
           pointerColor="red" 
-          pointerTextColor="white" />
-      </div>
-    </div>
+          pointerTextColor="white"
+          style="width: 80%;"
+        />
+    </q-fixed-position>      
   </div>
 </template>
 
@@ -58,7 +59,7 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
 import 'weacast-leaflet'
-import { Events, QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { Events, QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
@@ -75,6 +76,7 @@ export default {
     QWindowResizeObservable,
     QResizeObservable,
     QBtn,
+    QFixedPosition,
     TimeSeries
   },
   mixins: [
@@ -394,15 +396,5 @@ console.info('REFRESH')
 }
 .processing-cursor {
   cursor: wait;
-}
-
-.demo-div {
-  height: 80px;
-  width: 100%;
-  background-color: #dedbdb;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 30px;
-  padding-bottom: 15px;
 }
 </style>
