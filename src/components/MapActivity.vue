@@ -35,14 +35,18 @@
       round 
       icon="layers"
       @click="layout.toggleRight()" />
-    <k-time-controller
-      :min="timeLine.start" 
-      :max="timeLine.end" 
-      :value="timeLine.current" 
-      @change="onTimeLineUpdated"
-      :timezone="'auto'"
-      pointerColor="red" 
-      pointerTextColor="white" />
+    <div class="row justify-center items-end window-height window-width">
+      <div class="col-8 demo-div flex items-center">
+        <k-time-controller
+          :min="timeLine.start" 
+          :max="timeLine.end" 
+          :value="timeLine.current" 
+          @change="onTimeLineUpdated"
+          :timezone="'auto'"
+          pointerColor="red" 
+          pointerTextColor="white" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -390,5 +394,15 @@ console.info('REFRESH')
 }
 .processing-cursor {
   cursor: wait;
+}
+
+.demo-div {
+  height: 80px;
+  width: 100%;
+  background-color: #dedbdb;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 15px;
 }
 </style>
