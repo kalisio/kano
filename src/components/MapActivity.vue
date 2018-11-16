@@ -73,9 +73,9 @@ export default {
       layerHandlers: {},
       forecastModelHandlers: {},
       timeLine: {
-        start: Date.now(),
-        end: Date.now(),
-        current: Date.now()
+        start: null,
+        end: null,
+        current: null
       }
     }
   },
@@ -93,7 +93,10 @@ export default {
   },
   methods: {
     async refreshActivity () {
+console.info('REFRESH')      
       this.clearActivity()
+      // TimeLine
+      this.setupTimeline()
       // Retrieve the layers
       this.layers = {}
       this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
@@ -107,8 +110,6 @@ export default {
       this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
       // Setup the right pane
       this.setRightPanelContent('MapPanel', this.$data)
-      // TimeLine
-      this.setupTimeline()
       // FAB
       this.registerFabAction({
         name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
@@ -251,14 +252,18 @@ export default {
       .catch(error => logger.error('Cannot initialize weacast API', error))
     },
     setupTimeline () {
-      this.timeLine.current = Date.now()
-      let startTime = new Date()
+      let currentDate = this.getDate()
+      this.timeLine.current = currentDate.getTime()
+      let startTime = this.getDate()
       startTime.setDate(startTime.getDate() - 1)
       this.timeLine.start = startTime.getTime()
-      let endTime = new Date()
+      let endTime = this.getDate()
       endTime.setDate(endTime.getDate() + 1)
       this.timeLine.end = endTime.getTime()
       this.onTimeLineUpdated(this.timeLine.current)
+    },
+    getDate () {
+      return new Date()
     }
   },
   created () {
