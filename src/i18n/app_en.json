@@ -14,9 +14,15 @@
     "DISCONNECT": "The server connection has been lost, please wait until reconnection...",
     "RECONNECT": "We are trying to reconnect..."
   },
+  "TimeSeries": {
+    "GRAPH": "Timeseries - {{location}}",
+    "WIND": "Wind"
+  },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
-    "GEOLOCATE": "My position"
+    "GEOLOCATE": "My position",
+    "PROBE": "Probe location",
+    "PROBED_LOCATION": "Probed location"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

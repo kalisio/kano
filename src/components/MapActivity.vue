@@ -2,6 +2,20 @@
   <div>
     <div id="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
+      <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]">
+        <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
+        <q-btn icon="fullscreen" flat @click="onToggleProbeFullscreen"></q-btn>
+        <time-series
+          :feature="probedLocation"
+          style="{ width: 30vw; max-width: 30vw; height: 20vw; max-height: 20vw; overflow: hidden; }">
+        </time-series>
+      </q-popover>
+      <q-modal ref="modal" maximized>
+        <q-btn icon="close" flat @click="onCloseProbeModal"></q-btn>
+        <time-series
+          :feature="probedLocation">
+        </time-series>
+      </q-modal>
     </div>
     <q-btn 
       id="side-nav-toggle"
@@ -21,18 +35,14 @@
       round 
       icon="layers"
       @click="layout.toggleRight()" />
-    <div class="row justify-center items-end window-height window-width">
-      <div class="col-8 demo-div flex items-center">
-        <k-time-controller
-          :min="timeLine.start" 
-          :max="timeLine.end" 
-          :value="timeLine.current" 
-          @change="onTimeLineUpdated"
-          :timezone="'auto'"
-          pointerColor="red" 
-          pointerTextColor="white" />
-      </div>
-    </div>
+    <k-time-controller
+      :min="timeLine.start" 
+      :max="timeLine.end" 
+      :value="timeLine.current" 
+      @change="onTimeLineUpdated"
+      :timezone="'auto'"
+      pointerColor="red" 
+      pointerTextColor="white" />
   </div>
 </template>
 
@@ -43,21 +53,25 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
-import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
-import { weacast } from 'weacast-core/client'
 import 'weacast-leaflet'
+import { Events, QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import TimeSeries from './TimeSeries'
 
 const { offset } = dom
 
 export default {
   name: 'k-map-activity',
   components: {
+    QPopover,
+    QModal,
     QWindowResizeObservable,
     QResizeObservable,
-    QBtn
+    QBtn,
+    TimeSeries
   },
   mixins: [
     kCoreMixins.baseActivity,
@@ -81,7 +95,8 @@ export default {
   },
   computed: {
     mapStyle () {
-      return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
+      let style = 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute;'
+      return style
     }
   },
   watch: {
@@ -116,6 +131,9 @@ export default {
       this.registerFabAction({
         name: 'geolocate', label: this.$t('MapActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
       })
+      this.registerFabAction({
+        name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onProbeDynamicLocation
+      })
     },
     createLeafletTimedWmsLayer (options) {
       // Check for valid type
@@ -129,8 +147,12 @@ export default {
       return layer
     },
     getPointMarker (feature, latlng) {
+      // Use wind barbs on probed features
+      if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
+        return this.getProbedLocationMarker(feature, latlng)
+      }
       // ADS-B
-      if (_.has(feature, 'properties.icao')) {
+      else if (_.has(feature, 'properties.icao')) {
         return this.createMarkerFromStyle(latlng, {
           icon: {
             type: 'icon',
@@ -230,11 +252,61 @@ export default {
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
+    onToggleProbeFullscreen () {
+      this.$refs.popover.close( () => this.$refs.modal.open())
+    },
+    onCloseProbePopover () {
+      this.$refs.popover.close()
+    },
+    onCloseProbeModal () {
+      this.$refs.modal.open()
+    },
     onGeolocate () {
       this.updatePosition()
     },
+    createProbedLocationLayer () {
+      if (!this.probedLocation) return
+      const name = this.$t('MapActivity.PROBED_LOCATION')
+      // Remove any previous layer
+      this.removeLayer(name)
+      this.addLayer({
+        name,
+        type: 'OverlayLayer',
+        icon: 'colorize',
+        leaflet: {
+          type: 'geoJson',
+          isVisible: true,
+          arguments: [ this.getProbedLocationAtCurrentTime(), {} ]
+        }
+      })
+    },
+    onProbeDynamicLocation () {
+      let probe = async (event) => {
+        this.unsetMapCursor('probe-cursor')
+        this.map.off('click', probe)
+        this.setMapCursor('processing-cursor')
+        try {
+          await this.probeDynamicLocation(event.latlng.lng, event.latlng.lat,
+            moment.utc(), moment.utc().add({ days: 5 }))
+        } catch (error) {
+          logger.error(error)
+        }
+        this.unsetMapCursor('processing-cursor')
+        // Quasar popover is not persistent and closes when clicking outside
+        // We manually remove event listeners so that it becomes persistent
+        setTimeout(() => {
+          document.body.removeEventListener('click', this.$refs.popover.close, true)
+          document.body.removeEventListener('touchstart', this.$refs.popover.close, true)
+        }, 1000)
+        this.$refs.popover.open()
+        this.createProbedLocationLayer()
+      }
+      this.setMapCursor('probe-cursor')
+      this.map.on('click', probe)
+    },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
+      this.createProbedLocationLayer()
     },
     onTimeLineUpdated (time) {
       this.setCurrentTime(moment.utc(time))
@@ -245,7 +317,7 @@ export default {
     },
     setupWeacast () {
       const config = this.$config('weacast')
-      this.weacastApi = weacast(this.$config('weacast'))
+      this.weacastApi = weacast(config)
       return this.weacastApi.authenticate(config.authentication)
       .then(_ => this.setupForecastModels())
       .catch(error => logger.error('Cannot initialize weacast API', error))
@@ -300,16 +372,10 @@ export default {
 </script>
 
 <style>
-  .demo {
-    margin-left: 30px;
-  }
-  .demo-div {
-    height: 80px;
-    width: 100%;
-    background-color: #dedbdb;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 30px;
-    padding-bottom: 15px;
-  }
+.probe-cursor {
+  cursor: crosshair;
+}
+.processing-cursor {
+  cursor: wait;
+}
 </style>
