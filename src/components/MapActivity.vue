@@ -113,8 +113,7 @@ export default {
     }
   },
   methods: {
-    async refreshActivity () {
-console.info('REFRESH')      
+    async refreshActivity () {  
       this.clearActivity()
       // TimeLine
       this.setupTimeline()
