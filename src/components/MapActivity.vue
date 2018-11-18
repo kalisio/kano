@@ -36,7 +36,7 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
-    <q-fixed-position corner="bottom-left" :offset="[110, 40]" style="width: 100%;" >
+    <q-fixed-position corner="bottom-left" :offset="[110, 30]" style="width: 100%;" >
         <k-time-controller
           :min="timeLine.start" 
           :max="timeLine.end" 
