@@ -39,10 +39,10 @@
     <q-fixed-position corner="bottom-left" :offset="[110, 30]" style="width: 100%;" >
         <k-time-controller
           :min="timeLine.start" 
-          :max="timeLine.end" 
+          :max="timeLine.end"
+          :step="'h'"
           :value="timeLine.current" 
           @change="onTimeLineUpdated"
-          :timezone="'auto'"
           pointerColor="red" 
           pointerTextColor="white"
           style="width: 80%;"
