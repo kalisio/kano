@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="map" :style="mapStyle">
+    <div id="map" ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
       <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]">
         <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
@@ -36,7 +36,7 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
-    <q-fixed-position corner="bottom-left" :offset="[110, 30]" style="width: 100%;" >
+    <q-fixed-position corner="bottom-left" :offset="[110, 30]" :style="timelineContainerStyle">   
         <k-time-controller
           :min="timeLine.start" 
           :max="timeLine.end"
@@ -45,7 +45,7 @@
           @change="onTimeLineUpdated"
           pointerColor="red" 
           pointerTextColor="white"
-          style="width: 80%;"
+          style="width: 100%;"
         />
     </q-fixed-position>      
   </div>
@@ -96,13 +96,19 @@ export default {
         start: null,
         end: null,
         current: null
-      }
+      },
+      mapWidth: null
     }
   },
   computed: {
     mapStyle () {
       let style = 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute;'
       return style
+    },
+    timelineContainerStyle () {
+      return {
+        width: 0.8 * this.mapWidth + 'px'
+      }
     }
   },
   watch: {
@@ -241,7 +247,10 @@ export default {
     },
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
-      if (this.observe) this.refreshMap()
+      if (this.observe) {
+        this.refreshMap()
+        this.onResizeMap()
+      }
     },
     onMapMoved () {
       this.bounds = this.map.getBounds()
@@ -342,7 +351,14 @@ export default {
       this.timeLine.current = date.valueOf()
       this.timeLine.start = date.add({ days: -1 }).valueOf()
       this.timeLine.end = date.add({ days: 7 }).valueOf()
-      
+    },
+    onResizeMap () {
+      const componentRef = this.$refs.map
+
+      if (componentRef) {
+        const componentRect = componentRef.getBoundingClientRect()
+        this.mapWidth = componentRect.width
+      }
     }
   },
   created () {
