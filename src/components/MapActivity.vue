@@ -390,6 +390,33 @@ export default {
           } 
 
           return startValue
+        },
+        valueChanged (value, previousValue, step) {
+          let changed = true
+
+          if (step !== null) {
+            changed = false
+
+            if (previousValue === null) {
+              changed = true
+
+            } else {
+              const difference = Math.abs(value - previousValue)
+
+              switch (step) {
+                case 'h':
+                  changed = (difference >= 60 * 60000)
+                  break
+                case 'm':
+                  changed = (difference >= 60000)   
+                  break
+                default:
+                  changed = true
+              }
+            }
+          }
+
+          return changed
         }
       }
     },
