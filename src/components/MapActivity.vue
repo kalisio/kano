@@ -37,7 +37,7 @@
       @click="layout.toggleRight()" />
 
     <q-fixed-position corner="bottom-left" :offset="[110, 30]" :style="timelineContainerStyle">   
-        <k-time-controller
+        <k-time-controller v-if="forecastModel"
           :min="timeLine.start" 
           :max="timeLine.end"
           :step="'h'"
@@ -91,13 +91,15 @@ export default {
   ],
   inject: ['layout'],
   data () {
+    let now = moment.utc()
+
     return {
       layerHandlers: {},
       forecastModelHandlers: {},
       timeLine: {
-        start: null,
-        end: null,
-        current: null
+        start: now.add({ days: -7 }).clone().valueOf(),
+        end: now.add({ days: 7 }).clone().valueOf(),
+        current: now.clone().valueOf()
       },
       timeLineInterval: null,
       timeLineFormatter: null,
@@ -117,16 +119,17 @@ export default {
   },
   watch: {
     forecastModel: function (model) {
+      // Update layers
       _.forOwn(this.leafletLayers, layer => {
         if (layer instanceof L.weacast.ForecastLayer) layer.setForecastModel(model)
       })
+      // Update timeLine
+      this.setupTimeline()
     }
   },
   methods: {
     async refreshActivity () {  
       this.clearActivity()
-      // TimeLine
-      this.setupTimeline()
       // Retrieve the layers
       this.layers = {}
       this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
@@ -137,6 +140,8 @@ export default {
       })
       // Retrieve the forecast models
       await this.setupWeacast()
+      // TimeLine
+      this.setupTimeline()
       this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
       // Setup the right pane
       this.setRightPanelContent('MapPanel', this.$data)
@@ -253,7 +258,9 @@ export default {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) {
         this.refreshMap()
-        this.onResizeMap()
+        if (this.$refs.map) {
+          this.mapWidth = this.$refs.map.getBoundingClientRect().width
+        }
       }
     },
     onMapMoved () {
@@ -344,20 +351,31 @@ export default {
       const position = this.$store.get('user.position')
       this.center(position.longitude, position.latitude)
     },
-    setupWeacast () {
+    async setupWeacast () {
       const config = this.$config('weacast')
       this.weacastApi = weacast(config)
-      return this.weacastApi.authenticate(config.authentication)
-      .then(_ => this.setupForecastModels())
-      .catch(error => logger.error('Cannot initialize weacast API', error))
+      // Alter the get service function because we rewrite the access path by prefixing by 'weacast'
+      this.weacastApi.getService = (path) => {
+        return this.weacastApi.service(this.$config('apiPath') + '/' + path)
+      }
+      try {
+        await this.weacastApi.authenticate(config.authentication)
+        this.setupForecastModels()
+      } catch(error) {
+        logger.error('Cannot initialize weacast API', error)
+      }
     },
     setupTimeline () {
-      let date = moment.utc()
-      this.setCurrentTime(date.clone())
-      this.timeLine.current = date.valueOf()
-      this.timeLine.start = date.add({ days: -1 }).valueOf()
-      this.timeLine.end = date.add({ days: 7 }).valueOf()
-
+      if (!this.forecastModel) return
+      let now = moment.utc()
+      this.setCurrentTime(now.clone())
+      // Start just before the first available data
+      const start = this.forecastModel.lowerLimit - this.forecastModel.interval
+      // Start just after the last available data
+      const end = this.forecastModel.upperLimit + this.forecastModel.interval
+      this.timeLine.current = now.valueOf()
+      this.timeLine.start = now.clone().add({ seconds: start }).valueOf()
+      this.timeLine.end = now.clone().add({ seconds: end }).valueOf()
       this.timeLineInterval = this.getTimeLineInterval()
       this.timeLineFormatter = this.getTimeLineFormatter()
     },
