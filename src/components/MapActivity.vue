@@ -41,7 +41,9 @@
           :min="timeLine.start" 
           :max="timeLine.end"
           :step="'h'"
-          :value="timeLine.current" 
+          :value="timeLine.current"
+          :timeInterval="timeLineInterval"
+          :timeFormatter="timeLineFormatter"
           @change="onTimeLineUpdated"
           pointerColor="red" 
           pointerTextColor="white"
@@ -97,6 +99,8 @@ export default {
         end: null,
         current: null
       },
+      timeLineInterval: null,
+      timeLineFormatter: null,
       mapWidth: null
     }
   },
@@ -351,6 +355,69 @@ export default {
       this.timeLine.current = date.valueOf()
       this.timeLine.start = date.add({ days: -1 }).valueOf()
       this.timeLine.end = date.add({ days: 7 }).valueOf()
+
+      this.timeLineInterval = this.getTimeLineInterval()
+      this.timeLineFormatter = this.getTimeLineFormatter()
+    },
+    getTimeLineInterval () {
+      // interval length: length of 1 day in milliseconds
+      const length = 24 * 60 * 60000
+
+      return {
+        length,
+        getIntervalStartValue (rangeStart) {
+          const startTime = new Date(rangeStart)
+
+          const year = startTime.getFullYear()
+          const month = startTime.getMonth()
+          const day = startTime.getDate()
+          const hour = startTime.getHours()
+          const minute = startTime.getMinutes()
+
+          let startValue
+
+          // range starts on a day (ignoring seconds)
+          if (hour == 0 && minute == 0) {
+            startValue = rangeStart
+
+          } else {
+            let startOfDay = new Date(year, month, day, 0, 0, 0)
+            startOfDay.setDate(startOfDay.getDate() + 1)
+
+            startValue = startOfDay.getTime()
+          } 
+
+          return startValue
+        }
+      }
+    },
+    getTimeLineFormatter () {
+
+      return {
+
+        format (value, type, displayOptions) {
+          const time = new Date(value)
+          let label
+
+          switch (type) {
+            case 'interval':
+              if (displayOptions.width >= 110) {
+                label = moment(time).format('dddd D')
+              } else {
+                label = moment(time).format('ddd')
+              }
+              break 
+            case 'pointer':
+              label = moment(time).format('dddd D - h A')
+              break 
+            case 'indicator':
+              label = moment(time).format('h:mm A')
+              break 
+          }
+
+          return label
+        }        
+      }
     },
     onResizeMap () {
       const componentRef = this.$refs.map
