@@ -26,6 +26,8 @@ RUN npm run build
 WORKDIR /opt/${APP}
 
 RUN yarn install
+RUN yarn link @kalisio/kdk-core
+RUN yarn link @kalisio/kdk-map
 RUN git clone https://github.com/weacast/weacast-core.git -b master --single-branch && cd weacast-core && yarn install && yarn link && cd ..
 RUN git clone https://github.com/weacast/weacast-leaflet.git -b master --single-branch && cd weacast-leaflet && yarn install && yarn link weacast-core && yarn link && cd ..
 RUN yarn link weacast-core
