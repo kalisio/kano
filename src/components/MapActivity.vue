@@ -335,8 +335,10 @@ export default {
       this.weacastApi.setForecastTime(time)
       this.createProbedLocationLayer()
     },
-    onTimeLineUpdated (time) {
-      this.setCurrentTime(moment.utc(time))
+    onTimeLineUpdated (event) {
+      if (event.final) {
+          this.setCurrentTime(moment.utc(event.value))
+      }
     },
     refreshOnGeolocation () {
       const position = this.$store.get('user.position')
@@ -411,7 +413,7 @@ export default {
               label = moment(time).format('dddd D - h A')
               break 
             case 'indicator':
-              label = moment(time).format('h:mm A')
+              label = moment(time).format('h A')
               break 
           }
 
