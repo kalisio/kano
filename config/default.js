@@ -19,10 +19,10 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
-    weacastApi = 'http://localhost:' + (clientPort+2) // Weacast app client/server port = 8082/8083
+    weacastApi = 'http://localhost:' + clientPort // Kano app proxy all request to Weacast app
   } else {
     domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
-    weacastApi = 'http://localhost:' + (serverPort+1) // Weacast app client/server port = 8082
+    weacastApi = 'http://localhost:' + serverPort // Kano app proxy all request to Weacast app
   }
 }
 
@@ -96,7 +96,7 @@ module.exports = {
   },
   weacast: {
     apiUrl: weacastApi,
-    apiPath: API_PREFIX,
+    apiPath: '/weacast' + API_PREFIX,
     apiTimeout: 30000,
     authentication: {
       strategy: 'local',

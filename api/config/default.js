@@ -6,20 +6,25 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
-let domain
+let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:' + clientPort
+    domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
+    weacastApi = 'http://localhost:' + (clientPort+2) // Weacast app client/server port = 8082/8083
   } else {
-    domain = 'http://localhost:' + serverPort
+    domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
+    weacastApi = 'http://localhost:' + (serverPort+1) // Weacast app client/server port = 8082
   }
 }
 
@@ -27,7 +32,25 @@ module.exports = {
   // Proxy your API if using any.
   // Also see /build/script.dev.js and search for "proxy api requests"
   // https://github.com/chimurai/http-proxy-middleware
-  proxyTable: {},
+  proxyTable: {
+    '/weacast/api': {
+      target: weacastApi,
+      changeOrigin: true,
+      logLevel: 'debug',
+      pathRewrite: {
+        '^/weacast/api': '/api'
+      }
+    },
+    '/weacast/apiws': {
+      target: weacastApi,
+      changeOrigin: true,
+      ws: true,
+      logLevel: 'debug',
+      pathRewrite: {
+        '^/weacast/apiws': '/apiws'
+      }
+    }
+  },
   domain,
   host: process.env.HOSTNAME || 'localhost',
   port: serverPort,

@@ -70,10 +70,16 @@ module.exports = {
         ws: true,
         logLevel: 'debug'
       },
-      // The auth endpoints are not easy to prefix so we manage it manually
-      '/auth': {
+      // Proxy weacast as well
+      '/weacast/api': {
         target: 'http://localhost:' + serverPort,
         changeOrigin: true,
+        logLevel: 'debug'
+      },
+      '/weacast/apiws': {
+        target: 'http://localhost:' + serverPort,
+        changeOrigin: true,
+        ws: true,
         logLevel: 'debug'
       }
     }
