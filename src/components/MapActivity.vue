@@ -284,13 +284,13 @@ export default {
       this.map.toggleFullscreen()
     },
     onToggleProbeFullscreen () {
-      this.$refs.popover.close( () => this.$refs.modal.open())
+      this.$refs.popover.close(() => this.$refs.modal.open())
     },
     onCloseProbePopover () {
       this.$refs.popover.close()
     },
     onCloseProbeModal () {
-      this.$refs.modal.open()
+      this.$refs.modal.close()
     },
     onGeolocate () {
       this.updatePosition()
@@ -315,7 +315,7 @@ export default {
       this.setMapCursor('processing-cursor')
       try {
         await this.probeDynamicLocation(long, lat,
-          moment.utc(), moment.utc().add({ days: 5 }))
+          moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
       } catch (error) {
         logger.error(error)
       }
