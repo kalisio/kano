@@ -16,13 +16,20 @@
   },
   "TimeSeries": {
     "GRAPH": "Timeseries - {{location}}",
-    "WIND": "Wind"
+    "WIND": "Wind",
+    "WIND_SPEED": "Speed",
+    "WIND_GUST": "Gust",
+    "PRECIPITATIONS": "Precipitations"
   },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
     "PROBE": "Probe location",
-    "PROBED_LOCATION": "Probed location"
+    "PROBED_LOCATION": "Probed location",
+    "VIGICRUES_LEVEL_1": "No flood risk",
+    "VIGICRUES_LEVEL_2": "Flood risk",
+    "VIGICRUES_LEVEL_3": "Important flood risk",
+    "VIGICRUES_LEVEL_4": "Major flood risk"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

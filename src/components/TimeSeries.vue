@@ -1,6 +1,6 @@
 <template>
   <!-- root node required -->
-  <div>
+  <div ref="timeseries">
     <q-collapsible opened icon="list" :label="$t('TimeSeries.GRAPH', { location })">
       <canvas ref="chart" style="{ width: 100%; }"></canvas>
     </q-collapsible>
@@ -25,7 +25,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import Chart from 'chart.js'
-import { QCollapsible, QIcon, QTooltip } from 'quasar'
+import { QCollapsible, QIcon, QTooltip, QResizeObservable } from 'quasar'
 
 export default {
   name: 'time-series',
@@ -34,9 +34,14 @@ export default {
     QIcon,
     QTooltip
   },
-  props: ['feature'],
+  props: {
+    interval: { type: Number, default: 1 },
+    stepSize: { type: Number, default: 1 },
+    feature: { type: Object, default: () => null }
+  },
   data () {
-    return {}
+    return {
+    }
   },
   watch: {
     feature: function (feature) {
@@ -54,43 +59,91 @@ export default {
     formatDateTime (time) {
       return moment.utc(time).format('MM/DD HH:mm')
     },
-    setupGraph () {
-      // Destroy previous graph if any
-      if (this.chart) this.chart.destroy()
+    filter (value, index) {
+      // We filter one value out of N according to step size
+      return (index % (this.stepSize / this.interval)) === 0
+    },
+    setupAvailableTimes () {
+      let times = []
+      const forecastTime = this.feature.forecastTime
+      if (forecastTime.gust) times.push(forecastTime.gust)
+      if (forecastTime.windSpeed) times.push(forecastTime.windSpeed)
+      if (forecastTime.precipitations) times.push(forecastTime.precipitations)
+      // Make union of all available times for x-axis
+      return _.union(...times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
+    },
+    setupAvailableDatasets () {
+      let datasets = []
       const color = Chart.helpers.color
       const forecastTime = this.feature.forecastTime
       const properties = this.feature.properties
-      // Make union of all available times for x-axis
-      let times = _.union(forecastTime.gust, forecastTime.windSpeed, forecastTime.precipitations)
-        .map(time => moment.utc(time))
-        .sort((a, b) => a - b)
-
+      if (properties.gust) {
+        datasets.push({
+          label: this.$t('TimeSeries.WIND_GUST'),
+          backgroundColor: color('rgb(255, 99, 132)').alpha(0.5).rgbString(),
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          data: properties.gust.map((value, index) => ({ x: new Date(forecastTime.gust[index]), y: value })).filter(this.filter),
+          yAxisID: 'speed'
+        })
+      }
+      if (properties.windSpeed) {
+        datasets.push({
+          label: this.$t('TimeSeries.WIND_SPEED'),
+          backgroundColor: color('rgb(255, 159, 64)').alpha(0.5).rgbString(),
+          borderColor: 'rgb(255, 159, 64)',
+          fill: false,
+          data: properties.windSpeed.map((value, index) => ({ x: new Date(forecastTime.windSpeed[index]), y: value })).filter(this.filter),
+          yAxisID: 'speed'
+        })
+      }
+      if (properties.precipitations) {
+        datasets.push({
+          label: this.$t('TimeSeries.PRECIPITATIONS'),
+          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          data: properties.precipitations.map((value, index) => ({ x: new Date(forecastTime.precipitations[index]), y: value })).filter(this.filter),
+          yAxisID: 'precipitations'
+        })
+      }
+      return datasets
+    },
+    setupAvailableYAxes () {
+      let yAxes = []
+      const properties = this.feature.properties
+      if (properties.gust || properties.windSpeed) {
+        yAxes.push({
+          id: 'speed',
+          position: 'left',
+          scaleLabel: {
+            display: true,
+            labelString: 'm/s'
+          }
+        })
+      }
+      if (properties.precipitations) {
+        yAxes.push({
+          id: 'precipitations',
+          position: 'right',
+          scaleLabel: {
+            display: true,
+            labelString: 'mm (last 3h)'
+          }
+        })
+      }
+      return yAxes
+    },
+    setupGraph () {
+      if (!this.feature) return
+      // Destroy previous graph if any
+      if (this.chart) this.chart.destroy()
+      
       const config = {
         type: 'line',
         data: {
-          labels: times,
-          datasets: [{
-            label: 'Wind gust',
-            backgroundColor: color('rgb(255, 99, 132)').alpha(0.5).rgbString(),
-            borderColor: 'rgb(255, 99, 132)',
-            fill: false,
-            data: properties.gust.map((value, index) => ({ x: new Date(forecastTime.gust[index]), y: value })),
-            yAxisID: 'speed'
-          }, {
-            label: 'Wind speed',
-            backgroundColor: color('rgb(255, 159, 64)').alpha(0.5).rgbString(),
-            borderColor: 'rgb(255, 159, 64)',
-            fill: false,
-            data: properties.windSpeed.map((value, index) => ({ x: new Date(forecastTime.windSpeed[index]), y: value })),
-            yAxisID: 'speed'
-          }, {
-            label: 'Precipitations',
-            backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
-            borderColor: 'rgb(54, 162, 235)',
-            fill: false,
-            data: properties.precipitations.map((value, index) => ({ x: new Date(forecastTime.precipitations[index]), y: value })),
-            yAxisID: 'precipitations'
-          }]
+          labels: this.setupAvailableTimes(),
+          datasets: this.setupAvailableDatasets()
         },
         options: {
           tooltips: {
@@ -105,7 +158,7 @@ export default {
               type: 'time',
               time: {
                 unit: 'hour',
-                stepSize: 3,
+                stepSize: this.stepSize,
                 displayFormats: {
                   hour: 'MM/DD HH:mm'
                 },
@@ -117,21 +170,7 @@ export default {
                 labelString: 'Date'
               }
             }],
-            yAxes: [{
-              id: 'speed',
-              position: 'left',
-              scaleLabel: {
-                display: true,
-                labelString: 'm/s'
-              }
-            }, {
-              id: 'precipitations',
-              position: 'right',
-              scaleLabel: {
-                display: true,
-                labelString: 'mm (last 3h)'
-              }
-            }]
+            yAxes: this.setupAvailableYAxes()
           }
         }
       }

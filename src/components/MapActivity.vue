@@ -6,14 +6,14 @@
         <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
         <q-btn icon="fullscreen" flat @click="onToggleProbeFullscreen"></q-btn>
         <time-series
-          :feature="probedLocation"
+          :feature="probedLocation" :stepSize="3 * forecastInterval" :interval="forecastInterval"
           style="{ width: 30vw; max-width: 30vw; height: 20vw; max-height: 20vw; overflow: hidden; }">
         </time-series>
       </q-popover>
       <q-modal ref="modal" maximized>
         <q-btn icon="close" flat @click="onCloseProbeModal"></q-btn>
         <time-series
-          :feature="probedLocation">
+          :feature="probedLocation" :stepSize="forecastInterval" :interval="forecastInterval">
         </time-series>
       </q-modal>
     </div>
@@ -65,7 +65,7 @@ import { Events, QPopover, QModal, QWindowResizeObservable, QResizeObservable, d
 import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
-import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import TimeSeries from './TimeSeries'
 
 const { offset } = dom
@@ -115,6 +115,9 @@ export default {
       return {
         width: 0.8 * this.mapWidth + 'px'
       }
+    },
+    forecastInterval () {
+      return (this.forecastModel ? this.forecastModel.interval / 3600 : 1)
     }
   },
   watch: {
@@ -171,9 +174,14 @@ export default {
       // Use wind barbs on probed features
       if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
         let marker = this.getProbedLocationMarker(feature, latlng)
+        // We use custom events on this one
+        kMapUtils.unbindLeafletEvents(marker)
         marker.on('dragend', (event) => {
           const position = event.target.getLatLng()
           this.performDynamicLocationProbing(position.lng, position.lat)
+        })
+        marker.on('click', (event) => {
+          this.$refs.popover.toggle()
         })
         return marker
       }
@@ -213,25 +221,16 @@ export default {
     },
     getFeaturePopup (feature, layer) {
       let popup = L.popup({ autoPan: false }, layer)
-      const name = _.get(feature, 'properties.name', _.get(feature, 'properties.NomEntVigiCru', _.get(feature, 'properties.icao')))
-      return popup.setContent(name)
+      const name = _.get(feature, 'properties.name',
+        _.get(feature, 'properties.NomEntVigiCru',
+        _.get(feature, 'properties.icao')))
+      return (name ? popup.setContent(name) : null)
     },
     getFeatureTooltip (feature, layer) {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        let content
-        switch (level) {
-          case 2:
-            content = 'Risque de crue génératrice de débordements'
-            break
-          case 3:
-            content = 'Risque de crue génératrice de débordements importants'
-            break
-          case 4:
-            content = 'Risque de crue majeure'
-            break
-        }
+        let content = this.$t('MapActivity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
       }
       const callsign = _.get(feature, 'properties.callsign')
@@ -243,6 +242,15 @@ export default {
       if (value) {
         let tooltip = L.tooltip({ permanent: false }, layer)
         return tooltip.setContent('<b>' + value + ' nSv/h</b>')
+      }
+      const direction = _.get(feature, 'properties.windDirection')
+      const speed = _.get(feature, 'properties.windSpeed')
+      const gust = _.get(feature, 'properties.gust')
+      const precipitations = _.get(feature, 'properties.precipitations')
+      if (!_.isNil(direction) && !_.isNil(speed) && !_.isNil(gust) && !_.isNil(precipitations)) {
+        let tooltip = L.tooltip({ permanent: false }, layer)
+        return tooltip.setContent(`<b>${speed.toFixed(2)} m/s - ${direction.toFixed(2)}°</br>
+                                   max ${gust.toFixed(2)} m/s - ${precipitations.toFixed(2)} mm/h</b>`)
       }
       return null
     },
