@@ -36,7 +36,7 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
-    <q-fixed-position corner="bottom-left" :offset="[110, 30]" :style="timelineContainerStyle">   
+    <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
         <k-time-controller v-if="forecastModel"
           :min="timeLine.start" 
           :max="timeLine.end"
@@ -97,8 +97,8 @@ export default {
       layerHandlers: {},
       forecastModelHandlers: {},
       timeLine: {
-        start: now.add({ days: -7 }).clone().valueOf(),
-        end: now.add({ days: 7 }).clone().valueOf(),
+        start: now.clone().add({ days: -7 }).valueOf(),
+        end: now.clone().add({ days: 7 }).valueOf(),
         current: now.clone().valueOf()
       },
       timeLineInterval: null,
@@ -343,8 +343,9 @@ export default {
       this.createProbedLocationLayer()
     },
     onTimeLineUpdated (event) {
+      // Only when drag stops to avoid fetching data permanently 
       if (event.final) {
-          this.setCurrentTime(moment.utc(event.value))
+        this.setCurrentTime(moment.utc(event.value))
       }
     },
     refreshOnGeolocation () {
@@ -368,14 +369,15 @@ export default {
     setupTimeline () {
       if (!this.forecastModel) return
       let now = moment.utc()
-      this.setCurrentTime(now.clone())
       // Start just before the first available data
       const start = this.forecastModel.lowerLimit - this.forecastModel.interval
       // Start just after the last available data
       const end = this.forecastModel.upperLimit + this.forecastModel.interval
-      this.timeLine.current = now.valueOf()
       this.timeLine.start = now.clone().add({ seconds: start }).valueOf()
       this.timeLine.end = now.clone().add({ seconds: end }).valueOf()
+      // Clamp current time to range
+      this.timeLine.current = Math.max(Math.min(this.timeLine.current, this.timeLine.end), this.timeLine.start)
+      this.setCurrentTime(moment.utc(this.timeLine.current))
       this.timeLineInterval = this.getTimeLineInterval()
       this.timeLineFormatter = this.getTimeLineFormatter()
     },
