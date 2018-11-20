@@ -24,7 +24,7 @@
     "postversion": "git push origin --tags && npm run changelog && git push origin",
     "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
     "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
-    "release:major": "cd api && run release:major && cd .. && npm version --no-git-tag-version --force major",
+    "release:major": "cd api && npm run release:major && cd .. && npm version --no-git-tag-version --force major",
     "changelog": "github_changelog_generator -u kalisio -p kapp && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "node build/script.clean.js",
     "dev": "node --max_old_space_size=4096 build/script.dev.js",
