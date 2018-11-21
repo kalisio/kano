@@ -2,7 +2,7 @@
   <!-- root node required -->
   <div ref="timeseries">
     <q-collapsible opened icon="list" :label="$t('TimeSeries.GRAPH', { location })">
-      <canvas ref="chart" style="{ width: 100%; }"></canvas>
+      <canvas ref="chart" style="{ height: 100%; width: 100%; }"></canvas>
     </q-collapsible>
     <q-collapsible opened icon="list" :label="$t('TimeSeries.WIND')">
       <div class="text-center" v-if="feature">

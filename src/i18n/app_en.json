@@ -1,4 +1,5 @@
 {
+  "REMOVE_LABEL": "Remove",
   "screen": {
     "ABOUT_KALISIO": "About",
     "CONTACT": "Contact",
@@ -21,15 +22,20 @@
     "WIND_GUST": "Gust",
     "PRECIPITATIONS": "Precipitations"
   },
+  "Activity": {
+    "VIGICRUES_LEVEL_1": "No flood risk",
+    "VIGICRUES_LEVEL_2": "Flood risk",
+    "VIGICRUES_LEVEL_3": "Important flood risk",
+    "VIGICRUES_LEVEL_4": "Major flood risk",
+    "REMOVE_LABEL": "$t(REMOVE_LABEL)",
+    "REMOVE_DIALOG_TITLE": "Remove {{layer}} ?",
+    "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?"
+  },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
     "PROBE": "Probe location",
-    "PROBED_LOCATION": "Probed location",
-    "VIGICRUES_LEVEL_1": "No flood risk",
-    "VIGICRUES_LEVEL_2": "Flood risk",
-    "VIGICRUES_LEVEL_3": "Important flood risk",
-    "VIGICRUES_LEVEL_4": "Major flood risk"
+    "PROBED_LOCATION": "Probed location"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

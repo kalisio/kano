@@ -27,9 +27,10 @@
 <script>
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
-import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import mixins from '../mixins'
 
 const { offset } = dom
 
@@ -45,12 +46,12 @@ export default {
     kMapMixins.geolocation,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
-    kMapMixins.globe.fileLayers
+    kMapMixins.globe.fileLayers,
+    mixins.activity
   ],
   inject: ['layout'],
   data () {
     return {
-      layerHandlers: {}
     }
   },
   computed: {
@@ -62,13 +63,7 @@ export default {
     async refreshActivity () {
       this.clearActivity()
       // Retrive the layers
-      this.layers = {}
-      this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
-      const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
-      _.forEach(response.data, (layer) => {
-        if (layer.cesium) this.addLayer(layer)
-      })
+      await this.refreshLayers('cesium')
       // Setup the right pane
       this.setRightPanelContent('GlobePanel', this.$data)
       // FAB
@@ -115,13 +110,6 @@ export default {
         [Cesium.Math.toDegrees(cameraBounds.north), Cesium.Math.toDegrees(cameraBounds.east)]
       ])
     },
-    onLayerTriggered (layer) {
-      if (!this.isLayerVisible(layer.name)) {
-        this.showLayer(layer.name)
-      } else {
-        this.hideLayer(layer.name)
-      } 
-    },
     onToggleFullscreen () {
       if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()
       else Cesium.Fullscreen.requestFullscreen(document.body)
@@ -135,13 +123,6 @@ export default {
         if (!Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.requestFullscreen(document.body)
         this.viewer.scene.useWebVR = true
       }
-    },
-    onGeolocate () {
-      this.updatePosition()
-    },
-    refreshOnGeolocation () {
-      const position = this.$store.get('user.position')
-      this.center(position.longitude, position.latitude, 10000)
     }
   },
   created () {
@@ -159,12 +140,9 @@ export default {
     }
     this.bounds = new Cesium.Rectangle()
     this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
-    Events.$on('user-position-changed', this.refreshOnGeolocation)
-    if (this.$store.get('user.position')) this.refreshOnGeolocation()
   },
   beforeDestroy () {
     this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
-    Events.$off('user-position-changed', this.refreshOnGeolocation)
   }
 }
 </script>

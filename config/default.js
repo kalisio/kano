@@ -78,15 +78,15 @@ module.exports = {
   },
   mapPanel: {
     categories: [
-      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', exclusive: false },
-      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', exclusive: true }
+      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', options: { exclusive: false } },
+      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', options: { exclusive: true } }
     ]
   },
   globePanel: {
     categories: [
-      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', exclusive: false },
-      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', exclusive: true },
-      { name: 'TerrainLayer', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain', exclusive: true }
+      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', options: { exclusive: false } },
+      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', options: { exclusive: true } },
+      { name: 'TerrainLayer', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain', options: { exclusive: true } }
     ]
   },
   weacast: {

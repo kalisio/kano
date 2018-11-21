@@ -61,11 +61,12 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
 import 'weacast-leaflet'
-import { Events, QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
+import { QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
+import mixins from '../mixins'
 import TimeSeries from './TimeSeries'
 
 const { offset } = dom
@@ -87,14 +88,14 @@ export default {
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
-    kMapMixins.map.fileLayers
+    kMapMixins.map.fileLayers,
+    mixins.activity
   ],
   inject: ['layout'],
   data () {
     let now = moment.utc()
 
     return {
-      layerHandlers: {},
       forecastModelHandlers: {},
       timeLine: {
         start: now.clone().add({ days: -7 }).valueOf(),
@@ -134,13 +135,7 @@ export default {
     async refreshActivity () {  
       this.clearActivity()
       // Retrieve the layers
-      this.layers = {}
-      this.layerHandlers = { toggle: (layer) => this.onLayerTriggered(layer) }
-      const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
-      _.forEach(response.data, (layer) => {
-        if (layer.leaflet) this.addLayer(layer)
-      })
+      await this.refreshLayers('leaflet')
       // Retrieve the forecast models
       await this.setupWeacast()
       // TimeLine
@@ -230,7 +225,7 @@ export default {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        let content = this.$t('MapActivity.VIGICRUES_LEVEL_' + level)
+        let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
       }
       const callsign = _.get(feature, 'properties.callsign')
@@ -278,13 +273,6 @@ export default {
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
     },
-    onLayerTriggered (layer) {
-      if (!this.isLayerVisible(layer.name)) {
-        this.showLayer(layer.name)
-      } else {
-        this.hideLayer(layer.name)
-      } 
-    },
     onForecastModelSelected (model) {
       this.forecastModel = model
     },
@@ -299,9 +287,6 @@ export default {
     },
     onCloseProbeModal () {
       this.$refs.modal.close()
-    },
-    onGeolocate () {
-      this.updatePosition()
     },
     createProbedLocationLayer () {
       if (!this.probedLocation) return
@@ -348,6 +333,7 @@ export default {
     },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
+      this.map.timeDimension.setCurrentTime(time.valueOf())
       this.createProbedLocationLayer()
     },
     onTimeLineUpdated (event) {
@@ -355,10 +341,6 @@ export default {
       if (event.final) {
         this.setCurrentTime(moment.utc(event.value))
       }
-    },
-    refreshOnGeolocation () {
-      const position = this.$store.get('user.position')
-      this.center(position.longitude, position.latitude)
     },
     async setupWeacast () {
       const config = this.$config('weacast')
@@ -388,101 +370,6 @@ export default {
       this.setCurrentTime(moment.utc(this.timeLine.current))
       this.timeLineInterval = this.getTimeLineInterval()
       this.timeLineFormatter = this.getTimeLineFormatter()
-    },
-    getTimeLineInterval () {
-      // interval length: length of 1 day in milliseconds
-      const length = 24 * 60 * 60000
-
-      return {
-        length,
-        getIntervalStartValue (rangeStart) {
-          const startTime = new Date(rangeStart)
-
-          const year = startTime.getFullYear()
-          const month = startTime.getMonth()
-          const day = startTime.getDate()
-          const hour = startTime.getHours()
-          const minute = startTime.getMinutes()
-
-          let startValue
-
-          // range starts on a day (ignoring seconds)
-          if (hour == 0 && minute == 0) {
-            startValue = rangeStart
-
-          } else {
-            let startOfDay = new Date(year, month, day, 0, 0, 0)
-            startOfDay.setDate(startOfDay.getDate() + 1)
-
-            startValue = startOfDay.getTime()
-          } 
-
-          return startValue
-        },
-        valueChanged (value, previousValue, step) {
-          let changed = true
-
-          if (step !== null) {
-            changed = false
-
-            if (previousValue === null) {
-              changed = true
-
-            } else {
-              const difference = Math.abs(value - previousValue)
-
-              switch (step) {
-                case 'h':
-                  changed = (difference >= 60 * 60000)
-                  break
-                case 'm':
-                  changed = (difference >= 60000)   
-                  break
-                default:
-                  changed = true
-              }
-            }
-          }
-
-          return changed
-        }
-      }
-    },
-    getTimeLineFormatter () {
-
-      return {
-
-        format (value, type, displayOptions) {
-          const time = new Date(value)
-          let label
-
-          switch (type) {
-            case 'interval':
-              if (displayOptions.width >= 110) {
-                label = moment(time).format('dddd D')
-              } else {
-                label = moment(time).format('ddd')
-              }
-              break 
-            case 'pointer':
-              label = moment(time).format('dddd D - h A')
-              break 
-            case 'indicator':
-              label = moment(time).format('h A')
-              break 
-          }
-
-          return label
-        }        
-      }
-    },
-    onResizeMap () {
-      const componentRef = this.$refs.map
-
-      if (componentRef) {
-        const componentRect = componentRef.getBoundingClientRect()
-        this.mapWidth = componentRect.width
-      }
     }
   },
   created () {
@@ -493,7 +380,7 @@ export default {
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
   },
   mounted () {
-    this.setupMap()
+    this.setupMap({ timeDimension: true })
     // Add aa scale control
     L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
@@ -505,8 +392,6 @@ export default {
     // this.$on('popupopen', this.onPopupOpen)
     this.$on('click', this.onFeatureClicked)
     this.$on('collection-refreshed', this.onCollectionRefreshed)
-    Events.$on('user-position-changed', this.refreshOnGeolocation)
-    if (this.$store.get('user.position')) this.refreshOnGeolocation()
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
@@ -518,7 +403,6 @@ export default {
     // this.$off('popupopen', this.onPopupOpen)
     this.$off('click', this.onFeatureClicked)
     this.$off('collection-refreshed', this.onCollectionRefreshed)
-    Events.$off('user-position-changed', this.refreshOnGeolocation)
   }
 }
 </script>

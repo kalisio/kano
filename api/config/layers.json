@@ -1,7 +1,9 @@
 [ 
   {
-    "name": "Kalisio Sentinel 2 Cloudless",
+    "name": "Sentinel 2",
+    "description": "Cloudless",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg",
+    "icon": "satellite",
     "attribution": "Sentinel-2 cloudless <a href=\"https://s2maps.eu\">by EOX IT Services GmbH </a>",
     "type": "BaseLayer",
     "leaflet": {
@@ -21,8 +23,10 @@
     }
   },
   {
-    "name": "Kalisio OpenStreetMap (bright rendering)",
+    "name": "OSM Bright",
+    "description": "OpenStreetMap",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
+    "icon": "streetview",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -41,8 +45,10 @@
     }
   },
   {
-    "name": "Kalisio OpenStreetMap (dark rendering)",
+    "name": "OSM Dark",
+    "description": "OpenStreetMap",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png",
+    "icon": "streetview",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -60,8 +66,10 @@
     }
   },
   {
-    "name": "Kalisio OpenStreetMap & Terrain (bright rendering)",
+    "name": "OSMT bright",
+    "description": "OpenStreetMap & Terrain",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png",
+    "icon": "terrain",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -79,8 +87,10 @@
     }
   },
   {
-    "name": "Kalisio OpenStreetMap & Terrain (dark rendering)",
+    "name": "OSMT dark",
+    "description": "OpenStreetMap & Terrain",
     "iconUrl": "https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png",
+    "icon": "terrain",
     "attribution": "OpenMapTiles © <a href=\"https://openmaptiles.com\">OpenMapTiles</a> & OpenStreetMap © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors",
     "type": "BaseLayer",
     "leaflet": {
@@ -98,8 +108,10 @@
     }
   },
   {
-    "name": "WGS84 Standard Ellipsoid",
+    "name": "WGS84",
+    "description": "Standard Ellipsoid",
     "iconUrl": "statics/Cesium/Widgets/Images/TerrainProviders/Ellipsoid.png",
+    "icon": "fiber_manual_record",
     "attribution": "",
     "default": true,
     "type": "TerrainLayer",
@@ -110,7 +122,9 @@
   }, 
   {
     "name": "Cesium Terrain",
+    "description": "World-wide 30m",
     "iconUrl" : "statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+    "icon": "terrain",
     "attribution": "High-resolution, mesh-based terrain for the entire globe.\nBy https://cesiumjs.org",
     "type": "TerrainLayer",
     "cesium": {
@@ -121,7 +135,9 @@
   }, 
   {
     "name": "Kalisio Terrain",
+    "description": "World-wide 30m",
     "iconUrl" : "statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+    "icon": "terrain",
     "attribution": "High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com",
     "type": "TerrainLayer",
     "cesium": {
@@ -133,6 +149,7 @@
   },
   {
     "name": "Wind",
+    "description": "Speed and direction",
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
@@ -155,6 +172,7 @@
   },
   {
     "name": "Gust",
+    "description": "Max wind speed",
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
@@ -168,6 +186,7 @@
   },
   {
     "name": "Precipitations",
+    "description": "3h accumulation",
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png",
     "attribution": "Forecast data from <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type" : "OverlayLayer",
@@ -189,7 +208,7 @@
     "leaflet": {
       "type": "geoJson",
       "arguments": [
-        "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues.json",
+        "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues/sections",
         {
           "realtime": true,
           "interval": 900000,
@@ -200,7 +219,7 @@
     "cesium": {
       "type": "geoJson",
       "arguments": [
-        "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues.json",
+        "https://s3.eu-central-1.amazonaws.com/kargo/vigicrues/sections",
         {
           "realtime": true,
           "interval": 900000
@@ -271,8 +290,9 @@
     }
   },
   {
-    "name": "Wind speed - Isobaric surface",
-    "iconUrl": "",
+    "name": "Wind speed",
+    "description": "Isobaric surface",
+    "icon": "fingerprint",
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {
@@ -290,8 +310,9 @@
     }
   },
   {
-    "name": "Total water precipitation - Ground or water surface",
-    "iconUrl": "",
+    "name": "Total precipitation",
+    "description": "Ground or water",
+    "icon": "fingerprint",
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {
@@ -309,8 +330,9 @@
     }
   },
   {
-    "name": "Temperature - Isobaric surface",
-    "iconUrl": "",
+    "name": "Temperature",
+    "description": "Isobaric surface",
+    "icon": "fingerprint",
     "attribution": "ARPEGE © <a href=\"http://www.meteofrance.com\">Météo-France</a>",
     "type": "OverlayLayer",
     "leaflet": {

@@ -1,21 +1,26 @@
 <template>
   <q-collapsible icon="language" :label="$t('ForecastModelsPanel.LABEL')">
-    <div class="row justify-around">
-      <template v-for="model in forecastModels">
-        <q-btn :id="model.name" :key="model.name" @click="onModelClicked(model)" :flat="model.name !== selected.name" :outline="model.name === selected.name" round>
-          <img :src="model.iconUrl" width="32" height="32" />
-          <q-tooltip>
-            {{model.label}}
-          </q-tooltip>
-        </q-btn>
-      </template>
+    <div class="row justify-center">
+      <q-list dense no-border>
+        <template v-for="model in forecastModels">
+          <q-item :id="model.name" :key="model.name" inset-separator link @click="onModelClicked(model)">
+          <q-item-side v-if="!model.iconUrl" :icon="model.icon || 'language'" left>
+          </q-item-side>
+          <q-item-side v-else :avatar="model.iconUrl" left>
+          </q-item-side>
+          <q-item-main :label="model.label" :sublabel="model.description" :tag="model.name === selected.name ? 'b' : 'i'"></q-item-main>
+          <q-item-side right>
+          </q-item-side>
+        </q-item>
+        </template>
+      </q-list>
     </div>
   </q-collapsible>
 </template>
 
 <script>
 import _ from 'lodash'
-import { QCollapsible, QBtn, QIcon, QTooltip } from 'quasar'
+import { QCollapsible, QBtn, QIcon, QTooltip, QList, QItem, QItemSide, QItemTile, QItemMain } from 'quasar'
 
 export default {
   name: 'forecast-models-panel',
@@ -23,6 +28,11 @@ export default {
     QCollapsible,
     QBtn,
     QIcon,
+    QList,
+    QItem,
+    QItemSide,
+    QItemTile,
+    QItemMain,
     QTooltip
   },
   data () {

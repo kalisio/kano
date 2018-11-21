@@ -1,4 +1,5 @@
 {
+  "REMOVE_LABEL": "Supprimer",
   "screen": {
     "ABOUT_KALISIO": "A propos",
     "CONTACT": "Contact",
@@ -21,15 +22,20 @@
     "WIND_GUST": "Rafales",
     "PRECIPITATIONS": "Précipitations"
   },
+  "Activity": {
+    "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
+    "VIGICRUES_LEVEL_2": "Risque de crue génératrice de débordements",
+    "VIGICRUES_LEVEL_3": "Risque de crue génératrice de débordements importants",
+    "VIGICRUES_LEVEL_4": "Risque de crue majeure",
+    "REMOVE_LABEL": "$t(REMOVE_LABEL)",
+    "REMOVE_DIALOG_TITLE": "Supprimer {{layer}} ?",
+    "REMOVE_DIALOG_MESSAGE": "Etes vous sûr de vouloier supprimer {{layer}} de votre espace de travail ?"
+  },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position",
     "PROBE": "Mesurer position",
-    "PROBED_LOCATION": "Position mesurée",
-    "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
-    "VIGICRUES_LEVEL_2": "Risque de crue génératrice de débordements",
-    "VIGICRUES_LEVEL_3": "Risque de crue génératrice de débordements importants",
-    "VIGICRUES_LEVEL_4": "Risque de crue majeure"
+    "PROBED_LOCATION": "Position mesurée"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
