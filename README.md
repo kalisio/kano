@@ -10,6 +10,8 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kano/badge.svg)](https://snyk.io/test/github/kalisio/kano)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kano.svg?style=plastic)](https://hub.docker.com/r/kalisio/kano/)
 
+![Image](./kano.png)
+
 For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
 * [Kano development build](https://kano.dev.kalisio.xyz/)
