@@ -1,5 +1,3 @@
-<img src="https://github.com/kalisio/kDocs/blob/master/images/kalisio-logo-256.png" width="256">
-
 ## Kano application
 
 [![Build Status](https://travis-ci.org/kalisio/kano.png?branch=master)](https://travis-ci.org/kalisio/kano)
