@@ -1,11 +1,13 @@
 import _ from 'lodash'
+import logger from 'loglevel'
 import moment from 'moment'
 import { Events, Dialog } from 'quasar'
 
 export default {
   data () {
     return {
-      layerHandlers: {}
+      layerHandlers: {},
+      engineReady: false
     }
   },
   methods: {
@@ -54,7 +56,14 @@ export default {
     onGeolocate () {
       this.updatePosition()
     },
-    refreshOnGeolocation () {
+    onEngineReady () {
+      this.engineReady = true
+    },
+    geolocate () {
+      if (!this.engineReady) {
+        logger.error('Engine not ready to geolocate')
+        return
+      }
       const position = this.$store.get('user.position')
       this.center(position.longitude, position.latitude, 10000)
     },
@@ -138,12 +147,15 @@ export default {
     
   },
   mounted () {
+    this.$on('map-ready', this.onEngineReady)
+    this.$on('globe-ready', this.onEngineReady)
     this.$on('layer-added', this.onLayerAdded)
-    Events.$on('user-position-changed', this.refreshOnGeolocation)
-    if (this.$store.get('user.position')) this.refreshOnGeolocation()
+    Events.$on('user-position-changed', this.geolocate)
   },
   beforeDestroy () {
+    this.$off('map-ready', this.onEngineReady)
+    this.$off('globe-ready', this.onEngineReady)
     this.$off('layer-added', this.onLayerAdded)
-    Events.$off('user-position-changed', this.refreshOnGeolocation)
+    Events.$off('user-position-changed', this.geolocate)
   }
 }

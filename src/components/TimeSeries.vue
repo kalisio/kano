@@ -1,10 +1,12 @@
 <template>
   <!-- root node required -->
   <div ref="timeseries">
+    <q-resize-observable @resize="onResized" />
     <q-collapsible opened icon="list" :label="$t('TimeSeries.GRAPH', { location })">
-      <canvas ref="chart" style="{ height: 100%; width: 100%; }"></canvas>
+      <!--canvas ref="chart" :width="chartWidth" :height="chartHeight"></canvas-->
+      <canvas ref="chart"></canvas>
     </q-collapsible>
-    <q-collapsible opened icon="list" :label="$t('TimeSeries.WIND')">
+    <q-collapsible icon="list" :label="$t('TimeSeries.WIND')">
       <div class="text-center" v-if="feature">
         <span v-for="(direction, i) in feature.properties.windDirection">
             <span style="font-size: 0.5em;">
@@ -32,7 +34,8 @@ export default {
   components: {
     QCollapsible,
     QIcon,
-    QTooltip
+    QTooltip,
+    QResizeObservable
   },
   props: {
     interval: { type: Number, default: 1 },
@@ -41,6 +44,8 @@ export default {
   },
   data () {
     return {
+      chartWidth: 300,
+      chartHeight: 300
     }
   },
   watch: {
@@ -175,6 +180,12 @@ export default {
         }
       }
       this.chart = new Chart(this.$refs.chart.getContext('2d'), config)
+    },
+    onResized (size) {
+      if (this.$refs.chart) {
+        this.chartWidth = size.width
+        this.chartHeight = size.height * 0.7
+      }
     }
   }
 }

@@ -2,12 +2,12 @@
   <div>
     <div id="map" ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
-      <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]">
+      <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]"
+                 max-height="20vw" style="{ min-width: 30vw; max-width: 30vw; min-height: 20vw; max-height: 20vw; }">
         <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
         <q-btn icon="fullscreen" flat @click="onToggleProbeFullscreen"></q-btn>
         <time-series
-          :feature="probedLocation" :stepSize="3 * forecastInterval" :interval="forecastInterval"
-          style="{ width: 30vw; max-width: 30vw; height: 20vw; max-height: 20vw; overflow: hidden; }">
+          :feature="probedLocation" :stepSize="3 * forecastInterval" :interval="forecastInterval">
         </time-series>
       </q-popover>
       <q-modal ref="modal" maximized>
@@ -392,6 +392,7 @@ export default {
     // this.$on('popupopen', this.onPopupOpen)
     this.$on('click', this.onFeatureClicked)
     this.$on('collection-refreshed', this.onCollectionRefreshed)
+    if (this.$store.get('user.position')) this.geolocate()
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)

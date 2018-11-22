@@ -140,6 +140,7 @@ export default {
     }
     this.bounds = new Cesium.Rectangle()
     this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
+    if (this.$store.get('user.position')) this.geolocate()
   },
   beforeDestroy () {
     this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
