@@ -74,20 +74,20 @@ export default {
       return {
         length,
         getIntervalStartValue (rangeStart) {
-          const startTime = new Date(rangeStart)
-          const year = startTime.getFullYear()
-          const month = startTime.getMonth()
-          const day = startTime.getDate()
-          const hour = startTime.getHours()
-          const minute = startTime.getMinutes()
+          const startTime = moment.utc(rangeStart)
+          const year = startTime.year()
+          const month = startTime.month()
+          const day = startTime.day()
+          const hour = startTime.hours()
+          const minute = startTime.minutes()
           let startValue
           // range starts on a day (ignoring seconds)
           if (hour == 0 && minute == 0) {
             startValue = rangeStart
           } else {
-            let startOfDay = new Date(year, month, day, 0, 0, 0)
-            startOfDay.setDate(startOfDay.getDate() + 1)
-            startValue = startOfDay.getTime()
+            let startOfDay = startTime.startOf('day')
+            startOfDay.add({ days: 1 })
+            startValue = startOfDay.valueOf()
           } 
           return startValue
         },
