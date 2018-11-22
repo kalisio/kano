@@ -1,10 +1,10 @@
 <template>
-  <q-collapsible icon="language" :label="$t('ForecastModelsPanel.LABEL')">
+  <q-collapsible icon="fa-globe" :label="$t('ForecastModelsPanel.LABEL')">
     <div class="row justify-center">
       <q-list dense no-border>
         <template v-for="model in forecastModels">
           <q-item :id="model.name" :key="model.name" inset-separator link @click="onModelClicked(model)">
-          <q-item-side v-if="!model.iconUrl" :icon="model.icon || 'language'" left>
+          <q-item-side v-if="!model.iconUrl" :icon="model.icon || 'fa-globe'" left>
           </q-item-side>
           <q-item-side v-else :avatar="model.iconUrl" left>
           </q-item-side>

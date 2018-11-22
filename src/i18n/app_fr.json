@@ -45,7 +45,10 @@
   "LayersPanel": {
     "BASE_LAYERS": "Fonds cartographiques",
     "TERRAIN_LAYERS": "Couches terrain",
-    "OVERLAY_LAYERS": "Couches de données"
+    "OVERLAY_LAYERS": "Mes données",
+    "MEASURE_LAYERS": "Couches des mesures",
+    "METEO_LAYERS": "Couches météo",
+    "BUSINESS_LAYERS": "Couches métier"
   },
   "ForecastModelsPanel": {
     "LABEL": "Modèles de prévision"

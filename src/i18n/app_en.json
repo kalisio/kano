@@ -45,7 +45,10 @@
   "LayersPanel": {
     "BASE_LAYERS": "Base Layers",
     "TERRAIN_LAYERS": "Terrain layers",
-    "OVERLAY_LAYSERS": "Overlay layers"
+    "OVERLAY_LAYSERS": "My layers",
+    "MEASURE_LAYERS": "Measure layers",
+    "METEO_LAYERS": "Meteo layers",
+    "BUSINESS_LAYERS": "Business layers"
   },
   "ForecastModelsPanel": {
     "LABEL": "Forecast models"

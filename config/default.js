@@ -78,15 +78,28 @@ module.exports = {
   },
   mapPanel: {
     categories: [
-      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', options: { exclusive: false } },
-      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', options: { exclusive: true } }
+      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
+      { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['meteo'] } } } },
+      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
+      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
+      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
+        options: { exclusive: true, filter: { type: 'BaseLayer' } } }
     ]
   },
   globePanel: {
     categories: [
-      { name: 'OverlayLayer', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'layers', options: { exclusive: false } },
-      { name: 'BaseLayer', label: 'LayersPanel.BASE_LAYERS', icon: 'map', options: { exclusive: true } },
-      { name: 'TerrainLayer', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain', options: { exclusive: true } }
+      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
+      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+        options: { exclusive: false, filter: { type: 'OverlayLayer' } } },
+      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
+        options: { exclusive: true, filter: { type: 'BaseLayer' } } },
+      { name: 'TerrainLayers', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'fa-mountain',
+        options: { exclusive: true, filter: { type: 'TerrainLayer' } } }
     ]
   },
   weacast: {
