@@ -169,15 +169,12 @@ export default {
       // Use wind barbs on probed features
       if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
         let marker = this.getProbedLocationMarker(feature, latlng)
-        // We use custom events on this one
-        kMapUtils.unbindLeafletEvents(marker)
-        marker.on('dragend', (event) => {
-          const position = event.target.getLatLng()
-          this.performDynamicLocationProbing(position.lng, position.lat)
-        })
-        marker.on('click', (event) => {
-          this.$refs.popover.toggle()
-        })
+        if (marker) {
+          // We use custom events on this one
+          kMapUtils.unbindLeafletEvents(marker)
+          marker.on('dragend', (event) => this.performDynamicLocationProbing(event.target.getLatLng().lng, event.target.getLatLng().lat))
+          marker.on('click', (event) => this.$refs.popover.toggle())
+        }
         return marker
       }
       // ADS-B
