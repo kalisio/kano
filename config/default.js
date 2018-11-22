@@ -58,8 +58,8 @@ module.exports = {
   },
   layout: {
     view: 'lHh LpR lFf',
-    leftBreakpoint: 1900,
-    rightBreakpoint: 1900
+    leftBreakpoint: 9999,
+    rightBreakpoint: 9999
   },
   sideNav: {
     banner: 'kalisio-banner.png',
