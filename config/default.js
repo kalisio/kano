@@ -120,10 +120,7 @@ module.exports = {
       radius: 6,
       color: 'red',
       fillOpacity: 0.5,
-      fillColor: 'green',
-      popup: {
-        excludedProperties: ['wikipedia']
-      }
+      fillColor: 'green'
     },
     // Default GeoJSON layer style for points
     pointStyle: {
@@ -135,6 +132,8 @@ module.exports = {
         fillColor: 'green'
       }
     },
+    // Default GeoJSON popup will display all properties
+    popup: {},
     fileLayers: {
       fileSizeLimit : 1024 * 1024,
       formats: [ '.geojson', '.kml', '.gpx' ]

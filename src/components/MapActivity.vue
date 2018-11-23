@@ -165,33 +165,8 @@ export default {
       }
       return layer
     },
-    getPointMarker (feature, latlng) {
-      // Use wind barbs on probed features
-      if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
-        let marker = this.getProbedLocationMarker(feature, latlng)
-        if (marker) {
-          // We use custom events on this one
-          kMapUtils.unbindLeafletEvents(marker)
-          marker.on('dragend', (event) => this.performDynamicLocationProbing(event.target.getLatLng().lng, event.target.getLatLng().lat))
-          marker.on('click', (event) => this.$refs.popover.toggle())
-        }
-        return marker
-      }
-      // ADS-B
-      else if (_.has(feature, 'properties.icao')) {
-        return this.createMarkerFromStyle(latlng, {
-          icon: {
-            type: 'icon',
-            options: {
-              iconUrl: '/statics/paper-plane.png',
-              iconSize: [32, 32],
-              iconAnchor: [16, 32]
-            }
-          }
-        })
-      }
-      // Téléray
-      else if (_.has(feature, 'properties.irsnId')) {
+    getTelerayMarker (feature, latlng) {
+      if (_.has(feature, 'properties.irsnId')) {
         const valid = _.get(feature, 'properties.libelle')
         const icon = (valid === 'VA' ? 'info-circle' : (valid === 'NV' ? 'question-circle' : 'times-circle'))
         const color = (valid === 'VA' ? 'darkblue' : (valid === 'NV' ? 'orange' : 'dark'))
@@ -208,33 +183,30 @@ export default {
       }
       return null
     },
-    getFeatureStyle (feature) {
-      return this.convertFromSimpleStyleSpec(feature.properties || {})
+    getMeteoMarker (feature, latlng) {
+      // Use wind barbs on probed features
+      if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
+        let marker = this.getProbedLocationMarker(feature, latlng)
+        if (marker) {
+          // We use custom events on this one
+          kMapUtils.unbindLeafletEvents(marker)
+          marker.on('dragend', (event) => this.performDynamicLocationProbing(event.target.getLatLng().lng, event.target.getLatLng().lat))
+          marker.on('click', (event) => this.$refs.popover.toggle())
+        }
+        return marker
+      }
+      return null
     },
-    getFeaturePopup (feature, layer) {
-      let popup = L.popup({ autoPan: false }, layer)
-      const name = _.get(feature, 'properties.name',
-        _.get(feature, 'properties.NomEntVigiCru',
-        _.get(feature, 'properties.icao')))
-      return (name ? popup.setContent(name) : null)
-    },
-    getFeatureTooltip (feature, layer) {
+    getVigicruesTooltip (feature, layer) {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
         let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
       }
-      const callsign = _.get(feature, 'properties.callsign')
-      if (callsign) {
-        let tooltip = L.tooltip({ permanent: true }, layer)
-        return tooltip.setContent('<b>' + callsign + '</b>')
-      }
-      const value = _.get(feature, 'properties.value')
-      if (value) {
-        let tooltip = L.tooltip({ permanent: false }, layer)
-        return tooltip.setContent('<b>' + value + ' nSv/h</b>')
-      }
+      return null
+    },
+    getMeteoTooltip (feature, layer) {
       const direction = _.get(feature, 'properties.windDirection')
       const speed = _.get(feature, 'properties.windSpeed')
       const gust = _.get(feature, 'properties.gust')
@@ -373,6 +345,10 @@ export default {
     // Enable the observers in order to refresh the layout
     this.observe = true
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
+    this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
+    this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
+    this.registerLeafletStyle('markerStyle', this.getTelerayMarker)
+    this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
   },

@@ -225,7 +225,10 @@
         {
           "realtime": true,
           "interval": 900000,
-          "id": "properties.gid"
+          "id": "gid",
+          "popup": {
+            "pick": ["NomEntVigiCru"]
+          }
         }
       ]
     },
@@ -254,8 +257,14 @@
         {
           "realtime": true,
           "interval": 600000,
-          "id": "properties.irsnId",
-          "container": "markerClusterGroup"
+          "id": "irsnId",
+          "container": "markerClusterGroup",
+          "popup": {
+            "pick": ["name"]
+          },
+          "tooltip": {
+            "template": "<%= value.toFixed(2) %> nSv/h"
+          }
         }
       ]
     },
@@ -287,7 +296,16 @@
       "arguments": [
         "https://s3.eu-central-1.amazonaws.com/kargo/nuclear-sites.json",
         {
-          "cluster": {}
+          "cluster": {},
+          "marker-color": "orange",
+          "icon-color": "white",
+          "icon-classes": "fa fa-star",
+          "popup": {
+            "pick": ["NAME"]
+          },
+          "tooltip": {
+            "property": "LABEL"
+          }
         }
       ]
     },
@@ -320,7 +338,16 @@
         {
           "realtime": true,
           "interval": 5000,
-          "id": "properties.icao"
+          "id": "icao",
+          "marker-symbol": "/statics/paper-plane.png",
+          "marker-size": 32,
+          "icon-anchor": [16, 32],
+          "popup": {
+            "pick": ["icao"]
+          },
+          "tooltip": {
+            "property": "callsign"
+          }
         }
       ]
     },
