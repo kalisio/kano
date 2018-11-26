@@ -9,11 +9,11 @@ services:
       - NODE_APP_INSTANCE=${FLAVOR}
       - DB_URL
     networks:
-      - app-network
-      - cluster-network
+      - app
+      - cluster
 
 networks:
-  app-network:
-  cluster-network:
+  app:
+  cluster:
     external:
       name: ${DOCKER_NETWORK}
