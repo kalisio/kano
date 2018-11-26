@@ -10,8 +10,10 @@ services:
       - DB_URL
     networks:
       - app-network
+      - cluster-network
 
 networks:
   app-network:
+  cluster-network:
     external:
       name: ${DOCKER_NETWORK}
