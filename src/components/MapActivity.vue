@@ -218,11 +218,11 @@ export default {
       }
       return null
     },
-    onPopupOpen (event) {
+    onPopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
     },
-    onFeatureClicked (event) {
+    onFeatureClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
     },
@@ -277,6 +277,17 @@ export default {
       this.setMapCursor('processing-cursor')
       try {
         await this.probeDynamicLocation(long, lat,
+          moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
+      } catch (error) {
+        logger.error(error)
+      }
+      this.unsetMapCursor('processing-cursor')
+      this.createProbedLocationLayer()
+    },
+    async performStaticLocationProbing (featureId, long, lat) {
+      this.setMapCursor('processing-cursor')
+      try {
+        await this.probeStaticLocation(featureId, long, lat,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
       } catch (error) {
         logger.error(error)
