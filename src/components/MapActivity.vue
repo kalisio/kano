@@ -299,7 +299,10 @@ export default {
           $aggregate: elements
         }
       })
-      if (result.features.length > 0) this.probedLocation = result.features[0]
+      if (result.features.length > 0) {
+        this.probedLocation = result.features[0]
+        this.$refs.popover.open()
+      }
     },
     async performDynamicLocationProbing (long, lat) {
       this.setMapCursor('processing-cursor')
