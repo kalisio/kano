@@ -288,7 +288,7 @@ export default {
       })
     },
     async getTimeserie (layer, feature, elements, startTime, endTime) {
-      let results = await this.$api.getService(layer.service).find({
+      let result = await this.$api.getService(layer.service).find({
         query: {
           time: {
             $gte: startTime.format(),
@@ -299,7 +299,7 @@ export default {
           $aggregate: elements
         }
       })
-      if (results.length > 0) this.probedLocation = results[0]
+      if (result.features.length > 0) this.probedLocation = result.features[0]
     },
     async performDynamicLocationProbing (long, lat) {
       this.setMapCursor('processing-cursor')
