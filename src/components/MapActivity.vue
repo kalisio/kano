@@ -98,7 +98,7 @@ export default {
     return {
       forecastModelHandlers: {},
       timeLine: {
-        start: now.clone().add({ days: -7 }).valueOf(),
+        start: now.clone().subtract({ days: 7 }).valueOf(),
         end: now.clone().add({ days: 7 }).valueOf(),
         current: now.clone().valueOf()
       },
@@ -135,9 +135,17 @@ export default {
     async refreshActivity () {  
       this.clearActivity()
       // Retrieve the layers
-      await this.refreshLayers('leaflet')
+      try {
+        await this.refreshLayers('leaflet')
+      } catch (error) {
+        logger.error(error)
+      }
       // Retrieve the forecast models
-      await this.setupWeacast()
+      try {
+        await this.setupWeacast()
+      } catch (error) {
+        logger.error(error)
+      }
       // TimeLine
       this.setupTimeline()
       this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
@@ -225,6 +233,12 @@ export default {
     onFeatureClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
+      if (options.name === 'Sites') {
+        this.performStaticLocationProbing(_.get(feature, 'properties.NAME'))
+      } else if (options.service) {
+        this.getTimeserie(options, feature, ['H', 'Q'],
+          moment.utc(this.timeLine.start).clone().subtract({ days: 7 }), moment.utc(this.timeLine.end))
+      }
     },
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -273,6 +287,20 @@ export default {
         }
       })
     },
+    async getTimeserie (layer, feature, elements, startTime, endTime) {
+      let results = await this.$api.getService(layer.service).find({
+        query: {
+          time: {
+            $gte: startTime.format(),
+            $lte: endTime.format()
+          },
+          ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId),
+          $groupBy: 'properties.' + layer.featureId,
+          $aggregate: elements
+        }
+      })
+      if (results.length > 0) this.probedLocation = results[0]
+    },
     async performDynamicLocationProbing (long, lat) {
       this.setMapCursor('processing-cursor')
       try {
@@ -284,10 +312,10 @@ export default {
       this.unsetMapCursor('processing-cursor')
       this.createProbedLocationLayer()
     },
-    async performStaticLocationProbing (featureId, long, lat) {
+    async performStaticLocationProbing (featureId) {
       this.setMapCursor('processing-cursor')
       try {
-        await this.probeStaticLocation(featureId, long, lat,
+        await this.probeStaticLocation(featureId,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
       } catch (error) {
         logger.error(error)
@@ -326,11 +354,15 @@ export default {
       const config = this.$config('weacast')
       this.weacastApi = weacast(config)
       // Alter the get service function because we rewrite the access path by prefixing by 'weacast'
+      /*
       this.weacastApi.getService = (path) => {
         return this.weacastApi.service(this.$config('apiPath') + '/' + path)
       }
+      */
       try {
-        await this.weacastApi.authenticate(config.authentication)
+        // Transfer app token to Weacast
+        const accessToken = await this.$api.passport.getJWT()
+        await this.weacastApi.authenticate({ strategy: 'jwt', accessToken })
         this.setupForecastModels()
       } catch(error) {
         logger.error('Cannot initialize weacast API', error)

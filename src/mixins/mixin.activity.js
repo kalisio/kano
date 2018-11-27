@@ -17,8 +17,8 @@ export default {
         toggle: (layer) => this.onTriggerLayer(layer),
         remove: (layer) => this.onRemoveLayer(layer)
       }
-      const layersService = this.$api.getService('layers')
-      let response = await layersService.find()
+      const catalogService = this.$api.getService('catalog')
+      let response = await catalogService.find()
       _.forEach(response.data, (layer) => {
         if (layer[engine]) this.addLayer(layer)
       })

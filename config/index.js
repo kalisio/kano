@@ -69,8 +69,9 @@ module.exports = {
         changeOrigin: true,
         ws: true,
         logLevel: 'debug'
-      },
-      // Proxy weacast as well
+      }
+      /*
+      // Proxy weacast as well if required, see https://github.com/kalisio/kMap/issues/16
       '/weacast/api': {
         target: 'http://localhost:' + serverPort,
         changeOrigin: true,
@@ -82,6 +83,7 @@ module.exports = {
         ws: true,
         logLevel: 'debug'
       }
+      */
     }
   }
 }

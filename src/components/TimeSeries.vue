@@ -70,16 +70,20 @@ export default {
     },
     setupAvailableTimes () {
       let times = []
+      const time = this.feature.time
       const forecastTime = this.feature.forecastTime
-      if (forecastTime.gust) times.push(forecastTime.gust)
-      if (forecastTime.windSpeed) times.push(forecastTime.windSpeed)
-      if (forecastTime.precipitations) times.push(forecastTime.precipitations)
+      if (forecastTime && forecastTime.gust) times.push(forecastTime.gust)
+      if (forecastTime && forecastTime.windSpeed) times.push(forecastTime.windSpeed)
+      if (forecastTime && forecastTime.precipitations) times.push(forecastTime.precipitations)
+      if (time && time.H) times.push(time.H)
+      if (time && time.Q) times.push(time.Q)
       // Make union of all available times for x-axis
       return _.union(...times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
     },
     setupAvailableDatasets () {
       let datasets = []
       const color = Chart.helpers.color
+      const time = this.feature.time
       const forecastTime = this.feature.forecastTime
       const properties = this.feature.properties
       if (properties.gust) {
@@ -112,6 +116,26 @@ export default {
           yAxisID: 'precipitations'
         })
       }
+      if (properties.H) {
+        datasets.push({
+          label: this.$t('TimeSeries.H'),
+          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          data: properties.H.map((value, index) => ({ x: new Date(time.H[index]), y: value })).filter(this.filter),
+          yAxisID: 'H'
+        })
+      }
+      if (properties.Q) {
+        datasets.push({
+          label: this.$t('TimeSeries.Q'),
+          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          data: properties.Q.map((value, index) => ({ x: new Date(time.Q[index]), y: value })).filter(this.filter),
+          yAxisID: 'Q'
+        })
+      }
       return datasets
     },
     setupAvailableYAxes () {
@@ -134,6 +158,26 @@ export default {
           scaleLabel: {
             display: true,
             labelString: 'mm (last 3h)'
+          }
+        })
+      }
+      if (properties.H) {
+        yAxes.push({
+          id: 'H',
+          position: 'right',
+          scaleLabel: {
+            display: true,
+            labelString: 'm'
+          }
+        })
+      }
+      if (properties.Q) {
+        yAxes.push({
+          id: 'Q',
+          position: 'right',
+          scaleLabel: {
+            display: true,
+            labelString: 'm3/h'
           }
         })
       }

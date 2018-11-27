@@ -8,16 +8,21 @@ let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
+  weacastApi = `https://weacast.irsn.kalisio.xyz`
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
+    weacastApi = 'http://localhost:' + (clientPort+2) // Weacast app client/server port = 8082/8083
   } else {
     domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
+    weacastApi = 'http://localhost:' + (serverPort+1) // Weacast app client/server port = 8082
   }
 }
 
@@ -106,14 +111,9 @@ module.exports = {
   },
   weacast: {
     // Kano app proxy all request to Weacast app
-    apiUrl: domain,
-    apiPath: '/weacast' + API_PREFIX,
-    apiTimeout: 30000,
-    authentication: {
-      strategy: 'local',
-      email: process.env.WEACAST_USER || 'weacast@weacast.xyz',
-      password: process.env.WEACAST_PASSWORD || 'weacast'
-    }
+    apiUrl: weacastApi,
+    apiPath: API_PREFIX,
+    apiTimeout: 30000
   },
   map: {
     // Default GeoJSON layer style for polygons/lines

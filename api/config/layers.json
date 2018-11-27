@@ -213,11 +213,12 @@
   },
   {
     "name": "Vigicrues",
-    "description": "Level and rate",
+    "description": "Flooding alerts",
     "tags": ["measure"],
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png",
     "attribution" : "",
     "type" : "OverlayLayer",
+    "featureId": "gid",
     "leaflet": {
       "type": "geoJson",
       "arguments": [
@@ -225,7 +226,6 @@
         {
           "realtime": true,
           "interval": 900000,
-          "id": "gid",
           "popup": {
             "pick": ["NomEntVigiCru"]
           }
@@ -244,12 +244,53 @@
     }
   },
   {
+    "name": "Vigiprobes",
+    "description": "Level and rate",
+    "tags": ["measure"],
+    "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png",
+    "attribution" : "",
+    "type" : "OverlayLayer",
+    "service": "vigicrues-observations",
+    "featureId": "CdStationH",
+    "leaflet": {
+      "type": "geoJson",
+      "arguments": [
+        "/api/vigicrues-observations",
+        {
+          "realtime": true,
+          "interval": 3600000,
+          "container": "markerClusterGroup",
+          "marker-color": "#00a9ce",
+          "icon-color": "white",
+          "icon-classes": "fa fa-tint",
+          "popup": {
+            "pick": ["LbStationH"]
+          },
+          "tooltip": {
+            "template": "<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% } else if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% } %>"
+          }
+        }
+      ]
+    },
+    "cesium": {
+      "type": "geoJson",
+      "arguments": [
+        "/api/vigicrues-observations",
+        {
+          "realtime": true,
+          "interval": 3600000
+        }
+      ]
+    }
+  },
+  {
     "name": "Téléray",
     "description": "Dose rate",
     "tags": ["measure"],
     "iconUrl" : "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/teleray-icon.jpg",
     "attribution" : "",
     "type" : "OverlayLayer",
+    "featureId": "irsnId",
     "leaflet": {
       "type": "geoJson",
       "arguments": [
@@ -257,13 +298,12 @@
         {
           "realtime": true,
           "interval": 600000,
-          "id": "irsnId",
           "container": "markerClusterGroup",
           "popup": {
             "pick": ["name"]
           },
           "tooltip": {
-            "template": "<%= value.toFixed(2) %> nSv/h"
+            "template": "<% if (properties.value) { %>Dose rate = <%= properties.value.toFixed(2) %> nSv/h<% } %>"
           }
         }
       ]
@@ -331,6 +371,7 @@
     "iconUrl": "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/adsb-icon.jpg",
     "attribution": "",
     "type": "OverlayLayer",
+    "featureId": "icao",
     "leaflet": {
       "type": "geoJson",
       "arguments": [
@@ -338,7 +379,6 @@
         {
           "realtime": true,
           "interval": 5000,
-          "id": "icao",
           "marker-symbol": "/statics/paper-plane.png",
           "marker-size": 32,
           "icon-anchor": [16, 32],

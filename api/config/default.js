@@ -32,11 +32,12 @@ module.exports = {
   // Proxy your API if using any.
   // Also see /build/script.dev.js and search for "proxy api requests"
   // https://github.com/chimurai/http-proxy-middleware
+  /*
+  // Proxy weacast if required, see https://github.com/kalisio/kMap/issues/16
   proxyTable: {
     '/weacast/api': {
       target: weacastApi,
       changeOrigin: true,
-      logLevel: 'debug',
       pathRewrite: {
         '^/weacast/api': '/api'
       }
@@ -45,12 +46,12 @@ module.exports = {
       target: weacastApi,
       changeOrigin: true,
       ws: true,
-      logLevel: 'debug',
       pathRewrite: {
         '^/weacast/apiws': '/apiws'
       }
     }
   },
+  */
   domain,
   host: process.env.HOSTNAME || 'localhost',
   port: serverPort,
@@ -111,7 +112,7 @@ module.exports = {
       }
     }
   },
-  /*layers: {
+  /*catalog: {
     paginate: {
       default: 100,
       max: 100
