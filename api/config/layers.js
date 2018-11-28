@@ -359,7 +359,7 @@ module.exports = [
     type: 'OverlayLayer',
     service: 'vigicrues-observations',
     featureId: 'CdStationH',
-    history: 2592000,
+    history: 604800,
     variables: [
       {
         name: 'H',

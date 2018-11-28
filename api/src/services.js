@@ -58,7 +58,7 @@ module.exports = async function () {
     }
     // Check if a service is associated to this layer
     if (defaultLayer.service) {
-      createFeatureService.call(app, defaultLayer.service)
+      createFeatureService.call(app, defaultLayer.service, defaultLayer.featureId, defaultLayer.history)
       // Register permission for it
       permissions.defineAbilities.registerHook((subject, can, cannot) => {
         can('service', defaultLayer.service)
