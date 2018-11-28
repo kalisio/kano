@@ -242,11 +242,11 @@ export default {
         })
         if (results.length > 0) {
           this.probe = results[0]
-          this.getWeatherForFeature(_.get(feature, this.probe.featureId))
+          await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
           this.$refs.popover.open()
         }
       } else if (options.service) {
-        this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
+        await this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
           moment.utc(this.timeLine.start).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.end))
         this.$refs.popover.open()
       }
@@ -312,7 +312,7 @@ export default {
             $lte: endTime.format()
           },
           ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId),
-          $groupBy: 'properties.' + layer.featureId,
+          $groupBy: layer.featureId,
           $aggregate: elements
         }
       })
