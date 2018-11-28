@@ -6,19 +6,6 @@
       <!--canvas ref="chart" :width="chartWidth" :height="chartHeight"></canvas-->
       <canvas ref="chart"></canvas>
     </q-collapsible>
-    <q-collapsible icon="list" :label="$t('TimeSeries.WIND')">
-      <div class="text-center" v-if="feature">
-        <span v-for="(direction, i) in feature.properties.windDirection">
-            <span style="font-size: 0.5em;">
-              <span class="vertical-text">{{ formatDateTime(feature.forecastTime.windDirection[i]) }}</span>
-            </span>
-            <span style="font-size: 1.5em;">
-              <q-icon name="arrow_downward" :style="`transform: rotateZ(${direction}deg);`"></q-icon>
-              <q-tooltip anchor="bottom middle" self="top middle">{{ feature.properties.windDirection[i].toFixed(2) }}°</q-tooltip>
-            </span>
-        </span>
-      </div>
-    </q-collapsible>
   </div>
 </template>
 
@@ -40,7 +27,8 @@ export default {
   props: {
     interval: { type: Number, default: 1 },
     stepSize: { type: Number, default: 1 },
-    feature: { type: Object, default: () => null }
+    feature: { type: Object, default: () => null },
+    variables: { type: Array, default: () => [] }
   },
   data () {
     return {
@@ -70,117 +58,55 @@ export default {
     },
     setupAvailableTimes () {
       let times = []
-      const time = this.feature.time
-      const forecastTime = this.feature.forecastTime
-      if (forecastTime && forecastTime.gust) times.push(forecastTime.gust)
-      if (forecastTime && forecastTime.windSpeed) times.push(forecastTime.windSpeed)
-      if (forecastTime && forecastTime.precipitations) times.push(forecastTime.precipitations)
-      if (time && time.H) times.push(time.H)
-      if (time && time.Q) times.push(time.Q)
+      const time = this.feature.time || this.feature.forecastTime
+
+      this.variables.forEach(variable => {
+        if (time && time[variable.name]) times.push(time[variable.name])
+      })
       // Make union of all available times for x-axis
       return _.union(...times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
     },
     setupAvailableDatasets () {
       let datasets = []
       const color = Chart.helpers.color
-      const time = this.feature.time
-      const forecastTime = this.feature.forecastTime
+      const time = this.feature.time || this.feature.forecastTime
       const properties = this.feature.properties
-      if (properties.gust) {
-        datasets.push({
-          label: this.$t('TimeSeries.WIND_GUST'),
-          backgroundColor: color('rgb(255, 99, 132)').alpha(0.5).rgbString(),
-          borderColor: 'rgb(255, 99, 132)',
-          fill: false,
-          data: properties.gust.map((value, index) => ({ x: new Date(forecastTime.gust[index]), y: value })).filter(this.filter),
-          yAxisID: 'speed'
-        })
-      }
-      if (properties.windSpeed) {
-        datasets.push({
-          label: this.$t('TimeSeries.WIND_SPEED'),
-          backgroundColor: color('rgb(255, 159, 64)').alpha(0.5).rgbString(),
-          borderColor: 'rgb(255, 159, 64)',
-          fill: false,
-          data: properties.windSpeed.map((value, index) => ({ x: new Date(forecastTime.windSpeed[index]), y: value })).filter(this.filter),
-          yAxisID: 'speed'
-        })
-      }
-      if (properties.precipitations) {
-        datasets.push({
-          label: this.$t('TimeSeries.PRECIPITATIONS'),
-          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
-          borderColor: 'rgb(54, 162, 235)',
-          fill: false,
-          data: properties.precipitations.map((value, index) => ({ x: new Date(forecastTime.precipitations[index]), y: value })).filter(this.filter),
-          yAxisID: 'precipitations'
-        })
-      }
-      if (properties.H) {
-        datasets.push({
-          label: this.$t('TimeSeries.H'),
-          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
-          borderColor: 'rgb(54, 162, 235)',
-          fill: false,
-          data: properties.H.map((value, index) => ({ x: new Date(time.H[index]), y: value })).filter(this.filter),
-          yAxisID: 'H'
-        })
-      }
-      if (properties.Q) {
-        datasets.push({
-          label: this.$t('TimeSeries.Q'),
-          backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
-          borderColor: 'rgb(54, 162, 235)',
-          fill: false,
-          data: properties.Q.map((value, index) => ({ x: new Date(time.Q[index]), y: value })).filter(this.filter),
-          yAxisID: 'Q'
-        })
-      }
+      
+      this.variables.forEach(variable => {
+        // Variable available for feature ?
+        if (properties[variable.name]) {
+          datasets.push(Object.assign({
+            label: this.$t(variable.label) || variable.label,
+            data: properties[variable.name].map((value, index) => ({ x: new Date(time[variable.name][index]), y: value })).filter(this.filter),
+            yAxisID: variable.units[0]
+          }, variable.chartjs))
+        }
+      })
+      
       return datasets
     },
     setupAvailableYAxes () {
       let yAxes = []
       const properties = this.feature.properties
-      if (properties.gust || properties.windSpeed) {
-        yAxes.push({
-          id: 'speed',
-          position: 'left',
-          scaleLabel: {
-            display: true,
-            labelString: 'm/s'
-          }
-        })
-      }
-      if (properties.precipitations) {
-        yAxes.push({
-          id: 'precipitations',
-          position: 'right',
-          scaleLabel: {
-            display: true,
-            labelString: 'mm (last 3h)'
-          }
-        })
-      }
-      if (properties.H) {
-        yAxes.push({
-          id: 'H',
-          position: 'right',
-          scaleLabel: {
-            display: true,
-            labelString: 'm'
-          }
-        })
-      }
-      if (properties.Q) {
-        yAxes.push({
-          id: 'Q',
-          position: 'right',
-          scaleLabel: {
-            display: true,
-            labelString: 'm3/h'
-          }
-        })
-      }
+      let isLeft = true
+
+      this.variables.forEach(variable => {
+        // Variable available for feature ?
+        // Check also if axis already created
+        if (properties[variable.name] && !_.find(yAxes, axis => axis.id === variable.units[0])) {
+          yAxes.push({
+            id: variable.units[0],
+            position: isLeft ? 'left' : 'right',
+            scaleLabel: {
+              display: true,
+              labelString: variable.units[0]
+            }
+          })
+          // Alternate axes
+          isLeft = !isLeft
+        }
+      })
+
       return yAxes
     },
     setupGraph () {

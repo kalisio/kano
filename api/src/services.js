@@ -47,7 +47,7 @@ module.exports = async function () {
   }
 
   let catalogService = app.getService('catalog')
-  let defaultLayers = await fs.readJson('./config/layers.json')
+  let defaultLayers = app.get('catalog') ? app.get('catalog').layers || [] : []
   const layers = await catalogService.find({ paginate: false })
   for (let i = 0; i < defaultLayers.length; i++) {
     const defaultLayer = defaultLayers[i]

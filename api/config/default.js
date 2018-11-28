@@ -1,6 +1,7 @@
 var path = require('path')
 var fs = require('fs')
 var containerized = require('containerized')()
+const layers = require('./layers')
 
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
@@ -10,13 +11,13 @@ let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.irsn.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.irsn.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.irsn.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -112,12 +113,13 @@ module.exports = {
       }
     }
   },
-  /*catalog: {
+  catalog: {
+    layers,
     paginate: {
       default: 100,
       max: 100
     }
-  },*/
+  },
   logs: {
     Console: {
       colorize: true,

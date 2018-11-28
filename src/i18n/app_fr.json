@@ -15,12 +15,16 @@
     "DISCONNECT": "La connexion au serveur a été interrompue, merci de patienter jusqu'à la reconnexion...",
     "RECONNECT": "Tentative de reconnection en cours..."
   },
-  "TimeSeries": {
-    "GRAPH": "Séries temporelles - {{location}}",
-    "WIND": "Vent",
+  "Variables": {
+    "H": "Niveau d'eau",
+    "Q": "Débit d'eau",
     "WIND_SPEED": "Vitesse",
+    "WIND_DIRECTION": "Direction",
     "WIND_GUST": "Rafales",
     "PRECIPITATIONS": "Précipitations"
+  },
+  "TimeSeries": {
+    "GRAPH": "Séries temporelles - {{location}}"
   },
   "Activity": {
     "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",

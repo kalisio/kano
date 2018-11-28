@@ -20,7 +20,12 @@ export default {
       const catalogService = this.$api.getService('catalog')
       let response = await catalogService.find()
       _.forEach(response.data, (layer) => {
-        if (layer[engine]) this.addLayer(layer)
+        if (layer[engine]) {
+          // Process i18n
+          if (this.$t(layer.name)) layer.name = this.$t(layer.name)
+          if (this.$t(layer.description)) layer.description = this.$t(layer.description)
+          this.addLayer(layer)
+        }
       })
     },
     onLayerAdded (layer) {
@@ -64,6 +69,7 @@ export default {
         logger.error('Engine not ready to geolocate')
         return
       }
+      if (this.$store.has('bounds')) return
       const position = this.$store.get('user.position')
       this.center(position.longitude, position.latitude, 10000)
     },

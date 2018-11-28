@@ -7,13 +7,13 @@
         <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
         <q-btn icon="fullscreen" flat @click="onToggleProbeFullscreen"></q-btn>
         <time-series
-          :feature="probedLocation" :stepSize="3 * forecastInterval" :interval="forecastInterval">
+          :feature="probedLocation" :variables="variables" :stepSize="3 * forecastInterval" :interval="forecastInterval">
         </time-series>
       </q-popover>
       <q-modal ref="modal" maximized>
         <q-btn icon="close" flat @click="onCloseProbeModal"></q-btn>
         <time-series
-          :feature="probedLocation" :stepSize="forecastInterval" :interval="forecastInterval">
+          :feature="probedLocation" :variables="variables" :stepSize="forecastInterval" :interval="forecastInterval">
         </time-series>
       </q-modal>
     </div>
@@ -119,6 +119,9 @@ export default {
     },
     forecastInterval () {
       return (this.forecastModel ? this.forecastModel.interval / 3600 : 1)
+    },
+    variables () {
+      return _.flatten(_.values(_.pickBy(this.layers, (layer) => layer.isVisible && layer.variables)).map(layer => layer.variables))
     }
   },
   watch: {
@@ -159,7 +162,7 @@ export default {
         name: 'geolocate', label: this.$t('MapActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
       })
       this.registerFabAction({
-        name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onProbeDynamicLocation
+        name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onWeatherForLocation
       })
     },
     createLeafletTimedWmsLayer (options) {
@@ -198,7 +201,7 @@ export default {
         if (marker) {
           // We use custom events on this one
           kMapUtils.unbindLeafletEvents(marker)
-          marker.on('dragend', (event) => this.performDynamicLocationProbing(event.target.getLatLng().lng, event.target.getLatLng().lat))
+          marker.on('dragend', (event) => this.getWeatherForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat))
           marker.on('click', (event) => this.$refs.popover.toggle())
         }
         return marker
@@ -230,14 +233,22 @@ export default {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
     },
-    onFeatureClicked (options, event) {
+    async onFeatureClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
-      if (options.name === 'Sites') {
-        this.performStaticLocationProbing(_.get(feature, 'properties.NAME'))
+      if (options.probe) {
+        const results = await this.weacastApi.getService('probes').find({
+          query: { name: options.probe, $paginate: false, $select: ['elements', 'forecast', 'featureId'] }
+        })
+        if (results.length > 0) {
+          this.probe = results[0]
+          this.getWeatherForFeature(_.get(feature, this.probe.featureId))
+          this.$refs.popover.open()
+        }
       } else if (options.service) {
-        this.getTimeserie(options, feature, ['H', 'Q'],
-          moment.utc(this.timeLine.start).clone().subtract({ days: 7 }), moment.utc(this.timeLine.end))
+        this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
+          moment.utc(this.timeLine.start).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.end))
+        this.$refs.popover.open()
       }
     },
     onMapResized (size) {
@@ -255,6 +266,12 @@ export default {
         [this.bounds.getSouth(), this.bounds.getWest()],
         [this.bounds.getNorth(), this.bounds.getEast()]
       ])
+      this.$router.push({
+        query: {
+          south: this.bounds.getSouth(), west: this.bounds.getWest(),
+          north: this.bounds.getNorth(), east: this.bounds.getEast()
+        }
+      })
     },
     onForecastModelSelected (model) {
       this.forecastModel = model
@@ -287,7 +304,7 @@ export default {
         }
       })
     },
-    async getTimeserie (layer, feature, elements, startTime, endTime) {
+    async getMeasureForFeature (layer, feature, elements, startTime, endTime) {
       let result = await this.$api.getService(layer.service).find({
         query: {
           time: {
@@ -301,13 +318,12 @@ export default {
       })
       if (result.features.length > 0) {
         this.probedLocation = result.features[0]
-        this.$refs.popover.open()
       }
     },
-    async performDynamicLocationProbing (long, lat) {
+    async getWeatherForLocation (long, lat) {
       this.setMapCursor('processing-cursor')
       try {
-        await this.probeDynamicLocation(long, lat,
+        await this.getForecastForLocation(long, lat,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
       } catch (error) {
         logger.error(error)
@@ -315,10 +331,10 @@ export default {
       this.unsetMapCursor('processing-cursor')
       this.createProbedLocationLayer()
     },
-    async performStaticLocationProbing (featureId) {
+    async getWeatherForFeature (featureId) {
       this.setMapCursor('processing-cursor')
       try {
-        await this.probeStaticLocation(featureId,
+        await this.getForecastForFeature(featureId,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
       } catch (error) {
         logger.error(error)
@@ -326,11 +342,11 @@ export default {
       this.unsetMapCursor('processing-cursor')
       this.createProbedLocationLayer()
     },
-    onProbeDynamicLocation () {
+    onWeatherForLocation () {
       let probe = async (event) => {
         this.unsetMapCursor('probe-cursor')
         this.map.off('click', probe)
-        await this.performDynamicLocationProbing(event.latlng.lng, event.latlng.lat)
+        await this.getWeatherForLocation(event.latlng.lng, event.latlng.lat)
         // Quasar popover is not persistent and closes when clicking outside
         // We manually remove event listeners so that it becomes persistent
         setTimeout(() => {
@@ -372,12 +388,11 @@ export default {
       }
     },
     setupTimeline () {
-      if (!this.forecastModel) return
       let now = moment.utc()
       // Start just before the first available data
-      const start = this.forecastModel.lowerLimit - this.forecastModel.interval
+      const start = this.forecastModel ? this.forecastModel.lowerLimit - this.forecastModel.interval : -7*60*60*24
       // Start just after the last available data
-      const end = this.forecastModel.upperLimit + this.forecastModel.interval
+      const end = this.forecastModel ? this.forecastModel.upperLimit + this.forecastModel.interval : 7*60*60*24
       this.timeLine.start = now.clone().add({ seconds: start }).valueOf()
       this.timeLine.end = now.clone().add({ seconds: end }).valueOf()
       // Clamp current time to range
@@ -406,12 +421,19 @@ export default {
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
       this.map.fitBounds(this.$store.get('bounds'))
+    } else if (this.$route.query.south) {
+      this.$store.set('bounds', [
+        [this.$route.query.south, this.$route.query.west],
+        [this.$route.query.north, this.$route.query.east]
+      ])
+      this.map.fitBounds(this.$store.get('bounds'))
+    } else {
+      if (this.$store.get('user.position')) this.geolocate()
     }
     // Setup event connections
     // this.$on('popupopen', this.onPopupOpen)
     this.$on('click', this.onFeatureClicked)
     this.$on('collection-refreshed', this.onCollectionRefreshed)
-    if (this.$store.get('user.position')) this.geolocate()
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
