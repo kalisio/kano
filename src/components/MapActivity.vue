@@ -4,14 +4,14 @@
       <q-resize-observable @resize="onMapResized" />
       <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]"
                  max-height="20vw" style="{ min-width: 30vw; max-width: 30vw; min-height: 20vw; max-height: 20vw; }">
-        <q-btn icon="close" flat @click="onCloseProbePopover"></q-btn>
-        <q-btn icon="fullscreen" flat @click="onToggleProbeFullscreen"></q-btn>
+        <q-btn icon="close" flat @click="onCloseTimeseriesPopover"></q-btn>
+        <q-btn icon="fullscreen" flat @click="onToggleTimeseriesFullscreen"></q-btn>
         <time-series
           :feature="probedLocation" :variables="variables" :stepSize="3 * forecastInterval" :interval="forecastInterval">
         </time-series>
       </q-popover>
       <q-modal ref="modal" maximized>
-        <q-btn icon="close" flat @click="onCloseProbeModal"></q-btn>
+        <q-btn icon="close" flat @click="onCloseTimeseriesModal"></q-btn>
         <time-series
           :feature="probedLocation" :variables="variables" :stepSize="forecastInterval" :interval="forecastInterval">
         </time-series>
@@ -121,7 +121,7 @@ export default {
       return (this.forecastModel ? this.forecastModel.interval / 3600 : 1)
     },
     variables () {
-      return _.flatten(_.values(_.pickBy(this.layers, (layer) => layer.isVisible && layer.variables)).map(layer => layer.variables))
+      return _.flatten(_.values(_.pickBy(this.layers, (layer) => layer.variables)).map(layer => layer.variables))
     }
   },
   watch: {
@@ -202,7 +202,7 @@ export default {
           // We use custom events on this one
           kMapUtils.unbindLeafletEvents(marker)
           marker.on('dragend', (event) => this.getWeatherForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat))
-          marker.on('click', (event) => this.$refs.popover.toggle())
+          marker.on('click', (event) => this.toggleTimeseries())
         }
         return marker
       }
@@ -229,7 +229,7 @@ export default {
       }
       return null
     },
-    onPopupOpen (options, event) {
+    onFeaturePopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
     },
@@ -243,12 +243,12 @@ export default {
         if (results.length > 0) {
           this.probe = results[0]
           await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
-          this.$refs.popover.open()
+          this.openTimeseries()
         }
       } else if (options.service) {
         await this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
-          moment.utc(this.timeLine.start).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.end))
-        this.$refs.popover.open()
+          moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
+        this.openTimeseries()
       }
     },
     onMapResized (size) {
@@ -279,13 +279,13 @@ export default {
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
-    onToggleProbeFullscreen () {
-      this.$refs.popover.close(() => this.$refs.modal.open())
+    onToggleTimeseriesFullscreen () {
+      this.closeTimeseries(() => this.$refs.modal.open())
     },
-    onCloseProbePopover () {
-      this.$refs.popover.close()
+    onCloseTimeseriesPopover () {
+      this.closeTimeseries()
     },
-    onCloseProbeModal () {
+    onCloseTimeseriesModal () {
       this.$refs.modal.close()
     },
     createProbedLocationLayer () {
@@ -347,6 +347,13 @@ export default {
         this.unsetMapCursor('probe-cursor')
         this.map.off('click', probe)
         await this.getWeatherForLocation(event.latlng.lng, event.latlng.lat)
+        this.openTimeseries()
+      }
+      this.setMapCursor('probe-cursor')
+      this.map.on('click', probe)
+    },
+    openTimeseries () {
+      if (!this.$refs.popover.opened) {
         // Quasar popover is not persistent and closes when clicking outside
         // We manually remove event listeners so that it becomes persistent
         setTimeout(() => {
@@ -355,8 +362,16 @@ export default {
         }, 1000)
         this.$refs.popover.open()
       }
-      this.setMapCursor('probe-cursor')
-      this.map.on('click', probe)
+    },
+    closeTimeseries (fn) {
+      this.$refs.popover.close(fn)
+    },
+    toggleTimeseries () {
+      if (!this.$refs.popover.opened) {
+        this.openTimeseries()
+      } else {
+        this.closeTimeseries()
+      }
     },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
@@ -431,7 +446,7 @@ export default {
       if (this.$store.get('user.position')) this.geolocate()
     }
     // Setup event connections
-    // this.$on('popupopen', this.onPopupOpen)
+    // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
     this.$on('collection-refreshed', this.onCollectionRefreshed)
   },
@@ -442,7 +457,7 @@ export default {
     this.observe = false
     //this.removeCollectionLayer('Actors')
     // Remove event connections
-    // this.$off('popupopen', this.onPopupOpen)
+    // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onFeatureClicked)
     this.$off('collection-refreshed', this.onCollectionRefreshed)
   }

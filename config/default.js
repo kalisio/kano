@@ -8,13 +8,13 @@ let domain, weacastApi
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.dev.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
-  weacastApi = `https://weacast.irsn.kalisio.xyz`
+  weacastApi = 'https://weacast.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -24,6 +24,11 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
     domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
     weacastApi = 'http://localhost:' + (serverPort+1) // Weacast app client/server port = 8082
   }
+}
+// Override defaults if env provided
+if (process.env.SUBDOMAIN) {
+  domain = 'https://kano.' + process.env.SUBDOMAIN
+  weacastApi = 'https://weacast.' + process.env.SUBDOMAIN
 }
 
 module.exports = {

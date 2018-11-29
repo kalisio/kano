@@ -38,8 +38,8 @@
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
-    "PROBE": "Probe location",
-    "PROBED_LOCATION": "Probed location"
+    "PROBE": "Weather at location",
+    "PROBED_LOCATION": "Weather at location"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

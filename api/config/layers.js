@@ -1,3 +1,7 @@
+// Override defaults if env provided
+const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'kargo.kalisio.xyz')
+const mapproxyUrl = 'https://mapproxy.' + kargoDomain
+
 module.exports = [
   {
     name: 'Sentinel 2',
@@ -5,14 +9,14 @@ module.exports = [
     tags: [
       'satellite'
     ],
-    iconUrl: 'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg',
+    iconUrl: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'satellite',
     attribution: 'Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg',
+        `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
         {
           maxZoom: 18
         }
@@ -22,7 +26,7 @@ module.exports = [
       type: 'OpenStreetMap',
       isVisible: true,
       fileExtension: 'jpeg',
-      url: 'https://mapproxy.kargo.kalisio.xyz/wmts/s2/GLOBAL_WEBMERCATOR'
+      url: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -31,7 +35,7 @@ module.exports = [
     tags: [
       'street'
     ],
-    iconUrl: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png',
+    iconUrl: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
@@ -39,7 +43,7 @@ module.exports = [
       type: 'tileLayer',
       isVisible: true,
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
         {
           maxZoom: 18
         }
@@ -47,7 +51,7 @@ module.exports = [
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-bright/GLOBAL_WEBMERCATOR'
+      url: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -56,14 +60,14 @@ module.exports = [
     tags: [
       'street'
     ],
-    iconUrl: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png',
+    iconUrl: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
         {
           maxZoom: 18
         }
@@ -71,7 +75,7 @@ module.exports = [
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-dark/GLOBAL_WEBMERCATOR'
+      url: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -81,14 +85,14 @@ module.exports = [
       'street',
       'terrain'
     ],
-    iconUrl: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png',
+    iconUrl: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
         {
           maxZoom: 18
         }
@@ -96,7 +100,7 @@ module.exports = [
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR'
+      url: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -106,14 +110,14 @@ module.exports = [
       'street',
       'terrain'
     ],
-    iconUrl: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png',
+    iconUrl: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png',
+        `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
         {
           maxZoom: 18
         }
@@ -121,7 +125,7 @@ module.exports = [
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: 'https://mapproxy.kargo.kalisio.xyz/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR'
+      url: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -568,7 +572,7 @@ module.exports = [
     leaflet: {
       type: 'tileLayer.wms',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/service?',
+        `${mapproxyUrl}/service?`,
         {
           timeDimension: true,
           version: '1.3.0',
@@ -591,7 +595,7 @@ module.exports = [
     leaflet: {
       type: 'tileLayer.wms',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/service?',
+        `${mapproxyUrl}/service?`,
         {
           timeDimension: true,
           version: '1.3.0',
@@ -614,7 +618,7 @@ module.exports = [
     leaflet: {
       type: 'tileLayer.wms',
       arguments: [
-        'https://mapproxy.kargo.kalisio.xyz/service?',
+        `${mapproxyUrl}/service?`,
         {
           timeDimension: true,
           version: '1.3.0',

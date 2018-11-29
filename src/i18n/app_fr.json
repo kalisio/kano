@@ -38,8 +38,8 @@
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position",
-    "PROBE": "Mesurer position",
-    "PROBED_LOCATION": "Position mesurée"
+    "PROBE": "Temps sur position",
+    "PROBED_LOCATION": "Temps sur position"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
