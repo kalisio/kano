@@ -387,12 +387,6 @@ export default {
     async setupWeacast () {
       const config = this.$config('weacast')
       this.weacastApi = weacast(config)
-      // Alter the get service function because we rewrite the access path by prefixing by 'weacast'
-      /*
-      this.weacastApi.getService = (path) => {
-        return this.weacastApi.service(this.$config('apiPath') + '/' + path)
-      }
-      */
       try {
         // Transfer app token to Weacast
         const accessToken = await this.$api.passport.getJWT()

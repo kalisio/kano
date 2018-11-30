@@ -5896,9 +5896,9 @@ leaflet-pixi-overlay@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/leaflet-pixi-overlay/-/leaflet-pixi-overlay-1.5.1.tgz#634f9cad369b13de05d5e6c7eb02a5ac2ef2e55d"
 
-"leaflet-realtime@https://github.com/perliedman/leaflet-realtime":
+"leaflet-realtime@https://github.com/kalisio/leaflet-realtime":
   version "2.1.1"
-  resolved "https://github.com/perliedman/leaflet-realtime#b0b6b0f61489f0450d38870af047714b386594e9"
+  resolved "https://github.com/kalisio/leaflet-realtime#98bd41f8cee7cc6a92923e86f854f0e5611a6c12"
   dependencies:
     browserify "^16.2.2"
     grunt-contrib-uglify "^4.0.0"

@@ -46,6 +46,16 @@ module.exports = async function () {
     }
   }
 
+  // Helper to register service and permissions for a layer
+  function createFeatureServiceForLayer(options) {
+    createFeatureService.call(app, options)
+    // Register permission for it
+    permissions.defineAbilities.registerHook((subject, can, cannot) => {
+      can('service', options.collection)
+      can('all', options.collection)
+    })
+  }
+
   let catalogService = app.getService('catalog')
   let defaultLayers = app.get('catalog') ? app.get('catalog').layers || [] : []
   const layers = await catalogService.find({ paginate: false })
@@ -56,18 +66,14 @@ module.exports = async function () {
       logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
       await catalogService.create(defaultLayer)
     }
-    // Check if a service is associated to this layer
-    if (defaultLayer.service) {
-      createFeatureService.call(app, {
-        collection: defaultLayer.service,
-        featureId: defaultLayer.featureId,
-        history: defaultLayer.history
-      })
-      // Register permission for it
-      permissions.defineAbilities.registerHook((subject, can, cannot) => {
-        can('service', defaultLayer.service)
-        can('all', defaultLayer.service)
-      })
-    }
+    // Check if service(s) are associated to this layer
+    if (defaultLayer.service) createFeatureServiceForLayer({
+      collection: defaultLayer.service,
+      featureId: defaultLayer.featureId,
+      history: defaultLayer.history
+    })
+    if (defaultLayer.probeService) createFeatureServiceForLayer({
+      collection: defaultLayer.probeService
+    })
   }
 }

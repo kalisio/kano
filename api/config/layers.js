@@ -362,6 +362,7 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     service: 'vigicrues-observations',
+    probeService: 'vigicrues-stations',
     featureId: 'CdStationH',
     history: 604800,
     variables: [

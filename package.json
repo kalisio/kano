@@ -99,7 +99,7 @@
     "leaflet-filelayer": "^1.0.0",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-pixi-overlay": "^1.5.1",
-    "leaflet-realtime": "https://github.com/perliedman/leaflet-realtime",
+    "leaflet-realtime": "https://github.com/kalisio/leaflet-realtime",
     "leaflet-timedimension": "^1.1.0",
     "leaflet-velocity": "^1.2.2",
     "leaflet.markercluster": "^1.0.5",
