@@ -1,11 +1,6 @@
 <template>
-  <!-- root node required -->
   <div ref="timeseries">
-    <q-resize-observable @resize="onResized" />
-    <q-collapsible opened icon="list" :label="$t('TimeSeries.GRAPH', { location })">
-      <!--canvas ref="chart" :width="chartWidth" :height="chartHeight"></canvas-->
-      <canvas ref="chart"></canvas>
-    </q-collapsible>
+    <canvas ref="chart"></canvas>
   </div>
 </template>
 
@@ -14,27 +9,19 @@
 import _ from 'lodash'
 import moment from 'moment'
 import Chart from 'chart.js'
-import { QCollapsible, QIcon, QTooltip, QResizeObservable } from 'quasar'
+import { QIcon, QTooltip } from 'quasar'
 
 export default {
   name: 'time-series',
   components: {
-    QCollapsible,
     QIcon,
-    QTooltip,
-    QResizeObservable
+    QTooltip
   },
   props: {
     interval: { type: Number, default: 1 },
     stepSize: { type: Number, default: 1 },
     feature: { type: Object, default: () => null },
     variables: { type: Array, default: () => [] }
-  },
-  data () {
-    return {
-      chartWidth: 300,
-      chartHeight: 300
-    }
   },
   watch: {
     feature: function (feature) {
@@ -150,12 +137,6 @@ export default {
         }
       }
       this.chart = new Chart(this.$refs.chart.getContext('2d'), config)
-    },
-    onResized (size) {
-      if (this.$refs.chart) {
-        this.chartWidth = size.width
-        this.chartHeight = size.height * 0.7
-      }
     }
   }
 }

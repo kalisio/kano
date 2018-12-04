@@ -2,20 +2,15 @@
   <div>
     <div id="map" ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
-      <q-popover ref="popover" :anchor-click="false" anchor="center left" self="center left" :offset="[-20, 0]"
-                 max-height="20vw" style="{ min-width: 30vw; max-width: 30vw; min-height: 20vw; max-height: 20vw; }">
-        <q-btn icon="close" flat @click="onCloseTimeseriesPopover"></q-btn>
-        <q-btn icon="fullscreen" flat @click="onToggleTimeseriesFullscreen"></q-btn>
-        <time-series
-          :feature="probedLocation" :variables="variables" :stepSize="3 * forecastInterval" :interval="forecastInterval">
-        </time-series>
-      </q-popover>
-      <q-modal ref="modal" maximized>
-        <q-btn icon="close" flat @click="onCloseTimeseriesModal"></q-btn>
-        <time-series
-          :feature="probedLocation" :variables="variables" :stepSize="forecastInterval" :interval="forecastInterval">
-        </time-series>
-      </q-modal>
+      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }">
+        <div slot="widget-content">
+          <time-series
+            :feature="probedLocation" 
+            :variables="variables" 
+            :stepSize="forecastInterval" 
+            :interval="forecastInterval" />
+        </div>
+      </k-widget>
     </div>
     <q-btn 
       id="side-nav-toggle"
@@ -353,18 +348,18 @@ export default {
       this.map.on('click', probe)
     },
     openTimeseries () {
-      if (!this.$refs.popover.opened) {
+      /*if (!this.$refs.widget.opened) {
         // Quasar popover is not persistent and closes when clicking outside
         // We manually remove event listeners so that it becomes persistent
         setTimeout(() => {
           document.body.removeEventListener('click', this.$refs.popover.close, true)
           document.body.removeEventListener('touchstart', this.$refs.popover.close, true)
-        }, 1000)
-        this.$refs.popover.open()
-      }
+        }, 1000)*/
+        this.$refs.widget.open()
+      //}
     },
     closeTimeseries (fn) {
-      this.$refs.popover.close(fn)
+      this.$refs.widget.close(fn)
     },
     toggleTimeseries () {
       if (!this.$refs.popover.opened) {
@@ -421,6 +416,7 @@ export default {
     this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
+    this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
   mounted () {
     this.setupMap({ timeDimension: true })
