@@ -80,10 +80,8 @@ export default {
       return {
         length,
         getIntervalStartValue (rangeStart) {
-          const startTime = moment.utc(rangeStart)
-          const year = startTime.year()
-          const month = startTime.month()
-          const day = startTime.day()
+          let startTime = moment.utc(rangeStart)
+          startTime.local()
           const hour = startTime.hours()
           const minute = startTime.minutes()
           let startValue
