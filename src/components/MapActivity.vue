@@ -380,7 +380,11 @@ export default {
       }
     },
     async setupWeacast () {
-      const config = this.$config('weacast')
+      let config = this.$config('weacast')
+      const catalogService = this.$api.getService('catalog')
+      // Check for existing service in catalog overriding default config
+      let response = await catalogService.find({ query: { type: 'service', name: 'weacast' } })
+      if (response.data.length > 0) config.apiUrl = response.data[0].endpoint
       this.weacastApi = weacast(config)
       try {
         // Transfer app token to Weacast

@@ -181,7 +181,7 @@ module.exports = [
     name: 'Wind',
     description: 'Speed and direction',
     tags: [
-      'meteo'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -238,7 +238,7 @@ module.exports = [
     name: 'Gust',
     description: 'Max wind speed',
     tags: [
-      'meteo'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -273,7 +273,7 @@ module.exports = [
     name: 'Precipitations',
     description: '3h accumulation',
     tags: [
-      'meteo'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -565,7 +565,7 @@ module.exports = [
     name: 'Wind speed',
     description: 'Isobaric surface',
     tags: [
-      'meteo'
+      'weather'
     ],
     icon: 'fingerprint',
     attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -588,7 +588,7 @@ module.exports = [
     name: 'Total precipitation',
     description: 'Ground or water',
     tags: [
-      'meteo'
+      'weather'
     ],
     icon: 'fingerprint',
     attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -611,7 +611,7 @@ module.exports = [
     name: 'Temperature',
     description: 'Isobaric surface',
     tags: [
-      'meteo'
+      'weather'
     ],
     icon: 'fingerprint',
     attribution: 'ARPEGE © <a href="http://www.meteofrance.com">Météo-France</a>',
