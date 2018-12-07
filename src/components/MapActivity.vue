@@ -348,25 +348,13 @@ export default {
       this.map.on('click', probe)
     },
     openTimeseries () {
-      /*if (!this.$refs.widget.opened) {
-        // Quasar popover is not persistent and closes when clicking outside
-        // We manually remove event listeners so that it becomes persistent
-        setTimeout(() => {
-          document.body.removeEventListener('click', this.$refs.popover.close, true)
-          document.body.removeEventListener('touchstart', this.$refs.popover.close, true)
-        }, 1000)*/
-        this.$refs.widget.open()
-      //}
+      this.$refs.widget.open()
     },
     closeTimeseries (fn) {
       this.$refs.widget.close(fn)
     },
     toggleTimeseries () {
-      if (!this.$refs.popover.opened) {
-        this.openTimeseries()
-      } else {
-        this.closeTimeseries()
-      }
+      this.$refs.widget.toggle()
     },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
