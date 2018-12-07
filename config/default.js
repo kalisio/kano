@@ -82,7 +82,7 @@ module.exports = {
       { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
       { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['meteo'] } } } },
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
       { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
       { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',

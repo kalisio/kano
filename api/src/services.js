@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import fs from 'fs-extra'
 import logger from 'winston'
-import kCore from '@kalisio/kdk-core'
-import { permissions } from '@kalisio/kdk-core'
+import kCore, { permissions } from '@kalisio/kdk-core'
 import kMap, { createCatalogService, createFeatureService } from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
 
@@ -57,14 +56,31 @@ module.exports = async function () {
   }
 
   let catalogService = app.getService('catalog')
-  let defaultLayers = app.get('catalog') ? app.get('catalog').layers || [] : []
-  const layers = await catalogService.find({ paginate: false })
+  const catalog = app.get('catalog')
+
+  let defaultServices = catalog ? catalog.services || [] : []
+  const services = await catalogService.find({ query: { type: 'service' }, paginate: false })
+  for (let i = 0; i < defaultServices.length; i++) {
+    const defaultService = defaultServices[i]
+    let createdService = _.find(services, { name: defaultService.name })
+    if (!createdService) {
+      logger.info('Adding default service (name = ' + defaultService.name + ')')
+      await catalogService.create(defaultService)
+    } else {
+      logger.info('Reusing default service (name = ' + defaultService.name + ')')
+    }
+  }
+
+  let defaultLayers = catalog ? catalog.layers || [] : []
+  const layers = await catalogService.find({ query: { type: 'layer' }, paginate: false })
   for (let i = 0; i < defaultLayers.length; i++) {
     const defaultLayer = defaultLayers[i]
     let createdLayer = _.find(layers, { name: defaultLayer.name })
     if (!createdLayer) {
       logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
       await catalogService.create(defaultLayer)
+    } else {
+      logger.info('Reusing default layer (name = ' + defaultLayer.name + ')')
     }
     // Check if service(s) are associated to this layer
     if (defaultLayer.service) createFeatureServiceForLayer({
