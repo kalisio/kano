@@ -44,68 +44,110 @@ export default {
       return (index % (this.stepSize / this.interval)) === 0
     },
     setupAvailableTimes () {
-      let times = []
+      this.times = []
       const time = this.feature.time || this.feature.forecastTime
 
       this.variables.forEach(variable => {
-        if (time && time[variable.name]) times.push(time[variable.name])
+        if (time && time[variable.name]) this.times.push(time[variable.name])
       })
       // Make union of all available times for x-axis
-      return _.union(...times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
+      this.times = _.union(...this.times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
     },
     setupAvailableDatasets () {
-      let datasets = []
+      this.datasets = []
       const color = Chart.helpers.color
       const time = this.feature.time || this.feature.forecastTime
       const properties = this.feature.properties
       
       this.variables.forEach(variable => {
+        const unit = variable.units[0]
+        const label = this.$t(variable.label) || variable.label
         // Variable available for feature ?
         if (properties[variable.name]) {
-          datasets.push(Object.assign({
-            label: this.$t(variable.label) || variable.label,
+          this.datasets.push(Object.assign({
+            label: `${label} (${unit})`,
             data: properties[variable.name].map((value, index) => ({ x: new Date(time[variable.name][index]), y: value })).filter(this.filter),
-            yAxisID: variable.units[0]
+            yAxisID: unit
           }, variable.chartjs))
         }
       })
-      
-      return datasets
     },
     setupAvailableYAxes () {
-      let yAxes = []
+      this.yAxes = []
       const properties = this.feature.properties
       let isLeft = true
 
       this.variables.forEach(variable => {
+        const unit = variable.units[0]
         // Variable available for feature ?
         // Check also if axis already created
-        if (properties[variable.name] && !_.find(yAxes, axis => axis.id === variable.units[0])) {
-          yAxes.push({
-            id: variable.units[0],
+        if (properties[variable.name] && !_.find(this.yAxes, axis => axis.id === unit)) {
+          this.yAxes.push({
+            id: unit,
             position: isLeft ? 'left' : 'right',
             scaleLabel: {
               display: true,
-              labelString: variable.units[0]
+              labelString: unit
             }
           })
           // Alternate axes
           isLeft = !isLeft
         }
       })
+    },
+    toggleVariable (variableItem) {
+      const dataset = this.datasets[variableItem.datasetIndex]
+      let metadata = this.chart.getDatasetMeta(variableItem.datasetIndex)
+      const variable = this.variables[variableItem.datasetIndex]
+      // Check if there is others variables using the same unit axis
+      let datasetsWithYAxis = []
+      this.datasets.forEach((otherDataset, index) => {
+        if ((dataset.label !== otherDataset.label) &&
+            (dataset.yAxisID === otherDataset.yAxisID)) {
+          datasetsWithYAxis.push(index)
+        }
+      })
 
-      return yAxes
+      if (_.isNil(metadata.hidden)) {
+        metadata.hidden = !this.chart.data.datasets[variableItem.datasetIndex].hidden
+      } else {
+        metadata.hidden = null
+      }
+
+      // Check if there is another variable using the same unit axis
+      let yAxis = _.find(this.config.options.scales.yAxes, axis => axis.id === dataset.yAxisID) 
+      if (metadata.hidden) {
+        let hideYAxis = true
+        datasetsWithYAxis.forEach(otherDataset => {
+          let otherMetadata = this.chart.getDatasetMeta(otherDataset)
+          if (!otherMetadata.hidden) hideYAxis = false
+        })
+        if (hideYAxis) yAxis.display = false
+      } else {
+        let showYAxis = true
+        datasetsWithYAxis.forEach(otherDataset => {
+          let otherMetadata = this.chart.getDatasetMeta(otherDataset)
+          if (!otherMetadata.hidden) showYAxis = false
+        })
+        if (showYAxis) yAxis.display = true
+      }
+
+      this.chart.update(this.config)
     },
     setupGraph () {
       if (!this.feature) return
       // Destroy previous graph if any
       if (this.chart) this.chart.destroy()
       
-      const config = {
+      this.setupAvailableTimes()
+      this.setupAvailableDatasets()
+      this.setupAvailableYAxes()
+
+      this.config = {
         type: 'line',
         data: {
-          labels: this.setupAvailableTimes(),
-          datasets: this.setupAvailableDatasets()
+          labels: this.times,
+          datasets: this.datasets
         },
         options: {
           tooltips: {
@@ -132,11 +174,14 @@ export default {
                 labelString: 'Date'
               }
             }],
-            yAxes: this.setupAvailableYAxes()
+            yAxes: this.yAxes
+          },
+          legend: {
+            onClick: (event, legendItem) => this.toggleVariable(legendItem)
           }
         }
       }
-      this.chart = new Chart(this.$refs.chart.getContext('2d'), config)
+      this.chart = new Chart(this.$refs.chart.getContext('2d'), this.config)
     }
   }
 }
