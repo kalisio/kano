@@ -50,21 +50,12 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
-  roles: {
-    // Member/Manager/Owner
-    colors: ['amber', 'orange', 'deep-orange'],
-    icons: ['person', 'work', 'verified_user']
-  },
   screen: {
-    footer: [
-      { label: 'screen.ABOUT_KALISIO', url: website },
-      { label: 'screen.CONTACT', url: website + '/#footer' },
-      { label: 'screen.TERMS_AND_POLICIES', url: domain + '/#/terms' },
-    ],
+    footer: [],
     header: 'kalisio-banner.png'
   },
   login: {
-    providers: ['google', 'github']
+    providers: []
   },
   layout: {
     view: 'lHh LpR lFf',

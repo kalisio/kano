@@ -33,7 +33,7 @@ module.exports = async function () {
   let usersService = app.getService('users')
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
-  if (defaultUsers && !process.env.NODE_APP_INSTANCE) {
+  if (defaultUsers) {
     // Create default users if not already done
     const users = await usersService.find({ paginate: false })
     for (let i = 0; i < defaultUsers.length; i++) {
