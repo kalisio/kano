@@ -184,7 +184,7 @@ export default {
                   hour: 'MM/DD HH:mm'
                 },
                 tooltipFormat: 'MM/DD HH:mm',
-                parser: (date) => moment.utc(typeof date === 'number' ? date : date.toISOString())
+                parser: (date) => moment(typeof date === 'number' ? date : date.toISOString())
               },
               scaleLabel: {
                 display: false,
