@@ -59,6 +59,8 @@ export default {
       })
     },
     onGeolocate () {
+      // Force a refresh
+      this.$store.unset('bounds')
       this.updatePosition()
     },
     onEngineReady () {
