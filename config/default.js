@@ -50,12 +50,22 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
-  screen: {
-    footer: [],
-    header: 'kalisio-banner.png'
-  },
-  login: {
-    providers: []
+  screens: {
+    banner: 'kalisio-banner.png',
+    login: {
+      providers: [],
+      links: []
+    },
+    logout: {
+      links: [
+        { id: 'login-link', label: 'KLogout.LOG_IN_AGAIN_LINK', route: { name: 'login' } },
+      ]
+    },
+    changeEndpoint: {
+      links: [
+        { id: 'login-link', label: 'KChangeEndpoint.LOGIN_LINK', route: { name: 'login' } }
+      ]
+    }
   },
   layout: {
     view: 'lHh LpR lFf',

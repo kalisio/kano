@@ -11,7 +11,6 @@ module.exports = {
         component: 'authentication/KLogout',
         meta: { authenticated: true }
       },
-      'register': 'authentication/KRegister',
       'change-endpoint': 'authentication/KChangeEndpoint',
       'home': {
         // The name of the route has to be set the default child

@@ -1,9 +1,12 @@
 import _ from 'lodash'
-import fs from 'fs-extra'
+import path from 'path'
 import logger from 'winston'
 import kCore, { permissions } from '@kalisio/kdk-core'
 import kMap, { createCatalogService, createFeatureService } from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
+
+const servicesPath = path.join(__dirname, 'services')
+
 
 module.exports = async function () {
   const app = this
@@ -29,7 +32,10 @@ module.exports = async function () {
     logger.error(error.message)
   }
 
+  // Configure the users service
   let usersService = app.getService('users')
+  app.configureService('users', app.getService('users'), servicesPath)
+
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
   if (defaultUsers) {
