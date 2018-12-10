@@ -60,6 +60,7 @@ import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
+import appHooks from '../main.hooks'
 import mixins from '../mixins'
 import TimeSeries from './TimeSeries'
 
@@ -382,6 +383,8 @@ export default {
       let response = await catalogService.find({ query: { type: 'service', name: 'weacast' } })
       if (response.data.length > 0) config.apiUrl = response.data[0].endpoint
       this.weacastApi = weacast(config)
+      // Setup app hooks
+      this.weacastApi.hooks(appHooks)
       try {
         // Transfer app token to Weacast
         const accessToken = await this.$api.passport.getJWT()
