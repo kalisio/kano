@@ -1,6 +1,7 @@
 <template>
   <div ref="timeseries">
-    <canvas ref="chart"></canvas>
+    <canvas ref="chart">
+    </canvas>
   </div>
 </template>
 
@@ -18,30 +19,42 @@ export default {
     QTooltip
   },
   props: {
-    interval: { type: Number, default: 1 },
-    stepSize: { type: Number, default: 1 },
     feature: { type: Object, default: () => null },
-    variables: { type: Array, default: () => [] }
+    variables: { type: Array, default: () => [] },
+    decimationFactor: { type: Number, default: 1 },
+    timeInterval: { type: Number, default: 1 }
   },
   watch: {
-    feature: function (feature) {
-      this.setupGraph()
-    }
-  },
-  computed: {
-    location: function () {
-      return (this.feature
-        ? this.feature.geometry.coordinates[0].toFixed(2) + '°, ' + this.feature.geometry.coordinates[1].toFixed(2) + '°'
-        : '')
-    }
+    feature: function () { this.setupGraph() },
+    variables: function () { this.setupGraph() },
+    decimationFactor: function () { this.setupGraph() },
+    timeInterval: function () { this.setupGraph() }
   },
   methods: {
     formatDateTime (time) {
       return moment.utc(time).format('MM/DD HH:mm')
     },
     filter (value, index) {
-      // We filter one value out of N according to step size
-      return (index % (this.stepSize / this.interval)) === 0
+      // We filter one value out of N according to decimation factor
+      return (index % this.decimationFactor) === 0
+    },
+    setupTimeTicks() {
+      this.timeStepSize = Math.max(1, this.timeInterval)
+      const size = this.$el.getBoundingClientRect()
+      if (!this.times || !size.width) return
+      // Choose the right step size to ensure we have almost 100px between ticks
+      const pixelsPerTick = this.$el.getBoundingClientRect().width / this.times.length
+      this.timeStepSize = Math.max(1, Math.round(100 / pixelsPerTick))
+      // Round to nearest multiple of time interval
+      this.timeStepSize = Math.ceil(this.timeStepSize / this.timeInterval) * this.timeInterval
+      // We can update in place when possible
+      if (this.chart) {
+        let xAxis = _.find(this.config.options.scales.xAxes, axis => axis.type === 'time')
+        if (xAxis && xAxis.time) {
+          xAxis.time.stepSize = this.timeStepSize
+          this.chart.update(this.config)
+        }
+      }
     },
     setupAvailableTimes () {
       this.times = []
@@ -137,9 +150,13 @@ export default {
     setupGraph () {
       if (!this.feature) return
       // Destroy previous graph if any
-      if (this.chart) this.chart.destroy()
+      if (this.chart) {
+        this.chart.destroy()
+        this.chart = null
+      }
       
       this.setupAvailableTimes()
+      this.setupTimeTicks()
       this.setupAvailableDatasets()
       this.setupAvailableYAxes()
 
@@ -162,7 +179,7 @@ export default {
               type: 'time',
               time: {
                 unit: 'hour',
-                stepSize: this.stepSize,
+                stepSize: this.timeStepSize,
                 displayFormats: {
                   hour: 'MM/DD HH:mm'
                 },

@@ -2,13 +2,12 @@
   <div>
     <div id="map" ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
-      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }">
+      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="$t('TimeSeries.GRAPH', { location: probedLocationName })" @state-changed="onResizeTimeseries">
         <div slot="widget-content">
-          <time-series
+          <time-series ref="timeseries" 
             :feature="probedLocation" 
-            :variables="variables" 
-            :stepSize="forecastInterval" 
-            :interval="forecastInterval" />
+            :variables="variables"
+            :time-interval="forecastInterval" />
         </div>
       </k-widget>
     </div>
@@ -116,17 +115,32 @@ export default {
       return (this.forecastModel ? this.forecastModel.interval / 3600 : 1)
     },
     variables () {
+      // Filter layers with variables and convert from Object to Array type
       return _.flatten(_.values(_.pickBy(this.layers, (layer) => layer.variables)).map(layer => layer.variables))
+    },
+    probedLocationName: function () {
+      return (this.probedLocation
+        ? this.probedLocation.geometry.coordinates[0].toFixed(2) + '°, ' + this.probedLocation.geometry.coordinates[1].toFixed(2) + '°'
+        : '')
     }
   },
   watch: {
-    forecastModel: function (model) {
+    forecastModel: async function (model) {
       // Update layers
       _.forOwn(this.leafletLayers, layer => {
         if (layer instanceof L.weacast.ForecastLayer) layer.setForecastModel(model)
       })
       // Update timeLine
       this.setupTimeline()
+      // Update probed location if any
+      if (this.probedLocation) {
+        // Feature mode
+        if (this.probe && this.probedLocation.probeId) {
+          await this.getWeatherForFeature(_.get(this.probedLocation, this.probe.featureId))
+        } else { // Location mode
+          await this.getWeatherForLocation(this.probedLocation.geometry.coordinates[0], this.probedLocation.geometry.coordinates[1])
+        }
+      }
     }
   },
   methods: {
@@ -274,14 +288,8 @@ export default {
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
-    onToggleTimeseriesFullscreen () {
-      this.closeTimeseries(() => this.$refs.modal.open())
-    },
-    onCloseTimeseriesPopover () {
-      this.closeTimeseries()
-    },
-    onCloseTimeseriesModal () {
-      this.$refs.modal.close()
+    onResizeTimeseries(state) {
+      if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
     },
     createProbedLocationLayer () {
       if (!this.probedLocation) return
@@ -350,8 +358,8 @@ export default {
     openTimeseries () {
       this.$refs.widget.open()
     },
-    closeTimeseries (fn) {
-      this.$refs.widget.close(fn)
+    closeTimeseries () {
+      this.$refs.widget.close()
     },
     toggleTimeseries () {
       this.$refs.widget.toggle()
