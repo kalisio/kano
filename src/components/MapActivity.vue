@@ -30,6 +30,15 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
+    <k-color-legend v-if="colorLegend.visible"
+      class="fixed"
+      :style="colorLegendStyle"
+      :unit="colorLegend.unit"
+      :hint="colorLegend.hint"
+      :steps="colorLegend.steps"
+      @click="onColorLegendClick" />
+    />
+
     <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
         <k-time-controller v-if="forecastModel"
           :min="timeLine.start" 
@@ -84,7 +93,8 @@ export default {
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
     kMapMixins.map.fileLayers,
-    mixins.activity
+    mixins.activity,
+    mixins.legend    
   ],
   inject: ['layout'],
   data () {
@@ -99,7 +109,8 @@ export default {
       },
       timeLineInterval: null,
       timeLineFormatter: null,
-      mapWidth: null
+      mapWidth: null,
+      mapHeight: null
     }
   },
   computed: {
@@ -110,6 +121,16 @@ export default {
     timelineContainerStyle () {
       return {
         width: 0.8 * this.mapWidth + 'px'
+      }
+    },
+    colorLegendStyle () {
+      return {
+        left: '18px',
+        top: 0.25 * this.mapHeight + 'px',
+        height: 0.50 * this.mapHeight + 'px',
+        width: '34px',
+        border: '1px solid lightgrey',        
+        fontSize: '12px'
       }
     },
     forecastInterval () {
@@ -267,6 +288,7 @@ export default {
         this.refreshMap()
         if (this.$refs.map) {
           this.mapWidth = this.$refs.map.getBoundingClientRect().width
+          this.mapHeight = this.$refs.map.getBoundingClientRect().height
         }
       }
     },
@@ -424,6 +446,7 @@ export default {
     this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
+    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
   mounted () {
