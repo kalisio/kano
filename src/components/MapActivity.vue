@@ -176,13 +176,13 @@ export default {
       })
     },
     createLeafletTimedWmsLayer (options) {
+      let leafletOptions = options.leaflet || options
       // Check for valid type
-      if (options.type !== 'tileLayer.wms') return
-      const layerOptions = _.get(options, 'arguments[1]', {})
+      if (leafletOptions.type !== 'tileLayer.wms') return
       let layer = this.createLeafletLayer(options)
       // Specific case of time dimension layer where we embed the underlying WMS layer
-      if (layerOptions.timeDimension) {
-        layer = this.createLeafletLayer({ type: 'timeDimension.layer.wms', arguments: [ layer, layerOptions.timeDimension ] })
+      if (leafletOptions.timeDimension) {
+        layer = this.createLeafletLayer(Object.assign({ type: 'timeDimension.layer.wms', source: layer }, leafletOptions.timeDimension))
       }
       return layer
     },
@@ -404,9 +404,14 @@ export default {
       this.timeLine.end = now.clone().add({ seconds: end }).valueOf()
       // Clamp current time to range
       this.timeLine.current = Math.max(Math.min(this.timeLine.current, this.timeLine.end), this.timeLine.start)
-      this.setCurrentTime(moment.utc(this.timeLine.current))
       this.timeLineInterval = this.getTimeLineInterval()
       this.timeLineFormatter = this.getTimeLineFormatter()
+      let times = []
+      for (let time = this.timeLine.start; time <= this.timeLine.end; time += 3600000) {
+        times.push(new Date(time).toISOString())
+      }
+      this.map.timeDimension.setAvailableTimes(times, 'replace')
+      this.setCurrentTime(moment.utc(this.timeLine.current))
     }
   },
   created () {
