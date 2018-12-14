@@ -455,7 +455,7 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'star',
-      'marker-color': '#180EF1'
+      'marker-color': '#FFA500'
     }
   },
   {
