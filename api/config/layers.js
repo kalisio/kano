@@ -332,7 +332,7 @@ module.exports = [
     type: 'OverlayLayer',
     service: 'vigicrues-observations',
     probeService: 'vigicrues-stations',
-    featureId: 'CdStationH',
+    featureId: 'CdStationHydro',
     history: 604800,
     variables: [
       {
@@ -371,7 +371,7 @@ module.exports = [
       'icon-classes': 'fa fa-tint',
       popup: {
         pick: [
-          'LbStationH'
+          'LbStationHydro'
         ]
       },
       tooltip: {
