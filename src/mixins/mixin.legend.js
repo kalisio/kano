@@ -5,14 +5,12 @@ import L from 'leaflet'
 // Add knot unit not defined by default
 math.createUnit('knot', { definition: '0.514444 m/s', aliases: ['knots', 'kt', 'kts'] })
 
+const COLOR_STEPS = 10
+
 let legendMixin = {
   data () {
     return {
-      // We manage a "stack" of layers which can be displayed in the color legend, however only one
-      // layer (the most recent activated layer, i.e. the "top" of the "stack") is displayed in the legend.
-      // When another layer is activated (clicked in the Map interface) then it gets moved to the top of the stack
-      // and displayed in the legend.
-      colorLayers: [],
+      colorLayer: null,
       // These are the properties for the KColorLegend component, which are calculated from the 'active' layer.
       // If there are no visible/active layers then we set "visible" to false to completely hide the color legend.
       colorLegend: {
@@ -24,18 +22,15 @@ let legendMixin = {
     }
   },  
   methods: {
-    // Handler for the 'map-create-leaflet-layer' event
-    onColorLegendCreateLayer (event) {
-      const forecastLayer = event.leafletLayer
-
+    onColorLegendShowLayer (event) {
       // We only manage forecast layers
-      if (this.isForecastLayer(forecastLayer)) {
+      if (this.isForecastLayer(event.leafletLayer)) {
+
+        const forecastLayer = event.leafletLayer
 
         let colorLayer = {
-          id: forecastLayer._leaflet_id,
           layer: event.layer,
-          forecastLayer: forecastLayer,
-          available: false  // not available yet, becomes available only after the data has been loaded
+          forecastLayer
         }
 
         // Callback to be triggered once the data for the forecastLayer has been loaded, the color legend can then be shown
@@ -46,71 +41,22 @@ let legendMixin = {
         else forecastLayer.on('data', colorLayer.callback)
       }
     },
-    // Handler for the 'map-show-leaflet-layer' event
-    onColorLegendShowLayer (event) {
-      const forecastLayer = event.leafletLayer
-
-      // We only manage forecast layers
-      if (this.isForecastLayer(forecastLayer)) {
-        this.showColorLegend(forecastLayer)
-      }
-    },
-    // Handler for the 'map-hide-leaflet-layer' event
     onColorLegendHideLayer (event) {
       const forecastLayer = event.leafletLayer
 
       // We only manage forecast layers
       if (this.isForecastLayer(forecastLayer)) {
-        this.hideColorLegend(forecastLayer)
+        this.hideColorLegend()
       }
     },
     addColorLegend (layer) {
       const forecastLayer = layer.forecastLayer
       forecastLayer.off('data', layer.callback)
 
-      layer.available = true
-
-      // Push it to the 'top' of the 'stack' to make it the active layer
-      this.colorLayers.push(layer)
-
-      this.updateColorLegend()
+      this.updateColorLegend(layer)
     },
-    showColorLegend (forecastLayer) {
-      let index = this.findColorLayer(forecastLayer)
-
-      if (index >= 0) {
-        let layer = this.colorLayers[index]
-        layer.available = true
-
-        // Move it to the 'top' of the 'stack' to make it the active layer
-        this.colorLayers.splice(index, 1)
-        this.colorLayers.push(layer)
-
-        this.updateColorLegend()
-      }
-    },
-    hideColorLegend (forecastLayer) {
-      let index = this.findColorLayer(forecastLayer)
-
-      if (index >= 0) {
-        let layer = this.colorLayers[index]
-        layer.available = false
-
-        if (index === this.colorLayers.length - 1) {  // it was the last active legend
-          // Move it to the 'bottom' of the 'stack' because it's not the active layer anymore
-          this.colorLayers.splice(index, 1)
-          this.colorLayers.unshift(layer)
-
-          this.updateColorLegend()
-        }
-      }
-    },
-    findColorLayer (forecastLayer) {
-      return this.colorLayers.findIndex((layer) => layer.id === forecastLayer._leaflet_id)
-    },
-    getCurrentColorLayer () {
-        // The 'active' layer is always at the 'top' of the 'stack'
-        return this.colorLayers[this.colorLayers.length - 1]
+    hideColorLegend () {
+      this.updateColorLegend(null)
     },
     resetColorLegend () {
       this.colorLegend.visible = false
@@ -118,29 +64,26 @@ let legendMixin = {
       this.colorLegend.hint = null
       this.colorLegend.steps = null
     },
-    updateColorLegend () {
-      // No available layers - reset & hide the color legend
-      if (this.colorLayers.length === 0 || this.colorLayers[this.colorLayers.length - 1].available === false) {
+    updateColorLegend (colorLayer) {
+      this.colorLayer = colorLayer
+
+      // Reset & hide the color legend
+      if (!this.colorLayer) {
         this.resetColorLegend()
 
       } else {
-
-        const colorLayer = this.getCurrentColorLayer()
         const forecastLayer = colorLayer.forecastLayer
+        const colorMap = forecastLayer.getColorMap(COLOR_STEPS)        
 
-// TODO - forecastLayer.options.units is undefined for some reason - hardcoding the units for now
-//const units = forecastLayer.options.units
-const units = ['m/s', 'knot']   // TODO hardcoded
+        const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
 
         const unit = !units || units.length === 0 ? null : units[0]
         const hint = this.getColorLegendHint(units, unit, colorLayer.layer.name)
-        const steps = this.getColorLegendSteps(forecastLayer.getColorMap(), units, unit)
+        const steps = this.getColorLegendSteps(colorMap, units, unit)
 
         // We don't have units or steps for this layer, hide it
         if (unit === null || steps.length === 0) {
-          this.colorLegend.visible = false
-          // hide it and possibly show another one
-          this.hideColorLegend(forecastLayer)
+          this.hideColorLegend()
 
         // Units and steps (re)calculated, update the color legend
         } else {
@@ -154,22 +97,22 @@ const units = ['m/s', 'knot']   // TODO hardcoded
     },
     // Color legend was clicked - toggle to the next unit
     onColorLegendClick (event) {
-      const colorLayer = this.getCurrentColorLayer()
+      const colorLayer = this.colorLayer
       const forecastLayer = colorLayer.forecastLayer
 
-// TODO - forecastLayer.options.units is undefined for some reason - hardcoding the units for now
-//const units = forecastLayer.options.units
-const units = ['m/s', 'knot']   // TODO hardcoded
+      const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
 
       // There's only one unit, no toggling to do, we're done
       if (units.length <= 1) {
         return
       }
 
+      const colorMap = forecastLayer.getColorMap(COLOR_STEPS)
+
       // Get next unit and recalculate hint and steps
       const nextUnit = this.getNextUnit(units, event.unit)
       const hint = this.getColorLegendHint(units, nextUnit, colorLayer.layer.name)
-      const steps = this.getColorLegendSteps(forecastLayer.getColorMap(), units, nextUnit)
+      const steps = this.getColorLegendSteps(colorMap, units, nextUnit)
 
       // Units and steps (re)calculated, update the color legend
       this.colorLegend.unit = nextUnit
@@ -179,6 +122,9 @@ const units = ['m/s', 'knot']   // TODO hardcoded
     isForecastLayer (layer) {
       return layer instanceof L.weacast.ForecastLayer      
     },
+    getColorLegendUnits(colorLayer) {
+      return colorLayer.layer.variables[0].units
+    },
     getColorLegendHint (units, unit, layerName) {
       if (!units || units.length <= 1 || !unit) {
         return null
@@ -186,8 +132,8 @@ const units = ['m/s', 'knot']   // TODO hardcoded
 
       // Determine hint by calling "this.getNextUnit"
       const nextUnit = this.getNextUnit(units, unit)
-        
-      return layerName + ': click to convert to ' + nextUnit
+
+      return this.$t('ColorLegend.CONVERT_UNITS', {layer: layerName, unit: nextUnit})
     },
     getColorLegendSteps (colorMap, units, unit) {
       if (!colorMap || colorMap.length === 0 || !units || units.length === 0 || !unit) return []
@@ -215,25 +161,25 @@ const units = ['m/s', 'knot']   // TODO hardcoded
     },
   },
   mounted () {
-    this.colorLayers = []
+    this.colorLayer = null
     this.resetColorLegend()
 
     // Connect the events fired by mixin.base-map
-    this.$on('map-create-leaflet-layer', this.onColorLegendCreateLayer)
-    this.$on('map-show-leaflet-layer', this.onColorLegendShowLayer)
-    this.$on('map-hide-leaflet-layer', this.onColorLegendHideLayer)
-    // TODO necessary? we just ignore this and set this.colorLayers to null in "beforeDestroy"
+    this.$on('leaflet-layer-added', this.onColorLegendShowLayer)
+    this.$on('leaflet-layer-shown', this.onColorLegendShowLayer)
+    this.$on('leaflet-layer-hidden', this.onColorLegendHideLayer)
+    // TODO necessary? we just ignore this and set this.colorLayer to null in "beforeDestroy"
     // this.$on('map-remove-leaflet-layer', this.onColorLegendRemoveLayer)
   },
   beforeDestroy () {
-    // Delete references to the colorLayers
-    this.colorLayers = null
+    // Delete reference to the colorLayer
+    this.colorLayer = null
     this.resetColorLegend()
 
     // Disconnect the events
-    this.$off('map-create-leaflet-layer', this.onColorLegendCreateLayer)
-    this.$off('map-show-leaflet-layer', this.onColorLegendShowLayer)
-    this.$off('map-hide-leaflet-layer', this.onColorLegendHideLayer)
+    this.$off('leaflet-layer-added', this.onColorLegendShowLayer)
+    this.$off('leaflet-layer-shown', this.onColorLegendShowLayer)
+    this.$off('leaflet-layer-hidden', this.onColorLegendHideLayer)
     // this.$off('map-remove-leaflet-layer', this.onColorLegendRemoveLayer)
   }  
 }
