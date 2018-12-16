@@ -554,5 +554,40 @@ module.exports = [
       transparent: true,
       layers: 'ARPEGE_05_TEMPERATURE__ISOBARIC_SURFACE'
     }
+  },
+  {
+    name: 'Radar des précipitations',
+    description: 'Cumuls de lames d\'eau estimés à partir de données radar (en mm/h) ',
+    tags: [
+      'weather'
+    ],
+    icon: 'beach_access',
+    attribution: 'SYCAMORE © <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    units: [
+      'mm/h'
+    ],
+    chromajs: {
+      scale : [ 
+        "#ffffff00", 
+        "indigo", 
+        "blue", 
+        "skyblue", 
+        "aquamarine", 
+        "green", 
+        "palegreen", 
+        "yellow", 
+        "gold", 
+        "orange", 
+        "red", 
+        "purple"
+      ],
+      domain: [0, 2500],
+      classes: [0, 0.00001, 5, 10, 20, 50, 100, 200, 300, 500, 750, 1000, 1500, 2500]
+    },
+    leaflet: {
+      type: 'geotiff',
+      url: 'https://thredds.irsn.kalisio.xyz/thredds/fileServer/radar/12/RD_CPO_NAT100.SYCOMORE.V_EUR_COMPO.LAME_DEAU__20181212024000.tif'
+    }
   }
 ]
