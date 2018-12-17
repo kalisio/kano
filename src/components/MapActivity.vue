@@ -13,7 +13,7 @@
     </div>
     <q-btn 
       id="side-nav-toggle"
-      color="secondary"
+      color="primary"
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
@@ -48,7 +48,7 @@
           :timeInterval="timeLineInterval"
           :timeFormatter="timeLineFormatter"
           @change="onTimeLineUpdated"
-          pointerColor="red" 
+          pointerColor="#FC6E44" 
           pointerTextColor="white"
           style="width: 100%;"
         />
