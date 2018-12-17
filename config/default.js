@@ -45,13 +45,13 @@ module.exports = {
   apiTimeout: 20000,
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'Kano',
-  appLogo: 'kalisio-logo.png',
+  appLogo: 'kano-icon-64x64.png',
   publisher: 'Kalisio',
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
   screens: {
-    banner: 'kalisio-banner.png',
+    banner: 'kano-logo-black-256x84.png',
     login: {
       providers: [],
       links: []
@@ -73,7 +73,7 @@ module.exports = {
     rightBreakpoint: 9999
   },
   sideNav: {
-    banner: 'kalisio-banner.png',
+    banner: 'kano-logo-black-256x84.png',
     components: {
       user_actions: 'layout/KLinksPanel'
     }
