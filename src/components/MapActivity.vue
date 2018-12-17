@@ -451,7 +451,7 @@ export default {
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
   mounted () {
-    this.setupMap({ timeDimension: true })
+    this.setupMap(this.$config('map.viewer'))
     // Add aa scale control
     L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)

@@ -122,6 +122,12 @@ module.exports = {
     apiTimeout: 30000
   },
   map: {
+    viewer: {
+      minZoom: 3,
+      maxBounds: [ [-90, -180], [90, 180] ],
+      maxBoundsViscosity: 0.25,
+      timeDimension: true,
+    },
     // Default GeoJSON layer style for polygons/lines
     featureStyle: {
       opacity: 1,
