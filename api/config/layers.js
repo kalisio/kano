@@ -171,7 +171,7 @@ module.exports = [
         name: 'windSpeed',
         label: 'Variables.WIND_SPEED',
         units: [
-          'm/s'
+          'm/s', 'km/h', 'kt'
         ],
         chartjs: {
           backgroundColor: 'rgba(255, 159, 64, 128)',
@@ -187,7 +187,7 @@ module.exports = [
         name: 'windDirection',
         label: 'Variables.WIND_DIRECTION',
         units: [
-          '°'
+          'deg'
         ],
         chartjs: {
           backgroundColor: 'rgba(191, 191, 63, 128)',
@@ -228,7 +228,7 @@ module.exports = [
         name: 'gust',
         label: 'Variables.WIND_GUST',
         units: [
-          'm/s'
+          'm/s', 'km/h', 'kt'
         ],
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',

@@ -56,5 +56,8 @@
   },
   "ForecastModelsPanel": {
     "LABEL": "Modèles de prévision"
+  },
+  "ColorLegend": {
+    "CONVERT_UNITS": "{{layer}}: convertir en {{unit}}"
   }
 }
