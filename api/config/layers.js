@@ -367,7 +367,7 @@ module.exports = [
       type: 'geoJson',
       source: '/api/vigicrues-observations',
       realtime: true,
-      interval: 600000,
+      interval: 900000,
       container: 'markerClusterGroup',
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -378,14 +378,16 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% } else if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
+        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
+                   else if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h</br>\
+                   <%= new Date(feature.time).toLocaleString() %><% } %>'
       }
     },
     cesium: {
       type: 'geoJson',
       source: '/api/vigicrues-observations',
       realtime: true,
-      interval: 600000
+      interval: 900000
     }
   },
   {
@@ -410,7 +412,8 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Dose rate = <%= properties.value.toFixed(2) %> nSv/h<% } %>'
+        template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>\
+                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
       }
     },
     cesium: {
