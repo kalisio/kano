@@ -205,6 +205,8 @@ module.exports = [
       lineWidth: 4,
       frameRate: 20,
       particleMultiplier: 0.001,
+      displayValues: false
+      /*
       displayOptions: {
         velocityType: 'Wind',
         position: 'bottomright',
@@ -212,6 +214,7 @@ module.exports = [
         angleConvention: 'meteoCW',
         speedUnit: 'm/s'
       }
+      */
     }
   },
   {
