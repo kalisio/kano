@@ -24,7 +24,7 @@
     "PRECIPITATIONS": "Precipitations"
   },
   "TimeSeries": {
-    "GRAPH": "Timeseries - {{location}}"
+    "GRAPH": "Timeseries ({{location}})"
   },
   "Activity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
