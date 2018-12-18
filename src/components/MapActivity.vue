@@ -142,9 +142,12 @@ export default {
       return _.flatten(_.values(_.pickBy(this.layers, (layer) => layer.variables)).map(layer => layer.variables))
     },
     probedLocationName: function () {
-      return (this.probedLocation
-        ? this.probedLocation.geometry.coordinates[0].toFixed(2) + '°, ' + this.probedLocation.geometry.coordinates[1].toFixed(2) + '°'
-        : '')
+      if (!this.probedLocation) return ''
+      return _.get(this.probedLocation, 'properties.LbStationHydro') ||
+             _.get(this.probedLocation, 'properties.name') ||
+             _.get(this.probedLocation, 'properties.NAME') || 
+            this.probedLocation.geometry.coordinates[0].toFixed(2) + '°, ' +
+            this.probedLocation.geometry.coordinates[1].toFixed(2) + '°'
     }
   },
   watch: {
