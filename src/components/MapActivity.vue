@@ -327,7 +327,7 @@ export default {
         leaflet: {
           type: 'geoJson',
           isVisible: true,
-          arguments: [ this.getProbedLocationAtCurrentTime(), {} ]
+          source: this.getProbedLocationAtCurrentTime()
         }
       })
     },
