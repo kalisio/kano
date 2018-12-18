@@ -379,8 +379,8 @@ module.exports = [
       },
       tooltip: {
         template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
-                   else if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h</br>\
-                   <%= new Date(feature.time).toLocaleString() %><% } %>'
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% }\
+                   if (feature.time) { %></br><%= new Date(feature.time).toLocaleString() %><% } %>'
       }
     },
     cesium: {
