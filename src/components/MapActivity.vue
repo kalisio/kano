@@ -159,7 +159,10 @@ export default {
       if (this.probedLocation) {
         // Feature mode
         if (this.probe && this.probedLocation.probeId) {
-          await this.getWeatherForFeature(_.get(this.probedLocation, this.probe.featureId))
+          const probe = await this.getProbe(this.probe.name)
+          if (probe) {
+            await this.getWeatherForFeature(_.get(this.probedLocation, this.probe.featureId))
+          }
         } else { // Location mode
           await this.getWeatherForLocation(this.probedLocation.geometry.coordinates[0], this.probedLocation.geometry.coordinates[1])
         }
@@ -270,11 +273,8 @@ export default {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
       if (options.probe) {
-        const results = await this.weacastApi.getService('probes').find({
-          query: { name: options.probe, $paginate: false, $select: ['elements', 'forecast', 'featureId'] }
-        })
-        if (results.length > 0) {
-          this.probe = results[0]
+        const probe = await this.getProbe(options.probe)
+        if (probe) {
           await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
           this.openTimeseries()
         }
