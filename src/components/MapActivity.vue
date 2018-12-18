@@ -205,6 +205,7 @@ export default {
       // Specific case of time dimension layer where we embed the underlying WMS layer
       if (leafletOptions.timeDimension) {
         layer = this.createLeafletLayer(Object.assign({ type: 'timeDimension.layer.wms', source: layer }, leafletOptions.timeDimension))
+        layer.setAvailableTimes(this.map.timeDimension.getAvailableTimes())
       }
       return layer
     },
@@ -390,7 +391,8 @@ export default {
     },
     onCurrentTimeChanged (time) {
       this.weacastApi.setForecastTime(time)
-      this.map.timeDimension.setCurrentTime(time.valueOf())
+      // Round to nearest hour - FIXME: should be based on available times
+      this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
       this.createProbedLocationLayer()
     },
     onTimeLineUpdated (event) {
@@ -430,10 +432,11 @@ export default {
       this.timeLineInterval = this.getTimeLineInterval()
       this.timeLineFormatter = this.getTimeLineFormatter()
       let times = []
+      // Round to nearest hour - FIXME: should be based on available times
       for (let time = this.timeLine.start; time <= this.timeLine.end; time += 3600000) {
-        times.push(new Date(time).toISOString())
+        times.push(moment.utc(time).minutes(0).seconds(0).milliseconds(0).format())
       }
-      this.map.timeDimension.setAvailableTimes(times, 'replace')
+      this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
       this.setCurrentTime(moment.utc(this.timeLine.current))
     }
   },
