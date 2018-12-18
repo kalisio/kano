@@ -596,7 +596,9 @@ module.exports = [
     ],
     leaflet: {
       type: 'geotiff',
-      url: 'https://thredds.irsn.kalisio.xyz/thredds/fileServer/mf-radar/2018/12/12/RD_CPO_NAT100.SYCOMORE.V_EUR_COMPO.LAME_DEAU__20181212024000.tif'
+      interval: 5 * 60 * 1000,
+      // FIXME the year/month/day should be templated too
+      url: 'https://thredds.irsn.kalisio.xyz/thredds/fileServer/mf-radar/2018/12/12/RD_CPO_NAT100.SYCOMORE.V_EUR_COMPO.LAME_DEAU__20181212<%= hh %><%= mm %>00.tif'
     }
   }
 ]

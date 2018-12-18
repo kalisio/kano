@@ -13,7 +13,7 @@
     </div>
     <q-btn 
       id="side-nav-toggle"
-      color="primary"
+      color="secondary"
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
