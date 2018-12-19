@@ -39,7 +39,7 @@
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
     "PROBE": "Weather at location",
-    "PROBED_LOCATION": "Weather at location"
+    "PROBED_LOCATION": "Measures at location"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

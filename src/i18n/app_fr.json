@@ -39,7 +39,7 @@
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position",
     "PROBE": "Temps sur position",
-    "PROBED_LOCATION": "Temps sur position"
+    "PROBED_LOCATION": "Mesures sur position"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",

@@ -319,6 +319,21 @@ export default {
     onResizeTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
     },
+    onLayerShown (event) {
+      // Show timeseries on probed location
+      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+        if (!this.isTimeseriesOpen()) {
+          this.openTimeseries()
+          this.center(...this.probedLocation.geometry.coordinates)
+        }
+      }
+    },
+    onLayerHidden (event) {
+      // Hide timeseries on probed location
+      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+        if (this.isTimeseriesOpen()) this.closeTimeseries()
+      }
+    },
     createProbedLocationLayer () {
       if (!this.probedLocation) return
       const name = this.$t('MapActivity.PROBED_LOCATION')
@@ -382,6 +397,9 @@ export default {
       }
       this.setMapCursor('probe-cursor')
       this.map.on('click', probe)
+    },
+    isTimeseriesOpen () {
+      return this.$refs.widget.isOpen()
     },
     openTimeseries () {
       this.$refs.widget.open()
@@ -461,6 +479,8 @@ export default {
     // Add aa scale control
     L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
+    this.$on('leaflet-layer-shown', this.onLayerShown)
+    this.$on('leaflet-layer-hidden', this.onLayerHidden)
     this.map.on('moveend', this.onMapMoved)
     if (this.$store.has('bounds')) {
       this.map.fitBounds(this.$store.get('bounds'))
@@ -480,6 +500,8 @@ export default {
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
+    this.$off('leaflet-layer-shown', this.onLayerShown)
+    this.$off('leaflet-layer-hidden', this.onLayerHidden)
     this.map.off('moveend', this.onMapMoved)
     // No need to refresh the layout when leaving the component
     this.observe = false
