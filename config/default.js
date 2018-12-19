@@ -124,6 +124,8 @@ module.exports = {
   map: {
     viewer: {
       minZoom: 3,
+      center: [47, 3],
+      zoom: 6,
       maxBounds: [ [-90, -180], [90, 180] ],
       maxBoundsViscosity: 0.25,
       timeDimension: true,

@@ -35,7 +35,7 @@ export default {
         layer.actions = [{
           name: 'zoomTo',
           label: this.$t('Activity.ZOOM_TO_LABEL'),
-          icon: 'remove_circle'
+          icon: 'zoom_out_map'
         }, {
           name: 'remove',
           label: this.$t('Activity.REMOVE_LABEL'),
@@ -81,7 +81,11 @@ export default {
       }
       if (this.$store.has('bounds')) return
       const position = this.$store.get('user.position')
-      this.center(position.longitude, position.latitude, 10000)
+      // 3D or 2D centering ?
+      if (position) {
+        if (this.viewer) this.center(position.longitude, position.latitude, 10000)
+        else if (this.map)  this.center(position.longitude, position.latitude)
+      }
     },
     getTimeLineInterval () {
       // interval length: length of 1 day in milliseconds
