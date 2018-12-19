@@ -163,7 +163,7 @@ export default {
       if (this.probedLocation) {
         // Feature mode
         if (this.probe && this.probedLocation.probeId) {
-          const probe = await this.getProbe(this.probe.name)
+          const probe = await this.getForecastProbe(this.probe.name)
           if (probe) {
             await this.getWeatherForFeature(_.get(this.probedLocation, this.probe.featureId))
           }
@@ -234,12 +234,30 @@ export default {
       }
       return null
     },
+    getVigicruesMarker (feature, latlng) {
+      const isVigicruesProbe = (_.has(feature, 'properties.H') ||
+                                _.has(feature, 'properties.Q'))
+      if (isVigicruesProbe) {
+        return this.createMarkerFromStyle(latlng, {
+          type: 'circleMarker',
+          options: {
+            opacity: 1,
+            color: 'black',
+            fillOpacity: 1,
+            fillColor: 'blue'
+          }
+        })
+      }
+      return null
+    },
     getMeteoMarker (feature, latlng) {
-      // Use wind barbs on probed features
-      if (_.has(feature, 'properties.windDirection') && _.has(feature, 'properties.windSpeed')) {
-        let marker = this.getProbedLocationMarker(feature, latlng)
+      // Use wind barbs on weather probed features
+      const isWeatherProbe = (_.has(feature, 'properties.windDirection') &&
+                              _.has(feature, 'properties.windSpeed'))
+      if (isWeatherProbe) {
+        let marker = this.getProbedLocationForecastMarker(feature, latlng)
         if (marker) {
-          // We use custom events on this one
+          // We use custom events on this one to be able to drag probed location
           kMapUtils.unbindLeafletEvents(marker)
           marker.on('dragend', (event) => this.getWeatherForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat))
           marker.on('click', (event) => this.toggleTimeseries())
@@ -254,6 +272,12 @@ export default {
         let tooltip = L.tooltip({ permanent: false }, layer)
         let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
+      }
+      const H = _.get(feature, 'properties.H')
+      const Q = _.get(feature, 'properties.Q')
+      if (!_.isNil(H) && !_.isNil(Q)) {
+        let tooltip = L.tooltip({ permanent: false }, layer)
+        return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
       }
       return null
     },
@@ -277,16 +301,16 @@ export default {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
       if (options.probe) {
-        const probe = await this.getProbe(options.probe)
+        const probe = await this.getForecastProbe(options.probe)
         if (probe) {
           await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
-          this.openTimeseries()
         }
       } else if (options.service) {
         await this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
-        this.openTimeseries()
       }
+      if (this.probedLocation) this.openTimeseries()
+      else this.closeTimeseries()
     },
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -335,59 +359,111 @@ export default {
         if (this.isTimeseriesOpen()) this.closeTimeseries()
       }
     },
-    createProbedLocationLayer () {
+    async createProbedLocationLayer () {
       if (!this.probedLocation) return
       const name = this.$t('MapActivity.PROBED_LOCATION')
-      // Remove any previous layer
-      this.removeLayer(name)
-      this.addLayer({
-        name,
-        type: 'OverlayLayer',
-        icon: 'colorize',
-        leaflet: {
-          type: 'geoJson',
-          isVisible: true,
-          source: this.getProbedLocationAtCurrentTime()
+      // Use wind barbs on weather probed features
+      const isWeatherProbe = (_.has(this.probedLocation, 'properties.windDirection') &&
+                              _.has(this.probedLocation, 'properties.windSpeed'))
+      // Get any previous layer or create it the first time
+      let layer = this.getLeafletLayerByName(name)
+      if (!layer) {
+        await this.addLayer({
+          name,
+          type: 'OverlayLayer',
+          icon: 'colorize',
+          leaflet: {
+            type: 'geoJson',
+            isVisible: true
+          }
+        })
+        layer = this.getLeafletLayerByName(name)
+      }
+      // Update data
+      layer.clearLayers()
+      layer.addData(isWeatherProbe ?
+        this.getProbedLocationForecastAtCurrentTime() :
+        this.getProbedLocationMeasureAtCurrentTime())
+    },
+    getMeasureValueAtCurrentTime (times, values) {
+      // Check for the right value at time
+      if (Array.isArray(times) && Array.isArray(values)) {
+        // Look for the nearest time
+        let timeIndex = 0
+        let minDiff = Infinity
+        times.forEach((time, index) => {
+          let diff = Math.abs(this.currentTime.diff(moment.utc(time)))
+          if (diff < minDiff) {
+            minDiff = diff
+            timeIndex = index
+          }
+        })
+        return values[timeIndex]
+      } else {
+        // Constant value
+        return values
+      }
+    },
+    getProbedLocationMeasureAtCurrentTime () {
+      // Create new geojson from raw response containing all times
+      let feature = _.cloneDeep(this.probedLocation)
+      // Then check for the right value at time
+      _.forOwn(feature.properties, (value, key) => {
+        if (Array.isArray(value)) {
+          const times = _.get(feature, 'time.' + key)
+          if (times) {
+            feature.properties[key] = this.getMeasureValueAtCurrentTime(times, value)
+          }
         }
       })
+      return feature
     },
     async getMeasureForFeature (layer, feature, elements, startTime, endTime) {
-      let result = await this.$api.getService(layer.service).find({
-        query: {
-          time: {
-            $gte: startTime.format(),
-            $lte: endTime.format()
-          },
-          ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId),
-          $groupBy: layer.featureId,
-          $aggregate: elements
-        }
-      })
-      if (result.features.length > 0) {
-        this.probedLocation = result.features[0]
+      this.setMapCursor('processing-cursor')
+      try {
+        let result = await this.$api.getService(layer.service).find({
+          query: {
+            time: {
+              $gte: startTime.format(),
+              $lte: endTime.format()
+            },
+            ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId),
+            $groupBy: layer.featureId,
+            $aggregate: elements
+          }
+        })
+        if (result.features.length > 0) this.probedLocation = result.features[0]
+        else throw new Error('Cannot find valid measure for feature')
+        this.createProbedLocationLayer()
+      } catch (error) {
+        this.probedLocation = null
+        logger.error(error)
       }
+      this.unsetMapCursor('processing-cursor')
     },
     async getWeatherForLocation (long, lat) {
       this.setMapCursor('processing-cursor')
       try {
         await this.getForecastForLocation(long, lat,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
+        this.createProbedLocationLayer()
       } catch (error) {
+        this.probedLocation = null
         logger.error(error)
       }
       this.unsetMapCursor('processing-cursor')
-      this.createProbedLocationLayer()
     },
     async getWeatherForFeature (featureId) {
       this.setMapCursor('processing-cursor')
       try {
         await this.getForecastForFeature(featureId,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
+        this.createProbedLocationLayer()
       } catch (error) {
+        this.probedLocation = null
         logger.error(error)
       }
       this.unsetMapCursor('processing-cursor')
-      this.createProbedLocationLayer()
     },
     onWeatherForLocation () {
       let probe = async (event) => {
@@ -469,6 +545,7 @@ export default {
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
     this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
     this.registerLeafletStyle('markerStyle', this.getTelerayMarker)
+    this.registerLeafletStyle('markerStyle', this.getVigicruesMarker)
     this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
