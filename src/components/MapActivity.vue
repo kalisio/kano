@@ -6,8 +6,7 @@
         <div slot="widget-content">
           <time-series ref="timeseries" 
             :feature="probedLocation" 
-            :variables="variables"
-            :time-interval="forecastInterval" />
+            :variables="variables" />
         </div>
       </k-widget>
     </div>
@@ -133,9 +132,6 @@ export default {
         border: '1px solid lightgrey',        
         fontSize: '12px'
       }
-    },
-    forecastInterval () {
-      return (this.forecastModel ? this.forecastModel.interval / 3600 : 1)
     },
     variables () {
       // Filter layers with variables and convert from Object to Array type
@@ -388,17 +384,9 @@ export default {
     getMeasureValueAtCurrentTime (times, values) {
       // Check for the right value at time
       if (Array.isArray(times) && Array.isArray(values)) {
-        // Look for the nearest time
-        let timeIndex = 0
-        let minDiff = Infinity
-        times.forEach((time, index) => {
-          let diff = Math.abs(this.currentTime.diff(moment.utc(time)))
-          if (diff < minDiff) {
-            minDiff = diff
-            timeIndex = index
-          }
-        })
-        return values[timeIndex]
+        /// Look for the nearest time
+        const nearestTime = kMapUtils.getNearestTime(this.currentTime, times.map(time => moment.utc(time)))
+        return (nearestTime.index > 0 ? values[nearestTime.index] : null)
       } else {
         // Constant value
         return values

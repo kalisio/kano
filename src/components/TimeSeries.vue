@@ -11,6 +11,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import Chart from 'chart.js'
 import { QIcon, QTooltip } from 'quasar'
+import { utils as kMapUtils } from '@kalisio/kdk-map/client'
 
 export default {
   name: 'time-series',
@@ -21,14 +22,12 @@ export default {
   props: {
     feature: { type: Object, default: () => null },
     variables: { type: Array, default: () => [] },
-    decimationFactor: { type: Number, default: 1 },
-    timeInterval: { type: Number, default: 1 }
+    decimationFactor: { type: Number, default: 1 }
   },
   watch: {
     feature: function () { this.setupGraph() },
     variables: function () { this.setupGraph() },
-    decimationFactor: function () { this.setupGraph() },
-    timeInterval: function () { this.setupGraph() }
+    decimationFactor: function () { this.setupGraph() }
   },
   methods: {
     formatDateTime (time) {
@@ -39,14 +38,15 @@ export default {
       return (index % this.decimationFactor) === 0
     },
     setupTimeTicks() {
-      this.timeStepSize = Math.max(1, this.timeInterval)
       const size = this.$el.getBoundingClientRect()
       if (!this.times || !size.width) return
-      // Choose the right step size to ensure we have almost 100px between ticks
-      const pixelsPerTick = this.$el.getBoundingClientRect().width / this.times.length
-      this.timeStepSize = Math.max(1, Math.round(100 / pixelsPerTick))
-      // Round to nearest multiple of time interval
-      this.timeStepSize = Math.ceil(this.timeStepSize / this.timeInterval) * this.timeInterval
+      // Choose the right step size to ensure we have almost 100px between hour ticks
+      // If the time interval is less than hour act as if we have only 1 time per hour
+      const pixelsPerTick = this.$el.getBoundingClientRect().width / (this.times.length * Math.min(1, this.timeInterval))
+      this.timeStepSize = Math.ceil(Math.max(1, Math.round(100 / pixelsPerTick)))
+      // Round to nearest multiple of time interval in hours
+      const interval = Math.max(1, Math.floor(this.timeInterval))
+      this.timeStepSize = Math.ceil(this.timeStepSize / interval) * interval
       // We can update in place when possible
       if (this.chart) {
         let xAxis = _.find(this.config.options.scales.xAxes, axis => axis.type === 'time')
@@ -65,6 +65,12 @@ export default {
       })
       // Make union of all available times for x-axis
       this.times = _.union(...this.times).map(time => moment.utc(time)).sort((a, b) => a - b).filter(this.filter)
+      // Compute min time interval
+      this.timeInterval = 1 // 1h by default
+      if (this.times.length > 1) {
+        // Convert to hours
+        this.timeInterval = kMapUtils.getTimeInterval(this.times) / (3600 * 1000)
+      }
     },
     setupAvailableDatasets () {
       this.datasets = []
