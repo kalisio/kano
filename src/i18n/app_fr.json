@@ -33,7 +33,8 @@
     "VIGICRUES_LEVEL_4": "Risque de crue majeure",
     "REMOVE_LABEL": "$t(REMOVE_LABEL)",
     "REMOVE_DIALOG_TITLE": "Supprimer {{layer}} ?",
-    "REMOVE_DIALOG_MESSAGE": "Etes vous sûr de vouloier supprimer {{layer}} de votre espace de travail ?"
+    "REMOVE_DIALOG_MESSAGE": "Etes vous sûr de vouloier supprimer {{layer}} de votre espace de travail ?",
+    "ZOOM_TO_LABEL": "Zoomer sur"
   },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",

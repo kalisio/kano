@@ -15,6 +15,7 @@ export default {
       this.layers = {}
       this.layerHandlers = {
         toggle: (layer) => this.onTriggerLayer(layer),
+        zoomTo: (layer) => this.onZoomToLayer(layer),
         remove: (layer) => this.onRemoveLayer(layer)
       }
       const catalogService = this.$api.getService('catalog')
@@ -29,9 +30,13 @@ export default {
       })
     },
     onLayerAdded (layer) {
-      // FIXME: Add supported actions
+      // Add supported actions
       if (layer.type === 'OverlayLayer') {
         layer.actions = [{
+          name: 'zoomTo',
+          label: this.$t('Activity.ZOOM_TO_LABEL'),
+          icon: 'remove_circle'
+        }, {
           name: 'remove',
           label: this.$t('Activity.REMOVE_LABEL'),
           icon: 'remove_circle'
@@ -44,6 +49,9 @@ export default {
       } else {
         this.hideLayer(layer.name)
       } 
+    },
+    onZoomToLayer (layer) {
+      this.zoomToLayer(layer.name)
     },
     onRemoveLayer (layer) {
       Dialog.create({

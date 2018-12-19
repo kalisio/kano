@@ -33,7 +33,8 @@
     "VIGICRUES_LEVEL_4": "Major flood risk",
     "REMOVE_LABEL": "$t(REMOVE_LABEL)",
     "REMOVE_DIALOG_TITLE": "Remove {{layer}} ?",
-    "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?"
+    "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?",
+    "ZOOM_TO_LABEL": "Zoom to"
   },
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
