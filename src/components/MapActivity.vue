@@ -2,7 +2,7 @@
   <div>
     <div id="map" ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
-      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="$t('TimeSeries.GRAPH', { location: probedLocationName })" @state-changed="onResizeTimeseries">
+      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
         <div slot="widget-content">
           <time-series ref="timeseries" 
             :feature="probedLocation" 
@@ -146,8 +146,9 @@ export default {
       return _.get(this.probedLocation, 'properties.LbStationHydro') ||
              _.get(this.probedLocation, 'properties.name') ||
              _.get(this.probedLocation, 'properties.NAME') || 
+            this.$t('TimeSeries.PROBE') + ' (' +
             this.probedLocation.geometry.coordinates[0].toFixed(2) + '°, ' +
-            this.probedLocation.geometry.coordinates[1].toFixed(2) + '°'
+            this.probedLocation.geometry.coordinates[1].toFixed(2) + '°)'
     }
   },
   watch: {

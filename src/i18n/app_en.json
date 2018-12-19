@@ -24,7 +24,7 @@
     "PRECIPITATIONS": "Precipitations"
   },
   "TimeSeries": {
-    "GRAPH": "Timeseries ({{location}})"
+    "PROBE": "Probe"
   },
   "Activity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
@@ -39,8 +39,8 @@
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
-    "PROBE": "Weather at location",
-    "PROBED_LOCATION": "Measures at location"
+    "PROBE": "Probe",
+    "PROBED_LOCATION": "Probe"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Fullscreen",

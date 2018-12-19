@@ -24,7 +24,7 @@
     "PRECIPITATIONS": "Précipitations"
   },
   "TimeSeries": {
-    "GRAPH": "Séries temporelles ({{location}})"
+    "PROBE": "Sonde"
   },
   "Activity": {
     "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
@@ -39,8 +39,8 @@
   "MapActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position",
-    "PROBE": "Temps sur position",
-    "PROBED_LOCATION": "Mesures sur position"
+    "PROBE": "Sonder",
+    "PROBED_LOCATION": "Sonde"
   },
   "GlobeActivity": {
     "TOGGLE_FULLSCREEN": "Plein écran",
