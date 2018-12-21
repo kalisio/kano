@@ -1,5 +1,4 @@
 import math from 'mathjs'
-import L from 'leaflet'
 
 // TODO the following was taken from Weacast's legend mixin, however maybe we should get this from a config file?
 // Add knot unit not defined by default
@@ -17,43 +16,40 @@ let legendMixin = {
         visible: false,
         unit: null,
         hint: null,
-        steps: null
+        colorMap: null,
+        values: null,
+        showGradient: false
       }
     }
   },  
   methods: {
     onColorLegendShowLayer (event) {
-      // We only manage forecast layers
-      if (this.isForecastLayer(event.leafletLayer)) {
+      const leafletLayer = event.leafletLayer
 
-        const forecastLayer = event.leafletLayer
-
-        let colorLayer = {
-          layer: event.layer,
-          forecastLayer
-        }
-
-        // Callback to be triggered once the data for the forecastLayer has been loaded, the color legend can then be shown
-        colorLayer.callback = () => this.addColorLegend(colorLayer)
-
-        // We need to wait until data is here because it is require to get color map
-        if (forecastLayer.hasData) this.addColorLegend(colorLayer)
-        else forecastLayer.on('data', colorLayer.callback)
+      let colorLayer = {
+        layer: event.layer,
+        leafletLayer
       }
+
+      // Callback to be triggered once the data for the leafletLayer has been loaded, the color legend can then be shown
+      colorLayer.callback = () => this.addColorLegend(colorLayer)
+
+      // We need to wait until data is here because it is require to get color map
+      if (leafletLayer.hasData) this.addColorLegend(colorLayer)
+      else leafletLayer.on('data', colorLayer.callback)
     },
     onColorLegendHideLayer (event) {
-      const forecastLayer = event.leafletLayer
-
-      // We only manage forecast layers
-      if (this.isForecastLayer(forecastLayer)) {
+      if (this.colorLayer && this.colorLayer.leafletLayer._leaflet_id == event.leafletLayer._leaflet_id) {
         this.hideColorLegend()
       }
     },
     addColorLegend (layer) {
-      const forecastLayer = layer.forecastLayer
-      forecastLayer.off('data', layer.callback)
+      const leafletLayer = layer.leafletLayer
+      leafletLayer.off('data', layer.callback)
 
-      this.updateColorLegend(layer)
+      if (leafletLayer.colorMap) {
+        this.updateColorLegend(layer)
+      }
     },
     hideColorLegend () {
       this.updateColorLegend(null)
@@ -62,7 +58,9 @@ let legendMixin = {
       this.colorLegend.visible = false
       this.colorLegend.unit = null
       this.colorLegend.hint = null
-      this.colorLegend.steps = null
+      this.colorLegend.colorMap = null
+      this.colorLegend.values = null
+      this.colorLegend.showGradient = false
     },
     updateColorLegend (colorLayer) {
       this.colorLayer = colorLayer
@@ -72,25 +70,27 @@ let legendMixin = {
         this.resetColorLegend()
 
       } else {
-        const forecastLayer = colorLayer.forecastLayer
-        const colorMap = forecastLayer.getColorMap(COLOR_STEPS)        
+        const leafletLayer = colorLayer.leafletLayer
+        const colorMap = leafletLayer.colorMap     
 
         const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
 
         const unit = !units || units.length === 0 ? null : units[0]
         const hint = this.getColorLegendHint(units, unit, colorLayer.layer.name)
-        const steps = this.getColorLegendSteps(colorMap, units, unit)
+        const [ showGradient, values ] = this.getColorLegendValues(colorMap, units, unit, COLOR_STEPS)
 
         // We don't have units or steps for this layer, hide it
-        if (unit === null || steps.length === 0) {
+        if (unit === null || values.length === 0) {
           this.hideColorLegend()
 
         // Units and steps (re)calculated, update the color legend
         } else {
           this.colorLegend.unit = unit
           this.colorLegend.hint = hint
-          this.colorLegend.steps = steps
-
+          this.colorLegend.colorMap = colorMap
+          this.colorLegend.values = values
+          this.colorLegend.showGradient = showGradient
+    
           this.colorLegend.visible = true
         }
       }
@@ -98,7 +98,8 @@ let legendMixin = {
     // Color legend was clicked - toggle to the next unit
     onColorLegendClick (event) {
       const colorLayer = this.colorLayer
-      const forecastLayer = colorLayer.forecastLayer
+      const leafletLayer = colorLayer.leafletLayer
+      const colorMap = leafletLayer.colorMap     
 
       const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
 
@@ -107,20 +108,17 @@ let legendMixin = {
         return
       }
 
-      const colorMap = forecastLayer.getColorMap(COLOR_STEPS)
-
       // Get next unit and recalculate hint and steps
       const nextUnit = this.getNextUnit(units, event.unit)
       const hint = this.getColorLegendHint(units, nextUnit, colorLayer.layer.name)
-      const steps = this.getColorLegendSteps(colorMap, units, nextUnit)
-
+      const [ showGradient, values ] = this.getColorLegendValues(colorMap, units, nextUnit, COLOR_STEPS)
+      
       // Units and steps (re)calculated, update the color legend
       this.colorLegend.unit = nextUnit
       this.colorLegend.hint = hint
-      this.colorLegend.steps = steps
-    },
-    isForecastLayer (layer) {
-      return layer instanceof L.weacast.ForecastLayer      
+      this.colorLegend.colorMap = colorMap
+      this.colorLegend.values = values
+      this.colorLegend.showGradient = showGradient
     },
     getColorLegendUnits(colorLayer) {
       return colorLayer.layer.variables[0].units
@@ -135,18 +133,40 @@ let legendMixin = {
 
       return this.$t('ColorLegend.CONVERT_UNITS', {layer: layerName, unit: nextUnit})
     },
-    getColorLegendSteps (colorMap, units, unit) {
-      if (!colorMap || colorMap.length === 0 || !units || units.length === 0 || !unit) return []
+    getColorLegendValues (colorMap, units, unit, steps) {
+      if (!colorMap || !units || units.length === 0 || !unit) return []
+
+      let showGradient
+      let values
 
       const unitFrom = units[0]   // base unit
       const unitTo = unit
 
-      return colorMap.map((entry) => {
-        return {
-          color: entry.color,
-          value: math.unit(entry.value, unitFrom).toNumber(unitTo).toFixed(0)        
-        }
-      })
+      function valueMap (value) {
+        return math.unit(value, unitFrom).toNumber(unitTo).toFixed(0)
+      }
+
+      const classes = colorMap.classes()
+
+      if (classes) {
+        values = classes
+        showGradient = false
+
+        return [ showGradient, values.map(valueMap) ]
+      }
+
+      values = []
+
+      const dm = colorMap.domain()[0]
+      const dd = colorMap.domain()[1] - dm
+      
+      for (let i = 0; i < steps; i++) {
+        const value = dm + i / (steps-1) * dd
+        values.push(value)
+      }
+
+      showGradient = true
+      return [ showGradient, values.map(valueMap) ]
     },
     getNextUnit(units, currentUnit) {
       // No available units

@@ -34,7 +34,10 @@
       :style="colorLegendStyle"
       :unit="colorLegend.unit"
       :hint="colorLegend.hint"
-      :steps="colorLegend.steps"
+      :colorMap="colorLegend.colorMap"
+      :values="colorLegend.values"
+
+      :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
     />
 
