@@ -1,4 +1,5 @@
 import math from 'mathjs'
+import Vue from 'vue'
 
 // TODO the following was taken from Weacast's legend mixin, however maybe we should get this from a config file?
 // Add knot unit not defined by default
@@ -21,25 +22,32 @@ let legendMixin = {
         showGradient: false
       }
     }
-  },  
+  },
   methods: {
     onColorLegendShowLayer (event) {
-      const leafletLayer = event.leafletLayer
+      // In case the color legend was already visible then make sure it's first reset & hidden, and call
+      // Vue.nextTick() to let Vue know about it and update its DOM, before we (re)display it for the new layer
 
-      let colorLayer = {
-        layer: event.layer,
-        leafletLayer
-      }
+      this.updateColorLegend(null)
 
-      // Callback to be triggered once the data for the leafletLayer has been loaded, the color legend can then be shown
-      colorLayer.callback = () => this.addColorLegend(colorLayer)
+      Vue.nextTick(() => {
+        const leafletLayer = event.leafletLayer
 
-      // We need to wait until data is here because it is require to get color map
-      if (leafletLayer.hasData) this.addColorLegend(colorLayer)
-      else leafletLayer.on('data', colorLayer.callback)
+        let colorLayer = {
+          layer: event.layer,
+          leafletLayer
+        }
+
+        // Callback to be triggered once the data for the leafletLayer has been loaded, the color legend can then be shown
+        colorLayer.callback = () => this.addColorLegend(colorLayer)
+
+        // We need to wait until data is here because it is require to get color map
+        if (leafletLayer.hasData) this.addColorLegend(colorLayer)
+        else leafletLayer.on('data', colorLayer.callback)
+      })
     },
     onColorLegendHideLayer (event) {
-      if (this.colorLayer && this.colorLayer.leafletLayer._leaflet_id == event.leafletLayer._leaflet_id) {
+      if (this.colorLayer && this.colorLayer.leafletLayer._leaflet_id === event.leafletLayer._leaflet_id) {
         this.hideColorLegend()
       }
     },
@@ -71,9 +79,9 @@ let legendMixin = {
 
       } else {
         const leafletLayer = colorLayer.leafletLayer
-        const colorMap = leafletLayer.colorMap     
+        const colorMap = leafletLayer.colorMap
 
-        const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
+        const units = this.getColorLegendUnits(colorLayer)
 
         const unit = !units || units.length === 0 ? null : units[0]
         const hint = this.getColorLegendHint(units, unit, colorLayer.layer.name)
@@ -90,7 +98,7 @@ let legendMixin = {
           this.colorLegend.colorMap = colorMap
           this.colorLegend.values = values
           this.colorLegend.showGradient = showGradient
-    
+
           this.colorLegend.visible = true
         }
       }
@@ -99,9 +107,9 @@ let legendMixin = {
     onColorLegendClick (event) {
       const colorLayer = this.colorLayer
       const leafletLayer = colorLayer.leafletLayer
-      const colorMap = leafletLayer.colorMap     
+      const colorMap = leafletLayer.colorMap
 
-      const units = this.getColorLegendUnits(colorLayer)  //const units = ['m/s', 'knot']   // TODO only for testing
+      const units = this.getColorLegendUnits(colorLayer)
 
       // There's only one unit, no toggling to do, we're done
       if (units.length <= 1) {
@@ -112,7 +120,7 @@ let legendMixin = {
       const nextUnit = this.getNextUnit(units, event.unit)
       const hint = this.getColorLegendHint(units, nextUnit, colorLayer.layer.name)
       const [ showGradient, values ] = this.getColorLegendValues(colorMap, units, nextUnit, COLOR_STEPS)
-      
+
       // Units and steps (re)calculated, update the color legend
       this.colorLegend.unit = nextUnit
       this.colorLegend.hint = hint
@@ -120,7 +128,7 @@ let legendMixin = {
       this.colorLegend.values = values
       this.colorLegend.showGradient = showGradient
     },
-    getColorLegendUnits(colorLayer) {
+    getColorLegendUnits (colorLayer) {
       return colorLayer.layer.variables[0].units
     },
     getColorLegendHint (units, unit, layerName) {
@@ -143,7 +151,9 @@ let legendMixin = {
       const unitTo = unit
 
       function valueMap (value) {
-        return math.unit(value, unitFrom).toNumber(unitTo).toFixed(0)
+        let unitValue = math.unit(value, unitFrom).toNumber(unitTo)
+
+        return Math.round(unitValue, 0).toFixed(0)
       }
 
       const classes = colorMap.classes()
@@ -152,6 +162,11 @@ let legendMixin = {
         values = classes
         showGradient = false
 
+        // Only one unit, we don't need to convert, return the class values as-is
+        if (units.length === 1) {
+          return [ showGradient, values ]
+        }
+
         return [ showGradient, values.map(valueMap) ]
       }
 
@@ -159,26 +174,26 @@ let legendMixin = {
 
       const dm = colorMap.domain()[0]
       const dd = colorMap.domain()[1] - dm
-      
+
       for (let i = 0; i < steps; i++) {
-        const value = dm + i / (steps-1) * dd
+        const value = dm + i / (steps - 1) * dd
         values.push(value)
       }
 
       showGradient = true
       return [ showGradient, values.map(valueMap) ]
     },
-    getNextUnit(units, currentUnit) {
+    getNextUnit (units, currentUnit) {
       // No available units
       if (!units || units.length <= 1 || !currentUnit) return null
 
       // 'Rotate' from the current unit to the next
       const index = units.findIndex(unit => unit === currentUnit)
-      const newIndex = index === -1 ? null : index === units.length-1 ? 0 : index+1 
+      const newIndex = index === -1 ? null : index === units.length - 1 ? 0 : index + 1
       const unit = newIndex === null ? null : units[newIndex]
 
       return unit
-    },
+    }
   },
   mounted () {
     this.colorLayer = null
@@ -201,7 +216,7 @@ let legendMixin = {
     this.$off('leaflet-layer-shown', this.onColorLegendShowLayer)
     this.$off('leaflet-layer-hidden', this.onColorLegendHideLayer)
     // this.$off('map-remove-leaflet-layer', this.onColorLegendRemoveLayer)
-  }  
+  }
 }
 
 export default legendMixin

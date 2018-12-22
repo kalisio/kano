@@ -36,7 +36,6 @@
       :hint="colorLegend.hint"
       :colorMap="colorLegend.colorMap"
       :values="colorLegend.values"
-
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
     />
@@ -131,7 +130,7 @@ export default {
         left: '18px',
         top: 0.25 * this.mapHeight + 'px',
         height: 0.50 * this.mapHeight + 'px',
-        width: '34px',
+        width: '40px',
         border: '1px solid lightgrey',        
         fontSize: '12px'
       }
