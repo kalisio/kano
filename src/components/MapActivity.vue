@@ -35,7 +35,9 @@
       :unit="colorLegend.unit"
       :hint="colorLegend.hint"
       :colorMap="colorLegend.colorMap"
+      :colors="colorLegend.colors"
       :values="colorLegend.values"
+      :unitValues="colorLegend.unitValues"
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
     />

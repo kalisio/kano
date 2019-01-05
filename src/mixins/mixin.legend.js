@@ -18,7 +18,9 @@ let legendMixin = {
         unit: null,
         hint: null,
         colorMap: null,
+        colors: null,
         values: null,
+        unitValues: null,
         showGradient: false
       }
     }
@@ -62,13 +64,18 @@ let legendMixin = {
     hideColorLegend () {
       this.updateColorLegend(null)
     },
+    setColorLegend(visible, unit, hint, colorMap, colors, values, unitValues, showGradient) {
+      this.colorLegend.visible = visible
+      this.colorLegend.unit = unit
+      this.colorLegend.hint = hint
+      this.colorLegend.colorMap = colorMap
+      this.colorLegend.colors = colors
+      this.colorLegend.values = values
+      this.colorLegend.unitValues = unitValues
+      this.colorLegend.showGradient = showGradient
+    },
     resetColorLegend () {
-      this.colorLegend.visible = false
-      this.colorLegend.unit = null
-      this.colorLegend.hint = null
-      this.colorLegend.colorMap = null
-      this.colorLegend.values = null
-      this.colorLegend.showGradient = false
+      this.setColorLegend(false, null, null, null, null, null, null, false)
     },
     updateColorLegend (colorLayer) {
       this.colorLayer = colorLayer
@@ -80,12 +87,12 @@ let legendMixin = {
       } else {
         const leafletLayer = colorLayer.leafletLayer
         const colorMap = leafletLayer.colorMap
-
         const units = this.getColorLegendUnits(colorLayer)
 
         const unit = !units || units.length === 0 ? null : units[0]
         const hint = this.getColorLegendHint(units, unit, colorLayer.layer.name)
-        const [ showGradient, values ] = this.getColorLegendValues(colorMap, units, unit, COLOR_STEPS)
+        const [ showGradient, colors, values, unitValues ] =
+          this.getColorLegendValues(colorMap, leafletLayer.options.scale, units, unit, COLOR_STEPS)
 
         // We don't have units or steps for this layer, hide it
         if (unit === null || values.length === 0) {
@@ -93,13 +100,7 @@ let legendMixin = {
 
         // Units and steps (re)calculated, update the color legend
         } else {
-          this.colorLegend.unit = unit
-          this.colorLegend.hint = hint
-          this.colorLegend.colorMap = colorMap
-          this.colorLegend.values = values
-          this.colorLegend.showGradient = showGradient
-
-          this.colorLegend.visible = true
+          this.setColorLegend(true, unit, hint, colorMap, colors, values, unitValues, showGradient)
         }
       }
     },
@@ -119,14 +120,11 @@ let legendMixin = {
       // Get next unit and recalculate hint and steps
       const nextUnit = this.getNextUnit(units, event.unit)
       const hint = this.getColorLegendHint(units, nextUnit, colorLayer.layer.name)
-      const [ showGradient, values ] = this.getColorLegendValues(colorMap, units, nextUnit, COLOR_STEPS)
+      const [ showGradient, colors, values, unitValues ] =
+        this.getColorLegendValues(colorMap, leafletLayer.options.scale, units, nextUnit, COLOR_STEPS)
 
       // Units and steps (re)calculated, update the color legend
-      this.colorLegend.unit = nextUnit
-      this.colorLegend.hint = hint
-      this.colorLegend.colorMap = colorMap
-      this.colorLegend.values = values
-      this.colorLegend.showGradient = showGradient
+      this.setColorLegend(true, nextUnit, hint, colorMap, colors, values, unitValues, showGradient)
     },
     getColorLegendUnits (colorLayer) {
       return colorLayer.layer.variables[0].units
@@ -141,11 +139,13 @@ let legendMixin = {
 
       return this.$t('ColorLegend.CONVERT_UNITS', {layer: layerName, unit: nextUnit})
     },
-    getColorLegendValues (colorMap, units, unit, steps) {
+    getColorLegendValues (colorMap, scale, units, unit, steps) {
       if (!colorMap || !units || units.length === 0 || !unit) return []
 
       let showGradient
+      let colors
       let values
+      let unitValues
 
       const unitFrom = units[0]   // base unit
       const unitTo = unit
@@ -155,33 +155,49 @@ let legendMixin = {
 
         return Math.round(unitValue, 0).toFixed(0)
       }
-
+      
       const classes = colorMap.classes()
 
+      // Some tricky logic below:
+      //
+      // - Depending on whether we have one unit or more than one unit, we perform a unit conversion (or not)
+      // - Depending on whether we have 'classes' (predefined values) or not, we display a color 'gradient' or color 'steps'
+      // - Depending on whether the Chroma scale is specified as an array of colors, we pass these as "the" colors to
+      //   display; otherwise, we'll depend on calling "colorMap(value)" (chroma.js) to determine the colors
+
       if (classes) {
-        values = classes
         showGradient = false
+        values = classes
+
+        // Special case: if we have classes, AND the scale is specified as an array of colors, then we take these
+        // as THE "colors" to be displayed by the color legend, so we then bypass "colorMap(value)" for getting the color
+        if (scale && Array.isArray(scale)) {
+          colors = scale
+        }
 
         // Only one unit, we don't need to convert, return the class values as-is
         if (units.length === 1) {
-          return [ showGradient, values ]
+          unitValues = values
+        } else {
+          unitValues = values.map(valueMap)
         }
 
-        return [ showGradient, values.map(valueMap) ]
+      } else {
+        showGradient = true
+        values = []
+
+        const dm = colorMap.domain()[0]
+        const dd = colorMap.domain()[1] - dm
+
+        for (let i = 0; i < steps; i++) {
+          const value = dm + i / (steps - 1) * dd
+          values.push(value)
+        }
+
+        unitValues = values.map(valueMap)
       }
 
-      values = []
-
-      const dm = colorMap.domain()[0]
-      const dd = colorMap.domain()[1] - dm
-
-      for (let i = 0; i < steps; i++) {
-        const value = dm + i / (steps - 1) * dd
-        values.push(value)
-      }
-
-      showGradient = true
-      return [ showGradient, values.map(valueMap) ]
+      return [ showGradient, colors, values, unitValues ]
     },
     getNextUnit (units, currentUnit) {
       // No available units
