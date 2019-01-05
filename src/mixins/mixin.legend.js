@@ -64,7 +64,7 @@ let legendMixin = {
     hideColorLegend () {
       this.updateColorLegend(null)
     },
-    setColorLegend(visible, unit, hint, colorMap, colors, values, unitValues, showGradient) {
+    setColorLegend (visible, unit, hint, colorMap, colors, values, unitValues, showGradient) {
       this.colorLegend.visible = visible
       this.colorLegend.unit = unit
       this.colorLegend.hint = hint
@@ -83,7 +83,6 @@ let legendMixin = {
       // Reset & hide the color legend
       if (!this.colorLayer) {
         this.resetColorLegend()
-
       } else {
         const leafletLayer = colorLayer.leafletLayer
         const colorMap = leafletLayer.colorMap
@@ -155,7 +154,7 @@ let legendMixin = {
 
         return Math.round(unitValue, 0).toFixed(0)
       }
-      
+
       const classes = colorMap.classes()
 
       // Some tricky logic below:
@@ -181,7 +180,6 @@ let legendMixin = {
         } else {
           unitValues = values.map(valueMap)
         }
-
       } else {
         showGradient = true
         values = []
