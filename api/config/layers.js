@@ -306,9 +306,10 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     featureId: 'gid',
+    service: 'vigicrues-sections',
     leaflet: {
       type: 'geoJson',
-      source: 'https://s3.eu-central-1.amazonaws.com/kargo/vigicrues/sections',
+      source: '/api/vigicrues-sections',
       realtime: true,
       interval: 900000,
       popup: {
@@ -319,7 +320,7 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: 'https://s3.eu-central-1.amazonaws.com/kargo/vigicrues/sections',
+      source: '/api/vigicrues-sections',
       realtime: true,
       interval: 900000
     }
