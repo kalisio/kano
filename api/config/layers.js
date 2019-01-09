@@ -467,7 +467,7 @@ module.exports = [
     }
   },
   {
-    name: 'ADS-B',
+    name: 'Airbus EV ADS-B',
     description: 'Flight positions',
     tags: [
       'business'
