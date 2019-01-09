@@ -7027,7 +7027,7 @@ leaflet-pixi-overlay@^1.5.1:
 
 "leaflet-realtime@https://github.com/kalisio/leaflet-realtime":
   version "2.1.1"
-  resolved "https://github.com/kalisio/leaflet-realtime#98bd41f8cee7cc6a92923e86f854f0e5611a6c12"
+  resolved "https://github.com/kalisio/leaflet-realtime#723802aa9fa12ffa7488ffac2156fdec183168d2"
   dependencies:
     browserify "^16.2.2"
     grunt-contrib-uglify "^4.0.0"
