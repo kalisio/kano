@@ -27,10 +27,7 @@ let legendMixin = {
   },
   methods: {
     onColorLegendShowLayer (event) {
-      // In case the color legend was already visible then make sure it's first reset & hidden, and call
-      // Vue.nextTick() to let Vue know about it and update its DOM, before we (re)display it for the new layer
-
-      this.updateColorLegend(null)
+      // We call Vue.nextTick() to let Vue update its DOM when (re)displaying the color legend for the newly selected layer
 
       Vue.nextTick(() => {
         const leafletLayer = event.leafletLayer
