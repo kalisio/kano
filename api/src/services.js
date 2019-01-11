@@ -17,7 +17,8 @@ module.exports = async function () {
       let response = {
         name: 'kano',
         domain: app.get('domain'),
-        version: packageInfo.version
+        version: packageInfo.version,
+        cesium: app.get('cesium')
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER

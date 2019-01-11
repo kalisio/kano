@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="globe" :style="globeStyle">
+    <div ref="globe" :style="globeStyle">
       <q-resize-observable @resize="onGlobeResized" />
     </div>
     <q-btn 
@@ -27,7 +27,7 @@
 <script>
 import _ from 'lodash'
 import Cesium from 'cesium/Source/Cesium.js'
-import { QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import mixins from '../mixins'
@@ -42,6 +42,7 @@ export default {
     QBtn
   },
   mixins: [
+    kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
     kMapMixins.globe.baseGlobe,
@@ -60,9 +61,34 @@ export default {
     }
   },
   methods: {
+    async initializeViewer () {
+      if (this.viewer) return
+      const token = this.$store.get('capabilities.api.cesium.token')
+      // Not yet ready wait for capabilities to be there
+      if (!token) return
+        // Ensure DOM ref is here as well
+      await this.loadRefs()
+      this.setupGlobe(this.$refs.globe, token)
+      const bounds = this.$store.get('bounds')
+      if (bounds) {
+        this.viewer.camera.flyTo({
+          duration: 0,
+          destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0])
+        })
+      }
+      if (this.$store.get('user.position')) this.geolocate()
+      this.bounds = new Cesium.Rectangle()
+      this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
+    },
+    finalizeViewer () {
+      this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
+    },
     async refreshActivity () {
+      // Wait until viewer is ready
+      await this.initializeViewer()
+      if (!this.viewer) return
       this.clearActivity()
-      // Retrive the layers
+      // Retrieve the layers
       await this.refreshLayers('cesium')
       // Setup the right pane
       this.setRightPanelContent('GlobePanel', this.$data)
@@ -128,22 +154,14 @@ export default {
   created () {
     // Enable the observers in order to refresh the layout
     this.observe = true
+    // Required to get the access token from server
+    Events.$on('capabilities-api-changed', this.refreshActivity)
   },
   mounted () {
-    this.setupGlobe()
-    const bounds = this.$store.get('bounds')
-    if (bounds) {
-      this.viewer.camera.flyTo({
-        duration: 0,
-        destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0])
-      })
-    }
-    this.bounds = new Cesium.Rectangle()
-    this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
-    if (this.$store.get('user.position')) this.geolocate()
   },
   beforeDestroy () {
-    this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
+    Events.$off('capabilities-api-changed', this.refreshActivity)
+    this.finalizeViewer()
   }
 }
 </script>

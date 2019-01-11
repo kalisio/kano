@@ -76,7 +76,7 @@ export default {
     },
     geolocate () {
       if (!this.engineReady) {
-        logger.error('Engine not ready to geolocate')
+        //logger.error('Engine not ready to geolocate')
         return
       }
       if (this.$store.has('bounds')) return

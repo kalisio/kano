@@ -121,6 +121,9 @@ module.exports = {
       max: 100
     }
   },
+  cesium: {
+    token: process.env.CESIUM_TOKEN
+  },
   logs: {
     Console: {
       colorize: true,

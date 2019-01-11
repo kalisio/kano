@@ -111,7 +111,7 @@ module.exports = {
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
-      { name: 'TerrainLayers', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'fa-mountain',
+      { name: 'TerrainLayers', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain',
         options: { exclusive: true, filter: { type: 'TerrainLayer' } } }
     ]
   },
