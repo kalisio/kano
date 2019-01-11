@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="map" ref="map" :style="mapStyle">
+    <div ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
       <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
         <div slot="widget-content">
@@ -91,6 +91,7 @@ export default {
   },
   mixins: [
     kCoreMixins.baseActivity,
+    kCoreMixins.refsResolver(['map']),
     kMapMixins.geolocation,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
@@ -544,8 +545,9 @@ export default {
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
-  mounted () {
-    this.setupMap(this.$config('map.viewer'))
+  async mounted () {
+    await this.loadRefs()
+    this.setupMap(this.$refs.map, this.$config('map.viewer'))
     // Add aa scale control
     L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
