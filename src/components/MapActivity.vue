@@ -326,16 +326,11 @@ export default {
     },
     onMapMoved () {
       this.bounds = this.map.getBounds()
-      this.$store.set('bounds', [
-        [this.bounds.getSouth(), this.bounds.getWest()],
-        [this.bounds.getNorth(), this.bounds.getEast()]
-      ])
-      this.$router.push({
-        query: {
-          south: this.bounds.getSouth(), west: this.bounds.getWest(),
-          north: this.bounds.getNorth(), east: this.bounds.getEast()
-        }
-      })
+      const south = this.bounds.getSouth()
+      const west = this.bounds.getWest()
+      const north = this.bounds.getNorth()
+      const east = this.bounds.getEast()
+      this.$router.push({ query: { south, west, north, east } })
     },
     onForecastModelSelected (model) {
       this.forecastModel = model
@@ -549,23 +544,13 @@ export default {
   async mounted () {
     await this.loadRefs()
     this.setupMap(this.$refs.map, this.$config('map.viewer'))
-    // Add aa scale control
+    this.initializeView()
+    // Add a scale control
     L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.$on('leaflet-layer-shown', this.onLayerShown)
     this.$on('leaflet-layer-hidden', this.onLayerHidden)
     this.map.on('moveend', this.onMapMoved)
-    if (this.$store.has('bounds')) {
-      this.map.fitBounds(this.$store.get('bounds'))
-    } else if (this.$route.query.south) {
-      this.$store.set('bounds', [
-        [this.$route.query.south, this.$route.query.west],
-        [this.$route.query.north, this.$route.query.east]
-      ])
-      this.map.fitBounds(this.$store.get('bounds'))
-    } else {
-      if (this.$store.get('user.position')) this.geolocate()
-    }
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)

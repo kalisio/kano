@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import logger from 'loglevel'
 import moment from 'moment'
+import Cesium from 'cesium/Source/Cesium.js'
 import { Events, Dialog } from 'quasar'
 
 export default {
@@ -68,7 +69,7 @@ export default {
     },
     onGeolocate () {
       // Force a refresh
-      this.$store.unset('bounds')
+      this.$router.push({ query: {} })
       this.updatePosition()
     },
     onEngineReady () {
@@ -79,12 +80,21 @@ export default {
         //logger.error('Engine not ready to geolocate')
         return
       }
-      if (this.$store.has('bounds')) return
+      if (this.$route.query.south) return
       const position = this.$store.get('user.position')
       // 3D or 2D centering ?
       if (position) {
         if (this.viewer) this.center(position.longitude, position.latitude, 10000)
-        else if (this.map)  this.center(position.longitude, position.latitude)
+        else if (this.map) this.center(position.longitude, position.latitude)
+      }
+    },
+    initializeView () {
+      if (this.$route.query.south) {
+        const bounds= [ [this.$route.query.south, this.$route.query.west], [this.$route.query.north, this.$route.query.east] ]
+        if (this.viewer) this.viewer.camera.flyTo({ duration: 0, destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0]) })
+        else if (this.map) this.map.fitBounds(bounds)
+      } else {
+        if (this.$store.get('user.position')) this.geolocate()
       }
     },
     getTimeLineInterval () {

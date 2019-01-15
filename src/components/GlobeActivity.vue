@@ -70,14 +70,7 @@ export default {
         // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
-      const bounds = this.$store.get('bounds')
-      if (bounds) {
-        this.viewer.camera.flyTo({
-          duration: 0,
-          destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0])
-        })
-      }
-      if (this.$store.get('user.position')) this.geolocate()
+      this.initializeView()
       this.bounds = new Cesium.Rectangle()
       this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
     },
@@ -132,10 +125,11 @@ export default {
     },
     onGlobeMoved () {
       const cameraBounds = this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
-      this.$store.set('bounds', [
-        [Cesium.Math.toDegrees(cameraBounds.south), Cesium.Math.toDegrees(cameraBounds.west)],
-        [Cesium.Math.toDegrees(cameraBounds.north), Cesium.Math.toDegrees(cameraBounds.east)]
-      ])
+      const south = Cesium.Math.toDegrees(cameraBounds.south)
+      const west = Cesium.Math.toDegrees(cameraBounds.west)
+      const north = Cesium.Math.toDegrees(cameraBounds.north)
+      const east = Cesium.Math.toDegrees(cameraBounds.east)
+      this.$router.push({ query: { south, west, north, east } })
     },
     onToggleFullscreen () {
       if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()

@@ -81,8 +81,8 @@ module.exports = {
   user_actions: {
     links: [
       { }, // separator
-      { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map' } },
-      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe' } },
+      { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map', query: true } },
+      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } },
       { }, // separator
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
