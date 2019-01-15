@@ -389,7 +389,12 @@ module.exports = [
       type: 'geoJson',
       source: '/api/vigicrues-observations',
       realtime: true,
-      interval: 900000
+      interval: 900000,
+      cluster: {
+        pixelRange: 50
+      },
+      'marker-symbol': 'water',
+      'marker-color': '#00a9ce'
     }
   },
   {
@@ -464,6 +469,42 @@ module.exports = [
       },
       'marker-symbol': 'star',
       'marker-color': '#FFA500'
+    }
+  },
+  {
+    name: 'Airports',
+    description: 'Major airports',
+    tags: [
+      'business'
+    ],
+    icon: 'local_airport',
+    attribution: '',
+    type: 'OverlayLayer',
+    probe: 'ne_10m_airports',
+    leaflet: {
+      type: 'geoJson',
+      source: 'https://s3.eu-central-1.amazonaws.com/kargo/ne_10m_airports.json',
+      cluster: {},
+      'marker-color': 'blue',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-plane',
+      popup: {
+        pick: [
+          'NAME'
+        ]
+      },
+      tooltip: {
+        property: 'LABEL'
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      source: 'https://s3.eu-central-1.amazonaws.com/kargo/ne_10m_airports.json',
+      cluster: {
+        pixelRange: 50
+      },
+      'marker-symbol': 'airfield',
+      'marker-color': '#00A5FF'
     }
   },
   {

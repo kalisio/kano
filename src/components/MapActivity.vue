@@ -93,6 +93,7 @@ export default {
     kCoreMixins.baseActivity,
     kCoreMixins.refsResolver(['map']),
     kMapMixins.geolocation,
+    kMapMixins.featureService,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,

@@ -45,6 +45,7 @@ export default {
     kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
+    kMapMixins.featureService,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,
