@@ -8,6 +8,7 @@ services:
       - BUILD_NUMBER
       - NODE_APP_INSTANCE=${FLAVOR}
       - DB_URL
+      - CESIUM_TOKEN
     networks:
       - app
       - cluster
