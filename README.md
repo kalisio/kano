@@ -10,6 +10,8 @@
 
 ![Image](./kano.png)
 
+kano is a client aplication that can be used to visualise geospatial data served by [kargo](https://kalisio.github.io/kargo/).
+
 For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
 * [Kano development build](https://kano.dev.kalisio.xyz/)
