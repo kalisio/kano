@@ -16,7 +16,7 @@ For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
 * [Kano development build](https://kano.dev.kalisio.xyz/)
 
-This application is based on the [Kalisio Development Kit](https://kalisio.gitbooks.io/kalisio/).
+This application is based on the [Kalisio Development Kit](https://kalisio.github.io/kdk/).
 
 ### License
 
