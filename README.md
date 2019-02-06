@@ -1,3 +1,5 @@
+[![Kalisio](https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-logo-black-512x168.png)](https://kalisio.com)
+
 ## Kano application
 
 [![Build Status](https://travis-ci.org/kalisio/kano.png?branch=master)](https://travis-ci.org/kalisio/kano)
