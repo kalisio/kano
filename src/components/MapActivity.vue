@@ -46,7 +46,9 @@
     />
 
     <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
-        <k-time-controller v-if="forecastModel"
+        <k-time-controller
+          v-if="forecastModel"
+          :key="timeControllerRefreshKey"
           :min="timeLine.start" 
           :max="timeLine.end"
           :step="'h'"
@@ -118,7 +120,8 @@ export default {
       timeLineInterval: null,
       timeLineFormatter: null,
       mapWidth: null,
-      mapHeight: null
+      mapHeight: null,
+      timeControllerRefreshKey: 0
     }
   },
   computed: {
@@ -527,6 +530,20 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
       this.setCurrentTime(moment.utc(this.timeLine.current))
+
+      //
+      // Make the component aware that it needs to refresh.
+      //
+      // See: http://michaelnthiessen.com/force-re-render and related to: https://github.com/kalisio/kano/issues/24
+      //
+      // Core issue is that the :value property of k-time-controller can be changed by this method, but this does not
+      // affect the data element "this.currentValue" of the component which is only assigned once (see the expression
+      // "currentValue: this.value" in mixin.range-compute.js).
+      //
+      // Since invoking "setupTimeline" means that the whole component simply needs to be recalculated (because we're
+      // changing any/all of its props), forcing an update (using the ":key" technique) seem the simplest solution.  
+      //
+      this.timeControllerRefreshKey = this.timeControllerRefreshKey + 1
     }
   },
   created () {

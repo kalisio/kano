@@ -45,3 +45,4 @@ echo "DOCKER_NETWORK=$DOCKER_NETWORK" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
 echo "APP_SECRET=$APP_SECRET" >> .env
 echo "DB_URL=$DB_URL" >> .env
+echo "CESIUM_TOKEN=$CESIUM_TOKEN" >> .env

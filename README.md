@@ -1,3 +1,5 @@
+[![Kalisio](https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-logo-black-512x168.png)](https://kalisio.com)
+
 ## Kano application
 
 [![Build Status](https://travis-ci.org/kalisio/kano.png?branch=master)](https://travis-ci.org/kalisio/kano)
@@ -10,11 +12,13 @@
 
 ![Image](./kano.png)
 
+Kano is a client aplication that can be used to visualise geospatial data served by [Kargo](https://kalisio.github.io/kargo/).
+
 For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
 * [Kano development build](https://kano.dev.kalisio.xyz/)
 
-This application is based on the [Kalisio Development Kit](https://kalisio.gitbooks.io/kalisio/).
+This application is based on the [Kalisio Development Kit](https://kalisio.github.io/kdk/).
 
 ### License
 
