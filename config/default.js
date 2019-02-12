@@ -150,6 +150,7 @@ module.exports = {
     },
     // Default GeoJSON popup will display all properties
     popup: {},
+    cluster: {},
     fileLayers: {
       fileSizeLimit : 1024 * 1024,
       formats: [ '.geojson', '.kml', '.gpx' ]
@@ -179,6 +180,9 @@ module.exports = {
     featureStyle: {
       'marker-symbol': 'airport',
       'marker-color': '#57D824'
+    },
+    cluster: {
+      pixelRange: 50
     }
   },
   routes: require('./routes')
