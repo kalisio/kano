@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <div ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
       <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
@@ -10,6 +11,7 @@
         </div>
       </k-widget>
     </div>
+
     <q-btn 
       id="side-nav-toggle"
       color="secondary"
@@ -19,6 +21,7 @@
       @click="layout.toggleLeft()">
       Kano
     </q-btn>
+    
     <q-btn 
       id="map-panel-toggle"
       color="secondary"
@@ -67,7 +70,7 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
 import 'weacast-leaflet'
-import { QPopover, QModal, QWindowResizeObservable, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
+import { QPopover, QModal, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
 import { weacast } from 'weacast-core/client'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
@@ -83,7 +86,6 @@ export default {
   components: {
     QPopover,
     QModal,
-    QWindowResizeObservable,
     QResizeObservable,
     QBtn,
     QFixedPosition,
