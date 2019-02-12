@@ -7,7 +7,7 @@ module.exports = [
     name: 'Sentinel 2',
     description: 'Cloudless',
     tags: [
-      'satellite'
+      'imagery'
     ],
     iconUrl: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'satellite',
@@ -106,6 +106,27 @@ module.exports = [
     cesium: {
       type: 'OpenStreetMap',
       url: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR`
+    }
+  },
+  {
+    name: 'Mosaik',
+    description: 'Mosaik',
+    tags: [
+      'street',
+      'imagery'
+    ],
+    iconUrl: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    icon: 'terrain',
+    attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    type: 'BaseLayer',
+    leaflet: {
+      type: 'tileLayer',
+      source: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      maxZoom: 18
+    },
+    cesium: {
+      type: 'OpenStreetMap',
+      url: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR`
     }
   },
   {
