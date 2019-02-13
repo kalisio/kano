@@ -60,7 +60,14 @@
           pointerTextColor="white"
           style="width: 100%;"
         />
-    </q-fixed-position>      
+    </q-fixed-position>
+
+    <k-modal ref="geocodingModal" :title="$t('Activity.GEOCODING')" :toolbar="getGeocodingToolbar()" :buttons="getGeocodingButtons()" :route="false">
+      <div slot="modal-content" class="column xs-gutter">
+        <k-form ref="geocodingForm" :schema="getGeocodingSchema()" />
+      </div>
+    </k-modal>
+
   </div>
 </template>
 
@@ -181,32 +188,28 @@ export default {
     }
   },
   methods: {
+    async initializeViewer () {
+      if (this.map) return
+      // Ensure DOM ref is here as well
+      await this.loadRefs()
+      this.setupMap(this.$refs.map, this.$config('map.viewer'))
+      await this.initializeView()
+      // Add a scale control
+      L.control.scale().addTo(this.map)
+      this.map.on('moveend', this.onMapMoved)
+    },
+    finalizeViewer () {
+      this.map.off('moveend', this.onMapMoved)
+    },
     async refreshActivity () {  
+      // Wait until viewer is ready
+      await this.initializeViewer()
+      if (!this.map) return
       this.clearActivity()
-      // Retrieve the layers
-      try {
-        await this.refreshLayers('leaflet')
-      } catch (error) {
-        logger.error(error)
-      }
-      // Retrieve the forecast models
-      try {
-        await this.setupWeacast()
-      } catch (error) {
-        logger.error(error)
-      }
-      // TimeLine
-      this.setupTimeline()
-      this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
       // Setup the right pane
       this.setRightPanelContent('MapPanel', this.$data)
+      this.registerActivityActions()
       // FAB
-      this.registerFabAction({
-        name: 'toggle-fullscreen', label: this.$t('MapActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
-      })
-      this.registerFabAction({
-        name: 'geolocate', label: this.$t('MapActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
-      })
       this.registerFabAction({
         name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onWeatherForLocation
       })
@@ -561,15 +564,9 @@ export default {
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
   async mounted () {
-    await this.loadRefs()
-    this.setupMap(this.$refs.map, this.$config('map.viewer'))
-    this.initializeView()
-    // Add a scale control
-    L.control.scale().addTo(this.map)
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.$on('leaflet-layer-shown', this.onLayerShown)
     this.$on('leaflet-layer-hidden', this.onLayerHidden)
-    this.map.on('moveend', this.onMapMoved)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
@@ -579,7 +576,6 @@ export default {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
     this.$off('leaflet-layer-shown', this.onLayerShown)
     this.$off('leaflet-layer-hidden', this.onLayerHidden)
-    this.map.off('moveend', this.onMapMoved)
     // No need to refresh the layout when leaving the component
     this.observe = false
     //this.removeCollectionLayer('Actors')
@@ -587,6 +583,7 @@ export default {
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onFeatureClicked)
     this.$off('collection-refreshed', this.onCollectionRefreshed)
+    this.finalizeViewer()
   }
 }
 </script>

@@ -1,5 +1,8 @@
 {
   "REMOVE_LABEL": "Supprimer",
+  "schemas": {
+    "ACTIVITY_LOCATION_FIELD_HELPER": "Entrez une addresse"
+  },
   "screen": {
     "ABOUT_KALISIO": "A propos",
     "CONTACT": "Contact",
@@ -34,18 +37,20 @@
     "REMOVE_LABEL": "$t(REMOVE_LABEL)",
     "REMOVE_DIALOG_TITLE": "Supprimer {{layer}} ?",
     "REMOVE_DIALOG_MESSAGE": "Etes vous sûr de vouloier supprimer {{layer}} de votre espace de travail ?",
-    "ZOOM_TO_LABEL": "Zoomer sur"
-  },
-  "MapActivity": {
+    "ZOOM_TO_LABEL": "Zoomer sur",
     "TOGGLE_FULLSCREEN": "Plein écran",
     "GEOLOCATE": "Ma position",
+    "GEOCODE": "Rechercher",
+    "GEOCODING": "Rechercher un lieu",
+    "GEOCODE_BUTTON": "Géocoder",
+    "CLOSE_GEOCODING_ACTION": "Fermer"
+  },
+  "MapActivity": {
     "PROBE": "Sonder",
     "PROBED_LOCATION": "Sonde"
   },
   "GlobeActivity": {
-    "TOGGLE_FULLSCREEN": "Plein écran",
-    "TOGGLE_VR": "VR",
-    "GEOLOCATE": "Ma position"
+    "TOGGLE_VR": "VR"
   },
   "LayersPanel": {
     "BASE_LAYERS": "Fonds cartographiques",

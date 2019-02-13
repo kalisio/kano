@@ -1,5 +1,8 @@
 {
   "REMOVE_LABEL": "Remove",
+  "schemas": {
+    "ACTIVITY_LOCATION_FIELD_HELPER": "Enter an address"
+  },
   "screen": {
     "ABOUT_KALISIO": "About",
     "CONTACT": "Contact",
@@ -34,18 +37,20 @@
     "REMOVE_LABEL": "$t(REMOVE_LABEL)",
     "REMOVE_DIALOG_TITLE": "Remove {{layer}} ?",
     "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?",
-    "ZOOM_TO_LABEL": "Zoom to"
-  },
-  "MapActivity": {
+    "ZOOM_TO_LABEL": "Zoom to",
     "TOGGLE_FULLSCREEN": "Fullscreen",
     "GEOLOCATE": "My position",
+    "GEOCODE": "Find",
+    "GEOCODING": "Find a location",
+    "GEOCODE_BUTTON": "Geocode",
+    "CLOSE_GEOCODING_ACTION": "Close"
+  },
+  "MapActivity": {
     "PROBE": "Probe",
     "PROBED_LOCATION": "Probe"
   },
   "GlobeActivity": {
-    "TOGGLE_FULLSCREEN": "Fullscreen",
-    "TOGGLE_VR": "VR",
-    "GEOLOCATE": "My position"
+    "TOGGLE_VR": "VR"
   },
   "LayersPanel": {
     "BASE_LAYERS": "Base Layers",

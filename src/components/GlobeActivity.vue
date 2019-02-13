@@ -1,8 +1,10 @@
 <template>
   <div>
+
     <div ref="globe" :style="globeStyle">
       <q-resize-observable @resize="onGlobeResized" />
     </div>
+
     <q-btn 
       id="side-nav-toggle"
       color="secondary"
@@ -12,7 +14,7 @@
       @click="layout.toggleLeft()">
       Kano
     </q-btn>
-     <q-btn 
+    <q-btn 
       id="globe-panel-toggle"
       color="secondary"
       class="fixed"
@@ -21,6 +23,13 @@
       round 
       icon="layers"
       @click="layout.toggleRight()" />
+
+    <k-modal ref="geocodingModal" :title="$t('Activity.GEOCODING')" :toolbar="getGeocodingToolbar()" :buttons="getGeocodingButtons()" :route="false">
+      <div slot="modal-content" class="column xs-gutter">
+        <k-form ref="geocodingForm" :schema="getGeocodingSchema()" />
+      </div>
+    </k-modal>
+    
   </div>
 </template>
 
@@ -70,7 +79,7 @@ export default {
         // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
-      this.initializeView()
+      await this.initializeView()
       this.bounds = new Cesium.Rectangle()
       this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
     },
@@ -82,46 +91,24 @@ export default {
       await this.initializeViewer()
       if (!this.viewer) return
       this.clearActivity()
-      // Retrieve the layers
-      await this.refreshLayers('cesium')
       // Setup the right pane
       this.setRightPanelContent('GlobePanel', this.$data)
+      this.registerActivityActions()
       // FAB
       this.registerFabAction({
-        name: 'toggle-fullscreen', label: this.$t('GlobeActivity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
-      })
-      this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
-      })
-      this.registerFabAction({
-        name: 'geolocate', label: this.$t('GlobeActivity.GEOLOCATE'), icon: 'location_searching', handler: this.onGeolocate
       })
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()
     },
-    getEntityStyle (entity) {
-      return {
-        billboard: {
-          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-        },
-        label: {
-          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-          verticalOrigin: Cesium.VerticalOrigin.BASELINE
-        },
-        polyline: {
-          clampToGround: true
-        }
+    getVigicruesEntity (entity, options) {
+      const level = _.get(entity, 'properties.NivSituVigiCruEnt')
+      if (level > 1) {
+        // TODO: add tooltip
       }
-    },
-    getClusterStyle (entities, cluster) {
-      return {
-        label: {
-          show: true,
-          text: entities.length.toLocaleString()
-        }
-      }
+      return null
     },
     onGlobeMoved () {
       const cameraBounds = this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
@@ -147,6 +134,7 @@ export default {
     }
   },
   created () {
+    this.registerCesiumStyle('entityStyle', this.getVigicruesEntity)
     // Enable the observers in order to refresh the layout
     this.observe = true
     // Required to get the access token from server
