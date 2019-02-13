@@ -124,6 +124,9 @@ module.exports = {
   cesium: {
     token: process.env.CESIUM_TOKEN
   },
+  geocoder: {
+    provider: 'opendatafrance'
+  },
   logs: {
     Console: {
       colorize: true,

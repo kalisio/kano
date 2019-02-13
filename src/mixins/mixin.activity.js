@@ -3,15 +3,59 @@ import logger from 'loglevel'
 import moment from 'moment'
 import Cesium from 'cesium/Source/Cesium.js'
 import { Events, Dialog } from 'quasar'
+import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 
 export default {
+  mixins: [
+    kCoreMixins.refsResolver(['geocodingForm'])
+  ],
   data () {
     return {
       layerHandlers: {},
-      engineReady: false
+      engine: null
     }
   },
   methods: {
+    getGeocodingSchema () {
+      return {
+        '$schema': 'http://json-schema.org/draft-06/schema#',
+        '$id': 'http://kalisio.xyz/schemas/geocoding#',
+        'title': 'Geocoding Form',
+        'type': 'object',
+        'properties': {
+          "location": {
+            "type": "object", 
+            "field": {
+              "component": "KLocationField",
+              "helper": "schemas.ACTIVITY_LOCATION_FIELD_HELPER"
+            }
+          }
+        },
+        'required': ['user', 'role']
+      }
+    },
+    getGeocodingToolbar () {
+      return [
+        { name: 'close-action', label: this.$t('Activity.CLOSE_GEOCODING_ACTION'), icon: 'close', handler: this.onCloseGeocoding }
+      ]
+    },
+    getGeocodingButtons () {
+      return [
+        { name: 'geocode-button', label: this.$t('Activity.GEOCODE_BUTTON'), color: 'primary', handler: (event, done) => this.onGeocode(done) }
+      ]
+    },
+    registerActivityActions () {
+      // FAB
+      this.registerFabAction({
+        name: 'toggle-fullscreen', label: this.$t('Activity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen
+      })
+      this.registerFabAction({
+        name: 'geolocate', label: this.$t('Activity.GEOLOCATE'), icon: 'my_location', handler: this.onGeolocate
+      })
+      this.registerFabAction({
+        name: 'geocode', label: this.$t('Activity.GEOCODE'), icon: 'location_searching', handler: this.onGeocoding
+      })
+    },
     async refreshLayers (engine) {
       this.layers = {}
       this.layerHandlers = {
@@ -67,16 +111,36 @@ export default {
         ]
       })
     },
+    onMapReady () {
+      this.engine = 'leaflet'
+    },
+    onGlobeReady () {
+      this.engine = 'cesium'
+    },
     onGeolocate () {
       // Force a refresh
       this.$router.push({ query: {} })
       this.updatePosition()
     },
-    onEngineReady () {
-      this.engineReady = true
+    onCloseGeocoding (done) {
+      this.$refs.geocodingModal.close(done)
+    },
+    onGeocoding () {
+      this.$refs.geocodingModal.open()
+    },
+    onGeocode (done) {
+      this.onCloseGeocoding(() => {
+        let result = this.$refs.geocodingForm.validate()
+        const longitude = _.get(result, 'values.location.longitude')
+        const latitude = _.get(result, 'values.location.latitude')
+        if (longitude && latitude) {
+          this.center(longitude, latitude)
+        }
+        done()
+      })
     },
     geolocate () {
-      if (!this.engineReady) {
+      if (!this.engine) {
         //logger.error('Engine not ready to geolocate')
         return
       }
@@ -88,7 +152,7 @@ export default {
         else if (this.map) this.center(position.longitude, position.latitude)
       }
     },
-    initializeView () {
+    async initializeView () {
       if (this.$route.query.south) {
         const bounds= [ [this.$route.query.south, this.$route.query.west], [this.$route.query.north, this.$route.query.east] ]
         if (this.viewer) this.viewer.camera.flyTo({ duration: 0, destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0]) })
@@ -96,6 +160,24 @@ export default {
       } else {
         if (this.$store.get('user.position')) this.geolocate()
       }
+
+      // Retrieve the layers
+      try {
+        await this.refreshLayers(this.engine)
+      } catch (error) {
+        logger.error(error)
+      }
+      // Retrieve the forecast models
+      if (this.setupWeacast) {
+        try {
+          await this.setupWeacast()
+        } catch (error) {
+          logger.error(error)
+        }
+        this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
+      }
+      // TimeLine
+      if (this.setupTimeline) this.setupTimeline()
     },
     getTimeLineInterval () {
       // interval length: length of 1 day in milliseconds
@@ -172,17 +254,19 @@ export default {
     
   },
   created () {
-    
+    // Load the required components
+    this.$options.components['k-modal'] = this.$load('frame/KModal')
+    this.$options.components['k-form'] = this.$load('form/KForm')
   },
   mounted () {
-    this.$on('map-ready', this.onEngineReady)
-    this.$on('globe-ready', this.onEngineReady)
+    this.$on('map-ready', this.onMapReady)
+    this.$on('globe-ready', this.onGlobeReady)
     this.$on('layer-added', this.onLayerAdded)
     Events.$on('user-position-changed', this.geolocate)
   },
   beforeDestroy () {
-    this.$off('map-ready', this.onEngineReady)
-    this.$off('globe-ready', this.onEngineReady)
+    this.$off('map-ready', this.onMapReady)
+    this.$off('globe-ready', this.onGlobeReady)
     this.$off('layer-added', this.onLayerAdded)
     Events.$off('user-position-changed', this.geolocate)
   }
