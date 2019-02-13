@@ -178,8 +178,28 @@ module.exports = {
     },
     // Default GeoJSON layer style for points/polygons/lines in simple style spec
     featureStyle: {
-      'marker-symbol': 'airport',
-      'marker-color': '#57D824'
+      'marker-symbol': 'marker',
+      'marker-color': '#57D824',
+      'stroke': '#FF0000',
+      'fill': '#00FF00'
+    },
+    entityStyle: {
+      billboard: {
+        heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND'
+      },
+      label: {
+        heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND',
+        verticalOrigin: 'Cesium.VerticalOrigin.BASELINE'
+      },
+      polyline: {
+        clampToGround: true
+      }
+    },
+    clusterStyle: {
+      label: {
+        show: true,
+        text: '<%= entities.length.toLocaleString() %>'
+      }
     },
     cluster: {
       pixelRange: 50

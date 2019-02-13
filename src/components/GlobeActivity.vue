@@ -101,27 +101,12 @@ export default {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()
     },
-    getEntityStyle (entity) {
-      return {
-        billboard: {
-          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-        },
-        label: {
-          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-          verticalOrigin: Cesium.VerticalOrigin.BASELINE
-        },
-        polyline: {
-          clampToGround: true
-        }
+    getVigicruesEntity (entity, options) {
+      const level = _.get(entity, 'properties.NivSituVigiCruEnt')
+      if (level > 1) {
+        // TODO: add tooltip
       }
-    },
-    getClusterStyle (entities, cluster) {
-      return {
-        label: {
-          show: true,
-          text: entities.length.toLocaleString()
-        }
-      }
+      return null
     },
     onGlobeMoved () {
       const cameraBounds = this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
@@ -147,6 +132,7 @@ export default {
     }
   },
   created () {
+    this.registerCesiumStyle('entityStyle', this.getVigicruesEntity)
     // Enable the observers in order to refresh the layout
     this.observe = true
     // Required to get the access token from server
