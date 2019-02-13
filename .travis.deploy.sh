@@ -3,7 +3,7 @@ if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip deploy]"* ]]
 then
 	echo "Skipping deploy stage"
 else
-	source travis.env.sh
+	source .travis.env.sh
 
 	eval "$(ssh-agent -s)"
 	chmod 600 ssh.pem

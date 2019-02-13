@@ -12,6 +12,7 @@ stages:
 - name: DEPLOY
 jobs:
   include:
+
   - stage: BUILD
     language: node_js
     node_js:
@@ -20,7 +21,7 @@ jobs:
     - docker
     install: true
     script:
-    - bash travis.build.sh
+    - bash .travis.build.sh
     deploy:
       skip_cleanup: true
       provider: s3
@@ -31,6 +32,7 @@ jobs:
       upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
       on:
         all_branches: true
+
   - stage: TEST
     language: node_js
     node_js:
@@ -43,7 +45,7 @@ jobs:
     install:
     - npm install -g codeclimate-test-reporter
     script:
-    - bash travis.test.sh
+    - bash .travis.test.sh
     after_script:
     - codeclimate-test-reporter < server-coverage/lcov.info
     deploy:
@@ -65,6 +67,7 @@ jobs:
       upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
       on:
         all_branches: true
+
   - stage: DEPLOY
     language: node_js
     node_js:
@@ -78,6 +81,6 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: bash travis.deploy.sh
+      script: bash .travis.deploy.sh
       on:
         all_branches: true

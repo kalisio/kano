@@ -10,7 +10,7 @@ if [[ $TRAVIS_COMMIT_MESSAGE == *"[skip test]"* ]]
 then
 	echo "Skipping test stage"
 else
-	source travis.env.sh
+	source .travis.env.sh
 
 	# It first need to create the required network 
 	docker network create --attachable $DOCKER_NETWORK

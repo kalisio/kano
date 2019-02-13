@@ -1,5 +1,5 @@
 #!/bin/bash
-source travis.env.sh
+source .travis.env.sh
 
 # NOTE: The process build the image and run the container in order to allow us to copy the 
 # built artifact from the container to the host. Indeed the artifact is then copied to S3 
