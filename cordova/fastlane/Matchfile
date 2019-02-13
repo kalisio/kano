@@ -1,2 +1,0 @@
-git_url("https://github.com/kalisio/kApp-secrets")
-type("development") # The default type, can be: appstore, adhoc, enterprise or development
