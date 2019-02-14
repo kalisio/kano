@@ -11,6 +11,8 @@ export default {
   ],
   data () {
     return {
+      forecastModelHandlers: {},
+      layerCategories: {},
       layerHandlers: {},
       engine: null
     }
@@ -58,6 +60,7 @@ export default {
     },
     async refreshLayers (engine) {
       this.layers = {}
+      this.layerCategories = (engine === 'leaflet' ? this.$config('mapPanel.categories') : this.$config('globePanel.categories'))
       this.layerHandlers = {
         toggle: (layer) => this.onTriggerLayer(layer),
         zoomTo: (layer) => this.onZoomToLayer(layer),
@@ -175,6 +178,8 @@ export default {
           logger.error(error)
         }
         this.forecastModelHandlers = { toggle: (model) => this.onForecastModelSelected(model) }
+      } else {
+        this.forecastModelHandlers = {}
       }
       // TimeLine
       if (this.setupTimeline) this.setupTimeline()

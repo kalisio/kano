@@ -118,7 +118,6 @@ export default {
     let now = moment.utc()
 
     return {
-      forecastModelHandlers: {},
       timeLine: {
         start: now.clone().subtract({ days: 7 }).valueOf(),
         end: now.clone().add({ days: 7 }).valueOf(),
@@ -207,7 +206,7 @@ export default {
       if (!this.map) return
       this.clearActivity()
       // Setup the right pane
-      this.setRightPanelContent('MapPanel', this.$data)
+      this.setRightPanelContent('Panel', this.$data)
       this.registerActivityActions()
       // FAB
       this.registerFabAction({
@@ -285,9 +284,11 @@ export default {
       }
       const H = _.get(feature, 'properties.H')
       const Q = _.get(feature, 'properties.Q')
-      if (!_.isNil(H) && !_.isNil(Q)) {
+      if (!_.isNil(H) || !_.isNil(Q)) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
+        if (!_.isNil(H) && !_.isNil(Q)) return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
+        else if (!_.isNil(H)) return tooltip.setContent(`<b>${H.toFixed(2)} m`)
+        else if (!_.isNil(Q)) return tooltip.setContent(`<b>${Q.toFixed(2)} m3/h`)
       }
       return null
     },

@@ -92,7 +92,7 @@ export default {
       if (!this.viewer) return
       this.clearActivity()
       // Setup the right pane
-      this.setRightPanelContent('GlobePanel', this.$data)
+      this.setRightPanelContent('Panel', this.$data)
       this.registerActivityActions()
       // FAB
       this.registerFabAction({

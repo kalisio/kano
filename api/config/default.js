@@ -125,7 +125,7 @@ module.exports = {
     token: process.env.CESIUM_TOKEN
   },
   geocoder: {
-    provider: 'opendatafrance'
+    providers: [{ provider: 'opendatafrance' }, { provider: 'openstreetmap' }]
   },
   logs: {
     Console: {

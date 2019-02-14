@@ -1,6 +1,6 @@
 <template>
   <div>
-    <forecastmodels-panel :forecastModels="forecastModels" :forecastModelHandlers="forecastModelHandlers" :forecastModel="forecastModel" />
+    <forecastmodels-panel v-if="forecastModels.length > 0" :forecastModels="forecastModels" :forecastModelHandlers="forecastModelHandlers" :forecastModel="forecastModel" />
     <k-layers-panel :layers="layers" :layerHandlers="layerHandlers" :categories="layerCategories" />
   </div>
 </template>
@@ -14,6 +14,10 @@ export default {
       type: Object,
       default: () => {}
     },
+    layerCategories: {
+      type: Array,
+      default: () => []
+    },
     layerHandlers: {
       type: Object,
       default: () => {}
@@ -24,25 +28,16 @@ export default {
     },
     forecastModelHandlers: {
       type: Object,
-      default: () => []
+      default: () => {}
     },
     forecastModel: {
       type: Object,
       default: () => {}
     }
   },
-  data () {
-    return {
-      layerCategories: []
-    }
-  },
   async created () {
     this.$options.components['k-layers-panel'] = this.$load('KLayersPanel')
     this.$options.components['forecastmodels-panel'] = this.$load('ForecastModelsPanel')
-  },
-  async mounted () {
-    // Load the layer types
-    this.layerCategories = this.$config('mapPanel.categories')
   }
 }
 </script>
