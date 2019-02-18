@@ -64,6 +64,12 @@ module.exports = {
   },
   */
   apiPath: API_PREFIX,
+  helmet: {
+    frameguard: {
+      action: 'allow-from',
+      domain: 'http://localhost'
+    }
+  },
   paginate: {
     default: 10,
     max: 50

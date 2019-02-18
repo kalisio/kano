@@ -113,6 +113,7 @@
     "npm-run-all": "^4.1.2",
     "password-generator": "^2.2.0",
     "pixi.js": "^4.8.2",
+    "post-robot": "^10.0.10",
     "quasar-extras": "0.0.8",
     "quasar-framework": "0.14.7",
     "roboto-fontface": "^0.7.0",

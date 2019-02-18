@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import logger from 'loglevel'
 import moment from 'moment'
+import postRobot from 'post-robot'
 import Cesium from 'cesium/Source/Cesium.js'
 import { Events, Dialog } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
@@ -268,6 +269,18 @@ export default {
     this.$on('globe-ready', this.onGlobeReady)
     this.$on('layer-added', this.onLayerAdded)
     Events.$on('user-position-changed', this.geolocate)
+    /* Cross-window test */
+    postRobot.on('getLayer', (event) => {
+      const data = event.data
+      return {
+        hide: () => this.hideLayer(data.name),
+        show: () => this.showLayer(data.name)
+      }
+    })
+    postRobot.on('setActivity', (event) => {
+      const data = event.data
+      this.$router.push({ name: data.name, query: Object.assign({}, this.$route.query) })
+    })
   },
   beforeDestroy () {
     this.$off('map-ready', this.onMapReady)

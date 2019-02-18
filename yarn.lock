@@ -2435,6 +2435,15 @@ bcryptjs@^2.3.0:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
 
+belter@^1.0.41:
+  version "1.0.92"
+  resolved "https://registry.yarnpkg.com/belter/-/belter-1.0.92.tgz#116d35e45fbabefda0a26dce09f86921c4ae8af0"
+  integrity sha512-wb3QSSGPgl1OIUTM9MFBTizr7+xPPbV+oqU32RcFuFAXvk+ltrPWgDy6lp+OfhxziODKFazgpo3YufNjoiBPDA==
+  dependencies:
+    cross-domain-safe-weakmap "^1.0.20"
+    cross-domain-utils "^2.0.10"
+    zalgo-promise "^1.0.28"
+
 better-assert@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/better-assert/-/better-assert-1.0.2.tgz#40866b9e1b9e0b55b481894311e68faffaebc522"
@@ -3688,6 +3697,20 @@ create-server@~1.0.1:
   resolved "https://registry.yarnpkg.com/create-server/-/create-server-1.0.1.tgz#164342834f188bbec7c7bc4667463cc2b1304c44"
   dependencies:
     connected "0.0.x"
+
+cross-domain-safe-weakmap@^1.0.1, cross-domain-safe-weakmap@^1.0.20:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/cross-domain-safe-weakmap/-/cross-domain-safe-weakmap-1.0.23.tgz#48e662e7ed2dcb71b1652e75a8c3fac7840189c1"
+  integrity sha512-yGsAJzibnlDcWESitCcO6mAbywWL+jV2woftEPgyfuPcA6sFdT1TGI99DZPZfyYxkFPKpP7tCgQcH2V5CJVUaQ==
+  dependencies:
+    cross-domain-utils "^2.0.0"
+
+cross-domain-utils@^2.0.0, cross-domain-utils@^2.0.10:
+  version "2.0.24"
+  resolved "https://registry.yarnpkg.com/cross-domain-utils/-/cross-domain-utils-2.0.24.tgz#bde407670b2c7a67e0f04be23196d49dcf30b631"
+  integrity sha512-pt6i27qG5xuPKBnZtgAYeML4tgWpGLwf2hwKsfZVZtBBHgTC1K44WECU1HeHgHUVLiBjQcojW3OeGa2DRywumQ==
+  dependencies:
+    zalgo-promise "^1.0.11"
 
 cross-env@^5.1.4:
   version "5.1.4"
@@ -8352,6 +8375,17 @@ point-in-polygon@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-1.0.1.tgz#d59b64e8fee41c49458aac82b56718c5957b2af7"
 
+post-robot@^10.0.10:
+  version "10.0.10"
+  resolved "https://registry.yarnpkg.com/post-robot/-/post-robot-10.0.10.tgz#85c7c1aecb15d63214985fc4c57e753ef90ce3d8"
+  integrity sha512-PWLtWR4eDQp9xB5CezBt4mrg1eZaJ80u8Lkg8HMsdtok9qzW66MLOZw6KsR1Q9zQiaLt8JQH4SFUAJLVctCblA==
+  dependencies:
+    belter "^1.0.41"
+    cross-domain-safe-weakmap "^1.0.1"
+    cross-domain-utils "^2.0.0"
+    universal-serialize "^1.0.4"
+    zalgo-promise "^1.0.3"
+
 postcss-calc@^5.2.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -10885,6 +10919,11 @@ unique-slug@^2.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
+universal-serialize@^1.0.4:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/universal-serialize/-/universal-serialize-1.0.7.tgz#5e64607c3c941c88f76e77f2b095fafc2f37abed"
+  integrity sha512-rHWw4zdhPqKqbBu3GbNzdicHRc+0byzAFFcImDMo8x+S9yYfyqYQQcr749NV8jO/0YisMzd+LjeivdbHUzA67A==
+
 unorm@1.4.1, unorm@^1.3.3:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.4.1.tgz#364200d5f13646ca8bcd44490271335614792300"
@@ -11469,3 +11508,8 @@ yargs@~3.10.0:
 yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
+
+zalgo-promise@^1.0.11, zalgo-promise@^1.0.28, zalgo-promise@^1.0.3:
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/zalgo-promise/-/zalgo-promise-1.0.38.tgz#6acdb8990954eabab505c0c3bde47523fd927d33"
+  integrity sha512-+dj0kZU9poywiJ3nIFns3o10XXbbptugvO51TxwD8/V0SIEi+Jw/of0MeJZ8CO7gH9jqzD0MQ/Q1PXAx8GlOQw==
