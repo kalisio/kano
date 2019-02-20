@@ -10,6 +10,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import Chart from 'chart.js'
+import 'chartjs-plugin-annotation'
 import { QIcon, QTooltip } from 'quasar'
 import { utils as kMapUtils } from '@kalisio/kdk-map/client'
 
@@ -22,11 +23,13 @@ export default {
   props: {
     feature: { type: Object, default: () => null },
     variables: { type: Array, default: () => [] },
+    currentTime: { type: Object, default: () => moment.utc() },
     decimationFactor: { type: Number, default: 1 }
   },
   watch: {
     feature: function () { this.setupGraph() },
     variables: function () { this.setupGraph() },
+    currentTime: function () { this.setupGraph() },
     decimationFactor: function () { this.setupGraph() }
   },
   methods: {
@@ -174,6 +177,7 @@ export default {
         },
         options: {
           tooltips: {
+            mode: 'x',
             callbacks: {
               label: (tooltipItem, data) => {
                 return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2)
@@ -182,6 +186,7 @@ export default {
           },
           scales: {
             xAxes: [{
+              id: 'time',
               type: 'time',
               time: {
                 unit: 'hour',
@@ -190,7 +195,10 @@ export default {
                   hour: 'MM/DD HH:mm'
                 },
                 tooltipFormat: 'MM/DD HH:mm',
-                parser: (date) => moment(typeof date === 'number' ? date : date.toISOString())
+                parser: (date) => {
+                  if (moment.isMoment(date)) return date
+                  else return moment(typeof date === 'number' ? date : date.toISOString())
+                }
               },
               scaleLabel: {
                 display: false,
@@ -201,6 +209,29 @@ export default {
           },
           legend: {
             onClick: (event, legendItem) => this.toggleVariable(legendItem)
+          },
+          annotation: {
+            drawTime: 'afterDatasetsDraw',
+            events: ['click'],
+            annotations: [{
+              id: 'current-time',
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'time',
+              value: this.currentTime.valueOf(),
+              borderColor: 'grey',
+              borderWidth: 2,
+              label: {
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                content: this.currentTime.format('MM/DD HH:mm'),
+                position: 'top',
+                enabled: true
+              },
+              onClick: (event) => {
+                // The annotation is bound to the `this` variable
+                console.log('Annotation', event.type, this)
+              }
+            }]
           }
         }
       }

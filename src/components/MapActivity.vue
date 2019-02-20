@@ -5,9 +5,10 @@
       <q-resize-observable @resize="onMapResized" />
       <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
         <div slot="widget-content">
-          <time-series ref="timeseries" 
+          <time-series ref="timeseries"
             :feature="probedLocation" 
-            :variables="variables" />
+            :variables="variables"
+            :current-time="currentTime" />
         </div>
       </k-widget>
     </div>
