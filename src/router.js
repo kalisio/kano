@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { Store } from '@kalisio/kdk-core/client'
 import utils from './utils'
 import config from 'config'
 
@@ -19,5 +20,7 @@ const router = new VueRouter({
    */
   routes: utils.buildRoutes(config.routes)
 })
+
+Store.set('router', router)
 
 export default router

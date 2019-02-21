@@ -263,29 +263,26 @@ export default {
     // Load the required components
     this.$options.components['k-modal'] = this.$load('frame/KModal')
     this.$options.components['k-form'] = this.$load('form/KForm')
-  },
-  mounted () {
-    this.$on('map-ready', this.onMapReady)
-    this.$on('globe-ready', this.onGlobeReady)
-    this.$on('layer-added', this.onLayerAdded)
-    Events.$on('user-position-changed', this.geolocate)
     /* Cross-window test */
-    postRobot.on('getLayer', (event) => {
+    this.getLayerListener = postRobot.on('getLayer', (event) => {
       const data = event.data
       return {
         hide: () => this.hideLayer(data.name),
         show: () => this.showLayer(data.name)
       }
     })
-    postRobot.on('setActivity', (event) => {
-      const data = event.data
-      this.$router.push({ name: data.name, query: Object.assign({}, this.$route.query) })
-    })
+  },
+  mounted () {
+    this.$on('map-ready', this.onMapReady)
+    this.$on('globe-ready', this.onGlobeReady)
+    this.$on('layer-added', this.onLayerAdded)
+    Events.$on('user-position-changed', this.geolocate)
   },
   beforeDestroy () {
     this.$off('map-ready', this.onMapReady)
     this.$off('globe-ready', this.onGlobeReady)
     this.$off('layer-added', this.onLayerAdded)
     Events.$off('user-position-changed', this.geolocate)
+    this.getLayerListener.cancel()
   }
 }

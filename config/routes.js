@@ -26,11 +26,13 @@ module.exports = {
           },
           'map': {
             path: 'map',
-            component: 'MapActivity'
+            component: 'MapActivity',
+            embedApi: true
           },
           'globe': {
             path: 'globe',
-            component: 'GlobeActivity'
+            component: 'GlobeActivity',
+            embedApi: true
           }
         }
       }

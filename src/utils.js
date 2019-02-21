@@ -1,4 +1,7 @@
 import _ from 'lodash'
+import Vue from 'vue'
+import postRobot from 'post-robot'
+import { Store } from '@kalisio/kdk-core/client'
 
 function loadComponent (component) {
   return () => {
@@ -55,6 +58,55 @@ function load (name, type = 'component') {
   }
 }
 
+function getEmbedComponent(route) {
+  // The target component is the last one to be matched in hierarchy
+  let component = _.get(route, `matched[${route.matched.length - 1}]`)
+  return _.get(component, 'instances.default')
+}
+
+async function callEmbedMethod(route, data) {
+  // The event payload contains the name of the method to be called as well as its arguments
+  const method = (data ? data.command : undefined)
+  if (method) {
+    let component = getEmbedComponent(route)
+    if (component && (typeof component[method] === 'function')) {
+      if (Array.isArray(data.args)) return await component[method](...data.args)
+      else return await component[method](data.args)
+    }
+  }
+}
+
+// Setup post-robot event listenr to call component methods on this route from an external domain
+// If an event is received but the current route is not the same as the event name the new route is pushed first
+function setupEmbedApi(routeName, component) {
+  // Listen to an event named according to current route name
+  postRobot.on(routeName, async (event) => {
+    const router = Store.get('router')
+    let route = router.currentRoute
+    const data = event.data
+    let result
+    // If event received but the current route does not match the new route is pushed first
+    if (route.name !== routeName) {
+      let component = getEmbedComponent(route)
+      // Need to wait until route has really changed, component has been initialized, etc.
+      router.push({ name: routeName, query: Object.assign({}, route.query) }, () => {
+        //Vue.nextTick(() => callEmbedMethod(router.currentRoute, data))
+      })
+      result = await new Promise((resolve, reject) => {
+        const unwatch = component.$parent.$watch('$route', () => {
+          // Unwatch immediately
+          unwatch()
+          resolve(callEmbedMethod(router.currentRoute, data))
+        })
+      })
+    } else {
+      result = await callEmbedMethod(route, data)
+    }
+    return result
+  })
+}
+
+// Build vue router config from our config file
 function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
@@ -83,6 +135,9 @@ function buildRoutes (config) {
         }
         if (_.has(value, 'component')) {
           route.component = loadComponent(value.component)
+          if (_.has(value, 'embedApi')) {
+            setupEmbedApi(route.name)
+          }
         }
         if (_.has(value, 'props')) {
           route.props = value.props
