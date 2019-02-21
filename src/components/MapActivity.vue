@@ -8,7 +8,8 @@
           <time-series ref="timeseries"
             :feature="probedLocation" 
             :variables="variables"
-            :current-time="currentTime" />
+            :current-time-format="currentTimeFormat"
+            :current-formatted-time="currentFormattedTime" />
         </div>
       </k-widget>
     </div>
@@ -106,6 +107,7 @@ export default {
     kCoreMixins.refsResolver(['map']),
     kMapMixins.geolocation,
     kMapMixins.featureService,
+    kMapMixins.time,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
@@ -347,6 +349,8 @@ export default {
     },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
+      this.$store.patch('timeFormat', { locale: this.$store.get('timeFormat.locale') === 'en' ? 'fr' : 'en' })
+      this.$store.patch('timeFormat', { utc: this.$store.get('timeFormat.utc') ? false : true })
     },
     onResizeTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
@@ -487,7 +491,6 @@ export default {
       this.$refs.widget.toggle()
     },
     onCurrentTimeChanged (time) {
-      this.weacastApi.setForecastTime(time)
       // Round to nearest hour - FIXME: should be based on available times
       this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
       this.createProbedLocationLayer()

@@ -23,19 +23,18 @@ export default {
   props: {
     feature: { type: Object, default: () => null },
     variables: { type: Array, default: () => [] },
-    currentTime: { type: Object, default: () => moment.utc() },
+    currentTimeFormat: { type: Object, default: () => {} },
+    currentFormattedTime: { type: Object, default: () => {} },
     decimationFactor: { type: Number, default: 1 }
   },
   watch: {
     feature: function () { this.setupGraph() },
     variables: function () { this.setupGraph() },
-    currentTime: function () { this.setupGraph() },
+    currentTimeFormat: function () { this.setupGraph() },
+    currentFormattedTime: function () { this.setupGraph() },
     decimationFactor: function () { this.setupGraph() }
   },
   methods: {
-    formatDateTime (time) {
-      return moment.utc(time).format('MM/DD HH:mm')
-    },
     filter (value, index) {
       // We filter one value out of N according to decimation factor
       return (index % this.decimationFactor) === 0
@@ -169,6 +168,11 @@ export default {
       this.setupAvailableDatasets()
       this.setupAvailableYAxes()
 
+      const date = _.get(this.currentFormattedTime, 'date.short')
+      const time = _.get(this.currentFormattedTime, 'time.long')
+      const dateFormat = _.get(this.currentTimeFormat, 'date.short')
+      const timeFormat = _.get(this.currentTimeFormat, 'time.long')
+
       this.config = {
         type: 'line',
         data: {
@@ -192,9 +196,9 @@ export default {
                 unit: 'hour',
                 stepSize: this.timeStepSize,
                 displayFormats: {
-                  hour: 'MM/DD HH:mm'
+                  hour: `${dateFormat} - ${timeFormat}`
                 },
-                tooltipFormat: 'MM/DD HH:mm',
+                tooltipFormat: `${dateFormat} - ${timeFormat}`,
                 parser: (date) => {
                   if (moment.isMoment(date)) return date
                   else return moment(typeof date === 'number' ? date : date.toISOString())
@@ -218,12 +222,12 @@ export default {
               type: 'line',
               mode: 'vertical',
               scaleID: 'time',
-              value: this.currentTime.valueOf(),
+              value: new Date(this.currentFormattedTime.iso),
               borderColor: 'grey',
               borderWidth: 2,
               label: {
                 backgroundColor: 'rgba(0,0,0,0.5)',
-                content: this.currentTime.format('MM/DD HH:mm'),
+                content: `${date} - ${time}`,
                 position: 'top',
                 enabled: true
               },

@@ -55,6 +55,7 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
     kMapMixins.featureService,
+    kMapMixins.time,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,

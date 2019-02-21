@@ -233,22 +233,22 @@ export default {
     },
     getTimeLineFormatter () {
       return {
-        format (value, type, displayOptions) {
+        format: (value, type, displayOptions) => {
           const time = new Date(value)
           let label
           switch (type) {
             case 'interval':
               if (displayOptions.width >= 110) {
-                label = moment(time).format('dddd D')
+                label = this.formatTime('date.long', time)
               } else {
-                label = moment(time).format('ddd')
+                label = this.formatTime('date.short', time)
               }
               break 
             case 'pointer':
-              label = moment(time).format('dddd D - h A')
+              label = `${this.formatTime('date.long', time)} - ${this.formatTime('time.short', time)}`
               break 
             case 'indicator':
-              label = moment(time).format('h A')
+              label = this.formatTime('time.short', time)
               break 
           }
           return label
@@ -256,8 +256,7 @@ export default {
       }
     }
   },
-  beforeCreate () {
-    
+  beforeCreate () {   
   },
   created () {
     // Load the required components
