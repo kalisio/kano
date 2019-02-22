@@ -196,16 +196,33 @@ module.exports = {
       }
     },
     tooltip: {
-      showBackground : true,
-      backgroundColor: 'Cesium.Color.WHITE',
-      font : '14px monospace',
-      fillColor : 'Cesium.Color.BLACK',
-      outlineColor : 'Cesium.Color.BLACK',
-      horizontalOrigin : 'Cesium.HorizontalOrigin.LEFT',
-      verticalOrigin : 'Cesium.VerticalOrigin.CENTER',
-      pixelOffset : {
-        type: 'Cesium.Cartesian2',
-        options: [32, -32]
+      options: {
+        showBackground : true,
+        backgroundColor: 'Cesium.Color.WHITE',
+        font : '14px monospace',
+        fillColor : 'Cesium.Color.BLACK',
+        outlineColor : 'Cesium.Color.BLACK',
+        horizontalOrigin : 'Cesium.HorizontalOrigin.LEFT',
+        verticalOrigin : 'Cesium.VerticalOrigin.CENTER',
+        pixelOffset : {
+          type: 'Cesium.Cartesian2',
+          options: [32, -32]
+        }
+      }
+    },
+    popup: {
+      options: {
+        showBackground : true,
+        backgroundColor: 'Cesium.Color.WHITE',
+        font : '14px monospace',
+        fillColor : 'Cesium.Color.BLACK',
+        outlineColor : 'Cesium.Color.BLACK',
+        horizontalOrigin : 'Cesium.HorizontalOrigin.CENTER',
+        verticalOrigin : 'Cesium.VerticalOrigin.BOTTOM',
+        pixelOffset : {
+          type: 'Cesium.Cartesian2',
+          options: [0, -64]
+        }
       }
     },
     clusterStyle: {
