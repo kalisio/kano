@@ -104,11 +104,25 @@ export default {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()
     },
-    getVigicruesEntity (entity, options) {
-      const level = _.get(entity, 'properties.NivSituVigiCruEnt')
+    getVigicruesTooltip (entity, options) {
+      const properties = entity.properties
+      if (!properties) return
+      const level = properties.NivSituVigiCruEnt
       if (level > 1) {
-        // TODO: add tooltip
+        let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
+        content = '<b>' + content + '</b>'
+        return Object.assign({ show: true, html: content }, this.options.tooltip)
       }
+      /*
+      const H = properties.H
+      const Q = properties.Q
+      if (!_.isNil(H) || !_.isNil(Q)) {
+        let tooltip = L.tooltip({ permanent: false }, layer)
+        if (!_.isNil(H) && !_.isNil(Q)) return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
+        else if (!_.isNil(H)) return tooltip.setContent(`<b>${H.toFixed(2)} m`)
+        else if (!_.isNil(Q)) return tooltip.setContent(`<b>${Q.toFixed(2)} m3/h`)
+      }
+      */
       return null
     },
     onGlobeMoved () {
@@ -135,7 +149,7 @@ export default {
     }
   },
   created () {
-    this.registerCesiumStyle('entityStyle', this.getVigicruesEntity)
+    this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Enable the observers in order to refresh the layout
     this.observe = true
     // Required to get the access token from server

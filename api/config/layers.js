@@ -512,11 +512,11 @@ module.exports = [
       'icon-classes': 'fa fa-plane',
       popup: {
         pick: [
-          'NAME'
+          'name'
         ]
       },
       tooltip: {
-        property: 'LABEL'
+        property: 'iata_code'
       }
     },
     cesium: {
@@ -526,7 +526,15 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'airfield',
-      'marker-color': '#00A5FF'
+      'marker-color': '#00A5FF',
+      popup: {
+        pick: [
+          'name'
+        ]
+      },
+      tooltip: {
+        property: 'iata_code'
+      }
     }
   },
   {
@@ -630,7 +638,7 @@ module.exports = [
     name: 'Radar des précipitations',
     description: 'Cumuls de lames d\'eau estimés à partir de données radar (en mm/h) ',
     tags: [
-      'weather'
+      'measure'
     ],
     icon: 'beach_access',
     attribution: 'SYCAMORE © <a href="http://www.meteofrance.com">Météo-France</a>',

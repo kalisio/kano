@@ -320,7 +320,7 @@ export default {
           await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
         }
       } else if (options.service) {
-        await this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
+        await this.getMeasureForFeature(options, feature,
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
       }
       if (this.probedLocation) this.openTimeseries()
@@ -349,8 +349,6 @@ export default {
     },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
-      this.$store.patch('timeFormat', { locale: this.$store.get('timeFormat.locale') === 'en' ? 'fr' : 'en' })
-      this.$store.patch('timeFormat', { utc: this.$store.get('timeFormat.utc') ? false : true })
     },
     onResizeTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
@@ -421,10 +419,17 @@ export default {
       })
       return feature
     },
-    async getMeasureForFeature (layer, feature, elements, startTime, endTime) {
+    async getMeasureForFeature (layer, feature, startTime, endTime) {
       this.setMapCursor('processing-cursor')
       try {
-        let result = await this.$api.getService(layer.service).find({
+        let result = await this.getFeatures(Object.assign({
+          baseQuery: { ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId) }
+        }, layer), {
+          $gte: startTime.format(),
+          $lte: endTime.format()
+        })
+        /*
+        this.$api.getService(layer.service).find({
           query: {
             time: {
               $gte: startTime.format(),
@@ -435,6 +440,7 @@ export default {
             $aggregate: elements
           }
         })
+        */
         if (result.features.length > 0) this.probedLocation = result.features[0]
         else throw new Error('Cannot find valid measure for feature')
         this.createProbedLocationLayer()
@@ -568,7 +574,7 @@ export default {
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
-  async mounted () {
+  mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     this.$on('leaflet-layer-shown', this.onLayerShown)
     this.$on('leaflet-layer-hidden', this.onLayerHidden)

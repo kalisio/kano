@@ -195,6 +195,19 @@ module.exports = {
         clampToGround: true
       }
     },
+    tooltip: {
+      showBackground : true,
+      backgroundColor: 'Cesium.Color.WHITE',
+      font : '14px monospace',
+      fillColor : 'Cesium.Color.BLACK',
+      outlineColor : 'Cesium.Color.BLACK',
+      horizontalOrigin : 'Cesium.HorizontalOrigin.LEFT',
+      verticalOrigin : 'Cesium.VerticalOrigin.CENTER',
+      pixelOffset : {
+        type: 'Cesium.Cartesian2',
+        options: [32, -32]
+      }
+    },
     clusterStyle: {
       label: {
         show: true,
