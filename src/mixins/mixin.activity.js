@@ -82,6 +82,7 @@ export default {
       // Add supported actions
       if (layer.type === 'OverlayLayer') {
         layer.actions = [{
+          id: "zoomto",
           name: 'zoomTo',
           label: this.$t('Activity.ZOOM_TO_LABEL'),
           icon: 'zoom_out_map'

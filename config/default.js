@@ -43,7 +43,7 @@ module.exports = {
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
   apiTimeout: 20000,
-  transport: 'websocket', // Could be 'http' or 'websocket',
+  transport: 'http', // Could be 'http' or 'websocket',
   appName: 'Kano',
   appLogo: 'kano-icon-64x64.png',
   publisher: 'Kalisio',

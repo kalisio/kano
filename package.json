@@ -175,7 +175,7 @@
     "standard": "^10.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "testcafe": "^0.19.2",
+    "testcafe": "^1.0.1",
     "testcafe-vue-selectors": "^3.0.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
     "url-loader": "^0.5.7",

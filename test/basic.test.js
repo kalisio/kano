@@ -16,8 +16,21 @@ fixture`Basic`// declare the fixture
 
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
+const select = new pages.Selectdata()
 
 test('Login as default user', async test => {
   await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
+  
+
+ // await test.navigateTo("http://localhost:8080/#/home/map?south=39.07890809706475&west=-17.490234375000004&north=53.64463782485651&east=24.697265625000004")
+
+  await test.setTestSpeed(0.1)
+  
+  await select.openLeftPane(test)
+  await select.changeBusiness(test)
+  //await select.filldata(test)
+  await select.closeLeftPane(test)
+  await select.movemap(test, 1000, 5000)
+
   await auth.logOut(test)
 })

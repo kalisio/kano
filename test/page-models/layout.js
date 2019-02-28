@@ -9,7 +9,7 @@ export default class ApplicationLayout {
     this.appBarTitle = this.appBar.find('#app-bar-title')
     this.overflowMenuEntry = this.appBar.find('#overflow-menu-entry')
     this.overflowMenu = Selector('#overflow-menu')
-    this.SideNavToggle = this.appBar.find('#ap')
+    this.SideNavToggle = this.appBar.find('#ap') //this.SideNavToggle = Selector('#side-map-toggle')
     this.sideNav = VueSelector('k-side-nav')
     this.tabBar = VueSelector('k-tab-bar')
     this.fab = Selector('.q-fab')
@@ -25,12 +25,12 @@ export default class ApplicationLayout {
     return left >= 0
   }
   async openSideNav (test) {
-    let isSideNavVisible = await this.isSideNavVisible()
-    if (!isSideNavVisible) {
+    //let isSideNavVisible = await this.isSideNavVisible()
+    //if (!isSideNavVisible) {
       await test
         .click(this.sideNavToggle) // Ensure menu is open
         .wait(1000)
-    }
+   // }
   }
   async clickIdentity (test) {
     await this.openSideNav(test)

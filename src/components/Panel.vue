@@ -1,7 +1,7 @@
 <template>
   <div>
     <forecastmodels-panel v-if="forecastModels.length > 0" :forecastModels="forecastModels" :forecastModelHandlers="forecastModelHandlers" :forecastModel="forecastModel" />
-    <k-layers-panel :layers="layers" :layerHandlers="layerHandlers" :categories="layerCategories" />
+    <k-layers-panel :id='layer-c' :layers="layers" :layerHandlers="layerHandlers" :categories="layerCategories" />
   </div>
 </template>
 
