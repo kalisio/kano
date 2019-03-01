@@ -109,24 +109,24 @@ module.exports = [
     }
   },
   {
-    name: 'Mosaik',
-    description: 'Mosaik',
+    name: 'Mosaic',
+    description: 'Mosaic',
     tags: [
       'street',
       'imagery'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
     attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR`,
+      url: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },
@@ -417,6 +417,148 @@ module.exports = [
       },
       'marker-symbol': 'water',
       'marker-color': '#00a9ce'
+    }
+  },
+  {
+    name: 'OpenAQ',
+    description: 'Air Quality',
+    tags: [
+      'measure'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    service: 'openaq',
+    probeService: 'openaq',
+    featureId: 'location',
+    history: 604800,
+    variables: [
+      {
+        name: 'pm25',
+        label: 'Variables.PM25',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      },
+      {
+        name: 'pm10',
+        label: 'Variables.PM10',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(63, 63, 191, 128)',
+          borderColor: 'rgb(63, 63, 191)',
+          fill: false
+        }
+      },
+      {
+        name: 'co',
+        label: 'Variables.CO',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        }
+      },
+      {
+        name: 'no2',
+        label: 'Variables.NO2',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(81, 186, 153, 128)',
+          borderColor: 'rgb(81, 186, 153)',
+          fill: false
+        }
+      },
+      {
+        name: 'so2',
+        label: 'Variables.SO2',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(40, 44, 32, 128)',
+          borderColor: 'rgb(40, 44, 32)',
+          fill: false
+        }
+      },
+      {
+        name: 'o3',
+        label: 'Variables.O3',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(83, 134, 106, 128)',
+          borderColor: 'rgb(83, 134, 106)',
+          fill: false
+        }
+      },
+      {
+        name: 'bc',
+        label: 'Variables.BC',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(0, 0, 0, 128)',
+          borderColor: 'rgb(0, 0, 0)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      source: '/api/openaq',
+      realtime: true,
+      interval: 900000,
+      container: 'markerClusterGroup',
+      'marker-color': '#0B75A9',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-heartbeat',
+      popup: {
+        pick: [
+          'location'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.p35.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }\
+                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% } %>\
+                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% } %>\
+                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% } %>\
+                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% } %>\
+                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% } %>\
+                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>'
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      source: '/api/openaq',
+      realtime: true,
+      interval: 900000,
+      cluster: {
+        pixelRange: 50
+      },
+      'marker-symbol': 'air',
+      'marker-color': '#0B75A9'
     }
   },
   {
