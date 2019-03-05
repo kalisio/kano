@@ -2,7 +2,7 @@
   "REMOVE_LABEL": "Supprimer",
   "schemas": {
     "ACTIVITY_LOCATION_FIELD_HELPER": "Entrez une addresse",
-    "UPDATE_SETTINGS_TITLE": "Mettre à jour vos paramètres",
+    "UPDATE_SETTINGS_TITLE": "Vos paramètres",
     "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "Format d'heure abrégé <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
     "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "Format d'heure complet <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
     "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "Format de jour abrégé <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",

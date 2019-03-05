@@ -17,8 +17,6 @@
       ref="editor" 
       service="settings"
       objectId="settings"
-      :route="false"
-      @closed="onSettingsClosed"
       @applied="onSettingsEdited" />
   </div>
 </template>
@@ -37,13 +35,10 @@ export default {
   },
   methods: {
     editSettings () {
-      this.$refs.editor.open()
-    },
-    onSettingsClosed () {
-      this.sideNav.layout.hideCurrentSide()
+      this.sideNav.layout.hideCurrentSide(() => this.$refs.editor.open())
     },
     onSettingsEdited () {
-      this.$refs.editor.close(() => this.sideNav.layout.hideCurrentSide())
+      this.$refs.editor.close()
     }
   },
   created () {
