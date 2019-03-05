@@ -429,7 +429,6 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     service: 'openaq',
-    probeService: 'openaq',
     featureId: 'location',
     history: 604800,
     variables: [
@@ -523,6 +522,7 @@ module.exports = [
       source: '/api/openaq',
       realtime: true,
       interval: 900000,
+      queryInterval: 86400000,
       container: 'markerClusterGroup',
       'marker-color': '#0B75A9',
       'icon-color': 'white',
@@ -536,15 +536,15 @@ module.exports = [
         template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.p35.toFixed(2) %> µg/m³<% }\
                    if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }\
                    if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
-                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% } %>\
+                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }\
                    if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% } %>\
+                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% }\
                    if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% } %>\
+                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% }\
                    if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% } %>\
+                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% }\
                    if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% } %>\
+                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% }\
                    if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }\
                    if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>'
       }
@@ -554,6 +554,7 @@ module.exports = [
       source: '/api/openaq',
       realtime: true,
       interval: 900000,
+      queryInterval: 86400000,
       cluster: {
         pixelRange: 50
       },
