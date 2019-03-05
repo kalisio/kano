@@ -533,7 +533,7 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.p35.toFixed(2) %> µg/m³<% }\
+        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
                    if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }\
                    if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
                    if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }\
