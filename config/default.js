@@ -75,14 +75,20 @@ module.exports = {
   sideNav: {
     banner: 'kano-logo-black-256x84.png',
     components: {
-      user_actions: 'layout/KLinksPanel'
+      user_actions: 'layout/KLinksPanel',
+      app_settings: 'Settings',
+      app_logout: 'layout/KLinksPanel'
     }
   },
   user_actions: {
     links: [
       { }, // separator
       { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map', query: true } },
-      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } },
+      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } }
+    ]
+  },
+  app_logout: {
+    links: [
       { }, // separator
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]

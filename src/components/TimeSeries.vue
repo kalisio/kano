@@ -169,9 +169,9 @@ export default {
       this.setupAvailableYAxes()
 
       const date = _.get(this.currentFormattedTime, 'date.short')
-      const time = _.get(this.currentFormattedTime, 'time.long')
+      const time = _.get(this.currentFormattedTime, 'time.short')
       const dateFormat = _.get(this.currentTimeFormat, 'date.short')
-      const timeFormat = _.get(this.currentTimeFormat, 'time.long')
+      const timeFormat = _.get(this.currentTimeFormat, 'time.short')
 
       this.config = {
         type: 'line',

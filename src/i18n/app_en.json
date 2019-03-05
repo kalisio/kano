@@ -1,7 +1,15 @@
 {
   "REMOVE_LABEL": "Remove",
   "schemas": {
-    "ACTIVITY_LOCATION_FIELD_HELPER": "Enter an address"
+    "ACTIVITY_LOCATION_FIELD_HELPER": "Enter an address",
+    "UPDATE_SETTINGS_TITLE": "Update your settings",
+    "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "Short time format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "Long time format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "Short date format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_DATE_FIELD_HELPER": "Long date format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "Short year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "Long year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_UTC_FIELD_HELPER": "UTC time display mode"
   },
   "screen": {
     "ABOUT_KALISIO": "About",
@@ -11,6 +19,7 @@
   "sideNav": {
     "MAP": "2D View",
     "GLOBE": "3D View",
+    "SETTINGS": "Settings",
     "LOGOUT": "Se déconnecter"
   },
   "Index": {

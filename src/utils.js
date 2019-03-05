@@ -22,7 +22,11 @@ function loadComponent (component) {
 function loadSchema (schema) {
   return import(`@kalisio/kdk-core/lib/common/schemas/${schema}.json`)
     .catch(errorCore => {
-      console.log(errorCore)
+      // Otherwise this should be app component
+      return import(`./schemas/${schema}.json`)
+      .catch(errorApp => {
+        console.log(errorCore, errorApp)
+      })
     })
 }
 
@@ -67,13 +71,14 @@ function getEmbedComponent(route) {
 async function callEmbedMethod(route, data) {
   // The event payload contains the name of the method to be called as well as its arguments
   const method = (data ? data.command : undefined)
+  let result
   if (method) {
     let component = getEmbedComponent(route)
     if (component && (typeof component[method] === 'function')) {
-      if (Array.isArray(data.args)) return await component[method](...data.args)
-      else return await component[method](data.args)
+      result = (Array.isArray(data.args) ? await component[method](...data.args) : await component[method](data.args))
     }
   }
+  return result
 }
 
 // Setup post-robot event listenr to call component methods on this route from an external domain
@@ -92,13 +97,17 @@ function setupEmbedApi(routeName, component) {
       router.push({ name: routeName, query: Object.assign({}, route.query) }, () => {
         //Vue.nextTick(() => callEmbedMethod(router.currentRoute, data))
       })
-      result = await new Promise((resolve, reject) => {
-        const unwatch = component.$parent.$watch('$route', () => {
-          // Unwatch immediately
-          unwatch()
-          resolve(callEmbedMethod(router.currentRoute, data))
+      if (component) {
+        result = await new Promise((resolve, reject) => {
+          const unwatch = component.$parent.$watch('$route', () => {
+            // Unwatch immediately
+            unwatch()
+            resolve(callEmbedMethod(router.currentRoute, data))
+          })
         })
-      })
+      } else {
+        throw new Error('Embedded Kano application received a command while not yet ready')
+      }
     } else {
       result = await callEmbedMethod(route, data)
     }
