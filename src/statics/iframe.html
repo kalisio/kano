@@ -11,20 +11,67 @@
     <script src="./post-robot.min.js"></script>
     <script>
       var layerIsShown = false
-      function toggleLayer(name) {
-        postRobot.send(kano.contentWindow, 'map', { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
+      function toggleStaticLayer(name) {
+        postRobot.send(kano, 'map', { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
         .then(function () {
           layerIsShown = !layerIsShown
-          if (layerIsShown) postRobot.send(kano.contentWindow, 'map', { command: 'zoomToLayer', args: name })
+          if (layerIsShown) postRobot.send(kano, 'map', { command: 'zoomToLayer', args: name })
         })
       }
       function toggleBackground() {
-        postRobot.send(kano.contentWindow, 'map', { command: 'isLayerVisible', args: 'Sentinel 2' })
+        postRobot.send(kano, 'map', { command: 'isLayerVisible', args: 'Sentinel 2' })
         .then(function (result) {
           // Switch between Satellite/OSM
-          postRobot.send(kano.contentWindow, 'map', { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'Sentinel 2') })
-          postRobot.send(kano.contentWindow, 'map', { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'Sentinel 2') })
+          postRobot.send(kano, 'map', { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'Sentinel 2') })
+          postRobot.send(kano, 'map', { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'Sentinel 2') })
         })
+      }
+      function toggleDynamicLayer(name) {
+        postRobot.send(kano, 'map', { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            postRobot.send(kano, 'map', { command: 'removeLayer', args: name })
+          } else {
+            postRobot.send(kano, 'map', { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'insert_drive_file',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                start: false,
+                isVisible: true,
+                'icon-html': '<svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg>',
+                'icon-class': ''
+              }
+            }})
+            .then(function () { updateDynamicLayer(name) })
+            .then(function () { postRobot.send(kano, 'map', { command: 'zoomToLayer', args: [name, { maxZoom: 12 }] }) })
+          }
+        })
+      }
+      function updateDynamicLayer(name) {
+        const long = 1.444209 + 0.5 * (Math.random() - 0.5)
+        const lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        const alt = 8519.16 + 1000 * (Math.random() - 0.5)
+        const geoJson = {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": {
+                "callsign": "AIB03KM",
+                "track": 111
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [long, lat, alt]
+              }
+            }
+            ]
+        }
+        postRobot.send(kano, 'map', { command: 'updateLayer', args: [name, geoJson] })
+        .then(function () { postRobot.send(kano, 'map', { command: 'center', args: [long, lat, 12] }) })
       }
     </script>
   </head>
@@ -37,7 +84,9 @@
       <tr>
         <td style="text-align:center;">
           <button type="button" onclick="toggleBackground()">Switch background</button></br>
-          <button type="button" onclick="toggleLayer('Airports')">Switch airports</button>
+          <button type="button" onclick="toggleStaticLayer('Airports')">Switch airports</button></br>
+          <button type="button" onclick="toggleDynamicLayer('Aircraft')">Switch aircraft</button></br>
+          <button type="button" onclick="updateDynamicLayer('Aircraft')">Update aircraft</button></br>
         </td>
         <td>
           <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="http://localhost:8080/">
@@ -47,7 +96,7 @@
       </tbody>
     </table>
     <script>
-      var kano = document.getElementById('kano')
+      var kano = document.getElementById('kano').contentWindow
       /*
       setTimeout(function () {
         postRobot.send(kano.contentWindow, 'getLayer', { name: 'Airports' })
