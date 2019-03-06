@@ -65,10 +65,23 @@ module.exports = {
   */
   apiPath: API_PREFIX,
   helmet: {
+    /* X-Frame-Options is limited to a single domain,
+    // which is not easy to use in dev mode, best to rely on Content-Security-Policy
     frameguard: {
       action: 'allow-from',
       domain: 'http://localhost'
     }
+    */
+    contentSecurityPolicy: {
+      directives: {
+        frameAncestors: [
+          'http://localhost:*',
+          'https://*.kalisio.xyz',
+          'https://*.kalisio.com'
+        ]
+      }
+    },
+    frameguard: false
   },
   paginate: {
     default: 10,
