@@ -139,7 +139,6 @@ module.exports = {
     // Default GeoJSON layer style for polygons/lines
     featureStyle: {
       opacity: 1,
-      radius: 6,
       color: 'red',
       fillOpacity: 0.5,
       fillColor: 'green'
@@ -148,10 +147,11 @@ module.exports = {
     pointStyle: {
       type: 'circleMarker',
       options: {
-        opacity: 1,
-        color: 'red',
-        fillOpacity: 0.5,
-        fillColor: 'green'
+        radius: 6,
+        'stroke': 'red',
+        'stroke-opacity': 1,
+        'fill-opacity': 0.5,
+        'fill-color': 'green'
       }
     },
     // Default GeoJSON popup will display all properties
@@ -187,7 +187,7 @@ module.exports = {
       'marker-symbol': 'marker',
       'marker-color': '#57D824',
       'stroke': '#FF0000',
-      'fill': '#00FF00'
+      'fill-color': '#00FF00'
     },
     entityStyle: {
       billboard: {
