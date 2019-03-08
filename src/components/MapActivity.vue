@@ -204,9 +204,6 @@ export default {
       this.map.off('moveend', this.onMapMoved)
     },
     async refreshActivity () {  
-      // Wait until viewer is ready
-      await this.initializeViewer()
-      if (!this.map) return
       this.clearActivity()
       // Setup the right pane
       this.setRightPanelContent('Panel', this.$data)
@@ -215,6 +212,8 @@ export default {
       this.registerFabAction({
         name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onWeatherForLocation
       })
+      // Wait until viewer is ready
+      await this.initializeViewer()
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
