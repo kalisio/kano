@@ -108,10 +108,11 @@ export default {
         message: this.$t('Activity.REMOVE_DIALOG_MESSAGE', { layer: layer.name }),
         buttons: [
           {
-            label: 'Ok',
+            label: this.$t('OK'),
             handler: () => { this.removeLayer(layer.name) }
-          },
-          'Cancel'
+          }, {
+            label: this.$t('CANCEL')
+          }
         ]
       })
     },
