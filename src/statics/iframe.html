@@ -12,6 +12,29 @@
     <script>
       var layerIsShown = false
       var component = 'map'
+
+      function getGeoJsonAircraftFeature () {
+        const long = 1.444209 + 0.5 * (Math.random() - 0.5)
+        const lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        const alt = 8519.16 + 1000 * (Math.random() - 0.5)
+        const track = 360 * Math.random()
+        return {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {
+                callsign: 'AIB03KM',
+                track: track
+              },
+              geometry: {
+                type: 'Point',
+                coordinates: [long, lat, alt]
+              }
+            }
+          ]
+        }
+      }
       function toggleGlobe() {
         component = (component === 'globe' ? 'map' : 'globe')
         postRobot.send(kano, component)
@@ -51,7 +74,13 @@
                 'icon-anchor': [16, 16],
                 'marker-size': 32,
                 'icon-class': '',
-                templateStyle: true
+                template: ['icon-html'],
+                popup: {
+                  template: '<%= properties.callsign %>'
+                },
+                tooltip: {
+                  template: '<%= properties.callsign %>'
+                }
               },
               cesium: {
                 type: 'geoJson',
@@ -59,35 +88,32 @@
                 start: false,
                 isVisible: true,
                 'marker-symbol': 'airport',
-                'marker-color': '#57D824'
+                'marker-color': '#57D824',
+                entityStyle: {
+                  model: {
+                    type: 'Cesium.ModelGraphics',
+                    options: {
+                      uri: '/statics/a320.glb',
+                      minimumPixelSize: 64
+                    }
+                  }
+                },
+                popup: {
+                  template: '<%= properties.callsign %>'
+                },
+                tooltip: {
+                  template: '<%= properties.callsign %>'
+                }
               }
             }})
             .then(function () { updateDynamicLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: [name, { maxZoom: 12 }] }) })
           }
         })
       }
       function updateDynamicLayer(name) {
-        const long = 1.444209 + 0.5 * (Math.random() - 0.5)
-        const lat = 43.604652 + 0.5 * (Math.random() - 0.5)
-        const alt = 8519.16 + 1000 * (Math.random() - 0.5)
-        const track = 360 * Math.random()
-        const geoJson = {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: {
-                callsign: 'AIB03KM',
-                track: track
-              },
-              geometry: {
-                type: 'Point',
-                coordinates: [long, lat, alt]
-              }
-            }
-            ]
-        }
+        const geoJson = getGeoJsonAircraftFeature()
+        const long = geoJson.features[0].geometry.coordinates[0]
+        const lat = geoJson.features[0].geometry.coordinates[1]
         postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
         .then(function () {
           postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
