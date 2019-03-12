@@ -49,7 +49,7 @@
 
     <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
         <k-time-controller
-          v-if="forecastModel"
+          v-if="timeControllerEnabled"
           :key="timeControllerRefreshKey"
           :min="timeLine.start" 
           :max="timeLine.end"
@@ -142,6 +142,12 @@ export default {
       return {
         width: 0.8 * this.mapWidth + 'px'
       }
+    },
+    timeControllerEnabled () {
+      // For now only weather forecast requires timeline
+      return this.forecastModel &&
+        (_.values(this.layers).find(layer => layer.isVisible && layer.tags && layer.tags.includes('weather')) ||
+          this.isTimeseriesOpen())
     },
     colorLegendStyle () {
       return {
@@ -488,6 +494,8 @@ export default {
     },
     openTimeseries () {
       this.$refs.widget.open()
+      // Minimized widget is 40vw, if we have a small zie open wide directly (eg on mobile)
+      if (0.4 * this.mapWidth < 500) this.$refs.widget.setMode('maximized')
     },
     closeTimeseries () {
       this.$refs.widget.close()
