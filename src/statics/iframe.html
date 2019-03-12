@@ -47,11 +47,11 @@
         })
       }
       function toggleBackground() {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: 'Sentinel 2' })
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: 'OSM Dark' })
         .then(function (result) {
           // Switch between Satellite/OSM
-          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'Sentinel 2') })
-          postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'Sentinel 2') })
+          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'OSM Dark') })
+          postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
         })
       }
       function toggleDynamicLayer(name) {
