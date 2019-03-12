@@ -6,6 +6,7 @@ import logger from 'loglevel'
 import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
+import postRobot from 'post-robot'
 import Quasar from 'quasar'
 import router from './router'
 import appHooks from './main.hooks'
@@ -35,6 +36,16 @@ require(`./themes/app.${__THEME}.styl`)
 if (__THEME === 'mat') {
   require('quasar-extras/roboto-font')
 }
+
+postRobot.on('getLocalStorage', async (event) => {
+  return {
+    setItems: function (values) {
+      _.forOwn(values, (value, key) => {
+        window.localStorage.setItem(key, (typeof value === 'object' ? JSON.stringify(value) : value))
+      })
+    }
+  }
+})
 
 let api = kalisio()
 

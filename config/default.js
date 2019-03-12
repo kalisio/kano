@@ -42,7 +42,8 @@ module.exports = {
   version: require('../package.json').version,
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
-  apiTimeout: 20000,
+  apiJwt: 'kano-jwt',
+  apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'Kano',
   appLogo: 'kano-icon-64x64.png',
@@ -95,30 +96,30 @@ module.exports = {
   },
   mapPanel: {
     categories: [
+      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
+        options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
-        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
-      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
       { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
-        options: { exclusive: true, filter: { type: 'BaseLayer' } } }
+      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
+      { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
+        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
     ]
   },
   globePanel: {
     categories: [
-      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'TerrainLayers', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain',
-        options: { exclusive: true, filter: { type: 'TerrainLayer' } } }
+        options: { exclusive: true, filter: { type: 'TerrainLayer' } } },
+      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
+      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
+      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
     ]
   },
   weacast: {

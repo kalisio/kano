@@ -144,15 +144,13 @@
     </table>
     <script>
       var kano = document.getElementById('kano').contentWindow
-      /* basic integration test
-      setTimeout(function () {
-        postRobot.send(kano, 'getLayer', { name: 'Airports' })
-        .then(function(event) {
-          var layer = event.data
-          layer.show()
+      postRobot.send(kano, 'getLocalStorage')
+      .then(function(event) {
+        let localStorage = event.data
+        localStorage.setItems({
+          'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
         })
-      }, 10000)
-      */
+      })
     </script>
   </body>
 </html>

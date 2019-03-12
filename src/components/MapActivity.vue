@@ -515,10 +515,14 @@ export default {
       this.weacastApi = weacast(config)
       // Setup app hooks
       this.weacastApi.hooks(appHooks)
+      // Ensure we also logout from weacast on app logout
+      this.$api.on('logout', () => this.weacastApi.logout())
       try {
         // Transfer app token to Weacast
         const accessToken = await this.$api.passport.getJWT()
-        await this.weacastApi.authenticate({ strategy: 'jwt', accessToken })
+        const weacastAccessToken = await this.weacastApi.passport.getJWT()
+        if (weacastAccessToken) await this.weacastApi.authenticate()
+        else await this.weacastApi.authenticate({ strategy: 'jwt', accessToken })
         this.setupForecastModels()
       } catch(error) {
         logger.error('Cannot initialize weacast API', error)

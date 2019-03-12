@@ -43,7 +43,8 @@ export default {
     this.user = this.$store.get('user')
   },
   mounted () {
-    this.restoreSession()
+    setTimeout(() => {
+      this.restoreSession()
       .then(user => {
         this.user = user
         Toast.create.positive('Restoring previous session')
@@ -54,6 +55,7 @@ export default {
         // Check if we need to redirect based on the fact there is no authenticated user
         this.redirect()
       })
+    }, 1000)
 
     Events.$on('user-changed', user => {
       this.user = user
