@@ -1,8 +1,6 @@
 import _ from 'lodash'
 import logger from 'loglevel'
 import moment from 'moment'
-import postRobot from 'post-robot'
-import Cesium from 'cesium/Source/Cesium.js'
 import { Events, Dialog } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 
@@ -116,6 +114,9 @@ export default {
         ]
       })
     },
+    onForecastModelSelected (model) {
+      this.forecastModel = model
+    },
     onMapReady () {
       this.engine = 'leaflet'
     },
@@ -153,15 +154,13 @@ export default {
       const position = this.$store.get('user.position')
       // 3D or 2D centering ?
       if (position) {
-        if (this.viewer) this.center(position.longitude, position.latitude, 10000)
-        else if (this.map) this.center(position.longitude, position.latitude)
+        this.center(position.longitude, position.latitude)
       }
     },
     async initializeView () {
       if (this.$route.query.south) {
         const bounds= [ [this.$route.query.south, this.$route.query.west], [this.$route.query.north, this.$route.query.east] ]
-        if (this.viewer) this.viewer.camera.flyTo({ duration: 0, destination : Cesium.Rectangle.fromDegrees(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0]) })
-        else if (this.map) this.map.fitBounds(bounds)
+        this.zoomToBounds(bounds)
       } else {
         if (this.$store.get('user.position')) this.geolocate()
       }
@@ -175,7 +174,7 @@ export default {
       // Retrieve the forecast models
       if (this.setupWeacast) {
         try {
-          await this.setupWeacast()
+          await this.setupWeacast(this.$config('weacast'))
         } catch (error) {
           logger.error(error)
         }
@@ -185,6 +184,38 @@ export default {
       }
       // TimeLine
       if (this.setupTimeline) this.setupTimeline()
+    },
+    async createProbedLocationLayer () {
+      if (!this.probedLocation) return
+      const name = this.$t('MapActivity.PROBED_LOCATION')
+      // Use wind barbs on weather probed features
+      const isWeatherProbe = (_.has(this.probedLocation, 'properties.windDirection') &&
+                              _.has(this.probedLocation, 'properties.windSpeed'))
+      // Get any previous layer or create it the first time
+      let layer = this.getLayerByName(name)
+      if (!layer) {
+        await this.addLayer({
+          name,
+          type: 'OverlayLayer',
+          icon: 'colorize',
+          leaflet: {
+            type: 'geoJson',
+            isVisible: true,
+            realtime: true,
+            start: false
+          },
+          cesium: {
+            type: 'geoJson',
+            isVisible: true,
+            realtime: true,
+            start: false
+          }
+        })
+      }
+      // Update data
+      this.updateLayer(name, isWeatherProbe ?
+        this.getProbedLocationForecastAtCurrentTime() :
+        this.getProbedLocationMeasureAtCurrentTime())
     },
     getTimeLineInterval () {
       // interval length: length of 1 day in milliseconds
@@ -263,14 +294,6 @@ export default {
     // Load the required components
     this.$options.components['k-modal'] = this.$load('frame/KModal')
     this.$options.components['k-form'] = this.$load('form/KForm')
-    /* Cross-window test */
-    this.getLayerListener = postRobot.on('getLayer', (event) => {
-      const data = event.data
-      return {
-        hide: () => this.hideLayer(data.name),
-        show: () => this.showLayer(data.name)
-      }
-    })
   },
   mounted () {
     this.$on('map-ready', this.onMapReady)
@@ -283,6 +306,5 @@ export default {
     this.$off('globe-ready', this.onGlobeReady)
     this.$off('layer-added', this.onLayerAdded)
     Events.$off('user-position-changed', this.geolocate)
-    this.getLayerListener.cancel()
   }
 }
