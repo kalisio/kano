@@ -38,25 +38,11 @@
   "TimeSeries": {
     "PROBE": "Probe"
   },
-  "Activity": {
+  "MapActivity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
     "VIGICRUES_LEVEL_2": "Flood risk",
     "VIGICRUES_LEVEL_3": "Important flood risk",
-    "VIGICRUES_LEVEL_4": "Major flood risk",
-    "REMOVE_LABEL": "$t(REMOVE_LABEL)",
-    "REMOVE_DIALOG_TITLE": "Remove {{layer}} ?",
-    "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?",
-    "ZOOM_TO_LABEL": "Zoom to",
-    "TOGGLE_FULLSCREEN": "Fullscreen",
-    "GEOLOCATE": "My position",
-    "GEOCODE": "Find",
-    "GEOCODING": "Find a location",
-    "GEOCODE_BUTTON": "Geocode",
-    "CLOSE_GEOCODING_ACTION": "Close"
-  },
-  "MapActivity": {
-    "PROBE": "Probe",
-    "PROBED_LOCATION": "Probe"
+    "VIGICRUES_LEVEL_4": "Major flood risk"
   },
   "GlobeActivity": {
     "TOGGLE_VR": "VR"
@@ -71,8 +57,5 @@
   },
   "ForecastModelsPanel": {
     "LABEL": "Forecast models"
-  },
-  "ColorLegend": {
-    "CONVERT_UNITS": "{{layer}}: convert to {{unit}}"
   }
 }

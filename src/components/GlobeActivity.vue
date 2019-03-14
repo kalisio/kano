@@ -39,7 +39,6 @@ import Cesium from 'cesium/Source/Cesium.js'
 import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
-import mixins from '../mixins'
 
 const { offset } = dom
 
@@ -56,10 +55,10 @@ export default {
     kMapMixins.geolocation,
     kMapMixins.featureService,
     kMapMixins.time,
+    kMapMixins.activity,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
-    kMapMixins.globe.fileLayers,
-    mixins.activity
+    kMapMixins.globe.fileLayers
   ],
   inject: ['layout'],
   data () {

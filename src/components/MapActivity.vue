@@ -86,7 +86,6 @@ import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
-import mixins from '../mixins'
 
 const { offset } = dom
 
@@ -106,13 +105,13 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.activity,
+    kMapMixins.legend,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
     kMapMixins.map.fileLayers,
-    kMapMixins.map.geotiffLayers,
-    mixins.activity,
-    mixins.legend    
+    kMapMixins.map.geotiffLayers
   ],
   inject: ['layout'],
   data () {
@@ -216,10 +215,6 @@ export default {
       // Setup the right pane
       this.setRightPanelContent('Panel', this.$data)
       this.registerActivityActions()
-      // FAB
-      this.registerFabAction({
-        name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onWeatherForLocation
-      })
       // Wait until viewer is ready
       await this.initializeViewer()
     },
@@ -290,7 +285,7 @@ export default {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
+        let content = this.$t('MapActivity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
       }
       const H = _.get(feature, 'properties.H')
@@ -359,22 +354,22 @@ export default {
     onResizeTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
     },
-    onLayerShown (event) {
+    onLayerShown (layer) {
       // Show timeseries on probed location
-      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+      if (layer.name === this.$t('mixins.activity.PROBED_LOCATION')) {
         if (!this.isTimeseriesOpen()) {
           this.openTimeseries()
           this.center(...this.probedLocation.geometry.coordinates)
         }
       }
     },
-    onLayerHidden (event) {
+    onLayerHidden (layer) {
       // Hide timeseries on probed location
-      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+      if (layer.name === this.$t('mixins.activity.PROBED_LOCATION')) {
         if (this.isTimeseriesOpen()) this.closeTimeseries()
       }
     },
-    onWeatherForLocation () {
+    onProbeLocation () {
       let probe = async (event) => {
         this.unsetCursor('probe-cursor')
         this.map.off('click', probe)
@@ -462,8 +457,8 @@ export default {
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
-    this.$on('leaflet-layer-shown', this.onLayerShown)
-    this.$on('leaflet-layer-hidden', this.onLayerHidden)
+    this.$on('layer-shown', this.onLayerShown)
+    this.$on('layer-hidden', this.onLayerHidden)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
@@ -471,8 +466,8 @@ export default {
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
-    this.$off('leaflet-layer-shown', this.onLayerShown)
-    this.$off('leaflet-layer-hidden', this.onLayerHidden)
+    this.$off('layer-shown', this.onLayerShown)
+    this.$off('layer-hidden', this.onLayerHidden)
     // No need to refresh the layout when leaving the component
     this.observe = false
     //this.removeCollectionLayer('Actors')
