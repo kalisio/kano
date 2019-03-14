@@ -107,9 +107,7 @@ export default {
       if (!properties) return
       const level = properties.NivSituVigiCruEnt
       if (level > 1) {
-        let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
-        content = '<b>' + content + '</b>'
-        return Object.assign({ show: true, html: content }, this.options.tooltip)
+        return Object.assign({ show: false, text: this.$t('MapActivity.VIGICRUES_LEVEL_' + level) }, this.options.tooltip)
       }
       /*
       const H = properties.H

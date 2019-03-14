@@ -344,7 +344,12 @@ module.exports = [
       type: 'geoJson',
       source: '/api/vigicrues-sections',
       realtime: true,
-      interval: 900000
+      interval: 900000,
+      popup: {
+        pick: [
+          'NomEntVigiCru'
+        ]
+      }
     }
   },
   {
@@ -416,7 +421,16 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'water',
-      'marker-color': '#00a9ce'
+      'marker-color': '#00a9ce',
+      popup: {
+        pick: [
+          'LbStationHydro'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
+      }
     }
   },
   {
@@ -559,7 +573,21 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'air',
-      'marker-color': '#0B75A9'
+      'marker-color': '#0B75A9',
+      popup: {
+        pick: [
+          'location'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
+                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
+                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
+                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
+                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
+                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
+                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% } %>'
+      }
     }
   },
   {
@@ -597,7 +625,16 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'lighthouse',
-      'marker-color': '#180EF1'
+      'marker-color': '#180EF1',
+      popup: {
+        pick: [
+          'name'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n\
+                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
+      }
     }
   },
   {
@@ -633,7 +670,15 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'star',
-      'marker-color': '#FFA500'
+      'marker-color': '#FFA500',
+      popup: {
+        pick: [
+          'NAME'
+        ]
+      },
+      tooltip: {
+        property: 'LABEL'
+      }
     }
   },
   {
@@ -712,7 +757,10 @@ module.exports = [
       interval: 5000,
       'marker-symbol': 'airport',
       'marker-color': '#57D824',
-      popup: {}
+      popup: {},
+      tooltip: {
+        property: 'callsign'
+      }
     }
   },
   {

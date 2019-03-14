@@ -370,15 +370,14 @@ export default {
       }
     },
     onProbeLocation () {
-      let probe = async (event) => {
+      let probe = async (options, event) => {
         this.unsetCursor('probe-cursor')
-        this.map.off('click', probe)
         await this.getForecastForLocation(event.latlng.lng, event.latlng.lat,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
         this.openTimeseries()
       }
       this.setCursor('probe-cursor')
-      this.map.on('click', probe)
+      this.$once('click', probe)
     },
     isTimeseriesOpen () {
       return this.$refs.widget.isOpen()
