@@ -1,48 +1,52 @@
 #!/bin/bash
-export APP=kano
-export HOST=kano
-export PORT=8081
-export DOMAIN=kalisio.xyz
-export VERSION=$(node -p -e "require('./package.json').version")
-
 if [[ $TRAVIS_BRANCH == "master" ]]
 then
-	export DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 	export FLAVOR=dev
-	export SUBDOMAIN=dev.$DOMAIN
-	export VERSION_TAG=$VERSION-dev
 fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
-	export DEBUG=
 	export FLAVOR=test
-	export SUBDOMAIN=test.$DOMAIN
-	export VERSION_TAG=$VERSION-test
 fi
 if [[ -n "$TRAVIS_TAG" ]]
 then
-	export DEBUG=
 	export FLAVOR=prod
-	export SUBDOMAIN=$DOMAIN
-	export VERSION_TAG=$VERSION
 fi
 
-export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
-export NODE_APP_INSTANCE=$FLAVOR
+# Exports addtionnal variables
+export VERSION=$(node -p -e "require('./package.json').version")
+export BUILDS_BUCKET=$APP-builds
 
-echo "APP=$APP" > .env
-echo "COMPOSE_PROJECT_NAME=$APP" >> .env 
-echo "DEBUG=$DEBUG" >> .env
-echo "FLAVOR=$FLAVOR" >> .env
+# Retrieve the environment variables stored in the workspace
+echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
+git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
+cp workspace/common/.env .env
+if [ -f workspace/$FLAVOR/.env ]
+then
+  echo merging $FLAVOR/.env file with common .env
+	cat workspace/$FLAVOR/.env >> .env
+fi
+
+# Add computed variables
+echo "APP=$APP" >> .env
+echo "COMPOSE_PROJECT_NAME=$APP" >> .env
 echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
 echo "VERSION=$VERSION" >> .env
-echo "VERSION_TAG=$VERSION_TAG" >> .env
-echo "DOMAIN=$DOMAIN" >> .env
-echo "SUBDOMAIN=$SUBDOMAIN" >> .env
-echo "HOST"=$HOST >> .env
-echo "PORT=$PORT" >> .env
-echo "DOCKER_NETWORK=$DOCKER_NETWORK" >> .env
+echo "VERSION_TAG=$VERSION-$FLAVOR" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
-echo "APP_SECRET=$APP_SECRET" >> .env
-echo "DB_URL=$DB_URL" >> .env
-echo "CESIUM_TOKEN=$CESIUM_TOKEN" >> .env
+
+set -a
+. .env
+set +a
+
+# Retrieve ci environement variables
+cp workspace/common/.travis.env .travis.env
+if [ -f workspace/$FLAVOR/.travis.env ]
+then
+  echo merging $FLAVOR/.travis.env with common .travis.env
+	cat workspace/$FLAVOR/.travis.env >> .travis.env
+fi
+
+set -a
+. .travis.env
+set +a
+

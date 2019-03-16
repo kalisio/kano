@@ -10,28 +10,23 @@ stages:
 - name: BUILD
 - name: TEST
 - name: DEPLOY
+
 jobs:
   include:
 
   - stage: BUILD
+    os: linux
     language: node_js
     node_js:
     - '8'
     services:
     - docker
-    install: true
+    install:
+    - pip install --user awscli
+    before_script:
+    - export -f travis_fold
     script:
     - bash .travis.build.sh
-    deploy:
-      skip_cleanup: true
-      provider: s3
-      access_key_id: "$S3_ACCESS_KEY"
-      secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kano-builds
-      local_dir: dist
-      upload_dir: "$TRAVIS_BUILD_NUMBER/dist"
-      on:
-        all_branches: true
 
   - stage: TEST
     language: node_js
@@ -43,44 +38,22 @@ jobs:
       code_climate:
         repo_token: 30d4aec026718918864f0293f71801bef5922e57200e1901e174e1bde1562fcc
     install:
+    - pip install --user awscli
     - npm install -g codeclimate-test-reporter
+    before_script:
+    - export -f travis_fold
     script:
     - bash .travis.test.sh
-    after_script:
-    - codeclimate-test-reporter < server-coverage/lcov.info
-    deploy:
-    - provider: s3
-      skip_cleanup: true
-      access_key_id: "$S3_ACCESS_KEY"
-      secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kano-builds
-      local_dir: server-coverage
-      upload_dir: "$TRAVIS_BUILD_NUMBER/server-tests/coverage"
-      on:
-        all_branches: true
-    - provider: s3
-      skip_cleanup: true
-      access_key_id: "$S3_ACCESS_KEY"
-      secret_access_key: "$S3_SECRET_ACCESS_KEY"
-      bucket: kano-builds
-      local_dir: client-screenshots
-      upload_dir: "$TRAVIS_BUILD_NUMBER/client-tests/screenshots"
-      on:
-        all_branches: true
 
   - stage: DEPLOY
+    os: linux
     language: node_js
     node_js:
     - '8'
     services:
     - docker
     install: true
+    before_script:
+    - export -f travis_fold      
     script:
-    - openssl aes-256-cbc -K $encrypted_12c8071d2874_key -iv $encrypted_12c8071d2874_iv -in secrets.tar.enc -out secrets.tar -d
-    - tar xvf secrets.tar
-    deploy:
-      provider: script
-      skip_cleanup: true
-      script: bash .travis.deploy.sh
-      on:
-        all_branches: true
+    - bash .travis.deploy.sh
