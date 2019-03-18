@@ -2,10 +2,8 @@ version: '3.3'
 
 services:
   app:
-    environment:
-      - DEBUG=${DEBUG}
     deploy:
-      replicas: 1
+      replicas: ${REPLICAS:-1}
       placement:
         constraints:
          - node.role == worker
