@@ -65,10 +65,23 @@ module.exports = {
   */
   apiPath: API_PREFIX,
   helmet: {
+    /* X-Frame-Options is limited to a single domain,
+    // which is not easy to use in dev mode, best to rely on Content-Security-Policy
     frameguard: {
       action: 'allow-from',
       domain: 'http://localhost'
     }
+    */
+    contentSecurityPolicy: {
+      directives: {
+        frameAncestors: [
+          'http://localhost:*',
+          'https://*.kalisio.xyz',
+          'https://*.kalisio.com'
+        ]
+      }
+    },
+    frameguard: false
   },
   paginate: {
     default: 10,
@@ -82,6 +95,13 @@ module.exports = {
     ],
     path: API_PREFIX + '/authentication',
     service: API_PREFIX + '/users',
+    jwt: {
+      header: { typ: 'access' }, // See https://tools.ietf.org/html/rfc7519#section-5.1
+      audience: process.env.SUBDOMAIN || 'kalisio', // The resource server where the token is processed
+      issuer: 'kalisio', // The issuing server, application or resource
+      algorithm: 'HS256', // See https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
+      expiresIn: '1d'
+    },
     passwordPolicy: {
       minLength: 8,
       maxLength: 128,

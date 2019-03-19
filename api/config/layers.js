@@ -109,24 +109,24 @@ module.exports = [
     }
   },
   {
-    name: 'Mosaik',
-    description: 'Mosaik',
+    name: 'Mosaic',
+    description: 'Mosaic',
     tags: [
       'street',
       'imagery'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
     attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/mosaik/GLOBAL_WEBMERCATOR`,
+      url: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },
@@ -344,7 +344,12 @@ module.exports = [
       type: 'geoJson',
       source: '/api/vigicrues-sections',
       realtime: true,
-      interval: 900000
+      interval: 900000,
+      popup: {
+        pick: [
+          'NomEntVigiCru'
+        ]
+      }
     }
   },
   {
@@ -416,7 +421,173 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'water',
-      'marker-color': '#00a9ce'
+      'marker-color': '#00a9ce',
+      popup: {
+        pick: [
+          'LbStationHydro'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
+      }
+    }
+  },
+  {
+    name: 'OpenAQ',
+    description: 'Air Quality',
+    tags: [
+      'measure'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    service: 'openaq',
+    featureId: 'location',
+    history: 604800,
+    variables: [
+      {
+        name: 'pm25',
+        label: 'Variables.PM25',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      },
+      {
+        name: 'pm10',
+        label: 'Variables.PM10',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(63, 63, 191, 128)',
+          borderColor: 'rgb(63, 63, 191)',
+          fill: false
+        }
+      },
+      {
+        name: 'co',
+        label: 'Variables.CO',
+        units: [
+          'ppm'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        }
+      },
+      {
+        name: 'no2',
+        label: 'Variables.NO2',
+        units: [
+          'ppm'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(81, 186, 153, 128)',
+          borderColor: 'rgb(81, 186, 153)',
+          fill: false
+        }
+      },
+      {
+        name: 'so2',
+        label: 'Variables.SO2',
+        units: [
+          'ppm'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(40, 44, 32, 128)',
+          borderColor: 'rgb(40, 44, 32)',
+          fill: false
+        }
+      },
+      {
+        name: 'o3',
+        label: 'Variables.O3',
+        units: [
+          'ppm'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(83, 134, 106, 128)',
+          borderColor: 'rgb(83, 134, 106)',
+          fill: false
+        }
+      },
+      {
+        name: 'bc',
+        label: 'Variables.BC',
+        units: [
+          'µg/m³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(0, 0, 0, 128)',
+          borderColor: 'rgb(0, 0, 0)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      source: '/api/openaq',
+      realtime: true,
+      interval: 900000,
+      queryInterval: 86400000,
+      container: 'markerClusterGroup',
+      'marker-color': '#0B75A9',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-heartbeat',
+      popup: {
+        pick: [
+          'location'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }\
+                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }\
+                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
+                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% }\
+                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
+                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% }\
+                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
+                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% }\
+                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
+                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% }\
+                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }\
+                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>'
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      source: '/api/openaq',
+      realtime: true,
+      interval: 900000,
+      queryInterval: 86400000,
+      cluster: {
+        pixelRange: 50
+      },
+      'marker-symbol': 'air',
+      'marker-color': '#0B75A9',
+      popup: {
+        pick: [
+          'location'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
+                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
+                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
+                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
+                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
+                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
+                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% } %>'
+      }
     }
   },
   {
@@ -454,7 +625,16 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'lighthouse',
-      'marker-color': '#180EF1'
+      'marker-color': '#180EF1',
+      popup: {
+        pick: [
+          'name'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n\
+                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
+      }
     }
   },
   {
@@ -490,7 +670,15 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'star',
-      'marker-color': '#FFA500'
+      'marker-color': '#FFA500',
+      popup: {
+        pick: [
+          'NAME'
+        ]
+      },
+      tooltip: {
+        property: 'LABEL'
+      }
     }
   },
   {
@@ -512,11 +700,11 @@ module.exports = [
       'icon-classes': 'fa fa-plane',
       popup: {
         pick: [
-          'NAME'
+          'name'
         ]
       },
       tooltip: {
-        property: 'LABEL'
+        property: 'iata_code'
       }
     },
     cesium: {
@@ -526,7 +714,15 @@ module.exports = [
         pixelRange: 50
       },
       'marker-symbol': 'airfield',
-      'marker-color': '#00A5FF'
+      'marker-color': '#00A5FF',
+      popup: {
+        pick: [
+          'name'
+        ]
+      },
+      tooltip: {
+        property: 'iata_code'
+      }
     }
   },
   {
@@ -545,17 +741,11 @@ module.exports = [
       source: 'https://s3-eu-west-1.amazonaws.com/gift-backbone-adsb/adsb-airline-one.json',
       realtime: true,
       interval: 5000,
-      'marker-symbol': '/statics/paper-plane.png',
+      'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
+      'icon-anchor': [16, 16],
       'marker-size': 32,
-      'icon-anchor': [
-        16,
-        32
-      ],
-      popup: {
-        pick: [
-          'icao'
-        ]
-      },
+      'icon-class': '',
+      popup: {},
       tooltip: {
         property: 'callsign'
       }
@@ -566,7 +756,11 @@ module.exports = [
       realtime: true,
       interval: 5000,
       'marker-symbol': 'airport',
-      'marker-color': '#57D824'
+      'marker-color': '#57D824',
+      popup: {},
+      tooltip: {
+        property: 'callsign'
+      }
     }
   },
   {
@@ -630,7 +824,7 @@ module.exports = [
     name: 'Radar des précipitations',
     description: 'Cumuls de lames d\'eau estimés à partir de données radar (en mm/h) ',
     tags: [
-      'weather'
+      'measure'
     ],
     icon: 'beach_access',
     attribution: 'SYCAMORE © <a href="http://www.meteofrance.com">Météo-France</a>',

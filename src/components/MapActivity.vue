@@ -5,7 +5,7 @@
       <q-resize-observable @resize="onMapResized" />
       <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
         <div slot="widget-content">
-          <time-series ref="timeseries"
+          <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
             :variables="variables"
             :current-time-format="currentTimeFormat"
@@ -49,7 +49,7 @@
 
     <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
         <k-time-controller
-          v-if="forecastModel"
+          v-if="timeControllerEnabled"
           :key="timeControllerRefreshKey"
           :min="timeLine.start" 
           :max="timeLine.end"
@@ -80,15 +80,12 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
 import moment from 'moment'
-import 'weacast-leaflet'
 import { QPopover, QModal, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
-import { weacast } from 'weacast-core/client'
+
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
-import mixins from '../mixins'
-import TimeSeries from './TimeSeries'
 
 const { offset } = dom
 
@@ -99,22 +96,22 @@ export default {
     QModal,
     QResizeObservable,
     QBtn,
-    QFixedPosition,
-    TimeSeries
+    QFixedPosition
   },
   mixins: [
     kCoreMixins.baseActivity,
     kCoreMixins.refsResolver(['map']),
     kMapMixins.geolocation,
     kMapMixins.featureService,
+    kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.activity,
+    kMapMixins.legend,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
     kMapMixins.map.fileLayers,
-    kMapMixins.map.geotiffLayers,
-    mixins.activity,
-    mixins.legend    
+    kMapMixins.map.geotiffLayers
   ],
   inject: ['layout'],
   data () {
@@ -142,6 +139,12 @@ export default {
       return {
         width: 0.8 * this.mapWidth + 'px'
       }
+    },
+    timeControllerEnabled () {
+      // For now only weather forecast requires timeline
+      return this.forecastModel &&
+        (_.values(this.layers).find(layer => layer.isVisible && layer.tags && layer.tags.includes('weather')) ||
+          this.isTimeseriesOpen())
     },
     colorLegendStyle () {
       return {
@@ -181,10 +184,12 @@ export default {
         if (this.probe && this.probedLocation.probeId) {
           const probe = await this.getForecastProbe(this.probe.name)
           if (probe) {
-            await this.getWeatherForFeature(_.get(this.probedLocation, this.probe.featureId))
+            await this.getForecastForFeature(_.get(this.probedLocation, this.probe.featureId),
+              moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
           }
         } else { // Location mode
-          await this.getWeatherForLocation(this.probedLocation.geometry.coordinates[0], this.probedLocation.geometry.coordinates[1])
+          await this.getForecastForLocation(this.probedLocation.geometry.coordinates[0], this.probedLocation.geometry.coordinates[1],
+            moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
         }
       }
     }
@@ -196,6 +201,8 @@ export default {
       await this.loadRefs()
       this.setupMap(this.$refs.map, this.$config('map.viewer'))
       await this.initializeView()
+      // Add app hooks to weacast
+      this.weacastApi.hooks(appHooks)
       // Add a scale control
       L.control.scale().addTo(this.map)
       this.map.on('moveend', this.onMapMoved)
@@ -204,17 +211,12 @@ export default {
       this.map.off('moveend', this.onMapMoved)
     },
     async refreshActivity () {  
-      // Wait until viewer is ready
-      await this.initializeViewer()
-      if (!this.map) return
       this.clearActivity()
       // Setup the right pane
       this.setRightPanelContent('Panel', this.$data)
       this.registerActivityActions()
-      // FAB
-      this.registerFabAction({
-        name: 'probe', label: this.$t('MapActivity.PROBE'), icon: 'colorize', handler: this.onWeatherForLocation
-      })
+      // Wait until viewer is ready
+      await this.initializeViewer()
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
@@ -271,7 +273,8 @@ export default {
         if (marker) {
           // We use custom events on this one to be able to drag probed location
           kMapUtils.unbindLeafletEvents(marker)
-          marker.on('dragend', (event) => this.getWeatherForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat))
+          marker.on('dragend', (event) => this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat,
+            moment.utc(this.timeLine.start), moment.utc(this.timeLine.end)))
           marker.on('click', (event) => this.toggleTimeseries())
         }
         return marker
@@ -282,7 +285,7 @@ export default {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        let content = this.$t('Activity.VIGICRUES_LEVEL_' + level)
+        let content = this.$t('MapActivity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
       }
       const H = _.get(feature, 'properties.H')
@@ -317,10 +320,11 @@ export default {
       if (options.probe) {
         const probe = await this.getForecastProbe(options.probe)
         if (probe) {
-          await this.getWeatherForFeature(_.get(feature, this.probe.featureId))
+          await this.getForecastForFeature(_.get(feature, this.probe.featureId),
+            moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
         }
       } else if (options.service) {
-        await this.getMeasureForFeature(options, feature, options.variables.map(variable => variable.name),
+        await this.getMeasureForFeature(options, feature,
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
       }
       if (this.probedLocation) this.openTimeseries()
@@ -344,145 +348,44 @@ export default {
       const east = this.bounds.getEast()
       this.$router.push({ query: { south, west, north, east } })
     },
-    onForecastModelSelected (model) {
-      this.forecastModel = model
-    },
     onToggleFullscreen () {
       this.map.toggleFullscreen()
-      this.$store.patch('timeFormat', { locale: this.$store.get('timeFormat.locale') === 'en' ? 'fr' : 'en' })
-      this.$store.patch('timeFormat', { utc: this.$store.get('timeFormat.utc') ? false : true })
     },
     onResizeTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
     },
-    onLayerShown (event) {
+    onLayerShown (layer) {
       // Show timeseries on probed location
-      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+      if (layer.name === this.$t('mixins.activity.PROBED_LOCATION')) {
         if (!this.isTimeseriesOpen()) {
           this.openTimeseries()
           this.center(...this.probedLocation.geometry.coordinates)
         }
       }
     },
-    onLayerHidden (event) {
+    onLayerHidden (layer) {
       // Hide timeseries on probed location
-      if (event.layer.name === this.$t('MapActivity.PROBED_LOCATION')) {
+      if (layer.name === this.$t('mixins.activity.PROBED_LOCATION')) {
         if (this.isTimeseriesOpen()) this.closeTimeseries()
       }
     },
-    async createProbedLocationLayer () {
-      if (!this.probedLocation) return
-      const name = this.$t('MapActivity.PROBED_LOCATION')
-      // Use wind barbs on weather probed features
-      const isWeatherProbe = (_.has(this.probedLocation, 'properties.windDirection') &&
-                              _.has(this.probedLocation, 'properties.windSpeed'))
-      // Get any previous layer or create it the first time
-      let layer = this.getLeafletLayerByName(name)
-      if (!layer) {
-        await this.addLayer({
-          name,
-          type: 'OverlayLayer',
-          icon: 'colorize',
-          leaflet: {
-            type: 'geoJson',
-            isVisible: true
-          }
-        })
-        layer = this.getLeafletLayerByName(name)
-      }
-      // Update data
-      layer.clearLayers()
-      layer.addData(isWeatherProbe ?
-        this.getProbedLocationForecastAtCurrentTime() :
-        this.getProbedLocationMeasureAtCurrentTime())
-    },
-    getMeasureValueAtCurrentTime (times, values) {
-      // Check for the right value at time
-      if (Array.isArray(times) && Array.isArray(values)) {
-        /// Look for the nearest time
-        const nearestTime = kMapUtils.getNearestTime(this.currentTime, times.map(time => moment.utc(time)))
-        return (nearestTime.index > 0 ? values[nearestTime.index] : null)
-      } else {
-        // Constant value
-        return values
-      }
-    },
-    getProbedLocationMeasureAtCurrentTime () {
-      // Create new geojson from raw response containing all times
-      let feature = _.cloneDeep(this.probedLocation)
-      // Then check for the right value at time
-      _.forOwn(feature.properties, (value, key) => {
-        if (Array.isArray(value)) {
-          const times = _.get(feature, 'time.' + key)
-          if (times) {
-            feature.properties[key] = this.getMeasureValueAtCurrentTime(times, value)
-          }
-        }
-      })
-      return feature
-    },
-    async getMeasureForFeature (layer, feature, elements, startTime, endTime) {
-      this.setMapCursor('processing-cursor')
-      try {
-        let result = await this.$api.getService(layer.service).find({
-          query: {
-            time: {
-              $gte: startTime.format(),
-              $lte: endTime.format()
-            },
-            ['properties.' + layer.featureId]: _.get(feature, 'properties.' + layer.featureId),
-            $groupBy: layer.featureId,
-            $aggregate: elements
-          }
-        })
-        if (result.features.length > 0) this.probedLocation = result.features[0]
-        else throw new Error('Cannot find valid measure for feature')
-        this.createProbedLocationLayer()
-      } catch (error) {
-        this.probedLocation = null
-        logger.error(error)
-      }
-      this.unsetMapCursor('processing-cursor')
-    },
-    async getWeatherForLocation (long, lat) {
-      this.setMapCursor('processing-cursor')
-      try {
-        await this.getForecastForLocation(long, lat,
+    onProbeLocation () {
+      let probe = async (options, event) => {
+        this.unsetCursor('probe-cursor')
+        await this.getForecastForLocation(event.latlng.lng, event.latlng.lat,
           moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
-        this.createProbedLocationLayer()
-      } catch (error) {
-        this.probedLocation = null
-        logger.error(error)
-      }
-      this.unsetMapCursor('processing-cursor')
-    },
-    async getWeatherForFeature (featureId) {
-      this.setMapCursor('processing-cursor')
-      try {
-        await this.getForecastForFeature(featureId,
-          moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
-        this.createProbedLocationLayer()
-      } catch (error) {
-        this.probedLocation = null
-        logger.error(error)
-      }
-      this.unsetMapCursor('processing-cursor')
-    },
-    onWeatherForLocation () {
-      let probe = async (event) => {
-        this.unsetMapCursor('probe-cursor')
-        this.map.off('click', probe)
-        await this.getWeatherForLocation(event.latlng.lng, event.latlng.lat)
         this.openTimeseries()
       }
-      this.setMapCursor('probe-cursor')
-      this.map.on('click', probe)
+      this.setCursor('probe-cursor')
+      this.$once('click', probe)
     },
     isTimeseriesOpen () {
       return this.$refs.widget.isOpen()
     },
     openTimeseries () {
       this.$refs.widget.open()
+      // Minimized widget is 40vw, if we have a small zie open wide directly (eg on mobile)
+      if (0.4 * this.mapWidth < 500) this.$refs.widget.setMode('maximized')
     },
     closeTimeseries () {
       this.$refs.widget.close()
@@ -499,24 +402,6 @@ export default {
       // Only when drag stops to avoid fetching data permanently 
       if (event.final) {
         this.setCurrentTime(moment.utc(event.value))
-      }
-    },
-    async setupWeacast () {
-      let config = this.$config('weacast')
-      const catalogService = this.$api.getService('catalog')
-      // Check for existing service in catalog overriding default config
-      let response = await catalogService.find({ query: { type: 'service', name: 'weacast' } })
-      if (response.data.length > 0) config.apiUrl = response.data[0].endpoint
-      this.weacastApi = weacast(config)
-      // Setup app hooks
-      this.weacastApi.hooks(appHooks)
-      try {
-        // Transfer app token to Weacast
-        const accessToken = await this.$api.passport.getJWT()
-        await this.weacastApi.authenticate({ strategy: 'jwt', accessToken })
-        this.setupForecastModels()
-      } catch(error) {
-        logger.error('Cannot initialize weacast API', error)
       }
     },
     setupTimeline () {
@@ -564,14 +449,15 @@ export default {
     this.registerLeafletStyle('markerStyle', this.getVigicruesMarker)
     this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
+    this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-time-controller'] = this.$load('time/KTimeController')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-widget'] = this.$load('frame/KWidget')
   },
-  async mounted () {
+  mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
-    this.$on('leaflet-layer-shown', this.onLayerShown)
-    this.$on('leaflet-layer-hidden', this.onLayerHidden)
+    this.$on('layer-shown', this.onLayerShown)
+    this.$on('layer-hidden', this.onLayerHidden)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
@@ -579,8 +465,8 @@ export default {
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
-    this.$off('leaflet-layer-shown', this.onLayerShown)
-    this.$off('leaflet-layer-hidden', this.onLayerHidden)
+    this.$off('layer-shown', this.onLayerShown)
+    this.$off('layer-hidden', this.onLayerHidden)
     // No need to refresh the layout when leaving the component
     this.observe = false
     //this.removeCollectionLayer('Actors')

@@ -9,7 +9,6 @@
 <script>
 import _ from 'lodash'
 import { Toast, Events, QAjaxBar } from 'quasar'
-import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 
 /*
  * Root component
@@ -56,23 +55,6 @@ export default {
     // Request counter used to display progress bar
     this.nbRequests = 0
     this.nbCompletedRequests = 0
-    // Default time formatting
-    this.$store.set('timeFormat', {
-      time: {
-        short: 'H[h]',
-        long: 'HH:mm'
-      },
-      date: {
-        short: 'DD/MM',
-        long: 'dddd D'
-      },
-      year: {
-        short: 'YY',
-        long: 'YYYY'
-      },
-      utc: false,
-      locale: kCoreUtils.getLocale()
-    })
   },
   mounted () {
     // Check for error on refresh

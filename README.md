@@ -6,7 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/kalisio/kano/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kano)
 [![Test Coverage](https://codeclimate.com/github/kalisio/kano/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kano/coverage)
 [![Dependency Status](https://img.shields.io/david/kalisio/kano.svg?style=flat-square)](https://david-dm.org/kalisio/kano)
-[![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.gitbooks.io/kalisio)
+[![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.github.io/kdk/)
 [![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kano/badge.svg)](https://snyk.io/test/github/kalisio/kano)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kano.svg?style=plastic)](https://hub.docker.com/r/kalisio/kano/)
 

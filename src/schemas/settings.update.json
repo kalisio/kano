@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://www.kalisio.xyz/schemas/settings.update.json#",
+  "title": "schemas.UPDATE_SETTINGS_TITLE",
+  "type": "object",
+  "properties": {
+    "shortTime": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_SHORT_TIME_FIELD_HELPER"
+      }
+    },
+    "longTime": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_LONG_TIME_FIELD_HELPER"
+      }
+    },
+    "shortDate": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_SHORT_DATE_FIELD_HELPER"
+      }
+    },
+    "longDate": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_LONG_DATE_FIELD_HELPER"
+      }
+    },
+    "shortYear": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_SHORT_YEAR_FIELD_HELPER"
+      }
+    },
+    "longYear": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIME_FORMAT_LONG_YEAR_FIELD_HELPER"
+      }
+    },
+    "utc": {
+      "type": "boolean", 
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "schemas.TIME_FORMAT_UTC_FIELD_HELPER"
+      }
+    }
+  },
+  "required": ["utc"]
+}

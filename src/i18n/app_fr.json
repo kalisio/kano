@@ -1,7 +1,15 @@
 {
   "REMOVE_LABEL": "Supprimer",
   "schemas": {
-    "ACTIVITY_LOCATION_FIELD_HELPER": "Entrez une addresse"
+    "ACTIVITY_LOCATION_FIELD_HELPER": "Entrez une addresse",
+    "UPDATE_SETTINGS_TITLE": "Vos paramètres",
+    "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "Format d'heure abrégé <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "Format d'heure complet <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "Format de jour abrégé <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_DATE_FIELD_HELPER": "Format de jour complet <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "Format d'année abrégé <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "Format d'année complet <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_UTC_FIELD_HELPER": "Mode d'affichage temporel UTC"
   },
   "screen": {
     "ABOUT_KALISIO": "A propos",
@@ -11,6 +19,7 @@
   "sideNav": {
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D",
+    "SETTINGS": "Paramètres",
     "LOGOUT": "Se déconnecter"
   },
   "Index": {
@@ -29,25 +38,11 @@
   "TimeSeries": {
     "PROBE": "Sonde"
   },
-  "Activity": {
+  "MapActivity": {
     "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
     "VIGICRUES_LEVEL_2": "Risque de crue génératrice de débordements",
     "VIGICRUES_LEVEL_3": "Risque de crue génératrice de débordements importants",
-    "VIGICRUES_LEVEL_4": "Risque de crue majeure",
-    "REMOVE_LABEL": "$t(REMOVE_LABEL)",
-    "REMOVE_DIALOG_TITLE": "Supprimer {{layer}} ?",
-    "REMOVE_DIALOG_MESSAGE": "Etes vous sûr de vouloier supprimer {{layer}} de votre espace de travail ?",
-    "ZOOM_TO_LABEL": "Zoomer sur",
-    "TOGGLE_FULLSCREEN": "Plein écran",
-    "GEOLOCATE": "Ma position",
-    "GEOCODE": "Rechercher",
-    "GEOCODING": "Rechercher un lieu",
-    "GEOCODE_BUTTON": "Géocoder",
-    "CLOSE_GEOCODING_ACTION": "Fermer"
-  },
-  "MapActivity": {
-    "PROBE": "Sonder",
-    "PROBED_LOCATION": "Sonde"
+    "VIGICRUES_LEVEL_4": "Risque de crue majeure"
   },
   "GlobeActivity": {
     "TOGGLE_VR": "VR"
@@ -57,13 +52,10 @@
     "TERRAIN_LAYERS": "Couches terrain",
     "OVERLAY_LAYERS": "Mes données",
     "MEASURE_LAYERS": "Couches des mesures",
-    "METEO_LAYERS": "Couches météo",
+    "METEO_LAYERS": "Prévisions météo",
     "BUSINESS_LAYERS": "Couches métier"
   },
   "ForecastModelsPanel": {
     "LABEL": "Modèles de prévision"
-  },
-  "ColorLegend": {
-    "CONVERT_UNITS": "{{layer}}: convertir en {{unit}}"
   }
 }

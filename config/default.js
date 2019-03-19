@@ -42,7 +42,9 @@ module.exports = {
   version: require('../package.json').version,
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
-  apiTimeout: 20000,
+  apiJwt: 'kano-jwt',
+  apiTimeout: 30000,
+//transport: 'websocket', // Could be 'http' or 'websocket',
   transport: 'http', // Could be 'http' or 'websocket',
   appName: 'Kano',
   appLogo: 'kano-icon-64x64.png',
@@ -75,44 +77,50 @@ module.exports = {
   sideNav: {
     banner: 'kano-logo-black-256x84.png',
     components: {
-      user_actions: 'layout/KLinksPanel'
+      user_actions: 'layout/KLinksPanel',
+      app_settings: 'Settings',
+      app_logout: 'layout/KLinksPanel'
     }
   },
   user_actions: {
     links: [
       { }, // separator
       { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map', query: true } },
-      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } },
+      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } }
+    ]
+  },
+  app_logout: {
+    links: [
       { }, // separator
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
   mapPanel: {
     categories: [
+      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
+        options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
-        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
-      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
       { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
-        options: { exclusive: true, filter: { type: 'BaseLayer' } } }
+      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
+      { name: 'MeteoLayers', label: 'LayersPanel.METEO_LAYERS', icon: 'wb_sunny',
+        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
     ]
   },
   globePanel: {
     categories: [
-      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'BaseLayers', label: 'LayersPanel.BASE_LAYERS', icon: 'fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'TerrainLayers', label: 'LayersPanel.TERRAIN_LAYERS', icon: 'terrain',
-        options: { exclusive: true, filter: { type: 'TerrainLayer' } } }
+        options: { exclusive: true, filter: { type: 'TerrainLayer' } } },
+      { name: 'BusinessLayers', label: 'LayersPanel.BUSINESS_LAYERS', icon: 'layers',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
+      { name: 'OverlayLayers', label: 'LayersPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
+      { name: 'MeasureLayers', label: 'LayersPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
     ]
   },
   weacast: {
@@ -133,7 +141,6 @@ module.exports = {
     // Default GeoJSON layer style for polygons/lines
     featureStyle: {
       opacity: 1,
-      radius: 6,
       color: 'red',
       fillOpacity: 0.5,
       fillColor: 'green'
@@ -142,10 +149,11 @@ module.exports = {
     pointStyle: {
       type: 'circleMarker',
       options: {
-        opacity: 1,
-        color: 'red',
-        fillOpacity: 0.5,
-        fillColor: 'green'
+        radius: 6,
+        'stroke': 'red',
+        'stroke-opacity': 1,
+        'fill-opacity': 0.5,
+        'fill-color': 'green'
       }
     },
     // Default GeoJSON popup will display all properties
@@ -181,7 +189,7 @@ module.exports = {
       'marker-symbol': 'marker',
       'marker-color': '#57D824',
       'stroke': '#FF0000',
-      'fill': '#00FF00'
+      'fill-color': '#00FF00'
     },
     entityStyle: {
       billboard: {
@@ -193,6 +201,36 @@ module.exports = {
       },
       polyline: {
         clampToGround: true
+      }
+    },
+    tooltip: {
+      options: {
+        showBackground : true,
+        backgroundColor: 'Cesium.Color.WHITE',
+        font : '14px monospace',
+        fillColor : 'Cesium.Color.BLACK',
+        outlineColor : 'Cesium.Color.BLACK',
+        horizontalOrigin : 'Cesium.HorizontalOrigin.LEFT',
+        verticalOrigin : 'Cesium.VerticalOrigin.CENTER',
+        pixelOffset : {
+          type: 'Cesium.Cartesian2',
+          options: [32, -32]
+        }
+      }
+    },
+    popup: {
+      options: {
+        showBackground : true,
+        backgroundColor: 'Cesium.Color.WHITE',
+        font : '14px monospace',
+        fillColor : 'Cesium.Color.BLACK',
+        outlineColor : 'Cesium.Color.BLACK',
+        horizontalOrigin : 'Cesium.HorizontalOrigin.CENTER',
+        verticalOrigin : 'Cesium.VerticalOrigin.BOTTOM',
+        pixelOffset : {
+          type: 'Cesium.Cartesian2',
+          options: [0, -64]
+        }
       }
     },
     clusterStyle: {

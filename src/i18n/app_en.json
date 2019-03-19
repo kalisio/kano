@@ -1,7 +1,15 @@
 {
   "REMOVE_LABEL": "Remove",
   "schemas": {
-    "ACTIVITY_LOCATION_FIELD_HELPER": "Enter an address"
+    "ACTIVITY_LOCATION_FIELD_HELPER": "Enter an address",
+    "UPDATE_SETTINGS_TITLE": "Your settings",
+    "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "Short time format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "Long time format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "Short date format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_DATE_FIELD_HELPER": "Long date format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "Short year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "Long year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
+    "TIME_FORMAT_UTC_FIELD_HELPER": "UTC time display mode"
   },
   "screen": {
     "ABOUT_KALISIO": "About",
@@ -11,6 +19,7 @@
   "sideNav": {
     "MAP": "2D View",
     "GLOBE": "3D View",
+    "SETTINGS": "Settings",
     "LOGOUT": "Se déconnecter"
   },
   "Index": {
@@ -29,25 +38,11 @@
   "TimeSeries": {
     "PROBE": "Probe"
   },
-  "Activity": {
+  "MapActivity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
     "VIGICRUES_LEVEL_2": "Flood risk",
     "VIGICRUES_LEVEL_3": "Important flood risk",
-    "VIGICRUES_LEVEL_4": "Major flood risk",
-    "REMOVE_LABEL": "$t(REMOVE_LABEL)",
-    "REMOVE_DIALOG_TITLE": "Remove {{layer}} ?",
-    "REMOVE_DIALOG_MESSAGE": "Are you sure you want to remove <b>{{layer}}</b> from your workspace ?",
-    "ZOOM_TO_LABEL": "Zoom to",
-    "TOGGLE_FULLSCREEN": "Fullscreen",
-    "GEOLOCATE": "My position",
-    "GEOCODE": "Find",
-    "GEOCODING": "Find a location",
-    "GEOCODE_BUTTON": "Geocode",
-    "CLOSE_GEOCODING_ACTION": "Close"
-  },
-  "MapActivity": {
-    "PROBE": "Probe",
-    "PROBED_LOCATION": "Probe"
+    "VIGICRUES_LEVEL_4": "Major flood risk"
   },
   "GlobeActivity": {
     "TOGGLE_VR": "VR"
@@ -57,13 +52,10 @@
     "TERRAIN_LAYERS": "Terrain layers",
     "OVERLAY_LAYSERS": "My layers",
     "MEASURE_LAYERS": "Measure layers",
-    "METEO_LAYERS": "Meteo layers",
+    "METEO_LAYERS": "Meteo forecasts",
     "BUSINESS_LAYERS": "Business layers"
   },
   "ForecastModelsPanel": {
     "LABEL": "Forecast models"
-  },
-  "ColorLegend": {
-    "CONVERT_UNITS": "{{layer}}: convert to {{unit}}"
   }
 }

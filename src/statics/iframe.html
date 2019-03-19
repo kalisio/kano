@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <title>Kano IFrame integration</title>
+    <link rel="shortcut icon" type="image/x-icon" href="statics/kano-icon-64x64.png">
+    <script src="./post-robot.min.js"></script>
+    <script>
+      var layerIsShown = false
+      var component = 'map'
+
+      function getGeoJsonAircraftFeature () {
+        const long = 1.444209 + 0.5 * (Math.random() - 0.5)
+        const lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        const alt = 8519.16 + 1000 * (Math.random() - 0.5)
+        const track = 360 * Math.random()
+        return {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {
+                callsign: 'AIB03KM',
+                track: track
+              },
+              geometry: {
+                type: 'Point',
+                coordinates: [long, lat, alt]
+              }
+            }
+          ]
+        }
+      }
+      function toggleGlobe() {
+        component = (component === 'globe' ? 'map' : 'globe')
+        postRobot.send(kano, component)
+      }
+      function toggleStaticLayer(name) {
+        postRobot.send(kano, component, { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
+        .then(function () {
+          layerIsShown = !layerIsShown
+          if (layerIsShown) postRobot.send(kano, component, { command: 'zoomToLayer', args: name })
+        })
+      }
+      function toggleBackground() {
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: 'OSM Dark' })
+        .then(function (result) {
+          // Switch between Satellite/OSM
+          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'OSM Dark') })
+          postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
+        })
+      }
+      function toggleDynamicLayer(name) {
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'insert_drive_file',
+              featureId: 'callsign',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                start: false,
+                isVisible: true,
+                'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
+                'icon-anchor': [16, 16],
+                'marker-size': 32,
+                'icon-class': '',
+                template: ['icon-html'],
+                popup: {
+                  template: '<%= properties.callsign %>'
+                },
+                tooltip: {
+                  template: '<%= properties.callsign %>'
+                }
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                start: false,
+                isVisible: true,
+                'marker-symbol': 'airport',
+                'marker-color': '#57D824',
+                entityStyle: {
+                  model: {
+                    type: 'Cesium.ModelGraphics',
+                    options: {
+                      uri: '/statics/a320.glb',
+                      minimumPixelSize: 64
+                    }
+                  }
+                },
+                popup: {
+                  template: '<%= properties.callsign %>'
+                },
+                tooltip: {
+                  template: '<%= properties.callsign %>'
+                }
+              }
+            }})
+            .then(function () { updateDynamicLayer(name) })
+          }
+        })
+      }
+      function updateDynamicLayer(name) {
+        const geoJson = getGeoJsonAircraftFeature()
+        const long = geoJson.features[0].geometry.coordinates[0]
+        const lat = geoJson.features[0].geometry.coordinates[1]
+        postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
+        .then(function () {
+          postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
+        })
+      }
+    </script>
+  </head>
+  <body style="background-color: grey">
+    <table style="margin-left:auto;margin-right:auto;">
+      <thead>
+        <tr><th colspan="2"><h1>Kano IFrame Integration Sample</h1></th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td style="text-align:center;">
+          <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button></br>
+          <button type="button" onclick="toggleBackground()">Switch background</button></br>
+          <button type="button" onclick="toggleStaticLayer('Airports')">Switch airports</button></br>
+          <button type="button" onclick="toggleDynamicLayer('Aircraft')">Switch aircraft</button></br>
+          <button type="button" onclick="updateDynamicLayer('Aircraft')">Update aircraft</button></br>
+        </td>
+        <td>
+          <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="/">
+          </iframe>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <script>
+      var kano = document.getElementById('kano').contentWindow
+      postRobot.send(kano, 'getLocalStorage')
+      .then(function(event) {
+        let localStorage = event.data
+        localStorage.setItems({
+          'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
+        })
+      })
+    </script>
+  </body>
+</html>

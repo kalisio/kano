@@ -39,7 +39,6 @@ import Cesium from 'cesium/Source/Cesium.js'
 import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
-import mixins from '../mixins'
 
 const { offset } = dom
 
@@ -56,10 +55,10 @@ export default {
     kMapMixins.geolocation,
     kMapMixins.featureService,
     kMapMixins.time,
+    kMapMixins.activity,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
-    kMapMixins.globe.fileLayers,
-    mixins.activity
+    kMapMixins.globe.fileLayers
   ],
   inject: ['layout'],
   data () {
@@ -88,9 +87,6 @@ export default {
       this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
     },
     async refreshActivity () {
-      // Wait until viewer is ready
-      await this.initializeViewer()
-      if (!this.viewer) return
       this.clearActivity()
       // Setup the right pane
       this.setRightPanelContent('Panel', this.$data)
@@ -99,16 +95,30 @@ export default {
       this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
       })
+      // Wait until viewer is ready
+      await this.initializeViewer()
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
       if (this.observe) this.refreshGlobe()
     },
-    getVigicruesEntity (entity, options) {
-      const level = _.get(entity, 'properties.NivSituVigiCruEnt')
+    getVigicruesTooltip (entity, options) {
+      const properties = entity.properties
+      if (!properties) return
+      const level = properties.NivSituVigiCruEnt
       if (level > 1) {
-        // TODO: add tooltip
+        return Object.assign({ show: false, text: this.$t('MapActivity.VIGICRUES_LEVEL_' + level) }, this.options.tooltip)
       }
+      /*
+      const H = properties.H
+      const Q = properties.Q
+      if (!_.isNil(H) || !_.isNil(Q)) {
+        let tooltip = L.tooltip({ permanent: false }, layer)
+        if (!_.isNil(H) && !_.isNil(Q)) return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
+        else if (!_.isNil(H)) return tooltip.setContent(`<b>${H.toFixed(2)} m`)
+        else if (!_.isNil(Q)) return tooltip.setContent(`<b>${Q.toFixed(2)} m3/h`)
+      }
+      */
       return null
     },
     onGlobeMoved () {
@@ -135,7 +145,7 @@ export default {
     }
   },
   created () {
-    this.registerCesiumStyle('entityStyle', this.getVigicruesEntity)
+    this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Enable the observers in order to refresh the layout
     this.observe = true
     // Required to get the access token from server
