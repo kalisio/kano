@@ -23,13 +23,13 @@ export default class Selectdata extends ApplicationLayout {
 
       //2D
       //Couche métier
-      this.business = VueSelector('q-collapsible').nth(0)
+      this.business = VueSelector('q-collapsible').nth(1)
         this.sites = Selector('#sites')
         this.airports = Selector('#airports')
         this.airbus = Selector('#airbus-ev-ads-b')
         
       //Mes Meteo
-      this.meteo = VueSelector('q-collapsible').nth(1)
+      this.meteo = VueSelector('q-collapsible').nth(3)
         this.wind = Selector('#wind')
         this.gust = Selector('#gust')
         this.precipitations = Selector('#precipitations')
@@ -45,10 +45,10 @@ export default class Selectdata extends ApplicationLayout {
         this.téléray = Selector('#téléray')
 
       //Mes données
-        this.mydata = VueSelector('q-collapsible').nth(3)
+      //  this.mydata = VueSelector('q-collapsible').nth(3)
       
       //Fond carto
-      this.map = VueSelector('q-collapsible').nth(4)
+      this.map = VueSelector('q-collapsible').nth(0)
         this.sentinel2 = Selector('#sentinel-2')
         this.OSMBright = Selector('#osm-bright')
         this.OSMDark = Selector('#osm-dark')
