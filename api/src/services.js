@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import path from 'path'
+import fs from 'fs-extra'
 import logger from 'winston'
 import kCore, { permissions } from '@kalisio/kdk-core'
 import kMap, { createCatalogService, createFeatureService } from '@kalisio/kdk-map'
@@ -54,12 +55,13 @@ module.exports = async function () {
 
   // Helper to register service and permissions for a layer
   function createFeatureServiceForLayer(options) {
-    createFeatureService.call(app, options)
+    let service = createFeatureService.call(app, options)
     // Register permission for it
     permissions.defineAbilities.registerHook((subject, can, cannot) => {
       can('service', options.collection)
       can('all', options.collection)
     })
+    return service
   }
 
   let catalogService = app.getService('catalog')
@@ -90,7 +92,8 @@ module.exports = async function () {
       logger.info('Reusing default layer (name = ' + defaultLayer.name + ')')
     }
     // Check if service(s) are associated to this layer
-    if (defaultLayer.service) createFeatureServiceForLayer({
+    let featureService
+    if (defaultLayer.service) featureService = createFeatureServiceForLayer({
       collection: defaultLayer.service,
       featureId: defaultLayer.featureId,
       history: defaultLayer.history
@@ -98,5 +101,10 @@ module.exports = async function () {
     if (defaultLayer.probeService) createFeatureServiceForLayer({
       collection: defaultLayer.probeService
     })
+    // And if we need to initialize some data as well
+    if (!createdLayer && featureService && defaultLayer.fileName) {
+      const geojson = fs.readJsonSync(defaultLayer.fileName)
+      await featureService.create(geojson.features)
+    }
   }
 }
