@@ -76,6 +76,7 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import logger from 'loglevel'
@@ -217,6 +218,8 @@ export default {
       this.registerActivityActions()
       // Wait until viewer is ready
       await this.initializeViewer()
+      // Will fail if not integrated as iframe so check
+      if (window.parent !== window) postRobot.send(window.parent, 'map-ready')
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
@@ -323,7 +326,7 @@ export default {
           await this.getForecastForFeature(_.get(feature, this.probe.featureId),
             moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
         }
-      } else if (options.service) {
+      } else if (options.variables && options.service) {
         await this.getMeasureForFeature(options, feature,
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
       }

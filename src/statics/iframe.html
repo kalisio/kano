@@ -12,6 +12,7 @@
     <script>
       var layerIsShown = false
       var component = 'map'
+      var airports
 
       function getGeoJsonAircraftFeature () {
         const long = 1.444209 + 0.5 * (Math.random() - 0.5)
@@ -63,12 +64,11 @@
             postRobot.send(kano, component, { command: 'addLayer', args: {
               name,
               type: 'OverlayLayer',
-              icon: 'insert_drive_file',
+              icon: 'local_airport',
               featureId: 'callsign',
               leaflet: {
                 type: 'geoJson',
                 realtime: true,
-                start: false,
                 isVisible: true,
                 'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
                 'icon-anchor': [16, 16],
@@ -85,7 +85,6 @@
               cesium: {
                 type: 'geoJson',
                 realtime: true,
-                start: false,
                 isVisible: true,
                 'marker-symbol': 'airport',
                 'marker-color': '#57D824',
@@ -119,6 +118,59 @@
           postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
         })
       }
+      function toggleDynamicStyling(name) {
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'wb_sunny',
+              featureId: 'ICAO',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                //'marker-type': 'circleMarker',
+                'radius': 6,
+                'stroke-width': 0,
+                //'stroke': 'red',
+                //'stroke-opacity': 1,
+                'fill-opacity': 0.5,
+                'fill-color': '<% if (properties.visibility < 75) { %>#000000<% }\
+                               else if (properties.visibility < 300) { %>#d20200<% }\
+                               else if (properties.visibility < 1500) { %>#f9b40f<% }\
+                               else if (properties.visibility < 3000) { %>#eef52f<% }\
+                               else { %>#33c137<% } %>',
+                template: ['fill-color'],
+                tooltip: {
+                  template: 'visibility <%= properties.visibility.toFixed(0) %> m'
+                }
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                cluster: {
+                  pixelRange: 50
+                },
+                tooltip: {
+                  template: 'visibility <%= properties.visibility.toFixed(0) %> m'
+                }
+              }
+            }})
+            .then(function () { updateDynamicStyling(name) })
+            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+          }
+        })
+      }
+      function updateDynamicStyling(name) {
+        // Setup random visibility on some airports
+        airports.features.forEach(function(airport) { airport.properties.visibility = 5000 * Math.random() })
+        postRobot.send(kano, component, { command: 'updateLayer', args: [name, airports] })
+      }
     </script>
   </head>
   <body style="background-color: grey">
@@ -132,6 +184,8 @@
           <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button></br>
           <button type="button" onclick="toggleBackground()">Switch background</button></br>
           <button type="button" onclick="toggleStaticLayer('Airports')">Switch airports</button></br>
+          <button type="button" onclick="toggleDynamicStyling('METAR')">Switch METAR</button></br>
+          <button type="button" onclick="updateDynamicStyling('METAR')">Update METAR</button></br>
           <button type="button" onclick="toggleDynamicLayer('Aircraft')">Switch aircraft</button></br>
           <button type="button" onclick="updateDynamicLayer('Aircraft')">Update aircraft</button></br>
         </td>
@@ -150,6 +204,11 @@
         localStorage.setItems({
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
         })
+      })
+
+      postRobot.on('map-ready', () => {
+        postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
+        .then(function (result) { airports = result.data })
       })
     </script>
   </body>

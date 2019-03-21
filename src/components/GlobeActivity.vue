@@ -35,6 +35,7 @@
 
 <script>
 import _ from 'lodash'
+import postRobot from 'post-robot'
 import Cesium from 'cesium/Source/Cesium.js'
 import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
@@ -97,6 +98,7 @@ export default {
       })
       // Wait until viewer is ready
       await this.initializeViewer()
+      postRobot.send('globe-ready')
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component

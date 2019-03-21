@@ -148,7 +148,7 @@ module.exports = {
     pointStyle: {
       type: 'circleMarker',
       options: {
-        radius: 6,
+        'radius': 6,
         'stroke': 'red',
         'stroke-opacity': 1,
         'fill-opacity': 0.5,
