@@ -4,6 +4,7 @@ services:
   app:
     image: kalisio/${APP}:${VERSION_TAG}
     environment:
+      - DEBUG
       - APP_SECRET
       - BUILD_NUMBER
       - NODE_APP_INSTANCE=${FLAVOR}
