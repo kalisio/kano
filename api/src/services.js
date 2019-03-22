@@ -98,13 +98,14 @@ module.exports = async function () {
       featureId: defaultLayer.featureId,
       history: defaultLayer.history
     })
-    if (defaultLayer.probeService) createFeatureServiceForLayer({
-      collection: defaultLayer.probeService
-    })
+    if (defaultLayer.probeService) createFeatureServiceForLayer({ collection: defaultLayer.probeService })
     // And if we need to initialize some data as well
     if (!createdLayer && featureService && defaultLayer.fileName) {
       const geojson = fs.readJsonSync(defaultLayer.fileName)
       await featureService.create(geojson.features)
     }
   }
+
+  // Service to store user features
+  createFeatureServiceForLayer({ collection: 'features' })
 }
