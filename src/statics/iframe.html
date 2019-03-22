@@ -133,11 +133,10 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                //'marker-type': 'circleMarker',
+                /* Using vector layers does not allow for clustering
+                'marker-type': 'circleMarker',
                 'radius': 6,
                 'stroke-width': 0,
-                //'stroke': 'red',
-                //'stroke-opacity': 1,
                 'fill-opacity': 0.5,
                 'fill-color': '<% if (properties.visibility < 75) { %>#000000<% }\
                                else if (properties.visibility < 300) { %>#d20200<% }\
@@ -145,6 +144,20 @@
                                else if (properties.visibility < 3000) { %>#eef52f<% }\
                                else { %>#33c137<% } %>',
                 template: ['fill-color'],
+                */
+                /* Using marker layers allows for clustering */
+                container: 'markerClusterGroup',
+                'icon-html': '<svg height="16" width="16"><circle cx="8" cy="8" r="6" fill-opacity="0.5" stroke-width="0"\
+                                fill="<% if (properties.visibility < 75) { %>#000000<% }\
+                                      else if (properties.visibility < 300) { %>#d20200<% }\
+                                      else if (properties.visibility < 1500) { %>#f9b40f<% }\
+                                      else if (properties.visibility < 3000) { %>#eef52f<% }\
+                                      else { %>#33c137<% } %>"/>\
+                              </svg>',
+                'icon-anchor': [8, 8],
+                'marker-size': 16,
+                'icon-class': '',
+                template: ['icon-html'],
                 tooltip: {
                   template: 'visibility <%= properties.visibility.toFixed(0) %> m'
                 }

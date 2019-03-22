@@ -233,40 +233,6 @@ export default {
       }
       return layer
     },
-    getTelerayMarker (feature, latlng) {
-      if (_.has(feature, 'properties.irsnId')) {
-        const valid = _.get(feature, 'properties.libelle')
-        const icon = (valid === 'VA' ? 'info-circle' : (valid === 'NV' ? 'question-circle' : 'times-circle'))
-        const color = (valid === 'VA' ? 'darkblue' : (valid === 'NV' ? 'orange' : 'dark'))
-        return this.createMarkerFromStyle(latlng, {
-          icon: {
-            type: 'icon.fontAwesome',
-            options: {
-              iconClasses: 'fa fa-' + icon,
-              markerColor: color,
-              iconColor: '#FFF'
-            }
-          }
-        })
-      }
-      return null
-    },
-    getVigicruesMarker (feature, latlng) {
-      const isVigicruesProbe = (_.has(feature, 'properties.H') ||
-                                _.has(feature, 'properties.Q'))
-      if (isVigicruesProbe) {
-        return this.createMarkerFromStyle(latlng, {
-          type: 'circleMarker',
-          options: {
-            opacity: 1,
-            color: 'black',
-            fillOpacity: 1,
-            fillColor: 'blue'
-          }
-        })
-      }
-      return null
-    },
     getMeteoMarker (feature, latlng) {
       // Use wind barbs on weather probed features
       const isWeatherProbe = (_.has(feature, 'properties.windDirection') &&
@@ -290,14 +256,6 @@ export default {
         let tooltip = L.tooltip({ permanent: false }, layer)
         let content = this.$t('MapActivity.VIGICRUES_LEVEL_' + level)
         return tooltip.setContent('<b>' + content + '</b>')
-      }
-      const H = _.get(feature, 'properties.H')
-      const Q = _.get(feature, 'properties.Q')
-      if (!_.isNil(H) || !_.isNil(Q)) {
-        let tooltip = L.tooltip({ permanent: false }, layer)
-        if (!_.isNil(H) && !_.isNil(Q)) return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
-        else if (!_.isNil(H)) return tooltip.setContent(`<b>${H.toFixed(2)} m`)
-        else if (!_.isNil(Q)) return tooltip.setContent(`<b>${Q.toFixed(2)} m3/h`)
       }
       return null
     },
@@ -330,8 +288,6 @@ export default {
         await this.getMeasureForFeature(options, feature,
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
       }
-      if (this.probedLocation) this.openTimeseries()
-      else this.closeTimeseries()
     },
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -448,8 +404,6 @@ export default {
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
     this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
-    this.registerLeafletStyle('markerStyle', this.getTelerayMarker)
-    this.registerLeafletStyle('markerStyle', this.getVigicruesMarker)
     this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
     // Load the required components
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')

@@ -606,6 +606,14 @@ module.exports = [
       realtime: true,
       interval: 600000,
       container: 'markerClusterGroup',
+      'marker-color': '<% if (properties.libelle === "VA") { %>darkblue<% }\
+                          else if (properties.visibility === "NV") { %>orange<% }\
+                          else { %>dark<% } %>',
+      'icon-classes': '<% if (properties.libelle === "VA") { %>fa fa-info-circle<% }\
+                          else if (properties.visibility === "NV") { %>fa fa-question-circle<% }\
+                          else { %>fa fa-times-circle<% } %>',
+      'icon-color': '#FFF',
+      template: ['marker-color', 'icon-classes'],
       popup: {
         pick: [
           'name'
