@@ -131,6 +131,7 @@ module.exports = {
   map: {
     viewer: {
       minZoom: 3,
+      maxZoom: 18,
       center: [47, 3],
       zoom: 6,
       maxBounds: [ [-90, -180], [90, 180] ],
