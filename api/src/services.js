@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import path from 'path'
 import fs from 'fs-extra'
+import zlib from 'zlib'
 import logger from 'winston'
 import kCore, { permissions } from '@kalisio/kdk-core'
 import kMap, { createCatalogService, createFeatureService } from '@kalisio/kdk-map'
@@ -101,8 +102,21 @@ module.exports = async function () {
     if (defaultLayer.probeService) createFeatureServiceForLayer({ collection: defaultLayer.probeService })
     // And if we need to initialize some data as well
     if (!createdLayer && featureService && defaultLayer.fileName) {
-      const geojson = fs.readJsonSync(defaultLayer.fileName)
-      await featureService.create(geojson.features)
+      if (path.extname(defaultLayer.fileName) === '.gz') {
+        const extractedFileName = path.join(path.dirname(defaultLayer.fileName), path.basename(defaultLayer.fileName, '.gz'))
+        console.log(extractedFileName)
+        fs.createReadStream(defaultLayer.fileName)
+        .pipe(zlib.createGunzip())
+        .pipe(fs.createWriteStream(extractedFileName))
+        .on('close', async () => {
+          const geojson = fs.readJsonSync(extractedFileName)
+          await featureService.create(geojson.features)
+        })
+        .on('error', (error) => { console.log(error) })
+      } else {
+        const geojson = fs.readJsonSync(defaultLayer.fileName)
+        await featureService.create(geojson.features)
+      }
     }
   }
 
