@@ -1,6 +1,6 @@
 // Page models
 import * as pages from './page-models'
-import Subtitle from './subtitle'
+import Subtitle from '../tutorials/subtitle'
 
 
 

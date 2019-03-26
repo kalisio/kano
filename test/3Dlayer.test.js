@@ -30,7 +30,7 @@ test('Login, and features', async test => {
 
   
   await select.openRightPane3d(test)
-  await select.changeBusiness(test)
+  //await select.changeBusiness(test)
   //await select.filldata(test)
   //await select.deleteData(test)
   

@@ -75,3 +75,4 @@ secrets.tar
 ssh.pem
 app.env.sh
 *.keystore
+/test/videos

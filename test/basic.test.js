@@ -26,11 +26,6 @@ test('Login as default user', async test => {
 
   await test.setTestSpeed(0.1)
   
-  await select.openLeftPane(test)
-  await select.changeBusiness(test)
-  //await select.filldata(test)
-  await select.closeLeftPane(test)
-  await select.movemap(test, 1000, 5000)
 
   await auth.logOut(test)
 })
