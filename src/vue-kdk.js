@@ -10,6 +10,8 @@ export default {
     Vue.prototype.$api = options.api
     Vue.prototype.$can = options.api.can
     Vue.prototype.$load = utils.load
+    Vue.prototype.$createComponent = utils.createComponent
+    Vue.prototype.$createComponentVNode = utils.createComponentVNode
     Vue.prototype.$config = function (path, defaultValue) {
       return _.get(config, path, defaultValue)
     }

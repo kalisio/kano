@@ -64,12 +64,6 @@
         />
     </q-fixed-position>
 
-    <k-modal ref="geocodingModal" :title="$t('Activity.GEOCODING')" :toolbar="getGeocodingToolbar()" :buttons="getGeocodingButtons()" :route="false">
-      <div slot="modal-content" class="column xs-gutter">
-        <k-form ref="geocodingForm" :schema="getGeocodingSchema()" />
-      </div>
-    </k-modal>
-
   </div>
 </template>
 
