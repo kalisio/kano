@@ -1,6 +1,5 @@
 import { disallow } from 'feathers-hooks-common'
 
-
 module.exports = {
   before: {
     all: [],

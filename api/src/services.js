@@ -28,6 +28,13 @@ module.exports = async function () {
       res.json(response)
     })
     await app.configure(kCore)
+    // Register permission for storage service if defined
+    if (app.getService('storage')) {
+      permissions.defineAbilities.registerHook((subject, can, cannot) => {
+        can('service', 'storage')
+        can('all', 'storage')
+      })
+    }
     await app.configure(kMap)
     // Create a global catalog service 
     createCatalogService.call(app)
@@ -35,9 +42,11 @@ module.exports = async function () {
     logger.error(error.message)
   }
 
-  // Configure the users service
+  // Configure the required service
   let usersService = app.getService('users')
-  app.configureService('users', app.getService('users'), servicesPath)
+  app.configureService('users', usersService, servicesPath)
+  let featuresService = app.getService('features')
+  app.configureService('features', featuresService, servicesPath)
 
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
