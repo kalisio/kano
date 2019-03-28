@@ -7,7 +7,7 @@ import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
 import postRobot from 'post-robot'
-import Quasar from 'quasar'
+import Quasar, { Platform } from 'quasar'
 import router from './router'
 import appHooks from './main.hooks'
 import services from './services'
@@ -20,6 +20,9 @@ import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
 import 'quasar-extras/animate/bounceInRight.css'
 import 'quasar-extras/animate/bounceOutRight.css'
+
+// See https://github.com/quasarframework/quasar/issues/1092#issuecomment-357774605
+Platform.has.popstate = false
 
 // === DEFAULT / CUSTOM STYLE ===
 // WARNING! always comment out ONE of the two require() calls below.
