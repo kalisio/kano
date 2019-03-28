@@ -21,7 +21,7 @@
       style="left: 18px; top: 18px"
       icon="menu"
       @click="layout.toggleLeft()">
-      Kano
+      {{ appName }}
     </q-btn>
     
     <q-btn 
@@ -127,6 +127,9 @@ export default {
     }
   },
   computed: {
+    appName () {
+      return this.$config('appName')
+    },
     mapStyle () {
       let style = 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute;'
       return style

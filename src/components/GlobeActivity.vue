@@ -12,8 +12,9 @@
       style="left: 18px; top: 18px"
       icon="menu"
       @click="layout.toggleLeft()">
-      Kano
+      {{ appName }}
     </q-btn>
+
     <q-btn 
       id="globe-panel-toggle"
       color="secondary"
@@ -61,6 +62,9 @@ export default {
     }
   },
   computed: {
+    appName () {
+      return this.$config('appName')
+    },
     globeStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
     }
