@@ -20,7 +20,7 @@
     "MAP": "2D View",
     "GLOBE": "3D View",
     "SETTINGS": "Settings",
-    "LOGOUT": "Se déconnecter"
+    "LOGOUT": "Logout"
   },
   "Index": {
     "VERSION_MISMATCH": "Application version mismatch, please install the latest available version or check your end point",
@@ -50,7 +50,7 @@
   "LayersPanel": {
     "BASE_LAYERS": "Base Layers",
     "TERRAIN_LAYERS": "Terrain layers",
-    "OVERLAY_LAYSERS": "My layers",
+    "OVERLAY_LAYERS": "My layers",
     "MEASURE_LAYERS": "Measure layers",
     "METEO_LAYERS": "Meteo forecasts",
     "BUSINESS_LAYERS": "Business layers"
