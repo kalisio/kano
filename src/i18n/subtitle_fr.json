@@ -1,0 +1,24 @@
+{
+    "rightpanel": {
+        "OPEN_PANEL": "Ouverture du panneau d'option",
+        "CLOSE_PANEL": "Fermeture du panneau d'option",
+        "BASE_LAYERS": "Selection d'un fonds cartographiques",
+        "TERRAIN_LAYERS": "Selection d'une couches terrain",
+        "OVERLAY_LAYERS": "Selection de mes données",
+        "MEASURE_LAYERS": "Selection d'une couches des mesures",
+        "METEO_LAYERS": "Selection d'une prévisions météo",
+        "BUSINESS_LAYERS": "Selection d'une couches métier",
+        "DELETE_OVERLAY": "Supression d'une de mes données"
+    },
+    "leftpanel": {
+        "OPEN_PANEL": "Ouverture du panneau d'option",
+        "CLOSE_PANEL": "Fermeture du panneau d'option",
+        "2D_VIEW": "Selection de la vue 2D",
+        "3D_VIEW": "Selection de la vue 3D",
+        "SETTINGS": "Selection des paramétre",
+        "LOGOUT": "Se déconnecter"
+    },
+    "map": {
+        "MOVE_MAP": "Depalcement de la carte"
+    }
+}

@@ -109,7 +109,7 @@ export default class Selectdata extends ApplicationLayout {
     }*/
     async openRightPane2d(test, subtitle){
       if (subtitle!=null) {
-        subtitle.startRecord("Ouverture du panneau d'option");
+        subtitle.startRecord("rightpanel.OPEN_PANEL");
       }
       
       await test
@@ -128,7 +128,7 @@ export default class Selectdata extends ApplicationLayout {
     }
     async openRightPane3d(test, subtitle){
       if (subtitle!=null) {
-        subtitle.startRecord("Ouverture du panneau d'option");
+        subtitle.startRecord("rightpanel.OPEN_PANEL");
       }
       await test
       .click(this.sideBarRight3D)
@@ -146,7 +146,7 @@ export default class Selectdata extends ApplicationLayout {
     }
     async closeRightPane(test, subtitle){
       if (subtitle!=null) {
-        subtitle.startRecord("Fermeture du panneau d'option");
+        subtitle.startRecord("rightpanel.CLOSE_PANEL");
       }
       await test
       .click(VueSelector('k-layout'))

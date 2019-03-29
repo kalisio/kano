@@ -1,0 +1,24 @@
+{
+    "rightpanel": {
+        "OPEN_PANEL": "Open option panel",
+        "CLOSE_PANEL": "Close option panel",
+        "BASE_LAYERS": "Select a base layer",
+        "TERRAIN_LAYERS": "Select a terrain layer",
+        "OVERLAY_LAYERS": "Select an overlay layer",
+        "MEASURE_LAYERS": "Select a measure layer",
+        "METEO_LAYERS": "Select a meteo layer",
+        "BUSINESS_LAYERS": "Select a business layer",
+        "DELETE_OVERLAY": "Delete an overlay layer"
+    },
+    "leftpanel": {
+        "OPEN_PANEL": "Open option panel",
+        "CLOSE_PANEL": "Close option panel",
+        "2D_VIEW": "Select 2D view",
+        "3D_VIEW": "Select 3D view",
+        "SETTINGS": "Select settings",
+        "LOGOUT": "Logout"
+    },
+    "map": {
+        "MOVE_MAP": "Move the map"
+    }
+}

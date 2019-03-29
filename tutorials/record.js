@@ -25,7 +25,7 @@ createTestCafe('localhost', 1337, 1338)
        
 
         return runner
-            .src(['./test/basic.test.js','./test/2Dlayer.test.js','./test/3Dlayer.test.js'])
+            .src(['./tutorials/2Dlayer.tuto.js','./tutorials/3Dlayer.tuto.js'])
             //.src(['./test/2Dlayer.test.js'])
             .browsers(['firefox'])
             .run();
