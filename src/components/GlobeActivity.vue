@@ -75,7 +75,7 @@ export default {
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
-        // Ensure DOM ref is here as well
+      // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
       await this.initializeView()
@@ -96,7 +96,8 @@ export default {
       })
       // Wait until viewer is ready
       await this.initializeViewer()
-      postRobot.send('globe-ready')
+      // Will fail if not integrated as iframe so check
+      if (window.parent !== window) postRobot.send(window.parent, 'globe-ready')
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
