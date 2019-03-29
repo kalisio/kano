@@ -44,7 +44,7 @@ module.exports = {
   apiPath: API_PREFIX,
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
-  transport: 'websocket', // Could be 'http' or 'websocket',
+  transport: 'http', // Could be 'http' or 'websocket',
   appName: 'Kano',
   appLogo: 'kano-icon-64x64.png',
   publisher: 'Kalisio',
@@ -123,7 +123,7 @@ module.exports = {
     ]
   },
   weacast: {
-    // Kano app proxy all request to Weacast app
+    transport: 'http', // Could be 'http' or 'websocket',
     apiUrl: weacastApi,
     apiPath: API_PREFIX,
     apiTimeout: 30000

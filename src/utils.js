@@ -1,5 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue'
+import i18next from 'i18next'
+import VueI18next from '@panter/vue-i18next'
 import postRobot from 'post-robot'
 import { Store } from '@kalisio/kdk-core/client'
 
@@ -22,11 +24,14 @@ function loadComponent (component) {
 function loadSchema (schema) {
   return import(`@kalisio/kdk-core/lib/common/schemas/${schema}.json`)
     .catch(errorCore => {
-      // Otherwise this should be app component
-      return import(`./schemas/${schema}.json`)
-      .catch(errorApp => {
-        console.log(errorCore, errorApp)
-      })
+      return import(`@kalisio/kdk-map/lib/common/schemas/${schema}.json`)
+        .catch(errorMap => {
+          // Otherwise this should be app component
+          return import(`./schemas/${schema}.json`)
+            .catch(errorApp => {
+              console.log(errorCore, errorMap, errorApp)
+            })
+        })
     })
 }
 
@@ -60,6 +65,16 @@ function load (name, type = 'component') {
     default:
       return loadComponent(name)
   }
+}
+
+async function createComponent (component, options) {
+  const Component = Vue.extend(await loadComponent(component)())
+  return new Component(Object.assign({ i18n: new VueI18next(i18next) }, options))
+}
+
+async function createComponentVNode (component, options) {
+  const Component = Vue.extend(await loadComponent(component)())
+  return this.$createElement(Component, Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
 
 function getEmbedComponent(route) {
@@ -180,6 +195,8 @@ let utils = {
   loadTranslation,
   resolveAsset,
   load,
+  createComponent,
+  createComponentVNode,
   buildRoutes
 }
 

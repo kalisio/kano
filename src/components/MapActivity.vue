@@ -21,7 +21,7 @@
       style="left: 18px; top: 18px"
       icon="menu"
       @click="layout.toggleLeft()">
-      Kano
+      {{ appName }}
     </q-btn>
     
     <q-btn 
@@ -63,12 +63,6 @@
           style="width: 100%;"
         />
     </q-fixed-position>
-
-    <k-modal ref="geocodingModal" :title="$t('Activity.GEOCODING')" :toolbar="getGeocodingToolbar()" :buttons="getGeocodingButtons()" :route="false">
-      <div slot="modal-content" class="column xs-gutter">
-        <k-form ref="geocodingForm" :schema="getGeocodingSchema()" />
-      </div>
-    </k-modal>
 
   </div>
 </template>
@@ -112,7 +106,8 @@ export default {
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
     kMapMixins.map.fileLayers,
-    kMapMixins.map.geotiffLayers
+    kMapMixins.map.geotiffLayers,
+    kMapMixins.map.editLayers
   ],
   inject: ['layout'],
   data () {
@@ -132,6 +127,9 @@ export default {
     }
   },
   computed: {
+    appName () {
+      return this.$config('appName')
+    },
     mapStyle () {
       let style = 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute;'
       return style

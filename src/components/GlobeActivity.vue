@@ -12,8 +12,9 @@
       style="left: 18px; top: 18px"
       icon="menu"
       @click="layout.toggleLeft()">
-      Kano
+      {{ appName }}
     </q-btn>
+
     <q-btn 
       id="globe-panel-toggle"
       color="secondary"
@@ -24,12 +25,6 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
-    <k-modal ref="geocodingModal" :title="$t('Activity.GEOCODING')" :toolbar="getGeocodingToolbar()" :buttons="getGeocodingButtons()" :route="false">
-      <div slot="modal-content" class="column xs-gutter">
-        <k-form ref="geocodingForm" :schema="getGeocodingSchema()" />
-      </div>
-    </k-modal>
-    
   </div>
 </template>
 
@@ -67,6 +62,9 @@ export default {
     }
   },
   computed: {
+    appName () {
+      return this.$config('appName')
+    },
     globeStyle () {
       return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
     }
@@ -77,7 +75,7 @@ export default {
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
-        // Ensure DOM ref is here as well
+      // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
       await this.initializeView()
@@ -98,7 +96,8 @@ export default {
       })
       // Wait until viewer is ready
       await this.initializeViewer()
-      postRobot.send('globe-ready')
+      // Will fail if not integrated as iframe so check
+      if (window.parent !== window) postRobot.send(window.parent, 'globe-ready')
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component

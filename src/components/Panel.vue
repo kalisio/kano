@@ -10,7 +10,7 @@
 import { QCollapsible } from 'quasar'
 
 export default {
-  name: 'map-panel',
+  name: 'panel',
   components: {
     QCollapsible
   },
