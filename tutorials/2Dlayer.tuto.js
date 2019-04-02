@@ -20,7 +20,10 @@ fixture`2Dfixture`// declare the fixture
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
 const select = new pages.Selectdata()
-const subtitle =  new Subtitle();
+const panelMap = new pages.LayerPanelMap()
+const sidenav = new pages.Sidenav()
+const mapView = new pages.MapView()
+const subtitle =  new Subtitle()
   
 
 test('Login, and features', async test => {
@@ -36,19 +39,19 @@ test('Login, and features', async test => {
 
   //await select.select3D(test)
   
-  await select.select2D(test, subtitle)  
+  await sidenav.select2D(test, subtitle)  
   
-  await select.openRightPane2d(test)
+  await panelMap.openRightPanel(test)
   
   
-  await select.changeBusiness(test, subtitle)
+  await panelMap.changeBusiness(test, subtitle)
   
 
   //await select.filldata(test)
   //await select.deleteData(test)
   
-  await select.closeRightPane(test)
-  await select.movemap(test, 800, 0, subtitle)
+  await panelMap.closeRightPanel(test)  
+  await mapView.movemap(test, 800, 0, subtitle)
   
   subtitle.startRecord("déconnexion");
   await auth.logOut(test)

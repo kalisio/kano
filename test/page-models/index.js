@@ -1,12 +1,21 @@
 import { ClientFunction } from 'testcafe'
 import ApplicationLayout from './layout'
 import Authentication from './authentication'
+import LayerPanelMap from './layerPanelMap'
+import LayerPanelGlobe from './layerPanelGlobe'
+import Sidenav from './sidenav'
+import MapView from './mapView'
+
 import Selectdata from './selectdata'
 
 // Export all models
 export {
   ApplicationLayout,
   Authentication,
+  LayerPanelMap,
+  LayerPanelGlobe,
+  Sidenav,
+  MapView,
   Selectdata
 }
 

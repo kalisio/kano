@@ -25,6 +25,7 @@ export default class Subtitle{
       
     //Save a start timer and an action
      startRecord(action){
+         console.log('Subtitle start record action : '+action)
         var time = Date.now();
         //this.testAsso[time['action']] = action; 
         //console.log(time + '| |'+this.testAsso[time['action']]);
@@ -47,6 +48,7 @@ export default class Subtitle{
     }
     //Build and save log
      exportLogs(path){
+        console.log('Subtitle export init : \n'+this.logs)
         this.buildLogs();
         var fs = require('fs');
         this.pathBuild = pathBuilder.getPath();

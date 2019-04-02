@@ -17,6 +17,9 @@ fixture`3Dfixture`// declare the fixture
 const app = new pages.ApplicationLayout()
 const auth = new pages.Authentication()
 const select = new pages.Selectdata()
+const panelGlobe = new pages.LayerPanelGlobe()
+const sidenav = new pages.Sidenav()
+const mapView = new pages.MapView()
 
 test('Login, and features', async test => {
   await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
@@ -26,16 +29,16 @@ test('Login, and features', async test => {
 
   await test.setTestSpeed(0.1)
 
-  await select.select3D(test)
+  await sidenav.select3D(test)
 
   
-  await select.openRightPane3d(test)
+  await panelGlobe.openRightPanel(test)
   //await select.changeBusiness(test)
   //await select.filldata(test)
   //await select.deleteData(test)
   
-  await select.closeRightPane(test)
-  await select.movemap(test, 800, 0)
+  await panelGlobe.closeRightPanel(test)
+  await mapView.movemap(test, 800, 0)
 
 
   await auth.logOut(test)
