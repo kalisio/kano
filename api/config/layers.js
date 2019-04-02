@@ -39,7 +39,8 @@ module.exports = [
       type: 'tileLayer',
       isVisible: true,
       source: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      maxZoom: 18
+      maxZoom: 21,
+      maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
@@ -59,7 +60,8 @@ module.exports = [
     leaflet: {
       type: 'tileLayer',
       source: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      maxZoom: 18
+      maxZoom: 21,
+      maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
@@ -80,7 +82,8 @@ module.exports = [
     leaflet: {
       type: 'tileLayer',
       source: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      maxZoom: 18
+      maxZoom: 21,
+      maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
@@ -101,7 +104,8 @@ module.exports = [
     leaflet: {
       type: 'tileLayer',
       source: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      maxZoom: 18
+      maxZoom: 21,
+      maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
@@ -122,7 +126,8 @@ module.exports = [
     leaflet: {
       type: 'tileLayer',
       source: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
-      maxZoom: 18
+      maxZoom: 21,
+      maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
@@ -643,6 +648,52 @@ module.exports = [
         template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n\
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
       }
+    }
+  },
+  {
+    name: 'Radar des précipitations',
+    description: 'Cumuls de lames d\'eau estimés à partir de données radar (en mm/h) ',
+    tags: [
+      'measure'
+    ],
+    icon: 'beach_access',
+    attribution: 'SYCAMORE © <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'rainFall',
+        label: 'Radar des précipitations',
+        units: [
+          'mm/h'
+        ],
+        chromajs: {
+          scale: [ 
+            "#ffffff00", 
+            "indigo", 
+            "mediumblue", 
+            "dodgerblue", 
+            "skyblue",
+            "forestgreen",
+            "mediumseagreen", 
+            "turquoise",
+            "springgreen",
+            "yellow", 
+            "palegoldenrod", 
+            "peachpuff", 
+            "orange",
+            "saddlebrown",
+            "red"
+          ],
+          domain: [0, 500],
+          classes: [0, 0.2, 0.6, 1.2, 2.1, 3.6, 6.5, 11.5, 20.5, 36.5, 64.8, 115.3, 205, 364.6, 500]
+        }
+      }
+    ],
+    leaflet: {
+      type: 'georaster',
+      interval: 5 * 60 * 1000,
+      // FIXME the year/month/day should be templated too
+      url: 'https://thredds.irsn.kalisio.xyz/thredds/fileServer/mf-radar/2019/03/30/RD_CPO_NAT100.SYCOMORE.V_EUR_COMPO.LAME_DEAU__20190330<%= hh %><%= mm %>00_rainfall.tif'
     }
   }
   
