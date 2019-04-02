@@ -48,6 +48,11 @@ module.exports = {
   appName: 'Kano',
   appLogo: 'kano-icon-64x64.png',
   publisher: 'Kalisio',
+  locale: {
+    // If you'd like to force locale otherwise it is retrieved from browser
+    //default: 'en',
+    fallback: 'en'
+  },
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
