@@ -1,5 +1,6 @@
 import logger from 'loglevel'
 import i18next from 'i18next'
+import config from 'config'
 import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { loadTranslation } from '../utils'
 
@@ -7,12 +8,13 @@ export async function configureI18n () {
   // Defines the modules to be loaded
   const modules = ['kCore', 'kMap', 'app']
   try {
+    const localeConfig = config.locale || {}
     // Retrieve the locale
     const locale = kCoreUtils.getLocale()
     // Initializes i18next
     i18next.init({
-      lng: locale,
-      fallbackLng: 'en',
+      lng: localeConfig.default || locale,
+      fallbackLng: localeConfig.fallback || 'en',
       defaultNS: ['kdk']
     })
     // Build the translation resolvers
