@@ -7622,6 +7622,14 @@ mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
 
+mime-types-browser@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/mime-types-browser/-/mime-types-browser-0.0.3.tgz#b56b41f436db6220568d558276eac466ba2f40dd"
+  integrity sha1-tWtB9DbbYiBWjVWCdurEZrovQN0=
+  dependencies:
+    json-loader "^0.5.4"
+    mime-types "^2.1.12"
+
 mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.15, mime-types@~2.1.7:
   version "2.1.15"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.15.tgz#a4ebf5064094569237b8cf70046776d09fc92aed"
