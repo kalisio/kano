@@ -26,7 +26,8 @@
               type: 'Feature',
               properties: {
                 callsign: 'AIB03KM',
-                track: track
+                track: track,
+                type: (Math.random() > 0.5 ? 'a380' : 'a320')
               },
               geometry: {
                 type: 'Point',
@@ -36,6 +37,25 @@
           ]
         }
       }
+      function getGeoJsonAcarsFeature (id) {
+        return {
+          type: 'Feature',
+          properties: {
+            id,
+            type: (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC')),
+            timestamp: new Date(Date.now() + 1000 * 60 * 60 * (Math.random() - 0.5)),
+            message: `OUT 13:29Z /ZFW 113840 /FOB 13830 /TAW 127670</br>
+                      /POS N50 2.3924 E8 35.1521</br>
+                      /ALT 372</br>
+                      /AP EDDF /GATE A 10</br>
+                      /WND 08008 /OAT 17 /TAT 18`
+          },
+          geometry: {
+            type: 'Point'
+          }
+        }
+      }
+
       function toggleGlobe() {
         component = (component === 'globe' ? 'map' : 'globe')
         postRobot.send(kano, component)
@@ -55,7 +75,7 @@
           postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
         })
       }
-      function toggleDynamicLayer(name) {
+      function toggleAircraftLayer(name) {
         postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
@@ -70,14 +90,15 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
+                'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><img width="32px" height="32px" src="/statics/<%= properties.type %>.png"/></svg></span>',
+                /*
                 'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
+                */
                 'icon-anchor': [16, 16],
                 'marker-size': 32,
                 'icon-class': '',
                 template: ['icon-html'],
-                popup: {
-                  template: '<%= properties.callsign %>'
-                },
+                popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.callsign %>'
                 }
@@ -97,28 +118,27 @@
                     }
                   }
                 },
-                popup: {
-                  template: '<%= properties.callsign %>'
-                },
+                popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.callsign %>'
                 }
               }
             }})
-            .then(function () { updateDynamicLayer(name) })
+            .then(function () { updateAircraftLayer(name) })
           }
         })
       }
-      function updateDynamicLayer(name) {
+      function updateAircraftLayer(name) {
         const geoJson = getGeoJsonAircraftFeature()
         const long = geoJson.features[0].geometry.coordinates[0]
         const lat = geoJson.features[0].geometry.coordinates[1]
         postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
         .then(function () {
+          // Use zoom level or altitude depending on mode
           postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
         })
       }
-      function toggleDynamicStyling(name) {
+      function toggleMetarTafLayer(name) {
         postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
@@ -133,19 +153,7 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                /* Using vector layers does not allow for clustering
-                'marker-type': 'circleMarker',
-                'radius': 6,
-                'stroke-width': 0,
-                'fill-opacity': 0.5,
-                'fill-color': '<% if (properties.visibility < 75) { %>#000000<% }\
-                               else if (properties.visibility < 300) { %>#d20200<% }\
-                               else if (properties.visibility < 1500) { %>#f9b40f<% }\
-                               else if (properties.visibility < 3000) { %>#eef52f<% }\
-                               else { %>#33c137<% } %>',
-                template: ['fill-color'],
-                */
-                /* Using marker layers allows for clustering */
+                /* Using marker layers allows for clustering
                 container: 'markerClusterGroup',
                 'icon-html': '<svg height="16" width="16"><circle cx="8" cy="8" r="6" fill-opacity="0.5" stroke-width="0"\
                                 fill="<% if (properties.visibility < 75) { %>#000000<% }\
@@ -158,8 +166,20 @@
                 'marker-size': 16,
                 'icon-class': '',
                 template: ['icon-html'],
+                */
+                container: 'markerClusterGroup',
+                'icon-classes': 'fa fa-sun-o',
+                'icon-color': '#000000',
+                'icon-x-offset' : -2,
+                'icon-y-offset' : 0,
+                'marker-color': `<% if (properties.visibility < 75) { %>#000000<% }
+                                    else if (properties.visibility < 300) { %>#d20200<% }
+                                    else if (properties.visibility < 1500) { %>#f9b40f<% }
+                                    else if (properties.visibility < 3000) { %>#eef52f<% }
+                                    else { %>#33c137<% } %>"/>`,
+                template: ['marker-color'],
                 tooltip: {
-                  template: 'visibility <%= properties.visibility.toFixed(0) %> m'
+                  template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
                 }
               },
               cesium: {
@@ -170,19 +190,125 @@
                   pixelRange: 50
                 },
                 tooltip: {
-                  template: 'visibility <%= properties.visibility.toFixed(0) %> m'
+                  template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
                 }
               }
             }})
-            .then(function () { updateDynamicStyling(name) })
+            .then(function () { updateMetarTafLayer(name) })
             .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
           }
         })
       }
-      function updateDynamicStyling(name) {
+      function updateMetarTafLayer(name) {
         // Setup random visibility on some airports
-        airports.features.forEach(function(airport) { airport.properties.visibility = 5000 * Math.random() })
-        postRobot.send(kano, component, { command: 'updateLayer', args: [name, airports] })
+        airports.features.forEach(function(airport) {
+          airport.properties.visibility = 5000 * Math.random()
+          airport.properties.metar = 'KAUS 092135Z 26018G25KT 8SM -TSRA BR SCT045CB BKN060 OVC080 30/21 A2992'
+          airport.properties.taf = 'KOKC 051130Z 051212 14008KT 5SM BR BKN030 TEMPO 1316 1 1/2SM BR'
+        })
+        // Filter airports as all don't have METAR/TAF information
+        postRobot.send(kano, component, { command: 'updateLayer', args: [name, { type: 'FeatureCollection', features: airports.features.slice(0, 100) }] })
+      }
+      function toggleAcarsLayer(name) {
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'message',
+              featureId: 'id',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                'marker-type': 'circleMarker',
+                'radius': 6,
+                'stroke-width': 0,
+                'fill-opacity': 0.75,
+                'fill-color': `<% if (properties.type === 'ATC') { %>#000000<% }
+                                    else if (properties.type === 'AOC') { %>#f9b40f<% }
+                                    else { %>#33c137<% } %>`,
+                template: ['fill-color'],
+                tooltip: {
+                  template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
+                }
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                tooltip: {
+                  template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
+                }
+              }
+            }})
+            .then(function () { updateAcarsLayer(name) })
+            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+          }
+        })
+      }
+      function updateAcarsLayer(name) {
+        // Setup random messages
+        let acars = { type: 'FeatureCollection', features: [] }
+        for (let i = 0; i < flightpath.length; i++) {
+          let feature = getGeoJsonAcarsFeature(i)
+          feature.geometry.coordinates = flightpath[i]
+          acars.features.push(feature)
+        }
+        // Filter airports as all don't have METAR/TAF information
+        postRobot.send(kano, component, { command: 'updateLayer', args: [name, acars] })
+      }
+      function toggleFlightpathLayer(name) {
+        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'timeline',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true
+              }
+            }})
+            .then(function () { updateFlightpathLayer(name) })
+            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+          }
+        })
+      }
+      function updateFlightpathLayer(name) {
+        // Setup random path
+        flightpath.forEach(function(point) {
+          point[0] += 0.05 * (Math.random() - 0.5)
+          point[1] += 0.05 * (Math.random() - 0.5)
+        })
+        let path = { type: 'FeatureCollection', features: [] }
+        const middle = flightpath.length / 2
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 0 },
+          style: { stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
+          geometry: { type: 'LineString', coordinates: flightpath.slice(0, middle)}
+        })
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 1 },
+          style: { stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random() },
+          geometry: { type: 'LineString', coordinates: flightpath.slice(middle, flightpath.length)}
+        })
+        // Filter airports as all don't have METAR/TAF information
+        postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
     </script>
   </head>
@@ -197,10 +323,14 @@
           <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button></br>
           <button type="button" onclick="toggleBackground()">Switch background</button></br>
           <button type="button" onclick="toggleStaticLayer('Airports')">Switch airports</button></br>
-          <button type="button" onclick="toggleDynamicStyling('METAR')">Switch METAR</button></br>
-          <button type="button" onclick="updateDynamicStyling('METAR')">Update METAR</button></br>
-          <button type="button" onclick="toggleDynamicLayer('Aircraft')">Switch aircraft</button></br>
-          <button type="button" onclick="updateDynamicLayer('Aircraft')">Update aircraft</button></br>
+          <button type="button" onclick="toggleMetarTafLayer('METAR')">Switch METAR</button></br>
+          <button type="button" onclick="updateMetarTafLayer('METAR')">Update METAR</button></br>
+          <button type="button" onclick="toggleAircraftLayer('Aircraft')">Switch aircraft</button></br>
+          <button type="button" onclick="updateAircraftLayer('Aircraft')">Update aircraft</button></br>
+          <button type="button" onclick="toggleAcarsLayer('ACARS')">Switch ACARS</button></br>
+          <button type="button" onclick="updateAcarsLayer('ACARS')">Update ACARS</button></br>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch Flightpath</button></br>
+          <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update Flightpath</button></br>
         </td>
         <td>
           <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="/">
@@ -223,6 +353,173 @@
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
         .then(function (result) { airports = result.data })
       })
+
+      var flightpath = [
+        [1.3626,43.6439],
+        [1.3458,43.6413],
+        [1.3486,43.6385],
+        [1.3518,43.6309],
+        [1.3597,43.2513],
+        [1.7452,43.2261],
+        [1.7449,43.2015],
+        [1.7444,43.1691],
+        [1.7746,43.1529],
+        [1.7925,43.1405],
+        [1.815,43.1313],
+        [1.8419,43.1205],
+        [1.8698,42.8717],
+        [2.4842,42.8562],
+        [2.5216,42.528],
+        [3.3232,42.5235],
+        [3.3731,42.5248],
+        [3.4074,42.5417],
+        [3.4848,42.563],
+        [3.5307,42.5884],
+        [3.5658,42.5958],
+        [3.573,42.6164],
+        [3.5928,42.6466],
+        [3.6187,43.982],
+        [4.7607,44.0274],
+        [4.7582,44.059],
+        [4.7448,44.0885],
+        [4.7214,44.1155],
+        [4.6869,44.1361],
+        [4.6545,44.8888],
+        [3.4499,44.8907],
+        [3.4007,44.8815],
+        [3.3435,44.8673],
+        [3.3149,44.845],
+        [3.2697,44.8107],
+        [3.2378,44.7783],
+        [3.2227,44.7408],
+        [3.2181,44.709],
+        [3.2195,44.2513],
+        [3.2475,44.2221],
+        [3.2576,44.1948],
+        [3.2789,44.1703],
+        [3.3149,44.1514],
+        [3.372,44.1515],
+        [3.4218,44.1523],
+        [3.5086,44.1607],
+        [3.5797,44.3125],
+        [5.0279,44.3168],
+        [5.0775,44.4166],
+        [6.0713,44.4423],
+        [6.1117,44.4779],
+        [6.134,44.506],
+        [6.1345,44.5368],
+        [6.1123,44.5604],
+        [6.0565,44.5657],
+        [6.0189,44.5666],
+        [6.0131,44.5659],
+        [5.9694,44.5604],
+        [5.9216,44.548],
+        [5.8305,44.5422],
+        [5.7885,44.0806],
+        [2.7179,44.0467],
+        [2.7009,43.9645],
+        [2.6629,43.9242],
+        [2.6453,43.8927],
+        [2.6428,43.8629],
+        [2.6486,43.8206],
+        [2.6642,43.7878],
+        [2.6818,43.2388],
+        [2.9655,43.2101],
+        [2.9554,43.1814],
+        [2.9267,43.1669],
+        [2.8954,43.1605],
+        [2.861,43.1718],
+        [2.7891,43.1904],
+        [2.7581,43.2016],
+        [2.7492,43.2886],
+        [2.6825,43.3132],
+        [2.6649,43.6889],
+        [2.3987,43.7176],
+        [2.392,43.7538],
+        [2.401,43.7806],
+        [2.4153,43.8924],
+        [2.4787,43.918],
+        [2.5061,43.9335],
+        [2.5366,43.9421],
+        [2.5856,43.9374],
+        [2.63,43.9238],
+        [2.6773,43.9148],
+        [2.7156,43.9092],
+        [2.753,43.8836],
+        [2.9158,43.8759],
+        [2.9558,43.8607],
+        [3.0029,43.8396],
+        [3.0348,43.8084],
+        [3.0543,43.7596],
+        [3.0571,43.7574],
+        [3.057,43.7062],
+        [3.0555,43.6408],
+        [3.052,43.598],
+        [3.0439,43.5869],
+        [3.0334,43.5521],
+        [3.0003,43.5344],
+        [2.9567,43.5256],
+        [2.9202,43.1305],
+        [1.1854,43.1415],
+        [1.1937,43.1646],
+        [1.1968,43.1791],
+        [1.1944,43.1952],
+        [1.1911,43.2141],
+        [1.1875,43.3613],
+        [1.1574,43.3759],
+        [1.1507,43.7009],
+        [1.0107,43.7195],
+        [1.004,43.7348],
+        [0.998,43.7516],
+        [0.9906,43.8056],
+        [0.9686,43.8195],
+        [0.9631,44.0238],
+        [0.8862,44.0515],
+        [0.898,44.0671],
+        [0.9241,44.0725],
+        [0.9533,44.073],
+        [0.9853,44.0738],
+        [1.2651,44.0736],
+        [1.2959,44.0728],
+        [1.3907,44.0707],
+        [1.4176,44.0596],
+        [1.4417,44.0405],
+        [1.4558,44.02],
+        [1.4547,44.0022],
+        [1.4399,43.9867],
+        [1.419,43.8189],
+        [1.197,43.7976],
+        [1.1983,43.7827],
+        [1.207,43.7709],
+        [1.2182,43.7562],
+        [1.2337,43.5523],
+        [1.4539,43.5485],
+        [1.4794,43.5484],
+        [1.502,43.5489],
+        [1.6221,43.5533],
+        [1.6448,43.5652],
+        [1.6589,43.5867],
+        [1.6589,43.5997],
+        [1.6471,43.6135],
+        [1.632,43.7692],
+        [1.4578,43.7865],
+        [1.4257,43.7933],
+        [1.4015,43.8141],
+        [1.3269,43.8167],
+        [1.3004,43.8169],
+        [1.2738,43.8172],
+        [1.2162,43.812],
+        [1.1903,43.7923],
+        [1.1774,43.778],
+        [1.1831,43.7706],
+        [1.196,43.7576],
+        [1.2226,43.7513],
+        [1.2308,43.7394],
+        [1.2464,43.7349],
+        [1.2512,43.6222],
+        [1.3654,43.6194],
+        [1.3637,43.6193]
+      ]
     </script>
   </body>
 </html>
