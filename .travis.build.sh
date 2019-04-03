@@ -17,7 +17,10 @@ if [[ $TRAVIS_COMMIT_MESSAGE != *"[skip build]"* ]]
 then
 	# Build the image
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml build
-  
+  if [ $? -ne 0 ]; then
+		exit 1
+	fi
+	
 	# Tag the built image and push it to the hub
 	docker tag kalisio/$APP kalisio/$APP:$VERSION_TAG
 	docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
