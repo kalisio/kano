@@ -363,6 +363,10 @@
       postRobot.on('globe-ready', () => {
         // Whatever
       })
+      postRobot.on('click', (event) => {
+        console.log(event.data)
+        alert('Feature clicked')
+      })
 
       var flightpath = [
         [1.3626,43.6439],

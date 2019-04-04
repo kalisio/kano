@@ -143,6 +143,13 @@ export default {
         if (!Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.requestFullscreen(document.body)
         this.viewer.scene.useWebVR = true
       }
+    },
+    onFeatureClicked (options, event) {
+      const entity = event.target
+      if (!entity) return
+      const properties = (entity.properties ? entity.properties.getValue(0) : null)
+      // Will fail if not integrated as iframe so check
+      if (window.parent !== window) postRobot.send(window.parent, 'click', properties)
     }
   },
   created () {
@@ -151,11 +158,13 @@ export default {
     this.observe = true
     // Required to get the access token from server
     Events.$on('capabilities-api-changed', this.refreshActivity)
+    this.$on('click', this.onFeatureClicked)
   },
   mounted () {
   },
   beforeDestroy () {
     Events.$off('capabilities-api-changed', this.refreshActivity)
+    this.$off('click', this.onFeatureClicked)
     this.finalizeViewer()
   }
 }
