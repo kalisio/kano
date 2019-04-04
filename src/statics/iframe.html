@@ -38,11 +38,12 @@
         }
       }
       function getGeoJsonAcarsFeature (id) {
-        return {
+        const type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
+        let feature = {
           type: 'Feature',
           properties: {
             id,
-            type: (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC')),
+            type,
             timestamp: new Date(Date.now() + 1000 * 60 * 60 * (Math.random() - 0.5)),
             message: `OUT 13:29Z /ZFW 113840 /FOB 13830 /TAW 127670</br>
                       /POS N50 2.3924 E8 35.1521</br>
@@ -54,34 +55,43 @@
             type: 'Point'
           }
         }
+        if (component === 'globe') {
+          // Styling can be directly provided on feature as well
+          Object.assign(feature.properties, {
+            'marker-symbol' : 'circle',
+            'marker-color' : (type === 'ATC' ? '#000000' :
+                              (type === 'AOC') ? '#f9b40f' : '#33c137')
+          })
+        }
+        return feature
       }
 
       function toggleGlobe() {
         component = (component === 'globe' ? 'map' : 'globe')
-        postRobot.send(kano, component)
+        return postRobot.send(kano, component)
       }
       function toggleStaticLayer(name) {
-        postRobot.send(kano, component, { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
+        return postRobot.send(kano, component, { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
         .then(function () {
           layerIsShown = !layerIsShown
           if (layerIsShown) postRobot.send(kano, component, { command: 'zoomToLayer', args: name })
         })
       }
       function toggleBackground() {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: 'OSM Dark' })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: 'OSM Dark' })
         .then(function (result) {
           // Switch between Satellite/OSM
           postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'OSM Dark') })
-          postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
+          return postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
         })
       }
       function toggleAircraftLayer(name) {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
-            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
           } else {
-            postRobot.send(kano, component, { command: 'addLayer', args: {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
               name,
               type: 'OverlayLayer',
               icon: 'local_airport',
@@ -132,19 +142,19 @@
         const geoJson = getGeoJsonAircraftFeature()
         const long = geoJson.features[0].geometry.coordinates[0]
         const lat = geoJson.features[0].geometry.coordinates[1]
-        postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
         .then(function () {
           // Use zoom level or altitude depending on mode
-          postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
+          return postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
         })
       }
       function toggleMetarTafLayer(name) {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
-            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
           } else {
-            postRobot.send(kano, component, { command: 'addLayer', args: {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
               name,
               type: 'OverlayLayer',
               icon: 'wb_sunny',
@@ -178,6 +188,7 @@
                                     else if (properties.visibility < 3000) { %>#eef52f<% }
                                     else { %>#33c137<% } %>"/>`,
                 template: ['marker-color'],
+                popup: { pick: [] },
                 tooltip: {
                   template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
                 }
@@ -189,33 +200,50 @@
                 cluster: {
                   pixelRange: 50
                 },
+                'marker-symbol': 'lighthouse',
+                'marker-color': `<% if (properties.visibility < 75) { %>#000000<% }
+                                    else if (properties.visibility < 300) { %>#d20200<% }
+                                    else if (properties.visibility < 1500) { %>#f9b40f<% }
+                                    else if (properties.visibility < 3000) { %>#eef52f<% }
+                                    else { %>#33c137<% } %>"/>`,
+                template: ['marker-color'],
+                popup: { pick: [] },
                 tooltip: {
-                  template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
+                  template: 'METAR\n<%= properties.metar %>\nTAF\n<%= properties.taf %>'
                 }
               }
             }})
-            .then(function () { updateMetarTafLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+            .then(function () { return updateMetarTafLayer(name) })
+            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
           }
         })
       }
       function updateMetarTafLayer(name) {
         // Setup random visibility on some airports
         airports.features.forEach(function(airport) {
-          airport.properties.visibility = 5000 * Math.random()
+          const visibility = 5000 * Math.random()
+          airport.properties.visibility = visibility
           airport.properties.metar = 'KAUS 092135Z 26018G25KT 8SM -TSRA BR SCT045CB BKN060 OVC080 30/21 A2992'
           airport.properties.taf = 'KOKC 051130Z 051212 14008KT 5SM BR BKN030 TEMPO 1316 1 1/2SM BR'
+          if (component === 'globe') {
+            // Styling can be directly provided on feature as well
+            airport.properties['marker-symbol'] = 'lighthouse',
+            airport.properties['marker-color'] = (visibility < 75 ? '#000000' :
+                                                  (visibility < 300 ? '#d20200' :
+                                                  (visibility < 1500 ? '#f9b40f' :
+                                                  (visibility < 3000 ? '#eef52f' : '#33c137'))))
+          }
         })
         // Filter airports as all don't have METAR/TAF information
-        postRobot.send(kano, component, { command: 'updateLayer', args: [name, { type: 'FeatureCollection', features: airports.features.slice(0, 100) }] })
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, { type: 'FeatureCollection', features: airports.features.slice(0, 100) }] })
       }
       function toggleAcarsLayer(name) {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
-            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
           } else {
-            postRobot.send(kano, component, { command: 'addLayer', args: {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
               name,
               type: 'OverlayLayer',
               icon: 'message',
@@ -232,6 +260,7 @@
                                     else if (properties.type === 'AOC') { %>#f9b40f<% }
                                     else { %>#33c137<% } %>`,
                 template: ['fill-color'],
+                popup: { pick: [] },
                 tooltip: {
                   template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
                 }
@@ -240,13 +269,21 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
+                /*
+                'marker-symbol' : 'circle',
+                'marker-color' : `<% if (properties.type === 'ATC') { %>#000000<% }
+                                    else if (properties.type === 'AOC') { %>#f9b40f<% }
+                                    else { %>#33c137<% } %>`,
+                template: ['marker-color'],
+                */
+                popup: { pick: [] },
                 tooltip: {
-                  template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
+                  template: '<%= properties.timestamp.toISOString() %>\n<%= properties.message %>'
                 }
               }
             }})
-            .then(function () { updateAcarsLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+            .then(function () { return updateAcarsLayer(name) })
+            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
           }
         })
       }
@@ -259,15 +296,15 @@
           acars.features.push(feature)
         }
         // Filter airports as all don't have METAR/TAF information
-        postRobot.send(kano, component, { command: 'updateLayer', args: [name, acars] })
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, acars] })
       }
       function toggleFlightpathLayer(name) {
-        postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         .then(function (result) {
           if (result.data) {
-            postRobot.send(kano, component, { command: 'removeLayer', args: name })
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
           } else {
-            postRobot.send(kano, component, { command: 'addLayer', args: {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
               name,
               type: 'OverlayLayer',
               icon: 'timeline',
@@ -290,7 +327,7 @@
                 }
               }
             }})
-            .then(function () { updateFlightpathLayer(name) })
+            .then(function () { return updateFlightpathLayer(name) })
             .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
           }
         })
@@ -315,7 +352,7 @@
           geometry: { type: 'LineString', coordinates: coordinates.slice(middle, flightpath.length)}
         })
         // Filter airports as all don't have METAR/TAF information
-        postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
     </script>
   </head>
