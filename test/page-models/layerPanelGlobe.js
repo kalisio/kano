@@ -20,7 +20,7 @@ export default class Layerpanelglobal extends ApplicationLayout {
 
       async openRightPanel(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.OPEN_PANEL");
+          subtitle.startRecord("Open option panel");
         }
         await test
         .click(this.sideBarRight3D)
@@ -32,7 +32,7 @@ export default class Layerpanelglobal extends ApplicationLayout {
 
       async closeRightPanel(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.CLOSE_PANEL");
+          subtitle.startRecord("Close option panel");
         }
         await test
         .click(this.globalpanel)

@@ -28,7 +28,7 @@ const subtitle =  new Subtitle()
 
 test('Login, and features', async test => {
   subtitle.initStart();
-  subtitle.startRecord("Authentification");
+  subtitle.startRecord("Log in");
   await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
   subtitle.stopRecord();
   subtitle.buildLogs();
@@ -53,7 +53,7 @@ test('Login, and features', async test => {
   await panelMap.closeRightPanel(test)  
   await mapView.movemap(test, 800, 0, subtitle)
   
-  subtitle.startRecord("déconnexion");
+  subtitle.startRecord("Log out");
   await auth.logOut(test)
   subtitle.stopRecord();
 

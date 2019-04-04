@@ -54,7 +54,7 @@ export default class Layerpanelmap extends ApplicationLayout {
 
     async openRightPanel(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.OPEN_PANEL");
+          subtitle.startRecord("Open option panel");
         }        
         await test
         .click(this.sideBarRight)
@@ -66,7 +66,7 @@ export default class Layerpanelmap extends ApplicationLayout {
 
       async closeRightPanel(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.CLOSE_PANEL");
+          subtitle.startRecord("Close option panel");
         }
         await test
         .click(this.globalpanel)
@@ -79,7 +79,7 @@ export default class Layerpanelmap extends ApplicationLayout {
 
       async changeBusiness(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("Selection d'une couche à afficher");
+          subtitle.startRecord("Select a business layer");
         }
       await test
       .click(this.business)
@@ -96,7 +96,7 @@ export default class Layerpanelmap extends ApplicationLayout {
     }
     async deleteData(test, subtitle){
       if (subtitle!=null) {
-        subtitle.startRecord("Suppresion de donnée");
+        subtitle.startRecord("Delete an overlay layer");
       }
     await test
     .click(this.business)
