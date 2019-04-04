@@ -109,15 +109,15 @@
                 isVisible: true,
                 'marker-symbol': 'airport',
                 'marker-color': '#57D824',
-                entityStyle: {
-                  model: {
-                    type: 'Cesium.ModelGraphics',
-                    options: {
-                      uri: '/statics/a320.glb',
-                      minimumPixelSize: 64
-                    }
+                model: {
+                  type: 'Cesium.ModelGraphics',
+                  options: {
+                    uri: '/statics/<%= properties.type %>.glb',
+                    minimumPixelSize: 64,
+                    scale: 0.1
                   }
                 },
+                template: ['model.options.uri'],
                 popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.callsign %>'
@@ -274,12 +274,20 @@
               leaflet: {
                 type: 'geoJson',
                 realtime: true,
-                isVisible: true
+                isVisible: true,
+                popup: { pick: [] },
+                tooltip: {
+                  template: '<%= properties.message %>'
+                }
               },
               cesium: {
                 type: 'geoJson',
                 realtime: true,
-                isVisible: true
+                isVisible: true,
+                popup: { pick: [] },
+                tooltip: {
+                  template: '<%= properties.message %>'
+                }
               }
             }})
             .then(function () { updateFlightpathLayer(name) })
@@ -289,23 +297,22 @@
       }
       function updateFlightpathLayer(name) {
         // Setup random path
-        flightpath.forEach(function(point) {
-          point[0] += 0.05 * (Math.random() - 0.5)
-          point[1] += 0.05 * (Math.random() - 0.5)
+        let coordinates = flightpath.map(function(point) {
+          return [ point[0] + 0.05 * (Math.random() - 0.5),
+                   point[1] + 0.05 * (Math.random() - 0.5),
+                   10000 * Math.random() ]
         })
         let path = { type: 'FeatureCollection', features: [] }
-        const middle = flightpath.length / 2
+        const middle = coordinates.length / 2
         path.features.push({
           type: 'Feature',
-          properties: { id: 0 },
-          style: { stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
-          geometry: { type: 'LineString', coordinates: flightpath.slice(0, middle)}
+          properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle)}
         })
         path.features.push({
           type: 'Feature',
-          properties: { id: 1 },
-          style: { stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random() },
-          geometry: { type: 'LineString', coordinates: flightpath.slice(middle, flightpath.length)}
+          properties: { id: 1, message: 'ADS-B OK', stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random() },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(middle, flightpath.length)}
         })
         // Filter airports as all don't have METAR/TAF information
         postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
@@ -352,6 +359,9 @@
       postRobot.on('map-ready', () => {
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
         .then(function (result) { airports = result.data })
+      })
+      postRobot.on('globe-ready', () => {
+        // Whatever
       })
 
       var flightpath = [
