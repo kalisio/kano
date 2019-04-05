@@ -125,9 +125,12 @@
                     uri: '/statics/<%= properties.type %>.glb',
                     minimumPixelSize: 64,
                     scale: 0.1
-                  }
+                  },
                 },
-                template: ['model.options.uri'],
+                // Orientation as heading, pitch, roll
+                orientation: '<%= properties.track %>,0,0',
+                localFrameAxes: ['east', 'north'],
+                template: ['model.options.uri', 'orientation'],
                 popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.callsign %>'
@@ -401,8 +404,9 @@
         // Whatever
       })
       postRobot.on('click', (event) => {
-        console.log(event.data)
-        alert('Feature clicked')
+        if (event.data.layer.name === 'ACARS') {
+          alert('ACARS message clicked')
+        }
       })
 
       var flightpath = [
