@@ -13,15 +13,9 @@ export default class MapView extends ApplicationLayout {
 
     }
 
-    async movemap(test, x, y, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("Depalcement de la carte");
-        }
+    async movemap(test, x, y){
       await test    
       .drag(this.globalpanel, x, y)
       .wait(500)
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
     }
 }

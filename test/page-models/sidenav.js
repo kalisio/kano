@@ -15,7 +15,7 @@ export default class sidenav extends ApplicationLayout {
 
     async select2D(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("Vue 2D");
+          subtitle.startRecord("Select 2D view");
         }
       await test
       .click(this.sideBarLeft)
@@ -29,7 +29,7 @@ export default class sidenav extends ApplicationLayout {
     
     async select3D(test, subtitle){
         if (subtitle!=null) {
-          subtitle.startRecord("Vue 3D");
+          subtitle.startRecord("Select 3D view");
         }
       await test
       .click(this.sideBarLeft)

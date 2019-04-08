@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
-//import Subtitle from '../subtitle'
 
 
 export default class Layerpanelmap extends ApplicationLayout {
@@ -52,35 +51,20 @@ export default class Layerpanelmap extends ApplicationLayout {
 
     }
 
-    async openRightPanel(test, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.OPEN_PANEL");
-        }        
+    async openRightPanel(test){        
         await test
         .click(this.sideBarRight)
         .wait(500);
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
       }
 
-      async closeRightPanel(test, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.CLOSE_PANEL");
-        }
+      async closeRightPanel(test){
         await test
         .click(this.globalpanel)
         .click(this.globalpanel)
         .wait(250)
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
       }
 
-      async changeBusiness(test, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("Selection d'une couche à afficher");
-        }
+      async changeBusiness(test){
       await test
       .click(this.business)
       .wait(500)
@@ -90,14 +74,8 @@ export default class Layerpanelmap extends ApplicationLayout {
       .wait(500)
       .click(this.zoomTo)
       .wait(500)
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
     }
-    async deleteData(test, subtitle){
-      if (subtitle!=null) {
-        subtitle.startRecord("Suppresion de donnée");
-      }
+    async deleteData(test){
     await test
     .click(this.business)
     .wait(500)
@@ -107,9 +85,6 @@ export default class Layerpanelmap extends ApplicationLayout {
     .wait(500)
     .click(this.removeCancel)
     .wait(500)
-      if (subtitle!=null) {
-        subtitle.stopRecord();
-      }
   }
 
 }

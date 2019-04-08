@@ -276,6 +276,8 @@ export default {
     async onFeatureClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
+      // Will fail if not integrated as iframe so check
+      if (window.parent !== window) postRobot.send(window.parent, 'click', { feature, layer: options })
       if (options.probe) {
         const probe = await this.getForecastProbe(options.probe)
         if (probe) {

@@ -28,8 +28,8 @@ const subtitle =  new Subtitle()
 
 test('Login, and features', async test => {
   subtitle.initStart();
-  subtitle.startRecord("Authentification");
-  await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
+  subtitle.startRecord("Log in");
+  await auth.logIn(test, { email:  'kalisio@kalisio.xyz', password: 'Pass;word1' })
   subtitle.stopRecord();
   subtitle.buildLogs();
 
@@ -39,21 +39,26 @@ test('Login, and features', async test => {
 
   //await select.select3D(test)
   
-  await sidenav.select2D(test, subtitle)  
+  subtitle.startRecord("Select 2D view");
+  await sidenav.select2D(test)
+  subtitle.stopRecord();  
   
   await panelMap.openRightPanel(test)
   
-  
-  await panelMap.changeBusiness(test, subtitle)
+  subtitle.startRecord("Select a business layer");
+  await panelMap.changeBusiness(test)
+  subtitle.stopRecord();
   
 
   //await select.filldata(test)
   //await select.deleteData(test)
   
   await panelMap.closeRightPanel(test)  
-  await mapView.movemap(test, 800, 0, subtitle)
+  subtitle.startRecord("Move the map");
+  await mapView.movemap(test, 800, 0)
+  subtitle.stopRecord();
   
-  subtitle.startRecord("déconnexion");
+  subtitle.startRecord("Log out");
   await auth.logOut(test)
   subtitle.stopRecord();
 

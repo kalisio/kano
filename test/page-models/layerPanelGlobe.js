@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import ApplicationLayout from './layout'
-//import Subtitle from '../subtitle'
 
 
 export default class Layerpanelglobal extends ApplicationLayout {
@@ -18,29 +17,17 @@ export default class Layerpanelglobal extends ApplicationLayout {
 
     }
 
-      async openRightPanel(test, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.OPEN_PANEL");
-        }
+      async openRightPanel(test){
         await test
         .click(this.sideBarRight3D)
         .wait(500)
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
       }
 
       async closeRightPanel(test, subtitle){
-        if (subtitle!=null) {
-          subtitle.startRecord("rightpanel.CLOSE_PANEL");
-        }
         await test
         .click(this.globalpanel)
         .click(this.globalpanel)
         .wait(250)
-        if (subtitle!=null) {
-          subtitle.stopRecord();
-        }
       }
 
 
