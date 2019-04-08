@@ -106,7 +106,7 @@ export default {
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
     kMapMixins.map.fileLayers,
-    kMapMixins.map.geotiffLayers,
+    kMapMixins.map.georasterLayers,
     kMapMixins.map.editLayers
   ],
   inject: ['layout'],
