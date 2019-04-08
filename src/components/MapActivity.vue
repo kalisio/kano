@@ -93,14 +93,15 @@ export default {
     QFixedPosition
   },
   mixins: [
-    kCoreMixins.baseActivity,
     kCoreMixins.refsResolver(['map']),
+    kCoreMixins.baseActivity,
     kMapMixins.geolocation,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.activity,
     kMapMixins.legend,
+    kMapMixins.locationIndicator,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,

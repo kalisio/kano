@@ -52,6 +52,13 @@
         "component": "form/KToggleField",
         "helper": "schemas.TIME_FORMAT_UTC_FIELD_HELPER"
       }
+    },
+    "location": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.LOCATION_FORMAT"
+      }
     }
   },
   "required": ["utc"]
