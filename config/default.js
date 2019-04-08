@@ -46,7 +46,7 @@ module.exports = {
   apiTimeout: 30000,
   transport: 'http', // Could be 'http' or 'websocket',
   appName: 'Kano',
-  appLogo: 'kano-icon-64x64.png',
+  appLogo: 'kano-icon-32x32.png',
   publisher: 'Kalisio',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
