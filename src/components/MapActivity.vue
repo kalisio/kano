@@ -77,8 +77,7 @@ import logger from 'loglevel'
 import moment from 'moment'
 import { QPopover, QModal, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
 
-import { utils as kCoreUtils } from '@kalisio/kdk-core/client'
-import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
+import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
 
