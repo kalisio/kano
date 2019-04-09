@@ -44,7 +44,7 @@ module.exports = {
   apiPath: API_PREFIX,
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
-  transport: 'http', // Could be 'http' or 'websocket',
+  transport: 'websocket', // Could be 'http' or 'websocket',
   appName: 'Kano',
   appLogo: 'kano-icon-32x32.png',
   publisher: 'Kalisio',
