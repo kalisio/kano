@@ -101,7 +101,7 @@
                 realtime: true,
                 isVisible: true,
                 'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><img width="32px" height="32px" src="/statics/<%= properties.type %>.png"/></svg></span>',
-                /*
+                /* We can also use SVG
                 'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
                 */
                 'icon-anchor': [16, 16],
@@ -166,8 +166,8 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                /* Using marker layers allows for clustering
                 container: 'markerClusterGroup',
+                /* We can use SVG
                 'icon-html': '<svg height="16" width="16"><circle cx="8" cy="8" r="6" fill-opacity="0.5" stroke-width="0"\
                                 fill="<% if (properties.visibility < 75) { %>#000000<% }\
                                       else if (properties.visibility < 300) { %>#d20200<% }\
@@ -180,7 +180,7 @@
                 'icon-class': '',
                 template: ['icon-html'],
                 */
-                container: 'markerClusterGroup',
+                /* We can use font-awesome icons
                 'icon-classes': 'fa fa-sun-o',
                 'icon-color': '#000000',
                 'icon-x-offset' : -2,
@@ -189,8 +189,33 @@
                                     else if (properties.visibility < 300) { %>#d20200<% }
                                     else if (properties.visibility < 1500) { %>#f9b40f<% }
                                     else if (properties.visibility < 3000) { %>#eef52f<% }
-                                    else { %>#33c137<% } %>"/>`,
+                                    else { %>#33c137<% } %>`,
                 template: ['marker-color'],
+                */
+                /* We can use images
+                'marker-symbol': `<% if (properties.visibility < 75) { %>/statics/windyblack.png<% }
+                                    else if (properties.visibility < 300) { %>/statics/windyred.png<% }
+                                    else if (properties.visibility < 1500) { %>/statics/windyorange.png<% }
+                                    else if (properties.visibility < 3000) { %>/statics/windyyellow.png<% }
+                                    else { %>/statics/windygreen.png<% } %>`,
+                'marker-size': [24, 30],
+                template: ['marker-symbol'],
+                */
+                /* We can use HTML */
+                'icon-html': `<b style="display: inline-block; color:#000;
+                                text-shadow:-1px -1px 0 #FFF,1px -1px 0 #FFF,-1px 1px 0 #FFF,1px 1px 0 #FFF;">
+                                <%= properties.ICAO %>
+                              </b>
+                              <img style="display: inline-block;" width="24px" height="30px" src="
+                                <% if (properties.visibility < 75) { %>/statics/windyblack.png<% }
+                                  else if (properties.visibility < 300) { %>/statics/windyred.png<% }
+                                  else if (properties.visibility < 1500) { %>/statics/windyorange.png<% }
+                                  else if (properties.visibility < 3000) { %>/statics/windyyellow.png<% }
+                                  else { %>/statics/windygreen.png<% } %>"/>
+                              `,
+                'icon-class': '',
+                'icon-anchor': [12, 32],
+                template: ['icon-html'],
                 popup: { pick: [] },
                 tooltip: {
                   template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
