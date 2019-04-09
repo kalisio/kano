@@ -25,6 +25,8 @@ export default function () {
       utc: false,
       locale: kCoreUtils.getLocale()
     })
+    // Default location formatting settings
+    Store.set('locationFormat', 'f')
     const settingsService = api.createService('settings', {
       service: LocalSettingsService,
       propertyMapping: {
@@ -34,7 +36,8 @@ export default function () {
         longDate: 'timeFormat.date.long',
         shortYear: 'timeFormat.year.short',
         longYear: 'timeFormat.year.long',
-        utc: 'timeFormat.utc'
+        utc: 'timeFormat.utc',
+        location: 'locationFormat'
       }
     })
     // Restore previous settings if any

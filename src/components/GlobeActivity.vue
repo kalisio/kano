@@ -52,6 +52,7 @@ export default {
     kMapMixins.featureService,
     kMapMixins.time,
     kMapMixins.activity,
+    kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers
