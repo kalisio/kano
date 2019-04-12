@@ -80,11 +80,10 @@ export default {
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
       await this.initializeView()
-      this.bounds = new Cesium.Rectangle()
-      this.viewer.clock.onTick.addEventListener(this.onGlobeMoved)
+      this.viewer.clock.onTick.addEventListener(this.storeView)
     },
     finalizeViewer () {
-      this.viewer.clock.onTick.removeEventListener(this.onGlobeMoved)
+      this.viewer.clock.onTick.removeEventListener(this.storeView)
     },
     async refreshActivity () {
       this.clearActivity()
@@ -122,14 +121,6 @@ export default {
       }
       */
       return null
-    },
-    onGlobeMoved () {
-      const cameraBounds = this.viewer.camera.computeViewRectangle(this.viewer.scene.globe.ellipsoid, this.bounds)
-      const south = Cesium.Math.toDegrees(cameraBounds.south)
-      const west = Cesium.Math.toDegrees(cameraBounds.west)
-      const north = Cesium.Math.toDegrees(cameraBounds.north)
-      const east = Cesium.Math.toDegrees(cameraBounds.east)
-      this.$router.push({ query: { south, west, north, east } })
     },
     onToggleFullscreen () {
       if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()

@@ -6,6 +6,7 @@
   "properties": {
     "shortTime": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_SHORT_TIME_FIELD_HELPER"
@@ -13,6 +14,7 @@
     },
     "longTime": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_LONG_TIME_FIELD_HELPER"
@@ -20,6 +22,7 @@
     },
     "shortDate": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_SHORT_DATE_FIELD_HELPER"
@@ -27,6 +30,7 @@
     },
     "longDate": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_LONG_DATE_FIELD_HELPER"
@@ -34,6 +38,7 @@
     },
     "shortYear": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_SHORT_YEAR_FIELD_HELPER"
@@ -41,6 +46,7 @@
     },
     "longYear": {
       "type": "string", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.TIME_FORMAT_LONG_YEAR_FIELD_HELPER"
@@ -48,9 +54,17 @@
     },
     "utc": {
       "type": "boolean", 
+      "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KToggleField",
         "helper": "schemas.TIME_FORMAT_UTC_FIELD_HELPER"
+      }
+    },
+    "restoreView": {
+      "type": "boolean", 
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
       }
     },
     "location": {
@@ -61,5 +75,5 @@
       }
     }
   },
-  "required": ["utc"]
+  "required": ["shortTime", "longTime", "shortDate", "longDate", "shortYear", "longYear", "utc", "location", "restoreView"]
 }

@@ -204,10 +204,10 @@ export default {
       this.weacastApi.hooks(appHooks)
       // Add a scale control
       L.control.scale().addTo(this.map)
-      this.map.on('moveend', this.onMapMoved)
+      this.map.on('moveend', this.storeView)
     },
     finalizeViewer () {
-      this.map.off('moveend', this.onMapMoved)
+      this.map.off('moveend', this.storeView)
     },
     async refreshActivity () {  
       this.clearActivity()
@@ -298,14 +298,6 @@ export default {
           this.mapHeight = this.$refs.map.getBoundingClientRect().height
         }
       }
-    },
-    onMapMoved () {
-      this.bounds = this.map.getBounds()
-      const south = this.bounds.getSouth()
-      const west = this.bounds.getWest()
-      const north = this.bounds.getNorth()
-      const east = this.bounds.getEast()
-      this.$router.push({ query: { south, west, north, east } })
     },
     onToggleFullscreen () {
       this.map.toggleFullscreen()

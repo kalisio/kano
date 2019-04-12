@@ -27,6 +27,11 @@ export default function () {
     })
     // Default location formatting settings
     Store.set('locationFormat', 'f')
+    // Default view settings
+    Store.set('restore', {
+      view: true,
+      layers: false
+    })
     const settingsService = api.createService('settings', {
       service: LocalSettingsService,
       propertyMapping: {
@@ -37,7 +42,8 @@ export default function () {
         shortYear: 'timeFormat.year.short',
         longYear: 'timeFormat.year.long',
         utc: 'timeFormat.utc',
-        location: 'locationFormat'
+        location: 'locationFormat',
+        restoreView: 'restore.view'
       }
     })
     // Restore previous settings if any
