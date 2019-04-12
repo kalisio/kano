@@ -111,6 +111,8 @@ module.exports = async function () {
     if (defaultLayer.probeService) createFeatureServiceForLayer({ collection: defaultLayer.probeService })
     // And if we need to initialize some data as well
     if (!createdLayer && featureService && defaultLayer.fileName) {
+      // Cleanup
+      await featureService.remove(null, { query: {} })
       if (path.extname(defaultLayer.fileName) === '.gz') {
         const extractedFileName = path.join(path.dirname(defaultLayer.fileName), path.basename(defaultLayer.fileName, '.gz'))
         console.log(extractedFileName)
