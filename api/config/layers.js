@@ -179,7 +179,7 @@ module.exports = [
     type: 'TerrainLayer',
     cesium: {
       type: 'Cesium',
-      url: 'http://cesiumterrainserver.kalisio.xyz/tilesets/md15-tiles',
+      url: 'https://k2.' + kargoDomain,
       requestWaterMask: 'true',
       requestVertexNormals: 'true'
     }
