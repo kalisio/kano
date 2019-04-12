@@ -6,8 +6,6 @@ import LayerPanelGlobe from './layerPanelGlobe'
 import Sidenav from './sidenav'
 import MapView from './mapView'
 
-import Selectdata from './selectdata'
-
 // Export all models
 export {
   ApplicationLayout,
@@ -15,8 +13,7 @@ export {
   LayerPanelMap,
   LayerPanelGlobe,
   Sidenav,
-  MapView,
-  Selectdata
+  MapView
 }
 
 // Access store
