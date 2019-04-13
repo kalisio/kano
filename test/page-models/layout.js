@@ -9,7 +9,6 @@ export default class ApplicationLayout {
     this.appBarTitle = this.appBar.find('#app-bar-title')
     this.overflowMenuEntry = this.appBar.find('#overflow-menu-entry')
     this.overflowMenu = Selector('#overflow-menu')
-    //this.sideNavToggle = this.appBar.find('#ap') 
     this.sideNavToggle = Selector('#side-nav-toggle')
     this.sideNav = VueSelector('k-side-nav')
     this.tabBar = VueSelector('k-tab-bar')
@@ -20,18 +19,20 @@ export default class ApplicationLayout {
     this.idSelector = Selector((id) => { return document.getElementById(id) })
   }
   async isSideNavVisible () {
+    const exists = await this.sideNav.exists
+    if (!exists) return false
     let left = await this.sideNav.getBoundingClientRectProperty('left')
     // quasar actually hides the sideNav by translating it outside the viewport,
     // so that the visible flag is always true
     return left >= 0
   }
   async openSideNav (test) {
-    //let isSideNavVisible = await this.isSideNavVisible()
-    //if (!isSideNavVisible) {
+    let isSideNavVisible = await this.isSideNavVisible()
+    if (!isSideNavVisible) {
       await test
         .click(this.sideNavToggle) // Ensure menu is open
         .wait(1000)
-   // }
+    }
   }
   async clickIdentity (test) {
     await this.openSideNav(test)
