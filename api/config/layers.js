@@ -434,7 +434,7 @@ module.exports = [
       },
       tooltip: {
         template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
+                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
       }
     }
   },
