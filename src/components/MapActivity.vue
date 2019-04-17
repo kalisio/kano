@@ -3,7 +3,7 @@
     
     <div ref="map" :style="mapStyle">
       <q-resize-observable @resize="onMapResized" />
-      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onResizeTimeseries">
+      <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
@@ -161,12 +161,15 @@ export default {
     },
     probedLocationName: function () {
       if (!this.probedLocation) return ''
-      return _.get(this.probedLocation, 'properties.LbStationHydro') ||
+      let name = _.get(this.probedLocation, 'properties.LbStationHydro') ||
              _.get(this.probedLocation, 'properties.name') ||
-             _.get(this.probedLocation, 'properties.NAME') || 
-            this.$t('TimeSeries.PROBE') + ' (' +
-            this.probedLocation.geometry.coordinates[0].toFixed(2) + '°, ' +
-            this.probedLocation.geometry.coordinates[1].toFixed(2) + '°)'
+             _.get(this.probedLocation, 'properties.NAME')
+      if (!name && _.has(this.probedLocation, 'geometry.coordinates')) {
+        const longitude = _.get(this.probedLocation, 'geometry.coordinates[0]')
+        const latitude = _.get(this.probedLocation, 'geometry.coordinates[1]')
+        name = this.$t('TimeSeries.PROBE') + ` (${longitude.toFixed(2)}°, ${latitude.toFixed(2)}°)`
+      }
+      return name || ''
     }
   },
   watch: {
@@ -226,7 +229,10 @@ export default {
       let layer = this.createLeafletLayer(options)
       // Specific case of time dimension layer where we embed the underlying WMS layer
       if (leafletOptions.timeDimension) {
-        layer = this.createLeafletLayer(Object.assign({ type: 'timeDimension.layer.wms', source: layer }, leafletOptions.timeDimension))
+        layer = this.createLeafletLayer(Object.assign({
+          type: 'timeDimension.layer.wms',
+          source: layer
+        }, leafletOptions.timeDimension))
         layer.setAvailableTimes(this.map.timeDimension.getAvailableTimes())
       }
       return layer
@@ -238,11 +244,10 @@ export default {
       if (isWeatherProbe) {
         let marker = this.getProbedLocationForecastMarker(feature, latlng)
         if (marker) {
-          // We use custom events on this one to be able to drag probed location
-          kMapUtils.unbindLeafletEvents(marker)
-          marker.on('dragend', (event) => this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat,
-            moment.utc(this.timeLine.start), moment.utc(this.timeLine.end)))
-          marker.on('click', (event) => this.toggleTimeseries())
+          marker.on('dragend', (event) => {
+            this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat,
+              moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
+          })
         }
         return marker
       }
@@ -278,16 +283,29 @@ export default {
       if (!feature) return
       // Will fail if not integrated as iframe so check
       if (window.parent !== window) postRobot.send(window.parent, 'click', { feature, layer: options })
-      if (options.probe) {
+      const isWeatherProbe = (_.has(feature, 'properties.windDirection') &&
+                              _.has(feature, 'properties.windSpeed'))
+      const isWeatherProbedLocation = (this.probedLocation && _.has(this.probedLocation, 'properties.windDirection') &&
+                                       _.has(this.probedLocation, 'properties.windSpeed'))
+      let hasTimeseries = true
+      // Update timeseries data if required
+      if (options.probe) { // Static weacast probe
         const probe = await this.getForecastProbe(options.probe)
         if (probe) {
           await this.getForecastForFeature(_.get(feature, this.probe.featureId),
             moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
         }
-      } else if (options.variables && options.service) {
+      } else if (options.variables && options.service) { // Static measure probe
         await this.getMeasureForFeature(options, feature,
           moment.utc(this.timeLine.current).clone().subtract({ seconds: options.history }), moment.utc(this.timeLine.current))
+        
+      } else if (isWeatherProbe) { // Dynamic weacast probe
+        this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat,
+          moment.utc(this.timeLine.start), moment.utc(this.timeLine.end))
+      } else {
+        hasTimeseries = false
       }
+      if (hasTimeseries) this.openTimeseries()
     },
     onMapResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -302,8 +320,9 @@ export default {
     onToggleFullscreen () {
       this.map.toggleFullscreen()
     },
-    onResizeTimeseries(state) {
+    onUpdateTimeseries(state) {
       if (state !== 'closed') this.$refs.timeseries.setupTimeTicks()
+      else this.hideLayer(this.$t('mixins.activity.PROBED_LOCATION'))
     },
     onLayerShown (layer) {
       // Show timeseries on probed location
@@ -334,15 +353,21 @@ export default {
       return this.$refs.widget.isOpen()
     },
     openTimeseries () {
+      if (this.isTimeseriesOpen()) return
       this.$refs.widget.open()
       // Minimized widget is 40vw, if we have a small zie open wide directly (eg on mobile)
       if (0.4 * this.mapWidth < 500) this.$refs.widget.setMode('maximized')
+      this.showLayer(this.$t('mixins.activity.PROBED_LOCATION'))
     },
     closeTimeseries () {
+      if (!this.isTimeseriesOpen()) return
       this.$refs.widget.close()
+      this.hideLayer(this.$t('mixins.activity.PROBED_LOCATION'))
     },
     toggleTimeseries () {
       this.$refs.widget.toggle()
+      if (this.isLayerVisible(this.$t('mixins.activity.PROBED_LOCATION'))) this.hideLayer(this.$t('mixins.activity.PROBED_LOCATION'))
+      else this.showLayer(this.$t('mixins.activity.PROBED_LOCATION'))
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
