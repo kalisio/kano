@@ -129,6 +129,8 @@
     "vue-avatar": "^2.0.0",
     "vue-router": "^2.7.0",
     "vue2-dropzone": "^3.0.5",
+    "weacast-core": "^1.0.0",
+    "weacast-leaflet": "^1.0.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
