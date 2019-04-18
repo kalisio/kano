@@ -383,6 +383,61 @@
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
+      function toggleGradientFlightpathLayer(name) {
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'timeline',
+              leaflet: {
+                type: 'path',
+                realtime: true,
+                isVisible: true,
+                popup: { pick: [] },
+                tooltip: {
+                  template: '<%= properties.message %>'
+                }
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                popup: { pick: [] },
+                tooltip: {
+                  template: '<%= properties.message %>'
+                }
+              }
+            }})
+            .then(function () { return updateGradientFlightpathLayer(name) })
+            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+          }
+        })
+      }
+      function updateGradientFlightpathLayer(name) {
+        let path = { type: 'FeatureCollection', features: [] }
+        const middle = flightpath.length / 2
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 0, message: 'ADS-B KO', stroke: '#AADDFF', weight: 8 },
+          geometry: { type: 'LineString', coordinates: flightpath.slice(0, middle)}
+        })
+        let gradient = []
+        for (let i=middle; i < flightpath.length; i++)  {
+          if (i % 2) gradient.push('#0000FF')
+          else gradient.push('#D2691E')
+        }
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 1, message: 'ADS-B OK', gradient, weight: 8 },
+          geometry: { type: 'LineString', coordinates: flightpath.slice(middle, flightpath.length)}
+        })
+        // Filter airports as all don't have METAR/TAF information
+        return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
+      }
     </script>
   </head>
   <body style="background-color: grey">
@@ -402,8 +457,9 @@
           <button type="button" onclick="updateAircraftLayer('Aircraft')">Update aircraft</button></br>
           <button type="button" onclick="toggleAcarsLayer('ACARS')">Switch ACARS</button></br>
           <button type="button" onclick="updateAcarsLayer('ACARS')">Update ACARS</button></br>
-          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch Flightpath</button></br>
-          <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update Flightpath</button></br>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button></br>
+          <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button></br>
+          <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button></br>
         </td>
         <td>
           <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="/">
