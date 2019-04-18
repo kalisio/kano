@@ -56,14 +56,6 @@
             type: 'Point'
           }
         }
-        if (component === 'globe') {
-          // Styling can be directly provided on feature as well
-          Object.assign(feature.properties, {
-            'marker-symbol' : 'circle',
-            'marker-color' : (type === 'ATC' ? '#000000' :
-                              (type === 'AOC') ? '#f9b40f' : '#33c137')
-          })
-        }
         return feature
       }
 
@@ -120,18 +112,20 @@
                 isVisible: true,
                 'marker-symbol': 'airport',
                 'marker-color': '#57D824',
-                model: {
-                  type: 'Cesium.ModelGraphics',
-                  options: {
-                    uri: '/statics/<%= properties.type %>.glb',
-                    minimumPixelSize: 64,
-                    scale: 0.1
+                entityStyle: {
+                  model: {
+                    type: 'Cesium.ModelGraphics',
+                    options: {
+                      uri: '/statics/<%= properties.type %>.glb',
+                      minimumPixelSize: 64,
+                      scale: 0.1
+                    },
                   },
+                  // Orientation as heading, pitch, roll
+                  orientation: '<%= properties.track %>,0,0',
+                  localFrameAxes: ['east', 'north'],
+                  template: ['model.options.uri', 'orientation']
                 },
-                // Orientation as heading, pitch, roll
-                orientation: '<%= properties.track %>,0,0',
-                localFrameAxes: ['east', 'north'],
-                template: ['model.options.uri', 'orientation'],
                 popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.callsign %>'
@@ -229,13 +223,22 @@
                 cluster: {
                   pixelRange: 50
                 },
-                'marker-symbol': 'lighthouse',
-                'marker-color': `<% if (properties.visibility < 75) { %>#000000<% }
-                                    else if (properties.visibility < 300) { %>#d20200<% }
-                                    else if (properties.visibility < 1500) { %>#f9b40f<% }
-                                    else if (properties.visibility < 3000) { %>#eef52f<% }
-                                    else { %>#33c137<% } %>"/>`,
-                template: ['marker-color'],
+                entityStyle: {
+                  billboard: {
+                    scale: 0.5,
+                    image: `<% if (properties.visibility < 75) { %>/statics/windyblack.png<% }
+                              else if (properties.visibility < 300) { %>/statics/windyred.png<% }
+                              else if (properties.visibility < 1500) { %>/statics/windyorange.png<% }
+                              else if (properties.visibility < 3000) { %>/statics/windyyellow.png<% }
+                              else { %>/statics/windygreen.png<% } %>`,
+                    color: `Cesium.Color.<% if (properties.visibility < 75) { %>BLACK<% }
+                              else if (properties.visibility < 300) { %>ORANGERED<% }
+                              else if (properties.visibility < 1500) { %>GOLD<% }
+                              else if (properties.visibility < 3000) { %>YELLOW<% }
+                              else { %>LIMEGREEN<% } %>"/>`
+                  },
+                  template: ['billboard.image', 'billboard.color']
+                },
                 popup: { pick: [] },
                 tooltip: {
                   template: 'METAR\n<%= properties.metar %>\nTAF\n<%= properties.taf %>'
@@ -254,14 +257,6 @@
           airport.properties.visibility = visibility
           airport.properties.metar = 'KAUS 092135Z 26018G25KT 8SM -TSRA BR SCT045CB BKN060 OVC080 30/21 A2992'
           airport.properties.taf = 'KOKC 051130Z 051212 14008KT 5SM BR BKN030 TEMPO 1316 1 1/2SM BR'
-          if (component === 'globe') {
-            // Styling can be directly provided on feature as well
-            airport.properties['marker-symbol'] = 'lighthouse',
-            airport.properties['marker-color'] = (visibility < 75 ? '#000000' :
-                                                  (visibility < 300 ? '#d20200' :
-                                                  (visibility < 1500 ? '#f9b40f' :
-                                                  (visibility < 3000 ? '#eef52f' : '#33c137'))))
-          }
         })
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, { type: 'FeatureCollection', features: airports.features.slice(0, 100) }] })
@@ -298,13 +293,15 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                /*
                 'marker-symbol' : 'circle',
-                'marker-color' : `<% if (properties.type === 'ATC') { %>#000000<% }
-                                    else if (properties.type === 'AOC') { %>#f9b40f<% }
-                                    else { %>#33c137<% } %>`,
-                template: ['marker-color'],
-                */
+                entityStyle: {
+                  billboard: {
+                    color: `Cesium.Color.<% if (properties.type === 'ATC') { %>BLACK<% }
+                              else if (properties.type === 'AOC') { %>ORANGE<% }
+                              else { %>LIMEGREEN<% } %>`
+                  },
+                  template: ['billboard.color']
+                },
                 popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.timestamp.toISOString() %>\n<%= properties.message %>'
@@ -337,6 +334,7 @@
               name,
               type: 'OverlayLayer',
               icon: 'timeline',
+              featureId: 'id',
               leaflet: {
                 type: 'geoJson',
                 realtime: true,
@@ -353,6 +351,11 @@
                 popup: { pick: [] },
                 tooltip: {
                   template: '<%= properties.message %>'
+                },
+                entityStyle: {
+                  polyline: {
+                    clampToGround: false
+                  }
                 }
               }
             }})

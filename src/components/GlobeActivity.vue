@@ -141,7 +141,7 @@ export default {
       if (!entity) return
       const properties = (entity.properties ? entity.properties.getValue(0) : null)
       // Will fail if not integrated as iframe so check
-      if (window.parent !== window) postRobot.send(window.parent, 'click', properties)
+      if (window.parent !== window) postRobot.send(window.parent, 'click', { properties, layer: options })
     }
   },
   created () {
