@@ -9,6 +9,7 @@
     <title>Kano IFrame integration</title>
     <link rel="shortcut icon" type="image/x-icon" href="statics/kano-icon-32x32.png">
     <script src="./flightpath.js"></script>
+    <script src="./flightradar.js"></script>
     <script src="./post-robot.min.js"></script>
     <script>
       var layerIsShown = false
@@ -372,7 +373,7 @@
                    10000 * Math.random() ]
         })
         let path = { type: 'FeatureCollection', features: [] }
-        const middle = coordinates.length / 2
+        const middle = parseInt(coordinates.length / 2)
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
@@ -422,21 +423,26 @@
       }
       function updateGradientFlightpathLayer(name) {
         let path = { type: 'FeatureCollection', features: [] }
-        const middle = flightpath.length / 2
+        const middle = parseInt(flightradar.length / 2)
+        const offset = Math.ceil(flightradar.length % 2)
+        console.log(offset)
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: '#AADDFF', weight: 8 },
-          geometry: { type: 'LineString', coordinates: flightpath.slice(0, middle)}
+          geometry: { type: 'LineString', coordinates: flightradar.slice(0, middle + offset)}
         })
         let gradient = []
-        for (let i=middle; i < flightpath.length; i++)  {
-          if (i % 2) gradient.push('#0000FF')
-          else gradient.push('#D2691E')
+        for (let i=middle; i < flightradar.length; i++)  {
+          let red = 0
+          let green = 0
+          let blue = i - middle    
+          let decColor =0x1000000+ blue + 0x100 * green + 0x10000 *red
+          gradient.push('#'+decColor.toString(16).substr(1))
         }
         path.features.push({
           type: 'Feature',
           properties: { id: 1, message: 'ADS-B OK', gradient, weight: 8 },
-          geometry: { type: 'LineString', coordinates: flightpath.slice(middle, flightpath.length)}
+          geometry: { type: 'LineString', coordinates: flightradar.slice(middle, flightradar.length)}
         })
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
