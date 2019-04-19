@@ -128,7 +128,7 @@ module.exports = {
     ]
   },
   weacast: {
-    transport: 'http', // Could be 'http' or 'websocket',
+    transport: 'websocket', // Could be 'http' or 'websocket',
     apiUrl: weacastApi,
     apiPath: API_PREFIX,
     apiTimeout: 30000
