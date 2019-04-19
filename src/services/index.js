@@ -1,5 +1,5 @@
 import logger from 'loglevel'
-import kCore, { Store, LocalSettingsService, utils as kCoreUtils } from '@kalisio/kdk-core/client'
+import kCore, { LocalSettingsService, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import kMap from '@kalisio/kdk-map/client'
 
 export default function () {
@@ -8,30 +8,8 @@ export default function () {
   // Set up our plugin services
   try {
     api.configure(kCore)
-    // Default time formatting settings
-    Store.set('timeFormat', {
-      time: {
-        short: 'H[h]',
-        long: 'HH:mm'
-      },
-      date: {
-        short: 'DD/MM',
-        long: 'dddd D'
-      },
-      year: {
-        short: 'YY',
-        long: 'YYYY'
-      },
-      utc: false,
-      locale: kCoreUtils.getLocale()
-    })
-    // Default location formatting settings
-    Store.set('locationFormat', 'f')
-    // Default view settings
-    Store.set('restore', {
-      view: true,
-      layers: false
-    })
+    api.configure(kMap)
+    // Setup service for settings edition
     const settingsService = api.createService('settings', {
       service: LocalSettingsService,
       propertyMapping: {
@@ -48,7 +26,6 @@ export default function () {
     })
     // Restore previous settings if any
     settingsService.restoreSettings()
-    api.configure(kMap)
   } catch (error) {
     logger.error(error.message)
   }

@@ -49,16 +49,5 @@
   },
   "GlobeActivity": {
     "TOGGLE_VR": "VR"
-  },
-  "LayersPanel": {
-    "BASE_LAYERS": "Base Layers",
-    "TERRAIN_LAYERS": "Terrain layers",
-    "OVERLAY_LAYERS": "My layers",
-    "MEASURE_LAYERS": "Measure layers",
-    "METEO_LAYERS": "Meteo forecasts",
-    "BUSINESS_LAYERS": "Business layers"
-  },
-  "ForecastModelsPanel": {
-    "LABEL": "Forecast models"
   }
 }

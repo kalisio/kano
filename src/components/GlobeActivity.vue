@@ -88,7 +88,7 @@ export default {
     async refreshActivity () {
       this.clearActivity()
       // Setup the right pane
-      this.setRightPanelContent('Panel', this.$data)
+      this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
       // FAB
       this.registerFabAction({

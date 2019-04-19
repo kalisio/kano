@@ -49,16 +49,5 @@
   },
   "GlobeActivity": {
     "TOGGLE_VR": "VR"
-  },
-  "LayersPanel": {
-    "BASE_LAYERS": "Fonds cartographiques",
-    "TERRAIN_LAYERS": "Couches terrain",
-    "OVERLAY_LAYERS": "Mes données",
-    "MEASURE_LAYERS": "Couches des mesures",
-    "METEO_LAYERS": "Prévisions météo",
-    "BUSINESS_LAYERS": "Couches métier"
-  },
-  "ForecastModelsPanel": {
-    "LABEL": "Modèles de prévision"
   }
 }
