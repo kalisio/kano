@@ -377,7 +377,7 @@
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle)}
+          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightradar.length % 2))}
         })
         path.features.push({
           type: 'Feature',
@@ -424,12 +424,10 @@
       function updateGradientFlightpathLayer(name) {
         let path = { type: 'FeatureCollection', features: [] }
         const middle = parseInt(flightradar.length / 2)
-        const offset = Math.ceil(flightradar.length % 2)
-        console.log(offset)
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: '#AADDFF', weight: 8 },
-          geometry: { type: 'LineString', coordinates: flightradar.slice(0, middle + offset)}
+          geometry: { type: 'LineString', coordinates: flightradar.slice(0, middle + Math.ceil(flightradar.length % 2))}
         })
         let gradient = []
         for (let i=middle; i < flightradar.length; i++)  {
