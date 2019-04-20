@@ -73,7 +73,6 @@ export default {
       })
       // Handle reconnection correctly, otherwise auth seems to be lost
       // Also easier to perform a full refresh instead of handling this specifically on each activity
-      /*
       this.$api.socket.on('reconnect', () => {
         // Dismiss pending reconnection error message
         if (this.pendingReconnection) {
@@ -82,10 +81,10 @@ export default {
         }
         Loading.show({message: this.$t('Index.RECONNECT')})
         setTimeout(() => {
-          window.location.reload()
+          // Causes problems with hot reload in dev
+          if (!DEV) window.location.reload()
         }, 3000)
       })
-      */
     }
     // Check for API version, this one is not a service but a basic route so we don't use Feathers client
     this.$store.set('capabilities.client', {
