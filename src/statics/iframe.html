@@ -11,6 +11,7 @@
     <script src="./flightpath.js"></script>
     <script src="./flightradar.js"></script>
     <script src="./post-robot.min.js"></script>
+    <script src="./chroma.min.js"></script>
     <script>
       var layerIsShown = false
       var component = 'map'
@@ -377,7 +378,7 @@
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightradar.length % 2))}
+          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
         })
         path.features.push({
           type: 'Feature',
@@ -417,33 +418,35 @@
                 }
               }
             }})
-            .then(function () { return updateGradientFlightpathLayer(name) })
+            .then(function () { 
+              return updateGradientFlightpathLayer(name) 
+            })
             .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
           }
         })
       }
       function updateGradientFlightpathLayer(name) {
-        let path = { type: 'FeatureCollection', features: [] }
-        const middle = parseInt(flightradar.length / 2)
-        path.features.push({
-          type: 'Feature',
-          properties: { id: 0, message: 'ADS-B KO', stroke: '#AADDFF', weight: 8 },
-          geometry: { type: 'LineString', coordinates: flightradar.slice(0, middle + Math.ceil(flightradar.length % 2))}
-        })
+        let colorramp = chroma.scale([
+          'white',  //0
+          'yellow', // 2000
+          'yellow', // 3000
+          'green',  // 5000 
+          'green',  // 8000
+          'lightblue', // 10000
+          'lightblue', // 18000
+          'navy', // 20000
+          'navy', // 33000
+          'purple', //35000
+          'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000])
         let gradient = []
-        for (let i=middle; i < flightradar.length; i++)  {
-          let red = 0
-          let green = 0
-          let blue = i - middle    
-          let decColor =0x1000000+ blue + 0x100 * green + 0x10000 *red
-          gradient.push('#'+decColor.toString(16).substr(1))
+        let path = flightradar.features[0]
+        let coords = path.geometry.coordinates
+        for (let i=0; i < coords.length; ++i) {
+          let height = path.properties[i].altitude.feet
+          let color = colorramp(height).hex()
+          gradient.push(color)
         }
-        path.features.push({
-          type: 'Feature',
-          properties: { id: 1, message: 'ADS-B OK', gradient, weight: 8 },
-          geometry: { type: 'LineString', coordinates: flightradar.slice(middle, flightradar.length)}
-        })
-        // Filter airports as all don't have METAR/TAF information
+        path.properties = { gradient, weight: 8 }      
         return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
       }
     </script>
