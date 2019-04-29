@@ -289,7 +289,10 @@
                 popup: { pick: [] },
                 tooltip: {
                   template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
-                }
+                },
+                // Use higher value than default overlays to ensure messages are always on top of flightpath
+                // (see https://leafletjs.com/reference-1.4.0.html#map-overlaypane)
+                zIndex: 401
               },
               cesium: {
                 type: 'geoJson',
