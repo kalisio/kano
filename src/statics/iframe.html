@@ -101,7 +101,6 @@
                 */
                 'icon-anchor': [16, 16],
                 'marker-size': 32,
-                'icon-class': '',
                 template: ['icon-html'],
                 popup: { pick: [] },
                 tooltip: {
@@ -174,7 +173,6 @@
                               </svg>',
                 'icon-anchor': [8, 8],
                 'marker-size': 16,
-                'icon-class': '',
                 template: ['icon-html'],
                 */
                 /* We can use font-awesome icons
@@ -210,7 +208,6 @@
                                   else if (properties.visibility < 3000) { %>/statics/windyyellow.png<% }
                                   else { %>/statics/windygreen.png<% } %>"/>
                               `,
-                'icon-class': '',
                 'icon-anchor': [12, 32],
                 template: ['icon-html'],
                 popup: { pick: [] },
@@ -303,7 +300,8 @@
                   billboard: {
                     color: `Cesium.Color.<% if (properties.type === 'ATC') { %>BLACK<% }
                               else if (properties.type === 'AOC') { %>ORANGE<% }
-                              else { %>LIMEGREEN<% } %>`
+                              else { %>LIMEGREEN<% } %>`,
+                    heightReference : 'Cesium.HeightReference.RELATIVE_TO_GROUND'
                   },
                   template: ['billboard.color']
                 },
@@ -323,7 +321,7 @@
         let acars = { type: 'FeatureCollection', features: [] }
         for (let i = 0; i < flightpath.length; i++) {
           let feature = getGeoJsonAcarsFeature(i)
-          feature.geometry.coordinates = flightpath[i]
+          feature.geometry.coordinates = flightpath[i].concat(10000 * Math.random()) // Random altitude
           acars.features.push(feature)
         }
         // Filter airports as all don't have METAR/TAF information
@@ -374,7 +372,7 @@
         let coordinates = flightpath.map(function(point) {
           return [ point[0] + 0.05 * (Math.random() - 0.5),
                    point[1] + 0.05 * (Math.random() - 0.5),
-                   10000 * Math.random() ]
+                   10000 * Math.random() ] // Random altitude
         })
         let path = { type: 'FeatureCollection', features: [] }
         const middle = parseInt(coordinates.length / 2)
@@ -452,6 +450,110 @@
         path.properties = { gradient, weight: 8 }      
         return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
       }
+      function toggleFlightplanLayer(name) {
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        .then(function (result) {
+          if (result.data) {
+            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          } else {
+            return postRobot.send(kano, component, { command: 'addLayer', args: {
+              name,
+              type: 'OverlayLayer',
+              icon: 'multiline_chart',
+              featureId: 'name',
+              leaflet: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                popup: { pick: [] }
+              },
+              cesium: {
+                type: 'geoJson',
+                realtime: true,
+                isVisible: true,
+                popup: { pick: [] }
+              }
+            }})
+            .then(function () { return updateFlightplanLayer(name) })
+            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+          }
+        })
+      }
+      function updateFlightplanLayer(name) {
+        let plan = { type: 'FeatureCollection', features: [] }
+        // Departure/Arrival airports
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'TOULOUSE BLAGNAC', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137' },
+          geometry: { type: 'Point', coordinates: [ 1.368333, 43.635, 499.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'WILEY POST-WILL ROGERS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137' },
+          geometry: { type: 'Point', coordinates: [ -156.763333, 71.286667, 44.0 ] }
+        })
+        // Alternative Departure/Arrival airports
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f' },
+          geometry: { type: 'Point', coordinates: [ 1.473333, 43.568333, 0.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'BARTER ISLAND LRRS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f' },
+          geometry: { type: 'Point', coordinates: [ -143.578333, 70.135, 0.0 ] }
+        })
+        // Path
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'FLIGHTPATH', geodesic: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 2 },
+          geometry: { type: 'LineString', coordinates: [
+            [ 1.368333, 43.635, 499.0 ], // TOULOUSE
+            [ 2.548333, 49.01, 390.0 ], // PARIS
+            [ -6.27, 53.421667, 242.0 ], // DUBLIN
+            [ -156.763333, 71.286667, 44.0 ] // WILEY POST-WILL ROGERS
+          ] }
+        })
+        // Waypoints
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'PARIS-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">' },
+          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>' },
+          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'DUBLIN-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">' },
+          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>' },
+          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
+        })
+        // ETOPS
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#0000ff' },
+          geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
+        })
+        plan.features.push({
+          type: 'Feature',
+          properties: { name: 'KEFLAVIK AIRPORT ETOPS', geodesic: true, 'radius': 1500000, 'stroke': '#00bfff',
+                        'stroke-opacity': 1, 'stroke-width': 1, 'fill-opacity': 0.5, 'fill-color': '#00bfff' },
+          geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
+        })
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
+      }
     </script>
   </head>
   <body style="background-color: grey">
@@ -474,6 +576,7 @@
           <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button></br>
           <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button></br>
           <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button></br>
+          <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button></br>
         </td>
         <td>
           <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="/">
