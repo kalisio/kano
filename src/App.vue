@@ -8,6 +8,7 @@
 
 <script>
 import _ from 'lodash'
+import logger from 'loglevel'
 import { Toast, Events, QAjaxBar } from 'quasar'
 
 /*
@@ -18,17 +19,35 @@ export default {
     QAjaxBar
   },
   methods: {
-    showError (message) {
-      Toast.create.negative({
+    showError (error) {
+      // Check if this error is a quiet one or not
+      if (error.ignore) {
+        // In this case simply log
+        logger.error(error)
+        return
+      }
+      const message = error.message || error.error_message
+      let options = {
         html: message,
         timeout: 5000
-      })
+      }
+      // Check if user can retry to avoid this error
+      if (error.retryHandler) {
+        options.button = {
+          label: this.$t('RETRY'),
+          handler: error.retryHandler
+        }
+        // Increase timeout so that user has a chance to retry
+        options.timeout = 2 * options.timeout
+      }
+      // Display error with relevant options
+      Toast.create.negative(options)
     },
     showRouteError (route) {
       // We handle error on any page with query string
       if (route.query) {
         if (route.query.error_message) {
-          this.showError(route.query.error_message)
+          this.showError(route.query)
         }
       }
     },
@@ -75,13 +94,11 @@ export default {
             error.message += '<br/>' + this.$t('errors.' + key, translation.params)
           })
         }
-      } else {
+      } else if (error.code) {
         // Overwrite the message using error code
-        if (error.code) {
-          error.message = this.$t('errors.' + error.code)
-        }
+        error.message = this.$t('errors.' + error.code)
       }
-      this.showError(error.message)
+      this.showError(error)
     })
     Events.$on('before-hook', hook => {
       this.nbRequests++
