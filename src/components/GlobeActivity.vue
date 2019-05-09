@@ -79,8 +79,8 @@ export default {
       // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupGlobe(this.$refs.globe, token)
-      await this.initializeView()
       this.viewer.clock.onTick.addEventListener(this.storeView)
+      await this.initializeView()
     },
     finalizeViewer () {
       this.viewer.clock.onTick.removeEventListener(this.storeView)

@@ -203,12 +203,12 @@ export default {
       // Ensure DOM ref is here as well
       await this.loadRefs()
       this.setupMap(this.$refs.map, this.$config('map.viewer'))
-      await this.initializeView()
-      // Add app hooks to weacast
-      this.weacastApi.hooks(appHooks)
       // Add a scale control
       L.control.scale().addTo(this.map)
       this.map.on('moveend', this.storeView)
+      await this.initializeView()
+      // Add app hooks to weacast
+      this.weacastApi.hooks(appHooks)
     },
     finalizeViewer () {
       this.map.off('moveend', this.storeView)
