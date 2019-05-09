@@ -441,13 +441,16 @@
           'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000])
         let gradient = []
         let path = flightradar.features[0]
-        let coords = path.geometry.coordinates
-        for (let i=0; i < coords.length; ++i) {
-          let height = path.properties[i].altitude.feet
-          let color = colorramp(height).hex()
-          gradient.push(color)
+        // Transform FR24 data by flattening properties
+        if (Array.isArray(path.properties)) {
+          let coords = path.geometry.coordinates
+          for (let i=0; i < coords.length; ++i) {
+            let height = path.properties[i].altitude.feet
+            let color = colorramp(height).hex()
+            gradient.push(color)
+          }
+          path.properties = { gradient, weight: 8 }
         }
-        path.properties = { gradient, weight: 8 }      
         return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
       }
       function toggleFlightplanLayer(name) {
@@ -485,26 +488,30 @@
         plan.features.push({
           type: 'Feature',
           properties: { name: 'TOULOUSE BLAGNAC', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137' },
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137',
+                        tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.368333, 43.635, 499.0 ] }
         })
         plan.features.push({
           type: 'Feature',
           properties: { name: 'WILEY POST-WILL ROGERS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137' },
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137',
+                        tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -156.763333, 71.286667, 44.0 ] }
         })
         // Alternative Departure/Arrival airports
         plan.features.push({
           type: 'Feature',
           properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f' },
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f',
+                        tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.473333, 43.568333, 0.0 ] }
         })
         plan.features.push({
           type: 'Feature',
           properties: { name: 'BARTER ISLAND LRRS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f' },
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f',
+                        tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -143.578333, 70.135, 0.0 ] }
         })
         // Path
@@ -542,14 +549,16 @@
         // ETOPS
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#0000ff' },
+          properties: { name: 'KEFLAVIK AIRPORT ETOPS', geodesic: true, 'radius': 1500000, 'stroke': '#00bfff',
+                        'stroke-opacity': 1, 'stroke-width': 1, 'fill-opacity': 0.5, 'fill-color': '#00bfff',
+                        popup: { html: 'KEFLAVIK ETOPS ZONE' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'KEFLAVIK AIRPORT ETOPS', geodesic: true, 'radius': 1500000, 'stroke': '#00bfff',
-                        'stroke-opacity': 1, 'stroke-width': 1, 'fill-opacity': 0.5, 'fill-color': '#00bfff' },
+          properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#0000ff',
+                        tooltip: { property: 'name' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
         })
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
@@ -587,11 +596,13 @@
     </table>
     <script>
       var kano = document.getElementById('kano').contentWindow
-      postRobot.send(kano, 'getLocalStorage')
-      .then(function(event) {
-        let localStorage = event.data
-        localStorage.setItems({
-          'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
+      postRobot.on('kano-ready', () => {
+        postRobot.send(kano, 'getLocalStorage')
+        .then(function(event) {
+          let localStorage = event.data
+          localStorage.setItems({
+            'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
+          })
         })
       })
 

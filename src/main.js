@@ -49,6 +49,8 @@ postRobot.on('getLocalStorage', async (event) => {
     }
   }
 })
+// Will fail if not integrated as iframe so check
+if (window.parent !== window) postRobot.send(window.parent, 'kano-ready')
 
 let api = kalisio()
 

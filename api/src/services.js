@@ -64,8 +64,8 @@ module.exports = async function () {
   }
 
   // Helper to register service and permissions for a layer
-  function createFeatureServiceForLayer(options) {
-    let service = createFeatureService.call(app, options)
+  function createFeaturesServiceForLayer(options) {
+    let service = createFeaturesService.call(app, options)
     // Register permission for it
     permissions.defineAbilities.registerHook((subject, can, cannot) => {
       can('service', options.collection)
