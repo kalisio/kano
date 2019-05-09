@@ -11,7 +11,7 @@
     "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "Short year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
     "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "Long year format <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
     "TIME_FORMAT_UTC_FIELD_HELPER": "UTC time display mode",
-    "RESTORE_VIEW_FIELD_HELPER": "Save view",
+    "RESTORE_VIEW_FIELD_HELPER": "Save current view",
     "LOCATION_FORMAT": "Location format <a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>"
   },
   "screen": {
