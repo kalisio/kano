@@ -39,6 +39,7 @@ module.exports = {
   // If using local IP on WiFi router
   //domain: 'http://192.168.1.16:8081',
   domain,
+  flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version: require('../package.json').version,
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
