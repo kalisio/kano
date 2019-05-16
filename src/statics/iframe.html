@@ -468,7 +468,11 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                popup: { pick: [] }
+                popup: { pick: [] },
+                panes: [{
+                  name: 'labels',
+                  minZoom: 7
+                }]
               },
               cesium: {
                 type: 'geoJson',
@@ -533,7 +537,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>' },
+          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', pane: 'labels' },
           geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
         })
         plan.features.push({
@@ -543,7 +547,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>' },
+          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', pane: 'labels' },
           geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
         })
         // ETOPS
