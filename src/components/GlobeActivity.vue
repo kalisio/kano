@@ -55,7 +55,10 @@ export default {
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
-    kMapMixins.globe.fileLayers
+    kMapMixins.globe.fileLayers,
+    kMapMixins.globe.style,
+    kMapMixins.globe.tooltip,
+    kMapMixins.globe.popup
   ],
   inject: ['layout'],
   data () {
