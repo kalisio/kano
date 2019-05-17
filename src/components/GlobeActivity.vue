@@ -1,11 +1,11 @@
 <template>
   <div>
 
-    <div ref="globe" :style="globeStyle">
+    <div ref="globe" :style="viewStyle">
       <q-resize-observable @resize="onGlobeResized" />
     </div>
 
-    <q-btn 
+    <q-btn v-if="sideNavToggle"
       id="side-nav-toggle"
       color="secondary"
       class="fixed"
@@ -15,7 +15,7 @@
       {{ appName }}
     </q-btn>
 
-    <q-btn 
+    <q-btn v-if="panelToggle"
       id="globe-panel-toggle"
       color="secondary"
       class="fixed"
@@ -65,14 +65,6 @@ export default {
     return {
     }
   },
-  computed: {
-    appName () {
-      return this.$config('appName')
-    },
-    globeStyle () {
-      return 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute'
-    }
-  },
   methods: {
     async initializeViewer () {
       if (this.viewer) return
@@ -93,8 +85,10 @@ export default {
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
+      const actions = this.$config('globeActivity.actions')
+      const hasVrAction = (actions ? actions.includes('vr') : true)
       // FAB
-      this.registerFabAction({
+      if (hasVrAction) this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
       })
       // Wait until viewer is ready
@@ -148,6 +142,8 @@ export default {
     }
   },
   created () {
+    // Setup mapping activity mixin
+    this.setMappingEngine('cesium')
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Enable the observers in order to refresh the layout
     this.observe = true

@@ -57,6 +57,12 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
+  weacast: {
+    transport: 'websocket', // Could be 'http' or 'websocket',
+    apiUrl: weacastApi,
+    apiPath: API_PREFIX,
+    apiTimeout: 30000
+  },
   screens: {
     banner: 'kano-logo-black-256x84.png',
     login: {
@@ -128,11 +134,13 @@ module.exports = {
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
     ]
   },
-  weacast: {
-    transport: 'websocket', // Could be 'http' or 'websocket',
-    apiUrl: weacastApi,
-    apiPath: API_PREFIX,
-    apiTimeout: 30000
+  mapActivity: {
+    buttons: ['side-nav', 'panel'],
+    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'probe-location', 'create-layer']
+  },
+  globeActivity: {
+    buttons: ['side-nav', 'panel'],
+    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'vr']
   },
   map: {
     viewer: {

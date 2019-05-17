@@ -2,6 +2,7 @@
 import 'babel-polyfill'
 import 'whatwg-fetch'
 
+import config from 'config'
 import logger from 'loglevel'
 import Vue from 'vue'
 import i18next from 'i18next'
@@ -40,14 +41,15 @@ if (__THEME === 'mat') {
   require('quasar-extras/roboto-font')
 }
 
-postRobot.on('getLocalStorage', async (event) => {
-  return {
-    setItems: function (values) {
-      _.forOwn(values, (value, key) => {
-        window.localStorage.setItem(key, (typeof value === 'object' ? JSON.stringify(value) : value))
-      })
-    }
-  }
+postRobot.on('setLocalStorage', async (event) => {
+  _.forOwn(event.data, (value, key) => {
+    window.localStorage.setItem(key, (typeof value === 'object' ? JSON.stringify(value) : value))
+  })
+})
+postRobot.on('setConfiguration', async (event) => {
+  _.forOwn(event.data, (value, key) => {
+    _.set(config, key, value)
+  })
 })
 // Will fail if not integrated as iframe so check
 if (window.parent !== window) postRobot.send(window.parent, 'kano-ready')

@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <div ref="map" :style="mapStyle">
+    <div ref="map" :style="viewStyle">
       <q-resize-observable @resize="onMapResized" />
       <k-widget ref="widget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
         <div slot="widget-content">
@@ -14,7 +14,7 @@
       </k-widget>
     </div>
 
-    <q-btn 
+    <q-btn v-if="sideNavToggle"
       id="side-nav-toggle"
       color="secondary"
       class="fixed"
@@ -24,7 +24,7 @@
       {{ appName }}
     </q-btn>
     
-    <q-btn 
+    <q-btn v-if="panelToggle"
       id="map-panel-toggle"
       color="secondary"
       class="fixed"
@@ -131,13 +131,6 @@ export default {
     }
   },
   computed: {
-    appName () {
-      return this.$config('appName')
-    },
-    mapStyle () {
-      let style = 'width: 100%; height: 100%; fontWeight: normal; zIndex: 0; position: absolute;'
-      return style
-    },
     timelineContainerStyle () {
       return {
         width: 0.8 * this.mapWidth + 'px'
@@ -420,6 +413,8 @@ export default {
     }
   },
   created () {
+    // Setup mapping activity mixin
+    this.setMappingEngine('leaflet')
     // Enable the observers in order to refresh the layout
     this.observe = true
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)

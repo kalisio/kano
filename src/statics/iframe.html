@@ -470,8 +470,9 @@
                 isVisible: true,
                 popup: { pick: [] },
                 panes: [{
-                  name: 'labels',
-                  minZoom: 7
+                  name: 'waypoints',
+                  minZoom: 7,
+                  //maxZoom: 14
                 }]
               },
               cesium: {
@@ -532,22 +533,38 @@
         // Waypoints
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">' },
+          properties: { name: 'PARIS-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
+            entityStyle: {
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+            }
+          },
           geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', pane: 'labels' },
+          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', pane: 'waypoints',
+            entityStyle: {
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+            }
+          },
           geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">' },
+          properties: { name: 'DUBLIN-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
+            entityStyle: {
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+            }
+          },
           geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', pane: 'labels' },
+          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', pane: 'waypoints',
+            entityStyle: {
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+            }
+          },
           geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
         })
         // ETOPS
@@ -601,15 +618,22 @@
     <script>
       var kano = document.getElementById('kano').contentWindow
       postRobot.on('kano-ready', () => {
-        postRobot.send(kano, 'getLocalStorage')
-        .then(function(event) {
-          let localStorage = event.data
-          localStorage.setItems({
-            'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
-          })
+        postRobot.send(kano, 'setConfiguration', {
+          appName: 'Airline1',
+          'sideNav.components.app_logout': undefined,
+          mapActivity: {
+            buttons: ['side-nav'],
+            actions: ['fullscreen', 'geocode', 'probe-location']
+          },
+          globeActivity: {
+            buttons: ['panel'],
+            actions: ['geolocate', 'track-location', 'vr']
+          }
+        })
+        postRobot.send(kano, 'setLocalStorage', {
+          'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
         })
       })
-
       postRobot.on('map-ready', () => {
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
         .then(function (result) { airports = result.data })
