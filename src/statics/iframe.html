@@ -618,8 +618,10 @@
     <script>
       var kano = document.getElementById('kano').contentWindow
       postRobot.on('kano-ready', () => {
+        /*
         postRobot.send(kano, 'setConfiguration', {
-          appName: 'Airline1',
+          appName: '',
+          'locale.default': 'en',
           'sideNav.components.app_logout': undefined,
           mapActivity: {
             buttons: ['side-nav'],
@@ -630,6 +632,7 @@
             actions: ['geolocate', 'track-location', 'vr']
           }
         })
+        */
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
         })
