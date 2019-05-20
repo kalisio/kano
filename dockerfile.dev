@@ -1,4 +1,4 @@
-FROM  node:8
+FROM  node:8-stretch
 
 MAINTAINER Kalisio <contact@kalisio.xyz>
 
