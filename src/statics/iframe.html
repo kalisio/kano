@@ -18,10 +18,10 @@
       var airports
 
       function getGeoJsonAircraftFeature () {
-        const long = 1.444209 + 0.5 * (Math.random() - 0.5)
-        const lat = 43.604652 + 0.5 * (Math.random() - 0.5)
-        const alt = 8519.16 + 1000 * (Math.random() - 0.5)
-        const track = 360 * Math.random()
+        var long = 1.444209 + 0.5 * (Math.random() - 0.5)
+        var lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        var alt = 8519.16 + 1000 * (Math.random() - 0.5)
+        var track = 360 * Math.random()
         return {
           type: 'FeatureCollection',
           features: [
@@ -41,7 +41,7 @@
         }
       }
       function getGeoJsonAcarsFeature (id) {
-        const type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
+        var type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
         let feature = {
           type: 'Feature',
           properties: {
@@ -138,9 +138,9 @@
         })
       }
       function updateAircraftLayer(name) {
-        const geoJson = getGeoJsonAircraftFeature()
-        const long = geoJson.features[0].geometry.coordinates[0]
-        const lat = geoJson.features[0].geometry.coordinates[1]
+        var geoJson = getGeoJsonAircraftFeature()
+        var long = geoJson.features[0].geometry.coordinates[0]
+        var lat = geoJson.features[0].geometry.coordinates[1]
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
         .then(function () {
           // Use zoom level or altitude depending on mode
@@ -252,7 +252,7 @@
       function updateMetarTafLayer(name) {
         // Setup random visibility on some airports
         airports.features.forEach(function(airport) {
-          const visibility = 5000 * Math.random()
+          var visibility = 5000 * Math.random()
           airport.properties.visibility = visibility
           airport.properties.metar = 'KAUS 092135Z 26018G25KT 8SM -TSRA BR SCT045CB BKN060 OVC080 30/21 A2992'
           airport.properties.taf = 'KOKC 051130Z 051212 14008KT 5SM BR BKN030 TEMPO 1316 1 1/2SM BR'
@@ -344,7 +344,8 @@
                 isVisible: true,
                 popup: { pick: [] },
                 tooltip: {
-                  template: '<%= properties.message %>'
+                  template: '<%= properties.message %>',
+                  options: { sticky: true }
                 }
               },
               cesium: {
@@ -375,7 +376,7 @@
                    10000 * Math.random() ] // Random altitude
         })
         let path = { type: 'FeatureCollection', features: [] }
-        const middle = parseInt(coordinates.length / 2)
+        var middle = parseInt(coordinates.length / 2)
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
@@ -401,12 +402,13 @@
               icon: 'timeline',
               featureId: 'id',
               leaflet: {
-                type: 'path',
+                type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                popup: { pick: [] },
+                popup: { pick: ['message'] },
                 tooltip: {
-                  template: '<%= properties.message %>'
+                  template: '<%= properties.message %>',
+                  options: { sticky: true }
                 }
               },
               cesium: {
@@ -419,14 +421,13 @@
                 }
               }
             }})
-            .then(function () { 
-              return updateGradientFlightpathLayer(name) 
-            })
+            .then(function () { return updateGradientFlightpathLayer(name) })
             .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
           }
         })
       }
       function updateGradientFlightpathLayer(name) {
+        var offset = 5000 * (Math.random() - 0.5)
         let colorramp = chroma.scale([
           'white',  //0
           'yellow', // 2000
@@ -438,20 +439,20 @@
           'navy', // 20000
           'navy', // 33000
           'purple', //35000
-          'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000])
-        let gradient = []
-        let path = flightradar.features[0]
-        // Transform FR24 data by flattening properties
-        if (Array.isArray(path.properties)) {
-          let coords = path.geometry.coordinates
-          for (let i=0; i < coords.length; ++i) {
-            let height = path.properties[i].altitude.feet
-            let color = colorramp(height).hex()
-            gradient.push(color)
-          }
-          path.properties = { gradient, weight: 8 }
-        }
-        return postRobot.send(kano, component, { command: 'updatePaths', args: [path] })
+          'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000].map(value => value + offset))
+        let path = { type: 'FeatureCollection', features: [] }
+        var coords = flightradar.geometry.coordinates
+        // Compute color properties based on color scale
+        let gradient = heights.map(height => colorramp(height).hex())
+        flightradar.properties = { id: 0, gradient, weight: 8, message: 'ADS-B OK' }
+        path.features.push(flightradar)
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 1, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20' },
+          geometry: { type: 'LineString', coordinates: [ coords[0], coords[coords.length - 1] ] }
+        })
+        // Add a second part with standard geojson styling
+        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
       function toggleFlightplanLayer(name) {
         return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
@@ -606,6 +607,7 @@
           <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button></br>
           <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button></br>
           <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button></br>
+          <button type="button" onclick="updateGradientFlightpathLayer('GradientFlightpath')">Update gradient flightpath</button></br>
           <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button></br>
         </td>
         <td>
@@ -649,6 +651,13 @@
           alert('ACARS message clicked')
         }
       })
+      var coords = flightradar.geometry.coordinates
+      var heights = []
+      // Extract FR24 height data
+      for (let i=0; i < coords.length; ++i) {
+        heights.push(flightradar.properties[i].altitude.feet)
+      }
+      
     </script>
   </body>
 </html>
