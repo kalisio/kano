@@ -68,6 +68,7 @@
     "@feathersjs/errors": "^3.3.0",
     "@feathersjs/express": "^1.2.3",
     "@feathersjs/feathers": "^3.1.7",
+    "@kalisio/feathers-distributed": "^0.3.4",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^3.0.0",
     "feathers-mongodb": "^2.8.0",

@@ -83,6 +83,9 @@ module.exports = {
     },
     frameguard: false
   },
+  distribution: { // Distribute nothing for now, we only listen to Weacast
+    services: (service) => false
+  },
   paginate: {
     default: 10,
     max: 50

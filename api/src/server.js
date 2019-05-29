@@ -1,35 +1,40 @@
 import logger from 'winston'
 import { kalisio } from '@kalisio/kdk-core'
-
-const fs = require('fs-extra')
-const https = require('https')
-const proxyMiddleware = require('http-proxy-middleware')
-
-const express = require('@feathersjs/express')
-const middlewares = require('./middlewares')
-const services = require('./services')
-const hooks = require('./hooks')
-const channels = require('./channels')
+import distribution from '@kalisio/feathers-distributed'
+import fs from 'fs-extra'
+import https from 'https'
+import proxyMiddleware from 'http-proxy-middleware'
+import express from '@feathersjs/express'
+import middlewares from './middlewares'
+import services from './services'
+import hooks from './hooks'
+import channels from './channels'
 
 export class Server {
   constructor () {
     this.app = kalisio()
+    let app = this.app
+
+    // Distribute services
+    const distConfig = app.get('distribution')
+    if (distConfig) app.configure(distribution(distConfig))
+    
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
-      this.app.use('/', express.static('../dist'))
+      app.use('/', express.static('../dist'))
     }
     // In dev this is done by the webpack server
 
     // Define HTTP proxies to your custom API backend. See /config/index.js -> proxyTable
     // https://github.com/chimurai/http-proxy-middleware
-    const proxyTable = this.app.get('proxyTable') || {}
+    const proxyTable = app.get('proxyTable') || {}
     if (proxyTable)
     Object.keys(proxyTable).forEach(context => {
       let options = proxyTable[context]
       if (typeof options === 'string') {
         options = { target: options }
       }
-      this.app.use(proxyMiddleware(context, options))
+      app.use(proxyMiddleware(context, options))
     })
   }
 
