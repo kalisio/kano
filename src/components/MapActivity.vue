@@ -202,8 +202,8 @@ export default {
       L.control.scale().addTo(this.map)
       this.map.on('moveend', this.storeView)
       await this.initializeView()
-      // Add app hooks to weacast
-      this.weacastApi.hooks(appHooks)
+      // Add app hooks to weacast client if separat from app client
+      if (this.weacastApi !== this.$api) this.weacastApi.hooks(appHooks)
     },
     finalizeViewer () {
       this.map.off('moveend', this.storeView)
