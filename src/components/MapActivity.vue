@@ -203,18 +203,18 @@ export default {
       this.map.on('moveend', this.storeView)
       await this.initializeView()
       // Add app hooks to weacast client if separat from app client
-      if (this.weacastApi !== this.$api) this.weacastApi.hooks(appHooks)
+      if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
     },
     finalizeViewer () {
       this.map.off('moveend', this.storeView)
     },
     async refreshActivity () {  
       this.clearActivity()
+      // Wait until viewer is ready
+      await this.initializeViewer()
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
-      // Wait until viewer is ready
-      await this.initializeViewer()
       // Will fail if not integrated as iframe so check
       if (window.parent !== window) postRobot.send(window.parent, 'map-ready')
     },

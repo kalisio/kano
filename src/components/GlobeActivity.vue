@@ -82,6 +82,8 @@ export default {
     },
     async refreshActivity () {
       this.clearActivity()
+      // Wait until viewer is ready
+      await this.initializeViewer()
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
@@ -91,8 +93,6 @@ export default {
       if (hasVrAction) this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
       })
-      // Wait until viewer is ready
-      await this.initializeViewer()
       // Will fail if not integrated as iframe so check
       if (window.parent !== window) postRobot.send(window.parent, 'globe-ready')
     },
