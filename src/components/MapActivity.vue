@@ -345,7 +345,7 @@ export default {
       this.$once('click', probe)
     },
     isTimeseriesOpen () {
-      return this.$refs.widget.isOpen()
+      return (this.$refs.widget && this.$refs.widget.isOpen())
     },
     openTimeseries () {
       if (this.isTimeseriesOpen()) return
