@@ -137,8 +137,7 @@ export default {
     },
     timeControllerEnabled () {
       // For now only weather forecast requires timeline
-      return this.forecastModel &&
-        (_.values(this.layers).find(layer => layer.isVisible && layer.tags && layer.tags.includes('weather')) ||
+      return (_.values(this.layers).find(layer => layer.isVisible && layer.tags && layer.tags.includes('weather')) ||
           this.isTimeseriesOpen())
     },
     colorLegendStyle () {
