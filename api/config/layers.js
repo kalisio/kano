@@ -334,6 +334,7 @@ module.exports = [
     type: 'OverlayLayer',
     featureId: 'gid',
     service: 'vigicrues-sections',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     leaflet: {
       type: 'geoJson',
       source: '/api/vigicrues-sections',
@@ -367,6 +368,7 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     service: 'vigicrues-observations',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'vigicrues-stations',
     featureId: 'CdStationHydro',
     history: 604800,
@@ -448,6 +450,7 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     service: 'openaq',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'location',
     history: 604800,
     variables: [

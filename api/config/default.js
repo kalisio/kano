@@ -1,6 +1,7 @@
-var path = require('path')
-var fs = require('fs')
-var containerized = require('containerized')()
+const path = require('path')
+const fs = require('fs')
+const express = require('@feathersjs/express')
+const containerized = require('containerized')()
 const services = require('./services')
 const layers = require('./layers')
 
@@ -83,8 +84,9 @@ module.exports = {
     },
     frameguard: false
   },
-  distribution: { // Distribute nothing for now, we only listen to Weacast
-    services: (service) => false
+  distribution: { // Distribute data services
+    services: (service) => service.path.includes('vigicrues') || service.path.endsWith('openaq'),
+    middlewares: { after: express.errorHandler() }
   },
   paginate: {
     default: 10,
@@ -175,7 +177,9 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano')
+    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),
+    // We allow for a separate DB to hold shared data
+    secondaries: (process.env.DATA_DB_URL ? { data: process.env.DATA_DB_URL } : undefined)
   },
   storage: (process.env.S3_BUCKET ? {
     accessKeyId: process.env.S3_ACCESS_KEY,

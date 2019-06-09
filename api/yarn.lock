@@ -113,10 +113,10 @@
     lodash "^4.17.4"
     url-pattern "^1.0.3"
 
-"@kalisio/feathers-distributed@^0.3.4":
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-0.3.4.tgz#1b9126af3502ee1a3048b2fd5d35d781f12693f5"
-  integrity sha512-Jn2lV4wdkLIv0VIROZ/rYg7r6AqT6DjAs3c/guclh7OPa8XPxGpC4Kym2m9hu+wQZrPcM0J7vsQIkUr2MCGmrg==
+"@kalisio/feathers-distributed@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-0.4.0.tgz#f1e005560546a8711a8c036f214bdfc1e79afbc6"
+  integrity sha512-pPNulOFACNnSho9jAsLhwtEL9nWu3TylMfGawrJrrn3DAdqm0ZT01pXLyS/c5Q+6u2RYHMwF0OCoNcUgBBIk/g==
   dependencies:
     "@feathersjs/commons" "^1.4.0"
     "@feathersjs/errors" "^3.3.0"

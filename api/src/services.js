@@ -106,9 +106,13 @@ module.exports = async function () {
     if (defaultLayer.service) featuresService = createFeaturesServiceForLayer({
       collection: defaultLayer.service,
       featureId: defaultLayer.featureId,
-      history: defaultLayer.history
+      history: defaultLayer.history,
+      db: app.db.db(defaultLayer.dbName)
     })
-    if (defaultLayer.probeService) createFeaturesServiceForLayer({ collection: defaultLayer.probeService })
+    if (defaultLayer.probeService) createFeaturesServiceForLayer({
+      collection: defaultLayer.probeService,
+      db: app.db.db(defaultLayer.dbName)
+    })
     // And if we need to initialize some data as well
     if (!createdLayer && featuresService && defaultLayer.fileName) {
       // Cleanup
