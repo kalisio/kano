@@ -42,12 +42,6 @@ module.exports = async function () {
     logger.error(error.message)
   }
 
-  // Configure the required service
-  let usersService = app.getService('users')
-  app.configureService('users', usersService, servicesPath)
-  let featuresService = app.getService('features')
-  app.configureService('features', featuresService, servicesPath)
-
   let defaultUsers = app.get('authentication').defaultUsers
   // Do not use exposed passwords on staging/prod environments
   if (defaultUsers) {
@@ -134,7 +128,8 @@ module.exports = async function () {
       }
     }
   }
-
+  
   // Service to store user features
-  createFeaturesServiceForLayer({ collection: 'features' })
+  let featuresService = createFeaturesServiceForLayer({ collection: 'features' })
+  app.configureService('features', featuresService, servicesPath)
 }

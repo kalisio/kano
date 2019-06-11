@@ -131,6 +131,7 @@ module.exports = {
         name: 'Kalisio'
       }
     ],
+    disallowRegistration: true,
     // Required for OAuth2 to work correctly
     cookie: {
       enabled: true,
