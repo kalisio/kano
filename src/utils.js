@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import logger from 'loglevel'
 import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
@@ -130,6 +131,15 @@ function setupEmbedApi(routeName, component) {
   })
 }
 
+function sendEmbedEvent(...args) {
+  // Will fail if not integrated as iframe so check
+  if (window.parent !== window) {
+    // If no listener post-robot raises an error
+    try { postRobot.send(window.parent, ...args) }
+    catch (error) { logger.debug(error.message) }
+  }
+}
+
 // Build vue router config from our config file
 function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
@@ -197,6 +207,7 @@ let utils = {
   load,
   createComponent,
   createComponentVNode,
+  sendEmbedEvent,
   buildRoutes
 }
 

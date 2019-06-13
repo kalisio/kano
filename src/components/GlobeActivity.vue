@@ -35,6 +35,7 @@ import Cesium from 'cesium/Source/Cesium.js'
 import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import utils from '../utils'
 
 const { offset } = dom
 
@@ -93,8 +94,7 @@ export default {
       if (hasVrAction) this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
       })
-      // Will fail if not integrated as iframe so check
-      if (window.parent !== window) postRobot.send(window.parent, 'globe-ready')
+      utils.sendEmbedEvent('globe-ready')
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
@@ -137,8 +137,7 @@ export default {
       const entity = event.target
       if (!entity) return
       const properties = (entity.properties ? entity.properties.getValue(0) : null)
-      // Will fail if not integrated as iframe so check
-      if (window.parent !== window) postRobot.send(window.parent, 'click', { properties, layer: options })
+      utils.sendEmbedEvent('click', { properties, layer: options })
     }
   },
   created () {

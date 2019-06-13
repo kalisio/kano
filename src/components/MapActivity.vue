@@ -73,13 +73,13 @@ import L from 'leaflet'
 import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
-import logger from 'loglevel'
 import moment from 'moment'
 import { QPopover, QModal, QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
 
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
+import utils from '../utils'
 
 const { offset } = dom
 
@@ -214,8 +214,7 @@ export default {
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
-      // Will fail if not integrated as iframe so check
-      if (window.parent !== window) postRobot.send(window.parent, 'map-ready')
+      utils.sendEmbedEvent('map-ready')
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
@@ -276,8 +275,7 @@ export default {
     async onFeatureClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
-      // Will fail if not integrated as iframe so check
-      if (window.parent !== window) postRobot.send(window.parent, 'click', { feature, layer: options })
+      utils.sendEmbedEvent('click', { feature, layer: options })
       const isWeatherProbe = (_.has(feature, 'properties.windDirection') &&
                               _.has(feature, 'properties.windSpeed'))
       const isWeatherProbedLocation = (this.probedLocation && _.has(this.probedLocation, 'properties.windDirection') &&

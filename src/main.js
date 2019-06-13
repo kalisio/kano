@@ -4,6 +4,7 @@ import 'whatwg-fetch'
 
 import config from 'config'
 import logger from 'loglevel'
+import utils from './utils'
 import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
@@ -51,8 +52,8 @@ postRobot.on('setConfiguration', async (event) => {
     _.set(config, key, value)
   })
 })
-// Will fail if not integrated as iframe so check
-if (window.parent !== window) postRobot.send(window.parent, 'kano-ready')
+
+utils.sendEmbedEvent('kano-ready')
 
 let api = kalisio()
 
