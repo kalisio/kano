@@ -189,7 +189,8 @@ module.exports = {
       fullscreenButton: false,
       animation: false,
       //creditContainer: 'xxx',
-      timeline: false
+      timeline: false,
+      creditContainer: 'globe-credit'
     },
     fileLayers: {
       clearOnDrop : false,

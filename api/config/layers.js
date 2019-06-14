@@ -1,5 +1,5 @@
 // Override defaults if env provided
-const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'kargo.kalisio.xyz')
+const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
 const mapproxyUrl = 'https://mapproxy.' + kargoDomain
 
 module.exports = [

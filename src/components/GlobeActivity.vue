@@ -3,6 +3,7 @@
 
     <div ref="globe" :style="viewStyle">
       <q-resize-observable @resize="onGlobeResized" />
+      <div id="globe-credit" />
     </div>
 
     <q-btn v-if="sideNavToggle"
