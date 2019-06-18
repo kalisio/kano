@@ -525,16 +525,17 @@
         // Path
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'FLIGHTPATH', geodesic: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 2,
+          properties: { name: 'FLIGHTPATH', geodesic: true, wall: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 2,
+            'fill': '#f9b40f', 'fill-opacity': 0.5,
             entityStyle: {
               polyline: { arcType: 'Cesium.ArcType.GEODESIC' }
             }
           },
           geometry: { type: 'LineString', coordinates: [
-            [ 1.368333, 43.635, 499.0 ], // TOULOUSE
-            [ 2.548333, 49.01, 390.0 ], // PARIS
-            [ -6.27, 53.421667, 242.0 ], // DUBLIN
-            [ -156.763333, 71.286667, 44.0 ] // WILEY POST-WILL ROGERS
+            [ 1.368333, 43.635, 49900.0 ], // TOULOUSE
+            [ 2.548333, 49.01, 39000.0 ], // PARIS
+            [ -6.27, 53.421667, 24200.0 ], // DUBLIN
+            [ -156.763333, 71.286667, 4400.0 ] // WILEY POST-WILL ROGERS
           ] }
         })
         // Waypoints
