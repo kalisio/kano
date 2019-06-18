@@ -281,10 +281,10 @@
                 'radius': 6,
                 'stroke-width': 0,
                 'fill-opacity': 0.75,
-                'fill-color': `<% if (properties.type === 'ATC') { %>#000000<% }
-                                    else if (properties.type === 'AOC') { %>#f9b40f<% }
-                                    else { %>#33c137<% } %>`,
-                template: ['fill-color'],
+                'fill': `<% if (properties.type === 'ATC') { %>#000000<% }
+                                else if (properties.type === 'AOC') { %>#f9b40f<% }
+                                else { %>#33c137<% } %>`,
+                template: ['fill'],
                 popup: { pick: [] },
                 tooltip: {
                   template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
@@ -496,14 +496,14 @@
         plan.features.push({
           type: 'Feature',
           properties: { name: 'TOULOUSE BLAGNAC', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.368333, 43.635, 499.0 ] }
         })
         plan.features.push({
           type: 'Feature',
           properties: { name: 'WILEY POST-WILL ROGERS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#33c137',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -156.763333, 71.286667, 44.0 ] }
         })
@@ -511,21 +511,25 @@
         plan.features.push({
           type: 'Feature',
           properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.473333, 43.568333, 0.0 ] }
         })
         plan.features.push({
           type: 'Feature',
           properties: { name: 'BARTER ISLAND LRRS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#f9b40f',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -143.578333, 70.135, 0.0 ] }
         })
         // Path
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'FLIGHTPATH', geodesic: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 2 },
+          properties: { name: 'FLIGHTPATH', geodesic: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 2,
+            entityStyle: {
+              polyline: { arcType: 'Cesium.ArcType.GEODESIC' }
+            }
+          },
           geometry: { type: 'LineString', coordinates: [
             [ 1.368333, 43.635, 499.0 ], // TOULOUSE
             [ 2.548333, 49.01, 390.0 ], // PARIS
@@ -545,9 +549,11 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', pane: 'waypoints',
+          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', 'icon-text': 'PARIS', pane: 'waypoints',
             entityStyle: {
-              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } },
+              label: { font: '18px sans-serif', pixelOffset : { type: 'Cesium.Cartesian2', options: [32, 0] },
+                       distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
           geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
@@ -563,9 +569,11 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', pane: 'waypoints',
+          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', 'icon-text': 'DUBLIN', pane: 'waypoints',
             entityStyle: {
-              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
+              billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } },
+              label: { font: '18px sans-serif', pixelOffset : { type: 'Cesium.Cartesian2', options: [32, 0] },
+                       distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
           geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
@@ -574,14 +582,14 @@
         plan.features.push({
           type: 'Feature',
           properties: { name: 'KEFLAVIK AIRPORT ETOPS', geodesic: true, 'radius': 1500000, 'stroke': '#00bfff',
-                        'stroke-opacity': 1, 'stroke-width': 1, 'fill-opacity': 0.5, 'fill-color': '#00bfff',
-                        popup: { html: 'KEFLAVIK ETOPS ZONE' } },
+                        'stroke-opacity': 1, 'stroke-width': 1, 'fill': '#00bfff', 'fill-opacity': 0.5,
+                        popup: { html: 'KEFLAVIK ETOPS ZONE', text: 'KEFLAVIK ETOPS ZONE' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
         })
         plan.features.push({
           type: 'Feature',
           properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
-                        'stroke-opacity': 1, 'stroke-width': 0, 'fill-opacity': 0.5, 'fill-color': '#0000ff',
+                        'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#0000ff', 'fill-opacity': 0.5,
                         tooltip: { property: 'name' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
         })
@@ -639,11 +647,11 @@
         */
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
-        })
+        }).then(_ => postRobot.send(kano, component))
       })
       postRobot.on('map-ready', () => {
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
-        .then(function (result) { airports = result.data })
+        .then((result) => { airports = result.data })
       })
       postRobot.on('globe-ready', () => {
         // Whatever

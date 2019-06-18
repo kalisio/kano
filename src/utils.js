@@ -108,11 +108,9 @@ function setupEmbedApi(routeName, component) {
     let result
     // If event received but the current route does not match the new route is pushed first
     if (route.name !== routeName) {
-      let component = getEmbedComponent(route)
       // Need to wait until route has really changed, component has been initialized, etc.
-      router.push({ name: routeName, query: Object.assign({}, route.query) }, () => {
-        //Vue.nextTick(() => callEmbedMethod(router.currentRoute, data))
-      })
+      await new Promise((resolve, reject) => router.push({ name: routeName, query: Object.assign({}, route.query) }, resolve))
+      let component = getEmbedComponent(route)
       if (component) {
         result = await new Promise((resolve, reject) => {
           const unwatch = component.$parent.$watch('$route', () => {
