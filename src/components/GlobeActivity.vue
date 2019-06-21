@@ -3,6 +3,15 @@
 
     <div ref="globe" :style="viewStyle">
       <q-resize-observable @resize="onGlobeResized" />
+      <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
+        <div slot="widget-content">
+          <k-location-time-series ref="timeseries"
+            :feature="probedLocation" 
+            :variables="variables"
+            :current-time-format="currentTimeFormat"
+            :current-formatted-time="currentFormattedTime" />
+        </div>
+      </k-widget>
       <div id="globe-credit" />
     </div>
 
@@ -26,14 +35,45 @@
       icon="layers"
       @click="layout.toggleRight()" />
 
+    <k-color-legend v-if="colorLegend.visible"
+      class="fixed"
+      :style="colorLegendStyle"
+      :unit="colorLegend.unit"
+      :hint="colorLegend.hint"
+      :colorMap="colorLegend.colorMap"
+      :colors="colorLegend.colors"
+      :values="colorLegend.values"
+      :unitValues="colorLegend.unitValues"
+      :showGradient="colorLegend.showGradient"
+      @click="onColorLegendClick" />
+    />
+
+    <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
+      <k-time-controller
+        v-if="timelineEnabled"
+        :key="timelineRefreshKey"
+        :min="timeline.start" 
+        :max="timeline.end"
+        :step="'h'"
+        :value="timeline.current"
+        :timeInterval="timelineInterval"
+        :timeFormatter="timelineFormatter"
+        @change="onTimelineUpdated"
+        pointerColor="#FC6E44" 
+        pointerTextColor="white"
+        style="width: 100%;"
+      />
+    </q-fixed-position>
+
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import postRobot from 'post-robot'
+import moment from 'moment'
 import Cesium from 'cesium/Source/Cesium.js'
-import { Events, QWindowResizeObservable, QResizeObservable, dom, QBtn } from 'quasar'
+import { Events, QResizeObservable, QFixedPosition, dom, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import utils from '../utils'
@@ -43,9 +83,9 @@ const { offset } = dom
 export default {
   name: 'k-globe-activity',
   components: {
-    QWindowResizeObservable,
     QResizeObservable,
-    QBtn
+    QBtn,
+    QFixedPosition
   },
   mixins: [
     kCoreMixins.refsResolver(['globe']),
@@ -53,7 +93,12 @@ export default {
     kMapMixins.geolocation,
     kMapMixins.featureService,
     kMapMixins.time,
+    kMapMixins.weacast,
+    kMapMixins.time,
+    kMapMixins.timeline,
+    kMapMixins.timeseries,
     kMapMixins.activity,
+    kMapMixins.legend,
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
@@ -63,10 +108,6 @@ export default {
     kMapMixins.globe.popup
   ],
   inject: ['layout'],
-  data () {
-    return {
-    }
-  },
   methods: {
     async initializeViewer () {
       if (this.viewer) return
@@ -99,7 +140,13 @@ export default {
     },
     onGlobeResized (size) {
       // Avoid to refresh the layout when leaving the component
-      if (this.observe) this.refreshGlobe()
+      if (this.observe) {
+        this.refreshGlobe()
+        if (this.$refs.globe) {
+          this.engineContainerWidth = this.$refs.globe.getBoundingClientRect().width
+          this.engineContainerHeight = this.$refs.globe.getBoundingClientRect().height
+        }
+      }
     },
     getVigicruesTooltip (entity, options) {
       const properties = entity.properties
@@ -134,7 +181,7 @@ export default {
         this.viewer.scene.useWebVR = true
       }
     },
-    onFeatureClicked (options, event) {
+    async onFeatureClicked (options, event) {
       const entity = event.target
       if (!entity) return
       const properties = (entity.properties ? entity.properties.getValue(0) : null)

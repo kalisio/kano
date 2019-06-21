@@ -38,9 +38,6 @@
     "WIND_GUST": "Gust",
     "PRECIPITATIONS": "Precipitations"
   },
-  "TimeSeries": {
-    "PROBE": "Probe"
-  },
   "MapActivity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
     "VIGICRUES_LEVEL_2": "Flood risk",

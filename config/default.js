@@ -140,7 +140,7 @@ module.exports = {
   },
   globeActivity: {
     buttons: ['side-nav', 'panel'],
-    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'vr']
+    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'probe-location', 'vr']
   },
   map: {
     viewer: {

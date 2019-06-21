@@ -85,7 +85,9 @@ module.exports = {
     frameguard: false
   },
   distribution: { // Distribute data services
-    services: (service) => service.path.includes('vigicrues') || service.path.endsWith('openaq'),
+    services: (service) => service.path.includes('catalog') ||
+                            service.path.includes('vigicrues') ||
+                            service.path.endsWith('openaq'),
     middlewares: { after: express.errorHandler() }
   },
   paginate: {

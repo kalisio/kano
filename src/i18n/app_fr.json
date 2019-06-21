@@ -38,9 +38,6 @@
     "WIND_GUST": "Rafales",
     "PRECIPITATIONS": "Précipitations"
   },
-  "TimeSeries": {
-    "PROBE": "Sonde"
-  },
   "MapActivity": {
     "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
     "VIGICRUES_LEVEL_2": "Risque de crue génératrice de débordements",

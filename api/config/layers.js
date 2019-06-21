@@ -413,10 +413,10 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
-                   if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }\
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% }\
-                   if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>'
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
+                   if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% }
+                   if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     },
     cesium: {
@@ -435,8 +435,10 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }\
-                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/h<% } %>'
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
+                   if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
+                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/h<% }
+                   if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     }
   },
@@ -555,20 +557,20 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
-                   if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }\
-                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
-                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }\
-                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% }\
-                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% }\
-                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% }\
-                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
-                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% }\
-                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }\
-                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>'
+        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }
+                   if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }
+                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }
+                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }
+                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }
+                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% }
+                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }
+                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% }
+                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }
+                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% }
+                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }
+                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% }
+                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }
+                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>`
       }
     },
     cesium: {
@@ -588,13 +590,13 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }\
-                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }\
-                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }\
-                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }\
-                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }\
-                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }\
-                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% } %>'
+        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }
+                   if (properties.pm10) { %>\nPM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }
+                   if (properties.so2) { %>\nSO2 = <%= properties.so2.toFixed(2) %> ppm<% }
+                   if (properties.no2) { %>\nNO2 = <%= properties.no2.toFixed(2) %> ppm<% }
+                   if (properties.o3) { %>\nO3 = <%= properties.o3.toFixed(2) %> ppm<% }
+                   if (properties.co) { %>\nCO = <%= properties.co.toFixed(2) %> ppm<% }
+                   if (properties.bc) { %>\nBC = <%= properties.bc.toFixed(2) %> µg/m³<% } %>`
       }
     }
   },
@@ -614,12 +616,12 @@ module.exports = [
       realtime: true,
       interval: 600000,
       container: 'markerClusterGroup',
-      'marker-color': '<% if (properties.libelle === "VA") { %>darkblue<% }\
-                          else if (properties.visibility === "NV") { %>orange<% }\
-                          else { %>dark<% } %>',
-      'icon-classes': '<% if (properties.libelle === "VA") { %>fa fa-info-circle<% }\
-                          else if (properties.visibility === "NV") { %>fa fa-question-circle<% }\
-                          else { %>fa fa-times-circle<% } %>',
+      'marker-color': `<% if (properties.libelle === "VA") { %>darkblue<% }
+                          else if (properties.visibility === "NV") { %>orange<% }
+                          else { %>dark<% } %>`,
+      'icon-classes': `<% if (properties.libelle === "VA") { %>fa fa-info-circle<% }
+                          else if (properties.visibility === "NV") { %>fa fa-question-circle<% }
+                          else { %>fa fa-times-circle<% } %>`,
       'icon-color': '#FFF',
       template: ['marker-color', 'icon-classes'],
       popup: {
@@ -628,8 +630,8 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>\
-                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
+        template: `<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>
+                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     },
     cesium: {
@@ -648,8 +650,8 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n\
-                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
+        template: `<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n
+                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     }
   }
