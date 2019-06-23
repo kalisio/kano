@@ -207,3 +207,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.probe-cursor {
+  cursor: crosshair;
+}
+.processing-cursor {
+  cursor: wait;
+}
+</style>
