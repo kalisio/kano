@@ -71,14 +71,11 @@
 <script>
 import _ from 'lodash'
 import postRobot from 'post-robot'
-import moment from 'moment'
 import Cesium from 'cesium/Source/Cesium.js'
-import { Events, QResizeObservable, QFixedPosition, dom, QBtn } from 'quasar'
+import { Events, QResizeObservable, QFixedPosition, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import utils from '../utils'
-
-const { offset } = dom
 
 export default {
   name: 'k-globe-activity',
@@ -97,7 +94,7 @@ export default {
     kMapMixins.time,
     kMapMixins.timeline,
     kMapMixins.timeseries,
-    kMapMixins.activity,
+    kMapMixins.activity('globe'),
     kMapMixins.legend,
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
@@ -105,48 +102,27 @@ export default {
     kMapMixins.globe.fileLayers,
     kMapMixins.globe.style,
     kMapMixins.globe.tooltip,
-    kMapMixins.globe.popup
+    kMapMixins.globe.popup,
+    kMapMixins.globe.activity
   ],
   inject: ['layout'],
   methods: {
-    async initializeViewer () {
-      if (this.viewer) return
+    async refreshActivity () {
+      this.clearActivity()
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
-      // Ensure DOM ref is here as well
-      await this.loadRefs()
-      this.setupGlobe(this.$refs.globe, token)
-      this.viewer.clock.onTick.addEventListener(this.storeView)
-      await this.initializeView()
-    },
-    finalizeViewer () {
-      this.viewer.clock.onTick.removeEventListener(this.storeView)
-    },
-    async refreshActivity () {
-      this.clearActivity()
       // Wait until viewer is ready
-      await this.initializeViewer()
+      await this.initializeGlobe(token)
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
-      const actions = this.$config('globeActivity.actions')
-      const hasVrAction = (actions ? actions.includes('vr') : true)
+      const actions = _.get(this, 'activityOptions.actions', ['vr'])
       // FAB
-      if (hasVrAction) this.registerFabAction({
+      if (actions.includes('vr')) this.registerFabAction({
         name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
       })
       utils.sendEmbedEvent('globe-ready')
-    },
-    onGlobeResized (size) {
-      // Avoid to refresh the layout when leaving the component
-      if (this.observe) {
-        this.refreshGlobe()
-        if (this.$refs.globe) {
-          this.engineContainerWidth = this.$refs.globe.getBoundingClientRect().width
-          this.engineContainerHeight = this.$refs.globe.getBoundingClientRect().height
-        }
-      }
     },
     getVigicruesTooltip (entity, options) {
       const properties = entity.properties
@@ -167,20 +143,6 @@ export default {
       */
       return null
     },
-    onToggleFullscreen () {
-      if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()
-      else Cesium.Fullscreen.requestFullscreen(document.body)
-    },
-    onToggleVr () {
-      // VR requires fullscreen mode
-      if (this.viewer.scene.useWebVR) {
-        if (Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.exitFullscreen()
-        this.viewer.scene.useWebVR = false
-      } else {
-        if (!Cesium.Fullscreen.fullscreen) Cesium.Fullscreen.requestFullscreen(document.body)
-        this.viewer.scene.useWebVR = true
-      }
-    },
     async onFeatureClicked (options, event) {
       const entity = event.target
       if (!entity) return
@@ -189,11 +151,7 @@ export default {
     }
   },
   created () {
-    // Setup mapping activity mixin
-    this.setMappingEngine('cesium')
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
-    // Enable the observers in order to refresh the layout
-    this.observe = true
     // Required to get the access token from server
     Events.$on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onFeatureClicked)
@@ -203,7 +161,6 @@ export default {
   beforeDestroy () {
     Events.$off('capabilities-api-changed', this.refreshActivity)
     this.$off('click', this.onFeatureClicked)
-    this.finalizeViewer()
   }
 }
 </script>

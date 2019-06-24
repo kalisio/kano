@@ -12,6 +12,20 @@
             :current-formatted-time="currentFormattedTime" />
         </div>
       </k-widget>
+      <k-radial-fab ref="radialMenu" 
+      :style="radialFabStyle"
+      :button="false"
+      :itemSize="50"
+      :radius="80"
+      :angle-restriction="180">
+        <k-radial-fab-item 
+          v-for="(action, index) in featureActions" 
+          :key="index" 
+          :style="radialFabItemStyle" 
+          @click="onFeatureMenuClicked(action)">
+          <q-icon :name="action.icon" style="color: #f8ffd7"/>
+        </k-radial-fab-item>
+      </k-radial-fab>
     </div>
 
     <q-btn v-if="sideNavToggle"
@@ -74,20 +88,19 @@ import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
-import { QResizeObservable, dom, QBtn, QFixedPosition } from 'quasar'
+import { QResizeObservable, QBtn, QFixedPosition, QIcon } from 'quasar'
 
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
 import utils from '../utils'
 
-const { offset } = dom
-
 export default {
   name: 'k-map-activity',
   components: {
     QResizeObservable,
     QBtn,
+    QIcon,
     QFixedPosition
   },
   mixins: [
@@ -99,9 +112,10 @@ export default {
     kMapMixins.time,
     kMapMixins.timeline,
     kMapMixins.timeseries,
-    kMapMixins.activity,
+    kMapMixins.activity('map'),
     kMapMixins.legend,
     kMapMixins.locationIndicator,
+    kMapMixins.actionButtons,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
@@ -110,29 +124,19 @@ export default {
     kMapMixins.map.editLayers,
     kMapMixins.map.style,
     kMapMixins.map.tooltip,
-    kMapMixins.map.popup
+    kMapMixins.map.popup,
+    kMapMixins.map.activity
   ],
   inject: ['layout'],
   methods: {
-    async initializeViewer () {
-      if (this.map) return
-      // Ensure DOM ref is here as well
-      await this.loadRefs()
-      this.setupMap(this.$refs.map, this.$config('map.viewer'))
-      // Add a scale control
-      L.control.scale().addTo(this.map)
-      this.map.on('moveend', this.storeView)
-      await this.initializeView()
-      // Add app hooks to weacast client if separat from app client
-      if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
-    },
-    finalizeViewer () {
-      this.map.off('moveend', this.storeView)
-    },
     async refreshActivity () {  
       this.clearActivity()
-      // Wait until viewer is ready
-      await this.initializeViewer()
+      // Wait until map is ready
+      await this.initializeMap()
+      // Add a scale control
+      L.control.scale().addTo(this.map)
+      // Add app hooks to weacast client if separate from app client
+      if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
       this.setRightPanelContent('KCatalogPanel', this.$data)
       this.registerActivityActions()
@@ -198,19 +202,6 @@ export default {
       if (!feature) return
       utils.sendEmbedEvent('click', { feature, layer: options })
     },
-    onMapResized (size) {
-      // Avoid to refresh the layout when leaving the component
-      if (this.observe) {
-        this.refreshMap()
-        if (this.$refs.map) {
-          this.engineContainerWidth = this.$refs.map.getBoundingClientRect().width
-          this.engineContainerHeight = this.$refs.map.getBoundingClientRect().height
-        }
-      }
-    },
-    onToggleFullscreen () {
-      this.map.toggleFullscreen()
-    },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
       this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
@@ -226,10 +217,6 @@ export default {
     }
   },
   created () {
-    // Setup mapping activity mixin
-    this.setMappingEngine('leaflet')
-    // Enable the observers in order to refresh the layout
-    this.observe = true
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
     this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
@@ -245,13 +232,9 @@ export default {
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
     this.$off('timeline-changed', this.onTimelineChanged)
-    // No need to refresh the layout when leaving the component
-    this.observe = false
-    //this.removeCollectionLayer('Actors')
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onFeatureClicked)
-    this.finalizeViewer()
   }
 }
 </script>
