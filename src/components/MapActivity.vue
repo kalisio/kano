@@ -12,20 +12,6 @@
             :current-formatted-time="currentFormattedTime" />
         </div>
       </k-widget>
-      <k-radial-fab ref="radialMenu" 
-      :style="radialFabStyle"
-      :button="false"
-      :itemSize="50"
-      :radius="80"
-      :angle-restriction="180">
-        <k-radial-fab-item 
-          v-for="(action, index) in featureActions" 
-          :key="index" 
-          :style="radialFabItemStyle" 
-          @click="onFeatureMenuClicked(action)">
-          <q-icon :name="action.icon" style="color: #f8ffd7"/>
-        </k-radial-fab-item>
-      </k-radial-fab>
     </div>
 
     <q-btn v-if="sideNavToggle"
@@ -88,7 +74,7 @@ import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
-import { QResizeObservable, QBtn, QFixedPosition, QIcon } from 'quasar'
+import { QResizeObservable, QBtn, QFixedPosition } from 'quasar'
 
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
@@ -100,7 +86,6 @@ export default {
   components: {
     QResizeObservable,
     QBtn,
-    QIcon,
     QFixedPosition
   },
   mixins: [
@@ -115,7 +100,6 @@ export default {
     kMapMixins.activity('map'),
     kMapMixins.legend,
     kMapMixins.locationIndicator,
-    kMapMixins.actionButtons,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
