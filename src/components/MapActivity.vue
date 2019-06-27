@@ -198,6 +198,9 @@ export default {
         times.push(moment.utc(time).minutes(0).seconds(0).milliseconds(0).format())
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
+    },
+    generateHandlerForLayerEvent (event) {
+      return (layer) => utils.sendEmbedEvent(event, { layer })
     }
   },
   created () {
@@ -212,6 +215,14 @@ export default {
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
+    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
+    this.$on('layer-added', this.onAddedLayerEvent)
+    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
+    this.$on('layer-shown', this.onShownLayerEvent)
+    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
+    this.$on('layer-hidden', this.onHiddenLayerEvent)
+    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
+    this.$on('layer-removed', this.onRemovedLayerEvent)
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
@@ -219,6 +230,10 @@ export default {
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onFeatureClicked)
+    this.$off('layer-added', this.onAddedLayerEvent)
+    this.$off('layer-shown', this.onShownLayerEvent)
+    this.$off('layer-hidden', this.onHiddenLayerEvent)
+    this.$off('layer-removed', this.onRemovedLayerEvent)
   }
 }
 </script>
