@@ -42,12 +42,8 @@
       }
       function getGeoJsonAcarsFeature (id) {
         var type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
-        var message = `OUT 13:29Z /ZFW 113840 /FOB 13830 /TAW 127670</br>
-                      /POS N50 2.3924 E8 35.1521</br>
-                      /ALT 372</br>
-                      /AP EDDF /GATE A 10</br>
-                      /WND 08008 /OAT 17 /TAT 18`
-        if (component === 'globe') message = message.replace('</br>', '\n')
+        var separator = (component === 'globe' ? '\n' : '</br>')
+        var message = `OUT 13:29Z /ZFW 113840 /FOB 13830 /TAW 127670${separator}/POS N50 2.3924 E8 35.1521${separator}/ALT 372${separator}/AP EDDF /GATE A 10${separator}/WND 08008 /OAT 17 /TAT 18`
         let feature = {
           type: 'Feature',
           properties: {
