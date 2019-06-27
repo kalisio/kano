@@ -170,7 +170,6 @@ module.exports = {
     },
     // Default GeoJSON popup will display all properties
     popup: {},
-    cluster: {},
     fileLayers: {
       fileSizeLimit : 1024 * 1024,
       formats: [ '.geojson', '.kml', '.gpx' ]
@@ -188,7 +187,6 @@ module.exports = {
       vrButton: false,
       fullscreenButton: false,
       animation: false,
-      //creditContainer: 'xxx',
       timeline: false,
       creditContainer: 'globe-credit'
     },
@@ -251,9 +249,6 @@ module.exports = {
         show: true,
         text: '<%= entities.length.toLocaleString() %>'
       }
-    },
-    cluster: {
-      pixelRange: 50
     }
   },
   routes: require('./routes')

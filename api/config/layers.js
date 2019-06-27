@@ -403,7 +403,7 @@ module.exports = [
       source: '/api/vigicrues-observations',
       realtime: true,
       interval: 900000,
-      container: 'markerClusterGroup',
+      cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
@@ -424,9 +424,7 @@ module.exports = [
       source: '/api/vigicrues-observations',
       realtime: true,
       interval: 900000,
-      cluster: {
-        pixelRange: 50
-      },
+      cluster: { pixelRange: 50 },
       'marker-symbol': 'water',
       'marker-color': '#00a9ce',
       popup: {
@@ -547,7 +545,7 @@ module.exports = [
       realtime: true,
       interval: 900000,
       queryInterval: 86400000,
-      container: 'markerClusterGroup',
+      cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#0B75A9',
       'icon-color': 'white',
       'icon-classes': 'fa fa-heartbeat',
@@ -579,9 +577,7 @@ module.exports = [
       realtime: true,
       interval: 900000,
       queryInterval: 86400000,
-      cluster: {
-        pixelRange: 50
-      },
+      cluster: { pixelRange: 50 },
       'marker-symbol': 'air',
       'marker-color': '#0B75A9',
       popup: {
@@ -615,7 +611,7 @@ module.exports = [
       source: 'https://s3.eu-central-1.amazonaws.com/kargo/teleray.json',
       realtime: true,
       interval: 600000,
-      container: 'markerClusterGroup',
+      cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === "VA") { %>darkblue<% }
                           else if (properties.visibility === "NV") { %>orange<% }
                           else { %>dark<% } %>`,
@@ -639,9 +635,7 @@ module.exports = [
       source: 'https://s3.eu-central-1.amazonaws.com/kargo/teleray.json',
       realtime: true,
       interval: 600000,
-      cluster: {
-        pixelRange: 50
-      },
+      cluster: { pixelRange: 50 },
       'marker-symbol': 'lighthouse',
       'marker-color': '#180EF1',
       popup: {
