@@ -382,7 +382,7 @@
         })
         path.features.push({
           type: 'Feature',
-          properties: { id: 1, message: 'ADS-B OK', stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20', entityStyle: { polyline: { material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: Math.random() > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
+          properties: { id: 1, message: 'ADS-B OK', stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20', entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: Math.random() > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
           geometry: { type: 'LineString', coordinates: coordinates.slice(middle, flightpath.length)}
         })
         // Filter airports as all don't have METAR/TAF information
