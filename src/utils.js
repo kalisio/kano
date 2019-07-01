@@ -115,7 +115,6 @@ function setupEmbedApi(routeName, component) {
           route = router.currentRoute
           component = getEmbedComponent(route)
           if (component) resolve()
-          else console.log('wainting for component')
         }, 100)
       })
       clearInterval(interval)
