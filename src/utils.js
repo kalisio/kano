@@ -105,26 +105,22 @@ function setupEmbedApi(routeName, component) {
     const router = Store.get('router')
     let route = router.currentRoute
     const data = event.data
-    let result
+    let result, component, interval
     // If event received but the current route does not match the new route is pushed first
     if (route.name !== routeName) {
       // Need to wait until route has really changed, component has been initialized, etc.
       await new Promise((resolve, reject) => router.push({ name: routeName, query: Object.assign({}, route.query) }, resolve))
-      let component = getEmbedComponent(route)
-      if (component) {
-        result = await new Promise((resolve, reject) => {
-          const unwatch = component.$parent.$watch('$route', () => {
-            // Unwatch immediately
-            unwatch()
-            resolve(callEmbedMethod(router.currentRoute, data))
-          })
-        })
-      } else {
-        throw new Error('Embedded Kano application received a command while not yet ready')
-      }
-    } else {
-      result = await callEmbedMethod(route, data)
+      await new Promise((resolve, reject) => {
+        interval = setInterval(() => {
+          route = router.currentRoute
+          component = getEmbedComponent(route)
+          if (component) resolve()
+          else console.log('wainting for component')
+        }, 100)
+      })
+      clearInterval(interval)
     }
+    result = await callEmbedMethod(route, data)
     return result
   })
 }
