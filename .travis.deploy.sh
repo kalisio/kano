@@ -32,8 +32,12 @@ else
 	scp deploy/remove-app.sh $SSH_USER@$SSH_REMOTE:~/$APP
 
 	# Deploy the stack
+	SUDO=""
+	if [ "$SSH_USER" != "root" ]; then
+		SUDO="sudo"
+	fi
 	ssh $SSH_USER@$SSH_REMOTE "cd $APP; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh"
-	ssh $SSH_USER@$SSH_REMOTE "cd $APP; sudo ./remove-app.sh; sudo k-swarm-prune; sudo ./deploy-app.sh"
+	ssh $SSH_USER@$SSH_REMOTE "cd $APP; $SUDO ./remove-app.sh; $SUDO k-swarm-prune; $SUDO ./deploy-app.sh"
 
 	travis_fold end "deploy"
 fi
