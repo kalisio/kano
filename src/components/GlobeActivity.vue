@@ -148,6 +148,9 @@ export default {
       if (!entity) return
       const properties = (entity.properties ? entity.properties.getValue(0) : null)
       utils.sendEmbedEvent('click', { properties, layer: options })
+    },
+    generateHandlerForLayerEvent (event) {
+      return (layer) => utils.sendEmbedEvent(event, { layer })
     }
   },
   created () {
@@ -155,12 +158,24 @@ export default {
     // Required to get the access token from server
     Events.$on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onFeatureClicked)
+    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
+    this.$on('layer-added', this.onAddedLayerEvent)
+    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
+    this.$on('layer-shown', this.onShownLayerEvent)
+    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
+    this.$on('layer-hidden', this.onHiddenLayerEvent)
+    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
+    this.$on('layer-removed', this.onRemovedLayerEvent)
   },
   mounted () {
   },
   beforeDestroy () {
     Events.$off('capabilities-api-changed', this.refreshActivity)
     this.$off('click', this.onFeatureClicked)
+    this.$off('layer-added', this.onAddedLayerEvent)
+    this.$off('layer-shown', this.onShownLayerEvent)
+    this.$off('layer-hidden', this.onHiddenLayerEvent)
+    this.$off('layer-removed', this.onRemovedLayerEvent)
   }
 }
 </script>
