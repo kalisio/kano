@@ -1,6 +1,7 @@
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
 const mapproxyUrl = 'https://mapproxy.' + kargoDomain
+const forecastZIndex = 300
 
 module.exports = [
   {
@@ -232,7 +233,8 @@ module.exports = [
       lineWidth: 4,
       frameRate: 20,
       particleMultiplier: 0.001,
-      displayValues: false
+      displayValues: false,
+      zIndex: forecastZIndex      
       /*
       displayOptions: {
         velocityType: 'Wind',
@@ -275,6 +277,7 @@ module.exports = [
       elements: [
         'gust'
       ],
+      zIndex: forecastZIndex,
       mesh: true
     }
   },
@@ -320,6 +323,7 @@ module.exports = [
       elements: [
         'precipitations'
       ],
+      zIndex: forecastZIndex,
       mesh: true
     }
   },
