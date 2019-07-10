@@ -366,7 +366,7 @@
               }
             }})
             .then(function () { return updateFlightpathLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
           }
         })
       }
@@ -425,7 +425,7 @@
               }
             }})
             .then(function () { return updateGradientFlightpathLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
           }
         })
       }
@@ -492,7 +492,7 @@
               }
             }})
             .then(function () { return updateFlightplanLayer(name) })
-            .then(function () { postRobot.send(kano, component, { command: 'zoomToLayer', args: name }) })
+            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
           }
         })
       }
