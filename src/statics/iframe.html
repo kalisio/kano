@@ -485,6 +485,12 @@
                 isVisible: true,
                 popup: { pick: [] },
                 entityStyle: {
+                  billboard: {
+                    heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
+                  },
+                  label: {
+                    heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
+                  },
                   polyline: {
                     clampToGround: false
                   }
@@ -553,7 +559,7 @@
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
-          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
+          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 39000.0 ] }
         })
         plan.features.push({
           type: 'Feature',
@@ -564,7 +570,7 @@
                        distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
-          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 390.0 ] }
+          geometry: { type: 'Point', coordinates: [ 2.548333, 49.01, 39000.0 ] }
         })
         plan.features.push({
           type: 'Feature',
@@ -573,7 +579,7 @@
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
-          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
+          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 24200.0 ] }
         })
         plan.features.push({
           type: 'Feature',
@@ -584,7 +590,7 @@
                        distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
           },
-          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 242.0 ] }
+          geometry: { type: 'Point', coordinates: [ -6.27, 53.421667, 24200.0 ] }
         })
         // ETOPS
         plan.features.push({
