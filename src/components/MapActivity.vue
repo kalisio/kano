@@ -234,6 +234,9 @@ export default {
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)
     this.$off('layer-removed', this.onRemovedLayerEvent)
+  },
+  destroyed () {
+    utils.sendEmbedEvent('map-destroyed')
   }
 }
 </script>

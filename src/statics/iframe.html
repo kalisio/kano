@@ -671,6 +671,12 @@
       postRobot.on('globe-ready', () => {
         console.log('Globe component ready')
       })
+      postRobot.on('map-destroyed', () => {
+        console.log('Map component destroyed')
+      })
+      postRobot.on('globe-destroyed', () => {
+        console.log('Globe component destroyed')
+      })
       postRobot.on('click', (event) => {
         if (event.data.layer.name === 'ACARS') {
           alert('ACARS message clicked')
