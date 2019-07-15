@@ -609,6 +609,8 @@ module.exports = [
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/teleray-icon.jpg',
     attribution: '',
     type: 'OverlayLayer',
+    service: 'teleray',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'irsnId',
     leaflet: {
       type: 'geoJson',
