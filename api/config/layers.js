@@ -602,7 +602,7 @@ module.exports = [
   },
   {
     name: 'Téléray',
-    description: 'Dose rate',
+    description: 'Débit de dose gamma ambiant',
     tags: [
       'measure'
     ],
@@ -612,6 +612,21 @@ module.exports = [
     service: 'teleray',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'irsnId',
+    history: 604800,
+    variables: [
+      {
+        name: 'value',
+        label: 'Variables.DOSE_RATE',
+        units: [
+          'nSv/h³'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      }
+    ],
     leaflet: {
       type: 'geoJson',
       source: '/api/teleray',
