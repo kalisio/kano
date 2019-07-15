@@ -612,7 +612,7 @@ module.exports = [
     featureId: 'irsnId',
     leaflet: {
       type: 'geoJson',
-      source: 'https://s3.eu-central-1.amazonaws.com/kargo/teleray.json',
+      source: '/api/teleray',
       realtime: true,
       interval: 600000,
       cluster: { disableClusteringAtZoom: 18 },
@@ -636,7 +636,7 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: 'https://s3.eu-central-1.amazonaws.com/kargo/teleray.json',
+      source: '/api/teleray',
       realtime: true,
       interval: 600000,
       cluster: { pixelRange: 50 },
