@@ -580,7 +580,7 @@ module.exports = [
       source: '/api/openaq',
       realtime: true,
       interval: 900000,
-      queryInterval: 86400000,
+      queryInterval: 86400000 * 2,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'air',
       'marker-color': '#0B75A9',
@@ -632,6 +632,7 @@ module.exports = [
       source: '/api/teleray',
       realtime: true,
       interval: 600000,
+      queryInterval: 3600000,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === "VA") { %>darkblue<% }
                           else if (properties.visibility === "NV") { %>orange<% }
@@ -656,6 +657,7 @@ module.exports = [
       source: '/api/teleray',
       realtime: true,
       interval: 600000,
+      queryInterval: 3600000,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'lighthouse',
       'marker-color': '#180EF1',
