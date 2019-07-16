@@ -616,7 +616,7 @@ module.exports = [
     variables: [
       {
         name: 'value',
-        label: 'Variables.DOSE_RATE',
+        label: 'Variables.GAMMA_DOSE_RATE',
         units: [
           'nSv/h³'
         ],

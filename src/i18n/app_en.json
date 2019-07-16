@@ -36,7 +36,15 @@
     "WIND_SPEED": "Speed",
     "WIND_DIRECTION": "Direction",
     "WIND_GUST": "Gust",
-    "PRECIPITATIONS": "Precipitations"
+    "PRECIPITATIONS": "Precipitations",
+    "GAMMA_DOSE_RATE": "Ambient gamma dose rate",
+    "PM10": "Particculater matter (< 10µm, PM10)",
+    "PM25": "Particulate matter (< 2.5µm, PM2.5)",
+    "SO2": "Sulfur dioxide (SO2)",
+    "CO": "Carbon monoxide (CO)",
+    "NO2": "Nitrogen dioxide (NO2)",
+    "O3": "Ozone (O3)",
+    "BC": "Black carbon (BC)"   
   },
   "MapActivity": {
     "VIGICRUES_LEVEL_1": "No flood risk",
