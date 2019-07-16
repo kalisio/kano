@@ -224,6 +224,15 @@ module.exports = [
         }
       }
     ],
+    /* When available at different levels
+    levels: {
+      name: 'pressure',
+      label: 'Levels.PRESSURE',
+      units: [
+        'mb'
+      ],
+      values: [ 1000, 700, 450, 300, 200 ]
+    }*/,
     leaflet: {
       type: 'weacast.flowLayer',
       elements: [
@@ -322,6 +331,42 @@ module.exports = [
       type: 'weacast.scalarLayer',
       elements: [
         'precipitations'
+      ],
+      zIndex: forecastZIndex,
+      mesh: true
+    }
+  },
+  {
+    name: 'Temperature',
+    description: 'Mean temperature',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'temperature',
+        label: 'Variables.TEMPERATURE',
+        units: [
+          'degC', 'degF', 'K'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(255, 215, 0, 128)',
+          borderColor: 'rgb(255, 215, 0)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'RdBu',
+          invertScale: true
+        }
+      }
+    ],
+    leaflet: {
+      type: 'weacast.scalarLayer',
+      elements: [
+        'temperature'
       ],
       zIndex: forecastZIndex,
       mesh: true

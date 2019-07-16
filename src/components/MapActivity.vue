@@ -7,7 +7,7 @@
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
-            :variables="variables"
+            :variables="forecastLevel ? variablesForCurrentLevel : variables"
             :current-time-format="currentTimeFormat"
             :current-formatted-time="currentFormattedTime" />
         </div>
@@ -143,8 +143,10 @@ export default {
     },
     getMeteoMarker (feature, latlng) {
       // Use wind barbs on weather probed features
-      const isWeatherProbe = (_.has(feature, 'properties.windDirection') &&
-                              _.has(feature, 'properties.windSpeed'))
+      const windDirection = (this.forecastLevel ? `windDirection-${this.forecastLevel}` : 'windDirection')
+      const windSpeed = (this.forecastLevel ? `windSpeed-${this.forecastLevel}` : 'windSpeed')
+      const isWeatherProbe = (_.has(feature, `properties.${windDirection}`) &&
+                              _.has(feature, `properties.${windSpeed}`))
       if (isWeatherProbe) {
         let marker = this.getProbedLocationForecastMarker(feature, latlng)
         if (marker) {
@@ -166,16 +168,32 @@ export default {
       return null
     },
     getMeteoTooltip (feature, layer) {
-      const direction = _.get(feature, 'properties.windDirection')
-      const speed = _.get(feature, 'properties.windSpeed')
+      // Only wind/temperature can be available at different levels now
+      const windDirection = (this.forecastLevel ? `windDirection-${this.forecastLevel}` : 'windDirection')
+      const windSpeed = (this.forecastLevel ? `windSpeed-${this.forecastLevel}` : 'windSpeed')
+      const temperature = (this.forecastLevel ? `temperature-${this.forecastLevel}` : 'temperature')
+      const direction = _.get(feature, `properties.${windDirection}`)
+      const speed = _.get(feature, `properties.${windSpeed}`)
       const gust = _.get(feature, 'properties.gust')
+      const t = _.get(feature, `properties.${temperature}`)
       const precipitations = _.get(feature, 'properties.precipitations')
-      if (!_.isNil(direction) && !_.isNil(speed) && !_.isNil(gust) && !_.isNil(precipitations)) {
-        let tooltip = L.tooltip({ permanent: false }, layer)
-        return tooltip.setContent(`<b>${speed.toFixed(2)} m/s - ${direction.toFixed(2)}°</br>
-                                   max ${gust.toFixed(2)} m/s - ${precipitations.toFixed(2)} mm/h</b>`)
+      let html = ''
+      if (!_.isNil(speed)) {
+        html += `${speed.toFixed(2)} m/s</br>`
       }
-      return null
+      if (!_.isNil(gust)) {
+        html += `max ${gust.toFixed(2)} m/s</br>`
+      }
+      if (!_.isNil(direction)) {
+        html += `${direction.toFixed(2)} °</br>`
+      }
+      if (!_.isNil(precipitations)) {
+        html += `${precipitations.toFixed(2)} mm/h</br>`
+      }
+      if (!_.isNil(t)) {
+        html += `${t.toFixed(2)} °C</br>`
+      }
+      return (html ? L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`) : null)
     },
     onFeaturePopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')

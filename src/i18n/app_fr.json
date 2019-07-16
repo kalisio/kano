@@ -37,6 +37,7 @@
     "WIND_DIRECTION": "Direction",
     "WIND_GUST": "Rafales",
     "PRECIPITATIONS": "Précipitations",
+    "TEMPERATURE": "Température",
     "GAMMA_DOSE_RATE": "Débit de dose gamma ambiant",
     "PM10": "Particules fines (< 10µm, PM10)",
     "PM25": "Particules fines (< 2.5µm, PM2.5)",
@@ -45,6 +46,9 @@
     "NO2": "Dioxyde d'azote (NO2)",
     "O3": "Ozone (O3)",
     "BC": "Noir de carbone (BC)"
+  },
+  "Levels": {
+    "PRESSURE": "Pression"
   },
   "MapActivity": {
     "VIGICRUES_LEVEL_1": "Pas de vigilance particulière requise",
