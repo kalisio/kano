@@ -33,7 +33,7 @@ export default {
   name: 'settings',
   methods: {
     editSettings () {
-      //this.sideNav.klayout.hideLetDrawer()
+      //FIXME: this.sideNav.klayout.hideLetDrawer()
       this.$refs.editor.open()
     },
     onSettingsEdited () {
