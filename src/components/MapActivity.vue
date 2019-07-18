@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page>
     
     <div ref="map" :style="viewStyle">
       <q-resize-observer @resize="onMapResized" />
@@ -20,7 +20,7 @@
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
-      @click="layout.toggleLeft()">
+      @click="klayout.toggleLeftDrawer()">
       {{ appName }}
     </q-btn>
     
@@ -32,7 +32,7 @@
       small
       round 
       icon="layers"
-      @click="layout.toggleRight()" />
+      @click="klayout.toggleRightDrawer()" />
 
     <k-color-legend v-if="colorLegend.visible"
       class="fixed"
@@ -47,7 +47,7 @@
       @click="onColorLegendClick" />
     />
 
-    <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
+    <q-page-sticky position="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
       <k-time-controller
         v-if="timelineEnabled"
         :key="timelineRefreshKey"
@@ -62,9 +62,9 @@
         pointerTextColor="white"
         style="width: 100%;"
       />
-    </q-fixed-position>
+    </q-page-sticky>
 
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -104,7 +104,7 @@ export default {
     kMapMixins.map.popup,
     kMapMixins.map.activity
   ],
-  inject: ['layout'],
+  inject: ['klayout'],
   methods: {
     async refreshActivity () {  
       this.clearActivity()

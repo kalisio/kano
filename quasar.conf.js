@@ -27,19 +27,13 @@ module.exports = function (ctx) {
     ],
 
     extras: [
-      // 'ionicons-v4',
-      // 'mdi-v3',
-      // 'fontawesome-v5',
-      // 'eva-icons',
-      // 'themify',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
-      'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      'roboto-font', 
+      'material-icons',
+      'fontawesome-v5'
     ],
 
     framework: {
-      // iconSet: 'ionicons-v4',
+      // iconSet: by default material-icons
       // lang: 'de', // Quasar language
 
       components: [
@@ -49,10 +43,12 @@ module.exports = function (ctx) {
         'QDrawer',
         'QPageContainer',
         'QPage',
+        'QPageSticky',
         'QToolbar',
         'QToolbarTitle',
         'QResizeObserver',
         'QBtn',
+        'QMenu',
         'QTooltip',
         'QIcon',
         'QChip',
@@ -60,6 +56,7 @@ module.exports = function (ctx) {
         'QItem',
         'QItemSection',
         'QItemLabel',
+        'QSeparator',
         'QExpansionItem',
         "QCard",
         "QCardSection",
@@ -79,11 +76,6 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
-      env: ctx.dev ? { // so on dev we'll have
-        NODE_ENV: '"development"'
-      } : { // and on build (production):
-        NODE_ENV: '"production"'
-      },
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,
