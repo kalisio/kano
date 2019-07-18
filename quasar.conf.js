@@ -4,6 +4,9 @@
 const path = require('path')
 const fs = require('fs')
 
+const serverPort = process.env.PORT || process.env.HTTPS_PORT || 8081
+const clientPort = process.env.CLIENT_PORT || process.env.HTTPS_CLIENT_PORT || 8080
+
 // Load config based on current NODE_ENV, etc.
 const clientConfig = require('config')
 // Write JSON config
@@ -98,6 +101,20 @@ module.exports = function (ctx) {
     },
 
     devServer: {
+      port: clientPort,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          logLevel: 'debug'
+        },
+        '/apiws': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          ws: true,
+          logLevel: 'debug'
+        }
+      },
       // https: true,
       // port: 8080,
       open: true // opens browser window automatically
