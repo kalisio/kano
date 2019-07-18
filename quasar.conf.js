@@ -14,8 +14,8 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'api',
       'events',
+      'api',
       'i18n'
     ],
 
@@ -83,6 +83,11 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack (cfg) {
+        cfg.resolve.modules = [
+          path.resolve(__dirname, ''),
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'node_modules')
+        ],
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing aliases
           schemas: path.resolve(__dirname, './src/schemas'),

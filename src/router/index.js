@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { Store } from '@kalisio/kdk-core/client'
 import utils from '../utils'
 import config from 'config'
 
@@ -11,7 +12,7 @@ Vue.use(VueRouter)
  */
 
 export default function (/* { store, ssrContext } */) {
-  const Router = new VueRouter({
+  const router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes: utils.buildRoutes(config.routes),
 
@@ -22,5 +23,6 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  return Router
+  Store.set('router', router)
+  return router
 }
