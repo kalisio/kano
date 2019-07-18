@@ -79,6 +79,11 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
+      env: ctx.dev ? { // so on dev we'll have
+        NODE_ENV: '"development"'
+      } : { // and on build (production):
+        NODE_ENV: '"production"'
+      },
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,
@@ -87,13 +92,11 @@ module.exports = function (ctx) {
       // extractCSS: false,
       extendWebpack (cfg) {
         cfg.resolve.modules = [
-          path.resolve(__dirname, ''),
           path.resolve(__dirname, 'src'),
           path.resolve(__dirname, 'node_modules')
         ],
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing aliases
-          schemas: path.resolve(__dirname, './src/schemas'),
           '@': path.resolve(__dirname, './src/components'),
           config: path.resolve(__dirname, './config/client-config.json')
         }

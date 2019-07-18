@@ -21,7 +21,7 @@ export class Server {
     
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
-      app.use('/', express.static('../dist'))
+      app.use('/', express.static('../dist/spa'))
     }
     // In dev this is done by the webpack server
 
