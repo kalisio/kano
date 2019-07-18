@@ -6,6 +6,9 @@
 *.njsproj
 *.sln
 
+# Quasar build
+.quasar
+
 # Logs
 logs
 *.log
