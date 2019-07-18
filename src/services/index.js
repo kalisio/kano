@@ -1,9 +1,10 @@
 import logger from 'loglevel'
-import kCore, { LocalSettingsService, utils as kCoreUtils } from '@kalisio/kdk-core/client'
+import kCore, { LocalSettingsService } from '@kalisio/kdk-core/client'
 import kMap from '@kalisio/kdk-map/client'
 
 export default function () {
   const api = this
+  console.log(api)
 
   // Set up our plugin services
   try {

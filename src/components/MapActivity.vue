@@ -2,7 +2,7 @@
   <div>
     
     <div ref="map" :style="viewStyle">
-      <q-resize-observable @resize="onMapResized" />
+      <q-resize-observer @resize="onMapResized" />
       <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
@@ -74,8 +74,6 @@ import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
-import { QResizeObservable, QBtn, QFixedPosition } from 'quasar'
-
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
@@ -83,11 +81,6 @@ import utils from '../utils'
 
 export default {
   name: 'k-map-activity',
-  components: {
-    QResizeObservable,
-    QBtn,
-    QFixedPosition
-  },
   mixins: [
     kCoreMixins.refsResolver(['map']),
     kCoreMixins.baseActivity,

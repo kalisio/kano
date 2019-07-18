@@ -78,13 +78,13 @@ async function createComponentVNode (component, options) {
   return this.$createElement(Component, Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
 
-function getEmbedComponent(route) {
+function getEmbedComponent (route) {
   // The target component is the last one to be matched in hierarchy
   let component = _.get(route, `matched[${route.matched.length - 1}]`)
   return _.get(component, 'instances.default')
 }
 
-async function callEmbedMethod(route, data) {
+async function callEmbedMethod (route, data) {
   // The event payload contains the name of the method to be called as well as its arguments
   const method = (data ? data.command : undefined)
   let result
@@ -99,7 +99,7 @@ async function callEmbedMethod(route, data) {
 
 // Setup post-robot event listenr to call component methods on this route from an external domain
 // If an event is received but the current route is not the same as the event name the new route is pushed first
-function setupEmbedApi(routeName, component) {
+function setupEmbedApi (routeName, component) {
   // Listen to an event named according to current route name
   postRobot.on(routeName, async (event) => {
     const router = Store.get('router')
@@ -124,7 +124,7 @@ function setupEmbedApi(routeName, component) {
   })
 }
 
-function sendEmbedEvent(...args) {
+function sendEmbedEvent (...args) {
   // Will fail if not integrated as iframe so check
   if (window.parent !== window) {
     // If no listener post-robot raises an error

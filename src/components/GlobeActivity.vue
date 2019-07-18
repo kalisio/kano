@@ -2,7 +2,7 @@
   <div>
 
     <div ref="globe" :style="viewStyle">
-      <q-resize-observable @resize="onGlobeResized" />
+      <q-resize-observer @resize="onGlobeResized" />
       <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
@@ -72,18 +72,12 @@
 import _ from 'lodash'
 import postRobot from 'post-robot'
 import Cesium from 'cesium/Source/Cesium.js'
-import { Events, QResizeObservable, QFixedPosition, QBtn } from 'quasar'
 import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import utils from '../utils'
 
 export default {
   name: 'k-globe-activity',
-  components: {
-    QResizeObservable,
-    QBtn,
-    QFixedPosition
-  },
   mixins: [
     kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
@@ -156,7 +150,7 @@ export default {
   created () {
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Required to get the access token from server
-    Events.$on('capabilities-api-changed', this.refreshActivity)
+    this.$events.$on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onFeatureClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
     this.$on('layer-added', this.onAddedLayerEvent)
@@ -170,7 +164,7 @@ export default {
   mounted () {
   },
   beforeDestroy () {
-    Events.$off('capabilities-api-changed', this.refreshActivity)
+    this$events.$off('capabilities-api-changed', this.refreshActivity)
     this.$off('click', this.onFeatureClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)

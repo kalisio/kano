@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Toast, Events, Loading, Alert } from 'quasar'
+import { Loading } from 'quasar'
 import { mixins, beforeGuard } from '@kalisio/kdk-core/client'
 import config from 'config'
 import utils from '../utils'
@@ -47,7 +47,10 @@ export default {
       this.restoreSession()
       .then(user => {
         this.user = user
-        Toast.create.positive('Restoring previous session')
+        this.$q.notify({
+          type: 'positive',
+          message: 'Restoring previous session'
+        })
         // No need to redirect here since the user should be set thus managed by event handler below
       })
       .catch(() => {
@@ -57,7 +60,7 @@ export default {
       })
     }, 1000)
 
-    Events.$on('user-changed', user => {
+    this.$events.$on('user-changed', user => {
       this.user = user
       // Check if we need to redirect based on the fact there is an authenticated user
       this.redirect()
@@ -68,7 +71,9 @@ export default {
       this.$api.socket.on('reconnect_error', () => {
         // Display it only the first time the error appears because multiple attempts will be tried
         if (!this.pendingReconnection) {
-          this.pendingReconnection = Alert.create({html: this.$t('Index.DISCONNECT')})
+          this.pendingReconnection = this.$q.notify({
+            message: this.$t('Index.DISCONNECT')
+          })
         }
       })
       // Handle reconnection correctly, otherwise auth seems to be lost

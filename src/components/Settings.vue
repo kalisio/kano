@@ -22,17 +22,9 @@
 </template>
 
 <script>
-import { QList, QItem, QItemMain, QItemSide } from 'quasar'
-
 export default {
   name: 'settings',
   inject: ['sideNav'],
-  components: {
-    QList,
-    QItem,
-    QItemMain,
-    QItemSide
-  },
   methods: {
     editSettings () {
       this.sideNav.layout.hideCurrentSide(() => this.$refs.editor.open())
