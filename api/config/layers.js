@@ -232,7 +232,7 @@ module.exports = [
         'mb'
       ],
       values: [ 1000, 700, 450, 300, 200 ]
-    }*/,
+    },*/
     leaflet: {
       type: 'weacast.flowLayer',
       elements: [
