@@ -251,5 +251,5 @@ module.exports = {
       }
     }
   },
-  routes: require('./routes')
+  routes: require('../src/router/routes')
 }
