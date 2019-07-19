@@ -4,7 +4,6 @@ import kMap from '@kalisio/kdk-map/client'
 
 export default function () {
   const api = this
-  console.log(api)
 
   // Set up our plugin services
   try {

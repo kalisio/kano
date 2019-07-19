@@ -12,8 +12,6 @@ const servicesPath = path.join(__dirname, 'services')
 
 module.exports = async function () {
   const app = this
-  //console.log(app.db)
-  console.log(app.db.db)
 
   // Set up our plugin services
   try {
