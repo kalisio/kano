@@ -3,15 +3,6 @@
 
     <div ref="globe" :style="viewStyle">
       <q-resize-observer @resize="onGlobeResized" />
-      <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
-        <div slot="widget-content">
-          <k-location-time-series ref="timeseries"
-            :feature="probedLocation" 
-            :variables="variables"
-            :current-time-format="currentTimeFormat"
-            :current-formatted-time="currentFormattedTime" />
-        </div>
-      </k-widget>
       <div id="globe-credit" />
     </div>
 
@@ -34,6 +25,16 @@
       round 
       icon="layers"
       @click="klayout.toggleRightDrawer()" />
+
+    <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
+      <div slot="widget-content">
+        <k-location-time-series ref="timeseries"
+          :feature="probedLocation" 
+          :variables="variables"
+          :current-time-format="currentTimeFormat"
+          :current-formatted-time="currentFormattedTime" />
+      </div>
+    </k-widget>
 
     <k-color-legend v-if="colorLegend.visible"
       class="fixed"

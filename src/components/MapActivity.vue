@@ -3,15 +3,6 @@
     
     <div ref="map" :style="viewStyle">
       <q-resize-observer @resize="onMapResized" />
-      <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
-        <div slot="widget-content">
-          <k-location-time-series ref="timeseries"
-            :feature="probedLocation" 
-            :variables="variables"
-            :current-time-format="currentTimeFormat"
-            :current-formatted-time="currentFormattedTime" />
-        </div>
-      </k-widget>
     </div>
 
     <q-btn
@@ -46,6 +37,16 @@
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
     />
+
+    <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
+      <div slot="widget-content">
+        <k-location-time-series ref="timeseries"
+          :feature="probedLocation" 
+          :variables="variables"
+           :current-time-format="currentTimeFormat"
+           :current-formatted-time="currentFormattedTime" />
+      </div>
+    </k-widget>
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">   
       <div :style="timelineContainerStyle">
