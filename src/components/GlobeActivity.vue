@@ -164,7 +164,7 @@ export default {
   mounted () {
   },
   beforeDestroy () {
-    this$.events.$off('capabilities-api-changed', this.refreshActivity)
+    this.$events.$off('capabilities-api-changed', this.refreshActivity)
     this.$off('click', this.onFeatureClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)
