@@ -85,7 +85,7 @@ export default {
           this.pendingReconnection = null
         }
         // Causes problems with hot reload in dev
-        if (!DEV) {
+        if (!process.env.DEV) {
           Loading.show({message: this.$t('Index.RECONNECT')})
           setTimeout(() => {
             window.location.reload()
