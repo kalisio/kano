@@ -81,7 +81,7 @@ export default {
       this.$api.socket.on('reconnect', () => {
         // Dismiss pending reconnection error message
         if (this.pendingReconnection) {
-          this.pendingReconnection.dismiss()
+          this.pendingReconnection()
           this.pendingReconnection = null
         }
         // Causes problems with hot reload in dev

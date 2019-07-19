@@ -69,12 +69,14 @@ function load (name, type = 'component') {
 }
 
 async function createComponent (component, options) {
-  const Component = Vue.extend(await loadComponent(component)())
+  const ComponentClass = await loadComponent(component)()
+  const Component = Vue.extend(ComponentClass.default)
   return new Component(Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
 
 async function createComponentVNode (component, options) {
-  const Component = Vue.extend(await loadComponent(component)())
+  const ComponentClass = await loadComponent(component)()
+  const Component = Vue.extend(ComponentClass.default)
   return this.$createElement(Component, Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
 
