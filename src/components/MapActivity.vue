@@ -47,21 +47,23 @@
       @click="onColorLegendClick" />
     />
 
-    <q-page-sticky position="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
-      <k-time-controller
-        v-if="timelineEnabled"
-        :key="timelineRefreshKey"
-        :min="timeline.start" 
-        :max="timeline.end"
-        :step="'h'"
-        :value="timeline.current"
-        :timeInterval="timelineInterval"
-        :timeFormatter="timelineFormatter"
-        @change="onTimelineUpdated"
-        pointerColor="#FC6E44" 
-        pointerTextColor="white"
-        style="width: 100%;"
-      />
+    <q-page-sticky position="bottom-left" :offset="[110, 60]">   
+      <div :style="timelineContainerStyle">
+        <k-time-controller
+          v-if="timelineEnabled"
+          :key="timelineRefreshKey"
+          :min="timeline.start" 
+          :max="timeline.end"
+          :step="'h'"
+          :value="timeline.current"
+          :timeInterval="timelineInterval"
+          :timeFormatter="timelineFormatter"
+          @change="onTimelineUpdated"
+          pointerColor="#FC6E44" 
+          pointerTextColor="white"
+          style="width: 100%;"
+        />
+      </div>
     </q-page-sticky>
 
   </q-page>

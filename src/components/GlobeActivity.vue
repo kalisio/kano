@@ -48,21 +48,23 @@
       @click="onColorLegendClick" />
     />
 
-    <q-page-sticky position="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
-      <k-time-controller
-        v-if="timelineEnabled"
-        :key="timelineRefreshKey"
-        :min="timeline.start" 
-        :max="timeline.end"
-        :step="'h'"
-        :value="timeline.current"
-        :timeInterval="timelineInterval"
-        :timeFormatter="timelineFormatter"
-        @change="onTimelineUpdated"
-        pointerColor="#FC6E44" 
-        pointerTextColor="white"
-        style="width: 100%;"
-      />
+    <q-page-sticky position="bottom-left" :offset="[110, 60]">
+      <div :style="timelineContainerStyle">
+        <k-time-controller
+          v-if="timelineEnabled"
+          :key="timelineRefreshKey"
+          :min="timeline.start" 
+          :max="timeline.end"
+          :step="'h'"
+          :value="timeline.current"
+          :timeInterval="timelineInterval"
+          :timeFormatter="timelineFormatter"
+          @change="onTimelineUpdated"
+          pointerColor="#FC6E44" 
+          pointerTextColor="white"
+          style="width: 100%;"
+        />
+      </div>
     </q-page-sticky>
 
   </q-page>
@@ -124,16 +126,6 @@ export default {
       if (level > 1) {
         return Object.assign({ show: false, text: this.$t('MapActivity.VIGICRUES_LEVEL_' + level) }, this.options.tooltip)
       }
-      /*
-      const H = properties.H
-      const Q = properties.Q
-      if (!_.isNil(H) || !_.isNil(Q)) {
-        let tooltip = L.tooltip({ permanent: false }, layer)
-        if (!_.isNil(H) && !_.isNil(Q)) return tooltip.setContent(`<b>${H.toFixed(2)} m - ${Q.toFixed(2)} m3/h`)
-        else if (!_.isNil(H)) return tooltip.setContent(`<b>${H.toFixed(2)} m`)
-        else if (!_.isNil(Q)) return tooltip.setContent(`<b>${Q.toFixed(2)} m3/h`)
-      }
-      */
       return null
     },
     async onFeatureClicked (options, event) {
