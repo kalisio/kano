@@ -15,7 +15,7 @@
       <div id="globe-credit" />
     </div>
 
-    <q-btn v-if="sideNavToggle"
+    <q-btn
       id="side-nav-toggle"
       color="secondary"
       class="fixed"
@@ -25,7 +25,7 @@
       {{ appName }}
     </q-btn>
 
-    <q-btn v-if="panelToggle"
+    <q-btn
       id="globe-panel-toggle"
       color="secondary"
       class="fixed"
@@ -83,7 +83,6 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
     kMapMixins.featureService,
-    kMapMixins.time,
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.timeline,

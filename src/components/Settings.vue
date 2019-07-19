@@ -31,9 +31,10 @@
 <script>
 export default {
   name: 'settings',
+  inject: ['klayout'],
   methods: {
     editSettings () {
-      //this.sideNav.klayout.hideLeftDrawer()
+      this.klayout.hideLeftDrawer()
       this.$refs.editor.open()
     },
     onSettingsEdited () {

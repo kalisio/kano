@@ -14,7 +14,7 @@
       </k-widget>
     </div>
 
-    <q-btn v-if="sideNavToggle"
+    <q-btn
       id="side-nav-toggle"
       color="secondary"
       class="fixed"
@@ -24,7 +24,7 @@
       {{ appName }}
     </q-btn>
     
-    <q-btn v-if="panelToggle"
+    <q-btn
       id="map-panel-toggle"
       color="secondary"
       class="fixed"
