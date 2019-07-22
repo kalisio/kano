@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     showError (message) {
-      this.$q.notify({
+      this.$toast({
         type: 'negative',
         message,
         timeout: 5000
