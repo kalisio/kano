@@ -1,16 +1,16 @@
 #!/bin/bash
-if [[ $TRAVIS_BRANCH == "master" ]]
-then
-	export FLAVOR=dev
-fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
-	export FLAVOR=test
+	if [[ -n "$TRAVIS_TAG" ]]
+	then
+		export FLAVOR=prod
+	else
+		export FLAVOR=test
+	fi
+else
+	export FLAVOR=dev
 fi
-if [[ -n "$TRAVIS_TAG" ]]
-then
-	export FLAVOR=prod
-fi
+
 
 # Exports addtionnal variables
 export VERSION=$(node -p -e "require('./package.json').version")
