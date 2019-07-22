@@ -17,7 +17,6 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'events',
       'api',
       'i18n'
     ],
@@ -62,7 +61,8 @@ module.exports = function (ctx) {
         'QCard',
         'QCardSection',
         'QCardActions',
-        'QDialog'
+        'QDialog',
+        'QAvatar'
       ],
 
       directives: [
