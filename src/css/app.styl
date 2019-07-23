@@ -1,1 +1,21 @@
 // app global css
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  transition: color 0.25s;
+}
+a:hover {
+  color: $link-color-active;
+}
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+// To be used with "a" elements
+.link {
+  margin: 0;
+}
