@@ -47,10 +47,6 @@ export default {
       this.restoreSession()
       .then(user => {
         this.user = user
-        this.$toast({
-          type: 'positive',
-          message: 'Restoring previous session'
-        })
         // No need to redirect here since the user should be set thus managed by event handler below
       })
       .catch(() => {
@@ -71,9 +67,7 @@ export default {
       this.$api.socket.on('reconnect_error', () => {
         // Display it only the first time the error appears because multiple attempts will be tried
         if (!this.pendingReconnection) {
-          this.pendingReconnection = this.$toast({
-            message: this.$t('Index.DISCONNECT')
-          })
+          this.pendingReconnection = this.$toast({ message: this.$t('Index.DISCONNECT') })
         }
       })
       // Handle reconnection correctly, otherwise auth seems to be lost
