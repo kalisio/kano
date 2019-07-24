@@ -26,7 +26,7 @@
     "release:major": "cd api && npm run release:major && cd .. && npm version --no-git-tag-version --force major",
     "changelog": "github_changelog_generator -u kalisio -p kapp && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "quasar clean",
-    "dev": "quasar dev",
+    "dev": "cross-env NODE_ENV=development quasar dev",
     "prod": "cd api && npm run prod",
     "build": "quasar build",
     "cordova:remove:android": "cd cordova && cordova platform remove android && cd ..",
