@@ -1,5 +1,29 @@
 // app global css
 
+// BEGIN - STYLES TAKEN FROM 'OLD QUASAR' (v.0.14.7)
+
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #642879;
+}
+blockquote.text-right {
+  padding-right: 15px;
+  padding-left: 0;
+  border-right: 5px solid #642879;
+  border-left: 0;
+  text-align: right;
+}
+blockquote small {
+  display: block;
+  line-height: 1.4;
+  color: #777;
+}
+blockquote small:before {
+  content: '\2014 \00A0';
+}
+
 a {
   color: $link-color;
   text-decoration: none;
@@ -15,7 +39,25 @@ a:hover {
   outline-width: 0;
 }
 
-// To be used with "a" elements
-.link {
-  margin: 0;
+p {
+  font-size: 1rem;
+  letter-spacing: 0;
+  margin: 0 0 1rem;
+  line-height: 24px;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
+p.caption {
+  font-weight: 300;
+}
+p.caption:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.q-toolbar__title {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 12px;
+}
+
+// END - STYLES TAKEN FROM 'OLD QUASAR' (v.0.14.7)
