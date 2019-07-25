@@ -8,3 +8,4 @@ services:
       args:
         APP: ${APP}
         BUILD_NUMBER: ${BUILD_NUMBER}
+        BRANCH: ${BRANCH}

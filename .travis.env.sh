@@ -32,6 +32,7 @@ echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
 echo "VERSION=$VERSION" >> .env
 echo "VERSION_TAG=$VERSION-$FLAVOR" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
+echo "BRANCH=$TRAVIS_BRANCH" >> .env
 
 set -a
 . .env
