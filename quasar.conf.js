@@ -77,13 +77,13 @@ module.exports = function (ctx) {
       ],
 
       directives: [
-        'Ripple',
-        'Dialog'
+        'Ripple'
       ],
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog'
       ]
     },
 
