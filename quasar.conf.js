@@ -65,6 +65,7 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QSelect',
         'QSeparator',
+        'QSpinnerCube',
         'QTab',
         'QTabPanel',
         'QTabPanels',
