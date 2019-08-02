@@ -7,7 +7,7 @@
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
-            :variables="forecastLevel ? variablesForCurrentLevel : variables"
+            :variables="currentVariables"
             :current-time-format="currentTimeFormat"
             :current-formatted-time="currentFormattedTime" />
         </div>
@@ -52,7 +52,7 @@
       <div slot="widget-content">
         <k-location-time-series ref="timeseries"
           :feature="probedLocation" 
-          :variables="variables"
+          :variables="currentVariables"
            :current-time-format="currentTimeFormat"
            :current-formatted-time="currentFormattedTime" />
       </div>
@@ -77,6 +77,25 @@
       </div>
     </q-page-sticky>
 
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[0, 400]">
+      <vue-slider class="text-primary"
+        v-model="forecastLevel"
+        :direction="'btt'"
+        :height="100"
+        :width="4"
+        :lazy="true"
+        :marks="true"
+        :hide-label="true"
+        :data="forecastLevels.values"
+        :tooltip="'focus'"
+        :tooltip-formatter="getFormatedForecastLevel"
+        @change="onForecastLevelChanged"
+      />
+      <p class="text-secondary" style="transform: rotate(-90deg) translateX(-32px) translateX(96px);">
+        <b>{{$t(forecastLevels.label)}}</b>
+      </p>
+    </q-page-sticky>
+      
   </q-page>
 </template>
 
@@ -84,6 +103,8 @@
 import _ from 'lodash'
 import L from 'leaflet'
 import postRobot from 'post-robot'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/material.css'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
@@ -117,6 +138,9 @@ export default {
     kMapMixins.map.popup,
     kMapMixins.map.activity
   ],
+  components: {
+    VueSlider
+  },
   inject: ['klayout'],
   methods: {
     async refreshActivity () {  
@@ -223,6 +247,9 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
     },
+    onForecastLevelChanged (level) {
+      this.setForecastLevel(level)
+    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
@@ -271,5 +298,34 @@ export default {
 }
 .processing-cursor {
   cursor: wait;
+}
+.vue-slider-rail {
+  background-color: #FC6E44;
+}
+.vue-slider-disabled .vue-slider-rail {
+  background-color: #FC6E44;
+}
+.vue-slider-process {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-handle {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-handle::after {
+  background-color: #FC6E4499;
+}
+.vue-slider-dot-tooltip-inner {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-tooltip-text {
+  width: 60px;
+  height: 60px;
+  font-size: 1em;
+}
+.vue-slider-mark-step {
+  background-color: #642879;
+}
+.vue-slider-mark-step-active {
+  background-color: #642879;
 }
 </style>

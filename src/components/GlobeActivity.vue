@@ -30,7 +30,7 @@
       <div slot="widget-content">
         <k-location-time-series ref="timeseries"
           :feature="probedLocation" 
-          :variables="variables"
+          :variables="currentVariables"
           :current-time-format="currentTimeFormat"
           :current-formatted-time="currentFormattedTime" />
       </div>

@@ -121,6 +121,7 @@
     "socket.io-client": "^2.0.1",
     "togeojson": "^0.16.0",
     "tween.js": "^16.6.0",
+    "vue-slider-component": "^3.0.33",
     "vue2-dropzone": "^3.6.0",
     "weacast-core": "^1.0.0",
     "weacast-leaflet": "^1.0.0",
