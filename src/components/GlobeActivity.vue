@@ -111,7 +111,7 @@ export default {
       // Wait until viewer is ready
       await this.initializeGlobe(token)
       // Setup the right pane
-      this.setRightPanelContent('KCatalogPanel', this.$data)
+      this.setRightDrawer('KCatalogPanel', this.$data)
       this.registerActivityActions()
       const actions = _.get(this, 'activityOptions.actions', ['vr'])
       // FAB

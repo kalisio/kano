@@ -152,7 +152,7 @@ export default {
       // Add app hooks to weacast client if separate from app client
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
-      this.setRightPanelContent('KCatalogPanel', this.$data)
+      this.setRightDrawer('KCatalogPanel', this.$data)
       this.registerActivityActions()
       utils.sendEmbedEvent('map-ready')
     },
