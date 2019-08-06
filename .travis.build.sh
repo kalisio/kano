@@ -16,11 +16,12 @@ travis_fold start "build"
 if [[ $TRAVIS_COMMIT_MESSAGE != *"[skip build]"* ]]
 then
 	# Build the image
+	echo $BRANCH
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml build
-	echo $?
-  # if [ $? -ne 0 ]; then
-	#	exit 1
-	# fi
+  if [ $? -ne 0 ]; then
+		echo Build has failed with error: $?
+		exit 1
+	fi
 	
 	# Tag the built image and push it to the hub
 	docker tag kalisio/$APP kalisio/$APP:$VERSION_TAG
