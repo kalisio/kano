@@ -6,8 +6,6 @@ ARG APP
 ARG BUILD_NUMBER
 ARG BRANCH=master
 
-RUN echo $BRANCH
-
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev

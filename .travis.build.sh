@@ -17,9 +17,14 @@ if [[ $TRAVIS_COMMIT_MESSAGE != *"[skip build]"* ]]
 then
 	# Build the image
 	echo $BRANCH
-	docker-compose -f deploy/app.yml -f deploy/app.build.yml build
-  if [ $? -ne 0 ]; then
-		echo Build has failed with error: $?
+	docker-compose -f deploy/app.yml -f deploy/app.build.yml build > build.log 2>&1
+	# Capture the build result
+	BUILD_CODE=$?
+	# Copy the log whatever the result
+	aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
+	# Exit if an error has occured
+	if [ $BUILD_CODE -ne 0 ]; then
+		echo Build has failed with error: $BUILD_CODE
 		exit 1
 	fi
 	
