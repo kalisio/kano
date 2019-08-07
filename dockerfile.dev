@@ -19,21 +19,21 @@ RUN git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch &
 
 WORKDIR /opt/${APP}/api
 
-RUN yarn install > /dev/null
+RUN yarn install
 RUN yarn link @kalisio/kdk-core
 RUN yarn link @kalisio/kdk-map
 RUN npm run build
 
 WORKDIR /opt/${APP}
 
-RUN yarn install > /dev/null
+RUN yarn install
 RUN yarn link @kalisio/kdk-core
 RUN yarn link @kalisio/kdk-map
 RUN git clone https://github.com/weacast/weacast-core.git -b master --single-branch && cd weacast-core && yarn install && yarn link && cd ..
 RUN git clone https://github.com/weacast/weacast-leaflet.git -b master --single-branch && cd weacast-leaflet && yarn install && yarn link weacast-core && yarn link && cd ..
 RUN yarn link weacast-core
 RUN yarn link weacast-leaflet
-RUN npm run build 
+RUN npm run build
 
 EXPOSE 8081
 

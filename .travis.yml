@@ -21,6 +21,8 @@ jobs:
     - '8'
     services:
     - docker
+    before_install:
+    - python -c "import fcntl; fcntl.fcntl(1, fcntl.F_SETFL, 0)" # https://github.com/travis-ci/travis-ci/issues/8920
     install:
     - pip install --user awscli
     before_script:
