@@ -20,7 +20,7 @@ then
 	# Capture the build result
 	BUILD_CODE=$?
 	# Copy the log whatever the result
-	aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
+	# aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
 	# Exit if an error has occured
 	if [ $BUILD_CODE -ne 0 ]; then
 		echo Build has failed with error: $BUILD_CODE
