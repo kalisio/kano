@@ -18,7 +18,7 @@ then
 	# Build the image
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml build #> build.log 2>&1
 	# Capture the build result
-	#BUILD_CODE=$?
+	BUILD_CODE=$?
 	# Copy the log whatever the result
 	aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
 	# Exit if an error has occured
