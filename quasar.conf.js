@@ -26,7 +26,7 @@ module.exports = function (ctx) {
     ],
 
     extras: [
-      'roboto-font', 
+      'roboto-font',
       'material-icons',
       'fontawesome-v5'
     ],
@@ -106,7 +106,8 @@ module.exports = function (ctx) {
           ...cfg.resolve.alias, // This adds the existing aliases
           '@': path.resolve(__dirname, './src/components'),
           config: path.resolve(__dirname, './config/client-config.json')
-        }
+        },
+        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
       }
     },
 
@@ -188,7 +189,7 @@ module.exports = function (ctx) {
 
       extendWebpack (cfg) {
         // do something with Electron main process Webpack cfg
-        // chainWebpack also available besides this extendWebpack        
+        // chainWebpack also available besides this extendWebpack
       },
 
       packager: {
