@@ -291,6 +291,41 @@ module.exports = [
     }
   },
   {
+    name: 'UKAIR',
+    description: 'Air pollution',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'gust',
+        label: 'Variables.WIND_GUST',
+        units: [
+          'm/s', 'km/h', 'kt'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'OrRd'
+        }
+      }
+    ],
+    leaflet: {
+      type: 'weacast.colorMeshLayer',
+      elements: [
+        'gust'
+      ],
+      zIndex: forecastZIndex,
+      mesh: true
+    }
+  },
+  {
     name: 'Precipitations',
     description: '3h accumulation',
     tags: [
