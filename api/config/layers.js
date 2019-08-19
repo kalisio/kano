@@ -291,20 +291,20 @@ module.exports = [
     }
   },
   {
-    name: 'UKAIR',
-    description: 'Air pollution',
+    name: 'Nitrogen dioxide',
+    description: 'Concentration prediction',
     tags: [
       'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
-    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'Forecast data from <a href="http://www.bliasolutions.com">BLIA Solutions</a>',
     type: 'OverlayLayer',
     variables: [
       {
-        name: 'gust',
-        label: 'Variables.WIND_GUST',
+        name: 'no2',
+        label: 'Variables.NO2',
         units: [
-          'm/s', 'km/h', 'kt'
+          'ug/m3'
         ],
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
@@ -319,7 +319,42 @@ module.exports = [
     leaflet: {
       type: 'weacast.colorMeshLayer',
       elements: [
-        'gust'
+        'UKNO2'
+      ],
+      zIndex: forecastZIndex,
+      mesh: true
+    }
+  },
+  {
+    name: 'Ozone',
+    description: 'Concentration prediction',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
+    attribution: 'Forecast data from <a href="http://www.bliasolutions.com">BLIA Solutions</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'o3',
+        label: 'Variables.O3',
+        units: [
+          'ug/m3'
+        ],
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'OrRd'
+        }
+      }
+    ],
+    leaflet: {
+      type: 'weacast.colorMeshLayer',
+      elements: [
+        'UKOzone1'
       ],
       zIndex: forecastZIndex,
       mesh: true
