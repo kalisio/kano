@@ -317,7 +317,7 @@ module.exports = [
       }
     ],
     leaflet: {
-      type: 'weacast.colorMeshLayer',
+      type: 'weacast.meshLayer',
       elements: [
         'UKNO2'
       ],
@@ -352,7 +352,7 @@ module.exports = [
       }
     ],
     leaflet: {
-      type: 'weacast.colorMeshLayer',
+      type: 'weacast.meshLayer',
       elements: [
         'UKOzone1'
       ],
