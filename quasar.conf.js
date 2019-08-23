@@ -39,6 +39,7 @@ module.exports = function (ctx) {
         'QAjaxBar',
         'QAvatar',
         'QBtn',
+        'QBtnGroup',
         'QCard',
         'QCardSection',
         'QCardActions',
@@ -47,6 +48,8 @@ module.exports = function (ctx) {
         'QDialog',
         'QDrawer',
         'QExpansionItem',
+        'QFab',
+        'QFabAction',
         'QField',
         'QHeader',
         'QIcon',
@@ -65,6 +68,7 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QSelect',
         'QSeparator',
+        'QSpace',
         'QSpinnerCube',
         'QTab',
         'QTabPanel',
@@ -84,7 +88,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Dialog'
+        'Dialog',
+        'Platform'
       ]
     },
 
