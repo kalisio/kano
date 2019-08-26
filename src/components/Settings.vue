@@ -1,12 +1,19 @@
 <template>
   <div>
-    <q-list link no-border>
+    <q-list>
+      <q-separator />
       <!--
         Edit link
       -->
-      <q-item id="edit-settings" @click="editSettings">
-        <q-item-side icon="settings" />
-        <q-item-main :label="$t('sideNav.SETTINGS')" />
+      <q-item id="edit-settings" clickable @click="editSettings">
+        <q-item-section avatar>
+          <q-icon name="settings" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>
+            {{ $t('sideNav.SETTINGS') }}
+          </q-item-label>
+        </q-item-section>
       </q-item>
     </q-list>
     <!--
@@ -22,20 +29,11 @@
 </template>
 
 <script>
-import { QList, QItem, QItemMain, QItemSide } from 'quasar'
-
 export default {
   name: 'settings',
-  inject: ['sideNav'],
-  components: {
-    QList,
-    QItem,
-    QItemMain,
-    QItemSide
-  },
   methods: {
     editSettings () {
-      this.sideNav.layout.hideCurrentSide(() => this.$refs.editor.open())
+      this.$refs.editor.open()
     },
     onSettingsEdited () {
       this.$refs.editor.close()

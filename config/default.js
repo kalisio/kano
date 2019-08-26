@@ -4,31 +4,25 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
-let domain, weacastApi
+let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
-  weacastApi = 'https://weacast.dev.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
-  weacastApi = 'https://weacast.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.kalisio.xyz'
-  weacastApi = 'https://weacast.kalisio.xyz'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
-    weacastApi = 'http://localhost:' + (Number(clientPort)+2) // Weacast app client/server port = 8082/8083
   } else {
     domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
-    weacastApi = 'http://localhost:' + (Number(serverPort)+1) // Weacast app client/server port = 8082
   }
 }
 // Override defaults if env provided
 if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
-  weacastApi = 'https://weacast.' + process.env.SUBDOMAIN
 }
 
 module.exports = {
@@ -57,12 +51,6 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
-  weacast: {
-    transport: 'websocket', // Could be 'http' or 'websocket',
-    apiUrl: weacastApi,
-    apiPath: API_PREFIX,
-    apiTimeout: 30000
-  },
   screens: {
     banner: 'kano-logo-black-256x84.png',
     login: {
@@ -82,8 +70,15 @@ module.exports = {
   },
   layout: {
     view: 'lHh LpR lFf',
-    leftBreakpoint: 9999,
-    rightBreakpoint: 9999
+    leftDrawer: {
+      behavior: 'mobile',
+      component: {
+        name: 'layout/KSideNav'
+      }
+    },
+    rightDrawer: {
+      behavior: 'mobile'
+    }
   },
   sideNav: {
     banner: 'kano-logo-black-256x84.png',
@@ -108,13 +103,13 @@ module.exports = {
   },
   mapPanel: {
     categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fa-map',
+      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'layers',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fas fa-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
       { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'wb_sunny',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
@@ -122,15 +117,15 @@ module.exports = {
   },
   globePanel: {
     categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fa-map',
+      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'TerrainLayers', label: 'KCatalogPanel.TERRAIN_LAYERS', icon: 'terrain',
         options: { exclusive: true, filter: { type: 'TerrainLayer' } } },
       { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'layers',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fa-map-marker',
+      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fas fa-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fa-map-pin',
+      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
     ]
   },
@@ -251,5 +246,5 @@ module.exports = {
       }
     }
   },
-  routes: require('./routes')
+  routes: require('../src/router/routes')
 }

@@ -1,4 +1,7 @@
 .git
+.quasar
+.travis.*
+*.md
 dist
 electron/dist
 node_modules

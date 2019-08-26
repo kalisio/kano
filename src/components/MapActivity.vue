@@ -1,30 +1,31 @@
 <template>
-  <div>
+  <q-page>
     
     <div ref="map" :style="viewStyle">
-      <q-resize-observable @resize="onMapResized" />
+      <q-resize-observer @resize="onMapResized" />
       <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
-            :variables="forecastLevel ? variablesForCurrentLevel : variables"
+            :variables="currentVariables"
             :current-time-format="currentTimeFormat"
             :current-formatted-time="currentFormattedTime" />
         </div>
       </k-widget>
+      
     </div>
 
-    <q-btn v-if="sideNavToggle"
+    <q-btn
       id="side-nav-toggle"
       color="secondary"
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
-      @click="layout.toggleLeft()">
+      @click="klayout.toggleLeftDrawer()">
       {{ appName }}
     </q-btn>
     
-    <q-btn v-if="panelToggle"
+    <q-btn
       id="map-panel-toggle"
       color="secondary"
       class="fixed"
@@ -32,7 +33,7 @@
       small
       round 
       icon="layers"
-      @click="layout.toggleRight()" />
+      @click="klayout.toggleRightDrawer()" />
 
     <k-color-legend v-if="colorLegend.visible"
       class="fixed"
@@ -47,35 +48,66 @@
       @click="onColorLegendClick" />
     />
 
-    <q-fixed-position corner="bottom-left" :offset="[110, 60]" :style="timelineContainerStyle">   
-      <k-time-controller
-        v-if="timelineEnabled"
-        :key="timelineRefreshKey"
-        :min="timeline.start" 
-        :max="timeline.end"
-        :step="'h'"
-        :value="timeline.current"
-        :timeInterval="timelineInterval"
-        :timeFormatter="timelineFormatter"
-        @change="onTimelineUpdated"
-        pointerColor="#FC6E44" 
-        pointerTextColor="white"
-        style="width: 100%;"
-      />
-    </q-fixed-position>
+    <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
+      <div slot="widget-content">
+        <k-location-time-series ref="timeseries"
+          :feature="probedLocation" 
+          :variables="currentVariables"
+           :current-time-format="currentTimeFormat"
+           :current-formatted-time="currentFormattedTime" />
+      </div>
+    </k-widget>
 
-  </div>
+    <q-page-sticky position="bottom-left" :offset="[110, 60]">   
+      <div :style="timelineContainerStyle">
+        <k-time-controller
+          v-if="timelineEnabled"
+          :key="timelineRefreshKey"
+          :min="timeline.start" 
+          :max="timeline.end"
+          :step="'h'"
+          :value="timeline.current"
+          :timeInterval="timelineInterval"
+          :timeFormatter="timelineFormatter"
+          @change="onTimelineUpdated"
+          pointerColor="#FC6E44" 
+          pointerTextColor="white"
+          style="width: 100%;"
+        />
+      </div>
+    </q-page-sticky>
+
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[0, 400]">
+      <vue-slider class="text-primary"
+        v-model="forecastLevel"
+        :direction="'btt'"
+        :height="100"
+        :width="4"
+        :lazy="true"
+        :marks="true"
+        :hide-label="true"
+        :data="forecastLevels.values"
+        :tooltip="'focus'"
+        :tooltip-formatter="getFormatedForecastLevel"
+        @change="onForecastLevelChanged"
+      />
+      <p class="text-secondary" style="transform: rotate(-90deg) translateX(-32px) translateX(96px);">
+        <b>{{$t(forecastLevels.label)}}</b>
+      </p>
+    </q-page-sticky>
+      
+  </q-page>
 </template>
 
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
 import postRobot from 'post-robot'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/material.css'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
-import { QResizeObservable, QBtn, QFixedPosition } from 'quasar'
-
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
 import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
@@ -83,11 +115,6 @@ import utils from '../utils'
 
 export default {
   name: 'k-map-activity',
-  components: {
-    QResizeObservable,
-    QBtn,
-    QFixedPosition
-  },
   mixins: [
     kCoreMixins.refsResolver(['map']),
     kCoreMixins.baseActivity,
@@ -111,7 +138,10 @@ export default {
     kMapMixins.map.popup,
     kMapMixins.map.activity
   ],
-  inject: ['layout'],
+  components: {
+    VueSlider
+  },
+  inject: ['klayout'],
   methods: {
     async refreshActivity () {  
       this.clearActivity()
@@ -122,7 +152,7 @@ export default {
       // Add app hooks to weacast client if separate from app client
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
-      this.setRightPanelContent('KCatalogPanel', this.$data)
+      this.setRightDrawer('KCatalogPanel', this.$data)
       this.registerActivityActions()
       utils.sendEmbedEvent('map-ready')
     },
@@ -217,6 +247,9 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
     },
+    onForecastLevelChanged (level) {
+      this.setForecastLevel(level)
+    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
@@ -265,5 +298,34 @@ export default {
 }
 .processing-cursor {
   cursor: wait;
+}
+.vue-slider-rail {
+  background-color: #FC6E44;
+}
+.vue-slider-disabled .vue-slider-rail {
+  background-color: #FC6E44;
+}
+.vue-slider-process {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-handle {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-handle::after {
+  background-color: #FC6E4499;
+}
+.vue-slider-dot-tooltip-inner {
+  background-color: #FC6E44;
+}
+.vue-slider-dot-tooltip-text {
+  width: 60px;
+  height: 60px;
+  font-size: 1em;
+}
+.vue-slider-mark-step {
+  background-color: #642879;
+}
+.vue-slider-mark-step-active {
+  background-color: #642879;
 }
 </style>

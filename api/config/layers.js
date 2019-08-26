@@ -433,6 +433,15 @@ module.exports = [
         }
       }
     ],
+    /* When available at different levels 
+    levels: {
+      name: 'pressure',
+      label: 'Levels.PRESSURE',
+      units: [
+        'mb'
+      ],
+      values: [ 1000, 700, 450, 300, 200 ]
+    },*/
     leaflet: {
       type: 'weacast.scalarLayer',
       elements: [

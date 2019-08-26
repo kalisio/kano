@@ -1,15 +1,14 @@
 #!/bin/bash
-if [[ $TRAVIS_BRANCH == "master" ]]
-then
-	export FLAVOR=dev
-fi
 if [[ $TRAVIS_BRANCH == "test" ]]
 then
-	export FLAVOR=test
-fi
-if [[ -n "$TRAVIS_TAG" ]]
-then
-	export FLAVOR=prod
+  if [[ -n "$TRAVIS_TAG" ]]
+  then
+    export FLAVOR=prod
+  else
+    export FLAVOR=test
+  fi
+else
+  export FLAVOR=dev
 fi
 
 # Exports addtionnal variables
@@ -23,7 +22,7 @@ cp workspace/common/.env .env
 if [ -f workspace/$FLAVOR/.env ]
 then
   echo merging $FLAVOR/.env file with common .env
-	cat workspace/$FLAVOR/.env >> .env
+  cat workspace/$FLAVOR/.env >> .env
 fi
 
 # Add computed variables
@@ -33,6 +32,7 @@ echo "NODE_APP_INSTANCE=$FLAVOR" >> .env
 echo "VERSION=$VERSION" >> .env
 echo "VERSION_TAG=$VERSION-$FLAVOR" >> .env
 echo "BUILD_NUMBER=$TRAVIS_BUILD_NUMBER" >> .env
+echo "BRANCH=$TRAVIS_BRANCH" >> .env
 
 set -a
 . .env
@@ -43,7 +43,7 @@ cp workspace/common/.travis.env .travis.env
 if [ -f workspace/$FLAVOR/.travis.env ]
 then
   echo merging $FLAVOR/.travis.env with common .travis.env
-	cat workspace/$FLAVOR/.travis.env >> .travis.env
+  cat workspace/$FLAVOR/.travis.env >> .travis.env
 fi
 
 set -a

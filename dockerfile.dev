@@ -1,9 +1,10 @@
 FROM  node:8-stretch
 
-MAINTAINER Kalisio <contact@kalisio.xyz>
+LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP
 ARG BUILD_NUMBER
+ARG BRANCH=master
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
@@ -13,8 +14,8 @@ WORKDIR /opt/${APP}
 COPY . /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
-RUN git clone https://github.com/kalisio/kCore.git -b master --single-branch && cd kCore && yarn install && yarn link && cd ..
-RUN git clone https://github.com/kalisio/kMap.git -b master --single-branch && cd kMap && yarn install && yarn link @kalisio/kdk-core && yarn link && cd ..
+RUN git clone https://github.com/kalisio/kCore.git -b ${BRANCH} --single-branch && cd kCore && yarn install && yarn link && cd .. 
+RUN git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch && cd kMap && yarn install && yarn link @kalisio/kdk-core && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
 
