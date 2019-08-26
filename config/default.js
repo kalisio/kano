@@ -130,12 +130,12 @@ module.exports = {
     ]
   },
   mapActivity: {
-    buttons: ['side-nav', 'panel'],
-    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'probe-location', 'create-layer']
+    buttons: ['side-nav', 'panel', 'location-bar'],
+    actions: ['fullscreen', 'track-location', 'probe-location', 'create-layer'],
   },
   globeActivity: {
-    buttons: ['side-nav', 'panel'],
-    actions: ['fullscreen', 'geolocate', 'geocode', 'track-location', 'probe-location', 'vr']
+    buttons: ['side-nav', 'panel', 'location-bar'],
+    actions: ['fullscreen', 'track-location', 'probe-location', 'vr']
   },
   map: {
     viewer: {

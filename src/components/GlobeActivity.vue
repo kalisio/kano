@@ -12,9 +12,12 @@
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
-      @click="klayout.toggleLeftDrawer()">
-      {{ appName }}
-    </q-btn>
+      @click="klayout.toggleLeftDrawer()" />
+
+    <k-location-bar 
+      class="fixed" 
+      style="left: 74px; top: 18px" 
+      @location-changed="onLocationChanged" />
 
     <q-btn
       id="globe-panel-toggle"
@@ -47,7 +50,6 @@
       :unitValues="colorLegend.unitValues"
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
-    />
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">
       <div :style="timelineContainerStyle">

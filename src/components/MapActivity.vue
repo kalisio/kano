@@ -21,9 +21,12 @@
       class="fixed"
       style="left: 18px; top: 18px"
       icon="menu"
-      @click="klayout.toggleLeftDrawer()">
-      {{ appName }}
-    </q-btn>
+      @click="klayout.toggleLeftDrawer()" />
+ 
+    <k-location-bar 
+      class="fixed" 
+      style="left: 74px; top: 18px" 
+      @location-changed="onLocationChanged" />
     
     <q-btn
       id="map-panel-toggle"
@@ -46,7 +49,6 @@
       :unitValues="colorLegend.unitValues"
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
-    />
 
     <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
       <div slot="widget-content">
@@ -255,6 +257,7 @@ export default {
     }
   },
   created () {
+
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
     this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
