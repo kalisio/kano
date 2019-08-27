@@ -79,7 +79,7 @@
       </div>
     </q-page-sticky>
 
-    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[0, 400]">
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
       <vue-slider class="text-primary"
         v-model="forecastLevel"
         :direction="'btt'"
@@ -93,8 +93,10 @@
         :tooltip-formatter="getFormatedForecastLevel"
         @change="onForecastLevelChanged"
       />
-      <p class="text-secondary" style="transform: rotate(-90deg) translateX(-32px) translateX(96px);">
-        <b>{{$t(forecastLevels.label)}}</b>
+    </q-page-sticky>
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[-24, 400]">
+      <p class="text-secondary text-caption" style="transform: rotate(-90deg) translateX(24px);">
+        <b>{{$t(forecastLevels.label)}} - {{getFormatedForecastLevel(forecastLevel)}}</b>
       </p>
     </q-page-sticky>
       
@@ -295,40 +297,39 @@ export default {
 }
 </script>
 
-<style>
-.probe-cursor {
+<style lang="stylus">
+.probe-cursor 
   cursor: crosshair;
-}
-.processing-cursor {
+
+.processing-cursor 
   cursor: wait;
-}
-.vue-slider-rail {
-  background-color: #FC6E44;
-}
-.vue-slider-disabled .vue-slider-rail {
-  background-color: #FC6E44;
-}
-.vue-slider-process {
-  background-color: #FC6E44;
-}
-.vue-slider-dot-handle {
-  background-color: #FC6E44;
-}
-.vue-slider-dot-handle::after {
-  background-color: #FC6E4499;
-}
-.vue-slider-dot-tooltip-inner {
-  background-color: #FC6E44;
-}
-.vue-slider-dot-tooltip-text {
+
+.vue-slider-rail 
+  background-color: $secondary;
+
+.vue-slider-disabled .vue-slider-rail 
+  background-color: $secondary;
+
+.vue-slider-process 
+  background-color: $secondary;
+
+.vue-slider-dot-handle 
+  background-color: $secondary;
+
+.vue-slider-dot-handle::after 
+  background-color: transparentify($secondary, #000);
+
+.vue-slider-dot-tooltip-inner 
+  background-color: transparentify($secondary, #000);
+
+.vue-slider-dot-tooltip-text 
   width: 60px;
   height: 60px;
   font-size: 1em;
-}
-.vue-slider-mark-step {
-  background-color: #642879;
-}
-.vue-slider-mark-step-active {
-  background-color: #642879;
-}
+
+.vue-slider-mark-step 
+  background-color: $accent;
+
+.vue-slider-mark-step-active 
+  background-color: $accent;
 </style>
