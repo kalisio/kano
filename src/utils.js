@@ -92,8 +92,23 @@ async function callEmbedMethod (route, data) {
   let result
   if (method) {
     let component = getEmbedComponent(route)
-    if (component && (typeof component[method] === 'function')) {
-      result = (Array.isArray(data.args) ? await component[method](...data.args) : await component[method](data.args))
+    if (component && (typeof _.get(component, method) === 'function')) {
+      result = (Array.isArray(data.args) ?
+        await _.get(component, method)(...data.args) :
+        await _.get(component, method)(data.args))
+    }
+  }
+  return result
+}
+
+function getEmbedProperty (route, data) {
+  // The event payload contains the name of the property to be retrieved
+  const property = (data ? data.property : undefined)
+  let result
+  if (property) {
+    let component = getEmbedComponent(route)
+    if (component && _.has(component, property)) {
+      result = _.get(component, property)
     }
   }
   return result
@@ -121,7 +136,7 @@ function setupEmbedApi (routeName, component) {
       })
       clearInterval(interval)
     }
-    result = await callEmbedMethod(route, data)
+    result = (data.command ? await callEmbedMethod(route, data) : getEmbedProperty(route, data))
     return result
   })
 }

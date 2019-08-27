@@ -609,6 +609,17 @@
         })
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
       }
+      function updateForecastLevel() {
+        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind' })
+        .then(function (result) {
+          return postRobot.send(kano, component, { property: 'forecastLevels' })
+        })
+        .then(function (result) {
+          const index = Math.floor(Math.random() * result.data.values.length)
+          const level = result.data.values[index]
+          return postRobot.send(kano, component, { command: 'setForecastLevel', args: [level] })
+        })
+      }
     </script>
   </head>
   <body style="background-color: grey">
@@ -633,6 +644,7 @@
           <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button></br>
           <button type="button" onclick="updateGradientFlightpathLayer('GradientFlightpath')">Update gradient flightpath</button></br>
           <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button></br>
+          <button type="button" onclick="updateForecastLevel()">Update forecast level</button></br>
         </td>
         <td>
           <iframe id="kano" title="Kano" allow="geolocation *" allowfullscreen style="width: 1024px; height: 768px;" src="/">
