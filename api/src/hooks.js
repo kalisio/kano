@@ -12,7 +12,7 @@ corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
 
 module.exports = {
   before: {
-    all: [ coreHooks.log,
+    all: [coreHooks.log,
       // We skip authentication in some cases
       commonHooks.when(hook => {
         // First built-in Feathers services like authentication
@@ -23,17 +23,17 @@ module.exports = {
         return true
       }, authenticate('jwt')),
       coreHooks.processObjectIDs,
-      coreHooks.authorise ],
-    find: [ fuzzySearch() ],
+      coreHooks.authorise],
+    find: [fuzzySearch()],
     get: [],
     create: [],
-    update: [ coreHooks.preventUpdatePerspectives ],
+    update: [coreHooks.preventUpdatePerspectives],
     patch: [],
     remove: []
   },
 
   after: {
-    all: [ coreHooks.log, coreHooks.processPerspectives ],
+    all: [coreHooks.log, coreHooks.processPerspectives],
     find: [],
     get: [],
     create: [],
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   error: {
-    all: [ coreHooks.log ],
+    all: [coreHooks.log],
     find: [],
     get: [],
     create: [],

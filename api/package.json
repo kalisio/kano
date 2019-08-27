@@ -33,7 +33,7 @@
     "build": "npm run clean && babel src -d dist -s",
     "prod": "cross-env NODE_ENV=production node dist/main.js",
     "lint": "standard src/**/*.js test/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha --opts mocha.opts",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha --require babel-core/register",
     "coverage": "cross-env NODE_CONFIG_DIR=./test/config/ node node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts mocha.opts",
     "test": "npm run build && npm run lint && npm run coverage"
   },
@@ -47,39 +47,31 @@
   "devDependencies": {
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.0.0",
     "babel-preset-env": "^1.7.0",
-    "chai": "^3.5.0",
+    "chai": "^4.2.0",
     "chai-lint": "^0.1.1",
     "colors": "^1.1.2",
-    "cross-env": "^3.1.3",
-    "eslint": "^3.16.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^6.1.0",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^3.3.0",
+    "mocha": "^6.2.0",
     "nodemon": "^1.11.0",
     "shelljs": "^0.7.0",
-    "standard": "^10.0.3"
+    "standard": "^14.0.0"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.7",
-    "@feathersjs/authentication-jwt": "^2.0.1",
-    "@feathersjs/authentication-local": "^1.2.1",
-    "@feathersjs/errors": "^3.3.0",
     "@feathersjs/express": "^1.2.3",
-    "@feathersjs/feathers": "^3.1.7",
+    "@feathersjs/feathers": "^3.3.1",
     "@kalisio/feathers-distributed": "^0.4.0",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^3.0.0",
-    "feathers-mongodb": "^2.8.0",
     "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git",
-    "fs-extra": "^3.0.1",
+    "fs-extra": "^8.1.0",
     "http-proxy-middleware": "^0.17.4",
-    "moment": "^2.18.1",
-    "mongodb": "^2.2.26",
-    "request": "^2.81.0",
-    "winston": "^2.3.1"
+    "winston": "^3.2.1"
   }
 }

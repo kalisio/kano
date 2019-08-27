@@ -3,7 +3,7 @@ import logger from 'winston'
 import _ from 'lodash'
 import { Server } from './server'
 
-let server = new Server()
+const server = new Server()
 
 const config = server.app.get('logs')
 const logPath = _.get(config, 'DailyRotateFile.dirname')

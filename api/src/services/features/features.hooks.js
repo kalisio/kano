@@ -5,9 +5,9 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ setNow('createdAt', 'updatedAt') ],
-    update: [ discard('createdAt', 'updatedAt'), setNow('updatedAt') ],
-    patch: [ discard('createdAt', 'updatedAt'), setNow('updatedAt') ],
+    create: [setNow('createdAt', 'updatedAt')],
+    update: [discard('createdAt', 'updatedAt'), setNow('updatedAt')],
+    patch: [discard('createdAt', 'updatedAt'), setNow('updatedAt')],
     remove: []
   },
 
@@ -18,7 +18,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: [ setNow('updatedAt') ]
+    remove: [setNow('updatedAt')]
   },
 
   error: {

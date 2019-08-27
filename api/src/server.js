@@ -13,12 +13,12 @@ import channels from './channels'
 export class Server {
   constructor () {
     this.app = kalisio()
-    let app = this.app
+    const app = this.app
 
     // Distribute services
     const distConfig = app.get('distribution')
     if (distConfig) app.configure(distribution(distConfig))
-    
+
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
       app.use('/', express.static('../dist/spa'))
@@ -28,18 +28,19 @@ export class Server {
     // Define HTTP proxies to your custom API backend. See /config/index.js -> proxyTable
     // https://github.com/chimurai/http-proxy-middleware
     const proxyTable = app.get('proxyTable') || {}
-    if (proxyTable)
-    Object.keys(proxyTable).forEach(context => {
-      let options = proxyTable[context]
-      if (typeof options === 'string') {
-        options = { target: options }
-      }
-      app.use(proxyMiddleware(context, options))
-    })
+    if (proxyTable) {
+      Object.keys(proxyTable).forEach(context => {
+        let options = proxyTable[context]
+        if (typeof options === 'string') {
+          options = { target: options }
+        }
+        app.use(proxyMiddleware(context, options))
+      })
+    }
   }
 
   async run () {
-    let app = this.app
+    const app = this.app
     // First try to connect to DB
     await app.db.connect()
     // Set up our services
@@ -55,7 +56,7 @@ export class Server {
     const httpsConfig = app.get('https')
     if (httpsConfig) {
       const port = httpsConfig.port
-      let server = https.createServer({
+      const server = https.createServer({
         key: fs.readFileSync(httpsConfig.key),
         cert: fs.readFileSync(httpsConfig.cert)
       }, app)

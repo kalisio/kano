@@ -168,14 +168,9 @@ module.exports = {
     },
     DailyRotateFile: {
       dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kano-',
-      datePattern: 'yyyy-MM-dd.log',
-      maxDays: 30
-      /* Possible in next version of the logger : see https://github.com/winstonjs/winston-daily-rotate-file/pull/45
-      filename: path.join(__dirname, '..', 'logs'),
-      datePattern: '/yyyy/MM/dd.log',
-      createTree: true
-      */
+      filename: 'kano-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      maxFiles: '30d'
     }
   },
   db: {
