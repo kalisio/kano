@@ -2,7 +2,6 @@ import _ from 'lodash'
 import path from 'path'
 import fs from 'fs-extra'
 import zlib from 'zlib'
-import logger from 'winston'
 import kCore, { permissions } from '@kalisio/kdk-core'
 import kMap, { createCatalogService, createFeaturesService } from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
@@ -38,7 +37,7 @@ module.exports = async function () {
     // Create a global catalog service
     createCatalogService.call(app)
   } catch (error) {
-    logger.error(error.message)
+    app.logger.error(error.message)
   }
 
   const defaultUsers = app.get('authentication').defaultUsers
@@ -51,7 +50,7 @@ module.exports = async function () {
       const defaultUser = defaultUsers[i]
       const createdUser = _.find(users, { email: defaultUser.email })
       if (!createdUser) {
-        logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
+        app.logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
         await usersService.create(defaultUser)
       }
     }
@@ -77,10 +76,10 @@ module.exports = async function () {
     const defaultService = defaultServices[i]
     const createdService = _.find(services, { name: defaultService.name })
     if (!createdService) {
-      logger.info('Adding default service (name = ' + defaultService.name + ')')
+      app.logger.info('Adding default service (name = ' + defaultService.name + ')')
       await catalogService.create(defaultService)
     } else {
-      logger.info('Reusing default service (name = ' + defaultService.name + ')')
+      app.logger.info('Reusing default service (name = ' + defaultService.name + ')')
     }
   }
 
@@ -90,10 +89,10 @@ module.exports = async function () {
     const defaultLayer = defaultLayers[i]
     const createdLayer = _.find(layers, { name: defaultLayer.name })
     if (!createdLayer) {
-      logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
+      app.logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
       await catalogService.create(defaultLayer)
     } else {
-      logger.info('Reusing default layer (name = ' + defaultLayer.name + ')')
+      app.logger.info('Reusing default layer (name = ' + defaultLayer.name + ')')
     }
     // Check if service(s) are associated to this layer
     let featuresService

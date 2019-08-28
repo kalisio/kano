@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
 const services = require('./services')
@@ -163,10 +164,11 @@ module.exports = {
   },
   logs: {
     Console: {
-      colorize: true,
+      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
       level: (process.env.NODE_ENV === 'development' ? 'verbose' : 'info')
     },
     DailyRotateFile: {
+      format: winston.format.json(),
       dirname: path.join(__dirname, '..', 'logs'),
       filename: 'kano-%DATE%.log',
       datePattern: 'YYYY-MM-DD',

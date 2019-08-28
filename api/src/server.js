@@ -1,4 +1,3 @@
-import logger from 'winston'
 import { kalisio } from '@kalisio/kdk-core'
 import distribution from '@kalisio/feathers-distributed'
 import fs from 'fs-extra'
@@ -60,11 +59,11 @@ export class Server {
         key: fs.readFileSync(httpsConfig.key),
         cert: fs.readFileSync(httpsConfig.cert)
       }, app)
-      logger.info('Configuring HTTPS server at port ' + port.toString())
+      app.logger.info('Configuring HTTPS server at port ' + port.toString())
       await server.listen(port)
     } else {
       const port = app.get('port')
-      logger.info('Configuring HTTP server at port ' + port.toString())
+      app.logger.info('Configuring HTTP server at port ' + port.toString())
       await app.listen(port)
     }
   }

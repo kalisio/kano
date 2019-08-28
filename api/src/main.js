@@ -1,5 +1,4 @@
 import fs from 'fs-extra'
-import logger from 'winston'
 import _ from 'lodash'
 import { Server } from './server'
 
@@ -14,11 +13,11 @@ if (logPath) {
 
 if (require.main === module) {
   process.on('unhandledRejection', (reason, p) =>
-    logger.error('Unhandled Rejection at: Promise ', p, reason)
+    server.app.logger.error('Unhandled Rejection at: Promise ', p, reason)
   )
 
   server.run().then(() => {
-    logger.info('Server started listening')
+    server.app.logger.info('Server started listening')
   })
 }
 
