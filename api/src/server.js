@@ -53,6 +53,7 @@ export class Server {
 
     // Last lauch server
     const httpsConfig = app.get('https')
+    let expressServer
     if (httpsConfig) {
       const port = httpsConfig.port
       const server = https.createServer({
@@ -60,11 +61,12 @@ export class Server {
         cert: fs.readFileSync(httpsConfig.cert)
       }, app)
       app.logger.info('Configuring HTTPS server at port ' + port.toString())
-      await server.listen(port)
+      expressServer = await server.listen(port)
     } else {
       const port = app.get('port')
       app.logger.info('Configuring HTTP server at port ' + port.toString())
-      await app.listen(port)
+      expressServer = await app.listen(port)
     }
+    return expressServer
   }
 }
