@@ -51,7 +51,7 @@
     "cafe": "testcafe firefox test/*.test.js -S -s screenshots",
     "rec": "node ./tutorials/record.js",
     "test:server": "cd api && npm run test",
-    "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js -f Basic --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
+    "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
     "test": "npm-run-all --parallel test:**"
   },
   "standard": {
