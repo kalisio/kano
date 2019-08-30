@@ -130,12 +130,12 @@ module.exports = {
     ]
   },
   mapActivity: {
-    buttons: ['side-nav', 'panel', 'location-bar'],
-    actions: ['fullscreen', 'track-location', 'probe-location', 'create-layer'],
+    tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog'],
+    actions: ['probe-location', 'create-layer'],
   },
   globeActivity: {
-    buttons: ['side-nav', 'panel', 'location-bar'],
-    actions: ['fullscreen', 'track-location', 'probe-location', 'vr']
+    tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog', 'vr'],
+    actions: ['probe-location']
   },
   map: {
     viewer: {

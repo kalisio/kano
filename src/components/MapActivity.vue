@@ -137,13 +137,6 @@ export default {
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
       this.setRightDrawer('KCatalogPanel', this.$data)
-      this.setNavigationBar( true, [
-        { name: 'sidenav-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'menu', handler: () => { this.klayout.toggleLeftDrawer() } },
-      ], [
-        { name: 'fullscreen-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen },
-        { name: 'separator' },
-        { name: 'catalog-toggle', label: this.$t('mixins.activity.TOGGLE_CATALOG'), icon: 'layers', handler: this.toggleCatalogLayers }
-      ])
       this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },

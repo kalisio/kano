@@ -55,8 +55,5 @@
     "VIGICRUES_LEVEL_2": "Flood risk",
     "VIGICRUES_LEVEL_3": "Important flood risk",
     "VIGICRUES_LEVEL_4": "Major flood risk"
-  },
-  "GlobeActivity": {
-    "TOGGLE_VR": "VR"
   }
 }

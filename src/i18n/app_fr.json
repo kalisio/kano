@@ -55,8 +55,5 @@
     "VIGICRUES_LEVEL_2": "Risque de crue génératrice de débordements",
     "VIGICRUES_LEVEL_3": "Risque de crue génératrice de débordements importants",
     "VIGICRUES_LEVEL_4": "Risque de crue majeure"
-  },
-  "GlobeActivity": {
-    "TOGGLE_VR": "VR"
   }
 }

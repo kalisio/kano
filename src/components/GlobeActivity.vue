@@ -95,14 +95,6 @@ export default {
       await this.initializeGlobe(token)
       // Setup the right pane
       this.setRightDrawer('KCatalogPanel', this.$data)
-      this.setNavigationBar( true, [
-        { name: 'sidenav-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'menu', handler: () => { this.klayout.toggleLeftDrawer() } },
-      ], [
-        { name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr },
-        { name: 'fullscreen-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen },
-        { name: 'separator' },
-        { name: 'catalog-toggle', label: this.$t('mixins.activity.TOGGLE_CATALOG'), icon: 'layers', handler: this.toggleCatalogLayers }
-      ])
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
     },
