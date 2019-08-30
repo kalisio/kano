@@ -15,28 +15,9 @@
       
     </div>
 
-    <q-btn
-      id="side-nav-toggle"
-      color="secondary"
-      class="fixed"
-      style="left: 18px; top: 18px"
-      icon="menu"
-      @click="klayout.toggleLeftDrawer()" />
- 
-    <k-location-bar 
-      class="fixed" 
-      style="left: 74px; top: 18px" 
-      @location-changed="onLocationChanged" />
-    
-    <q-btn
-      id="map-panel-toggle"
-      color="secondary"
-      class="fixed"
-      style="right: 18px; top: 18px"
-      small
-      round 
-      icon="layers"
-      @click="klayout.toggleRightDrawer()" />
+    <q-page-sticky position="top" :offset="[0, 18]">
+      <k-navigation-bar @location-changed="onLocationChanged" />
+    </q-page-sticky>
 
     <k-color-legend v-if="colorLegend.visible"
       class="fixed"
@@ -147,6 +128,7 @@ export default {
   methods: {
     async refreshActivity () {  
       this.clearActivity()
+      this.clearNavigationBar()
       // Wait until map is ready
       await this.initializeMap()
       // Add a scale control
@@ -155,7 +137,14 @@ export default {
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
       this.setRightDrawer('KCatalogPanel', this.$data)
-      this.registerActivityActions()
+      this.setNavigationBar( true, [
+        { name: 'sidenav-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'menu', handler: () => { this.klayout.toggleLeftDrawer() } },
+      ], [
+        { name: 'fullscreen-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen },
+        { name: 'separator' },
+        { name: 'catalog-toggle', label: this.$t('mixins.activity.TOGGLE_CATALOG'), icon: 'layers', handler: this.toggleCatalogLayers }
+      ])
+      this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },
     createLeafletTimedWmsLayer (options) {
@@ -257,7 +246,9 @@ export default {
     }
   },
   created () {
-
+    // Load the required components
+    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
+    // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
     this.registerLeafletStyle('tooltip', this.getMeteoTooltip)

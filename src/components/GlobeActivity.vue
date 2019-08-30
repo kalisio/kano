@@ -6,28 +6,9 @@
       <div id="globe-credit" />
     </div>
 
-    <q-btn
-      id="side-nav-toggle"
-      color="secondary"
-      class="fixed"
-      style="left: 18px; top: 18px"
-      icon="menu"
-      @click="klayout.toggleLeftDrawer()" />
-
-    <k-location-bar 
-      class="fixed" 
-      style="left: 74px; top: 18px" 
-      @location-changed="onLocationChanged" />
-
-    <q-btn
-      id="globe-panel-toggle"
-      color="secondary"
-      class="fixed"
-      style="right: 18px; top: 18px"
-      small
-      round 
-      icon="layers"
-      @click="klayout.toggleRightDrawer()" />
+    <q-page-sticky position="top" :offset="[0, 18]">
+      <k-navigation-bar @location-changed="onLocationChanged" />
+    </q-page-sticky>
 
     <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
       <div slot="widget-content">
@@ -114,12 +95,15 @@ export default {
       await this.initializeGlobe(token)
       // Setup the right pane
       this.setRightDrawer('KCatalogPanel', this.$data)
-      this.registerActivityActions()
-      const actions = _.get(this, 'activityOptions.actions', ['vr'])
-      // FAB
-      if (actions.includes('vr')) this.registerFabAction({
-        name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr
-      })
+      this.setNavigationBar( true, [
+        { name: 'sidenav-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'menu', handler: () => { this.klayout.toggleLeftDrawer() } },
+      ], [
+        { name: 'toggle-vr', label: this.$t('GlobeActivity.TOGGLE_VR'), icon: 'terrain', handler: this.onToggleVr },
+        { name: 'fullscreen-toggle', label: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), icon: 'fullscreen', handler: this.onToggleFullscreen },
+        { name: 'separator' },
+        { name: 'catalog-toggle', label: this.$t('mixins.activity.TOGGLE_CATALOG'), icon: 'layers', handler: this.toggleCatalogLayers }
+      ])
+      this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
     },
     getVigicruesTooltip (entity, options) {
@@ -142,6 +126,9 @@ export default {
     }
   },
   created () {
+    // Load the required components
+    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')    
+    // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Required to get the access token from server
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
