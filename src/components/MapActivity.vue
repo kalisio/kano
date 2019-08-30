@@ -72,8 +72,6 @@
           :timeInterval="timelineInterval"
           :timeFormatter="timelineFormatter"
           @change="onTimelineUpdated"
-          pointerColor="#FC6E44" 
-          pointerTextColor="white"
           style="width: 100%;"
         />
       </div>
@@ -328,8 +326,8 @@ export default {
   font-size: 1em;
 
 .vue-slider-mark-step 
-  background-color: $accent;
+  background-color: $primary;
 
 .vue-slider-mark-step-active 
-  background-color: $accent;
+  background-color: $primary;
 </style>
