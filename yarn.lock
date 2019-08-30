@@ -10078,6 +10078,11 @@ leaflet-velocity@^1.2.2:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/leaflet-velocity/-/leaflet-velocity-1.2.4.tgz#c431e4027b632aee37454bd03429afa436e3b28d"
 
+leaflet.locatecontrol@^0.67.0:
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/leaflet.locatecontrol/-/leaflet.locatecontrol-0.67.0.tgz#adfeebfd662f61d639a5a5fba362368579f8ac55"
+  integrity sha512-3R8jYBwYyXc5Ka7bZvx6naWUvfmJTGJfZ2o/ZWombhCK7NkOxEpwFA3bhW9/BRZ99cLyjeNuLUaLwcPrMKYrjA==
+
 leaflet.markercluster@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/leaflet.markercluster/-/leaflet.markercluster-1.0.6.tgz#2d8069ef7881142e71173d86fb55d332af4742d7"
