@@ -3,20 +3,22 @@
     
     <div ref="map" :style="viewStyle">
       <q-resize-observer @resize="onMapResized" />
-      <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
-        <div slot="widget-content">
-          <k-location-time-series ref="timeseries"
-            :feature="probedLocation" 
-            :variables="currentVariables"
-            :current-time-format="currentTimeFormat"
-            :current-formatted-time="currentFormattedTime" />
-        </div>
-      </k-widget>
-      
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
       <k-navigation-bar @location-changed="onLocationChanged" />
+    </q-page-sticky>
+
+    <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
+      <k-widget ref="timeseriesWidget" :title="probedLocationName" @state-changed="onUpdateTimeseriesWidget">
+        <div slot="widget-content">
+          <k-location-time-series ref="timeseries"
+            :feature="probedLocation" 
+            :variables="currentVariables"
+             :current-time-format="currentTimeFormat"
+             :current-formatted-time="currentFormattedTime" />
+        </div>
+      </k-widget>
     </q-page-sticky>
 
     <k-color-legend v-if="colorLegend.visible"
@@ -30,16 +32,6 @@
       :unitValues="colorLegend.unitValues"
       :showGradient="colorLegend.showGradient"
       @click="onColorLegendClick" />
-
-    <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
-      <div slot="widget-content">
-        <k-location-time-series ref="timeseries"
-          :feature="probedLocation" 
-          :variables="currentVariables"
-           :current-time-format="currentTimeFormat"
-           :current-formatted-time="currentFormattedTime" />
-      </div>
-    </k-widget>
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">   
       <div :style="timelineContainerStyle">
@@ -125,6 +117,11 @@ export default {
     VueSlider
   },
   inject: ['klayout'],
+  data () {
+    return {
+      timeseriesWidgetPosition: 'top'
+    }
+  },
   methods: {
     async refreshActivity () {  
       this.clearActivity()
@@ -235,6 +232,10 @@ export default {
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
+    },
+    onUpdateTimeseriesWidget (state) {
+      this.timeseriesWidgetPosition = (state === 'maximized' ? 'top-left' : 'top')
+      this.updateTimeseries(state)
     }
   },
   created () {

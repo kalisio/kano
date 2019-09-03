@@ -10,15 +10,17 @@
       <k-navigation-bar @location-changed="onLocationChanged" />
     </q-page-sticky>
 
-    <k-widget ref="timeseriesWidget" :offset="{ minimized: [18,18], maximized: [0,0] }" :title="probedLocationName" @state-changed="onUpdateTimeseries">
-      <div slot="widget-content">
-        <k-location-time-series ref="timeseries"
-          :feature="probedLocation" 
-          :variables="currentVariables"
-          :current-time-format="currentTimeFormat"
-          :current-formatted-time="currentFormattedTime" />
-      </div>
-    </k-widget>
+    <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
+      <k-widget ref="timeseriesWidget" :title="probedLocationName" @state-changed="onUpdateTimeseriesWidget">
+        <div slot="widget-content">
+          <k-location-time-series ref="timeseries"
+            :feature="probedLocation" 
+            :variables="currentVariables"
+             :current-time-format="currentTimeFormat"
+             :current-formatted-time="currentFormattedTime" />
+        </div>
+      </k-widget>
+    </q-page-sticky>
 
     <k-color-legend v-if="colorLegend.visible"
       class="fixed"
@@ -85,6 +87,11 @@ export default {
     kMapMixins.globe.activity
   ],
   inject: ['klayout'],
+  data () {
+    return {
+      timeseriesWidgetPosition: 'top'
+    }
+  },
   methods: {
     async refreshActivity () {
       this.clearActivity()
@@ -115,6 +122,10 @@ export default {
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
+    },
+    onUpdateTimeseriesWidget (state) {
+      this.timeseriesWidgetPosition = (state === 'maximized' ? 'top-left' : 'top')
+      this.updateTimeseries(state)
     }
   },
   created () {
