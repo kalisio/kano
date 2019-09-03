@@ -221,7 +221,6 @@ export default {
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
       this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
-      this.createProbedLocationLayer()
     },
     onTimelineChanged (timeline) {
       let times = []
