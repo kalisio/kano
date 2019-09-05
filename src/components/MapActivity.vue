@@ -6,11 +6,13 @@
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar @location-changed="onLocationChanged" />
+      <k-navigation-bar @location-changed="onLocationChanged" :style="navBarStyle()"/>
     </q-page-sticky>
 
     <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
-      <k-widget ref="timeseriesWidget" :title="probedLocationName" @state-changed="onUpdateTimeseriesWidget">
+      <q-resize-observer @resize="onTimeseriesWidgetResized" />
+      <k-widget ref="timeseriesWidget" :title="probedLocationName"
+        :style="timeseriesWidgetStyle()" @state-changed="onUpdateTimeseriesWidget">
         <div slot="widget-content">
           <k-location-time-series ref="timeseries"
             :feature="probedLocation" 
@@ -123,6 +125,21 @@ export default {
     }
   },
   methods: {
+    navBarStyle() {
+      if (this.$q.screen.lt.sm) return 'width: 100vw'
+      if (this.$q.screen.lt.md) return 'width: 90vw'
+      if (this.$q.screen.lt.lg) return 'width: 80vw'
+      return 'width: 60vw'
+    },
+    timeseriesWidgetStyle () {
+      if (this.$refs.timeseriesWidget && this.$refs.timeseriesWidget.isOpen()) {
+        if (!this.$refs.timeseriesWidget.isMinimized()) return 'width: 100vw;height: 100vh;'
+        else if (this.$q.screen.lt.sm) return 'width: 100vw;height: 40vh;'
+        else if (this.$q.screen.lt.md) return 'width: 90vw;height: 40vh;'
+        else if (this.$q.screen.lt.lg) return 'width: 80vw;height: 40vh;'
+      }
+      return 'width: 60vw;height: 40vh;'
+    },
     async refreshActivity () {  
       this.clearActivity()
       this.clearNavigationBar()
@@ -233,9 +250,22 @@ export default {
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     },
-    onUpdateTimeseriesWidget (state) {
+    async onUpdateTimeseriesWidget (state) {
+      if (state === 'closed') {
+        this.closeTimeseries()
+        return
+      }
       this.timeseriesWidgetPosition = (state === 'maximized' ? 'top-left' : 'top')
-      this.updateTimeseries(state)
+      // We need to force a refresh so that the prop is correctly updated by Vuejs in child component
+      await this.$nextTick()        
+      this.onTimeseriesWidgetResized()
+    },
+    onTimeseriesWidgetResized () {
+      // It appears chartjs does not take time ticks into account in chart height
+      this.resizeTimeseries(
+        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().width),
+        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().height * 0.8)
+      )
     }
   },
   created () {
