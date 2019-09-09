@@ -126,19 +126,15 @@ export default {
   },
   methods: {
     navBarStyle() {
-      if (this.$q.screen.lt.sm) return 'width: 100vw'
-      if (this.$q.screen.lt.md) return 'width: 90vw'
-      if (this.$q.screen.lt.lg) return 'width: 80vw'
-      return 'width: 60vw'
+      if (this.$q.screen.lt.md) return ''
+      return 'width: 80vw'
     },
     timeseriesWidgetStyle () {
       if (this.$refs.timeseriesWidget && this.$refs.timeseriesWidget.isOpen()) {
         if (!this.$refs.timeseriesWidget.isMinimized()) return 'width: 100vw;height: 100vh;'
-        else if (this.$q.screen.lt.sm) return 'width: 100vw;height: 40vh;'
-        else if (this.$q.screen.lt.md) return 'width: 90vw;height: 40vh;'
-        else if (this.$q.screen.lt.lg) return 'width: 80vw;height: 40vh;'
+        else if (this.$q.screen.lt.md) return 'width: 100vw;height: 40vh;'
       }
-      return 'width: 60vw;height: 40vh;'
+      return 'width: 80vw;height: 40vh;'
     },
     async refreshActivity () {  
       this.clearActivity()
