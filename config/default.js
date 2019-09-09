@@ -101,7 +101,7 @@ module.exports = {
       { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
     ]
   },
-  mapPanel: {
+  mapCatalog: {
     categories: [
       { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
@@ -115,7 +115,7 @@ module.exports = {
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
     ]
   },
-  globePanel: {
+  globeCatalog: {
     categories: [
       { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
