@@ -131,7 +131,7 @@ module.exports = {
   },
   mapActivity: {
     tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog'],
-    actions: ['probe-location', 'create-layer'],
+    actions: ['probe-location', 'create-layer']
   },
   globeActivity: {
     tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog', 'vr'],
