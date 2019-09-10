@@ -89,7 +89,10 @@ module.exports = {
     services: (service) => service.path.includes('catalog') ||
                             service.path.includes('vigicrues') ||
                             service.path.endsWith('openaq'),
-    middlewares: { after: express.errorHandler() }
+    middlewares: { after: express.errorHandler() },
+    // When called internally from remote service do not authenticate,
+    // this assumes a gateway scenario where authentication is performed externally
+    authentication: false
   },
   paginate: {
     default: 10,

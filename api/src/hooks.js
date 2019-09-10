@@ -17,6 +17,11 @@ module.exports = {
       commonHooks.when(hook => {
         // First built-in Feathers services like authentication
         if (typeof hook.service.getPath !== 'function') return false
+          // Second distributed service calls
+        const distributedConfig = hook.app.get('distribution')
+        if (hook.params.fromRemote && distributedConfig) {
+          if (!distributedConfig.authentication) return false
+        }
         // Then user creation
         if ((hook.service.name === 'users') && (hook.method === 'create')) return false
         // If not exception perform authentication
