@@ -73,6 +73,8 @@
       </p>
     </q-page-sticky>
       
+    <component v-for="component in components" :is="component.name" :key="component.name"></component>
+
   </q-page>
 </template>
 
@@ -119,9 +121,20 @@ export default {
     VueSlider
   },
   inject: ['klayout'],
+  provide () {
+    return {
+      activity: this,
+      map: this
+    }
+  },
   data () {
     return {
       timeseriesWidgetPosition: 'top'
+    }
+  },
+  computed: {
+    components () {
+      return _.get(this, 'activityOptions.components', [])
     }
   },
   methods: {
@@ -267,6 +280,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
+    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
