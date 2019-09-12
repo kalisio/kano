@@ -23,17 +23,9 @@
       </k-widget>
     </q-page-sticky>
 
-    <k-color-legend v-if="colorLegend.visible"
-      class="fixed"
-      :style="colorLegendStyle"
-      :unit="colorLegend.unit"
-      :hint="colorLegend.hint"
-      :colorMap="colorLegend.colorMap"
-      :colors="colorLegend.colors"
-      :values="colorLegend.values"
-      :unitValues="colorLegend.unitValues"
-      :showGradient="colorLegend.showGradient"
-      @click="onColorLegendClick" />
+    <q-page-sticky position="left" :offset="[18, 0]">
+      <k-color-legend/>
+    </q-page-sticky>
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">   
       <div :style="timelineContainerStyle">
@@ -104,7 +96,6 @@ export default {
     kMapMixins.timeline,
     kMapMixins.timeseries,
     kMapMixins.activity('map'),
-    kMapMixins.legend,
     kMapMixins.locationIndicator,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
@@ -123,8 +114,8 @@ export default {
   inject: ['klayout'],
   provide () {
     return {
-      activity: this,
-      map: this
+      kActivity: this,
+      kMap: this
     }
   },
   data () {
@@ -280,6 +271,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
+    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)

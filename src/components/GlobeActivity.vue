@@ -24,18 +24,6 @@
       </k-widget>
     </q-page-sticky>
 
-    <k-color-legend v-if="colorLegend.visible"
-      class="fixed"
-      :style="colorLegendStyle"
-      :unit="colorLegend.unit"
-      :hint="colorLegend.hint"
-      :colorMap="colorLegend.colorMap"
-      :colors="colorLegend.colors"
-      :values="colorLegend.values"
-      :unitValues="colorLegend.unitValues"
-      :showGradient="colorLegend.showGradient"
-      @click="onColorLegendClick" />
-
     <q-page-sticky position="bottom-left" :offset="[110, 60]">
       <div :style="timelineContainerStyle">
         <k-time-controller
@@ -80,7 +68,6 @@ export default {
     kMapMixins.timeline,
     kMapMixins.timeseries,
     kMapMixins.activity('globe'),
-    kMapMixins.legend,
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
@@ -93,8 +80,8 @@ export default {
   inject: ['klayout'],
   provide () {
     return {
-      activity: this,
-      globe: this
+      kActivity: this,
+      kGlobe: this
     }
   },
   data () {
