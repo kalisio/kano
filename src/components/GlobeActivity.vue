@@ -7,21 +7,11 @@
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar @location-changed="onLocationChanged" :style="navBarStyle()"/>
+      <k-navigation-bar @location-changed="onLocationChanged"/>
     </q-page-sticky>
 
-    <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
-      <q-resize-observer @resize="onTimeseriesWidgetResized" />
-      <k-widget ref="timeseriesWidget" :title="probedLocationName"
-        :style="timeseriesWidgetStyle()" @state-changed="onUpdateTimeseriesWidget">
-        <div slot="widget-content">
-          <k-location-time-series ref="timeseries"
-            :feature="probedLocation" 
-            :variables="currentVariables"
-             :current-time-format="currentTimeFormat"
-             :current-formatted-time="currentFormattedTime" />
-        </div>
-      </k-widget>
+    <q-page-sticky position="top" :offset="[0, 0]">
+      <k-location-time-series :variables="currentVariables" />
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
@@ -50,7 +40,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.timeseries,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
@@ -79,17 +68,6 @@ export default {
     }
   },
   methods: {
-    navBarStyle() {
-      if (this.$q.screen.lt.md) return ''
-      return 'width: 80vw'
-    },
-    timeseriesWidgetStyle () {
-      if (this.$refs.timeseriesWidget && this.$refs.timeseriesWidget.isOpen()) {
-        if (!this.$refs.timeseriesWidget.isMinimized()) return 'width: 100vw;height: 100vh;'
-        else if (this.$q.screen.lt.md) return 'width: 100vw;height: 40vh;'
-      }
-      return 'width: 80vw;height: 40vh;'
-    },
     async refreshActivity () {
       this.clearActivity()
       const token = this.$store.get('capabilities.api.cesium.token')
@@ -119,29 +97,13 @@ export default {
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
-    },
-    async onUpdateTimeseriesWidget (state) {
-      if (state === 'closed') {
-        this.closeTimeseries()
-        return
-      }
-      this.timeseriesWidgetPosition = (state === 'maximized' ? 'top-left' : 'top')
-      // We need to force a refresh so that the prop is correctly updated by Vuejs in child component
-      await this.$nextTick()        
-      this.onTimeseriesWidgetResized()
-    },
-    onTimeseriesWidgetResized () {
-      // It appears chartjs does not take time ticks into account in chart height
-      this.resizeTimeseries(
-        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().width),
-        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().height * 0.8)
-      )
     }
   },
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')    
     this.$options.components['k-timeline'] = this.$load('KTimeline')
+    this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
