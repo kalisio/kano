@@ -28,20 +28,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">   
-      <div :style="timelineContainerStyle">
-        <k-time-controller
-          v-if="timelineEnabled"
-          :key="timelineRefreshKey"
-          :min="timeline.start" 
-          :max="timeline.end"
-          :step="'h'"
-          :value="timeline.current"
-          :timeInterval="timelineInterval"
-          :timeFormatter="timelineFormatter"
-          @change="onTimelineUpdated"
-          style="width: 100%;"
-        />
-      </div>
+      <k-timeline v-if="timelineEnabled"/>
     </q-page-sticky>
 
     <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
@@ -93,7 +80,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.timeline,
     kMapMixins.timeseries,
     kMapMixins.activity('map'),
     kMapMixins.locationIndicator,
@@ -272,6 +258,7 @@ export default {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
+    this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)

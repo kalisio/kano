@@ -25,22 +25,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom-left" :offset="[110, 60]">
-      <div :style="timelineContainerStyle">
-        <k-time-controller
-          v-if="timelineEnabled"
-          :key="timelineRefreshKey"
-          :min="timeline.start" 
-          :max="timeline.end"
-          :step="'h'"
-          :value="timeline.current"
-          :timeInterval="timelineInterval"
-          :timeFormatter="timelineFormatter"
-          @change="onTimelineUpdated"
-          pointerColor="#FC6E44" 
-          pointerTextColor="white"
-          style="width: 100%;"
-        />
-      </div>
+      <k-timeline v-if="timelineEnabled"/>
     </q-page-sticky>
 
     <component v-for="component in components" :is="component.name" :key="component.name"></component>
@@ -65,7 +50,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.timeline,
     kMapMixins.timeseries,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
