@@ -27,7 +27,7 @@
       <k-color-legend/>
     </q-page-sticky>
 
-    <q-page-sticky position="bottom-left" :offset="[110, 60]">   
+    <q-page-sticky position="bottom" :offset="[0, 40]">
       <k-timeline v-if="timelineEnabled"/>
     </q-page-sticky>
 
