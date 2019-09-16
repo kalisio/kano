@@ -19,7 +19,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-if="timelineEnabled"/>
+      <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
     <component v-for="component in components" :is="component.name" :key="component.name"></component>
@@ -94,10 +94,9 @@ export default {
       return null
     },
     async onFeatureClicked (options, event) {
-      const entity = event.target
-      if (!entity) return
-      const properties = (entity.properties ? entity.properties.getValue(0) : null)
-      utils.sendEmbedEvent('click', { properties, layer: options })
+      const feature = _.get(event, 'target.feature')
+      if (!feature) return
+      utils.sendEmbedEvent('click', { feature, layer: options })
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })

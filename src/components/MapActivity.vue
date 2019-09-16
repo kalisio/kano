@@ -22,7 +22,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-if="timelineEnabled"/>
+      <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
     <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
