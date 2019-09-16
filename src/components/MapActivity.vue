@@ -6,25 +6,15 @@
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar @location-changed="onLocationChanged" :style="navBarStyle()" />
+      <k-navigation-bar @location-changed="onLocationChanged" />
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
-      <k-info-box :style="infoBoxStyle()" />
+      <k-location-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
     </q-page-sticky>
 
-    <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
-      <q-resize-observer @resize="onTimeseriesWidgetResized" />
-      <k-widget ref="timeseriesWidget" :title="probedLocationName"
-        :style="timeseriesWidgetStyle()" @state-changed="onUpdateTimeseriesWidget">
-        <div slot="widget-content">
-          <k-location-time-series ref="timeseries"
-            :feature="probedLocation" 
-            :variables="currentVariables"
-             :current-time-format="currentTimeFormat"
-             :current-formatted-time="currentFormattedTime" />
-        </div>
-      </k-widget>
+    <q-page-sticky position="top" :offset="[0, 0]">
+      <k-location-time-series :variables="currentVariables" />
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
@@ -100,11 +90,6 @@ export default {
   components: {
     VueSlider
   },
-  provide () {
-    return {
-      kActivity: this
-    }
-  },
   inject: ['klayout'],
   provide () {
     return {
@@ -118,19 +103,6 @@ export default {
     }
   },
   methods: {
-    },
-    infoBoxStyle() {
-      /*if (this.$q.screen.lt.md) return 'width: 200px; max-height: 60vh'
-      return 'minwidhtwidth: 20vw; max-height: 60vh'*/
-      return "min-width: 150px; width: 15vw; max-height: 40vh"
-    },
-    timeseriesWidgetStyle () {
-      if (this.$refs.timeseriesWidget && this.$refs.timeseriesWidget.isOpen()) {
-        if (!this.$refs.timeseriesWidget.isMinimized()) return 'width: 100vw;height: 100vh;'
-        else if (this.$q.screen.lt.md) return 'width: 100vw;height: 40vh;'
-      }
-      return 'width: 80vw;height: 40vh;'
-    },
     async refreshActivity () {  
       this.clearActivity()
       this.clearNavigationBar()
@@ -245,7 +217,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-info-box'] = this.$load('KInfoBox')
+    this.$options.components['k-location-info-box'] = this.$load('KLocationInfoBox')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
