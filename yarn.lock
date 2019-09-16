@@ -2279,6 +2279,7 @@
 "@turf/turf@^5.1.6":
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/@turf/turf/-/turf-5.1.6.tgz#c3122592887ed234b75468b8a8c45bf886fbf8f6"
+  integrity sha1-wxIlkoh+0jS3VGi4qMRb+Ib7+PY=
   dependencies:
     "@turf/along" "5.1.x"
     "@turf/area" "5.1.x"

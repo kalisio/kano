@@ -141,7 +141,7 @@ module.exports = {
     // Required for OAuth2 to work correctly
     cookie: {
       enabled: true,
-      name: 'feathers-jwt',
+      name: 'kano-jwt',
       httpOnly: false,
       secure: (process.env.NODE_ENV === 'development' ? false : true)
     },

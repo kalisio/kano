@@ -17,7 +17,7 @@ export default async ({ app, Vue }) => {
     defaultNS: ['kdk']
   })
   // Load the translation files
-  const modules = ['kCore', 'kMap', 'app']
+  const modules = ['kCore', 'kMap', 'app', 'plugin']
   try {
     // Build the translation resolvers
     const translationResolvers = modules.map(module => {

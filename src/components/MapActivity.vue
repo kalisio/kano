@@ -27,33 +27,12 @@
       </k-widget>
     </q-page-sticky>
 
-    <k-color-legend v-if="colorLegend.visible"
-      class="fixed"
-      :style="colorLegendStyle"
-      :unit="colorLegend.unit"
-      :hint="colorLegend.hint"
-      :colorMap="colorLegend.colorMap"
-      :colors="colorLegend.colors"
-      :values="colorLegend.values"
-      :unitValues="colorLegend.unitValues"
-      :showGradient="colorLegend.showGradient"
-      @click="onColorLegendClick" />
+    <q-page-sticky position="left" :offset="[18, 0]">
+      <k-color-legend/>
+    </q-page-sticky>
 
-    <q-page-sticky position="bottom-left" :offset="[110, 60]">   
-      <div :style="timelineContainerStyle">
-        <k-time-controller
-          v-if="timelineEnabled"
-          :key="timelineRefreshKey"
-          :min="timeline.start" 
-          :max="timeline.end"
-          :step="'h'"
-          :value="timeline.current"
-          :timeInterval="timelineInterval"
-          :timeFormatter="timelineFormatter"
-          @change="onTimelineUpdated"
-          style="width: 100%;"
-        />
-      </div>
+    <q-page-sticky position="bottom" :offset="[0, 40]">
+      <k-timeline v-if="timelineEnabled"/>
     </q-page-sticky>
 
     <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
@@ -77,6 +56,8 @@
       </p>
     </q-page-sticky>
       
+    <component v-for="component in components" :is="component.name" :key="component.name"></component>
+
   </q-page>
 </template>
 
@@ -103,10 +84,7 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.timeline,
-    kMapMixins.timeseries,
     kMapMixins.activity('map'),
-    kMapMixins.legend,
     kMapMixins.locationIndicator,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
@@ -128,15 +106,18 @@ export default {
     }
   },
   inject: ['klayout'],
-  data () {
+  provide () {
     return {
-      timeseriesWidgetPosition: 'top'
+      kActivity: this,
+      kMap: this
+    }
+  },
+  computed: {
+    components () {
+      return _.get(this, 'activityOptions.components', [])
     }
   },
   methods: {
-    navBarStyle() {
-      if (this.$q.screen.lt.md) return ''
-      return 'width: 80vw'
     },
     infoBoxStyle() {
       /*if (this.$q.screen.lt.md) return 'width: 200px; max-height: 60vh'
@@ -189,8 +170,8 @@ export default {
         let marker = this.getProbedLocationForecastMarker(feature, latlng)
         if (marker) {
           marker.on('dragend', (event) => {
-            this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat,
-              moment.utc(this.timeline.start), moment.utc(this.timeline.end))
+            const { start, end } = this.getTimeRange()
+            this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat, start, end)
           })
         }
         return marker
@@ -259,29 +240,16 @@ export default {
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
-    },
-    async onUpdateTimeseriesWidget (state) {
-      if (state === 'closed') {
-        this.closeTimeseries()
-        return
-      }
-      this.timeseriesWidgetPosition = (state === 'maximized' ? 'top-left' : 'top')
-      // We need to force a refresh so that the prop is correctly updated by Vuejs in child component
-      await this.$nextTick()        
-      this.onTimeseriesWidgetResized()
-    },
-    onTimeseriesWidgetResized () {
-      // It appears chartjs does not take time ticks into account in chart height
-      this.resizeTimeseries(
-        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().width),
-        Math.floor(this.$refs.timeseriesWidget.$el.getBoundingClientRect().height * 0.8)
-      )
     }
   },
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-info-box'] = this.$load('KInfoBox')
+    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
+    this.$options.components['k-timeline'] = this.$load('KTimeline')
+    this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
+    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
