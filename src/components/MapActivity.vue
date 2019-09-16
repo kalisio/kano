@@ -10,7 +10,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
-      <k-location-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
+      <k-feature-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
     </q-page-sticky>
 
     <q-page-sticky position="top" :offset="[0, 0]">
@@ -217,7 +217,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-location-info-box'] = this.$load('KLocationInfoBox')
+    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')

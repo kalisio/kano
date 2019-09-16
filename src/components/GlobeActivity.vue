@@ -11,7 +11,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
-      <k-location-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
+      <k-feature-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
     </q-page-sticky>
 
     <q-page-sticky position="top" :offset="[0, 0]">
@@ -108,7 +108,7 @@ export default {
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')    
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
-    this.$options.components['k-location-info-box'] = this.$load('KLocationInfoBox')
+    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
