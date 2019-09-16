@@ -129,6 +129,12 @@ module.exports = function (ctx) {
           changeOrigin: true,
           ws: true,
           logLevel: 'debug'
+        },
+        // The auth endpoints are not easy to prefix so we manage it manually
+        '/auth': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          logLevel: 'debug'
         }
       },
       // https: true,
