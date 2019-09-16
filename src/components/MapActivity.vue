@@ -6,7 +6,11 @@
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar @location-changed="onLocationChanged" :style="navBarStyle()"/>
+      <k-navigation-bar @location-changed="onLocationChanged" :style="navBarStyle()" />
+    </q-page-sticky>
+
+    <q-page-sticky position="left" :offset="[18, 0]">
+      <k-info-box :style="infoBoxStyle()" />
     </q-page-sticky>
 
     <q-page-sticky :position="timeseriesWidgetPosition" :offset="[0, 0]">
@@ -118,6 +122,11 @@ export default {
   components: {
     VueSlider
   },
+  provide () {
+    return {
+      kActivity: this
+    }
+  },
   inject: ['klayout'],
   data () {
     return {
@@ -128,6 +137,11 @@ export default {
     navBarStyle() {
       if (this.$q.screen.lt.md) return ''
       return 'width: 80vw'
+    },
+    infoBoxStyle() {
+      /*if (this.$q.screen.lt.md) return 'width: 200px; max-height: 60vh'
+      return 'minwidhtwidth: 20vw; max-height: 60vh'*/
+      return "min-width: 150px; width: 15vw; max-height: 40vh"
     },
     timeseriesWidgetStyle () {
       if (this.$refs.timeseriesWidget && this.$refs.timeseriesWidget.isOpen()) {
@@ -267,6 +281,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
+    this.$options.components['k-info-box'] = this.$load('KInfoBox')
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
