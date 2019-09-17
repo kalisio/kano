@@ -45,7 +45,7 @@
     "CO": "Carbon monoxide (CO)",
     "NO2": "Nitrogen dioxide (NO2)",
     "O3": "Ozone (O3)",
-    "BC": "Black carbon (BC)"   
+    "BC": "Black carbon (BC)"
   },
   "Levels": {
     "PRESSURE": "Pressure"
