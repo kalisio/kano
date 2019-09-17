@@ -6,7 +6,7 @@
     </div>
 
     <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar @location-changed="onLocationChanged" />
+      <k-navigation-bar />
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
