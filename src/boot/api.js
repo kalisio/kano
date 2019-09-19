@@ -47,4 +47,7 @@ export default async ({ app, router, Vue }) => {
   beforeGuard.registerGuard(authenticationGuard)
 
   updateThemeColors()
+
+  api.on('authenticated', () => utils.sendEmbedEvent('kano-login'))
+  api.on('logout', () => utils.sendEmbedEvent('kano-logout'))
 }
