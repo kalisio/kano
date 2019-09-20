@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Loading } from 'quasar'
+import { Loading, Dialog } from 'quasar'
 import { mixins, beforeGuard } from '@kalisio/kdk-core/client'
 import config from 'config'
 import utils from '../utils'
@@ -38,28 +38,9 @@ export default {
       user: null
     }
   },
-  created () {
+  async created () {
     // initialize the user
     this.user = this.$store.get('user')
-  },
-  async mounted () {
-    setTimeout(() => {
-      try {
-        this.user = await this.restoreSession()
-        // No need to redirect here since the user should be set thus managed by event handler below
-      } catch (_) {
-        this.user = null
-        // Check if we need to redirect based on the fact there is no authenticated user
-        this.redirect()
-      }
-    }, 1000)
-
-    this.$events.$on('user-changed', user => {
-      this.user = user
-      // Check if we need to redirect based on the fact there is an authenticated user
-      this.redirect()
-    })
-
     if (this.$api.socket) {
       // Display error message if we cannot contact the server
       this.$api.socket.on('reconnect_error', () => {
@@ -104,6 +85,22 @@ export default {
       else if (api.buildNumber === config.buildNumber) return
     }
     this.$toast({html: this.$t('Index.VERSION_MISMATCH')})
+  },
+  async mounted () {
+    try {
+      this.user = await this.restoreSession()
+      // No need to redirect here since the user should be set thus managed by event handler below
+    } catch (_) {
+      this.user = null
+      // Check if we need to redirect based on the fact there is no authenticated user
+      this.redirect()
+    }
+    
+    this.$events.$on('user-changed', user => {
+      this.user = user
+      // Check if we need to redirect based on the fact there is an authenticated user
+      this.redirect()
+    })
   }
 }
 </script>
