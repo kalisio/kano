@@ -117,6 +117,10 @@ export default {
       this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },
+    getViewKey () {
+      // We'd like to share view settings between 2D/3D
+      return this.appName.toLowerCase() + `-view`
+    },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
       // Check for valid type

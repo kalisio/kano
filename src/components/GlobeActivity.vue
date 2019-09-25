@@ -84,6 +84,10 @@ export default {
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
     },
+    getViewKey () {
+      // We'd like to share view settings between 2D/3D
+      return this.appName.toLowerCase() + `-view`
+    },
     getVigicruesTooltip (entity, options) {
       const properties = entity.properties
       if (!properties) return
