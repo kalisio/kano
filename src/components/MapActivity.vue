@@ -85,7 +85,8 @@ export default {
     kMapMixins.map.style,
     kMapMixins.map.tooltip,
     kMapMixins.map.popup,
-    kMapMixins.map.activity
+    kMapMixins.map.activity,
+    kMapMixins.map.tiledMeshLayers
   ],
   components: {
     VueSlider
