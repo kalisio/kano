@@ -685,8 +685,9 @@ module.exports = [
         name: 'value',
         label: 'Variables.GAMMA_DOSE_RATE',
         units: [
-          'nSv/h³'
+          'nSv/h'
         ],
+        range: [0, 500],
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
