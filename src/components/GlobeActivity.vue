@@ -52,7 +52,8 @@ export default {
     kMapMixins.globe.style,
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
-    kMapMixins.globe.activity
+    kMapMixins.globe.activity,
+    kMapMixins.globe.opendapLayers
   ],
   inject: ['klayout'],
   provide () {
