@@ -416,6 +416,60 @@ module.exports = [
       }
     }
   },
+    /* opendap layer examples
+    {
+        name: 'opendap-tiled',
+        description: 'opendap tiled mesh test',
+        tags: [
+            'measure'
+        ],
+        iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
+        attribution: 'bla bla',
+        type: 'OverlayLayer',
+        variables: [
+            {
+                name: 'temperature',
+                label: 'Variables.TEMPERATURE',
+                units: [
+                    'degC', 'degF', 'K'
+                ],
+                chartjs: {
+                    backgroundColor: 'rgba(255, 215, 0, 128)',
+                    borderColor: 'rgb(255, 215, 0)',
+                    fill: false
+                },
+                chromajs: {
+                    // scale: 'YlOrRd',
+                    scale: 'RdYlBu',
+                    invertScale: true
+                }
+            }
+        ],
+        leaflet: {
+            type: 'tiledMeshLayer',
+            source: 'opendap',
+            opacity: 0.6,
+            opendap: {
+                // url: 'https://thredds.irsn.kalisio.xyz/thredds/dodsC/mf-arpege-05/2019/06/14/12/T6086_G_T_Hau_20190614120000.grib',
+                // query: 'Temperature_height_above_ground',
+                // dimensions: { time: 0, height_above_ground: 0 },
+                url: 'https://thredds.irsn.kalisio.xyz/thredds/dodsC/mf-arpege-01/2019/06/15/11360000000.20190615180000.grib',
+                // query: 'Temperature_surface',
+                // dimensions: { time2: 0 },
+                query: 'Temperature_height_above_ground',
+                dimensions: { time2: 0, height_above_ground1: 0 },
+                // query: 'u-component_of_wind_height_above_ground',
+                // dimensions: { time2: 0, height_above_ground: 0},
+                // query: 'Wind_speed_height_above_ground',
+                // dimensions: { time2: 0, height_above_ground2: 0},
+                // query: 'High_cloud_cover_surface',
+                // dimensions: { time2: 0 },
+                latitude: 'lat',
+                longitude: 'lon'
+            }
+        },
+    },
+    */
   {
     name: 'Vigiprobes',
     description: 'Level and rate',
