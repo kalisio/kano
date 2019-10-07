@@ -468,6 +468,9 @@ module.exports = [
                 longitude: 'lon'
             }
         },
+        cesium: {
+            type: 'opendap'
+        }
     },
     */
   {
