@@ -27,7 +27,7 @@
     "dev": "nodemon --watch src --exec npm run debug",
     "dev:replica": "nodemon --watch src --exec npm run debug:replica",
     "predebug": "npm run build",
-    "debug": "cross-env NODE_ENV=development node --inspect dist/main.js",
+    "debug": "cross-env NODE_ENV=development node --inspect-brk dist/main.js",
     "debug:replica": "cross-env NODE_ENV=development node --inspect=localhost:9230 dist/main.js",
     "clean": "node build/script.clean.js",
     "build": "npm run clean && babel src -d dist -s",
@@ -72,6 +72,7 @@
     "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git",
     "fs-extra": "^8.1.0",
     "http-proxy-middleware": "^0.17.4",
+    "jsdap": "^8.1.0",
     "winston": "^3.2.1"
   }
 }
