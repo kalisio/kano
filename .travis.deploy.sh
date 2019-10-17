@@ -9,8 +9,6 @@ else
 	# Deploy the app
 	#
 	travis_fold start "deploy"
-
-	cp workspace/$FLAVOR/ssh.pem ssh.pem
  
   # Copy the required keys and update the mode
 	cp workspace/$FLAVOR/*.pem ~/.ssh/.
