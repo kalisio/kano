@@ -12,32 +12,35 @@ else
 
 	cp workspace/$FLAVOR/ssh.pem ssh.pem
  
-  # Enable ssh pem
-	eval "$(ssh-agent -s)"
-	chmod 600 ssh.pem
-	ssh-add ssh.pem
-	ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_REMOTE mkdir -p $APP
+  # Copy the required keys and update the mode
+	cp workspace/$FLAVOR/*.pem ~/.ssh/.
+	for KEY in `ls ~/.ssh/*.pem`; do
+  	chmod 600 $KEY
+	done
+
+	# Copy the ssh config file
+	cp workspace/$FLAVOR/ssh.config ~/.ssh/config
+	service sshd reload
+
+  # Create app directory if needed 
+	ssh REMOTE_SERVER mkdir -p $APP
 
 	# Deploy environment file
-	scp .env $SSH_USER@$SSH_REMOTE:~/$APP/.env
+	scp .env REMOTE_SERVER:~/$APP/.env
 
 	# Deploy compose files
-	scp deploy/app.yml $SSH_USER@$SSH_REMOTE:~/$APP/app.yml
-	scp deploy/app.swarm.yml $SSH_USER@$SSH_REMOTE:~/$APP/app.swarm.yml
-	scp deploy/mongodb.yml $SSH_USER@$SSH_REMOTE:~/$APP/mongodb.yml
-	scp deploy/mongodb.swarm.yml $SSH_USER@$SSH_REMOTE:~/$APP/mongodb.swarm.yml
+	scp deploy/app.yml REMOTE_SERVER:~/$APP/app.yml
+	scp deploy/app.swarm.yml REMOTE_SERVER:~/$APP/app.swarm.yml
+	scp deploy/mongodb.yml REMOTE_SERVER:~/$APP/mongodb.yml
+	scp deploy/mongodb.swarm.yml REMOTE_SERVER:~/$APP/mongodb.swarm.yml
 
 	# Deploy utilities
-	scp deploy/deploy-app.sh $SSH_USER@$SSH_REMOTE:~/$APP
-	scp deploy/remove-app.sh $SSH_USER@$SSH_REMOTE:~/$APP
+	scp deploy/deploy-app.sh REMOTE_SERVER:~/$APP
+	scp deploy/remove-app.sh REMOTE_SERVER:~/$APP
 
 	# Deploy the stack
-	SUDO=""
-	if [ "$SSH_USER" != "root" ]; then
-		SUDO="sudo"
-	fi
-	ssh $SSH_USER@$SSH_REMOTE "cd $APP; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh"
-	ssh $SSH_USER@$SSH_REMOTE "cd $APP; $SUDO ./remove-app.sh; $SUDO k-swarm-prune; $SUDO ./deploy-app.sh"
+	ssh REMOTE_SERVER "cd $APP; chmod u+x ./remove-app.sh; chmod u+x ./deploy-app.sh"
+	ssh REMOTE_SERVER "cd $APP; ./remove-app.sh; k-swarm-prune; ./deploy-app.sh"
 
 	travis_fold end "deploy"
 fi
