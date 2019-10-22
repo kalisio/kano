@@ -60,6 +60,7 @@
     "@quasar/extras": "^1.2.0",
     "@turf/turf": "^5.1.6",
     "Leaflet.Geodesic": "https://github.com/henrythasler/Leaflet.Geodesic.git",
+    "abort-controller": "^3.0.0",
     "ajv": "^6.0.0",
     "ajv-i18n": "^3.0.0",
     "babel-polyfill": "^6.23.0",

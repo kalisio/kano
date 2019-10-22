@@ -422,8 +422,8 @@ module.exports = [
   },
   /* tiled mesh layer examples */
   {
-    name: 'Tiled mesh layer examples',
-    description: 'tiled mesh layer tests',
+    name: 'Flood map',
+    description: 'Water level elevation map',
     tags: [
       'measure'
     ],
@@ -450,8 +450,8 @@ module.exports = [
       }
     ],
     levels: {
-      name: 'seaLevel',
-      label: 'Levels.SEA',
+      name: 'waterLevel',
+      label: 'Levels.WATER',
       units: [ 'm' ],
       values: [ 0, 20, 50, 100, 150 ]
     },
@@ -481,9 +481,10 @@ module.exports = [
     */
     leaflet: {
       type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,                       // layer opacity
       // fillColor: [1.0, 0.0, 0.0, 1.0], // rgba value to use as fill color for the data (no color map will be used)
-      cutOver: 'seaLevel',                // value or level name to use as input to cutOver value
+      cutOver: 'waterLevel',              // value or level name to use as input to cutOver value
       // cutUnder: 100,                   // value or level name to use as input to cutUnde value
     },
   },
