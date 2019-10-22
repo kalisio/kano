@@ -25,7 +25,7 @@
       <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
-    <q-page-sticky v-if="hasSelectableLevels" position="bottom-right" :offset="[40, 400]">
+    <q-page-sticky v-if="hasSelectableLevels" position="bottom-right" style="z-index: 10;" :offset="[40, 400]">
       <vue-slider class="text-primary"
         v-model="selectableLevel"
         :direction="'btt'"
