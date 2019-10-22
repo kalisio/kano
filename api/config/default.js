@@ -85,10 +85,12 @@ module.exports = {
     },
     frameguard: false
   },
-  distribution: { // Distribute data services
+  distribution: { // Distribute data & alert services
     services: (service) => service.path.includes('catalog') ||
                             service.path.includes('vigicrues') ||
-                            service.path.endsWith('openaq'),
+                            service.path.includes('openaq') ||
+                            service.path.includes('teleray') ||
+                            service.path.includes('geoalerts'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally

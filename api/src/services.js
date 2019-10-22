@@ -26,16 +26,7 @@ module.exports = async function () {
       res.json(response)
     })
     await app.configure(kCore)
-    // Register permission for storage service if defined
-    if (app.getService('storage')) {
-      permissions.defineAbilities.registerHook((subject, can, cannot) => {
-        can('service', 'storage')
-        can('all', 'storage')
-      })
-    }
     await app.configure(kMap)
-    // Create a global catalog service
-    createCatalogService.call(app)
   } catch (error) {
     app.logger.error(error.message)
   }

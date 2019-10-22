@@ -201,6 +201,7 @@ module.exports = [
         units: [
           'm/s', 'km/h', 'kt'
         ],
+        range: [0, 60],
         chartjs: {
           backgroundColor: 'rgba(255, 159, 64, 128)',
           borderColor: 'rgb(255, 159, 64)',
@@ -271,6 +272,7 @@ module.exports = [
         units: [
           'm/s', 'km/h', 'kt'
         ],
+        range: [0, 60],
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',
@@ -306,6 +308,7 @@ module.exports = [
         units: [
           'mm'
         ],
+        range: [0, 300],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -352,6 +355,7 @@ module.exports = [
         units: [
           'degC', 'degF', 'K'
         ],
+        range: [0, 50],
         chartjs: {
           backgroundColor: 'rgba(255, 215, 0, 128)',
           borderColor: 'rgb(255, 215, 0)',
@@ -504,6 +508,7 @@ module.exports = [
         units: [
           'm'
         ],
+        range: [0, 10],
         chartjs: {
           backgroundColor: 'rgba(63, 63, 191, 128)',
           borderColor: 'rgb(63, 63, 191)',
@@ -516,6 +521,7 @@ module.exports = [
         units: [
           'm3/h'
         ],
+        range: [0, 10000],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -585,6 +591,7 @@ module.exports = [
         units: [
           'µg/m³'
         ],
+        range: [0, 100],
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
@@ -597,6 +604,7 @@ module.exports = [
         units: [
           'µg/m³'
         ],
+        range: [0, 200],
         chartjs: {
           backgroundColor: 'rgba(63, 63, 191, 128)',
           borderColor: 'rgb(63, 63, 191)',
@@ -609,6 +617,7 @@ module.exports = [
         units: [
           'ppm'
         ],
+        range: [0, 10000],
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',
@@ -621,6 +630,7 @@ module.exports = [
         units: [
           'ppm'
         ],
+        range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(81, 186, 153, 128)',
           borderColor: 'rgb(81, 186, 153)',
@@ -633,6 +643,7 @@ module.exports = [
         units: [
           'ppm'
         ],
+        range: [0, 500],
         chartjs: {
           backgroundColor: 'rgba(40, 44, 32, 128)',
           borderColor: 'rgb(40, 44, 32)',
@@ -645,6 +656,7 @@ module.exports = [
         units: [
           'ppm'
         ],
+        range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(83, 134, 106, 128)',
           borderColor: 'rgb(83, 134, 106)',
@@ -657,6 +669,7 @@ module.exports = [
         units: [
           'µg/m³'
         ],
+        range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(0, 0, 0, 128)',
           borderColor: 'rgb(0, 0, 0)',
@@ -739,8 +752,9 @@ module.exports = [
         name: 'value',
         label: 'Variables.GAMMA_DOSE_RATE',
         units: [
-          'nSv/h³'
+          'nSv/h'
         ],
+        range: [0, 500],
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
