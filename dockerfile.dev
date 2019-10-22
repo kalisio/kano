@@ -14,12 +14,14 @@ WORKDIR /opt/${APP}
 COPY . /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
+RUN git clone https://github.com/kalisio/feathers-distributed.git -b master --single-branch && cd feathers-distributed && yarn install && yarn link && cd .. 
 RUN git clone https://github.com/kalisio/kCore.git -b ${BRANCH} --single-branch && cd kCore && yarn install && yarn link && cd .. 
 RUN git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch && cd kMap && yarn install && yarn link @kalisio/kdk-core && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
 
 RUN yarn install
+RUN yarn link @kalisio/feathers-distributed
 RUN yarn link @kalisio/kdk-core
 RUN yarn link @kalisio/kdk-map
 RUN npm run build
