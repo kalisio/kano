@@ -610,7 +610,7 @@
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
       }
       function updateForecastLevel() {
-        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind' })
+        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind (isobaric)' })
         .then(function (result) {
           return postRobot.send(kano, component, { property: 'forecastLevels' })
         })
