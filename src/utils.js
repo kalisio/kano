@@ -4,6 +4,7 @@ import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
 import postRobot from 'post-robot'
+import config from 'config'
 import { Store } from '@kalisio/kdk-core/client'
 
 function loadComponent (component) {
@@ -150,6 +151,24 @@ function sendEmbedEvent (...args) {
   }
 }
 
+function setGatewayUrlJwt (item, path, jwt) {
+  let url = _.get(item, path)
+  if (!url) return
+  if (!url.startsWith(config.gateway)) return
+  _.set(item, path, url + (url.includes('?') ? '&' : '?') + `${config.gatewayJwtField}=${jwt}`)
+}
+
+function setGatewayJwt (layers, jwt) {
+  // If we need to use API gateway forward token as query parameter
+  // (Leaflet does not support anything else by default as it mainly uses raw <img> tags)
+  layers.forEach(layer => {
+    setGatewayUrlJwt(layer, 'iconUrl', jwt)
+    setGatewayUrlJwt(layer, 'leaflet.source', jwt)
+    setGatewayUrlJwt(layer, 'cesium.url', jwt)
+  })
+  return layers
+}
+
 // Build vue router config from our config file
 function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
@@ -218,6 +237,8 @@ let utils = {
   createComponent,
   createComponentVNode,
   sendEmbedEvent,
+  setGatewayUrlJwt,
+  setGatewayJwt,
   buildRoutes
 }
 

@@ -48,6 +48,14 @@ export default async ({ app, router, Vue }) => {
 
   updateThemeColors()
 
-  api.on('authenticated', () => utils.sendEmbedEvent('kano-login'))
-  api.on('logout', () => utils.sendEmbedEvent('kano-logout'))
+  api.on('authenticated', (data) => {
+    // Store API gateway token if any
+    if (data.gatewayToken) api.get('storage').setItem(config.gatewayJwt, data.gatewayToken)
+    utils.sendEmbedEvent('kano-login')
+  })
+  api.on('logout', (data) => {
+    // Remove API gateway token if any
+    api.get('storage').removeItem(config.gatewayJwt)
+    utils.sendEmbedEvent('kano-logout')
+  })
 }

@@ -24,6 +24,8 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
 if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
+// On a developer machine will do domain = gateway = localhost
+const gateway = domain.replace('kano', 'api')
 
 module.exports = {
   // Special alias to host loopback interface in cordova
@@ -40,6 +42,9 @@ module.exports = {
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
+  gateway: 'https://api.',
+  gatewayJwtField: 'jwt',
+  gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
   appLogo: 'kano-icon-32x32.png',
   publisher: 'Kalisio',

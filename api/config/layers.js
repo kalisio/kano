@@ -1,6 +1,7 @@
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
-const mapproxyUrl = 'https://mapproxy.' + kargoDomain
+const mapproxyUrl = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/mapproxy' : 'https://mapproxy.' + kargoDomain)
+const k2Url = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
 const forecastZIndex = 300
 
 module.exports = [
@@ -180,7 +181,7 @@ module.exports = [
     type: 'TerrainLayer',
     cesium: {
       type: 'Cesium',
-      url: 'https://k2.' + kargoDomain,
+      url: k2Url,
       requestWaterMask: 'true',
       requestVertexNormals: 'true'
     }
