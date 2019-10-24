@@ -155,7 +155,15 @@ function setGatewayUrlJwt (item, path, jwt) {
   let url = _.get(item, path)
   if (!url) return
   if (!url.startsWith(config.gateway)) return
-  _.set(item, path, url + (url.includes('?') ? '&' : '?') + `${config.gatewayJwtField}=${jwt}`)
+  // FIXME: specific case of Cesium OpenStreetMap provider
+  // Because Cesium generates the final url as base url + tile scheme + extension
+  // updating the base url property breaks it, for now we modify the extension 
+  if ((path === 'cesium.url') && _.get(item, 'cesium.type') === 'OpenStreetMap') {
+    const ext = _.get(item, 'cesium.fileExtension', 'png')
+    _.set(item, 'cesium.fileExtension', ext + `?${config.gatewayJwtField}=${jwt}`)
+  } else {
+    _.set(item, path, url + (url.includes('?') ? '&' : '?') + `${config.gatewayJwtField}=${jwt}`)
+  }
 }
 
 function setGatewayJwt (layers, jwt) {
