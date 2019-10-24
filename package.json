@@ -99,6 +99,7 @@
     "mathjs": "^5.7.0",
     "mime-types-browser": "^0.0.3",
     "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
     "password-generator": "^2.2.0",
     "pixi.js": "5.0.4",
     "post-robot": "^10.0.10",
