@@ -52,7 +52,10 @@ function loadTranslation (module, locale) {
 }
 
 function resolveAsset (asset) {
-  return require('./assets/' + asset)
+  // If external URL simply use it
+  if (asset.startsWith('http://') || asset.startsWith('https://')) return asset
+  // Otherwise let webpack resolve asset
+  else return require('./assets/' + asset)
 }
 
 // We need this so that we can dynamically load the components
