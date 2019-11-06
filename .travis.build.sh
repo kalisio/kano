@@ -23,7 +23,7 @@ then
 	# output to a file and push it to S3. Be careful if the building process come to take
 	# more than 10 minutes, Travis will stop
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml build > build.log 2>&1
-	BUILD_CODE=$?
+	ERROR_CODE=$?
 	# Copy the log whatever the result
 	aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
 	# Exit if an error has occured
