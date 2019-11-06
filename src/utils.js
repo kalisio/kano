@@ -145,12 +145,15 @@ function setupEmbedApi (routeName, component) {
   })
 }
 
-function sendEmbedEvent (...args) {
+async function sendEmbedEvent (...args) {
   // Will fail if not integrated as iframe so check
   if (window.parent !== window) {
     // If no listener post-robot raises an error
-    try { postRobot.send(window.parent, ...args) }
-    catch (error) { logger.debug(error.message) }
+    try {
+      await postRobot.send(window.parent, ...args)
+    } catch (error) {
+      logger.debug(error.message)
+    }
   }
 }
 

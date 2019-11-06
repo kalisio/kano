@@ -31,9 +31,9 @@ postRobot.on('setConfiguration', async (event) => {
   updateThemeColors()
 })
 
-utils.sendEmbedEvent('kano-ready')
-
 export default async ({ app, router, Vue }) => {
+  await utils.sendEmbedEvent('kano-ready')
+
   let api = kalisio()
 
   // Setup app hooks
