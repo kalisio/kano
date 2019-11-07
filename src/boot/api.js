@@ -24,6 +24,11 @@ postRobot.on('setLocalStorage', async (event) => {
     window.localStorage.setItem(key, (typeof value === 'object' ? JSON.stringify(value) : value))
   })
 })
+postRobot.on('unsetLocalStorage', async (event) => {
+  _.forEach(event.data, (key) => {
+    window.localStorage.removeItem(key)
+  })
+})
 postRobot.on('setConfiguration', async (event) => {
   _.forOwn(event.data, (value, key) => {
     _.set(config, key, value)
