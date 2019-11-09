@@ -1,6 +1,7 @@
-FROM  node:8-stretch
-
-LABEL maintainer="contact@kalisio.xyz"
+#
+# Build stage
+#
+FROM  node:8-buster AS Build
 
 ARG APP
 ARG BUILD_NUMBER
@@ -36,6 +37,14 @@ RUN git clone https://github.com/weacast/weacast-leaflet.git -b master --single-
 RUN yarn link weacast-core
 RUN yarn link weacast-leaflet
 RUN npm run build
+
+#
+# Release stage
+#
+FROM node:8-buster-slim
+LABEL maintainer="contact@kalisio.xyz"
+
+COPY --from=Build /opt/${APP} /opt/${APP}
 
 EXPOSE 8081
 

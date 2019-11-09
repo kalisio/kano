@@ -1,6 +1,5 @@
-FROM  node:8-stretch
-
-MAINTAINER Kalisio <contact@kalisio.xyz>
+FROM  node:8-buster-slim
+LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP
 ARG BUILD_NUMBER
@@ -11,13 +10,11 @@ ENV NODE_APP_INSTANCE=prod
 
 WORKDIR /opt/${APP}
 COPY . /opt/${APP}
-
-RUN yarn install
+RUN yarn
 RUN npm run build
 
 WORKDIR /opt/${APP}/api
-
-RUN yarn install
+RUN yarn
 RUN npm run build
 
 EXPOSE 8081
