@@ -57,7 +57,7 @@ WORKDIR /opt/${APP}/modules
 RUN \
   cd feathers-distributed && yarn link && cd .. && \
   cd kCore && yarn link && cd .. && \
-  cd kMap && yarn link && yarn link @kalisio/kCore 
+  cd kMap && yarn link && yarn link @kalisio/kdk-core
 
 WORKDIR /opt/${APP}/api
 RUN \
