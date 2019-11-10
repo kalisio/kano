@@ -36,7 +36,8 @@ RUN \
   yarn link @kalisio/kdk-map && \
   yarn link weacast-core && \
   yarn link weacast-leaflet && \
-  yarn build > build.log 2>&1
+  yarn build > build.log 2>&1 && \
+  tail build.log
 
 #
 # Run stage
