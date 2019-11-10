@@ -37,7 +37,7 @@ RUN \
   yarn link weacast-core && \
   yarn link weacast-leaflet && \
   yarn build > build.log 2>&1 && \
-  tail build.log
+  tail -n 24 build.log
 
 #
 # Run stage
@@ -58,8 +58,8 @@ WORKDIR /opt/${APP}/modules
 RUN \
   cd feathers-distributed && yarn link && cd .. && \
   cd kCore && yarn link && cd .. && \
-  cd kMap && yarn link @kalisio/kdk-core && yarn link && cd .. \
-  cd weacast-core && yarn link && cd .. \
+  cd kMap && yarn link @kalisio/kdk-core && yarn link && cd .. && \
+  cd weacast-core && yarn link && cd .. && \
   cd weacast-leaflet && yarn link weacast-core && yarn link
 
 WORKDIR /opt/${APP}/api
