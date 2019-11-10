@@ -8,15 +8,14 @@ ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV DEBUG=
 ENV NODE_APP_INSTANCE=prod
 
-WORKDIR /opt/${APP}
 COPY . /opt/${APP}
-RUN yarn
-RUN npm run build
+
+WORKDIR /opt/${APP}
+RUN yarn && yarn build
 
 WORKDIR /opt/${APP}/api
-RUN yarn
-RUN npm run build
+RUN yarn && yarn build
 
 EXPOSE 8081
 
-CMD [ "npm", "run", "prod" ]
+CMD [ "yarn", "prod" ]
