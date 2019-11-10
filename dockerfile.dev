@@ -7,9 +7,7 @@ ARG APP
 ARG BUILD_NUMBER
 ARG BRANCH=master
 
-ENV APP=$APP
 ENV BUILD_NUMBER=$BUILD_NUMBER
-ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
 WORKDIR /opt/${APP}
@@ -27,7 +25,7 @@ RUN \
   yarn link @kalisio/feathers-distributed && \
   yarn link @kalisio/kdk-core && \
   yarn link @kalisio/kdk-map && \
-  npm run build
+  yarn build
 
 WORKDIR /opt/${APP}
 RUN \
@@ -38,13 +36,20 @@ RUN \
   git clone https://github.com/weacast/weacast-leaflet.git -b master --single-branch && cd weacast-leaflet && yarn && yarn link weacast-core && yarn link && cd .. && \
   yarn link weacast-core && \
   yarn link weacast-leaflet && \
-  npm run build
+  yarn build
 
 #
-# Release stage
+# Run stage
 #
 FROM node:8-buster-slim
 LABEL maintainer="contact@kalisio.xyz"
+
+ARG APP
+ARG BUILD_NUMBER
+
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV NODE_APP_INSTANCE=dev
+ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 
 COPY --from=Build /opt/${APP} /opt/${APP}
 
@@ -70,4 +75,4 @@ RUN \
 
 EXPOSE 8081
 
-CMD [ "npm", "run", "prod" ]
+CMD [ "yarn", "prod" ]
