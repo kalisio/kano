@@ -70,7 +70,6 @@ RUN \
 
 WORKDIR /opt/${APP}
 RUN \
-  cd weacast-core && yarn link && cd .. && \
   yarn link @kalisio/kdk-core && \
   yarn link @kalisio/kdk-map && \ 
   yarn link weacast-core && \
