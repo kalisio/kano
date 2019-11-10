@@ -22,7 +22,6 @@ RUN  \
   git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch && cd kMap && yarn && yarn link @kalisio/kdk-core && yarn link && cd ..
 
 WORKDIR /opt/${APP}/api
-
 RUN \
   yarn && \
   yarn link @kalisio/feathers-distributed && \
@@ -31,7 +30,6 @@ RUN \
   npm run build
 
 WORKDIR /opt/${APP}
-
 RUN \
   yarn && \
   yarn link @kalisio/kdk-core && \
