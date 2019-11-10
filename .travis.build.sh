@@ -25,7 +25,7 @@ then
 	docker-compose -f deploy/app.yml -f deploy/app.build.yml build #> build.log 2>&1
 	ERROR_CODE=$?
 	# Copy the log whatever the result
-	aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
+	#aws s3 cp build.log s3://$BUILDS_BUCKET/$BUILD_NUMBER/build.log
 	# Exit if an error has occured
 	if [ $ERROR_CODE -ne 0 ]; then
 		echo "Building the docker image has failed [error: $ERROR_CODE]"
