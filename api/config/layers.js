@@ -506,6 +506,90 @@ module.exports = [
     }
   },
   {
+    name: 'Hubeau hydrometry',
+    description: 'Real-Time Hydrometric Data from french Hub\'eau portal',
+    tags: [
+      'measure'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    service: 'hubeau-observations',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    probeService: 'hubeau-stations',
+    featureId: 'code_station',
+    history: 604800,
+    variables: [
+      {
+        name: 'H',
+        label: 'Variables.H',
+        units: [
+          'm'
+        ],
+        range: [0, 10],
+        chartjs: {
+          backgroundColor: 'rgba(63, 63, 191, 128)',
+          borderColor: 'rgb(63, 63, 191)',
+          fill: false
+        }
+      },
+      {
+        name: 'Q',
+        label: 'Variables.Q',
+        units: [
+          'm3/h'
+        ],
+        range: [0, 10000],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      source: '/api/hubeaus-observations',
+      realtime: true,
+      interval: 900000,
+      cluster: { disableClusteringAtZoom: 18 },
+      'marker-color': '#00a9ce',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-tint',
+      popup: {
+        pick: [
+          'LbStationHydro'
+        ]
+      },
+      tooltip: {
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> mm<% }
+                   if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> l/s<% }
+                   if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      source: '/api/hubeau-observations',
+      realtime: true,
+      interval: 900000,
+      cluster: { pixelRange: 50 },
+      'marker-symbol': 'water',
+      'marker-color': '#00a9ce',
+      popup: {
+        pick: [
+          'LbStationHydro'
+        ]
+      },
+      tooltip: {
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> mm<% }
+                   if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
+                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> l/s<% }
+                   if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
+      }
+    }
+  },
+  {
     name: 'OpenAQ',
     description: 'Air Quality',
     tags: [
