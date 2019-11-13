@@ -511,7 +511,7 @@ module.exports = [
     tags: [
       'measure'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-icon.png',
     attribution: '',
     type: 'OverlayLayer',
     service: 'hubeau-observations',
@@ -537,9 +537,9 @@ module.exports = [
         name: 'Q',
         label: 'Variables.Q',
         units: [
-          'm3/h'
+          'm3/s'
         ],
-        range: [0, 10000],
+        range: [0, 1000],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -558,13 +558,13 @@ module.exports = [
       'icon-classes': 'fa fa-tint',
       popup: {
         pick: [
-          'LbStationHydro'
+          'libelle_station'
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> mm<% }
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
                    if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> l/s<% }
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/s<% }
                    if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     },
@@ -578,13 +578,13 @@ module.exports = [
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'LbStationHydro'
+          'libelle_station'
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> mm<% }
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
                    if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> l/s<% }
+                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/s<% }
                    if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     }
