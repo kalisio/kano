@@ -388,7 +388,7 @@ module.exports = [
   },
   {
     name: 'Vigicrues',
-    description: 'Flooding alerts',
+    description: 'Carte de vigilance crues nationale',
     tags: [
       'measure'
     ],
@@ -422,96 +422,12 @@ module.exports = [
     }
   },
   {
-    name: 'Vigiprobes',
-    description: 'Level and rate',
+    name: 'Hub\'Eau Hydrométrie',
+    description: 'Données hydrométriques',
     tags: [
       'measure'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
-    attribution: '',
-    type: 'OverlayLayer',
-    service: 'vigicrues-observations',
-    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    probeService: 'vigicrues-stations',
-    featureId: 'CdStationHydro',
-    history: 604800,
-    variables: [
-      {
-        name: 'H',
-        label: 'Variables.H',
-        units: [
-          'm'
-        ],
-        range: [0, 10],
-        chartjs: {
-          backgroundColor: 'rgba(63, 63, 191, 128)',
-          borderColor: 'rgb(63, 63, 191)',
-          fill: false
-        }
-      },
-      {
-        name: 'Q',
-        label: 'Variables.Q',
-        units: [
-          'm3/h'
-        ],
-        range: [0, 10000],
-        chartjs: {
-          backgroundColor: 'rgba(54, 162, 235, 128)',
-          borderColor: 'rgb(54, 162, 235)',
-          fill: false
-        }
-      }
-    ],
-    leaflet: {
-      type: 'geoJson',
-      source: '/api/vigicrues-observations',
-      realtime: true,
-      interval: 900000,
-      cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': '#00a9ce',
-      'icon-color': 'white',
-      'icon-classes': 'fa fa-tint',
-      popup: {
-        pick: [
-          'LbStationHydro'
-        ]
-      },
-      tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
-                   if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% }
-                   if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
-      }
-    },
-    cesium: {
-      type: 'geoJson',
-      source: '/api/vigicrues-observations',
-      realtime: true,
-      interval: 900000,
-      cluster: { pixelRange: 50 },
-      'marker-symbol': 'water',
-      'marker-color': '#00a9ce',
-      popup: {
-        pick: [
-          'LbStationHydro'
-        ]
-      },
-      tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
-                   if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/h<% }
-                   if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
-      }
-    }
-  },
-  {
-    name: 'Hubeau hydrometry',
-    description: 'Real-Time Hydrometric Data from french Hub\'eau portal',
-    tags: [
-      'measure'
-    ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-icon.png',
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
     attribution: '',
     type: 'OverlayLayer',
     service: 'hubeau-observations',
@@ -591,7 +507,7 @@ module.exports = [
   },
   {
     name: 'OpenAQ',
-    description: 'Air Quality',
+    description: 'Air Quality data',
     tags: [
       'measure'
     ],
