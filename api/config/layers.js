@@ -396,11 +396,11 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     featureId: 'gid',
-    service: 'vigicrues-sections',
+    service: 'vigicrues',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     leaflet: {
       type: 'geoJson',
-      source: '/api/vigicrues-sections',
+      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
@@ -411,7 +411,7 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/vigicrues-sections',
+      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
