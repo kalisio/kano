@@ -25,24 +25,24 @@
       <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
-    <q-page-sticky v-if="hasSelectableLevels" position="bottom-right" style="z-index: 10;" :offset="[40, 400]">
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
       <vue-slider class="text-primary"
-        v-model="selectableLevel"
+        v-model="forecastLevel"
         :direction="'btt'"
         :height="100"
         :width="4"
         :lazy="true"
         :marks="true"
         :hide-label="true"
-        :data="selectableLevels.values"
+        :data="forecastLevels.values"
         :tooltip="'focus'"
-        :tooltip-formatter="getFormatedSelectableLevel"
-        @change="onSelectableLevelChanged"
+        :tooltip-formatter="getFormatedForecastLevel"
+        @change="onForecastLevelChanged"
       />
     </q-page-sticky>
-    <q-page-sticky v-if="hasSelectableLevels" position="bottom-right" :offset="[-24, 400]">
+    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[-24, 400]">
       <p class="text-secondary text-caption" style="transform: rotate(-90deg) translateX(24px);">
-        <b>{{$t(selectableLevels.label)}} - {{getFormatedSelectableLevel(selectableLevel)}}</b>
+        <b>{{$t(forecastLevels.label)}} - {{getFormatedForecastLevel(forecastLevel)}}</b>
       </p>
     </q-page-sticky>
       
@@ -98,21 +98,17 @@ export default {
       kMap: this
     }
   },
-  data () {
-    return {
-      selectableLevel: 0,
-      selectableLevels: {}
-    }
-  },
   computed: {
     components () {
       return _.get(this, 'activityOptions.components', [])
-    },
-    hasSelectableLevels () {
-      return _.get(this.selectableLevels, 'values', []).length > 0
     }
   },
   methods: {
+    async getCatalogLayers () {
+      let layers = await kMapMixins.activity('map').methods.getCatalogLayers.call(this)
+      const gatewayToken = this.$api.get('storage').getItem(this.$config('gatewayJwt'))
+      return (gatewayToken ? utils.setGatewayJwt(layers, gatewayToken) : layers)
+    },
     async refreshActivity () {  
       this.clearActivity()
       this.clearNavigationBar()
@@ -221,30 +217,11 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
     },
+    onForecastLevelChanged (level) {
+      this.setForecastLevel(level)
+    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
-    },
-    setSelectableLevels (layer, levels) {
-      this.selectableLevels = levels
-      this.selectableLevelsLayer = layer
-    },
-    clearSelectableLevels (layer) {
-      if (this.selectableLevelsLayer && (this.selectableLevelsLayer._id === layer._id)) {
-        this.selectableLevel = 0
-        this.selectableLevels = []
-        this.selectableLevelsLayer = null
-      }
-    },
-    setSelectableLevel (value) {
-      this.selectableLevel = value
-      this.$emit('selectable-level-changed', this.selectableLevel)
-    },
-    onSelectableLevelChanged (level) {
-      this.setSelectableLevel (level)
-    },
-    getFormatedSelectableLevel (level) {
-      const unit = _.get(this.selectableLevels, 'units[0]')
-      return `${level || this.selectableLevel} ${unit}`
     }
   },
   created () {
