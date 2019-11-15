@@ -21,8 +21,6 @@ jobs:
     - '8'
     services:
     - docker
-    install:
-    - pip install --user awscli
     before_script:
     - export -f travis_fold
     script:

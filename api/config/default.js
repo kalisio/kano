@@ -10,6 +10,39 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
+// Start blocking after N requests or N auth requests
+let nbRequestsPerMinute = 120
+let nbAuthenticationRequestsPerMinute = 10
+// Global API limiter
+let apiLimiter = {
+  http: {
+    windowMs: 60*1000, // 1 minute window
+    delayAfter: nbRequestsPerMinute / 2, // begin slowing down responses after the 1/2 requests
+    delayMs: 1000, // slow down subsequent responses by 1 seconds per request 
+    max: nbRequestsPerMinute // start blocking after N requests
+  },
+  websocket: {
+    tokensPerInterval: nbRequestsPerMinute, // start blocking after N requests
+    interval: 60*1000 // 1 minute window
+    /*
+    maxConcurrency: 500, // Number of simultaneous connections globally allowed, 0 means no limit
+    concurrency: 10 // Number of simultaneous connections allowed per IP, 0 means no limit
+    */
+  }
+}
+// Authentication limiter
+let limiter = {
+  http: {
+    windowMs: 60*1000, // 1 minute window
+    delayAfter: nbAuthenticationRequestsPerMinute / 2, // begin slowing down responses after the 1/2 requests
+    delayMs: 3000, // slow down subsequent responses by 3 seconds per request 
+    max: nbAuthenticationRequestsPerMinute // start blocking after N requests
+  },
+  websocket: {
+    tokensPerInterval: nbAuthenticationRequestsPerMinute, // start blocking after N requests
+    interval: 60*1000 // 1 minute window
+  }
+}
 let domain
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
@@ -30,6 +63,9 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
 if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
+// Just used for testing purpose now
+apiLimiter = null
+limiter = null
 
 module.exports = {
   // Proxy your API if using any.
@@ -100,6 +136,8 @@ module.exports = {
     default: 10,
     max: 50
   },
+  // Global API limiter
+  apiLimiter,
   authentication: {
     secret: process.env.APP_SECRET,
     strategies: [
@@ -125,6 +163,8 @@ module.exports = {
       prohibited: fs.readFileSync(path.join(__dirname, '10k_most_common_passwords.txt')).toString().split('\n'),
       history: 5
     },
+    // Authentication limiter
+    limiter,
     defaultUsers: [
       {
         email: 'kalisio@kalisio.xyz',

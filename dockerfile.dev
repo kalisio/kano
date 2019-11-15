@@ -1,40 +1,80 @@
-FROM  node:8-stretch
-
-LABEL maintainer="contact@kalisio.xyz"
+#
+# Build stage
+#
+FROM  node:8-buster AS Build
 
 ARG APP
 ARG BUILD_NUMBER
 ARG BRANCH=master
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
-ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
 ENV NODE_APP_INSTANCE=dev
 
 WORKDIR /opt/${APP}
 COPY . /opt/${APP}
 
 WORKDIR /opt/${APP}/modules
-RUN git clone https://github.com/kalisio/kCore.git -b ${BRANCH} --single-branch && cd kCore && yarn install && yarn link && cd .. 
-RUN git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch && cd kMap && yarn install && yarn link @kalisio/kdk-core && yarn link && cd ..
+RUN  \
+  git clone https://github.com/kalisio/feathers-distributed.git -b master --single-branch && cd feathers-distributed && yarn && yarn link && cd .. && \
+  git clone https://github.com/kalisio/kCore.git -b ${BRANCH} --single-branch && cd kCore && yarn && yarn link && cd .. && \
+  git clone https://github.com/kalisio/kMap.git -b ${BRANCH} --single-branch && cd kMap && yarn && yarn link @kalisio/kdk-core && yarn link && cd .. && \
+  git clone https://github.com/weacast/weacast-core.git -b master --single-branch && cd weacast-core && yarn && yarn link && cd .. && \
+  git clone https://github.com/weacast/weacast-leaflet.git -b master --single-branch && cd weacast-leaflet && yarn && yarn link weacast-core && yarn link
 
 WORKDIR /opt/${APP}/api
-
-RUN yarn install
-RUN yarn link @kalisio/kdk-core
-RUN yarn link @kalisio/kdk-map
-RUN npm run build
+RUN \
+  yarn && \
+  yarn link @kalisio/feathers-distributed && \
+  yarn link @kalisio/kdk-core && \
+  yarn link @kalisio/kdk-map && \
+  yarn build
 
 WORKDIR /opt/${APP}
+RUN \
+  yarn && \
+  yarn link @kalisio/kdk-core && \
+  yarn link @kalisio/kdk-map && \
+  yarn link weacast-core && \
+  yarn link weacast-leaflet && \
+  yarn build > build.log 2>&1 && \
+  tail -n 24 build.log
 
-RUN yarn install
-RUN yarn link @kalisio/kdk-core
-RUN yarn link @kalisio/kdk-map
-RUN git clone https://github.com/weacast/weacast-core.git -b master --single-branch && cd weacast-core && yarn install && yarn link && cd ..
-RUN git clone https://github.com/weacast/weacast-leaflet.git -b master --single-branch && cd weacast-leaflet && yarn install && yarn link weacast-core && yarn link && cd ..
-RUN yarn link weacast-core
-RUN yarn link weacast-leaflet
-RUN npm run build
+#
+# Run stage
+#
+FROM node:8-buster-slim
+LABEL maintainer="contact@kalisio.xyz"
+
+ARG APP
+ARG BUILD_NUMBER
+
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV NODE_APP_INSTANCE=dev
+ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
+
+COPY --from=Build /opt/${APP} /opt/${APP}
+
+WORKDIR /opt/${APP}/modules
+RUN \
+  cd feathers-distributed && yarn link && cd .. && \
+  cd kCore && yarn link && cd .. && \
+  cd kMap && yarn link @kalisio/kdk-core && yarn link && cd .. && \
+  cd weacast-core && yarn link && cd .. && \
+  cd weacast-leaflet && yarn link weacast-core && yarn link
+
+WORKDIR /opt/${APP}/api
+RUN \
+  yarn link @kalisio/feathers-distributed && \
+  yarn link @kalisio/kdk-core && \
+  yarn link @kalisio/kdk-map
+
+WORKDIR /opt/${APP}
+RUN \
+  yarn link @kalisio/kdk-core && \
+  yarn link @kalisio/kdk-map && \ 
+  yarn link weacast-core && \
+  yarn link weacast-leaflet  
 
 EXPOSE 8081
 
-CMD [ "npm", "run", "prod" ]
+CMD [ "yarn", "prod" ]

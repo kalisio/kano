@@ -1,6 +1,7 @@
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
-const mapproxyUrl = 'https://mapproxy.' + kargoDomain
+const mapproxyUrl = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/mapproxy' : 'https://mapproxy.' + kargoDomain)
+const k2Url = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
 const forecastZIndex = 300
 
 module.exports = [
@@ -180,7 +181,7 @@ module.exports = [
     type: 'TerrainLayer',
     cesium: {
       type: 'Cesium',
-      url: 'https://k2.' + kargoDomain,
+      url: k2Url,
       requestWaterMask: 'true',
       requestVertexNormals: 'true'
     }
@@ -387,7 +388,7 @@ module.exports = [
   },
   {
     name: 'Vigicrues',
-    description: 'Flooding alerts',
+    description: 'Carte de vigilance crues nationale',
     tags: [
       'measure'
     ],
@@ -395,11 +396,11 @@ module.exports = [
     attribution: '',
     type: 'OverlayLayer',
     featureId: 'gid',
-    service: 'vigicrues-sections',
+    service: 'vigicrues',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     leaflet: {
       type: 'geoJson',
-      source: '/api/vigicrues-sections',
+      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
@@ -410,7 +411,7 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/vigicrues-sections',
+      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
@@ -489,18 +490,18 @@ module.exports = [
     },
   },
   {
-    name: 'Vigiprobes',
-    description: 'Level and rate',
+    name: 'Hub\'Eau Hydrométrie',
+    description: 'Données hydrométriques',
     tags: [
       'measure'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
     attribution: '',
     type: 'OverlayLayer',
-    service: 'vigicrues-observations',
+    service: 'hubeau-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    probeService: 'vigicrues-stations',
-    featureId: 'CdStationHydro',
+    probeService: 'hubeau-stations',
+    featureId: 'code_station',
     history: 604800,
     variables: [
       {
@@ -520,9 +521,9 @@ module.exports = [
         name: 'Q',
         label: 'Variables.Q',
         units: [
-          'm3/h'
+          'm3/s'
         ],
-        range: [0, 10000],
+        range: [0, 1000],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -532,7 +533,7 @@ module.exports = [
     ],
     leaflet: {
       type: 'geoJson',
-      source: '/api/vigicrues-observations',
+      source: '/api/hubeaus-observations',
       realtime: true,
       interval: 900000,
       cluster: { disableClusteringAtZoom: 18 },
@@ -541,19 +542,19 @@ module.exports = [
       'icon-classes': 'fa fa-tint',
       popup: {
         pick: [
-          'LbStationHydro'
+          'libelle_station'
         ]
       },
       tooltip: {
         template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
                    if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/h<% }
+                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/s<% }
                    if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/vigicrues-observations',
+      source: '/api/hubeau-observations',
       realtime: true,
       interval: 900000,
       cluster: { pixelRange: 50 },
@@ -561,20 +562,20 @@ module.exports = [
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'LbStationHydro'
+          'libelle_station'
         ]
       },
       tooltip: {
         template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
                    if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/h<% }
+                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/s<% }
                    if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
       }
     }
   },
   {
     name: 'OpenAQ',
-    description: 'Air Quality',
+    description: 'Air Quality data',
     tags: [
       'measure'
     ],

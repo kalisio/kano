@@ -610,7 +610,7 @@
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
       }
       function updateForecastLevel() {
-        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind' })
+        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind (isobaric)' })
         .then(function (result) {
           return postRobot.send(kano, component, { property: 'forecastLevels' })
         })
@@ -675,20 +675,16 @@
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.oOPo_7lPMFgH6dBUtSnNs3w4h-DwwCSLdg9yMF0YU18'
         }).then(_ => postRobot.send(kano, component))
       })
+      postRobot.on('kano-login', () => console.log('User logged in'))
+      postRobot.on('kano-logout', () => console.log('User logged out'))
       postRobot.on('map-ready', () => {
         console.log('Map component ready')
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
         .then((result) => { airports = result.data })
       })
-      postRobot.on('globe-ready', () => {
-        console.log('Globe component ready')
-      })
-      postRobot.on('map-destroyed', () => {
-        console.log('Map component destroyed')
-      })
-      postRobot.on('globe-destroyed', () => {
-        console.log('Globe component destroyed')
-      })
+      postRobot.on('globe-ready', () => console.log('Globe component ready'))
+      postRobot.on('map-destroyed', () => console.log('Map component destroyed'))
+      postRobot.on('globe-destroyed', () => console.log('Globe component destroyed'))
       postRobot.on('click', (event) => {
         if (event.data.layer.name === 'ACARS') {
           alert('ACARS message clicked')

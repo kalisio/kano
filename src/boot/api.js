@@ -24,6 +24,11 @@ postRobot.on('setLocalStorage', async (event) => {
     window.localStorage.setItem(key, (typeof value === 'object' ? JSON.stringify(value) : value))
   })
 })
+postRobot.on('unsetLocalStorage', async (event) => {
+  _.forEach(event.data, (key) => {
+    window.localStorage.removeItem(key)
+  })
+})
 postRobot.on('setConfiguration', async (event) => {
   _.forOwn(event.data, (value, key) => {
     _.set(config, key, value)
@@ -31,9 +36,9 @@ postRobot.on('setConfiguration', async (event) => {
   updateThemeColors()
 })
 
-utils.sendEmbedEvent('kano-ready')
-
 export default async ({ app, router, Vue }) => {
+  await utils.sendEmbedEvent('kano-ready')
+
   let api = kalisio()
 
   // Setup app hooks
@@ -48,6 +53,14 @@ export default async ({ app, router, Vue }) => {
 
   updateThemeColors()
 
-  api.on('authenticated', () => utils.sendEmbedEvent('kano-login'))
-  api.on('logout', () => utils.sendEmbedEvent('kano-logout'))
+  api.on('authenticated', (data) => {
+    // Store API gateway token if any
+    if (data.gatewayToken) api.get('storage').setItem(config.gatewayJwt, data.gatewayToken)
+    utils.sendEmbedEvent('kano-login')
+  })
+  api.on('logout', (data) => {
+    // Remove API gateway token if any
+    api.get('storage').removeItem(config.gatewayJwt)
+    utils.sendEmbedEvent('kano-logout')
+  })
 }
