@@ -446,7 +446,7 @@ module.exports = [
         chromajs: {
           scale: 'RdYlBu',
           invertScale: true,
-          domain: [ 0, 50 ]
+          domain: [ 0, 800 ]
         }
       }
     ],
@@ -485,7 +485,7 @@ module.exports = [
       resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,                       // layer opacity
       // fillColor: [1.0, 0.0, 0.0, 1.0], // rgba value to use as fill color for the data (no color map will be used)
-      cutOver: 'waterLevel',              // value or level name to use as input to cutOver value
+      // cutOver: 'waterLevel',              // value or level name to use as input to cutOver value
       // cutUnder: 100,                   // value or level name to use as input to cutUnde value
     },
   },
