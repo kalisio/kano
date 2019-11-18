@@ -25,7 +25,7 @@
       <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
-    <q-page-sticky position="bottom-right" :offset="[40, 400]">
+    <q-page-sticky position="top-right" :offset="[40, 40]">
       <k-level-slider/>
     </q-page-sticky>
 
