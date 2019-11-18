@@ -196,11 +196,6 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
     },
-    /*
-    onForecastLevelChanged (level) {
-      this.setForecastLevel(level)
-    },
-    */
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
