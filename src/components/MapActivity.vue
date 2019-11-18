@@ -24,11 +24,11 @@
     <q-page-sticky position="bottom" :offset="[0, 40]">
       <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
-/*
+
     <q-page-sticky position="bottom-right" :offset="[40, 400]">
       <k-level-slider/>
     </q-page-sticky>
-*/
+
     <component v-for="component in components" :is="component.name" :key="component.name"></component>
 
   </q-page>
@@ -258,33 +258,4 @@ export default {
 
 .processing-cursor 
   cursor: wait;
-
-.vue-slider-rail 
-  background-color: $secondary;
-
-.vue-slider-disabled .vue-slider-rail 
-  background-color: $secondary;
-
-.vue-slider-process 
-  background-color: $secondary;
-
-.vue-slider-dot-handle 
-  background-color: $secondary;
-
-.vue-slider-dot-handle::after 
-  background-color: transparentify($secondary, #000);
-
-.vue-slider-dot-tooltip-inner 
-  background-color: transparentify($secondary, #000);
-
-.vue-slider-dot-tooltip-text 
-  width: 60px;
-  height: 60px;
-  font-size: 1em;
-
-.vue-slider-mark-step 
-  background-color: $primary;
-
-.vue-slider-mark-step-active 
-  background-color: $primary;
 </style>
