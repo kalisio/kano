@@ -542,7 +542,7 @@ module.exports = [
       'icon-classes': 'fa fa-tint',
       popup: {
         pick: [
-          'libelle_station'
+          'name'
         ]
       },
       tooltip: {
