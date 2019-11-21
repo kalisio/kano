@@ -58,7 +58,7 @@
     "@feathersjs/client": "^3.5.4",
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.2.0",
-    "@turf/turf": "^5.1.6",
+    "@turf/distance": "^6.0.0",
     "Leaflet.Geodesic": "https://github.com/henrythasler/Leaflet.Geodesic.git",
     "abort-controller": "^3.0.0",
     "ajv": "^6.0.0",
