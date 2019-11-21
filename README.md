@@ -9,6 +9,7 @@
 [![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.github.io/kdk/)
 [![Known Vulnerabilities](https://snyk.io/test/github/kalisio/kano/badge.svg)](https://snyk.io/test/github/kalisio/kano)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kano.svg?style=plastic)](https://hub.docker.com/r/kalisio/kano/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkalisio%2Fkano.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkalisio%2Fkano?ref=badge_shield)
 
 ![Image](./kano.png)
 
@@ -24,3 +25,6 @@ This application is based on the [Kalisio Development Kit](https://kalisio.githu
 
 Copyright (c) 2018 Kalisio
 
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkalisio%2Fkano.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkalisio%2Fkano?ref=badge_large)
