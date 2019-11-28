@@ -88,7 +88,7 @@ module.exports = {
   sideNav: {
     banner: 'kano-logo-black-256x84.png',
     components: {
-      user_actions: 'layout/KLinksPanel',
+      //user_actions: 'layout/KLinksPanel',
       app_settings: 'Settings',
       app_logout: 'layout/KLinksPanel'
     }
@@ -96,7 +96,7 @@ module.exports = {
   user_actions: {
     links: [
       { }, // separator
-      { label: 'sideNav.MAP', icon: 'layers', route: { name: 'map', query: true } },
+      { label: 'sideNav.MAP', icon: 'map', route: { name: 'map', query: true } },
       { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } }
     ]
   },
@@ -135,11 +135,11 @@ module.exports = {
     ]
   },
   mapActivity: {
-    tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog'],
+    tools: ['side-nav', 'track-location', 'location-bar', 'globe', 'fullscreen', 'catalog'],
     actions: ['probe-location', 'create-layer']
   },
   globeActivity: {
-    tools: ['side-nav', 'track-location', 'location-bar', 'fullscreen', 'catalog', 'vr'],
+    tools: ['side-nav', 'track-location', 'location-bar', 'map', 'vr', 'fullscreen', 'catalog'],
     actions: ['probe-location']
   },
   map: {
