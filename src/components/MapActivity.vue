@@ -25,27 +25,10 @@
       <k-timeline v-show="timelineEnabled"/>
     </q-page-sticky>
 
-    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[40, 400]">
-      <vue-slider class="text-primary"
-        v-model="forecastLevel"
-        :direction="'btt'"
-        :height="100"
-        :width="4"
-        :lazy="true"
-        :marks="true"
-        :hide-label="true"
-        :data="forecastLevels.values"
-        :tooltip="'focus'"
-        :tooltip-formatter="getFormatedForecastLevel"
-        @change="onForecastLevelChanged"
-      />
+    <q-page-sticky position="right" :offset="[40, 0]" style="vertical-align: center;">
+      <k-level-slider/>
     </q-page-sticky>
-    <q-page-sticky v-if="hasForecastLevels" position="bottom-right" :offset="[-24, 400]">
-      <p class="text-secondary text-caption" style="transform: rotate(-90deg) translateX(24px);">
-        <b>{{$t(forecastLevels.label)}} - {{getFormatedForecastLevel(forecastLevel)}}</b>
-      </p>
-    </q-page-sticky>
-      
+
     <component v-for="component in components" :is="component.name" :key="component.name"></component>
 
   </q-page>
@@ -55,8 +38,6 @@
 import _ from 'lodash'
 import L from 'leaflet'
 import postRobot from 'post-robot'
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/material.css'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
@@ -76,6 +57,7 @@ export default {
     kMapMixins.time,
     kMapMixins.activity('map'),
     kMapMixins.locationIndicator,
+    kMapMixins.levels,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.forecastLayers,
@@ -88,9 +70,6 @@ export default {
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers
   ],
-  components: {
-    VueSlider
-  },
   inject: ['klayout'],
   provide () {
     return {
@@ -217,9 +196,6 @@ export default {
       }
       this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
     },
-    onForecastLevelChanged (level) {
-      this.setForecastLevel(level)
-    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
@@ -231,6 +207,7 @@ export default {
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
+    this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
@@ -276,33 +253,4 @@ export default {
 
 .processing-cursor 
   cursor: wait;
-
-.vue-slider-rail 
-  background-color: $secondary;
-
-.vue-slider-disabled .vue-slider-rail 
-  background-color: $secondary;
-
-.vue-slider-process 
-  background-color: $secondary;
-
-.vue-slider-dot-handle 
-  background-color: $secondary;
-
-.vue-slider-dot-handle::after 
-  background-color: transparentify($secondary, #000);
-
-.vue-slider-dot-tooltip-inner 
-  background-color: transparentify($secondary, #000);
-
-.vue-slider-dot-tooltip-text 
-  width: 60px;
-  height: 60px;
-  font-size: 1em;
-
-.vue-slider-mark-step 
-  background-color: $primary;
-
-.vue-slider-mark-step-active 
-  background-color: $primary;
 </style>
