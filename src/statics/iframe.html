@@ -612,12 +612,12 @@
       function updateForecastLevel() {
         return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind (isobaric)' })
         .then(function (result) {
-          return postRobot.send(kano, component, { property: 'forecastLevels' })
+          return postRobot.send(kano, component, { property: 'selectableLevels' })
         })
         .then(function (result) {
           const index = Math.floor(Math.random() * result.data.values.length)
           const level = result.data.values[index]
-          return postRobot.send(kano, component, { command: 'setForecastLevel', args: [level] })
+          return postRobot.send(kano, component, { command: 'setSelectedLevel', args: [level] })
         })
       }
     </script>
