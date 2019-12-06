@@ -182,6 +182,7 @@ function setGatewayJwt (layers, jwt) {
     setGatewayUrlJwt(layer, 'geotiff.url', jwt)
     setGatewayUrlJwt(layer, 'wcs.url', jwt)
     setGatewayUrlJwt(layer, 'cesium.url', jwt)
+    setGatewayUrlJwt(layer, 'cesium.source', jwt)
   })
   return layers
 }
