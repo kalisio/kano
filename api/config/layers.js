@@ -1,7 +1,10 @@
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
-const mapproxyUrl = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/mapproxy' : 'https://mapproxy.' + kargoDomain)
-const k2Url = (process.env.GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
+const wmtsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wmts' : 'https://mapproxy.' + kargoDomain + '/wmts')
+const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' : 'https://mapproxy.' + kargoDomain + '/wms')
+const wcsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wcs' : 'https://mapserver.' + kargoDomain + '/cgi-bin/ows')
+const k2Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
+const s3Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/s3' : 'https://s3.eu-central-1.amazonaws.com')
 const forecastZIndex = 300
 
 module.exports = [
@@ -11,20 +14,20 @@ module.exports = [
     tags: [
       'imagery'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'satellite',
     attribution: 'Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
       isVisible: true,
       fileExtension: 'jpeg',
-      url: `${mapproxyUrl}/wmts/s2/GLOBAL_WEBMERCATOR`
+      url: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -33,20 +36,20 @@ module.exports = [
     tags: [
       'street'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       isVisible: true,
-      source: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
       maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/osm-bright/GLOBAL_WEBMERCATOR`
+      url: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -55,19 +58,19 @@ module.exports = [
     tags: [
       'street'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
       maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/osm-dark/GLOBAL_WEBMERCATOR`
+      url: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -77,19 +80,19 @@ module.exports = [
       'street',
       'terrain'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
       maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/osm-terrain-bright/GLOBAL_WEBMERCATOR`
+      url: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -99,19 +102,19 @@ module.exports = [
       'street',
       'terrain'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
       maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/osm-terrain-dark/GLOBAL_WEBMERCATOR`
+      url: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -121,19 +124,19 @@ module.exports = [
       'street',
       'imagery'
     ],
-    iconUrl: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
     attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
       maxNativeZoom: 18
     },
     cesium: {
       type: 'OpenStreetMap',
-      url: `${mapproxyUrl}/wmts/mosaic/GLOBAL_WEBMERCATOR`,
+      url: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },

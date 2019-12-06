@@ -140,6 +140,7 @@ module.exports = {
   apiLimiter,
   authentication: {
     secret: process.env.APP_SECRET,
+    appId: process.env.APP_ID,
     strategies: [
       'jwt',
       'local'
