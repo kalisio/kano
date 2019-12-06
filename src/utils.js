@@ -178,6 +178,9 @@ function setGatewayJwt (layers, jwt) {
   layers.forEach(layer => {
     setGatewayUrlJwt(layer, 'iconUrl', jwt)
     setGatewayUrlJwt(layer, 'leaflet.source', jwt)
+    setGatewayUrlJwt(layer, 'opendap.url', jwt)
+    setGatewayUrlJwt(layer, 'geotiff.url', jwt)
+    setGatewayUrlJwt(layer, 'wcs.url', jwt)
     setGatewayUrlJwt(layer, 'cesium.url', jwt)
   })
   return layers
