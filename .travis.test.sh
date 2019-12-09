@@ -17,9 +17,13 @@ else
 	mkdir server-coverage
 	chmod -R 777 server-coverage
 
-  # Run the tests
-	docker-compose -f deploy/app.yml -f deploy/mongodb.yml up -d mongodb
-	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.server.yml up app
+	# Run the API tests
+	docker-compose -f deploy/app.yml -f deploy/app.test.server.yml up app
+	ERROR_CODE=$?
+	if [ $ERROR_CODE -eq 1 ]; then
+		echo "Testing ${APP} API failed [error: $ERROR_CODE]"
+		exit 1
+	fi
 
   # Backup the server coverages
 	codeclimate-test-reporter < server-coverage/lcov.info
@@ -39,8 +43,8 @@ else
 	mkdir client-screenshots
 	chmod -R 777 client-screenshots
 
-	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up -d app
-	docker-compose -f deploy/app.yml -f deploy/mongodb.yml -f deploy/app.test.client.yml up testcafe
+	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up -d app
+	docker-compose -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
 	
 	# Backup the client screenshots
 	aws s3 cp client-screenshots dist s3://$BUILDS_BUCKET/$BUILD_NUMBER/client-screenshots > /dev/null
