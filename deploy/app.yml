@@ -12,11 +12,9 @@ services:
       - DATA_DB_URL
       - CESIUM_TOKEN
     networks:
-      - app
-      - cluster
+      - app-network
 
 networks:
-  app:
-  cluster:
+  app-network:
     external:
       name: ${DOCKER_NETWORK}
