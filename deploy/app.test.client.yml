@@ -7,6 +7,7 @@ services:
       dockerfile: dockerfile.testcafe
     image: kalisio/testcafe
     depends_on:
+      - mongodb
       - app
     environment:
       - NODE_ENV=production
