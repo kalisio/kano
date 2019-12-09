@@ -437,7 +437,7 @@ module.exports = [
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-stations',
     featureId: 'code_station',
-    history: 604800,
+    history: 86400,
     variables: [
       {
         name: 'H',
@@ -520,7 +520,7 @@ module.exports = [
     service: 'openaq',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'location',
-    history: 604800,
+    history: 86400,
     variables: [
       {
         name: 'pm25',
@@ -680,10 +680,11 @@ module.exports = [
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/teleray-icon.jpg',
     attribution: '',
     type: 'OverlayLayer',
-    service: 'teleray',
+    service: 'teleray-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    probeService: 'teleray-sensors',
     featureId: 'irsnId',
-    history: 604800,
+    history: 86400,
     variables: [
       {
         name: 'value',
