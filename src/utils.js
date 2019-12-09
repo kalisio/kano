@@ -6,6 +6,7 @@ import VueI18next from '@panter/vue-i18next'
 import postRobot from 'post-robot'
 import config from 'config'
 import { Store } from '@kalisio/kdk-core/client'
+import { buildUrl } from '@kalisio/kdk-core/common'
 
 function loadComponent (component) {
   return () => {
@@ -168,7 +169,7 @@ function setGatewayUrlJwt (item, path, jwt) {
     const ext = _.get(item, 'cesium.fileExtension', 'png')
     _.set(item, 'cesium.fileExtension', ext + `?${config.gatewayJwtField}=${jwt}`)
   } else {
-    _.set(item, path, url + (url.includes('?') ? '&' : '?') + `${config.gatewayJwtField}=${jwt}`)
+    _.set(item, path, buildUrl(url, { [config.gatewayJwtField]: jwt }))
   }
 }
 
