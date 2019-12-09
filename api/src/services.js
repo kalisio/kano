@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import zlib from 'zlib'
 import kCore, { permissions } from '@kalisio/kdk-core'
-import kMap, { createCatalogService, createFeaturesService } from '@kalisio/kdk-map'
+import kMap, { createFeaturesService } from '@kalisio/kdk-map'
 import packageInfo from '../../package.json'
 
 const servicesPath = path.join(__dirname, 'services')
