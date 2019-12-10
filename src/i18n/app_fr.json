@@ -63,7 +63,7 @@
     "CLOSE_ACTION": "$t(CANCEL)",
     "CLIENT_VERSION": "$t(KScreen.CLIENT_VERSION)",
     "API_VERSION": "$t(KScreen.API_VERSION)",
-    "MORE": "Pour plus d'information visitez la page GitHub",
+    "MORE": "Page GitHub",
     "KDK_POWERED": "$t(KScreen.KDK_POWERED)",
     "BUG_REPORT": "Nous signaler un bug",
     "BUG_REPORT_SUBJECT": "[Kano] Rapport de bug - client v{{clientVersionName}} - API v{{apiVersionName}}",

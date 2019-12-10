@@ -28,10 +28,12 @@
           <div class="row justify-center">
             <cite v-if="clientVersionName">{{ $t('About.CLIENT_VERSION') }} {{ clientVersionName }}</cite>
             <cite v-if="apiVersionName">&nbsp;-&nbsp;{{ $t('About.API_VERSION') }} {{ apiVersionName }}</cite>
-          </div>
+          </div><br/>
           <!-- More info -->
           <div class="row justify-center">
-            <a @click="onGitRepositoryClicked()">{{ $t('About.MORE') }}</a>
+            <a href="https://github.com/kalisio/kano" target="_blank">
+              <q-icon name="link"/>&nbsp;{{ $t('About.MORE') }}
+            </a>
           </div><br/>
           <!-- Bug report -->
           <div class="row justify-center">
@@ -57,7 +59,7 @@
           <!-- KDK -->
           <div class="row justify-center">
             <img :src="$load('kdk-icon.png', 'asset')" width="20" height="20" />
-            <a @click="onKDKClicked()">{{ $t('About.KDK_POWERED') }}</a>
+            <a href="https://kalisio.github.io/kdk" target="_blank">{{ $t('About.KDK_POWERED') }}</a>
           </div>
         </div>
       </div>
@@ -93,12 +95,6 @@ export default {
     onAboutClosed () {
       this.$refs.about.close()
       this.klayout.hideLeftDrawer()
-    },
-    onKDKClicked () {
-      openURL('https://kalisio.github.io/kdk/')
-    },
-    onGitRepositoryClicked () {
-      openURL('https://github.com/kalisio/kano')
     }
   },
   created () {
