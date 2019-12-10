@@ -24,19 +24,25 @@
       ref="editor" 
       service="settings"
       objectId="settings"
-      @applied="onSettingsEdited" />
+      @applied="onSettingsEdited"
+      @closed="onSettingsClosed" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'settings',
+  inject: ['klayout'],
   methods: {
     editSettings () {
       this.$refs.editor.open()
     },
     onSettingsEdited () {
       this.$refs.editor.close()
+      this.klayout.hideLeftDrawer()
+    },
+    onSettingsClosed () {
+      this.klayout.hideLeftDrawer()
     }
   },
   created () {

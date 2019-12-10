@@ -23,6 +23,7 @@
     "MAP": "2D View",
     "GLOBE": "3D View",
     "SETTINGS": "Settings",
+    "ABOUT": "About",
     "LOGOUT": "Logout"
   },
   "Index": {
@@ -56,5 +57,17 @@
     "VIGICRUES_LEVEL_2": "Flood risk",
     "VIGICRUES_LEVEL_3": "Important flood risk",
     "VIGICRUES_LEVEL_4": "Major flood risk"
+  },
+  "About": {
+    "TITLE": "A propos de l'application",
+    "CLOSE_ACTION": "$t(CANCEL)",
+    "CLIENT_VERSION": "$t(KScreen.CLIENT_VERSION)",
+    "API_VERSION": "$t(KScreen.API_VERSION)",
+    "MORE": "For more information visit the GitHub page",
+    "KDK_POWERED": "$t(KScreen.KDK_POWERED)",
+    "BUG_REPORT": "Report us a bug",
+    "BUG_REPORT_SUBJECT": "[Kano] Bug report - client v{{clientVersionName}} - API v{{apiVersionName}}",
+    "BUG_REPORT_BODY": "Please detail your problem here%0D%0A%0D%0APlatform information to be kept%0D%0A%0D%0A",
+    "SYSTEM_DETAILS": "Platform information"
   }
 }

@@ -90,6 +90,7 @@ module.exports = {
     components: {
       //user_actions: 'layout/KLinksPanel',
       app_settings: 'Settings',
+      app_about: 'About',
       app_logout: 'layout/KLinksPanel'
     }
   },
