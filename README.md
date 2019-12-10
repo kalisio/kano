@@ -28,3 +28,5 @@ Copyright (c) 2018 Kalisio
 
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkalisio%2Fkano.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkalisio%2Fkano?ref=badge_large)
+
+The detailed list of Open Source dependencies can be found in our [3rd-party software report](https://app.fossa.com/reports/f97aacf2-aee3-4582-b99f-fdac4d2ba331).
