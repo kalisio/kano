@@ -63,10 +63,12 @@
     "CLOSE_ACTION": "$t(CANCEL)",
     "CLIENT_VERSION": "$t(KScreen.CLIENT_VERSION)",
     "API_VERSION": "$t(KScreen.API_VERSION)",
+    "DOMAIN": "Hosted on",
+    "FLAVOR": "Flavor",
     "MORE": "GitHub page",
     "KDK_POWERED": "$t(KScreen.KDK_POWERED)",
     "BUG_REPORT": "Report us a bug",
-    "BUG_REPORT_SUBJECT": "[Kano] Bug report - client v{{clientVersionName}} - API v{{apiVersionName}}",
+    "BUG_REPORT_SUBJECT": "[{{appName}}] Bug report - Client v{{clientVersionName}} - API v{{apiVersionName}}",
     "BUG_REPORT_BODY": "Please detail your problem here%0D%0A%0D%0APlatform information to be kept%0D%0A%0D%0A",
     "SYSTEM_DETAILS": "Platform information"
   }

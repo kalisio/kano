@@ -26,8 +26,12 @@
           <div v-if="banner" class="row justify-center"><img class="screen-banner" :src="banner"></div>
           <!-- Version -->
           <div class="row justify-center">
-            <cite v-if="clientVersionName">{{ $t('About.CLIENT_VERSION') }} {{ clientVersionName }}</cite>
-            <cite v-if="apiVersionName">&nbsp;-&nbsp;{{ $t('About.API_VERSION') }} {{ apiVersionName }}</cite>
+            <cite v-if="clientVersionName">{{ $t('About.CLIENT_VERSION') }}{{ clientVersionName }}</cite>
+            <cite v-if="apiVersionName">&nbsp;-&nbsp;{{ $t('About.API_VERSION') }}{{ apiVersionName }}</cite>
+          </div>
+          <div class="row justify-center">
+            <cite>{{ $t('About.DOMAIN') }} <a :href="$config('domain')" target="_blank">{{ $config('domain') }}</a></cite>
+            <cite>&nbsp;({{ $config('flavor') }})</cite>
           </div><br/>
           <!-- More info -->
           <div class="row justify-center">
@@ -106,12 +110,18 @@ export default {
     Object.assign(this.systemDetails, { touch: this.$q.platform.has.touch })
     Object.assign(this.systemDetails, { iframe: this.$q.platform.within.iframe })
     Object.assign(this.systemDetails, { agent: this.$q.platform.userAgent })
-    const context = { clientVersionName: this.clientVersionName, apiVersionName: this.apiVersionName }
+    const context = {
+      appName: this.$config('appName'),
+      clientVersionName: this.clientVersionName,
+      apiVersionName: this.apiVersionName
+    }
     this.bugReport.address = 'support@kalisio.com'
     this.bugReport.subject = this.$t('About.BUG_REPORT_SUBJECT', context)
     this.bugReport.body = this.$t('About.BUG_REPORT_BODY')
     // Append detailed system info to email body
     _.forOwn(this.systemDetails, (value, key) => { this.bugReport.body += `${key}: ${value}%0D%0A` })
+    this.bugReport.body += `domain: ${this.$config('domain')}%0D%0A`
+    this.bugReport.body += `flavor: ${this.$config('flavor')}%0D%0A`
   }
 }
 </script>
