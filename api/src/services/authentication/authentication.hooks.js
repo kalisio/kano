@@ -38,7 +38,7 @@ module.exports = {
       if (appId) await coreHooks.createJWT({
         name: 'gatewayToken',
         jwt: user => ({ subject: appId }),
-        payload: user => ({ userId: user._id })
+        payload: user => ({ userId: (user ? user._id : undefined) })
       })(hook)
       return hook
     })],
