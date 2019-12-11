@@ -1,5 +1,3 @@
-const website = 'https://www.kalisio.com'
-
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
@@ -47,7 +45,9 @@ module.exports = {
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
   appLogo: 'kano-icon-32x32.png',
+  appWebsite: 'https://github.com/kalisio/kano',
   publisher: 'Kalisio',
+  publisherWebsite: 'https://www.kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
     //default: 'en',
@@ -90,7 +90,7 @@ module.exports = {
     components: {
       //user_actions: 'layout/KLinksPanel',
       app_settings: 'Settings',
-      app_about: 'About',
+      app_about: 'layout/KAbout',
       app_logout: 'layout/KLinksPanel'
     }
   },
