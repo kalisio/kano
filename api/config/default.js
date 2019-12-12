@@ -123,9 +123,11 @@ module.exports = {
   },
   distribution: { // Distribute data & alert services
     services: (service) => service.path.includes('catalog') ||
-                            service.path.includes('vigicrues') ||
+                            service.path.includes('hubeau-stations') ||
+                            service.path.includes('hubeau-observations') ||
                             service.path.includes('openaq') ||
-                            service.path.includes('teleray') ||
+                            service.path.includes('teleray-stations') ||
+                            service.path.includes('teleray-observations') ||
                             service.path.includes('geoalerts'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
