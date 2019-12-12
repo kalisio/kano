@@ -29,7 +29,7 @@ module.exports = {
       } else {
         // Loop over auth providers and select the one used to login if any
         for (const provider of hook.app.authenticationProviders) {
-          if (_.has(hook, `params.user.${provider}Id`) && _.has(config, `${provider}.appId`)) {
+          if (_.get(hook, `params.user.${provider}Id`) && _.get(config, `${provider}.appId`)) {
             appId = _.get(config, `${provider}.appId`)
             break
           }
