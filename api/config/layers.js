@@ -702,7 +702,7 @@ module.exports = [
     ],
     leaflet: {
       type: 'geoJson',
-      source: '/api/teleray',
+      source: '/api/teleray-measurements',
       realtime: true,
       interval: 600000,
       queryInterval: 3600000,
