@@ -403,7 +403,6 @@ module.exports = [
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     leaflet: {
       type: 'geoJson',
-      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
@@ -414,7 +413,6 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/vigicrues',
       realtime: true,
       interval: 900000,
       popup: {
@@ -614,7 +612,6 @@ module.exports = [
     ],
     leaflet: {
       type: 'geoJson',
-      source: '/api/openaq',
       realtime: true,
       interval: 900000,
       queryInterval: 86400000,
@@ -646,7 +643,6 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/openaq',
       realtime: true,
       interval: 900000,
       queryInterval: 86400000 * 2,
@@ -700,7 +696,6 @@ module.exports = [
     ],
     leaflet: {
       type: 'geoJson',
-      source: '/api/teleray-measurements',
       realtime: true,
       interval: 600000,
       queryInterval: 3600000,
@@ -725,7 +720,6 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/teleray-measurements',
       realtime: true,
       interval: 600000,
       queryInterval: 3600000,
