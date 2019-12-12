@@ -468,7 +468,6 @@ module.exports = [
     ],
     leaflet: {
       type: 'geoJson',
-      source: '/api/hubeaus-observations',
       realtime: true,
       interval: 900000,
       cluster: { disableClusteringAtZoom: 18 },
@@ -489,7 +488,6 @@ module.exports = [
     },
     cesium: {
       type: 'geoJson',
-      source: '/api/hubeau-observations',
       realtime: true,
       interval: 900000,
       cluster: { pixelRange: 50 },
