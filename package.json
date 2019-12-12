@@ -105,7 +105,7 @@
     "post-robot": "^10.0.10",
     "quasar": "^1.0.5",
     "showdown": "^1.8.6",
-    "sift": "^6.0.0",
+    "sift": "^8.0.0",
     "socket.io-client": "^2.0.1",
     "togeojson": "^0.16.0",
     "tween.js": "^16.6.0",
