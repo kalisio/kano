@@ -24,8 +24,6 @@ jobs:
     - '8'
     services:
     - docker
-    before_script:
-    - export -f travis_fold
     script:
     - bash .travis.build.sh
 
