@@ -6,10 +6,13 @@ notifications:
     on_success: always
     on_failure: always
     
-stages:
-- name: BUILD
-- name: TEST
-- name: DEPLOY
+    stages:
+      - name: BUILD
+        if: commit_message !~ /(skip[ _-]build)/
+      - name: TEST
+        if: commit_message !~ /(skip[ _-]test)/
+      - name: DEPLOY
+        if: commit_message !~ /(skip[ _-]deploy)/
 
 jobs:
   include:
@@ -51,8 +54,6 @@ jobs:
     - '8'
     services:
     - docker
-    install: true
-    before_script:
-    - export -f travis_fold      
+    install: true    
     script:
     - bash .travis.deploy.sh
