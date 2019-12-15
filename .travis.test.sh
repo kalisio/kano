@@ -7,7 +7,7 @@ docker network create --attachable $DOCKER_NETWORK
 #
 # Test the api
 #
-travis_fold start "api"
+#travis_fold start "api"
 
 # Install code climate
 curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -34,26 +34,26 @@ cp -R api/src /opt/${APP}/api/src
 # Report to code climate
 ./cc-test-reporter after-build -t lcov --exit-code $ERROR_CODE
 
-travis_fold end "api"
+#travis_fold end "api"
 
 #
 # Test the client
 #
-travis_fold start "client"
+#travis_fold start "client"
 
 # Output directory for client screenshots
-mkdir client-screenshots
-chmod -R 777 client-screenshots
+#mkdir client-screenshots
+#chmod -R 777 client-screenshots
 
 # Run the app
-docker-compose -f deploy/mongodb.yml -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
-RROR_CODE=$?
+#docker-compose -f deploy/mongodb.yml -f deploy/app.yml -f deploy/app.test.client.yml up testcafe
+#ERROR_CODE=$?
 # Backup the client screenshots
-aws s3 cp client-screenshots dist s3://$BUILDS_BUCKET/$BUILD_NUMBER/client-screenshots > /dev/null
-if [ $? -eq 1 ]; then
-	echo "Testing ${App} client failed [error: $ERROR_CODE]"
-	exit 1
-fi
+#aws s3 cp client-screenshots dist s3://$BUILDS_BUCKET/$BUILD_NUMBER/client-screenshots > /dev/null
+#if [ $? -eq 1 ]; then
+#	echo "Testing ${App} client failed [error: $ERROR_CODE]"
+#	exit 1
+#fi
 
-travis_fold end "client"
+#travis_fold end "client"
 
