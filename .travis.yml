@@ -33,6 +33,8 @@ jobs:
     - '8'
     services:
     - docker
+    before_install:
+    - pip install --user awscli
     script:
     - bash .travis.test.sh
 
