@@ -33,15 +33,6 @@ jobs:
     - '8'
     services:
     - docker
-    - mongodb
-    addons:
-      code_climate:
-        repo_token: 30d4aec026718918864f0293f71801bef5922e57200e1901e174e1bde1562fcc
-    install:
-    - pip install --user awscli
-    - npm install -g codeclimate-test-reporter
-    before_script:
-    - export -f travis_fold
     script:
     - bash .travis.test.sh
 
