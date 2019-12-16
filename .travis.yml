@@ -6,13 +6,27 @@ notifications:
     on_success: always
     on_failure: always
     
-    stages:
-      - name: BUILD
-        if: commit_message !~ /(skip[ _-]build)/
-      - name: TEST
-        if: commit_message !~ /(skip[ _-]test)/
-      - name: DEPLOY
-        if: commit_message !~ /(skip[ _-]deploy)/
+# stage: TEST 
+# Must be declared here to enable build matrix
+language: node_js
+node_js:
+- '8'    
+env:
+  matrix:
+  - SCOPE=api
+  - SCOPE=client
+before_install:
+- pip install --user awscli
+script:
+- bash .travis.test.sh $SCOPE
+
+stages:
+  - name: BUILD
+    if: commit_message !~ /(skip[ _-]build)/
+  - name: TEST
+    if: commit_message !~ /(skip[ _-]test)/
+  - name: DEPLOY
+    if: commit_message !~ /(skip[ _-]deploy)/
 
 jobs:
   include:
@@ -26,17 +40,6 @@ jobs:
     - docker
     script:
     - bash .travis.build.sh
-
-  - stage: TEST
-    language: node_js
-    node_js:
-    - '8'
-    services:
-    - docker
-    before_install:
-    - pip install --user awscli
-    script:
-    - bash .travis.test.sh
 
   - stage: DEPLOY
     os: linux
