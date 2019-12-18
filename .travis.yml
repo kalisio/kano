@@ -13,11 +13,11 @@ node_js:
 - '8'    
 env:
   matrix:
-  - SCOPE=api
+  - TEST_SCOPE=api
 before_install:
 - pip install --user awscli
 script:
-- bash .travis.test.sh $SCOPE
+- bash .travis.test.sh $TEST_SCOPE
 
 stages:
   - name: BUILD
@@ -38,7 +38,7 @@ jobs:
     services:
     - docker
     env:
-      - SCOPE=none      
+      - TEST_SCOPE=none      
     script:
     - bash .travis.build.sh
 
@@ -50,7 +50,7 @@ jobs:
     services:
     - docker
     env:
-    - SCOPE=none    
+    - TEST_SCOPE=none    
     install: true    
     script:
     - bash .travis.deploy.sh
