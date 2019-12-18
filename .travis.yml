@@ -14,6 +14,7 @@ node_js:
 env:
   matrix:
   - TEST_SCOPE=api
+  - TEST_SCOPE=basic
 before_install:
 - pip install --user awscli
 script:
@@ -23,7 +24,7 @@ stages:
   - name: BUILD
     if: commit_message !~ /(skip[ _-]build)/
   - name: TEST
-    #if: commit_message !~ /(skip[ _-]test)/
+    if: commit_message !~ /(skip[ _-]test)/
   - name: DEPLOY
     if: commit_message !~ /(skip[ _-]deploy)/
 
