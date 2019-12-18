@@ -38,7 +38,7 @@ jobs:
     services:
     - docker
     env:
-      - TEST_SCOPE=none      
+    - TEST_SCOPE=none      
     script:
     - bash .travis.build.sh
 
