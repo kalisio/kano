@@ -14,7 +14,7 @@ node_js:
 env:
   matrix:
   - TEST_SCOPE=api
-  - TEST_SCOPE=basic
+  #- TEST_SCOPE=basic
 before_install:
 - pip install --user awscli
 script:
