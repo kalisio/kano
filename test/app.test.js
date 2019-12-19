@@ -14,11 +14,15 @@ fixture`basic`// declare the fixture
     await pages.checkNoClientError(test)
   })
 
-const app = new pages.ApplicationLayout()
-const auth = new pages.Authentication()
+const app = new pages.Application()
 
-test('Login as default user', async test => {
-  await auth.logIn(test, { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' })
-  await test.setTestSpeed(0.1)
-  await auth.logOut(test)
+test('Registering to the app', async test => {
+  await app.goToRegisterScreen(test)
+  await app.register(test)
+  await app.logout(test)
+})
+
+test('Authenticating to the app', async test => {
+  await app.login(test)
+  await app.logout(test)
 })

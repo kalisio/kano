@@ -13,8 +13,9 @@ node_js:
 - '8'    
 env:
   matrix:
-  - TEST_SCOPE=api
-  #- TEST_SCOPE=basic
+  - TEST_SCOPE=api TEST_BROWSER=none
+  - TEST_SCOPE=app TEST_BROWSER=chromium
+  - TEST_SCOPE=app TEST_BROWSER=firefox
 before_install:
 - pip install --user awscli
 script:
@@ -39,7 +40,7 @@ jobs:
     services:
     - docker
     env:
-    - TEST_SCOPE=none      
+    - TEST_SCOPE=none TEST_BROWSER=none   
     script:
     - bash .travis.build.sh
 
@@ -51,7 +52,7 @@ jobs:
     services:
     - docker
     env:
-    - TEST_SCOPE=none    
+    - TEST_SCOPE=none TEST_BROWSER=none
     install: true    
     script:
     - bash .travis.deploy.sh
