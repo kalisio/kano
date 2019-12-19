@@ -13,7 +13,7 @@ services:
     volumes:
       - ../test:/tests
       - ../screenshots:/screenshots
-      command: ${TEST_BROWSER}:headless /tests/*.test.js -S -s /screenshots --speed ${TEST_SPEED:-0.5} -f $FIXTURE 
+    command: ${TEST_BROWSER}:headless /tests/*.test.js -S -s /screenshots --speed ${TEST_SPEED:-0.5} -f $FIXTURE 
     networks:
       - app-network
       
