@@ -31,14 +31,18 @@ then
 	# Report to code climate
 	./cc-test-reporter after-build -t lcov --exit-code $ERROR_CODE
 else
-  # Run Testcafe with the given fixture 
+  # Extract the version of Testcafe to use
+  export TESTCAFE_TAG=`node -p -e "require('./package.json').devDependencies['testcafe'].match(/\d+.\d+.\d+/g)[0]"`
+  
+	# Run Testcafe with the given fixture 
 	export FIXTURE=$1
 
 	# Create the screenshots dir
 	mkdir screenshots
 	chmod -R 777 screenshots
 
-	# Run the app
+	# Run the tests
+	echo Running tests $FIXTURE with Testcafe $TESTCAFE_TAG
 	docker-compose -f deploy/mongodb.yml -f deploy/app.yml -f deploy/app.test.client.yml up --exit-code-from testcafe testcafe
 	ERROR_CODE=$?
 	#Copy the screenshots whatever the result
