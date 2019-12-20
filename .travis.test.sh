@@ -47,7 +47,7 @@ else
 	ERROR_CODE=$?
 	#Copy the screenshots whatever the result
 	aws s3 sync screenshots s3://$BUILDS_BUCKET/$BUILD_NUMBER/$FIXTURE-screenshots > /dev/null
-	if [ $ERROR_CODE -eq 1 ]; then
+	if [ $ERROR_CODE -ne 0 ]; then
 		echo "Testing $FIXTURE failed [error: $ERROR_CODE]"
 		exit 1
 	fi
