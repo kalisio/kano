@@ -80,8 +80,8 @@
     "geotiff": "^1.0.0-beta.6",
     "i18next": "^10.5.0",
     "jquery": "^3.2.1",
-    "jsdap": "^8.1.0",
     "js-yaml": "^3.13.1",
+    "jsdap": "^8.1.0",
     "leaflet": "^1.2.0",
     "leaflet-draw": "^1.0.4",
     "leaflet-fa-markers": "^0.0.5",
@@ -111,10 +111,10 @@
     "tween.js": "^16.6.0",
     "vue-slider-component": "^3.0.33",
     "vue2-dropzone": "^3.6.0",
-    "xml2js": "^0.4.22",
     "weacast-core": "^1.0.0",
     "weacast-leaflet": "^1.0.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "xml2js": "^0.4.22"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.4",
@@ -133,7 +133,7 @@
     "npm-run-all": "^4.1.2",
     "shelljs": "^0.8.1",
     "standard": "^14.0.0",
-    "testcafe": "^1.0.1",
-    "testcafe-vue-selectors": "^3.0.0"
+    "testcafe": "^1.7.1",
+    "testcafe-vue-selectors": "^3.1.0"
   }
 }

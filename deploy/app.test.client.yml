@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   testcafe:
-    image: kalisio/testcafe:1.3.3
+    image: kalisio/testcafe:1.7.1
     depends_on:
       - mongodb
       - app
