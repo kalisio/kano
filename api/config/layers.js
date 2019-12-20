@@ -222,6 +222,7 @@ module.exports = [
         units: [
           'deg'
         ],
+        range: [0, 360],
         chartjs: {
           backgroundColor: 'rgba(191, 191, 63, 128)',
           borderColor: 'rgb(191, 191, 63)',
@@ -248,6 +249,7 @@ module.exports = [
       frameRate: 20,
       particleMultiplier: 0.001,
       displayValues: false,
+      'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex      
       /*
       displayOptions: {
@@ -292,6 +294,7 @@ module.exports = [
       elements: [
         'gust'
       ],
+      'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
       mesh: true
     }
@@ -339,6 +342,7 @@ module.exports = [
       elements: [
         'precipitations'
       ],
+      'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
       mesh: true
     }
@@ -385,6 +389,7 @@ module.exports = [
       elements: [
         'temperature'
       ],
+      'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
       mesh: true
     }
