@@ -16,12 +16,6 @@ fixture`app`// declare the fixture
 
 const app = new pages.Application()
 
-test('Registering to the app', async test => {
-  await app.goToRegisterScreen(test)
-  await app.register(test)
-  await app.logout(test)
-})
-
 test('Authenticating to the app', async test => {
   await app.login(test)
   await app.logout(test)
