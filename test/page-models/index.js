@@ -1,5 +1,6 @@
 import { ClientFunction } from 'testcafe'
 import Application from './application'
+import NavigationBar from './application'
 /*import LayerPanelMap from './layerPanelMap'
 import LayerPanelGlobe from './layerPanelGlobe'
 import Sidenav from './sidenav'
@@ -9,6 +10,7 @@ import MapView from './mapView'
 // Export all models
 export {
   Application,
+  NavigationBar
   /*LayerPanelMap,
   LayerPanelGlobe,
   Sidenav,

@@ -15,8 +15,9 @@ fixture`app`// declare the fixture
   })
 
 const app = new pages.Application()
+const navbar = new pages.NavigationBar()
 
 test('Authenticating to the app', async test => {
   await app.login(test)
-  await app.logout(test)
+  await navbar.clickSideNav(test)
 })
