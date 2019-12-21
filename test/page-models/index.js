@@ -1,6 +1,6 @@
 import { ClientFunction } from 'testcafe'
 import Application from './application'
-import NavigationBar from './application'
+import NavigationBar from './navigation-bar'
 /*import LayerPanelMap from './layerPanelMap'
 import LayerPanelGlobe from './layerPanelGlobe'
 import Sidenav from './sidenav'
