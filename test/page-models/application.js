@@ -3,7 +3,7 @@ import VueSelector from 'testcafe-vue-selectors'
 
 const defaultUser = {
   name: 'kalisio',
-  email: 'kalisio@kalisio.com',
+  email: 'kalisio@kalisio.xyz',
   password: 'Pass;word1'
 }
 
