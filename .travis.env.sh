@@ -1,7 +1,7 @@
 #!/bin/bash
-if [[ $TRAVIS_BRANCH == "test" ]]
+if [ $TRAVIS_BRANCH == "test" ]
 then
-  if [[ -n "$TRAVIS_TAG" ]]
+  if [ -n "$TRAVIS_TAG" ]
   then
     export FLAVOR=prod
   else
@@ -11,9 +11,11 @@ else
   export FLAVOR=dev
 fi
 
+# Extract the name of the app
+APP=$(node -p -e "require('./package.json').name")
+
 # Exports addtionnal variables
-export VERSION=$(node -p -e "require('./package.json').version")
-export BUILDS_BUCKET=$APP-builds
+VERSION=$(node -p -e "require('./package.json').version")
 
 # Retrieve the environment variables stored in the workspace
 echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
@@ -49,4 +51,6 @@ fi
 set -a
 . .travis.env
 set +a
+
+BUILDS_BUCKET=$APP-builds
 

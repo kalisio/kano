@@ -3,14 +3,8 @@ version: '3.3'
 services:
   app:
     image: kalisio/${APP}:${VERSION_TAG}
-    environment:
-      - DEBUG
-      - APP_SECRET
-      - BUILD_NUMBER
-      - NODE_APP_INSTANCE=${FLAVOR}
-      - DB_URL
-      - DATA_DB_URL
-      - CESIUM_TOKEN
+    env_file:
+      - ../.env
     networks:
       - app-network
 
