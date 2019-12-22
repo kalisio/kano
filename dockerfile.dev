@@ -20,7 +20,7 @@ RUN \
   node . workspaces/${APP}.js --clone --branch ${BRANCH} && \
   node . workspaces/${APP}.js --install && \
   node . workspaces/${APP}.js --link && \
-  cd ${APP} && yarn build && cd api && yarn build
+  cd ${APP} && yarn build > build.log 2>&1 && tail -n 24 build.log && cd api && yarn build
 
 #
 # Run stage
