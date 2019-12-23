@@ -7,5 +7,6 @@ services:
       dockerfile: dockerfile.${FLAVOR}
       args:
         APP: ${APP}
+        FLAVOR: ${FLAVOR}
         BUILD_NUMBER: ${BUILD_NUMBER}
         BRANCH: ${BRANCH}

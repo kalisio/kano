@@ -4,23 +4,26 @@
 FROM  node:8-buster AS Build
 
 ARG APP
+ARG FLAVOR
 ARG BUILD_NUMBER
 ARG BRANCH=master
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
-ENV NODE_APP_INSTANCE=dev
+ENV NODE_APP_INSTANCE=$FLAVOR
 
 # Install the cli
 WORKDIR /opt
 RUN git clone https://github.com/kalisio/kdk.git && cd kdk && yarn 
 
 # Install the app
+COPY workspace/${APP}.js  /opt/kdk/${APP}.js
 WORKDIR /opt/kdk
 RUN \
-  node . workspaces/${APP}.js --clone --branch ${BRANCH} && \
-  node . workspaces/${APP}.js --install && \
-  node . workspaces/${APP}.js --link && \
-  cd ${APP} && yarn build > build.log 2>&1 && tail -n 24 build.log && cd api && yarn build
+  node . ${APP}.js --clone --branch ${BRANCH} && \
+  node . ${APP}.js --install && \
+  node . ${APP}.js --link && \
+  cd ${APP} && yarn build > build.log 2>&1 && tail -n 24 build.log && \ 
+  cd api && yarn build
 
 #
 # Run stage
@@ -29,16 +32,16 @@ FROM node:8-buster-slim
 LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP
+ARG FLAVOR
 ARG BUILD_NUMBER
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
-ENV NODE_APP_INSTANCE=dev
-ENV DEBUG=kalisio*,-kalisio:kCore:authorisations:hooks
+ENV NODE_APP_INSTANCE=$FLAVOR
 
 COPY --from=Build /opt/kdk /opt/kdk
 
 WORKDIR /opt/kdk
-RUN node . workspaces/${APP}.js --link
+RUN node . ${APP}.js --link
 
 WORKDIR /opt/kdk/${APP}
 EXPOSE 8081
