@@ -1,7 +1,11 @@
 #!/bin/bash
-if [ $TRAVIS_BRANCH == "test" ]
+
+# Compute the flavor
+TEST_FLAVOR_REGEX="^test*"
+PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
+if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
 then
-  if [ -n "$TRAVIS_TAG" ]
+  if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
   then
     export FLAVOR=prod
   else
