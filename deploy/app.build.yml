@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: ../.
-      dockerfile: dockerfile.${FLAVOR}
+      dockerfile: dockerfile
       args:
         APP: ${APP}
         BRANCH: ${BRANCH}

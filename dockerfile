@@ -4,19 +4,21 @@
 FROM  node:8-buster AS Build
 
 ARG APP
+ARG BRANCH
 ARG FLAVOR
+ARG WORKSPACE
 ARG BUILD_NUMBER
-ARG BRANCH=master
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 
 # Install the cli
 WORKDIR /opt
-RUN git clone https://github.com/kalisio/kdk.git && cd kdk && yarn 
+RUN git clone https://github.com/kalisio/kdk.git && cd kdk && yarn  
 
 # Install the app
-COPY workspace/${APP}.js  /opt/kdk/${APP}.js
+RUN echo ${WORKSPACE}
+COPY ${WORKSPACE} /opt/kdk/${APP}.js
 WORKDIR /opt/kdk
 RUN \
   node . ${APP}.js --clone --branch ${BRANCH} && \
