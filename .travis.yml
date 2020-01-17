@@ -8,18 +8,18 @@ notifications:
     
 # stage: TEST 
 # Must be declared here to enable build matrix
-language: node_js
-node_js:
-- '8'    
-env:
-  matrix:
-  - TEST_SCOPE=api TEST_BROWSER=none
-  - TEST_SCOPE=app TEST_BROWSER=chromium
-  - TEST_SCOPE=app TEST_BROWSER=firefox
-before_install:
-- pip install --user awscli
-script:
-- bash .travis.test.sh $TEST_SCOPE
+#language: node_js
+#node_js:
+#- '8'    
+#env:
+#  matrix:
+#  - TEST_SCOPE=api TEST_BROWSER=none
+#  - TEST_SCOPE=app TEST_BROWSER=chromium
+#  - TEST_SCOPE=app TEST_BROWSER=firefox
+#before_install:
+#- pip install --user awscli
+#script:
+#- bash .travis.test.sh $TEST_SCOPE
 
 stages:
   - name: BUILD

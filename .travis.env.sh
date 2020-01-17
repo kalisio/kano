@@ -21,9 +21,19 @@ APP=$(node -p -e "require('./package.json').name")
 # Exports addtionnal variables
 VERSION=$(node -p -e "require('./package.json').version")
 
-# Retrieve the environment variables stored in the workspace
+# Clone the workspace 
 echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
 git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
+
+# Define the CLI workspace to be used for building process
+if [ -f workspace/$FLAVOR/$APP.js ]
+then
+  export WORKSPACE=workspace/$FLAVOR/$APP.js
+else
+  export WORKSPACE=workspace/$APP.js
+fi
+
+# Define environment variables (merges common and flavor env)
 cp workspace/common/.env .env
 if [ -f workspace/$FLAVOR/.env ]
 then
