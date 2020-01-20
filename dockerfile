@@ -21,7 +21,7 @@ RUN echo ${WORKSPACE}
 COPY ${WORKSPACE} /opt/kdk/${APP}.js
 WORKDIR /opt/kdk
 RUN \
-  node . ${APP}.js --clone --branch ${BRANCH} && \
+  node . ${APP}.js --clone ${BRANCH} && \
   node . ${APP}.js --install && \
   node . ${APP}.js --link && \
   cd ${APP} && yarn build > build.log 2>&1 && tail -n 24 build.log && \ 
