@@ -57,15 +57,15 @@ BUILD_BUCKET=${APP}-builds/$BUILD_NUMBER
 git clone https://github.com/kalisio/kdk.git && cd kdk && yarn 
 
 # Clone the project and install the dependencies
-if [ -f workspace/$FLAVOR/$APP.js ]
+if [ -f $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js ]
 then
-  cp workspace/$FLAVOR/$APP.js ${APP}.js  
+  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js ${APP}.js  
 else
-  cp workspace/$APP.js ${APP}.js
+  cp $TRAVIS_BUILD_DIR/workspace/$APP.js ${APP}.js
 fi
 node . ${APP}.js --clone ${TRAVIS_BRANCH}
 node . ${APP}.js --install
 node . ${APP}.js --link
 
-cd $AP
+cd $APP
 
