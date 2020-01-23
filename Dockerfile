@@ -8,10 +8,11 @@ ARG BUILD_NUMBER
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 
-# Copy the built artefacr
+# Copy the built artefact.
+# Warning - 
+# We could do ADD and let Docker uncompress automatically the archive but we reach log limit in Travis.
+# So we copy the archive and uncompress it usin tar without the verbose mode
 COPY kdk.tgz /opt/.
-
-# Uncompress the artefact
 WORKDIR /opt
 RUN tar zxf kdk.tgz && rm kdk.tgz
 
