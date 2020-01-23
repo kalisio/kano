@@ -23,5 +23,5 @@ jobs:
     before_script:
     - export -f travis_fold
     script:
-    - bash .travis.app.sh
+    - travis_wait 60 bash .travis.app.sh
 
