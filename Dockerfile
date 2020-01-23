@@ -8,7 +8,7 @@ ARG BUILD_NUMBER
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 
-COPY kdk /opt/kdk
+ADD kdk.tgz /opt
 
 WORKDIR /opt/kdk
 RUN node . ${APP}.js --link
