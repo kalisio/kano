@@ -30,7 +30,7 @@ if [ $ERROR_CODE -eq 1 ]; then
 fi
 # Create an archive to speed docker build process
 cd ../..
-tar -zcvf kdk.tgz kdk
+tar -zcf kdk.tgz kdk
 docker build --build-arg APP=$APP --build-arg FLAVOR=$FLAVOR --build-arg BUILD_NUMBER=$BUILD_NUMBER -t kalisio/$APP:$TAG . 
 ERROR_CODE=$?
 if [ $ERROR_CODE -eq 1 ]; then
