@@ -6,53 +6,22 @@ notifications:
     on_success: always
     on_failure: always
     
-# stage: TEST 
-# Must be declared here to enable build matrix
-#language: node_js
-#node_js:
-#- '8'    
-#env:
-#  matrix:
-#  - TEST_SCOPE=api TEST_BROWSER=none
-#  - TEST_SCOPE=app TEST_BROWSER=chromium
-#  - TEST_SCOPE=app TEST_BROWSER=firefox
-#before_install:
-#- pip install --user awscli
-#script:
-#- bash .travis.test.sh $TEST_SCOPE
-
 stages:
-  - name: BUILD
-    if: commit_message !~ /(skip[ _-]build)/
-#  - name: TEST
-#    if: commit_message !~ /(skip[ _-]test)/
-  - name: DEPLOY
-    if: commit_message !~ /(skip[ _-]deploy)/
+  - name: APP
+    if: commit_message !~ /(skip[ _-]app)/
 
 jobs:
   include:
 
-  - stage: BUILD
+  - stage: APP
     os: linux
     language: node_js
     node_js:
     - '8'
     services:
     - docker
-    env:
-    - TEST_SCOPE=none TEST_BROWSER=none   
+    before_script:
+    - export -f travis_fold
     script:
-    - bash .travis.build.sh
+    - bash .travis.app.sh
 
-  - stage: DEPLOY
-    os: linux
-    language: node_js
-    node_js:
-    - '8'    
-    services:
-    - docker
-    env:
-    - TEST_SCOPE=none TEST_BROWSER=none
-    install: true    
-    script:
-    - bash .travis.deploy.sh
