@@ -741,5 +741,119 @@ module.exports = [
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     }
+  },
+  {
+    name: 'Température à 2m',
+    description: 'Archivée sur OPeNDAP/THREDDS',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'temperature',
+        label: 'Variables.TEMPERATURE',
+        units: [
+          'K', 'degC', 'degF'
+        ],
+        range: [0, 50],
+        chartjs: {
+          backgroundColor: 'rgba(255, 215, 0, 128)',
+          borderColor: 'rgb(255, 215, 0)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'RdBu',
+          invertScale: true,
+          domain: [270, 320]
+        }
+      }
+    ],
+    meteo_model: [
+	{ model: 'arpege-world'
+	, from: '2020-01-01 00:00:00'
+	, dynprops: { url: { template: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-05/<%- folder %>/T6086_G_T_Hau_<%- file %>.grb" } }
+	, opendap:
+		{ query: 'Temperature_height_above_ground'
+		, dimensions: { time: 0, height_above_ground: 0 }
+		, latitude: 'lat'
+		, longitude: 'lon'
+		}
+	},
+	{ model: 'arpege-europe'
+	, from: '2020-01-01 00:00:00'
+	, dynprops: { url: { template: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-01/<%- folder %>/T10063_T_Hau_<%- file %>.grb" } }
+	, opendap:
+		{ query: 'Temperature_height_above_ground'
+		, dimensions: { time: 0, height_above_ground: 0 }
+		, latitude: 'lat'
+		, longitude: 'lon'
+		}
+	},
+    ],
+    leaflet: {
+      type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
+      opacity: 0.6
+    }
+  },
+  {
+    name: 'Précipitations',
+    description: 'Radar archivé sur OPeNDAP/THREDDS',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
+    attribution: 'Données de <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: [
+          'mm'
+        ],
+        range: [0, 300],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false
+        },
+        chromajs: {
+          scale: [
+            "indigo",
+            "mediumblue",
+            "dodgerblue",
+            "skyblue",
+            "forestgreen",
+            "mediumseagreen",
+            "turquoise",
+            "springgreen",
+            "yellow",
+            "palegoldenrod",
+            "peachpuff",
+            "orange",
+            "saddlebrown",
+            "red"
+          ],
+          classes: [ 0, 0.2, 0.6, 1.2, 2.1, 3.6, 6.5, 11.5, 20.5, 36.5, 64.8, 115.3, 205, 364.6, 500 ]
+        }
+      }
+    ],
+    time_based: [
+	{ from: '2020-01-01 00:00:00'
+        , every: '00:05:00'
+	, dynprops: { url: { template: "<% const folder = stepTime.format('YYYY/MM/DD'); const file = stepTime.format('YYYYMMDDHHmm00') %>https://thredds.c3x.kalisio.fr/thredds/fileServer/mf-radar/<%- folder %>/RD_CPO_NAT100.SYCOMORE.V_EUR_COMPO.LAME_DEAU__<%- file %>_rainfall.tif" } }
+	, geotiff: {}
+	},
+    ],
+    leaflet: {
+      type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
+      opacity: 0.6,
+      cutUnder: 0.1
+    }
   }
 ]
