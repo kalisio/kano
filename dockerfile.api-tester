@@ -1,0 +1,31 @@
+
+ARG APP
+ARG TAG
+FROM kalisio/$APP:$TAG
+LABEL maintainer="contact@kalisio.xyz"
+
+ARG APP
+ARG TEST_REPORTER_VERSION=0.7.0
+
+ENV MOCHA_CONTEXT=$APP
+ENV STANDRD_CONTEXT=$APP
+ENV SLACK_WEBOOK_URL=
+ENV CC_TEST_REPORTER_ID=
+
+# Install GIT
+RUN apt-get update && apt-get -y install git
+
+# Install code climate
+WORKDIR /opt/kdk/$APP/api
+RUN \
+  curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-${TEST_REPORTER_VERSION}-linux-amd64 > ./cc-test-reporter && \
+  chmod +x ./cc-test-reporter && \
+  mkdir coverage && \
+  chmod +w coverage
+
+CMD \
+  yarn lint | node ./test/reporters/standard-slack.js; \
+  ./cc-test-reporter before-build; \
+  yarn coverage --reporter test/reporters/mocha-slack; \
+  ./cc-test-reporter format-coverage -t lcov; \
+  ./cc-test-reporter upload-coverage

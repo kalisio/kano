@@ -1,5 +1,14 @@
 #!/bin/bash
 
+check_code()
+{
+   if [ $1 -eq 1 ]; then
+	  echo "$2 has failed [error: $1]"
+	  exit 1
+  fi
+}
+
+
 TEST_FLAVOR_REGEX="^test$|-test$"
 PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
 if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];

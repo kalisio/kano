@@ -1,0 +1,6 @@
+FROM kalisio/testcafe:1.7.1
+LABEL maintainer="contact@kalisio.xyz"
+
+ENV NODE_ENV=production
+
+COPY ./test /tests/.

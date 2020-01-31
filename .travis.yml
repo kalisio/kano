@@ -2,17 +2,17 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: 2wRukOpqNxWDcrPyntSXFEP/mMXIfvGKL2rAJSKsaUzEppABWxf3zoa66mdP5uC1MI6yndmirSr+0OR0KDxpOp0YytxydziSBtZYJTFKiyqsK8tzben47nP/lOrYJn5+3Vc4EIyVyAd1Jr+3M2g2wuG4/4yanPCJmrkBLDq/T7BsbHUgAU3IIuUQoFDh6BJ+HtEgprRVt1YSCDLMS9MEenvprRX3SZ88zeJZctxUe/10WhqidszLEM3r0vCXutYNiHACnaJjE/CBAL/36KMkucpjekKg0CBr3avvqPZDy8L5p87/HIPJGYHDw17TLwNG0IhlZuISSSGeL0MzY0ChTgmtZDRWWZOAtaSg5CM3SP3VQffgPv/JEyPMxtDBnWZALrt/J8iK8CqmmSncnkROi2EiJ3c5lA2U786PAwHvLCrG/CHTv9MvSmzualUxY/+a9DwqAFwBRnrBWyPWOv4/BqpZepO3LDL3GUpAC/r2w+vTYZQw/SRmR6yT4dAgHXVqvINdVhWvJnOiX7s3jaQe6DCzMSb1rTJhYyXwILnkpgVf7AsyJXQrr3rAz/KKaYCNY43/Q0bNRJmmN2QTD+kICNmQMJiWogeiJ2NfylFzU0fK66BE7LYV0GJUHB2G9SzEHmls5Ej1A86zA34yyWagQEg7AxSLMOwFfckGEh0d9JU=
+      secure: PxuIjhULoC8GEyoYWTZQwIzEori+7/N5NLTJcY01TkqjQVdIjxdf33Py6ky9DgIxWOrG0R5jIrQ8eD9Coee34s/av85HDFwJMwY2UTTtYcYUdDUIo6g1OmAGYGAcnyZxUsYknK51sh1w6C4YSjlkuKYNpryse8pSHzE26qOirONGwccPXcN9AZHHonWKRYq0mjaseMgVmp4rGQufMksP80LLt1stzDsShFvVRo5zO1gvmmK5IDUqSocPTfNYThsvqS6Wdp+a9O/uDmx3coNDgkqPm1Fj58Q1Bklmi+gEm2cHCQgOGa1bYN+EivLw+4oFGuq6Yz1qKaF3fivE/jUDgqmOx2cYpyUXUtcqvjezIx/EOjvf8heC5xZZ2NUE0RCNPr8RzGzltWwZLU09Td1PxXZlQ6II6r1kKHLLfzi4Uf7von159FK4L7+/rae3V1T7qI1Rif6sHV1uD4wdleaJVtqM1p4UUWiV7jHdRJke5C0MhM1+PUfiHJTDszm2Iv8Fkac+TM5Yya1p87/t+jgfBRlZ1i+wuJiec4EU3Ch9o9J+ptKnAhwKzvM4xab95mm6OOQ4cZaedOWLJuKTCpZ2KJJA73x0lPDUNYELXsDMB13DYbqkE7R2/XOW0oIQ+BCcviKGEqInjogjYlvrJ4y8HtOsV1vmzbCWjNGFWM2RurY=
     on_success: always
     on_failure: always
-    
+
 stages:
-  - name: APP
-    if: commit_message !~ /(skip[ _-]app)/
+- name: APP
+  if: commit_message !~ /(skip[ _-]app)/
 
 jobs:
   include:
-
+    
   - stage: APP
     os: linux
     language: node_js
@@ -24,4 +24,3 @@ jobs:
     - export -f travis_fold
     script:
     - bash .travis.app.sh
-
