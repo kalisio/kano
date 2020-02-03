@@ -68,13 +68,16 @@ git clone https://github.com/kalisio/kdk.git && cd kdk && yarn
 # Clone the project and install the dependencies
 if [ -f $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js ]
 then
-  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js ${APP}.js  
+  echo Found specific project file in $FLAVOR
+  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js $APP.js  
 else
-  cp $TRAVIS_BUILD_DIR/workspace/$APP.js ${APP}.js
+  echo use common project file
+  cp $TRAVIS_BUILD_DIR/workspace/$APP.js $APP.js
+  more $APP.js
 fi
-node . ${APP}.js --clone ${TRAVIS_BRANCH}
-node . ${APP}.js --install
-node . ${APP}.js --link
+node . $APP.js --clone $TRAVIS_BRANCH
+node . $APP.js --install
+node . $APP.js --link
 
 cd $APP
 
