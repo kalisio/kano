@@ -73,7 +73,6 @@ then
 else
   echo use common project file
   cp $TRAVIS_BUILD_DIR/workspace/$APP.js $APP.js
-  more $APP.js
 fi
 node . $APP.js --clone $TRAVIS_BRANCH
 node . $APP.js --install
