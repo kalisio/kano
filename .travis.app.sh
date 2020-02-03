@@ -70,7 +70,7 @@ done
 # Note: it does not seem necessary to restart the service (service sshd reload)
 cp workspace/$FLAVOR/ssh.config ~/.ssh/config
 # Deploy the stack
-ssh REMOTE_SERVER "cd kargo; ./kargo remove $APP; ./kargo deploy $APP; ./kargo test $APP"
+ssh REMOTE_SERVER "cd kargo; ./kargo remove $APP; ./kargo deploy $APP; nohup ./kargo test $APP &"
 check_code $? "Deploying the app"
 
 travis_fold end "deploy"
