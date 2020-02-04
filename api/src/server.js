@@ -73,6 +73,7 @@ export class Server {
       app.logger.info('Configuring HTTP server at port ' + port.toString())
       expressServer = await app.listen(port)
     }
+    expressServer.on('close', () => distribution.finalize(app))
     return expressServer
   }
 }
