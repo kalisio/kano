@@ -73,7 +73,14 @@
         "component": "form/KTextField",
         "helper": "schemas.LOCATION_FORMAT"
       }
+    },
+    "timelineWidth": {
+      "type": "number",
+      "field": {
+        "component": "form/KNumberField",
+        "helper": "schemas.TIMELINE_WIDTH"
+      }
     }
   },
-  "required": ["shortTime", "longTime", "shortDate", "longDate", "shortYear", "longYear", "utc", "location", "restoreView"]
+  "required": ["shortTime", "longTime", "shortDate", "longDate", "shortYear", "longYear", "utc", "location", "restoreView", "timelineWidth"]
 }

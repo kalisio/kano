@@ -21,7 +21,8 @@ export default function () {
         longYear: 'timeFormat.year.long',
         utc: 'timeFormat.utc',
         location: 'locationFormat',
-        restoreView: 'restore.view'
+        restoreView: 'restore.view',
+        timelineWidth: 'timelineWidth'
       }
     })
     // Restore previous settings if any
