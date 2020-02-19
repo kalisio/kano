@@ -24,3 +24,18 @@ jobs:
     - export -f travis_fold
     script:
     - bash .travis.app.sh
+
+  - stage: DOC
+    language: node_js
+    node_js:
+    - '8'
+    install: true
+    script: bash .travis.doc.sh
+    deploy:
+      provider: pages
+      local-dir: docs/.vuepress/dist
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      keep-history: true
+      on:
+        branch: master      
