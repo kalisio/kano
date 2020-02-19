@@ -5,11 +5,11 @@ actionText: Show me more →
 actionLink: /about/introduction
 features:
 - title: Powerful Geovisualizer
-  details: Kano supports 3D and advanced visualization capabilities thanks to hardware acceleration with WebGL technology
-- title: Web and mobile oriented
-  details: Manage your services and scale the platform in a minute with the simplicity of Docker
-- title: Highly Customizable and integrable
-  details: 
+  details: Kano supports advanced visualization capabilities in 2D and 3D thanks to hardware acceleration with WebGL technology
+- title: Real-time oriented
+  details: Driven by today’s most advanced web technologies, Kano enables real-time tracking of your geospatial assets
+- title: Designed to be integrated and customized
+  details: Through a single API, Kano provides users with the capability to develop geospatial applications
 footer: MIT Licensed | Copyright © 2018-2020 Kalisio
 ---
 
