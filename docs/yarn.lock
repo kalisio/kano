@@ -7862,7 +7862,7 @@ vuepress-plugin-smooth-scroll@^0.0.3:
 
 "vuepress-theme-kalisio@http://github.com/kalisio/vuepress-theme-kalisio#^1.3.0":
   version "1.3.0"
-  resolved "http://github.com/kalisio/vuepress-theme-kalisio#7ec6e771d2352619f57ede3d294e393dff42beed"
+  resolved "http://github.com/kalisio/vuepress-theme-kalisio#b1beae8bedcfa3c0b6985ea257b7b25dd1d3fe33"
   dependencies:
     "@vuepress/plugin-back-to-top" "^1.3.0"
     "@vuepress/plugin-pwa" "^1.3.0"
