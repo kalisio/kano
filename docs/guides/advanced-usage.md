@@ -28,11 +28,15 @@ It uses [post-robot](https://github.com/krakenjs/post-robot) to
     * event response data is the property value
 
 ::: tip
-Event messaging using post-robot is always async because it relies on the [postMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) under-the-hood.
+Event messaging using **post-robot** is always async because it relies on the [postMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) under-the-hood.
 :::
 
 ::: warning
 In-memory data exchange is Json and more specifically GeoJson for map features. Do not try to inject functions or "complex" objects (e.g. class instances) in event payloads.
+:::
+
+::: warning
+You must use the same version of the **post-robot** library as the one used by **Kano**. For now, **Kano** relies on the `10.0.10` version of **post-robot**.
 :::
 
 In addition to the events used to access mixin methods there are a couple of dedicated events:
@@ -52,7 +56,7 @@ In addition to the events used to access mixin methods there are a couple of ded
 
 Here is a simple code sample:
 ```html
-  <script src="./post-robot.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/post-robot@10.0.10/dist/post-robot.min.js"></script>
   <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="kano.kalisio.com">
 	<script>
 	  var kano = document.getElementById('kano').contentWindow
