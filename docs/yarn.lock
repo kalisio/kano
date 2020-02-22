@@ -1552,15 +1552,6 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-belter@^1.0.41:
-  version "1.0.115"
-  resolved "https://registry.yarnpkg.com/belter/-/belter-1.0.115.tgz#a1fe7786f94175d4450863a9b501eb32f14fc3a3"
-  integrity sha512-CDUeweAO3hRNamhZsDqO0Ubn+Lyfka3rMfjBvOCka6/NreGGAACGFVYlej9ssgebyl2qbBBSiwinUVNC85uGvw==
-  dependencies:
-    cross-domain-safe-weakmap "^1.0.20"
-    cross-domain-utils "^2.0.10"
-    zalgo-promise "^1.0.28"
-
 big.js@^3.1.3:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-3.2.0.tgz#a5fc298b81b9e0dca2e458824784b65c52ba588e"
@@ -2315,20 +2306,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
-
-cross-domain-safe-weakmap@^1.0.1, cross-domain-safe-weakmap@^1.0.20:
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/cross-domain-safe-weakmap/-/cross-domain-safe-weakmap-1.0.27.tgz#81a5eae012b3cfb7e7e5ca3d737a6c94c3499bab"
-  integrity sha512-f5etDzszteeGh99Dzd7o72FGwd8rLGzgEv50Vk0r8mLzPdQEzcb7Vmx3PfKWD4k66Hp8vN0BLPuBmmMs4UxseQ==
-  dependencies:
-    cross-domain-utils "^2.0.0"
-
-cross-domain-utils@^2.0.0, cross-domain-utils@^2.0.10:
-  version "2.0.29"
-  resolved "https://registry.yarnpkg.com/cross-domain-utils/-/cross-domain-utils-2.0.29.tgz#f531cb8929427ba0a081d2037651dd7b02e7fcea"
-  integrity sha512-Kb0Mgtmo7OIN4QuIYuWNe63pxq9DnlyyzzALcHUPg8zVJIP5QFOGuTe5KgnlyLAx4IxckD6661WaawjSkuTvUA==
-  dependencies:
-    zalgo-promise "^1.0.11"
 
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"
@@ -5836,17 +5813,6 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-post-robot@^10.0.10:
-  version "10.0.31"
-  resolved "https://registry.yarnpkg.com/post-robot/-/post-robot-10.0.31.tgz#167a6e57c48489f2600b038145cfce53be9163be"
-  integrity sha512-BIw0VCKRlugKYiRTiAYWS/g2/LYjoCfn/YHO9MKcrGGyeHqw1FBaFx4FTcYsTz5z8s6bJGlj6WynSEAe6uA5LA==
-  dependencies:
-    belter "^1.0.41"
-    cross-domain-safe-weakmap "^1.0.1"
-    cross-domain-utils "^2.0.0"
-    universal-serialize "^1.0.4"
-    zalgo-promise "^1.0.3"
-
 postcss-calc@^7.0.1:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-7.0.2.tgz#504efcd008ca0273120568b0792b16cdcde8aac1"
@@ -7629,11 +7595,6 @@ unique-string@^2.0.0:
   dependencies:
     crypto-random-string "^2.0.0"
 
-universal-serialize@^1.0.4:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/universal-serialize/-/universal-serialize-1.0.7.tgz#5e64607c3c941c88f76e77f2b095fafc2f37abed"
-  integrity sha512-rHWw4zdhPqKqbBu3GbNzdicHRc+0byzAFFcImDMo8x+S9yYfyqYQQcr749NV8jO/0YisMzd+LjeivdbHUzA67A==
-
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -7899,15 +7860,14 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   dependencies:
     smoothscroll-polyfill "^0.4.3"
 
-"vuepress-theme-kalisio@http://github.com/kalisio/vuepress-theme-kalisio#1.3.0":
+"vuepress-theme-kalisio@http://github.com/kalisio/vuepress-theme-kalisio#^1.3.0":
   version "1.3.0"
-  resolved "http://github.com/kalisio/vuepress-theme-kalisio#191901885b100280d3a10755ada1f585f6f582f8"
+  resolved "http://github.com/kalisio/vuepress-theme-kalisio#590c657537309048b9023fe71ca835e328a0d969"
   dependencies:
     "@vuepress/plugin-back-to-top" "^1.3.0"
     "@vuepress/plugin-pwa" "^1.3.0"
     "@vuepress/theme-default" "^1.3.0"
     mermaid "^8.4.7"
-    post-robot "^10.0.10"
 
 vuepress@^1.3.0:
   version "1.3.0"
@@ -8329,11 +8289,6 @@ yargs@12.0.5:
     which-module "^2.0.0"
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
-
-zalgo-promise@^1.0.11, zalgo-promise@^1.0.28, zalgo-promise@^1.0.3:
-  version "1.0.44"
-  resolved "https://registry.yarnpkg.com/zalgo-promise/-/zalgo-promise-1.0.44.tgz#10b6888def701abc0681ec760d73e2bfd2448ae2"
-  integrity sha512-CSQ1xh0vVwgrohObNdysPANonBV+3yl1Xy+qrtMWBvb/a0D/2OUNqb0GJvaAgGtP/gQawtiQAFil2bGSq8aoMA==
 
 zepto@^1.2.0:
   version "1.2.0"
