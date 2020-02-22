@@ -89,4 +89,4 @@ A full sample exploring the different ways to interact with the API is provided 
 
 ## Developing in Kano
 
-For the bravest who want to develop in **Kano**, we recommend that you browse the documentation of our [Development Kit](https://kalisio.github.io/kdk/). Indeed **Kano** is based on the **KDK** and makes the best use of all the features offered by thr provided cartographic services.
+For the bravest who want to develop in **Kano**, we recommend that you browse the documentation of our [Development Kit](https://kalisio.github.io/kdk/). Indeed **Kano** is based on the **KDK** and makes the best use of all the features offered by the provided cartographic services.
