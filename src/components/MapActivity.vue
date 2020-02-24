@@ -93,8 +93,6 @@ export default {
       this.clearNavigationBar()
       // Wait until map is ready
       await this.initializeMap()
-      // Add a scale control
-      L.control.scale().addTo(this.map)
       // Add app hooks to weacast client if separate from app client
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
