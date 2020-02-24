@@ -42,7 +42,7 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
-import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
+import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
 import utils from '../utils'
 
@@ -83,11 +83,6 @@ export default {
     }
   },
   methods: {
-    async getCatalogLayers () {
-      let layers = await kMapMixins.activity('map').methods.getCatalogLayers.call(this)
-      const gatewayToken = this.$api.get('storage').getItem(this.$config('gatewayJwt'))
-      return (gatewayToken ? utils.setGatewayJwt(layers, gatewayToken) : layers)
-    },
     async refreshActivity () {  
       this.clearActivity()
       this.clearNavigationBar()

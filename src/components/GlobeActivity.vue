@@ -73,11 +73,6 @@ export default {
     }
   },
   methods: {
-    async getCatalogLayers () {
-      let layers = await kMapMixins.activity('globe').methods.getCatalogLayers.call(this)
-      const gatewayToken = this.$api.get('storage').getItem(this.$config('gatewayJwt'))
-      return (gatewayToken ? utils.setGatewayJwt(layers, gatewayToken) : layers)
-    },
     async refreshActivity () {
       this.clearActivity()
       const token = this.$store.get('capabilities.api.cesium.token')
