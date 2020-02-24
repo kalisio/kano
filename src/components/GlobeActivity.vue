@@ -19,7 +19,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-show="timelineEnabled"/>
+      <k-timeline v-show="timeline.enabled"/>
     </q-page-sticky>
 
     <component v-for="component in components" :is="component.name" :key="component.name"></component>
@@ -44,6 +44,8 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.timeline,
+    kMapMixins.playMode,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
