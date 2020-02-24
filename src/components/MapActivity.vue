@@ -22,7 +22,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-show="timelineEnabled"/>
+      <k-timeline v-show="timeline.enabled"/>
     </q-page-sticky>
 
     <q-page-sticky position="right" :offset="[40, 0]">
@@ -55,6 +55,8 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.timeline,
+    kMapMixins.playMode,
     kMapMixins.activity('map'),
     kMapMixins.locationIndicator,
     kMapMixins.levels,
@@ -188,14 +190,6 @@ export default {
       // Round to nearest hour - FIXME: should be based on available times
       this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
     },
-    onTimelineChanged (timeline) {
-      let times = []
-      // Round to nearest hour - FIXME: should be based on available times
-      for (let time = this.timeline.start; time <= this.timeline.end; time += 3600000) {
-        times.push(moment.utc(time).minutes(0).seconds(0).milliseconds(0).format())
-      }
-      this.map.timeDimension.setAvailableTimes(times.join(), 'replace')
-    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
@@ -217,7 +211,6 @@ export default {
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
-    this.$on('timeline-changed', this.onTimelineChanged)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onFeatureClicked)
@@ -232,7 +225,6 @@ export default {
   },
   beforeDestroy () {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
-    this.$off('timeline-changed', this.onTimelineChanged)
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onFeatureClicked)
