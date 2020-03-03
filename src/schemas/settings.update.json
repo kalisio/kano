@@ -5,7 +5,7 @@
   "type": "object",
   "properties": {
     "shortTime": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -13,7 +13,7 @@
       }
     },
     "longTime": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -21,7 +21,7 @@
       }
     },
     "shortDate": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -29,7 +29,7 @@
       }
     },
     "longDate": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -37,7 +37,7 @@
       }
     },
     "shortYear": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -45,7 +45,7 @@
       }
     },
     "longYear": {
-      "type": "string", 
+      "type": "string",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
@@ -53,7 +53,7 @@
       }
     },
     "utc": {
-      "type": "boolean", 
+      "type": "boolean",
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KToggleField",
@@ -61,26 +61,69 @@
       }
     },
     "restoreView": {
-      "type": "boolean", 
+      "type": "boolean",
       "field": {
         "component": "form/KToggleField",
         "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
       }
     },
     "location": {
-      "type": "string", 
+      "type": "string",
       "field": {
         "component": "form/KTextField",
         "helper": "schemas.LOCATION_FORMAT"
       }
     },
-    "timelineWidth": {
+    "timelineSpan": {
       "type": "number",
+      "group": "schemas.TIMELINE_SETTINGS",
       "field": {
         "component": "form/KNumberField",
-        "helper": "schemas.TIMELINE_WIDTH"
+        "helper": "schemas.TIMELINE_SPAN"
+      }
+    },
+    "timelineOffset": {
+      "type": "number",
+      "group": "schemas.TIMELINE_SETTINGS",
+      "field": {
+        "component": "form/KNumberField",
+        "helper": "schemas.TIMELINE_OFFSET"
+      }
+    },
+    "timelineStep": {
+      "type": "number",
+      "group": "schemas.TIMELINE_SETTINGS",
+      "field": {
+        "component": "form/KNumberField",
+        "helper": "schemas.TIMELINE_STEP"
+      }
+    },
+    "timelineReference": {
+      "type": "string",
+      "group": "schemas.TIMELINE_SETTINGS",
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.TIMELINE_REFERENCE"
+      }
+    },
+    "timeseriesSpan": {
+      "type": "number",
+      "group": "schemas.TIMESERIES_SETTINGS",
+      "field": {
+        "component": "form/KNumberField",
+        "helper": "schemas.TIMESERIES_SPAN"
       }
     }
   },
-  "required": ["shortTime", "longTime", "shortDate", "longDate", "shortYear", "longYear", "utc", "location", "restoreView", "timelineWidth"]
+  "required": [
+    "shortTime",
+    "longTime",
+    "shortDate",
+    "longDate",
+    "shortYear",
+    "longYear",
+    "utc",
+    "location",
+    "restoreView"
+  ]
 }

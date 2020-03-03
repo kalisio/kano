@@ -22,7 +22,10 @@
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-show="timeline.enabled"/>
+      <div class="column q-gutter-md">
+        <k-timeline v-show="timeline.enabled"/>
+        <k-timeline-control v-show="timeline.enabled"/>
+      </div>
     </q-page-sticky>
 
     <q-page-sticky position="right" :offset="[40, 0]">
@@ -56,7 +59,6 @@ export default {
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.timeline,
-    kMapMixins.playMode,
     kMapMixins.activity('map'),
     kMapMixins.locationIndicator,
     kMapMixins.levels,
@@ -200,6 +202,7 @@ export default {
     this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
+    this.$options.components['k-timeline-control'] = this.$load('KTimelineControl')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))

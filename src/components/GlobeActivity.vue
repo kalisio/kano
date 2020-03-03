@@ -45,7 +45,6 @@ export default {
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.timeline,
-    kMapMixins.playMode,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
