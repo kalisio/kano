@@ -126,9 +126,9 @@ module.exports = {
                             service.path.includes('hubeau-stations') ||
                             service.path.includes('hubeau-observations') ||
                             service.path.includes('openaq') ||
-                            service.path.includes('teleray-stations') ||
-                            service.path.includes('teleray-observations') ||
-                            service.path.includes('geoalerts'),
+                            service.path.includes('teleray-sensors') ||
+                            service.path.includes('teleray-measurements') ||
+                            service.path.includes('vigicrues'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally

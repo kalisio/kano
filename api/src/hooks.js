@@ -9,6 +9,13 @@ const { authenticate } = require('@feathersjs/authentication').hooks
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
 corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
+// Then rules for catalog, features, etc.
+corePermissions.defineAbilities.registerHook((subject, can, cannot) => {
+  can('service', 'features')
+  can('all', 'features')
+  can('all', 'catalog')
+  can('all', 'alerts')
+})
 
 module.exports = {
   before: {

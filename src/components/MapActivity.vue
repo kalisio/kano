@@ -45,7 +45,7 @@ import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
-import { mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk-map/client'
+import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
 import appHooks from '../main.hooks'
 import utils from '../utils'
 
@@ -72,7 +72,8 @@ export default {
     kMapMixins.map.tooltip,
     kMapMixins.map.popup,
     kMapMixins.map.activity,
-    kMapMixins.map.tiledMeshLayers
+    kMapMixins.map.tiledMeshLayers,
+    kMapMixins.map.mapillary
   ],
   inject: ['klayout'],
   provide () {
@@ -87,18 +88,11 @@ export default {
     }
   },
   methods: {
-    async getCatalogLayers () {
-      let layers = await kMapMixins.activity('map').methods.getCatalogLayers.call(this)
-      const gatewayToken = this.$api.get('storage').getItem(this.$config('gatewayJwt'))
-      return (gatewayToken ? utils.setGatewayJwt(layers, gatewayToken) : layers)
-    },
     async refreshActivity () {  
       this.clearActivity()
       this.clearNavigationBar()
       // Wait until map is ready
       await this.initializeMap()
-      // Add a scale control
-      L.control.scale().addTo(this.map)
       // Add app hooks to weacast client if separate from app client
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane

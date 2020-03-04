@@ -1,6 +1,5 @@
 import 'whatwg-fetch'
 import config from 'config'
-import logger from 'loglevel'
 import postRobot from 'post-robot'
 import { colors } from 'quasar'
 import utils from '../utils'

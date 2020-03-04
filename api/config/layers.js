@@ -190,6 +190,33 @@ module.exports = [
     }
   },
   {
+    name: 'Mapillary',
+    description: 'Mapillary coverage',
+    tags: [
+      'business'
+    ],
+    iconUrl: `https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg`,
+    attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
+    type: 'OverlayLayer',
+    leaflet: {
+      type: 'vectorGrid.protobuf',
+      source: `https://tiles3.mapillary.com/v0.1/{z}/{x}/{y}.mvt`,
+      interactive: true,
+      minZoom: 11,
+      maxNativeZoom: 14,
+      vectorTileLayerStyles: {
+        'mapillary-images': {
+		      radius: 0.01,
+			    color: "#FF0000"
+        },
+        'mapillary-sequences': {
+		  	  weight: 1,
+				  color: "#FF6E00"
+		    }	
+	    }
+    }
+  },
+  {
     name: 'Wind',
     description: 'Speed and direction',
     tags: [
