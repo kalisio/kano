@@ -193,7 +193,7 @@ module.exports = [
     name: 'Wind',
     description: 'Speed and direction',
     tags: [
-      'weather', 'live'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -266,7 +266,7 @@ module.exports = [
     name: 'Gust',
     description: 'Max wind speed',
     tags: [
-      'weather', 'live'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -303,7 +303,7 @@ module.exports = [
     name: 'Precipitations',
     description: '3h accumulation',
     tags: [
-      'weather', 'live'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -351,7 +351,7 @@ module.exports = [
     name: 'Temperature',
     description: 'Mean temperature',
     tags: [
-      'weather', 'live'
+      'weather'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
