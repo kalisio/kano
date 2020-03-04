@@ -10,7 +10,7 @@
     </q-page-sticky>
 
     <q-page-sticky position="left" :offset="[18, 0]">
-      <k-feature-info-box style="min-width: 150px; width: 15vw; max-height: 40vh" />
+      <k-feature-info-box style="min-width: 250px; width: 25vw;" />
     </q-page-sticky>
 
     <q-page-sticky position="top" :offset="[0, 0]">
@@ -67,6 +67,7 @@ export default {
     kMapMixins.map.style,
     kMapMixins.map.tooltip,
     kMapMixins.map.popup,
+    kMapMixins.map.infobox,
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.mapillary
