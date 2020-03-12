@@ -8739,9 +8739,10 @@ leaflet-fa-markers@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/leaflet-fa-markers/-/leaflet-fa-markers-0.0.5.tgz#5ef7c974962171640a8251e2b449b96af8bed98e"
 
-leaflet-filelayer@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/leaflet-filelayer/-/leaflet-filelayer-1.0.0.tgz#c0d86548d57de793738de70c1125ee3bdd5dd893"
+leaflet-filelayer@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/leaflet-filelayer/-/leaflet-filelayer-1.2.0.tgz#9f822e68a06072b0b0a8f328ba9419ba96bbccb1"
+  integrity sha512-H3HrOOM9bpkrRUacdnWISV0MKZXLBYsX24H4XV+55QbcGCvd9In6oPzANEnhsokHAwNWd9qP6GfiHEFCfn+qkA==
 
 leaflet-fullscreen@^1.0.2:
   version "1.0.2"

@@ -88,7 +88,7 @@
     "leaflet": "^1.2.0",
     "leaflet-draw": "^1.0.4",
     "leaflet-fa-markers": "^0.0.5",
-    "leaflet-filelayer": "^1.0.0",
+    "leaflet-filelayer": "^1.2.0",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-heatmap": "^1.0.0",
     "leaflet-pixi-overlay": "1.8.1",
