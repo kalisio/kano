@@ -1,4 +1,4 @@
-FROM node:8-buster-slim
+FROM node:12-buster-slim
 LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP
@@ -7,6 +7,9 @@ ARG BUILD_NUMBER
 
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
+
+# Install curl
+RUN apt-get update && apt-get -y install curl
 
 # Copy the built artefact.
 # Warning - 
