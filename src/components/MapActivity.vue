@@ -17,10 +17,6 @@
       <k-location-time-series :variables="currentVariables" />
     </q-page-sticky>
 
-    <q-page-sticky position="bottom-left" :offset="[18, 18]">
-      <k-mapillary-viewer />
-    </q-page-sticky>
-
     <q-page-sticky position="left" :offset="[18, 0]">
       <k-color-legend />
     </q-page-sticky>
@@ -77,8 +73,7 @@ export default {
     kMapMixins.map.popup,
     kMapMixins.map.infobox,
     kMapMixins.map.activity,
-    kMapMixins.map.tiledMeshLayers,
-    kMapMixins.map.mapillary
+    kMapMixins.map.tiledMeshLayers
   ],
   inject: ['klayout'],
   provide () {
@@ -204,7 +199,6 @@ export default {
     this.$options.components['k-timeline-control'] = this.$load('KTimelineControl')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
-    this.$options.components['k-mapillary-viewer'] = this.$load('KMapillaryViewer')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
