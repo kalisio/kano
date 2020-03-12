@@ -6,7 +6,7 @@
 
 <script>
 import { Loading, Dialog } from 'quasar'
-import { mixins, beforeGuard } from '@kalisio/kdk-core/client'
+import { mixins, beforeGuard } from '@kalisio/kdk/core.client'
 import config from 'config'
 import utils from '../utils'
 

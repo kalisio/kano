@@ -31,8 +31,8 @@
 import _ from 'lodash'
 import postRobot from 'post-robot'
 import Cesium from 'cesium/Source/Cesium.js'
-import { mixins as kCoreMixins } from '@kalisio/kdk-core/client'
-import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
 
 export default {
@@ -118,6 +118,8 @@ export default {
     // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
     // Required to get the access token from server
+  },
+  mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onFeatureClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
@@ -128,8 +130,6 @@ export default {
     this.$on('layer-hidden', this.onHiddenLayerEvent)
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$on('layer-removed', this.onRemovedLayerEvent)
-  },
-  mounted () {
   },
   beforeDestroy () {
     this.$events.$off('capabilities-api-changed', this.refreshActivity)

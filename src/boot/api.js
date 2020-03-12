@@ -6,7 +6,7 @@ import utils from '../utils'
 import appHooks from '../main.hooks'
 import services from '../services'
 import plugin from '../vue-kdk'
-import { kalisio, beforeGuard, authenticationGuard } from '@kalisio/kdk-core/client'
+import { kalisio, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 
 function updateThemeColors () {
   const theme = config.theme

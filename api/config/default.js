@@ -207,6 +207,9 @@ module.exports = {
   cesium: {
     token: process.env.CESIUM_TOKEN
   },
+  mapillary: {
+    clientID: process.env.MAPILLARY_CLIENTID
+  },
   geocoder: {
     providers: [{ provider: 'opendatafrance' }, { provider: 'openstreetmap' }]
   },

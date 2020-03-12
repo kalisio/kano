@@ -17,8 +17,12 @@
       <k-location-time-series :variables="currentVariables" />
     </q-page-sticky>
 
+    <q-page-sticky position="bottom-left" :offset="[18, 18]">
+      <k-mapillary-viewer />
+    </q-page-sticky>
+
     <q-page-sticky position="left" :offset="[18, 0]">
-      <k-color-legend/>
+      <k-color-legend />
     </q-page-sticky>
 
     <q-page-sticky position="bottom" :offset="[0, 40]">
@@ -41,8 +45,8 @@ import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import moment from 'moment'
-import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk-core/client'
-import { mixins as kMapMixins } from '@kalisio/kdk-map/client'
+import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
+import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import appHooks from '../main.hooks'
 import utils from '../utils'
 
@@ -203,6 +207,7 @@ export default {
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
+    this.$options.components['k-mapillary-viewer'] = this.$load('KMapillaryViewer')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)

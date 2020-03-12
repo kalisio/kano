@@ -2,8 +2,8 @@ import _ from 'lodash'
 import path from 'path'
 import fs from 'fs-extra'
 import zlib from 'zlib'
-import kCore, { permissions } from '@kalisio/kdk-core'
-import kMap, { createFeaturesService } from '@kalisio/kdk-map'
+import kCore, { permissions } from '@kalisio/kdk/core.api'
+import kMap, { createFeaturesService } from '@kalisio/kdk/map.api'
 import packageInfo from '../../package.json'
 
 const servicesPath = path.join(__dirname, 'services')
@@ -18,7 +18,8 @@ module.exports = async function () {
         name: 'kano',
         domain: app.get('domain'),
         version: packageInfo.version,
-        cesium: app.get('cesium')
+        cesium: app.get('cesium'),
+        mapillary: app.get('mapillary')
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER
@@ -108,7 +109,6 @@ module.exports = async function () {
       await featuresService.remove(null, { query: {} })
       if (path.extname(defaultLayer.fileName) === '.gz') {
         const extractedFileName = path.join(path.dirname(defaultLayer.fileName), path.basename(defaultLayer.fileName, '.gz'))
-        console.log(extractedFileName)
         fs.createReadStream(defaultLayer.fileName)
           .pipe(zlib.createGunzip())
           .pipe(fs.createWriteStream(extractedFileName))

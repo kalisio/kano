@@ -32,7 +32,7 @@ check_code $? "Builing the client"
 
 # Create an archive to speed docker build process
 cd ../..
-tar -zcf kdk.tgz kdk
+tar -zcf kalisio.tgz kalisio
 docker build --build-arg APP=$APP --build-arg FLAVOR=$FLAVOR --build-arg BUILD_NUMBER=$BUILD_NUMBER -f dockerfile -t kalisio/$APP:$TAG . 
 check_code $? "Building the app docker image"
 

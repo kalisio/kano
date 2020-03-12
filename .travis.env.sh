@@ -63,7 +63,7 @@ export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
 BUILD_BUCKET=${APP}-builds/$BUILD_NUMBER
 
 # Install the kdk
-git clone https://github.com/kalisio/kdk.git && cd kdk && yarn 
+git clone https://github.com/kalisio/kli.git kalisio && cd kalisio && yarn 
 
 # Clone the project and install the dependencies
 if [ -f $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$APP.js ]

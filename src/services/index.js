@@ -1,6 +1,6 @@
 import logger from 'loglevel'
-import kCore, { LocalSettingsService } from '@kalisio/kdk-core/client'
-import kMap from '@kalisio/kdk-map/client'
+import kCore, { LocalSettingsService } from '@kalisio/kdk/core.client'
+import kMap from '@kalisio/kdk/map.client'
 
 export default function () {
   const api = this

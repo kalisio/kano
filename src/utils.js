@@ -4,13 +4,13 @@ import Vue from 'vue'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
 import postRobot from 'post-robot'
-import { Store } from '@kalisio/kdk-core/client'
+import { Store } from '@kalisio/kdk/core.client'
 
 function loadComponent (component) {
   return () => {
-    return import(`@kalisio/kdk-core/lib/client/components/${component}.vue`)
+    return import(`@kalisio/kdk/lib/core/client/components/${component}.vue`)
       .catch(errorCore => {
-        return import(`@kalisio/kdk-map/lib/client/components/${component}.vue`)
+        return import(`@kalisio/kdk/lib/map/client/components/${component}.vue`)
           .catch(errorMap => {
             // Otherwise this should be app component
             return import(`@/${component}.vue`)
@@ -23,9 +23,9 @@ function loadComponent (component) {
 }
 
 function loadSchema (schema) {
-  return import(`@kalisio/kdk-core/lib/common/schemas/${schema}.json`)
+  return import(`@kalisio/kdk/lib/core/common/schemas/${schema}.json`)
     .catch(errorCore => {
-      return import(`@kalisio/kdk-map/lib/common/schemas/${schema}.json`)
+      return import(`@kalisio/kdk/lib/map/common/schemas/${schema}.json`)
         .catch(errorMap => {
           // Otherwise this should be app component
           return import(`./schemas/${schema}.json`)
@@ -38,9 +38,9 @@ function loadSchema (schema) {
 
 function loadTranslation (module, locale) {
   let translation = module + '_' + locale + '.json'
-  return import(`@kalisio/kdk-core/lib/client/i18n/${translation}`)
+  return import(`@kalisio/kdk/lib/core/client/i18n/${translation}`)
     .catch(errorCore => {
-      return import(`@kalisio/kdk-map/lib/client/i18n/${translation}`)
+      return import(`@kalisio/kdk/lib/map/client/i18n/${translation}`)
         .catch(errorMap => {
           return import(`./i18n/${translation}`)
             .catch(errorApp => {

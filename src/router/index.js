@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { Store } from '@kalisio/kdk-core/client'
+import { Store } from '@kalisio/kdk/core.client'
 import utils from '../utils'
 
 Vue.use(VueRouter)

@@ -1,5 +1,5 @@
 // Application hooks that run for every service
-import { hooks as coreHooks } from '@kalisio/kdk-core/client'
+import { hooks as coreHooks } from '@kalisio/kdk/core.client'
 
 export default {
   before: {

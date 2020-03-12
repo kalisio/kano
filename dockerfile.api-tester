@@ -16,7 +16,7 @@ ENV CC_TEST_REPORTER_ID=
 RUN apt-get update && apt-get -y install git
 
 # Install code climate
-WORKDIR /opt/kdk/$APP/api
+WORKDIR /opt/kalisio/$APP/api
 RUN \
   curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-${TEST_REPORTER_VERSION}-linux-amd64 > ./cc-test-reporter && \
   chmod +x ./cc-test-reporter && \
