@@ -58,7 +58,7 @@
   "dependencies": {
     "@feathersjs/client": "^3.5.4",
     "@panter/vue-i18next": "^0.9.1",
-    "@quasar/extras": "^1.2.0",
+    "@quasar/extras": "^1.6.0",
     "@turf/centroid": "^6.0.2",
     "@turf/distance": "^6.0.0",
     "Leaflet.Geodesic": "https://github.com/henrythasler/Leaflet.Geodesic.git",
@@ -109,7 +109,7 @@
     "password-generator": "^2.2.0",
     "pixi.js": "5.0.4",
     "post-robot": "^10.0.10",
-    "quasar": "^1.0.5",
+    "quasar": "^1.9.9",
     "showdown": "^1.8.6",
     "sift": "^8.0.0",
     "socket.io-client": "^2.0.1",
@@ -123,7 +123,7 @@
     "xml2js": "^0.4.22"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.4",
+    "@quasar/app": "^1.6.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "config": "^1.26.1",
