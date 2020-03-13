@@ -118,7 +118,9 @@ module.exports = {
       { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
       { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'wb_sunny',
-        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
+        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
+      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'archive',
+        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['archive'] } } } }
     ]
   },
   globeCatalog: {
@@ -132,7 +134,9 @@ module.exports = {
       { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fas fa-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
+      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'archive',
+        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['archive'] } } } }
     ]
   },
   mapActivity: {
