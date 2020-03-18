@@ -141,7 +141,12 @@ module.exports = {
   },
   mapActivity: {
     tools: ['side-nav', 'track-location', 'location-bar', 'globe', 'fullscreen', 'catalog'],
-    actions: ['probe-location', 'create-layer']
+    actions: ['probe-location', 'create-layer'],
+    layerActions: ['zoom-to', 'save', 'edit', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
+    components: [{
+      name: 'site-seeker',
+      component: 'SiteSeeker'
+    }]*/
   },
   globeActivity: {
     tools: ['side-nav', 'track-location', 'location-bar', 'map', 'vr', 'fullscreen', 'catalog'],
@@ -175,6 +180,7 @@ module.exports = {
     },
     // Default GeoJSON popup will display all properties
     popup: {},
+    cluster: { disableClusteringAtZoom: 18 },
     fileLayers: {
       fileSizeLimit : 1024 * 1024,
       formats: [ '.geojson', '.kml', '.gpx' ]
