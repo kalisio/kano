@@ -24,13 +24,13 @@ module.exports = {
             name: 'home',
             redirect: { name: 'map' }
           },
-          'map': {
-            path: 'map',
+          'map/:south?/:west?/:north?/:east?': {
+            name: 'map',
             component: 'MapActivity',
             embedApi: true
           },
-          'globe': {
-            path: 'globe',
+          'globe/:south?/:west?/:north?/:east?': {
+            name: 'globe',
             component: 'GlobeActivity',
             embedApi: true
           }
