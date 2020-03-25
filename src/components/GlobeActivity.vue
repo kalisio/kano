@@ -177,11 +177,4 @@ export default {
   .processing-cursor {
     cursor: wait;
   }
-  .timeline {
-    width: 70vw;
-    height: 110px;
-    background-color: #ffffff;
-    border: solid 1px lightgrey;
-    border-radius: 5px 5px 0px 0px;
-  }
 </style>
