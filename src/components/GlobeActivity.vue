@@ -1,30 +1,53 @@
 <template>
-  <q-page>
-
-    <div ref="globe" :style="viewStyle">
-      <q-resize-observer @resize="onGlobeResized" />
-      <div id="globe-credit" />
+  <k-page :padding="false">
+    <div slot="page-content" >
+      <!--
+        Globe
+       -->
+      <div ref="globe" :style="viewStyle">
+        <q-resize-observer @resize="onGlobeResized" />
+        <div id="globe-credit" />
+      </div>
+      <!--
+        NavigationBar
+       -->
+      <q-page-sticky position="top">
+        <div class="column items-center">
+          <k-navigation-bar v-if="isNavigationBarOpened" />
+          <k-opener v-model="isNavigationBarOpened" position="top" color="secondary" />
+        </div>
+      </q-page-sticky>
+      <!--
+        TimeLine
+       -->
+      <q-page-sticky position="bottom">
+        <div class="column items-center">
+          <k-opener v-model="isTimelineOpened" position="bottom" color="secondary"  />
+          <div v-if="isTimelineOpened" class="row justify-center items-end timeline">
+            <k-timeline style="width: 60vw;" />
+            <k-timeline-control style="width: 60vw;" />
+          </div>
+        </div>
+      </q-page-sticky>
+      <!--
+        FeatureInfoBox
+       -->
+      <q-page-sticky position="left" :offset="[18, 0]">
+        <k-feature-info-box style="min-width: 250px; width: 25vw;" />
+      </q-page-sticky>
+      <!--
+        LocationTimeSeries
+       -->
+      <q-page-sticky position="top" :offset="[0, 0]">
+        <k-location-time-series :variables="currentVariables" />
+      </q-page-sticky>
+       <!--
+        Extra components
+       -->  
+      <component v-for="component in components" :is="component.name" :key="component.name"></component>
     </div>
 
-    <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar />
-    </q-page-sticky>
-
-    <q-page-sticky position="left" :offset="[18, 0]">
-      <k-feature-info-box style="min-width: 250px; width: 25vw;" />
-    </q-page-sticky>
-
-    <q-page-sticky position="top" :offset="[0, 0]">
-      <k-location-time-series :variables="currentVariables" />
-    </q-page-sticky>
-
-    <q-page-sticky position="bottom" :offset="[0, 40]">
-      <k-timeline v-show="timeline.enabled"/>
-    </q-page-sticky>
-
-    <component v-for="component in components" :is="component.name" :key="component.name"></component>
-    
-  </q-page>
+  </k-page>
 </template>
 
 <script>
@@ -66,7 +89,9 @@ export default {
   },
   data () {
     return {
-      timeseriesWidgetPosition: 'top'
+      timeseriesWidgetPosition: 'top',
+      isNavigationBarOpened: true,
+      isTimelineOpened: false
     }
   },
   computed: {
@@ -111,8 +136,11 @@ export default {
   },
   created () {
     // Load the required components
-    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')    
+    this.$options.components['k-page'] = this.$load('layout/KPage')
+    this.$options.components['k-opener'] = this.$load('layout/KOpener')
+    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
+    this.$options.components['k-timeline-control'] = this.$load('KTimelineControl')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
@@ -147,10 +175,17 @@ export default {
 </script>
 
 <style>
-.probe-cursor {
-  cursor: crosshair;
-}
-.processing-cursor {
-  cursor: wait;
-}
+  .probe-cursor {
+    cursor: crosshair;
+  }
+  .processing-cursor {
+    cursor: wait;
+  }
+  .timeline {
+    width: 70vw;
+    height: 110px;
+    background-color: #ffffff;
+    border: solid 1px lightgrey;
+    border-radius: 5px 5px 0px 0px;
+  }
 </style>

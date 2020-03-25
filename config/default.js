@@ -74,15 +74,17 @@ module.exports = {
     }
   },
   layout: {
-    view: 'lHh LpR lFf',
+    view: 'lhh LpR lff',
     leftDrawer: {
       behavior: 'mobile',
       component: {
         name: 'layout/KSideNav'
-      }
+      },
+      opener: true
     },
     rightDrawer: {
-      behavior: 'mobile'
+      behavior: 'mobile',
+      opener: true
     }
   },
   sideNav: {
@@ -140,7 +142,7 @@ module.exports = {
     ]
   },
   mapActivity: {
-    tools: ['side-nav', 'track-location', 'location-bar', 'globe', 'fullscreen', 'catalog'],
+    tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
     layerActions: ['zoom-to', 'save', 'edit', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
     components: [{
@@ -149,7 +151,7 @@ module.exports = {
     }]*/
   },
   globeActivity: {
-    tools: ['side-nav', 'track-location', 'location-bar', 'map', 'vr', 'fullscreen', 'catalog'],
+    tools: ['map', 'track-location', 'location-bar', 'vr', 'fullscreen'],
     actions: ['probe-location']
   },
   map: {

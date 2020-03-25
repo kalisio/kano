@@ -1,40 +1,63 @@
 <template>
-  <q-page>
-    
-    <div ref="map" :style="viewStyle">
-      <q-resize-observer @resize="onMapResized" />
-    </div>
-
-    <q-page-sticky position="top" :offset="[0, 18]">
-      <k-navigation-bar />
-    </q-page-sticky>
-
-    <q-page-sticky position="left" :offset="[18, 0]">
-      <k-feature-info-box style="min-width: 250px; width: 25vw;" />
-    </q-page-sticky>
-
-    <q-page-sticky position="top" :offset="[0, 0]">
-      <k-location-time-series :variables="currentVariables" />
-    </q-page-sticky>
-
-    <q-page-sticky position="left" :offset="[18, 0]">
-      <k-color-legend />
-    </q-page-sticky>
-
-    <q-page-sticky position="bottom" :offset="[0, 40]">
-      <div class="column q-gutter-md">
-        <k-timeline v-show="timeline.enabled"/>
-        <k-timeline-control v-show="timeline.enabled"/>
+  <k-page :padding="false">
+    <template v-slot:page-content>
+      <!--
+        Map
+       -->
+      <div ref="map" :style="viewStyle">
+        <q-resize-observer @resize="onMapResized" />
       </div>
-    </q-page-sticky>
-
-    <q-page-sticky position="right" :offset="[40, 0]">
-      <k-level-slider/>
-    </q-page-sticky>
-
-    <component v-for="component in components" :is="component.name" :key="component.name"></component>
-
-  </q-page>
+      <!--
+        NavigationBar
+       -->
+      <q-page-sticky position="top">
+        <div class="column items-center">
+          <k-navigation-bar v-if="isNavigationBarOpened" />
+          <k-opener v-model="isNavigationBarOpened" position="top" color="secondary" />
+        </div>
+      </q-page-sticky>
+      <!--
+        TimeLine
+       -->
+      <q-page-sticky position="bottom">
+        <div class="column items-center">
+          <k-opener v-model="isTimelineOpened" position="bottom" color="secondary"  />
+          <div v-if="isTimelineOpened" class="row justify-center items-end timeline">
+            <k-timeline style="width: 60vw;" />
+            <k-timeline-control style="width: 60vw;" />
+          </div>
+        </div>
+      </q-page-sticky>
+      <!--
+        FeatureInfoBox
+       -->
+       <q-page-sticky position="left" :offset="[18, 0]">
+        <k-feature-info-box style="min-width: 250px; width: 25vw;" />
+      </q-page-sticky>
+      <!--
+        LocationTimeSeries
+       -->
+      <q-page-sticky position="top" :offset="[0, 0]">
+        <k-location-time-series :variables="currentVariables" />
+      </q-page-sticky>
+      <!--
+        ColorLegend
+       -->
+      <q-page-sticky position="left" :offset="[18, 0]">
+        <k-color-legend />
+      </q-page-sticky>
+      <!--
+        LevelSlider
+       -->
+      <q-page-sticky position="right" :offset="[40, 0]">
+        <k-level-slider />
+      </q-page-sticky>
+       <!--
+        Extra components
+       -->
+      <component v-for="component in components" :is="component.name" :key="component.name"></component>
+    </template>
+  </k-page>
 </template>
 
 <script>
@@ -86,6 +109,12 @@ export default {
   computed: {
     components () {
       return _.get(this, 'activityOptions.components', [])
+    }
+  },
+  data () {
+    return {
+      isNavigationBarOpened: true,
+      isTimelineOpened: false
     }
   },
   methods: {
@@ -193,13 +222,16 @@ export default {
   },
   created () {
     // Load the required components
+    this.$options.components['k-page'] = this.$load('layout/KPage')
+    this.$options.components['k-opener'] = this.$load('layout/KOpener')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
-    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-timeline-control'] = this.$load('KTimelineControl')
+    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
+    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
+    // Load extra components
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
@@ -238,9 +270,17 @@ export default {
 </script>
 
 <style lang="stylus">
-.probe-cursor 
-  cursor: crosshair;
-
-.processing-cursor 
-  cursor: wait;
+  .probe-cursor {
+    cursor: crosshair;
+  }
+  .processing-cursor {
+    cursor: wait;
+  }
+  .timeline {
+    width: 70vw;
+    height: 110px;
+    background-color: #ffffff;
+    border: solid 1px lightgrey;
+    border-radius: 5px 5px 0px 0px;
+  }
 </style>

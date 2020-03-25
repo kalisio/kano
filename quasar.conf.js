@@ -86,7 +86,8 @@ module.exports = function (ctx) {
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'TouchSwipe'
       ],
 
       // Quasar plugins
@@ -98,6 +99,8 @@ module.exports = function (ctx) {
         'AppFullscreen'
       ]
     },
+
+    animations: [],
 
     supportIE: false,
 
@@ -147,9 +150,6 @@ module.exports = function (ctx) {
       // port: 8080,
       open: true // opens browser window automatically
     },
-
-    // animations: 'all', // --- includes all animations
-    animations: [],
 
     ssr: {
       pwa: false
