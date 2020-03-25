@@ -28,6 +28,7 @@ module.exports = function (ctx) {
     extras: [
       'roboto-font',
       'material-icons',
+      'line-awesome',
       'fontawesome-v5'
     ],
 
