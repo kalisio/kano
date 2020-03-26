@@ -105,7 +105,7 @@ export default {
       // Wait until viewer is ready
       await this.initializeGlobe(token)
       // Setup the right pane
-      this.setRightDrawer('KCatalogPanel', this.$data)
+      this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
     },

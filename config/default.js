@@ -111,33 +111,33 @@ module.exports = {
   },
   mapCatalog: {
     categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
+      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group', 
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
-      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'layers',
+      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fas fa-map-marker',
+      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'las la-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
+      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'wb_sunny',
+      { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'las la-cloud-sun-rain', component: 'catalog/KWeatherForecastSelector',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
-      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'archive',
+      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'las la-archive',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['archive'] } } } }
     ]
   },
   globeCatalog: {
     categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'fas fa-map',
+      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
-      { name: 'TerrainLayers', label: 'KCatalogPanel.TERRAIN_LAYERS', icon: 'terrain',
+      { name: 'TerrainLayers', label: 'KCatalogPanel.TERRAIN_LAYERS', icon: 'las la-mountain',
         options: { exclusive: true, filter: { type: 'TerrainLayer' } } },
-      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'layers',
+      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'fas fa-map-marker',
+      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'las la-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'fas fa-map-pin',
+      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'archive',
+      { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'las la-archive',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['archive'] } } } }
     ]
   },
