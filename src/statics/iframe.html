@@ -8,6 +8,7 @@
 
     <title>Kano IFrame integration</title>
     <link rel="shortcut icon" type="image/x-icon" href="statics/kano-icon-32x32.png">
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
     <script src="./flightpath.js"></script>
     <script src="./flightradar.js"></script>
     <script src="./post-robot.min.js"></script>
@@ -22,12 +23,38 @@
         var lat = 43.604652 + 0.5 * (Math.random() - 0.5)
         var alt = 8519.16 + 1000 * (Math.random() - 0.5)
         var track = 360 * Math.random()
+        var speed = 300 // miles / h
+        // Compute speed vector data for 3/5/10 minutes
+        // We duplicate points to avoid color interpolation and we insert points to control opacity
+        /*
+        var durations = [0, 3, 5, 10]
+        var colors = ['red', 'yellow', 'blue']
+        var speedVectors = []
+        for (var i = 0; i < 3; i++) {
+          var color = colors[i]
+          var domain = [durations[i], durations[i+1] - 1, durations[i+1]]
+          var colorramp = chroma.scale([
+            chroma(color).alpha(0),
+            chroma(color).alpha(0),
+            chroma(color).alpha(1)]).domain(domain)
+          var destinations = domain.map(duration => turf.destination([long, lat], duration * speed / 60, track, { units: 'miles' }))
+          speedVectors.push({
+            type: 'Feature',
+            properties: { id: i+1, gradient: domain.map(duration => colorramp(duration).hex()), weight: 8 },
+            geometry: {
+              type: 'LineString',
+              coordinates: destinations.map(destination => destination.geometry.coordinates)
+            }
+          })
+        }
+        */
         return {
           type: 'FeatureCollection',
           features: [
             {
               type: 'Feature',
               properties: {
+                id: 0,
                 callsign: 'AIB03KM',
                 track: track,
                 type: (Math.random() > 0.5 ? 'a380' : 'a320')
@@ -37,7 +64,7 @@
                 coordinates: [long, lat, alt]
               }
             }
-          ]
+          ]//.concat(speedVectors)
         }
       }
       function getGeoJsonAcarsFeature (id) {
