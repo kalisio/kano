@@ -119,7 +119,7 @@ module.exports = {
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'las la-cloud-sun-rain', component: 'catalog/KWeatherForecastSelector',
+      { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'las la-cloud-sun-rain', component: 'catalog/KWeatherLayersSelector',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } },
       { name: 'ArchiveLayers', label: 'KCatalogPanel.ARCHIVE_LAYERS', icon: 'las la-archive',
         options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['archive'] } } } }

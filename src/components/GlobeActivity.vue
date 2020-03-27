@@ -1,6 +1,6 @@
 <template>
   <k-page :padding="false">
-    <div slot="page-content" >
+    <template v-slot:page-content>
       <!--
         Globe
        -->
@@ -42,8 +42,7 @@
         Extra components
        -->  
       <component v-for="component in components" :is="component.name" :key="component.name"></component>
-    </div>
-
+    </template>
   </k-page>
 </template>
 
