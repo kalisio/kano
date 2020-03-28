@@ -220,7 +220,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener'] = this.$load('layout/KOpener')
+    this.$options.components['k-opener'] = this.$load('frame/KOpener')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('timeline/KTimeline')
     this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
