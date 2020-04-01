@@ -71,6 +71,7 @@ module.exports = function (ctx) {
         'QScrollArea',
         'QSelect',
         'QSeparator',
+        'QSlider',
         'QSpace',
         'QSpinnerCube',
         'QTab',
@@ -101,7 +102,10 @@ module.exports = function (ctx) {
       ]
     },
 
-    animations: [],
+    animations: [
+      'zoomIn',
+      'zoomOut'
+    ],
 
     supportIE: false,
 

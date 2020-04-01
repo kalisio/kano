@@ -22,7 +22,7 @@
       <q-page-sticky position="bottom">
         <div class="column items-center">
           <k-opener v-model="isTimelineOpened" position="bottom" color="secondary"  />
-          <k-timeline v-if="isTimelineOpened" style="width: 70vw;" />
+          <k-timeline v-if="isTimelineOpened" style="width: 60vw;" />
         </div>
       </q-page-sticky>
       <!--
@@ -222,7 +222,7 @@ export default {
     this.$options.components['k-page'] = this.$load('layout/KPage')
     this.$options.components['k-opener'] = this.$load('frame/KOpener')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-timeline'] = this.$load('timeline/KTimeline')
+    this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
