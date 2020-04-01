@@ -92,7 +92,7 @@
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-heatmap": "^1.0.0",
     "leaflet-pixi-overlay": "1.8.1",
-    "leaflet-realtime": "https://github.com/kalisio/leaflet-realtime",
+    "leaflet-realtime": "^2.2.0",
     "leaflet-timedimension": "^1.1.0",
     "leaflet-velocity": "^1.2.2",
     "leaflet.locatecontrol": "^0.67.0",
