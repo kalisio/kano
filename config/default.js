@@ -176,8 +176,9 @@ module.exports = {
       'fill-opacity': 0.5,
       'fill-color': 'green'
     },
-    // Default GeoJSON popup will display all properties
-    popup: {},
+    // Default GeoJSON infobox will display all properties
+    popup: { pick: [] },
+    infobox: {},
     cluster: { disableClusteringAtZoom: 18 },
     fileLayers: {
       fileSizeLimit : 1024 * 1024,
@@ -238,7 +239,9 @@ module.exports = {
         }
       }
     },
+    // Default GeoJSON infobox will display all properties
     popup: {
+      pick: [],
       options: {
         showBackground : true,
         backgroundColor: 'Cesium.Color.WHITE',
@@ -253,6 +256,7 @@ module.exports = {
         }
       }
     },
+    infobox: {},
     clusterStyle: {
       label: {
         show: true,
