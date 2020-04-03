@@ -36,7 +36,7 @@ module.exports = {
       }, authenticate('jwt')),
       coreHooks.processObjectIDs,
       coreHooks.authorise],
-    find: [fuzzySearch()],
+    find: [fuzzySearch(), coreHooks.marshallCollationQuery],
     get: [],
     create: [],
     update: [coreHooks.preventUpdatePerspectives],

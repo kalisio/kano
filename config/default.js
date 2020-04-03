@@ -140,7 +140,7 @@ module.exports = {
   mapActivity: {
     tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
-    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
+    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
     components: [{
       name: 'site-seeker',
       component: 'SiteSeeker'
