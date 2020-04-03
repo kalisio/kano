@@ -94,8 +94,18 @@
       "type": "number",
       "group": "schemas.TIMELINE_SETTINGS",
       "field": {
-        "component": "form/KNumberField",
-        "helper": "schemas.TIMELINE_STEP"
+        "component": "form/KSelectField",
+        "helper": "schemas.TIMELINE_STEP",
+        "options": [
+          { "label": "5m", "value": 5  },
+          { "label": "10m", "value": 10 },
+          { "label": "15m", "value": 15 },
+          { "label": "30m", "value": 30 },
+          { "label": "1h", "value": 60, "selected": true },
+          { "label": "3h", "value": 180 },
+          { "label": "6h", "value": 360 },
+          { "label": "12h", "value": 720 }
+        ]
       }
     },
     "timelineReference": {
