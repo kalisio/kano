@@ -140,7 +140,7 @@ module.exports = {
   mapActivity: {
     tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
-    layerActions: ['zoom-to', 'save', 'edit', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
+    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
     components: [{
       name: 'site-seeker',
       component: 'SiteSeeker'
@@ -167,8 +167,21 @@ module.exports = {
       'fill-opacity': 0.5,
       'fill-color': 'green'
     },
+    // Default GeoJSON layer style for polygons/lines edition
+    editFeatureStyle: {
+      opacity: 1,
+      color: 'red',
+      'fill-opacity': 0.5,
+      'fill-color': 'green'
+    },
     // Default GeoJSON layer style for points
     pointStyle: {
+      'icon-color': '#FFFFFF',
+      'marker-color': '#2196f3',
+      'icon-classes': 'fas fa-circle'
+    },
+    // Default GeoJSON layer style for points edition
+    editPointStyle: {
       'marker-type': 'circleMarker',
       radius: 6,
       stroke: 'red',
