@@ -14,7 +14,7 @@
       <q-page-sticky position="top">
         <div class="column items-center">
           <k-navigation-bar v-if="isNavigationBarOpened" />
-          <k-opener v-model="isNavigationBarOpened" position="top" color="secondary" />
+          <k-opener v-model="isNavigationBarOpened" position="top" />
         </div>
       </q-page-sticky>
       <!--
@@ -22,7 +22,7 @@
        -->
       <q-page-sticky position="bottom">
         <div class="column items-center">
-          <k-opener v-model="isTimelineOpened" position="bottom" color="secondary"  />
+          <k-opener v-model="isTimelineOpened" position="bottom" />
           <k-timeline v-if="isTimelineOpened" style="width: 70vw;" />
         </div>
       </q-page-sticky>
@@ -63,7 +63,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.timeline,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
