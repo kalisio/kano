@@ -402,7 +402,7 @@ module.exports = [
         }
       }
     ],
-    /* When available at different levels 
+    /* When available at different levels
     levels: {
       name: 'pressure',
       label: 'Levels.PRESSURE',
@@ -433,10 +433,12 @@ module.exports = [
     featureId: 'gid',
     service: 'vigicrues',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    from: 'PT-15M',
+    to: 'PT-15M',
+    every: 'PT15M',
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
       popup: {
         pick: [
           'NomEntVigiCru'
@@ -446,7 +448,6 @@ module.exports = [
     cesium: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
       popup: {
         pick: [
           'NomEntVigiCru'
@@ -467,7 +468,10 @@ module.exports = [
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-stations',
     featureId: 'code_station',
-    history: 86400,
+    from: 'P-7D',
+    to: 'PT-10M',
+    every: 'PT10M',
+    queryFrom: 'PT-30M',
     variables: [
       {
         name: 'H',
@@ -499,7 +503,6 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -519,7 +522,6 @@ module.exports = [
     cesium: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'water',
       'marker-color': '#00a9ce',
@@ -548,7 +550,10 @@ module.exports = [
     service: 'openaq',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'location',
-    history: 86400,
+    from: 'P-7D',
+    to: 'PT-15M',
+    every: 'PT15M',
+    queryFrom: 'P-1D',
     variables: [
       {
         name: 'pm25',
@@ -645,8 +650,6 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
-      queryInterval: 86400000,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#0B75A9',
       'icon-color': 'white',
@@ -676,8 +679,6 @@ module.exports = [
     cesium: {
       type: 'geoJson',
       realtime: true,
-      interval: 900000,
-      queryInterval: 86400000 * 2,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'air',
       'marker-color': '#0B75A9',
@@ -710,7 +711,10 @@ module.exports = [
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'teleray-sensors',
     featureId: 'irsnId',
-    history: 86400,
+    from: 'P-7D',
+    to: 'PT-10M',
+    every: 'PT10M',
+    queryFrom: 'PT-1H',
     variables: [
       {
         name: 'value',
@@ -729,8 +733,6 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      interval: 600000,
-      queryInterval: 3600000,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === "VA") { %>darkblue<% }
                           else if (properties.visibility === "NV") { %>orange<% }
@@ -753,8 +755,6 @@ module.exports = [
     cesium: {
       type: 'geoJson',
       realtime: true,
-      interval: 600000,
-      queryInterval: 3600000,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'lighthouse',
       'marker-color': '#180EF1',
