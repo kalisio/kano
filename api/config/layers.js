@@ -193,7 +193,7 @@ module.exports = [
     name: 'Mapillary',
     description: 'Mapillary coverage',
     tags: [
-      'business'
+      'captures'
     ],
     iconUrl: `https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg`,
     attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
@@ -205,14 +205,13 @@ module.exports = [
       minZoom: 11,
       maxNativeZoom: 14,
       vectorTileLayerStyles: {
-        'mapillary-images': {
-		      radius: 0.01,
-			    color: "#FF0000"
-        },
         'mapillary-sequences': {
-		  	  weight: 1,
-				  color: "#FF6E00"
-		    }	
+          weight: 2,
+          color: '#59AF8499'
+        },
+        'mapillary-images': {
+          opacity: 0
+        }
 	    }
     }
   },
@@ -767,6 +766,149 @@ module.exports = [
         template: `<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
+    }
+  },
+  {
+    name: 'Température',
+    description: 'Température moyenne à 2m archivée sur OPeNDAP/THREDDS',
+    tags: [
+        'weather', 'archive'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    variables: [
+        {
+            name: 'temperature',
+            label: 'Variables.TEMPERATURE',
+            units: [
+                'degC', 'K', 'degF'
+            ],
+            range: [0, 50],
+            chartjs: {
+                backgroundColor: 'rgba(255, 215, 0, 128)',
+                borderColor: 'rgb(255, 215, 0)',
+                fill: false
+            },
+            chromajs: {
+                scale: 'RdBu',
+                invertScale: true,
+                domain: [-5, 25]
+            }
+        }
+    ],
+    meteo_model: [
+        {
+            model: 'arpege-world',
+            from: 'P-60D',
+            to: 'PT-6H',
+            dynprops: {
+                url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-05/<%- folder %>/T6086_G_T_Hau_<%- file %>.grb" },
+                dimensionsAsValues$time: { floatTemplate: "<% const v = forecastOffset.hours(); %><%- v %>" }
+            },
+            opendap: {
+                variable: 'Temperature_height_above_ground',
+                dimensionsAsValues: { height_above_ground: 2.0 },
+                latitude: 'lat',
+                longitude: 'lon',
+                converter: 'kelvin2celsius'
+            }
+        },
+        {
+            model: 'arpege-europe',
+            from: 'P-60D',
+            to: 'PT-6H',
+            dynprops: {
+                url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-01/<%- folder %>/T10063_T_Hau_<%- file %>.grb" },
+                dimensionsAsValues$time: { floatTemplate: "<%const v = forecastOffset.hours(); %><%- v %>" }
+            },
+            opendap: {
+                variable: 'Temperature_height_above_ground',
+                dimensionsAsValues: { height_above_ground: 2.0 },
+                latitude: 'lat',
+                longitude: 'lon',
+                converter: 'kelvin2celsius'
+            }
+        }
+    ],
+    leaflet: {
+        type: 'tiledMeshLayer',
+        resolutionScale: [ 2.0, 2.0 ],
+        opacity: 0.6
+    }
+},
+{
+    name: 'Précipitations',
+    description: 'Accumulation sur 3h archivée sur OPeNDAP/THREDDS',
+    tags: [
+        'weather', 'archive'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    variables: [
+        {
+            name: 'precipitations',
+            label: 'Variables.PRECIPITATIONS',
+            units: [
+              'mm'
+            ],
+            range: [0, 300],
+            chartjs: {
+              backgroundColor: 'rgba(54, 162, 235, 128)',
+              borderColor: 'rgb(54, 162, 235)',
+              fill: false
+            },
+            chromajs: {
+              scale: 'BuPu',
+              classes: [
+                0,
+                1,
+                2,
+                4,
+                10,
+                25,
+                50,
+                100,
+                300
+              ]
+            }
+        }
+    ],
+    meteo_model: [
+        {
+            model: 'arpege-world',
+            from: 'P-60D',
+            to: 'PT-6H',
+            dynprops: {
+                url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-05/<%- folder %>/T6086_G_PREC_GDE_ECH_Sol_<%- file %>.grb" },
+                dimensionsAsValues$time: { floatTemplate: "<% const v = forecastOffset.hours(); %><%- v %>" }
+            },
+            opendap: {
+                variable: 'VAR85-0-1-157_surface_Mixed_intervals_Accumulation',
+                latitude: 'lat',
+                longitude: 'lon'
+            }
+        },
+        {
+            model: 'arpege-europe',
+            from: 'P-60D',
+            to: 'PT-6H',
+            dynprops: {
+                url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = runTime.format('YYYYMMDDHH0000') %>https://thredds.c3x.kalisio.fr/thredds/dodsC/mf-arpege-01/<%- folder %>/T10063_PREC_GDE_ECH_Sol_<%- file %>.grb" },
+                dimensionsAsValues$time: { floatTemplate: "<%const v = forecastOffset.hours(); %><%- v %>" }
+            },
+            opendap: {
+                variable: 'VAR85-0-1-157_surface_Mixed_intervals_Accumulation',
+                latitude: 'lat',
+                longitude: 'lon'
+            }
+        }
+    ],
+    leaflet: {
+        type: 'tiledMeshLayer',
+        resolutionScale: [ 2.0, 2.0 ],
+        opacity: 0.6
     }
   }
 ]
