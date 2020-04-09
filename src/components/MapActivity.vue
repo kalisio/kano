@@ -28,7 +28,7 @@
       <!--
         FeatureInfoBox
        -->
-       <q-page-sticky position="left" :offset="[18, 0]">
+      <q-page-sticky position="left" :offset="[18, 0]">
         <k-feature-info-box style="min-width: 250px; width: 25vw;" />
       </q-page-sticky>
       <!--
