@@ -502,6 +502,8 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
+      tiled: true,
+      minZoom: 12,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -512,10 +514,10 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
-                   if (feature.time && feature.time.H) { %></br><%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %></br>Q = <%= properties.Q.toFixed(2) %> m3/s<% }
-                   if (feature.time && feature.time.Q) { %></br><%= new Date(feature.time.Q).toLocaleString() %><% } %>`
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m</br><% }
+                   if (feature.time && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %></br><% }
+                   if (properties.Q) { %>Q = <%= properties.Q.toFixed(2) %> m3/s</br><% }
+                   if (feature.time && feature.time.Q) { %><%= new Date(feature.time.Q).toLocaleString() %></br><% } %>`
       }
     },
     cesium: {
@@ -530,10 +532,10 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m<% }
-                   if (feature.time && feature.time.H) { %>\n<%= new Date(feature.time.H).toLocaleString() %><% }
-                   if (properties.Q) { %>\nQ = <%= properties.Q.toFixed(2) %> m3/s<% }
-                   if (feature.time && feature.time.Q) { %>\n<%= new Date(feature.time.Q).toLocaleString() %><% } %>`
+        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m\n<% }
+                   if (feature.time && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }
+                   if (properties.Q) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }
+                   if (feature.time && feature.time.Q) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>`
       }
     }
   },
@@ -649,6 +651,8 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
+      tiled: true,
+      minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#0B75A9',
       'icon-color': 'white',
@@ -659,20 +663,20 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }
-                   if (feature.time && feature.time.pm25) { %></br><%= new Date(feature.time.pm25).toLocaleString() %><% }
-                   if (properties.pm10) { %></br>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }
-                   if (feature.time && feature.time.pm10) { %></br><%= new Date(feature.time.pm10).toLocaleString() %><% }
-                   if (properties.so2) { %></br>SO2 = <%= properties.so2.toFixed(2) %> ppm<% }
-                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %><% }
-                   if (properties.no2) { %></br>NO2 = <%= properties.no2.toFixed(2) %> ppm<% }
-                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %><% }
-                   if (properties.o3) { %></br>O3 = <%= properties.o3.toFixed(2) %> ppm<% }
-                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %><% }
-                   if (properties.co) { %></br>CO = <%= properties.co.toFixed(2) %> ppm<% }
-                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %><% }
-                   if (properties.bc) { %></br>BC = <%= properties.bc.toFixed(2) %> µg/m³<% }
-                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %><% } %>`
+        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³</br><% }
+                   if (feature.time && feature.time.pm25) { %><%= new Date(feature.time.pm25).toLocaleString() %></br><% }
+                   if (properties.pm10) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³</br><% }
+                   if (feature.time && feature.time.pm10) { %><%= new Date(feature.time.pm10).toLocaleString() %></br><% }
+                   if (properties.so2) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm</br><% }
+                   if (feature.time && feature.time.so2) { %><%= new Date(feature.time.so2).toLocaleString() %></br><% }
+                   if (properties.no2) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm</br><% }
+                   if (feature.time && feature.time.no2) { %><%= new Date(feature.time.no2).toLocaleString() %></br><% }
+                   if (properties.o3) { %>O3 = <%= properties.o3.toFixed(2) %> ppm</br><% }
+                   if (feature.time && feature.time.o3) { %><%= new Date(feature.time.o3).toLocaleString() %></br><% }
+                   if (properties.co) { %>CO = <%= properties.co.toFixed(2) %> ppm</br><% }
+                   if (feature.time && feature.time.co) { %><%= new Date(feature.time.co).toLocaleString() %></br><% }
+                   if (properties.bc) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³</br><% }
+                   if (feature.time && feature.time.bc) { %><%= new Date(feature.time.bc).toLocaleString() %></br><% } %>`
       }
     },
     cesium: {
@@ -687,13 +691,20 @@ module.exports = [
         ]
       },
       tooltip: {
-        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³<% }
-                   if (properties.pm10) { %>\nPM10 = <%= properties.pm10.toFixed(2) %> µg/m³<% }
-                   if (properties.so2) { %>\nSO2 = <%= properties.so2.toFixed(2) %> ppm<% }
-                   if (properties.no2) { %>\nNO2 = <%= properties.no2.toFixed(2) %> ppm<% }
-                   if (properties.o3) { %>\nO3 = <%= properties.o3.toFixed(2) %> ppm<% }
-                   if (properties.co) { %>\nCO = <%= properties.co.toFixed(2) %> ppm<% }
-                   if (properties.bc) { %>\nBC = <%= properties.bc.toFixed(2) %> µg/m³<% } %>`
+        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³\n<% }
+                   if (feature.time && feature.time.pm25) { %><%= new Date(feature.time.pm25).toLocaleString() %>\n<% }
+                   if (properties.pm10) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³\n<% }
+                   if (feature.time && feature.time.pm10) { %><%= new Date(feature.time.pm10).toLocaleString() %>\n<% }
+                   if (properties.so2) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm\n<% }
+                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %>\n<% }
+                   if (properties.no2) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm\n<% }
+                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %>\n<% }
+                   if (properties.o3) { %>O3 = <%= properties.o3.toFixed(2) %> ppm\n<% }
+                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %>\n<% }
+                   if (properties.co) { %>CO = <%= properties.co.toFixed(2) %> ppm\n<% }
+                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %>\n<% }
+                   if (properties.bc) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³\n<% }
+                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %>\n<% } %>`
       }
     }
   },
@@ -732,6 +743,8 @@ module.exports = [
     leaflet: {
       type: 'geoJson',
       realtime: true,
+      tiled: true,
+      minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === "VA") { %>darkblue<% }
                           else if (properties.visibility === "NV") { %>orange<% }
