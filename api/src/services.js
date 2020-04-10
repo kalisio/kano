@@ -85,7 +85,8 @@ module.exports = async function () {
       app.logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
       await catalogService.create(defaultLayer)
     } else {
-      app.logger.info('Reusing default layer (name = ' + defaultLayer.name + ')')
+      app.logger.info('Updating default layer (name = ' + defaultLayer.name + ')')
+      await catalogService.update(createdLayer._id, defaultLayer)
     }
     // Check if service(s) are associated to this layer
     let featuresService
