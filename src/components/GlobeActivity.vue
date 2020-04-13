@@ -99,6 +99,7 @@ export default {
       await this.initializeGlobe(token)
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
+      // Setup the widgets
       this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
       // Setup the actions
       this.registerActivityActions()      

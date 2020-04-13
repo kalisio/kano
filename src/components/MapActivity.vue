@@ -28,9 +28,9 @@
       <!--
         LocationTimeSeries
        -->
-      <!--q-page-sticky position="top" :offset="[0, 0]">
+      <q-page-sticky position="top" :offset="[0, 0]">
         <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky-->
+      </q-page-sticky>
       <!--
         ColorLegend
        -->
@@ -121,7 +121,7 @@ export default {
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
       this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
-      this.registerWidget('time-series', 'las la-chart-area', 'widgets/KTimeSeriesWidget', this.$data)
+      //this.registerWidget('time-series', 'las la-chart-area', 'widgets/KTimeSeriesWidget', this.$data)
       if (this.mapillaryClientID) this.registerWidget('mapillary', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
       // Setup the actions
       this.registerActivityActions()      
@@ -225,7 +225,6 @@ export default {
     this.$options.components['k-opener'] = this.$load('frame/KOpener')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
-    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
