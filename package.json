@@ -59,6 +59,7 @@
     "@feathersjs/client": "^3.5.4",
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.6.0",
+    "@turf/bbox": "^6.0.1",
     "@turf/centroid": "^6.0.2",
     "@turf/distance": "^6.0.0",
     "Leaflet.Geodesic": "https://github.com/henrythasler/Leaflet.Geodesic.git",

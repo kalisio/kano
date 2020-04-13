@@ -193,7 +193,7 @@ module.exports = [
     name: 'Mapillary',
     description: 'Mapillary coverage',
     tags: [
-      'captures'
+      'captured'
     ],
     iconUrl: `https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg`,
     attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',

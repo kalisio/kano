@@ -115,6 +115,8 @@ module.exports = {
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
+      { name: 'CapturedLayers', label: 'KCatalogPanel.CAPTURED_LAYERS', icon: 'las la-street-view',
+        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } } },
       { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'las la-map-marker',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
       { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',

@@ -1,5 +1,5 @@
 <template>
-  <k-page :padding="false">
+  <k-page ref="page" :padding="false">
     <template v-slot:page-content>
       <!--
         Globe
@@ -25,12 +25,6 @@
           <k-opener v-model="isTimelineOpened" position="bottom" />
           <k-timeline v-if="isTimelineOpened" style="width: 60vw;" />
         </div>
-      </q-page-sticky>
-      <!--
-        FeatureInfoBox
-       -->
-      <q-page-sticky position="left" :offset="[18, 0]">
-        <k-feature-info-box style="min-width: 250px; width: 25vw;" />
       </q-page-sticky>
       <!--
         LocationTimeSeries
@@ -60,6 +54,7 @@ export default {
     kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
     kMapMixins.geolocation,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
@@ -104,6 +99,8 @@ export default {
       await this.initializeGlobe(token)
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
+      this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
+      // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
     },
@@ -120,10 +117,11 @@ export default {
       }
       return null
     },
-    async onFeatureClicked (options, event) {
+    async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
       utils.sendEmbedEvent('click', { feature, layer: options })
+      this.$emit('feature-clicked', feature, options, options)
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -136,7 +134,6 @@ export default {
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
-    this.$options.components['k-feature-info-box'] = this.$load('KFeatureInfoBox')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
@@ -144,7 +141,7 @@ export default {
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
-    this.$on('click', this.onFeatureClicked)
+    this.$on('click', this.onClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
     this.$on('layer-added', this.onAddedLayerEvent)
     this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
@@ -156,7 +153,7 @@ export default {
   },
   beforeDestroy () {
     this.$events.$off('capabilities-api-changed', this.refreshActivity)
-    this.$off('click', this.onFeatureClicked)
+    this.$off('click', this.onClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)

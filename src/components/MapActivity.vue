@@ -1,5 +1,5 @@
 <template>
-  <k-page :padding="false">
+  <k-page ref="page" :padding="false">
     <template v-slot:page-content>
       <!--
         Map
@@ -26,17 +26,11 @@
         </div>
       </q-page-sticky>
       <!--
-        FeatureInfoBox
-       -->
-      <q-page-sticky position="left" :offset="[18, 0]">
-        <k-feature-info-box style="min-width: 250px; width: 25vw;" />
-      </q-page-sticky>
-      <!--
         LocationTimeSeries
        -->
-      <q-page-sticky position="top" :offset="[0, 0]">
+      <!--q-page-sticky position="top" :offset="[0, 0]">
         <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky>
+      </q-page-sticky-->
       <!--
         ColorLegend
        -->
@@ -72,13 +66,14 @@ import utils from '../utils'
 export default {
   name: 'k-map-activity',
   mixins: [
-    kCoreMixins.refsResolver(['map']),
+    kCoreMixins.refsResolver(['page', 'map']),
     kCoreMixins.baseActivity,
+    kMapMixins.activity('map'),
     kMapMixins.geolocation,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
-    kMapMixins.activity('map'),
     kMapMixins.locationIndicator,
     kMapMixins.levels,
     kMapMixins.map.baseMap,
@@ -93,7 +88,8 @@ export default {
     kMapMixins.map.popup,
     kMapMixins.map.infobox,
     kMapMixins.map.activity,
-    kMapMixins.map.tiledMeshLayers
+    kMapMixins.map.tiledMeshLayers,
+    kMapMixins.map.mapillary
   ],
   inject: ['klayout'],
   provide () {
@@ -123,6 +119,11 @@ export default {
       if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
+      // Setup the widgets
+      this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
+      this.registerWidget('time-series', 'las la-chart-area', 'widgets/KTimeSeriesWidget', this.$data)
+      if (this.mapillaryClientID) this.registerWidget('mapillary', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
+      // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },
@@ -203,10 +204,12 @@ export default {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
     },
-    async onFeatureClicked (options, event) {
+    async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
+      const layer = _.get(event, 'target')
       if (!feature) return
-      utils.sendEmbedEvent('click', { feature, layer: options })
+      utils.sendEmbedEvent('click', { feature, layer: layer })
+      this.$emit('feature-clicked', feature, layer, options)
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
@@ -238,7 +241,7 @@ export default {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
-    this.$on('click', this.onFeatureClicked)
+    this.$on('click', this.onClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
     this.$on('layer-added', this.onAddedLayerEvent)
     this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
@@ -252,7 +255,7 @@ export default {
     this.$off('current-time-changed', this.onCurrentTimeChanged)
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
-    this.$off('click', this.onFeatureClicked)
+    this.$off('click', this.onClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)
