@@ -27,7 +27,7 @@ cd api && yarn build
 check_code $? "Building the api"
 
 # Build the client
-cd .. && yarn build #> build.log 2>&1 
+cd .. && yarn build ##> build.log 2>&1 
 check_code $? "Builing the client"
 tail -n 24 build.log 
 
