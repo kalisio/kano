@@ -89,6 +89,7 @@ export default {
     kMapMixins.map.infobox,
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
+    kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillary
   ],
   inject: ['klayout'],
