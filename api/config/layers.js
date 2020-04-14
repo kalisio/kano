@@ -1031,7 +1031,22 @@ module.exports = [
 	    ],
     },
     leaflet: {
-      type: 'tiledWindLayer'
+      type: 'tiledWindLayer',
+      lineWidth: 4,
+      frameRate: 20,
+      particleMultiplier: 0.001,
+      displayValues: false,
+      'icon-classes': 'fas fa-wind',
+      zIndex: forecastZIndex,
+      /*
+      displayOptions: {
+        velocityType: 'Wind',
+        position: 'bottomright',
+        emptyString: 'No wind data',
+        angleConvention: 'meteoCW',
+        speedUnit: 'm/s'
+      }
+      */
     }
   },
 
