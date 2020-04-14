@@ -122,7 +122,6 @@ export default {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
       utils.sendEmbedEvent('click', { feature, layer: options })
-      this.$emit('feature-clicked', feature, options, options)
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
