@@ -995,6 +995,13 @@ module.exports = [
 		    to: 'PT+151200S',
 		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
 		    weacast: { model: 'arome-france', element: 'u-wind' }
+		},
+		{
+		    model: 'arome-france-high',
+		    from: 'PT-1H',
+		    to: 'PT+151200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arome-france-high', element: 'u-wind' }
 		}
 	    ],
     },
@@ -1027,6 +1034,13 @@ module.exports = [
 		    to: 'PT+151200S',
 		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
 		    weacast: { model: 'arome-france', element: 'v-wind' }
+		},
+		{
+		    model: 'arome-france-high',
+		    from: 'PT-1H',
+		    to: 'PT+151200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arome-france-high', element: 'v-wind' }
 		}
 	    ],
     },
@@ -1106,6 +1120,13 @@ module.exports = [
             to: 'PT+151200S',
             dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
             weacast: { model: 'arome-france', element: 'gust' }
+        },
+        {
+            model: 'arome-france-high',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france-high', element: 'gust' }
         }
     ],
     leaflet: {
@@ -1181,6 +1202,13 @@ module.exports = [
             to: 'PT+151200S',
             dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
             weacast: { model: 'arome-france', element: 'precipitations' }
+        },
+        {
+            model: 'arome-france-high',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france-high', element: 'precipitations' }
         }
     ],
     leaflet: {
@@ -1247,6 +1275,13 @@ module.exports = [
             to: 'PT+151200S',
             dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
             weacast: { model: 'arome-france', element: 'temperature' }
+        },
+        {
+            model: 'arome-france-high',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france-high', element: 'temperature' }
         }
     ],
     leaflet: {
