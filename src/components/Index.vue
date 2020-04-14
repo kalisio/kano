@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import logger from 'loglevel'
 import { Loading, Dialog } from 'quasar'
 import { mixins, beforeGuard } from '@kalisio/kdk/core.client'
 import config from 'config'
@@ -46,6 +47,7 @@ export default {
       this.$api.socket.on('reconnect_error', () => {
         // Display it only the first time the error appears because multiple attempts will be tried
         if (!this.pendingReconnection) {
+          logger.error(new Error('Socket has been disconnected'))
           this.pendingReconnection = Dialog.create({
             title: this.$t('Index.ALERT'),
             message: this.$t('Index.DISCONNECT'),
@@ -67,6 +69,8 @@ export default {
           setTimeout(() => {
             window.location.reload()
           }, 3000)
+        } else {
+          logger.error(new Error('Socket disconnected, not trying to reconnect automatically in development mode please refresh page manually'))
         }
       })
     }
