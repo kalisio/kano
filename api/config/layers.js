@@ -923,5 +923,321 @@ module.exports = [
         resolutionScale: [ 2.0, 2.0 ],
         opacity: 0.6
     }
+  },
+
+  {
+    name: 'Wind (tiled)',
+    description: 'Speed and direction',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'windSpeed',
+        label: 'Variables.WIND_SPEED',
+        units: [
+          'm/s', 'km/h', 'kt'
+        ],
+        range: [0, 60],
+        chartjs: {
+          backgroundColor: 'rgba(255, 159, 64, 128)',
+          borderColor: 'rgb(255, 159, 64)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'RdYlBu',
+          domain: [20, 3]
+        }
+      },
+      {
+        name: 'windDirection',
+        label: 'Variables.WIND_DIRECTION',
+        units: [
+          'deg'
+        ],
+        range: [0, 360],
+        chartjs: {
+          backgroundColor: 'rgba(191, 191, 63, 128)',
+          borderColor: 'rgb(191, 191, 63)',
+          fill: false
+        }
+      }
+    ],
+    u: {
+	    meteo_model: [
+		{
+		    model: 'gfs-world',
+		    from: 'PT-1H',
+		    to: 'PT+864000S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'gfs-world', element: 'u-wind' }
+		},
+		{
+		    model: 'arpege-world',
+		    from: 'PT-1H',
+		    to: 'PT+367200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arpege-world', element: 'u-wind' }
+		},
+		{
+		    model: 'arpege-europe',
+		    from: 'PT-1H',
+		    to: 'PT+367200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arpege-europe', element: 'u-wind' }
+		},
+		{
+		    model: 'arome-france',
+		    from: 'PT-1H',
+		    to: 'PT+151200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arome-france', element: 'u-wind' }
+		}
+	    ],
+    },
+    v: {
+	    meteo_model: [
+		{
+		    model: 'gfs-world',
+		    from: 'PT-1H',
+		    to: 'PT+864000S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'gfs-world', element: 'v-wind' }
+		},
+		{
+		    model: 'arpege-world',
+		    from: 'PT-1H',
+		    to: 'PT+367200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arpege-world', element: 'v-wind' }
+		},
+		{
+		    model: 'arpege-europe',
+		    from: 'PT-1H',
+		    to: 'PT+367200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arpege-europe', element: 'v-wind' }
+		},
+		{
+		    model: 'arome-france',
+		    from: 'PT-1H',
+		    to: 'PT+151200S',
+		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+		    weacast: { model: 'arome-france', element: 'v-wind' }
+		}
+	    ],
+    },
+    leaflet: {
+      type: 'tiledWindLayer'
+    }
+  },
+
+  {
+    name: 'Gust (tiled)',
+    description: 'Max wind speed',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'gust',
+        label: 'Variables.WIND_GUST',
+        units: [
+          'm/s', 'km/h', 'kt'
+        ],
+        range: [0, 60],
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'OrRd',
+          domain: [0, 60]
+        }
+      }
+    ],
+    meteo_model: [
+        {
+            model: 'gfs-world',
+            from: 'PT-1H',
+            to: 'PT+864000S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'gfs-world', element: 'gust' }
+        },
+        {
+            model: 'arpege-world',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-world', element: 'gust' }
+        },
+        {
+            model: 'arpege-europe',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-europe', element: 'gust' }
+        },
+        {
+            model: 'arome-france',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france', element: 'gust' }
+        }
+    ],
+    leaflet: {
+      type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
+      opacity: 0.6
+    }
+  },
+
+  {
+    name: 'Precipitations (tiled)',
+    description: '3h accumulation',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: [
+          'mm'
+        ],
+        range: [0, 300],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'BuPu',
+          classes: [
+            0,
+            1,
+            2,
+            4,
+            10,
+            25,
+            50,
+            100,
+            300
+          ]
+        }
+      }
+    ],
+    meteo_model: [
+        {
+            model: 'gfs-world',
+            from: 'PT-1H',
+            to: 'PT+864000S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'gfs-world', element: 'precipitations' }
+        },
+        {
+            model: 'arpege-world',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-world', element: 'precipitations' }
+        },
+        {
+            model: 'arpege-europe',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-europe', element: 'precipitations' }
+        },
+        {
+            model: 'arome-france',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france', element: 'precipitations' }
+        }
+    ],
+    leaflet: {
+      type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
+      opacity: 0.6
+    }
+  },
+
+  {
+    name: 'Temperature (tiled)',
+    description: 'Mean temperature',
+    tags: [
+      'weather'
+    ],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
+    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'temperature',
+        label: 'Variables.TEMPERATURE',
+        units: [
+          'degC', 'degF', 'K'
+        ],
+        range: [0, 50],
+        chartjs: {
+          backgroundColor: 'rgba(255, 215, 0, 128)',
+          borderColor: 'rgb(255, 215, 0)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'RdBu',
+          invertScale: true,
+          domain: [0, 50]
+        }
+      }
+    ],
+    meteo_model: [
+        {
+            model: 'gfs-world',
+            from: 'PT-1H',
+            to: 'PT+864000S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'gfs-world', element: 'temperature' }
+        },
+        {
+            model: 'arpege-world',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-world', element: 'temperature' }
+        },
+        {
+            model: 'arpege-europe',
+            from: 'PT-1H',
+            to: 'PT+367200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arpege-europe', element: 'temperature' }
+        },
+        {
+            model: 'arome-france',
+            from: 'PT-1H',
+            to: 'PT+151200S',
+            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
+            weacast: { model: 'arome-france', element: 'temperature' }
+        }
+    ],
+    leaflet: {
+      type: 'tiledMeshLayer',
+      resolutionScale: [ 2.0, 2.0 ],
+      opacity: 0.6
+    }
   }
 ]
