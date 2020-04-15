@@ -48,6 +48,9 @@ export default {
         // Display it only the first time the error appears because multiple attempts will be tried
         if (!this.pendingReconnection) {
           logger.error(new Error('Socket has been disconnected'))
+          // This will ensure any operation in progress will not keep a "dead" loading indicator
+          // as this error might appear under-the-hood without notifying service operations
+          Loading.hide()
           this.pendingReconnection = Dialog.create({
             title: this.$t('Index.ALERT'),
             message: this.$t('Index.DISCONNECT'),

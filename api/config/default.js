@@ -102,6 +102,13 @@ module.exports = {
   },
   */
   apiPath: API_PREFIX,
+  socketio: {
+    // This avoid the issue of disconnecting the socket when sending a large amout of data
+    // See https://github.com/socketio/socket.io/issues/2666, https://github.com/socketio/socket.io/issues/2769
+    pingTimeout: 30000,
+    // Used to avoid DoS by limiting max message size
+    maxHttpBufferSize: 10 * 1024 * 1024 // 10MB
+  },
   helmet: {
     /* X-Frame-Options is limited to a single domain,
     // which is not easy to use in dev mode, best to rely on Content-Security-Policy

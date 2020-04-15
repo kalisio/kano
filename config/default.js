@@ -142,7 +142,9 @@ module.exports = {
   mapActivity: {
     tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
-    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove']/*,
+    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
+    featuresChunkSize: 5000
+    /*,
     components: [{
       name: 'site-seeker',
       component: 'SiteSeeker'
@@ -196,7 +198,7 @@ module.exports = {
     infobox: {},
     cluster: { disableClusteringAtZoom: 18 },
     fileLayers: {
-      fileSizeLimit : 1024 * 1024,
+      fileSizeLimit : 1024 * 1024,  // 1GB
       formats: [ '.geojson', '.kml', '.gpx' ]
     }
   },
