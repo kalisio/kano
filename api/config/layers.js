@@ -823,82 +823,112 @@ module.exports = [
       }
     ],
     u: {
-	    meteo_model: [
-		{
-		    model: 'gfs-world',
-		    from: 'PT-1H',
-		    to: 'PT+864000S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'gfs-world', element: 'u-wind' }
-		},
-		{
-		    model: 'arpege-world',
-		    from: 'PT-1H',
-		    to: 'PT+367200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arpege-world', element: 'u-wind' }
-		},
-		{
-		    model: 'arpege-europe',
-		    from: 'PT-1H',
-		    to: 'PT+367200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arpege-europe', element: 'u-wind' }
-		},
-		{
-		    model: 'arome-france',
-		    from: 'PT-1H',
-		    to: 'PT+151200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arome-france', element: 'u-wind' }
-		},
-		{
-		    model: 'arome-france-high',
-		    from: 'PT-1H',
-		    to: 'PT+151200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arome-france-high', element: 'u-wind' }
-		}
-	    ],
+      meteo_model: [
+        {
+          model: 'gfs-world',
+          from: 'PT-1H',
+          to: 'PT+864000S',
+          weacast: { element: 'u-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arpege-world',
+          from: 'PT-1H',
+          to: 'PT+367200S',
+          weacast: { element: 'u-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arpege-europe',
+          from: 'PT-1H',
+          to: 'PT+367200S',
+          weacast: { element: 'u-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arome-france',
+          from: 'PT-1H',
+          to: 'PT+151200S',
+          weacast: { element: 'u-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arome-france-high',
+          from: 'PT-1H',
+          to: 'PT+151200S',
+          weacast: { element: 'u-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        }
+      ]
     },
     v: {
-	    meteo_model: [
-		{
-		    model: 'gfs-world',
-		    from: 'PT-1H',
-		    to: 'PT+864000S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'gfs-world', element: 'v-wind' }
-		},
-		{
-		    model: 'arpege-world',
-		    from: 'PT-1H',
-		    to: 'PT+367200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arpege-world', element: 'v-wind' }
-		},
-		{
-		    model: 'arpege-europe',
-		    from: 'PT-1H',
-		    to: 'PT+367200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arpege-europe', element: 'v-wind' }
-		},
-		{
-		    model: 'arome-france',
-		    from: 'PT-1H',
-		    to: 'PT+151200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arome-france', element: 'v-wind' }
-		},
-		{
-		    model: 'arome-france-high',
-		    from: 'PT-1H',
-		    to: 'PT+151200S',
-		    dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-		    weacast: { model: 'arome-france-high', element: 'v-wind' }
-		}
-	    ],
+      meteo_model: [
+        {
+          model: 'gfs-world',
+          from: 'PT-1H',
+          to: 'PT+864000S',
+          weacast: { element: 'v-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arpege-world',
+          from: 'PT-1H',
+          to: 'PT+367200S',
+          weacast: { element: 'v-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arpege-europe',
+          from: 'PT-1H',
+          to: 'PT+367200S',
+          weacast: { element: 'v-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arome-france',
+          from: 'PT-1H',
+          to: 'PT+151200S',
+          weacast: { element: 'v-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        },
+        {
+          model: 'arome-france-high',
+          from: 'PT-1H',
+          to: 'PT+151200S',
+          weacast: { element: 'v-wind' },
+          dynprops: {
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          }
+        }
+      ],
     },
     leaflet: {
       type: 'tiledWindLayer',
@@ -909,13 +939,13 @@ module.exports = [
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
       /*
-      displayOptions: {
+        displayOptions: {
         velocityType: 'Wind',
         position: 'bottomright',
         emptyString: 'No wind data',
         angleConvention: 'meteoCW',
         speedUnit: 'm/s'
-      }
+        }
       */
     }
   },
@@ -949,41 +979,56 @@ module.exports = [
       }
     ],
     meteo_model: [
-        {
-            model: 'gfs-world',
-            from: 'PT-1H',
-            to: 'PT+864000S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'gfs-world', element: 'gust' }
+      {
+        model: 'gfs-world',
+        from: 'PT-1H',
+        to: 'PT+864000S',
+        weacast: { element: 'gust' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
         },
-        {
-            model: 'arpege-world',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-world', element: 'gust' }
-        },
-        {
-            model: 'arpege-europe',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-europe', element: 'gust' }
-        },
-        {
-            model: 'arome-france',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france', element: 'gust' }
-        },
-        {
-            model: 'arome-france-high',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france-high', element: 'gust' }
+      },
+      {
+        model: 'arpege-world',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'gust' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
         }
+      },
+      {
+        model: 'arpege-europe',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'gust' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'gust' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france-high',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'gust' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      }
     ],
     leaflet: {
       type: 'tiledMeshLayer',
@@ -1031,41 +1076,56 @@ module.exports = [
       }
     ],
     meteo_model: [
-        {
-            model: 'gfs-world',
-            from: 'PT-1H',
-            to: 'PT+864000S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'gfs-world', element: 'precipitations' }
-        },
-        {
-            model: 'arpege-world',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-world', element: 'precipitations' }
-        },
-        {
-            model: 'arpege-europe',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-europe', element: 'precipitations' }
-        },
-        {
-            model: 'arome-france',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france', element: 'precipitations' }
-        },
-        {
-            model: 'arome-france-high',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france-high', element: 'precipitations' }
+      {
+        model: 'gfs-world',
+        from: 'PT-1H',
+        to: 'PT+864000S',
+        weacast: { element: 'precipitations' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
         }
+      },
+      {
+        model: 'arpege-world',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'precipitations' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arpege-europe',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'precipitations' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'precipitations' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france-high',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'precipitations' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      }
     ],
     leaflet: {
       type: 'tiledMeshLayer',
@@ -1104,41 +1164,56 @@ module.exports = [
       }
     ],
     meteo_model: [
-        {
-            model: 'gfs-world',
-            from: 'PT-1H',
-            to: 'PT+864000S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'gfs-world', element: 'temperature' }
-        },
-        {
-            model: 'arpege-world',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-world', element: 'temperature' }
-        },
-        {
-            model: 'arpege-europe',
-            from: 'PT-1H',
-            to: 'PT+367200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arpege-europe', element: 'temperature' }
-        },
-        {
-            model: 'arome-france',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france', element: 'temperature' }
-        },
-        {
-            model: 'arome-france-high',
-            from: 'PT-1H',
-            to: 'PT+151200S',
-            dynprops: { forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' } },
-            weacast: { model: 'arome-france-high', element: 'temperature' }
+      {
+        model: 'gfs-world',
+        from: 'PT-1H',
+        to: 'PT+864000S',
+        weacast: { element: 'temperature' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
         }
+      },
+      {
+        model: 'arpege-world',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'temperature' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arpege-europe',
+        from: 'PT-1H',
+        to: 'PT+367200S',
+        weacast: { element: 'temperature' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'temperature' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      {
+        model: 'arome-france-high',
+        from: 'PT-1H',
+        to: 'PT+151200S',
+        weacast: { element: 'temperature' },
+        dynprops: {
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      }
     ],
     leaflet: {
       type: 'tiledMeshLayer',
