@@ -1,5 +1,5 @@
 <template>
-  <k-page ref="page" :padding="false">
+  <k-page :padding="false">
     <template v-slot:page-content>
       <!--
         Map
@@ -28,9 +28,9 @@
       <!--
         LocationTimeSeries
        -->
-      <q-page-sticky position="top" :offset="[0, 0]">
+      <!--q-page-sticky position="top" :offset="[0, 0]">
         <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky>
+      </q-page-sticky-->
       <!--
         ColorLegend
        -->
@@ -66,13 +66,14 @@ import utils from '../utils'
 export default {
   name: 'k-map-activity',
   mixins: [
-    kCoreMixins.refsResolver(['page', 'map']),
+    kCoreMixins.refsResolver(['map']),
     kCoreMixins.baseActivity,
     kMapMixins.activity('map'),
     kMapMixins.geolocation,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
+    kMapMixins.timeSeries,
     kMapMixins.time,
     kMapMixins.locationIndicator,
     kMapMixins.levels,
@@ -122,7 +123,7 @@ export default {
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
       this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
-      //this.registerWidget('time-series', 'las la-chart-area', 'widgets/KTimeSeriesWidget', this.$data)
+      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeriesWidget', this.$data)
       if (this.mapillaryClientID) this.registerWidget('mapillary', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
       // Setup the actions
       this.registerActivityActions()      
@@ -226,7 +227,6 @@ export default {
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
-    this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
     // Load extra components
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))

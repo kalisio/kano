@@ -1,5 +1,5 @@
 <template>
-  <k-page ref="page" :padding="false">
+  <k-page :padding="false">
     <template v-slot:page-content>
       <!--
         Globe
@@ -29,9 +29,9 @@
       <!--
         LocationTimeSeries
        -->
-      <q-page-sticky position="top" :offset="[0, 0]">
+      <!--q-page-sticky position="top" :offset="[0, 0]">
         <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky>
+      </q-page-sticky-->
        <!--
         Extra components
        -->  
@@ -57,6 +57,7 @@ export default {
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
+    kMapMixins.timeSeries,
     kMapMixins.time,
     kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
@@ -79,7 +80,6 @@ export default {
   },
   data () {
     return {
-      timeseriesWidgetPosition: 'top',
       isNavigationBarOpened: true,
       isTimelineOpened: false
     }
@@ -101,6 +101,7 @@ export default {
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
       this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
+      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeriesWidget', this.$data)
       // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
@@ -133,7 +134,6 @@ export default {
     this.$options.components['k-opener'] = this.$load('frame/KOpener')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
-    this.$options.components['k-location-time-series'] = this.$load('KLocationTimeSeries')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
