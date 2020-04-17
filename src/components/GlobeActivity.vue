@@ -12,26 +12,14 @@
         NavigationBar
        -->
       <q-page-sticky position="top">
-        <div class="column items-center">
-          <k-navigation-bar v-if="isNavigationBarOpened" />
-          <k-opener v-model="isNavigationBarOpened" position="top" />
-        </div>
+        <k-opener-proxy position="top" component="KNavigationBar" :opened="true" />
       </q-page-sticky>
       <!--
         TimeLine
        -->
       <q-page-sticky position="bottom">
-        <div class="column items-center">
-          <k-opener v-model="isTimelineOpened" position="bottom" />
-          <k-timeline v-if="isTimelineOpened" style="width: 60vw;" />
-        </div>
+        <k-opener-proxy position="bottom" component="KTimeline" />
       </q-page-sticky>
-      <!--
-        LocationTimeSeries
-       -->
-      <!--q-page-sticky position="top" :offset="[0, 0]">
-        <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky-->
        <!--
         Extra components
        -->  
@@ -53,13 +41,13 @@ export default {
   mixins: [
     kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
+    kMapMixins.activity('globe'),    
     kMapMixins.geolocation,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.timeSeries,
     kMapMixins.time,
-    kMapMixins.activity('globe'),
     kMapMixins.locationIndicator,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
@@ -76,12 +64,6 @@ export default {
     return {
       kActivity: this,
       kGlobe: this
-    }
-  },
-  data () {
-    return {
-      isNavigationBarOpened: true,
-      isTimelineOpened: false
     }
   },
   computed: {
@@ -131,7 +113,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener'] = this.$load('frame/KOpener')
+    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))

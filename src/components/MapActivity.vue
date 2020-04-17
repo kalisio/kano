@@ -11,26 +11,14 @@
         NavigationBar
        -->
       <q-page-sticky position="top">
-        <div class="column items-center">
-          <k-navigation-bar v-if="isNavigationBarOpened" />
-          <k-opener v-model="isNavigationBarOpened" position="top" />
-        </div>
+        <k-opener-proxy position="top" component="KNavigationBar" :opened="true" />
       </q-page-sticky>
       <!--
         TimeLine
        -->
       <q-page-sticky position="bottom">
-        <div class="column items-center">
-          <k-opener v-model="isTimelineOpened" position="bottom" />
-          <k-timeline v-if="isTimelineOpened" style="width: 60vw;" />
-        </div>
+        <k-opener-proxy position="bottom" component="KTimeline" />
       </q-page-sticky>
-      <!--
-        LocationTimeSeries
-       -->
-      <!--q-page-sticky position="top" :offset="[0, 0]">
-        <k-location-time-series :variables="currentVariables" />
-      </q-page-sticky-->
       <!--
         ColorLegend
        -->
@@ -103,12 +91,6 @@ export default {
   computed: {
     components () {
       return _.get(this, 'activityOptions.components', [])
-    }
-  },
-  data () {
-    return {
-      isNavigationBarOpened: true,
-      isTimelineOpened: false
     }
   },
   methods: {
@@ -223,7 +205,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener'] = this.$load('frame/KOpener')
+    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
