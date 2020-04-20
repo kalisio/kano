@@ -28,9 +28,8 @@ const user = {
   password: 'Pass;word1'
 }
 
-test('Authenticating to the app', async test => {
+test('Checking the app layout', async test => {
   await screens.login(test, user)
-  await test.wait(1000)
   // Check default layout state
   await test.expect(await layout.isLeftDrawerOpened()).notOk()
   await test.expect(await layout.isRightDrawerOpened()).notOk()
