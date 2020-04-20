@@ -20,7 +20,7 @@ const layout = new pages.Layout()
 const sideNav = new pages.SideNav()
 const navigationBar = new pages.NavigationBar()
 const timeline = new pages.Timeline()
-const mapAcitivty = new pages.MapActivity()
+const mapActivity = new pages.MapActivity()
 
 const user = {
   name: 'kalisio',
@@ -45,7 +45,8 @@ test('Authenticating to the app', async test => {
   // Open the catalog
   await layout.clickRightOpener(test)
   await test.expect(await layout.isRightDrawerOpened()).ok()
-  await mapAcitivty.clickOnMap(test)
+  await mapActivity.click(test)
+  await mapActivity.move(test, 100, 100)
   await test.expect(await layout.isRightDrawerOpened()).notOk()
   // Open the side nav
   await layout.clickLeftOpener(test)
