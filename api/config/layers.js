@@ -198,21 +198,15 @@ module.exports = [
     iconUrl: `https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg`,
     attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
     type: 'OverlayLayer',
+    from : 'P-5Y',
+    to : 'PT-0M',
+    queryFrom : 'P-1Y',
     leaflet: {
-      type: 'vectorGrid.protobuf',
-      source: `https://tiles3.mapillary.com/v0.1/{z}/{x}/{y}.mvt`,
-      interactive: true,
-      minZoom: 11,
-      maxNativeZoom: 14,
-      vectorTileLayerStyles: {
-        'mapillary-sequences': {
-          weight: 2,
-          color: '#59AF8499'
-        },
-        'mapillary-images': {
-          opacity: 0
-        }
-	    }
+      type: 'mapillary',
+      url : 'https://a.mapillary.com',
+      minZoom : 13,
+      'stroke-color' : 'green',
+      'stroke-width' : 3
     }
   },
   {
