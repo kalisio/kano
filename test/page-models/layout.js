@@ -1,6 +1,7 @@
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import BasePage from './base-page'
+import { getWindowInnerWidth } from '.'
 
 export default class AppBar extends BasePage {
   constructor () {
@@ -11,6 +12,9 @@ export default class AppBar extends BasePage {
     this.appBarTitle = this.appBar.find('#app-bar-title')
     this.appBarOverflowMenu = Selector('#overflow-menu')
     this.appBarOverflowMenuEntry = this.appBar.find('#overflow-menu-entry')
+    // Drawers
+    this.leftDrawer = Selector('.q-drawer--left')
+    this.rightDrawer = Selector('.q-drawer--right')
     // Openers
     this.leftOpener = Selector('#opener-left')
     this.rightOpener = Selector('#opener-right')
@@ -24,74 +28,78 @@ export default class AppBar extends BasePage {
     this.signupAlert = VueSelector('k-signup-alert')
   }
 
-  // Sidenav functions
-  async isSideNavVisible () {
-    // quasar actually hides the sideNav by translating it outside the viewport,
-    // so that the visible flag is always true
-    const leftPos = await this.sideNav.getBoundingClientRectProperty('left')
-    return leftPos >= 0
-  }
-
   // AppBar
   async clickLeading (test) {
     await test
       .click(this.appBarLeading)
-      .wait(1000)
+      .wait(500)
   }
 
   // TabBar
   async clickTabBar (test, tab) {
     await test
       .click(this.tabBar.find(tab))
-      .wait(3000)
+      .wait(500)
+  }
+
+  // Drawers
+  async isLeftDrawerOpened () {
+    const leftPos = await this.leftDrawer.getBoundingClientRectProperty('left')
+    return leftPos >= 0
+  }
+
+  async isRightDrawerOpened () {
+    const rightPos = await this.rightDrawer.getBoundingClientRectProperty('right')
+    const windowWidth = await getWindowInnerWidth()
+    return rightPos <= windowWidth
   }
 
   // Openers
   async clickLeftOpener (test) {
     await test
       .click(this.leftOpener)
-      .wait(1000)
+      .wait(500)
   }
 
   async clickRightOpener (test) {
     await test
       .click(this.rightOpener)
-      .wait(1000)
+      .wait(500)
   }
 
   async clickTopOpener (test) {
     await test
       .click(this.topOpener)
-      .wait(1000)
+      .wait(500)
   }
 
   async clickBottomOpener (test) {
     await test
       .click(this.bottomOpener)
-      .wait(1000)
+      .wait(500)
   }
 
   // Fab
   async openAndClickFab (test, entry) {
     await test
       .click(Selector(this.fab))
-      .wait(1000)
+      .wait(500)
     await test
       .click(this.fab.find(entry))
-      .wait(1000)
+      .wait(500)
   }
 
   async clickFab (test, entry) {
     await test
       .click(Selector(entry))
-      .wait(1000)
+      .wait(500)
   }
 
   // SignupAlert
   async closeSignupAlert (test) {
     await test
       .click(this.signupAlert.find('.q-alert-close').find('.cursor-pointer'))
-      .wait(1000)
+      .wait(500)
   }
 
   // Helpers
@@ -105,6 +113,6 @@ export default class AppBar extends BasePage {
     await test
       .click(this.appBarOverflowMenuEntry)
       .click(this.appBarOverflowMenu.find(entry))
-      .wait(1000)
+      .wait(500)
   }
 }

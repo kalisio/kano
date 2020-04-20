@@ -51,20 +51,20 @@ export default class Layerpanelmap extends ApplicationLayout {
 
     }
 
-    async openRightPanel(test){        
+    async openRightPanel (test) {        
         await test
         .click(this.sideBarRight)
         .wait(500);
       }
 
-      async closeRightPanel(test){
+      async closeRightPanel(test) {
         await test
         .click(this.globalpanel)
         .click(this.globalpanel)
         .wait(250)
       }
 
-      async changeBusiness(test){
+      async changeBusiness(test) {
       await test
       .click(this.business)
       .wait(500)
@@ -75,7 +75,8 @@ export default class Layerpanelmap extends ApplicationLayout {
       .click(this.zoomTo)
       .wait(500)
     }
-    async deleteData(test){
+
+    async deleteData(test) {
     await test
     .click(this.business)
     .wait(500)

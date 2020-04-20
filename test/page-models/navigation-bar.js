@@ -1,16 +1,13 @@
-import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
+import BasePage from './base-page'
 
-
-export default class NavigationBar {
+export default class NavigationBar  extends BasePage {
   constructor () {
-      //input
-      this.sideNavButton = VueSelector('k-navigation-bar').find('.q-btn').nth(0)
-    }
+    super()
+    this.navivationBar = VueSelector('k-navigation-bar')
+  }
 
-  async clickSideNav (test) {
-    await test
-      .click(this.sideNavButton)
-      .wait(500)
+  async isVisible () {
+    return await this.navivationBar.exists && await this.navivationBar.visible
   }
 }

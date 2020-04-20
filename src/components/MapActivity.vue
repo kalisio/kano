@@ -4,7 +4,7 @@
       <!--
         Map
        -->
-      <div ref="map" :style="viewStyle">
+      <div id="map" ref="map" :style="viewStyle">
         <q-resize-observer @resize="onMapResized" />
       </div>
       <!--

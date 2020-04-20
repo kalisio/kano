@@ -2,7 +2,6 @@ import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 import BasePage from './base-page'
 
-
 export default class SideNav extends BasePage {
   constructor () {
     super()
@@ -11,7 +10,7 @@ export default class SideNav extends BasePage {
     this.identityLink = Selector('#account')
     this.logoutLink = VueSelector('k-links-panel').find('.q-icon').withText('exit_to_app')
   }
-
+  
   // Identity
   async clickIdentity (test) {
     await this.openSideNav(test)

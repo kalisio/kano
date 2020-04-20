@@ -4,7 +4,7 @@
       <!--
         Globe
        -->
-      <div ref="globe" :style="viewStyle">
+      <div id="globe" ref="globe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>

@@ -2,22 +2,18 @@ import { ClientFunction } from 'testcafe'
 import Screens from './screens'
 import Layout from './layout'
 import SideNav from './side-nav'
-/*import LayerPanelMap from './layerPanelMap'
-import LayerPanelGlobe from './layerPanelGlobe'
-import Sidenav from './sidenav'
-import MapView from './mapView'
-*/
+import NavigationBar from './navigation-bar'
+import Timeline from './timeline'
+import MapActivity from './map-activity'
 
 // Export all models
 export {
   Screens,
   Layout,
-  SideNav
-  /*NavigationBar
-  LayerPanelMap,
-  LayerPanelGlobe,
-  Sidenav,
-  MapView*/
+  SideNav,
+  NavigationBar,
+  Timeline,
+  MapActivity
 }
 
 // Access store
@@ -30,6 +26,10 @@ export const api = {
   find: ClientFunction((service, params) => window.$api.getService(service).find(params)),
   remove: ClientFunction((service, id) => window.$api.getService(service).remove(id))
 }
+
+// Acces window size
+export const getWindowInnerWidth = ClientFunction(() => window.innerWidth)
+export const getWindowInnerHeight = ClientFunction(() => window.innerHeight)
 
 // Access routes
 const baseUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? `http://localhost:8081` : `http://localhost:8082`)

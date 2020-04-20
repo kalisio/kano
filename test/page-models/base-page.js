@@ -12,6 +12,12 @@ export default class BasePage {
     await this.error.visible
   }
 
+  // Visibility helper
+  /*async expectVisibility (test, element, visible) {
+    if (visible) await test.expect(element.visible).ok()
+    else await test.expect(element.visible).notOk()
+  }*/
+
   // Colection helpers
   async getItem (test, collectionSelector, name) {
     const collection = await collectionSelector.getVue()
