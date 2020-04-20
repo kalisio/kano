@@ -1,6 +1,7 @@
 import { ClientFunction } from 'testcafe'
-import Application from './application'
-import NavigationBar from './navigation-bar'
+import Screens from './screens'
+import Layout from './layout'
+import SideNav from './side-nav'
 /*import LayerPanelMap from './layerPanelMap'
 import LayerPanelGlobe from './layerPanelGlobe'
 import Sidenav from './sidenav'
@@ -9,9 +10,11 @@ import MapView from './mapView'
 
 // Export all models
 export {
-  Application,
-  NavigationBar
-  /*LayerPanelMap,
+  Screens,
+  Layout,
+  SideNav
+  /*NavigationBar
+  LayerPanelMap,
   LayerPanelGlobe,
   Sidenav,
   MapView*/
@@ -29,7 +32,7 @@ export const api = {
 }
 
 // Access routes
-const baseUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? `http://localhost:8081` : `http://localhost:8080`)
+const baseUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? `http://localhost:8081` : `http://localhost:8082`)
 export const getUrl = (path) => path ? baseUrl + '/#/' + path : baseUrl
 export const goBack = ClientFunction(() => window.history.back())
 

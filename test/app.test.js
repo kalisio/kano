@@ -15,11 +15,19 @@ fixture`app`// declare the fixture
     // await pages.checkNoClientError(test)
   })
 
-const app = new pages.Application()
-const navbar = new pages.NavigationBar()
+const screens = new pages.Screens()
+const layout = new pages.Layout()
+const sideNav = new pages.SideNav()
+
+const user = {
+  name: 'kalisio',
+  email: 'kalisio@kalisio.xyz',
+  password: 'Pass;word1'
+}
 
 test('Authenticating to the app', async test => {
-  await app.login(test)
-  await test.wait(5000)
-  await navbar.clickSideNav(test)
+  await screens.login(test, user)
+  await layout.clickLeftOpener(test)
+  await sideNav.logout(test)
 })
+
