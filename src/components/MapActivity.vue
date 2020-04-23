@@ -136,17 +136,7 @@ export default {
       const windSpeed = (this.forecastLevel ? `windSpeed-${this.forecastLevel}` : 'windSpeed')
       const isWeatherProbe = (_.has(feature, `properties.${windDirection}`) &&
                               _.has(feature, `properties.${windSpeed}`))
-      if (isWeatherProbe) {
-        let marker = this.getProbedLocationForecastMarker(feature, latlng)
-        if (marker) {
-          marker.on('dragend', (event) => {
-            const { start, end } = this.getTimeRange()
-            this.getForecastForLocation(event.target.getLatLng().lng, event.target.getLatLng().lat, start, end)
-          })
-        }
-        return marker
-      }
-      return null
+      return (isWeatherProbe ? this.getProbedLocationForecastMarker(feature, latlng) : null)
     },
     getVigicruesTooltip (feature, layer) {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
