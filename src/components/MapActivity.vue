@@ -130,14 +130,6 @@ export default {
       }
       return layer
     },
-    getMeteoMarker (feature, latlng) {
-      // Use wind barbs on weather probed features
-      const windDirection = (this.forecastLevel ? `windDirection-${this.forecastLevel}` : 'windDirection')
-      const windSpeed = (this.forecastLevel ? `windSpeed-${this.forecastLevel}` : 'windSpeed')
-      const isWeatherProbe = (_.has(feature, `properties.${windDirection}`) &&
-                              _.has(feature, `properties.${windSpeed}`))
-      return (isWeatherProbe ? this.getProbedLocationForecastMarker(feature, latlng) : null)
-    },
     getVigicruesTooltip (feature, layer) {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
@@ -145,34 +137,6 @@ export default {
         return tooltip.setContent(this.$t('MapActivity.VIGICRUES_LEVEL_' + level))
       }
       return null
-    },
-    getMeteoTooltip (feature, layer) {
-      // Only wind/temperature can be available at different levels now
-      const windDirection = (this.forecastLevel ? `windDirection-${this.forecastLevel}` : 'windDirection')
-      const windSpeed = (this.forecastLevel ? `windSpeed-${this.forecastLevel}` : 'windSpeed')
-      const temperature = (this.forecastLevel ? `temperature-${this.forecastLevel}` : 'temperature')
-      const direction = _.get(feature, `properties.${windDirection}`)
-      const speed = _.get(feature, `properties.${windSpeed}`)
-      const gust = _.get(feature, 'properties.gust')
-      const t = _.get(feature, `properties.${temperature}`)
-      const precipitations = _.get(feature, 'properties.precipitations')
-      let html = ''
-      if (!_.isNil(speed)) {
-        html += `${speed.toFixed(2)} m/s</br>`
-      }
-      if (!_.isNil(gust)) {
-        html += `max ${gust.toFixed(2)} m/s</br>`
-      }
-      if (!_.isNil(direction)) {
-        html += `${direction.toFixed(2)} °</br>`
-      }
-      if (!_.isNil(precipitations)) {
-        html += `${precipitations.toFixed(2)} mm/h</br>`
-      }
-      if (!_.isNil(t)) {
-        html += `${t.toFixed(2)} °C</br>`
-      }
-      return (html ? L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`) : null)
     },
     onFeaturePopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')
@@ -205,8 +169,8 @@ export default {
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
-    this.registerLeafletStyle('tooltip', this.getMeteoTooltip)
-    this.registerLeafletStyle('markerStyle', this.getMeteoMarker)
+    this.registerLeafletStyle('tooltip', this.getProbedLocationForecastTooltip)
+    this.registerLeafletStyle('markerStyle', this.getProbedLocationForecastMarker)
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
