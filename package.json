@@ -38,10 +38,31 @@
     "test": "npm-run-all --parallel test:**"
   },
   "standard": {
-    "parser": "babel-eslint",
-    "plugins": ["testcafe", "html"],
-    "sourceType": "module",
-    "globals": ["DEV", "PROD", "__THEME", "cordova", "test", "fixture"]
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "vue"
+    ],
+    "globals": [
+      "DEV",
+      "PROD",
+      "__THEME",
+      "test",
+      "fixture",
+      "fetch",
+      "cordova",
+      "location",
+      "FileReader",
+      "LocalFileSystem",
+      "mime",
+      "atob",
+      "URL",
+      "Blob",
+      "Event"
+    ]
   },
   "dependencies": {
     "@feathersjs/client": "^3.5.4",
@@ -113,16 +134,17 @@
   },
   "devDependencies": {
     "@quasar/app": "1.1.4",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "config": "^1.26.1",
     "connect-history-api-fallback": "^1.1.0",
     "es6-promise": "^4.1.1",
-    "eslint": "^6.1.0",
+    "eslint": "^6.8.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-testcafe": "^0.2.1",
-    "eslint-plugin-vue": "^5.2.3",
+    "eslint-plugin-vue": "^6.2.2",
     "express": "^4.15.4",
     "glob": "^7.1.2",
     "npm-run-all": "^4.1.2",
