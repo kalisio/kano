@@ -205,8 +205,8 @@ module.exports = [
       type: 'mapillary',
       url : 'https://a.mapillary.com',
       minZoom : 13,
-      'stroke-color' : 'green',
-      'stroke-width' : 3
+      'stroke-color' : '#40880a55',
+      'stroke-width' : 8
     }
   },
   {
