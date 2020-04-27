@@ -715,6 +715,7 @@ module.exports = [
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'teleray-sensors',
     featureId: 'irsnId',
+    featureIdType: 'number',
     from: 'P-7D',
     to: 'PT-10M',
     every: 'PT10M',
