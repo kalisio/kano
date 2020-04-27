@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'
 import BasePage from './base-page'
 
-export default class MapActivity  extends BasePage {
+export default class MapActivity extends BasePage {
   constructor () {
     super()
     this.map = Selector('#map')
@@ -12,7 +12,7 @@ export default class MapActivity  extends BasePage {
   }
 
   async move (test, dx, dy) {
-    await test    
+    await test
       .drag(this.map, dx, dy)
   }
 }

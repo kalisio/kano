@@ -96,9 +96,4 @@ export default class Screens extends BasePage {
       // Need this so that we are sure dynamic components, user, etc. have been loaded
       .wait(2000)
   }
-
-  // Logout screen functions
-  async goToLoginScreen (test) {
-    await test.click(this.loginLink)
-  }
 }

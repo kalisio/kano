@@ -1,13 +1,15 @@
 import VueSelector from 'testcafe-vue-selectors'
 import BasePage from './base-page'
 
-export default class Timeline  extends BasePage {
+export default class Timeline extends BasePage {
   constructor () {
     super()
     this.timeline = VueSelector('k-timeline')
   }
 
   async isVisible () {
-    return await this.timeline.exists && await this.timeline.visible
+    const exists = await this.timeline.exists
+    if (!exists) return false
+    return this.navivationBar.visible
   }
 }

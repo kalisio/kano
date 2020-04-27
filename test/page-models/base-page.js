@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { Selector } from 'testcafe'
 import VueSelector from 'testcafe-vue-selectors'
 
@@ -11,12 +12,6 @@ export default class BasePage {
   async isErrorVisible () {
     await this.error.visible
   }
-
-  // Visibility helper
-  /*async expectVisibility (test, element, visible) {
-    if (visible) await test.expect(element.visible).ok()
-    else await test.expect(element.visible).notOk()
-  }*/
 
   // Colection helpers
   async getItem (test, collectionSelector, name) {
