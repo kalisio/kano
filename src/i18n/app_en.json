@@ -55,6 +55,26 @@
     "O3": "Ozone (O3)",
     "BC": "Black carbon (BC)"
   },
+  "Layers": {
+    "MAPILLARY": "Mapillary",
+    "MAPILLARY_DESCRIPTION": "Images coverage",
+    "OPENAQ": "OpenAQ",
+    "OPENAQ_DESCRIPTION": "Air quality data",
+    "TELERAY": "Téléray",
+    "TELERAY_DESCRIPTION": "Gamma dose rate",
+    "VIGICRUES": "Vigicrues",
+    "VIGICRUES_DESCRIPTION": "Flooding warning",
+    "HUBEAU": "Hub'Eau",
+    "HUBEAU_DESCRIPTION": "Hydrometric data",
+    "WIND": "Wind",
+    "WIND_DESCRIPTION": "Speed and direction",
+    "GUST": "Gust",
+    "GUST_DESCRIPTION": "Maximum wind speed",
+    "PRECIPITATIONS": "Precipitations",
+    "PRECIPITATIONS_DESCRIPTION": "Accumulation per 3h",
+    "TEMPERATURE": "Temperature",
+    "TEMPERATURE_DESCRIPTION": "Mean Temperature"
+  },
   "Levels": {
     "PRESSURE": "Pressure"
   },
