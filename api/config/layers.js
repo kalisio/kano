@@ -9,8 +9,8 @@ const forecastZIndex = 300
 
 module.exports = [
   {
-    name: 'Sentinel 2',
-    description: 'Cloudless',
+    name: 'layers.S2',
+    description: 'layers.S2_DESCRIPTION',
     tags: [
       'imagery'
     ],
@@ -31,8 +31,8 @@ module.exports = [
     }
   },
   {
-    name: 'OSM Bright',
-    description: 'OpenStreetMap',
+    name: 'layers.OSM_BRIGHT',
+    description: 'layers.OSM_BRIGHT_DESCRIPTION',
     tags: [
       'street'
     ],
@@ -53,8 +53,8 @@ module.exports = [
     }
   },
   {
-    name: 'OSM Dark',
-    description: 'OpenStreetMap',
+    name: 'layers.OSM_DARK',
+    description: 'layers.OSM_DARK_DESCRIPTION',
     tags: [
       'street'
     ],
@@ -74,8 +74,8 @@ module.exports = [
     }
   },
   {
-    name: 'OSMT bright',
-    description: 'OpenStreetMap & Terrain',
+    name: 'layers.OSMT_BRIGHT',
+    description: 'layers.OSMT_BRIGHT_DESCRIPTION',
     tags: [
       'street',
       'terrain'
@@ -96,8 +96,8 @@ module.exports = [
     }
   },
   {
-    name: 'OSMT dark',
-    description: 'OpenStreetMap & Terrain',
+    name: 'layers.OSMT_DARK',
+    description: 'layers.OSMT_DARK_DESCRIPTION',
     tags: [
       'street',
       'terrain'
@@ -118,8 +118,8 @@ module.exports = [
     }
   },
   {
-    name: 'Mosaic',
-    description: 'Mosaic',
+    name: 'layers.MOSAIC',
+    description: 'layers.MOSAIC_DESCRIPTION',
     tags: [
       'street',
       'imagery'
@@ -141,7 +141,7 @@ module.exports = [
     }
   },
   {
-    name: 'WGS84',
+    name: 'layers.CESIUM_ELLIPSOID',
     description: 'Standard Ellipsoid',
     tags: [
       'terrain'
@@ -157,8 +157,8 @@ module.exports = [
     }
   },
   {
-    name: 'Cesium Terrain',
-    description: 'World-wide 30m',
+    name: 'layers.CESIUM_TERRAIN',
+    description: 'layers.CESIUM_TERRAIN_DESCRIPTION',
     tags: [
       'terrain'
     ],
@@ -173,8 +173,8 @@ module.exports = [
     }
   },
   {
-    name: 'Kalisio Terrain',
-    description: 'World-wide 30m',
+    name: 'layers.K2',
+    description: 'layers.K2_DESCRIPTION',
     tags: [
       'terrain'
     ],
@@ -195,18 +195,18 @@ module.exports = [
     tags: [
       'captured'
     ],
-    iconUrl: `https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg`,
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg',
     attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
     type: 'OverlayLayer',
-    from : 'P-5Y',
-    to : 'PT-0M',
-    queryFrom : 'P-1Y',
+    from: 'P-5Y',
+    to: 'PT-0M',
+    queryFrom: 'P-1Y',
     leaflet: {
       type: 'mapillary',
-      url : 'https://a.mapillary.com',
-      minZoom : 13,
-      'stroke-color' : '#40880a55',
-      'stroke-width' : 8
+      url: 'https://a.mapillary.com',
+      minZoom: 13,
+      'stroke-color': '#40880a55',
+      'stroke-width': 8
     }
   },
   {
@@ -258,7 +258,7 @@ module.exports = [
         'mb'
       ],
       values: [ 1000, 700, 450, 300, 200 ]
-    },*/
+    }, */
     leaflet: {
       type: 'weacast.flowLayer',
       elements: [
@@ -270,7 +270,7 @@ module.exports = [
       particleMultiplier: 0.001,
       displayValues: false,
       'icon-classes': 'fas fa-wind',
-      zIndex: forecastZIndex      
+      zIndex: forecastZIndex
       /*
       displayOptions: {
         velocityType: 'Wind',
@@ -403,7 +403,7 @@ module.exports = [
         'mb'
       ],
       values: [ 1000, 700, 450, 300, 200 ]
-    },*/
+    }, */
     leaflet: {
       type: 'weacast.scalarLayer',
       elements: [
