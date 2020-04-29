@@ -75,7 +75,7 @@
     "K2": "Kalisio Terrain",
     "K2_DESCRIPTION": "World wide 30-meter resolution elevation model",
     "MAPILLARY": "Mapillary",
-    "MAPILLARY_DESCRIPTION": "Couverture des prises de vues Mapillary",
+    "MAPILLARY_DESCRIPTION": "Couverture des prises de vues",
     "OPENAQ": "OpenAQ",
     "OPENAQ_DESCRIPTION": "Pollution de l'air",
     "TELERAY": "Téléray",

@@ -9,8 +9,8 @@ const forecastZIndex = 300
 
 module.exports = [
   {
-    name: 'layers.S2',
-    description: 'layers.S2_DESCRIPTION',
+    name: 'Layers.S2',
+    description: 'Layers.S2_DESCRIPTION',
     tags: [
       'imagery'
     ],
@@ -31,8 +31,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.OSM_BRIGHT',
-    description: 'layers.OSM_BRIGHT_DESCRIPTION',
+    name: 'Layers.OSM_BRIGHT',
+    description: 'Layers.OSM_BRIGHT_DESCRIPTION',
     tags: [
       'street'
     ],
@@ -53,8 +53,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.OSM_DARK',
-    description: 'layers.OSM_DARK_DESCRIPTION',
+    name: 'Layers.OSM_DARK',
+    description: 'Layers.OSM_DARK_DESCRIPTION',
     tags: [
       'street'
     ],
@@ -74,8 +74,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.OSMT_BRIGHT',
-    description: 'layers.OSMT_BRIGHT_DESCRIPTION',
+    name: 'Layers.OSMT_BRIGHT',
+    description: 'Layers.OSMT_BRIGHT_DESCRIPTION',
     tags: [
       'street',
       'terrain'
@@ -96,8 +96,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.OSMT_DARK',
-    description: 'layers.OSMT_DARK_DESCRIPTION',
+    name: 'Layers.OSMT_DARK',
+    description: 'Layers.OSMT_DARK_DESCRIPTION',
     tags: [
       'street',
       'terrain'
@@ -118,8 +118,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.MOSAIC',
-    description: 'layers.MOSAIC_DESCRIPTION',
+    name: 'Layers.MOSAIC',
+    description: 'Layers.MOSAIC_DESCRIPTION',
     tags: [
       'street',
       'imagery'
@@ -141,7 +141,7 @@ module.exports = [
     }
   },
   {
-    name: 'layers.CESIUM_ELLIPSOID',
+    name: 'Layers.CESIUM_ELLIPSOID',
     description: 'Standard Ellipsoid',
     tags: [
       'terrain'
@@ -157,8 +157,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.CESIUM_TERRAIN',
-    description: 'layers.CESIUM_TERRAIN_DESCRIPTION',
+    name: 'Layers.CESIUM_TERRAIN',
+    description: 'Layers.CESIUM_TERRAIN_DESCRIPTION',
     tags: [
       'terrain'
     ],
@@ -173,8 +173,8 @@ module.exports = [
     }
   },
   {
-    name: 'layers.K2',
-    description: 'layers.K2_DESCRIPTION',
+    name: 'Layers.K2',
+    description: 'Layers.K2_DESCRIPTION',
     tags: [
       'terrain'
     ],
