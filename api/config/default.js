@@ -109,6 +109,9 @@ module.exports = {
     // Used to avoid DoS by limiting max message size
     maxHttpBufferSize: 10 * 1024 * 1024 // 10MB
   },
+  bodyParser: {
+    json: { limit: 10 * 1024 * 1024 } // 10MB
+  },
   helmet: {
     /* X-Frame-Options is limited to a single domain,
     // which is not easy to use in dev mode, best to rely on Content-Security-Policy
