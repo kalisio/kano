@@ -81,8 +81,8 @@ export default {
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
-      this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeriesWidget', this.$data)
+      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
+      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
       // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')

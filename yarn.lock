@@ -1507,6 +1507,13 @@
   resolved "https://registry.yarnpkg.com/@quasar/fastclick/-/fastclick-1.1.4.tgz#21ed3e9a4387dcb43022a08af4ef08a5f1abf159"
   integrity sha512-i9wbyV4iT+v4KhtHJynUFhH5LiEPvAEgSnwMqPN4hf/8uRe82nDl5qP5agrp2el1h0HzyBpbvHaW7NB0BPrtvA==
 
+"@turf/bbox-polygon@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@turf/bbox-polygon/-/bbox-polygon-6.0.1.tgz#ae0fbb14558831fb34538aae089a23d3336c6379"
+  integrity sha512-f6BK6GOzUNjmJeOYHklk/5LNcQMQbo51gvAM10dTM5IqzKP01KM5bgV88uOKfSZB0HRQVpaRV1tgXk2bg5cPRg==
+  dependencies:
+    "@turf/helpers" "6.x"
+
 "@turf/bbox@^6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-6.0.1.tgz#b966075771475940ee1c16be2a12cf389e6e923a"
@@ -3734,9 +3741,10 @@ casl@^1.0.2:
   dependencies:
     sift "^5.0.0"
 
-cesium@^1.46.1:
+cesium@1.50.0:
   version "1.50.0"
   resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.50.0.tgz#11e93cccaa55ffe305dbd2b02b5647d1eeda114d"
+  integrity sha512-x0PM2/rssASFOH8lTFec8r07iBAyh3m7wrEbY0q5Ocw2L8hhimyWSfymh+raqeBPPZ3BLa4z7V76beOwZXuQ9Q==
   dependencies:
     requirejs "^2.3.2"
 
