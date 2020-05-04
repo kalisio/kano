@@ -61,7 +61,6 @@ export default {
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
-    kMapMixins.timeSeries,
     kMapMixins.time,
     kMapMixins.levels,
     kMapMixins.map.baseMap,

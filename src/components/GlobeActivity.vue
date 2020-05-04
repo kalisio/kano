@@ -46,7 +46,6 @@ export default {
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
-    kMapMixins.timeSeries,
     kMapMixins.time,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
