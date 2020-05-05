@@ -58,11 +58,13 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.activity('map'),
     kMapMixins.geolocation,
+    kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.levels,
+    kMapMixins.infobox,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.heatmapLayers,
@@ -73,7 +75,6 @@ export default {
     kMapMixins.map.style,
     kMapMixins.map.tooltip,
     kMapMixins.map.popup,
-    kMapMixins.map.infobox,
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
@@ -166,9 +167,9 @@ export default {
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
-    this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
-    this.registerLeafletStyle('tooltip', this.getProbedLocationForecastTooltip)
-    this.registerLeafletStyle('markerStyle', this.getProbedLocationForecastMarker)
+    this.registerStyle('tooltip', this.getVigicruesTooltip)
+    this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
+    this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)

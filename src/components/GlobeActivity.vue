@@ -43,17 +43,18 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.activity('globe'),    
     kMapMixins.geolocation,
+    kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.infobox,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,
     kMapMixins.globe.style,
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
-    kMapMixins.globe.infobox,
     kMapMixins.globe.activity,
     kMapMixins.globe.opendapLayers
   ],
@@ -116,7 +117,7 @@ export default {
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
-    this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
+    this.registerStyle('tooltip', this.getVigicruesTooltip)
     // Required to get the access token from server
   },
   mounted () {
