@@ -3,7 +3,9 @@
   "description": "Kalisio Kano Application",
   "version": "0.4.0",
   "homepage": "https://github.com/kalisio/kapp",
-  "keywords": ["kalisio"],
+  "keywords": [
+    "kalisio"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -69,6 +71,7 @@
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.6.0",
     "@turf/bbox": "^6.0.1",
+    "@turf/bbox-polygon": "^6.0.1",
     "@turf/centroid": "^6.0.2",
     "@turf/distance": "^6.0.0",
     "@turf/meta": "^6.0.0",
@@ -80,7 +83,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.25.0",
     "casl": "^1.0.2",
-    "cesium": "^1.46.1",
+    "cesium": "1.50.0",
     "chart.js": "^2.7.3",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-labels": "^1.1.0",

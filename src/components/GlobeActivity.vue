@@ -43,18 +43,18 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.activity('globe'),    
     kMapMixins.geolocation,
+    kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
-    kMapMixins.timeSeries,
     kMapMixins.time,
+    kMapMixins.infobox,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,
     kMapMixins.globe.style,
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
-    kMapMixins.globe.infobox,
     kMapMixins.globe.activity,
     kMapMixins.globe.opendapLayers
   ],
@@ -81,8 +81,8 @@ export default {
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
-      this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeriesWidget', this.$data)
+      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
+      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
       // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('globe-ready')
@@ -117,7 +117,7 @@ export default {
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
-    this.registerCesiumStyle('tooltip', this.getVigicruesTooltip)
+    this.registerStyle('tooltip', this.getVigicruesTooltip)
     // Required to get the access token from server
   },
   mounted () {

@@ -58,12 +58,13 @@ export default {
     kCoreMixins.baseActivity,
     kMapMixins.activity('map'),
     kMapMixins.geolocation,
+    kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.weacast,
-    kMapMixins.timeSeries,
     kMapMixins.time,
     kMapMixins.levels,
+    kMapMixins.infobox,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.heatmapLayers,
@@ -74,7 +75,6 @@ export default {
     kMapMixins.map.style,
     kMapMixins.map.tooltip,
     kMapMixins.map.popup,
-    kMapMixins.map.infobox,
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
@@ -103,9 +103,9 @@ export default {
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
-      this.registerWidget('feature', 'las la-digital-tachograph', 'widgets/KFeatureWidget', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeriesWidget', this.$data)
-      if (this.mapillaryClientID) this.registerWidget('mapillary', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
+      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
+      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
+      if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
       // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
@@ -167,9 +167,9 @@ export default {
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
-    this.registerLeafletStyle('tooltip', this.getVigicruesTooltip)
-    this.registerLeafletStyle('tooltip', this.getProbedLocationForecastTooltip)
-    this.registerLeafletStyle('markerStyle', this.getProbedLocationForecastMarker)
+    this.registerStyle('tooltip', this.getVigicruesTooltip)
+    this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
+    this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
