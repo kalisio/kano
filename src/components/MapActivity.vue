@@ -64,6 +64,7 @@ export default {
     kMapMixins.weacast,
     kMapMixins.time,
     kMapMixins.levels,
+    kMapMixins.infobox,
     kMapMixins.map.baseMap,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.heatmapLayers,
