@@ -38,8 +38,10 @@ debug(`Found ${layers.length} layer definitions to build catalog from`)
 let filter = []
 // Now build filter according any env filter
 if (process.env.LAYERS_FILTER) {
-  // Check for separator, whitespace or comme is supported
-  if (process.env.LAYERS_FILTER.includes(',')) filter = process.env.LAYERS_FILTER.split(',')
+  // Check for wildcard to get all layers
+  if (process.env.LAYERS_FILTER === '*') filter = layers.map(layer => layer.name.replace('Layers.', ''))
+  // Check for list with separator, whitespace or comme is supported
+  else if (process.env.LAYERS_FILTER.includes(',')) filter = process.env.LAYERS_FILTER.split(',')
   else filter = process.env.LAYERS_FILTER.split(' ')
 }
 // Now filter layers
