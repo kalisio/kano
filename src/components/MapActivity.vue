@@ -133,7 +133,7 @@ export default {
       const level = _.get(feature, 'properties.NivSituVigiCruEnt')
       if (level > 1) {
         let tooltip = L.tooltip({ permanent: false }, layer)
-        return tooltip.setContent(this.$t('MapActivity.VIGICRUES_LEVEL_' + level))
+        return tooltip.setContent(this.$t('Layers.VIGICRUES_LEVEL_' + level))
       }
       return null
     },

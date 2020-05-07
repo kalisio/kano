@@ -3,7 +3,6 @@ const fs = require('fs')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
-const services = require('./services')
 const layers = require('./layers')
 
 const serverPort = process.env.PORT || 8081
@@ -208,7 +207,6 @@ module.exports = {
     }
   },
   catalog: {
-    services,
     layers,
     paginate: {
       default: 100,

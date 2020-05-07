@@ -8,8 +8,7 @@ import config from 'config'
 export default async ({ app, Vue }) => {
     // Define the locale to be used
   const localeConfig = config.locale || {}
-  const localeBrowser = kCoreUtils.getLocale()
-  let locale = localeConfig.default || localeBrowser
+  const locale = kCoreUtils.getAppLocale()
   // Initializes i18next
   i18next.init({
     lng: locale,

@@ -63,21 +63,8 @@ module.exports = async function () {
   const catalogService = app.getService('catalog')
   const catalog = app.get('catalog')
 
-  const defaultServices = catalog ? catalog.services || [] : []
-  const services = await catalogService.find({ query: { type: 'service' }, paginate: false })
-  for (let i = 0; i < defaultServices.length; i++) {
-    const defaultService = defaultServices[i]
-    const createdService = _.find(services, { name: defaultService.name })
-    if (!createdService) {
-      app.logger.info('Adding default service (name = ' + defaultService.name + ')')
-      await catalogService.create(defaultService)
-    } else {
-      app.logger.info('Reusing default service (name = ' + defaultService.name + ')')
-    }
-  }
-
   const defaultLayers = catalog ? catalog.layers || [] : []
-  const layers = await catalogService.find({ query: { type: 'layer' }, paginate: false })
+  const layers = await catalogService.find({ query: {}, paginate: false })
   for (let i = 0; i < defaultLayers.length; i++) {
     const defaultLayer = defaultLayers[i]
     const createdLayer = _.find(layers, { name: defaultLayer.name })
