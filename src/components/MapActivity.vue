@@ -78,7 +78,7 @@ export default {
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
-    kMapMixins.map.mapillary
+    kMapMixins.map.mapillaryLayers
   ],
   inject: ['klayout'],
   provide () {
@@ -105,7 +105,7 @@ export default {
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
-      if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryWidget', this.mapillary)
+      if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryViewer')
       // Setup the actions
       this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')

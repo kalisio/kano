@@ -32,7 +32,7 @@ export const getWindowInnerWidth = ClientFunction(() => window.innerWidth)
 export const getWindowInnerHeight = ClientFunction(() => window.innerHeight)
 
 // Access routes
-const baseUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? `http://localhost:8081` : `http://localhost:8082`)
+const baseUrl = process.env.APP_URL || (process.env.NODE_ENV === 'production' ? 'http://localhost:8081' : 'http://localhost:8082')
 export const getUrl = (path) => path ? baseUrl + '/#/' + path : baseUrl
 export const goBack = ClientFunction(() => window.history.back())
 
@@ -49,12 +49,11 @@ export const checkClientError = async (test) => {
 // Mock Geolocation API that does not work well in headless browsers
 // See https://github.com/DevExpress/testcafe/issues/1991
 export const mockLocationAPI = ClientFunction(() => {
-  navigator.geolocation.getCurrentPosition =
-    (callback) => callback({
-      coords: {
-        latitude: 43.2996151,
-        longitude: 1.9287062
-      },
-      timestamp: Date.now()
-    })
+  navigator.geolocation.getCurrentPosition = (callback) => callback({
+    coords: {
+      latitude: 43.2996151,
+      longitude: 1.9287062
+    },
+    timestamp: Date.now()
+  })
 })
