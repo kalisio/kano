@@ -114,7 +114,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           OSMT_BRIGHT: 'OpenStreetMap et Terrain (Clair)',
-          OSMT_BRIGHT_DESCRIPTION: 'Données OpenStreetMap data et terrain à 30m de résolution (style clair)'
+          OSMT_BRIGHT_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style clair)'
         }
       },
       en: {
@@ -150,7 +150,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           OSMT_DARK: 'OpenStreetMap et Terrain (Sombre)',
-          OSMT_DARK_DESCRIPTION: 'Données OpenStreetMap data et terrain à 30m de résolution (style sombre)'
+          OSMT_DARK_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style sombre)'
         }
       },
       en: {
@@ -186,13 +186,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           MOSAIC: 'Mosaique',
-          MOSAIC_DESCRIPTION: '"Données Sentinel 2, IGN BD Ortho 5m et OpenStreetMap fusionnées'
+          MOSAIC_DESCRIPTION: 'Données Sentinel 2, IGN BD Ortho 5m et OpenStreetMap fusionnées'
         }
       },
       en: {
         Layers: {
           MOSAIC: 'Mosaic',
-          MOSAIC_DESCRIPTION: 'Mergd Sentinel 2, IGN BD Ortho 5m and OpenStreetMap data'
+          MOSAIC_DESCRIPTION: 'Merged Sentinel 2, IGN BD Ortho 5m and OpenStreetMap data'
         }
       }
     },
