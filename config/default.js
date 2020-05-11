@@ -39,7 +39,7 @@ module.exports = {
   apiPath: API_PREFIX,
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
-  transport: 'http', // Could be 'http' or 'websocket',
+  transport: 'websocket', // Could be 'http' or 'websocket',
   gateway: 'https://api.',
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
@@ -144,11 +144,6 @@ module.exports = {
     actions: ['probe-location', 'create-layer'],
     layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
     featuresChunkSize: 5000
-    ,
-    components: [{
-      name: 'site-seeker',
-      component: 'SiteSeeker'
-    }]
   },
   globeActivity: {
     tools: ['map', 'track-location', 'location-bar', 'vr', 'fullscreen'],
