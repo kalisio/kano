@@ -121,13 +121,19 @@ module.exports = function (ctx) {
         cfg.resolve.modules = [
           path.resolve(__dirname, 'src'),
           path.resolve(__dirname, 'node_modules')
-        ],
+        ]
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing aliases
           '@': path.resolve(__dirname, './src/components'),
           config: path.resolve(__dirname, './config/client-config.json')
-        },
+        }
         cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
+        // Allow for single file component i18n (https://panter.github.io/vue-i18next/guide/single-file-component.html)
+        cfg.module.rules.push({
+          resourceQuery: /blockType=i18n/,
+          type: 'javascript/auto',
+          loader: '@intlify/vue-i18n-loader',
+        })
       }
     },
 

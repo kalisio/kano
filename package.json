@@ -74,8 +74,8 @@
     "@turf/bbox-polygon": "^6.0.1",
     "@turf/centroid": "^6.0.2",
     "@turf/distance": "^6.0.0",
-    "@turf/meta": "^6.0.0",
     "@turf/helpers": "^6.0.0",
+    "@turf/meta": "^6.0.0",
     "Leaflet.Geodesic": "https://github.com/henrythasler/Leaflet.Geodesic.git",
     "abort-controller": "^3.0.0",
     "ajv": "^6.0.0",
@@ -138,6 +138,7 @@
     "xml2js": "^0.4.22"
   },
   "devDependencies": {
+    "@intlify/vue-i18n-loader": "^1.0.0",
     "@quasar/app": "1.1.4",
     "babel-eslint": "^10.0.3",
     "babel-plugin-add-module-exports": "^1.0.2",
