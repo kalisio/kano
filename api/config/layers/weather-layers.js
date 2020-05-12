@@ -544,8 +544,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           fill: false
         },
         chromajs: {
-          scale: 'OrRd',
-          domain: [0, 60]
+          scale: 'OrRd'
         }
       }
     ],
@@ -771,8 +770,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           scale: 'RdBu',
-          invertScale: true,
-          domain: [-20, 50]
+          invertScale: true
         }
       }
     ],
