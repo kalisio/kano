@@ -68,12 +68,16 @@ module.exports = async function () {
   for (let i = 0; i < defaultLayers.length; i++) {
     const defaultLayer = defaultLayers[i]
     const createdLayer = _.find(layers, { name: defaultLayer.name })
-    if (!createdLayer) {
-      app.logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
-      await catalogService.create(defaultLayer)
-    } else {
-      app.logger.info('Updating default layer (name = ' + defaultLayer.name + ')')
-      await catalogService.update(createdLayer._id, defaultLayer)
+    try {
+      if (!createdLayer) {
+        app.logger.info('Adding default layer (name = ' + defaultLayer.name + ')')
+        await catalogService.create(defaultLayer)
+      } else {
+        app.logger.info('Updating default layer (name = ' + defaultLayer.name + ')')
+        await catalogService.update(createdLayer._id, defaultLayer)
+      }
+    } catch (error) {
+      console.error(error)
     }
     // Check if service(s) are associated to this layer
     let featuresService
@@ -94,7 +98,11 @@ module.exports = async function () {
     // And if we need to initialize some data as well
     if (!createdLayer && featuresService && defaultLayer.fileName) {
       // Cleanup
-      await featuresService.remove(null, { query: {} })
+      try {
+        await featuresService.remove(null, { query: {} })
+      } catch (error) {
+        console.error(error)
+      }
       if (path.extname(defaultLayer.fileName) === '.gz') {
         const extractedFileName = path.join(path.dirname(defaultLayer.fileName), path.basename(defaultLayer.fileName, '.gz'))
         fs.createReadStream(defaultLayer.fileName)
@@ -102,12 +110,20 @@ module.exports = async function () {
           .pipe(fs.createWriteStream(extractedFileName))
           .on('close', async () => {
             const geojson = fs.readJsonSync(extractedFileName)
-            await featuresService.create(geojson.features)
+            try {
+              await featuresService.create(geojson.features)
+            } catch (error) {
+              console.error(error)
+            }
           })
           .on('error', (error) => { console.log(error) })
       } else {
         const geojson = fs.readJsonSync(defaultLayer.fileName)
-        await featuresService.create(geojson.features)
+        try {
+          await featuresService.create(geojson.features)
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
   }
