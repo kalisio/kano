@@ -138,10 +138,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m</br><% }
-                   if (feature.time && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %></br><% }
-                   if (properties.Q) { %>Q = <%= properties.Q.toFixed(2) %> m3/s</br><% }
-                   if (feature.time && feature.time.Q) { %><%= new Date(feature.time.Q).toLocaleString() %></br><% } %>`
+        template: `<% if (_.has(properties, 'H')) { %>H = <%= properties.H.toFixed(2) %> m</br><% }
+                   if (_.has(feature, 'time.H')) { %><%= new Date(feature.time.H).toLocaleString() %></br><% }
+                   if (_.has(properties, 'Q')) { %>Q = <%= properties.Q.toFixed(2) %> m3/s</br><% }
+                   if (_.has(feature, 'time.Q')) { %><%= new Date(feature.time.Q).toLocaleString() %></br><% } %>`
       }
     },
     cesium: {
@@ -156,10 +156,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.H) { %>H = <%= properties.H.toFixed(2) %> m\n<% }
-                   if (feature.time && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }
-                   if (properties.Q) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }
-                   if (feature.time && feature.time.Q) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>`
+        template: `<% if (_.has(properties, 'H')) { %>H = <%= properties.H.toFixed(2) %> m\n<% }` +
+                  `if (_.has(feature, 'time.H')) && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'Q')) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }` +
+                  `if (_.has(feature, 'time.Q')) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>`
       }
     }
   },
@@ -319,20 +319,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³</br><% }
-                   if (feature.time && feature.time.pm25) { %><%= new Date(feature.time.pm25).toLocaleString() %></br><% }
-                   if (properties.pm10) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³</br><% }
-                   if (feature.time && feature.time.pm10) { %><%= new Date(feature.time.pm10).toLocaleString() %></br><% }
-                   if (properties.so2) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm</br><% }
-                   if (feature.time && feature.time.so2) { %><%= new Date(feature.time.so2).toLocaleString() %></br><% }
-                   if (properties.no2) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm</br><% }
-                   if (feature.time && feature.time.no2) { %><%= new Date(feature.time.no2).toLocaleString() %></br><% }
-                   if (properties.o3) { %>O3 = <%= properties.o3.toFixed(2) %> ppm</br><% }
-                   if (feature.time && feature.time.o3) { %><%= new Date(feature.time.o3).toLocaleString() %></br><% }
-                   if (properties.co) { %>CO = <%= properties.co.toFixed(2) %> ppm</br><% }
-                   if (feature.time && feature.time.co) { %><%= new Date(feature.time.co).toLocaleString() %></br><% }
-                   if (properties.bc) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³</br><% }
-                   if (feature.time && feature.time.bc) { %><%= new Date(feature.time.bc).toLocaleString() %></br><% } %>`
+        template: `<% if (_.has(properties, 'pm25')) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³</br><% }
+                   if (_.has(feature, 'time.pm25')) { %><%= new Date(feature.time.pm25).toLocaleString() %></br><% }
+                   if (_.has(properties, 'pm10')) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³</br><% }
+                   if (_.has(feature, 'time.pm10')) { %><%= new Date(feature.time.pm10).toLocaleString() %></br><% }
+                   if (_.has(properties, 'so2')) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm</br><% }
+                   if (_.has(feature, 'time.so2')) { %><%= new Date(feature.time.so2).toLocaleString() %></br><% }
+                   if (_.has(properties, 'no2')) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm</br><% }
+                   if (_.has(feature, 'time.no2')) { %><%= new Date(feature.time.no2).toLocaleString() %></br><% }
+                   if (_.has(properties, 'o3')) { %>O3 = <%= properties.o3.toFixed(2) %> ppm</br><% }
+                   if (_.has(feature, 'time.o3')) { %><%= new Date(feature.time.o3).toLocaleString() %></br><% }
+                   if (_.has(properties, 'co')) { %>CO = <%= properties.co.toFixed(2) %> ppm</br><% }
+                   if (_.has(feature, 'time.co')) { %><%= new Date(feature.time.co).toLocaleString() %></br><% }
+                   if (_.has(properties, 'bc')) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³</br><% }
+                   if (_.has(feature, 'time.bc')) { %><%= new Date(feature.time.bc).toLocaleString() %></br><% } %>`
       }
     },
     cesium: {
@@ -347,20 +347,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.pm25) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³\n<% }
-                   if (feature.time && feature.time.pm25) { %><%= new Date(feature.time.pm25).toLocaleString() %>\n<% }
-                   if (properties.pm10) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³\n<% }
-                   if (feature.time && feature.time.pm10) { %><%= new Date(feature.time.pm10).toLocaleString() %>\n<% }
-                   if (properties.so2) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm\n<% }
-                   if (feature.time && feature.time.so2) { %></br><%= new Date(feature.time.so2).toLocaleString() %>\n<% }
-                   if (properties.no2) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm\n<% }
-                   if (feature.time && feature.time.no2) { %></br><%= new Date(feature.time.no2).toLocaleString() %>\n<% }
-                   if (properties.o3) { %>O3 = <%= properties.o3.toFixed(2) %> ppm\n<% }
-                   if (feature.time && feature.time.o3) { %></br><%= new Date(feature.time.o3).toLocaleString() %>\n<% }
-                   if (properties.co) { %>CO = <%= properties.co.toFixed(2) %> ppm\n<% }
-                   if (feature.time && feature.time.co) { %></br><%= new Date(feature.time.co).toLocaleString() %>\n<% }
-                   if (properties.bc) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³\n<% }
-                   if (feature.time && feature.time.bc) { %></br><%= new Date(feature.time.bc).toLocaleString() %>\n<% } %>`
+        template: `<% if (_.has(properties, 'pm25')) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³\n<% }` +
+                  `if (_.has(feature, 'time.pm25')) { %><%= new Date(feature.time.pm25).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'pm10')) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³\n<% }` +
+                  `if (_.has(feature, 'time.pm10')) { %><%= new Date(feature.time.pm10).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'so2')) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm\n<% }` +
+                  `if (_.has(feature, 'time.so2')) { %></br><%= new Date(feature.time.so2).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'no2')) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm\n<% }` +
+                  `if (_.has(feature, 'time.no2')) { %></br><%= new Date(feature.time.no2).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'o3')) { %>O3 = <%= properties.o3.toFixed(2) %> ppm\n<% }` +
+                  `if (_.has(feature, 'time.o3')) { %></br><%= new Date(feature.time.o3).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'co')) { %>CO = <%= properties.co.toFixed(2) %> ppm\n<% }` +
+                  `if (_.has(feature, 'time.co')) { %></br><%= new Date(feature.time.co).toLocaleString() %>\n<% }` +
+                  `if (_.has(properties, 'bc')) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³\n<% }` +
+                  `if (_.has(feature, 'time.bc')) { %></br><%= new Date(feature.time.bc).toLocaleString() %>\n<% } %>`
       }
     }
   },
@@ -437,7 +437,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>
+        template: `<% if (_.has(properties, 'value')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     },
@@ -453,8 +453,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (properties.value) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n
-                   <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
+        template: `<% if (_.has(properties, 'value')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n` +
+                  `<%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     }
   },
