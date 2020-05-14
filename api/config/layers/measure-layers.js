@@ -157,7 +157,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: `<% if (_.has(properties, 'H')) { %>H = <%= properties.H.toFixed(2) %> m\n<% }` +
-                  `if (_.has(feature, 'time.H')) && feature.time.H) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }` +
+                  `if (_.has(feature, 'time.H')) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }` +
                   `if (_.has(properties, 'Q')) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }` +
                   `if (_.has(feature, 'time.Q')) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>`
       }
