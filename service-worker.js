@@ -27,27 +27,27 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "098c7620c1e20eed36b31d299cc0bda6"
+    "revision": "34665c83b0927b3e2134a301c552aad9"
   },
   {
     "url": "about/contact.html",
-    "revision": "82ae0a9e9dc14bbeeaf9eb117d648c46"
+    "revision": "fd889849f07a9af0d8be45f694ec2166"
   },
   {
     "url": "about/contributing.html",
-    "revision": "d62f80c55bf36a42331baa5227204dce"
+    "revision": "125aec0529d87bb513ae6002337de001"
   },
   {
     "url": "about/introduction.html",
-    "revision": "a0dae89a59cc2fef7d15c03a2515d738"
+    "revision": "f8d556c3f108965fe9a1f408c3e708ab"
   },
   {
     "url": "about/license.html",
-    "revision": "31b0c8e4e427d7b5791d41fdab7e64f1"
+    "revision": "b38987da3f2f758fee7455e4e3a85943"
   },
   {
     "url": "about/roadmap.html",
-    "revision": "bb978eb206c7cb6d3961ea1efd293dc8"
+    "revision": "1df281ab4436e48b57f47dc9a2a65821"
   },
   {
     "url": "assets/css/0.styles.082ff60f.css",
@@ -138,32 +138,32 @@ self.__precacheManifest = [
     "revision": "69f5983744880298469079af537a6a77"
   },
   {
-    "url": "assets/js/app.586db09f.js",
-    "revision": "41a4e9e401124d4b964329b7852b880e"
+    "url": "assets/js/app.8fa3117f.js",
+    "revision": "6586c89aca0297714f79c7c555f07ed8"
   },
   {
     "url": "guides/advanced-usage.html",
-    "revision": "53d286fd1f5905c2c416b54ed508114c"
+    "revision": "409095be1450568e314ab080a52f26ed"
   },
   {
     "url": "guides/getting-started.html",
-    "revision": "53880ff999ac02164b0d12271e71bf3f"
+    "revision": "a5cd69a27b5cd203a80298b1774339b6"
   },
   {
     "url": "guides/understanding-kano.html",
-    "revision": "9a866dc7d35cb7cf0d5590e3bb9a1a23"
+    "revision": "0df7e4cd9526ffdf7657a506a1e67ac6"
   },
   {
     "url": "index.html",
-    "revision": "c25e10a1c173d9edfc1bfbdaacc56755"
+    "revision": "b38a3675dd8efef150395a25fd647161"
   },
   {
     "url": "reference/api.html",
-    "revision": "4be55f0b7867283b0684867910706669"
+    "revision": "b6866eaa3896e20e580d73f7098e3d15"
   },
   {
     "url": "reference/configuration.html",
-    "revision": "1f9cffa77808db7794b6b7cb4cb70459"
+    "revision": "1e04a8cf6cc353d619c721af0196325f"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
