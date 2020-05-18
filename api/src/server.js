@@ -2,6 +2,7 @@ import { kalisio } from '@kalisio/kdk/core.api'
 import distribution from '@kalisio/feathers-distributed'
 import fs from 'fs-extra'
 import https from 'https'
+import path from 'path'
 import proxyMiddleware from 'http-proxy-middleware'
 import express from '@feathersjs/express'
 import middlewares from './middlewares'
@@ -51,7 +52,7 @@ export class Server {
     // Configure middlewares - always has to be last
     app.configure(middlewares)
     // Custom configuration entry point if any
-    const pluginPath = app.get('pluginPath')
+    const pluginPath = app.get('pluginPath') || path.join(__dirname, 'plugin.js')
     if (fs.pathExistsSync(pluginPath)) {
       const plugin = require(pluginPath)
       await app.configure(plugin)
