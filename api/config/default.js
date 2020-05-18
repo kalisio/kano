@@ -101,6 +101,7 @@ module.exports = {
   },
   */
   apiPath: API_PREFIX,
+  pluginPath: path.join(__dirname, '..', 'src', 'plugin.js'),
   socketio: {
     // This avoid the issue of disconnecting the socket when sending a large amout of data
     // See https://github.com/socketio/socket.io/issues/2666, https://github.com/socketio/socket.io/issues/2769
