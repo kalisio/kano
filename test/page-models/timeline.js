@@ -10,6 +10,6 @@ export default class Timeline extends BasePage {
   async isVisible () {
     const exists = await this.timeline.exists
     if (!exists) return false
-    return this.navivationBar.visible
+    return this.timeline.visible
   }
 }

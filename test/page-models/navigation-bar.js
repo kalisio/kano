@@ -4,12 +4,12 @@ import BasePage from './base-page'
 export default class NavigationBar extends BasePage {
   constructor () {
     super()
-    this.navivationBar = VueSelector('k-navigation-bar')
+    this.navigationBar = VueSelector('k-navigation-bar')
   }
 
   async isVisible () {
-    const exists = await this.navivationBar.exists
+    const exists = await this.navigationBar.exists
     if (!exists) return false
-    return this.navivationBar.visible
+    return this.navigationBar.visible
   }
 }
