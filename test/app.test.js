@@ -2,7 +2,7 @@
 import * as pages from './page-models'
 
 fixture`app`// declare the fixture
-  .page`${pages.getUrl()}`  // specify the start page
+  .page`${pages.getUrl()}`
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
   .beforeEach(async test => {
@@ -11,7 +11,6 @@ fixture`app`// declare the fixture
   })
   .afterEach(async test => {
     // check for console error messages
-    // FIXME: geolocation error
     // await pages.checkNoClientError(test)
   })
 
@@ -52,4 +51,3 @@ test('Checking the app layout', async test => {
   await test.expect(await layout.isLeftDrawerOpened()).ok()
   await sideNav.logout(test)
 })
-
