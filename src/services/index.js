@@ -22,10 +22,7 @@ export default function () {
         utc: 'timeFormat.utc',
         location: 'locationFormat',
         restoreView: 'restore.view',
-        timelineSpan: 'timeline.span',
-        timelineOffset: 'timeline.offset',
         timelineStep: 'timeline.step',
-        timelineReference: 'timeline.reference',
         timeseriesSpan: 'timeseries.span'
       }
     })

@@ -19,7 +19,7 @@
     "TIMELINE_STEP": "Timeline step (in minutes)",
     "TIMELINE_REFERENCE": "Reference time",
     "TIMESERIES_SETTINGS": "Timeseries parameters",
-    "TIMESERIES_SPAN": "Timeseries span (in days)"
+    "TIMESERIES_SPAN": "Timeseries span (in hours)"
   },
   "screen": {
     "ABOUT_KALISIO": "About",

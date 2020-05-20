@@ -19,7 +19,7 @@
     "TIMELINE_STEP": "Pas du sélécteur temporel, en minutes",
     "TIMELINE_REFERENCE": "Temps de référence du sélecteur temporel",
     "TIMESERIES_SETTINGS": "Paramètrage des séries temporelles",
-    "TIMESERIES_SPAN": "Intervalle des séries temporelles, en jours"
+    "TIMESERIES_SPAN": "Intervalle des séries temporelles, en heures"
   },
   "screen": {
     "ABOUT_KALISIO": "A propos",

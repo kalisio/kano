@@ -95,8 +95,17 @@
       "type": "number",
       "group": "schemas.TIMESERIES_SETTINGS",
       "field": {
-        "component": "form/KNumberField",
-        "helper": "schemas.TIMESERIES_SPAN"
+        "component": "form/KSelectField",
+        "helper": "schemas.TIMESERIES_SPAN",
+        "options": [
+          { "label": "3H", "value": 180 },
+          { "label": "6H", "value": 360 },
+          { "label": "12H", "value": 720 },
+          { "label": "24H", "value": 1440, "selected": true },
+          { "label": "48H", "value": 2880 },
+          { "label": "72H", "value": 4320 },
+          { "label": "96H", "value": 5760 }
+        ]
       }
     }
   },
@@ -107,8 +116,6 @@
     "longDate",
     "shortYear",
     "longYear",
-    "utc",
-    "location",
-    "restoreView"
+    "location"
   ]
 }
