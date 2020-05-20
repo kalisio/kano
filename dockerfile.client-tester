@@ -4,3 +4,5 @@ LABEL maintainer="contact@kalisio.xyz"
 ENV NODE_ENV=production
 
 COPY ./test /tests/.
+
+ENTRYPOINT [ "/docker-entrypoint.sh --skip-js-errors" ]
