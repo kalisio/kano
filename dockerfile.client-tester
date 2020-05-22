@@ -1,4 +1,4 @@
-FROM kalisio/testcafe:1.7.1
+FROM kalisio/testcafe:1.8.5
 LABEL maintainer="contact@kalisio.xyz"
 
 ENV NODE_ENV=production
