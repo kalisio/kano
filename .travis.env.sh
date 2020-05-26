@@ -42,7 +42,7 @@ then
     KDK_PROJECT_FILE=$APP-$VERSION.js
   else
     export FLAVOR=test
-    KDK_PROJECT_FILE=$APP-$MAJOR-$MINOR.js
+    KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
   fi
 else
   export FLAVOR=dev
