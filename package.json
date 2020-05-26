@@ -152,7 +152,7 @@
     "eslint-plugin-testcafe": "^0.2.1",
     "eslint-plugin-vue": "^6.2.2",
     "express": "^4.15.4",
-    "glob": "^7.1.2",
+    "glob": "^7.1.6",
     "npm-run-all": "^4.1.2",
     "shelljs": "^0.8.1",
     "standard": "^14.0.0",
