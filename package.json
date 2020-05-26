@@ -155,7 +155,7 @@
     "glob": "^7.1.2",
     "npm-run-all": "^4.1.2",
     "shelljs": "^0.8.1",
-    "standard": "^14.0.0",
+    "standard": "^14.3.4",
     "testcafe": "^1.8.5",
     "testcafe-vue-selectors": "^3.1.0"
   },
