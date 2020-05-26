@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "@feathersjs/client": "^3.5.4",
-    "@panter/vue-i18next": "^0.9.1",
+    "@panter/vue-i18next": "^0.15.2",
     "@quasar/extras": "^1.6.0",
     "@turf/bbox": "^6.0.1",
     "@turf/bbox-polygon": "^6.0.1",

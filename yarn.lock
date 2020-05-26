@@ -1088,9 +1088,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@panter/vue-i18next@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@panter/vue-i18next/-/vue-i18next-0.9.1.tgz#a24694d37b7e2f54f67ac8a485f634203660e98d"
+"@panter/vue-i18next@^0.15.2":
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/@panter/vue-i18next/-/vue-i18next-0.15.2.tgz#814f6774237e444eb9b69156e9c507d41b7fbd32"
+  integrity sha512-7VX9GyxHJNEJKa2CRzC294Oz5EEbzVDZ1o3O/P8gL/PWBmcFOFsuivRbP/1a9ga2ihv/NBzoCWMCNIEEeCcONQ==
   dependencies:
     deepmerge "^2.0.0"
 
@@ -1593,7 +1594,7 @@
 
 "@types/events@*":
   version "1.2.0"
-  resolved "http://registry.npmjs.org/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
+  resolved "https://registry.npmjs.org/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
 
 "@types/express-serve-static-core@*":
   version "4.16.0"
@@ -6272,7 +6273,7 @@ eventemitter3@~3.1.0:
 
 events@1.1.1, events@^1.1.1:
   version "1.1.1"
-  resolved "http://registry.npmjs.org/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
+  resolved "https://registry.npmjs.org/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
 events@^3.0.0:
   version "3.0.0"
@@ -7912,7 +7913,7 @@ http-deceiver@^1.2.7:
 
 http-errors@1.6.3, http-errors@~1.6.3:
   version "1.6.3"
-  resolved "http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
+  resolved "https://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
   dependencies:
     depd "~1.1.2"
     inherits "2.0.3"
