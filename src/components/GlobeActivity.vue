@@ -58,7 +58,6 @@ export default {
     kMapMixins.globe.activity,
     kMapMixins.globe.opendapLayers
   ],
-  inject: ['klayout'],
   provide () {
     return {
       kActivity: this,

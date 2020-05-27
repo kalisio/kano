@@ -80,7 +80,6 @@ export default {
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers
   ],
-  inject: ['klayout'],
   provide () {
     return {
       kActivity: this,

@@ -32,17 +32,16 @@
 <script>
 export default {
   name: 'settings',
-  inject: ['klayout'],
   methods: {
     editSettings () {
       this.$refs.editor.open()
     },
     onSettingsEdited () {
       this.$refs.editor.close()
-      this.klayout.hideLeftDrawer()
+      this.$store.patch('leftDrawer', { visible: false })
     },
     onSettingsClosed () {
-      this.klayout.hideLeftDrawer()
+      this.$store.patch('leftDrawer', { visible: false })
     }
   },
   created () {
