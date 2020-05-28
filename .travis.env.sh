@@ -32,7 +32,7 @@ echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
 git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
 
 # Define the flavor
-TEST_FLAVOR_REGEX="^test$|-test$"
+TEST_FLAVOR_REGEX="^test-*|-test$"
 PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
 if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
 then
