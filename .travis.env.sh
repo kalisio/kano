@@ -34,16 +34,15 @@ git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
 # Define the flavor
 TEST_FLAVOR_REGEX="^test-*|-test$"
 PROD_FLAVOR_REGEX="^prod-v[0-9]+\.[0-9]+\.[0-9]+"
+if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
+then
+  export FLAVOR=prod
+  KDK_PROJECT_FILE=$APP-$VERSION.js
+fi
 if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
 then
-  if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
-  then
-    export FLAVOR=prod
-    KDK_PROJECT_FILE=$APP-$VERSION.js
-  else
-    export FLAVOR=test
-    KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
-  fi
+  export FLAVOR=test
+  KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
 else
   export FLAVOR=dev
   KDK_PROJECT_FILE=$APP.js
