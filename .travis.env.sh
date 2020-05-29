@@ -38,14 +38,15 @@ if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
 then
   export FLAVOR=prod
   KDK_PROJECT_FILE=$APP-$VERSION.js
-fi
-if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
-then
-  export FLAVOR=test
-  KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
 else
-  export FLAVOR=dev
-  KDK_PROJECT_FILE=$APP.js
+  if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
+  then
+    export FLAVOR=test
+    KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
+  else
+    export FLAVOR=dev
+    KDK_PROJECT_FILE=$APP.js
+  fi
 fi
 export NODE_APP_INSTANCE=$FLAVOR
 TAG=$VERSION-$FLAVOR
