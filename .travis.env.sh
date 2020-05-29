@@ -38,7 +38,11 @@ PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
 # so that we don't know the branch the tag is coming from
 if [[ -n "$TRAVIS_TAG" ]];
 then
-  TRAVIS_BRANCH=$(git branch --contains "tags/$TRAVIS_TAG" --format="%(refname)")
+  ls
+  git branch --contains tags/v1.0.0
+  git branch --contains tags/v1.0.0 --format="%(refname)"
+  git branch --contains tags/$TRAVIS_TAG --format="%(refname)"
+  TRAVIS_BRANCH=$(git branch --contains tags/"$TRAVIS_TAG" --format="%(refname)")
   echo "Current branch for tag is $TRAVIS_BRANCH"
   # Refname is in the form refs/heads/tag_name so we remove the prefix
   TRAVIS_BRANCH=${TRAVIS_BRANCH#"refs/heads/"}
