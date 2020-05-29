@@ -38,7 +38,9 @@ PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
 # so that we don't know the branch the tag is coming from
 if [[ -n "$TRAVIS_TAG" ]];
 then
-  ls
+  git status
+  git branch
+  git tag
   git branch --contains tags/v1.0.0
   git branch --contains tags/v1.0.0 --format="%(refname)"
   git branch --contains tags/$TRAVIS_TAG --format="%(refname)"
