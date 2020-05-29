@@ -34,6 +34,15 @@ git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
 # Define the flavor
 TEST_FLAVOR_REGEX="^test-*|-test$"
 PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
+# When we buil on a tag the travis branch is actually the same than the tag
+# so that we don't know the branch the tag is coming from
+if [[ -n "$TRAVIS_TAG" ]];
+then
+  TRAVIS_BRANCH=$(git branch --contains tags/$TRAVIS_TAG --format="%(refname)")
+  # Refname is in the form refs/heads/tag_name so we remove the prefix
+  TRAVIS_BRANCH=${TRAVIS_BRANCH#"refs/heads/"}
+fi
+
 if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
 then
   if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
@@ -51,7 +60,7 @@ fi
 export NODE_APP_INSTANCE=$FLAVOR
 TAG=$VERSION-$FLAVOR
 
-echo "Build flavor is $FLAVOR"
+echo "Build flavor is $FLAVOR on branch $TRAVIS_BRANCH"
 
 # Read ci environement variables
 cp workspace/common/.travis.env .travis.env
