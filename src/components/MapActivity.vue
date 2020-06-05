@@ -97,8 +97,6 @@ export default {
       this.clearNavigationBar()
       // Wait until map is ready
       await this.initializeMap()
-      // Add app hooks to weacast client if separate from app client
-      if (this.weacastApi && (this.weacastApi !== this.$api)) this.weacastApi.hooks(appHooks)
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets

@@ -14,10 +14,7 @@
     "RESTORE_VIEW_FIELD_HELPER": "Sauvegarder la vue courante",
     "LOCATION_FORMAT": "Format de coordonnées <a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>",
     "TIMELINE_SETTINGS": "Paramètrage du sélecteur temporel",
-    "TIMELINE_SPAN": "Intervalle du sélécteur temporel, en jours",
-    "TIMELINE_OFFSET": "Position du temps de référence dans le sélecteur temporel, en jours",
     "TIMELINE_STEP": "Pas du sélécteur temporel, en minutes",
-    "TIMELINE_REFERENCE": "Temps de référence du sélecteur temporel",
     "TIMESERIES_SETTINGS": "Paramètrage des séries temporelles",
     "TIMESERIES_SPAN": "Intervalle des séries temporelles, en heures"
   },

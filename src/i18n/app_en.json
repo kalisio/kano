@@ -14,10 +14,7 @@
     "RESTORE_VIEW_FIELD_HELPER": "Save current view",
     "LOCATION_FORMAT": "Location format <a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>",
     "TIMELINE_SETTINGS": "Timeline parameters",
-    "TIMELINE_SPAN": "Timeline span (in days)",
-    "TIMELINE_OFFSET": "Reference time offset in the timeline (in days)",
     "TIMELINE_STEP": "Timeline step (in minutes)",
-    "TIMELINE_REFERENCE": "Reference time",
     "TIMESERIES_SETTINGS": "Timeseries parameters",
     "TIMESERIES_SPAN": "Timeseries span (in hours)"
   },
