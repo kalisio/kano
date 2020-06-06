@@ -3,7 +3,7 @@ import VueSelector from 'testcafe-vue-selectors'
 import BasePage from './base-page'
 import { getWindowInnerWidth } from '.'
 
-export default class AppBar extends BasePage {
+export default class Layout extends BasePage {
   constructor () {
     super()
     // AppBar
