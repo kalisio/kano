@@ -94,22 +94,20 @@ export default {
     this.$toast({html: this.$t('Index.VERSION_MISMATCH')})
   },
   async mounted () {
-    setTimeout(async () => {
-      try {
-        this.user = await this.restoreSession()
-        // No need to redirect here since the user should be set thus managed by event handler below
-      } catch (_) {
-        this.user = null
-        // Check if we need to redirect based on the fact there is no authenticated user
-        this.redirect()
-      }
-    }, 1000)
-    
     this.$events.$on('user-changed', user => {
       this.user = user
       // Check if we need to redirect based on the fact there is an authenticated user
       this.redirect()
     })
+
+    try {
+      // No need to update/redirect here since the user should be managed by event handler above
+      await this.restoreSession()
+    } catch (_) {
+      this.user = null
+      // Check if we need to redirect based on the fact there is no authenticated user
+      this.redirect()
+    }
   }
 }
 </script>
