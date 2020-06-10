@@ -1,5 +1,5 @@
 // https://github.com/mochajs/mocha/issues/812
-
+const util = require('util')
 const mocha = require('mocha')
 const SlackNotifier = require('./slack-notifier')
 
@@ -19,18 +19,23 @@ function SlackReporter (runner, options) {
   let passes = 0
   let failures = 0
   let skips = 0
+  let exitCode = 0
   let messages = []
 
   runner.on(EVENT_RUN_BEGIN, function () {
     startTime = new Date()
-    notifier.addSection(`[${context}] running tests ${startTime.toUTCString()}`)
+    notifier.addSection(`*[${context}]* running tests ${startTime.toUTCString()}`)
   })
 
-  runner.on(EVENT_RUN_END, function () {
+  runner.on(EVENT_RUN_END, async function () {
     const duration = ((new Date() - startTime) / 60).toFixed(2)
     notifier.addSection(`Duration: ${duration}s`)
     notifier.addDivider()
     notifier.notify()
+    // Due to some reasons, eg https://github.com/kalisio/kdk/issues/63, tests cannot always quit
+    // We force a manual exit here after a while to be sure the reporter has sent its report back
+    await util.promisify(setTimeout)(5000)
+    process.exit(exitCode)
   })
 
   runner.on(EVENT_SUITE_BEGIN, function (suite) {
@@ -46,6 +51,8 @@ function SlackReporter (runner, options) {
 
   runner.on(EVENT_SUITE_END, function (suite) {
     if (!suite.root) {
+      // On at least a failed test exit in error
+      if (failures > 0) exitCode = 1
       messages.forEach(message => {
         notifier.addSection(message)
       })
