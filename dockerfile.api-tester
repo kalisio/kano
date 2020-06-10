@@ -8,7 +8,7 @@ ARG APP
 ARG TEST_REPORTER_VERSION=0.7.0
 
 ENV MOCHA_CONTEXT=$APP
-ENV STANDRD_CONTEXT=$APP
+ENV STANDARD_CONTEXT=$APP
 ENV SLACK_WEBOOK_URL=
 ENV CC_TEST_REPORTER_ID=
 
@@ -26,6 +26,6 @@ RUN \
 CMD \
   yarn lint | node ./test/reporters/standard-slack.js; \
   ./cc-test-reporter before-build; \
-  yarn coverage -- --reporter test/reporters/mocha-slack; \
+  yarn coverage -- -- --reporter test/reporters/mocha-slack; \
   ./cc-test-reporter format-coverage -t lcov; \
   ./cc-test-reporter upload-coverage
