@@ -105,7 +105,7 @@ export default class Layout extends BasePage {
   async clickToolbar (test, entry) {
     await test
       .click(this.appBar.find(entry))
-      .wait(500)
+      .wait(3000)
   }
 
   async clickOverflowMenu (test, entry) {
