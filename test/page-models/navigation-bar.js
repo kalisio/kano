@@ -8,6 +8,8 @@ export default class NavigationBar extends BasePage {
   }
 
   async isVisible () {
+    // const bar = VueSelector(this.navigationBar, { visibilityCheck: true })
+    // return bar.exists
     const exists = await this.navigationBar.exists
     if (!exists) return false
     return this.navigationBar.visible

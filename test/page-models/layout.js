@@ -32,73 +32,86 @@ export default class Layout extends BasePage {
   async clickLeading (test) {
     await test
       .click(this.appBarLeading)
+      .wait(500)
   }
 
   // TabBar
   async clickTabBar (test, tab) {
     await test
       .click(this.tabBar.find(tab))
+      .wait(500)
   }
 
   // Drawers
   async isLeftDrawerOpened () {
-    const drawer = Selector(this.leftDrawer, { visibilityCheck: true })
-    return drawer.exists
+    const leftPos = await this.leftDrawer.getBoundingClientRectProperty('left')
+    return leftPos >= 0
   }
 
   async isRightDrawerOpened () {
-    const drawer = Selector(this.rightDrawer, { visibilityCheck: true })
-    return drawer.exists
+    const rightPos = await this.rightDrawer.getBoundingClientRectProperty('right')
+    const windowWidth = await getWindowInnerWidth()
+    return rightPos <= windowWidth
   }
 
   // Openers
   async clickLeftOpener (test) {
     await test
       .click(this.leftOpener)
+      .wait(500)
   }
 
   async clickRightOpener (test) {
     await test
       .click(this.rightOpener)
+      .wait(500)
   }
 
   async clickTopOpener (test) {
     await test
       .click(this.topOpener)
+      .wait(500)
   }
 
   async clickBottomOpener (test) {
     await test
       .click(this.bottomOpener)
+      .wait(500)
   }
 
   // Fab
   async openAndClickFab (test, entry) {
     await test
       .click(Selector(this.fab))
+      .wait(500)
       .click(this.fab.find(entry))
+      .wait(500)
   }
 
   async clickFab (test, entry) {
     await test
       .click(Selector(entry))
+      .wait(500)
   }
 
   // SignupAlert
   async closeSignupAlert (test) {
     await test
       .click(this.signupAlert.find('.q-alert-close').find('.cursor-pointer'))
+      .wait(500)
   }
 
   // Helpers
   async clickToolbar (test, entry) {
     await test
       .click(this.appBar.find(entry))
+      .wait(500)
   }
 
   async clickOverflowMenu (test, entry) {
     await test
       .click(this.appBarOverflowMenuEntry)
       .click(this.appBarOverflowMenu.find(entry))
+      .wait(500)
   }
 }

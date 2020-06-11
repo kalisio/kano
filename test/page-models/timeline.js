@@ -23,11 +23,11 @@ export default class Timeline extends BasePage {
       .click(this.opener)
   }
 
-  // async isVisible () {
-  //   const exists = await this.timeline.exists
-  //   if (!exists) return false
-  //   return this.timeline.visible
-  // }
+  async isVisible () {
+    const exists = await this.timeline.exists
+    if (!exists) return false
+    return this.timeline.visible
+  }
 
   async clickDay (day) {
     let button = null

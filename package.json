@@ -35,6 +35,7 @@
     "cafe:firefox": "testcafe firefox test/*.test.js -S -s screenshots",
     "cafe:chrome": "testcafe chrome test/*.test.js -S -s screenshots",
     "cafe:chromium": "testcafe chromium test/*.test.js -S -s screenshots",
+    "cafe:chromium-brk": "testcafe chromium --inspect-brk=127.0.0.1:9232 test/*.test.js -S -s screenshots",
     "rec": "node ./tutorials/record.js",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
