@@ -5,6 +5,7 @@ import SideNav from './side-nav'
 import NavigationBar from './navigation-bar'
 import Timeline from './timeline'
 import MapActivity from './map-activity'
+import Catalog from './catalog'
 
 // Export all models
 export {
@@ -13,7 +14,8 @@ export {
   SideNav,
   NavigationBar,
   Timeline,
-  MapActivity
+  MapActivity,
+  Catalog
 }
 
 // Access store
