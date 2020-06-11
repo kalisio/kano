@@ -1,5 +1,3 @@
-// import _ from 'lodash'
-// import { fs } from 'fs'
 import * as fs from 'fs'
 import png from 'pngjs'
 import pixelmatch from 'pixelmatch'
@@ -22,15 +20,23 @@ const timeline = new pages.Timeline()
 const mapActivity = new pages.MapActivity()
 const catalog = new pages.Catalog()
 
-const recordRef = true
+const recordRef = false
+
+function refScreenshot (t, key) {
+  const screenshotBase = t.testRun.opts.screenshots.path
+  // return `${screenshotBase}/reference/${t.browser.name.toLowerCase()}/${key}.png`
+  return `${screenshotBase}/reference/chrome/${key}.png`
+}
+
+function screenshot (t, key, absolute = false) {
+  return absolute ? `${t.testRun.opts.screenshots.path}/${key}.png` : `${key}.png`
+}
 
 function diffScreenshots (t, key) {
   if (recordRef) return
 
-  const screenshotPath = t.testRun.opts.screenshots.path
-
-  const ref = png.PNG.sync.read(fs.readFileSync(`${screenshotPath}/reference/${key}.png`))
-  const img = png.PNG.sync.read(fs.readFileSync(`${screenshotPath}/baselayers/${key}.png`))
+  const ref = png.PNG.sync.read(fs.readFileSync(refScreenshot(t, key)))
+  const img = png.PNG.sync.read(fs.readFileSync(screenshot(t, key, true)))
   const { width, height } = ref
   const diff = new png.PNG({ width, height })
 
@@ -42,7 +48,8 @@ function diffScreenshots (t, key) {
   const numDiffs = pixelmatch(ref.data, img.data, diff.data, width, height, opts)
   const diffRatio = 100.0 * (numDiffs / (width * height))
   if (diffRatio > 1.0) {
-    fs.writeFileSync(`${screenshotPath}/diff-${key}.png`, png.PNG.sync.write(diff))
+    const output = screenshot(t, `diff-${key}`, true)
+    fs.writeFileSync(output, png.PNG.sync.write(diff))
     throw new Error(`Diff ratio for ${key} is too high: ${diffRatio}`)
   }
 }
@@ -95,52 +102,36 @@ fixture`app`// declare the fixture
 //   await sideNav.logout(test)
 // })
 
-// test('Robin', async test => {
-//   await layout.clickRightOpener(test)
-//   await catalog.openCategory(test, 'Fonds cartographiques')
-//   await catalog.selectLayer(test, 'Sentinel 2')
-//   await test.takeScreenshot({ path: 'baselayers/sentinel2.png' })
-//   // await test.wait(1000)
-//   await catalog.selectLayer(test, 'OpenStreetMap (Sombre)')
-//   await test.takeScreenshot({ path: 'baselayers/osm_dark.png' })
-//   // await test.wait(1000)
-//   await catalog.selectLayer(test, 'OpenStreetMap (Clair)')
-//   // await test.wait(1000)
-//   await test.takeScreenshot({ path: 'baselayers/osm_light.png' })
+test('baselayers', async t => {
+  const category = 'Fonds cartographiques'
+  const layers = {
+    sentinel2: 'Sentinel 2',
+    osm_light: 'OpenStreetMap (Clair)',
+    osm_dark: 'OpenStreetMap (Sombre)',
+    osm_terrain_light: 'OpenStreetMap et Terrain (Clair)',
+    osm_terrain_dark: 'OpenStreetMap et Terrain (Sombre)',
+    mosaic: 'Mosaique',
+    bd_ortho_ign: 'BD ORTHO IGN',
+    scan_std_ign: 'SCAN standard IGN',
+    scan_cla_ign: 'SCAN classique IGN',
+    maptiler_light: 'Maptiler (Clair)',
+    maptiler_topo: 'Maptiler (Topographique)',
+    maptiler_hybrid: 'Maptiler (Hybride)'
+  }
 
-//   throw new Error('shit!!')
-// })
+  await catalog.open()
+  await catalog.clickCategory(category)
+  await catalog.close()
 
-// test('baselayers', async t => {
-//   const category = 'Fonds cartographiques'
-//   const layers = {
-//     sentinel2: 'Sentinel 2',
-//     osm_light: 'OpenStreetMap (Clair)',
-//     osm_dark: 'OpenStreetMap (Sombre)',
-//     osm_terrain_light: 'OpenStreetMap et Terrain (Clair)',
-//     osm_terrain_dark: 'OpenStreetMap et Terrain (Sombre)',
-//     mosaic: 'Mosaique',
-//     bd_ortho_ign: 'BD ORTHO IGN',
-//     scan_std_ign: 'SCAN standard IGN',
-//     scan_cla_ign: 'SCAN classique IGN',
-//     maptiler_light: 'Maptiler (Clair)',
-//     maptiler_topo: 'Maptiler (Topographique)',
-//     maptiler_hybrid: 'Maptiler (Hybride)'
-//   }
+  for (const [key, value] of Object.entries(layers)) {
+    await catalog.open()
+    await catalog.clickLayer(value)
+    await catalog.close()
+    await t.takeScreenshot({ path: screenshot(t, key) })
 
-//   await catalog.open()
-//   await catalog.clickCategory(category)
-//   await catalog.close()
-
-//   for (const [key, value] of Object.entries(layers)) {
-//     await catalog.open()
-//     await catalog.clickLayer(value)
-//     await catalog.close()
-//     await t.takeScreenshot({ path: `baselayers/${key}.png` })
-
-//     diffScreenshots(t, key)
-//   }
-// })
+    diffScreenshots(t, key)
+  }
+})
 
 // test('measurelayers', async t => {
 //   const category = 'Couches des mesures'
@@ -159,55 +150,55 @@ fixture`app`// declare the fixture
 //     await catalog.open()
 //     await catalog.clickLayer(value)
 //     await catalog.close()
-//     await t.takeScreenshot({ path: `measurelayers/${key}.png` })
+//     await t.takeScreenshot({ path: screenshot(t, key) })
 
 //     diffScreenshots(t, key)
 //   }
 // })
 
-test('meteolayers', async t => {
-  await timeline.open()
-  /*
-  await timeline.clickChip('08/06')
-  await t.wait(2000)
-  await timeline.clickPreviousDay()
-  await t.wait(2000)
-  */
-  /*
-  await timeline.clickDay('+')
-  await t.wait(2000)
-  await timeline.clickDay('-')
-  await t.wait(2000)
-  await timeline.clickHour('+')
-  await t.wait(2000)
-  await timeline.clickHour('-')
-  await t.wait(2000)
-  await timeline.clickHour('13h')
-  await t.wait(2000)
-  await timeline.clickDay('07/06')
-  await t.wait(2000)
-  */
+// test('meteolayers', async t => {
+//   await timeline.open()
+//   /*
+//   await timeline.clickChip('08/06')
+//   await t.wait(2000)
+//   await timeline.clickPreviousDay()
+//   await t.wait(2000)
+//   */
+//   /*
+//   await timeline.clickDay('+')
+//   await t.wait(2000)
+//   await timeline.clickDay('-')
+//   await t.wait(2000)
+//   await timeline.clickHour('+')
+//   await t.wait(2000)
+//   await timeline.clickHour('-')
+//   await t.wait(2000)
+//   await timeline.clickHour('13h')
+//   await t.wait(2000)
+//   await timeline.clickDay('07/06')
+//   await t.wait(2000)
+//   */
 
-  await timeline.clickDay('07/06')
-  await timeline.clickHour('15h')
-  await timeline.close()
+//   await timeline.clickDay('07/06')
+//   await timeline.clickHour('15h')
+//   await timeline.close()
 
-  const category = 'Prévisions météo'
-  const layers = {
-    wind_s3_arpege01: ['Archives', 'ARPEGE - 0.1°', 'Vent (S3)'],
-    wind_s3_gfs05: ['Archives', 'GFS - 0.5°', 'Vent (S3)'],
-  }
+//   const category = 'Prévisions météo'
+//   const layers = {
+//     wind_s3_arpege01: ['Archives', 'ARPEGE - 0.1°', 'Vent (S3)'],
+//     wind_s3_gfs05: ['Archives', 'GFS - 0.5°', 'Vent (S3)'],
+//   }
 
-  await catalog.open()
-  await catalog.clickCategory(category)
-  await catalog.close()
+//   await catalog.open()
+//   await catalog.clickCategory(category)
+//   await catalog.close()
 
-  for (const [key, value] of Object.entries(layers)) {
-    await catalog.open()
-    await catalog.clickMeteoLayer(...value)
-    await catalog.close()
-    await t.takeScreenshot({ path: `measurelayers/${key}.png` })
+//   for (const [key, value] of Object.entries(layers)) {
+//     await catalog.open()
+//     await catalog.clickMeteoLayer(...value)
+//     await catalog.close()
+//     await t.takeScreenshot({ path: `measurelayers/${key}.png` })
 
-    // diffScreenshots(t, key)
-  }
-})
+//     // diffScreenshots(t, key)
+//   }
+// })
