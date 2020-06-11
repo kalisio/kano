@@ -3,7 +3,7 @@ import png from 'pngjs'
 import pixelmatch from 'pixelmatch'
 import * as pages from './page-models'
 
-const recordRef = true
+const recordRef = false
 
 const width = 1280
 const height = 1024
@@ -23,8 +23,7 @@ const catalog = new pages.Catalog()
 
 function refScreenshot (t, key) {
   const screenshotBase = t.testRun.opts.screenshots.path
-  // return `${screenshotBase}/reference/${t.browser.name.toLowerCase()}/${key}.png`
-  return `${screenshotBase}/reference/chrome/${key}.png`
+  return `${screenshotBase}/../reference/${key}.png`
 }
 
 function screenshot (t, key, absolute = false) {
@@ -49,7 +48,7 @@ function diffScreenshots (t, key) {
   if (diffRatio > 1.0) {
     const output = screenshot(t, `diff-${key}`, true)
     fs.writeFileSync(output, png.PNG.sync.write(diff))
-    throw new Error(`Diff ratio for ${key} is too high: ${diffRatio}`)
+    throw new Error(`Diff ratio for ${key} is too high: ${diffRatio.toPrecision(2)}%`)
   }
 }
 
@@ -84,6 +83,7 @@ test('baselayers', async t => {
     osm_dark: 'OpenStreetMap (Sombre)',
     osm_terrain_light: 'OpenStreetMap et Terrain (Clair)',
     osm_terrain_dark: 'OpenStreetMap et Terrain (Sombre)',
+    /*
     mosaic: 'Mosaique',
     bd_ortho_ign: 'BD ORTHO IGN',
     scan_std_ign: 'SCAN standard IGN',
@@ -91,6 +91,7 @@ test('baselayers', async t => {
     maptiler_light: 'Maptiler (Clair)',
     maptiler_topo: 'Maptiler (Topographique)',
     maptiler_hybrid: 'Maptiler (Hybride)'
+    */
   }
 
   await catalog.open()
@@ -101,9 +102,11 @@ test('baselayers', async t => {
     await catalog.open()
     await catalog.clickLayer(value)
     await catalog.close()
-    await t.takeScreenshot({ path: screenshot(t, `baselayers-${key}`) })
 
-    diffScreenshots(t, key)
+    const sshotKey = `baselayers-${key}`
+    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+
+    diffScreenshots(t, sshotKey)
   }
 })
 
