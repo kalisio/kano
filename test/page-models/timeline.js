@@ -29,37 +29,39 @@ export default class Timeline extends BasePage {
     return this.timeline.visible
   }
 
+  getDay (day) {
+    if (day === '+') return this.timeline.find('i.la-calendar-plus')
+    if (day === '-') return this.timeline.find('i.la-calendar-minus')
+    return this.timeline.find('.ellipsis').withExactText(day)
+  }
+
+  getHour (hour) {
+    if (hour === '+') return this.timeline.find('i.la-angle-right')
+    if (hour === '-') return this.timeline.find('i.la-angle-left')
+    return this.timeline.find('.k-timeline-hour-frame').withExactText(hour)
+  }
+
+  getStep (step) {
+    if (step === '+') return this.timeline.find('i.la-step-forward')
+    if (step === '-') return this.timeline.find('i.la-step-backward')
+    return null
+  }
+
   async clickDay (day) {
-    let button = null
-    if (day === '+') {
-      button = this.timeline.find('i.la-calendar-plus')
-    } else if (day === '-') {
-      button = this.timeline.find('i.la-calendar-minus')
-    } else {
-      button = this.timeline.find('.ellipsis').withExactText(day)
-    }
-    await t.click(button)
+    const button = this.getDay(day)
+    await t
+      .click(button)
   }
 
   async clickHour (hour) {
-    let button = null
-    if (hour === '+') {
-      button = this.timeline.find('i.la-angle-right')
-    } else if (hour === '-') {
-      button = this.timeline.find('i.la-angle-left')
-    } else {
-      button = this.timeline.find('.k-timeline-hour-frame').withExactText(hour)
-    }
-    await t.click(button)
+    const button = this.getHour(hour)
+    await t
+      .click(button)
   }
 
   async clickStep (step) {
-    let button = null
-    if (step === '+') {
-      button = this.timeline.find('i.la-step-forward')
-    } else if (step === '-') {
-      button = this.timeline.find('i.la-step-backward')
-    }
-    await t.click(button)
+    const button = this.getStep(step)
+    await t
+      .click(button)
   }
 }

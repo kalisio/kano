@@ -219,8 +219,15 @@ test('Check meteo layers', async t => {
     // diffScreenshots(t, sshotKey)
   }
 
+  timeline.open()
+  timeline.clickDay('-')
+  timeline.close()
+
   for (const [key, value] of Object.entries(archive_layers)) {
     await catalog.open()
+    await catalog.clickArchives()
+    await catalog.selectMeteoModel(value[0])
+    await catalog.clickLayer(value[1], true)
     // await catalog.clickMeteoLayer('Archives', ...value, true)
     await catalog.close()
 

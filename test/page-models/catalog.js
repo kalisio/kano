@@ -117,32 +117,12 @@ export default class Catalog extends BasePage {
 
   async selectMeteoModel (model) {
     const select = VueSelector('k-catalog-panel k-weather-layers-selector QSelect')
-    await t.click(select).wait(1000)
-
-    // const entry = Selector('*').withExactText(model)
-    /*
-    const snap = await entry()
-    const count = await entry.count
-    debugger
-    for (let i = 0; i < count; ++i) {
-      const t = entry.nth(i)
-      const ts = await t()
-      debugger
-    }
-    */
-    // await t.click(entry.nth(1))
-
-    // const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item__section')
-    // const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item').child('.q-focus-helper')
+    await t.click(select)
     const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item')
-    // const snap = await entry()
-    // const entry = await this.getMeteoModel(model)
-    // const entry = VueSelector('QPortal').child('*').withExactText(model)
-    // const entry = VueSelector('QPortal').child(0)
     await t
-      .hover(entry)
-      .wait(5000)
+    // robin: test may fail here, in that case, chrome was probably out of focus
+    // try again and let chrome window focused ...
       .click(entry)
-      // .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
+      .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
   }
 }
