@@ -52,7 +52,7 @@ function diffScreenshots (t, key) {
   }
 }
 
-fixture `catalog`// declare the fixture
+fixture `Catalog`// declare the fixture
   .page`${pages.getUrl()}`
   // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
   // so implement one in your test if you'd like another behaviour
@@ -75,7 +75,7 @@ fixture `catalog`// declare the fixture
     // await pages.checkNoClientError(test)
   })
 
-test('baselayers', async t => {
+test('Check base layers', async t => {
   const category = 'Fonds cartographiques'
   const layers = {
     sentinel2: 'Sentinel 2',
@@ -95,12 +95,12 @@ test('baselayers', async t => {
   }
 
   await catalog.open()
-  await catalog.clickCategory(category)
+  await catalog.clickCategory(category, true)
   await catalog.close()
 
   for (const [key, value] of Object.entries(layers)) {
     await catalog.open()
-    await catalog.clickLayer(value)
+    await catalog.clickLayer(value, true)
     await catalog.close()
 
     const sshotKey = `baselayers-${key}`
@@ -108,30 +108,132 @@ test('baselayers', async t => {
 
     diffScreenshots(t, sshotKey)
   }
+
+  await catalog.open()
+  await catalog.clickCategory(category, false)
+  await catalog.close()
 })
 
-// test('measurelayers', async t => {
-//   const category = 'Couches des mesures'
-//   const layers = {
-//     srtm: 'Élévation SRTM',
-//     vigicrues: 'Vigicrues',
-//     openaq: 'OpenAQ',
-//     teleray: 'Téléray'
-//   }
+test('Check measure layers', async t => {
+  const category = 'Couches des mesures'
+  const layers = {
+    srtm: 'Élévation SRTM',
+    vigicrues: 'Vigicrues',
+    // openaq: 'OpenAQ',
+    // teleray: 'Téléray'
+  }
 
-//   await catalog.open()
-//   await catalog.clickCategory(category)
-//   await catalog.close()
+  await catalog.open()
+  await catalog.clickCategory(category, true)
+  await catalog.close()
 
-//   for (const [key, value] of Object.entries(layers)) {
-//     await catalog.open()
-//     await catalog.clickLayer(value)
-//     await catalog.close()
-//     await t.takeScreenshot({ path: screenshot(t, key) })
+  for (const [key, value] of Object.entries(layers)) {
+    await catalog.open()
+    await catalog.clickLayer(value, true)
+    await catalog.close()
 
-//     diffScreenshots(t, key)
-//   }
-// })
+    const sshotKey = `measurelayers-${key}`
+    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+
+    // diffScreenshots(t, sshotKey)
+  }
+
+  await catalog.open()
+  await catalog.clickCategory(category, false)
+  await catalog.close()
+})
+
+test('Check meteo layers', async t => {
+  const category = 'Prévisions météo'
+  const forecast_layers = {
+    // wind_gfs05: ['GFS - 0.5°', 'Vent'],
+    // gust_gfs05: ['GFS - 0.5°', 'Rafales'],
+    // precipitations_gfs05: ['GFS - 0.5°', 'Précipitations'],
+    // temperature_gfs05: ['GFS - 0.5°', 'Température'],
+
+    tiled_wind_gfs05: ['GFS - 0.5°', 'Vent (tuilé)'],
+    tiled_gust_gfs05: ['GFS - 0.5°', 'Rafales (tuilé)'],
+    tiled_precipitations_gfs05: ['GFS - 0.5°', 'Précipitations (tuilé)'],
+    tiled_temperature_gfs05: ['GFS - 0.5°', 'Température (tuilé)'],
+
+    // wind_arpege01: ['ARPEGE - 0.1°', 'Vent'],
+    // gust_arpege01: ['ARPEGE - 0.1°', 'Rafales'],
+    // precipitations_arpege01: ['ARPEGE - 0.1°', 'Précipitations'],
+    // temperature_arpege01: ['ARPEGE - 0.1°', 'Température'],
+
+    tiled_wind_arpege01: ['ARPEGE - 0.1°', 'Vent (tuilé)'],
+    tiled_gust_arpege01: ['ARPEGE - 0.1°', 'Rafales (tuilé)'],
+    tiled_precipitations_arpege01: ['ARPEGE - 0.1°', 'Précipitations (tuilé)'],
+    tiled_temperature_arpege01: ['ARPEGE - 0.1°', 'Température (tuilé)'],
+
+    // wind_arpege025: ['ARPEGE - 0.25°', 'Vent'],
+    // gust_arpege025: ['ARPEGE - 0.25°', 'Rafales'],
+    // precipitations_arpege025: ['ARPEGE - 0.25°', 'Précipitations'],
+    // temperature_arpege025: ['ARPEGE - 0.25°', 'Température'],
+
+    tiled_wind_arpege025: ['ARPEGE - 0.25°', 'Vent (tuilé)'],
+    tiled_gust_arpege025: ['ARPEGE - 0.25°', 'Rafales (tuilé)'],
+    tiled_precipitations_arpege025: ['ARPEGE - 0.25°', 'Précipitations (tuilé)'],
+    tiled_temperature_arpege025: ['ARPEGE - 0.25°', 'Température (tuilé)'],
+  }
+  const archive_layers = {
+    wind_s3_gfs05: ['GFS - 0.5°', 'Vent (S3)'],
+    gust_s3_gfs05: ['GFS - 0.5°', 'Rafales (S3)'],
+    precipitations_s3_gfs05: ['GFS - 0.5°', 'Précipitations (S3)'],
+    temperature_s3_gfs05: ['GFS - 0.5°', 'Température (S3)'],
+
+    wind_s3_arpege01: ['ARPEGE - 0.1°', 'Vent (S3)'],
+    gust_s3_arpege01: ['ARPEGE - 0.1°', 'Rafales (S3)'],
+    precipitations_s3_arpege01: ['ARPEGE - 0.1°', 'Précipitations (S3)'],
+    temperature_s3_arpege01: ['ARPEGE - 0.1°', 'Température (S3)'],
+
+    wind_opendap_arpege01: ['ARPEGE - 0.1°', 'Vent (archivé)'],
+    precipitations_opendap_arpege01: ['ARPEGE - 0.1°', 'Précipitations (archivé)'],
+    temperature_opendap_arpege01: ['ARPEGE - 0.1°', 'Température (archivé)'],
+
+    wind_s3_arpege025: ['ARPEGE - 0.25°', 'Vent (S3)'],
+    gust_s3_arpege025: ['ARPEGE - 0.25°', 'Rafales (S3)'],
+    precipitations_s3_arpege025: ['ARPEGE - 0.25°', 'Précipitations (S3)'],
+    temperature_s3_arpege025: ['ARPEGE - 0.25°', 'Température (S3)'],
+
+    wind_opendap_arpege025: ['ARPEGE - 0.25°', 'Vent (archivé)'],
+    precipitations_opendap_arpege025: ['ARPEGE - 0.25°', 'Précipitations (archivé)'],
+    temperature_opendap_arpege025: ['ARPEGE - 0.25°', 'Température (archivé)'],
+  }
+
+  await catalog.open()
+  await catalog.clickCategory(category, true)
+  await catalog.close()
+
+  for (const [key, value] of Object.entries(forecast_layers)) {
+    await catalog.open()
+    await catalog.clickForecast()
+    await catalog.selectMeteoModel(value[0])
+    await catalog.clickLayer(value[1], true)
+    // await catalog.clickMeteoLayer('Prévisions', ...value, true)
+    await catalog.close()
+
+    const sshotKey = `meteolayers-${key}`
+    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+
+    // diffScreenshots(t, sshotKey)
+  }
+
+  for (const [key, value] of Object.entries(archive_layers)) {
+    await catalog.open()
+    // await catalog.clickMeteoLayer('Archives', ...value, true)
+    await catalog.close()
+
+    const sshotKey = `meteolayers-${key}`
+    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+
+    // diffScreenshots(t, sshotKey)
+  }
+
+  await catalog.open()
+  await catalog.clickCategory(category, false)
+  await catalog.close()
+})
 
 // test('meteolayers', async t => {
 //   await timeline.open()
