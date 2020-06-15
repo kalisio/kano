@@ -55,8 +55,10 @@ export default class Catalog extends BasePage {
     const count = await tabs.count
     for (let i = 0; i < count; ++i) {
       const tab = tabs.nth(i)
-      const label = await tab.getVue(({ props }) => props.label)
-      if (label === mode) return tab
+      const id = await tab.id
+      if (id === mode) return tab
+      // const label = await tab.getVue(({ props }) => props.label)
+      // if (label === mode) return tab
     }
 
     throw new Error(`Forecast mode '${mode}' not found !`)
@@ -79,8 +81,9 @@ export default class Catalog extends BasePage {
     throw new Error(`Meteo model '${model}' not found !`)
     */
     // return Selector('.q-menu').find('.q-item__label').withExactText(model)
-    const item = Selector('.q-menu').find('.q-item__label').withExactText(model)
-    return item.parent('.q-item')
+    // const item = Selector('.q-menu').find('.q-item__label').withExactText(model)
+    // return item.parent('.q-item')
+    return Selector('.q-menu').find(`#${model}`)
   }
 
   async clickCategory (category, expectExpanded) {
@@ -118,7 +121,8 @@ export default class Catalog extends BasePage {
   async selectMeteoModel (model) {
     const select = VueSelector('k-catalog-panel k-weather-layers-selector QSelect')
     await t.click(select)
-    const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item')
+    // const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item')
+    const entry = await this.getMeteoModel(model)
     await t
     // robin: test may fail here, in that case, chrome was probably out of focus
     // try again and let chrome window focused ...
