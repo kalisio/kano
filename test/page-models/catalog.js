@@ -50,39 +50,18 @@ export default class Catalog extends BasePage {
   }
 
   async getForecastMode (mode) {
-    // return Selector('.q-tab__label').withExactText(mode)
     const tabs = VueSelector('k-layers-selector QTab')
     const count = await tabs.count
     for (let i = 0; i < count; ++i) {
       const tab = tabs.nth(i)
       const id = await tab.id
       if (id === mode) return tab
-      // const label = await tab.getVue(({ props }) => props.label)
-      // if (label === mode) return tab
     }
 
     throw new Error(`Forecast mode '${mode}' not found !`)
   }
 
   async getMeteoModel (model) {
-    /*
-    const entries = VueSelector('QMenu QItem')
-    const count = await entries.count
-    for (let i = 0; i < count; ++i) {
-      const entry = entries.nth(i)
-      // const label = await entry.getVue(({ props }) => props.label)
-      // console.log(`found ${label}`)
-      // if (label === model) return entry
-      const id = await entry.id
-      console.log(`found ${id}`)
-      if (id === model) return entry
-    }
-
-    throw new Error(`Meteo model '${model}' not found !`)
-    */
-    // return Selector('.q-menu').find('.q-item__label').withExactText(model)
-    // const item = Selector('.q-menu').find('.q-item__label').withExactText(model)
-    // return item.parent('.q-item')
     return Selector('.q-menu').find(`#${model}`)
   }
 
@@ -121,12 +100,11 @@ export default class Catalog extends BasePage {
   async selectMeteoModel (model) {
     const select = VueSelector('k-catalog-panel k-weather-layers-selector QSelect')
     await t.click(select)
-    // const entry = Selector('.q-menu').find('.q-item__label').withExactText(model).parent('.q-item')
     const entry = await this.getMeteoModel(model)
     await t
     // robin: test may fail here, in that case, chrome was probably out of focus
     // try again and let chrome window focused ...
       .click(entry)
-      // .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
+    // .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
   }
 }
