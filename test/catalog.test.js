@@ -146,59 +146,59 @@ test('Check measure layers', async t => {
 test('Check meteo layers', async t => {
   const category = 'Prévisions météo'
   const forecast_layers = {
-    // wind_gfs05: ['GFS - 0.5°', 'Vent'],
-    // gust_gfs05: ['GFS - 0.5°', 'Rafales'],
-    // precipitations_gfs05: ['GFS - 0.5°', 'Précipitations'],
-    // temperature_gfs05: ['GFS - 0.5°', 'Température'],
+    // wind_gfs05: ['gfs-world', 'Vent'],
+    // gust_gfs05: ['gfs-world', 'Rafales'],
+    // precipitations_gfs05: ['gfs-world', 'Précipitations'],
+    // temperature_gfs05: ['gfs-world', 'Température'],
 
-    tiled_wind_gfs05: ['GFS - 0.5°', 'Vent (tuilé)'],
-    tiled_gust_gfs05: ['GFS - 0.5°', 'Rafales (tuilé)'],
-    tiled_precipitations_gfs05: ['GFS - 0.5°', 'Précipitations (tuilé)'],
-    tiled_temperature_gfs05: ['GFS - 0.5°', 'Température (tuilé)'],
+    tiled_wind_gfs05: ['gfs-world', 'Vent (tuilé)'],
+    tiled_gust_gfs05: ['gfs-world', 'Rafales (tuilé)'],
+    tiled_precipitations_gfs05: ['gfs-world', 'Précipitations (tuilé)'],
+    tiled_temperature_gfs05: ['gfs-world', 'Température (tuilé)'],
 
-    // wind_arpege01: ['ARPEGE - 0.1°', 'Vent'],
-    // gust_arpege01: ['ARPEGE - 0.1°', 'Rafales'],
-    // precipitations_arpege01: ['ARPEGE - 0.1°', 'Précipitations'],
-    // temperature_arpege01: ['ARPEGE - 0.1°', 'Température'],
+    // wind_arpege01: ['arpege-europe', 'Vent'],
+    // gust_arpege01: ['arpege-europe', 'Rafales'],
+    // precipitations_arpege01: ['arpege-europe', 'Précipitations'],
+    // temperature_arpege01: ['arpege-europe', 'Température'],
 
-    tiled_wind_arpege01: ['ARPEGE - 0.1°', 'Vent (tuilé)'],
-    tiled_gust_arpege01: ['ARPEGE - 0.1°', 'Rafales (tuilé)'],
-    tiled_precipitations_arpege01: ['ARPEGE - 0.1°', 'Précipitations (tuilé)'],
-    tiled_temperature_arpege01: ['ARPEGE - 0.1°', 'Température (tuilé)'],
+    tiled_wind_arpege01: ['arpege-europe', 'Vent (tuilé)'],
+    tiled_gust_arpege01: ['arpege-europe', 'Rafales (tuilé)'],
+    tiled_precipitations_arpege01: ['arpege-europe', 'Précipitations (tuilé)'],
+    tiled_temperature_arpege01: ['arpege-europe', 'Température (tuilé)'],
 
-    // wind_arpege025: ['ARPEGE - 0.25°', 'Vent'],
-    // gust_arpege025: ['ARPEGE - 0.25°', 'Rafales'],
-    // precipitations_arpege025: ['ARPEGE - 0.25°', 'Précipitations'],
-    // temperature_arpege025: ['ARPEGE - 0.25°', 'Température'],
+    // wind_arpege025: ['arpege-world', 'Vent'],
+    // gust_arpege025: ['arpege-world', 'Rafales'],
+    // precipitations_arpege025: ['arpege-world', 'Précipitations'],
+    // temperature_arpege025: ['arpege-world', 'Température'],
 
-    tiled_wind_arpege025: ['ARPEGE - 0.25°', 'Vent (tuilé)'],
-    tiled_gust_arpege025: ['ARPEGE - 0.25°', 'Rafales (tuilé)'],
-    tiled_precipitations_arpege025: ['ARPEGE - 0.25°', 'Précipitations (tuilé)'],
-    tiled_temperature_arpege025: ['ARPEGE - 0.25°', 'Température (tuilé)'],
+    tiled_wind_arpege025: ['arpege-world', 'Vent (tuilé)'],
+    tiled_gust_arpege025: ['arpege-world', 'Rafales (tuilé)'],
+    tiled_precipitations_arpege025: ['arpege-world', 'Précipitations (tuilé)'],
+    tiled_temperature_arpege025: ['arpege-world', 'Température (tuilé)'],
   }
   const archive_layers = {
-    wind_s3_gfs05: ['GFS - 0.5°', 'Vent (S3)'],
-    gust_s3_gfs05: ['GFS - 0.5°', 'Rafales (S3)'],
-    precipitations_s3_gfs05: ['GFS - 0.5°', 'Précipitations (S3)'],
-    temperature_s3_gfs05: ['GFS - 0.5°', 'Température (S3)'],
+    wind_s3_gfs05: ['gfs-world', 'Vent (S3)'],
+    gust_s3_gfs05: ['gfs-world', 'Rafales (S3)'],
+    precipitations_s3_gfs05: ['gfs-world', 'Précipitations (S3)'],
+    temperature_s3_gfs05: ['gfs-world', 'Température (S3)'],
 
-    wind_s3_arpege01: ['ARPEGE - 0.1°', 'Vent (S3)'],
-    gust_s3_arpege01: ['ARPEGE - 0.1°', 'Rafales (S3)'],
-    precipitations_s3_arpege01: ['ARPEGE - 0.1°', 'Précipitations (S3)'],
-    temperature_s3_arpege01: ['ARPEGE - 0.1°', 'Température (S3)'],
+    wind_s3_arpege01: ['arpege-europe', 'Vent (S3)'],
+    gust_s3_arpege01: ['arpege-europe', 'Rafales (S3)'],
+    precipitations_s3_arpege01: ['arpege-europe', 'Précipitations (S3)'],
+    temperature_s3_arpege01: ['arpege-europe', 'Température (S3)'],
 
-    wind_opendap_arpege01: ['ARPEGE - 0.1°', 'Vent (archivé)'],
-    precipitations_opendap_arpege01: ['ARPEGE - 0.1°', 'Précipitations (archivé)'],
-    temperature_opendap_arpege01: ['ARPEGE - 0.1°', 'Température (archivé)'],
+    wind_opendap_arpege01: ['arpege-europe', 'Vent (archivé)'],
+    precipitations_opendap_arpege01: ['arpege-europe', 'Précipitations (archivé)'],
+    temperature_opendap_arpege01: ['arpege-europe', 'Température (archivé)'],
 
-    wind_s3_arpege025: ['ARPEGE - 0.25°', 'Vent (S3)'],
-    gust_s3_arpege025: ['ARPEGE - 0.25°', 'Rafales (S3)'],
-    precipitations_s3_arpege025: ['ARPEGE - 0.25°', 'Précipitations (S3)'],
-    temperature_s3_arpege025: ['ARPEGE - 0.25°', 'Température (S3)'],
+    wind_s3_arpege025: ['arpege-world', 'Vent (S3)'],
+    gust_s3_arpege025: ['arpege-world', 'Rafales (S3)'],
+    precipitations_s3_arpege025: ['arpege-world', 'Précipitations (S3)'],
+    temperature_s3_arpege025: ['arpege-world', 'Température (S3)'],
 
-    wind_opendap_arpege025: ['ARPEGE - 0.25°', 'Vent (archivé)'],
-    precipitations_opendap_arpege025: ['ARPEGE - 0.25°', 'Précipitations (archivé)'],
-    temperature_opendap_arpege025: ['ARPEGE - 0.25°', 'Température (archivé)'],
+    wind_opendap_arpege025: ['arpege-world', 'Vent (archivé)'],
+    precipitations_opendap_arpege025: ['arpege-world', 'Précipitations (archivé)'],
+    temperature_opendap_arpege025: ['arpege-world', 'Température (archivé)'],
   }
 
   await catalog.open()
@@ -271,8 +271,8 @@ test('Check meteo layers', async t => {
 
 //   const category = 'Prévisions météo'
 //   const layers = {
-//     wind_s3_arpege01: ['Archives', 'ARPEGE - 0.1°', 'Vent (S3)'],
-//     wind_s3_gfs05: ['Archives', 'GFS - 0.5°', 'Vent (S3)'],
+//     wind_s3_arpege01: ['Archives', 'arpege-europe', 'Vent (S3)'],
+//     wind_s3_gfs05: ['Archives', 'gfs-world', 'Vent (S3)'],
 //   }
 
 //   await catalog.open()

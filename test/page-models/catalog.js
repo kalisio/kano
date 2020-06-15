@@ -111,11 +111,11 @@ export default class Catalog extends BasePage {
   }
 
   async clickForecast () {
-    await this.clickForecastMode('Prévisions')
+    await this.clickForecastMode('forecast')
   }
 
   async clickArchives () {
-    await this.clickForecastMode('Archives')
+    await this.clickForecastMode('archive')
   }
 
   async selectMeteoModel (model) {
@@ -127,6 +127,6 @@ export default class Catalog extends BasePage {
     // robin: test may fail here, in that case, chrome was probably out of focus
     // try again and let chrome window focused ...
       .click(entry)
-      .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
+      // .expect(select.getVue(({ computed }) => computed.selectedString)).eql(model, `meteo model '${model}' isn't selected`)
   }
 }
