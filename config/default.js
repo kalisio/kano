@@ -99,14 +99,14 @@ module.exports = {
   user_actions: {
     links: [
       { }, // separator
-      { label: 'sideNav.MAP', icon: 'map', route: { name: 'map', query: true } },
-      { label: 'sideNav.GLOBE', icon: 'terrain', route: { name: 'globe', query: true } }
+      { label: 'sideNav.MAP', icon: 'las la-map', route: { name: 'map', query: true } },
+      { label: 'sideNav.GLOBE', icon: 'las la-mountain', route: { name: 'globe', query: true } }
     ]
   },
   app_logout: {
     links: [
       { }, // separator
-      { label: 'sideNav.LOGOUT', icon: 'exit_to_app', route: { name: 'logout' } }
+      { label: 'sideNav.LOGOUT', icon: 'las la-sign-out-alt', route: { name: 'logout' } }
     ]
   },
   mapCatalog: {

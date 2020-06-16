@@ -7,7 +7,7 @@
       -->
       <q-item id="edit-settings" clickable @click="editSettings">
         <q-item-section avatar>
-          <q-icon name="settings" />
+          <q-icon name="las la-cog" />
         </q-item-section>
         <q-item-section>
           <q-item-label>
