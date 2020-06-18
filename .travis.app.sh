@@ -71,7 +71,7 @@ done
 # Note: it does not seem necessary to restart the service (service sshd reload)
 cp workspace/$FLAVOR/ssh.config ~/.ssh/config
 # Deploy the stack
-ssh REMOTE_SERVER "export S3_ARTEFACTS_PATH=$BUILD_BUCKET; cd kargo; ./kargo remove $APP; ./kargo deploy $APP; ./kargo exec test-$APP"
+ssh REMOTE_SERVER "export S3_ARTEFACTS_PATH=s3://$BUILD_BUCKET; cd kargo; ./kargo remove $APP; ./kargo deploy $APP; ./kargo exec test-$APP"
 check_code $? "Deploying the app"
 
 travis_fold end "deploy"
