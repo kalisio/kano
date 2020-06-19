@@ -1,6 +1,3 @@
-import * as fs from 'fs'
-import png from 'pngjs'
-import pixelmatch from 'pixelmatch'
 import * as pages from './page-models'
 
 const recordRef = false
@@ -20,37 +17,6 @@ const sideNav = new pages.SideNav()
 const timeline = new pages.Timeline()
 const mapActivity = new pages.MapActivity()
 const catalog = new pages.Catalog()
-
-function refScreenshot (t, key) {
-  const screenshotBase = t.testRun.opts.screenshots.path
-  return `${screenshotBase}/../reference/${key}.png`
-}
-
-function screenshot (t, key, absolute = false) {
-  return absolute ? `${t.testRun.opts.screenshots.path}/${key}.png` : `${key}.png`
-}
-
-function diffScreenshots (t, key) {
-  if (recordRef) return
-
-  const ref = png.PNG.sync.read(fs.readFileSync(refScreenshot(t, key)))
-  const img = png.PNG.sync.read(fs.readFileSync(screenshot(t, key, true)))
-  const { width, height } = ref
-  const diff = new png.PNG({ width, height })
-
-  const opts = {
-    alpha: 0.3,
-    diffColor: [255, 0, 0],
-    diffColorAlt: [0, 255, 0]
-  }
-  const numDiffs = pixelmatch(ref.data, img.data, diff.data, width, height, opts)
-  const diffRatio = 100.0 * (numDiffs / (width * height))
-  if (diffRatio > 1.0) {
-    const output = screenshot(t, `diff-${key}`, true)
-    fs.writeFileSync(output, png.PNG.sync.write(diff))
-    throw new Error(`Diff ratio for ${key} is too high: ${diffRatio.toPrecision(2)}%`)
-  }
-}
 
 fixture `Catalog`// declare the fixture
   .page`${pages.getUrl()}`
@@ -104,9 +70,9 @@ test('Check base layers', async t => {
     await catalog.close()
 
     const sshotKey = `baselayers-${key}`
-    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+    await pages.takeScreenshot(sshotKey)
 
-    diffScreenshots(t, sshotKey)
+    // pages.diffScreenshots(sshotKey)
   }
 
   await catalog.open()
@@ -133,9 +99,9 @@ test('Check measure layers', async t => {
     await catalog.close()
 
     const sshotKey = `measurelayers-${key}`
-    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+    await pages.takeScreenshot(sshotKey)
 
-    // diffScreenshots(t, sshotKey)
+    // pages.diffScreenshots(sshotKey)
   }
 
   await catalog.open()
@@ -214,9 +180,9 @@ test('Check meteo layers', async t => {
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
-    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+    await pages.takeScreenshot(sshotKey)
 
-    // diffScreenshots(t, sshotKey)
+    // pages.diffScreenshots(sshotKey)
   }
 
   timeline.open()
@@ -232,9 +198,9 @@ test('Check meteo layers', async t => {
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
-    await t.takeScreenshot({ path: screenshot(t, sshotKey) })
+    await pages.takeScreenshot(sshotKey)
 
-    // diffScreenshots(t, sshotKey)
+    // pages.diffScreenshots(sshotKey)
   }
 
   await catalog.open()
