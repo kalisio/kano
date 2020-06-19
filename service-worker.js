@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "e54f7c839b7d759a7065e71322d38b2a"
+    "revision": "4fc21524f7fcf1b9822ff891e8a7094d"
   },
   {
     "url": "about/contact.html",
