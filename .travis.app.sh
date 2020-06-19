@@ -29,6 +29,7 @@ check_code $? "Building the api"
 # Build the client
 cd .. && yarn build && yarn cafe:cp ##> build.log 2>&1
 check_code $? "Builing the client"
+ls -alh test/page-models/*
 tail -n 24 build.log 
 
 # Create an archive to speed docker build process
