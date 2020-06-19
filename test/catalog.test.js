@@ -1,6 +1,6 @@
 import * as pages from './page-models'
 
-const recordRef = false
+const doDiff = false
 
 const width = 1280
 const height = 1024
@@ -70,9 +70,7 @@ test('Check base layers', async t => {
     await catalog.close()
 
     const sshotKey = `baselayers-${key}`
-    await pages.takeScreenshot(sshotKey)
-
-    // pages.diffScreenshots(sshotKey)
+    await pages.checkScreenshot(t, sshotKey, doDiff)
   }
 
   await catalog.open()
@@ -99,9 +97,7 @@ test('Check measure layers', async t => {
     await catalog.close()
 
     const sshotKey = `measurelayers-${key}`
-    await pages.takeScreenshot(sshotKey)
-
-    // pages.diffScreenshots(sshotKey)
+    await pages.checkScreenshot(t, sshotKey, doDiff)
   }
 
   await catalog.open()
@@ -180,9 +176,7 @@ test('Check meteo layers', async t => {
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
-    await pages.takeScreenshot(sshotKey)
-
-    // pages.diffScreenshots(sshotKey)
+    await pages.checkScreenshot(t, sshotKey, doDiff)
   }
 
   timeline.open()
@@ -198,9 +192,7 @@ test('Check meteo layers', async t => {
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
-    await pages.takeScreenshot(sshotKey)
-
-    // pages.diffScreenshots(sshotKey)
+    await pages.checkScreenshot(t, sshotKey, doDiff)
   }
 
   await catalog.open()
