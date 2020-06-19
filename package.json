@@ -32,7 +32,7 @@
     "analyze:treemap": "webpack-bundle-analyzer build-stats.json dist",
     "analyze": "npm run analyze:stats && npm run analyze:treemap",
     "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
-    "cafe:cp": "cpx node_modules/@kalisio/kdk/page-models/**/*.js test/page-models",
+    "cafe:cp": "cpx 'node_modules/@kalisio/kdk/page-models/**/*.js' test/page-models",
     "cafe:firefox": "npm run cafe:cp && testcafe firefox test/*.test.js -s path=test/screenshots,takeOnFails=true",
     "cafe:chrome": "npm run cafe:cp && testcafe chrome test/*.test.js -s path=test/screenshots,takeOnFails=true",
     "rec": "node ./tutorials/record.js",
