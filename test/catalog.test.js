@@ -80,7 +80,7 @@ test('Check base layers', async t => {
 test('Check measure layers', async t => {
   const category = 'Couches des mesures'
   const layers = {
-    srtm: 'Élévation SRTM',
+    // srtm: 'Élévation SRTM',
     vigicrues: 'Vigicrues',
     // openaq: 'OpenAQ',
     // teleray: 'Téléray'
