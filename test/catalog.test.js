@@ -69,6 +69,7 @@ test('Check base layers', async t => {
 
     const sshotKey = `baselayers-${key}`
     await pages.assertScreenshotMatches(t, sshotKey)
+    // await pages.takeScreenshot(t, sshotKey)
   }
 
   await catalog.open()
@@ -104,6 +105,7 @@ test('Check measure layers', async t => {
 })
 
 test('Check meteo layers', async t => {
+
   const category = 'Prévisions météo'
   const forecast_layers = {
     // wind_gfs05: ['gfs-world', 'Vent'],
@@ -131,10 +133,10 @@ test('Check meteo layers', async t => {
     // precipitations_arpege025: ['arpege-world', 'Précipitations'],
     // temperature_arpege025: ['arpege-world', 'Température'],
 
-    tiled_wind_arpege025: ['arpege-world', 'Vent (tuilé)'],
-    tiled_gust_arpege025: ['arpege-world', 'Rafales (tuilé)'],
-    tiled_precipitations_arpege025: ['arpege-world', 'Précipitations (tuilé)'],
-    tiled_temperature_arpege025: ['arpege-world', 'Température (tuilé)'],
+    // tiled_wind_arpege025: ['arpege-world', 'Vent (tuilé)'],
+    // tiled_gust_arpege025: ['arpege-world', 'Rafales (tuilé)'],
+    // tiled_precipitations_arpege025: ['arpege-world', 'Précipitations (tuilé)'],
+    // tiled_temperature_arpege025: ['arpege-world', 'Température (tuilé)'],
   }
   const archive_layers = {
     wind_s3_gfs05: ['gfs-world', 'Vent (S3)'],
@@ -151,17 +153,22 @@ test('Check meteo layers', async t => {
     precipitations_opendap_arpege01: ['arpege-europe', 'Précipitations (archivé)'],
     temperature_opendap_arpege01: ['arpege-europe', 'Température (archivé)'],
 
-    wind_s3_arpege025: ['arpege-world', 'Vent (S3)'],
-    gust_s3_arpege025: ['arpege-world', 'Rafales (S3)'],
-    precipitations_s3_arpege025: ['arpege-world', 'Précipitations (S3)'],
-    temperature_s3_arpege025: ['arpege-world', 'Température (S3)'],
+    // wind_s3_arpege025: ['arpege-world', 'Vent (S3)'],
+    // gust_s3_arpege025: ['arpege-world', 'Rafales (S3)'],
+    // precipitations_s3_arpege025: ['arpege-world', 'Précipitations (S3)'],
+    // temperature_s3_arpege025: ['arpege-world', 'Température (S3)'],
 
-    wind_opendap_arpege025: ['arpege-world', 'Vent (archivé)'],
-    precipitations_opendap_arpege025: ['arpege-world', 'Précipitations (archivé)'],
-    temperature_opendap_arpege025: ['arpege-world', 'Température (archivé)'],
+    // wind_opendap_arpege025: ['arpege-world', 'Vent (archivé)'],
+    // precipitations_opendap_arpege025: ['arpege-world', 'Précipitations (archivé)'],
+    // temperature_opendap_arpege025: ['arpege-world', 'Température (archivé)'],
   }
 
+  const refKey = 'baselayers-osm_dark'
+
   await catalog.open()
+  await catalog.clickCategory('Fonds cartographiques', true)
+  await catalog.clickLayer('OpenStreetMap (Sombre)', true)
+  await catalog.clickCategory('Fonds cartographiques', false)
   await catalog.clickCategory(category, true)
   await catalog.close()
 
@@ -170,11 +177,11 @@ test('Check meteo layers', async t => {
     await catalog.clickForecast()
     await catalog.selectMeteoModel(value[0])
     await catalog.clickLayer(value[1], true)
-    // await catalog.clickMeteoLayer('Prévisions', ...value, true)
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
-    await pages.takeScreenshot(t, sshotKey)
+    // await pages.takeScreenshot(t, sshotKey)
+    await pages.assertScreenshotMismatches(t, sshotKey, refKey)
   }
 
   timeline.open()
@@ -186,7 +193,6 @@ test('Check meteo layers', async t => {
     await catalog.clickArchives()
     await catalog.selectMeteoModel(value[0])
     await catalog.clickLayer(value[1], true)
-    // await catalog.clickMeteoLayer('Archives', ...value, true)
     await catalog.close()
 
     const sshotKey = `meteolayers-${key}`
@@ -197,50 +203,3 @@ test('Check meteo layers', async t => {
   await catalog.clickCategory(category, false)
   await catalog.close()
 })
-
-// test('meteolayers', async t => {
-//   await timeline.open()
-//   /*
-//   await timeline.clickChip('08/06')
-//   await t.wait(2000)
-//   await timeline.clickPreviousDay()
-//   await t.wait(2000)
-//   */
-//   /*
-//   await timeline.clickDay('+')
-//   await t.wait(2000)
-//   await timeline.clickDay('-')
-//   await t.wait(2000)
-//   await timeline.clickHour('+')
-//   await t.wait(2000)
-//   await timeline.clickHour('-')
-//   await t.wait(2000)
-//   await timeline.clickHour('13h')
-//   await t.wait(2000)
-//   await timeline.clickDay('07/06')
-//   await t.wait(2000)
-//   */
-
-//   await timeline.clickDay('07/06')
-//   await timeline.clickHour('15h')
-//   await timeline.close()
-
-//   const category = 'Prévisions météo'
-//   const layers = {
-//     wind_s3_arpege01: ['Archives', 'arpege-europe', 'Vent (S3)'],
-//     wind_s3_gfs05: ['Archives', 'gfs-world', 'Vent (S3)'],
-//   }
-
-//   await catalog.open()
-//   await catalog.clickCategory(category)
-//   await catalog.close()
-
-//   for (const [key, value] of Object.entries(layers)) {
-//     await catalog.open()
-//     await catalog.clickMeteoLayer(...value)
-//     await catalog.close()
-//     await t.takeScreenshot({ path: `measurelayers/${key}.png` })
-
-//     // diffScreenshots(t, key)
-//   }
-// })
