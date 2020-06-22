@@ -33,7 +33,7 @@ tail -n 24 build.log
 
 # Create an archive to speed docker build process
 cd ../..
-tar -zcf kalisio.tgz kalisio
+tar --exclude='./kalisio/kano/test' -zcf kalisio.tgz kalisio
 docker build --build-arg APP=$APP --build-arg FLAVOR=$FLAVOR --build-arg BUILD_NUMBER=$BUILD_NUMBER -f dockerfile -t kalisio/$APP:$TAG . 
 check_code $? "Building the app docker image"
 
