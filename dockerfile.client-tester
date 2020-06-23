@@ -6,5 +6,3 @@ ENV NODE_ENV=production
 USER user
 COPY ./kalisio/kdk/page-models /tests/page-models
 COPY ./test /tests/.
-
-ENTRYPOINT [ "bash" ]
