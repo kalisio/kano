@@ -148,9 +148,11 @@ test('Check meteo layers', async t => {
     await catalog.clickLayer(layer, true)
     await catalog.close()
 
+    // let layer time to display data
+    await t.wait(2000)
     const sshotKey = `${category}-${model}-${layer}`
-    // await pages.takeScreenshot(t, sshotKey)
-    await pages.assertScreenshotMismatches(t, sshotKey, refKey)
+    const minDiff = layer.includes('WIND') ? 2 : 50
+    await pages.assertScreenshotMismatches(t, sshotKey, refKey, minDiff)
   }
 
   timeline.open()
@@ -164,8 +166,11 @@ test('Check meteo layers', async t => {
     await catalog.clickLayer(layer, true)
     await catalog.close()
 
+    // let layer time to display data
+    await t.wait(2000)
     const sshotKey = `${category}-${model}-${layer}`
-    await pages.takeScreenshot(t, sshotKey)
+    const minDiff = layer.includes('WIND') ? 2 : 50
+    await pages.assertScreenshotMismatches(t, sshotKey, refKey, minDiff)
   }
 
   await catalog.open()
