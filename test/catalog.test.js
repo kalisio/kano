@@ -41,33 +41,31 @@ fixture `Catalog`// declare the fixture
 
 test('Check base layers', async t => {
   const category = 'BaseLayers'
-  const layers = {
-    sentinel2: 'Sentinel 2',
-    osm_light: 'OpenStreetMap (Clair)',
-    osm_dark: 'OpenStreetMap (Sombre)',
-    osm_terrain_light: 'OpenStreetMap et Terrain (Clair)',
-    osm_terrain_dark: 'OpenStreetMap et Terrain (Sombre)',
-    /*
-    mosaic: 'Mosaique',
-    bd_ortho_ign: 'BD ORTHO IGN',
-    scan_std_ign: 'SCAN standard IGN',
-    scan_cla_ign: 'SCAN classique IGN',
-    maptiler_light: 'Maptiler (Clair)',
-    maptiler_topo: 'Maptiler (Topographique)',
-    maptiler_hybrid: 'Maptiler (Hybride)'
-    */
-  }
+  const layers = [
+    'Layers.S2',
+    'Layers.OSM_BRIGHT',
+    'Layers.OSM_DARK',
+    'Layers.OSMT_BRIGHT',
+    'Layers.OSMT_DARK',
+    // 'Layers.MOSAIC',
+    // 'Layers.IGN_ORTHO',
+    // 'Layers.IGN_SCAN',
+    // 'Layers.IGN_SCAN_CLASSIC',
+    // 'Layers.MAPTILER_BRIGHT',
+    // 'Layers.MAPTILER_TOPO',
+    // 'Layers.MAPTILER_HYBRID',
+  ]
 
   await catalog.open()
   await catalog.clickCategory(category, true)
   await catalog.close()
 
-  for (const [key, value] of Object.entries(layers)) {
+  for (const layer of layers) {
     await catalog.open()
-    await catalog.clickLayer(value, true)
+    await catalog.clickLayer(layer, true)
     await catalog.close()
 
-    const sshotKey = `baselayers-${key}`
+    const sshotKey = `${category}-${layer}`
     await pages.assertScreenshotMatches(t, sshotKey)
     // await pages.takeScreenshot(t, sshotKey)
   }
@@ -79,23 +77,23 @@ test('Check base layers', async t => {
 
 test('Check measure layers', async t => {
   const category = 'MeasureLayers'
-  const layers = {
-    // srtm: 'Élévation SRTM',
-    vigicrues: 'Vigicrues',
-    // openaq: 'OpenAQ',
-    // teleray: 'Téléray'
-  }
+  const layers = [
+    'Layers.VIGICRUES',
+    // 'Layers.HUBEAU',
+    // 'Layers.OPENAQ',
+    // 'Layers.TELERAY',
+  ]
 
   await catalog.open()
   await catalog.clickCategory(category, true)
   await catalog.close()
 
-  for (const [key, value] of Object.entries(layers)) {
+  for (const layer of layers) {
     await catalog.open()
-    await catalog.clickLayer(value, true)
+    await catalog.clickLayer(layer, true)
     await catalog.close()
 
-    const sshotKey = `measurelayers-${key}`
+    const sshotKey = `${category}-${layer}`
     await pages.takeScreenshot(t, sshotKey)
   }
 
@@ -106,79 +104,51 @@ test('Check measure layers', async t => {
 
 test('Check meteo layers', async t => {
   const category = 'MeteoLayers'
-  const forecast_layers = {
-    // wind_gfs05: ['gfs-world', 'Vent'],
-    // gust_gfs05: ['gfs-world', 'Rafales'],
-    // precipitations_gfs05: ['gfs-world', 'Précipitations'],
-    // temperature_gfs05: ['gfs-world', 'Température'],
+  const forecastLayers = [
+    ['gfs-world', 'Layers.WIND_TILED'],
+    ['gfs-world', 'Layers.GUST_TILED'],
+    ['gfs-world', 'Layers.PRECIPITATIONS_TILED'],
+    ['gfs-world', 'Layers.TEMPERATURE_TILED'],
 
-    tiled_wind_gfs05: ['gfs-world', 'Vent (tuilé)'],
-    tiled_gust_gfs05: ['gfs-world', 'Rafales (tuilé)'],
-    tiled_precipitations_gfs05: ['gfs-world', 'Précipitations (tuilé)'],
-    tiled_temperature_gfs05: ['gfs-world', 'Température (tuilé)'],
+    ['arpege-world', 'Layers.WIND_TILED'],
+    ['arpege-world', 'Layers.GUST_TILED'],
+    ['arpege-world', 'Layers.PRECIPITATIONS_TILED'],
+    ['arpege-world', 'Layers.TEMPERATURE_TILED'],
+  ]
 
-    // wind_arpege01: ['arpege-europe', 'Vent'],
-    // gust_arpege01: ['arpege-europe', 'Rafales'],
-    // precipitations_arpege01: ['arpege-europe', 'Précipitations'],
-    // temperature_arpege01: ['arpege-europe', 'Température'],
+  const archiveLayers = [
+    ['gfs-world', 'Layers.S3_ARCHIVE_WIND'],
+    ['gfs-world', 'Layers.S3_ARCHIVE_GUST'],
+    ['gfs-world', 'Layers.S3_ARCHIVE_PRECIPITATIONS'],
+    ['gfs-world', 'Layers.S3_ARCHIVE_TEMPERATURE'],
 
-    tiled_wind_arpege01: ['arpege-europe', 'Vent (tuilé)'],
-    tiled_gust_arpege01: ['arpege-europe', 'Rafales (tuilé)'],
-    tiled_precipitations_arpege01: ['arpege-europe', 'Précipitations (tuilé)'],
-    tiled_temperature_arpege01: ['arpege-europe', 'Température (tuilé)'],
+    ['arpege-world', 'Layers.S3_ARCHIVE_WIND'],
+    ['arpege-world', 'Layers.S3_ARCHIVE_GUST'],
+    ['arpege-world', 'Layers.S3_ARCHIVE_PRECIPITATIONS'],
+    ['arpege-world', 'Layers.S3_ARCHIVE_TEMPERATURE'],
 
-    // wind_arpege025: ['arpege-world', 'Vent'],
-    // gust_arpege025: ['arpege-world', 'Rafales'],
-    // precipitations_arpege025: ['arpege-world', 'Précipitations'],
-    // temperature_arpege025: ['arpege-world', 'Température'],
+    ['arpege-world', 'Layers.ARCHIVED_WIND'],
+    ['arpege-world', 'Layers.ARCHIVED_PRECIPITATIONS'],
+    ['arpege-world', 'Layers.ARCHIVED_TEMPERATURE'],
+  ]
 
-    // tiled_wind_arpege025: ['arpege-world', 'Vent (tuilé)'],
-    // tiled_gust_arpege025: ['arpege-world', 'Rafales (tuilé)'],
-    // tiled_precipitations_arpege025: ['arpege-world', 'Précipitations (tuilé)'],
-    // tiled_temperature_arpege025: ['arpege-world', 'Température (tuilé)'],
-  }
-  const archive_layers = {
-    wind_s3_gfs05: ['gfs-world', 'Vent (S3)'],
-    gust_s3_gfs05: ['gfs-world', 'Rafales (S3)'],
-    precipitations_s3_gfs05: ['gfs-world', 'Précipitations (S3)'],
-    temperature_s3_gfs05: ['gfs-world', 'Température (S3)'],
-
-    wind_s3_arpege01: ['arpege-europe', 'Vent (S3)'],
-    gust_s3_arpege01: ['arpege-europe', 'Rafales (S3)'],
-    precipitations_s3_arpege01: ['arpege-europe', 'Précipitations (S3)'],
-    temperature_s3_arpege01: ['arpege-europe', 'Température (S3)'],
-
-    wind_opendap_arpege01: ['arpege-europe', 'Vent (archivé)'],
-    precipitations_opendap_arpege01: ['arpege-europe', 'Précipitations (archivé)'],
-    temperature_opendap_arpege01: ['arpege-europe', 'Température (archivé)'],
-
-    // wind_s3_arpege025: ['arpege-world', 'Vent (S3)'],
-    // gust_s3_arpege025: ['arpege-world', 'Rafales (S3)'],
-    // precipitations_s3_arpege025: ['arpege-world', 'Précipitations (S3)'],
-    // temperature_s3_arpege025: ['arpege-world', 'Température (S3)'],
-
-    // wind_opendap_arpege025: ['arpege-world', 'Vent (archivé)'],
-    // precipitations_opendap_arpege025: ['arpege-world', 'Précipitations (archivé)'],
-    // temperature_opendap_arpege025: ['arpege-world', 'Température (archivé)'],
-  }
-
-  const refKey = 'baselayers-osm_dark'
+  const refKey = 'BaseLayers-Layers.OSM_DARK'
 
   await catalog.open()
   await catalog.clickCategory('BaseLayers', true)
-  await catalog.clickLayer('OpenStreetMap (Sombre)', true)
+  await catalog.clickLayer('Layers.OSM_DARK', true)
   await catalog.clickCategory('BaseLayers', false)
   await catalog.clickCategory(category, true)
   await catalog.close()
 
-  for (const [key, value] of Object.entries(forecast_layers)) {
+  for (const [model, layer] of forecastLayers) {
     await catalog.open()
     await catalog.clickForecast()
-    await catalog.selectMeteoModel(value[0])
-    await catalog.clickLayer(value[1], true)
+    await catalog.selectMeteoModel(model)
+    await catalog.clickLayer(layer, true)
     await catalog.close()
 
-    const sshotKey = `meteolayers-${key}`
+    const sshotKey = `${category}-${model}-${layer}`
     // await pages.takeScreenshot(t, sshotKey)
     await pages.assertScreenshotMismatches(t, sshotKey, refKey)
   }
@@ -187,14 +157,14 @@ test('Check meteo layers', async t => {
   timeline.clickDay('-')
   timeline.close()
 
-  for (const [key, value] of Object.entries(archive_layers)) {
+  for (const [model, layer] of archiveLayers) {
     await catalog.open()
     await catalog.clickArchives()
-    await catalog.selectMeteoModel(value[0])
-    await catalog.clickLayer(value[1], true)
+    await catalog.selectMeteoModel(model)
+    await catalog.clickLayer(layer, true)
     await catalog.close()
 
-    const sshotKey = `meteolayers-${key}`
+    const sshotKey = `${category}-${model}-${layer}`
     await pages.takeScreenshot(t, sshotKey)
   }
 
