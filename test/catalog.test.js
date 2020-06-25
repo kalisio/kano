@@ -40,7 +40,7 @@ fixture `Catalog`// declare the fixture
   })
 
 test('Check base layers', async t => {
-  const category = 'Fonds cartographiques'
+  const category = 'BaseLayers'
   const layers = {
     sentinel2: 'Sentinel 2',
     osm_light: 'OpenStreetMap (Clair)',
@@ -78,7 +78,7 @@ test('Check base layers', async t => {
 })
 
 test('Check measure layers', async t => {
-  const category = 'Couches des mesures'
+  const category = 'MeasureLayers'
   const layers = {
     // srtm: 'Élévation SRTM',
     vigicrues: 'Vigicrues',
@@ -105,8 +105,7 @@ test('Check measure layers', async t => {
 })
 
 test('Check meteo layers', async t => {
-
-  const category = 'Prévisions météo'
+  const category = 'MeteoLayers'
   const forecast_layers = {
     // wind_gfs05: ['gfs-world', 'Vent'],
     // gust_gfs05: ['gfs-world', 'Rafales'],
@@ -166,9 +165,9 @@ test('Check meteo layers', async t => {
   const refKey = 'baselayers-osm_dark'
 
   await catalog.open()
-  await catalog.clickCategory('Fonds cartographiques', true)
+  await catalog.clickCategory('BaseLayers', true)
   await catalog.clickLayer('OpenStreetMap (Sombre)', true)
-  await catalog.clickCategory('Fonds cartographiques', false)
+  await catalog.clickCategory('BaseLayers', false)
   await catalog.clickCategory(category, true)
   await catalog.close()
 
