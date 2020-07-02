@@ -10,7 +10,7 @@ features:
   details: Driven by today’s most advanced web technologies, Kano enables real-time tracking of your geospatial assets
 - title: Designed to be integrated and customized
   details: Through a single API, Kano provides users with the capability to develop geospatial applications
-footer: MIT Licensed | Copyright © 2018-2020 Kalisio
+footer: MIT Licensed | Copyright © 2017-20xx Kalisio
 ---
 
 <center>
