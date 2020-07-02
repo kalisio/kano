@@ -1,13 +1,14 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <q-ajax-bar ref="bar" position="bottom" size="8px" color="primary" />
+    <q-ajax-bar ref="bar" position="bottom" size="8px" color="primary" :delay="250"></q-ajax-bar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
+import logger from 'loglevel'
 
 export default {
   data () {
@@ -17,14 +18,28 @@ export default {
   },
   methods: {
     showError (message) {
-      this.$toast({ message, html: true })
+      // Check if this error is a quiet one or not
+      if (error.ignore) {
+        // In this case simply log
+        logger.error(error)
+        return
+      }
+      let options = { message: error.message || error.error_message, html: true }
+      // Check if user can retry to avoid this error
+      if (error.retryHandler) {
+        options.actions = [{
+          label: this.$t('RETRY'),
+          handler: error.retryHandler
+        }]
+        // Increase timeout so that user has a chance to retry
+        options.timeout = 20000
+      }
+      this.$toast(options)
     },
     showRouteError (route) {
       // We handle error on any page with query string
-      if (route.query) {
-        if (route.query.error_message) {
-          this.showError(route.query.error_message)
-        }
+      if (route.query && route.query.error_message) {
+        this.showError(route.query)
       }
     },
     startProgress () {
@@ -78,7 +93,7 @@ export default {
           error.message = this.$t('errors.' + error.code)
         }
       }
-      this.showError(error.message)
+      this.showError(error)
     })
     this.$events.$on('before-hook', hook => {
       this.nbRequests++
