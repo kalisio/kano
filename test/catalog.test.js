@@ -66,8 +66,8 @@ test('Check base layers', async t => {
     await catalog.close()
 
     const runKey = `${category}-${layer}`
-    await catalog.assertScreenshotMatches(t, runKey)
-    // await catalog.takeScreenshot(t, runKey)
+    await pages.assertScreenshotMatches(t, runKey)
+    // await pages.takeScreenshot(t, runKey)
   }
 
   await catalog.open()
@@ -94,7 +94,7 @@ test('Check measure layers', async t => {
     await catalog.close()
 
     const runKey = `${category}-${layer}`
-    await catalog.takeScreenshot(t, runKey)
+    await pages.takeScreenshot(t, runKey)
   }
 
   await catalog.open()
@@ -152,7 +152,7 @@ test('Check meteo layers', async t => {
     await t.wait(2000)
     const runKey = `${category}-${model}-${layer}`
     const minDiff = layer.includes('WIND') ? 2 : 50
-    await catalog.assertScreenshotMismatches(t, runKey, { refKey: refKey, minDiffRatio: minDiff })
+    await pages.assertScreenshotMismatches(t, runKey, { refKey: refKey, minDiffRatio: minDiff })
   }
 
   timeline.open()
@@ -170,7 +170,7 @@ test('Check meteo layers', async t => {
     await t.wait(2000)
     const runKey = `${category}-${model}-${layer}`
     const minDiff = layer.includes('WIND') ? 2 : 50
-    await catalog.assertScreenshotMismatches(t, runKey, { refKey: refKey, minDiffRatio: minDiff })
+    await pages.assertScreenshotMismatches(t, runKey, { refKey: refKey, minDiffRatio: minDiff })
   }
 
   await catalog.open()
