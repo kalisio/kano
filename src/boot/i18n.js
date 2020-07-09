@@ -1,6 +1,7 @@
 import logger from 'loglevel'
 import i18next from 'i18next'
 import VueI18next from '@panter/vue-i18next'
+import { Quasar } from 'quasar'
 import { utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import utils from '../utils'
 import config from 'config'
@@ -15,6 +16,14 @@ export default async ({ app, Vue }) => {
     fallbackLng: localeConfig.fallback || 'en',
     defaultNS: ['kdk']
   })
+  // Set Quasar language pack
+  try {
+    import('quasar/lang/' + locale)
+    .then(lang => Quasar.lang.set(lang.default))
+  }
+  catch (error) {
+    logger.error(error.message)
+  } 
   // Load the translation files
   const modules = ['core', 'map', 'app', 'plugin']
   try {
