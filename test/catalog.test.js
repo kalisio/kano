@@ -30,7 +30,6 @@ fixture `Catalog`// declare the fixture
   })
   .afterEach(async test => {
     // logout
-    await mapActivity.click(test)
     await layout.clickLeftOpener(test)
     await test.expect(await layout.isLeftDrawerOpened()).ok()
     await sideNav.logout(test)
@@ -176,4 +175,15 @@ test('Check meteo layers', async t => {
   await catalog.open()
   await catalog.clickCategory(category, false)
   await catalog.close()
+})
+
+test('Check imported layers', async t => {
+  const dialog = new pages.LayerImportDialog()
+
+  layout.openAndClickFab(t, '#import-layer')
+
+  // geojson
+  const runKey = 'regions-version-simplifiee'
+  await dialog.importLayer(`data/${runKey}.geojson`)
+  await pages.assertScreenshotMatches(t, runKey)
 })
