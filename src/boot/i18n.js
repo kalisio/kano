@@ -18,8 +18,8 @@ export default async ({ app, Vue }) => {
   })
   // Set Quasar language pack
   try {
-    import('quasar/lang/' + locale)
-    .then(lang => Quasar.lang.set(lang.default))
+    const lang = await import('quasar/lang/' + locale)
+    Quasar.lang.set(lang.default)
   }
   catch (error) {
     logger.error(error.message)
