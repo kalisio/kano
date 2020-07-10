@@ -46,6 +46,7 @@ module.exports = {
   appName: 'Kano',
   appLogo: 'kano-icon-32x32.png',
   appWebsite: 'https://github.com/kalisio/kano',
+  appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
   publisherWebsite: 'https://www.kalisio.com',
   locale: {
