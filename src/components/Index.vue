@@ -91,7 +91,7 @@ export default {
       if (!api.buildNumber) return
       else if (api.buildNumber === config.buildNumber) return
     }
-    this.$toast({html: this.$t('Index.VERSION_MISMATCH')})
+    this.$toast({ message: this.$t('Index.VERSION_MISMATCH') })
   },
   async mounted () {
     this.$events.$on('user-changed', user => {
