@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    showError (message) {
+    showError (error) {
       // Check if this error is a quiet one or not
       if (error.ignore) {
         // In this case simply log
