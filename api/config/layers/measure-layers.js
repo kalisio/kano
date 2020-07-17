@@ -1,6 +1,5 @@
 module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
-  return [
-  {
+  return [{
     name: 'Layers.VIGICRUES',
     description: 'Layers.VIGICRUES_DESCRIPTION',
     i18n: {
@@ -8,20 +7,26 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           VIGICRUES: 'Vigicrues',
           VIGICRUES_DESCRIPTION: 'Carte de vigilance crues',
-          VIGICRUES_LEVEL_1: 'Pas de vigilance particulière requise',
-          VIGICRUES_LEVEL_2: 'Risque de crue génératrice de débordements',
-          VIGICRUES_LEVEL_3: 'Risque de crue génératrice de débordements importants',
-          VIGICRUES_LEVEL_4: 'Risque de crue majeure'
+          VIGICRUES_VIGILANCE_1: 'Pas de vigilance particulière requise',
+          VIGICRUES_VIGILANCE_2: 'Risque de crue génératrice de débordements',
+          VIGICRUES_VIGILANCE_3: 'Risque de crue génératrice de débordements importants',
+          VIGICRUES_VIGILANCE_4: 'Risque de crue majeure'
+        },
+        Variables: {
+          VIGILANCE: 'Vigilance'
         }
       },
       en: {
         Layers: {
           VIGICRUES: 'Vigicrues',
           VIGICRUES_DESCRIPTION: 'Flooding warnings',
-          VIGICRUES_LEVEL_1: 'No flood risk',
-          VIGICRUES_LEVEL_2: 'Flood risk',
-          VIGICRUES_LEVEL_3: 'Important flood risk',
-          VIGICRUES_LEVEL_4: 'Major flood risk'
+          VIGICRUES_VIGILANCE_1: 'No flood risk',
+          VIGICRUES_VIGILANCE_2: 'Flood risk',
+          VIGICRUES_VIGILANCE_3: 'Important flood risk',
+          VIGICRUES_VIGILANCE_4: 'Major flood risk'
+        },
+        Variables: {
+          VIGILANCE: 'Vigilance'
         }
       }
     },
@@ -31,29 +36,50 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
     attribution: '',
     type: 'OverlayLayer',
-    featureId: 'gid',
-    service: 'vigicrues',
+    service: 'vigicrues-forecasts',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    from: 'PT-15M',
+    probeService: 'vigicrues-sections',
+    featureId: 'gid',
+    featureIdType: 'number',
+    from: 'P-7D',
     to: 'PT-15M',
     every: 'PT15M',
+    queryFrom: 'PT-1H',
+    variables: [
+      {
+        name: 'NivSituVigiCruEnt',
+        label: 'Variables.VIGILANCE',
+        units: [
+          'Vigilance'
+        ],
+        range: [1, 4],
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      }
+    ],
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      popup: {
-        pick: [
-          'NomEntVigiCru'
-        ]
-      }
+      'stroke-width': 2,
+      stroke: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
+        else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
+        else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
+        else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
+        else { %>black<% } %>`,
+      fill: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
+        else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
+        else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
+        else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
+        else { %>black<% } %>`,
+      'fill-opacity': 0.5,
+      template: ['stroke', 'fill']
     },
     cesium: {
       type: 'geoJson',
-      realtime: true,
-      popup: {
-        pick: [
-          'NomEntVigiCru'
-        ]
-      }
+      realtime: true
     }
   },
   {
@@ -62,17 +88,17 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          HUBEAU: `Hub'Eau`,
+          HUBEAU: 'Hub\'Eau',
           HUBEAU_DESCRIPTION: 'Données hydrométriques'
         },
         Variables: {
-          H: `Niveau d'eau`,
-          Q: `Débit d'eau`
+          H: 'Niveau d\'eau',
+          Q: 'Débit d\'eau'
         }
       },
       en: {
         Layers: {
-          HUBEAU: `Hub'Eau`,
+          HUBEAU: 'Hub\'Eau',
           HUBEAU_DESCRIPTION: 'Hydrometric data'
         },
         Variables: {
@@ -169,22 +195,22 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OPENAQ: `OpenAQ`,
-          OPENAQ_DESCRIPTION: `Pollution de l'air`
+          OPENAQ: 'OpenAQ',
+          OPENAQ_DESCRIPTION: 'Données de Qualité de l\'air'
         },
         Variables: {
           PM10: 'Particules fines (< 10µm, PM10)',
           PM25: 'Particules fines (< 2.5µm, PM2.5)',
           SO2: 'Dioxyde de soufre (SO2)',
           CO: 'Monoxyde de carbone (CO)s',
-          NO2: `Dioxyde d'azote (NO2)`,
+          NO2: 'Dioxyde d\'azote (NO2)',
           O3: 'Ozone (O3)',
           BC: 'Noir de carbone (BC)'
         }
       },
       en: {
         Layers: {
-          OPENAQ: `OpenAQ`,
+          OPENAQ: 'OpenAQ',
           OPENAQ_DESCRIPTION: 'Air quality data'
         },
         Variables: {
