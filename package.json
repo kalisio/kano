@@ -128,6 +128,7 @@
     "pixi.js": "5.0.4",
     "post-robot": "^10.0.10",
     "quasar": "^1.9.9",
+    "sanitize-html": "^1.27.1",
     "showdown": "^1.8.6",
     "sift": "^8.0.0",
     "socket.io-client": "^2.0.1",
