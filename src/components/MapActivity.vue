@@ -126,12 +126,6 @@ export default {
       }
       return layer
     },
-    getVigicruesTooltip (feature, layer) {
-      const name = _.get(feature, 'properties.NomEntVigiCru')
-      const level = _.get(feature, 'properties.NivSituVigiCruEnt')
-      let tooltip = L.tooltip({ permanent: false }, layer)
-      return tooltip.setContent(name + '<br>'  + this.$t('Layers.VIGICRUES_VIGILANCE_' + level))
-    },
     onFeaturePopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return

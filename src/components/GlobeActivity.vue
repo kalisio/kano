@@ -90,15 +90,6 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.appName.toLowerCase() + `-view`
     },
-    getVigicruesTooltip (entity, options) {
-      const properties = entity.properties
-      if (!properties) return
-      const level = properties.NivSituVigiCruEnt
-      if (level > 1) {
-        return Object.assign({ show: false, text: this.$t('MapActivity.VIGICRUES_LEVEL_' + level) }, this.options.tooltip)
-      }
-      return null
-    },
     async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
