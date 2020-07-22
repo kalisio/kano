@@ -1,3 +1,5 @@
+const tours = require('../tours')
+
 module.exports = {
   '/' : {
     name: 'index',
@@ -6,7 +8,10 @@ module.exports = {
     // will be overriden when required
     meta: { unauthenticated: true },
     children: {
-      'login': 'authentication/KLogin',
+      'login': {
+        component: 'authentication/KLogin',
+        tour: tours.login
+      },
       'logout': {
         component: 'authentication/KLogout',
         meta: { authenticated: true }
@@ -22,7 +27,8 @@ module.exports = {
             // Because this child is the default one path is empty and name is the one of the parent route
             path: '',
             name: 'home',
-            redirect: { name: 'map' }
+            redirect: { name: 'map' },
+            tour: tours.home
           },
           'map/:south?/:west?/:north?/:east?': {
             name: 'map',

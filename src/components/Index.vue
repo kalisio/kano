@@ -1,5 +1,7 @@
 <template>
   <div>
+    <k-tour ref="tour" />
+    <k-welcome />
     <router-view></router-view>
   </div>
 </template>
@@ -40,6 +42,8 @@ export default {
     }
   },
   async created () {
+    this.$options.components['k-welcome'] = utils.loadComponent('layout/KWelcome')
+    this.$options.components['k-tour'] = utils.loadComponent('layout/KTour')
     // initialize the user
     this.user = this.$store.get('user')
     if (this.$api.socket) {

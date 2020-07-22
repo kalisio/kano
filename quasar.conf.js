@@ -18,7 +18,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     boot: [
       'api',
-      'i18n'
+      'i18n',
+      'tour'
     ],
 
     css: [

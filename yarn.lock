@@ -7774,7 +7774,7 @@ hash-base@^3.0.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-hash-sum@2.0.0:
+hash-sum@2.0.0, hash-sum@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/hash-sum/-/hash-sum-2.0.0.tgz#81d01bb5de8ea4a214ad5d6ead1b523460b0b45a"
   integrity sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==
@@ -9033,6 +9033,11 @@ jsx-ast-utils@^2.1.0:
   dependencies:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
+
+jump.js@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jump.js/-/jump.js-1.0.2.tgz#e0641b47f40a38f2139c25fda0500bf28e43015a"
+  integrity sha1-4GQbR/QKOPITnCX9oFAL8o5DAVo=
 
 jwa@^1.4.1:
   version "1.4.1"
@@ -11416,6 +11421,11 @@ pointer-tracker@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pointer-tracker/-/pointer-tracker-2.3.0.tgz#d9dcd467accfb974fc8481adca36a41c8ce761a5"
   integrity sha512-2tQaxrI62yNRIE6jFkxCpa/nraqavDWPZH1WVVAEA9TlH7CWjqX6sfCsWwrWeSYcQwAiZ/l3YfqXNDp4aQIOCQ==
+
+popper.js@^1.16.0:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
 
 portfinder@^1.0.24:
   version "1.0.25"
@@ -14963,6 +14973,16 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue-tour@~1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-tour/-/vue-tour-1.4.0.tgz#e8ef0656e98f87e55659f00c3dd64ec5853945b1"
+  integrity sha512-vsuxNLsSSKBOJpDme1ZkcY744LYk+l4TSfQz39xJZ4BE1GrioyTzS4+PT3D1nKhT/3vOZurNM66cZgzgRNZ/wA==
+  dependencies:
+    hash-sum "^2.0.0"
+    jump.js "^1.0.2"
+    popper.js "^1.16.0"
+    vue "^2.6.10"
 
 vue2-dropzone@^3.6.0:
   version "3.6.0"

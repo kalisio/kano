@@ -23,5 +23,12 @@ export default function (/* { store, ssrContext } */) {
   })
 
   Store.set('router', router)
+  Store.set('tours', Object.assign({
+    current: {
+      name: '',
+      step: 0,
+      play: false
+    }
+  }, utils.buildTours(require('./routes'))))
   return router
 }

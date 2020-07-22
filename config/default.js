@@ -61,7 +61,9 @@ module.exports = {
     banner: 'kano-logo-black-256x84.png',
     login: {
       providers: [],
-      links: []
+      links: [
+        { id: 'contextual-help', label: 'KLogin.CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
+      ]
     },
     logout: {
       links: [
@@ -91,6 +93,7 @@ module.exports = {
   sideNav: {
     banner: 'kano-logo-black-256x84.png',
     components: {
+      // Now managed through the navbar
       //user_actions: 'layout/KLinksPanel',
       app_settings: 'Settings',
       app_about: 'layout/KAbout',
@@ -107,7 +110,7 @@ module.exports = {
   app_logout: {
     links: [
       { }, // separator
-      { label: 'sideNav.LOGOUT', icon: 'las la-sign-out-alt', route: { name: 'logout' } }
+      { id: 'logout', label: 'sideNav.LOGOUT', icon: 'las la-sign-out-alt', route: { name: 'logout' } }
     ]
   },
   mapCatalog: {
