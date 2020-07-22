@@ -10,7 +10,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           VIGICRUES_VIGILANCE_1: 'Pas de vigilance particulière requise',
           VIGICRUES_VIGILANCE_2: 'Risque de crue génératrice de débordements',
           VIGICRUES_VIGILANCE_3: 'Risque de crue génératrice de débordements importants',
-          VIGICRUES_VIGILANCE_4: 'Risque de crue majeure'
+          VIGICRUES_VIGILANCE_4: 'Risque de crue majeure',
+          VIGICRUES_VIGILANCE_undefined: 'Aucune donnée'
         },
         Variables: {
           VIGILANCE: 'Vigilance'
@@ -23,7 +24,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           VIGICRUES_VIGILANCE_1: 'No flood risk',
           VIGICRUES_VIGILANCE_2: 'Flood risk',
           VIGICRUES_VIGILANCE_3: 'Important flood risk',
-          VIGICRUES_VIGILANCE_4: 'Major flood risk'
+          VIGICRUES_VIGILANCE_4: 'Major flood risk',
+          VIGICRUES_VIGILANCE_undefined: 'No data'
         },
         Variables: {
           VIGILANCE: 'Vigilance'
@@ -44,7 +46,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT15M',
-    queryFrom: 'PT-1H',
+    queryFrom: 'PT-6H',
     variables: [
       {
         name: 'NivSituVigiCruEnt',
