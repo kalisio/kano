@@ -77,6 +77,10 @@ test/screenshots/run
 test/page-models/core
 test/page-models/map
 
+# KDK tours
+src/tours/core
+src/tours/map
+
 # Secrets
 secrets.tar
 # SSH key

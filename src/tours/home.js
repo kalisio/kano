@@ -1,49 +1,36 @@
 module.exports = [{
   target: '#opener-left',
-  title: 'tours.home.OPENER_LABEL',
+  title: 'tours.home.SIDENAV_LABEL',
+  link: 'tours.home.SIDENAV_LINK_LABEL',
   params: {
     placement: 'right',
-    clickOnNext: '#opener-left',
-    nextDelay: 500
+    clickOnLink: '#opener-left',
+    tour: 'map/side-nav'
   }
 }, {
-  target: '#logout',
-  title: 'tours.home.LOGOUT_LABEL',
-  content: 'tours.home.SESSION_LABEL',
+  target: '#opener-top',
+  title: 'tours.home.NAVIGATION_BAR_LABEL',
+  link: 'tours.home.NAVIGATION_BAR_LINK_LABEL',
   params: {
-    placement: 'top',
-    clickOnPrevious: '#online-help',
-    previousDelay: 500
+    placement: 'bottom',
+    tour: 'map/navigation-bar'
   }
 }, {
-  target: '#help',
-  link: 'tours.home.HELP_LABEL',
+  target: '#opener-right',
+  title: 'tours.home.CATALOG_LABEL',
+  link: 'tours.home.CATALOG_LINK_LABEL',
   params: {
-    placement: 'top',
-    clickOnLink: '#help'
+    placement: 'left',
+    clickOnLink: '#opener-right',
+    tour: 'map/catalog-panel'
   }
 }, {
-  target: '#edit-settings',
-  content: 'tours.home.SETTINGS_LABEL',
+  target: '#opener-bottom',
+  title: 'tours.home.TIMELINE_LABEL',
+  link: 'tours.home.TIMELINE_LINK_LABEL',
   params: {
     placement: 'top',
-    clickOnPrevious: '#about',
-    previousDelay: 500
-  }
-}, {
-  target: '#about',
-  content: 'tours.home.ABOUT_LABEL',
-  params: {
-    placement: 'top',
-    clickOnNext: '#about',
-    nextDelay: 500
-  }
-}, {
-  target: '#report-bug',
-  content: 'tours.home.BUG_LABEL',
-  params: {
-    placement: 'top',
-    clickOnPrevious: ['#close-action', '#opener-left'],
-    previousDelay: 500
+    clickOnLink: '#opener-bottom',
+    tour: 'map/timeline'
   }
 }]

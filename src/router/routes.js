@@ -33,12 +33,22 @@ module.exports = {
           'map/:south?/:west?/:north?/:east?': {
             name: 'map',
             component: 'MapActivity',
-            embedApi: true
+            embedApi: true,
+            tour: {
+              'side-nav': tours['side-nav'],
+              'navigation-bar': tours['navigation-bar'],
+              'catalog-panel': tours['catalog-panel']
+            }
           },
           'globe/:south?/:west?/:north?/:east?': {
             name: 'globe',
             component: 'GlobeActivity',
-            embedApi: true
+            embedApi: true,
+            tour: {
+              'side-nav': tours['side-nav'],
+              'navigation-bar': tours['navigation-bar'],
+              'catalog-panel': tours['catalog-panel']
+            }
           }
         }
       }

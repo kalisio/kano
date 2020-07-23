@@ -20,13 +20,20 @@
   },
   "tours": {
     "home": {
-      "OPENER_LABEL": "Ouvrez à tout moment le menu latéral principal.",
+      "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",
+      "SIDENAV_LINK_LABEL": "Parcourir le menu principal",
       "HELP_LABEL": "Accédez à notre aide en ligne à tout moment",
       "ABOUT_LABEL": "Affichez les informations détaillées du système et signalez-nous un boggue.",
       "BUG_LABEL": "Signalez-nous un boggue via un email contenant automatiquement les informations nécessaires.",
       "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",
       "LOGOUT_LABEL": "Déconnectez vous si vous souhaitez clôturer votre session de travail.",
-      "SESSION_LABEL": "Sinon la session reste active sur votre appareil pendant <b>24H</b> et vous n'aurez pas besoin de vous reconnecter durant ce laps de temps."
+      "SESSION_LABEL": "Sinon la session reste active sur votre appareil pendant <b>24H</b> et vous n'aurez pas besoin de vous reconnecter durant ce laps de temps.",
+      "NAVIGATION_BAR_LABEL": "Ouvrez à tout moment la barre de navigation via cette poignée.",
+      "NAVIGATION_BAR_LINK_LABEL": "Parcourir la barre de navigation",
+      "CATALOG_LABEL": "Ouvrez à tout moment le catalogue via cette poignée.",
+      "CATALOG_LINK_LABEL": "Parcourir le catalogue",
+      "TIMELINE_LABEL": "Ouvrez à tout moment la ligne de temps via cette poignée.",
+      "TIMELINE_LINK_LABEL": "Parcourir la ligne de temps"
     }
   },
   "screen": {
