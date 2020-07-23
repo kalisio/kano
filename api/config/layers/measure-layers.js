@@ -65,6 +65,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'geoJson',
       realtime: true,
+      staticGeometry: true,
       'stroke-width': 2,
       stroke: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
         else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
