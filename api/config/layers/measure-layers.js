@@ -232,8 +232,9 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
     attribution: '',
     type: 'OverlayLayer',
-    service: 'openaq',
+    service: 'openaq-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    probeService: 'openaq-stations',
     featureId: 'location',
     from: 'P-7D',
     to: 'PT-15M',
@@ -336,11 +337,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 10,
+      minZoom: 8,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': '#0B75A9',
+      'marker-color': `<% if (_.has(properties, 'pm25') ||
+                              _.has(properties, 'pm10') ||
+                              _.has(properties, 'so2') ||
+                              _.has(properties, 'no2') ||
+                              _.has(properties, 'o3') ||
+                              _.has(properties, 'co') ||
+                              _.has(properties, 'bc')) { %>blue<% }
+                        else { %>dark<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-heartbeat',
+      'icon-x-offset': -1,
+      template: ['marker-color'],
       popup: {
         pick: [
           'location'
@@ -398,8 +408,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          TELERAY: `Téléray`,
-          TELERAY_DESCRIPTION: `Débit de dose gamma ambiant`
+          TELERAY: 'Téléray',
+          TELERAY_DESCRIPTION: 'Débit de dose gamma ambiant'
         },
         Variables: {
           GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
@@ -407,7 +417,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          TELERAY: `Téléray`,
+          TELERAY: 'Téléray',
           TELERAY_DESCRIPTION: 'Gamma dose rate'
         },
         Variables: {
