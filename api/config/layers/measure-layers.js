@@ -349,7 +349,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                         else { %>dark<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-heartbeat',
-      'icon-x-offset': -1,
+      'icon-x-offset': -2,
       template: ['marker-color'],
       popup: {
         pick: [
