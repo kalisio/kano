@@ -702,7 +702,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          GSMAP_RAIN72: "Précipiations sur 72h",
+          GSMAP_RAIN72: "Précipitations sur 72h",
           GSMAP_RAIN72_DESCRIPTION: "Accumulées"
         }
       },
