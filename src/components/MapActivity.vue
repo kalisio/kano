@@ -78,7 +78,8 @@ export default {
     kMapMixins.map.activity,
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
-    kMapMixins.map.mapillaryLayers
+    kMapMixins.map.mapillaryLayers,
+    kMapMixins.map.gsmapLayers
   ],
   provide () {
     return {
