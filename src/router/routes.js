@@ -37,7 +37,8 @@ module.exports = {
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
-              'catalog-panel': tours['catalog-panel']
+              'catalog-panel': tours['catalog-panel'],
+              'timeline': tours['timeline']
             }
           },
           'globe/:south?/:west?/:north?/:east?': {
@@ -47,7 +48,8 @@ module.exports = {
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
-              'catalog-panel': tours['catalog-panel']
+              'catalog-panel': tours['catalog-panel'],
+              'timeline': tours['timeline']
             }
           }
         }
