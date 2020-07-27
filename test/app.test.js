@@ -29,6 +29,8 @@ const user = {
 
 test('Checking the app layout', async test => {
   await screens.login(test, user)
+  await layout.closeWelcomeDialog(test)
+
   // Check default layout state
   await test.expect(await layout.isLeftDrawerOpened()).notOk()
   await test.expect(await layout.isRightDrawerOpened()).notOk()

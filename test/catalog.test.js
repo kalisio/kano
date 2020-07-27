@@ -27,6 +27,7 @@ fixture `Catalog`// declare the fixture
     await test.resizeWindow(width, height)
     // login
     await screens.login(test, user)
+    await layout.closeWelcomeDialog(test)
   })
   .afterEach(async test => {
     // logout
