@@ -33,4 +33,13 @@ module.exports = [{
     clickOnLink: '#opener-bottom',
     tour: 'map/timeline'
   }
+}, {
+  target: '#fab',
+  title: 'tours.home.FAB_LABEL',
+  link: 'tours.home.FAB_LINK_LABEL',
+  params: {
+    placement: 'top',
+    clickOnLink: 'div.q-fab__icon-holder',
+    tour: 'map/fab'
+  }
 }]

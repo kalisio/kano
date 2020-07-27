@@ -4,6 +4,7 @@ module.exports = {
   'side-nav': require('./side-nav'),
   'navigation-bar': require('./map/navigation-bar'),
   'catalog-panel': require('./map/catalog-panel'),
-  'timeline': require('./map/timeline')
+  'timeline': require('./map/timeline'),
+  'fab': require('./map/fab')
 }
 

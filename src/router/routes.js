@@ -38,7 +38,8 @@ module.exports = {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
               'catalog-panel': tours['catalog-panel'],
-              'timeline': tours['timeline']
+              'timeline': tours['timeline'],
+              'fab': tours['fab']
             }
           },
           'globe/:south?/:west?/:north?/:east?': {
@@ -49,7 +50,8 @@ module.exports = {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
               'catalog-panel': tours['catalog-panel'],
-              'timeline': tours['timeline']
+              'timeline': tours['timeline'],
+              'fab': tours['fab']
             }
           }
         }

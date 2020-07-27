@@ -33,7 +33,9 @@
       "CATALOG_LABEL": "Ouvrez à tout moment le catalogue via cette poignée.",
       "CATALOG_LINK_LABEL": "Parcourir le catalogue",
       "TIMELINE_LABEL": "Ouvrez à tout moment la ligne de temps via cette poignée.",
-      "TIMELINE_LINK_LABEL": "Parcourir la ligne de temps"
+      "TIMELINE_LINK_LABEL": "Parcourir la ligne de temps",
+      "FAB_LABEL": "Accéder rapidement aux actions relatives aux données cartographiques via ce bouton.",
+      "FAB_LINK_LABEL": "Voir les actions"
     }
   },
   "screen": {

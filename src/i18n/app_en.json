@@ -33,7 +33,9 @@
       "CATALOG_LABEL": "Open the catalog any time using this handle.",
       "CATALOG_LINK_LABEL": "Browse the catalog",
       "TIMELINE_LABEL": "Open the timeline any time using this handle.",
-      "TIMELINE_LINK_LABEL": "Browse the timeline"
+      "TIMELINE_LINK_LABEL": "Browse the timeline",
+      "FAB_LABEL": "Quickly execute actions related to map data using this button.",
+      "FAB_LINK_LABEL": "Browse the actions"
     }
   },
   "screen": {
