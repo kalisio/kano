@@ -5,7 +5,7 @@ module.exports = [{
   params: {
     placement: 'right',
     clickOnLink: '#opener-left',
-    tour: 'map/side-nav'
+    tour: 'side-nav'
   }
 }, {
   target: '#opener-top',
@@ -13,7 +13,7 @@ module.exports = [{
   link: 'tours.home.NAVIGATION_BAR_LINK_LABEL',
   params: {
     placement: 'bottom',
-    tour: 'map/navigation-bar'
+    tour: 'navigation-bar'
   }
 }, {
   target: '#opener-right',
@@ -22,7 +22,7 @@ module.exports = [{
   params: {
     placement: 'left',
     clickOnLink: '#opener-right',
-    tour: 'map/catalog-panel'
+    tour: 'catalog-panel'
   }
 }, {
   target: '#opener-bottom',
@@ -31,7 +31,7 @@ module.exports = [{
   params: {
     placement: 'top',
     clickOnLink: '#opener-bottom',
-    tour: 'map/timeline'
+    tour: 'timeline'
   }
 }, {
   target: '#fab',
@@ -40,6 +40,6 @@ module.exports = [{
   params: {
     placement: 'top',
     clickOnLink: 'div.q-fab__icon-holder',
-    tour: 'map/fab'
+    tour: 'fab'
   }
 }]

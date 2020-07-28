@@ -109,6 +109,7 @@ module.exports = {
   },
   app_logout: {
     links: [
+      { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } } },
       { }, // separator
       { id: 'logout', label: 'sideNav.LOGOUT', icon: 'las la-sign-out-alt', route: { name: 'logout' } }
     ]

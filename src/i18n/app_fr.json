@@ -47,6 +47,7 @@
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D",
     "SETTINGS": "Paramètres",
+    "CONTEXTUAL_HELP": "$t(CONTEXTUAL_HELP)",
     "LOGOUT": "Se déconnecter"
   },
   "Index": {

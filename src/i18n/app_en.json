@@ -47,6 +47,7 @@
     "MAP": "2D View",
     "GLOBE": "3D View",
     "SETTINGS": "Settings",
+    "CONTEXTUAL_HELP": "$t(CONTEXTUAL_HELP)",
     "LOGOUT": "Logout"
   },
   "Index": {
