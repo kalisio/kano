@@ -46,7 +46,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         units: [
           'm/s', 'km/h', 'kt'
         ],
-        range: [0, 60],
+        range: [0, 70],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 159, 64, 128)',
           borderColor: 'rgb(255, 159, 64)',
@@ -64,6 +65,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'deg'
         ],
         range: [0, 360],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(191, 191, 63, 128)',
           borderColor: 'rgb(191, 191, 63)',
@@ -139,7 +141,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         units: [
           'm/s', 'km/h', 'kt'
         ],
-        range: [0, 60],
+        range: [0, 70],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',
@@ -265,6 +268,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'degC', 'degF', 'K'
         ],
         range: [-20, 50],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 215, 0, 128)',
           borderColor: 'rgb(255, 215, 0)',
@@ -340,7 +344,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         units: [
           'm/s', 'km/h', 'kt'
         ],
-        range: [0, 60],
+        range: [0, 70],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 159, 64, 128)',
           borderColor: 'rgb(255, 159, 64)',
@@ -358,6 +363,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'deg'
         ],
         range: [0, 360],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(191, 191, 63, 128)',
           borderColor: 'rgb(191, 191, 63)',
@@ -537,7 +543,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         units: [
           'm/s', 'km/h', 'kt'
         ],
-        range: [0, 60],
+        range: [0, 70],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',

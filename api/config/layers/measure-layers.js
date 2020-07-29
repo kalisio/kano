@@ -52,13 +52,21 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         name: 'NivSituVigiCruEnt',
         label: 'Variables.VIGILANCE',
         units: [
-          'Vigilance'
+          'niveau'
         ],
         range: [1, 4],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
-          fill: false
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 1,
+              max: 4,
+              stepSize: 1
+            }
+          }
         }
       }
     ],
@@ -557,7 +565,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         name: "precipitations",
         label: "Variables.PRECIPITATIONS",
         units: ["mm/hr"],
-        range: [0, 30.0],
+        range: [0, 30],
         chartjs: {
           backgroundColor: "rgba(54, 162, 235, 128)",
           borderColor: "rgb(54, 162, 235)",
