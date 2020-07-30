@@ -171,6 +171,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#00a9ce',
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
+      'icon-x-offset': 1,
       popup: {
         pick: [
           'name'
@@ -472,21 +473,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (properties.libelle === 'VA') { %>darkblue<% }
-                          else if (properties.visibility === 'NV') { %>orange<% }
+      'marker-color': `<% if (properties.libelle === 'VA') { %>orange<% }
+                          else if (properties.visibility === 'NV') { %>grey<% }
                           else { %>dark<% } %>`,
-      'icon-classes': `<% if (properties.libelle === 'VA') { %>fa fa-info-circle<% }
-                          else if (properties.visibility === 'NV') { %>fa fa-question-circle<% }
-                          else { %>fa fa-times-circle<% } %>`,
+      'icon-classes': 'fa fa-radiation',
+      'icon-x-offset': -2,
       'icon-color': '#FFF',
-      template: ['marker-color', 'icon-classes'],
+      template: ['marker-color'],
       popup: {
         pick: [
           'name'
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'value')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h</br>
+        template: `<% if (_.has(properties, 'value')) { properties.value.toFixed(2) %> nSv/h</br>
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     },
