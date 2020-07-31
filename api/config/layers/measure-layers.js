@@ -586,7 +586,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             "#eb1e00",
             "#af0000"
           ],
-          classes: [0.1, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 15.0, 20.0, 25.0]
+          classes: [0.1, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0]
         }
       }
     ],
@@ -641,7 +641,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             "#eb1e00",
             "#af0000"
           ],
-          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250]
+          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
         }
       }
     ],
@@ -696,7 +696,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             "#eb1e00",
             "#af0000"
           ],
-          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250]
+          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
         }
       }
     ],
@@ -751,7 +751,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             "#eb1e00",
             "#af0000"
           ],
-          classes: [0, 5, 10, 30, 50, 100, 200, 300, 400, 500]
+          classes: [0, 5, 10, 30, 50, 100, 200, 300, 400, 500, 600]
         }
       }
     ],
