@@ -6,7 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/kalisio/kano/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kano)
 [![Test Coverage](https://codeclimate.com/github/kalisio/kano/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kano/coverage)
 [![Dependency Status](https://img.shields.io/david/kalisio/kano.svg?style=flat-square)](https://david-dm.org/kalisio/kano)
-[![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.github.io/kdk/)
+[![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.github.io/kano/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kano.svg?style=plastic)](https://hub.docker.com/r/kalisio/kano/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkalisio%2Fkano.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkalisio%2Fkano?ref=badge_shield)
 
@@ -22,9 +22,7 @@ This application is based on the [Kalisio Development Kit](https://kalisio.githu
 
 ### License
 
-Copyright (c) 2018 Kalisio
-
-
+This project is licensed under the MIT License - see the [license file](./LICENSE) for details
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkalisio%2Fkano.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkalisio%2Fkano?ref=badge_large)
 
