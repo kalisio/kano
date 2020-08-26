@@ -42,18 +42,18 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
   * **components**: a list of additional components to display (see [advanced usage](./advanced-usage.md))
 * **map**: 2D map view configuration
 	* **viewer**: 2D map initialization [options](https://leafletjs.com/reference.html#map-option),
-	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.md#map-style) for polygons/lines,
-	* **pointStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.md#map-style) for points,
-	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.md#map-popup),
-	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.md#map-tooltip),
-	* **cluster**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.md#map-style),
-	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.md#file-layer),
+	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style) for polygons/lines,
+	* **pointStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style) for points,
+	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.html#map-popup),
+	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.html#map-tooltip),
+	* **cluster**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style),
+	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
 * **globe**: 3D globe view configuration
 	* **viewer**: 3D globe initialization [options](https://cesiumjs.org/Cesium/Build/Documentation/Viewer.html#Viewer)
-	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.md#file-layer),
-	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.md#globe-style) for polygons/lines/points,
-	* **entityStyle**: default [entity style](https://kalisio.github.io/kdk/api/map/mixins.md#globe-style),
-	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.md#globe-tooltip),
-	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.md#globe-popup),
-	* **clusterStyle**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.md#globe-style),
-	* **cluster**: default GeoJSON [cluster options](https://kalisio.github.io/kdk/api/map/mixins.md#globe-style)
+	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
+	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style) for polygons/lines/points,
+	* **entityStyle**: default [entity style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style),
+	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-tooltip),
+	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-popup),
+	* **clusterStyle**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style),
+	* **cluster**: default GeoJSON [cluster options](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style)

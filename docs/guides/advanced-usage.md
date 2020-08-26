@@ -106,3 +106,58 @@ module.exports = {
 ```
 
 Then build/run the application as usual.
+
+The component file should look e.g. like this:
+```html
+<template>
+  <div>
+    <q-dialog ref="myDialog">
+    </q-dialog>
+    <q-page-sticky position="bottom-right" :offset="[16, 16]">
+      <q-btn round color="secondary" icon="edit_location" @click="showDialog">
+      </q-btn>
+    </q-page-sticky>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'my-component',
+  inject: ['kMap'],
+  data () {
+    return {
+      ...
+  },
+  methods: {
+    async showDialog () {
+      this.$refs.myDialog.show()
+    },
+    onTimeChanged () {
+      ...
+    }
+  },
+  async mounted () {
+    // To be aware of time change
+    this.kMap.$on('current-time-changed', this.onTimeChanged)
+    ...
+  },
+  beforeDestroy () {
+    this.kMap.$off('current-time-changed', this.onTimeChanged)
+  }
+}
+</script>
+// Required translations in JSON format
+<i18n>
+{ 
+  "fr": {
+      ...
+    }
+  },
+  "en": {
+      ...
+    }
+  }
+}
+</i18n>
+
+```

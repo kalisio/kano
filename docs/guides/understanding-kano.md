@@ -4,13 +4,15 @@ sidebarDepth: 3
 
 # Understanding Kano
 
-Kano is a powerful [geospatial visualizer](https://en.wikipedia.org/wiki/Geovisualization) which supports advanced visualization capabilities in 2D and 3D thanks to hardware acceleration with WebGL technology. Driven by today's most advanced web technologies, it also enables tracking of your geospatial assets in real-time.
+**Kano** is a powerful [geospatial visualizer](https://en.wikipedia.org/wiki/Geovisualization) which supports advanced visualization capabilities in 2D and 3D thanks to hardware acceleration with WebGL technology. Driven by today's most advanced web technologies, it also enables tracking of your geospatial assets in real-time.
 
 Although Kano is a web application for end-users, it has also been designed to be integrated in third-party business applications and customized by developers (check out [advanced usage](./advanced-usage.md)). Using a single and simple API, Kano provides developers with the capability to easily develop 2D and 3D geospatial applications (check out [the API reference](../reference/api.md)).
 
-## Main concepts
+## Key concepts
 
-**Kano** is composed of two main activities (i.e. entry point for interacting with the user on a given type of objects):
+Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano.
+
+Kano is composed of two main activities (i.e. entry point for interacting with the user on a given type of objects):
 * a **2D activity** to visualise and interact with data on a standard map in 2D,
 * a **3D activity** to visualise data and interact with on a [virtual globe](https://en.wikipedia.org/wiki/Virtual_globe) in 3D.
 
@@ -33,5 +35,7 @@ Each component can be shown/hidden through a handle on the different side of the
 * at the bottom to open the **timeline**,
 * on the left to open the **side/main menu**,
 * on the right to open the **catalog**.
+
+In addition, a floating action button <i class="las la-chrvron-up la-2x"></i> is available in the bottom-right corner to perform some actions.
 
 Check out now our [quickstart guide](./getting-started.md) for more details.
