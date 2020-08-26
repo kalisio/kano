@@ -1,6 +1,6 @@
 module.exports = {
   base: '/kano/',
-  title: 'kano',
+  title: 'Kano',
   description: 'A powerful real-time Geovisualizer',
   head: [
     ['link', { rel: 'icon', href: `https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-icon-64x64.png` }],
