@@ -4,7 +4,7 @@ module.exports = [{
   link: 'tours.home.SIDENAV_LINK_LABEL',
   params: {
     placement: 'right',
-    clickOnLink: '#opener-left',
+    hoverClickOnLink: '#opener-left',
     tour: 'side-nav'
   }
 }, {
@@ -21,7 +21,7 @@ module.exports = [{
   link: 'tours.home.CATALOG_LINK_LABEL',
   params: {
     placement: 'left',
-    clickOnLink: '#opener-right',
+    hoverClickOnLink: '#opener-right',
     tour: 'catalog-panel'
   }
 }, {
@@ -30,7 +30,7 @@ module.exports = [{
   link: 'tours.home.TIMELINE_LINK_LABEL',
   params: {
     placement: 'top',
-    clickOnLink: '#opener-bottom',
+    hoverClickOnLink: '#opener-bottom',
     tour: 'timeline'
   }
 }, {
@@ -39,7 +39,7 @@ module.exports = [{
   link: 'tours.home.FAB_LINK_LABEL',
   params: {
     placement: 'top',
-    clickOnLink: 'div.q-fab__icon-holder',
+    hoverClickOnLink: 'div.q-fab__icon-holder',
     tour: 'fab'
   }
 }]
