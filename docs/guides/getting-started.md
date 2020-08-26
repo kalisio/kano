@@ -24,7 +24,7 @@ Kano look and features are ever-evolving, moreover it can be configured accordin
 
 The main menu allows to open the documentation, manage your settings and logout from Kano.
 
-:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the main menu tutorial
+:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the main menu tutorial to get more details
 
 ## Navigation bar
 
@@ -34,7 +34,7 @@ The navigation bar allows to quickly execute recurring actions:
 * seek for an address,
 * switch to fullscreen mode.
 
-:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the navigation bar tutorial
+:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the navigation bar tutorial to get more details
 
 ## Catalog
 
@@ -42,16 +42,16 @@ The catalog allows to manage the layers displayed on your view. You can show/hid
 
 Using the overflow menu on a layer you can access actions available for this layer like zooming to and for user-defined feature layers saving (i.e. make it persitent), editing properties, editing features, editing display style, display raw data, create charts, delete it.
 
-:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the catalog tutorial
+:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the catalog tutorial to get more details
 
 ## Timeline
 
 The timeline allows to quickly execute actions related to the time of the displayed data. Stick to real-time or go forward/backward in time as you wish. 
 
-:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the timeline tutorial
+:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the timeline tutorial to get more details
 
 ## Floating action button
 
 Using the FAB you can create a new blank data layer or import existing data as a new data layer. You can also probe weather forecast data at a specific location if your datasets include numerical weather prediction models.
 
-:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the FAB tutorial
+:point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the FAB tutorial to get more details
