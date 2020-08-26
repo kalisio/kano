@@ -7,8 +7,9 @@
     <meta name="generator" content="VuePress 1.5.0">
     <link rel="icon" href="https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-icon-64x64.png">
     <link rel="manifest" href="/kano/manifest.json">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <meta name="description" content="A powerful real-time Geovisualizer">
-    <link rel="preload" href="/kano/assets/css/0.styles.cdd4485d.css" as="style"><link rel="preload" href="/kano/assets/js/app.298ba9db.js" as="script"><link rel="preload" href="/kano/assets/js/2.3a0cead2.js" as="script"><link rel="preload" href="/kano/assets/js/15.8961250e.js" as="script"><link rel="preload" href="/kano/assets/js/8.b6ecc4d1.js" as="script"><link rel="preload" href="/kano/assets/js/3.e5425bc9.js" as="script"><link rel="prefetch" href="/kano/assets/js/10.ad3e25bc.js"><link rel="prefetch" href="/kano/assets/js/11.a81db617.js"><link rel="prefetch" href="/kano/assets/js/12.61f3ccd7.js"><link rel="prefetch" href="/kano/assets/js/13.c16743b3.js"><link rel="prefetch" href="/kano/assets/js/14.00ec3d7f.js"><link rel="prefetch" href="/kano/assets/js/16.c8743988.js"><link rel="prefetch" href="/kano/assets/js/17.ab075fe0.js"><link rel="prefetch" href="/kano/assets/js/18.b1f28b09.js"><link rel="prefetch" href="/kano/assets/js/19.1761d51a.js"><link rel="prefetch" href="/kano/assets/js/4.ee60b431.js"><link rel="prefetch" href="/kano/assets/js/5.a5152bf8.js"><link rel="prefetch" href="/kano/assets/js/6.eb76727d.js"><link rel="prefetch" href="/kano/assets/js/7.3658d3f9.js"><link rel="prefetch" href="/kano/assets/js/9.2138219e.js">
+    <link rel="preload" href="/kano/assets/css/0.styles.cdd4485d.css" as="style"><link rel="preload" href="/kano/assets/js/app.b05d395a.js" as="script"><link rel="preload" href="/kano/assets/js/2.4e87fba6.js" as="script"><link rel="preload" href="/kano/assets/js/16.f329fa05.js" as="script"><link rel="preload" href="/kano/assets/js/9.722eafc5.js" as="script"><link rel="preload" href="/kano/assets/js/3.d9a8bf66.js" as="script"><link rel="prefetch" href="/kano/assets/js/10.9ea42f12.js"><link rel="prefetch" href="/kano/assets/js/11.8cf0f675.js"><link rel="prefetch" href="/kano/assets/js/12.e67c2774.js"><link rel="prefetch" href="/kano/assets/js/13.177ca055.js"><link rel="prefetch" href="/kano/assets/js/14.672325f9.js"><link rel="prefetch" href="/kano/assets/js/15.eef4d95a.js"><link rel="prefetch" href="/kano/assets/js/17.60123428.js"><link rel="prefetch" href="/kano/assets/js/18.068401d9.js"><link rel="prefetch" href="/kano/assets/js/19.a99bff4f.js"><link rel="prefetch" href="/kano/assets/js/4.012724ec.js"><link rel="prefetch" href="/kano/assets/js/5.b3686441.js"><link rel="prefetch" href="/kano/assets/js/6.555f98bb.js"><link rel="prefetch" href="/kano/assets/js/7.8e57e421.js"><link rel="prefetch" href="/kano/assets/js/8.a6076d44.js">
     <link rel="stylesheet" href="/kano/assets/css/0.styles.cdd4485d.css">
   </head>
   <body>
@@ -67,11 +68,62 @@
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><p>Then build/run the application as usual.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><p>Then build/run the application as usual.</p> <p>The component file should look e.g. like this:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>q-dialog</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>myDialog<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>q-dialog</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>q-page-sticky</span> <span class="token attr-name">position</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>bottom-right<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:offset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[16, 16]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>q-btn</span> <span class="token attr-name">round</span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>secondary<span class="token punctuation">&quot;</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>edit_location<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>showDialog<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>q-btn</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>q-page-sticky</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'my-component'</span><span class="token punctuation">,</span>
+  inject<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'kMap'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">async</span> <span class="token function">showDialog</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>myDialog<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">onTimeChanged</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token keyword">async</span> <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// To be aware of time change</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>kMap<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'current-time-changed'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onTimeChanged<span class="token punctuation">)</span>
+    <span class="token operator">...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">beforeDestroy</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>kMap<span class="token punctuation">.</span><span class="token function">$off</span><span class="token punctuation">(</span><span class="token string">'current-time-changed'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onTimeChanged<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+// Required translations in JSON format
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+{ 
+  &quot;fr&quot;: {
+      ...
+    }
+  },
+  &quot;en&quot;: {
+      ...
+    }
+  }
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/kano/guides/getting-started.html" class="prev">
         Getting Started
       </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/kano/assets/js/app.298ba9db.js" defer></script><script src="/kano/assets/js/2.3a0cead2.js" defer></script><script src="/kano/assets/js/15.8961250e.js" defer></script><script src="/kano/assets/js/8.b6ecc4d1.js" defer></script><script src="/kano/assets/js/3.e5425bc9.js" defer></script>
+    <script src="/kano/assets/js/app.b05d395a.js" defer></script><script src="/kano/assets/js/2.4e87fba6.js" defer></script><script src="/kano/assets/js/16.f329fa05.js" defer></script><script src="/kano/assets/js/9.722eafc5.js" defer></script><script src="/kano/assets/js/3.d9a8bf66.js" defer></script>
   </body>
 </html>
