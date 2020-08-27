@@ -223,11 +223,13 @@ function buildTours (config) {
       if (tour) {
         // If we directly have a tour as an array of steps
         if (Array.isArray(tour)) tours[name] = tour
-        // Or a set of tours as key/value object when the route has a parameter
-        // and each value has its own tour
+        // Or a set of tours as key/value object when eg the route has a parameter and each value has its own tour
+        // or when the tour is split over multiple linked smaller tours because it is too much complex for a single one
         else if (typeof tour === 'object') {
           _.forOwn(tour, (paramTour, paramValue) => {
-            tours[`${name}/${paramValue}`] = paramTour
+            // We identify the main route tour if the key is the same
+            if (paramValue === name) tours[`${name}`] = paramTour
+            else tours[`${name}/${paramValue}`] = paramTour
           })
         }
       }
