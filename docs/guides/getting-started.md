@@ -32,6 +32,7 @@ The navigation bar allows to quickly execute recurring actions:
 * switch from 2D (respectively 3D) activity to 3D (respectively 2D) activity,
 * display the coordinates of a location,
 * seek for an address,
+* center the view on your current location,
 * switch to fullscreen mode.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the navigation bar tutorial to get more details
@@ -40,7 +41,7 @@ The navigation bar allows to quickly execute recurring actions:
 
 The catalog allows to manage the layers displayed on your view. You can show/hide a layer by selecting it in the relevant category.
 
-Using the overflow menu on a layer you can access actions available for this layer like zooming to and for user-defined feature layers saving (i.e. make it persitent), editing properties, editing features, editing display style, display raw data, create charts, delete it.
+Using the overflow menu on a layer you can access actions available for this layer like zooming to and for user-defined feature layers saving (i.e. make it persistent), editing properties, editing features, editing display style, display raw data, create charts, delete it.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the catalog tutorial to get more details
 
