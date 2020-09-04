@@ -76,7 +76,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl 
     },
     {
       name: 'Layers.MAPTILER_HYBRID',
-      description: 'Layers.MAPS_HYBRID_DESCRIPTION',
+      description: 'Layers.MAPTILER_HYBRID_DESCRIPTION',
       i18n: {
         fr: {
           Layers: {
@@ -114,7 +114,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl 
     },
     {
       name: 'Layers.MAPTILER_TERRAIN3D',
-      description: 'Layers.TILERS_TERRAIN3D_DESCRIPTION',
+      description: 'Layers.MAPTILER_TERRAIN3D_DESCRIPTION',
       i18n: {
         fr: {
           Layers: {
