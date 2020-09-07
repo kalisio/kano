@@ -135,10 +135,12 @@ module.exports = {
     services: (service) => service.path.includes('catalog') ||
                             service.path.includes('hubeau-stations') ||
                             service.path.includes('hubeau-observations') ||
-                            service.path.includes('openaq') ||
+                            service.path.includes('openaq-stations') ||
+                            service.path.includes('openaq-measurements') ||
                             service.path.includes('teleray-sensors') ||
                             service.path.includes('teleray-measurements') ||
-                            service.path.includes('vigicrues'),
+                            service.path.includes('vigicrues-sections') ||
+                            service.path.includes('vigicrues-forecasts'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
