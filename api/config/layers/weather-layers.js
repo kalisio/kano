@@ -200,6 +200,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'mm'
         ],
         range: [0, 300],
+        step: 2,
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -652,6 +653,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'mm'
         ],
         range: [0, 300],
+        step: 2,
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -770,6 +772,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'degC', 'degF', 'K'
         ],
         range: [-20, 50],
+        step: 1,
         chartjs: {
           backgroundColor: 'rgba(255, 215, 0, 128)',
           borderColor: 'rgb(255, 215, 0)',

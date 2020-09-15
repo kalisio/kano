@@ -142,6 +142,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'm'
         ],
         range: [0, 10],
+        step: 0.1,
         chartjs: {
           backgroundColor: 'rgba(63, 63, 191, 128)',
           borderColor: 'rgb(63, 63, 191)',
@@ -155,6 +156,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'm3/s'
         ],
         range: [0, 1000],
+        step: 10,
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
@@ -460,6 +462,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'nSv/h'
         ],
         range: [0, 500],
+        step: 5,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
