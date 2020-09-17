@@ -60,8 +60,8 @@ The timeline allows to quickly execute actions related to the time of the displa
 ## Floating action button
 
 Using the FAB you can:
-* <i class="las la-file-alt la-2x"/> Create a new blank data layer by locating and drawing the underlying entities. You can add the data schema from a [JSON schema](https://json-schema.org/) file in order to edit the meatadata (i.e. properties) of your entities.
-* <i class="las la-file-alt"/> Create a new data layer by import existing data from a [GeoJSON](https://geojson.org/) file.
+* <i class="las la-plus"/> Create a new blank data layer by locating and drawing the underlying entities. You can add the data schema from a [JSON schema](https://json-schema.org/) file in order to edit the meatadata (i.e. properties) of your entities.
+* <i class="las la-file-import"/> Create a new data layer by import existing data from a [GeoJSON](https://geojson.org/) file.
 * <i class="las la-eye-dropper"/> Probe weather forecast data from active prediction models by selecting a specific location on the map.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the FAB tutorial to get more details
