@@ -125,7 +125,8 @@ module.exports = {
         frameAncestors: [
           'http://localhost:*',
           'https://*.kalisio.xyz',
-          'https://*.kalisio.com'
+          'https://*.kalisio.com',
+          'https://*.kalisio.fr'
         ]
       }
     },
