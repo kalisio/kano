@@ -362,10 +362,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@kalisio/feathers-distributed@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-1.0.1.tgz#45c14324b7d5080d85b8f429b32171378fbda278"
-  integrity sha512-rvzprNWPwIeTe3yZxjJrf30h5xkUq3dFYBA+KMSJzXxYZySdw+ARb9DcZYvY7Gu1vByetYAEwMkjQumkOxirxQ==
+"@kalisio/feathers-distributed@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-1.0.3.tgz#936788dba5c6739ba477d563902ea0d058adaf11"
+  integrity sha512-jcwFp9zk3reWLwuGuscmf8hkFxe6JIOtGb5uZHc2f0LeRNAdWBt4hKLNyqEEiCj6w0qhyETEMDHdY7svPUpCXw==
   dependencies:
     "@feathersjs/commons" "^1.4.0"
     "@feathersjs/errors" "^3.3.0"
