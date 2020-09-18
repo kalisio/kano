@@ -124,7 +124,7 @@
     "mime-types-browser": "^0.0.3",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
-    "papaparse": "^4.6.1",
+    "papaparse": "^5.2.0",
     "password-generator": "^2.2.0",
     "pinch-zoom-element": "^1.1.1",
     "pixi.js": "5.0.4",
