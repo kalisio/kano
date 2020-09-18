@@ -1546,7 +1546,7 @@
     "@turf/helpers" "6.x"
     "@turf/invariant" "6.x"
 
-"@turf/explode@^6.0.0":
+"@turf/explode@^6.2.0-alpha.2":
   version "6.2.0-alpha.2"
   resolved "https://registry.yarnpkg.com/@turf/explode/-/explode-6.2.0-alpha.2.tgz#dd6eb9175008c3bd3be0dd3a1d5f1c264402838b"
   integrity sha512-RTMNdMso2GWH6XJW56cc99FJrufNMwoY+ivVAZpTqHnr46gWe04OHq/7DkXXxU3i3t+c67rmME5A1guTUkxbog==
