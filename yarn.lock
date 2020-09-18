@@ -1546,9 +1546,22 @@
     "@turf/helpers" "6.x"
     "@turf/invariant" "6.x"
 
+"@turf/explode@^6.0.0":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/explode/-/explode-6.2.0-alpha.2.tgz#dd6eb9175008c3bd3be0dd3a1d5f1c264402838b"
+  integrity sha512-RTMNdMso2GWH6XJW56cc99FJrufNMwoY+ivVAZpTqHnr46gWe04OHq/7DkXXxU3i3t+c67rmME5A1guTUkxbog==
+  dependencies:
+    "@turf/helpers" "^6.2.0-alpha.2"
+    "@turf/meta" "^6.2.0-alpha.2"
+
 "@turf/helpers@6.x", "@turf/helpers@^6.0.0":
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.1.4.tgz#d6fd7ebe6782dd9c87dca5559bda5c48ae4c3836"
+
+"@turf/helpers@^6.2.0-alpha.2":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.2.0-alpha.2.tgz#3a17ecd4e906bc5e3ceedd68664341d25b514da3"
+  integrity sha512-YW7Tk75XTbJh3ZBwdo29QE/N4HjxApNV4ZUVJaukBm2Kns/sGMJh9RQPuITOlB5+tW6FUVTMlZYK1PejiVNeAQ==
 
 "@turf/invariant@6.x":
   version "6.1.2"
@@ -1562,6 +1575,13 @@
   integrity sha512-VA7HJkx7qF1l3+GNGkDVn2oXy4+QoLP6LktXAaZKjuT1JI0YESat7quUkbCMy4zP9lAUuvS4YMslLyTtr919FA==
   dependencies:
     "@turf/helpers" "6.x"
+
+"@turf/meta@^6.2.0-alpha.2":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-6.2.0-alpha.2.tgz#8234b31ab277ccb9e2b779ec3595af32135ea291"
+  integrity sha512-Hk2gnRSto/yiT6oO0bHYPiOvWTsgb1dlQm9cTcrrR068Zlfzx/7cJV5Me2Ls085rMBMlT376CgaHySexXVRrIg==
+  dependencies:
+    "@turf/helpers" "^6.2.0-alpha.2"
 
 "@types/body-parser@*":
   version "1.17.0"
