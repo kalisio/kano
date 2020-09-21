@@ -362,15 +362,16 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@kalisio/feathers-distributed@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-1.0.1.tgz#45c14324b7d5080d85b8f429b32171378fbda278"
-  integrity sha512-rvzprNWPwIeTe3yZxjJrf30h5xkUq3dFYBA+KMSJzXxYZySdw+ARb9DcZYvY7Gu1vByetYAEwMkjQumkOxirxQ==
+"@kalisio/feathers-distributed@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-1.0.4.tgz#53f9ab1377bd440e3d5f7c76f29d9792a427e967"
+  integrity sha512-5lPI3OtYnj1WOVfAESFPAcagseSamFfrHzGWU42Z6viMkJ+ycKxo8XkxweRjBkF0OQYwWzp0nXam7bLaAfLwzg==
   dependencies:
     "@feathersjs/commons" "^1.4.0"
     "@feathersjs/errors" "^3.3.0"
     cote "^1.0.0"
     debug "^4.1.0"
+    uuid "^8.2.0"
 
 "@slack/types@^1.1.0":
   version "1.3.0"
@@ -5694,6 +5695,11 @@ uuid@^3.3.3:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.2.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
+  integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
 
 v8-compile-cache@^2.0.3:
   version "2.1.0"
