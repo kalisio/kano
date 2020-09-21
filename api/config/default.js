@@ -146,7 +146,8 @@ module.exports = {
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
     authentication: false,
-    key: 'kano'
+    key: 'kano',
+    healthcheckPath: API_PREFIX + '/distribution/'
   },
   paginate: {
     default: 10,
