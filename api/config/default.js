@@ -132,7 +132,7 @@ module.exports = {
     },
     frameguard: false
   },
-  distribution: { // Distribute data & alert services
+  distribution: { // Distribute data services
     services: (service) => service.path.includes('catalog') ||
                             service.path.includes('hubeau-stations') ||
                             service.path.includes('hubeau-observations') ||
