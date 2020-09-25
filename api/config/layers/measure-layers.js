@@ -489,7 +489,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'value')) { properties.value.toFixed(2) %> nSv/h</br>
+        template: `<% if (_.has(properties, 'value')) { %><%= properties.value.toFixed(2) %> nSv/h</br>
                    <%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
       }
     },
