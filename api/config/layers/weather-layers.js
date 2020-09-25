@@ -496,16 +496,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       particleMultiplier: 0.001,
       displayValues: false,
       'icon-classes': 'fas fa-wind',
-      zIndex: forecastZIndex
-      /*
-      displayOptions: {
-        velocityType: 'Wind',
-        position: 'bottomright',
-        emptyString: 'No wind data',
-        angleConvention: 'meteoCW',
-        speedUnit: 'm/s'
-      }
-      */
+      zIndex: forecastZIndex,
+      minZoom: 7
     }
   },
   {
@@ -613,7 +605,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,
       'icon-classes': 'fas fa-wind',
-      zIndex: forecastZIndex
+      zIndex: forecastZIndex,
+      minZoom: 7
     }
   },
   {
@@ -732,7 +725,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,
       'icon-classes': 'fas fa-cloud-rain',
-      zIndex: forecastZIndex
+      zIndex: forecastZIndex,
+      minZoom: 7
     }
   },
   {
@@ -850,7 +844,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
-      zIndex: forecastZIndex
+      zIndex: forecastZIndex,
+      minZoom: 7
     }
   }]
 }
