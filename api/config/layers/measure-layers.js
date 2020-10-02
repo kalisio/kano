@@ -198,10 +198,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'H')) { %>H = <%= properties.H.toFixed(2) %> m\n<% }` +
-                  `if (_.has(feature, 'time.H')) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'Q')) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }` +
-                  `if (_.has(feature, 'time.Q')) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>`
+        template: '<% if (_.has(properties, \'H\')) { %>H = <%= properties.H.toFixed(2) %> m\n<% }' +
+                  'if (_.has(feature, \'time.H\')) { %><%= new Date(feature.time.H).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'Q\')) { %>Q = <%= properties.Q.toFixed(2) %> m3/s\n<% }' +
+                  'if (_.has(feature, \'time.Q\')) { %><%= new Date(feature.time.Q).toLocaleString() %>\n<% } %>'
       }
     }
   },
@@ -399,20 +399,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'pm25')) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³\n<% }` +
-                  `if (_.has(feature, 'time.pm25')) { %><%= new Date(feature.time.pm25).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'pm10')) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³\n<% }` +
-                  `if (_.has(feature, 'time.pm10')) { %><%= new Date(feature.time.pm10).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'so2')) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm\n<% }` +
-                  `if (_.has(feature, 'time.so2')) { %></br><%= new Date(feature.time.so2).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'no2')) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm\n<% }` +
-                  `if (_.has(feature, 'time.no2')) { %></br><%= new Date(feature.time.no2).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'o3')) { %>O3 = <%= properties.o3.toFixed(2) %> ppm\n<% }` +
-                  `if (_.has(feature, 'time.o3')) { %></br><%= new Date(feature.time.o3).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'co')) { %>CO = <%= properties.co.toFixed(2) %> ppm\n<% }` +
-                  `if (_.has(feature, 'time.co')) { %></br><%= new Date(feature.time.co).toLocaleString() %>\n<% }` +
-                  `if (_.has(properties, 'bc')) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³\n<% }` +
-                  `if (_.has(feature, 'time.bc')) { %></br><%= new Date(feature.time.bc).toLocaleString() %>\n<% } %>`
+        template: '<% if (_.has(properties, \'pm25\')) { %>PM2.5 = <%= properties.pm25.toFixed(2) %> µg/m³\n<% }' +
+                  'if (_.has(feature, \'time.pm25\')) { %><%= new Date(feature.time.pm25).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'pm10\')) { %>PM10 = <%= properties.pm10.toFixed(2) %> µg/m³\n<% }' +
+                  'if (_.has(feature, \'time.pm10\')) { %><%= new Date(feature.time.pm10).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'so2\')) { %>SO2 = <%= properties.so2.toFixed(2) %> ppm\n<% }' +
+                  'if (_.has(feature, \'time.so2\')) { %></br><%= new Date(feature.time.so2).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'no2\')) { %>NO2 = <%= properties.no2.toFixed(2) %> ppm\n<% }' +
+                  'if (_.has(feature, \'time.no2\')) { %></br><%= new Date(feature.time.no2).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'o3\')) { %>O3 = <%= properties.o3.toFixed(2) %> ppm\n<% }' +
+                  'if (_.has(feature, \'time.o3\')) { %></br><%= new Date(feature.time.o3).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'co\')) { %>CO = <%= properties.co.toFixed(2) %> ppm\n<% }' +
+                  'if (_.has(feature, \'time.co\')) { %></br><%= new Date(feature.time.co).toLocaleString() %>\n<% }' +
+                  'if (_.has(properties, \'bc\')) { %>BC = <%= properties.bc.toFixed(2) %> µg/m³\n<% }' +
+                  'if (_.has(feature, \'time.bc\')) { %></br><%= new Date(feature.time.bc).toLocaleString() %>\n<% } %>'
       }
     }
   },
@@ -505,8 +505,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'value')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n` +
-                  `<%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>`
+        template: '<% if (_.has(properties, \'value\')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n' +
+                  '<%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
       }
     }
   },
@@ -545,250 +545,250 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }
   },
   {
-    name: "Layers.GSMAP_RAIN",
-    description: "Layers.GSMAP_RAIN_DESCRIPTION",
+    name: 'Layers.GSMAP_RAIN',
+    description: 'Layers.GSMAP_RAIN_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          GSMAP_RAIN: "Précipitations",
-          GSMAP_RAIN_DESCRIPTION: "Horaire"
+          GSMAP_RAIN: 'Précipitations',
+          GSMAP_RAIN_DESCRIPTION: 'Horaire'
         }
       },
       en: {
         Layers: {
-          GSMAP_RAIN: "Precipitation",
-          GSMAP_RAIN_DESCRIPTION: "Hourly"
+          GSMAP_RAIN: 'Precipitation',
+          GSMAP_RAIN_DESCRIPTION: 'Hourly'
         }
       }
     },
-    tags: ["measure"],
-    iconUrl: "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png",
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "precipitations",
-        label: "Variables.PRECIPITATIONS",
-        units: ["mm/hr"],
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm/hr'],
         range: [0, 30],
         chartjs: {
-          backgroundColor: "rgba(54, 162, 235, 128)",
-          borderColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
           fill: false
         },
         chromajs: {
           scale: [
-            "#000096",
-            "#0064ff",
-            "#00b4ff",
-            "#33db80",
-            "#9beb4a",
-            "#ffeb00",
-            "#ffb300",
-            "#ff6400",
-            "#eb1e00",
-            "#af0000"
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
           ],
           classes: [0.1, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0]
         }
       }
     ],
     leaflet: {
-      type: "gsmapLayer",
+      type: 'gsmapLayer',
       opacity: 0.4,
-      product: "rain"
+      product: 'rain'
     }
   },
   {
-    name: "Layers.GSMAP_RAIN12",
-    description: "Layers.GSMAP_RAIN12_DESCRIPTION",
+    name: 'Layers.GSMAP_RAIN12',
+    description: 'Layers.GSMAP_RAIN12_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          GSMAP_RAIN12: "Précipitations sur 12h",
-          GSMAP_RAIN12_DESCRIPTION: "Accumulées"
+          GSMAP_RAIN12: 'Précipitations sur 12h',
+          GSMAP_RAIN12_DESCRIPTION: 'Accumulées'
         }
       },
       en: {
         Layers: {
-          GSMAP_RAIN12: "Precipitation over 12h",
-          GSMAP_RAIN12_DESCRIPTION: "Accumulated"
+          GSMAP_RAIN12: 'Precipitation over 12h',
+          GSMAP_RAIN12_DESCRIPTION: 'Accumulated'
         }
       }
     },
-    tags: ["measure"],
-    iconUrl: "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png",
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation12: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "precipitations",
-        label: "Variables.PRECIPITATIONS",
-        units: ["mm"],
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
         range: [0, 300],
         chartjs: {
-          backgroundColor: "rgba(54, 162, 235, 128)",
-          borderColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
           fill: false
         },
         chromajs: {
           scale: [
-            "#000096",
-            "#0064ff",
-            "#00b4ff",
-            "#33db80",
-            "#9beb4a",
-            "#ffeb00",
-            "#ffb300",
-            "#ff6400",
-            "#eb1e00",
-            "#af0000"
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
           ],
           classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
         }
       }
     ],
     leaflet: {
-      type: "gsmapLayer",
+      type: 'gsmapLayer',
       opacity: 0.4,
-      product: "rain12"
+      product: 'rain12'
     }
   },
   {
-    name: "Layers.GSMAP_RAIN24",
-    description: "Layers.GSMAP_RAIN24_DESCRIPTION",
+    name: 'Layers.GSMAP_RAIN24',
+    description: 'Layers.GSMAP_RAIN24_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          GSMAP_RAIN24: "Précipitations sur 24h",
-          GSMAP_RAIN24_DESCRIPTION: "Accumulées"
+          GSMAP_RAIN24: 'Précipitations sur 24h',
+          GSMAP_RAIN24_DESCRIPTION: 'Accumulées'
         }
       },
       en: {
         Layers: {
-          GSMAP_RAIN24: "Precipitation over 24h",
-          GSMAP_RAIN24_DESCRIPTION: "Accumulated"
+          GSMAP_RAIN24: 'Precipitation over 24h',
+          GSMAP_RAIN24_DESCRIPTION: 'Accumulated'
         }
       }
     },
-    tags: ["measure"],
-    iconUrl: "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png",
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation24: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "precipitations",
-        label: "Variables.PRECIPITATIONS",
-        units: ["mm"],
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
         range: [0, 300],
         chartjs: {
-          backgroundColor: "rgba(54, 162, 235, 128)",
-          borderColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
           fill: false
         },
         chromajs: {
           scale: [
-            "#000096",
-            "#0064ff",
-            "#00b4ff",
-            "#33db80",
-            "#9beb4a",
-            "#ffeb00",
-            "#ffb300",
-            "#ff6400",
-            "#eb1e00",
-            "#af0000"
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
           ],
           classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
         }
       }
     ],
     leaflet: {
-      type: "gsmapLayer",
+      type: 'gsmapLayer',
       opacity: 0.4,
-      product: "rain24"
+      product: 'rain24'
     }
   },
   {
-    name: "Layers.GSMAP_RAIN72",
-    description: "Layers.GSMAP_RAIN72_DESCRIPTION",
+    name: 'Layers.GSMAP_RAIN72',
+    description: 'Layers.GSMAP_RAIN72_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          GSMAP_RAIN72: "Précipitations sur 72h",
-          GSMAP_RAIN72_DESCRIPTION: "Accumulées"
+          GSMAP_RAIN72: 'Précipitations sur 72h',
+          GSMAP_RAIN72_DESCRIPTION: 'Accumulées'
         }
       },
       en: {
         Layers: {
-          GSMAP_RAIN72: "Precipitation over 72h",
-          GSMAP_RAIN72_DESCRIPTION: "Accumulated"
+          GSMAP_RAIN72: 'Precipitation over 72h',
+          GSMAP_RAIN72_DESCRIPTION: 'Accumulated'
         }
       }
     },
-    tags: ["measure"],
-    iconUrl: "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png",
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation72: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "precipitations",
-        label: "Variables.PRECIPITATIONS",
-        units: ["mm"],
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
         range: [0, 600],
         chartjs: {
-          backgroundColor: "rgba(54, 162, 235, 128)",
-          borderColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
           fill: false
         },
         chromajs: {
           scale: [
-            "#000096",
-            "#0064ff",
-            "#00b4ff",
-            "#33db80",
-            "#9beb4a",
-            "#ffeb00",
-            "#ffb300",
-            "#ff6400",
-            "#eb1e00",
-            "#af0000"
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
           ],
           classes: [0, 5, 10, 30, 50, 100, 200, 300, 400, 500, 600]
         }
       }
     ],
     leaflet: {
-      type: "gsmapLayer",
+      type: 'gsmapLayer',
       opacity: 0.4,
-      product: "rain72"
+      product: 'rain72'
     }
   },
   {
-    name: "Layers.GSMAP_CLOUD",
-    description: "Layers.GSMAP_CLOUD_DESCRIPTION",
+    name: 'Layers.GSMAP_CLOUD',
+    description: 'Layers.GSMAP_CLOUD_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          GSMAP_CLOUD: "Couverture nuageuse",
-          GSMAP_CLOUD_DESCRIPTION: ""
+          GSMAP_CLOUD: 'Couverture nuageuse',
+          GSMAP_CLOUD_DESCRIPTION: ''
         }
       },
       en: {
         Layers: {
-          GSMAP_CLOUD: "Cloud cover",
-          GSMAP_CLOUD_DESCRIPTION: ""
+          GSMAP_CLOUD: 'Cloud cover',
+          GSMAP_CLOUD_DESCRIPTION: ''
         }
       }
     },
-    tags: ["measure"],
-    iconUrl: "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png",
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Cloud: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     leaflet: {
-      type: "gsmapLayer",
+      type: 'gsmapLayer',
       opacity: 0.6,
-      product: "ir"
+      product: 'ir'
     }
   }]
 }

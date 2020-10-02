@@ -24,8 +24,8 @@ module.exports = {
       let appId = config.appId
       // Check if the token contains the appId for the gateway
       // => iframe integration use case
-      if (_.has(hook, `params.payload.appId`)) {
-        appId = _.get(hook, `params.payload.appId`)
+      if (_.has(hook, 'params.payload.appId')) {
+        appId = _.get(hook, 'params.payload.appId')
       } else {
         // Loop over auth providers and select the one used to login if any
         for (const provider of hook.app.authenticationProviders) {
@@ -35,11 +35,13 @@ module.exports = {
           }
         }
       }
-      if (appId) await coreHooks.createJWT({
-        name: 'gatewayToken',
-        jwt: user => ({ subject: appId }),
-        payload: user => ({ userId: (user ? user._id : undefined) })
-      })(hook)
+      if (appId) {
+        await coreHooks.createJWT({
+          name: 'gatewayToken',
+          jwt: user => ({ subject: appId }),
+          payload: user => ({ userId: (user ? user._id : undefined) })
+        })(hook)
+      }
       return hook
     })],
     update: [],
