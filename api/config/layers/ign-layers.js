@@ -27,7 +27,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'tileLayer',
       source: `${tmsUrl}/ign-ortho@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
-      maxNativeZoom: 19
+      maxNativeZoom: 19,
+      tms: true
     },
     cesium: {
       type: 'TileMapService',
@@ -63,7 +64,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'tileLayer',
       source: `${tmsUrl}/ign-scan-standard@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
       type: 'TileMapService',
@@ -99,7 +101,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'tileLayer',
       source: `${tmsUrl}/ign-scan-classic@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
       type: 'TileMapService',
