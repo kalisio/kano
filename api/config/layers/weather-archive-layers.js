@@ -2,56 +2,56 @@ const forecastZIndex = 300
 
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
-    name: "Layers.S3_ARCHIVE_PRECIPITATIONS",
-    description: "Layers.PRECIPITATIONS_DESCRIPTION",
+    name: 'Layers.S3_ARCHIVE_PRECIPITATIONS',
+    description: 'Layers.PRECIPITATIONS_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_PRECIPITATIONS: "Précipitations",
-          PRECIPITATIONS_DESCRIPTION: "Accumulation pour 3h"
+          S3_ARCHIVE_PRECIPITATIONS: 'Précipitations',
+          PRECIPITATIONS_DESCRIPTION: 'Accumulation pour 3h'
         },
         Variables: {
-          PRECIPITATIONS: "Précipitations"
+          PRECIPITATIONS: 'Précipitations'
         }
       },
       en: {
         Layers: {
-          S3_ARCHIVE_PRECIPITATIONS: "Precipitations",
-          PRECIPITATIONS_DESCRIPTION: "Accumulation per 3h"
+          S3_ARCHIVE_PRECIPITATIONS: 'Precipitations',
+          PRECIPITATIONS_DESCRIPTION: 'Accumulation per 3h'
         },
         Variables: {
-          PRECIPITATIONS: "Precipitations"
+          PRECIPITATIONS: 'Precipitations'
         }
       }
     },
-    tags: ["weather", "archive"],
+    tags: ['weather', 'archive'],
     iconUrl:
-    "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png",
+    'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
     attribution:
     'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "precipitations",
-        label: "Variables.PRECIPITATIONS",
-        units: ["mm"],
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
         range: [0, 300],
         chartjs: {
-          backgroundColor: "rgba(54, 162, 235, 128)",
-          borderColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
           fill: false
         },
         chromajs: {
-          scale: "BuPu",
+          scale: 'BuPu',
           classes: [0, 1, 2, 4, 10, 25, 50, 100, 300]
         }
       }
     ],
     meteo_model: [
       {
-        model: "gfs-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'gfs-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -61,9 +61,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -73,9 +73,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-europe",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-europe',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -85,9 +85,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arome-france",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arome-france',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -98,56 +98,56 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     leaflet: {
-      type: "tiledMeshLayer",
+      type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
-      "icon-classes": "fas fa-cloud-rain",
+      'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
       minZoom: 7
     }
   },
   {
-    name: "Layers.S3_ARCHIVE_TEMPERATURE",
-    description: "Layers.TEMPERATURE_DESCRIPTION",
+    name: 'Layers.S3_ARCHIVE_TEMPERATURE',
+    description: 'Layers.TEMPERATURE_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_TEMPERATURE: "Température",
-          TEMPERATURE_DESCRIPTION: "Température moyenne"
+          S3_ARCHIVE_TEMPERATURE: 'Température',
+          TEMPERATURE_DESCRIPTION: 'Température moyenne'
         },
         Variables: {
-          TEMPERATURE: "Température"
+          TEMPERATURE: 'Température'
         }
       },
       en: {
         Layers: {
-          S3_ARCHIVE_TEMPERATURE: "Temperature",
-          TEMPERATURE_DESCRIPTION: "Mean temperature"
+          S3_ARCHIVE_TEMPERATURE: 'Temperature',
+          TEMPERATURE_DESCRIPTION: 'Mean temperature'
         },
         Variables: {
-          TEMPERATURE: "Temperature"
+          TEMPERATURE: 'Temperature'
         }
       }
     },
-    tags: ["weather", "archive"],
+    tags: ['weather', 'archive'],
     iconUrl:
-    "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png",
+    'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
     attribution:
     'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "temperature",
-        label: "Variables.TEMPERATURE",
-        units: ["degC", "degF", "K"],
+        name: 'temperature',
+        label: 'Variables.TEMPERATURE',
+        units: ['degC', 'degF', 'K'],
         range: [-20, 50],
         chartjs: {
-          backgroundColor: "rgba(255, 215, 0, 128)",
-          borderColor: "rgb(255, 215, 0)",
+          backgroundColor: 'rgba(255, 215, 0, 128)',
+          borderColor: 'rgb(255, 215, 0)',
           fill: false
         },
         chromajs: {
-          scale: "RdBu",
+          scale: 'RdBu',
           invertScale: true,
           domain: [-20, 50]
         }
@@ -164,9 +164,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        }, */
     meteo_model: [
       {
-        model: "gfs-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'gfs-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -176,9 +176,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -188,9 +188,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-europe",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-europe',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -200,9 +200,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arome-france",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arome-france',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -213,10 +213,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     leaflet: {
-      type: "tiledMeshLayer",
+      type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
-      "icon-classes": "fas fa-temperature-high",
+      'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
       minZoom: 7
     }
@@ -271,9 +271,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     meteo_model: [
       {
-        model: "gfs-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'gfs-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -283,9 +283,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-world",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-world',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -295,9 +295,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arpege-europe",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arpege-europe',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -307,9 +307,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {}
       },
       {
-        model: "arome-france",
-        from: "P-60D",
-        to: "PT-6H",
+        model: 'arome-france',
+        from: 'P-60D',
+        to: 'PT-6H',
         dynprops: {
           url: {
             strTemplate:
@@ -320,75 +320,75 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     leaflet: {
-      type: "tiledMeshLayer",
+      type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
-      "icon-classes": "fas fa-temperature-high",
+      'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
       minZoom: 7
     }
   },
   {
-    name: "Layers.S3_ARCHIVE_WIND",
-    description: "Layers.WIND_DESCRIPTION",
+    name: 'Layers.S3_ARCHIVE_WIND',
+    description: 'Layers.WIND_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_WIND: "Vent",
-          WIND_DESCRIPTION: "Vitesse et direction"
+          S3_ARCHIVE_WIND: 'Vent',
+          WIND_DESCRIPTION: 'Vitesse et direction'
         },
         Variables: {
-          WIND_SPEED: "Vitesse",
-          WIND_DIRECTION: "Direction"
+          WIND_SPEED: 'Vitesse',
+          WIND_DIRECTION: 'Direction'
         },
         Levels: {
-          PRESSURE: "Pression"
+          PRESSURE: 'Pression'
         }
       },
       en: {
         Layers: {
-          S3_ARCHIVE_WIND: "Wind",
-          WIND_DESCRIPTION: "Speed and direction"
+          S3_ARCHIVE_WIND: 'Wind',
+          WIND_DESCRIPTION: 'Speed and direction'
         },
         Variables: {
-          WIND_SPEED: "Speed",
-          WIND_DIRECTION: "Direction"
+          WIND_SPEED: 'Speed',
+          WIND_DIRECTION: 'Direction'
         },
         Levels: {
-          PRESSURE: "Pressure"
+          PRESSURE: 'Pressure'
         }
       }
     },
-    tags: ["weather", "archive"],
+    tags: ['weather', 'archive'],
     iconUrl:
-    "https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg",
+    'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
     attribution:
     'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
-    type: "OverlayLayer",
+    type: 'OverlayLayer',
     variables: [
       {
-        name: "windSpeed",
-        label: "Variables.WIND_SPEED",
-        units: ["m/s", "km/h", "kt"],
+        name: 'windSpeed',
+        label: 'Variables.WIND_SPEED',
+        units: ['m/s', 'km/h', 'kt'],
         range: [0, 60],
         chartjs: {
-          backgroundColor: "rgba(255, 159, 64, 128)",
-          borderColor: "rgb(255, 159, 64)",
+          backgroundColor: 'rgba(255, 159, 64, 128)',
+          borderColor: 'rgb(255, 159, 64)',
           fill: false
         },
         chromajs: {
-          scale: "RdYlBu",
+          scale: 'RdYlBu',
           domain: [20, 3]
         }
       },
       {
-        name: "windDirection",
-        label: "Variables.WIND_DIRECTION",
-        units: ["deg"],
+        name: 'windDirection',
+        label: 'Variables.WIND_DIRECTION',
+        units: ['deg'],
         range: [0, 360],
         chartjs: {
-          backgroundColor: "rgba(191, 191, 63, 128)",
-          borderColor: "rgb(191, 191, 63)",
+          backgroundColor: 'rgba(191, 191, 63, 128)',
+          borderColor: 'rgb(191, 191, 63)',
           fill: false
         }
       }
@@ -405,9 +405,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     u: {
       meteo_model: [
         {
-          model: "gfs-world",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'gfs-world',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -417,9 +417,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arpege-world",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arpege-world',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -429,9 +429,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arpege-europe",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arpege-europe',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -441,9 +441,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arome-france",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arome-france',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -457,9 +457,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     v: {
       meteo_model: [
         {
-          model: "gfs-world",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'gfs-world',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -469,9 +469,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arpege-world",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arpege-world',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -481,9 +481,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arpege-europe",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arpege-europe',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -493,9 +493,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           geotiff: {}
         },
         {
-          model: "arome-france",
-          from: "P-60D",
-          to: "PT-6H",
+          model: 'arome-france',
+          from: 'P-60D',
+          to: 'PT-6H',
           dynprops: {
             url: {
               strTemplate:
@@ -507,12 +507,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ]
     },
     leaflet: {
-      type: "tiledWindLayer",
+      type: 'tiledWindLayer',
       lineWidth: 4,
       frameRate: 20,
       particleMultiplier: 0.001,
       displayValues: false,
-      "icon-classes": "fas fa-wind",
+      'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
       minZoom: 7
     }

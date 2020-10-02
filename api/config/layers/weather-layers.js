@@ -485,7 +485,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             model: { strTemplate: '<%- model.name %>' }
           }
         }
-      ],
+      ]
     },
     leaflet: {
       type: 'tiledWindLayer',
@@ -555,7 +555,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         dynprops: {
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
           model: { strTemplate: '<%- model.name %>' }
-        },
+        }
       },
       {
         model: 'arpege-world',
@@ -600,7 +600,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     leaflet: {
       type: 'tiledMeshLayer',
-      resolutionScale: [ 2.0, 2.0 ],
+      resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
@@ -720,7 +720,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     leaflet: {
       type: 'tiledMeshLayer',
-      resolutionScale: [ 2.0, 2.0 ],
+      resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
@@ -839,7 +839,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     leaflet: {
       type: 'tiledMeshLayer',
-      resolutionScale: [ 2.0, 2.0 ],
+      resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
