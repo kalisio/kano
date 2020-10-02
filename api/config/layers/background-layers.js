@@ -5,13 +5,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSM_BRIGHT: 'OpenStreetMap (Clair)',
+          OSM_BRIGHT: 'Plan',
           OSM_BRIGHT_DESCRIPTION: 'Données OpenStreetMap (Style clair)'
         }
       },
       en: {
         Layers: {
-          OSM_BRIGHT: 'OpenStreeMap (Bright)',
+          OSM_BRIGHT: 'Plan',
           OSM_BRIGHT_DESCRIPTION: 'OpenStreeMap data (bright style)'
         }
       }
@@ -42,13 +42,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSM_DARK: 'OpenStreetMap (Sombre)',
+          OSM_DARK: 'Plan (Sombre)',
           OSM_DARK_DESCRIPTION: 'Données OpenStreetMap (Style sombre)'
         }
       },
       en: {
         Layers: {
-          OSM_DARK: 'OpenStreeMap (Dark)',
+          OSM_DARK: 'Plan (Dark)',
           OSM_DARK_DESCRIPTION: 'OpenStreeMap data (dark style)'
         }
       }
@@ -78,13 +78,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSMT_BRIGHT: 'OpenStreetMap et Terrain (Clair)',
+          OSMT_BRIGHT: 'Relief',
           OSMT_BRIGHT_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style clair)'
         }
       },
       en: {
         Layers: {
-          OSMT_BRIGHT: 'OpenStreeMap & Terrain (Bright)',
+          OSMT_BRIGHT: 'Relief',
           OSMT_BRIGHT_DESCRIPTION: 'OpenStreeMap data and 30m resolution terrain data (bright style)'
         }
       }
@@ -115,13 +115,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSMT_DARK: 'OpenStreetMap et Terrain (Sombre)',
+          OSMT_DARK: 'Relief (Sombre)',
           OSMT_DARK_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style sombre)'
         }
       },
       en: {
         Layers: {
-          OSMT_DARK: 'OpenStreeMap & Terrain (Dark)',
+          OSMT_DARK: 'Relief (Dark)',
           OSMT_DARK_DESCRIPTION: 'OpenStreeMap data and 30m resolution terrain data (dark style)'
         }
       }
@@ -147,40 +147,39 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }
   },
   {
-    name: 'Layers.MOSAIC',
-    description: 'Layers.MOSAIC_DESCRIPTION',
+    name: 'Layers.IMAGERY',
+    description: 'Layers.IMAGERY_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          MOSAIC: 'Mosaique',
-          MOSAIC_DESCRIPTION: 'Données Sentinel 2, IGN BD Ortho 5m et OpenStreetMap fusionnées'
+          MOSAIC: 'Imagerie',
+          MOSAIC_DESCRIPTION: 'Données Sentinel 2 et IGN BD Ortho fusionnées'
         }
       },
       en: {
         Layers: {
-          MOSAIC: 'Mosaic',
-          MOSAIC_DESCRIPTION: 'Merged Sentinel 2, IGN BD Ortho 5m and OpenStreetMap data'
+          MOSAIC: 'Imagery',
+          MOSAIC_DESCRIPTION: 'Merged Sentinel 2 and IGN BD Ortho'
         }
       }
     },
     tags: [
-      'street',
       'imagery'
     ],
-    iconUrl: `${tmsUrl}/mosaic@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    attribution: 'BMNG by <a href="https://www.nasa.gov/">Nasa</a>, BD Ortho <a href="http://www.ign.fr/">by IGN</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${tmsUrl}/mosaic@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
       maxNativeZoom: 18,
       tms: true
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/mosaic@GLOBAL_WEBMERCATOR`,
+      url: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },

@@ -1,14 +1,13 @@
 const forecastZIndex = 300
 
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
-  return [
-  {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+  return [{
     name: "Layers.S3_ARCHIVE_PRECIPITATIONS",
     description: "Layers.PRECIPITATIONS_DESCRIPTION",
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_PRECIPITATIONS: "Précipitations (S3)",
+          S3_ARCHIVE_PRECIPITATIONS: "Précipitations",
           PRECIPITATIONS_DESCRIPTION: "Accumulation pour 3h"
         },
         Variables: {
@@ -17,7 +16,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          S3_ARCHIVE_PRECIPITATIONS: "Precipitations (S3)",
+          S3_ARCHIVE_PRECIPITATIONS: "Precipitations",
           PRECIPITATIONS_DESCRIPTION: "Accumulation per 3h"
         },
         Variables: {
@@ -113,7 +112,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_TEMPERATURE: "Température (S3)",
+          S3_ARCHIVE_TEMPERATURE: "Température",
           TEMPERATURE_DESCRIPTION: "Température moyenne"
         },
         Variables: {
@@ -122,7 +121,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          S3_ARCHIVE_TEMPERATURE: "Temperature (S3)",
+          S3_ARCHIVE_TEMPERATURE: "Temperature",
           TEMPERATURE_DESCRIPTION: "Mean temperature"
         },
         Variables: {
@@ -228,7 +227,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_GUST: 'Rafales (S3)',
+          S3_ARCHIVE_GUST: 'Rafales',
           GUST_DESCRIPTION: 'Vitesse maximale du vent'
         },
         Variables: {
@@ -237,7 +236,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          S3_ARCHIVE_GUST: 'Gust (S3)',
+          S3_ARCHIVE_GUST: 'Gust',
           GUST_DESCRIPTION: 'Maximum wind speed'
         },
         Variables: {
@@ -335,7 +334,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          S3_ARCHIVE_WIND: "Vent (S3)",
+          S3_ARCHIVE_WIND: "Vent",
           WIND_DESCRIPTION: "Vitesse et direction"
         },
         Variables: {
@@ -348,7 +347,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          S3_ARCHIVE_WIND: "Wind (S3)",
+          S3_ARCHIVE_WIND: "Wind",
           WIND_DESCRIPTION: "Speed and direction"
         },
         Variables: {

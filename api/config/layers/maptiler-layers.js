@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl }) {
   return [
     {
       name: 'Layers.MAPTILER_BRIGHT',
