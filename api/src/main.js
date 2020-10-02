@@ -26,7 +26,7 @@ async function runServer () {
 
 if (require.main === module) {
   if (process.env.LAUNCH_DELAY) {
-    console.log(`Waiting ${process.env.LAUNCH_DELAY / 1000}s for server to start...`)
+    console.log(`Waiting ${process.env.LAUNCH_DELAY/1000}s for server to start...`)
     setTimeout(() => {
       createServer()
       runServer()
