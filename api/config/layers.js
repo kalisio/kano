@@ -5,9 +5,9 @@ const debug = makeDebug('kano:layers')
 
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
-const wmtsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wmts' : 'https://mapproxy.' + kargoDomain + '/wmts')
+const wmtsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wmts' : 'https://mapcache.' + kargoDomain + '/mapcahce/wmts/1.0.0')
 const tmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/tms' : 'https://mapcache.' + kargoDomain + '/mapcache/tms/1.0.0')
-const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' : 'https://mapproxy.' + kargoDomain + '/wms')
+const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' : 'https://mapcache.' + kargoDomain + '/mapcache')
 const wcsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wcs' : 'https://mapserver.' + kargoDomain + '/cgi-bin/ows')
 const k2Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
 const maptilerUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/maptiler' : 'https://api.maptiler.com/')

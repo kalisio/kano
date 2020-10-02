@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl }) {
   return [
     {
       name: 'Layers.MAPTILER_BRIGHT',
@@ -6,13 +6,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl 
       i18n: {
         fr: {
           Layers: {
-            MAPTILER_BRIGHT: 'Maptiler (Clair)',
+            MAPTILER_BRIGHT: 'Plan (MapTiler)',
             MAPTILER_BRIGHT_DESCRIPTION: 'Données OpenStreetMap (Style clair)'
           }
         },
         en: {
           Layers: {
-            MAPTILER_BRIGHT: 'Maptiler (Bright)',
+            MAPTILER_BRIGHT: 'Plan (MapTiler)',
             MAPTILER_BRIGHT_DESCRIPTION: 'OpenStreeMap data (bright style)'
           }
         }
@@ -43,13 +43,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl 
       i18n: {
         fr: {
           Layers: {
-            MAPTILER_TOPO: 'Maptiler (Topographique)',
+            MAPTILER_TOPO: 'Relief (MapTiler)',
             MAPTILER_TOPO_DESCRIPTION: 'Données OpenStreetMap et terrain'
           }
         },
         en: {
           Layers: {
-            MAPTILER_TOPO: 'Maptiler (Topography)',
+            MAPTILER_TOPO: 'Relief (MapTiler)',
             MAPTILER_TOPO_DESCRIPTION: 'OpenStreeMap data and terrain'
           }
         }
@@ -80,13 +80,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl 
       i18n: {
         fr: {
           Layers: {
-            MAPTILER_HYBRID: 'Maptiler (Hybride)',
+            MAPTILER_HYBRID: 'Hybride (MapTiler)',
             MAPTILER_HYBRID_DESCRIPTION: 'Données satellite et OpenStreetMap fusionnées'
           }
         },
         en: {
           Layers: {
-            MAPTILER_HYBRID: 'Maptiler (Hybrid)',
+            MAPTILER_HYBRID: 'Hybrid (MapTiler)',
             MAPTILER_HYBRID_DESCRIPTION: 'Merged satellite and OpenStreetMap data'
           }
         }
