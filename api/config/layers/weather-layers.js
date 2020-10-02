@@ -1,14 +1,13 @@
 const forecastZIndex = 300
 
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
-  return [
-  {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+  return [{
     name: 'Layers.WIND',
     description: 'Layers.WIND_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          WIND: 'Vent',
+          WIND: 'Vent (non tuilé)',
           WIND_DESCRIPTION: 'Vitesse et direction'
         },
         Variables: {
@@ -21,7 +20,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          WIND: 'Wind',
+          WIND: 'Wind (not tiled)',
           WIND_DESCRIPTION: 'Speed and direction'
         },
         Variables: {
@@ -111,7 +110,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          GUST: 'Rafales',
+          GUST: 'Rafales (non tuilé)',
           GUST_DESCRIPTION: 'Vitesse maximale du vent'
         },
         Variables: {
@@ -120,7 +119,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          GUST: 'Gust',
+          GUST: 'Gust (not tiled)',
           GUST_DESCRIPTION: 'Maximum wind speed'
         },
         Variables: {
@@ -169,7 +168,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          PRECIPITATIONS: 'Précipitations',
+          PRECIPITATIONS: 'Précipitations (non tuilé)',
           PRECIPITATIONS_DESCRIPTION: 'Accumulation pour 3h'
         },
         Variables: {
@@ -178,7 +177,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          PRECIPITATIONS: 'Precipitations',
+          PRECIPITATIONS: 'Precipitations (not tiled)',
           PRECIPITATIONS_DESCRIPTION: 'Accumulation per 3h'
         },
         Variables: {
@@ -238,7 +237,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          TEMPERATURE: 'Température',
+          TEMPERATURE: 'Température (non tuilé)',
           TEMPERATURE_DESCRIPTION: 'Température moyenne'
         },
         Variables: {
@@ -247,7 +246,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          TEMPERATURE: 'Temperature',
+          TEMPERATURE: 'Temperature (not tiled)',
           TEMPERATURE_DESCRIPTION: 'Mean temperature'
         },
         Variables: {
@@ -300,14 +299,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       mesh: true
     }
   },
-
   {
     name: 'Layers.WIND_TILED',
     description: 'Layers.WIND_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          WIND_TILED: 'Vent (tuilé)',
+          WIND_TILED: 'Vent',
           WIND_DESCRIPTION: 'Vitesse et direction'
         },
         Variables: {
@@ -320,7 +318,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          WIND_TILED: 'Wind (tiled)',
+          WIND_TILED: 'Wind',
           WIND_DESCRIPTION: 'Speed and direction'
         },
         Variables: {
@@ -506,7 +504,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          GUST_TILED: 'Rafales (tuilé)',
+          GUST_TILED: 'Rafales',
           GUST_DESCRIPTION: 'Vitesse maximale du vent'
         },
         Variables: {
@@ -515,7 +513,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          GUST_TILED: 'Gust (tiled)',
+          GUST_TILED: 'Gust',
           GUST_DESCRIPTION: 'Maximum wind speed'
         },
         Variables: {
@@ -615,7 +613,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          PRECIPITATIONS_TILED: 'Précipitations (tuilé)',
+          PRECIPITATIONS_TILED: 'Précipitations',
           PRECIPITATIONS_DESCRIPTION: 'Accumulation pour 3h'
         },
         Variables: {
@@ -624,7 +622,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          PRECIPITATIONS_TILED: 'Precipitations (tiled)',
+          PRECIPITATIONS_TILED: 'Precipitations',
           PRECIPITATIONS_DESCRIPTION: 'Accumulation per 3h'
         },
         Variables: {
@@ -735,7 +733,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          TEMPERATURE_TILED: 'Température (tuilé)',
+          TEMPERATURE_TILED: 'Température',
           TEMPERATURE_DESCRIPTION: 'Température moyenne'
         },
         Variables: {
@@ -744,7 +742,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          TEMPERATURE_TILED: 'Temperature (tiled)',
+          TEMPERATURE_TILED: 'Temperature',
           TEMPERATURE_DESCRIPTION: 'Mean temperature'
         },
         Variables: {

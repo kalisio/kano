@@ -1,54 +1,17 @@
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
-  return [
-  {
-    name: 'Layers.S2',
-    description: 'Layers.S2_DESCRIPTION',
-    i18n: {
-      fr: {
-        Layers: {
-          S2: 'Sentinel 2',
-          S2_DESCRIPTION: 'Imagerie sans nuage Sentinel 2'
-        }
-      },
-      en: {
-        Layers: {
-          S2: 'Sentinel 2',
-          S2_DESCRIPTION: 'Sentinel 2 cloudless imagery'
-        }
-      }
-    },
-    tags: [
-      'imagery'
-    ],
-    iconUrl: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
-    icon: 'satellite',
-    attribution: 'Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>',
-    type: 'BaseLayer',
-    leaflet: {
-      type: 'tileLayer',
-      source: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
-      maxZoom: 18
-    },
-    cesium: {
-      type: 'OpenStreetMap',
-      isVisible: true,
-      fileExtension: 'jpeg',
-      url: `${wmtsUrl}/s2/GLOBAL_WEBMERCATOR`
-    }
-  },
-  {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+  return [{
     name: 'Layers.OSM_BRIGHT',
     description: 'Layers.OSM_BRIGHT_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          OSM_BRIGHT: 'OpenStreetMap (Clair)',
+          OSM_BRIGHT: 'Plan',
           OSM_BRIGHT_DESCRIPTION: 'Données OpenStreetMap (Style clair)'
         }
       },
       en: {
         Layers: {
-          OSM_BRIGHT: 'OpenStreeMap (Bright)',
+          OSM_BRIGHT: 'Plan',
           OSM_BRIGHT_DESCRIPTION: 'OpenStreeMap data (bright style)'
         }
       }
@@ -56,20 +19,21 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'street'
     ],
-    iconUrl: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
       isVisible: true,
-      source: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
-      type: 'OpenStreetMap',
-      url: `${wmtsUrl}/osm-bright/GLOBAL_WEBMERCATOR`
+      type: 'TileMapService',
+      url: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -78,13 +42,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSM_DARK: 'OpenStreetMap (Sombre)',
+          OSM_DARK: 'Plan (Sombre)',
           OSM_DARK_DESCRIPTION: 'Données OpenStreetMap (Style sombre)'
         }
       },
       en: {
         Layers: {
-          OSM_DARK: 'OpenStreeMap (Dark)',
+          OSM_DARK: 'Plan (Dark)',
           OSM_DARK_DESCRIPTION: 'OpenStreeMap data (dark style)'
         }
       }
@@ -92,19 +56,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'street'
     ],
-    iconUrl: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'streetview',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
-      type: 'OpenStreetMap',
-      url: `${wmtsUrl}/osm-dark/GLOBAL_WEBMERCATOR`
+      type: 'TileMapService',
+      url: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -113,13 +78,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSMT_BRIGHT: 'OpenStreetMap et Terrain (Clair)',
+          OSMT_BRIGHT: 'Relief',
           OSMT_BRIGHT_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style clair)'
         }
       },
       en: {
         Layers: {
-          OSMT_BRIGHT: 'OpenStreeMap & Terrain (Bright)',
+          OSMT_BRIGHT: 'Relief',
           OSMT_BRIGHT_DESCRIPTION: 'OpenStreeMap data and 30m resolution terrain data (bright style)'
         }
       }
@@ -128,19 +93,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'street',
       'terrain'
     ],
-    iconUrl: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
-      type: 'OpenStreetMap',
-      url: `${wmtsUrl}/osm-terrain-bright/GLOBAL_WEBMERCATOR`
+      type: 'TileMapService',
+      url: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR`
     }
   },
   {
@@ -149,13 +115,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSMT_DARK: 'OpenStreetMap et Terrain (Sombre)',
+          OSMT_DARK: 'Relief (Sombre)',
           OSMT_DARK_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style sombre)'
         }
       },
       en: {
         Layers: {
-          OSMT_DARK: 'OpenStreeMap & Terrain (Dark)',
+          OSMT_DARK: 'Relief (Dark)',
           OSMT_DARK_DESCRIPTION: 'OpenStreeMap data and 30m resolution terrain data (dark style)'
         }
       }
@@ -164,55 +130,56 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'street',
       'terrain'
     ],
-    iconUrl: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR/0/0/0.png`,
+    iconUrl: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR/0/0/0.png`,
     icon: 'terrain',
     attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      source: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
-      type: 'OpenStreetMap',
-      url: `${wmtsUrl}/osm-terrain-dark/GLOBAL_WEBMERCATOR`
+      type: 'TileMapService',
+      url: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR`
     }
   },
   {
-    name: 'Layers.MOSAIC',
-    description: 'Layers.MOSAIC_DESCRIPTION',
+    name: 'Layers.IMAGERY',
+    description: 'Layers.IMAGERY_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          MOSAIC: 'Mosaique',
-          MOSAIC_DESCRIPTION: 'Données Sentinel 2, IGN BD Ortho 5m et OpenStreetMap fusionnées'
+          IMAGERY: 'Imagerie',
+          IMAGERY_DESCRIPTION: 'Données PlanetSat et IGN BD Ortho fusionnées'
         }
       },
       en: {
         Layers: {
-          MOSAIC: 'Mosaic',
-          MOSAIC_DESCRIPTION: 'Merged Sentinel 2, IGN BD Ortho 5m and OpenStreetMap data'
+          IMAGERY: 'Imagery',
+          IMAGERY_DESCRIPTION: 'Merged PlanetSat and IGN BD Ortho'
         }
       }
     },
     tags: [
-      'street',
       'imagery'
     ],
-    iconUrl: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'BD Ortho <a href="http://www.ign.fr/">by IGN</a>, Sentinel-2 cloudless <a href="https://s2maps.eu">by EOX IT Services GmbH </a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    attribution: 'PlanetSat by <a href="https://planetobserver.com/">PlanetObserver</a>, BD Ortho <a href="http://www.ign.fr/">by IGN</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
-      maxNativeZoom: 18
+      maxNativeZoom: 18,
+      tms: true
     },
     cesium: {
-      type: 'OpenStreetMap',
-      url: `${wmtsUrl}/mosaic/GLOBAL_WEBMERCATOR`,
+      type: 'TileMapService',
+      url: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },
@@ -239,7 +206,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: 'statics/Cesium/Widgets/Images/TerrainProviders/Ellipsoid.png',
     icon: 'fiber_manual_record',
     attribution: '',
-    'default': true,
+    default: true,
     type: 'TerrainLayer',
     cesium: {
       type: 'Ellipsoid',
