@@ -152,34 +152,34 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          MOSAIC: 'Imagerie',
-          MOSAIC_DESCRIPTION: 'Données Sentinel 2 et IGN BD Ortho fusionnées'
+          IMAGERY: 'Imagerie',
+          IMAGERY_DESCRIPTION: 'Données PlanetSat et IGN BD Ortho fusionnées'
         }
       },
       en: {
         Layers: {
-          MOSAIC: 'Imagery',
-          MOSAIC_DESCRIPTION: 'Merged Sentinel 2 and IGN BD Ortho'
+          IMAGERY: 'Imagery',
+          IMAGERY_DESCRIPTION: 'Merged PlanetSat and IGN BD Ortho'
         }
       }
     },
     tags: [
       'imagery'
     ],
-    iconUrl: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    iconUrl: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'BMNG by <a href="https://www.nasa.gov/">Nasa</a>, BD Ortho <a href="http://www.ign.fr/">by IGN</a> contributors',
+    attribution: 'PlanetSat by <a href="https://planetobserver.com/">PlanetObserver</a>, BD Ortho <a href="http://www.ign.fr/">by IGN</a> contributors',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
       maxNativeZoom: 18,
       tms: true
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/orthophotos@GLOBAL_WEBMERCATOR`,
+      url: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR`,
       fileExtension: 'jpeg'
     }
   },
