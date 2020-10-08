@@ -174,7 +174,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'tileLayer',
       source: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
       maxZoom: 21,
-      maxNativeZoom: 18,
+      maxNativeZoom: 19,
       tms: true
     },
     cesium: {
