@@ -12,7 +12,9 @@ To avoid the burden of developing a completely new application for every mapping
   token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIiwiZXhwIjoxNTg0MDE1Mjg0fQ.paxyC2weSLACd5k5IvuKnryFemP8UCS9cKUJDoma-xs">
 </kano>
 
-The **iframe** API is a subset of the internal Kano components API exposing:
+This **iframe** offers an API so that you can dynamically control the behaviour and the content of Kano, as well as how the embedding application reacts in real-time to changes in Kano, a.k.a [micro frontend](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16). You can read more about the underlying concepts in this [article](https://blog.feathersjs.com/a-use-case-of-microservices-with-feathersjs-building-a-geospatial-platform-56373604db71). 
+
+The API is a subset of the internal Kano components API exposing:
 * [2D map mixins](../kmap/mixins.md#map)
 * [3D globe mixins](../kmap/mixins.md#globe)
 
