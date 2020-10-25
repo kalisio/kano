@@ -26,7 +26,7 @@ module.exports = function () {
     leaflet: {
 	type: 'tileLayer',
 	isVisible: true,
-	source: `https://tiles.openseamap.org/seamark/z/x/y.png`
+	source: `https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png`
 	maxZoom: 19,
 	maxNativeZoom: 19,
 	tms: true
