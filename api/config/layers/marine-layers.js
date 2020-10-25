@@ -12,7 +12,7 @@ module.exports = function () {
       en: {
         Layers: {
           OPENSEAMAP: 'Nautical informations',
-          OPENSEAMAP_DESCRIPTION: 'OpenSeaMap data ©'
+          OPENSEAMAP_DESCRIPTION: 'OpenSeaMap data©'
         }
       }
     },
