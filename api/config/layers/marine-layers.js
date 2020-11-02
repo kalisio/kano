@@ -24,12 +24,12 @@ module.exports = function () {
     attribution: 'OpenSeaMap © <a href="http://www.openseamap.org">OpenSeaMap</a> contributors',
     type: 'OverlayLayer',
     leaflet: {
-	type: 'tileLayer',
-	isVisible: true,
-	source: `https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png`
-	maxZoom: 19,
-	maxNativeZoom: 19,
-	tms: true
+    	type: 'tileLayer',
+    	isVisible: true,
+    	source: `https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png`,
+    	maxZoom: 19,
+    	maxNativeZoom: 19,
+    	tms: true
     }
   }]
 }
