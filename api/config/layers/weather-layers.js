@@ -379,43 +379,24 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
-    u: {
-      meteo_model: {
-        default: {
-          from: 'PT-1H',
-          weacast: { element: 'u-wind' },
-          dynprops: {
-            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-            model: { strTemplate: '<%- model.name %>' }
-          }
-        },
-        sources: [
-          { model: 'gfs-world',         to: 'PT+864000S' },
-          { model: 'arpege-world',      to: 'PT+367200S' },
-          { model: 'arpege-europe',     to: 'PT+367200S' },
-          { model: 'arome-france',      to: 'PT+151200S' },
-          { model: 'arome-france-high', to: 'PT+151200S' }
-        ]
-      }
-    },
-    v: {
-      meteo_model: {
-        default: {
-          from: 'PT-1H',
-          weacast: { element: 'v-wind' },
-          dynprops: {
-            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-            model: { strTemplate: '<%- model.name %>' }
-          }
-        },
-        sources: [
-          { model: 'gfs-world',         to: 'PT+864000S' },
-          { model: 'arpege-world',      to: 'PT+367200S' },
-          { model: 'arpege-europe',     to: 'PT+367200S' },
-          { model: 'arome-france',      to: 'PT+151200S' },
-          { model: 'arome-france-high', to: 'PT+151200S' }
-        ]
-      }
+    uvComponents: { u: 'u-wind', v: 'v-wind' },
+    meteo_model: {
+      default: {
+        from: 'PT-1H',
+        weacast: {},
+        dynprops: {
+          element: { strTemplate: '<%- component %>' },
+          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+          model: { strTemplate: '<%- model.name %>' }
+        }
+      },
+      sources: [
+        { model: 'gfs-world',         to: 'PT+864000S' },
+        { model: 'arpege-world',      to: 'PT+367200S' },
+        { model: 'arpege-europe',     to: 'PT+367200S' },
+        { model: 'arome-france',      to: 'PT+151200S' },
+        { model: 'arome-france-high', to: 'PT+151200S' }
+      ]
     },
     leaflet: {
       type: 'tiledWindLayer',

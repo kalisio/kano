@@ -306,45 +306,24 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        ],
        values: [ 1000, 700, 450, 300, 200 ]
        }, */
-    u: {
-      meteo_model: {
-        default: {
-          from: 'P-60D',
-          to: 'PT-5M',
-          geotiff: {},
-          dynprops: {
-            url: {
-              strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/u-wind/10/<%- file %>.cog"
-            }
+    uvComponents: { u: 'u-wind', v: 'v-wind' },
+    meteo_model: {
+      default: {
+        from: 'P-60D',
+        to: 'PT-5M',
+        geotiff: {},
+        dynprops: {
+          url: {
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- component %>/10/<%- file %>.cog"
           }
-        },
-        sources: [
-          { model: 'gfs-world' },
-          { model: 'arpege-world' },
-          { model: 'arpege-europe' },
-          { model: 'arome-france' }
-        ]
-      }
-    },
-    v: {
-      meteo_model: {
-        default: {
-          from: 'P-60D',
-          to: 'PT-5M',
-          geotiff: {},
-          dynprops: {
-            url: {
-              strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/v-wind/10/<%- file %>.cog"
-            }
-          }
-        },
-        sources: [
-          { model: 'gfs-world' },
-          { model: 'arpege-world' },
-          { model: 'arpege-europe' },
-          { model: 'arome-france' }
-        ]
-      }
+        }
+      },
+      sources: [
+        { model: 'gfs-world' },
+        { model: 'arpege-world' },
+        { model: 'arpege-europe' },
+        { model: 'arome-france' }
+      ]
     },
     leaflet: {
       type: 'tiledWindLayer',
