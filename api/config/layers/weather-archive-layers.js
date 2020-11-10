@@ -51,7 +51,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "gfs-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -63,7 +63,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -75,7 +75,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-europe",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -87,7 +87,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arome-france",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -166,7 +166,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "gfs-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -178,7 +178,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -190,7 +190,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-europe",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -202,7 +202,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arome-france",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -273,7 +273,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "gfs-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -285,7 +285,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-world",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -297,7 +297,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arpege-europe",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -309,7 +309,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         model: "arome-france",
         from: "P-60D",
-        to: "PT-6H",
+        to: "PT-5M",
         dynprops: {
           url: {
             strTemplate:
@@ -407,7 +407,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "gfs-world",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -419,7 +419,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arpege-world",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -431,7 +431,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arpege-europe",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -443,7 +443,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arome-france",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -459,7 +459,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "gfs-world",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -471,7 +471,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arpege-world",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -483,7 +483,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arpege-europe",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
@@ -495,7 +495,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           model: "arome-france",
           from: "P-60D",
-          to: "PT-6H",
+          to: "PT-5M",
           dynprops: {
             url: {
               strTemplate:
