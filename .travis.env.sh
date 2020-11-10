@@ -33,25 +33,25 @@ git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
 
 # Define the flavor
 TEST_FLAVOR_REGEX="^test-*|-test$"
-PROD_FLAVOR_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+"
-if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
+PROD_FLAVOR_REGEX="^prod-v[0-9]+\.[0-9]+\.[0-9]+"
+if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
 then
-  if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
+  export FLAVOR=prod
+  KDK_PROJECT_FILE=$APP-$VERSION.js
+else
+  if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
   then
-    export FLAVOR=prod
-    KDK_PROJECT_FILE=$APP-$VERSION.js
-  else
     export FLAVOR=test
     KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
+  else
+    export FLAVOR=dev
+    KDK_PROJECT_FILE=$APP.js
   fi
-else
-  export FLAVOR=dev
-  KDK_PROJECT_FILE=$APP.js
 fi
 export NODE_APP_INSTANCE=$FLAVOR
 TAG=$VERSION-$FLAVOR
 
-echo "Build flavor is $FLAVOR"
+echo "Build flavor is $FLAVOR on branch $TRAVIS_BRANCH"
 
 # Read ci environement variables
 cp workspace/common/.travis.env .travis.env
