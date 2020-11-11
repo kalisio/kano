@@ -23,7 +23,7 @@
     "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
     "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
     "release:major": "cd api && npm run release:major && cd .. && npm version --no-git-tag-version --force major",
-    "changelog": "github_changelog_generator -u kalisio -p kapp && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
+    "changelog": "github_changelog_generator -u kalisio -p kano && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "clean": "quasar clean",
     "dev": "npm run tours:cp && cross-env NODE_ENV=development quasar dev",
     "prod": "cd api && npm run prod",
