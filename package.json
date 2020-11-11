@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "@feathersjs/client": "^3.5.4",
+    "@kalisio/kdk": "^1.2.0",
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.6.0",
     "@turf/bbox": "^6.0.1",
@@ -139,8 +140,8 @@
     "vue-slider-component": "^3.0.33",
     "vue2-dropzone": "^3.6.0",
     "vue-tour": "~1.4.0",
-    "weacast-core": "^1.0.0",
-    "weacast-leaflet": "^1.0.0",
+    "weacast-core": "^1.3.0",
+    "weacast-leaflet": "^1.2.0",
     "whatwg-fetch": "^2.0.3",
     "xml2js": "^0.4.22"
   },
