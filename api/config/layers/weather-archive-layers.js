@@ -47,6 +47,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    meteoElements: [ 'precipitations' ],
     meteo_model: {
       default: {
         from: 'P-60D',
@@ -54,7 +55,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {},
         dynprops: {
           url: {
-            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/precipitations/surface/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog"
           }
         }
       },
@@ -130,6 +131,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        ],
        values: [ 1000, 700, 450, 300, 200 ]
        }, */
+    meteoElements: [ 'temperature' ],
     meteo_model: {
       default: {
         from: 'P-60D',
@@ -137,7 +139,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {},
         dynprops: {
           url: {
-            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/temperature/2/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/2/<%- file %>.cog"
           }
         }
       },
@@ -205,6 +207,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    meteoElements: [ 'gust' ],
     meteo_model: {
       default: {
         from: 'P-60D',
@@ -212,7 +215,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {},
         dynprops: {
           url: {
-            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/gust/10/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/10/<%- file %>.cog"
           }
         }
       },
@@ -306,7 +309,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        ],
        values: [ 1000, 700, 450, 300, 200 ]
        }, */
-    uvComponents: { u: 'u-wind', v: 'v-wind' },
+    meteoElements: [ 'u-wind', 'v-wind' ],
     meteo_model: {
       default: {
         from: 'P-60D',
@@ -314,7 +317,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         geotiff: {},
         dynprops: {
           url: {
-            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- component %>/10/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- windComponent %>/10/<%- file %>.cog"
           }
         }
       },

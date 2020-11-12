@@ -379,13 +379,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
-    uvComponents: { u: 'u-wind', v: 'v-wind' },
+    meteoElements: [ 'u-wind', 'v-wind' ],
     meteo_model: {
       default: {
         from: 'PT-1H',
         weacast: {},
         dynprops: {
-          element: { strTemplate: '<%- component %>' },
+          element: { strTemplate: '<%- windComponent %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
           model: { strTemplate: '<%- model.name %>' }
         }
@@ -457,11 +457,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    meteoElements: [ 'gust' ],
     meteo_model: {
       default: {
         from: 'PT-1H',
-        weacast: { element: 'gust' },
+        weacast: {},
         dynprops: {
+          element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
           model: { strTemplate: '<%- model.name %>' }
         }
@@ -542,11 +544,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    meteoElements: [ 'precipitations' ],
     meteo_model: {
       default: {
         from: 'PT-1H',
-        weacast: { element: 'precipitations' },
+        weacast: {},
         dynprops: {
+          element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
           model: { strTemplate: '<%- model.name %>' }
         }
@@ -626,11 +630,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
+    meteoElements: [ 'temperature' ],
     meteo_model: {
       default: {
         from: 'PT-1H',
-        weacast: { element: 'temperature' },
+        weacast: {},
         dynprops: {
+          element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
           model: { strTemplate: '<%- model.name %>' }
         }
