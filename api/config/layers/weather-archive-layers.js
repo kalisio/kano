@@ -72,7 +72,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -156,7 +162,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -232,7 +244,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -336,7 +354,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       displayValues: false,
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   }]
 }
