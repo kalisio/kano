@@ -92,7 +92,11 @@ export default {
     this.$store.set('capabilities.api', api)
     // FIXME: we should elaborate a more complex check between compatible versions
     if (api.version === config.version) {
-      if (!api.buildNumber) return
+      if (this.$config('flavor') === 'prod') return
+      // Local dev has not the concept of build number
+      else if (!api.buildNumber) return
+      // On staging check it because we do not increase version number on each change
+      // and would like to know if the mobile client is up-to-date
       else if (api.buildNumber === config.buildNumber) return
     }
     this.$toast({ message: this.$t('Index.VERSION_MISMATCH') })
