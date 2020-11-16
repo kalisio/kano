@@ -139,7 +139,10 @@ function setupEmbedApi (routeName, component) {
       })
       clearInterval(interval)
     }
-    result = (data.command ? await callEmbedMethod(route, data) : getEmbedProperty(route, data))
+    // If no payload this was just a route change
+    if (data) {
+      result = (data.command ? await callEmbedMethod(route, data) : getEmbedProperty(route, data))
+    }
     return result
   })
 }
