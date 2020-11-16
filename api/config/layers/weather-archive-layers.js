@@ -232,7 +232,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       sources: [
-        { model: 'gfs-world' },
+        // gfs gust is at 'surface' level, unlike the other models where it's at 10m
+        { model: 'gfs-world',
+          dynprops: {
+            url: {
+              strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog"
+            }
+          }
+        },
         { model: 'arpege-world' },
         { model: 'arpege-europe' },
         { model: 'arome-france' }
