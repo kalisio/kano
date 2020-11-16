@@ -17,7 +17,7 @@ module.exports = function () {
       }
     },
     tags: [
-      'marine'
+      'business'
     ],
     iconUrl: 'statics/OpenSeaMap-Logo-256.png',
     icon: 'marine',
@@ -25,11 +25,9 @@ module.exports = function () {
     type: 'OverlayLayer',
     leaflet: {
       type: 'tileLayer',
-      isVisible: true,
       source: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png',
-      maxZoom: 19,
-      maxNativeZoom: 19,
-      tms: true
+      maxNativeZoom: 18,
+      tms: false
     }
   }]
 }
