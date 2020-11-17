@@ -67,6 +67,13 @@
         "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
       }
     },
+    "restoreLayers": {
+      "type": "boolean",
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "schemas.RESTORE_LAYERS_FIELD_HELPER"
+      }
+    },
     "location": {
       "type": "string",
       "field": {

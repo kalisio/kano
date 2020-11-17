@@ -12,6 +12,7 @@
     "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "Format d'année complet <a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
     "TIME_FORMAT_UTC_FIELD_HELPER": "Mode d'affichage temporel UTC",
     "RESTORE_VIEW_FIELD_HELPER": "Sauvegarder la vue courante",
+    "RESTORE_LAYERS_FIELD_HELPER": "Sauvegarder les couches actives",
     "LOCATION_FORMAT": "Format de coordonnées <a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>",
     "TIMELINE_SETTINGS": "Paramètrage du sélecteur temporel",
     "TIMELINE_STEP": "Pas du sélécteur temporel, en minutes",
