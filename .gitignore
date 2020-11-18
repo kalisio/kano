@@ -88,3 +88,6 @@ ssh.pem
 app.env.sh
 *.keystore
 /test/videos
+
+# local layers
+local-layers.js

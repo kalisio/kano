@@ -47,63 +47,38 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
-    meteo_model: [
-      {
-        model: 'gfs-world',
+    meteoElements: [ 'precipitations' ],
+    meteo_model: {
+      default: {
         from: 'P-60D',
         to: 'PT-5M',
+        geotiff: {},
         dynprops: {
           url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/precipitations/surface/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog"
           }
-        },
-        geotiff: {}
+        }
       },
-      {
-        model: 'arpege-world',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/precipitations/surface/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      },
-      {
-        model: 'arpege-europe',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/precipitations/surface/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      },
-      {
-        model: 'arome-france',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/precipitations/surface/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      }
-    ],
+      sources: [
+        { model: 'gfs-world' },
+        { model: 'arpege-world' },
+        { model: 'arpege-europe' },
+        { model: 'arome-france' }
+      ]
+    },
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -162,63 +137,38 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        ],
        values: [ 1000, 700, 450, 300, 200 ]
        }, */
-    meteo_model: [
-      {
-        model: 'gfs-world',
+    meteoElements: [ 'temperature' ],
+    meteo_model: {
+      default: {
         from: 'P-60D',
         to: 'PT-5M',
+        geotiff: {},
         dynprops: {
           url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/temperature/2/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/2/<%- file %>.cog"
           }
-        },
-        geotiff: {}
+        }
       },
-      {
-        model: 'arpege-world',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/temperature/2/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      },
-      {
-        model: 'arpege-europe',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/temperature/2/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      },
-      {
-        model: 'arome-france',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/temperature/2/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      }
-    ],
+      sources: [
+        { model: 'gfs-world' },
+        { model: 'arpege-world' },
+        { model: 'arpege-europe' },
+        { model: 'arome-france' }
+      ]
+    },
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -269,63 +219,45 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
-    meteo_model: [
-      {
-        model: 'gfs-world',
+    meteoElements: [ 'gust' ],
+    meteo_model: {
+      default: {
         from: 'P-60D',
         to: 'PT-5M',
+        geotiff: {},
         dynprops: {
           url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/gust/surface/<%- file %>.cog"
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/10/<%- file %>.cog"
           }
-        },
-        geotiff: {}
+        }
       },
-      {
-        model: 'arpege-world',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/gust/10/<%- file %>.cog"
+      sources: [
+        // gfs gust is at 'surface' level, unlike the other models where it's at 10m
+        { model: 'gfs-world',
+          dynprops: {
+            url: {
+              strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog"
+            }
           }
         },
-        geotiff: {}
-      },
-      {
-        model: 'arpege-europe',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/gust/10/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      },
-      {
-        model: 'arome-france',
-        from: 'P-60D',
-        to: 'PT-5M',
-        dynprops: {
-          url: {
-            strTemplate:
-            "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/gust/10/<%- file %>.cog"
-          }
-        },
-        geotiff: {}
-      }
-    ],
+        { model: 'arpege-world' },
+        { model: 'arpege-europe' },
+        { model: 'arome-france' }
+      ]
+    },
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   },
   {
@@ -402,108 +334,23 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
        ],
        values: [ 1000, 700, 450, 300, 200 ]
        }, */
-    u: {
-      meteo_model: [
-        {
-          model: 'gfs-world',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/u-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arpege-world',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/u-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arpege-europe',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/u-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arome-france',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/u-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
+    meteoElements: [ 'u-wind', 'v-wind' ],
+    meteo_model: {
+      default: {
+        from: 'P-60D',
+        to: 'PT-5M',
+        geotiff: {},
+        dynprops: {
+          url: {
+            strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- windComponent %>/10/<%- file %>.cog"
+          }
         }
-      ]
-    },
-    v: {
-      meteo_model: [
-        {
-          model: 'gfs-world',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/v-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arpege-world',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/v-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arpege-europe',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/v-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        },
-        {
-          model: 'arome-france',
-          from: 'P-60D',
-          to: 'PT-5M',
-          dynprops: {
-            url: {
-              strTemplate:
-              "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/v-wind/10/<%- file %>.cog"
-            }
-          },
-          geotiff: {}
-        }
+      },
+      sources: [
+        { model: 'gfs-world' },
+        { model: 'arpege-world' },
+        { model: 'arpege-europe' },
+        { model: 'arome-france' }
       ]
     },
     leaflet: {
@@ -514,7 +361,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       displayValues: false,
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
-      minZoom: 7
+      minZoom: {
+        'gfs-world': 3,
+        'arpege-world': 3,
+        'arpege-europe': 5,
+        'arome-france': 7,
+        'arome-france-high': 9
+      }
     }
   }]
 }
