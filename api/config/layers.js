@@ -5,7 +5,7 @@ const debug = makeDebug('kano:layers')
 
 // Override defaults if env provided
 const kargoDomain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
-const wmtsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wmts/1.0.0' : 'https://mapcache.' + kargoDomain + '/mapcahce/wmts/1.0.0')
+const wmtsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wmts/1.0.0' : 'https://mapcache.' + kargoDomain + '/mapcache/wmts/1.0.0')
 const tmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/tms/1.0.0' : 'https://mapcache.' + kargoDomain + '/mapcache/tms/1.0.0')
 const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' : 'https://mapcache.' + kargoDomain + '/mapcache')
 const wcsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wcs' : 'https://mapserver.' + kargoDomain + '/cgi-bin/ows')
