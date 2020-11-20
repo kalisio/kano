@@ -790,5 +790,85 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       product: 'ir'
     }
+  },
+  {
+    name: 'Layers.OPENRADIATION',
+    description: 'Layers.OPENRADIATION_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          OPENRADIATION: 'OpenRadiation',
+          OPENRADIATION_DESCRIPTION: 'Mesures OpenRadiation'
+        }
+      },
+      en: {
+        Layers: {
+          OPENRADIATION: 'OpenRadiation',
+          OPENRADIATION_DESCRIPTION: 'OpenRadiation measurements'
+        }
+      }
+    },
+    tags: [
+      'measure'
+    ],
+    iconUrl: 'statics/openradiation-logo.png',
+    attribution: '',
+    type: 'OverlayLayer',
+    service: 'openradiation',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    featureId: 'reportUuid',
+    from: 'P-3Y',
+    to: 'PT1H',
+    every: 'PT1H',
+    queryFrom: 'P-1D',
+    variables: [
+      {
+        name: 'value',
+        label: 'Valeur',
+        units: [
+          'µSv/h'
+        ],
+        range: [0, 500],
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      realtime: true,
+      tiled: true,
+      minZoom: 8,
+      cluster: { disableClusteringAtZoom: 18 },
+      'marker-color': '#808000',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-radiation-alt',
+      popup: {
+        pick: [
+          'value'
+        ]
+      },
+      tooltip: {
+        template: `<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% }
+                    if (feature.time && feature.time.value) { %></br><%= new Date(feature.time.value).toLocaleString() %><% } %>`
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      realtime: true,
+      cluster: { pixelRange: 50 },
+      'marker-symbol': 'air',
+      'marker-color': '#0B75A9',
+      popup: {
+        pick: [
+          'nomptp'
+        ]
+      },
+      tooltip: {
+        template: `<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> nSv/h<% } %>`
+      }
+    }
   }]
 }
