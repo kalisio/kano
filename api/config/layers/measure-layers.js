@@ -817,10 +817,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     service: 'openradiation',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'reportUuid',
-    from: 'P-3Y',
+    from: 'P-1M',
     to: 'PT1H',
     every: 'PT1H',
-    queryFrom: 'P-1D',
+    queryFrom: 'P-3H',
     variables: [
       {
         name: 'value',
@@ -841,8 +841,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 8,
-      cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': '#808000',
+      cluster: { disableClusteringAtZoom: 21 },
+      'marker-color': '#00c2fc',
       'icon-color': 'white',
       'icon-classes': 'fa fa-radiation-alt',
       popup: {
