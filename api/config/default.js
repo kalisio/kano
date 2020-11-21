@@ -141,7 +141,8 @@ module.exports = {
                             service.path.includes('teleray-sensors') ||
                             service.path.includes('teleray-measurements') ||
                             service.path.includes('vigicrues-sections') ||
-                            service.path.includes('vigicrues-forecasts'),
+                            service.path.includes('vigicrues-forecasts') ||
+                            service.path.includes('openradiation'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
