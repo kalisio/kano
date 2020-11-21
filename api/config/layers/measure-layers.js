@@ -168,7 +168,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 12,
+      minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -194,7 +194,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'libelle_station'
+          'name'
         ]
       },
       tooltip: {
@@ -799,12 +799,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'Mesures OpenRadiation'
+        },
+        Variables: {
+          value: 'Radioactivité ambiante'
         }
       },
       en: {
         Layers: {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'OpenRadiation measurements'
+        },
+        Variables: {
+          value: 'Ambient radioactivity'
         }
       }
     },
@@ -812,7 +818,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'measure'
     ],
     iconUrl: 'statics/openradiation-logo.png',
-    attribution: '',
+    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
     type: 'OverlayLayer',
     service: 'openradiation',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
@@ -824,11 +830,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     variables: [
       {
         name: 'value',
-        label: 'Valeur',
+        label: 'Variables.value',
         units: [
           'µSv/h'
         ],
-        range: [0, 500],
+        range: [0, 250],
+        step: 0.1,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
@@ -845,13 +852,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#78c0f0',
       'icon-color': 'white',
       'icon-classes': 'fa fa-radiation-alt',
+      'icon-x-offset': -2,
       popup: {
         pick: [
-          'value'
+          'userId'
         ]
       },
       tooltip: {
-        template: `<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% }
+        template: `<% if (properties.value) { %><%= properties.value.toFixed(2) %> µSv/h<% }
                     if (feature.time && feature.time.value) { %></br><%= new Date(feature.time.value).toLocaleString() %><% } %>`
       }
     },
@@ -863,7 +871,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#78c0f0',
       popup: {
         pick: [
-          'nomptp'
+          'userId'
         ]
       },
       tooltip: {
