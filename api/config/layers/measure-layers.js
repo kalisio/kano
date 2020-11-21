@@ -819,7 +819,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     featureId: 'reportUuid',
     from: 'P-7D',
     to: 'PT-15M',
-    every: 'PT1H',
+    every: 'PT15M',
     queryFrom: 'P-1D',
     variables: [
       {
@@ -842,7 +842,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 8,
       cluster: { disableClusteringAtZoom: 21 },
-      'marker-color': '#00c2',
+      'marker-color': '#78c0f0',
       'icon-color': 'white',
       'icon-classes': 'fa fa-radiation-alt',
       popup: {
@@ -860,14 +860,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       cluster: { pixelRange: 50 },
       'marker-symbol': 'air',
-      'marker-color': '#0B75A9',
+      'marker-color': '#78c0f0',
       popup: {
         pick: [
           'nomptp'
         ]
       },
       tooltip: {
-        template: `<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> nSv/h<% } %>`
+        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> nSv/h<% } %>'
       }
     }
   }]
