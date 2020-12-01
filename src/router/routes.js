@@ -30,7 +30,7 @@ module.exports = {
             redirect: { name: 'map' },
             tour: tours.home
           },
-          'map/:south?/:west?/:north?/:east?/:layers?': {
+          'map/:south?/:west?/:north?/:east?': {
             name: 'map',
             component: 'MapActivity',
             embedApi: true,
@@ -42,7 +42,7 @@ module.exports = {
               'fab': tours['fab']
             }
           },
-          'globe/:south?/:west?/:north?/:east?/:layers?': {
+          'globe/:south?/:west?/:north?/:east?': {
             name: 'globe',
             component: 'GlobeActivity',
             embedApi: true,

@@ -60,27 +60,6 @@
         "helper": "schemas.TIME_FORMAT_UTC_FIELD_HELPER"
       }
     },
-    "restoreView": {
-      "type": "boolean",
-      "field": {
-        "component": "form/KToggleField",
-        "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
-      }
-    },
-    "restoreLayers": {
-      "type": "boolean",
-      "field": {
-        "component": "form/KToggleField",
-        "helper": "schemas.RESTORE_LAYERS_FIELD_HELPER"
-      }
-    },
-    "location": {
-      "type": "string",
-      "field": {
-        "component": "form/KTextField",
-        "helper": "schemas.LOCATION_FORMAT"
-      }
-    },
     "timelineStep": {
       "type": "number",
       "group": "schemas.TIMELINE_SETTINGS",
@@ -113,6 +92,30 @@
           { "label": "72H", "value": 4320 },
           { "label": "96H", "value": 5760 }
         ]
+      }
+    },
+    "restoreView": {
+      "type": "boolean",
+      "group": "schemas.MAP_SETTINGS",
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
+      }
+    },
+    "restoreLayers": {
+      "type": "boolean",
+      "group": "schemas.MAP_SETTINGS",
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "schemas.RESTORE_LAYERS_FIELD_HELPER"
+      }
+    },
+    "location": {
+      "type": "string",
+      "group": "schemas.MAP_SETTINGS",
+      "field": {
+        "component": "form/KTextField",
+        "helper": "schemas.LOCATION_FORMAT"
       }
     }
   },
