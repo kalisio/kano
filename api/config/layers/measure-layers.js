@@ -168,7 +168,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 12,
+      minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -194,7 +194,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'libelle_station'
+          'name'
         ]
       },
       tooltip: {
@@ -789,6 +789,94 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'gsmapLayer',
       opacity: 0.6,
       product: 'ir'
+    }
+  },
+  {
+    name: 'Layers.OPENRADIATION',
+    description: 'Layers.OPENRADIATION_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          OPENRADIATION: 'OpenRadiation',
+          OPENRADIATION_DESCRIPTION: 'Mesures OpenRadiation'
+        },
+        Variables: {
+          value: 'Radioactivité ambiante'
+        }
+      },
+      en: {
+        Layers: {
+          OPENRADIATION: 'OpenRadiation',
+          OPENRADIATION_DESCRIPTION: 'OpenRadiation measurements'
+        },
+        Variables: {
+          value: 'Ambient radioactivity'
+        }
+      }
+    },
+    tags: [
+      'measure'
+    ],
+    iconUrl: 'statics/openradiation-logo.png',
+    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
+    type: 'OverlayLayer',
+    service: 'openradiation',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    featureId: 'reportUuid',
+    from: 'P-7D',
+    to: 'PT-15M',
+    every: 'PT15M',
+    queryFrom: 'P-1D',
+    variables: [
+      {
+        name: 'value',
+        label: 'Variables.value',
+        units: [
+          'µSv/h'
+        ],
+        range: [0, 250],
+        step: 0.1,
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      realtime: true,
+      tiled: true,
+      minZoom: 8,
+      cluster: { disableClusteringAtZoom: 21 },
+      'marker-color': '#78c0f0',
+      'icon-color': 'white',
+      'icon-classes': 'fa fa-radiation-alt',
+      'icon-x-offset': -2,
+      popup: {
+        pick: [
+          'userId'
+        ]
+      },
+      tooltip: {
+        template: `<% if (properties.value) { %><%= properties.value.toFixed(2) %> µSv/h<% }
+                    if (feature.time && feature.time.value) { %></br><%= new Date(feature.time.value).toLocaleString() %><% } %>`
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      realtime: true,
+      cluster: { pixelRange: 50 },
+      'marker-symbol': 'air',
+      'marker-color': '#78c0f0',
+      popup: {
+        pick: [
+          'userId'
+        ]
+      },
+      tooltip: {
+        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> nSv/h<% } %>'
+      }
     }
   }]
 }
