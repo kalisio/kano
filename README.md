@@ -2,7 +2,7 @@
 
 ## Kano application
 
-[![Build Status](https://travis-ci.org/kalisio/kano.png?branch=master)](https://travis-ci.org/kalisio/kano)
+[![Build Status](https://travis-ci.com/kalisio/kano.png?branch=master)](https://travis-ci.com/kalisio/kano)
 [![Code Climate](https://codeclimate.com/github/kalisio/kano/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kano)
 [![Test Coverage](https://codeclimate.com/github/kalisio/kano/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kano/coverage)
 [![Dependency Status](https://img.shields.io/david/kalisio/kano.svg?style=flat-square)](https://david-dm.org/kalisio/kano)
