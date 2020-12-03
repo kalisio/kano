@@ -1762,6 +1762,14 @@
     "@turf/helpers" "6.x"
     "@turf/meta" "6.x"
 
+"@turf/clean-coords@^6.0.0":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@turf/clean-coords/-/clean-coords-6.0.1.tgz#162eb24c33bb3d484efaf3298787909498a9bc81"
+  integrity sha512-qpPT+YqWHIKCC0ryIhcle7nEVqJJ6RhEZNVy5t/PyzR+E8Q+RRAeiMCaPjLnT7Rem8VPOcF+bBoCdub1KyHhdw==
+  dependencies:
+    "@turf/helpers" "6.x"
+    "@turf/invariant" "6.x"
+
 "@turf/distance@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@turf/distance/-/distance-6.0.1.tgz#0761f28784286e7865a427c4e7e3593569c2dea8"
@@ -1787,9 +1795,16 @@
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.2.0-alpha.2.tgz#3a17ecd4e906bc5e3ceedd68664341d25b514da3"
   integrity sha512-YW7Tk75XTbJh3ZBwdo29QE/N4HjxApNV4ZUVJaukBm2Kns/sGMJh9RQPuITOlB5+tW6FUVTMlZYK1PejiVNeAQ==
 
-"@turf/invariant@6.x":
+"@turf/invariant@6.x", "@turf/invariant@^6.0.0":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@turf/invariant/-/invariant-6.1.2.tgz#6013ed6219f9ac2edada9b31e1dfa5918eb0a2f7"
+  dependencies:
+    "@turf/helpers" "6.x"
+
+"@turf/kinks@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@turf/kinks/-/kinks-6.0.0.tgz#dde4f10f6e1ec18dc25a5d2d5dbe09aa994e9904"
+  integrity sha512-X2xk3+Sr9aeu51t1vBa7Iwowvjxcbl5fePLIo/dDOU4j5WeFoqGCto+DdEHQcC3y8HVUin4i8GaHVaM9sVTphg==
   dependencies:
     "@turf/helpers" "6.x"
 
