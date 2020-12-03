@@ -49,6 +49,7 @@ export default {
     kMapMixins.infobox,
     kMapMixins.weacast,
     kMapMixins.time,
+    kMapMixins.context,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,
