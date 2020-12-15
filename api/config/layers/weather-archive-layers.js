@@ -50,7 +50,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'precipitations' ],
     meteo_model: {
       default: {
-        from: 'P-60D',
+        from: 'P-1Y',
         to: 'PT-5M',
         geotiff: {},
         dynprops: {
@@ -140,7 +140,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'temperature' ],
     meteo_model: {
       default: {
-        from: 'P-60D',
+        from: 'P-1Y',
         to: 'PT-5M',
         geotiff: {},
         dynprops: {
@@ -222,7 +222,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'gust' ],
     meteo_model: {
       default: {
-        from: 'P-60D',
+        from: 'P-1Y',
         to: 'PT-5M',
         geotiff: {},
         dynprops: {
@@ -337,7 +337,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'u-wind', 'v-wind' ],
     meteo_model: {
       default: {
-        from: 'P-60D',
+        from: 'P-1Y',
         to: 'PT-5M',
         geotiff: {},
         dynprops: {
