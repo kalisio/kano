@@ -98,11 +98,11 @@
         })
       }
       function toggleBackground() {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: 'OSM Dark' })
+        return postRobot.send(kano, component, { command: 'isLayerVisible', args: 'Layers.OSM_DARK' })
         .then(function (result) {
           // Switch between Satellite/OSM
-          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'OSM Bright' : 'OSM Dark') })
-          return postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'OSM Bright' : 'OSM Dark') })
+          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
+          return postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
         })
       }
       function toggleAircraftLayer(name) {
@@ -659,7 +659,7 @@
         <td style="text-align:center;">
           <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button></br>
           <button type="button" onclick="toggleBackground()">Switch background</button></br>
-          <button type="button" onclick="toggleStaticLayer('Airports')">Switch airports</button></br>
+          <button type="button" onclick="toggleStaticLayer('Layers.AIRPORTS')">Switch airports</button></br>
           <button type="button" onclick="toggleMetarTafLayer('METAR')">Switch METAR</button></br>
           <button type="button" onclick="updateMetarTafLayer('METAR')">Update METAR</button></br>
           <button type="button" onclick="toggleAircraftLayer('Aircraft')">Switch aircraft</button></br>
@@ -706,7 +706,7 @@
       postRobot.on('kano-logout', () => console.log('User logged out'))
       postRobot.on('map-ready', () => {
         console.log('Map component ready')
-        postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Airports' })
+        postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Layers.AIRPORTS' })
         .then((result) => { airports = result.data })
       })
       postRobot.on('globe-ready', () => console.log('Globe component ready'))
