@@ -4,8 +4,9 @@
     "dev": "vuepress dev .",
     "build": "vuepress build ."
   },
-  "devDependencies": {
-    "vuepress": "^1.5.0",
-    "vuepress-theme-kalisio": "http://github.com/kalisio/vuepress-theme-kalisio#1.5.0"
+  "devDependencies": {},
+  "dependencies": {
+    "vuepress": "^1.7.1",
+    "vuepress-theme-kalisio": "https://github.com/kalisio/vuepress-theme-kalisio"
   }
 }
