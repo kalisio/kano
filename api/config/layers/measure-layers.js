@@ -76,18 +76,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 10,
       staticGeometry: true,
-      'stroke-width': 2,
       stroke: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
         else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
         else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
         else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
         else { %>black<% } %>`,
-      fill: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
-        else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
-        else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
-        else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
-        else { %>black<% } %>`,
-      'fill-opacity': 0.5,
+      'stroke-width': 8,
+      'stroke-opacity': 0.5,
       template: ['stroke', 'fill']
     },
     cesium: {
