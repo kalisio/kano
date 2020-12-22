@@ -82,12 +82,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
         else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
         else { %>black<% } %>`,
-      fill: `<% if (properties.NivSituVigiCruEnt === 1) { %>green<% }
-        else if (properties.NivSituVigiCruEnt === 2) { %>yellow<% }
-        else if (properties.NivSituVigiCruEnt === 3) { %>orange<% }
-        else if (properties.NivSituVigiCruEnt === 4) { %>red<% }
-        else { %>black<% } %>`,
-      'fill-opacity': 0.5,
+      'stroke-width': 8,
+      'stroke-opacity': 0.5,
       template: ['stroke', 'fill']
     },
     cesium: {
