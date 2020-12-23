@@ -134,9 +134,8 @@ export default {
     },
     async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
-      const layer = _.get(event, 'target')
       if (!feature) return
-      utils.sendEmbedEvent('click', { feature, layer: layer })
+      utils.sendEmbedEvent('click', { feature, layer: options })
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
