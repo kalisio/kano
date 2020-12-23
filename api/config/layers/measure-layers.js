@@ -83,11 +83,36 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         else { %>black<% } %>`,
       'stroke-width': 8,
       'stroke-opacity': 0.5,
-      template: ['stroke', 'fill']
+      template: ['stroke'],
+      tooltip: {
+        template: `<% if (_.has(properties, 'name') && _.has(properties, 'NivSituVigiCruEnt')) { %>
+                    <%= properties.name %><br><%= $t('Layers.VIGICRUES_VIGILANCE_' + properties.NivSituVigiCruEnt) %>
+                  <% } %>`,
+        options: { permanent: false, sticky: true }
+      }
     },
     cesium: {
       type: 'geoJson',
-      realtime: true
+      realtime: true,
+      'stroke-width': 4,
+      'stroke-opacity': 0.5,
+      entityStyle: {
+        polyline: {
+          clampToGround: false,
+          material: `Cesium.Color.<% if (properties.NivSituVigiCruEnt === 1) { %>GREEN<% }
+                    else if (properties.NivSituVigiCruEnt === 2) { %>YELLOW<% }
+                    else if (properties.NivSituVigiCruEnt === 3) { %>ORANGE<% }
+                    else if (properties.NivSituVigiCruEnt === 4) { %>RED<% }
+                    else { %>BLACK<% } %>`
+        },
+        template: ['polyline.material']
+      },
+      tooltip: {
+        template: '<% if (_.has(properties, \'name\') && _.has(properties, \'NivSituVigiCruEnt\')) { %>' +
+                  '<%= properties.name %>\n<%= $t(\'Layers.VIGICRUES_VIGILANCE_\' + properties.NivSituVigiCruEnt) %>' +
+                  '<% } %>',
+        options: { sticky: true }
+      }
     }
   },
   {
@@ -500,7 +525,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'value\')) { %>Dose = <%= properties.value.toFixed(2) %> nSv/h\n' +
+        template: '<% if (_.has(properties, \'value\')) { %><%= properties.value.toFixed(2) %> nSv/h\n' +
                   '<%= new Date(properties.measureDateFormatted).toLocaleString() %><% } %>'
       }
     }

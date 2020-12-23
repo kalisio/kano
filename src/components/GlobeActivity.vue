@@ -107,9 +107,6 @@ export default {
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
-    // Setup the engine
-    this.registerStyle('tooltip', this.getVigicruesTooltip)
-    // Required to get the access token from server
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
