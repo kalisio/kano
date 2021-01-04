@@ -134,7 +134,9 @@ export default {
     async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
       if (!feature) return
-      utils.sendEmbedEvent('click', { feature, layer: options })
+      // Retrieve original layer options not processed ones
+      // as they can include internal objects not to be serialized
+      utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
