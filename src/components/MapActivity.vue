@@ -8,12 +8,6 @@
         <q-resize-observer @resize="onMapResized" />
       </div>
       <!--
-        NavigationBar
-       -->
-      <q-page-sticky position="top">
-        <k-opener-proxy position="top" component="KNavigationBar" :opened="true" />
-      </q-page-sticky>
-      <!--
         TimeLine
        -->
       <q-page-sticky position="bottom">
@@ -106,7 +100,27 @@ export default {
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
       if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryViewer')
       // Setup the actions
-      this.registerActivityActions()      
+      this.setActivityBar({ 
+        'default': [
+          { id: 'toggle-globe', icon: 'las la-globe', tooltip: this.$t('mixins.activity.TOGGLE_GLOBE'), handler: { name: 'globe', query: true } },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { id: 'track-position', icon: 'las la-crosshairs', tooltip: this.$t('mixins.activity.TRACK'), handler: () => this.setActivityBarMode('track') },
+          { id: 'search-location', icon: 'las la-search', tooltip: this.$t('mixins.activity.SEARCH'), handler: () => this.setActivityBarMode('search') },
+          { component: 'KLocationInput', map: null, search: false },
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), handler: this.onToggleFullscreen }
+        ],
+        'track': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KPositionIndicator' }
+        ],
+        'search': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KLocationInput' }
+        ],
+      })
+      //this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },
     getViewKey () {
