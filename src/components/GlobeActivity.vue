@@ -8,12 +8,6 @@
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
-      <!--
-        TimeLine
-       -->
-      <q-page-sticky position="bottom">
-        <k-opener-proxy position="bottom" component="KTimeline" />
-      </q-page-sticky>
        <!--
         Extra components
        -->  
@@ -72,31 +66,36 @@ export default {
       if (!token) return
       // Wait until viewer is ready
       await this.initializeGlobe(token)
+      // Setup the top pane
+      this.setTopPane({ 
+        'default': [
+          { id: 'map-toggle', icon: 'las la-map', tooltip: this.$t('mixins.activity.TOGGLE_MAP'), route: { name: 'map', query: true } },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { id: 'track-position', icon: 'las la-crosshairs', tooltip: this.$t('mixins.activity.TRACK'), handler: () => this.setTopPaneMode('track') },
+          { id: 'search-location', icon: 'las la-search', tooltip: this.$t('mixins.activity.SEARCH'), handler: () => this.setTopPaneMode('search') },
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), handler: this.onToggleFullscreen }
+        ],
+        'track': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setTopPaneMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KPositionIndicator' }
+        ],
+        'search': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setTopPaneMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KLocationInput' }
+        ],
+      })
+      // Set the bottom pane
+      this.setBottomPane([
+          { component: 'KTimeline' }
+        ]
+      )
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
-      // Setup the actions
-      this.setActivityBar({ 
-        'default': [
-          { id: 'map-toggle', icon: 'las la-map', tooltip: this.$t('mixins.activity.TOGGLE_MAP'), handler: { name: 'map', query: true } },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { id: 'track-position', icon: 'las la-crosshairs', tooltip: this.$t('mixins.activity.TRACK'), handler: () => this.setActivityBarMode('track') },
-          { id: 'search-location', icon: 'las la-search', tooltip: this.$t('mixins.activity.SEARCH'), handler: () => this.setActivityBarMode('search') },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), handler: this.onToggleFullscreen }
-        ],
-        'track': [
-          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { component: 'KPositionIndicator' }
-        ],
-        'search': [
-          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { component: 'KLocationInput' }
-        ],
-      }, this.mode)    
       utils.sendEmbedEvent('globe-ready')
     },
     getViewKey () {
@@ -117,7 +116,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))

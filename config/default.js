@@ -78,6 +78,13 @@ module.exports = {
   },
   layout: {
     view: 'lhh LpR lff',
+    topPane: {
+      opener: true,
+      visible: true
+    },
+    bottomPane: {
+      opener: true
+    },
     leftDrawer: {
       behavior: 'mobile',
       component: {
@@ -160,9 +167,9 @@ module.exports = {
       maxZoom: 21,
       center: [47, 3],
       zoom: 6,
-      maxBounds: [ [-90, -180], [90, 180] ],
+      maxBounds: [[-90, -180], [90, 180]],
       maxBoundsViscosity: 0.25,
-      timeDimension: true,
+      timeDimension: true
     },
     // Default GeoJSON layer style for polygons/lines
     featureStyle: {
@@ -201,7 +208,7 @@ module.exports = {
     cluster: { disableClusteringAtZoom: 18 },
     fileLayers: {
       fileSizeLimit : 1024 * 1024,  // 1GB
-      formats: [ '.geojson', '.kml', '.gpx' ]
+      formats: ['.geojson', '.kml', '.gpx']
     }
   },
   globe: {

@@ -8,12 +8,6 @@
         <q-resize-observer @resize="onMapResized" />
       </div>
       <!--
-        TimeLine
-       -->
-      <q-page-sticky position="bottom">
-        <k-opener-proxy position="bottom" component="KTimeline" />
-      </q-page-sticky>
-      <!--
         ColorLegend
        -->
       <q-page-sticky position="left" :offset="[18, 0]">
@@ -93,33 +87,38 @@ export default {
       this.clearNavigationBar()
       // Wait until map is ready
       await this.initializeMap()
+      // Setup the top pane
+      this.setTopPane({ 
+        'default': [
+          { id: 'toggle-globe', icon: 'las la-globe', tooltip: this.$t('mixins.activity.TOGGLE_GLOBE'), route: { name: 'globe', query: true } },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { id: 'track-position', icon: 'las la-crosshairs', tooltip: this.$t('mixins.activity.TRACK'), handler: () => this.setTopPaneMode('track') },
+          { id: 'search-location', icon: 'las la-search', tooltip: this.$t('mixins.activity.SEARCH'), handler: () => this.setTopPaneMode('search') },
+          { component: 'KLocationInput', map: null, search: false },
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), handler: this.onToggleFullscreen }
+        ],
+        'track': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setTopPaneMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KPositionIndicator' }
+        ],
+        'search': [
+          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setTopPaneMode('default') },
+          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
+          { component: 'KLocationInput' }
+        ],
+      })
+      // Set the bottom pane
+      this.setBottomPane([
+          { component: 'KTimeline' }
+        ]
+      )
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
       if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryViewer')
-      // Setup the actions
-      this.setActivityBar({ 
-        'default': [
-          { id: 'toggle-globe', icon: 'las la-globe', tooltip: this.$t('mixins.activity.TOGGLE_GLOBE'), handler: { name: 'globe', query: true } },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { id: 'track-position', icon: 'las la-crosshairs', tooltip: this.$t('mixins.activity.TRACK'), handler: () => this.setActivityBarMode('track') },
-          { id: 'search-location', icon: 'las la-search', tooltip: this.$t('mixins.activity.SEARCH'), handler: () => this.setActivityBarMode('search') },
-          { component: 'KLocationInput', map: null, search: false },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: this.$t('mixins.activity.TOGGLE_FULLSCREEN'), handler: this.onToggleFullscreen }
-        ],
-        'track': [
-          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { component: 'KPositionIndicator' }
-        ],
-        'search': [
-          { id: 'back', icon: 'las la-arrow-left', handler: () => this.setActivityBarMode('default') },
-          { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
-          { component: 'KLocationInput' }
-        ],
-      })
       //this.registerActivityActions()      
       utils.sendEmbedEvent('map-ready')
     },
@@ -164,7 +163,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
     this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
     this.$options.components['k-timeline'] = this.$load('KTimeline')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
