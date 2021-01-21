@@ -156,10 +156,14 @@ module.exports = {
       default: [
         { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe', query: true } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        /* Only for example purpose
+        { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
+        { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
         { id: 'track-position', icon: 'las la-crosshairs', tooltip: 'mixins.activity.TRACK', handler: { name: 'setTopPaneMode', params: ['track'] } },
         { id: 'search-location', icon: 'las la-search', tooltip: 'mixins.activity.SEARCH', handler: { name: 'setTopPaneMode', params: ['search'] } },
         { component: 'KLocationInput', map: null, search: false },
-        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', handler: { name: 'onToggleFullscreen' } }
+        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
       ],
       track: [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -175,13 +179,35 @@ module.exports = {
     bottomPane: [
       { component: 'KTimeline' }
     ],
-    tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
     layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
     featuresChunkSize: 5000
   },
   globeActivity: {
-    tools: ['map', 'track-location', 'location-bar', 'vr', 'fullscreen'],
+    topPane: {
+      default: [
+        { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map', query: true } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { id: 'track-position', icon: 'las la-crosshairs', tooltip: 'mixins.activity.TRACK', handler: { name: 'setTopPaneMode', params: ['track'] } },
+        { id: 'search-location', icon: 'las la-search', tooltip: 'mixins.activity.SEARCH', handler: { name: 'setTopPaneMode', params: ['search'] } },
+        { component: 'KLocationInput', map: null, search: false },
+        { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
+        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
+      ],
+      track: [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { component: 'KPositionIndicator' }
+      ],
+      search: [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { component: 'KLocationInput' }
+      ]
+    },
+    bottomPane: [
+      { component: 'KTimeline' }
+    ],
     actions: ['probe-location']
   },
   map: {
