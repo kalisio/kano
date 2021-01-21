@@ -88,7 +88,10 @@ export default {
       // Wait until map is ready
       await this.initializeMap()
       // Setup the top pane
-      this.setTopPane({ 
+   //   this.setTopPane(this.$config('mapActivity.topPane'))
+   //   this.setBottomPane(this.$config('mapActivity.bottomPane'))
+      
+      /*this.setTopPane({ 
         'default': [
           { id: 'toggle-globe', icon: 'las la-globe', tooltip: this.$t('mixins.activity.TOGGLE_GLOBE'), route: { name: 'globe', query: true } },
           { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
@@ -107,12 +110,12 @@ export default {
           { component: 'QSeparator', vertical: true,  color: 'lightgrey' },
           { component: 'KLocationInput' }
         ],
-      })
+      })*/
       // Set the bottom pane
-      this.setBottomPane([
+      /*this.setBottomPane([
           { component: 'KTimeline' }
         ]
-      )
+      )*/
       // Setup the right pane
       this.setRightDrawer('catalog/KCatalogPanel', this.$data)
       // Setup the widgets

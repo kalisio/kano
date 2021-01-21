@@ -152,6 +152,29 @@ module.exports = {
     ]
   },
   mapActivity: {
+    topPane: {
+      default: [
+        { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe', query: true } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { id: 'track-position', icon: 'las la-crosshairs', tooltip: 'mixins.activity.TRACK', handler: { name: 'setTopPaneMode', params: ['track'] } },
+        { id: 'search-location', icon: 'las la-search', tooltip: 'mixins.activity.SEARCH', handler: { name: 'setTopPaneMode', params: ['search'] } },
+        { component: 'KLocationInput', map: null, search: false },
+        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', handler: { name: 'onToggleFullscreen' } }
+      ],
+      track: [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { component: 'KPositionIndicator' }
+      ],
+      search: [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+        { component: 'KLocationInput' }
+      ]
+    },
+    bottomPane: [
+      { component: 'KTimeline' }
+    ],
     tools: ['globe', 'track-location', 'location-bar', 'fullscreen'],
     actions: ['probe-location', 'create-layer'],
     layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
