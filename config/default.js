@@ -27,11 +27,11 @@ const gateway = domain.replace('kano', 'api')
 
 module.exports = {
   // Special alias to host loopback interface in cordova
-  //domain: 'http://10.0.2.2:8081',
+  // domain: 'http://10.0.2.2:8081',
   // If using port forwarding
-  //domain: 'http://localhost:8081',
+  // domain: 'http://localhost:8081',
   // If using local IP on WiFi router
-  //domain: 'http://192.168.1.16:8081',
+  // domain: 'http://192.168.1.16:8081',
   domain,
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version: require('../package.json').version,
@@ -51,7 +51,7 @@ module.exports = {
   publisherWebsite: 'https://www.kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
-    //default: 'en',
+    // default: 'en',
     fallback: 'en'
   },
   logs: {
@@ -67,7 +67,7 @@ module.exports = {
     },
     logout: {
       links: [
-        { id: 'login-link', label: 'KLogout.LOG_IN_AGAIN_LINK', route: { name: 'login' } },
+        { id: 'login-link', label: 'KLogout.LOG_IN_AGAIN_LINK', route: { name: 'login' } }
       ]
     },
     changeEndpoint: {
@@ -86,10 +86,16 @@ module.exports = {
       opener: true
     },
     leftDrawer: {
+      content: [
+        { component: 'QImg', src: 'statics/kano-logo.png' },
+        { component: 'Settings' },
+        { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px;' },
+        { component: 'layout/KAbout' },
+        { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
+        { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px;' },
+        { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
+      ],
       behavior: 'mobile',
-      component: {
-        name: 'layout/KSideNav'
-      },
       opener: true
     },
     rightDrawer: {
@@ -97,33 +103,9 @@ module.exports = {
       opener: true
     }
   },
-  sideNav: {
-    banner: 'kano-logo-black-256x84.png',
-    components: {
-      // Now managed through the navbar
-      //user_actions: 'layout/KLinksPanel',
-      app_settings: 'Settings',
-      app_about: 'layout/KAbout',
-      app_logout: 'layout/KLinksPanel'
-    }
-  },
-  user_actions: {
-    links: [
-      { }, // separator
-      { label: 'sideNav.MAP', icon: 'las la-map', route: { name: 'map', query: true } },
-      { label: 'sideNav.GLOBE', icon: 'las la-mountain', route: { name: 'globe', query: true } }
-    ]
-  },
-  app_logout: {
-    links: [
-      { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } } },
-      { }, // separator
-      { id: 'logout', label: 'sideNav.LOGOUT', icon: 'las la-sign-out-alt', route: { name: 'logout' } }
-    ]
-  },
   mapCatalog: {
     categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group', 
+      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group',
         options: { exclusive: true, filter: { type: 'BaseLayer' } } },
       { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
@@ -256,19 +238,19 @@ module.exports = {
     infobox: {},
     cluster: { disableClusteringAtZoom: 18 },
     fileLayers: {
-      fileSizeLimit : 1024 * 1024,  // 1GB
+      fileSizeLimit: 1024 * 1024, // 1GB
       formats: ['.geojson', '.kml', '.gpx']
     }
   },
   globe: {
     viewer: {
-      sceneMode : 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
-      sceneModePicker : false,
-      scene3DOnly : true,
-      homeButton : false,
-      geocoder : false,
-      navigationHelpButton : false,
-      baseLayerPicker : false,
+      sceneMode: 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
+      sceneModePicker: false,
+      scene3DOnly: true,
+      homeButton: false,
+      geocoder: false,
+      navigationHelpButton: false,
+      baseLayerPicker: false,
       vrButton: false,
       fullscreenButton: false,
       animation: false,
@@ -276,7 +258,7 @@ module.exports = {
       creditContainer: 'globe-credit'
     },
     fileLayers: {
-      clearOnDrop : false,
+      clearOnDrop: false,
       flyToOnDrop: true,
       clampToGround: true
     },
@@ -301,14 +283,14 @@ module.exports = {
     },
     tooltip: {
       options: {
-        showBackground : true,
+        showBackground: true,
         backgroundColor: 'Cesium.Color.WHITE',
-        font : '14px monospace',
-        fillColor : 'Cesium.Color.BLACK',
-        outlineColor : 'Cesium.Color.BLACK',
-        horizontalOrigin : 'Cesium.HorizontalOrigin.LEFT',
-        verticalOrigin : 'Cesium.VerticalOrigin.CENTER',
-        pixelOffset : {
+        font: '14px monospace',
+        fillColor: 'Cesium.Color.BLACK',
+        outlineColor: 'Cesium.Color.BLACK',
+        horizontalOrigin: 'Cesium.HorizontalOrigin.LEFT',
+        verticalOrigin: 'Cesium.VerticalOrigin.CENTER',
+        pixelOffset: {
           type: 'Cesium.Cartesian2',
           options: [32, -32]
         }
@@ -318,14 +300,14 @@ module.exports = {
     popup: {
       pick: [],
       options: {
-        showBackground : true,
+        showBackground: true,
         backgroundColor: 'Cesium.Color.WHITE',
-        font : '14px monospace',
-        fillColor : 'Cesium.Color.BLACK',
-        outlineColor : 'Cesium.Color.BLACK',
-        horizontalOrigin : 'Cesium.HorizontalOrigin.CENTER',
-        verticalOrigin : 'Cesium.VerticalOrigin.BOTTOM',
-        pixelOffset : {
+        font: '14px monospace',
+        fillColor: 'Cesium.Color.BLACK',
+        outlineColor: 'Cesium.Color.BLACK',
+        horizontalOrigin: 'Cesium.HorizontalOrigin.CENTER',
+        verticalOrigin: 'Cesium.VerticalOrigin.BOTTOM',
+        pixelOffset: {
           type: 'Cesium.Cartesian2',
           options: [0, -64]
         }
