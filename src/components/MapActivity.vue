@@ -33,7 +33,6 @@ import L from 'leaflet'
 import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
-import moment from 'moment'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import appHooks from '../main.hooks'
@@ -89,7 +88,7 @@ export default {
       // Setup the panes
       this.setTopPane(this.$config('mapActivity.topPane'))
       this.setBottomPane(this.$config('mapActivity.bottomPane'))
-      this.setRightDrawer('catalog/KCatalogPanel', this.$data)
+      this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
