@@ -89,6 +89,7 @@ export default {
       this.setTopPane(this.$config('mapActivity.topPane'))
       this.setBottomPane(this.$config('mapActivity.bottomPane'))
       this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
+      this.setFabActions(this.$config('mapActivity.fab'))
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)

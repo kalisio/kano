@@ -161,8 +161,11 @@ module.exports = {
     bottomPane: [
       { component: 'KTimeline' }
     ],
-    actions: ['probe-location', 'create-layer'],
-    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
+    fab: [
+      { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: { name: 'onCreateLayer' } },
+      { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: { name: 'onImportLayer' } },
+      { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+    ],
     featuresChunkSize: 5000
   },
   globeActivity: {
@@ -190,7 +193,9 @@ module.exports = {
     bottomPane: [
       { component: 'KTimeline' }
     ],
-    actions: ['probe-location']
+    fab: [
+      { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+    ]
   },
   map: {
     viewer: {

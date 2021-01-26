@@ -70,6 +70,7 @@ export default {
       this.setTopPane(this.$config('globeActivity.topPane'))
       this.setBottomPane(this.$config('globeActivity.bottomPane'))
       this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
+      this.setFabActions(this.$config('globeActivity.fab'))
       // Setup the widgets
       this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
       this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
