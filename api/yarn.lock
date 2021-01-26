@@ -360,9 +360,9 @@
     passport "^0.4.0"
     uuid "^3.1.0"
 
-"@feathersjs/authentication@https://github.com/kalisio/authentication.git":
+"@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -526,10 +526,10 @@
     debug "^4.1.0"
     uuid "^8.2.0"
 
-"@kalisio/kdk@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.2.0.tgz#6d133b60d04034e48f454d737243b7b7322e7da4"
-  integrity sha512-rFJfaqQGK9J1qqqKJ2abeEniIQhuElcjq0/Z51m/fCIRWmb50suHvrV2Vfp7Q5j98R1fCnEu+Yi8It6dtHbEjw==
+"@kalisio/kdk@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.2.1.tgz#8881b002ed5e6f03c6a92c0ef9f43acecfc66223"
+  integrity sha512-J/g3pWWGcbUPLMFe9dxhs2cGMMNgnp5UTynTzFvOW8R6rOH3whDsD9o+6z0TiwrsGBbj5VBMfEoTINa9qFk+yg==
   dependencies:
     "@feathersjs/authentication" "https://github.com/kalisio/authentication.git"
     "@feathersjs/authentication-jwt" "^2.0.1"
@@ -556,7 +556,7 @@
     feathers-authentication-management "^2.0.1"
     feathers-blob "^1.4.0"
     feathers-hooks-common "^3.0.0"
-    feathers-mailer "^2.0.0"
+    feathers-mailer "^3.0.0"
     feathers-mongodb "^2.8.0"
     feathers-mongodb-management "^0.1.0"
     geotiff "^1.0.0-beta.6"
@@ -570,7 +570,6 @@
     multer "^1.3.0"
     node-fetch "^2.6.0"
     node-geocoder "^3.21.1"
-    nodemailer-smtp-transport "^2.7.4"
     passport-github "^1.1.0"
     passport-google-oauth20 "^2.0.0"
     passport-oauth2-cognito "^0.1.0"
@@ -3383,14 +3382,14 @@ feathers-hooks@^2.0.1:
     feathers-commons "^0.8.6"
     uberproto "^1.2.0"
 
-feathers-mailer@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/feathers-mailer/-/feathers-mailer-2.0.0.tgz#a913363082a3c66ea50213c03fda902b5d011390"
-  integrity sha512-ksM9ZUCtPZQVLEC8pZpFeKyhTddlW7QYljQ5Ta2J/yGHYVzEg8G6APvnh3r7OGfViMxixBvq+pXz7D2E+luNhQ==
+feathers-mailer@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/feathers-mailer/-/feathers-mailer-3.0.1.tgz#e4b798d260087a9c49845293b608d5d998a995a5"
+  integrity sha512-IC78GDfW4df4fi6VYIzOIBkJgzm1CyDdJW8BN9tnPUjuygPkp17AS/w5ASY4WvgOczRJZKZgD0nZEa2V5JlL7A==
   dependencies:
-    debug "^2.2.0"
-    nodemailer "^4.0.0"
-    uberproto "^1.2.0"
+    debug "^3.1.0"
+    nodemailer "^4.4.2"
+    uberproto "^2.0.0"
 
 "feathers-mongodb-fuzzy-search@https://github.com/kalisio/feathers-mongodb-fuzzy-search.git":
   version "1.0.1"
@@ -4193,19 +4192,6 @@ http-signature@~1.2.0:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
-
-httpntlm@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/httpntlm/-/httpntlm-1.6.1.tgz#ad01527143a2e8773cfae6a96f58656bb52a34b2"
-  integrity sha1-rQFScUOi6Hc8+uapb1hla7UqNLI=
-  dependencies:
-    httpreq ">=0.4.22"
-    underscore "~1.7.0"
-
-httpreq@>=0.4.22:
-  version "0.4.24"
-  resolved "https://registry.yarnpkg.com/httpreq/-/httpreq-0.4.24.tgz#4335ffd82cd969668a39465c929ac61d6393627f"
-  integrity sha1-QzX/2CzZaWaKOUZckprGHWOTYn8=
 
 iconv-lite@0.4.19:
   version "0.4.19"
@@ -5561,33 +5547,7 @@ node-preload@^0.2.1:
   dependencies:
     process-on-spawn "^1.0.0"
 
-nodemailer-fetch@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz#79c4908a1c0f5f375b73fe888da9828f6dc963a4"
-  integrity sha1-ecSQihwPXzdbc/6IjamCj23JY6Q=
-
-nodemailer-shared@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-shared/-/nodemailer-shared-1.1.0.tgz#cf5994e2fd268d00f5cf0fa767a08169edb07ec0"
-  integrity sha1-z1mU4v0mjQD1zw+nZ6CBae2wfsA=
-  dependencies:
-    nodemailer-fetch "1.6.0"
-
-nodemailer-smtp-transport@^2.7.4:
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.7.4.tgz#0d89af019a144a480fd8ecc99997d9f838f13685"
-  integrity sha1-DYmvAZoUSkgP2OzJmZfZ+DjxNoU=
-  dependencies:
-    nodemailer-shared "1.1.0"
-    nodemailer-wellknown "0.1.10"
-    smtp-connection "2.12.0"
-
-nodemailer-wellknown@0.1.10:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/nodemailer-wellknown/-/nodemailer-wellknown-0.1.10.tgz#586db8101db30cb4438eb546737a41aad0cf13d5"
-  integrity sha1-WG24EB2zDLRDjrVGc3pBqtDPE9U=
-
-nodemailer@^4.0.0:
+nodemailer@^4.4.2:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.7.0.tgz#4420e06abfffd77d0618f184ea49047db84f4ad8"
   integrity sha512-IludxDypFpYw4xpzKdMAozBSkzKHmNBvGanUREjJItgJ2NYcK/s8+PggVhj7c2yGFQykKsnnmv1+Aqo0ZfjHmw==
@@ -6085,9 +6045,9 @@ passport-oauth2@1.x.x, passport-oauth2@^1.4.0:
     uid2 "0.0.x"
     utils-merge "1.x.x"
 
-"passport-openidconnect@git+https://github.com/kalisio/passport-openidconnect.git":
+"passport-openidconnect@https://github.com/kalisio/passport-openidconnect":
   version "0.0.2"
-  resolved "git+https://github.com/kalisio/passport-openidconnect.git#82d9f0653334a0538b2c3dc2a8119eefc2eca237"
+  resolved "https://github.com/kalisio/passport-openidconnect#82d9f0653334a0538b2c3dc2a8119eefc2eca237"
   dependencies:
     oauth "0.9.x"
     passport-strategy "1.x.x"
@@ -7110,17 +7070,9 @@ slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
 
-smtp-connection@2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/smtp-connection/-/smtp-connection-2.12.0.tgz#d76ef9127cb23c2259edb1e8349c2e8d5e2d74c1"
-  integrity sha1-1275EnyyPCJZ7bHoNJwujV4tdME=
-  dependencies:
-    httpntlm "1.6.1"
-    nodemailer-shared "1.1.0"
-
-"sns-mobile@https://github.com/kalisio/sns-mobile":
+"sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
   version "1.3.0"
-  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
@@ -7808,11 +7760,6 @@ uid2@0.0.x:
 undefsafe@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-0.0.3.tgz#ecca3a03e56b9af17385baac812ac83b994a962f"
-
-underscore@~1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
-  integrity sha1-a7rwh3UA02vjTsqlhODbn+8DUgk=
 
 uniq@^1.0.1:
   version "1.0.1"

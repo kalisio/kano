@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@feathersjs/client": "^3.5.4",
-    "@kalisio/kdk": "^1.2.0",
+    "@kalisio/kdk": "^1.2.1",
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.6.0",
     "@turf/bbox": "^6.0.1",
