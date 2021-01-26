@@ -1,5 +1,13 @@
 # Changelog
 
+## [prod-v1.1.1](https://github.com/kalisio/kano/tree/prod-v1.1.1) (2021-01-26)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.1.0...prod-v1.1.1)
+
+**Fixed bugs:**
+
+- Click event not sent in iframe API [\#153](https://github.com/kalisio/kano/issues/153)
+
 ## [prod-v1.1.0](https://github.com/kalisio/kano/tree/prod-v1.1.0) (2020-11-10)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.0.0...prod-v1.1.0)
@@ -49,8 +57,8 @@
 - Add Hubeau hydrometry layer [\#94](https://github.com/kalisio/kano/issues/94)
 - Enhance docker build to decrease image size [\#93](https://github.com/kalisio/kano/issues/93)
 - Access map data layers through an API gateway [\#92](https://github.com/kalisio/kano/issues/92)
-- Make style colors configurable [\#90](https://github.com/kalisio/kano/issues/90)
 - Plugin system to enhance customization [\#89](https://github.com/kalisio/kano/issues/89)
+- Make style colors configurable [\#90](https://github.com/kalisio/kano/issues/90)
 - Integrate KNavigationBar [\#87](https://github.com/kalisio/kano/issues/87)
 - Update drawers management [\#86](https://github.com/kalisio/kano/issues/86)
 - Migrate to Quasar 1.0.x [\#85](https://github.com/kalisio/kano/issues/85)
@@ -94,7 +102,6 @@
 - Enhance the deployment method  [\#14](https://github.com/kalisio/kano/issues/14)
 - Create a probe layer [\#13](https://github.com/kalisio/kano/issues/13)
 - Integrate a level controller [\#12](https://github.com/kalisio/kano/issues/12)
-- Improve time controller [\#11](https://github.com/kalisio/kano/issues/11)
 - Make the AppBar invisible [\#10](https://github.com/kalisio/kano/issues/10)
 - Integrate a MapPanel and a GlobePanel on the right of the layout [\#9](https://github.com/kalisio/kano/issues/9)
 - Provide the capability to go fullscreen [\#8](https://github.com/kalisio/kano/issues/8)
@@ -104,6 +111,7 @@
 - Provide the capability to geolocate the user [\#3](https://github.com/kalisio/kano/issues/3)
 - Include a forecast model selector [\#2](https://github.com/kalisio/kano/issues/2)
 - Map and Globe components must be activities [\#1](https://github.com/kalisio/kano/issues/1)
+- Improve time controller [\#11](https://github.com/kalisio/kano/issues/11)
 
 **Fixed bugs:**
 
