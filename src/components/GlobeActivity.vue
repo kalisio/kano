@@ -8,6 +8,10 @@
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
+      <!-- 
+        Target
+       -->
+      <k-target v-if="isTargetVisible" />
        <!--
         Extra components
        -->  
@@ -94,6 +98,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
+    this.$options.components['k-target'] = this.$load('controls/KTarget')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
   },
   mounted () {
