@@ -48,7 +48,6 @@ export default {
     kCoreMixins.refsResolver(['map']),
     kCoreMixins.baseActivity,
     kMapMixins.activity('map'),
-    kMapMixins.geolocation,
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,

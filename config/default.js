@@ -143,26 +143,26 @@ module.exports = {
         { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
         { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
-        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search'] } },
+        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
         { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
         {
           component: 'frame/KMenu',
           icon: 'las la-wrench',
-          tooltip: 'mixinx.activity.CONTROLS',
+          tooltip: 'mixins.activity.TOOLS',
           actionRenderer: 'item',
           content: [
-            { id: 'track-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['track'] } }
+            { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
           ]
         },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
       ],
-      track: [
+      'display-position': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { component: 'KPositionIndicator' }
       ],
-      search: [
+      'search-location': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { component: 'KLocationSearch' }
@@ -184,27 +184,27 @@ module.exports = {
         { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map', query: true } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
-        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search'] } },
+        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
         { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
         {
           component: 'frame/KMenu',
           icon: 'las la-wrench',
-          tooltip: 'mixinx.activity.CONTROLS',
+          tooltip: 'mixins.activity.TOOLS',
           actionRenderer: 'item',
           content: [
-            { id: 'track-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['track'] } }
+            { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
           ]
         },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
         { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
       ],
-      track: [
+      'display-position': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { component: 'KPositionIndicator' }
       ],
-      search: [
+      'search-location': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
         { component: 'QSeparator', vertical: true, color: 'lightgrey' },
         { component: 'KLocationSearch' }

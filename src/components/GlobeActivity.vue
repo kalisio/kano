@@ -33,8 +33,7 @@ export default {
   mixins: [
     kCoreMixins.refsResolver(['globe']),
     kCoreMixins.baseActivity,
-    kMapMixins.activity('globe'),    
-    kMapMixins.geolocation,
+    kMapMixins.activity('globe'),
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
