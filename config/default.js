@@ -133,89 +133,101 @@ module.exports = {
         options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
     ]
   },
-  mapActivity: {
+  'map-activity': {
     topPane: {
-      default: [
-        { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe', query: true } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        /* Only for example purpose
-        { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
-        { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
-        { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
-        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
-        { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
-        {
-          component: 'frame/KMenu',
-          icon: 'las la-wrench',
-          tooltip: 'mixins.activity.TOOLS',
-          actionRenderer: 'item',
-          content: [
-            { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
-          ]
-        },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
-      ],
-      'display-position': [
-        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { component: 'KPositionIndicator' }
-      ],
-      'search-location': [
-        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { component: 'KLocationSearch' }
+      content: {
+        default: [
+          { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe-activity', query: true } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          /* Only for example purpose
+          { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
+          { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
+          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
+          { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
+          { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
+          {
+            component: 'frame/KMenu',
+            icon: 'las la-wrench',
+            tooltip: 'mixins.activity.TOOLS',
+            actionRenderer: 'item',
+            content: [
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
+            ]
+          },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
+        ],
+        'display-position': [
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KPositionIndicator' }
+        ],
+        'search-location': [
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KLocationSearch' }
+        ]
+      }
+    },
+    bottomPane: {
+      content: [
+        { component: 'KTimeline' }
       ]
     },
-    bottomPane: [
-      { component: 'KTimeline' }
-    ],
-    fab: [
-      { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: { name: 'onCreateLayer' } },
-      { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: { name: 'onImportLayer' } },
-      { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
-    ],
+    fab: {
+      actions: [
+        { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: { name: 'onCreateLayer' } },
+        { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: { name: 'onImportLayer' } },
+        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+      ]
+    },
     featuresChunkSize: 5000
   },
-  globeActivity: {
+  'globe-activity': {
     topPane: {
-      default: [
-        { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map', query: true } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
-        { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
-        { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
-        {
-          component: 'frame/KMenu',
-          icon: 'las la-wrench',
-          tooltip: 'mixins.activity.TOOLS',
-          actionRenderer: 'item',
-          content: [
-            { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
-          ]
-        },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
-        { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
-      ],
-      'display-position': [
-        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { component: 'KPositionIndicator' }
-      ],
-      'search-location': [
-        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-        { component: 'KLocationSearch' }
+      content: {
+        default: [
+          { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', query: true } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
+          { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
+          { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
+          {
+            component: 'frame/KMenu',
+            icon: 'las la-wrench',
+            tooltip: 'mixins.activity.TOOLS',
+            actionRenderer: 'item',
+            content: [
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
+            ]
+          },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
+        ],
+        'display-position': [
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KPositionIndicator' }
+        ],
+        'search-location': [
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KLocationSearch' }
+        ]
+      }
+    },
+    bottomPane: {
+      content: [
+        { component: 'KTimeline' }
       ]
     },
-    bottomPane: [
-      { component: 'KTimeline' }
-    ],
-    fab: [
-      { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
-    ]
+    fab: {
+      actions: [
+        { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+      ]
+    }
   },
   map: {
     viewer: {

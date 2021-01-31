@@ -70,13 +70,16 @@ export default {
       // Wait until viewer is ready
       await this.initializeGlobe(token)
       // Setup the panes
-      this.setTopPane(this.$config('globeActivity.topPane'))
-      this.setBottomPane(this.$config('globeActivity.bottomPane'))
+      this.configureTopPane()
+      this.configureBottomPane()
       this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
-      this.setFabActions(this.$config('globeActivity.fab'))
-      // Setup the widgets
-      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
+      this.configureFab()
+      const widgets = [
+        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widgets/KInformationBox', props: this.selection },
+        { name: 'time-series', icon: 'las la-chart-line', component: 'widgets/KTimeSeries', props: this.$data }
+      ]
+      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widgets/KMapillaryViewer' })
+      this.setWindow(widgets)
       utils.sendEmbedEvent('globe-ready')
     },
     getViewKey () {

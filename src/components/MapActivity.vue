@@ -89,14 +89,16 @@ export default {
       // Wait until map is ready
       await this.initializeMap()
       // Setup the panes
-      this.setTopPane(this.$config('mapActivity.topPane'))
-      this.setBottomPane(this.$config('mapActivity.bottomPane'))
+      this.configureTopPane()
+      this.configureBottomPane()
       this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
-      this.setFabActions(this.$config('mapActivity.fab'))
-      // Setup the widgets
-      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
-      if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryViewer')
+      this.configureFab()
+      const widgets = [
+        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widgets/KInformationBox', props: this.selection },
+        { name: 'time-series', icon: 'las la-chart-line', component: 'widgets/KTimeSeries', props: this.$data }
+      ]
+      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widgets/KMapillaryViewer' })
+      this.setWindow(widgets)
       // Notifie the listener
       utils.sendEmbedEvent('map-ready')
     },
