@@ -143,7 +143,7 @@ module.exports = {
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
-          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
+          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: {}, handler: { name: 'onToggleUserLocation' } },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
           {
@@ -156,7 +156,7 @@ module.exports = {
             ]
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -190,7 +190,7 @@ module.exports = {
         default: [
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', query: true } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: true, handler: { name: 'onToggleUserLocation' } },
+          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: {}, handler: { name: 'onToggleUserLocation' } },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
           {
@@ -204,7 +204,7 @@ module.exports = {
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.TOGGLE_FULLSCREEN', toggle: true, handler: { name: 'onToggleFullscreen' } }
+          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
