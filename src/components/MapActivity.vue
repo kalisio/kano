@@ -145,7 +145,7 @@ export default {
     this.$options.components['k-page'] = this.$load('layout/KPage')
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
-    this.$options.components['k-target'] = this.$load('controls/KTarget')
+    this.$options.components['k-target'] = this.$load('control/KTarget')
     // Load extra components
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine

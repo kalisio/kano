@@ -203,7 +203,7 @@ module.exports = {
             ]
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.TOGGLE_VR', toggle: true, handler: { name: 'onToggleVr' } },
+          { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.ENTER_VR', toggle: { tooltip: 'mixins.activity.EXIT_VR' }, handler: { name: 'onToggleVr' } },
           { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
         ],
         'display-position': [

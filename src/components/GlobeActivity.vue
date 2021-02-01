@@ -100,7 +100,7 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-target'] = this.$load('controls/KTarget')
+    this.$options.components['k-target'] = this.$load('control/KTarget')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
   },
   mounted () {
