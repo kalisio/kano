@@ -94,10 +94,10 @@ export default {
       this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
       this.configureFab()
       const widgets = [
-        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widgets/KInformationBox', props: this.selection },
-        { name: 'time-series', icon: 'las la-chart-line', component: 'widgets/KTimeSeries', props: this.$data }
+        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },
+        { name: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', props: this.$data }
       ]
-      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widgets/KMapillaryViewer' })
+      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widget/KMapillaryViewer' })
       this.setWindow(widgets)
       // Notifie the listener
       utils.sendEmbedEvent('map-ready')

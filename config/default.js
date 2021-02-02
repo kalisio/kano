@@ -143,7 +143,7 @@ module.exports = {
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
-          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: {}, handler: { name: 'onToggleUserLocation' } },
+          { component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
           {
@@ -166,7 +166,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { component: 'KLocationSearch' }
+          { component: 'KSearchLocation' }
         ]
       }
     },
@@ -190,7 +190,7 @@ module.exports = {
         default: [
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', query: true } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { id: 'locate-user', icon: 'las la-crosshairs', tooltip: 'mixins.activity.LOCATE_USER', toggle: {}, handler: { name: 'onToggleUserLocation' } },
+          { component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
           {
@@ -214,7 +214,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { component: 'KLocationSearch' }
+          { component: 'KSearchLocation' }
         ]
       }
     },
