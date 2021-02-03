@@ -25,6 +25,218 @@ if (process.env.SUBDOMAIN) {
 // On a developer machine will do domain = gateway = localhost
 const gateway = domain.replace('kano', 'api')
 
+// Default map catalog catagories
+const mapCatalog = {
+  categories: [
+    {
+      name: 'BaseLayers',
+      label: 'KCatalogPanel.BASE_LAYERS',
+      icon: 'las la-layer-group',
+      options: { exclusive: true, filter: { type: 'BaseLayer' } }
+    },
+    {
+      name: 'BusinessLayers',
+      label: 'KCatalogPanel.BUSINESS_LAYERS',
+      icon: 'las la-briefcase',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
+    },
+    {
+      name: 'CapturedLayers',
+      label: 'KCatalogPanel.CAPTURED_LAYERS',
+      icon: 'las la-street-view',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } }
+    },
+    {
+      name: 'OverlayLayers',
+      label: 'KCatalogPanel.OVERLAY_LAYERS',
+      icon: 'las la-map-marker',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
+    },
+    {
+      name: 'MeasureLayers',
+      label: 'KCatalogPanel.MEASURE_LAYERS',
+      icon: 'las la-map-pin',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
+    },
+    {
+      name: 'MeteoLayers',
+      label: 'KCatalogPanel.METEO_LAYERS',
+      icon: 'las la-cloud-sun-rain',
+      component: 'catalog/KWeatherLayersSelector',
+      options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
+    }
+  ]
+}
+
+// Map engine configuration
+const mapEngine = {
+  viewer: {
+    minZoom: 3,
+    maxZoom: 21,
+    center: [47, 3],
+    zoom: 6,
+    maxBounds: [[-90, -180], [90, 180]],
+    maxBoundsViscosity: 0.25,
+    timeDimension: true
+  },
+  // Default GeoJSON layer style for polygons/lines
+  featureStyle: {
+    'stroke-opacity': 1,
+    'stroke-color': 'red',
+    'stroke-width': 3,
+    'fill-opacity': 0.5,
+    'fill-color': 'green'
+  },
+  // Default GeoJSON layer style for polygons/lines edition
+  editFeatureStyle: {
+    'stroke-opacity': 1,
+    'stroke-color': 'red',
+    'stroke-width': 3,
+    'fill-opacity': 0.5,
+    'fill-color': 'green'
+  },
+  // Default GeoJSON layer style for points
+  pointStyle: {
+    'icon-color': '#FFFFFF',
+    'marker-color': '#2196f3',
+    'icon-classes': 'fas fa-circle'
+  },
+  // Default GeoJSON layer style for points edition
+  editPointStyle: {
+    'marker-type': 'circleMarker',
+    radius: 6,
+    'stroke-color': 'red',
+    'stroke-opacity': 1,
+    'fill-opacity': 0.5,
+    'fill-color': 'green'
+  },
+  // Default GeoJSON infobox will display all properties
+  popup: { pick: [] },
+  infobox: {},
+  cluster: { disableClusteringAtZoom: 18 },
+  fileLayers: {
+    fileSizeLimit: 1024 * 1024, // 1GB
+    formats: ['.geojson', '.kml', '.gpx']
+  }
+}
+
+// Default globe catalog categories
+const globeCatalog = {
+  categories: [
+    {
+      name: 'BaseLayers',
+      label: 'KCatalogPanel.BASE_LAYERS',
+      icon: 'las la-layer-group',
+      options: { exclusive: true, filter: { type: 'BaseLayer' } } 
+    },
+    {
+      name: 'TerrainLayers',
+      label: 'KCatalogPanel.TERRAIN_LAYERS',
+      icon: 'las la-mountain',
+      options: { exclusive: true, filter: { type: 'TerrainLayer' } }
+    },
+    {
+      name: 'BusinessLayers',
+      label: 'KCatalogPanel.BUSINESS_LAYERS',
+      icon: 'las la-briefcase',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
+    },
+    {
+      name: 'OverlayLayers',
+      label: 'KCatalogPanel.OVERLAY_LAYERS',
+      icon: 'las la-map-marker',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
+    },
+    {
+      name: 'MeasureLayers',
+      label: 'KCatalogPanel.MEASURE_LAYERS',
+      icon: 'las la-map-pin',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
+    }
+  ]
+}
+
+// Globe engine configuration
+const globeEngine = {
+  viewer: {
+    sceneMode: 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
+    sceneModePicker: false,
+    scene3DOnly: true,
+    homeButton: false,
+    geocoder: false,
+    navigationHelpButton: false,
+    baseLayerPicker: false,
+    vrButton: false,
+    fullscreenButton: false,
+    animation: false,
+    timeline: false,
+    creditContainer: 'globe-credit'
+  },
+  fileLayers: {
+    clearOnDrop: false,
+    flyToOnDrop: true,
+    clampToGround: true
+  },
+  // Default GeoJSON layer style for points/polygons/lines in simple style spec
+  featureStyle: {
+    'marker-symbol': 'marker',
+    'marker-color': '#57D824',
+    stroke: '#FF0000',
+    'fill-color': '#00FF00'
+  },
+  entityStyle: {
+    billboard: {
+      heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND'
+    },
+    label: {
+      heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND',
+      verticalOrigin: 'Cesium.VerticalOrigin.BASELINE'
+    },
+    polyline: {
+      clampToGround: true
+    }
+  },
+  tooltip: {
+    options: {
+      showBackground: true,
+      backgroundColor: 'Cesium.Color.WHITE',
+      font: '14px monospace',
+      fillColor: 'Cesium.Color.BLACK',
+      outlineColor: 'Cesium.Color.BLACK',
+      horizontalOrigin: 'Cesium.HorizontalOrigin.LEFT',
+      verticalOrigin: 'Cesium.VerticalOrigin.CENTER',
+      pixelOffset: {
+        type: 'Cesium.Cartesian2',
+        options: [32, -32]
+      }
+    }
+  },
+  // Default GeoJSON infobox will display all properties
+  popup: {
+    pick: [],
+    options: {
+      showBackground: true,
+      backgroundColor: 'Cesium.Color.WHITE',
+      font: '14px monospace',
+      fillColor: 'Cesium.Color.BLACK',
+      outlineColor: 'Cesium.Color.BLACK',
+      horizontalOrigin: 'Cesium.HorizontalOrigin.CENTER',
+      verticalOrigin: 'Cesium.VerticalOrigin.BOTTOM',
+      pixelOffset: {
+        type: 'Cesium.Cartesian2',
+        options: [0, -64]
+      }
+    }
+  },
+  infobox: {},
+  clusterStyle: {
+    label: {
+      show: true,
+      text: '<%= entities.length.toLocaleString() %>'
+    }
+  }
+}
+
 module.exports = {
   // Special alias to host loopback interface in cordova
   // domain: 'http://10.0.2.2:8081',
@@ -85,6 +297,9 @@ module.exports = {
     bottomPane: {
       opener: true
     },
+    rightPane: {
+      opener: true
+    },
     leftDrawer: {
       content: [
         { component: 'QImg', src: 'statics/kano-logo.png' },
@@ -103,37 +318,7 @@ module.exports = {
       opener: true
     }
   },
-  mapCatalog: {
-    categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group',
-        options: { exclusive: true, filter: { type: 'BaseLayer' } } },
-      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'CapturedLayers', label: 'KCatalogPanel.CAPTURED_LAYERS', icon: 'las la-street-view',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'las la-map-marker',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } },
-      { name: 'MeteoLayers', label: 'KCatalogPanel.METEO_LAYERS', icon: 'las la-cloud-sun-rain', component: 'catalog/KWeatherLayersSelector',
-        options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } } }
-    ]
-  },
-  globeCatalog: {
-    categories: [
-      { name: 'BaseLayers', label: 'KCatalogPanel.BASE_LAYERS', icon: 'las la-layer-group',
-        options: { exclusive: true, filter: { type: 'BaseLayer' } } },
-      { name: 'TerrainLayers', label: 'KCatalogPanel.TERRAIN_LAYERS', icon: 'las la-mountain',
-        options: { exclusive: true, filter: { type: 'TerrainLayer' } } },
-      { name: 'BusinessLayers', label: 'KCatalogPanel.BUSINESS_LAYERS', icon: 'las la-briefcase',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } } },
-      { name: 'OverlayLayers', label: 'KCatalogPanel.OVERLAY_LAYERS', icon: 'las la-map-marker',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } } },
-      { name: 'MeasureLayers', label: 'KCatalogPanel.MEASURE_LAYERS', icon: 'las la-map-pin',
-        options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } } }
-    ]
-  },
-  'map-activity': {
+  mapActivity: {
     topPane: {
       content: {
         default: [
@@ -182,9 +367,11 @@ module.exports = {
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
       ]
     },
-    featuresChunkSize: 5000
+    engine: mapEngine,
+    catalog: mapCatalog,
+    featuresChunkSize: 5000 // TODO: here or in mapEngine ?
   },
-  'globe-activity': {
+  globeActivity: {
     topPane: {
       content: {
         default: [
@@ -227,136 +414,9 @@ module.exports = {
       actions: [
         { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
       ]
-    }
-  },
-  map: {
-    viewer: {
-      minZoom: 3,
-      maxZoom: 21,
-      center: [47, 3],
-      zoom: 6,
-      maxBounds: [[-90, -180], [90, 180]],
-      maxBoundsViscosity: 0.25,
-      timeDimension: true
     },
-    // Default GeoJSON layer style for polygons/lines
-    featureStyle: {
-      'stroke-opacity': 1,
-      'stroke-color': 'red',
-      'stroke-width': 3,
-      'fill-opacity': 0.5,
-      'fill-color': 'green'
-    },
-    // Default GeoJSON layer style for polygons/lines edition
-    editFeatureStyle: {
-      'stroke-opacity': 1,
-      'stroke-color': 'red',
-      'stroke-width': 3,
-      'fill-opacity': 0.5,
-      'fill-color': 'green'
-    },
-    // Default GeoJSON layer style for points
-    pointStyle: {
-      'icon-color': '#FFFFFF',
-      'marker-color': '#2196f3',
-      'icon-classes': 'fas fa-circle'
-    },
-    // Default GeoJSON layer style for points edition
-    editPointStyle: {
-      'marker-type': 'circleMarker',
-      radius: 6,
-      'stroke-color': 'red',
-      'stroke-opacity': 1,
-      'fill-opacity': 0.5,
-      'fill-color': 'green'
-    },
-    // Default GeoJSON infobox will display all properties
-    popup: { pick: [] },
-    infobox: {},
-    cluster: { disableClusteringAtZoom: 18 },
-    fileLayers: {
-      fileSizeLimit: 1024 * 1024, // 1GB
-      formats: ['.geojson', '.kml', '.gpx']
-    }
-  },
-  globe: {
-    viewer: {
-      sceneMode: 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
-      sceneModePicker: false,
-      scene3DOnly: true,
-      homeButton: false,
-      geocoder: false,
-      navigationHelpButton: false,
-      baseLayerPicker: false,
-      vrButton: false,
-      fullscreenButton: false,
-      animation: false,
-      timeline: false,
-      creditContainer: 'globe-credit'
-    },
-    fileLayers: {
-      clearOnDrop: false,
-      flyToOnDrop: true,
-      clampToGround: true
-    },
-    // Default GeoJSON layer style for points/polygons/lines in simple style spec
-    featureStyle: {
-      'marker-symbol': 'marker',
-      'marker-color': '#57D824',
-      stroke: '#FF0000',
-      'fill-color': '#00FF00'
-    },
-    entityStyle: {
-      billboard: {
-        heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND'
-      },
-      label: {
-        heightReference: 'Cesium.HeightReference.CLAMP_TO_GROUND',
-        verticalOrigin: 'Cesium.VerticalOrigin.BASELINE'
-      },
-      polyline: {
-        clampToGround: true
-      }
-    },
-    tooltip: {
-      options: {
-        showBackground: true,
-        backgroundColor: 'Cesium.Color.WHITE',
-        font: '14px monospace',
-        fillColor: 'Cesium.Color.BLACK',
-        outlineColor: 'Cesium.Color.BLACK',
-        horizontalOrigin: 'Cesium.HorizontalOrigin.LEFT',
-        verticalOrigin: 'Cesium.VerticalOrigin.CENTER',
-        pixelOffset: {
-          type: 'Cesium.Cartesian2',
-          options: [32, -32]
-        }
-      }
-    },
-    // Default GeoJSON infobox will display all properties
-    popup: {
-      pick: [],
-      options: {
-        showBackground: true,
-        backgroundColor: 'Cesium.Color.WHITE',
-        font: '14px monospace',
-        fillColor: 'Cesium.Color.BLACK',
-        outlineColor: 'Cesium.Color.BLACK',
-        horizontalOrigin: 'Cesium.HorizontalOrigin.CENTER',
-        verticalOrigin: 'Cesium.VerticalOrigin.BOTTOM',
-        pixelOffset: {
-          type: 'Cesium.Cartesian2',
-          options: [0, -64]
-        }
-      }
-    },
-    infobox: {},
-    clusterStyle: {
-      label: {
-        show: true,
-        text: '<%= entities.length.toLocaleString() %>'
-      }
-    }
+    engine: globeEngine,
+    catalog: globeCatalog
   },
   routes: require('../src/router/routes')
 }

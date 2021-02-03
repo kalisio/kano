@@ -46,8 +46,8 @@ export default {
   name: 'k-map-activity',
   mixins: [
     kCoreMixins.refsResolver(['map']),
-    kCoreMixins.baseActivity,
-    kMapMixins.activity('map'),
+    kCoreMixins.baseActivity(),
+    kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
@@ -91,7 +91,9 @@ export default {
       // Setup the panes
       this.configureTopPane()
       this.configureBottomPane()
-      this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
+      this.setRightPane([
+        { component: 'catalog/KCatalogPanel', ...this.$data }
+      ])
       this.configureFab()
       const widgets = [
         { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },

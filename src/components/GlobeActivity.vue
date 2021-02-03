@@ -32,8 +32,8 @@ export default {
   name: 'k-globe-activity',
   mixins: [
     kCoreMixins.refsResolver(['globe']),
-    kCoreMixins.baseActivity,
-    kMapMixins.activity('globe'),
+    kCoreMixins.baseActivity(),
+    kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
@@ -72,7 +72,7 @@ export default {
       // Setup the panes
       this.configureTopPane()
       this.configureBottomPane()
-      this.setRightDrawer([{ component: 'catalog/KCatalogPanel', ...this.$data }])
+      this.setRightPane([{ component: 'catalog/KCatalogPanel', ...this.$data }])
       this.configureFab()
       const widgets = [
         { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },
