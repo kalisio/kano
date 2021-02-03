@@ -355,6 +355,11 @@ module.exports = {
         ]
       }
     },
+    rightPane: {
+      content: [
+        { component: 'catalog/KCatalog' }
+      ]
+    },
     bottomPane: {
       content: [
         { component: 'KTimeline' }
@@ -404,6 +409,11 @@ module.exports = {
           { component: 'KSearchLocation' }
         ]
       }
+    },
+    rightPane: {
+      content: [
+        { component: 'catalog/KCatalog' }
+      ]
     },
     bottomPane: {
       content: [

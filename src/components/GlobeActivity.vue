@@ -72,7 +72,7 @@ export default {
       // Setup the panes
       this.configureTopPane()
       this.configureBottomPane()
-      this.setRightPane([{ component: 'catalog/KCatalogPanel', ...this.$data }])
+      this.configureRightPane()
       this.configureFab()
       const widgets = [
         { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },
