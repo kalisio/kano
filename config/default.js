@@ -374,6 +374,7 @@ module.exports = {
     },
     engine: mapEngine,
     catalog: mapCatalog,
+    layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],
     featuresChunkSize: 5000 // TODO: here or in mapEngine ?
   },
   globeActivity: {
