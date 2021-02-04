@@ -153,13 +153,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           IMAGERY: 'Imagerie',
-          IMAGERY_DESCRIPTION: 'Données PlanetSat et IGN BD Ortho fusionnées'
+          IMAGERY_DESCRIPTION: 'Images PlanetSAT et IGN BDORTHO fusionnées'
         }
       },
       en: {
         Layers: {
           IMAGERY: 'Imagery',
-          IMAGERY_DESCRIPTION: 'Merged PlanetSat and IGN BD Ortho'
+          IMAGERY_DESCRIPTION: 'Merged PlanetSAT and IGN BDORTHO images'
         }
       }
     },
@@ -168,7 +168,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'PlanetSat by <a href="https://planetobserver.com/">PlanetObserver</a>, BD Ortho <a href="http://www.ign.fr/">by IGN</a> contributors',
+    attribution: 'PlanetSAT by <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO by <a href="http://www.ign.fr/">IGN</a>',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',

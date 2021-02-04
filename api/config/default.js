@@ -49,7 +49,7 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kano.kalisio.xyz'
+  domain = 'https://kano.prod.kalisio.com'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
@@ -134,14 +134,10 @@ module.exports = {
   },
   distribution: { // Distribute data services
     services: (service) => service.path.includes('catalog') ||
-                            service.path.includes('hubeau-stations') ||
-                            service.path.includes('hubeau-observations') ||
-                            service.path.includes('openaq-stations') ||
-                            service.path.includes('openaq-measurements') ||
-                            service.path.includes('teleray-sensors') ||
-                            service.path.includes('teleray-measurements') ||
-                            service.path.includes('vigicrues-sections') ||
-                            service.path.includes('vigicrues-forecasts') ||
+                            service.path.includes('hubeau') ||
+                            service.path.includes('openaq') ||
+                            service.path.includes('teleray') ||
+                            service.path.includes('vigicrues') ||
                             service.path.includes('openradiation'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,

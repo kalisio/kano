@@ -28,8 +28,9 @@ check_code $? "Building the api"
 
 # Build the client
 cd .. && yarn build ##> build.log 2>&1
-check_code $? "Builing the client"
-tail -n 24 build.log 
+EXIT_CODE=$? 
+tail -n 24 build.log
+check_code $EXIT_CODE "Builing the client"
 
 # Create an archive to speed docker build process
 cd ../..
@@ -71,8 +72,11 @@ done
 # Copy the ssh config file
 # Note: it does not seem necessary to restart the service (service sshd reload)
 cp workspace/$FLAVOR/ssh.config ~/.ssh/config
-# Deploy the stack
-ssh REMOTE_SERVER 'export BUILD_BUCKET='"'$BUILD_BUCKET'"';'"cd kargo; ./kargo remove $APP; ./kargo pull; ./kargo configure; ./kargo deploy $APP; ./kargo exec test-$APP"
-check_code $? "Deploying the app"
+# Deploy the stack except in prod
+if [ $FLAVOR != "prod" ]
+then
+	ssh REMOTE_SERVER 'export BUILD_BUCKET='"'$BUILD_BUCKET'"';'"cd kargo; ./kargo remove $APP; ./kargo pull; ./kargo configure; ./kargo deploy $APP; ./kargo exec test-$APP"
+	check_code $? "Deploying the app"
+fi
 
 travis_fold end "deploy"
