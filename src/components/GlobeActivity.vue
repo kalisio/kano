@@ -84,7 +84,7 @@ export default {
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.appName.toLowerCase() + `-view`
+      return this.geAppName.toLowerCase() + `-view`
     },
     async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')

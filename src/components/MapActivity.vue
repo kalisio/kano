@@ -104,7 +104,7 @@ export default {
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.appName.toLowerCase() + `-view`
+      return this.geAppName().toLowerCase() + `-view`
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
