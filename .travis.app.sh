@@ -72,11 +72,8 @@ done
 # Copy the ssh config file
 # Note: it does not seem necessary to restart the service (service sshd reload)
 cp workspace/$FLAVOR/ssh.config ~/.ssh/config
-# Deploy the stack except in prod
-if [ $FLAVOR != "prod" ]
-then
-	ssh REMOTE_SERVER 'export BUILD_BUCKET='"'$BUILD_BUCKET'"';'"cd kargo; ./kargo remove $APP; ./kargo pull; ./kargo configure; ./kargo deploy $APP; ./kargo exec test-$APP"
-	check_code $? "Deploying the app"
-fi
+# Deploy the stack
+ssh REMOTE_SERVER 'export BUILD_BUCKET='"'$BUILD_BUCKET'"';'"cd /mnt/share/kargo; ./kargo remove $APP; ./kargo pull; ./kargo configure; ./kargo deploy $APP; ./kargo exec test-$APP"
+check_code $? "Deploying the app"
 
 travis_fold end "deploy"
