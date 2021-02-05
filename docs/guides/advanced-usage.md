@@ -12,20 +12,16 @@ To avoid the burden of developing a completely new application for every mapping
 
 This **iframe** offers an API so that you can dynamically control the behaviour and the content of Kano, as well as how the embedding application reacts in real-time to changes in Kano, a.k.a [micro frontend](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16). You can read more about the underlying concepts in this [article](https://blog.feathersjs.com/a-use-case-of-microservices-with-feathersjs-building-a-geospatial-platform-56373604db71). 
 
-The API is a subset of the internal Kano components API exposing:
-* [2D map mixins](https://kalisio.github.io/kdk/api/map/map-mixins.html)
-* [3D globe mixins](https://kalisio.github.io/kdk/api/map/globe-mixins.html)
-
-It uses [post-robot](https://github.com/krakenjs/post-robot) to
+The [API](../reference/api.md) is a subset of the internal Kano components and uses [post-robot](https://github.com/krakenjs/post-robot) to
 1. select which is the target component
     * event name = `map` for 2D map and `globe` for 3D globe 
 2. transform external method calls to internal calls using the following event payload
-    * the `command` property is the mixin method name
-    * the `args` property is the expected method arguments
+    * the `command` property is the mixin method name (e.g. `isLayerVisible`)
+    * the `args` property is the expected method arguments (e.g. a string, an object or an array when multiple arguments are required)
 3. retrieve internal method call result externally
-    * event response data is the method result object
+    * event response `data` is the method result object
 4. retrieve internal property externally
-    * event response data is the property value
+    * event response `data` is the returned property value
 
 ::: tip
 Event messaging using **post-robot** is always async because it relies on the [postMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) under-the-hood.
@@ -42,6 +38,7 @@ You must use the same version of the **post-robot** library as the one used by *
 In addition to the events used to access mixin methods there are a couple of dedicated events:
 * `kano-ready`: to be listened by integrating application to know when the Kano application has been initialized in the iframe so that you can safely use the API
 * `setLocalStorage`: listened by Kano to set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
+* `setConfiguration`: listened by Kano to set key/value pairs to override its configuration, typically useful to configure available actions
 * `kano-login`: to be listened by integrating application to know when the user has been authenticated in the Kano application
 * `kano-logout`: to be listened by integrating application to know when the user has been unauthenticated in the Kano application
 * `map-ready`: to be listened by integrating application to know when the 2D map component has been initialized in the Kano application so that you can safely use the underlying API
@@ -86,6 +83,10 @@ Here is a simple code sample:
 ```
 
 A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
+
+::: warning
+Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
+:::
 
 ## Developing in Kano
 

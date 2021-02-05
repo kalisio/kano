@@ -28,8 +28,9 @@ check_code $? "Building the api"
 
 # Build the client
 cd .. && yarn build ##> build.log 2>&1
-check_code $? "Builing the client"
-tail -n 24 build.log 
+EXIT_CODE=$? 
+tail -n 24 build.log
+check_code $EXIT_CODE "Builing the client"
 
 # Create an archive to speed docker build process
 cd ../..
