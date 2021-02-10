@@ -237,6 +237,12 @@ const globeEngine = {
   }
 }
 
+const widgets = [
+  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
+  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widget/KMapillaryViewer' }
+]
+
 module.exports = {
   // Special alias to host loopback interface in cordova
   // domain: 'http://10.0.2.2:8081',
@@ -365,6 +371,9 @@ module.exports = {
         { component: 'KTimeline' }
       ]
     },
+    window: {
+      widgets: widgets
+    },
     fab: {
       actions: [
         { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: { name: 'onCreateLayer' } },
@@ -420,6 +429,9 @@ module.exports = {
       content: [
         { component: 'KTimeline' }
       ]
+    },
+    window: {
+      widget: widgets
     },
     fab: {
       actions: [

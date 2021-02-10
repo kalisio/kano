@@ -63,23 +63,13 @@ export default {
   },
   methods: {
     async refreshActivity () {
-      this.clearActivity()
+      this.condifureActivity()
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
       // Wait until viewer is ready
       await this.initializeGlobe(token)
-      // Setup the panes
-      this.configureTopPane()
-      this.configureBottomPane()
-      this.configureRightPane()
-      this.configureFab()
-      const widgets = [
-        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },
-        { name: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', props: this.$data }
-      ]
-      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widget/KMapillaryViewer' })
-      this.setWindow(widgets)
+      // Notifie the listener
       utils.sendEmbedEvent('globe-ready')
     },
     getViewKey () {

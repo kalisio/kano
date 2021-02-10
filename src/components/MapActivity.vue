@@ -85,20 +85,9 @@ export default {
   },
   methods: {
     async refreshActivity () {  
-      this.clearActivity()
+      this.configureActivity()
       // Wait until map is ready
       await this.initializeMap()
-      // Setup the panes
-      this.configureTopPane()
-      this.configureBottomPane()
-      this.configureRightPane()
-      this.configureFab()
-      const widgets = [
-        { name: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', props: this.selection },
-        { name: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', props: this.$data }
-      ]
-      if (this.mapillaryClientID) widgets.push({ name: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widget/KMapillaryViewer' })
-      this.setWindow(widgets)
       // Notifie the listener
       utils.sendEmbedEvent('map-ready')
     },
