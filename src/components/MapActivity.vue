@@ -141,6 +141,8 @@ export default {
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
     this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
+    // Refresh the activity
+    this.refreshActivity()
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)

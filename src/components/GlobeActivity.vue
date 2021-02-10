@@ -92,6 +92,8 @@ export default {
     this.$options.components['k-page'] = this.$load('layout/KPage')
     this.$options.components['k-target'] = this.$load('control/KTarget')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
+    // Refresh the activity
+    this.refreshActivity()
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
