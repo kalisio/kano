@@ -84,20 +84,25 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'u-wind', 'v-wind' ],
     meteo_model: {
       default: {
-        from: 'PT-1H',
-        weacast: {},
         dynprops: {
+          // weacast props
           element: { strTemplate: '<%- windComponent %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' }
+          model: { strTemplate: '<%- model.name %>' },
+          // geotiff props
+          url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- windComponent %>/10/<%- file %>.cog" }
         }
       },
       sources: [
-        { model: 'gfs-world',         to: 'PT+864000S' },
-        { model: 'arpege-world',      to: 'PT+367200S' },
-        { model: 'arpege-europe',     to: 'PT+367200S' },
-        { model: 'arome-france',      to: 'PT+151200S' },
-        { model: 'arome-france-high', to: 'PT+151200S' }
+        { model: 'gfs-world',         from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'gfs-world',         from: 'PT-1H', to: 'PT+864000S', weacast: {} },
+        { model: 'arpege-world',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-world',      from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arpege-europe',     from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-europe',     from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arome-france',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arome-france',      from: 'PT-1H', to: 'PT+151200S', weacast: {} },
+        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
     },
     leaflet: {
@@ -161,27 +166,33 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           fill: false
         },
         chromajs: {
-          scale: 'OrRd'
+          scale: 'OrRd',
+          domain: [0, 50]
         }
       }
     ],
     meteoElements: [ 'gust' ],
     meteo_model: {
       default: {
-        from: 'PT-1H',
-        weacast: {},
         dynprops: {
+          // weacast props
           element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' }
+          model: { strTemplate: '<%- model.name %>' },
+          // geotiff props
+          url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog" }
         }
       },
       sources: [
-        { model: 'gfs-world',         to: 'PT+864000S' },
-        { model: 'arpege-world',      to: 'PT+367200S' },
-        { model: 'arpege-europe',     to: 'PT+367200S' },
-        { model: 'arome-france',      to: 'PT+151200S' },
-        { model: 'arome-france-high', to: 'PT+151200S' }
+        { model: 'gfs-world',         from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'gfs-world',         from: 'PT-1H', to: 'PT+864000S', weacast: {} },
+        { model: 'arpege-world',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-world',      from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arpege-europe',     from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-europe',     from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arome-france',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arome-france',      from: 'PT-1H', to: 'PT+151200S', weacast: {} },
+        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
     },
     leaflet: {
@@ -244,37 +255,32 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           scale: 'BuPu',
-          classes: [
-            0,
-            1,
-            2,
-            4,
-            10,
-            25,
-            50,
-            100,
-            300
-          ]
+          classes: [ 0, 1, 2, 4, 10, 25, 50, 100, 300 ]
         }
       }
     ],
     meteoElements: [ 'precipitations' ],
     meteo_model: {
       default: {
-        from: 'PT-1H',
-        weacast: {},
         dynprops: {
+          // weacast props
           element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' }
+          model: { strTemplate: '<%- model.name %>' },
+          // geotiff props
+          url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/surface/<%- file %>.cog" }
         }
       },
       sources: [
-        { model: 'gfs-world',         to: 'PT+864000S' },
-        { model: 'arpege-world',      to: 'PT+367200S' },
-        { model: 'arpege-europe',     to: 'PT+367200S' },
-        { model: 'arome-france',      to: 'PT+151200S' },
-        { model: 'arome-france-high', to: 'PT+151200S' }
+        { model: 'gfs-world',         from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'gfs-world',         from: 'PT-1H', to: 'PT+864000S', weacast: {} },
+        { model: 'arpege-world',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-world',      from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arpege-europe',     from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-europe',     from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arome-france',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arome-france',      from: 'PT-1H', to: 'PT+151200S', weacast: {} },
+        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
     },
     leaflet: {
@@ -337,7 +343,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           scale: 'RdBu',
-          invertScale: true
+          invertScale: true,
+          domain: [-20, 50]
         }
       }
     ],
@@ -353,20 +360,25 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteoElements: [ 'temperature' ],
     meteo_model: {
       default: {
-        from: 'PT-1H',
-        weacast: {},
         dynprops: {
+          // weacast props
           element: { strTemplate: '<%- meteoElements[0] %>' },
           forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' }
+          model: { strTemplate: '<%- model.name %>' },
+          // geotiff props
+          url: { strTemplate: "<% const folder = runTime.format('YYYY/MM/DD/HH'); const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %>/<%- folder %>/<%- meteoElements[0] %>/2/<%- file %>.cog" }
         }
       },
       sources: [
-        { model: 'gfs-world',         to: 'PT+864000S' },
-        { model: 'arpege-world',      to: 'PT+367200S' },
-        { model: 'arpege-europe',     to: 'PT+367200S' },
-        { model: 'arome-france',      to: 'PT+151200S' },
-        { model: 'arome-france-high', to: 'PT+151200S' }
+        { model: 'gfs-world',         from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'gfs-world',         from: 'PT-1H', to: 'PT+864000S', weacast: {} },
+        { model: 'arpege-world',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-world',      from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arpege-europe',     from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arpege-europe',     from: 'PT-1H', to: 'PT+367200S', weacast: {} },
+        { model: 'arome-france',      from: 'P-1Y',  to: 'PT-61M',     geotiff: {} },
+        { model: 'arome-france',      from: 'PT-1H', to: 'PT+151200S', weacast: {} },
+        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
     },
     leaflet: {
