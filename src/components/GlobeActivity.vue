@@ -22,8 +22,6 @@
 
 <script>
 import _ from 'lodash'
-import postRobot from 'post-robot'
-import Cesium from 'cesium/Source/Cesium.js'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
@@ -62,8 +60,8 @@ export default {
     }
   },
   methods: {
-    async refreshActivity () {
-      this.condifureActivity()
+    async configureActivty () {
+      kCoreMixins.baseActivity(this.activityName).methods.configureActivity.call(this)
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
@@ -92,8 +90,6 @@ export default {
     this.$options.components['k-page'] = this.$load('layout/KPage')
     this.$options.components['k-target'] = this.$load('control/KTarget')
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
-    // Refresh the activity
-    this.refreshActivity()
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)

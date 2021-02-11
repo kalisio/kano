@@ -33,13 +33,10 @@
 
 <script>
 import _ from 'lodash'
-import L from 'leaflet'
-import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
-import appHooks from '../main.hooks'
 import utils from '../utils'
 
 export default {
@@ -84,8 +81,8 @@ export default {
     }
   },
   methods: {
-    async refreshActivity () {  
-      this.configureActivity()
+    async configureActivity () {  
+      kCoreMixins.baseActivity(this.activityName).methods.configureActivity.call(this)
       // Wait until map is ready
       await this.initializeMap()
       // Notifie the listener
@@ -135,14 +132,11 @@ export default {
     this.$options.components['k-color-legend'] = this.$load('KColorLegend')
     this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
     this.$options.components['k-target'] = this.$load('control/KTarget')
-    // Load extra components
     this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
     this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
-    // Refresh the activity
-    this.refreshActivity()
   },
   mounted () {
     this.$on('current-time-changed', this.onCurrentTimeChanged)
