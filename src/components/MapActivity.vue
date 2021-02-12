@@ -39,11 +39,13 @@ import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.cl
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
 
+const baseActivityMixin = kCoreMixins.baseActivity()
+
 export default {
   name: 'k-map-activity',
   mixins: [
     kCoreMixins.refsResolver(['map']),
-    kCoreMixins.baseActivity(),
+    baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
@@ -81,8 +83,8 @@ export default {
     }
   },
   methods: {
-    async configureActivity () {  
-      kCoreMixins.baseActivity(this.activityName).methods.configureActivity.call(this)
+    async configureActivity () {
+      baseActivityMixin.methods.configureActivity.call(this)
       // Wait until map is ready
       await this.initializeMap()
       // Notifie the listener

@@ -26,11 +26,13 @@ import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
 
+const baseActivityMixin = kCoreMixins.baseActivity()
+
 export default {
   name: 'k-globe-activity',
   mixins: [
     kCoreMixins.refsResolver(['globe']),
-    kCoreMixins.baseActivity(),
+    baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
@@ -60,8 +62,8 @@ export default {
     }
   },
   methods: {
-    async configureActivty () {
-      kCoreMixins.baseActivity(this.activityName).methods.configureActivity.call(this)
+    async configureActivity () {
+      baseActivityMixin.methods.configureActivity.call(this)
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return

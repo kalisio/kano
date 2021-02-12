@@ -62,7 +62,6 @@ const mapCatalog = {
       name: 'MeteoLayers',
       label: 'KCatalogPanel.METEO_LAYERS',
       icon: 'las la-cloud-sun-rain',
-      component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
     }
   ]
@@ -363,7 +362,7 @@ module.exports = {
     },
     rightPane: {
       content: [
-        { component: 'catalog/KCatalog' }
+        { component: 'catalog/KCatalog', bind: '$data' }
       ]
     },
     bottomPane: {
@@ -422,7 +421,7 @@ module.exports = {
     },
     rightPane: {
       content: [
-        { component: 'catalog/KCatalog' }
+        { component: 'catalog/KCatalog', bind: '$data' }
       ]
     },
     bottomPane: {
