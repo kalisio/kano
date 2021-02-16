@@ -367,6 +367,13 @@ module.exports = {
         { component: 'KTimeline' }
       ]
     },
+    page: {
+      content: [{
+        component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
+      }, {
+        component: 'frame/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
+      }]
+    },
     window: {
       widgets: widgets
     },

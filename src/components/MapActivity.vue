@@ -1,32 +1,10 @@
 <template>
   <k-page :padding="false">
     <template v-slot:page-content>
-      <!--
-        Map
-       -->
+      <!-- Map -->
       <div id="map" ref="map" :style="viewStyle">
         <q-resize-observer @resize="onMapResized" />
       </div>
-      <!-- 
-        Target
-       -->
-      <k-target v-if="isTargetVisible" />
-      <!--
-        ColorLegend
-       -->
-      <q-page-sticky position="left" :offset="[18, 0]">
-        <k-color-legend />
-      </q-page-sticky>
-      <!--
-        LevelSlider
-       -->
-      <q-page-sticky position="right" :offset="[40, 0]">
-        <k-level-slider />
-      </q-page-sticky>
-       <!--
-        Extra components
-       -->
-      <component v-for="component in components" :is="component.name" :key="component.name"></component>
     </template>
   </k-page>
 </template>
@@ -75,11 +53,6 @@ export default {
     return {
       kActivity: this,
       kMap: this
-    }
-  },
-  computed: {
-    components () {
-      return _.get(this, 'activityOptions.components', [])
     }
   },
   methods: {
@@ -131,10 +104,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
-    this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
-    this.$options.components['k-target'] = this.$load('control/KTarget')
-    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)

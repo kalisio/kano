@@ -1,21 +1,11 @@
 <template>
   <k-page :padding="false">
     <template v-slot:page-content>
-      <!--
-        Globe
-       -->
+      <!-- Globe -->
       <div id="globe" ref="globe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
-      <!-- 
-        Target
-       -->
-      <k-target v-if="isTargetVisible" />
-       <!--
-        Extra components
-       -->  
-      <component v-for="component in components" :is="component.name" :key="component.name"></component>
     </template>
   </k-page>
 </template>
@@ -56,11 +46,6 @@ export default {
       kGlobe: this
     }
   },
-  computed: {
-    components () {
-      return _.get(this, 'activityOptions.components', [])
-    }
-  },
   methods: {
     async configureActivity () {
       baseActivityMixin.methods.configureActivity.call(this)
@@ -90,8 +75,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-target'] = this.$load('control/KTarget')
-    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
