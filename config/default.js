@@ -372,7 +372,10 @@ module.exports = {
         component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
       }, {
         component: 'frame/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
-      }]
+      } /* Only for example purpose
+      {
+        component: 'frame/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
+      }*/]
     },
     window: {
       widgets: widgets

@@ -120,8 +120,7 @@ function getEmbedProperty (route, data) {
 // Setup post-robot event listenr to call component methods on this route from an external domain
 // If an event is received but the current route is not the same as the event name the new route is pushed first
 function setupEmbedApi (routeName, component) {
-  // Listen to an event named according to current route name
-  postRobot.on(routeName, async (event) => {
+  const listener = async (event) => {
     const router = Store.get('router')
     let route = router.currentRoute
     const data = event.data
@@ -144,7 +143,13 @@ function setupEmbedApi (routeName, component) {
       result = (data.command ? await callEmbedMethod(route, data) : getEmbedProperty(route, data))
     }
     return result
-  })
+  }
+  // Listen to an event named according to current route name
+  postRobot.on(routeName, listener)
+  // This is for backward compatibility because at some point we have changed route naming
+  // in order to make activities configurable (see https://github.com/kalisio/kano/issues/154)
+  // eg 'map' => 'map-activity'
+  if (routeName.endsWith('-activity')) postRobot.on(routeName.replace('-activity', ''), listener)
 }
 
 async function sendEmbedEvent (...args) {
