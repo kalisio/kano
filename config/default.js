@@ -332,7 +332,15 @@ module.exports = {
           { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
           { component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
-          { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
+          {
+            component: 'frame/KMenu',
+            icon: 'star_border',
+            autoClose: false,
+            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            content: [
+              { id: 'favorite-views', component: 'KFavoriteViews' }
+            ]
+          },
           {
             component: 'frame/KMenu',
             icon: 'las la-wrench',
@@ -400,7 +408,15 @@ module.exports = {
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
-          { id: 'set-favorite', icon: 'star_border', tooltip: 'mixins.activity.ADD_FAVORITE', handler: { name: 'onSetFavorite' } },
+          {
+            component: 'frame/KMenu',
+            icon: 'star_border',
+            autoClose: false,
+            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            content: [
+              { id: 'favorite-views', component: 'KFavoriteViews' }
+            ]
+          },
           {
             component: 'frame/KMenu',
             icon: 'las la-wrench',
