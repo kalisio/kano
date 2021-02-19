@@ -395,6 +395,23 @@ module.exports = {
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
       ]
     },
+    layers: {
+      actions: [{
+        component: 'frame/KMenu',
+        actionRenderer: 'item',
+        content: [
+          { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
+          { id: 'save', label: 'mixins.activity.SAVE_LAYER', icon: 'las la-save', handler: 'onSaveLayer' },
+          { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', handler: 'onFilterLayerData' },
+          { id: 'view-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', handler: 'onViewLayerData' },
+          { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', handler: 'onChartLayerData' },
+          { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', handler: 'onEditLayer' },
+          { id: 'edit-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', handler: 'onEditLayerStyle' },
+          { id: 'edit-data', label: 'mixins.activity.STOP_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData' },
+          { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer' }
+        ]
+      }]
+    },
     engine: mapEngine,
     catalog: mapCatalog,
     layerActions: ['zoom-to', 'save', 'edit', 'edit-style', 'filter-data', 'view-data', 'chart-data', 'edit-data', 'remove'],

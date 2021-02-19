@@ -688,8 +688,8 @@
           'locale.default': 'en',
           'layout.leftDrawer.filter': { id: { $ne: 'logout' } },
           'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } },
-          'mapActivity.fab.filter': { id: { $in: ['create-layer', 'import-layer', 'probe-location'] } },
-          'globeActivity.filter': { id: { $nin: ['probe-location'] } }
+          'mapActivity.fab.filter': { id: { $in: ['import-layer', 'probe-location'] } },
+          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } }
         })
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.2oFJhEv306tbkZfzM1tTfFPFjjs5nVu3DWjo5OvGrFc'
