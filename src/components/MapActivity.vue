@@ -20,7 +20,7 @@ import utils from '../utils'
 const baseActivityMixin = kCoreMixins.baseActivity()
 
 export default {
-  name: 'k-map-activity',
+  name: 'map-activity',
   mixins: [
     kCoreMixins.refsResolver(['map']),
     baseActivityMixin,

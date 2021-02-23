@@ -19,7 +19,7 @@ import utils from '../utils'
 const baseActivityMixin = kCoreMixins.baseActivity()
 
 export default {
-  name: 'k-globe-activity',
+  name: 'globe-activity',
   mixins: [
     kCoreMixins.refsResolver(['globe']),
     baseActivityMixin,
