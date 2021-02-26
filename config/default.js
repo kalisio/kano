@@ -335,6 +335,7 @@ module.exports = {
           {
             component: 'frame/KMenu',
             icon: 'star_border',
+            persistent: true,
             autoClose: false,
             tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
