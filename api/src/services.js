@@ -97,7 +97,7 @@ module.exports = async function () {
       })
     }
     // And if we need to initialize some data as well
-    if (!createdLayer && featuresService && (defaultLayer.fileName || defaultLayer.url)) {
+    if (!createdLayer && featuresService && (defaultLayer.url || defaultLayer.fileName)) {
       // Cleanup
       try {
         await featuresService.remove(null, { query: {} })
