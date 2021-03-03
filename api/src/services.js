@@ -2,6 +2,7 @@ import _ from 'lodash'
 import path from 'path'
 import fs from 'fs-extra'
 import zlib from 'zlib'
+import request from 'superagent'
 import kCore, { permissions } from '@kalisio/kdk/core.api'
 import kMap, { createFeaturesService } from '@kalisio/kdk/map.api'
 import packageInfo from '../../package.json'
@@ -96,14 +97,22 @@ module.exports = async function () {
       })
     }
     // And if we need to initialize some data as well
-    if (!createdLayer && featuresService && defaultLayer.fileName) {
+    if (!createdLayer && featuresService && (defaultLayer.fileName || defaultLayer.url)) {
       // Cleanup
       try {
         await featuresService.remove(null, { query: {} })
       } catch (error) {
         console.error(error)
       }
-      if (path.extname(defaultLayer.fileName) === '.gz') {
+      // Data requested from external service ?
+      if (defaultLayer.url) {
+        try {
+          const response = await request.get(defaultLayer.url)
+          await featuresService.create(response.body.features)
+        } catch (error) {
+          console.error(error)
+        }
+      } else if (path.extname(defaultLayer.fileName) === '.gz') {
         const extractedFileName = path.join(path.dirname(defaultLayer.fileName), path.basename(defaultLayer.fileName, '.gz'))
         fs.createReadStream(defaultLayer.fileName)
           .pipe(zlib.createGunzip())
