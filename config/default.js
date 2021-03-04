@@ -422,9 +422,10 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: { name: 'onCreateLayer' } },
-        { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: { name: 'onImportLayer' } },
-        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+        { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: 'onCreateLayer' },
+        { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: 'onImportLayer' },
+        { id: 'connect-layer', icon: 'las la-plug', label: 'mixins.activity.CONNECT_LAYER', handler: 'onConnectLayer' },
+        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
     engine: mapEngine,
@@ -491,7 +492,7 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: { name: 'onProbeLocation' } }
+        { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
     engine: globeEngine,
