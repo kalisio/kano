@@ -271,7 +271,7 @@ const globeEngine = {
 const widgets = [
   { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
   { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'mapillary-viewer', icon: 'img:statics/mapillary-icon.svg', component: 'widget/KMapillaryViewer' }
+  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
 ]
 
 module.exports = {

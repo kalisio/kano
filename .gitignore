@@ -81,6 +81,9 @@ test/page-models/map
 src/tours/core
 src/tours/map
 
+#KDK icons
+src/assets/icons
+
 # Secrets
 secrets.tar
 # SSH key

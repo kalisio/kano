@@ -68,6 +68,19 @@ export default {
     this.nbRequests = 0
     this.nbCompletedRequests = 0
   },
+  created () {
+    // Install the icon mapping function to handle kdk icons
+    this.$q.iconMapFn = (iconName) => {
+      if (iconName.startsWith('kdk:') === true) {
+        // we strip the "kdk:" part
+        const name = iconName.substring(4)
+        // Load the icon
+        const icon = this.$load('icons/' + name, 'asset')
+        // Return the inlined icon
+        return { icon: 'img:' + icon }
+      }
+    }
+  },
   mounted () {
     // Check for error on refresh
     this.showRouteError(this.$route)
