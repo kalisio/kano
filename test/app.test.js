@@ -16,9 +16,6 @@ fixture`app`// declare the fixture
 
 const screens = new pages.Screens()
 const layout = new pages.Layout()
-const sideNav = new pages.SideNav()
-const navigationBar = new pages.NavigationBar()
-const timeline = new pages.Timeline()
 const mapActivity = new pages.MapActivity()
 
 const user = {
@@ -33,23 +30,22 @@ test('Checking the app layout', async test => {
 
   // Check default layout state
   await test.expect(await layout.isLeftDrawerOpened()).notOk()
-  await test.expect(await layout.isRightDrawerOpened()).notOk()
-  await test.expect(await navigationBar.isVisible()).ok()
-  await test.expect(await timeline.isVisible()).notOk()
+  await test.expect(await layout.isRightPaneOpened()).notOk()
+  await test.expect(await layout.isTopPaneOpened()).ok()
+  await test.expect(await layout.isBottomPaneOpened()).notOk()
   // Close the navigation bar
   await layout.clickTopOpener(test)
-  await test.expect(await navigationBar.isVisible()).notOk()
-  // Open the timeline
-  await layout.clickBottomOpener(test)
-  await test.expect(await timeline.isVisible()).ok()
+  await test.expect(await layout.isTopPaneOpened()).notOk()
   // Open the catalog
   await layout.clickRightOpener(test)
-  await test.expect(await layout.isRightDrawerOpened()).ok()
+  await test.expect(await layout.isRightPaneOpened()).ok()
+  // Open the timeline
+  await layout.clickBottomOpener(test)
+  await test.expect(await layout.isBottomPaneOpened()).ok()
+  // Interact with the map
   await mapActivity.click(test)
   await mapActivity.move(test, 100, 100)
-  await test.expect(await layout.isRightDrawerOpened()).notOk()
-  // Open the side nav
+  // Open the left drawer
   await layout.clickLeftOpener(test)
-  await test.expect(await layout.isLeftDrawerOpened()).ok()
-  await sideNav.logout(test)
+  await layout.clickLeftDrawer(test, pages.Layout.LOGOUT)
 })

@@ -683,21 +683,14 @@
     <script>
       var kano = document.getElementById('kano').contentWindow
       postRobot.on('kano-ready', () => {
-        /*
+        // configuration example
         postRobot.send(kano, 'setConfiguration', {
-          appName: '',
           'locale.default': 'en',
-          'sideNav.components.app_logout': undefined,
-          mapActivity: {
-            buttons: ['side-nav'],
-            actions: ['fullscreen', 'geocode', 'probe-location']
-          },
-          globeActivity: {
-            buttons: ['panel'],
-            actions: ['geolocate', 'track-location', 'vr']
-          }
+          'layout.leftDrawer.filter': { id: { $ne: 'logout' } },
+          'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } },
+          'mapActivity.fab.filter': { id: { $in: ['import-layer', 'probe-location'] } },
+          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } }
         })
-        */
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.2oFJhEv306tbkZfzM1tTfFPFjjs5nVu3DWjo5OvGrFc'
         })

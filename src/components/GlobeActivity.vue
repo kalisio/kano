@@ -1,48 +1,29 @@
 <template>
   <k-page :padding="false">
     <template v-slot:page-content>
-      <!--
-        Globe
-       -->
+      <!-- Globe -->
       <div id="globe" ref="globe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
-      <!--
-        NavigationBar
-       -->
-      <q-page-sticky position="top">
-        <k-opener-proxy position="top" component="KNavigationBar" :opened="true" />
-      </q-page-sticky>
-      <!--
-        TimeLine
-       -->
-      <q-page-sticky position="bottom">
-        <k-opener-proxy position="bottom" component="KTimeline" />
-      </q-page-sticky>
-       <!--
-        Extra components
-       -->  
-      <component v-for="component in components" :is="component.name" :key="component.name"></component>
     </template>
   </k-page>
 </template>
 
 <script>
 import _ from 'lodash'
-import postRobot from 'post-robot'
-import Cesium from 'cesium/Source/Cesium.js'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
 
+const baseActivityMixin = kCoreMixins.baseActivity()
+
 export default {
-  name: 'k-globe-activity',
+  name: 'globe-activity',
   mixins: [
     kCoreMixins.refsResolver(['globe']),
-    kCoreMixins.baseActivity,
-    kMapMixins.activity('globe'),    
-    kMapMixins.geolocation,
+    baseActivityMixin,
+    kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
@@ -65,31 +46,20 @@ export default {
       kGlobe: this
     }
   },
-  computed: {
-    components () {
-      return _.get(this, 'activityOptions.components', [])
-    }
-  },
   methods: {
-    async refreshActivity () {
-      this.clearActivity()
+    async configureActivity () {
+      baseActivityMixin.methods.configureActivity.call(this)
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
       // Wait until viewer is ready
       await this.initializeGlobe(token)
-      // Setup the right pane
-      this.setRightDrawer('catalog/KCatalogPanel', this.$data)
-      // Setup the widgets
-      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
-      // Setup the actions
-      this.registerActivityActions()      
+      // Notifie the listener
       utils.sendEmbedEvent('globe-ready')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.appName.toLowerCase() + `-view`
+      return this.geAppName.toLowerCase() + `-view`
     },
     async onClicked (options, event) {
       const feature = _.get(event, 'target.feature')
@@ -105,10 +75,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
-    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-timeline'] = this.$load('KTimeline')
-    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
   },
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)

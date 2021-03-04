@@ -1,63 +1,30 @@
 <template>
   <k-page :padding="false">
     <template v-slot:page-content>
-      <!--
-        Map
-       -->
+      <!-- Map -->
       <div id="map" ref="map" :style="viewStyle">
         <q-resize-observer @resize="onMapResized" />
       </div>
-      <!--
-        NavigationBar
-       -->
-      <q-page-sticky position="top">
-        <k-opener-proxy position="top" component="KNavigationBar" :opened="true" />
-      </q-page-sticky>
-      <!--
-        TimeLine
-       -->
-      <q-page-sticky position="bottom">
-        <k-opener-proxy position="bottom" component="KTimeline" />
-      </q-page-sticky>
-      <!--
-        ColorLegend
-       -->
-      <q-page-sticky position="left" :offset="[18, 0]">
-        <k-color-legend />
-      </q-page-sticky>
-      <!--
-        LevelSlider
-       -->
-      <q-page-sticky position="right" :offset="[40, 0]">
-        <k-level-slider />
-      </q-page-sticky>
-       <!--
-        Extra components
-       -->
-      <component v-for="component in components" :is="component.name" :key="component.name"></component>
     </template>
   </k-page>
 </template>
 
 <script>
 import _ from 'lodash'
-import L from 'leaflet'
-import postRobot from 'post-robot'
 import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
 import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
-import moment from 'moment'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
-import appHooks from '../main.hooks'
 import utils from '../utils'
 
+const baseActivityMixin = kCoreMixins.baseActivity()
+
 export default {
-  name: 'k-map-activity',
+  name: 'map-activity',
   mixins: [
     kCoreMixins.refsResolver(['map']),
-    kCoreMixins.baseActivity,
-    kMapMixins.activity('map'),
-    kMapMixins.geolocation,
+    baseActivityMixin,
+    kMapMixins.activity,
     kMapMixins.style,
     kMapMixins.featureSelection,
     kMapMixins.featureService,
@@ -88,30 +55,17 @@ export default {
       kMap: this
     }
   },
-  computed: {
-    components () {
-      return _.get(this, 'activityOptions.components', [])
-    }
-  },
   methods: {
-    async refreshActivity () {  
-      this.clearActivity()
-      this.clearNavigationBar()
+    async configureActivity () {
+      baseActivityMixin.methods.configureActivity.call(this)
       // Wait until map is ready
       await this.initializeMap()
-      // Setup the right pane
-      this.setRightDrawer('catalog/KCatalogPanel', this.$data)
-      // Setup the widgets
-      this.registerWidget('information-box', 'las la-digital-tachograph', 'widgets/KInformationBox', this.selection)
-      this.registerWidget('time-series', 'las la-chart-line', 'widgets/KTimeSeries', this.$data)
-      if (this.mapillaryClientID) this.registerWidget('mapillary-viewer', 'img:statics/mapillary-icon.svg', 'widgets/KMapillaryViewer')
-      // Setup the actions
-      this.registerActivityActions()      
+      // Notifie the listener
       utils.sendEmbedEvent('map-ready')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.appName.toLowerCase() + `-view`
+      return this.geAppName().toLowerCase() + `-view`
     },
     createLeafletTimedWmsLayer (options) {
       let leafletOptions = options.leaflet || options
@@ -150,13 +104,6 @@ export default {
   created () {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
-    this.$options.components['k-opener-proxy'] = this.$load('frame/KOpenerProxy')
-    this.$options.components['k-navigation-bar'] = this.$load('KNavigationBar')
-    this.$options.components['k-timeline'] = this.$load('KTimeline')
-    this.$options.components['k-color-legend'] = this.$load('KColorLegend')
-    this.$options.components['k-level-slider'] = this.$load('KLevelSlider')
-    // Load extra components
-    this.components.forEach(component => this.$options.components[component.name] = this.$load(component.component))
     // Setup the engine
     this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)

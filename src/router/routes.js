@@ -8,16 +8,16 @@ module.exports = {
     // will be overriden when required
     meta: { unauthenticated: true },
     children: {
-      'login': {
+      login: {
         component: 'authentication/KLogin',
         tour: tours.login
       },
-      'logout': {
+      logout: {
         component: 'authentication/KLogout',
         meta: { authenticated: true }
       },
       'change-endpoint': 'authentication/KChangeEndpoint',
-      'home': {
+      home: {
         // The name of the route has to be set the default child
         name: '',
         component: 'layout/KHome',
@@ -27,31 +27,31 @@ module.exports = {
             // Because this child is the default one path is empty and name is the one of the parent route
             path: '',
             name: 'home',
-            redirect: { name: 'map' },
+            redirect: { name: 'map-activity' },
             tour: tours.home
           },
           'map/:south?/:west?/:north?/:east?': {
-            name: 'map',
+            name: 'map-activity',
             component: 'MapActivity',
             embedApi: true,
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
               'catalog-panel': tours['catalog-panel'],
-              'timeline': tours['timeline'],
-              'fab': tours['fab']
+              timeline: tours['timeline'],
+              fab: tours['fab']
             }
           },
           'globe/:south?/:west?/:north?/:east?': {
-            name: 'globe',
+            name: 'globe-activity',
             component: 'GlobeActivity',
             embedApi: true,
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
               'catalog-panel': tours['catalog-panel'],
-              'timeline': tours['timeline'],
-              'fab': tours['fab']
+              timeline: tours['timeline'],
+              fab: tours['fab']
             }
           }
         }

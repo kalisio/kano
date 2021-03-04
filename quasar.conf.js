@@ -56,6 +56,7 @@ module.exports = function (ctx) {
         'QField',
         'QHeader',
         'QIcon',
+        'QImg',
         'QInput',
         'QItem',
         'QItemSection',
@@ -69,7 +70,6 @@ module.exports = function (ctx) {
         'QPagination',
         'QPopupProxy',
         'QResizeObserver',
-        'QRouteTab',
         'QScrollArea',
         'QSelect',
         'QSeparator',
@@ -91,6 +91,7 @@ module.exports = function (ctx) {
 
       directives: [
         'Ripple',
+        'ClosePopup',
         'TouchSwipe'
       ],
 
@@ -100,6 +101,7 @@ module.exports = function (ctx) {
         'Dialog',
         'Platform',
         'Loading',
+        'BottomSheet',
         'AppFullscreen'
       ]
     },

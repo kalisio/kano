@@ -24,8 +24,7 @@
       ref="editor" 
       service="settings"
       objectId="settings"
-      @applied="onSettingsEdited"
-      @closed="onSettingsClosed" />
+      @applied="onSettingsEdited" />
   </div>
 </template>
 
@@ -34,14 +33,11 @@ export default {
   name: 'settings',
   methods: {
     editSettings () {
+      this.$layout.setLeftDrawerVisible(false)
       this.$refs.editor.open()
     },
     onSettingsEdited () {
       this.$refs.editor.close()
-      this.$store.patch('leftDrawer', { visible: false })
-    },
-    onSettingsClosed () {
-      this.$store.patch('leftDrawer', { visible: false })
     }
   },
   created () {
