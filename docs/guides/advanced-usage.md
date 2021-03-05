@@ -88,6 +88,33 @@ A full sample exploring the different ways to interact with the API is provided 
 Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
 :::
 
+### Accessing the underlying API
+
+You can access the backend API using either the [Feathers client](https://docs.feathersjs.com/api/client.html) or raw HTTP REST requests. However, in order to ease integration you can also access the backend API through the iframe API. For this simply target the `api` component using [post-robot](https://github.com/krakenjs/post-robot), which transform external method calls to internal calls using the following event payload:
+* the `service` property is the target service name (e.g. `catalog`)
+* the `operation` property is the target service operation name (among `get`, `find`, `update`, `patch`, `remove`)
+* the `args` property is the expected [service operation arguments](https://docs.feathersjs.com/api/services.html#service-methods)
+
+Event response `data` is the method result object. In addition to the event used to access service operations the `api-ready` event is to be listened by integrating application to know when the Kano backend API has been initialized in the iframe so that you can safely use it.
+
+Here is a simple code sample:
+```html
+  <script src="https://cdn.jsdelivr.net/npm/post-robot@10.0.10/dist/post-robot.min.js"></script>
+  <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="kano.kalisio.com">
+  <script>
+    var kano = document.getElementById('kano').contentWindow
+    // Wait for map to be initialized
+    postRobot.on('map-ready', () => {
+      // Request saved user contexts and activate the first one if any
+      postRobot.send(kano, 'api', { service: 'catalog', operation: 'find', args: [{ query: { type: 'Context' } }] })
+      .then((result) => {
+        const response = result.data
+        if (response.total > 0) postRobot.send(kano, 'map', { command: 'loadContext', args: response.data[0] })
+      })
+    })
+  </script>
+```
+
 ## Developing in Kano
 
 **Kano** is powered by the [KDK](https://kalisio.github.io/kdk) and rely on its main abstractions. If you'd like to develop an application based on Kano or extend Kano we assume you are familiar with this technology. Indeed, **Kano** is based on the **KDK** and makes the best use of all the features offered by the provided [cartographic components and services](../reference).

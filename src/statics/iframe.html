@@ -699,6 +699,13 @@
       postRobot.on('kano-logout', () => console.log('User logged out'))
       postRobot.on('map-ready', () => {
         console.log('Map component ready')
+        // check acces to a service by requesting saved user contexts
+        postRobot.send(kano, 'api', { service: 'catalog', operation: 'find', args: [{ query: { type: 'Context' } }] })
+        .then((result) => {
+          // Activate first context if any
+          const response = result.data
+          if (response.total > 0) postRobot.send(kano, component, { command: 'loadContext', args: response.data[0] })
+        })
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Layers.AIRPORTS' })
         .then((result) => { airports = result.data })
       })

@@ -45,6 +45,26 @@ export default async ({ app, router, Vue }) => {
   // Then all services
   services.call(api)
 
+  // Add a generic function that can be used from the iframe API
+  // to access all service operations easily, eg operation 'get' on service 'catalog'
+  const serviceOperation = async (options) => {
+    // Extract service/operation from options
+    let { operation, service, args } = options
+    service = api.getService(service)
+    if (!service) throw new Error(`Cannot find service ${service}`)
+    operation = service[operation]
+    if (!operation || (typeof operation !== 'function')) throw new Error(`Cannot find service operation ${operation}`)
+    const result = await operation.bind(service)(...args)
+    return result
+  }
+  
+  postRobot.on('api', async (event) => {
+    const result = await serviceOperation(event.data)
+    return result
+  })
+
+  await utils.sendEmbedEvent('api-ready')
+
   Vue.use(plugin, { api })
 
   // Add global guard
