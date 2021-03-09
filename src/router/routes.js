@@ -40,6 +40,12 @@ module.exports = {
               'catalog-panel': tours['catalog-panel'],
               timeline: tours['timeline'],
               fab: tours['fab']
+            },
+            children: {
+              add: {
+                name: 'add-map-layer',
+                component: 'catalog/KAddLayer'
+              }
             }
           },
           'globe/:south?/:west?/:north?/:east?': {
@@ -52,6 +58,12 @@ module.exports = {
               'catalog-panel': tours['catalog-panel'],
               timeline: tours['timeline'],
               fab: tours['fab']
+            },
+            children: {
+              add: {
+                name: 'add-globe-layer',
+                component: 'catalog/KAddLayer'
+              }
             }
           }
         }

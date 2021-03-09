@@ -6,6 +6,8 @@
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
+      <!-- Child views -->
+      <router-view />
     </template>
   </k-page>
 </template>

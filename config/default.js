@@ -355,7 +355,7 @@ module.exports = {
     topPane: {
       content: {
         default: [
-          { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe-activity', query: true } },
+          { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           /* Only for example purpose
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
@@ -422,9 +422,7 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'create-layer', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', handler: 'onCreateLayer' },
-        { id: 'import-layer', icon: 'las la-file-upload', label: 'mixins.activity.IMPORT_LAYER', handler: 'onImportLayer' },
-        { id: 'connect-layer', icon: 'las la-plug', label: 'mixins.activity.CONNECT_LAYER', handler: 'onConnectLayer' },
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
@@ -439,7 +437,7 @@ module.exports = {
     topPane: {
       content: {
         default: [
-          { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', query: true } },
+          { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
@@ -492,6 +490,7 @@ module.exports = {
     },
     fab: {
       actions: [
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-globe-layer' } },
         { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },

@@ -34,10 +34,10 @@ export default {
   methods: {
     editSettings () {
       this.$layout.setLeftDrawerVisible(false)
-      this.$refs.editor.open()
+      this.$refs.editor.openModal()
     },
     onSettingsEdited () {
-      this.$refs.editor.close()
+      this.$refs.editor.closeModal()
     }
   },
   created () {

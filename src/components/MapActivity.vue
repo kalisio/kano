@@ -5,6 +5,8 @@
       <div id="map" ref="map" :style="viewStyle">
         <q-resize-observer @resize="onMapResized" />
       </div>
+      <!-- Child views -->
+      <router-view />
     </template>
   </k-page>
 </template>
