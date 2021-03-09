@@ -32,7 +32,7 @@ module.exports = [{
   content: 'tours.home.BUG_LABEL',
   params: {
     placement: 'top',
-    clickOnPrevious: ['#close-modal', '#left-opener'],
+    clickOnPrevious: ['#close-action', '#left-opener'],
     previousDelay: 500
   }
 }]
