@@ -846,7 +846,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT15M',
-    queryFrom: 'P-1D',
+    queryFrom: 'PT-1H',
     variables: [
       {
         name: 'value',
