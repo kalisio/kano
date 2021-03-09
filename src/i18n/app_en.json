@@ -30,14 +30,17 @@
       "SETTINGS_LABEL": "Update general settings of the system on your device.",
       "LOGOUT_LABEL": "Logout in order to close your work session.",
       "SESSION_LABEL": "Otherwise the session will remain active on your device for <b>24H</b>, you will not have to login again in this time frame.",
-      "NAVIGATION_BAR_LABEL": "Open the main menu any time using this handle.",
-      "NAVIGATION_BAR_LINK_LABEL": "Open the navigation bar any time using this handle.",
+      "NAVIGATION_BAR_LABEL": "Open the application bar any time using this handle.",
+      "NAVIGATION_BAR_LINK_LABEL": "Browse the application bar.",
       "CATALOG_LABEL": "Open the catalog any time using this handle.",
       "CATALOG_LINK_LABEL": "Browse the catalog",
       "TIMELINE_LABEL": "Open the timeline any time using this handle.",
       "TIMELINE_LINK_LABEL": "Browse the timeline",
       "FAB_LABEL": "Quickly execute actions related to map data using this button.",
       "FAB_LINK_LABEL": "Browse the actions"
+    },
+    "navigation-bar": {
+      "NAVIGATION_BAR_LABEL": "The application bar allows to quickly execute recurring actions."
     }
   },
   "screen": {

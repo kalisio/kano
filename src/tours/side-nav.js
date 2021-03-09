@@ -3,9 +3,7 @@ module.exports = [{
   title: 'tours.home.LOGOUT_LABEL',
   content: 'tours.home.SESSION_LABEL',
   params: {
-    placement: 'top',
-    clickOnPrevious: '#online-help',
-    previousDelay: 500
+    placement: 'top'
   }
 }, {
   target: '#help',
@@ -19,7 +17,6 @@ module.exports = [{
   content: 'tours.home.SETTINGS_LABEL',
   params: {
     placement: 'top',
-    clickOnPrevious: '#about',
     previousDelay: 500
   }
 }, {
@@ -35,7 +32,7 @@ module.exports = [{
   content: 'tours.home.BUG_LABEL',
   params: {
     placement: 'top',
-    clickOnPrevious: ['#close-action', '#opener-left'],
+    clickOnPrevious: ['#close-modal', '#left-opener'],
     previousDelay: 500
   }
 }]

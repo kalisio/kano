@@ -7,4 +7,3 @@ module.exports = {
   'timeline': require('./map/timeline'),
   'fab': require('./map/fab')
 }
-

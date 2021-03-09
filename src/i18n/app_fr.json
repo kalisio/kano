@@ -30,14 +30,17 @@
       "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",
       "LOGOUT_LABEL": "Déconnectez vous si vous souhaitez clôturer votre session de travail.",
       "SESSION_LABEL": "Sinon la session reste active sur votre appareil pendant <b>24H</b> et vous n'aurez pas besoin de vous reconnecter durant ce laps de temps.",
-      "NAVIGATION_BAR_LABEL": "Ouvrez à tout moment la barre de navigation via cette poignée.",
-      "NAVIGATION_BAR_LINK_LABEL": "Parcourir la barre de navigation",
+      "NAVIGATION_BAR_LABEL": "Ouvrez à tout moment la barre d'application via cette poignée.",
+      "NAVIGATION_BAR_LINK_LABEL": "Parcourir la barre d'application",
       "CATALOG_LABEL": "Ouvrez à tout moment le catalogue via cette poignée.",
       "CATALOG_LINK_LABEL": "Parcourir le catalogue",
       "TIMELINE_LABEL": "Ouvrez à tout moment la ligne de temps via cette poignée.",
       "TIMELINE_LINK_LABEL": "Parcourir la ligne de temps",
       "FAB_LABEL": "Accéder rapidement aux actions relatives aux données cartographiques via ce bouton.",
       "FAB_LINK_LABEL": "Voir les actions"
+    },
+    "navigation-bar": {
+      "NAVIGATION_BAR_LABEL": "La <b>barre d'application</b> vous permet d'accéder rapidement à certaines actions récurrentes."
     }
   },
   "screen": {

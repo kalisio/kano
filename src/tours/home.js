@@ -1,14 +1,14 @@
 module.exports = [{
-  target: '#opener-left',
+  target: '#left-opener',
   title: 'tours.home.SIDENAV_LABEL',
   link: 'tours.home.SIDENAV_LINK_LABEL',
   params: {
     placement: 'right',
-    hoverClickOnLink: '#opener-left',
+    hoverClickOnLink: '#left-opener',
     tour: 'side-nav'
   }
 }, {
-  target: '#opener-top',
+  target: '#top-opener',
   title: 'tours.home.NAVIGATION_BAR_LABEL',
   link: 'tours.home.NAVIGATION_BAR_LINK_LABEL',
   params: {
@@ -16,21 +16,21 @@ module.exports = [{
     tour: 'navigation-bar'
   }
 }, {
-  target: '#opener-right',
+  target: '#right-opener',
   title: 'tours.home.CATALOG_LABEL',
   link: 'tours.home.CATALOG_LINK_LABEL',
   params: {
     placement: 'left',
-    hoverClickOnLink: '#opener-right',
+    hoverClickOnLink: '#right-opener',
     tour: 'catalog-panel'
   }
 }, {
-  target: '#opener-bottom',
+  target: '#bottom-opener',
   title: 'tours.home.TIMELINE_LABEL',
   link: 'tours.home.TIMELINE_LINK_LABEL',
   params: {
     placement: 'top',
-    hoverClickOnLink: '#opener-bottom',
+    hoverClickOnLink: '#bottom-opener',
     tour: 'timeline'
   }
 }, {

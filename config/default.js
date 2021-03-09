@@ -70,6 +70,7 @@ const mapCatalog = {
 
 // Map layer actions
 const mapLayerActions = [{
+  id: 'layer-actions',
   component: 'frame/KMenu',
   actionRenderer: 'item',
   content: [
@@ -361,23 +362,16 @@ module.exports = {
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
-          { component: 'KLocateUser' },
+          { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            component: 'frame/KMenu',
-            icon: 'star_border',
-            persistent: true,
-            autoClose: false,
-            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
-              { id: 'favorite-views', component: 'KFavoriteViews' }
+              { component: 'KFavoriteViews' }
             ]
           },
           {
-            component: 'frame/KMenu',
-            icon: 'las la-wrench',
-            tooltip: 'mixins.activity.TOOLS',
-            actionRenderer: 'item',
+            id: 'tools', component: 'frame/KMenu', icon: 'las la-wrench', tooltip: 'mixins.activity.TOOLS', actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
             ]
@@ -439,22 +433,16 @@ module.exports = {
         default: [
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { component: 'KLocateUser' },
+          { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            component: 'frame/KMenu',
-            icon: 'star_border',
-            autoClose: false,
-            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'favorite-views', component: 'frame/KMenu', icon: 'star_border', autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
-              { id: 'favorite-views', component: 'KFavoriteViews' }
+              { component: 'KFavoriteViews' }
             ]
           },
           {
-            component: 'frame/KMenu',
-            icon: 'las la-wrench',
-            tooltip: 'mixins.activity.TOOLS',
-            actionRenderer: 'item',
+            id: 'tools', component: 'frame/KMenu', icon: 'las la-wrench', tooltip: 'mixins.activity.TOOLS', actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
             ]

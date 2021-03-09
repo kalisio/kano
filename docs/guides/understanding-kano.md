@@ -33,7 +33,7 @@ The 3D view is pretty similar to the 2D activity except that some feature might 
 :::
 
 Each component can be shown/hidden through a handle on the different side of the view:
-* at the top to open the **navigation bar**,
+* at the top to open the **application bar**,
 * at the bottom to open the **timeline**,
 * on the left to open the **side/main menu**,
 * on the right to open the **catalog**.

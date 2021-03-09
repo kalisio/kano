@@ -26,13 +26,14 @@ The main menu allows to open the documentation, manage your settings and logout 
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the main menu tutorial to get more details
 
-## Navigation bar
+## Application bar
 
-The navigation bar allows to quickly execute recurring actions:
+The application bar allows to quickly execute recurring actions:
 * switch from 2D (respectively 3D) activity to <i class="las la-globe"></i> 3D (respectively <i class="las la-map"></i> 2D) activity,
-* <i class="las la-crosshairs"></i> display the coordinates of a location,
-* <i class="las la-search"></i> seek for an address,
-* <i class="las la-street-view"></i> center the view on your current location,
+* <i class="las la-crosshairs"></i> center the view on your current location and display it,
+* <i class="las la-search-location"></i> seek for an address,
+* <i class="las la-star_border"></i> manage your favorite views,
+* <i class="las la-wrench"></i> displays the coordinates of a location,
 * <i class="las la-expand"></i> switch to fullscreen mode.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the navigation bar tutorial to get more details
@@ -75,6 +76,7 @@ A *right-click* on a feature of the map will display a contextual menu if some a
 Depending on the layer different actions are available. The most common action is to *zoom to* <i class="las la-search-location"/> the layer in order to fit the view on the available data. If the layer is disabled at high scales this action will set the current scale of the map so that data will start be visible if the layer is shown.
 
 More actions are available on user-defined feature layers:
+* <i class="las la-search-location"></i> center the view to the loaded layer content (if any)
 * <i class="las la-save"></i> save the layer (i.e. make it persistent),
 * <i class="las la-file-alt"></i> edit layer properties like its name or description,
 * <i class="las la-edit"></i> edit layer features (metadata and geometry),
