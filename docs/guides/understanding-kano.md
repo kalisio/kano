@@ -38,6 +38,6 @@ Each component can be shown/hidden through a handle on the different side of the
 * on the left to open the **side/main menu**,
 * on the right to open the **catalog**.
 
-In addition, a **floating action button** <i class="las la-chevron-up la-2x"></i> is available in the bottom-right corner to perform some actions.
+In addition, a **floating action button** <i class="las la-ellipsis-v la-2x"></i> is available in the bottom-right corner to perform some actions.
 
 Check out now our [quickstart guide](./getting-started.md) for more details.
