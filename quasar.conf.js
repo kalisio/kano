@@ -54,7 +54,6 @@ module.exports = function (ctx) {
         'QFab',
         'QFabAction',
         'QField',
-        'QFile',
         'QHeader',
         'QIcon',
         'QImg',
