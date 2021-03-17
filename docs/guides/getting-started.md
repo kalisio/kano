@@ -32,8 +32,8 @@ The application bar allows to quickly execute recurring actions:
 * switch from 2D (respectively 3D) activity to <i class="las la-globe"></i> 3D (respectively <i class="las la-map"></i> 2D) activity,
 * <i class="las la-crosshairs"></i> center the view on your current location and display it,
 * <i class="las la-search-location"></i> seek for an address,
-* <i class="las la-star_border"></i> manage your favorite views,
-* <i class="las la-wrench"></i> displays the coordinates of a location,
+* <i class="las la-star-border"></i> manage your favorite views,
+* <i class="las la-wrench"></i> tools to e.g. display the coordinates of a location,
 * <i class="las la-expand"></i> switch to fullscreen mode.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the navigation bar tutorial to get more details
@@ -60,7 +60,7 @@ The timeline allows to quickly execute actions related to the time of the displa
 
 ## Floating action button
 
-Using the FAB you can:
+Using the FAB at the bottom right corner you can:
 * <i class="las la-plus"/> Create a new blank data layer by locating and drawing the underlying entities. You can add the data schema from a [JSON schema](https://json-schema.org/) file in order to edit the meatadata (i.e. properties) of your entities.
 * <i class="las la-file-import"/> Create a new data layer by import existing data from a [GeoJSON](https://geojson.org/) file.
 * <i class="las la-eye-dropper"/> Probe weather forecast data from active prediction models by selecting a specific location on the map.

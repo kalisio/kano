@@ -365,7 +365,7 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
               { component: 'KFavoriteViews' }
             ]
@@ -436,7 +436,7 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'favorite-views', component: 'frame/KMenu', icon: 'star_border', autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
               { component: 'KFavoriteViews' }
             ]
