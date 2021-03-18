@@ -9,6 +9,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_SHORT_TIME_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_SHORT_TIME_FIELD_HELPER"
       }
     },
@@ -17,6 +18,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_LONG_TIME_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_LONG_TIME_FIELD_HELPER"
       }
     },
@@ -25,7 +27,9 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_SHORT_DATE_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_SHORT_DATE_FIELD_HELPER"
+
       }
     },
     "longDate": {
@@ -33,6 +37,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_LONG_DATE_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_LONG_DATE_FIELD_HELPER"
       }
     },
@@ -41,6 +46,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_SHORT_YEAR_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_SHORT_YEAR_FIELD_HELPER"
       }
     },
@@ -49,6 +55,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KTextField",
+        "label": "schemas.TIME_FORMAT_LONG_YEAR_FIELD_LABEL",
         "helper": "schemas.TIME_FORMAT_LONG_YEAR_FIELD_HELPER"
       }
     },
@@ -57,7 +64,7 @@
       "group": "schemas.TIME_FORMAT_SETTINGS",
       "field": {
         "component": "form/KToggleField",
-        "helper": "schemas.TIME_FORMAT_UTC_FIELD_HELPER"
+        "label": "schemas.TIME_FORMAT_UTC_FIELD_LABEL"
       }
     },
     "timelineStep": {
@@ -65,7 +72,7 @@
       "group": "schemas.TIMELINE_SETTINGS",
       "field": {
         "component": "form/KSelectField",
-        "helper": "schemas.TIMELINE_STEP",
+        "label": "schemas.TIMELINE_STEP",
         "options": [
           { "label": "5m", "value": 5  },
           { "label": "10m", "value": 10 },
@@ -73,7 +80,7 @@
           { "label": "15m", "value": 15 },
           { "label": "20m", "value": 20 },
           { "label": "30m", "value": 30 },
-          { "label": "1h", "value": 60, "selected": true }
+          { "label": "60m", "value": 60, "selected": true }
         ]
       }
     },
@@ -82,7 +89,7 @@
       "group": "schemas.TIMESERIES_SETTINGS",
       "field": {
         "component": "form/KSelectField",
-        "helper": "schemas.TIMESERIES_SPAN",
+        "label": "schemas.TIMESERIES_SPAN",
         "options": [
           { "label": "3H", "value": 180 },
           { "label": "6H", "value": 360 },
@@ -99,7 +106,7 @@
       "group": "schemas.MAP_SETTINGS",
       "field": {
         "component": "form/KToggleField",
-        "helper": "schemas.RESTORE_VIEW_FIELD_HELPER"
+        "label": "schemas.RESTORE_VIEW_FIELD_LABEL"
       }
     },
     "restoreLayers": {
@@ -107,7 +114,7 @@
       "group": "schemas.MAP_SETTINGS",
       "field": {
         "component": "form/KToggleField",
-        "helper": "schemas.RESTORE_LAYERS_FIELD_HELPER"
+        "label": "schemas.RESTORE_LAYERS_FIELD_LABEL"
       }
     },
     "location": {
@@ -115,7 +122,8 @@
       "group": "schemas.MAP_SETTINGS",
       "field": {
         "component": "form/KTextField",
-        "helper": "schemas.LOCATION_FORMAT"
+        "label": "schemas.LOCATION_FORMAT_LABEL",
+        "helper": "schemas.LOCATION_FORMAT_HELPER"
       }
     }
   },
