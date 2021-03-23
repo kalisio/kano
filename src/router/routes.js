@@ -45,6 +45,10 @@ module.exports = {
               add: {
                 name: 'add-map-layer',
                 component: 'catalog/KAddLayer'
+              },
+              categories: {
+                name: 'manage-layer-categories',
+                component: 'catalog/KLayerCategories'
               }
             }
           },

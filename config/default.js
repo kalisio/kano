@@ -29,38 +29,32 @@ const gateway = domain.replace('kano', 'api')
 const mapCatalog = {
   categories: [
     {
-      name: 'BaseLayers',
-      label: 'KCatalogPanel.BASE_LAYERS',
+      name: 'KCatalogPanel.BASE_LAYERS',
       icon: 'las la-layer-group',
       options: { exclusive: true, filter: { type: 'BaseLayer' } }
     },
     {
-      name: 'BusinessLayers',
-      label: 'KCatalogPanel.BUSINESS_LAYERS',
+      name: 'KCatalogPanel.BUSINESS_LAYERS',
       icon: 'las la-briefcase',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
     },
     {
-      name: 'CapturedLayers',
-      label: 'KCatalogPanel.CAPTURED_LAYERS',
+      name: 'KCatalogPanel.CAPTURED_LAYERS',
       icon: 'las la-street-view',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } }
     },
     {
-      name: 'OverlayLayers',
-      label: 'KCatalogPanel.OVERLAY_LAYERS',
+      name: 'KCatalogPanel.OVERLAY_LAYERS',
       icon: 'las la-map-marker',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
     },
     {
-      name: 'MeasureLayers',
-      label: 'KCatalogPanel.MEASURE_LAYERS',
+      name: 'KCatalogPanel.MEASURE_LAYERS',
       icon: 'las la-map-pin',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
     },
     {
-      name: 'MeteoLayers',
-      label: 'KCatalogPanel.METEO_LAYERS',
+      name: 'KCatalogPanel.METEO_LAYERS',
       icon: 'las la-cloud-sun-rain',
       component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
@@ -392,9 +386,17 @@ module.exports = {
       }
     },
     rightPane: {
-      content: [
-        { component: 'catalog/KCatalog', bind: '$data' }
-      ]
+      content: [{
+        component: 'catalog/KCatalog', bind: '$data'
+      }, {
+        component: 'QSpace'
+      }, {
+        component: 'frame/KPanel',
+        content: [
+          { id: 'manage-layer-categories', icon: 'las la-cog', label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+            route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } }
+        ]
+      }]
     },
     bottomPane: {
       content: [
@@ -418,7 +420,8 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
+          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
