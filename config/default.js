@@ -29,9 +29,9 @@ const gateway = domain.replace('kano', 'api')
 const mapCatalog = {
   categories: [
     {
-      name: 'KCatalogPanel.BASE_LAYERS',
-      icon: 'las la-layer-group',
-      options: { exclusive: true, filter: { type: 'BaseLayer' } }
+      name: 'KCatalogPanel.OVERLAY_LAYERS',
+      icon: 'las la-map-marker',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
     },
     {
       name: 'KCatalogPanel.BUSINESS_LAYERS',
@@ -39,14 +39,14 @@ const mapCatalog = {
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
     },
     {
+      name: 'KCatalogPanel.BASE_LAYERS',
+      icon: 'las la-layer-group',
+      options: { exclusive: true, filter: { type: 'BaseLayer' } }
+    },
+    {
       name: 'KCatalogPanel.CAPTURED_LAYERS',
       icon: 'las la-street-view',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } }
-    },
-    {
-      name: 'KCatalogPanel.OVERLAY_LAYERS',
-      icon: 'las la-map-marker',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
     },
     {
       name: 'KCatalogPanel.MEASURE_LAYERS',
