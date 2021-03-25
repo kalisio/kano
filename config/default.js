@@ -29,11 +29,6 @@ const gateway = domain.replace('kano', 'api')
 const mapCatalog = {
   categories: [
     {
-      name: 'KCatalogPanel.OVERLAY_LAYERS',
-      icon: 'las la-map-marker',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
-    },
-    {
       name: 'KCatalogPanel.BUSINESS_LAYERS',
       icon: 'las la-briefcase',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
@@ -136,6 +131,12 @@ const mapEngine = {
 const globeCatalog = {
   categories: [
     {
+      name: 'BusinessLayers',
+      label: 'KCatalogPanel.BUSINESS_LAYERS',
+      icon: 'las la-briefcase',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
+    },
+    {
       name: 'BaseLayers',
       label: 'KCatalogPanel.BASE_LAYERS',
       icon: 'las la-layer-group',
@@ -146,18 +147,6 @@ const globeCatalog = {
       label: 'KCatalogPanel.TERRAIN_LAYERS',
       icon: 'las la-mountain',
       options: { exclusive: true, filter: { type: 'TerrainLayer' } }
-    },
-    {
-      name: 'BusinessLayers',
-      label: 'KCatalogPanel.BUSINESS_LAYERS',
-      icon: 'las la-briefcase',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
-    },
-    {
-      name: 'OverlayLayers',
-      label: 'KCatalogPanel.OVERLAY_LAYERS',
-      icon: 'las la-map-marker',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $exists: false } } }
     },
     {
       name: 'MeasureLayers',
