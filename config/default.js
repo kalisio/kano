@@ -396,7 +396,7 @@ module.exports = {
       content: [{
         component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
       }, {
-        component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KWmsLegend' }]
+        component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
       }, {
         component: 'frame/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
       } /* Only for example purpose
