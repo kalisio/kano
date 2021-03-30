@@ -409,7 +409,7 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'add-map-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
           route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
@@ -458,9 +458,17 @@ module.exports = {
       }
     },
     rightPane: {
-      content: [
-        { component: 'catalog/KCatalog', bind: '$data' }
-      ]
+      content: [{
+        component: 'catalog/KCatalog', bind: '$data'
+      }, {
+        component: 'QSpace'
+      }, {
+        component: 'frame/KPanel',
+        content: [
+          { id: 'manage-layer-categories', icon: 'las la-cog', label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+            route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } }
+        ]
+      }]
     },
     bottomPane: {
       content: [
