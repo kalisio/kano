@@ -409,8 +409,8 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
-          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+        { id: 'add-map-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
+          route: { name: 'add-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
@@ -430,7 +430,7 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
               { component: 'KFavoriteViews' }
             ]
@@ -472,8 +472,9 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-globe-layer' } },
-        { id: 'probe-location', icon: 'las la-eye-dropper', tooltip: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
+          route: { name: 'add-globe-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
     engine: globeEngine,

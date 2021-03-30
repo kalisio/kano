@@ -37,6 +37,7 @@ module.exports = {
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
+              'favorite-views': tours['favorite-views'],
               'catalog-panel': tours['catalog-panel'],
               timeline: tours['timeline'],
               fab: tours['fab']
@@ -44,11 +45,18 @@ module.exports = {
             children: {
               add: {
                 name: 'add-map-layer',
-                component: 'catalog/KAddLayer'
+                component: 'catalog/KAddLayer',
+                tour: {
+                  'add-layer': tours['add-layer'],
+                  'import-layer': tours['import-layer'],
+                  'connect-layer': tours['connect-layer'],
+                  'create-layer': tours['create-layer']
+                }
               },
               categories: {
                 name: 'manage-layer-categories',
-                component: 'catalog/KLayerCategories'
+                component: 'catalog/KLayerCategories',
+                tour: tours['catalog-categories']
               }
             }
           },
@@ -59,6 +67,7 @@ module.exports = {
             tour: {
               'side-nav': tours['side-nav'],
               'navigation-bar': tours['navigation-bar'],
+              'favorite-views': tours['favorite-views'],
               'catalog-panel': tours['catalog-panel'],
               timeline: tours['timeline'],
               fab: tours['fab']
@@ -66,7 +75,13 @@ module.exports = {
             children: {
               add: {
                 name: 'add-globe-layer',
-                component: 'catalog/KAddLayer'
+                component: 'catalog/KAddLayer',
+                tour: {
+                  'add-layer': tours['add-layer'],
+                  'import-layer': tours['import-layer'],
+                  'connect-layer': tours['connect-layer'],
+                  'create-layer': tours['create-layer']
+                }
               }
             }
           }
