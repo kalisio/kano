@@ -410,7 +410,7 @@ module.exports = {
     fab: {
       actions: [
         { id: 'add-map-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
-          route: { name: 'add-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
