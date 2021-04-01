@@ -73,6 +73,7 @@ module.exports = {
               fab: tours['fab']
             },
             children: {
+              /* Not yet available
               add: {
                 name: 'add-globe-layer',
                 component: 'catalog/KAddLayer',
@@ -82,6 +83,11 @@ module.exports = {
                   'connect-layer': tours['connect-layer'],
                   'create-layer': tours['create-layer']
                 }
+              },*/
+              categories: {
+                name: 'manage-layer-categories',
+                component: 'catalog/KLayerCategories',
+                tour: tours['catalog-categories']
               }
             }
           }
