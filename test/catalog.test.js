@@ -36,7 +36,7 @@ fixture`catalog`// declare the fixture
   })
 
 test('Check base layers', async test => {
-  const category = 'BaseLayers'
+  const category = 'KCatalogPanel.BaseLayers'
   const layers = [
     'Layers.OSM_BRIGHT',
     'Layers.OSM_DARK',
@@ -90,7 +90,7 @@ test('Check measure layers', async test => {
 })
 
 test('Check meteo layers', async test => {
-  const category = 'MeteoLayers'
+  const category = 'KCatalogPanel.MeteoLayers'
   const forecastLayers = [
     ['gfs-world', 'Layers.WIND_TILED'],
     ['gfs-world', 'Layers.GUST_TILED'],
@@ -131,11 +131,20 @@ test('Check meteo layers', async test => {
   await layout.clickRightOpener(test)
 })
 
-test('Check imported layers', async test => {
-  const dialog = new pages.LayerImportDialog()
-  layout.openAndClickFab(test, '#import-layer')
-  // geojson
-  const runKey = 'regions-version-simplifiee'
-  await dialog.importLayer(`data/${runKey}.geojson`)
-  await pages.assertScreenshotMatches(test, runKey)
+test('Check categories', async test => {
+
+  const categoryName = 'Test category'
+  await layout.clickRightOpener(test)
+  await catalog.clickCategories()
+  const dialog = Selector('.q-dialog')
+  await test
+      .typeText(dialog.find('#name-field'), categoryName)
+      .click(dialog.find('#add-layer-category'))
+      .wait(1000)
+  let category = await catalog.getCategory(categoryName)
+  category = await category.getVue()
+  console.log(category)
+  await t
+      .expect(category).ok(`catalog category '${category}' has been created`)
+  await layout.clickRightOpener(test)
 })
