@@ -34,8 +34,7 @@ const leftPane = {
     { component: 'layout/KAbout' },
     { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
     { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px; max-height: 1px;' },
-    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' } //,
-    //{ component: 'QSeparator', color: 'lightgrey' }
+    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
   ]
 }
 
@@ -353,13 +352,22 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'manage-favorite-views',
+            component: 'frame/KMenu',
+            icon: 'star_border',
+            persistent: true,
+            autoClose: false,
+            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
               { component: 'KFavoriteViews' }
             ]
           },
           {
-            id: 'tools', component: 'frame/KMenu', icon: 'las la-wrench', tooltip: 'mixins.activity.TOOLS', actionRenderer: 'item',
+            id: 'tools',
+            component: 'frame/KMenu',
+            icon: 'las la-wrench',
+            tooltip: 'mixins.activity.TOOLS',
+            actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
             ]
