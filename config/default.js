@@ -25,6 +25,20 @@ if (process.env.SUBDOMAIN) {
 // On a developer machine will do domain = gateway = localhost
 const gateway = domain.replace('kano', 'api')
 
+// Left pane
+const leftPane = {
+  content: [
+    { component: 'QImg', src: 'statics/kano-logo.png' },
+    { component: 'Settings' },
+    { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px; max-height: 1px;' },
+    { component: 'layout/KAbout' },
+    { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
+    { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px; max-height: 1px;' },
+    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' } //,
+    //{ component: 'QSeparator', color: 'lightgrey' }
+  ]
+}
+
 // Default map catalog catagories
 const mapCatalog = {
   categories: [
@@ -312,22 +326,12 @@ module.exports = {
   },
   layout: {
     view: 'lhh LpR lff',
-    leftDrawer: {
-      content: [
-        { component: 'QImg', src: 'statics/kano-logo.png' },
-        { component: 'Settings' },
-        { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px;' },
-        { component: 'layout/KAbout' },
-        { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
-        { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px;' },
-        { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
-      ],
-      behavior: 'mobile',
-      opener: true
-    },
     topPane: {
       opener: true,
       visible: true
+    },
+    leftPane: {
+      opener: true
     },
     bottomPane: {
       opener: true
@@ -375,6 +379,7 @@ module.exports = {
         ]
       }
     },
+    leftPane: leftPane,
     rightPane: {
       content: [{
         component: 'catalog/KCatalog', bind: '$data'
@@ -458,6 +463,7 @@ module.exports = {
         ]
       }
     },
+    leftPane: leftPane,
     rightPane: {
       content: [{
         component: 'catalog/KCatalog', bind: '$data'

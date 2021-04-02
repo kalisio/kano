@@ -63,9 +63,9 @@ test('Connect OGC WMS layer (BRGM)', async test => {
   const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
   // Selection based on text content does not seem to work
   //const layer = 'Carte géologique 50 000e - harmonisé'
-  const layer = 20
+  const layerId = 'bgm-station'
   const runKey = 'wms-geologie-brgm'
-  await dialog.connectLayer(service, layer)
+  await dialog.connectLayer(service, layerId)
   await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
   //await pages.assertScreenshotMatches(test, runKey)
@@ -77,10 +77,9 @@ test('Connect OGC WMS layer (IGN)', async test => {
   
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/r/wms?service=wms&request=getcapabilities'
   // Selection based on text content does not seem to work
-  //const layer = 'Ortho 50 cm'
-  const layer = 1
+  const layerId = 'orthoimagery-orthophotos-bdortho'
   const runKey = 'wms-ortho-ign'
-  await dialog.connectLayer(service, layer)
+  await dialog.connectLayer(service, layerId)
   await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
   //await pages.assertScreenshotMatches(test, runKey)
