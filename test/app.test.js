@@ -29,7 +29,7 @@ test('Checking the app layout', async test => {
   await layout.closeWelcomeDialog(test)
 
   // Check default layout state
-  await test.expect(await layout.isLeftDrawerOpened()).notOk()
+  await test.expect(await layout.isLeftPaneOpened()).notOk()
   await test.expect(await layout.isRightPaneOpened()).notOk()
   await test.expect(await layout.isTopPaneOpened()).ok()
   await test.expect(await layout.isBottomPaneOpened()).notOk()
@@ -39,13 +39,19 @@ test('Checking the app layout', async test => {
   // Open the catalog
   await layout.clickRightOpener(test)
   await test.expect(await layout.isRightPaneOpened()).ok()
+  await layout.clickRightOpener(test)
+  await test.expect(await layout.isRightPaneOpened()).notOk()
   // Open the timeline
   await layout.clickBottomOpener(test)
   await test.expect(await layout.isBottomPaneOpened()).ok()
+  await layout.clickBottomOpener(test)
+  await test.expect(await layout.isBottomPaneOpened()).notOk()
   // Interact with the map
   await mapActivity.click(test)
   await mapActivity.move(test, 100, 100)
   // Open the left drawer
   await layout.clickLeftOpener(test)
-  await layout.clickLeftDrawer(test, pages.Layout.LOGOUT)
+  await layout.clickLeftPane(test, pages.Layout.LOGOUT)
+  // Go back to the login screen
+  await screens.goToLoginScreen(test)
 })

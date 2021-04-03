@@ -32,7 +32,7 @@ fixture`add-layer`// declare the fixture
   .afterEach(async test => {
     // logout
     await layout.clickLeftOpener(test)
-    await layout.clickLeftDrawer(test, pages.Layout.LOGOUT)
+    await layout.clickLeftPane(test, pages.Layout.LOGOUT)
     // check for console error messages
     // await pages.checkNoClientError(test)
   })
@@ -43,9 +43,7 @@ test('Import GeoJson layer', async test => {
   const geojson = 'regions-version-simplifiee'
   let runKey = `created-${{geojson}}`
   // Selection based on text content does not seem to work
-  //const id = 'code'
-  const id = 0
-  await dialog.importLayer(`data/${geojson}.geojson`, id)
+  await dialog.importLayer(`data/${geojson}.geojson`, 'code')
   await pages.takeScreenshot(test, runKey)
   //await pages.assertScreenshotMatches(test, runKey)
   // Remove layer
