@@ -89,6 +89,12 @@ const mapLayerActions = [{
   ]
 }]
 
+const mapWidgets = [
+  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
+  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
+]
+
 // Map engine configuration
 const mapEngine = {
   viewer: {
@@ -188,6 +194,12 @@ const globeLayerActions = [{
   ]
 }]
 
+const globeWidgets = [
+  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
+  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
+]
+
 // Globe engine configuration
 const globeEngine = {
   viewer: {
@@ -269,12 +281,6 @@ const globeEngine = {
     }
   }
 }
-
-const widgets = [
-  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
-  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
-]
 
 module.exports = {
   // Special alias to host loopback interface in cordova
@@ -423,7 +429,7 @@ module.exports = {
       }*/]
     },
     window: {
-      widgets
+      widgets: mapWidgets
     },
     fab: {
       actions: [
@@ -501,7 +507,7 @@ module.exports = {
       }]
     },
     window: {
-      widgets
+      widgets: globeWidgets
     },
     fab: {
       actions: [
