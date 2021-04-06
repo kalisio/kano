@@ -68,7 +68,9 @@ export default {
       if (!feature) return
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
-      utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
+      if (options) { // Check for internal objects not coming from a layer
+        utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
+      }
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })

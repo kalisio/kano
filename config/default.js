@@ -169,6 +169,7 @@ const globeCatalog = {
 
 // Globe layer actions
 const globeLayerActions = [{
+  id: 'layer-actions',
   component: 'frame/KMenu',
   actionRenderer: 'item',
   content: [
@@ -186,6 +187,7 @@ const globeEngine = {
   viewer: {
     sceneMode: 3, // SceneMode.COLUMBUS_VIEW = 1, SceneMode.SCENE3D = 3,
     sceneModePicker: false,
+    infoBox: false,
     scene3DOnly: true,
     homeButton: false,
     geocoder: false,
@@ -415,7 +417,7 @@ module.exports = {
       }*/]
     },
     window: {
-      widgets: widgets
+      widgets
     },
     fab: {
       actions: [
@@ -440,13 +442,22 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'manage-favorite-views', component: 'frame/KMenu', icon: 'star_border', persistent: true, autoClose: false, tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            id: 'manage-favorite-views',
+            component: 'frame/KMenu',
+            icon: 'star_border',
+            persistent: true,
+            autoClose: false,
+            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
             content: [
               { component: 'KFavoriteViews' }
             ]
           },
           {
-            id: 'tools', component: 'frame/KMenu', icon: 'las la-wrench', tooltip: 'mixins.activity.TOOLS', actionRenderer: 'item',
+            id: 'tools',
+            component: 'frame/KMenu',
+            icon: 'las la-wrench',
+            tooltip: 'mixins.activity.TOOLS',
+            actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
             ]
@@ -471,14 +482,6 @@ module.exports = {
     rightPane: {
       content: [{
         component: 'catalog/KCatalog', bind: '$data'
-      }, {
-        component: 'QSpace'
-      }, {
-        component: 'frame/KPanel',
-        content: [
-          { id: 'manage-layer-categories', icon: 'las la-cog', label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-            route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } }
-        ]
       }]
     },
     bottomPane: {
@@ -486,8 +489,13 @@ module.exports = {
         { component: 'KTimeline' }
       ]
     },
+    page: {
+      content: [{
+        component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
+      }]
+    },
     window: {
-      widget: widgets
+      widgets
     },
     fab: {
       actions: [

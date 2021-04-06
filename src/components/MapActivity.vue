@@ -93,7 +93,9 @@ export default {
       if (!feature) return
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
-      utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
+      if (options) { // Check for internal objects not coming from a layer
+        utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
+      }
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
