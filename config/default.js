@@ -163,6 +163,12 @@ const globeCatalog = {
       name: 'KCatalogPanel.MEASURE_LAYERS',
       icon: 'las la-map-pin',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
+    },
+    {
+      name: 'KCatalogPanel.METEO_LAYERS',
+      icon: 'las la-cloud-sun-rain',
+      component: 'catalog/KWeatherLayersSelector',
+      options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
     }
   ]
 }
