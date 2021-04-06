@@ -145,26 +145,22 @@ const mapEngine = {
 const globeCatalog = {
   categories: [
     {
-      name: 'BusinessLayers',
-      label: 'KCatalogPanel.BUSINESS_LAYERS',
+      name: 'KCatalogPanel.BUSINESS_LAYERS',
       icon: 'las la-briefcase',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
     },
     {
-      name: 'BaseLayers',
-      label: 'KCatalogPanel.BASE_LAYERS',
+      name: 'KCatalogPanel.BASE_LAYERS',
       icon: 'las la-layer-group',
       options: { exclusive: true, filter: { type: 'BaseLayer' } } 
     },
     {
-      name: 'TerrainLayers',
-      label: 'KCatalogPanel.TERRAIN_LAYERS',
+      name: 'KCatalogPanel.TERRAIN_LAYERS',
       icon: 'las la-mountain',
       options: { exclusive: true, filter: { type: 'TerrainLayer' } }
     },
     {
-      name: 'MeasureLayers',
-      label: 'KCatalogPanel.MEASURE_LAYERS',
+      name: 'KCatalogPanel.MEASURE_LAYERS',
       icon: 'las la-map-pin',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
     }
