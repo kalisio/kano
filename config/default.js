@@ -25,6 +25,9 @@ if (process.env.SUBDOMAIN) {
 // On a developer machine will do domain = gateway = localhost
 const gateway = domain.replace('kano', 'api')
 
+// Allow to override version number for custom build
+const version = (process.env.VERSION ? process.env.VERSION : require('../package.json').version)
+
 // Left pane
 const leftPane = {
   content: [
@@ -291,13 +294,13 @@ module.exports = {
   // domain: 'http://192.168.1.16:8081',
   domain,
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
-  version: require('../package.json').version,
+  version,
   buildNumber: process.env.BUILD_NUMBER,
   apiPath: API_PREFIX,
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  gateway: 'https://api.',
+  gateway,
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',

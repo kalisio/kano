@@ -18,7 +18,8 @@ module.exports = async function () {
       const response = {
         name: 'kano',
         domain: app.get('domain'),
-        version: packageInfo.version,
+        // Allow to override version number for custom build
+        version: (process.env.VERSION ? process.env.VERSION : packageInfo.version),
         cesium: app.get('cesium'),
         mapillary: app.get('mapillary')
       }
