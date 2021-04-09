@@ -113,7 +113,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       displayValues: false,
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
-      minZoom: {
+      meteoModelMinZoom: {
         'gfs-world': 3,
         'arpege-world': 3,
         'arpege-europe': 5,
@@ -201,7 +201,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-wind',
       zIndex: forecastZIndex,
-      minZoom: {
+      meteoModelMinZoom: {
         'gfs-world': 3,
         'arpege-world': 3,
         'arpege-europe': 5,
@@ -289,7 +289,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-cloud-rain',
       zIndex: forecastZIndex,
-      minZoom: {
+      meteoModelMinZoom: {
         'gfs-world': 3,
         'arpege-world': 3,
         'arpege-europe': 5,
@@ -387,7 +387,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       opacity: 0.6,
       'icon-classes': 'fas fa-temperature-high',
       zIndex: forecastZIndex,
-      minZoom: {
+      meteoModelMinZoom: {
         'gfs-world': 3,
         'arpege-world': 3,
         'arpege-europe': 5,
