@@ -32,7 +32,7 @@ fixture`add-layer`// declare the fixture
   .afterEach(async test => {
     // logout
     await layout.clickLeftOpener(test)
-    await layout.clickLeftPane(test, pages.Layout.LOGOUT)
+    await layout.clickLeftPaneAction(test, pages.Layout.LOGOUT)
     // check for console error messages
     // await pages.checkNoClientError(test)
   })

@@ -34,6 +34,7 @@ export default {
   methods: {
     editSettings () {
       this.$refs.editor.openModal()
+      this.$emit('triggered')
     },
     onSettingsEdited () {
       this.$refs.editor.closeModal()

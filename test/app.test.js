@@ -51,7 +51,7 @@ test('Checking the app layout', async test => {
   await mapActivity.move(test, 100, 100)
   // Open the left drawer
   await layout.clickLeftOpener(test)
-  await layout.clickLeftPane(test, pages.Layout.LOGOUT)
+  await layout.clickLeftPaneAction(test, pages.Layout.LOGOUT)
   // Go back to the login screen
   await screens.goToLoginScreen(test)
 })
