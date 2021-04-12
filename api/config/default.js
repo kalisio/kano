@@ -62,6 +62,9 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
 if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
+// On a developer machine will do domain = gateway = localhost
+const gateway = domain.replace('kano', 'api')
+
 // Just used for testing purpose now
 apiLimiter = null
 limiter = null
@@ -91,6 +94,7 @@ module.exports = {
   },
   */
   domain,
+  gateway,
   host: process.env.HOSTNAME || 'localhost',
   port: serverPort,
   /* To enable HTTPS
