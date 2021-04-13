@@ -39,7 +39,7 @@ fixture`add-layer`// declare the fixture
 
 test('Import GeoJson layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   const geojson = 'regions-version-simplifiee'
   let runKey = `created-${{geojson}}`
   // Selection based on text content does not seem to work
@@ -56,7 +56,7 @@ test('Import GeoJson layer', async test => {
 
 test('Connect OGC WMS layer (BRGM)', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   
   const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
   // Selection based on text content does not seem to work
@@ -71,7 +71,7 @@ test('Connect OGC WMS layer (BRGM)', async test => {
 
 test('Connect OGC WMS layer (IGN)', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/r/wms?service=wms&request=getcapabilities'
   // Selection based on text content does not seem to work
@@ -85,7 +85,7 @@ test('Connect OGC WMS layer (IGN)', async test => {
 /*
 test('Connect OGC WFS layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
   const layer = 'BD TOPO'
@@ -98,7 +98,7 @@ test('Connect OGC WFS layer', async test => {
 */
 test('Create blank layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   let runKey = 'created-layer'
   // Selection based on text content does not seem to work
   //const id = 'name'
