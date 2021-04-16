@@ -6,18 +6,24 @@ module.exports = [{
     placement: 'top'
   }
 }, {
-  target: '#help',
-  link: 'tours.home.HELP_LABEL',
-  params: {
-    placement: 'top',
-    clickOnLink: '#help'
-  }
-}, {
   target: '#edit-settings',
   content: 'tours.home.SETTINGS_LABEL',
   params: {
     placement: 'top',
     previousDelay: 500
+  }
+}, {
+  target: '#online-help',
+  link: 'tours.home.HELP_LABEL',
+  params: {
+    placement: 'top',
+    clickOnLink: '#online-help'
+  }
+}, {
+  target: '#contextual-help',
+  content: 'tours.home.CONTEXT_HELP_LABEL',
+  params: {
+    placement: 'top'
   }
 }, {
   target: '#about',
