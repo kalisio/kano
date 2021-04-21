@@ -308,7 +308,7 @@ module.exports = {
   appWebsite: 'https://github.com/kalisio/kano',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
-  publisherWebsite: 'https://www.kalisio.com',
+  publisherWebsite: 'https://kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
     // default: 'en',
@@ -408,10 +408,12 @@ module.exports = {
         component: 'QSpace'
       }, {
         component: 'frame/KPanel',
-        content: [
-          { id: 'manage-layer-categories', icon: 'las la-cog', label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-            route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } }
-        ]
+        content: [{
+          id: 'manage-layer-categories',
+          icon: 'las la-cog',
+          label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+          route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
+        }]
       }]
     },
     bottomPane: {
