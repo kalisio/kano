@@ -1,0 +1,9 @@
+{
+    "browsers": ["chrome", "firefox"],
+    "screenshots": {
+        "path": "test/reports/screenshots",
+        "takeOnFails": true,
+        "pathPattern": "${BROWSER}/${FIXTURE}/${TEST_INDEX}/${FILE_INDEX}.png"
+    },
+    "debugMode": false
+}

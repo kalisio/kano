@@ -35,13 +35,14 @@ fixture`catalog`// declare the fixture
   })
 
 test('Check base layers', async test => {
-  const category = 'KCatalogPanel.BASE_LAYERS'
+  const category = 'BASE_LAYERS'
   const layers = [
     'Layers.OSM_DARK',
     'Layers.OSMT_BRIGHT',
-    'Layers.OSMT_DARK',
     'Layers.OSM_BRIGHT'
   ]
+  // Close the top pane
+  await layout.clickTopOpener(test)
   // Open the category
   await layout.clickRightOpener(test)
   await catalog.clickCategory(test, category, true)
@@ -51,9 +52,9 @@ test('Check base layers', async test => {
     await layout.clickRightOpener(test)
     await catalog.clickLayer(test, layer, true)
     await layout.clickRightOpener(test)
-    // const runKey = `${category}-${layer}`
-    // await pages.assertScreenshotMatches(test, runKey)
-    // await pages.takeScreenshot(t, runKey)
+    const runKey = `${category}-${layer}`
+    await pages.assertScreenshotMatches(test, runKey)
+    await pages.takeScreenshot(test, runKey)
   }
   // Close the category
   await layout.clickRightOpener(test)
@@ -62,7 +63,7 @@ test('Check base layers', async test => {
 })
 
 test('Check measure layers', async test => {
-  const category = 'KCatalogPanel.MEASURE_LAYERS'
+  const category = 'MEASURE_LAYERS'
   const layers = [
     'Layers.VIGICRUES',
     'Layers.HUBEAU',
