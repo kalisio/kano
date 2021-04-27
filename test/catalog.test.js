@@ -45,7 +45,9 @@ test('Check base layers', async test => {
   await layout.clickTopOpener(test)
   // Open the category
   await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, category, true)
+  await catalog.clickCategory(test, category)
+  const categoryObj = await catalog.getCategory(category)
+  console.log(categoryObj)
   await layout.clickRightOpener(test)
   // Active each layer
   for (const layer of layers) {
@@ -53,8 +55,8 @@ test('Check base layers', async test => {
     await catalog.clickLayer(test, layer, true)
     await layout.clickRightOpener(test)
     const runKey = `${category}-${layer}`
-    await pages.assertScreenshotMatches(test, runKey)
     await pages.takeScreenshot(test, runKey)
+    await pages.assertScreenshotMatches(test, runKey)
   }
   // Close the category
   await layout.clickRightOpener(test)
@@ -75,7 +77,7 @@ test('Check measure layers', async test => {
 
   for (const layer of layers) {
     await layout.clickRightOpener(test)
-    await catalog.clickLayer(test, layer, true)
+    await catalog.clickLayer(test, layer, false)
     await layout.clickRightOpener(test)
     // const runKey = `${category}-${layer}`
     // await pages.takeScreenshot(test, runKey)
