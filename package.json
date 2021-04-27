@@ -38,6 +38,8 @@
     "cafe:cp": "shx cp -R node_modules/@kalisio/kdk/extras/testcafe/page-models/* test/page-models",
     "cafe:firefox": "npm run cafe:cp && testcafe firefox test/*.test.js",
     "cafe:chrome": "npm run cafe:cp && testcafe chrome test/*.test.js",
+    "cafe:dev:firefox": "npm run cafe:cp && cross-env APP_URL=https://kano.dev.kalisio.xyz && testcafe firefox test/*.test.js",
+    "cafe:dev:chrome": "npm run cafe:cp && cross-env APP_URL=https://kano.dev.kalisio.xyz && testcafe chrome test/*.test.js",
     "rec": "node ./tutorials/record.js",
     "test:server": "cd api && npm run test",
     "test:client": "cross-env NODE_ENV=production testcafe chrome:headless test/*.test.js --app \"npm run prod\" --app-init-delay 10000 -S -s screenshots",
