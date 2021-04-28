@@ -16,7 +16,7 @@ Kano is a client aplication that can be used to visualise geospatial data served
 
 For more information please visit our websites:
 * [Kalisio Company](https://kalisio.com/)
-* [Kano development build](https://kano.dev.kalisio.xyz/)
+* [Kano Product](https://kalisio.github.io/kano/)
 
 This application is based on the [Kalisio Development Kit](https://kalisio.github.io/kdk/).
 
