@@ -12,6 +12,7 @@ const user = {
 const screens = new pages.Screens()
 const layout = new pages.Layout()
 const catalog = new pages.Catalog()
+const map = new pages.MapActivity()
 
 fixture`catalog`// declare the fixture
   .page`${pages.getUrl()}`
@@ -45,12 +46,11 @@ test('Check base layers', async test => {
   await layout.clickTopOpener(test)
   // Open the category
   await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, category)
-  const categoryObj = await catalog.getCategory(category)
-  console.log(categoryObj)
+  await catalog.checkCategoryExpanded(test, category, false)
+  await catalog.clickCategory(test, category, true)
   await layout.clickRightOpener(test)
   // Active each layer
-  for (const layer of layers) {
+ for (const layer of layers) {
     await layout.clickRightOpener(test)
     await catalog.clickLayer(test, layer, true)
     await layout.clickRightOpener(test)
@@ -65,6 +65,7 @@ test('Check base layers', async test => {
 })
 
 test('Check measure layers', async test => {
+  const bbox = [ 43.48531032718829, 1.291923522949219, 43.701885100693744, 1.6623687744140627 ]
   const category = 'MEASURE_LAYERS'
   const layers = [
     'Layers.VIGICRUES',
@@ -72,17 +73,22 @@ test('Check measure layers', async test => {
     'Layers.TELERAY'
   ]
   await layout.clickRightOpener(test)
+  await catalog.checkCategoryExpanded(test, category, false)
   await catalog.clickCategory(test, category, true)
-  await layout.clickRightOpener(test)
-
+  await catalog.checkCategoryExpanded(test, category, true)
   for (const layer of layers) {
-    await layout.clickRightOpener(test)
-    await catalog.clickLayer(test, layer, false)
-    await layout.clickRightOpener(test)
+    await catalog.checkLayerDisabled(test, layer, true)
+    await catalog.checkLayerActive(test, layer, false)
+  }
+  await layout.clickRightOpener(test)
+  await map.zoomTo(test, bbox)
+  await layout.clickRightOpener(test)
+  await catalog.clickCategory(test, category, true)
+  for (const layer of layers) {
+    await catalog.checkLayerDisabled(test, layer, false)
     // const runKey = `${category}-${layer}`
     // await pages.takeScreenshot(test, runKey)
   }
-  await layout.clickRightOpener(test)
   await catalog.clickCategory(test, category, false)
   await layout.clickRightOpener(test)
 })
