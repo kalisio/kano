@@ -36,6 +36,7 @@ export default {
     kMapMixins.levels,
     kMapMixins.context,
     kMapMixins.map.baseMap,
+    kMapMixins.map.canvasLayers,
     kMapMixins.map.geojsonLayers,
     kMapMixins.map.heatmapLayers,
     kMapMixins.map.forecastLayers,
