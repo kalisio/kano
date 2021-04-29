@@ -404,11 +404,11 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: [{
-        component: 'catalog/KCatalog', bind: '$data'
+        id: 'catalog', component: 'catalog/KCatalog', bind: '$data'
       }, {
         component: 'QSpace'
       }, {
-        component: 'frame/KPanel',
+        id: 'catalog-footer', component: 'frame/KPanel',
         content: [{
           id: 'manage-layer-categories',
           icon: 'las la-cog',

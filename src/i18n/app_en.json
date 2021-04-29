@@ -30,7 +30,7 @@
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Open the main menu any time using this handle.",
-      "SIDENAV_LINK_LABEL": "Browse the main menu.",
+      "SIDENAV_LINK_LABEL": "Browse the main menu",
       "HELP_LABEL": "Access our online help anytime",
       "CONTEXT_HELP_LABEL": "To get contextual help whenever your are lost simply click on the following icon",
       "ABOUT_LABEL": "Display detailed system information and send us bug reports.",
@@ -39,7 +39,7 @@
       "LOGOUT_LABEL": "Logout in order to close your work session.",
       "SESSION_LABEL": "Otherwise the session will remain active on your device for <b>24H</b>, you will not have to login again in this time frame.",
       "NAVIGATION_BAR_LABEL": "Open the application bar any time using this handle.",
-      "NAVIGATION_BAR_LINK_LABEL": "Browse the application bar.",
+      "NAVIGATION_BAR_LINK_LABEL": "Browse the application bar",
       "CATALOG_LABEL": "Open the catalog any time using this handle.",
       "CATALOG_LINK_LABEL": "Browse the catalog",
       "TIMELINE_LABEL": "Open the timeline any time using this handle.",
