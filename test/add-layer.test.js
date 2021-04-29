@@ -58,12 +58,10 @@ test('Import GeoJson layer', async test => {
 test('Connect OGC WMS layer (BRGM)', async test => {
   const dialog = new pages.AddLayer()
   layout.openAndClickFab(test, 'add-layer')
-  
   const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
   const layerId = 'bgm-station'
-  const runKey = 'wms-geologie-brgm'
+  const runKey = 'wms-brgm-geologie'
   await dialog.connectLayer(service, layerId)
-  await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
   await pages.assertScreenshotMatches(test, runKey)
 })
@@ -71,12 +69,10 @@ test('Connect OGC WMS layer (BRGM)', async test => {
 test('Connect OGC WMS layer (IGN)', async test => {
   const dialog = new pages.AddLayer()
   layout.openAndClickFab(test, 'add-layer')
-  
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/r/wms?service=wms&request=getcapabilities'
   const layerId = 'orthoimagery-orthophotos-bdortho'
-  const runKey = 'wms-ortho-ign'
+  const runKey = 'wms-ign-ortho'
   await dialog.connectLayer(service, layerId)
-  await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
   await pages.assertScreenshotMatches(test, runKey)
 })
@@ -84,12 +80,21 @@ test('Connect OGC WMS layer (IGN)', async test => {
 test('Connect OGC WFS layer', async test => {
   const dialog = new pages.AddLayer()
   layout.openAndClickFab(test, 'add-layer')
-  
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
-  const layer = 'BD TOPO'
+  const layer = 'bdtopo-v-3-batiment'
   await dialog.connectLayer(service, layer)
-  await mapActivity.zoomTo(test, bbox)
-  const runKey = 'wfs-geologie-ign'
+  const runKey = 'wfs-ign-bdtopo'
+  await pages.takeScreenshot(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
+})
+
+test('Connect OGC WMTS layer', async test => {
+  const dialog = new pages.AddLayer()
+  layout.openAndClickFab(test, 'add-layer')
+  const service = 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/WMTS/1.0.0/WMTSCapabilities.xml'
+  const layer = 'usgs-imagery-topo'
+  await dialog.connectLayer(service, layer)
+  const runKey = 'wmts-usgs-imagery-topo'
   await pages.takeScreenshot(test, runKey)
   await pages.assertScreenshotMatches(test, runKey)
 })
@@ -104,8 +109,6 @@ test('Create blank layer', async test => {
   // Draw a marker and edit properties
   await test.click(Selector('.leaflet-draw-draw-marker'))
   await mapActivity.clickAt(test, 500, 500)
-  await mapActivity.clickAt(test, 500, 500)
-  await test.click(Selector('.q-dialog #close-action'))
   // Draw a line
   await test.click(Selector('.leaflet-draw-draw-polyline'))
   await mapActivity.clickAt(test, 300, 300)
