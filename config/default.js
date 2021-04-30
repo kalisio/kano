@@ -308,7 +308,7 @@ module.exports = {
   appWebsite: 'https://github.com/kalisio/kano',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
-  publisherWebsite: 'https://www.kalisio.com',
+  publisherWebsite: 'https://kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
     // default: 'en',
@@ -358,10 +358,9 @@ module.exports = {
         default: [
           { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          /* Only for example purpose
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
-          { component: 'QSeparator', vertical: true, color: 'lightgrey' }, */
+          { id: 'zoom-separator', component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
@@ -398,20 +397,24 @@ module.exports = {
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KSearchLocation' }
         ]
-      }
+      },
+      // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
+      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } }
     },
     leftPane: leftPane,
     rightPane: {
       content: [{
-        component: 'catalog/KCatalog', bind: '$data'
+        id: 'catalog', component: 'catalog/KCatalog', bind: '$data'
       }, {
         component: 'QSpace'
       }, {
-        component: 'frame/KPanel',
-        content: [
-          { id: 'manage-layer-categories', icon: 'las la-cog', label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-            route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } }
-        ]
+        id: 'catalog-footer', component: 'frame/KPanel',
+        content: [{
+          id: 'manage-layer-categories',
+          icon: 'las la-cog',
+          label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+          route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
+        }]
       }]
     },
     bottomPane: {
@@ -454,6 +457,9 @@ module.exports = {
         default: [
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
+          { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
+          { id: 'zoom-separator', component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
@@ -491,7 +497,9 @@ module.exports = {
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KSearchLocation' }
         ]
-      }
+      },
+      // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
+      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } }
     },
     leftPane: leftPane,
     rightPane: {

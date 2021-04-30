@@ -32,6 +32,7 @@
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",
       "SIDENAV_LINK_LABEL": "Parcourir le menu principal",
       "HELP_LABEL": "Accédez à notre aide en ligne à tout moment",
+      "CONTEXT_HELP_LABEL": "Pour obtenir de l'aide contextuelle lorsque vous êtes perdu cliquez à tout moment cette l'icône",
       "ABOUT_LABEL": "Affichez les informations détaillées du système et signalez-nous un boggue.",
       "BUG_LABEL": "Signalez-nous un boggue via un email contenant automatiquement les informations nécessaires.",
       "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",

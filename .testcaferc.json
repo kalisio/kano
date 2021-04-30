@@ -1,0 +1,8 @@
+{
+    "screenshots": {
+        "path": "test/reports",
+        "takeOnFails": true,
+        "pathPattern": "${BROWSER}/${FIXTURE}/${TEST_INDEX}/${FILE_INDEX}.png"
+    },
+    "debugMode": false
+}

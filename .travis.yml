@@ -9,7 +9,9 @@ notifications:
 stages:
 - name: APP
   if: commit_message !~ /(skip[ _-]app)/
-
+- name: DOC
+  if: commit_message =~ /\[build doc\]/
+  
 jobs:
   include:
     

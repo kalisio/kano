@@ -32,84 +32,83 @@ fixture`add-layer`// declare the fixture
   .afterEach(async test => {
     // logout
     await layout.clickLeftOpener(test)
-    await layout.clickLeftPane(test, pages.Layout.LOGOUT)
+    await layout.clickLeftPaneAction(test, pages.Layout.LOGOUT)
     // check for console error messages
     // await pages.checkNoClientError(test)
   })
 
 test('Import GeoJson layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   const geojson = 'regions-version-simplifiee'
-  let runKey = `created-${{geojson}}`
-  // Selection based on text content does not seem to work
+  let runKey = `created-${geojson}`
   await dialog.importLayer(`data/${geojson}.geojson`, 'code')
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
   // Remove layer
-  await catalog.clickLayerAction(runKey, 'remove')
-  runKey = `removed-${{geojson}}`
+  await layout.clickRightOpener(test)
+  await catalog.clickLayerAction(test, geojson, 'remove')
   await test.click(Selector('.q-dialog .q-btn').nth(1))
+  await layout.clickRightOpener(test)
+  runKey = `removed-${geojson}`
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
 })
 
 test('Connect OGC WMS layer (BRGM)', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
-  
+  layout.openAndClickFab(test, 'add-layer')
   const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
-  // Selection based on text content does not seem to work
-  //const layer = 'Carte géologique 50 000e - harmonisé'
   const layerId = 'bgm-station'
-  const runKey = 'wms-geologie-brgm'
+  const runKey = 'wms-brgm-geologie'
   await dialog.connectLayer(service, layerId)
-  await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
 })
 
 test('Connect OGC WMS layer (IGN)', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
-  
+  layout.openAndClickFab(test, 'add-layer')
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/r/wms?service=wms&request=getcapabilities'
-  // Selection based on text content does not seem to work
   const layerId = 'orthoimagery-orthophotos-bdortho'
-  const runKey = 'wms-ortho-ign'
+  const runKey = 'wms-ign-ortho'
   await dialog.connectLayer(service, layerId)
-  await mapActivity.zoomTo(test, bbox)
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
 })
-/*
+
 test('Connect OGC WFS layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
-  
+  layout.openAndClickFab(test, 'add-layer')
   const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
-  const layer = 'BD TOPO'
+  const layer = 'bdtopo-v-3-batiment'
   await dialog.connectLayer(service, layer)
-  await mapActivity.zoomTo(test, bbox)
-  const runKey = 'wfs-geologie-ign'
+  const runKey = 'wfs-ign-bdtopo'
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
 })
-*/
+
+test('Connect OGC WMTS layer', async test => {
+  const dialog = new pages.AddLayer()
+  layout.openAndClickFab(test, 'add-layer')
+  const service = 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/WMTS/1.0.0/WMTSCapabilities.xml'
+  const layer = 'usgs-imagery-topo'
+  await dialog.connectLayer(service, layer)
+  const runKey = 'wmts-usgs-imagery-topo'
+  await pages.takeScreenshot(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
+})
+
 test('Create blank layer', async test => {
   const dialog = new pages.AddLayer()
-  layout.openAndClickFab(test, '#add-layer')
+  layout.openAndClickFab(test, 'add-layer')
   let runKey = 'created-layer'
   // Selection based on text content does not seem to work
-  //const id = 'name'
-  const id = 0
-  await dialog.createLayer(runKey, 'data/protocole.json', id)
+  await dialog.createLayer(runKey, 'data/protocole.json', 'name')
   await mapActivity.zoomTo(test, bbox)
   // Draw a marker and edit properties
   await test.click(Selector('.leaflet-draw-draw-marker'))
   await mapActivity.clickAt(test, 500, 500)
-  await mapActivity.clickAt(test, 500, 500)
-  await test.click(Selector('.q-dialog #close-action'))
   // Draw a line
   await test.click(Selector('.leaflet-draw-draw-polyline'))
   await mapActivity.clickAt(test, 300, 300)
@@ -123,11 +122,11 @@ test('Create blank layer', async test => {
   // Close edition
   await test.click(Selector('.q-notifications button'))
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
   // Remove layer
   await catalog.clickLayerAction(runKey, 'remove')
   runKey = 'removed-layer'
   await test.click(Selector('.q-dialog .q-btn').nth(1))
   await pages.takeScreenshot(test, runKey)
-  //await pages.assertScreenshotMatches(test, runKey)
+  await pages.assertScreenshotMatches(test, runKey)
 })

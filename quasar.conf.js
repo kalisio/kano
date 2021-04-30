@@ -19,7 +19,8 @@ module.exports = function (ctx) {
     boot: [
       'api',
       'i18n',
-      'tour'
+      'tour',
+      'plugins'
     ],
 
     css: [
