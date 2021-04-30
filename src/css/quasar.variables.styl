@@ -9,18 +9,11 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary    = #642879
-$secondary  = #bc477b
-$accent     = #FC6E44
+$primary    = #72448b
+$secondary  ?= lighten($primary, 75%)
+$accent     ?= lighten($primary, 25%)
 $dark       ?= darken($primary, 25%)
-$light      ?= lighten($primary, 25%)
-
-$positive   = #21BA45
-$negative   = #C10015
-$info       = #31CCEC
-$warning    = #F2C037
-
-// STYLES TAKEN FROM 'OLD QUASAR' (v.0.14.7)
-
-$link-color          ?= lighten($primary, 25%)
-$link-color-active   ?= $primary
+$info       = $accent
+$positive   = #7bb946
+$negative   = #c74a4a
+$warning    = #d09931
