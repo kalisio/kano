@@ -1,12 +1,54 @@
 # Changelog
 
-## [prod-v1.1.1](https://github.com/kalisio/kano/tree/prod-v1.1.1) (2021-01-26)
+## [prod-v1.2.0](https://github.com/kalisio/kano/tree/prod-v1.2.0) (2021-05-04)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.1.1...prod-v1.2.0)
+
+**Implemented enhancements:**
+
+- Add layer categories management [\#167](https://github.com/kalisio/kano/issues/167)
+- Enhance place finder ui [\#163](https://github.com/kalisio/kano/issues/163)
+- Handle the kdk icon library [\#160](https://github.com/kalisio/kano/issues/160)
+- The iframe API should allow to access services [\#159](https://github.com/kalisio/kano/issues/159)
+- Allow to initialize layers from an external service [\#158](https://github.com/kalisio/kano/issues/158)
+- Add favorite views management [\#156](https://github.com/kalisio/kano/issues/156)
+- Refactor the layout using new KDK capabilities [\#154](https://github.com/kalisio/kano/issues/154)
+- Allow to manage a bookmark of favorite views [\#147](https://github.com/kalisio/kano/issues/147)
+- Add client tests [\#101](https://github.com/kalisio/kano/issues/101)
+
+**Fixed bugs:**
+
+- X axis not readable depending on the selected time range [\#162](https://github.com/kalisio/kano/issues/162)
+- X axis not fully visible when timeseries widget is in fullscreen mode [\#161](https://github.com/kalisio/kano/issues/161)
+- TimeSeries widget is not well resized on multi-screen display [\#118](https://github.com/kalisio/kano/issues/118)
+
+**Merged pull requests:**
+
+- build\(deps\): bump y18n from 3.2.1 to 3.2.2 [\#168](https://github.com/kalisio/kano/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump prismjs from 1.22.0 to 1.23.0 in /docs [\#157](https://github.com/kalisio/kano/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [prod-v1.1.1](https://github.com/kalisio/kano/tree/prod-v1.1.1) (2021-01-27)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.1.0...prod-v1.1.1)
+
+**Implemented enhancements:**
+
+- Upgrade post-robot to latest version [\#151](https://github.com/kalisio/kano/issues/151)
+- Add an OpenRadiation layer [\#148](https://github.com/kalisio/kano/issues/148)
+- Translate tooltips in default layers [\#130](https://github.com/kalisio/kano/issues/130)
+- Enhance edition information [\#124](https://github.com/kalisio/kano/issues/124)
+- Keep track of currently activated layers [\#43](https://github.com/kalisio/kano/issues/43)
 
 **Fixed bugs:**
 
 - Click event not sent in iframe API [\#153](https://github.com/kalisio/kano/issues/153)
+- Update Vigicrues layer configuration for v1.4 [\#152](https://github.com/kalisio/kano/issues/152)
+
+**Merged pull requests:**
+
+- build\(deps\): bump ini from 1.3.4 to 1.3.7 [\#149](https://github.com/kalisio/kano/pull/149) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update layers.js [\#146](https://github.com/kalisio/kano/pull/146) ([benoit-jpi](https://github.com/benoit-jpi))
 
 ## [prod-v1.1.0](https://github.com/kalisio/kano/tree/prod-v1.1.0) (2020-11-10)
 
