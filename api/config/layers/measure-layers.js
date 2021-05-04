@@ -855,7 +855,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           'µSv/h'
         ],
         range: [0, 250],
-        step: 0.1,
+        step: 5,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
@@ -872,7 +872,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#78c0f0',
       'icon-color': 'white',
       'icon-classes': 'fa fa-radiation-alt',
-      'icon-x-offset': -2,
+      'icon-x-offset': -1,
       popup: {
         pick: [
           'userId'

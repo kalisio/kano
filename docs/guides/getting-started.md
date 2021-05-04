@@ -61,8 +61,10 @@ The timeline allows to quickly execute actions related to the time of the displa
 ## Floating action button
 
 Using the FAB at the bottom right corner you can:
-* <i class="las la-plus"/> Create a new blank data layer by locating and drawing the underlying entities. You can add the data schema from a [JSON schema](https://json-schema.org/) file in order to edit the meatadata (i.e. properties) of your entities.
-* <i class="las la-file-import"/> Create a new data layer by import existing data from a [GeoJSON](https://geojson.org/) file.
+* <i class="las la-plus"/> Create a new blank data layer:
+   * By connecting to web mapping services using OGC standards (WMS, WFS, TMS, WMTS).
+   * By locating and drawing the underlying entities. You can add the data schema from a [JSON schema](https://json-schema.org/) file in order to edit the meatadata (i.e. properties) of your entities.
+  * By import existing data from a [GeoJSON](https://geojson.org/) file.
 * <i class="las la-eye-dropper"/> Probe weather forecast data from active prediction models by selecting a specific location on the map.
 
 :point_right: Launch the main tutorial from the main menu then open the link <i class="las la-external-link-square-alt"/> to the FAB tutorial to get more details
@@ -76,7 +78,6 @@ A *right-click* on a feature of the map will display a contextual menu if some a
 Depending on the layer different actions are available. The most common action is to *zoom to* <i class="las la-search-location"/> the layer in order to fit the view on the available data. If the layer is disabled at high scales this action will set the current scale of the map so that data will start be visible if the layer is shown.
 
 More actions are available on user-defined feature layers:
-* <i class="las la-search-location"></i> center the view to the loaded layer content (if any)
 * <i class="las la-save"></i> save the layer (i.e. make it persistent),
 * <i class="las la-file-alt"></i> edit layer properties like its name or description,
 * <i class="las la-edit"></i> edit layer features (metadata and geometry),

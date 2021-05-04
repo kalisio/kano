@@ -32,13 +32,14 @@ In-memory data exchange is Json and more specifically GeoJson for map features. 
 :::
 
 ::: warning
-You must use the same version of the **post-robot** library as the one used by **Kano**. For now, **Kano** relies on the `10.0.10` version of **post-robot**.
+You must use the same version of the **post-robot** library as the one used by **Kano**. For now, **Kano** relies on the `10.0.42` version of **post-robot**.
 :::
 
 In addition to the events used to access mixin methods there are a couple of dedicated events:
-* `kano-ready`: to be listened by integrating application to know when the Kano application has been initialized in the iframe so that you can safely use the API
+* `kano-ready`: to be listened by integrating application to know when the Kano application has been initialized in the iframe so that you can safely use the iframe API
+* `api-ready`: to be listened by integrating application to know when the Kano backend connection has been initialized in the iframe so that you can safely call the backend API
 * `setLocalStorage`: listened by Kano to set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
-* `setConfiguration`: listened by Kano to set key/value pairs to override its configuration, typically useful to configure available actions
+* `setConfiguration`: listened by Kano to set key/value pairs to override its configuration, typically useful to configure available components or actions
 * `kano-login`: to be listened by integrating application to know when the user has been authenticated in the Kano application
 * `kano-logout`: to be listened by integrating application to know when the user has been unauthenticated in the Kano application
 * `map-ready`: to be listened by integrating application to know when the 2D map component has been initialized in the Kano application so that you can safely use the underlying API
@@ -50,6 +51,10 @@ In addition to the events used to access mixin methods there are a couple of ded
 * `layer-shown`: to be listened by integrating application to know whenever a layer has been shown in the 2D/3D map
 * `layer-hidden`: to be listened by integrating application to know whenever a new layer has been hidden in the 2D/3D map
 * `click`: to be listened by integrating application to know whenever a feature has been clicked on a layer in the 2D/3D map, will provide the `feature` and `layer` (descriptor) as data payload properties
+
+::: warning
+You should add a listener for each of the above events in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
+:::
 
 Here is a simple code sample:
 ```html
@@ -125,10 +130,12 @@ The most simple way to develop in Kano is to design and integrate your own compo
 ```js
 module.exports = {
   mapActivity: { // Can also be globeActivity
-    components: [{
-      name: 'my-component', // Component tag
-      component: 'MyComponent' // Component file name
-    }]
+    page: {
+      content: [{
+        id: 'my-component',
+        component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
+      }]
+    }
   }
 }
 ```
@@ -141,10 +148,8 @@ The component file should look e.g. like this:
   <div>
     <q-dialog ref="myDialog">
     </q-dialog>
-    <q-page-sticky position="bottom-right" :offset="[16, 16]">
-      <q-btn round color="secondary" icon="edit_location" @click="showDialog">
-      </q-btn>
-    </q-page-sticky>
+    <q-btn round color="primary" icon="edit_location" @click="showDialog">
+    </q-btn>
   </div>
 </template>
 
