@@ -1,5 +1,9 @@
 # Changelog
 
+## [prod-v1.2.1](https://github.com/kalisio/kano/tree/prod-v1.2.1) (2021-05-04)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.0...prod-v1.2.1)
+
 ## [prod-v1.2.0](https://github.com/kalisio/kano/tree/prod-v1.2.0) (2021-05-04)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.1.1...prod-v1.2.0)
