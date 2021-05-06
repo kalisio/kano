@@ -895,7 +895,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> nSv/h<% } %>'
+        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% } %>'
       }
     }
   }]
