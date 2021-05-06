@@ -52,7 +52,8 @@ const mapCatalog = {
     {
       name: 'KCatalogPanel.BASE_LAYERS',
       icon: 'las la-layer-group',
-      options: { exclusive: true, filter: { type: 'BaseLayer' } }
+      component: 'catalog/KBaseLayersSelector',
+      options: { filter: { type: 'BaseLayer' } }
     },
     {
       name: 'KCatalogPanel.CAPTURED_LAYERS',

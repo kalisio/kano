@@ -10,7 +10,6 @@ const tmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/tms/1
 const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' : 'https://mapcache.' + kargoDomain + '/mapcache')
 const wcsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wcs' : 'https://mapserver.' + kargoDomain + '/cgi-bin/ows')
 const k2Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
-const maptilerUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/maptiler' : 'https://api.maptiler.com/')
 const s3Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/s3' : 'https://s3.eu-central-1.amazonaws.com')
 
 // Request layer definition files
@@ -27,7 +26,7 @@ layerFiles.forEach(layerFile => {
     console.error(error)
   }
   // Layers provided through a generation function ?
-  if (typeof layersFromFile === 'function') layersFromFile = layersFromFile({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, maptilerUrl })
+  if (typeof layersFromFile === 'function') layersFromFile = layersFromFile({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url })
   // Layers directly provided as array or object
   else if (!Array.isArray(layersFromFile)) layersFromFile = [layersFromFile]
   layers = layers.concat(layersFromFile)
