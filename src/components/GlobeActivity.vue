@@ -64,13 +64,22 @@ export default {
       return this.geAppName.toLowerCase() + `-view`
     },
     async onClicked (options, event) {
+      const latlng = _.get(event, 'latlng')
+      const pickedPosition = _.get(event, 'pickedPosition')
       const feature = _.get(event, 'target.feature')
-      if (!feature) return
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
-      if (options) { // Check for internal objects not coming from a layer
-        utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
-      }
+      const layer = (options ? this.getLayerByName(options.name) : undefined)
+      utils.sendEmbedEvent('click', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
+    },
+    async onDblClicked (options, event) {
+      const latlng = _.get(event, 'latlng')
+      const pickedPosition = _.get(event, 'pickedPosition')
+      const feature = _.get(event, 'target.feature')
+      // Retrieve original layer options not processed ones
+      // as they can include internal objects not to be serialized
+      const layer = (options ? this.getLayerByName(options.name) : undefined)
+      utils.sendEmbedEvent('dblclick', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -83,6 +92,7 @@ export default {
   mounted () {
     this.$events.$on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onClicked)
+    this.$on('dblclick', this.onDblClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
     this.$on('layer-added', this.onAddedLayerEvent)
     this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
@@ -95,6 +105,7 @@ export default {
   beforeDestroy () {
     this.$events.$off('capabilities-api-changed', this.refreshActivity)
     this.$off('click', this.onClicked)
+    this.$off('dblclick', this.onDblClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)
