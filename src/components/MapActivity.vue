@@ -90,13 +90,20 @@ export default {
       if (!feature) return
     },
     async onClicked (options, event) {
+      const latlng = _.get(event, 'latlng')
       const feature = _.get(event, 'target.feature')
-      if (!feature) return
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
-      if (options) { // Check for internal objects not coming from a layer
-        utils.sendEmbedEvent('click', { feature, layer: this.getLayerByName(options.name) })
-      }
+      const layer = (options ? this.getLayerByName(options.name) : undefined)
+      utils.sendEmbedEvent('click', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
+    },
+    async onDblClicked (options, event) {
+      const latlng = _.get(event, 'latlng')
+      const feature = _.get(event, 'target.feature')
+      // Retrieve original layer options not processed ones
+      // as they can include internal objects not to be serialized
+      const layer = (options ? this.getLayerByName(options.name) : undefined)
+      utils.sendEmbedEvent('dblclick', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
     },
     onCurrentTimeChanged (time) {
       // Round to nearest hour - FIXME: should be based on available times
@@ -119,6 +126,7 @@ export default {
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onClicked)
+    this.$on('dblclick', this.onDblClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
     this.$on('layer-added', this.onAddedLayerEvent)
     this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
@@ -133,6 +141,7 @@ export default {
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onClicked)
+    this.$off('dblclick', this.onDblClicked)
     this.$off('layer-added', this.onAddedLayerEvent)
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)
