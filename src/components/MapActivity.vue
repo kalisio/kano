@@ -13,8 +13,6 @@
 
 <script>
 import _ from 'lodash'
-import 'leaflet-timedimension/dist/leaflet.timedimension.src.js'
-import 'leaflet-timedimension/dist/leaflet.timedimension.control.css'
 import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
@@ -70,21 +68,6 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + `-view`
     },
-    createLeafletTimedWmsLayer (options) {
-      let leafletOptions = options.leaflet || options
-      // Check for valid type
-      if (leafletOptions.type !== 'tileLayer.wms') return
-      let layer = this.createLeafletLayer(options)
-      // Specific case of time dimension layer where we embed the underlying WMS layer
-      if (leafletOptions.timeDimension) {
-        layer = this.createLeafletLayer(Object.assign({
-          type: 'timeDimension.layer.wms',
-          source: layer
-        }, leafletOptions.timeDimension))
-        layer.setAvailableTimes(this.map.timeDimension.getAvailableTimes())
-      }
-      return layer
-    },
     onFeaturePopupOpen (options, event) {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
@@ -105,10 +88,6 @@ export default {
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('dblclick', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
     },
-    onCurrentTimeChanged (time) {
-      // Round to nearest hour - FIXME: should be based on available times
-      this.map.timeDimension.setCurrentTime(time.clone().minutes(0).seconds(0).milliseconds(0).valueOf())
-    },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
@@ -117,12 +96,10 @@ export default {
     // Load the required components
     this.$options.components['k-page'] = this.$load('layout/KPage')
     // Setup the engine
-    this.registerLeafletConstructor(this.createLeafletTimedWmsLayer)
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
     this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
   },
   mounted () {
-    this.$on('current-time-changed', this.onCurrentTimeChanged)
     // Setup event connections
     // this.$on('popupopen', this.onFeaturePopupOpen)
     this.$on('click', this.onClicked)
@@ -137,7 +114,6 @@ export default {
     this.$on('layer-removed', this.onRemovedLayerEvent)
   },
   beforeDestroy () {
-    this.$off('current-time-changed', this.onCurrentTimeChanged)
     // Remove event connections
     // this.$off('popupopen', this.onFeaturePopupOpen)
     this.$off('click', this.onClicked)
