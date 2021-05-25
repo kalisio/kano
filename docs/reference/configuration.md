@@ -48,8 +48,8 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
     * **actions**: list of actions to be displayed,
     * **filter**: action filter using any expression supported by [sift](https://github.com/crcn/sift.js),
   * **restore**: user context restoration configuration
-    **view**: set it to `true` (default) in order to restore the current extent on page refresh
-    **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
+    * **view**: set it to `true` (default) in order to restore the current extent on page refresh
+    * **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
   * **engine**: 2D map view configuration
     * **viewer**: 2D map initialization [options](https://leafletjs.com/reference.html#map-option),
     * **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style) for polygons/lines,
@@ -90,8 +90,8 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
     * **filter**: layer filter using any expression supported by [sift](https://github.com/crcn/sift.js),
     * **categories**: list of categories to be displayed in 3D globe layers panel,
   * **restore**: user context restoration configuration
-    **view**: set it to `true` (default) in order to restore the current extent on page refresh
-    **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
+    * **view**: set it to `true` (default) in order to restore the current extent on page refresh
+    * **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
   **engine**: 3D globe view configuration
   	* **viewer**: 3D globe initialization [options](https://cesiumjs.org/Cesium/Build/Documentation/Viewer.html#Viewer)
   	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
