@@ -77,7 +77,7 @@ const mapCatalog = {
 // Map layer actions
 const mapLayerActions = [{
   id: 'layer-actions',
-  component: 'frame/KMenu',
+  component: 'frame/KPopupAction',
   actionRenderer: 'item',
   content: [
     { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
@@ -186,7 +186,7 @@ const globeCatalog = {
 // Globe layer actions
 const globeLayerActions = [{
   id: 'layer-actions',
-  component: 'frame/KMenu',
+  component: 'frame/KPopupAction',
   actionRenderer: 'item',
   content: [
     { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
@@ -366,7 +366,7 @@ module.exports = {
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
             id: 'manage-favorite-views',
-            component: 'frame/KMenu',
+            component: 'menu/KMenu',
             icon: 'star_border',
             persistent: true,
             autoClose: false,
@@ -377,7 +377,7 @@ module.exports = {
           },
           {
             id: 'tools',
-            component: 'frame/KMenu',
+            component: 'menu/KMenu',
             icon: 'las la-wrench',
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
@@ -465,7 +465,7 @@ module.exports = {
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
             id: 'manage-favorite-views',
-            component: 'frame/KMenu',
+            component: 'menu/KMenu',
             icon: 'star_border',
             persistent: true,
             autoClose: false,
@@ -476,7 +476,7 @@ module.exports = {
           },
           {
             id: 'tools',
-            component: 'frame/KMenu',
+            component: 'menu/KMenu',
             icon: 'las la-wrench',
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
