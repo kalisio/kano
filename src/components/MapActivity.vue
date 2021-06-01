@@ -72,7 +72,7 @@ export default {
       const feature = _.get(event, 'layer.feature')
       if (!feature) return
     },
-    async onClicked (options, event) {
+    onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
       const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
       // Retrieve original layer options not processed ones
@@ -80,13 +80,16 @@ export default {
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('click', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
     },
-    async onDblClicked (options, event) {
+    onDblClicked (options, event) {
       const latlng = _.get(event, 'latlng')
       const feature = _.get(event, 'target.feature')
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('dblclick', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
+    },
+    onEditStopEvent (layer) {
+      utils.sendEmbedEvent('edit-stop', { layer, geojson: this.toGeoJson(layer.name) })
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -112,6 +115,9 @@ export default {
     this.$on('layer-hidden', this.onHiddenLayerEvent)
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$on('layer-removed', this.onRemovedLayerEvent)
+    this.onEditStartEvent = this.generateHandlerForLayerEvent('edit-start')
+    this.$on('edit-start', this.onEditStartEvent)
+    this.$on('edit-stop', this.onEditStopEvent)
   },
   beforeDestroy () {
     // Remove event connections
@@ -122,6 +128,8 @@ export default {
     this.$off('layer-shown', this.onShownLayerEvent)
     this.$off('layer-hidden', this.onHiddenLayerEvent)
     this.$off('layer-removed', this.onRemovedLayerEvent)
+    this.$off('edit-start', this.onEditStartEvent)
+    this.$off('edit-stop', this.onEditStopEvent)
   },
   destroyed () {
     utils.sendEmbedEvent('map-destroyed')
