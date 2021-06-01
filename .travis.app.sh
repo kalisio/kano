@@ -65,6 +65,7 @@ push_docker $APP ${TAG}_api-tester ${FLAVOR}_api-tester
 # push_docker $APP ${TAG}_client-tester ${FLAVOR}_client-tester
 
 # Copy the required keys and update the mode
+cp workspace/common/*.pem ~/.ssh/.
 cp workspace/$FLAVOR/*.pem ~/.ssh/.
 for KEY in `ls ~/.ssh/*.pem`; do
 	chmod 600 $KEY
