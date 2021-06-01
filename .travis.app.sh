@@ -32,6 +32,9 @@ EXIT_CODE=$?
 tail -n 24 build.log
 check_code $EXIT_CODE "Builing the client"
 
+docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
+check_code $? "Connecting to Docker"
+
 # Create an archive to speed docker build process
 cd ../..
 tar --exclude='kalisio/kano/test' -zcf kalisio.tgz kalisio
@@ -52,8 +55,6 @@ travis_fold end "build"
 #
 travis_fold start "deploy"
 
-docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-check_code $? "Connecting to Docker"
 
 # Push the app image to the hub
 push_docker $APP $TAG $FLAVOR 
