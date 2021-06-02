@@ -686,6 +686,7 @@
         // configuration example
         postRobot.send(kano, 'setConfiguration', {
           'locale.default': 'en',
+          'layout.welcome' : false, // No welcome screen
           'layout.leftPane.filter': { id: { $ne: 'logout' } },
           'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } }, // No fullscreen mode
           'mapActivity.fab.filter': { id: { $in: ['import-layer', 'probe-location'] } },

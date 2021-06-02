@@ -18,7 +18,14 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
     * **links**: links displayed at the bottom of the screen,
   * **changeEndpoint**: change endpoint screen configuration (only useful for mobile apps)
     * **links**: links displayed at the bottom of the screen,
-* **layout**: layout configuration, see [Quasar docs](https://quasar.dev/layout/layout) for details,
+* **layout**: layout configuration (see [Quasar docs](https://quasar.dev/layout/layout) for details)
+  * **topPane**: application bar setup,
+    * **opener**: `true` to add a handler to open/close the pane,
+    * **visible**: `true` to show this pane,
+  * **leftPane**: left pane (i.e. main menu) setup (as above),
+  * **bottomPane**: bottom pane setup (as above),
+  * **rightPane**: right pane setup (as above),
+  * **welcome**: `true` to display the welcome screen by default,
 * **mapActivity**: 2D map activity configuration
   * **topPane**: application bar components configuration
     * **content**: list of components to be displayed according to current mode,
@@ -92,7 +99,7 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
   * **restore**: user context restoration configuration
     * **view**: set it to `true` (default) in order to restore the current extent on page refresh
     * **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
-  **engine**: 3D globe view configuration
+  * **engine**: 3D globe view configuration
   	* **viewer**: 3D globe initialization [options](https://cesiumjs.org/Cesium/Build/Documentation/Viewer.html#Viewer)
   	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
   	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style) for polygons/lines/points,
