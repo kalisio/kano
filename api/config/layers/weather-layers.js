@@ -50,7 +50,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         chartjs: {
           backgroundColor: 'rgba(255, 159, 64, 128)',
           borderColor: 'rgb(255, 159, 64)',
-          fill: false
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
         },
         chromajs: {
           scale: 'RdYlBu',
@@ -163,7 +168,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',
-          fill: false
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
         },
         chromajs: {
           scale: 'OrRd',
@@ -251,7 +261,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
-          fill: false
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
         },
         chromajs: {
           scale: 'BuPu',
