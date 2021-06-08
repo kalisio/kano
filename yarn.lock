@@ -1001,7 +1001,7 @@
 
 "@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -1219,10 +1219,10 @@
     js-yaml "^3.13.1"
     json5 "^2.1.1"
 
-"@kalisio/kdk@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.3.2.tgz#0e28686dd2e485e48342ef4991c2e43d396ed1a1"
-  integrity sha512-C2X6jrbSCQCoYkb381k7Zgqq7HVeXT+BBmIs9APXJxDLEX2bylC9zK0EbE9MXXvakJKfUwBZYmSE3ljqLTUTTA==
+"@kalisio/kdk@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.3.4.tgz#cc666911f75262b80a95664bc4fbb3157bc3e957"
+  integrity sha512-tpVhiLt1U3daaHis4fPjnSEjIkViEjrgaMmmdYKvy+FVvFQDVdfOx5KyTd0qu/VwIupFow7Bc5B4OEWU+QBcDg==
   dependencies:
     "@feathersjs/authentication" "https://github.com/kalisio/authentication.git"
     "@feathersjs/authentication-jwt" "^2.0.1"
@@ -14072,7 +14072,7 @@ snapdragon@^0.8.1:
 
 "sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
   version "1.3.0"
-  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
