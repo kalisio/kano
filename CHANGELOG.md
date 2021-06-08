@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
+## [prod-v1.2.2](https://github.com/kalisio/kano/tree/prod-v1.2.2) (2021-06-08)
 
-[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.1...HEAD)
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.1...prod-v1.2.2)
 
 **Implemented enhancements:**
 
