@@ -1,5 +1,30 @@
 # Changelog
 
+## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.1...HEAD)
+
+**Implemented enhancements:**
+
+- Integrate the new base layers selector [\#177](https://github.com/kalisio/kano/issues/177)
+- Provide a unique modal to add new layer [\#165](https://github.com/kalisio/kano/issues/165)
+
+**Fixed bugs:**
+
+- Y axis for precipitations exhibit a negative scale in timeseries widget [\#199](https://github.com/kalisio/kano/issues/199)
+- Click event not sent in iframe when a feature is not selected [\#187](https://github.com/kalisio/kano/issues/187)
+
+**Merged pull requests:**
+
+- build\(deps\): bump ws from 6.2.1 to 6.2.2 in /docs [\#197](https://github.com/kalisio/kano/pull/197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 in /docs [\#193](https://github.com/kalisio/kano/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump lodash from 4.17.20 to 4.17.21 in /docs [\#180](https://github.com/kalisio/kano/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [prod-v1.2.1](https://github.com/kalisio/kano/tree/prod-v1.2.1) (2021-05-04)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.0...prod-v1.2.1)
