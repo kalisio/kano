@@ -1,5 +1,14 @@
 # Changelog
 
+## [prod-v1.2.2](https://github.com/kalisio/kano/tree/prod-v1.2.2) (2021-06-08)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.1...prod-v1.2.2)
+
+**Fixed bugs:**
+
+- Y axis for precipitations exhibit a negative scale in timeseries widget [\#199](https://github.com/kalisio/kano/issues/199)
+- Click event not sent in iframe when a feature is not selected [\#187](https://github.com/kalisio/kano/issues/187)
+
 ## [prod-v1.2.1](https://github.com/kalisio/kano/tree/prod-v1.2.1) (2021-05-04)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.0...prod-v1.2.1)
@@ -10,6 +19,7 @@
 
 **Implemented enhancements:**
 
+- Provide a unique modal to add new layer [\#165](https://github.com/kalisio/kano/issues/165)
 - Add layer categories management [\#167](https://github.com/kalisio/kano/issues/167)
 - Enhance place finder ui [\#163](https://github.com/kalisio/kano/issues/163)
 - Handle the kdk icon library [\#160](https://github.com/kalisio/kano/issues/160)
