@@ -82,8 +82,7 @@ export default {
     },
     onDblClicked (options, event) {
       const latlng = _.get(event, 'latlng')
-      const latlng = _.get(event, 'latlng')
-      const feature = _.get(event, 'target.feature')
+      const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
       // Retrieve original layer options not processed ones
       // as they can include internal objects not to be serialized
       const layer = (options ? this.getLayerByName(options.name) : undefined)
