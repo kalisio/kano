@@ -674,7 +674,8 @@
           <button type="button" onclick="updateForecastLevel()">Update forecast level</button></br>
         </td>
         <td>
-          <iframe id="kano" title="Kano" allow="geolocation *" allowfullscreen style="width: 1024px; height: 768px;" src="/">
+          <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
+          <iframe id="kano" title="Kano" allow="geolocation *; clipboard-write" allowfullscreen style="width: 1024px; height: 768px;" src="/">
           </iframe>
         </td>
       </tr>
