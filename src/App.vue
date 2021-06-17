@@ -58,7 +58,7 @@ export default {
     }
   },
   watch: {
-    '$route' (to, from) {
+    $route (to, from) {
       // Check for error when navigating
       this.showRouteError(to)
     }
