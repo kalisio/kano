@@ -1,32 +1,5 @@
 {
   "REMOVE_LABEL": "Supprimer",
-  "schemas": {
-    "ACTIVITY_LOCATION_FIELD_LABEL": "Entrez une addresse",
-    "UPDATE_SETTINGS_TITLE": "Vos paramètres",
-    "TIME_FORMAT_SETTINGS": "Format de date et d'heure",
-    "TIME_FORMAT_SHORT_TIME_FIELD_LABEL": "Format d'heure abrégé",
-    "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_TIME_FIELD_LABEL": "Format d'heure complet",
-    "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_SHORT_DATE_FIELD_LABEL": "Format de jour abrégé",
-    "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_DATE_FIELD_LABEL": "Format de jour complet",
-    "TIME_FORMAT_LONG_DATE_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_SHORT_YEAR_FIELD_LABEL": "Format d'année abrégé",
-    "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_YEAR_FIELD_LABEL": "Format d'année complet",
-    "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_UTC_FIELD_LABEL": "Mode d'affichage temporel UTC",
-    "MAP_SETTINGS": "Paramètres cartographiques",
-    "RESTORE_VIEW_FIELD_LABEL": "Sauvegarder l'emprise courante",
-    "RESTORE_LAYERS_FIELD_LABEL": "Sauvegarder les couches actives",
-    "LOCATION_FORMAT_LABEL": "Format de coordonnées",
-    "LOCATION_FORMAT_HELPER": "<a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>",
-    "TIMELINE_SETTINGS": "Paramètrage du sélecteur temporel",
-    "TIMELINE_STEP": "Pas du sélécteur temporel, en minutes",
-    "TIMESERIES_SETTINGS": "Paramètrage des séries temporelles",
-    "TIMESERIES_SPAN": "Intervalle des séries temporelles, en heures"
-  },
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",
@@ -59,7 +32,6 @@
   "sideNav": {
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D",
-    "SETTINGS": "Paramètres",
     "CONTEXTUAL_HELP": "$t(CONTEXTUAL_HELP)",
     "LOGOUT": "Se déconnecter"
   },

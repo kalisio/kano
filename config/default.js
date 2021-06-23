@@ -32,7 +32,8 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 const leftPane = {
   content: [
     { component: 'QImg', src: 'statics/kano-logo.png' },
-    { component: 'Settings' },
+    { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px; max-height: 1px;' },
+    { component: 'editor/KSettingsEditor' },
     { component: 'QSeparator', color: 'lightgrey', style: 'min-height: 1px; max-height: 1px;' },
     { component: 'layout/KAbout' },
     { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
@@ -317,6 +318,22 @@ module.exports = {
   },
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
+  },
+  settings: {
+    propertyMapping: {
+      shortTime: 'timeFormat.time.short',
+      longTime: 'timeFormat.time.long',
+      shortDate: 'timeFormat.date.short',
+      longDate: 'timeFormat.date.long',
+      shortYear: 'timeFormat.year.short',
+      longYear: 'timeFormat.year.long',
+      utc: 'timeFormat.utc',
+      location: 'locationFormat',
+      restoreView: 'restore.view',
+      restoreLayers: 'restore.layers',
+      timelineStep: 'timeline.step',
+      timeseriesSpan: 'timeseries.span'
+    }
   },
   screens: {
     banner: 'kano-logo-black-256x84.png',

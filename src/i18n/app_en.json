@@ -1,32 +1,5 @@
 {
   "REMOVE_LABEL": "Remove",
-  "schemas": {
-    "ACTIVITY_LOCATION_FIELD_LABEL": "Enter an address",
-    "UPDATE_SETTINGS_TITLE": "Your settings",
-    "TIME_FORMAT_SETTINGS": "Time/Date format",
-    "TIME_FORMAT_SHORT_TIME_FIELD_LABEL": "Short time format",
-    "TIME_FORMAT_SHORT_TIME_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_TIME_FIELD_LABEL": "Long time format",
-    "TIME_FORMAT_LONG_TIME_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_SHORT_DATE_FIELD_LABEL": "Short date format",
-    "TIME_FORMAT_SHORT_DATE_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_DATE_FIELD_LABEL": "Long date format",
-    "TIME_FORMAT_LONG_DATE_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_SHORT_YEAR_FIELD_LABEL": "Short year format",
-    "TIME_FORMAT_SHORT_YEAR_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_LONG_YEAR_FIELD_LABEL": "Long year format",
-    "TIME_FORMAT_LONG_YEAR_FIELD_HELPER": "<a target='_blank' href='https://momentjs.com/docs/#/displaying/format/'>&#x1F6C8;</a>",
-    "TIME_FORMAT_UTC_FIELD_LABEL": "UTC time display mode",
-    "MAP_SETTINGS": "Map parameters",
-    "RESTORE_VIEW_FIELD_LABEL": "Save current extent",
-    "RESTORE_LAYERS_FIELD_LABEL": "Save active layers",
-    "LOCATION_FORMAT_LABEL": "Location format",
-    "LOCATION_FORMAT_HELPER": "<a target='_blank' href='https://github.com/nerik/formatcoords#formatting'>&#x1F6C8;</a>",
-    "TIMELINE_SETTINGS": "Timeline parameters",
-    "TIMELINE_STEP": "Timeline step (in minutes)",
-    "TIMESERIES_SETTINGS": "Timeseries parameters",
-    "TIMESERIES_SPAN": "Timeseries span (in hours)"
-  },
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Open the main menu any time using this handle.",
@@ -59,7 +32,6 @@
   "sideNav": {
     "MAP": "2D View",
     "GLOBE": "3D View",
-    "SETTINGS": "Settings",
     "CONTEXTUAL_HELP": "$t(CONTEXTUAL_HELP)",
     "LOGOUT": "Logout"
   },
