@@ -28,10 +28,13 @@ function loadSchema (schema) {
       return import(`@kalisio/kdk/lib/map/common/schemas/${schema}.json`)
         .catch(errorMap => {
           // Otherwise this should be app component
+          /* None available yet
           return import(`./schemas/${schema}.json`)
             .catch(errorApp => {
               console.log(errorCore, errorMap, errorApp)
             })
+          */
+          console.log(errorCore, errorMap)
         })
     })
 }
