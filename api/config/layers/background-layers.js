@@ -6,7 +6,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           OSM_BRIGHT: 'Plan',
-          OSM_BRIGHT_DESCRIPTION: 'Données OpenStreetMap (Style clair)'
+          OSM_BRIGHT_DESCRIPTION: 'Données OpenStreetMap (style clair)'
         }
       },
       en: {
@@ -43,7 +43,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           OSM_DARK: 'Plan (Sombre)',
-          OSM_DARK_DESCRIPTION: 'Données OpenStreetMap (Style sombre)'
+          OSM_DARK_DESCRIPTION: 'Données OpenStreetMap (style sombre)'
         }
       },
       en: {
