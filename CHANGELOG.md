@@ -1,13 +1,44 @@
 # Changelog
 
+## [prod-v1.2.4](https://github.com/kalisio/kano/tree/prod-v1.2.4) (2021-07-15)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.3...prod-v1.2.4)
+
+## [prod-v1.2.3](https://github.com/kalisio/kano/tree/prod-v1.2.3) (2021-07-02)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.2...prod-v1.2.3)
+
+**Merged pull requests:**
+
+- build\(deps\): bump prismjs from 1.23.0 to 1.24.0 in /docs [\#210](https://github.com/kalisio/kano/pull/210) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump color-string from 1.5.4 to 1.5.5 in /docs [\#208](https://github.com/kalisio/kano/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump postcss from 7.0.35 to 7.0.36 in /docs [\#204](https://github.com/kalisio/kano/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 [\#194](https://github.com/kalisio/kano/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [prod-v1.2.2](https://github.com/kalisio/kano/tree/prod-v1.2.2) (2021-06-08)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.1...prod-v1.2.2)
+
+**Implemented enhancements:**
+
+- Integrate the new base layers selector [\#177](https://github.com/kalisio/kano/issues/177)
+- Provide a unique modal to add new layer [\#165](https://github.com/kalisio/kano/issues/165)
 
 **Fixed bugs:**
 
 - Y axis for precipitations exhibit a negative scale in timeseries widget [\#199](https://github.com/kalisio/kano/issues/199)
 - Click event not sent in iframe when a feature is not selected [\#187](https://github.com/kalisio/kano/issues/187)
+
+**Merged pull requests:**
+
+- build\(deps\): bump ws from 6.2.1 to 6.2.2 in /docs [\#197](https://github.com/kalisio/kano/pull/197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 in /docs [\#193](https://github.com/kalisio/kano/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump lodash from 4.17.20 to 4.17.21 in /docs [\#180](https://github.com/kalisio/kano/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.2.1](https://github.com/kalisio/kano/tree/prod-v1.2.1) (2021-05-04)
 
@@ -19,7 +50,6 @@
 
 **Implemented enhancements:**
 
-- Provide a unique modal to add new layer [\#165](https://github.com/kalisio/kano/issues/165)
 - Add layer categories management [\#167](https://github.com/kalisio/kano/issues/167)
 - Enhance place finder ui [\#163](https://github.com/kalisio/kano/issues/163)
 - Handle the kdk icon library [\#160](https://github.com/kalisio/kano/issues/160)
