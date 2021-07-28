@@ -94,11 +94,7 @@ export default {
     },
     onEditStopEvent (event) {
       this.setTopPaneMode('default')
-      if (event.status === 'accept') {
-        utils.sendEmbedEvent('edit-stop', { layer: event.layer, geojson: this.toGeoJson(event.layer.name) })
-      } else {
-        utils.sendEmbedEvent('edit-cancel', { layer: event.layer })
-      }
+      utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
