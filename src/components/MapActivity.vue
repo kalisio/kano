@@ -88,8 +88,17 @@ export default {
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('dblclick', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
     },
-    onEditStopEvent (layer) {
-      utils.sendEmbedEvent('edit-stop', { layer, geojson: this.toGeoJson(layer.name) })
+    onEditStartEvent (event) {
+      this.setTopPaneMode('edit-layer-data')
+      utils.sendEmbedEvent('edit-start', { layer: event.layer })
+    },
+    onEditStopEvent (event) {
+      this.setTopPaneMode('default')
+      if (event.status === 'accept') {
+        utils.sendEmbedEvent('edit-stop', { layer: event.layer, geojson: this.toGeoJson(event.layer.name) })
+      } else {
+        utils.sendEmbedEvent('edit-cancel', { layer: event.layer })
+      }
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -115,7 +124,6 @@ export default {
     this.$on('layer-hidden', this.onHiddenLayerEvent)
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$on('layer-removed', this.onRemovedLayerEvent)
-    this.onEditStartEvent = this.generateHandlerForLayerEvent('edit-start')
     this.$on('edit-start', this.onEditStartEvent)
     this.$on('edit-stop', this.onEditStopEvent)
   },

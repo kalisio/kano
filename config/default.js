@@ -418,7 +418,9 @@ module.exports = {
         'edit-layer-data': [
           { id: 'accept', icon: 'las la-check', tooltip: 'mixins.activity.SAVE_LABEL', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { component: 'KLayerEditMode' }
+          { component: 'KLayerEditMode' },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { id: 'reject', icon: 'las la-times', tooltip: 'mixins.activity.SAVE_LABEL', handler: { name: 'onEndLayerEdition', params: ['reject'] } }
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
