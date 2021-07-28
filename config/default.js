@@ -418,7 +418,7 @@ module.exports = {
         'edit-layer-data': [
           { id: 'accept', icon: 'las la-check', tooltip: 'mixins.activity.SAVE_LAYER_EDITION_CHANGES', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
-          { component: 'KLayerEditMode' },
+          { component: 'KLayerEditionToolbar' },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { id: 'reject', icon: 'las la-times', tooltip: 'mixins.activity.DISCARD_LAYER_EDITION_CHANGES', handler: { name: 'onEndLayerEdition', params: ['reject'] } }
         ]
