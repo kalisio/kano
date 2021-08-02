@@ -12,7 +12,7 @@ export default function () {
     api.configure(kMap)
     api.createService('in-memory-features', {
       service: memory({
-        id: 'name',
+        id: '_id',
         paginate: { default: 10 },
         matcher: api.matcher
       })
