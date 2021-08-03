@@ -1,5 +1,4 @@
 import logger from 'loglevel'
-import memory from 'feathers-memory'
 import kCore from '@kalisio/kdk/core.client'
 import kMap from '@kalisio/kdk/map.client'
 
@@ -10,13 +9,6 @@ export default function () {
   try {
     api.configure(kCore)
     api.configure(kMap)
-    api.createService('in-memory-features', {
-      service: memory({
-        id: '_id',
-        paginate: { default: 10 },
-        matcher: api.matcher
-      })
-    })
   } catch (error) {
     logger.error(error.message)
   }
