@@ -142,7 +142,8 @@ module.exports = {
                             service.path.includes('openaq') ||
                             service.path.includes('teleray') ||
                             service.path.includes('vigicrues') ||
-                            service.path.includes('openradiation'),
+                            service.path.includes('openradiation') ||
+                            service.path.includes('population-insee'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
