@@ -31,14 +31,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 13,
-      'stroke': 0,
-      'fill-color': `<%= chroma.scale('OrRd').classes([475, 1387, 2887, 5225, 8750, 13800, 21337, 30987, 49675, 102138])(25 * properties.Ind).hex() %>',
+      stroke: 0,
+      'fill-color': "<%= chroma.scale('OrRd').classes([475, 1387, 2887, 5225, 8750, 13800, 21337, 30987, 49675, 102138])(25 * properties.Ind).hex() %>",
       template: ['fill-color'],
       popup: {
         pick: []
       },
       tooltip: {
-        template: `<%= properties.Ind %> individus`
+        template: '<%= properties.Ind %> individus'
       }
     }
   }]
