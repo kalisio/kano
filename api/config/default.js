@@ -143,6 +143,7 @@ module.exports = {
                             service.path.includes('teleray') ||
                             service.path.includes('vigicrues') ||
                             service.path.includes('openradiation') ||
+                            service.path.includes('metar-taf') ||
                             service.path.includes('population-insee'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
