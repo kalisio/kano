@@ -40,9 +40,9 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       featureId: 'icao',
       featureIdType: 'string',
       from: 'P-7D',
-      to: 'PT-15M',
+      to: 'PT',
       every: 'PT30M',
-      queryFrom: 'P-1D',
+      queryFrom: 'PT-4H',
       variables: [
         {
           name: 'temperature',
@@ -116,16 +116,18 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         minZoom: 8,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': '#444444',
-        'icon-color': `<% if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
+        'icon-color': `<% if (['SKC', 'CAVOK'].includes(_.get(properties, 'cloudCover'))) { %>#FFBD00<% }
+          else if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
           else if (_.get(properties, 'cloudCover') === 'SCT') { %>#DFE1B0<% }
           else if (_.get(properties, 'cloudCover') === 'BKN') { %>#B3B490<% }
           else if (_.get(properties, 'cloudCover') === 'OVC') { %>#828359<% }
-          else { %>#FFBD00<% } %>`,
-        'icon-classes': `<% if (_.get(properties, 'cloudCover') === 'FEW') { %>fas fa-cloud-sun<% }
+          else { %>#FFFFFF<% } %>`,
+        'icon-classes': `<% if (['SKC', 'CAVOK'].includes(_.get(properties, 'cloudCover'))) { %>fas fa-sun<% }
+          else if (_.get(properties, 'cloudCover') === 'FEW') { %>fas fa-cloud-sun<% }
           else if (_.get(properties, 'cloudCover') === 'SCT') { %>fas fa-cloud-sun<% }
           else if (_.get(properties, 'cloudCover') === 'BKN') { %>fas fa-cloud<% }
           else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
-          else { %>fas fa-sun<% } %>`,
+          else { %>fas fa-ban<% } %>`,
           'icon-x-offset': -3,
         template: ['icon-color', 'icon-classes'],
         popup: {
@@ -135,13 +137,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         tooltip: {
           template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C</br><% }
-                    if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %></br><% }
                     if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °</br><% }
-                    if (_.has(feature, 'time.windDirection')) { %><%= new Date(feature.time.windDirection).toLocaleString() %></br><% }
                     if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts</br><% }
-                    if (_.has(feature, 'time.windSpeed')) { %><%= new Date(feature.time.windSpeed).toLocaleString() %></br><% } 
                     if (_.has(properties, 'visibility')) { %>Visibility = <%= properties.visibility.toFixed(2) %> mi</br><% }
-                    if (_.has(feature, 'time.visibiity')) { %><%= new Date(feature.time.visibility).toLocaleString() %></br><% } %>`
+                    if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %></br><% } %>`
         }
       },
       cesium: {
@@ -157,13 +156,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         tooltip: {
           template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C\n<% }` +
-                    `if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% }` +
                     `if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °\n<% }` +
-                    `if (_.has(feature, 'time.windDirection')) { %><%= new Date(feature.time.windDirection).toLocaleString() %>\n<% }` +
                     `if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts\n<% }` +
-                    `if (_.has(feature, 'time.windSpeed')) { %><%= new Date(feature.time.windSpeed).toLocaleString() %>\n<% }` + 
                     `if (_.has(properties, 'visibility')) { %>Visibilité = <%= properties.visibility.toFixed(2) %> mi\n<% }` +
-                    `if (_.has(feature, 'time.visibility')) { %><%= new Date(feature.time.visibility).toLocaleString() %>\n<% } %>`
+                    `if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% } %>`
         }
       }
     }
