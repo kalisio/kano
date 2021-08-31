@@ -11,6 +11,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           },
           Variables: {
             TEMPERATURE: 'Température',
+            DEWPOINT: "Point de rosée",
             WIND_SPEED: 'Vitesse',
             WIND_DIRECTION: 'Direction',
             VISIBILITY: 'Visiblité'
@@ -22,9 +23,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             METAR_DESCRIPTION: 'METAR Observations'
           },
           Variables: {
+            TEMPERATURE: 'Temperature',
+            DEWPOINT: "Dew point",
             WIND_SPEED: 'Speed',
             WIND_DIRECTION: 'Direction',
-            TEMPERATURE: 'Temperature',
             VISIBILITY: 'Visibility'
           }
         }
@@ -52,8 +54,21 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ],
           range: [-50, 50],
           chartjs: {
-            backgroundColor: 'rgba(255, 215, 0, 128)',
-            borderColor: 'rgb(255, 215, 0)',
+            backgroundColor: '#510861',
+            borderColor: '#510861',
+            fill: false
+          }
+        },
+        {
+          name: 'dewpoint',
+          label: 'Variables.DEWPOINT',
+          units: [
+            'degC', 'degF', 'K'
+          ],
+          range: [-50, 50],
+          chartjs: {
+            backgroundColor: '#D566ed',
+            borderColor: '#D566ed',
             fill: false
           }
         },
@@ -66,18 +81,33 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           range: [0, 70],
           step: 1,
           chartjs: {
-            backgroundColor: 'rgba(255, 159, 64, 128)',
-            borderColor: 'rgb(255, 159, 64)',
+            backgroundColor: '#E38020',
+            borderColor: '#E38020',
             fill: false,
             yAxis: {
               ticks: {
                 min: 0
               }
             }
-          },
-          chromajs: {
-            scale: 'RdYlBu',
-            domain: [20, 3]
+          }
+        },
+        {
+          name: 'windGust',
+          label: 'Variables.WIND_GUST',
+          units: [
+            'kts', 'm/s', 'km/h'
+          ],
+          range: [0, 100],
+          step: 1,
+          chartjs: {
+            backgroundColor: '#Dd350b',
+            borderColor: '#Dd350b',
+            fill: false,
+            yAxis: {
+              ticks: {
+                min: 0
+              }
+            }
           }
         },
         {
@@ -89,8 +119,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           range: [0, 360],
           step: 1,
           chartjs: {
-            backgroundColor: 'rgba(191, 191, 63, 128)',
-            borderColor: 'rgb(191, 191, 63)',
+            backgroundColor: '#3F7FBF',
+            borderColor: '#3F7FBF',
             fill: false
           }
         },
@@ -103,8 +133,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           range: [0, 10000],
           step: 1,
           chartjs: {
-            backgroundColor: 'rgba(11, 117, 169, 128)',
-            borderColor: 'rgb(11, 117, 169)',
+            backgroundColor: '#4a9029',
+            borderColor: '#4a9029',
             fill: false
           }
         }
@@ -116,18 +146,20 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         minZoom: 8,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': '#444444',
-        'icon-color': `<% if (['SKC', 'CAVOK'].includes(_.get(properties, 'cloudCover'))) { %>#FFBD00<% }
-          else if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
-          else if (_.get(properties, 'cloudCover') === 'SCT') { %>#DFE1B0<% }
-          else if (_.get(properties, 'cloudCover') === 'BKN') { %>#B3B490<% }
-          else if (_.get(properties, 'cloudCover') === 'OVC') { %>#828359<% }
-          else { %>#FFFFFF<% } %>`,
-        'icon-classes': `<% if (['SKC', 'CAVOK'].includes(_.get(properties, 'cloudCover'))) { %>fas fa-sun<% }
-          else if (_.get(properties, 'cloudCover') === 'FEW') { %>fas fa-cloud-sun<% }
-          else if (_.get(properties, 'cloudCover') === 'SCT') { %>fas fa-cloud-sun<% }
-          else if (_.get(properties, 'cloudCover') === 'BKN') { %>fas fa-cloud<% }
-          else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
-          else { %>fas fa-ban<% } %>`,
+        'icon-color': `<% if (_.get(properties, 'rawOb')) {
+            if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
+            else if (_.get(properties, 'cloudCover') === 'SCT') { %>#DFE1B0<% }
+            else if (_.get(properties, 'cloudCover') === 'BKN') { %>#B3B490<% }
+            else if (_.get(properties, 'cloudCover') === 'OVC') { %>#828359<% }
+            else { %>#FFBD00<% }
+         } else { %>#FFFFFF<% } %>`,
+        'icon-classes': `<% if (_.get(properties, 'rawOb')) {
+            if (_.get(properties, 'cloudCover') === 'FEW') { %>fas fa-cloud-sun<% }
+            else if (_.get(properties, 'cloudCover') === 'SCT') { %>fas fa-cloud-sun<% }
+            else if (_.get(properties, 'cloudCover') === 'BKN') { %>fas fa-cloud<% }
+            else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
+            else { %>fas fa-sun<% } 
+          } else { %>fas fa-ban<% } %>`,
           'icon-x-offset': -3,
         template: ['icon-color', 'icon-classes'],
         popup: {
@@ -137,8 +169,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         tooltip: {
           template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C</br><% }
+                    if (_.has(properties, 'dewpoint')) { %>Point de rosée = <%= properties.dewpoint.toFixed(2) %> °C</br><% }
                     if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °</br><% }
                     if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts</br><% }
+                    if (_.has(properties, 'windGust')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts</br><% }
                     if (_.has(properties, 'visibility')) { %>Visibility = <%= properties.visibility.toFixed(2) %> mi</br><% }
                     if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %></br><% } %>`
         }
