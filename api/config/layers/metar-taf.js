@@ -143,7 +143,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         type: 'geoJson',
         realtime: true,
         tiled: true,
-        minZoom: 8,
+        minZoom: 10,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': '#444444',
         'icon-color': `<% if (_.get(properties, 'rawOb')) {
@@ -190,8 +190,10 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         tooltip: {
           template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C\n<% }` +
+                    `if (_.has(properties, 'dewpoint')) { %>Direction du vent = <%= properties.dewpoint.toFixed(2) %> °\n<% }` +
                     `if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °\n<% }` +
                     `if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts\n<% }` +
+                    `if (_.has(properties, 'windGust')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts\n<% }` +
                     `if (_.has(properties, 'visibility')) { %>Visibilité = <%= properties.visibility.toFixed(2) %> mi\n<% }` +
                     `if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% } %>`
         }
