@@ -51,12 +51,6 @@ const mapCatalog = {
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
     },
     {
-      name: 'KCatalogPanel.BASE_LAYERS',
-      icon: 'las la-layer-group',
-      component: 'catalog/KBaseLayersSelector',
-      options: { filter: { type: 'BaseLayer' } }
-    },
-    {
       name: 'KCatalogPanel.CAPTURED_LAYERS',
       icon: 'las la-street-view',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } }
@@ -71,6 +65,12 @@ const mapCatalog = {
       icon: 'las la-cloud-sun-rain',
       component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
+    },
+    {
+      name: 'KCatalogPanel.BASE_LAYERS',
+      icon: 'las la-layer-group',
+      component: 'catalog/KBaseLayersSelector',
+      options: { filter: { type: 'BaseLayer' } }
     }
   ]
 }
@@ -161,11 +161,6 @@ const globeCatalog = {
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
     },
     {
-      name: 'KCatalogPanel.BASE_LAYERS',
-      icon: 'las la-layer-group',
-      options: { exclusive: true, filter: { type: 'BaseLayer' } } 
-    },
-    {
       name: 'KCatalogPanel.TERRAIN_LAYERS',
       icon: 'las la-mountain',
       options: { exclusive: true, filter: { type: 'TerrainLayer' } }
@@ -180,6 +175,12 @@ const globeCatalog = {
       icon: 'las la-cloud-sun-rain',
       component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
+    },
+    {
+      name: 'KCatalogPanel.BASE_LAYERS',
+      icon: 'las la-layer-group',
+      component: 'catalog/KBaseLayersSelector',
+      options: { filter: { type: 'BaseLayer' } } 
     }
   ]
 }
