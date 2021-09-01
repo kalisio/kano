@@ -1,113 +1,80 @@
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
-    name: 'Layers.IGN_ORTHO',
-    description: 'Layers.IGN_ORTHO_DESCRIPTION',
+    name: 'Layers.IGN_PLAN',
+    description: 'Layers.IGN_PLAN_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          IGN_ORTHO: 'BD ORTHO (IGN)',
-          IGN_ORTHO_DESCRIPTION: 'Photos aériennes IGN'
+          IGN_PLAN: 'Plan (IGN)',
+          IGN_PLAN_DESCRIPTION: 'Cartographie multi-échelles sur la France issue des bases de données vecteur de l\'IGN'
         }
       },
       en: {
         Layers: {
-          IGN_ORTHO: 'BD ORTHO (IGN)',
-          IGN_ORTHO_DESCRIPTION: 'IGN aerial imagery'
-        }
-      }
-    },
-    tags: [
-      'imagery'
-    ],
-    iconUrl: `${tmsUrl}/ign-ortho@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
-    icon: 'satellite',
-    attribution: '© <a href="https://ign.fr">IGN</a>',
-    type: 'BaseLayer',
-    leaflet: {
-      type: 'tileLayer',
-      source: `${tmsUrl}/ign-ortho@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
-      maxZoom: 21,
-      maxNativeZoom: 19,
-      tms: true
-    },
-    cesium: {
-      type: 'TileMapService',
-      url: `${tmsUrl}/ign-orth@GLOBAL_WEBMERCATOR`,
-      fileExtension: 'jpeg'
-    }
-  },
-  {
-    name: 'Layers.IGN_SCAN',
-    description: 'Layers.IGN_SCAN_DESCRIPTION',
-    i18n: {
-      fr: {
-        Layers: {
-          IGN_SCAN: 'SCAN standard (IGN)',
-          IGN_SCAN_DESCRIPTION: 'Cartographie topographique multi-échelles - standard'
-        }
-      },
-      en: {
-        Layers: {
-          IGN_SCAN: 'Standard SCAN (IGN)',
-          IGN_SCAN_DESCRIPTION: 'Multi-scale topography map - standard'
+          IGN_PLAN: 'Plan (IGN)',
+          IGN_PLAN_DESCRIPTION: 'Multi-scale French map based on IGN vector databases'
         }
       }
     },
     tags: [
       'maps'
     ],
-    iconUrl: `${tmsUrl}/ign-scan-standard@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
-    icon: 'satellite',
+    iconUrl: `https://wxs.ign.fr/cartes/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX=9&TILEROW=187&TILECOL=260`,
+    icon: 'streetview',
     attribution: '© <a href="https://ign.fr">IGN</a>',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${tmsUrl}/ign-scan-standard@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `https://wxs.ign.fr/cartes/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}`,
       maxZoom: 21,
-      maxNativeZoom: 18,
-      tms: true
+      maxNativeZoom: 19
     },
     cesium: {
-      type: 'TileMapService',
-      url: `${tmsUrl}/ign-scan-standard@GLOBAL_WEBMERCATOR`,
-      fileExtension: 'jpeg'
+      type: 'WebMapTileService',
+      url: `https://wxs.ign.fr/cartes/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={TileMatrix}&TILEROW={TileRow}&TILECOL={TileCol}`,
+      format: 'image/png',
+      layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+      style: 'normal',
+      tileMatrixSetID: 'PM'
     }
-  },
-  {
-    name: 'Layers.IGN_SCAN_CLASSIC',
-    description: 'Layers.IGN_SCAN_CLASSIC_DESCRIPTION',
+  }, {
+    name: 'Layers.IGN_IMAGERY',
+    description: 'Layers.IGN_IMAGERY_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          IGN_SCAN_CLASSIC: 'SCAN classique (IGN)',
-          IGN_SCAN_CLASSIC_DESCRIPTION: 'Cartographie topographique multi-échelles - classique'
+          IGN_IMAGERY: 'Imagerie (IGN)',
+          IGN_IMAGERY_DESCRIPTION: 'Photographies aériennes issue des bases de données de l\'IGN'
         }
       },
       en: {
         Layers: {
-          IGN_SCAN_CLASSIC: 'Classic SCAN (IGN)',
-          IGN_SCAN_CLASSIC_DESCRIPTION: 'Multi-scale topography map - classic'
+          IGN_IMAGERY: 'Imagerie (IGN)',
+          IGN_IMAGERY_DESCRIPTION: 'Aerial imagery based on IGN databases'
         }
       }
     },
     tags: [
       'maps'
     ],
-    iconUrl: `${tmsUrl}/ign-scan-classic@GLOBAL_WEBMERCATOR/6/32/22.jpeg`,
+    iconUrl: `https://wxs.ign.fr/ortho/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX=9&TILEROW=187&TILECOL=260`,
     icon: 'satellite',
     attribution: '© <a href="https://ign.fr">IGN</a>',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
-      source: `${tmsUrl}/ign-scan-classic@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      source: `https://wxs.ign.fr/ortho/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}`,
       maxZoom: 21,
-      maxNativeZoom: 18,
-      tms: true
+      maxNativeZoom: 19
     },
     cesium: {
-      type: 'TileMapService',
-      url: `${tmsUrl}/ign-scan-classic@GLOBAL_WEBMERCATOR`,
-      fileExtension: 'jpeg'
+      type: 'WebMapTileService',
+      url: `https://wxs.ign.fr/ortho/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={TileMatrix}&TILEROW={TileRow}&TILECOL={TileCol}`,
+      format: 'image/png',
+      layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
+      style: 'normal',
+      tileMatrixSetID: 'PM'
     }
   }]
 }
+
