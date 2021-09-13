@@ -21,18 +21,12 @@ describe(suite, () => {
   })
 
   it('check-layout', async () => {
-    let isTopPaneVisible = await core.isTopPaneVisible(page)
-    expect(isTopPaneVisible).be.true
-    let isRightPaneVisible = await core.isRightPaneVisible(page)
-    expect(isRightPaneVisible).be.false
-    let isBottomPaneVisible = await core.isBottomPaneVisible(page)
-    expect(isBottomPaneVisible).be.false
-    let isLeftPaneVisible = await core.isLeftPaneVisible(page)
-    expect(isLeftPaneVisible).be.false        
+    expect(await core.isTopPaneVisible(page)).be.true
+    expect(await core.isRightPaneVisible(page)).be.false
+    expect(await core.isBottomPaneVisible(page)).be.false
+    expect(await core.isLeftPaneVisible(page)).be.false        
     await core.clickTopOpener(page)
-    await page.waitForTimeout(1000)
-    isTopPaneVisible = await core.isTopPaneVisible(page)
-    expect(isTopPaneVisible).be.false
+    expect(await core.isTopPaneVisible(page)).be.false
   })
 
   after(async () => {
