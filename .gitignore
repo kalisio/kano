@@ -72,7 +72,7 @@ dist
 config/client-config.json
 
 # Test
-test/client/run
+test/run
 
 # KDK tours
 src/tours/core
