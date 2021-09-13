@@ -13,7 +13,7 @@ const runnerOptions = {
   }
 }
 
-describe.skip(suite, () => {
+describe(suite, () => {
   let runner
   let page
 
