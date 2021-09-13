@@ -1,150 +1,63 @@
-import * as pages from './page-models'
+import _ from 'lodash'
+import { expect } from 'chai'
 
-const width = 1280
-const height = 1024
+import { core, map } from '@kalisio/kdk/test.client'
+import { importLayer, connectLayer } from './common'
 
-const user = {
-  name: 'kalisio',
-  email: 'kalisio@kalisio.xyz',
-  password: 'Pass;word1'
+const suite = 'catalog'
+
+const runnerOptions = {
+  geolocation: { latitude: 43.10, longitude:1.71 },
+  localStorage: {
+    'kano-welcome': false
+  }
 }
 
-const screens = new pages.Screens()
-const layout = new pages.Layout()
-const catalog = new pages.Catalog()
-const map = new pages.MapActivity()
+describe.skip(suite, () => {
+  let runner
+  let page
 
-fixture`catalog`// declare the fixture
-  .page`${pages.getUrl()}`
-  // test.before/test.after overrides fixture.beforeEach/fixture.afterEach hook,
-  // so implement one in your test if you'd like another behaviour
-  .beforeEach(async test => {
-    // mock geolocation
-    await pages.mockLocationAPI()
-    // resize to some predefined size
-    await test.resizeWindow(width, height)
-    // login
-    await screens.login(test, user)
-    await layout.closeWelcomeDialog(test)
-  })
-  .afterEach(async test => {
-    // logout
-    await layout.clickLeftOpener(test)
-    await layout.clickLeftPaneAction(test, pages.Layout.LOGOUT)
-    // check for console error messages
-    // await pages.checkNoClientError(test)
+  before(async () => {
+    runner = new core.Runner(suite, runnerOptions)
+    page = await runner.start()
+    await core.login(page, 'kalisio@kalisio.xyz', 'Pass;word1')
   })
 
-test('Check base layers', async test => {
-  const category = 'BASE_LAYERS'
-  const layers = [
-    'Layers.OSM_DARK',
-    'Layers.OSMT_BRIGHT',
-    'Layers.OSM_BRIGHT'
-  ]
-  // Close the top pane
-  await layout.clickTopOpener(test)
-  // Open the category
-  await layout.clickRightOpener(test)
-  await catalog.checkCategoryExpanded(test, category, false)
-  await catalog.clickCategory(test, category, true)
-  await layout.clickRightOpener(test)
-  // Active each layer
- for (const layer of layers) {
-    await layout.clickRightOpener(test)
-    await catalog.clickLayer(test, layer, true)
-    await layout.clickRightOpener(test)
-    const runKey = `${category}-${layer}`
-    await pages.takeScreenshot(test, runKey)
-    await pages.assertScreenshotMatches(test, runKey)
-  }
-  // Close the category
-  await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, category, false)
-  await layout.clickRightOpener(test)
+  it('check-layer-category', async () => {
+    await core.clickRightOpener(page)
+    expect(await map.isLayerCategoryOpened(page, map.getSystemLayerCategoryId('BASE_LAYERS'))).to.false
+    await map.clickLayerCategory(page, map.getSystemLayerCategoryId('BASE_LAYERS'))
+    expect(await map.isLayerCategoryOpened(page, map.getSystemLayerCategoryId('BASE_LAYERS'))).to.true
+    await core.clickRightOpener(page)
+  })
+
+  it('check-base-layers', async () => {
+    const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'IGN_PLAN']
+    for (const layer of layers) {
+      await map.clickBaseLayer(page, layer)
+      expect(await runner.captureAndMatch(_.kebabCase(layer))).to.true
+    }
+    await map.clickBaseLayer(page, 'IGN_PLAN')
+    expect(await runner.captureAndMatch('empty')).to.true
+    await map.clickBaseLayer(page, 'OSM_BRIGHT')
+  }).timeout(60000)
+
+  it('import-geojson-layer', async () => {
+    await importLayer(page, runner.getDataPath('regions.geojson'), 'code')
+    expect(await runner.captureAndMatch('regions')).to.true
+    await map.clickLayer(page, 'regions')
+  })
+
+  it('connect-wms-layer', async () => {
+    const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
+    const layerId = 'geologie'
+    await connectLayer(page, service, layerId)
+    expect(await runner.captureAndMatch(layerId)).to.true
+    await map.clickLayer(page, _.kebabCase('Cartes géologiques'))
+  })
+
+  after(async () => {
+    await core.logout(page)
+    await runner.stop()
+  })
 })
-
-test('Check measure layers', async test => {
-  const bbox = [ 43.48531032718829, 1.291923522949219, 43.701885100693744, 1.6623687744140627 ]
-  const category = 'MEASURE_LAYERS'
-  const layers = [
-    'Layers.VIGICRUES',
-    'Layers.HUBEAU',
-    'Layers.TELERAY'
-  ]
-  await layout.clickRightOpener(test)
-  await catalog.checkCategoryExpanded(test, category, false)
-  await catalog.clickCategory(test, category, true)
-  await catalog.checkCategoryExpanded(test, category, true)
-  for (const layer of layers) {
-    await catalog.checkLayerDisabled(test, layer, true)
-    await catalog.checkLayerActive(test, layer, false)
-  }
-  await layout.clickRightOpener(test)
-  await map.zoomTo(test, bbox)
-  await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, category, true)
-  for (const layer of layers) {
-    await catalog.checkLayerDisabled(test, layer, false)
-    // const runKey = `${category}-${layer}`
-    // await pages.takeScreenshot(test, runKey)
-  }
-  await catalog.clickCategory(test, category, false)
-  await layout.clickRightOpener(test)
-})
-
-test('Check meteo layers', async test => {
-  const category = 'KCatalogPanel.METEO_LAYERS'
-  const forecastLayers = [
-    ['gfs-world', 'Layers.WIND_TILED'],
-    ['gfs-world', 'Layers.GUST_TILED'],
-    ['gfs-world', 'Layers.PRECIPITATIONS_TILED'],
-    ['gfs-world', 'Layers.TEMPERATURE_TILED'],
-    ['arpege-world', 'Layers.WIND_TILED'],
-    ['arpege-world', 'Layers.GUST_TILED'],
-    ['arpege-world', 'Layers.PRECIPITATIONS_TILED'],
-    ['arpege-world', 'Layers.TEMPERATURE_TILED']
-  ]
-  const refKey = 'BaseLayers-Layers.OSM_DARK'
-  await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, 'KCatalogPanel.BASE_LAYERS', true)
-  await catalog.clickLayer(test, 'Layers.OSM_DARK', true)
-  await catalog.clickCategory(test, 'KCatalogPanel.BASE_LAYERS', false)
-  await catalog.clickCategory(category, true)
-  await layout.clickRightOpener(test)
-
-  for (const [model, layer] of forecastLayers) {
-    await layout.clickRightOpener(test)
-    await catalog.clickForecast(test)
-    await catalog.selectMeteoModel(test, model)
-    await catalog.clickLayer(test, layer, true)
-    await layout.clickRightOpener(test)
-    // let layer time to display data
-    /* await test.wait(2000)
-    const runKey = `${category}-${model}-${layer}`
-    const minDiff = layer.includes('WIND') ? 2 : 50
-    await pages.assertScreenshotMismatches(test, runKey, { refKey: refKey, minDiffRatio: minDiff })
-    */
-  }
-  await layout.clickRightOpener(test)
-  await catalog.clickCategory(test, category, false)
-  await layout.clickRightOpener(test)
-})
-
-/* test('Check categories', async test => {
-
-  const categoryName = 'Test category'
-  await layout.clickRightOpener(test)
-  await catalog.clickCategories()
-  const dialog = Selector('.q-dialog')
-  await test
-    .typeText(dialog.find('#name-field'), categoryName)
-    .click(dialog.find('#add-layer-category'))
-    .wait(1000)
-  let category = await catalog.getCategory(categoryName)
-  category = await category.getVue()
-  await test
-    .expect(category).ok(`catalog category '${category}' has been created`)
-  await layout.clickRightOpener(test)
-})
-*/

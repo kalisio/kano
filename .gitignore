@@ -71,10 +71,8 @@ dist
 # Generated config
 config/client-config.json
 
-# TestCafe
-test/reports
-test/page-models/core
-test/page-models/map
+# Test
+test/client/run
 
 # KDK tours
 src/tours/core
@@ -83,13 +81,6 @@ src/tours/map
 #KDK icons
 src/assets/icons
 
-# Secrets
-secrets.tar
-# SSH key
-ssh.pem
-app.env.sh
-*.keystore
-/test/videos
 
 # local layers
 local-layers.js
