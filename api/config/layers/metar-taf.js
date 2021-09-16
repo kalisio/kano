@@ -11,7 +11,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           },
           Variables: {
             TEMPERATURE: 'Température',
-            DEWPOINT: "Point de rosée",
+            DEWPOINT: 'Point de rosée',
             WIND_SPEED: 'Vitesse',
             WIND_DIRECTION: 'Direction',
             VISIBILITY: 'Visiblité'
@@ -24,7 +24,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           },
           Variables: {
             TEMPERATURE: 'Temperature',
-            DEWPOINT: "Dew point",
+            DEWPOINT: 'Dew point',
             WIND_SPEED: 'Speed',
             WIND_DIRECTION: 'Direction',
             VISIBILITY: 'Visibility'
@@ -160,7 +160,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
             else { %>fas fa-sun<% } 
           } else { %>fas fa-ban<% } %>`,
-          'icon-x-offset': -3,
+        'icon-x-offset': -3,
         template: ['icon-color', 'icon-classes'],
         popup: {
           pick: [
@@ -189,13 +189,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ]
         },
         tooltip: {
-          template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C\n<% }` +
-                    `if (_.has(properties, 'dewpoint')) { %>Direction du vent = <%= properties.dewpoint.toFixed(2) %> °\n<% }` +
-                    `if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °\n<% }` +
-                    `if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts\n<% }` +
-                    `if (_.has(properties, 'windGust')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts\n<% }` +
-                    `if (_.has(properties, 'visibility')) { %>Visibilité = <%= properties.visibility.toFixed(2) %> mi\n<% }` +
-                    `if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% } %>`
+          template: '<% if (_.has(properties, \'temperature\')) { %>Température = <%= properties.temperature.toFixed(2) %> °C\n<% }' +
+                    'if (_.has(properties, \'dewpoint\')) { %>Direction du vent = <%= properties.dewpoint.toFixed(2) %> °\n<% }' +
+                    'if (_.has(properties, \'windDirection\')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °\n<% }' +
+                    'if (_.has(properties, \'windSpeed\')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts\n<% }' +
+                    'if (_.has(properties, \'windGust\')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts\n<% }' +
+                    'if (_.has(properties, \'visibility\')) { %>Visibilité = <%= properties.visibility.toFixed(2) %> mi\n<% }' +
+                    'if (_.has(feature, \'time.temperature\')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% } %>'
         }
       }
     }
