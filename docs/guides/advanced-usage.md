@@ -194,3 +194,5 @@ export default {
 </i18n>
 
 ```
+
+It's also possible to create separated i18n files if you'd like, simply put your `plugin_en.json`, `plugin_fr.json`, etc. files in the `src/i18n` folder before building the app.
