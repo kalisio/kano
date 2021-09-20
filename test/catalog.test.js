@@ -2,7 +2,6 @@ import _ from 'lodash'
 import { expect } from 'chai'
 
 import { core, map } from '@kalisio/kdk/test.client'
-import { importLayer, connectLayer } from './common'
 
 const suite = 'catalog'
 
@@ -32,7 +31,7 @@ describe(suite, () => {
   })
 
   it('check-base-layers', async () => {
-    const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'IGN_PLAN']
+    const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'HYBRID', 'IGN_PLAN']
     for (const layer of layers) {
       await map.clickBaseLayer(page, layer)
       expect(await runner.captureAndMatch(_.kebabCase(layer))).to.true
@@ -43,7 +42,7 @@ describe(suite, () => {
   }).timeout(60000)
 
   it('import-geojson-layer', async () => {
-    await importLayer(page, runner.getDataPath('regions.geojson'), 'code')
+    await map.importLayer(page, runner.getDataPath('regions.geojson'), 'code')
     expect(await runner.captureAndMatch('regions')).to.true
     await map.clickLayer(page, 'regions')
   })
@@ -51,7 +50,7 @@ describe(suite, () => {
   it('connect-wms-layer', async () => {
     const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'geologie'
-    await connectLayer(page, service, layerId)
+    await map.connectLayer(page, service, layerId)
     expect(await runner.captureAndMatch(layerId)).to.true
     await map.clickLayer(page, _.kebabCase('Cartes géologiques'))
   })
