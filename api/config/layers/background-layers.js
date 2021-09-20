@@ -183,6 +183,43 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fileExtension: 'jpeg'
     }
   },
+  { 
+    name: 'Layers.HYBRID',
+    description: 'Layers.HYBRID_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          HYBRID: 'Hybride',
+          HYBRID_DESCRIPTION: 'Images PlanetSAT et IGN BDORTHO fusionnées avec OpenStreetMap'
+        }
+      },
+      en: {
+        Layers: {
+          HYBRID: 'Hybrid',
+          HYBRID_DESCRIPTION: 'Merged PlanetSAT and IGN BDORTHO images with OpenStreetMap'
+        }
+      }
+    },
+    tags: [
+      'imagery'
+    ],
+    iconUrl: `${tmsUrl}/hybrid@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
+    icon: 'terrain',
+    attribution: 'PlanetSAT © <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO © <a href="http://www.ign.fr/">IGN</a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a>, OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    type: 'BaseLayer',
+    leaflet: {
+      type: 'tileLayer',
+      source: `${tmsUrl}/hybrid@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.jpeg`,
+      maxZoom: 20,
+      maxNativeZoom: 18,
+      tms: true
+    },
+    cesium: {
+      type: 'TileMapService',
+      url: `${tmsUrl}/hybrid@GLOBAL_WEBMERCATOR`,
+      fileExtension: 'jpeg'
+    }
+  },
   {
     name: 'Layers.CESIUM_ELLIPSOID',
     description: 'Standard Ellipsoid',
