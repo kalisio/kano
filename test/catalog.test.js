@@ -12,6 +12,8 @@ const runnerOptions = {
   }
 }
 
+const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
+
 describe(suite, () => {
   let runner
   let page
@@ -19,7 +21,7 @@ describe(suite, () => {
   before(async () => {
     runner = new core.Runner(suite, runnerOptions)
     page = await runner.start()
-    await core.login(page, 'kalisio@kalisio.xyz', 'Pass;word1')
+    await core.login(page, user)
   })
 
   it('check-layer-category', async () => {
