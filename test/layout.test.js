@@ -4,6 +4,7 @@ import { core } from '@kalisio/kdk/test.client'
 const suite = 'layout'
 
 const runnerOptions = {
+  appName: 'kano',
   geolocation: { latitude: 43.10, longitude:1.71 },
   localStorage: {
     'kano-welcome': false
