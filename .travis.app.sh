@@ -41,13 +41,6 @@ tar --exclude='kalisio/kano/test' -zcf kalisio.tgz kalisio
 docker build --build-arg APP=$APP --build-arg FLAVOR=$FLAVOR --build-arg BUILD_NUMBER=$BUILD_NUMBER -f dockerfile -t kalisio/$APP:$TAG . 
 check_code $? "Building the app docker image"
 
-docker build --build-arg APP=$APP --build-arg TAG=$TAG -f dockerfile.api-tester -t kalisio/$APP:${TAG}_api-tester . 
-check_code $? "Building the tests api docker image"
-
-# client tests were disabled since testcafe doesn't work well
-# docker build --build-arg APP=$APP -f dockerfile.client-tester -t kalisio/$APP:${TAG}_client-tester . 
-# check_code $? "Building the tests client docker image"
-
 travis_fold end "build"
 
 #
@@ -55,14 +48,7 @@ travis_fold end "build"
 #
 travis_fold start "deploy"
 
-
 # Push the app image to the hub
 push_docker $APP $TAG $FLAVOR 
-
-# Push the tests api image to the hub
-push_docker $APP ${TAG}_api-tester ${FLAVOR}_api-tester
-
-# Push the tests client image to the hub
-# push_docker $APP ${TAG}_client-tester ${FLAVOR}_client-tester
 
 travis_fold end "deploy"
