@@ -43,22 +43,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
         },
         chromajs: {
           scale: [
-            "indigo",
-            "mediumblue",
-            "dodgerblue",
-            "skyblue",
-            "forestgreen",
-            "mediumseagreen",
-            "turquoise",
-            "springgreen",
-            "yellow",
-            "palegoldenrod",
-            "peachpuff",
-            "orange",
-            "saddlebrown",
-            "red"
+            "white",
+            "#483D88",
+            "#0000CD",
+            "#1E90FF",
+            "#ADD8E6",
+            "#556B2F",
+            "#3CB371",
+            "#7FFFD4",
+            "#7FFF00",
+            "#FFFF00",
+            "#F0E68C",
+            "#DEB887"
           ],
-          classes: [ 0, 0.2, 0.6, 1.2, 2.1, 3.6, 6.5, 11.5, 20.5, 36.5, 64.8, 115.3, 205, 364.6, 500 ]
+          classes: [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
         }
       }
     ],
@@ -68,7 +66,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
         to: 'PT-1H',
         every: 'PT5M',
         dynprops: {
-          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif'  + jwtTemplate }
+          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif' + jwtTemplate }
         },
         geotiff: {}
       }]
@@ -77,7 +75,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
       type: 'tiledMeshLayer',
       resolutionScale: [ 2.0, 2.0 ],
       opacity: 0.6,
-      cutUnder: 0.1
+      cutUnder: 2
     }
   }]
 }
