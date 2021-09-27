@@ -1,6 +1,6 @@
 const forecastZIndex = 300
 
-module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
   return [{
     name: 'Layers.WIND_TILED',
     description: 'Layers.WIND_DESCRIPTION',

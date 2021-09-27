@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
   return [{
     name: 'Layers.POPULATION_INSEE',
     description: 'Layers.POPULATION_INSEE_DESCRIPTION',

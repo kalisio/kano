@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
   return [{
     name: 'Layers.OSM_BRIGHT',
     description: 'Layers.OSM_BRIGHT_DESCRIPTION',
