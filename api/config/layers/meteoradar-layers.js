@@ -56,7 +56,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
             "#F0E68C",
             "#DEB887"
           ],
-          classes: [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+          classes: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
         }
       }
     ],
@@ -64,7 +64,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
       sources: [{
         from: 'P-60D',
         to: 'PT-1H',
-        every: 'PT5M',
+        every: 'PT15M',
         dynprops: {
           url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif' + jwtTemplate }
         },
