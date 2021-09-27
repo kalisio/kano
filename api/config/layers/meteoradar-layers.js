@@ -1,3 +1,5 @@
+const jwtTemplate = (process.env.API_GATEWAY ? '?jwt=<%- jwtToken %>' : '')
+
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
   return [{
     name: 'Layers.METEORADAR',
@@ -66,7 +68,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
         to: 'PT-1H',
         every: 'PT5M',
         dynprops: {
-          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif' }
+          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif'  + jwtTemplate }
         },
         geotiff: {}
       }]
