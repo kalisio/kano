@@ -88,7 +88,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
     units: ['h./Km²'],
     leaflet: {
       type: 'tileLayer',
-      source: `http://localhost:80/styles/population-density/{z}/{x}/{y}.png`,
+      source: `${tmsUrl}/population-density@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
       opacity: 0.5,
       minZoom: 10,
       maxZoom: 21,
