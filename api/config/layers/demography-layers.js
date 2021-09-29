@@ -52,13 +52,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
     i18n: {
       fr: {
         Layers: {
-          POPULATION_DENSITY: 'Densité de population par Km²',
+          POPULATION_DENSITY: 'Densité de population',
           POPULATION_DENSITY_DESCRIPTION: 'Carroyage INSEE (1Km and 200m)'
         }
       },
       en: {
         Layers: {
-          POPULATION_DENSITY: 'Population density per Km²',
+          POPULATION_DENSITY: 'Population density',
           POPULATION_DENSITY_DESCRIPTION: 'INSEE Squaring (1Km and 200m)'
         }
       }
