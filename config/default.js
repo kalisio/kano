@@ -67,6 +67,11 @@ const mapCatalog = {
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
     },
     {
+      name: 'KCatalogPanel.DEMOGRAPHY_LAYERS',
+      icon: 'las la-users',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['demography'] } } }
+    },
+    {
       name: 'KCatalogPanel.BASE_LAYERS',
       icon: 'las la-layer-group',
       component: 'catalog/KBaseLayersSelector',
@@ -175,6 +180,11 @@ const globeCatalog = {
       icon: 'las la-cloud-sun-rain',
       component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
+    },
+    {
+      name: 'KCatalogPanel.DEMOGRAPHY_LAYERS',
+      icon: 'las la-users',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['demography'] } } }
     },
     {
       name: 'KCatalogPanel.BASE_LAYERS',
