@@ -531,40 +531,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
     }
   },
   {
-    name: 'Layers.MAPILLARY',
-    description: 'Layers.MAPILLARY_DESCRIPTION',
-    i18n: {
-      fr: {
-        Layers: {
-          MAPILLARY: 'Mapillary',
-          MAPILLARY_DESCRIPTION: 'Couverture des prises de vues'
-        }
-      },
-      en: {
-        Layers: {
-          MAPILLARY: 'Mapillary',
-          MAPILLARY_DESCRIPTION: 'Images coverage'
-        }
-      }
-    },
-    tags: [
-      'captured'
-    ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/mapillary-icon.jpg',
-    attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
-    type: 'OverlayLayer',
-    from: 'P-5Y',
-    to: 'PT-0M',
-    queryFrom: 'P-1Y',
-    leaflet: {
-      type: 'mapillary',
-      url: 'https://a.mapillary.com',
-      minZoom: 13,
-      'stroke-color': '#40880a55',
-      'stroke-width': 8
-    }
-  },
-  {
     name: 'Layers.GSMAP_RAIN',
     description: 'Layers.GSMAP_RAIN_DESCRIPTION',
     i18n: {
