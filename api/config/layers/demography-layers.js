@@ -28,7 +28,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
     featureId: 'fid',
     chromajs: {
       scale: 'OrRd',
-      classes: [1, 475, 1387, 2887, 5225, 8750, 13800, 21337, 30987, 49675, 102138]
+      classes: [1, 19, 55, 115, 209, 350, 552, 853, 1239, 1987, 4085]
     },
     units: ['h.'],
     leaflet: {
