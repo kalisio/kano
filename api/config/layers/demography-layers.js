@@ -90,7 +90,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
       type: 'tileLayer',
       source: `http://localhost:80/styles/population-density/{z}/{x}/{y}.png`,
       opacity: 0.5,
-      minZoom: 9,
+      minZoom: 10,
       maxZoom: 21,
       maxNativeZoom: 14
     }
