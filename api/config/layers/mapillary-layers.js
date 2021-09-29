@@ -1,5 +1,3 @@
-const accessToken = process.env.MAPILLARY_CLIENT_TOKEN
-
 module.exports = function () {
   return [{
     name: 'Layers.MAPILLARY',
