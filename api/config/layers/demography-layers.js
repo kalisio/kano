@@ -92,7 +92,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
       opacity: 0.5,
       minZoom: 10,
       maxZoom: 21,
-      maxNativeZoom: 14
+      maxNativeZoom: 14,
+      tms: true
     }
   }]
 }
