@@ -9,6 +9,7 @@ The default frontend configuration file can be found [here](https://github.com/k
 Most options come from the "standard" frontend [configuration](https://kalisio.github.io/kdk/guides/basics/step-by-step.html#configuring-a-kapp) of **KDK** based app, here are the main ones:
 * **appName**: displayed application name,
 * **appLogo**: displayed application logo,
+* **theme**: the theme to be used,
 * **screens**: connection screens configuration
   * **banner**: displayed application banner,
   * **login**: login screen configuration
