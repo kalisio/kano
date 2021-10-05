@@ -687,6 +687,7 @@
       postRobot.on('kano-ready', () => {
         // configuration example
         postRobot.send(kano, 'setConfiguration', {
+          theme: '#448aff', // Change theme color
           'locale.default': 'en',
           'layout.welcome' : false, // No welcome screen
           'layout.leftPane.filter': { id: { $ne: 'logout' } },
