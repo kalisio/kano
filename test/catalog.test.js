@@ -5,22 +5,18 @@ import { core, map } from '@kalisio/kdk/test.client'
 
 const suite = 'catalog'
 
-const runnerOptions = {
-  appName: 'kano',
-  geolocation: { latitude: 43.10, longitude:1.71 },
-  localStorage: {
-    'kano-welcome': false
-  }
-}
-
-const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
-
-describe(suite, () => {
-  let runner
-  let page
+describe(`suite:${suite}`, () => {
+  let runner, page
+  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
-    runner = new core.Runner(suite, runnerOptions)
+    runner = new core.Runner(suite, {
+      appName: 'kano',
+      geolocation: { latitude: 43.10, longitude:1.71 },
+      localStorage: {
+        'kano-welcome': false
+      }
+    })
     page = await runner.start()
     await core.login(page, user)
   })
@@ -34,7 +30,7 @@ describe(suite, () => {
   })
 
   it('check-base-layers', async () => {
-    const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'HYBRID', 'IGN_PLAN']
+    const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'HYBRID', 'IGN_PLAN' ]
     for (const layer of layers) {
       await map.clickBaseLayer(page, layer)
       expect(await runner.captureAndMatch(_.kebabCase(layer))).to.true

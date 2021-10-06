@@ -3,22 +3,18 @@ import { core } from '@kalisio/kdk/test.client'
 
 const suite = 'layout'
 
-const runnerOptions = {
-  appName: 'kano',
-  geolocation: { latitude: 43.10, longitude:1.71 },
-  localStorage: {
-    'kano-welcome': false
-  }
-}
-
-const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
-
-describe(suite, () => {
-  let runner
-  let page
+describe(`suite:${suite}`, () => {
+  let runner, page
+  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
-    runner = new core.Runner(suite, runnerOptions)
+    runner = new core.Runner(suite, {
+      appName: 'kano',
+      geolocation: { latitude: 43.10, longitude:1.71 },
+      localStorage: {
+        'kano-welcome': false
+      }
+    })
     page = await runner.start()
     await core.login(page, user)
   })
