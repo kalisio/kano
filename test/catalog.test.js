@@ -40,6 +40,12 @@ describe(`suite:${suite}`, () => {
     await map.clickBaseLayer(page, 'OSM_BRIGHT')
   }).timeout(60000)
 
+  it('drop-geojson-gradient-file', async () => {
+    await map.dropFile(page, runner.getDataPath('path.geojson'))
+    expect(await runner.captureAndMatch('path')).to.true
+    await map.clickLayer(page, 'path')
+  })
+  
   it('import-geojson-layer', async () => {
     await map.importLayer(page, runner.getDataPath('regions.geojson'), 'code')
     expect(await runner.captureAndMatch('regions')).to.true
