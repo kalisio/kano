@@ -30,7 +30,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
-    kMapMixins.time,
     kMapMixins.levels,
     kMapMixins.context,
     kMapMixins.map.baseMap,

@@ -332,18 +332,18 @@ module.exports = {
   },
   settings: {
     propertyMapping: {
-      shortTime: 'timeFormat.time.short',
-      longTime: 'timeFormat.time.long',
-      shortDate: 'timeFormat.date.short',
-      longDate: 'timeFormat.date.long',
-      shortYear: 'timeFormat.year.short',
-      longYear: 'timeFormat.year.long',
-      utc: 'timeFormat.utc',
+      shortTime: 'time.format.time.short',
+      longTime: 'time.format.time.long',
+      shortDate: 'time.format.date.short',
+      longDate: 'time.format.date.long',
+      shortYear: 'time.format.year.short',
+      longYear: 'time.format.year.long',
+      utc: 'time.format.utc',
+      timelineStep: 'time.step',
+      timeseriesSpan: 'timeseries.span',
       location: 'locationFormat',
       restoreView: 'restore.view',
-      restoreLayers: 'restore.layers',
-      timelineStep: 'timeline.step',
-      timeseriesSpan: 'timeseries.span'
+      restoreLayers: 'restore.layers'
     }
   },
   screens: {

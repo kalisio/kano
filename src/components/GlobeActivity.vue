@@ -31,7 +31,6 @@ export default {
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
-    kMapMixins.time,
     kMapMixins.context,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
