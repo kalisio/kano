@@ -21,7 +21,7 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user)
   })
 
-  it('check-layer-category', async () => {
+  it('check layer category', async () => {
     await core.clickRightOpener(page)
     expect(await map.isLayerCategoryOpened(page, map.getSystemLayerCategoryId('BASE_LAYERS'))).to.false
     await map.clickLayerCategory(page, map.getSystemLayerCategoryId('BASE_LAYERS'))
@@ -29,7 +29,7 @@ describe(`suite:${suite}`, () => {
     await core.clickRightOpener(page)
   })
 
-  it('check-base-layers', async () => {
+  it('check base layers', async () => {
     const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'OSMT_DARK', 'IMAGERY', 'HYBRID', 'IGN_PLAN' ]
     for (const layer of layers) {
       await map.clickBaseLayer(page, layer)
@@ -40,19 +40,19 @@ describe(`suite:${suite}`, () => {
     await map.clickBaseLayer(page, 'OSM_BRIGHT')
   }).timeout(60000)
 
-  it('drop-geojson-gradient-file', async () => {
+  it('drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
     expect(await runner.captureAndMatch('flight')).to.true
     await map.clickLayer(page, 'flight')
   })
   
-  it('import-geojson-layer', async () => {
+  it('import geojson layer', async () => {
     await map.importLayer(page, runner.getDataPath('regions.geojson'), 'code')
     expect(await runner.captureAndMatch('regions')).to.true
     await map.clickLayer(page, 'regions')
   })
 
-  it('connect-wms-layer', async () => {
+  it('connect wms layer', async () => {
     const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'geologie'
     await map.connectLayer(page, service, layerId)

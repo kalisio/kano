@@ -19,7 +19,7 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user)
   })
 
-  it('locate-user', async () => {
+  it('locate user', async () => {
     await core.clickTopPaneAction(page, 'locate-user')
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
@@ -27,7 +27,7 @@ describe(`suite:${suite}`, () => {
     await core.clickTopPaneAction(page, 'locate-user')
   })
 
-  it('search-location', async () => {
+  it('search location', async () => {
     await core.clickTopPaneAction(page, 'search-location')
     let selector = '#place-chooser input'
     await core.type(page, selector, 'place du capitole')
@@ -40,7 +40,7 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'back')
   })
 
-  it('display-position', async () => {
+  it('display position', async () => {
     await core.clickTopPaneAction(page, 'tools')
     await core.clickTopPaneAction(page, 'display-position')
     expect(await runner.captureAndMatch('position')).to.true

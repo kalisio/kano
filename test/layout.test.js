@@ -19,7 +19,7 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user)
   })
 
-  it('check-layout', async () => {
+  it('check layout', async () => {
     expect(await core.isTopPaneVisible(page)).be.true
     expect(await core.isRightPaneVisible(page)).be.false
     expect(await core.isBottomPaneVisible(page)).be.false
