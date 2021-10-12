@@ -41,9 +41,9 @@ describe(`suite:${suite}`, () => {
   }).timeout(60000)
 
   it('drop-geojson-gradient-file', async () => {
-    await map.dropFile(page, runner.getDataPath('path.geojson'))
-    expect(await runner.captureAndMatch('path')).to.true
-    await map.clickLayer(page, 'path')
+    await map.dropFile(page, runner.getDataPath('flight.geojson'))
+    expect(await runner.captureAndMatch('flight')).to.true
+    await map.clickLayer(page, 'flight')
   })
   
   it('import-geojson-layer', async () => {

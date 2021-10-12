@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { core, map } from '@kalisio/kdk/test.client'
 
-const suite = 'control'
+const suite = 'controls'
 
 describe(`suite:${suite}`, () => {
   let runner, page
