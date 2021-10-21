@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
     name: 'Layers.VIGICRUES',
     description: 'Layers.VIGICRUES_DESCRIPTION',
