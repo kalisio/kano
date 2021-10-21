@@ -1,6 +1,9 @@
-module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
+
+
+module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   let layers = []
-  if (storageUrl) layers.push({
+  const flavor = process.env.NODE_APP_INSTANCE || 'dev'
+  if (s3Url) layers.push({
     name: 'Layers.METEORADAR',
     description: 'Layers.METEORADAR_DESCRIPTION',
     i18n: {
@@ -65,7 +68,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, stor
         to: 'PT-1H',
         every: 'PT15M',
         dynprops: {
-          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + storageUrl + '/scw/kalisio-archive-data/meteoradar/dev/<%- folder %>/<%- file %>.tif?jwt=<%- jwtToken %>' }
+          url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + s3Url + '/scw/kalisio-archive-data/meteoradar/' + flavor + '/<%- folder %>/<%- file %>.tif?jwt=<%- jwtToken %>' }
         },
         geotiff: {}
       }]

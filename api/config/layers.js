@@ -11,7 +11,6 @@ const wmsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wms' 
 const wcsUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/wcs' : 'https://mapserver.' + kargoDomain + '/cgi-bin/ows')
 const k2Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/k2' : 'https://k2.' + kargoDomain)
 const s3Url = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/s3' : 'https://s3.eu-central-1.amazonaws.com')
-const storageUrl = (process.env.API_GATEWAY ? 'https://api.' + kargoDomain + '/storage' : undefined)
 
 // Request layer definition files
 const layerFiles = glob.sync(path.join(__dirname, 'layers/**/*.js'))
@@ -27,7 +26,7 @@ layerFiles.forEach(layerFile => {
     console.error(error)
   }
   // Layers provided through a generation function ?
-  if (typeof layersFromFile === 'function') layersFromFile = layersFromFile({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl })
+  if (typeof layersFromFile === 'function') layersFromFile = layersFromFile({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url })
   // Layers directly provided as array or object
   else if (!Array.isArray(layersFromFile)) layersFromFile = [layersFromFile]
   layers = layers.concat(layersFromFile)

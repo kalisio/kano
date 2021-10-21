@@ -1,4 +1,4 @@
-module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url, storageUrl }) {
+module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [
     {
       name: 'Layers.METAR',
