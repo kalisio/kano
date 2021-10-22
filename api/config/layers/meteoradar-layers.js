@@ -31,36 +31,25 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     attribution: 'Radar © <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
-    variables: [
-      {
-        name: 'rainFall',
-        label: 'Variables.RAIN_FALL',
-        units: [
-          'mm/h'
-        ],
-        chartjs: {
-          backgroundColor: 'rgba(54, 162, 235, 128)',
-          borderColor: 'rgb(54, 162, 235)',
-          fill: false
-        },
-        chromajs: {
-          scale: [
-            "white",
-            "#483D88",
-            "#0000CD",
-            "#1E90FF",
-            "#ADD8E6",
-            "#556B2F",
-            "#3CB371",
-            "#7FFFD4",
-            "#7FFF00",
-            "#FFFF00",
-            "#F0E68C",
-            "#DEB887"
-          ],
-          classes: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
-        }
-      }
+    chromajs: {
+      scale: [
+        "#483D88",
+        "#0000CD",
+        "#1E90FF",
+        "#ADD8E6",
+        "#556B2F",
+        "#3CB371",
+        "#7FFFD4",
+        "#7FFF00",
+        "#FFFF00",
+        "#F0E68C",
+        "#DEB887",
+        "#A0532E"
+      ],
+      classes: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+    },
+    units: [
+      'Force'
     ],
     time_based: {
       sources: [{
@@ -82,3 +71,4 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   })
   return layers
 }
+
