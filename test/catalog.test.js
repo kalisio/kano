@@ -53,7 +53,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('connect wms layer', async () => {
-    const service = 'http://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
+    const service = 'https://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'geologie'
     await map.connectLayer(page, service, layerId)
     expect(await runner.captureAndMatch(layerId)).to.true
