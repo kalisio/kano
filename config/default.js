@@ -18,7 +18,7 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
     domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
   }
 }
-// Override defaults if env provided
+// Override defaults if env provided at build time
 if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
