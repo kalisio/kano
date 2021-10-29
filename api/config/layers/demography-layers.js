@@ -35,7 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       classes: [1, 30, 100, 200, 400, 750, 1350, 4086]
     },
-    units: ['h./Km²'],
+    units: ['h.'],
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
