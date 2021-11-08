@@ -9,6 +9,9 @@ export default function () {
   try {
     api.configure(kCore)
     api.configure(kMap)
+    // Restore previous settings if any
+  	const settingsService = api.getService('settings')
+  	if (settingsService) settingsService.restoreSettings()
   } catch (error) {
     logger.error(error.message)
   }
