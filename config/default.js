@@ -61,6 +61,11 @@ const mapCatalog = {
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
     },
     {
+      name: 'KCatalogPanel.INFRASTRUCTURE_LAYERS',
+      icon: 'las la-broadcast-tower',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['infrastructure'] } } }
+    },
+    {
       name: 'KCatalogPanel.METEO_LAYERS',
       icon: 'las la-cloud-sun-rain',
       component: 'catalog/KWeatherLayersSelector',
@@ -174,6 +179,11 @@ const globeCatalog = {
       name: 'KCatalogPanel.MEASURE_LAYERS',
       icon: 'las la-map-pin',
       options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
+    },
+    {
+      name: 'KCatalogPanel.INFRASTRUCTURE_LAYERS',
+      icon: 'las la-broadcast-tower',
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['infrastructure'] } } }
     },
     {
       name: 'KCatalogPanel.METEO_LAYERS',

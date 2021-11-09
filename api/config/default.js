@@ -144,7 +144,8 @@ module.exports = {
                             service.path.includes('vigicrues') ||
                             service.path.includes('openradiation') ||
                             service.path.includes('metar-taf') ||
-                            service.path.includes('population'),
+                            service.path.includes('population') ||
+                            service.path.includes('centipede'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
