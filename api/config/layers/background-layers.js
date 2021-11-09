@@ -110,43 +110,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }
   },
   {
-    name: 'Layers.OSMT_DARK',
-    description: 'Layers.OSMT_DARK_DESCRIPTION',
-    i18n: {
-      fr: {
-        Layers: {
-          OSMT_DARK: 'Relief (Sombre)',
-          OSMT_DARK_DESCRIPTION: 'Données OpenStreetMap et terrain à 30m de résolution (style sombre)'
-        }
-      },
-      en: {
-        Layers: {
-          OSMT_DARK: 'Relief (Dark)',
-          OSMT_DARK_DESCRIPTION: 'OpenStreeMap data and 30m resolution terrain data (dark style)'
-        }
-      }
-    },
-    tags: [
-      'street',
-      'terrain'
-    ],
-    iconUrl: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR/0/0/0.png`,
-    icon: 'terrain',
-    attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-    type: 'BaseLayer',
-    leaflet: {
-      type: 'tileLayer',
-      source: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      maxZoom: 21,
-      maxNativeZoom: 18,
-      tms: true
-    },
-    cesium: {
-      type: 'TileMapService',
-      url: `${tmsUrl}/osm-terrain-dark@GLOBAL_WEBMERCATOR`
-    }
-  },
-  {
     name: 'Layers.IMAGERY',
     description: 'Layers.IMAGERY_DESCRIPTION',
     i18n: {
