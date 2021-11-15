@@ -5,8 +5,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          CENTIPEDE: 'Centipede RTK',
-          CENTIPEDE_DESCRIPTION: 'Centipede RTK network'
+          CENTIPEDE: 'Bases Centipede RTK',
+          CENTIPEDE_DESCRIPTION: 'Bases du réseau Centipede RTK'
         },
         Variables: {
           ping: 'Status'
@@ -14,8 +14,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          CENTIPEDE: 'Centipede RTK',
-          CENTIPEDE_DESCRIPTION: 'Centipede RTK network'
+          CENTIPEDE: 'Centipede RTK bases',
+          CENTIPEDE_DESCRIPTION: 'Centipede RTK network bases'
         },
         Variables: {
           ping: 'Status'
@@ -56,9 +56,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 8,
-      //'marker-type': 'circleMarker',
-      //radius: 6,
+      minZoom: 7,
       'icon-classes': 'fa fa-map-pin',
       'icon-x-offset': 2,
       'marker-color': `<% if (properties.ping && properties.ping === 2 ) { %>#78b955<% } 

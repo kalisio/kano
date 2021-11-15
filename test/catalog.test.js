@@ -46,10 +46,22 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, 'flight')
   })
   
-  it('import geojson layer', async () => {
-    await map.importLayer(page, runner.getDataPath('regions.geojson'), 'code')
+  it('import geojson file', async () => {
+    await map.importLayer(page, runner.getDataPath('departements.geojson'), 'code')
+    expect(await runner.captureAndMatch('departements')).to.true
+    await map.clickLayer(page, 'departements')
+  })
+
+  it('import kml file', async () => {
+    await map.importLayer(page, runner.getDataPath('regions.kml'))
     expect(await runner.captureAndMatch('regions')).to.true
     await map.clickLayer(page, 'regions')
+  })
+
+  it('import gpx file', async () => {
+    await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    expect(await runner.captureAndMatch('trace')).to.true
+    await map.clickLayer(page, 'trace')
   })
 
   it('connect wms layer', async () => {
