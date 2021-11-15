@@ -7,6 +7,22 @@ import appHooks from '../main.hooks'
 import services from '../services'
 import plugin from '../vue-kdk'
 import { kalisio, beforeGuard, authenticationGuard, Theme } from '@kalisio/kdk/core.client'
+import { CanvasDrawContext } from '@kalisio/kdk/map.client'
+
+// those are imported to make them available in
+// canvas layer's draw context
+import turf_destination from '@turf/destination'
+// import turf_circle from '@turf/circle'
+
+const kanoLib = {
+  // make turf functions available from canvas layer
+  turf: {
+    destination: turf_destination,
+    // circle: turf_circle
+  }
+}
+
+CanvasDrawContext.merge(kanoLib)
 
 function updateThemeColors () {
   const theme = config.theme
