@@ -46,6 +46,12 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, 'flight')
   })
   
+  it('import geojson file with bbox', async () => {
+    await map.importLayer(page, runner.getDataPath('landing.geojson'))
+    expect(await runner.captureAndMatch('landing')).to.true
+    await map.clickLayer(page, 'landing')
+  })
+
   it('import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('departements.geojson'), 'code')
     expect(await runner.captureAndMatch('departements')).to.true
