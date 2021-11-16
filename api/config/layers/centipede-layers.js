@@ -88,5 +88,72 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% } %>'
       }
     }
+  },
+  {
+    name: 'Layers.CENTIPEDE_BUFFER',
+    description: 'Layers.CENTIPEDE_BUFFER_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          CENTIPEDE_BUFFER: 'Couverture Centipede RTK',
+          CENTIPEDE_BUFFER_DESCRIPTION: 'Centipede RTK network'
+        }
+      },
+      en: {
+        Layers: {
+          CENTIPEDE_BUFFER: "Centipede RTK's coverage",
+          CENTIPEDE_BUFFER_DESCRIPTION: 'Centipede RTK network'
+        }
+      }
+    },
+    tags: [
+      'infrastructure'
+    ],
+    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
+    type: 'OverlayLayer',
+    leaflet: {
+      type: 'kanvasLayer',
+      userData: {
+        radius: 50 // radius in km around centipede antennas
+      },
+      draw: [{
+        layer: 'Layers.CENTIPEDE', // attached to Layers.CENTIPEDE geojson layer
+        code: `
+          const props = ctx.feature.properties
+
+          // only draw buffer around antennas with ping === 2
+          if (props.ping !== 2) return
+
+          // feature position => buffer center
+          const coords0 = {
+            lat: ctx.feature.geometry.coordinates[1],
+            lon: ctx.feature.geometry.coordinates[0]
+          }
+          // move 50km north from feature position => buffer border
+          const border = ctx.turf.destination(ctx.feature.geometry, ctx.userData.radius, 0, { units: 'kilometers' })
+          const coords1 = {
+            lat: border.geometry.coordinates[1],
+            lon: border.geometry.coordinates[0]
+          }
+
+          // project in canvas space
+          const pos0 = ctx.latLonToCanvas(coords0)
+          const pos1 = ctx.latLonToCanvas(coords1)
+          const radius = ctx.len2(ctx.vec2(pos1, pos0))
+          // build gradient to fill buffer
+          const gradient = ctx.canvas.createRadialGradient(pos0.x, pos0.y, 5, pos0.x, pos0.y, radius)
+          gradient.addColorStop(0, '#A7D49B80')
+          gradient.addColorStop(1, '#A7D49B20')
+
+          // draw buffer filled with gradient + stroked border
+          ctx.canvas.beginPath()
+          ctx.canvas.arc(pos0.x, pos0.y, radius, 0, 2 * ctx.Math.PI)
+          ctx.canvas.fillStyle = gradient
+          ctx.canvas.fill()
+          ctx.canvas.strokeStyle = '#92AC86'
+          ctx.canvas.stroke()
+          `
+      }]
+    }
   }]
 }
