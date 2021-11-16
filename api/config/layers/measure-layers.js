@@ -126,7 +126,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         Variables: {
           H: 'Niveau d\'eau',
-          Q: 'Débit d\'eau'
+          Q: 'Débit d\'eau',
+          HP_RNN: 'Niveau d\'eau (prévision RNN)'
         }
       },
       en: {
@@ -136,7 +137,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         Variables: {
           H: 'Water level',
-          Q: 'Water rate'
+          Q: 'Water rate',
+          HP_RNN: 'Water level (RNN prediction)'
         }
       }
     },
@@ -181,6 +183,21 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           backgroundColor: 'rgba(54, 162, 235, 128)',
           borderColor: 'rgb(54, 162, 235)',
           fill: false
+        }
+      },
+      {
+        name: 'HP_RNN',
+        label: 'Variables.HP_RNN',
+        units: [
+          'm'
+        ],
+        range: [0, 10],
+        step: 0.1,
+        chartjs: {
+          backgroundColor: 'rgba(63, 63, 191, 128)',
+          borderColor: 'rgb(63, 63, 191)',
+          fill: false,
+          borderDash: [10, 10]
         }
       }
     ],
