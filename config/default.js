@@ -430,7 +430,8 @@ module.exports = {
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
             content: [
-              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
+              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_MAP', handler: { name: 'setTopPaneMode', params: ['capture-map'] } },
             ]
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
@@ -450,6 +451,11 @@ module.exports = {
           { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KLayerEditionToolbar' }
+        ],
+        'capture-map': [ 
+          { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KCaptureToolbar' }
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
