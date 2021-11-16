@@ -23,21 +23,23 @@ describe(`suite:${suite}`, () => {
 
   it('check layer category', async () => {
     await core.clickRightOpener(page)
-    expect(await map.isLayerCategoryOpened(page, map.getSystemLayerCategoryId('BASE_LAYERS'))).to.false
-    await map.clickLayerCategory(page, map.getSystemLayerCategoryId('BASE_LAYERS'))
-    expect(await map.isLayerCategoryOpened(page, map.getSystemLayerCategoryId('BASE_LAYERS'))).to.true
+    const categoryId = await map.getLayerCategoryId(page, map.getLayerId('OSM_DARK'))
+    expect(categoryId).to.equal('k-catalog-panel-base-layers')
+    expect(await map.isLayerCategoryOpened(page, categoryId)).to.false
+    await map.clickLayerCategory(page, categoryId)
+    expect(await map.isLayerCategoryOpened(page, categoryId)).to.true
     await core.clickRightOpener(page)
   })
 
   it('check base layers', async () => {
     const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'IMAGERY', 'HYBRID', 'IGN_PLAN' ]
     for (const layer of layers) {
-      await map.clickBaseLayer(page, layer)
+      await map.clickLayer(page, layer)
       expect(await runner.captureAndMatch(_.kebabCase(layer))).to.true
     }
-    await map.clickBaseLayer(page, 'IGN_PLAN')
+    await map.clickLayer(page, 'IGN_PLAN')
     expect(await runner.captureAndMatch('empty')).to.true
-    await map.clickBaseLayer(page, 'OSM_BRIGHT')
+    await map.clickLayer(page, 'OSM_BRIGHT')
   }).timeout(60000)
 
   it('drop geojson gradient file', async () => {

@@ -14,7 +14,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          CENTIPEDE: 'Centipede RTK bases',
+          CENTIPEDE: 'Centipede RTK\'s bases',
           CENTIPEDE_DESCRIPTION: 'Centipede RTK network bases'
         },
         Variables: {
@@ -25,7 +25,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'infrastructure'
     ],
-    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
+    attribution: "<a href='https://docs.centipede.fr/'>Centipede</a>",
     type: 'OverlayLayer',
     service: 'centipede-pings',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
@@ -101,7 +101,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          CENTIPEDE_BUFFER: "Centipede RTK's coverage",
+          CENTIPEDE_BUFFER: 'Centipede RTK\'s coverage',
           CENTIPEDE_BUFFER_DESCRIPTION: 'Centipede RTK network'
         }
       }
@@ -109,7 +109,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'infrastructure'
     ],
-    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
+    attribution: "<a href='https://docs.centipede.fr/'>Centipeded/a>",
     type: 'OverlayLayer',
     leaflet: {
       type: 'kanvasLayer',
