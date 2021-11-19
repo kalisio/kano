@@ -127,7 +127,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Variables: {
           H: 'Niveau d\'eau',
           Q: 'Débit d\'eau',
-          HP_RNN: 'Niveau d\'eau (prévision RNN)'
+          HP_RNN: 'Prévision de niveau d\'eau - RNN'
         }
       },
       en: {
@@ -138,7 +138,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Variables: {
           H: 'Water level',
           Q: 'Water rate',
-          HP_RNN: 'Water level (RNN prediction)'
+          HP_RNN: 'Predicted water level - RNN'
         }
       }
     },
