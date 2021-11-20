@@ -431,7 +431,7 @@ module.exports = {
             actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_MAP', handler: { name: 'setTopPaneMode', params: ['capture-map'] } },
+              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } },
             ]
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
