@@ -1,5 +1,17 @@
 # Changelog
 
+## [prod-v1.3.1](https://github.com/kalisio/kano/tree/prod-v1.3.1) (2021-11-24)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.3.0...prod-v1.3.1)
+
+**Implemented enhancements:**
+
+- Allow the user to define its default background map [\#200](https://github.com/kalisio/kano/issues/200)
+
+**Fixed bugs:**
+
+- Saved user settings are erased by default values [\#223](https://github.com/kalisio/kano/issues/223)
+
 ## [prod-v1.3.0](https://github.com/kalisio/kano/tree/prod-v1.3.0) (2021-10-22)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.2.4...prod-v1.3.0)
@@ -107,7 +119,6 @@
 - Add an OpenRadiation layer [\#148](https://github.com/kalisio/kano/issues/148)
 - Translate tooltips in default layers [\#130](https://github.com/kalisio/kano/issues/130)
 - Enhance edition information [\#124](https://github.com/kalisio/kano/issues/124)
-- Keep track of currently activated layers [\#43](https://github.com/kalisio/kano/issues/43)
 
 **Fixed bugs:**
 
@@ -184,6 +195,7 @@
 - Timeseries tooltip should include all variables [\#47](https://github.com/kalisio/kano/issues/47)
 - Make timeseries available in Globe [\#46](https://github.com/kalisio/kano/issues/46)
 - Create an iframe integration API [\#45](https://github.com/kalisio/kano/issues/45)
+- Keep track of currently activated layers [\#43](https://github.com/kalisio/kano/issues/43)
 - Allow to define the style of imported GeoJson layers [\#42](https://github.com/kalisio/kano/issues/42)
 - Add a vertical time line in timeseries [\#41](https://github.com/kalisio/kano/issues/41)
 - Timeseries should be maximized on mobile [\#35](https://github.com/kalisio/kano/issues/35)
