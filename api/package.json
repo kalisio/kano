@@ -68,7 +68,7 @@
     "@feathersjs/express": "^1.2.3",
     "@feathersjs/feathers": "^3.3.1",
     "@kalisio/feathers-distributed": "^1.0.5",
-    "@kalisio/kdk": "^1.4.0",
+    "@kalisio/kdk": "^1.4.1",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^3.0.0",
     "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git",
