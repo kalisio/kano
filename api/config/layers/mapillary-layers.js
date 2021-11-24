@@ -11,7 +11,7 @@ module.exports = function () {
       },
       en: {
         Layers: {
-          MAPILLARY: "Mapillary",
+          MAPILLARY: 'Mapillary',
           MAPILLARY_DESCRIPTION: 'Mapillary images coverage'
         }
       }

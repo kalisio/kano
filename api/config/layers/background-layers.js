@@ -183,7 +183,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fileExtension: 'jpeg'
     }
   },
-  { 
+  {
     name: 'Layers.HYBRID',
     description: 'Layers.HYBRID_DESCRIPTION',
     i18n: {
