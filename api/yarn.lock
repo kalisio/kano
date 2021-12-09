@@ -546,10 +546,10 @@
     debug "^4.1.0"
     uuid "^8.2.0"
 
-"@kalisio/kdk@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.4.1.tgz#224200a1cab4679a39298f0141790211ff0957ca"
-  integrity sha512-rXleta4o57K3z8QqyWXBzdrVUVar885RrON6pWf9gz3aFSwDA+oIakv+EXhVyxmEsvP+Vs4wFXP4LyL8v1OjpA==
+"@kalisio/kdk@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.4.2.tgz#ff36c388086c175a5674ca46000cc948e03ada8e"
+  integrity sha512-7a3himwNvYXw3FwpIyBjCy5E1ioP38yk8a0pJMp1lyWoXuhNo4za8q3xzt+anDMVUdC52Z5rIZIOuTdVyxWI6A==
   dependencies:
     "@feathersjs/authentication" "https://github.com/kalisio/authentication.git"
     "@feathersjs/authentication-jwt" "^2.0.1"
