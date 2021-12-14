@@ -432,6 +432,7 @@ module.exports = {
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } },
+              { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } }
             ]
           },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
@@ -456,6 +457,11 @@ module.exports = {
           { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KCaptureToolbar' }
+        ],
+        'measure-tool': [
+          { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { component: 'QSeparator', vertical: true, color: 'lightgrey' },
+          { component: 'KMeasureTool' }
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
