@@ -1198,9 +1198,9 @@
     passport "^0.4.0"
     uuid "^3.1.0"
 
-"@feathersjs/authentication@https://github.com/kalisio/authentication.git":
+"@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -1447,10 +1447,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@kalisio/kdk@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.4.2.tgz#ff36c388086c175a5674ca46000cc948e03ada8e"
-  integrity sha512-7a3himwNvYXw3FwpIyBjCy5E1ioP38yk8a0pJMp1lyWoXuhNo4za8q3xzt+anDMVUdC52Z5rIZIOuTdVyxWI6A==
+"@kalisio/kdk@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.5.0.tgz#2766b53cb7f70d3fe1f9a600022f580cddecbcb1"
+  integrity sha512-wk/bdjF9Ams9oRws48iu8lLVMEwIllNPqWhWsS2Vb+prRfPZN2XpRS6AEaHe7hY9Y+g1UJ6h0u7cjBMa5UZFRw==
   dependencies:
     "@feathersjs/authentication" "https://github.com/kalisio/authentication.git"
     "@feathersjs/authentication-jwt" "^2.0.1"
@@ -13815,9 +13815,9 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-"sns-mobile@https://github.com/kalisio/sns-mobile":
+"sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
   version "1.3.0"
-  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
