@@ -66,7 +66,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'icon-color': '#FFF',
       template: ['marker-color'],
       tooltip: {
-        template: `<%= properties.name %>: <%= properties.status || 'no status' %><% if (_.has(properties, 'value')) { %></br><%= properties.value.toFixed(2) %> unit<% } %>`
+        template: '<%= properties.name %>: <%= properties.status || \'no status\' %><% if (_.has(properties, \'value\')) { %></br><%= properties.value.toFixed(2) %> unit<% } %>'
       }
     },
     cesium: {
