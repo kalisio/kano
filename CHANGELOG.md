@@ -1,5 +1,32 @@
 # Changelog
 
+## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.0...HEAD)
+
+**Merged pull requests:**
+
+- build\(deps\): bump follow-redirects from 1.13.1 to 1.14.7 in /docs [\#239](https://github.com/kalisio/kano/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [prod-v1.4.0](https://github.com/kalisio/kano/tree/prod-v1.4.0) (2022-01-07)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.3.2...prod-v1.4.0)
+
+**Implemented enhancements:**
+
+- Provide a control to take a map capture [\#225](https://github.com/kalisio/kano/issues/225)
+- Layer import : permit to choose default visibility of a new layer [\#207](https://github.com/kalisio/kano/issues/207)
+
+**Fixed bugs:**
+
+- Switching from 2D to 3D activity if a GeoJson layer is visible raises an error [\#169](https://github.com/kalisio/kano/issues/169)
+
+**Merged pull requests:**
+
+- build\(deps\): bump mermaid from 8.13.5 to 8.13.8 in /docs [\#235](https://github.com/kalisio/kano/pull/235) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump mermaid from 8.8.4 to 8.13.5 in /docs [\#230](https://github.com/kalisio/kano/pull/230) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 [\#194](https://github.com/kalisio/kano/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [prod-v1.3.2](https://github.com/kalisio/kano/tree/prod-v1.3.2) (2021-12-09)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.3.1...prod-v1.3.2)
@@ -10,7 +37,6 @@
 
 **Implemented enhancements:**
 
-- Add Meteoradar layer [\#221](https://github.com/kalisio/kano/issues/221)
 - Allow the user to define its default background map [\#200](https://github.com/kalisio/kano/issues/200)
 
 **Fixed bugs:**
@@ -23,6 +49,7 @@
 
 **Implemented enhancements:**
 
+- Add Meteoradar layer [\#221](https://github.com/kalisio/kano/issues/221)
 - Add the hybrid layer among the default background layers [\#219](https://github.com/kalisio/kano/issues/219)
 - Update default configuration for IGN layers [\#218](https://github.com/kalisio/kano/issues/218)
 
@@ -42,7 +69,6 @@
 - build\(deps\): bump color-string from 1.5.4 to 1.5.5 in /docs [\#208](https://github.com/kalisio/kano/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump postcss from 7.0.35 to 7.0.36 in /docs [\#204](https://github.com/kalisio/kano/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ws from 6.2.1 to 6.2.2 in /docs [\#197](https://github.com/kalisio/kano/pull/197) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 [\#194](https://github.com/kalisio/kano/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 in /docs [\#193](https://github.com/kalisio/kano/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -50,6 +76,7 @@
 - build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.2.4](https://github.com/kalisio/kano/tree/prod-v1.2.4) (2021-07-15)
 
@@ -102,7 +129,6 @@
 **Merged pull requests:**
 
 - build\(deps\): bump y18n from 3.2.1 to 3.2.2 [\#168](https://github.com/kalisio/kano/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.22.0 to 1.23.0 in /docs [\#157](https://github.com/kalisio/kano/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ini from 1.3.4 to 1.3.7 [\#149](https://github.com/kalisio/kano/pull/149) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update layers.js [\#146](https://github.com/kalisio/kano/pull/146) ([benoit-jpi](https://github.com/benoit-jpi))
