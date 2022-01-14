@@ -1,13 +1,5 @@
 # Changelog
 
-## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
-
-[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.0...HEAD)
-
-**Merged pull requests:**
-
-- build\(deps\): bump follow-redirects from 1.13.1 to 1.14.7 in /docs [\#239](https://github.com/kalisio/kano/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
-
 ## [prod-v1.4.0](https://github.com/kalisio/kano/tree/prod-v1.4.0) (2022-01-07)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.3.2...prod-v1.4.0)
