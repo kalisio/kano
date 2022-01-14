@@ -3,19 +3,15 @@ import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.api'
 import { permissions as mapPermissions } from '@kalisio/kdk/map.api'
+import * as permissions from './permissions'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
 corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
-// Then rules for catalog, features, etc.
-corePermissions.defineAbilities.registerHook((subject, can, cannot) => {
-  can('service', 'features')
-  can('all', 'features')
-  can('all', 'catalog')
-  can('all', 'alerts')
-})
+// Then rules for app
+corePermissions.defineAbilities.registerHook(permissions.defineUserAbilities)
 
 module.exports = {
   before: {

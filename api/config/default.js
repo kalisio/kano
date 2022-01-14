@@ -191,14 +191,8 @@ module.exports = {
       {
         email: 'kalisio@kalisio.xyz',
         password: 'Pass;word1',
-        /*
-        device: {
-          registrationId: 'xxx',
-          number: '+xxx',
-          platform: 'ANDROID'
-        }
-        */
-        name: 'Kalisio'
+        name: 'Kalisio',
+        catalog: { permissions: 'owner' }
       }
     ],
     disallowRegistration: true,

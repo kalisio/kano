@@ -1,6 +1,6 @@
 const path = require('path')
 
-// USe default app config
+// Use default app config
 const config = require(path.join(__dirname, '../../config/default'))
 
 // Simply changes outputs so we don't pollute DB, logs, etc.

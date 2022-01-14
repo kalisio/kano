@@ -32,7 +32,7 @@
     "build": "npm run clean && babel src -d dist -s",
     "prod": "cross-env NODE_ENV=production node dist/main.js",
     "lint": "standard src/**/*.js test/**/*.js config/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha --require babel-core/register",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" mocha --require babel-core/register",
     "coverage": "nyc npm run mocha",
     "test": "npm run build && npm run lint && npm run coverage"
   },

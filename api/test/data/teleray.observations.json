@@ -1,0 +1,24 @@
+[
+  {
+    "type": "Feature",
+    "properties": {
+      "irsnId": 1000,
+      "name": "TOKYO-JAPON",
+      "measureDateFormatted": "2022-01-07T17:20:02",
+      "value": 61,
+      "average": 60,
+      "libelle": "VA",
+      "validation": "valide",
+      "cleanMeasure": 1
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        139.72669982910156,
+        35.64739990234375,
+        0
+      ]
+    },
+    "time": "2022-01-07T16:20:02.000Z"
+  }
+]

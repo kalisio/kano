@@ -1,0 +1,18 @@
+[
+  {
+    "properties": {
+      "irsnId": 1000,
+      "name": "TOKYO-JAPON"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        139.72669982910156,
+        35.64739990234375,
+        0
+      ]
+    },
+    "type": "Feature"
+  }
+]
+

@@ -46,7 +46,7 @@ module.exports = async function () {
       const defaultUser = defaultUsers[i]
       const createdUser = _.find(users, { email: defaultUser.email })
       if (!createdUser) {
-        app.logger.info('Initializing default user (email = ' + defaultUser.email + ', password = ' + defaultUser.password + ')')
+        app.logger.info('Initializing default user (email = ' + defaultUser.email + ')')
         await usersService.create(defaultUser)
       }
     }
@@ -55,10 +55,10 @@ module.exports = async function () {
   // Helper to register service and permissions for a layer
   function createFeaturesServiceForLayer (options) {
     const service = createFeaturesService.call(app, options)
-    // Register permission for it
+    // Register default permissions for it
     permissions.defineAbilities.registerHook((subject, can, cannot) => {
       can('service', options.collection)
-      can('all', options.collection)
+      can('read', options.collection)
     })
     return service
   }
