@@ -136,16 +136,12 @@ module.exports = {
     },
     frameguard: false
   },
-  distribution: { // Distribute data services
-    services: (service) => service.path.includes('catalog') ||
-                            service.path.includes('hubeau') ||
-                            service.path.includes('openaq') ||
-                            service.path.includes('teleray') ||
-                            service.path.includes('vigicrues') ||
-                            service.path.includes('openradiation') ||
-                            service.path.includes('metar-taf') ||
-                            service.path.includes('population') ||
-                            service.path.includes('centipede'),
+  distribution: { // Distribute data services only
+    services: (service) => !service.path.includes('users') &&
+                           !service.path.includes('authentication') &&
+                           !service.path.includes('authorisations') &&
+                           !service.path.includes('features') &&
+                           !service.path.includes('geocoder'),
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
