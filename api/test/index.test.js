@@ -1,12 +1,14 @@
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
-import chai, { util, expect } from 'chai'
+import feathers from '@feathersjs/client'
+import io from 'socket.io-client'
+import chai, { util, expect, assert } from 'chai'
 import chailint from 'chai-lint'
 import server from '../src/main'
 
 describe('kano', () => {
-  let expressServer, app, userService, authorisationService, catalogService, featuresService,
+  let expressServer, app, client, userService, authorisationService, catalogService, featuresService,
   measureLayer, stationsService, observationsService, userObject, managerObject
 
   before(() => {
@@ -17,9 +19,16 @@ describe('kano', () => {
     expect(typeof server).to.equal('object')
   })
 
-  it('initialize the server', async () => {
+  it('initialize the server/client', async () => {
     expressServer = await server.run()
     app = server.app
+    client = feathers()
+    const socket = io(app.get('domain'), {
+      transports: ['websocket'],
+      path: app.get('apiPath') + 'ws'
+    })
+    client.configure(feathers.socketio(socket))
+    client.configure(feathers.authentication({ path: app.get('apiPath') + '/authentication' }))
   })
   // Let enough time to process
     .timeout(10000)
@@ -47,16 +56,61 @@ describe('kano', () => {
   })
 
   it('creates a test user', async () => {
-    userObject = await userService.create({ email: 'test-user@test.org', name: 'test-user' }, { checkAuthorisation: true })
+    userObject = await userService.create({
+      email: 'test-user@test.org',
+      password: 'Pass;word1',
+      name: 'test-user'
+    }, { checkAuthorisation: true })
     const users = await userService.find({ query: { 'profile.name': 'test-user' }, user: userObject, checkAuthorisation: true })
     expect(users.data.length).to.equal(1)
   })
+  // Let enough time to process
+    .timeout(5000)
 
   it('creates a test manager', async () => {
-    managerObject = await userService.create({ email: 'test-manager@test.org', name: 'test-manager', catalog: { permissions: 'manager' } }, { checkAuthorisation: true })
+    managerObject = await userService.create({
+      email: 'test-manager@test.org',
+      name: 'test-manager',
+      catalog: { permissions: 'manager' }
+    }, { checkAuthorisation: true })
     const users = await userService.find({ query: { 'profile.name': 'test-manager' }, user: userObject, checkAuthorisation: true })
     expect(users.data.length).to.equal(1)
   })
+  // Let enough time to process
+    .timeout(5000)
+
+  it('connects user client', async () => {
+    const response = await client.authenticate({
+      strategy: 'local',
+      email: 'test-user@test.org',
+      password: 'Pass;word1'
+    })
+    const payload = await client.passport.verifyJWT(response.accessToken)
+    expect(payload.userId).to.equal(userObject._id.toString())
+  })
+  // Let enough time to process
+    .timeout(5000)
+
+  it('cannot update users from external clients', async () => {
+    try {
+      await client.service(app.get('apiPath') + '/users').update(userObject._id.toString(), { name: 'new name' })
+    } catch (error) {
+      expect(error).toExist()
+      expect(error.name).to.equal('MethodNotAllowed')
+    }
+  })
+
+  it('cannot update user permissions without using authorisations service', async () => {
+    try {
+      const result = await client.service(app.get('apiPath') + '/users').patch(userObject._id.toString(), { catalog: { permissions: 'manager' } })
+      assert.fail('error not thrown')
+    } catch (error) {
+      expect(error).toExist()
+      expect(error.name).to.equal('BadRequest')
+    }
+  })
+  // Let enough time to process
+    .timeout(5000)
 
   it('users can read built-in layer', async () => {
     const stations = await stationsService.find({ query: {}, user: userObject, checkAuthorisation: true })
@@ -67,6 +121,8 @@ describe('kano', () => {
     expect(observations.type).to.equal('FeatureCollection')
     expect(observations.features.length).to.equal(0)
   })
+  // Let enough time to process
+    .timeout(5000)
 
   it('users cannot update built-in layer by default', async () => {
     try {
@@ -107,6 +163,8 @@ describe('kano', () => {
     let observations = require('./data/teleray.observations.json')
     await observationsService.create(observations, { user: userObject, checkAuthorisation: true })
   })
+  // Let enough time to process
+    .timeout(5000)
 
   it('managers can remove user authorisation on built-in layer', async () => {
     const authorisation = await authorisationService.remove('Layers.TELERAY', {
@@ -162,6 +220,8 @@ describe('kano', () => {
     layers = await catalogService.find({ query: {}, user: managerObject, checkAuthorisation: true })
     expect(layers.data.length).to.equal(2)
   })
+  // Let enough time to process
+    .timeout(5000)
 
   it('removes test users', async () => {
     await userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })

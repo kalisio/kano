@@ -32,7 +32,7 @@
     "build": "npm run clean && babel src -d dist -s",
     "prod": "cross-env NODE_ENV=production node dist/main.js",
     "lint": "standard src/**/*.js test/**/*.js config/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" mocha --require babel-core/register",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" SUBDOMAIN= mocha --require babel-core/register",
     "coverage": "nyc npm run mocha",
     "test": "npm run build && npm run lint && npm run coverage"
   },
@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@feathersjs/client": "^3.5.3",
     "@slack/webhook": "^5.0.2",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.1",

@@ -30,7 +30,13 @@ module.exports = {
         // If not exception perform authentication
         return true
       }, authenticate('jwt')),
-      coreHooks.processObjectIDs,
+      // We skip processing DB IDs in some cases
+      commonHooks.when(hook => {
+        // First built-in Feathers services like authentication
+        if (typeof hook.service.getPath !== 'function') return false
+        // If not exception process IDs
+        return true
+      }, coreHooks.processObjectIDs),
       coreHooks.authorise],
     find: [fuzzySearch(), coreHooks.marshallCollationQuery],
     get: [],

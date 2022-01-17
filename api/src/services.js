@@ -31,6 +31,7 @@ module.exports = async function () {
     })
     await app.configure(kCore)
     app.configureService('authentication', app.getService('authentication'), servicesPath)
+    app.configureService('users', app.getService('users'), servicesPath)
     await app.configure(kMap)
   } catch (error) {
     app.logger.error(error.message)
