@@ -181,6 +181,8 @@
     "standard": "^14.0.0"
   },
   "resolutions": {
+    "@feathersjs/commons": "1.4.4",
+    "@geoman-io/leaflet-geoman-free": "2.11.3",
     "@pixi/accessibility": "5.3.10",
     "@pixi/app": "5.3.10",
     "@pixi/constants": "5.3.10",

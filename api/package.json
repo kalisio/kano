@@ -78,5 +78,8 @@
     "http-proxy-middleware": "^0.17.4",
     "weacast-core": "^1.4.0",
     "winston": "^3.2.1"
+  },
+  "resolutions": {
+    "@geoman-io/leaflet-geoman-free": "2.11.3"
   }
 }
