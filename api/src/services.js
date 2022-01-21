@@ -107,6 +107,9 @@ module.exports = async function () {
     // Check if service(s) are associated to this layer
     let featuresService
     if (defaultLayer.service) {
+      featuresService = app.getService(defaultLayer.service)
+      // Avoid create it twice as we can share services between different layers
+      if (featuresService) continue
       featuresService = createFeaturesServiceForLayer({
         collection: defaultLayer.service,
         featureId: defaultLayer.featureId,
