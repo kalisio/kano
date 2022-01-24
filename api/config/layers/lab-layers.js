@@ -145,7 +145,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 10,
+      //minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.flag_alert === 0) { %>green<% }
                           else if (properties.flag_alert === 1) { %>red<% }
