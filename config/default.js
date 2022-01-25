@@ -426,6 +426,7 @@ module.exports = {
             persistent: true,
             autoClose: false,
             tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
+            visible: { name: '$can', params: ['update', 'catalog'] },
             content: [
               { component: 'KFavoriteViews' }
             ]
