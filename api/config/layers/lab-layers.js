@@ -42,14 +42,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     probeService: 'lab-stations',
     featureId: 'id',
     from: 'P-7D',
-    to: 'PT-10M',
-    every: 'PT10M',
-    queryFrom: 'PT-1H',
+    to: 'PT-30S',
+    every: 'PT30S',
+    queryFrom: 'PT-10M',
     variables: [
       {
         name: 'tmp_ow',
         label: 'Variables.TEMPERATURE',
-        units: [
+        units: [ 
           'degC'
         ],
         range: [-50, 127],
