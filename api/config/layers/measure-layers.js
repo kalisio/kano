@@ -127,7 +127,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Variables: {
           H: 'Niveau d\'eau',
           Q: 'Débit d\'eau',
-          HP_RNN: 'Prévision de niveau d\'eau - RNN'
+          HP_RNN: 'Niveau d\'eau - Prévision RNN',
+          HP_XGB: 'Niveau d\'eau - Prévision XGB'
         }
       },
       en: {
@@ -138,7 +139,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Variables: {
           H: 'Water level',
           Q: 'Water rate',
-          HP_RNN: 'Predicted water level - RNN'
+          HP_RNN: 'Water level - RNN prediction',
+          HP_XGB: 'Water level - XGB prediction'
         }
       }
     },
@@ -194,10 +196,25 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         range: [0, 10],
         step: 0.1,
         chartjs: {
-          backgroundColor: 'rgba(63, 63, 191, 128)',
-          borderColor: 'rgb(63, 63, 191)',
+          backgroundColor: 'rgba(100, 149, 237, 128)',
+          borderColor: 'rgb(100, 149, 237)',
           fill: false,
-          borderDash: [10, 10]
+          borderDash: [5, 15]
+        }
+      },
+      {
+        name: 'HP_XGB',
+        label: 'Variables.HP_XGB',
+        units: [
+          'm'
+        ],
+        range: [0, 10],
+        step: 0.1,
+        chartjs: {
+          backgroundColor: 'rgba(65, 105, 225, 128)',
+          borderColor: 'rgb(65, 105, 225)',
+          fill: false,
+          borderDash: [5, 15]
         }
       }
     ],
