@@ -1,5 +1,30 @@
 # Changelog
 
+## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.1...HEAD)
+
+**Merged pull requests:**
+
+- build\(deps\): bump follow-redirects from 1.13.1 to 1.14.7 in /docs [\#239](https://github.com/kalisio/kano/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [prod-v1.4.1](https://github.com/kalisio/kano/tree/prod-v1.4.1) (2022-01-27)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.0...prod-v1.4.1)
+
+**Implemented enhancements:**
+
+- Allow multiple layers to use the same feature service but with different variables to be displayed [\#236](https://github.com/kalisio/kano/issues/236)
+- Add permissions management [\#234](https://github.com/kalisio/kano/issues/234)
+- Add variables for Hub'eau predictions based on machine learning models [\#226](https://github.com/kalisio/kano/issues/226)
+- Ease service distribution configuration [\#175](https://github.com/kalisio/kano/issues/175)
+
+**Fixed bugs:**
+
+- Distributed weacast services should not allow external updates [\#245](https://github.com/kalisio/kano/issues/245)
+- Prevent user authorisations to be updated externally through the API [\#240](https://github.com/kalisio/kano/issues/240)
+- Built-in feature services should not allow external updates [\#232](https://github.com/kalisio/kano/issues/232)
+
 ## [prod-v1.4.0](https://github.com/kalisio/kano/tree/prod-v1.4.0) (2022-01-07)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.3.2...prod-v1.4.0)
@@ -17,7 +42,6 @@
 
 - build\(deps\): bump mermaid from 8.13.5 to 8.13.8 in /docs [\#235](https://github.com/kalisio/kano/pull/235) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump mermaid from 8.8.4 to 8.13.5 in /docs [\#230](https://github.com/kalisio/kano/pull/230) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 [\#194](https://github.com/kalisio/kano/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.3.2](https://github.com/kalisio/kano/tree/prod-v1.3.2) (2021-12-09)
 
@@ -61,14 +85,13 @@
 - build\(deps\): bump color-string from 1.5.4 to 1.5.5 in /docs [\#208](https://github.com/kalisio/kano/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump postcss from 7.0.35 to 7.0.36 in /docs [\#204](https://github.com/kalisio/kano/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ws from 6.2.1 to 6.2.2 in /docs [\#197](https://github.com/kalisio/kano/pull/197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 [\#194](https://github.com/kalisio/kano/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump dns-packet from 1.3.1 to 1.3.4 in /docs [\#193](https://github.com/kalisio/kano/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 in /docs [\#180](https://github.com/kalisio/kano/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.2.4](https://github.com/kalisio/kano/tree/prod-v1.2.4) (2021-07-15)
 
@@ -120,7 +143,9 @@
 
 **Merged pull requests:**
 
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump y18n from 3.2.1 to 3.2.2 [\#168](https://github.com/kalisio/kano/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.22.0 to 1.23.0 in /docs [\#157](https://github.com/kalisio/kano/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ini from 1.3.4 to 1.3.7 [\#149](https://github.com/kalisio/kano/pull/149) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update layers.js [\#146](https://github.com/kalisio/kano/pull/146) ([benoit-jpi](https://github.com/benoit-jpi))
@@ -128,7 +153,6 @@
 - build\(deps\): bump showdown from 1.9.0 to 1.9.1 [\#137](https://github.com/kalisio/kano/pull/137) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.20.0 to 1.21.0 in /docs [\#136](https://github.com/kalisio/kano/pull/136) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump elliptic from 6.5.2 to 6.5.3 in /docs [\#135](https://github.com/kalisio/kano/pull/135) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump lodash from 4.17.15 to 4.17.19 in /docs [\#132](https://github.com/kalisio/kano/pull/132) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.15 to 4.17.19 [\#127](https://github.com/kalisio/kano/pull/127) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.1.1](https://github.com/kalisio/kano/tree/prod-v1.1.1) (2021-01-27)
