@@ -1,29 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
-
-[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.1...HEAD)
-
-**Merged pull requests:**
-
-- build\(deps\): bump follow-redirects from 1.13.1 to 1.14.7 in /docs [\#239](https://github.com/kalisio/kano/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
-
 ## [prod-v1.4.1](https://github.com/kalisio/kano/tree/prod-v1.4.1) (2022-01-27)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.0...prod-v1.4.1)
-
-**Implemented enhancements:**
-
-- Allow multiple layers to use the same feature service but with different variables to be displayed [\#236](https://github.com/kalisio/kano/issues/236)
-- Add permissions management [\#234](https://github.com/kalisio/kano/issues/234)
-- Add variables for Hub'eau predictions based on machine learning models [\#226](https://github.com/kalisio/kano/issues/226)
-- Ease service distribution configuration [\#175](https://github.com/kalisio/kano/issues/175)
-
-**Fixed bugs:**
-
-- Distributed weacast services should not allow external updates [\#245](https://github.com/kalisio/kano/issues/245)
-- Prevent user authorisations to be updated externally through the API [\#240](https://github.com/kalisio/kano/issues/240)
-- Built-in feature services should not allow external updates [\#232](https://github.com/kalisio/kano/issues/232)
 
 ## [prod-v1.4.0](https://github.com/kalisio/kano/tree/prod-v1.4.0) (2022-01-07)
 
