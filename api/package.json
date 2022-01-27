@@ -1,7 +1,7 @@
 {
   "name": "kano-api",
   "description": "Kalisio Kano Application Web Services",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "homepage": "https://github.com/kalisio/kano",
   "keywords": [
     "kalisio"
