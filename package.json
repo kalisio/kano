@@ -134,7 +134,7 @@
     "mathjs": "^5.7.0",
     "mime-types-browser": "^0.0.3",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "papaparse": "^4.6.1",
     "password-generator": "^2.2.0",
     "pinch-zoom-element": "^1.1.1",
