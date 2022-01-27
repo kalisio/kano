@@ -61,7 +61,7 @@
     "mocha": "^9.1.1",
     "nodemon": "^1.11.0",
     "nyc": "^15.0.1",
-    "shelljs": "^0.7.0",
+    "shelljs": "^0.8.5",
     "standard": "^14.0.0"
   },
   "dependencies": {
