@@ -195,6 +195,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ],
         range: [0, 10],
         step: 0.1,
+        runTimes: true,
         chartjs: {
           backgroundColor: 'rgba(65, 105, 225, 128)',
           borderColor: 'rgb(65, 105, 225)',
@@ -210,6 +211,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ],
         range: [0, 10],
         step: 0.1,
+        runTimes: true,
         chartjs: {
           backgroundColor: 'rgba(65, 105, 225, 128)',
           borderColor: 'rgb(65, 105, 225)',
