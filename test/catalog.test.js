@@ -72,6 +72,12 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, 'trace')
   })
 
+  /*it('import shp file', async () => {
+    await map.dropFile(page, runner.getDataPath('espaces-naturels.shp'))
+    expect(await runner.captureAndMatch('espaces-naturels')).to.true
+    await map.clickLayer(page, 'espaces-naturels')
+  })*/
+
   it('connect wms layer', async () => {
     const service = 'https://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'geologie'

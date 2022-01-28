@@ -507,7 +507,7 @@
     lodash "^4.17.20"
     radix-router "^3.0.1"
 
-"@geoman-io/leaflet-geoman-free@^2.11.1":
+"@geoman-io/leaflet-geoman-free@2.11.3", "@geoman-io/leaflet-geoman-free@^2.11.1":
   version "2.11.3"
   resolved "https://registry.yarnpkg.com/@geoman-io/leaflet-geoman-free/-/leaflet-geoman-free-2.11.3.tgz#480164ab76c2b2a885003e0c111284f3c3160a36"
   integrity sha512-LsiurEgKEHBcTnAVl8h7EfS5V/doCuxePzPE9SnfrhtJBN7IzP6UwkEo35Agwko+BnIuw/o2bE4F7irvKwQzjw==
