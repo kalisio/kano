@@ -141,7 +141,7 @@
     "pixi.js": "5.3.10",
     "post-robot": "^10.0.10",
     "quasar": "^1.9.9",
-    "sanitize-html": "^1.27.1",
+    "sanitize-html": "^2.3.2",
     "showdown": "^1.9.1",
     "shpjs": "^4.0.2",
     "sift": "^8.0.0",
