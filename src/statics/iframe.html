@@ -458,7 +458,10 @@
         })
       }
       function updateGradientFlightpathLayer(name) {
-        var offset = 5000 * (Math.random() - 0.5)
+        // Filter according to current batch
+        let filter = function (value, index) {
+          return index <= (coords.length * split)
+        }
         let colorramp = chroma.scale([
           'white',  //0
           'yellow', // 2000
@@ -470,19 +473,26 @@
           'navy', // 20000
           'navy', // 33000
           'purple', //35000
-          'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000].map(value => value + offset))
+          'purple']).domain([0, 2000, 3000, 5000, 8000, 10000, 18000, 20000, 33000, 35000, 50000].map(value => value))
         let path = { type: 'FeatureCollection', features: [] }
-        var coords = flightradar.geometry.coordinates
         // Compute color properties based on color scale
-        let gradient = heights.map(height => colorramp(height).hex())
-        flightradar.properties = { id: 0, gradient, weight: 8, message: 'ADS-B OK' }
-        path.features.push(flightradar)
+        let gradient = heights.filter(filter).map(height => colorramp(height).hex())
+        let coordinates = coords.filter(filter)
         path.features.push({
           type: 'Feature',
-          properties: { id: 1, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20' },
-          geometry: { type: 'LineString', coordinates: [ coords[0], coords[coords.length - 1] ] }
+          properties: { id: 0, gradient, weight: 8, message: 'ADS-B OK' },
+          geometry: { type: 'LineString', coordinates }
         })
         // Add a second part with standard geojson styling
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 1, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00',
+                        weight: 1 + 5 * Math.random(), 'dash-array': '20, 20' },
+          geometry: { type: 'LineString', coordinates: [ coordinates[0], coordinates[coordinates.length - 1] ] }
+        })
+        // Jump to next batch
+        split += 1.0 / 3.0
+        if (split > 1) split = 1.0 / 3.0
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
       function toggleFlightplanLayer(name) {
@@ -727,13 +737,14 @@
       postRobot.on('layer-hidden', (event) => console.log(event.data.layer.name + ' has been hidden'))
       postRobot.on('layer-added', (event) => console.log(event.data.layer.name + ' has been added'))
       postRobot.on('layer-removed', (event) => console.log(event.data.layer.name + ' has been removed'))
+      // Extract FR24 data
       var coords = flightradar.geometry.coordinates
       var heights = []
-      // Extract FR24 height data
       for (let i=0; i < coords.length; ++i) {
         heights.push(flightradar.properties[i].altitude.feet)
       }
-      
+      // We split the path into 3 batches when updating to see gradient changes
+      var split = 1.0 / 3.0
     </script>
   </body>
 </html>
