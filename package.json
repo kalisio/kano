@@ -143,6 +143,7 @@
     "quasar": "^1.9.9",
     "sanitize-html": "^1.27.1",
     "showdown": "^1.9.1",
+    "shpjs": "^4.0.2",
     "sift": "^8.0.0",
     "socket.io-client": "^2.0.1",
     "tween.js": "^16.6.0",
@@ -152,7 +153,8 @@
     "weacast-core": "^1.4.0",
     "weacast-leaflet": "^1.2.0",
     "whatwg-fetch": "^2.0.3",
-    "xml2js": "^0.4.22"
+    "xml2js": "^0.4.22",
+    "yallist": "^4.0.0"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^1.0.0",
