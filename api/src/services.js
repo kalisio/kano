@@ -112,6 +112,7 @@ module.exports = async function () {
       if (featuresService) continue
       featuresService = createFeaturesServiceForLayer({
         collection: defaultLayer.service,
+        ttl: defaultLayer.ttl,
         featureId: defaultLayer.featureId,
         featureIdType: defaultLayer.featureIdType,
         db: app.db.db(defaultLayer.dbName)

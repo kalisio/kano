@@ -39,6 +39,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     type: 'OverlayLayer',
     service: 'lab-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    ttl: 7 * 24 * 60 * 60,
     probeService: 'lab-stations',
     featureId: 'id',
     from: 'P-7D',
