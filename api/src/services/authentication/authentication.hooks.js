@@ -17,7 +17,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [iff(hook => process.env.API_GATEWAY, async hook => {
+    create: [iff(hook => process.env.API_GATEWAY_URL, async hook => {
       const config = hook.app.get('authentication')
       if (!config) return hook
       // Default appId for Kano used to access the gateway

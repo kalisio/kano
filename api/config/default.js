@@ -63,7 +63,7 @@ if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
 // On a developer machine will do domain = gateway = localhost
-const gateway = domain.replace('kano', 'api')
+const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
 
 // Just used for testing purpose now
 apiLimiter = null

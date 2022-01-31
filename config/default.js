@@ -23,7 +23,7 @@ if (process.env.SUBDOMAIN) {
   domain = 'https://kano.' + process.env.SUBDOMAIN
 }
 // On a developer machine will do domain = gateway = localhost
-const gateway = domain.replace('kano', 'api')
+const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
 
 // Allow to override version number for custom build
 const version = (process.env.VERSION ? process.env.VERSION : require('../package.json').version)
