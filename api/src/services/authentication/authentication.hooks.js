@@ -38,8 +38,14 @@ module.exports = {
       if (appId) {
         await coreHooks.createJWT({
           name: 'gatewayToken',
-          jwt: user => ({ subject: appId }),
-          payload: user => ({ userId: (user ? user._id : undefined) })
+          jwt: user => ({
+            subject: appId,
+            // Audience is target subdomain
+            audience: process.env.API_GATEWAY_URL.replace('https://api.', '')
+          }),
+          payload: user => ({
+            userId: (user ? user._id : undefined)
+          })
         })(hook)
       }
       return hook
