@@ -359,18 +359,7 @@ module.exports = {
   },
   settings: {
     propertyMapping: {
-      shortTime: 'time.format.time.short',
-      longTime: 'time.format.time.long',
-      shortDate: 'time.format.date.short',
-      longDate: 'time.format.date.long',
-      shortYear: 'time.format.year.short',
-      longYear: 'time.format.year.long',
-      utc: 'time.format.utc',
-      timelineStep: 'time.step',
-      timeseriesSpan: 'timeseries.span',
-      location: 'locationFormat',
-      restoreView: 'restore.view',
-      restoreLayers: 'restore.layers'
+      // Nothing specific, use defaults
     }
   },
   screens: {
