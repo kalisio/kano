@@ -168,13 +168,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ]
         },
         tooltip: {
-          template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= properties.temperature.toFixed(2) %> °C</br><% }
-                    if (_.has(properties, 'dewpoint')) { %>Point de rosée = <%= properties.dewpoint.toFixed(2) %> °C</br><% }
-                    if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °</br><% }
-                    if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts</br><% }
-                    if (_.has(properties, 'windGust')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts</br><% }
-                    if (_.has(properties, 'visibility')) { %>Visibility = <%= properties.visibility.toFixed(2) %> mi</br><% }
-                    if (_.has(feature, 'time.temperature')) { %><%= new Date(feature.time.temperature).toLocaleString() %></br><% } %>`
+          template: `<% if (_.has(properties, 'temperature')) { %>Température = <%= Units.format(properties.temperature, 'degC') %></br><% }
+                    if (_.has(properties, 'dewpoint')) { %>Point de rosée = <%= Units.format(properties.dewpoint, 'degC') %></br><% }
+                    if (_.has(properties, 'windDirection')) { %>Direction du vent = <%= Units.format(properties.windDirection, 'deg') %></br><% }
+                    if (_.has(properties, 'windSpeed')) { %>Vitesse du vent = <%= Units.format(properties.windSpeed, 'kt') %></br><% }
+                    if (_.has(properties, 'windGust')) { %>Vitesse de rafale = <%= Units.format(properties.windGust, 'kt') %></br><% }
+                    if (_.has(properties, 'visibility')) { %>Visibility = <%= Units.format(properties.visibility, 'mi') %></br><% }
+                    if (_.has(feature, 'time.temperature')) { %><%= Time.format(feature.time.temperature, 'locale') %></br><% } %>`
         }
       },
       cesium: {
@@ -189,13 +189,13 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ]
         },
         tooltip: {
-          template: '<% if (_.has(properties, \'temperature\')) { %>Température = <%= properties.temperature.toFixed(2) %> °C\n<% }' +
-                    'if (_.has(properties, \'dewpoint\')) { %>Direction du vent = <%= properties.dewpoint.toFixed(2) %> °\n<% }' +
-                    'if (_.has(properties, \'windDirection\')) { %>Direction du vent = <%= properties.windDirection.toFixed(2) %> °\n<% }' +
-                    'if (_.has(properties, \'windSpeed\')) { %>Vitesse du vent = <%= properties.windSpeed.toFixed(2) %> kts\n<% }' +
-                    'if (_.has(properties, \'windGust\')) { %>Vitesse de rafale = <%= properties.windGust.toFixed(2) %> kts\n<% }' +
-                    'if (_.has(properties, \'visibility\')) { %>Visibilité = <%= properties.visibility.toFixed(2) %> mi\n<% }' +
-                    'if (_.has(feature, \'time.temperature\')) { %><%= new Date(feature.time.temperature).toLocaleString() %>\n<% } %>'
+          template: '<% if (_.has(properties, \'temperature\')) { %>Température = <%= Units.format(properties.temperature, \'degC\') %>\n<% }' +
+                    'if (_.has(properties, \'dewpoint\')) { %>Point de rosée = <%= Units.format(properties.dewpoint, \'degC\') %>\n<% }' +
+                    'if (_.has(properties, \'windDirection\')) { %>Direction du vent = <%= Units.format(properties.windDirection, \'degC\') %>\n<% }' +
+                    'if (_.has(properties, \'windSpeed\')) { %>Vitesse du vent = <%= Units.format(properties.windSpeed, \'kt\') %>\n<% }' +
+                    'if (_.has(properties, \'windGust\')) { %>Vitesse de rafale = <%= Units.format(properties.windGust, \'kt\') %>\n<% }' +
+                    'if (_.has(properties, \'visibility\')) { %>Visibilité = <%= Units.format(properties.visibility, \'mi\') %>\n<% }' +
+                    'if (_.has(feature, \'time.temperature\')) { %><%= Time.format(feature.time.temperature, \'locale\') %>\n<% } %>'
         }
       }
     }
