@@ -357,6 +357,9 @@ module.exports = {
   logs: {
     level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
   },
+  units: {
+    // Nothing specific, use defaults
+  },
   settings: {
     propertyMapping: {
       // Nothing specific, use defaults

@@ -131,7 +131,7 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.6.0",
     "mapillary-js": "^4.0.0",
-    "mathjs": "^5.7.0",
+    "mathjs": "^10.1.1",
     "mime-types-browser": "^0.0.3",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.7",
