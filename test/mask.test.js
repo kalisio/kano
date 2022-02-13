@@ -21,15 +21,17 @@ describe(`suite:${suite}`, () => {
 
   it('add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
-    expect(await runner.captureAndMatch('polygon-mask')).to.true
+    const match = await runner.captureAndMatch('polygon-mask')
     await map.removeLayer(page, 'ariege')
     await core.clickRightOpener(page)
+    expect(match).to.true
   })
 
   it('add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
-    expect(await runner.captureAndMatch('multi-polygon-mask')).to.true
+    const match = await runner.captureAndMatch('multi-polygon-mask')
     await map.removeLayer(page, 'occitanie')
+    expect(match).to.true
   })
 
   after(async () => {
