@@ -1,7 +1,7 @@
+import _ from 'lodash'
 import 'whatwg-fetch'
 import config from 'config'
 import postRobot from 'post-robot'
-import { colors } from 'quasar'
 import utils from '../utils'
 import appHooks from '../main.hooks'
 import services from '../services'
@@ -11,14 +11,14 @@ import { CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
 // canvas layer's draw context
-import turf_destination from '@turf/destination'
-// import turf_circle from '@turf/circle'
+import destination from '@turf/destination'
+// import circle from '@turf/circle'
 
 const kanoLib = {
   // make turf functions available from canvas layer
   turf: {
-    destination: turf_destination,
-    // circle: turf_circle
+    destination
+    // circle
   }
 }
 
@@ -50,7 +50,7 @@ postRobot.on('setConfiguration', async (event) => {
 export default async ({ app, router, Vue }) => {
   await utils.sendEmbedEvent('kano-ready')
 
-  let api = kalisio()
+  const api = kalisio()
 
   // Setup app hooks
   api.hooks(appHooks)
@@ -69,7 +69,7 @@ export default async ({ app, router, Vue }) => {
     const result = await operation.bind(service)(...args)
     return result
   }
-  
+
   postRobot.on('api', async (event) => {
     const result = await serviceOperation(event.data)
     return result

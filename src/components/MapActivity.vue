@@ -13,7 +13,7 @@
 
 <script>
 import _ from 'lodash'
-import { mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
+import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
 
@@ -65,11 +65,11 @@ export default {
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.geAppName().toLowerCase() + `-view`
+      return this.geAppName().toLowerCase() + '-view'
     },
     onFeaturePopupOpen (options, event) {
-      const feature = _.get(event, 'layer.feature')
-      if (!feature) return
+      // Nothing special to do yet
+      // const feature = _.get(event, 'layer.feature')
     },
     onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
@@ -148,6 +148,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('../statics/position-cursor.png'), auto; 
+    cursor: url('../statics/position-cursor.png'), auto;
   }
 </style>

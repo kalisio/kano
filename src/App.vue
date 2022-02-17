@@ -24,7 +24,7 @@ export default {
         logger.error(error)
         return
       }
-      let options = { message: error.message || error.error_message, html: true }
+      const options = { message: error.message || error.error_message, html: true }
       // Check if user can retry to avoid this error
       if (error.retryHandler) {
         options.actions = [{
@@ -43,14 +43,14 @@ export default {
       }
     },
     startProgress () {
-      let progressBar = this.$refs.bar
+      const progressBar = this.$refs.bar
       if (progressBar && !this.progressBarActive && (this.nbRequests > this.nbCompletedRequests)) {
         progressBar.start()
         this.progressBarActive = true
       }
     },
     stopProgress () {
-      let progressBar = this.$refs.bar
+      const progressBar = this.$refs.bar
       if (progressBar && this.progressBarActive && (this.nbRequests <= this.nbCompletedRequests)) {
         this.progressBarActive = false
         progressBar.stop()

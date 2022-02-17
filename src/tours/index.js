@@ -10,6 +10,6 @@ module.exports = {
   'import-layer': require('./map/import-layer'),
   'connect-layer': require('./map/connect-layer'),
   'create-layer': require('./map/create-layer'),
-  'timeline': require('./map/timeline'),
-  'fab': require('./map/fab')
+  timeline: require('./map/timeline'),
+  fab: require('./map/fab')
 }
