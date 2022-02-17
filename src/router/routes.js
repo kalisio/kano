@@ -1,7 +1,7 @@
 const tours = require('../tours')
 
 module.exports = {
-  '/' : {
+  '/': {
     name: 'index',
     component: 'Index',
     // By default all child routes are considered unauthenticated,
@@ -39,8 +39,8 @@ module.exports = {
               'navigation-bar': tours['navigation-bar'],
               'favorite-views': tours['favorite-views'],
               'catalog-panel': tours['catalog-panel'],
-              timeline: tours['timeline'],
-              fab: tours['fab']
+              timeline: tours.timeline,
+              fab: tours.fab
             },
             children: {
               add: {
@@ -69,8 +69,8 @@ module.exports = {
               'navigation-bar': tours['navigation-bar'],
               'favorite-views': tours['favorite-views'],
               'catalog-panel': tours['catalog-panel'],
-              timeline: tours['timeline'],
-              fab: tours['fab']
+              timeline: tours.timeline,
+              fab: tours.fab
             }
           }
         }

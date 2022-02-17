@@ -10,7 +10,7 @@ describe(`suite:${suite}`, () => {
   before(async () => {
     runner = new core.Runner(suite, {
       appName: 'kano',
-      geolocation: { latitude: 43.10, longitude:1.71 },
+      geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
       }
@@ -24,14 +24,14 @@ describe(`suite:${suite}`, () => {
     const match = await runner.captureAndMatch('polygon-mask')
     await map.removeLayer(page, 'ariege')
     await core.clickRightOpener(page)
-    expect(match).to.true
+    expect(match).beTrue()
   })
 
   it('add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
     const match = await runner.captureAndMatch('multi-polygon-mask')
     await map.removeLayer(page, 'occitanie')
-    expect(match).to.true
+    expect(match).beTrue()
   })
 
   after(async () => {

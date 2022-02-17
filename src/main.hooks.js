@@ -12,7 +12,7 @@ corePermissions.defineAbilities.registerHook(permissions.defineUserAbilities)
 
 export default {
   before: {
-    all: [ coreHooks.log, coreHooks.emit ],
+    all: [coreHooks.log, coreHooks.emit],
     find: [],
     get: [],
     create: [],
@@ -22,7 +22,7 @@ export default {
   },
 
   after: {
-    all: [ coreHooks.log, coreHooks.emit ],
+    all: [coreHooks.log, coreHooks.emit],
     find: [],
     get: [],
     create: [],
@@ -32,7 +32,7 @@ export default {
   },
 
   error: {
-    all: [ coreHooks.log, coreHooks.emit ],
+    all: [coreHooks.log, coreHooks.emit],
     find: [],
     get: [],
     create: [],

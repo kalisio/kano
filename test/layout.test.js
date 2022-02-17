@@ -10,7 +10,7 @@ describe(`suite:${suite}`, () => {
   before(async () => {
     runner = new core.Runner(suite, {
       appName: 'kano',
-      geolocation: { latitude: 43.10, longitude:1.71 },
+      geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
       }
@@ -20,12 +20,12 @@ describe(`suite:${suite}`, () => {
   })
 
   it('check layout', async () => {
-    expect(await core.isTopPaneVisible(page)).be.true
-    expect(await core.isRightPaneVisible(page)).be.false
-    expect(await core.isBottomPaneVisible(page)).be.false
-    expect(await core.isLeftPaneVisible(page)).be.false        
+    expect(await core.isTopPaneVisible(page)).beTrue()
+    expect(await core.isRightPaneVisible(page)).beFalse()
+    expect(await core.isBottomPaneVisible(page)).beFalse()
+    expect(await core.isLeftPaneVisible(page)).beFalse()
     await core.clickTopOpener(page)
-    expect(await core.isTopPaneVisible(page)).be.false
+    expect(await core.isTopPaneVisible(page)).beFalse()
   })
 
   after(async () => {

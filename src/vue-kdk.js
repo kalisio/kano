@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import config from 'config'
-import { utils as kCoreUtils } from '@kalisio/kdk/core.client'
+import { utils as kCoreUtils, Store, Layout, Events } from '@kalisio/kdk/core.client'
 import utils from './utils'
-import { Store, Layout, Events } from '@kalisio/kdk/core.client'
+
 import { Geolocation } from '@kalisio/kdk/map.client'
 
 export default {
