@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import { expect } from 'chai'
+import chai, { util, expect } from 'chai'
+import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client'
 
@@ -10,6 +11,8 @@ describe(`suite:${suite}`, () => {
   const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
+    chailint(chai, util)
+    
     runner = new core.Runner(suite, {
       appName: 'kano',
       geolocation: { latitude: 43.10, longitude: 1.71 },
