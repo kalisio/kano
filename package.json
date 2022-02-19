@@ -44,10 +44,18 @@
     "parser": "vue-eslint-parser",
     "parserOptions": {
       "parser": "babel-eslint",
+      "allowImportExportEverywhere": true,
+      "ecmaVersion": 2019,
       "sourceType": "module"
     },
     "plugins": [
       "vue"
+    ],
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "src/statics"
     ],
     "globals": [
       "DEV",
@@ -163,6 +171,7 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "chai": "^4.3.4",
+    "chai-lint": "^0.1.1",
     "config": "^1.26.1",
     "connect-history-api-fallback": "^1.1.0",
     "es6-promise": "^4.1.1",

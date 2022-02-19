@@ -3897,6 +3897,11 @@ cesium@1.50.0:
   dependencies:
     requirejs "^2.3.2"
 
+chai-lint@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/chai-lint/-/chai-lint-0.1.1.tgz#e9ccfd57d223de4f9b14a76cc962113743b680a8"
+  integrity sha1-6cz9V9Ij3k+bFKdsyWIRN0O2gKg=
+
 chai@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.3.4.tgz#b55e655b31e1eac7099be4c08c21964fce2e6c49"

@@ -60,7 +60,7 @@ export default {
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
-      return this.geAppName.toLowerCase() + `-view`
+      return this.geAppName.toLowerCase() + '-view'
     },
     async onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
@@ -124,6 +124,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('../statics/position-cursor.png'), auto; 
+    cursor: url('../statics/position-cursor.png'), auto;
   }
 </style>

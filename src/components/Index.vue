@@ -72,7 +72,7 @@ export default {
         }
         // Causes problems with hot reload in dev
         if (this.$config('flavor') !== 'dev') {
-          Loading.show({message: this.$t('Index.RECONNECT')})
+          Loading.show({ message: this.$t('Index.RECONNECT') })
           setTimeout(() => {
             window.location.reload()
           }, 3000)
