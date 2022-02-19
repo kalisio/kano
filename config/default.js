@@ -42,6 +42,53 @@ const leftPane = {
   ]
 }
 
+// Catalog tababr
+function catalogTabbar (activeView) {
+  return {
+    id: 'catalog-tabbar', component: 'frame/KPanel', class: 'q-pa-sm', actionRenderer: 'tab', content: [
+      { 
+        id: 'user-layers-tab', label: 'KUserLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
+        toggled: activeView === 'user-layers' ? true : false,
+        handler: { name: 'setRightPaneMode', params: ['map'] } 
+      },
+      { 
+        id: 'user-views-tab', label: 'KViewsPanel.VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        toggled: activeView === 'user-views' ? true : false,
+        handler: { name: 'setRightPaneMode', params: ['user-views'] } 
+      },
+      { 
+        id: 'catalog-layers-tab', label: 'KCatalogLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        toggled: activeView === 'catalog-layers' ? true : false,
+        handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
+      }
+    ]
+  }
+}
+
+// Catalog panes
+const catalogPanes = {
+  'user-layers': [
+    catalogTabbar('user-layers'),
+    { id: 'user-layers', component: 'catalog/KUserLayersPanel', bind: '$data' },
+    { component: 'QSpace' },
+    { id: 'catalog-footer', component: 'frame/KPanel', content: [{
+        id: 'manage-layer-categories',
+        icon: 'las la-cog',
+        label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+        route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
+      }]
+    }
+  ],
+  'user-views': [
+   catalogTabbar('user-views'),
+    { id: 'user-views', component: 'catalog/KViewsPanel' }
+  ],
+  'catalog-layers': [
+    catalogTabbar('catalog-layers'),
+    { id: 'system-layers', component: 'catalog/KCatalogLayersPanel', bind: '$data', scope: 'user' }
+  ]
+} 
+
 // Default map catalog catagories
 const mapCatalog = {
   categories: [
@@ -109,7 +156,7 @@ const mapLayerActions = [{
     { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData',
       visible: ['isLayerDataEditable', { name: '$can', params: ['update', 'catalog'] }],
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
-    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer',
+    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer',
       visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
   ]
 }]
@@ -412,18 +459,6 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'manage-favorite-views',
-            component: 'menu/KMenu',
-            icon: 'star_border',
-            persistent: true,
-            autoClose: false,
-            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
-            visible: { name: '$can', params: ['update', 'catalog'] },
-            content: [
-              { component: 'KFavoriteViews' }
-            ]
-          },
-          {
             id: 'tools',
             component: 'menu/KMenu',
             icon: 'las la-wrench',
@@ -469,19 +504,7 @@ module.exports = {
     },
     leftPane: leftPane,
     rightPane: {
-      content: [{
-        id: 'catalog', component: 'catalog/KCatalog', bind: '$data'
-      }, {
-        component: 'QSpace'
-      }, {
-        id: 'catalog-footer', component: 'frame/KPanel',
-        content: [{
-          id: 'manage-layer-categories',
-          icon: 'las la-cog',
-          label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-          route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
-        }]
-      }]
+      content: catalogPanes
     },
     bottomPane: {
       content: [
@@ -505,6 +528,8 @@ module.exports = {
     },
     fab: {
       actions: [
+        { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
+          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
           route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
@@ -569,9 +594,7 @@ module.exports = {
     },
     leftPane: leftPane,
     rightPane: {
-      content: [{
-        component: 'catalog/KCatalog', bind: '$data'
-      }]
+      content: catalogPanes
     },
     bottomPane: {
       content: [
