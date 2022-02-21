@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="scss">
   .probe-cursor {
     cursor: crosshair;
   }

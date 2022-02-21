@@ -9,11 +9,11 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary    = #72448b
-$secondary  ?= lighten($primary, 75%)
-$accent     ?= lighten($primary, 25%)
-$dark       ?= darken($primary, 25%)
-$info       = $accent
-$positive   = #7bb946
-$negative   = #c74a4a
-$warning    = #d09931
+$primary: #72448b;
+$secondary: lighten($primary, 75%);
+$accent: lighten($primary, 25%);
+$dark: darken($primary, 25%);
+$info: $accent;
+$positive: #7bb946;
+$negative: #c74a4a;
+$warning: #d09931;

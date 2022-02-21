@@ -26,7 +26,7 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user)
   })
 
- /* it('drop geojson gradient file', async () => {
+  it('drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
     const match = await runner.captureAndMatch('flight')
     await map.clickLayer(page, userLayersTab, 'flight')
@@ -66,7 +66,7 @@ describe(`suite:${suite}`, () => {
     const match = await runner.captureAndMatch('espaces-naturels')
     await map.clickLayer(page, userLayersTab, 'espaces-naturels')
     expect(match).beTrue()
-  })*/
+  })
 
   it('connect wms layer', async () => {
     const service = 'https://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
