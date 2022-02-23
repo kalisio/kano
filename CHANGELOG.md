@@ -1,24 +1,14 @@
 # Changelog
 
-## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
-
-[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.5.0...HEAD)
-
-**Merged pull requests:**
-
-- build\(deps\): bump url-parse from 1.5.3 to 1.5.7 in /docs [\#255](https://github.com/kalisio/kano/pull/255) ([dependabot[bot]](https://github.com/apps/dependabot))
-
 ## [prod-v1.5.0](https://github.com/kalisio/kano/tree/prod-v1.5.0) (2022-02-23)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.1...prod-v1.5.0)
 
 **Implemented enhancements:**
 
-- Enhance catalog layout [\#256](https://github.com/kalisio/kano/issues/256)
 - Update configuration to include units management [\#250](https://github.com/kalisio/kano/issues/250)
 - Allow to define TTL at layer level for time-based data [\#249](https://github.com/kalisio/kano/issues/249)
 - Allow to import shapefiles [\#244](https://github.com/kalisio/kano/issues/244)
-- Elevation profile widget [\#145](https://github.com/kalisio/kano/issues/145)
 
 **Merged pull requests:**
 
