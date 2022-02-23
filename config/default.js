@@ -454,12 +454,12 @@ module.exports = {
           { component: 'KLayerEditionToolbar' }
         ],
         'capture-map': [ 
-          { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KCaptureToolbar' }
         ],
         'measure-tool': [
-          { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true, color: 'lightgrey' },
           { component: 'KMeasureTool' }
         ]
