@@ -1,8 +1,49 @@
 # Changelog
 
+## [Unreleased](https://github.com/kalisio/kano/tree/HEAD)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.5.0...HEAD)
+
+**Merged pull requests:**
+
+- build\(deps\): bump url-parse from 1.5.3 to 1.5.7 in /docs [\#255](https://github.com/kalisio/kano/pull/255) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [prod-v1.5.0](https://github.com/kalisio/kano/tree/prod-v1.5.0) (2022-02-23)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.1...prod-v1.5.0)
+
+**Implemented enhancements:**
+
+- Enhance catalog layout [\#256](https://github.com/kalisio/kano/issues/256)
+- Update configuration to include units management [\#250](https://github.com/kalisio/kano/issues/250)
+- Allow to define TTL at layer level for time-based data [\#249](https://github.com/kalisio/kano/issues/249)
+- Allow to import shapefiles [\#244](https://github.com/kalisio/kano/issues/244)
+- Elevation profile widget [\#145](https://github.com/kalisio/kano/issues/145)
+
+**Merged pull requests:**
+
+- build\(deps\): bump follow-redirects from 1.14.7 to 1.14.8 in /docs [\#253](https://github.com/kalisio/kano/pull/253) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump node-fetch from 2.6.0 to 2.6.7 [\#247](https://github.com/kalisio/kano/pull/247) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump shelljs from 0.7.8 to 0.8.5 in /api [\#242](https://github.com/kalisio/kano/pull/242) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump shelljs from 0.8.1 to 0.8.5 [\#241](https://github.com/kalisio/kano/pull/241) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump follow-redirects from 1.13.1 to 1.14.7 in /docs [\#239](https://github.com/kalisio/kano/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [prod-v1.4.1](https://github.com/kalisio/kano/tree/prod-v1.4.1) (2022-01-27)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.0...prod-v1.4.1)
+
+**Implemented enhancements:**
+
+- Allow multiple layers to use the same feature service but with different variables to be displayed [\#236](https://github.com/kalisio/kano/issues/236)
+- Add permissions management [\#234](https://github.com/kalisio/kano/issues/234)
+- Add variables for Hub'eau predictions based on machine learning models [\#226](https://github.com/kalisio/kano/issues/226)
+- Ease service distribution configuration [\#175](https://github.com/kalisio/kano/issues/175)
+
+**Fixed bugs:**
+
+- Distributed weacast services should not allow external updates [\#245](https://github.com/kalisio/kano/issues/245)
+- Prevent user authorisations to be updated externally through the API [\#240](https://github.com/kalisio/kano/issues/240)
+- Built-in feature services should not allow external updates [\#232](https://github.com/kalisio/kano/issues/232)
 
 ## [prod-v1.4.0](https://github.com/kalisio/kano/tree/prod-v1.4.0) (2022-01-07)
 
@@ -69,8 +110,8 @@
 - build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 in /docs [\#180](https://github.com/kalisio/kano/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
-- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.2.4](https://github.com/kalisio/kano/tree/prod-v1.2.4) (2021-07-15)
 
@@ -122,7 +163,7 @@
 
 **Merged pull requests:**
 
-- build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump y18n from 3.2.1 to 3.2.2 [\#168](https://github.com/kalisio/kano/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.22.0 to 1.23.0 in /docs [\#157](https://github.com/kalisio/kano/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -132,6 +173,7 @@
 - build\(deps\): bump showdown from 1.9.0 to 1.9.1 [\#137](https://github.com/kalisio/kano/pull/137) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.20.0 to 1.21.0 in /docs [\#136](https://github.com/kalisio/kano/pull/136) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump elliptic from 6.5.2 to 6.5.3 in /docs [\#135](https://github.com/kalisio/kano/pull/135) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump lodash from 4.17.15 to 4.17.19 in /docs [\#132](https://github.com/kalisio/kano/pull/132) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.15 to 4.17.19 [\#127](https://github.com/kalisio/kano/pull/127) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [prod-v1.1.1](https://github.com/kalisio/kano/tree/prod-v1.1.1) (2021-01-27)
