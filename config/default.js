@@ -164,6 +164,7 @@ const mapLayerActions = [{
 const mapWidgets = [
   { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
   { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'elevation-profile', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
   { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
 ]
 
@@ -287,6 +288,7 @@ const globeLayerActions = [{
 const globeWidgets = [
   { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
   { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'elevation-profile', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
   { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
 ]
 
