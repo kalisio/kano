@@ -85,7 +85,7 @@ const catalogPanes = {
   ],
   'catalog-layers': [
     catalogTabbar('catalog-layers'),
-    { id: 'system-layers', component: 'catalog/KCatalogLayersPanel', bind: '$data', scope: 'user' }
+    { id: 'system-layers', component: 'catalog/KCatalogLayersPanel', bind: '$data' }
   ]
 } 
 
