@@ -67,26 +67,6 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
     },
-    onFeaturePopupOpen (options, event) {
-      // Nothing special to do yet
-      // const feature = _.get(event, 'layer.feature')
-    },
-    onClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('click', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
-    },
-    onDblClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('dblclick', { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
-    },
     onEditStartEvent (event) {
       this.setTopPaneMode('edit-layer-data')
       utils.sendEmbedEvent('edit-start', { layer: event.layer })
@@ -95,8 +75,51 @@ export default {
       this.setTopPaneMode('default')
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
     },
-    generateHandlerForLayerEvent (event) {
-      return (layer) => utils.sendEmbedEvent(event, { layer })
+    forwardLayerEvents (layerEvents) {
+      if (!_.has(this, 'layerHandlers'))
+        this.layerHandlers = {}
+
+      for (const layerEvent of layerEvents) {
+        const handler = (layer) => utils.sendEmbedEvent(layerEvent, { layer })
+        this.layerHandlers[layerEvent] = handler
+        this.$on(layerEvent, handler)
+      }
+    },
+    removeForwardedLayerEvents () {
+      for (const layerEvent in this.layerHandlers)
+        this.$off(layerEvent, this.layerHandlers[layerEvent])
+      this.layerHandlers = {}
+    },
+    forwardLeafletEvents (leafletEvents) {
+      if (!_.has(this, 'leafletHandlers'))
+        this.leafletHandlers = {}
+
+      for (const leafletEvent of leafletEvents) {
+        const handler = (options, event) => {
+          // event may be disabled by config
+          const opts = this.activityOptions
+          let okForward = leafletEvent === 'click' || leafletEvent === 'dblclick'
+          if (opts.allowForwardEvents) okForward = okForward || opts.allowForwardEvents.indexOf(leafletEvent) !== -1
+          if (opts.disallowForwardEvents) okForward = okForward && opts.disallowForwardEvents.indexOf(leafletEvent) === -1
+          if (!okForward) return
+
+          const latlng = _.get(event, 'latlng')
+          const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
+          // feature required for those events
+          if (leafletEvent === 'mouseover' && !feature) return
+          // Retrieve original layer options not processed ones
+          // as they can include internal objects not to be serialized
+          const layer = (options ? this.getLayerByName(options.name) : undefined)
+          utils.sendEmbedEvent(leafletEvent, { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
+        }
+        this.leafletHandlers[leafletEvent] = handler
+        this.$on(leafletEvent, handler)
+      }
+    },
+    removeForwardedLeafletEvents () {
+      for (const leafletEvent in this.leafletHandlers)
+        this.$off(leafletEvent, this.leafletHandlers[leafletEvent])
+      this.leafletHandlers = {}
     }
   },
   created () {
@@ -108,29 +131,17 @@ export default {
   },
   mounted () {
     // Setup event connections
-    // this.$on('popupopen', this.onFeaturePopupOpen)
-    this.$on('click', this.onClicked)
-    this.$on('dblclick', this.onDblClicked)
-    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
-    this.$on('layer-added', this.onAddedLayerEvent)
-    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
-    this.$on('layer-shown', this.onShownLayerEvent)
-    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
-    this.$on('layer-hidden', this.onHiddenLayerEvent)
-    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
-    this.$on('layer-removed', this.onRemovedLayerEvent)
+    const allLeafletEvents = [ 'click', 'dblclick', 'mouseover' /*, 'popupopen' */ ]
+    this.forwardLeafletEvents(allLeafletEvents)
+    const allLayerEvents = [ 'layer-added', 'layer-shown', 'layer-hidden', 'layer-removed' ]
+    this.forwardLayerEvents(allLayerEvents)
     this.$on('edit-start', this.onEditStartEvent)
     this.$on('edit-stop', this.onEditStopEvent)
   },
   beforeDestroy () {
     // Remove event connections
-    // this.$off('popupopen', this.onFeaturePopupOpen)
-    this.$off('click', this.onClicked)
-    this.$off('dblclick', this.onDblClicked)
-    this.$off('layer-added', this.onAddedLayerEvent)
-    this.$off('layer-shown', this.onShownLayerEvent)
-    this.$off('layer-hidden', this.onHiddenLayerEvent)
-    this.$off('layer-removed', this.onRemovedLayerEvent)
+    this.removeForwardedLeafletEvents()
+    this.removeForwardedLayerEvents()
     this.$off('edit-start', this.onEditStartEvent)
     this.$off('edit-stop', this.onEditStopEvent)
   },
