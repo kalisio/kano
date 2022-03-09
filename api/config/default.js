@@ -185,10 +185,15 @@ module.exports = {
     limiter,
     defaultUsers: [
       {
-        email: 'kalisio@kalisio.xyz',
+        email: 'admin-kano@kalisio.xyz',
         password: 'Pass;word1',
         name: 'Kalisio',
         catalog: { permissions: 'owner' }
+      },
+      {
+        email: 'user-kano@kalisio.xyz',
+        password: 'Pass;word1',
+        name: 'Kano'
       }
     ],
     disallowRegistration: true,

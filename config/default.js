@@ -75,7 +75,8 @@ const catalogPanes = {
         id: 'manage-layer-categories',
         icon: 'las la-cog',
         label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-        route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
+        visible: { name: '$can', params: ['create', 'catalog'] },
+        route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } },
       }]
     }
   ],
@@ -530,10 +531,15 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
-          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
-          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+        { 
+          id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
+          visible: { name: '$can', params: ['create', 'catalog'] },
+          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
+        },
+        { 
+          id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
+          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
+        },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
@@ -613,6 +619,11 @@ module.exports = {
     },
     fab: {
       actions: [
+        { 
+          id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
+          visible: { name: '$can', params: ['create', 'catalog'] },
+          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
+        },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },
