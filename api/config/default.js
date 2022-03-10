@@ -187,13 +187,13 @@ module.exports = {
       {
         email: 'admin-kano@kalisio.xyz',
         password: 'Pass;word1',
-        name: 'Kalisio',
+        name: 'Admin',
         catalog: { permissions: 'owner' }
       },
       {
         email: 'user-kano@kalisio.xyz',
         password: 'Pass;word1',
-        name: 'Kano'
+        name: 'User'
       }
     ],
     disallowRegistration: true,
