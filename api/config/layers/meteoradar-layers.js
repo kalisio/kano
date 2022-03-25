@@ -1,6 +1,6 @@
 
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
-  const layers = []
+  let layers = []
   const flavor = process.env.NODE_APP_INSTANCE || 'dev'
   if (s3Url) {
     layers.push({
@@ -9,8 +9,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            METEORADAR: 'Radar des précipitations',
-            METEORADAR_DESCRIPTION: 'Cumuls de lames d\'eau estimés à partir de données radar (en mm/h)'
+            METEORADAR: 'Précipitations Météo-France',
+            METEORADAR_DESCRIPTION: 'Cumuls de lames d\'eau estimés à partir de données radar'
           },
           Variables: {
             RAIN_FALL: 'Radar des précipitations'
@@ -18,8 +18,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            METEORADAR: 'Precipitations radar',
-            METEORADAR_DESCRIPTION: 'Estimated precipitations from radar imagery (mm/h)'
+            METEORADAR: 'Météo-France Precipitations',
+            METEORADAR_DESCRIPTION: 'Estimated precipitations from radar data'
           },
           Variables: {
             RAIN_FALL: 'Precipitations radar'
@@ -94,5 +94,272 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     })
   }
+  layers = layers.concat([{
+    name: 'Layers.GSMAP_RAIN',
+    description: 'Layers.GSMAP_RAIN_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          GSMAP_RAIN: 'Précipitations GSMap',
+          GSMAP_RAIN_DESCRIPTION: 'Précipitations estimées à partir de données radar (mm/h)'
+        }
+      },
+      en: {
+        Layers: {
+          GSMAP_RAIN: 'GSMap Precipitations',
+          GSMAP_RAIN_DESCRIPTION: 'Estimated precipitations from radar data (mm/h)'
+        }
+      }
+    },
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
+    attribution: "Precipitation: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm/hr'],
+        range: [0, 30],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
+        },
+        chromajs: {
+          scale: [
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
+          ],
+          classes: [0.1, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0]
+        }
+      }
+    ],
+    leaflet: {
+      type: 'gsmapLayer',
+      opacity: 0.4,
+      product: 'rain'
+    }
+  },
+  {
+    name: 'Layers.GSMAP_RAIN12',
+    description: 'Layers.GSMAP_RAIN12_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          GSMAP_RAIN12: 'Précipitations GSMap (12h)',
+          GSMAP_RAIN12_DESCRIPTION: 'Précipitations estimées à partir de données radar (mm/12h)'
+        }
+      },
+      en: {
+        Layers: {
+          GSMAP_RAIN12: 'GSMap Precipitations (12h)',
+          GSMAP_RAIN12_DESCRIPTION: 'Estimated precipitations from radar data (mm/12h)'
+        }
+      }
+    },
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
+    attribution: "Precipitation12: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
+        range: [0, 300],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
+        },
+        chromajs: {
+          scale: [
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
+          ],
+          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
+        }
+      }
+    ],
+    leaflet: {
+      type: 'gsmapLayer',
+      opacity: 0.4,
+      product: 'rain12'
+    }
+  },
+  {
+    name: 'Layers.GSMAP_RAIN24',
+    description: 'Layers.GSMAP_RAIN24_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          GSMAP_RAIN24: 'Précipitations GSMap (24h)',
+          GSMAP_RAIN24_DESCRIPTION: 'Précipitations estimées à partir de données radar (mm/24h)'
+        }
+      },
+      en: {
+        Layers: {
+          GSMAP_RAIN24: 'GSMap Precipitations (24h)',
+          GSMAP_RAIN24_DESCRIPTION: 'Estimated precipitations from radar data (mm/24h)'
+        }
+      }
+    },
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
+    attribution: "Precipitation24: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
+        range: [0, 300],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
+        },
+        chromajs: {
+          scale: [
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
+          ],
+          classes: [0, 5, 10, 20, 30, 50, 100, 150, 200, 250, 300]
+        }
+      }
+    ],
+    leaflet: {
+      type: 'gsmapLayer',
+      opacity: 0.4,
+      product: 'rain24'
+    }
+  },
+  {
+    name: 'Layers.GSMAP_RAIN72',
+    description: 'Layers.GSMAP_RAIN72_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          GSMAP_RAIN72: 'Précipitations GSMap (72h)',
+          GSMAP_RAIN72_DESCRIPTION: 'Précipitations estimées à partir de données radar (mm/72h)'
+        }
+      },
+      en: {
+        Layers: {
+          GSMAP_RAIN72: 'GSMap Precipitations (72h)',
+          GSMAP_RAIN72_DESCRIPTION: 'Estimated precipitations from radar data (mm/72h)'
+        }
+      }
+    },
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
+    attribution: "Precipitation72: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
+    type: 'OverlayLayer',
+    variables: [
+      {
+        name: 'precipitations',
+        label: 'Variables.PRECIPITATIONS',
+        units: ['mm'],
+        range: [0, 600],
+        chartjs: {
+          backgroundColor: 'rgba(54, 162, 235, 128)',
+          borderColor: 'rgb(54, 162, 235)',
+          fill: false,
+          yAxis: {
+            ticks: {
+              min: 0
+            }
+          }
+        },
+        chromajs: {
+          scale: [
+            '#000096',
+            '#0064ff',
+            '#00b4ff',
+            '#33db80',
+            '#9beb4a',
+            '#ffeb00',
+            '#ffb300',
+            '#ff6400',
+            '#eb1e00',
+            '#af0000'
+          ],
+          classes: [0, 5, 10, 30, 50, 100, 200, 300, 400, 500, 600]
+        }
+      }
+    ],
+    leaflet: {
+      type: 'gsmapLayer',
+      opacity: 0.4,
+      product: 'rain72'
+    }
+  },
+  {
+    name: 'Layers.GSMAP_CLOUD',
+    description: 'Layers.GSMAP_CLOUD_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          GSMAP_CLOUD: 'Couverture nuageuse GSMap',
+          GSMAP_CLOUD_DESCRIPTION: 'Couverture estimée à partir de données satellite'
+        }
+      },
+      en: {
+        Layers: {
+          GSMAP_CLOUD: 'GSMap Cloud cover',
+          GSMAP_CLOUD_DESCRIPTION: 'Estimated cover from satellite data'
+        }
+      }
+    },
+    tags: ['measure'],
+    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
+    attribution: "Cloud: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
+    type: 'OverlayLayer',
+    leaflet: {
+      type: 'gsmapLayer',
+      opacity: 0.6,
+      product: 'ir'
+    }
+  }])
   return layers
 }
