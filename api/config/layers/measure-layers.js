@@ -224,7 +224,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 10,
+      minZoom: 8,
+      minFeatureZoom: 12,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': '#00a9ce',
       'icon-color': 'white',
@@ -407,7 +408,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 8,
+      minZoom: 4,
+      minFeatureZoom: 8,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'pm25') ||
                               _.has(properties, 'pm10') ||
@@ -530,7 +532,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 10,
+      minZoom: 6,
+      minFeatureZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === 'VA') { %>orange<% }
                           else if (properties.visibility === 'NV') { %>grey<% }
