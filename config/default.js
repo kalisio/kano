@@ -163,10 +163,10 @@ const mapLayerActions = [{
 }]
 
 const mapWidgets = [
-  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
-  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'elevation-profile', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
-  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
+  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
+  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
+  { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
 ]
 
 // Map engine configuration
@@ -287,10 +287,10 @@ const globeLayerActions = [{
 }]
 
 const globeWidgets = [
-  { id: 'information-box', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
-  { id: 'time-series', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'elevation-profile', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
-  { id: 'mapillary-viewer', icon: 'kdk:mapillary.png', component: 'widget/KMapillaryViewer' }
+  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
+  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
+  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
+  { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
 ]
 
 // Globe engine configuration
