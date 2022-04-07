@@ -9,7 +9,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             BUSINESS_LAYERS: 'Business data'
           }
         }
@@ -26,7 +26,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             METEO_FORECAST_LAYERS: 'Meteorological forecasts'
           }
         }
@@ -44,7 +44,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             METEO_MEASURE_LAYERS: 'Meteorological observations'
           }
         }
@@ -61,7 +61,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             ATMOSPHERIC_LAYERS: 'Atmospheric observations'
           }
         }
@@ -78,7 +78,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             RADIOACTIVITY_LAYERS: 'Radioactivity'
           }
         }
@@ -95,7 +95,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             HYDROGRAPHY_LAYERS: 'Hydrography'
           }
         }
@@ -112,7 +112,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             DEMOGRAPHY_LAYERS: 'Demography'
           }
         }
@@ -129,7 +129,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             CAPTURED_LAYERS: 'Captured views'
           }
         }
@@ -146,7 +146,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             ADMINISTRATIVE_LAYERS: 'Administrative'
           }
         }
@@ -163,7 +163,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             INFRASTRUCTURE_LAYERS: 'Infrastructures'
           }
         }
@@ -180,7 +180,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             BASE_LAYERS: 'Map backgrounds'
           }
         }
@@ -198,7 +198,7 @@ module.exports = function ({ domain }) {
           }
         },
         en: {
-          Layers: {
+          Categories: {
             TERRAIN_LAYERS: 'Topography'
           }
         }
