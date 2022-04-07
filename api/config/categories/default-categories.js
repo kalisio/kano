@@ -50,7 +50,7 @@ module.exports = function ({ domain }) {
         }
       },
       icon: 'las la-satellite',
-      options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $all: ['weather', 'measure'] } } }
+      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $all: ['weather', 'measure'] } } }
     },
     {
       name: 'Categories.ATMOSPHERIC_LAYERS',
