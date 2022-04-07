@@ -50,7 +50,6 @@ module.exports = function ({ domain }) {
         }
       },
       icon: 'las la-satellite',
-      component: 'catalog/KWeatherLayersSelector',
       options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $all: ['weather', 'measure'] } } }
     },
     {
