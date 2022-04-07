@@ -32,7 +32,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       tags: [
-        'measure'
+        'weather', 'measure'
       ],
       attribution: '',
       type: 'OverlayLayer',

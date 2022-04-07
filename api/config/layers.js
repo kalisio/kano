@@ -39,7 +39,7 @@ let filter = []
 if (process.env.LAYERS_FILTER) {
   // Check for wildcard to get all layers
   if (process.env.LAYERS_FILTER === '*') filter = layers.map(layer => layer.name.replace('Layers.', ''))
-  // Check for list with separator, whitespace or comme is supported
+  // Check for list with separator, whitespace or comma is supported
   else if (process.env.LAYERS_FILTER.includes(',')) filter = process.env.LAYERS_FILTER.split(',')
   else filter = process.env.LAYERS_FILTER.split(' ')
 }

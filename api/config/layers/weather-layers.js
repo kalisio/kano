@@ -33,7 +33,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'weather'
+      'weather', 'forecast'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -151,7 +151,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'weather'
+      'weather', 'forecast'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -244,7 +244,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'weather'
+      'weather', 'forecast'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
@@ -337,7 +337,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'weather'
+      'weather', 'forecast'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',

@@ -90,54 +90,6 @@ const catalogPanes = {
   ]
 } 
 
-// Default map catalog catagories
-const mapCatalog = {
-  categories: [
-    {
-      name: 'KCatalogPanel.BUSINESS_LAYERS',
-      icon: 'las la-briefcase',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
-    },
-    {
-      name: 'KCatalogPanel.CAPTURED_LAYERS',
-      icon: 'las la-street-view',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['captured'] } } }
-    },
-    {
-      name: 'KCatalogPanel.MEASURE_LAYERS',
-      icon: 'las la-map-pin',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
-    },
-    {
-      name: 'KCatalogPanel.INFRASTRUCTURE_LAYERS',
-      icon: 'las la-broadcast-tower',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['infrastructure'] } } }
-    },
-    {
-      name: 'KCatalogPanel.ADMINISTRATIVE_LAYERS',
-      icon: 'las la-landmark',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['administrative'] } } }
-    },
-    {
-      name: 'KCatalogPanel.METEO_LAYERS',
-      icon: 'las la-cloud-sun-rain',
-      component: 'catalog/KWeatherLayersSelector',
-      options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
-    },
-    {
-      name: 'KCatalogPanel.DEMOGRAPHY_LAYERS',
-      icon: 'las la-users',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['demography'] } } }
-    },
-    {
-      name: 'KCatalogPanel.BASE_LAYERS',
-      icon: 'las la-layer-group',
-      component: 'catalog/KBaseLayersSelector',
-      options: { filter: { type: 'BaseLayer' } }
-    }
-  ]
-}
-
 // Map layer actions
 const mapLayerActions = [{
   id: 'layer-actions',
@@ -219,54 +171,6 @@ const mapEngine = {
     fileSizeLimit: 1024 * 1024, // 1GB
     formats: ['.geojson', '.kml', '.gpx']
   }
-}
-
-// Default globe catalog categories
-const globeCatalog = {
-  categories: [
-    {
-      name: 'KCatalogPanel.BUSINESS_LAYERS',
-      icon: 'las la-briefcase',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['business'] } } }
-    },
-    {
-      name: 'KCatalogPanel.TERRAIN_LAYERS',
-      icon: 'las la-mountain',
-      options: { exclusive: true, filter: { type: 'TerrainLayer' } }
-    },
-    {
-      name: 'KCatalogPanel.MEASURE_LAYERS',
-      icon: 'las la-map-pin',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['measure'] } } }
-    },
-    {
-      name: 'KCatalogPanel.INFRASTRUCTURE_LAYERS',
-      icon: 'las la-broadcast-tower',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['infrastructure'] } } }
-    },
-    {
-      name: 'KCatalogPanel.ADMINISTRATIVE_LAYERS',
-      icon: 'las la-landmark',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['administrative'] } } }
-    },
-    {
-      name: 'KCatalogPanel.METEO_LAYERS',
-      icon: 'las la-cloud-sun-rain',
-      component: 'catalog/KWeatherLayersSelector',
-      options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $in: ['weather'] } } }
-    },
-    {
-      name: 'KCatalogPanel.DEMOGRAPHY_LAYERS',
-      icon: 'las la-users',
-      options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['demography'] } } }
-    },
-    {
-      name: 'KCatalogPanel.BASE_LAYERS',
-      icon: 'las la-layer-group',
-      component: 'catalog/KBaseLayersSelector',
-      options: { filter: { type: 'BaseLayer' } } 
-    }
-  ]
 }
 
 // Globe layer actions
@@ -544,7 +448,6 @@ module.exports = {
       ]
     },
     engine: mapEngine,
-    catalog: mapCatalog,
     layers: {
       actions: mapLayerActions
     },
@@ -628,7 +531,6 @@ module.exports = {
       ]
     },
     engine: globeEngine,
-    catalog: globeCatalog,
     layers: {
       actions: globeLayerActions
     }

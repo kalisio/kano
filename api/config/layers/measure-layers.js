@@ -33,7 +33,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'hydrography', 'forecast'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
     attribution: '',
@@ -145,7 +145,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'hydrography', 'measure'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
     attribution: '',
@@ -298,7 +298,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'atmospheric', 'measure'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
     attribution: '',
@@ -462,7 +462,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                   'if (_.has(properties, \'pm10\')) { %>PM10 = <%= Units.format(properties.pm10, \'µg/m³\') %>\n<% }' +
                   'if (_.has(feature, \'time.pm10\')) { %><%= Time.format(feature.time.pm10, \'locale\') %>\n<% }' +
                   'if (_.has(properties, \'so2\')) { %>SO2 = <%= Units.format(properties.so2, \'ppm\') %>\n<% }' +
-                  'if (_.has(feature, \'time.so2\')) { %></br><%= Time.format(feature.time.so2, \'locale\')) %>\n<% }' +
+                  'if (_.has(feature, \'time.so2\')) { %></br><%= Time.format(feature.time.so2, \'locale\') %>\n<% }' +
                   'if (_.has(properties, \'no2\')) { %>NO2 = <%= Units.format(properties.no2, \'ppm\') %>\n<% }' +
                   'if (_.has(feature, \'time.no2\')) { %></br><%= Time.format(feature.time.no2, \'locale\') %>\n<% }' +
                   'if (_.has(properties, \'o3\')) { %>O3 = <%= Units.format(properties.o3, \'ppm\') %>\n<% }' +
@@ -498,7 +498,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'radioactivity', 'measure'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/teleray-icon.jpg',
     attribution: '',
@@ -593,7 +593,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'radioactivity', 'measure'
     ],
     iconUrl: 'statics/openradiation-logo.png',
     attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",

@@ -4,6 +4,7 @@ var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
 const layers = require('./layers')
+const categories = require('./categories')
 
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
@@ -212,9 +213,10 @@ module.exports = {
   },
   catalog: {
     layers,
+    categories,
     paginate: {
       default: 100,
-      max: 100
+      max: 1000
     }
   },
   cesium: {
