@@ -44,7 +44,7 @@ To be put in the `kano/api/config` directory.
 <<< @/.vuepress/public/local.js
 :::
 ::: details my-layers.js - Used to define the available default layers.
-To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services]https://geoservices.ign.fr/services-web-experts-cartes).
+To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services](https://geoservices.ign.fr/services-web-experts-cartes).
 
 <<< @/.vuepress/public/my-layers.js
 :::
