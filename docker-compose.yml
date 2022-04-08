@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+  kano:
+    image: kalisio/kano:dev
+    environment:
+      - APP_SECRET=xxx
+      - LAYERS_FILTER=OSM PLAN_IGN CESIUM_ELLIPSOID
+      - BUILD_NUMBER
+      - NODE_APP_INSTANCE
+      - DB_URL
+      - DATA_DB_URL
+      - CESIUM_TOKEN
+      - MAPILLARY_TOKEN
+    volumes:
+      - type: bind
+        source: ./my-layers.js
+        target: /opt/kalisio/kano/api/config/layers/my-layers.js
+      - type: bind
+        source: ./local.js
+        target: /opt/kalisio/kano/api/config/local.js
+    ports:
+      - "8080:8081"
+    networks:
+      - kano
+  mongodb:
+    image: mongo:4.2
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - kano
+
+volumes:
+  mongodb:
+
+networks:
+  kano:
+
