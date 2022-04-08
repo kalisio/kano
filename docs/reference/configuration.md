@@ -4,6 +4,10 @@ sidebarDepth: 3
 
 # Configuration
 
+The default backend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/api/config/default.js).
+
+Most options come from the "standard" backend [configuration](https://kalisio.github.io/kdk/guides/basics/step-by-step.html#configuring-a-kapp) of **KDK** based app.
+
 The default frontend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/config/default.js).
 
 Most options come from the "standard" frontend [configuration](https://kalisio.github.io/kdk/guides/basics/step-by-step.html#configuring-a-kapp) of **KDK** based app, here are the main ones:
