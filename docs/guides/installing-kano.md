@@ -24,7 +24,9 @@ docker-compose down
 docker-compose down -v
 ```
 
-Then point your browser to [localhost:8080](http://localhost:80801).
+Then point your browser to [localhost:8080](http://localhost:80801). You should see something like this once connected:
+
+![installation](../assets/kano-installation.png)
 
 ::: warning
 If running Docker under Windows in a virtual machine first redirect the port 8080 of your virtual machine to your host
@@ -49,12 +51,12 @@ To be put in the `kano/api/config/layers` directory. Example based on OpenStreee
 
 As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version but you can change it to target a production release.
 
-::: tip
-If you'd like to use the 3D mode or the Mapillary layer you should provide the required tokens to access their respective API on the backend side using the following environment variables: `CESIUM_TOKEN`, `MAPILLARY_TOKEN`.
-:::
-
 ::: warning
 By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
+:::
+
+::: tip
+If you'd like to use the 3D mode or the Mapillary layer you should provide the required tokens to access their respective APIs on the backend side by setting the following environment variables: `CESIUM_TOKEN`, `MAPILLARY_TOKEN`.
 :::
 
 ### The hard way : from source code

@@ -10,8 +10,8 @@ services:
       - NODE_APP_INSTANCE
       - DB_URL
       - DATA_DB_URL
-      - CESIUM_TOKEN
-      - MAPILLARY_TOKEN
+      - CESIUM_TOKEN=xxx
+      - MAPILLARY_TOKEN=xxx
     volumes:
       - type: bind
         source: ./my-layers.js
