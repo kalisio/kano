@@ -465,17 +465,6 @@ module.exports = {
           { id: 'locate-user', component: 'KLocateUser' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
-            id: 'manage-favorite-views',
-            component: 'menu/KMenu',
-            icon: 'star_border',
-            persistent: true,
-            autoClose: false,
-            tooltip: 'KFavoriteViews.FAVORITE_VIEWS_LABEL',
-            content: [
-              { component: 'KFavoriteViews' }
-            ]
-          },
-          {
             id: 'tools',
             component: 'menu/KMenu',
             icon: 'las la-wrench',
