@@ -104,13 +104,10 @@ const mapLayerActions = [{
     { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', handler: 'onChartLayerData', visible: ['isFeatureLayer', 'hasFeatureSchema'] },
     { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', handler: 'onEditLayer',
       visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }] },
-    { id: 'edit-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', handler: 'onEditLayerStyle',
-      visible: ['isLayerStyleEditable', { name: '$can', params: ['update', 'catalog'] }] },
-    { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData',
-      visible: ['isLayerDataEditable', { name: '$can', params: ['update', 'catalog'] }],
+    { id: 'edit-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', handler: 'onEditLayerStyle', visible: 'isLayerStyleEditable' },
+    { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
-    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer',
-      visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
+    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
   ]
 }]
 
