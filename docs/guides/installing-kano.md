@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Installing Kano
 
-### The easy way : using Docker
+## The easy way : using Docker
 
 ::: warning 
 This requires you to [install Docker](https://docs.docker.com/engine/installation/), the world’s leading software container platform.
@@ -59,7 +59,13 @@ By default no built-in layers are available in Kano unless you specify their nam
 If you'd like to use the 3D mode or the Mapillary layer you should provide the required tokens to access their respective APIs on the backend side by setting the following environment variables: `CESIUM_TOKEN`, `MAPILLARY_TOKEN`.
 :::
 
-### The hard way : from source code
+### Add weather forecasts
+
+Kano integrates smoothly with [Weacast](https://weacast.github.io/weacast-docs/) in order to display weather forecast data.
+
+**Coming soon**
+
+## The hard way : from source code
 
 First you have to ensure the [KDK prerequisites](https://kalisio.github.io/kdk/guides/development/setup.html#prerequisites) to run Kano from source code. Then the following commands, assuming you have a MongoDB instance running on local host and default port (27017), should launch your local instance of Kano:
 
