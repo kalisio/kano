@@ -39,6 +39,7 @@ function getGuidesSidebar () {
     'understanding-kano',
     'getting-started',
     'installing-kano',
+    'customizing-kano',
     'advanced-usage'
   ]
 }

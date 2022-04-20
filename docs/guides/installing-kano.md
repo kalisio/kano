@@ -24,7 +24,7 @@ docker-compose down
 docker-compose down -v
 ```
 
-Then point your browser to [localhost:8080](http://localhost:80801). You should see something like this once connected:
+Then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected:
 
 ![installation](../assets/kano-installation.png)
 
@@ -61,9 +61,27 @@ If you'd like to use the 3D mode or the Mapillary layer you should provide the r
 
 ### Add weather forecasts
 
-Kano integrates smoothly with [Weacast](https://weacast.github.io/weacast-docs/) in order to display weather forecast data.
+Kano integrates smoothly with [Weacast](https://weacast.github.io/weacast-docs/) in order to display weather forecast data. You can also use Docker containers to run Weacast by following [this guide](https://weacast.github.io/weacast/guides/basics.html#the-easy-way-using-docker) and taking care of port conflicts as they use the same by default.
 
-**Coming soon**
+The following commands and additional docker-compose file should do the job:
+
+```bash
+// Run the MongoDB, Weacast and Kano containers
+docker-compose -f docker-compose.yml -f docker-compose-weacast.yml up -d
+
+// Stop the MongoDB, Weacast and Kano containers
+docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down 
+// Stop the MongoDB, Weacast and Kano containers erasing DB data
+docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
+```
+
+::: details docker-compose-weacast.yml - Used to deploy Weacast container.
+<<< @/.vuepress/public/docker-compose-weacast.yml
+:::
+
+::: tip
+You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environement variable.
+:::
 
 ## The hard way : from source code
 
@@ -101,3 +119,26 @@ yarn dev
 ```
 
 Point your browser to [localhost:8080](http://localhost:8080).
+
+### Add weather forecasts
+
+Instead of using Docker containers you can directly install Weacast from the source code as well by following [this guide](https://weacast.github.io/weacast/guides/basics.html#the-hard-way-from-source-code). You should however take care of port conflicts as it uses the same than Kano by default (API and NodeJS debugger), the following commands should do the job:
+```bash
+// Clone Weacast
+git clone https://github.com/weacast/weacast.git
+cd weacast
+yarn install
+
+// Set the most minimalist environment to run server
+export PORT="8082"
+export NODE_OPTIONS="--inspect-port=9230"
+export LOADERS="gfs"
+
+// Run the server/API
+cd packages/api
+yarn dev
+```
+
+::: tip
+You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environement variable.
+:::
