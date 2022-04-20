@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Installing Kano
 
-## The easy way : using Docker
+## Using Docker
 
 ::: warning 
 This requires you to [install Docker](https://docs.docker.com/engine/installation/), the world’s leading software container platform.
@@ -83,7 +83,7 @@ docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
 You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environment variable.
 :::
 
-## The hard way : from source code
+## From source code
 
 First you have to ensure the [KDK prerequisites](https://kalisio.github.io/kdk/guides/development/setup.html#prerequisites) to run Kano from source code. Then the following commands, assuming you have a MongoDB instance running on local host and default port (27017), should launch your local instance of Kano:
 
