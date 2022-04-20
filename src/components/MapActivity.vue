@@ -76,8 +76,7 @@ export default {
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
     },
     forwardLayerEvents (layerEvents) {
-      if (!_.has(this, 'layerHandlers'))
-        this.layerHandlers = {}
+      if (!_.has(this, 'layerHandlers')) { this.layerHandlers = {} }
 
       for (const layerEvent of layerEvents) {
         const handler = (layer) => utils.sendEmbedEvent(layerEvent, { layer })
@@ -86,13 +85,11 @@ export default {
       }
     },
     removeForwardedLayerEvents () {
-      for (const layerEvent in this.layerHandlers)
-        this.$off(layerEvent, this.layerHandlers[layerEvent])
+      for (const layerEvent in this.layerHandlers) { this.$off(layerEvent, this.layerHandlers[layerEvent]) }
       this.layerHandlers = {}
     },
     forwardLeafletEvents (leafletEvents) {
-      if (!_.has(this, 'leafletHandlers'))
-        this.leafletHandlers = {}
+      if (!_.has(this, 'leafletHandlers')) { this.leafletHandlers = {} }
 
       for (const leafletEvent of leafletEvents) {
         const handler = (options, event) => {
@@ -117,8 +114,7 @@ export default {
       }
     },
     removeForwardedLeafletEvents () {
-      for (const leafletEvent in this.leafletHandlers)
-        this.$off(leafletEvent, this.leafletHandlers[leafletEvent])
+      for (const leafletEvent in this.leafletHandlers) { this.$off(leafletEvent, this.leafletHandlers[leafletEvent]) }
       this.leafletHandlers = {}
     }
   },
@@ -131,9 +127,9 @@ export default {
   },
   mounted () {
     // Setup event connections
-    const allLeafletEvents = [ 'click', 'dblclick', 'mouseover' /*, 'popupopen' */ ]
+    const allLeafletEvents = ['click', 'dblclick', 'mouseover']
     this.forwardLeafletEvents(allLeafletEvents)
-    const allLayerEvents = [ 'layer-added', 'layer-shown', 'layer-hidden', 'layer-removed' ]
+    const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed']
     this.forwardLayerEvents(allLayerEvents)
     this.$on('edit-start', this.onEditStartEvent)
     this.$on('edit-stop', this.onEditStopEvent)

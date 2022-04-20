@@ -6,13 +6,14 @@ const suite = 'layout'
 
 describe(`suite:${suite}`, () => {
   let runner, page
-  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
+  const user = { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
     chailint(chai, util)
-    
+
     runner = new core.Runner(suite, {
       appName: 'kano',
+      user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false

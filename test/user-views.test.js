@@ -11,25 +11,26 @@ const catalogLayersTab = 'catalog-layers-tab'
 
 describe(`suite:${suite}`, () => {
   let runner, page
-  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
+  const user = { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
     chailint(chai, util)
-    
+
     runner = new core.Runner(suite, {
       appName: 'kano',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      }
+      },
+      mode: 'screenshots'
     })
     page = await runner.start()
     await core.login(page, user)
   })
 
   it('create views', async () => {
-    const andorraExtent=[42.3915, 1.2847, 42.7051, 1.9315]
-    const toulouseExtent=[43.5895, 1.41584, 43.6087, 1.4562]
+    const andorraExtent = [42.3915, 1.2847, 42.7051, 1.9315]
+    const toulouseExtent = [43.5895, 1.41584, 43.6087, 1.4562]
     await map.zoomToExtent(page, andorraExtent)
     await map.createView(page, 'Andorra', false)
     await map.zoomToExtent(page, toulouseExtent)
@@ -39,13 +40,13 @@ describe(`suite:${suite}`, () => {
     expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beTrue()
   })
 
-  it ('restore andorra', async () => {
+  it('restore andorra', async () => {
     await map.clickView(page, userViewsTab, 'Andorra')
     const match = await runner.captureAndMatch('andorra')
     expect(match).beTrue()
   })
 
-  it ('restore toulouse', async () => {
+  it('restore toulouse', async () => {
     await map.clickView(page, userViewsTab, 'Toulouse')
     const match = await runner.captureAndMatch('toulouse')
     expect(match).beTrue()
@@ -57,7 +58,7 @@ describe(`suite:${suite}`, () => {
     expect(await map.viewExists(page, userViewsTab, 'Andorra')).beFalse()
     expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beFalse()
   })
- 
+
   after(async () => {
     await core.logout(page)
     await runner.stop()

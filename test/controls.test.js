@@ -6,17 +6,19 @@ const suite = 'controls'
 
 describe(`suite:${suite}`, () => {
   let runner, page
-  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
+  const user = { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
     chailint(chai, util)
-    
+
     runner = new core.Runner(suite, {
       appName: 'kano',
+      user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      }
+      },
+      modes: 'screenshots'
     })
     page = await runner.start()
     await core.login(page, user)
@@ -26,6 +28,7 @@ describe(`suite:${suite}`, () => {
     await core.clickTopPaneAction(page, 'locate-user')
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
+    await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
     await core.clickTopPaneAction(page, 'locate-user')
   })

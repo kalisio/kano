@@ -4,7 +4,7 @@ import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client'
 
-const suite = 'user-layers'
+const suite = 'useradmin-layers'
 
 const userLayersTab = 'user-layers-tab'
 
@@ -18,6 +18,7 @@ describe(`suite:${suite}`, () => {
     runner = new core.Runner(suite, {
       appName: 'kano',
       user: user.email,
+      step: '1/2 - User: droping and importing files',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
@@ -96,6 +97,7 @@ describe(`suite:${suite}`, () => {
     runner = new core.Runner(suite, {
       appName: 'kano',
       user: user.email,
+      step: '2/2 - Admin: droping and removing files',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false

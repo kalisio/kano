@@ -10,13 +10,14 @@ const catalogLayersTab = 'catalog-layers-tab'
 
 describe(`suite:${suite}`, () => {
   let runner, page
-  const user = { email: 'kalisio@kalisio.xyz', password: 'Pass;word1' }
+  const user = { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' }
 
   before(async () => {
     chailint(chai, util)
-    
+
     runner = new core.Runner(suite, {
       appName: 'kano',
+      user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
@@ -29,7 +30,7 @@ describe(`suite:${suite}`, () => {
   it('check layer category', async () => {
     await map.clickCatalogTab(page, catalogLayersTab)
     const categoryId = await map.getLayerCategoryId(page, map.getLayerId('OSM_DARK'))
-    expect(categoryId).to.equal('k-catalog-panel-base-layers')
+    expect(categoryId).to.equal('categories-base-layers')
     expect(await map.isLayerCategoryOpened(page, categoryId)).beFalse()
     await map.clickLayerCategory(page, categoryId)
     expect(await map.isLayerCategoryOpened(page, categoryId)).beTrue()
