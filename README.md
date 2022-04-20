@@ -2,6 +2,7 @@
 
 ## Kano application
 
+[![Latest Release](https://img.shields.io/github/v/tag/kalisio/kano?sort=semver&label=latest)](https://github.com/kalisio/kano/releases)
 [![Build Status](https://app.travis-ci.com/kalisio/kano.svg?branch=master)](https://app.travis-ci.com/kalisio/kano)
 [![Code Climate](https://codeclimate.com/github/kalisio/kano/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kano)
 [![Test Coverage](https://codeclimate.com/github/kalisio/kano/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kano/coverage)
