@@ -80,7 +80,7 @@ docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
 :::
 
 ::: tip
-You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environement variable.
+You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environment variable.
 :::
 
 ## The hard way : from source code
@@ -140,5 +140,5 @@ yarn dev
 ```
 
 ::: tip
-You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environement variable.
+You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environment variable.
 :::
