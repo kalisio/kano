@@ -11,23 +11,23 @@ const catalogLayersTab = 'catalog-layers-tab'
 
 describe(`suite:${suite}`, () => {
   let runner, page
-  const user = { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
+  const user = [
+    { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
+    { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
+  ]
 
   before(async () => {
     chailint(chai, util)
 
     runner = new core.Runner(suite, {
       appName: 'kano',
-      user: user.email,
-      step: '1/3 - Admin : Creating views',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
       }
-      // mode: 'screenshots'
     })
     page = await runner.start()
-    await core.login(page, user)
+    await core.login(page, user[1])
   })
 
   it('admin: create views', async () => {
@@ -42,30 +42,10 @@ describe(`suite:${suite}`, () => {
     expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beTrue()
   })
 
-  after(async () => {
+  it('switch to user', async () => {
     await core.logout(page)
-    await runner.stop()
-  })
-})
-
-describe(`suite:${suite}`, () => {
-  let runner, page
-  const user = { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' }
-
-  before(async () => {
-    chailint(chai, util)
-
-    runner = new core.Runner(suite, {
-      appName: 'kano',
-      user: user.email,
-      step: '2/3 - User : restoring views, trying to create and delete view',
-      geolocation: { latitude: 43.10, longitude: 1.71 },
-      localStorage: {
-        'kano-welcome': false
-      }
-    })
-    page = await runner.start()
-    await core.login(page, user)
+    await core.goToLoginScreen(page)
+    await core.login(page, user[0])
   })
 
   it('user: restore andorra', async () => {
@@ -92,30 +72,10 @@ describe(`suite:${suite}`, () => {
     expect(await map.viewExists(page, userViewsTab, 'Andorra')).beTrue()
   })
 
-  after(async () => {
+  it('switch to admin', async () => {
     await core.logout(page)
-    await runner.stop()
-  })
-})
-
-describe(`suite:${suite}`, () => {
-  let runner, page
-  const user = { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
-
-  before(async () => {
-    chailint(chai, util)
-
-    runner = new core.Runner(suite, {
-      appName: 'kano',
-      user: user.email,
-      step: '3/3 - Admin : deleting views',
-      geolocation: { latitude: 43.10, longitude: 1.71 },
-      localStorage: {
-        'kano-welcome': false
-      }
-    })
-    page = await runner.start()
-    await core.login(page, user)
+    await core.goToLoginScreen(page)
+    await core.login(page, user[1])
   })
 
   it('admin: remove views', async () => {
