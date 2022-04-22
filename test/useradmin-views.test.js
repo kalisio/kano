@@ -30,15 +30,18 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user[1])
   })
 
-  it('admin: create views', async () => {
-    const andorraExtent = [42.3915, 1.2847, 42.7051, 1.9315]
-    const toulouseExtent = [43.5895, 1.41584, 43.6087, 1.4562]
-    await map.zoomToExtent(page, andorraExtent)
+  it('admin: create Andorra view', async () => {
+    const extent = [42.3915, 1.2847, 42.7051, 1.9315]
+    await map.zoomToExtent(page, extent)
     await map.createView(page, 'Andorra', false)
-    await map.zoomToExtent(page, toulouseExtent)
+    expect(await map.viewExists(page, userViewsTab, 'Andorra')).beTrue()
+  })
+
+  it('admin: create Toulouse view', async () => {
+    const extent = [43.5895, 1.41584, 43.6087, 1.4562]
+    await map.zoomToExtent(page, extent)
     await map.clickLayer(page, catalogLayersTab, 'HYBRID')
     await map.createView(page, 'Toulouse', true)
-    expect(await map.viewExists(page, userViewsTab, 'Andorra')).beTrue()
     expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beTrue()
   })
 
@@ -48,28 +51,24 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user[0])
   })
 
-  it('user: restore andorra', async () => {
+  it('user: restore andorra view', async () => {
     await map.clickView(page, userViewsTab, 'Andorra')
     const match = await runner.captureAndMatch('andorra')
     expect(match).beTrue()
   })
 
-  it('user: restore toulouse', async () => {
+  it('user: restore toulouse view', async () => {
     await map.clickView(page, userViewsTab, 'Toulouse')
     const match = await runner.captureAndMatch('toulouse')
     expect(match).beTrue()
   })
 
   it('user: can\'t create views', async () => {
-    const castelnaudaryExtent = [43.3060, 1.9218, 43.3296, 1.9870]
-    await map.zoomToExtent(page, castelnaudaryExtent)
-    await map.createView(page, 'Castelnaudary', false)
-    expect(await map.viewExists(page, userViewsTab, 'Castelnaudary')).beFalse()
+    expect(await core.elementExists(page, 'create-view')).beFalse()
   })
 
   it('user: can\'t remove views', async () => {
-    await map.removeView(page, userViewsTab, 'Andorra')
-    expect(await map.viewExists(page, userViewsTab, 'Andorra')).beTrue()
+    expect(await core.elementExists(page, 'remove-view')).beFalse()
   })
 
   it('switch to admin', async () => {
