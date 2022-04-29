@@ -116,6 +116,22 @@ export default {
     removeForwardedLeafletEvents () {
       for (const leafletEvent in this.leafletHandlers) { this.$off(leafletEvent, this.leafletHandlers[leafletEvent]) }
       this.leafletHandlers = {}
+    },
+    onMoveEnd () {
+      // Update navigation information in store
+      const center = this.map.getCenter()
+      const zoom = this.map.getZoom()
+      const bounds = this.map.getBounds()
+      const south = bounds.getSouth()
+      const west = bounds.getWest()
+      const north = bounds.getNorth()
+      const east = bounds.getEast()
+      this.$store.patch(this.activityName, {
+        longitude: center.lng,
+        latitude: center.lat,
+        zoom,
+        south, west, north, east
+      })
     }
   },
   created () {
@@ -133,6 +149,9 @@ export default {
     this.forwardLayerEvents(allLayerEvents)
     this.$on('edit-start', this.onEditStartEvent)
     this.$on('edit-stop', this.onEditStopEvent)
+    // We store some information about the current navigation state in store, initialize it
+    this.$store.set(this.activityName, {})
+    this.$on('moveend', this.onMoveEnd)
   },
   beforeDestroy () {
     // Remove event connections
@@ -140,6 +159,7 @@ export default {
     this.removeForwardedLayerEvents()
     this.$off('edit-start', this.onEditStartEvent)
     this.$off('edit-stop', this.onEditStopEvent)
+    this.$off('moveend', this.onMoveEnd)
   },
   destroyed () {
     utils.sendEmbedEvent('map-destroyed')

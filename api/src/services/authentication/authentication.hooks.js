@@ -18,6 +18,10 @@ module.exports = {
     find: [],
     get: [],
     create: [iff(hook => process.env.API_GATEWAY_URL, async hook => {
+      if (process.env.API_GATEWAY_JWT) {
+        hook.result.gatewayToken = process.env.API_GATEWAY_JWT
+        return hook
+      }
       const config = hook.app.get('authentication')
       if (!config) return hook
       // Default appId for Kano used to access the gateway
