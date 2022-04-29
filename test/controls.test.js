@@ -28,7 +28,7 @@ describe(`suite:${suite}`, () => {
     await core.clickTopPaneAction(page, 'locate-user')
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
-    await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
+    //await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
     await core.clickTopPaneAction(page, 'locate-user')
   })
