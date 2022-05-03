@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://www.kalisio.xyz/schemas/saisie.json#",
+  "title": "Données",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Identifiant"
+      }
+    },
+    "Nom": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Nom"
+      }
+    },
+    "Information": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextareaField",
+        "helper": "Informations"
+      }
+    }
+  },
+  "required": ["id"]
+}

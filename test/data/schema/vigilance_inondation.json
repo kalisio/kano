@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://www.kalisio.xyz/schemas/vigilance_inondation.json#",
+  "title": "Vigilance inondation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Identifiant"
+      }
+    },
+    "Nom": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Nom"
+      }
+    },
+    "Type": {
+      "type": "string", 
+      "field": {
+        "component": "form/KSelectField",
+        "helper": "Type",
+        "options": [
+          { "label": "Suivi du ruissellement pluvial", "value": "Suivi du ruissellement pluvial" },
+          { "label": "Suivi du niveau du cours d'eau", "value": "Suivi du niveau du cours d'eau" }
+        ]
+      }
+    },
+    "Information": {
+      "type": "string", 
+      "field": {
+        "component": "form/KTextareaField",
+        "helper": "Informations"
+      }
+    }
+  },
+  "required": ["id"]
+}

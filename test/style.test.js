@@ -22,7 +22,7 @@ describe(`suite:${suite}`, () => {
     runner = new core.Runner(suite, {
       appName: 'kano',
       user: user[1].email,
-      geolocation: { latitude: 43.3, longitude: 1.96 },
+      geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
       }/* ,
