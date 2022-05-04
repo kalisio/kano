@@ -32,9 +32,32 @@ describe(`suite:${suite}`, () => {
     await core.login(page, current_user)
   })
 
+  it('go to', async () => {
+    await map.goToPosition(page, 43.30095, 1.95545, 2000)
+  })
+
   it('create layer', async () => {
     await map.createLayer(page, 'test', runner.getDataPath('test.json'), 'id')
-    //await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    await page.waitForTimeout(1500)
+  })
+
+ /*  it('save layer', async () => {
+    await map.saveLayer(page, userLayersTab, 'test')
+  }) */
+  //#map > div.leaflet-pane.leaflet-map-pane > div.leaflet-pane.leaflet-marker-pane
+
+  it('add point', async () => {
+    //await map.goToPosition(page, 43.30095, 1.95545)
+    //await page.waitForTimeout(3000)
+    await core.clickTopPaneAction(page, 'add-points')
+    await page.waitForTimeout(1500)
+    await core.click(page, '#map', 2000)
+    await core.moveMap(page, 'up', 100)
+    await core.click(page, '#map')
+    await core.moveMap(page, 'left', 130)
+    await core.click(page, '#map')
+    await core.clickRightPaneAction(page, 'layer-actions')
+    await core.clickRightPaneAction(page, 'edit-data')
   })
 
   it('save layer', async () => {
