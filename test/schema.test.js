@@ -55,7 +55,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('add points', async () => {
-    await core.zoomToLevel(page, 15)
+    await map.zoomToLevel(page, 15)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
     await core.clickTopPaneAction(page, 'add-points', 1000)
