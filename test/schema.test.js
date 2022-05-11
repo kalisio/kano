@@ -34,63 +34,102 @@ describe(`suite:${suite}`, () => {
 
   it('create layer', async () => {
     await map.goToPosition(page, 43.31588, 1.95109, 1500)
-    await core.zoomToLevel(page, 18)
-    await map.createLayer(page, 'test', runner.getDataPath('test.json'), 'id', 1500)
+    await map.zoomToLevel(page, 17)
+    await map.createLayer(page, 'saisie', runner.getDataPath('saisie.json'), 'id', 1500)
   })
 
   it('add line', async () => {
     await core.clickTopPaneAction(page, 'add-lines')
     await page.waitForTimeout(1500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'down', 2, 500)
-    await core.mapInteraction(page, 'left', 2, 500)
+    await map.mapInteraction(page, 'up', 4, 500)
+    await map.mapInteraction(page, 'right', 3, 500)
     await core.click(page, '#map', 2000)
     await page.waitForTimeout(1500)
     await core.click(page, '#map')
     await core.clickRightPaneAction(page, 'layer-actions')
     await core.clickRightPaneAction(page, 'edit-data', 1500)
     //const match = await runner.captureAndMatch('line')
-    await page.screenshot({ path: './test/data/schema/screenrefs/line.png' })
+    //await page.screenshot({ path: './test/data/schema/screenrefs/line.png' })
     //expect(await runner.captureAndMatch('line')).beTrue()
   })
 
   it('add points', async () => {
-    await core.zoomToLevel(page, 16)
+    await core.zoomToLevel(page, 15)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
     await core.clickTopPaneAction(page, 'add-points', 1000)
-    await core.mapInteraction(page, 'left', 2, 500)
+    await map.mapInteraction(page, 'left', 2, 500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'right', 7, 500)
+    await map.mapInteraction(page, 'right', 4, 500)
     await core.click(page, '#map', 2000)
     await core.clickTopPaneAction(page, 'accept')
     //const match = await runner.captureAndMatch('points')
-    await page.screenshot({ path: './test/data/schema/screenrefs/points.png' })
+    //await page.screenshot({ path: './test/data/schema/screenrefs/points.png' })
     //expect(await runner.captureAndMatch('points')).beTrue()
   })
 
-  it('add polygon', async () => {
+  it('save layer', async () => {
+    await map.saveLayer(page, userLayersTab, 'saisie', 2000)
+    //await core.clickRightPaneAction(page, 'zoom-to', 1500)
+    //const match = await runner.captureAndMatch('polygon')
+    //await page.screenshot({ path: './test/data/schema/screenrefs/all_features.png' })
+    //expect(await runner.captureAndMatch('polygon')).beTrue()
+  })
+
+  it('add rectangle', async () => {
     await map.goToPosition(page, 43.31501, 1.9547, 1500)
-    await core.zoomToLevel(page, 17)
+    await map.zoomToLevel(page, 17)
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickTopPaneAction(page, 'add-rectangles', 1000)
+    await core.click(page, '#map', 2000)
+    await map.mapInteraction(page, 'down', 2, 500)
+    await map.mapInteraction(page, 'right', 2, 500)
+    await core.click(page, '#map', 2000)
+    await core.clickTopPaneAction(page, 'accept')
+  })
+
+  it('edit style', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions')
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#apply-button')
+  })
+
+  it('remove rectangle', async () => {
+    await map.goToPosition(page, 43.31441, 1.95556, 1500)
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickTopPaneAction(page, 'remove', 1000)
+    await core.click(page, '#map', 1500)
+    await core.clickTopPaneAction(page, 'accept')
+  })
+
+  it('add polygon', async () => {
+    await map.goToPosition(page, 43.31359, 1.95684, 1500)
+    await map.zoomToLevel(page, 17)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
     await core.clickTopPaneAction(page, 'add-polygons', 1000)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'down', 2, 500)
+    await map.mapInteraction(page, 'down', 1, 500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'down', 1, 500)
-    await core.mapInteraction(page, 'right', 2, 500)
+    await map.mapInteraction(page, 'down', 1, 500)
+    await map.mapInteraction(page, 'right', 1, 500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'up', 2, 500)
+    await map.mapInteraction(page, 'right', 1, 500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'up', 1, 500)
-    await core.mapInteraction(page, 'left', 1, 500)
+    await map.mapInteraction(page, 'up', 1, 500)
     await core.click(page, '#map', 2000)
-    await core.mapInteraction(page, 'left', 1, 500)
+    await map.mapInteraction(page, 'left', 1, 500)
+    await map.mapInteraction(page, 'up', 1, 500)
     await core.click(page, '#map', 2000)
-    await core.clickTopPaneAction(page, 'accept', 1000)
+    await core.click(page, '#map', 2000)
+    await page.waitForTimeout(5000)
+    await core.clickTopPaneAction(page, 'accept')
+    await page.waitForTimeout(3000)
     //const match = await runner.captureAndMatch('polygon')
-    await page.screenshot({ path: './test/data/schema/screenrefs/polygon.png' })
+    //await page.screenshot({ path: './test/data/schema/screenrefs/polygon.png' })
     //expect(await runner.captureAndMatch('polygon')).beTrue()
   })
 
@@ -107,19 +146,12 @@ describe(`suite:${suite}`, () => {
     await core.clickRightPaneAction(page, 'edit-data', 1500)
   }) */
 
-  it('save layer', async () => {
-    await map.saveLayer(page, userLayersTab, 'test', 2000)
-    await core.clickRightPaneAction(page, 'zoom-to', 1500)
-    //const match = await runner.captureAndMatch('polygon')
-    await page.screenshot({ path: './test/data/schema/screenrefs/all_features.png' })
-    //expect(await runner.captureAndMatch('polygon')).beTrue()
-  })
-
-  it('remove layer', async () => {
+  /* it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'test')
-  })
+  }) */
   
   after(async () => {
+    await page.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
   })
