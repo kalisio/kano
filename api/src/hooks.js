@@ -1,11 +1,11 @@
 // Application hooks that run for every service
 import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import commonHooks from 'feathers-hooks-common'
-import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.api'
-import { permissions as mapPermissions } from '@kalisio/kdk/map.api'
-import * as permissions from './permissions'
-
-const { authenticate } = require('@feathersjs/authentication').hooks
+import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.api.js'
+import { permissions as mapPermissions } from '@kalisio/kdk/map.api.js'
+import * as permissions from './permissions.js'
+import authentication from '@feathersjs/authentication'
+const { authenticate } = authentication.hooks
 
 // Default rules for all users
 corePermissions.defineAbilities.registerHook(corePermissions.defineUserAbilities)
@@ -13,7 +13,7 @@ corePermissions.defineAbilities.registerHook(mapPermissions.defineUserAbilities)
 // Then rules for app
 corePermissions.defineAbilities.registerHook(permissions.defineUserAbilities)
 
-module.exports = {
+export default {
   before: {
     all: [coreHooks.log,
       // We skip authentication in some cases

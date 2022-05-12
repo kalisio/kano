@@ -7,7 +7,7 @@ const debug = makeDebug('kano:categories')
 const domain = (process.env.SUBDOMAIN ? process.env.SUBDOMAIN : 'test.kalisio.xyz')
 
 // Request categories definition files
-const categoryFiles = glob.sync(path.join(__dirname, 'categories/**/*.js'))
+const categoryFiles = glob.sync(path.join(__dirname, 'categories/**/*.cjs'))
 debug('Processing the following category definition files to build catalog from', categoryFiles)
 
 // Process them

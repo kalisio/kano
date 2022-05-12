@@ -22,6 +22,9 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 
 export default {
   name: 'globe-activity',
+  components: {
+    KPage: utils.loadComponent('layout/KPage')
+  },
   mixins: [
     kCoreMixins.refsResolver(['globe']),
     baseActivityMixin,
@@ -84,12 +87,8 @@ export default {
       return (layer) => utils.sendEmbedEvent(event, { layer })
     }
   },
-  created () {
-    // Load the required components
-    this.$options.components['k-page'] = this.$load('layout/KPage')
-  },
   mounted () {
-    this.$events.$on('capabilities-api-changed', this.refreshActivity)
+    this.$events.on('capabilities-api-changed', this.refreshActivity)
     this.$on('click', this.onClicked)
     this.$on('dblclick', this.onDblClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')

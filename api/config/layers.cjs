@@ -13,7 +13,7 @@ const k2Url = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL + '/k2'
 const s3Url = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL + '/s3' : 'https://s3.eu-central-1.amazonaws.com')
 
 // Request layer definition files
-const layerFiles = glob.sync(path.join(__dirname, 'layers/**/*.js'))
+const layerFiles = glob.sync(path.join(__dirname, 'layers/**/*.cjs'))
 debug('Processing the following layer definition files to build catalog from', layerFiles)
 
 // Process them

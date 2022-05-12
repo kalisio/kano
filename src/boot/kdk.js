@@ -1,13 +1,11 @@
 import _ from 'lodash'
-import 'whatwg-fetch'
 import config from 'config'
 import postRobot from 'post-robot'
 import utils from '../utils'
 import appHooks from '../main.hooks'
 import services from '../services'
-import plugin from '../vue-kdk'
-import { kalisio, beforeGuard, authenticationGuard, Theme } from '@kalisio/kdk/core.client'
-import { CanvasDrawContext } from '@kalisio/kdk/map.client'
+import { kalisio, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
 // canvas layer's draw context
@@ -47,7 +45,7 @@ postRobot.on('setConfiguration', async (event) => {
   updateThemeColors()
 })
 
-export default async ({ app, router, Vue }) => {
+export default async ({ app }) => {
   await utils.sendEmbedEvent('kano-ready')
 
   const api = kalisio()
@@ -77,7 +75,35 @@ export default async ({ app, router, Vue }) => {
 
   await utils.sendEmbedEvent('api-ready')
 
-  Vue.use(plugin, { api })
+  // Register global properties to the the vue app
+  app.config.globalProperties.$store = Store
+  app.config.globalProperties.$layout = Layout
+  app.config.globalProperties.$events = Events
+  app.config.globalProperties.$api = api
+  app.config.globalProperties.$can = api.can
+  app.config.globalProperties.$toast = kdkCoreUtils.toast
+  // TODO. Is it required ? 
+  // app.config.globalProperties.$createComponent = utils.createComponent
+  // app.config.globalPropertiese.$createComponentVNode = utils.createComponentVNode
+  app.config.globalProperties.$geolocation = Geolocation
+
+  app.config.globalProperties.$config = function (path, defaultValue) {
+    return _.get(config, path, defaultValue)
+  }
+
+  // Register global components
+  app.component('KAction', await kdkCoreUtils.loadComponent('frame/KAction'))
+  app.component('KPanel', await kdkCoreUtils.loadComponent('frame/KPanel'))
+  app.component('KStamp', await kdkCoreUtils.loadComponent('frame/KStamp'))
+  app.component('KModal', await kdkCoreUtils.loadComponent('frame/KModal'))
+  app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
+  app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
+
+  // Register global properties
+  // FIXME: This is used for testing purpose, don't know how to access this from Puppeteer otherwise
+  global.$store = app.config.globalProperties.$store
+  global.$layout = app.config.globalProperties.$layout
+  global.$api = app.config.globalProperties.$api
 
   // Add global guard
   beforeGuard.registerGuard(authenticationGuard)

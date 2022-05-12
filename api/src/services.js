@@ -3,17 +3,20 @@ import path from 'path'
 import fs from 'fs-extra'
 import zlib from 'zlib'
 import request from 'superagent'
-import kCore, { permissions } from '@kalisio/kdk/core.api'
-import kMap, { createFeaturesService } from '@kalisio/kdk/map.api'
-import packageInfo from '../../package.json'
+import { fileURLToPath } from 'url'
+import kCore, { permissions } from '@kalisio/kdk/core.api.js'
+import kMap, { createFeaturesService } from '@kalisio/kdk/map.api.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const servicesPath = path.join(__dirname, 'services')
 
-module.exports = async function () {
+export default async function () {
   const app = this
 
   // Set up our plugin services
   try {
+    const packageInfo = fs.readJsonSync(path.join(__dirname, '../../package.json'))
     app.use(app.get('apiPath') + '/capabilities', (req, res, next) => {
       const response = {
         name: 'kano',

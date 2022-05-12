@@ -1,6 +1,6 @@
-const express = require('@feathersjs/express')
+import express from '@feathersjs/express'
 
-module.exports = function () {
+export default function () {
   // Add your custom middleware here. Remember, that
   // in Express the order matters, `notFound` and
   // the error handler have to go last.

@@ -1,4 +1,4 @@
-import { permissions } from '@kalisio/kdk/core.common'
+import { permissions } from '@kalisio/kdk/core.common.js'
 
 // FIXME: this file is duplicated in the api folder
 // Indeed, permissions files are usually isomorphic files. However, when we tried to create a common folder

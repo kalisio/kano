@@ -102,7 +102,7 @@ export default {
     this.$toast({ message: this.$t('Index.VERSION_MISMATCH') })
   },
   async mounted () {
-    this.$events.$on('user-changed', user => {
+    this.$events.on('user-changed', user => {
       this.user = user
       // Check if we need to redirect based on the fact there is an authenticated user
       this.redirect()

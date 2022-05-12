@@ -21,6 +21,9 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 
 export default {
   name: 'map-activity',
+  components: {
+    KPage: utils.loadComponent('layout/KPage')
+  },
   mixins: [
     kCoreMixins.refsResolver(['map']),
     baseActivityMixin,
@@ -135,8 +138,6 @@ export default {
     }
   },
   created () {
-    // Load the required components
-    this.$options.components['k-page'] = this.$load('layout/KPage')
     // Setup the engine
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
     this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)

@@ -19,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/kalisio/kano/issues"
   },
+  "type": "module",
   "main": "main.js",
   "scripts": {
     "release:patch": "npm --no-git-tag-version version patch",
@@ -26,15 +27,13 @@
     "release:major": "npm --no-git-tag-version version major",
     "dev": "nodemon --watch src --exec npm run debug",
     "dev:replica": "nodemon --watch src --exec npm run debug:replica",
-    "debug": "npm run build && cross-env NODE_ENV=development node --inspect dist/main.js",
-    "debug:replica": "npm run build && cross-env NODE_ENV=development node --inspect=localhost:9230 dist/main.js",
-    "clean": "node build/script.clean.js",
-    "build": "npm run clean && babel src -d dist -s",
-    "prod": "cross-env NODE_ENV=production node dist/main.js",
-    "lint": "standard src/**/*.js test/**/*.js config/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" SUBDOMAIN= mocha --require babel-core/register",
-    "coverage": "nyc npm run mocha",
-    "test": "npm run build && npm run lint && npm run coverage"
+    "debug": "cross-env NODE_ENV=development node --inspect src/main.js",
+    "debug:replica": "cross-env NODE_ENV=development node --inspect=localhost:9230 src/main.js",
+    "prod": "cross-env NODE_ENV=production node src/main.js",
+    "lint": "standard src/**/*.js test/**/*.js --fix",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha",
+    "coverage": "c8 npm run mocha",
+    "test": "npm run lint && npm run coverage"
   },
   "standard": {
     "parser": "babel-eslint",
@@ -46,23 +45,16 @@
   "devDependencies": {
     "@feathersjs/client": "^3.5.3",
     "@slack/webhook": "^5.0.2",
-    "babel-cli": "^6.24.0",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-export-extensions": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
+    "c8": "^7.11.0",
     "chai": "^4.3.4",
     "chai-lint": "^0.1.1",
     "colors": "^1.1.2",
     "concat-stream": "^2.0.0",
     "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
     "mocha": "^9.1.1",
     "nodemon": "^1.11.0",
-    "nyc": "^15.0.1",
     "shelljs": "^0.8.5",
-    "standard": "^14.0.0"
+    "standard": "^16.0.4"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.7",

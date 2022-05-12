@@ -9,6 +9,7 @@
 <script>
 import _ from 'lodash'
 import logger from 'loglevel'
+import { utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
 
 export default {
   data () {
@@ -70,27 +71,18 @@ export default {
   },
   created () {
     // Install the icon mapping function to handle kdk icons
-    this.$q.iconMapFn = (iconName) => {
-      if (iconName.startsWith('kdk:') === true) {
-        // we strip the "kdk:" part
-        const name = iconName.substring(4)
-        // Load the icon
-        const icon = this.$load('icons/' + name, 'asset')
-        // Return the inlined icon
-        return { icon: 'img:' + icon }
-      }
-    }
+    this.$q.iconMapFn = kdkCoreUtils.mapIconFunction
   },
   mounted () {
     // Check for error on refresh
     this.showRouteError(this.$route)
-    this.$events.$on('error-hook', hook => {
+    this.$events.on('error-hook', hook => {
       this.nbCompletedRequests++
       this.stopProgress()
       // Forward to global error handler
       this.$events.$emit('error', hook.error)
     })
-    this.$events.$on('error', error => {
+    this.$events.on('error', error => {
       // Translate the message if a translation key exists
       const translation = _.get(error, 'data.translation')
       if (translation) {
@@ -108,11 +100,11 @@ export default {
       }
       this.showError(error)
     })
-    this.$events.$on('before-hook', hook => {
+    this.$events.on('before-hook', hook => {
       this.nbRequests++
       this.startProgress()
     })
-    this.$events.$on('after-hook', hook => {
+    this.$events.on('after-hook', hook => {
       this.nbCompletedRequests++
       this.stopProgress()
     })
