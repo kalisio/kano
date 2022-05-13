@@ -29,7 +29,7 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
   })
 
-  Store.set('router', router)
+  Store.set('router', Router)
   Store.set('tours', Object.assign({
     current: {
       name: '',
@@ -38,5 +38,5 @@ export default route(function (/* { store, ssrContext } */) {
     }
   }, utils.buildTours(routeConfig)))
   
-  return router
+  return Router
 })

@@ -1,22 +1,17 @@
 const tours = require('../tours')
 
-module.exports = {
-  '/': {
+module.exports = [{
+    path: '/',
     name: 'index',
     component: 'Index',
-    // By default all child routes are considered unauthenticated,
-    // will be overriden when required
     meta: { unauthenticated: true },
     children: {
-      login: {
-        component: 'authentication/KLogin',
-        tour: tours.login
-      },
+      login: 'screen/KLoginScreen',
       logout: {
-        component: 'authentication/KLogout',
+        component: 'screen/KLogoutScreen',
         meta: { authenticated: true }
       },
-      'change-endpoint': 'authentication/KChangeEndpoint',
+      'change-endpoint': 'screen/KEndpointScreen',
       home: {
         // The name of the route has to be set the default child
         name: '',
@@ -82,5 +77,10 @@ module.exports = {
       }
     }
   },
-  '*': 'Error404'
-}
+  // Always leave this as last one,
+  // but you can also remove it
+  {
+    path: '/:catchAll(.*)*',
+    component: 'screen/KErrorScreen'
+  }
+]
