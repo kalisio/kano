@@ -55,7 +55,7 @@
       "mocha"
     ],
     "ignore": [
-      "src/statics"
+      "public"
     ],
     "globals": [
       "DEV",
