@@ -4,13 +4,13 @@ import postRobot from 'post-robot'
 import { Store } from '@kalisio/kdk/core.client'
 
 async function createComponent (component, options) {
-  const ComponentClass = await loadComponent(component)()
+  const ComponentClass = await utils.loadComponent(component)()
   const Component = Vue.extend(ComponentClass.default)
   return new Component(Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
 
 async function createComponentVNode (component, options) {
-  const ComponentClass = await loadComponent(component)()
+  const ComponentClass = await utils.loadComponent(component)()
   const Component = Vue.extend(ComponentClass.default)
   return this.$createElement(Component, Object.assign({ i18n: new VueI18next(i18next) }, options))
 }
@@ -113,7 +113,7 @@ function buildRoutes (config) {
       // Otherwise we have an object similar to what expect vue-router,
       // we simply return the async component loading function with the given component value
       if (typeof value === 'string') {
-        route.component = loadComponent(value)
+        route.component = () => import(`@components/${value}.vue`)
       } else {
         // Take care that path can be empty so we cannot just check with a if
         if (_.has(value, 'path')) {
@@ -124,7 +124,7 @@ function buildRoutes (config) {
           route.name = value.name
         }
         if (_.has(value, 'component')) {
-          route.component = loadComponent(value.component)
+          route.component = () => import(`@components/${value.component}.vue`)
           if (_.has(value, 'embedApi')) {
             setupEmbedApi(route.name)
           }
@@ -186,7 +186,6 @@ function buildTours (config) {
 }
 
 let utils = {
-  loadComponent,
   loadSchema,
   loadTranslation,
   resolveAsset,
