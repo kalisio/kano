@@ -25,64 +25,52 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      },
-      mode: 'screenshots'
+      }/* ,
+      mode: 'screenshots' */
     })
     page = await runner.start()
     await core.login(page, current_user)
   })
 
   it('create layer', async () => {
-    await map.createLayer(page, 'saisie', runner.getDataPath('saisie.json'), 'id', 1500)
+    await map.createLayer(page, 'saisie', runner.getDataPath('saisie.json'), 'id', 500)
     await core.clickTopPaneAction(page, 'accept')
-    // Couche ajoutée, pas en édition
   })
 
   it('add line', async () => {
-    await map.goToPosition(page, 43.31588, 1.95109, 1500)
+    await map.goToPosition(page, 43.31588, 1.95109, 500)
     await map.zoomToLevel(page, 17)
-    // En position
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // En édition
+    await core.clickRightPaneAction(page, 'edit-data', 500)
     await core.clickTopPaneAction(page, 'add-lines')
-    await page.waitForTimeout(1500)
-    await core.click(page, '#map', 2000)
-    await map.moveMap(page, 'up', 4, 500)
-    await map.moveMap(page, 'right', 3, 500)
-    await core.click(page, '#map', 2000)
+    await page.waitForTimeout(1000)
+    await core.click(page, '#map', 1000)
+    await map.moveMap(page, 'up', 4)
+    await map.moveMap(page, 'right', 3)
+    await core.click(page, '#map', 1000)
     await page.waitForTimeout(1500)
     await core.click(page, '#map')
     await core.clickRightPaneAction(page, 'layer-actions')
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // Donnée enregistrée, plus en édition
-    //const match = await runner.captureAndMatch('line')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/line.png' })
-    //expect(await runner.captureAndMatch('line')).beTrue()
+    expect(await runner.captureAndMatch('t1-line')).beTrue()
   })
 
   it('add points', async () => {
     await map.zoomToLevel(page, 15)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // En édition
     await core.clickTopPaneAction(page, 'add-points', 1000)
-    await map.moveMap(page, 'left', 2, 500)
-    await core.click(page, '#map', 2000)
-    await map.moveMap(page, 'right', 4, 500)
-    await core.click(page, '#map', 2000)
+    await map.moveMap(page, 'left', 2)
+    await core.click(page, '#map', 1000)
+    await map.moveMap(page, 'right', 4)
+    await core.click(page, '#map', 1000)
     await core.clickTopPaneAction(page, 'accept')
-    // Donnée enregistrée, plus en édition
-    //const match = await runner.captureAndMatch('points')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/points.png' })
-    //expect(await runner.captureAndMatch('points')).beTrue()
+    //await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
+    expect(await runner.captureAndMatch('t2-points')).beTrue()
   })
 
   it('save layer', async () => {
-    await map.saveLayer(page, userLayersTab, 'saisie', 2000)
-    //const match = await runner.captureAndMatch('polygon')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/all_features.png' })
-    //expect(await runner.captureAndMatch('polygon')).beTrue()
+    await map.saveLayer(page, userLayersTab, 'saisie', 1500)
   })
 
   it('add rectangle', async () => {
@@ -90,14 +78,14 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 17)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // En édition
     await core.clickTopPaneAction(page, 'add-rectangles', 1000)
-    await core.click(page, '#map', 2000)
-    await map.moveMap(page, 'down', 2, 500)
-    await map.moveMap(page, 'right', 2, 500)
-    await core.click(page, '#map', 2000)
+    await core.click(page, '#map', 1000)
+    await map.moveMap(page, 'down', 2)
+    await map.moveMap(page, 'right', 2)
+    await core.click(page, '#map', 1000)
     await core.clickTopPaneAction(page, 'accept')
-    // Donnée enregistrée, plus en édition
+    //await page.screenshot({ path: './test/data/schema/screenrefs/t3-rectangle.png' })
+    expect(await runner.captureAndMatch('t3-rectangle')).beTrue()
   })
 
   
@@ -106,37 +94,32 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 17)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // En édition
     await core.clickTopPaneAction(page, 'add-polygons', 1000)
-    await core.click(page, '#map', 500)
+    await core.click(page, '#map')
     await map.moveMap(page, 'down', 1)
-    await core.click(page, '#map', 500)
+    await core.click(page, '#map')
     await map.moveMap(page, 'down', 1)
     await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map', 500)
+    await core.click(page, '#map')
     await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map', 500)
+    await core.click(page, '#map')
     await map.moveMap(page, 'up', 1)
-    await core.click(page, '#map', 500)
-    await map.moveMap(page, 'left', 1)
+    await core.click(page, '#map')
     await map.moveMap(page, 'up', 1)
-    await core.click(page, '#map', 500)
     await map.moveMap(page, 'left', 1)
-    await core.click(page, '#map', 500)
-    await core.click(page, '#map', 500)
+    await core.click(page, '#map')
+    await map.moveMap(page, 'left', 1)
+    await core.click(page, '#map')
+    await core.click(page, '#map')
     await core.clickTopPaneAction(page, 'accept')
-    // Donnée enregistrée, plus en édition
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'zoom-to', 1500)
-    //const match = await runner.captureAndMatch('polygon')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/polygon.png' })
-    //expect(await runner.captureAndMatch('polygon')).beTrue()
+    expect(await runner.captureAndMatch('t4-polygon')).beTrue()
   })
 
-  it('edit style', async () => {
-    await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
-    await core.click(page, '#apply-button')
+  it('show all features canvas', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'zoom-to', 1500)
+    await page.waitForTimeout(3000)
+    expect(await runner.captureAndMatch('t5-zoom-to')).beTrue()
   })
 
   it('remove rectangle', async () => {
@@ -145,30 +128,96 @@ describe(`suite:${suite}`, () => {
     await map.moveMap(page, 'down', 1)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    // En édition
     await core.clickTopPaneAction(page, 'remove', 1000)
     await core.click(page, '#map', 1500)
-    //await core.clickTopPaneAction(page, 'accept')
+    await core.clickTopPaneAction(page, 'accept')
+    await page.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t6-remove-rectangle')).beTrue()
+  })
+
+  it('remove point', async () => {
+    await map.goToPosition(page, 43.31904, 1.96055, 1500)
+    await map.zoomToLevel(page, 17)
+    await map.moveMap(page, 'down', 1)
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickTopPaneAction(page, 'remove', 1000)
+    await core.click(page, '#map', 1500)
+    // stop editing using 'accept' arrow
+    await core.clickTopPaneAction(page, 'accept')
+    await page.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t7-remove-point')).beTrue()
+  })
+
+  it('remove line', async () => {
+    await map.goToPosition(page, 43.31652, 1.95110, 1500)
+    await map.zoomToLevel(page, 17)
+    await map.moveMap(page, 'down', 1)
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickTopPaneAction(page, 'remove', 1000)
+    await core.click(page, '#map', 1500)
+    // stop editing using layer menu link
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await page.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t8-remove-line')).beTrue()
+  })
+
+  it('edit point', async () => {
+    await map.goToPosition(page, 43.31902, 1.94681, 1500)
+    await map.zoomToLevel(page, 17)
+    await map.moveMap(page, 'down', 1)
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickTopPaneAction(page, 'edit-properties', 1500)
+    await core.click(page, '#map', 500)
+    await core.type(page, '#id-field', 'pt1', false, true)
+    await core.type(page, '#Nom-field', 'Point 1')
+    await core.type(page, '#Information-field', 'Point 1 description')
+    await core.click(page, '#apply-button', 1500)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
   })
 
-  /* it('edit properties', async () => {
+  it('edit polygon', async () => {
+    await map.goToPosition(page, 43.31379, 1.95728, 1500)
+    await map.zoomToLevel(page, 17)
+    await map.moveMap(page, 'down', 1)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickXPath(page, '/html/body/div[1]/div[2]/div[2]/div/div/main/div[1]/div/div[1]/div[1]/div[3]/svg/g/path')
-    await core.clickTopPaneAction(page, 'edit-properties')
-    await core.type(page, '#id-field', 1)
-    await core.type(page, '#nom-field', `Test name`)
-    await core.type(page, '#obs-field', `Test observation`)
-    await core.clickAction(page, 'apply-button', 1000)
+    await core.clickTopPaneAction(page, 'edit-properties', 1500)
+    await core.click(page, '#map', 500)
+    await core.type(page, '#id-field', 'pol1', false, true)
+    await core.type(page, '#Nom-field', 'Polygon 1')
+    await core.type(page, '#Information-field', 'Polygon 1 description')
+    await core.click(page, '#apply-button', 1500)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
+  })
+
+  it('view data', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions', 1500)
+    await core.clickRightPaneAction(page, 'view-data', 1500)
+    await page.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t9-view-data')).beTrue()
+    await core.click(page, '#item-actions', 1500)
+    expect(await runner.captureAndMatch('t10-go-to-feature')).beTrue()
+  })
+
+  /* it('show feature info', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions')
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-popup-group')
+    await core.click(page, '#style-toggle-popup')
+    await core.click(page, '#style-popup-field', 500)
+    await core.click(page, '#Nom', 500)
+    await core.click(page, '#apply-button')
   }) */
 
-  /* it('remove layer', async () => {
-    await map.removeLayer(page, userLayersTab, 'test')
-  }) */
+  it('remove layer', async () => {
+    await map.removeLayer(page, userLayersTab, 'saisie')
+  })
   
   after(async () => {
     await page.waitForTimeout(5000)
