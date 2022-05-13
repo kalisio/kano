@@ -91,7 +91,8 @@ module.exports = configure(function (ctx) {
 
       extendWebpack (cfg) {
         cfg.resolve.fallback = {
-          fs: false 
+          fs: false,
+          'dom-serializer': false
         },
         // Required for old dependencies, i.e. feathers.js
         cfg.resolve.modules = [
