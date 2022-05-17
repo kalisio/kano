@@ -83,16 +83,19 @@ module.exports = configure(function (ctx) {
       
       chainWebpack (chain) {
         chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
-        // This is required since webpack 5 removed nodejs polyfilss
-        // see https://quasar.dev/start/upgrade-guide#nodejs-polyfills
-        const nodePolyfillWebpackPlugin = require('node-polyfill-webpack-plugin')
-        chain.plugin('node-polyfill').use(nodePolyfillWebpackPlugin)
       },
 
       extendWebpack (cfg) {
         cfg.resolve.fallback = {
           fs: false,
-          'dom-serializer': false
+          'dom-serializer': false,
+          assert: require.resolve('assert'),
+          http: require.resolve('stream-http'),
+          https: require.resolve('https-browserify'),
+          path: require.resolve('path-browserify'),
+          stream: require.resolve('stream-browserify'),
+          timers: require.resolve('timers-browserify'),
+          zlib: require.resolve('browserify-zlib')
         },
         // Required for old dependencies, i.e. feathers.js
         cfg.resolve.modules = [

@@ -7,14 +7,19 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
 import logger from 'loglevel'
 import { Loading, Dialog } from 'quasar'
-import { mixins, beforeGuard } from '@kalisio/kdk/core.client'
+import { mixins, beforeGuard, utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
 import config from 'config'
 import utils from '../utils'
 
 export default {
   name: 'index',
+  components: {
+    KWelcome: import('@components/layout/KWelcome.vue'),
+    KTour: import('@components/layout/KTour.vue')
+  },
   // authorisation mixin is required to automatically update user' abilities on update
   mixins: [mixins.authentication, mixins.authorisation],
   methods: {
@@ -42,8 +47,6 @@ export default {
     }
   },
   async created () {
-    this.$options.components['k-welcome'] = utils.loadComponent('layout/KWelcome')
-    this.$options.components['k-tour'] = utils.loadComponent('layout/KTour')
     // initialize the user
     this.user = this.$store.get('user')
     if (this.$api.socket) {

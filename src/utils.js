@@ -186,10 +186,6 @@ function buildTours (config) {
 }
 
 let utils = {
-  loadSchema,
-  loadTranslation,
-  resolveAsset,
-  load,
   createComponent,
   createComponentVNode,
   sendEmbedEvent,

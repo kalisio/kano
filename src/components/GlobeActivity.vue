@@ -14,6 +14,7 @@
 
 <script>
 import _ from 'lodash'
+import { defineAsyncComponent } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils'
@@ -23,7 +24,7 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 export default {
   name: 'globe-activity',
   components: {
-    KPage: utils.loadComponent('layout/KPage')
+    KPage: import('@components/layout/KPage')
   },
   mixins: [
     kCoreMixins.refsResolver(['globe']),
