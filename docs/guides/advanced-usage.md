@@ -174,7 +174,7 @@ export default {
     this.kMap.$on('current-time-changed', this.onTimeChanged)
     ...
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.kMap.$off('current-time-changed', this.onTimeChanged)
   }
 }

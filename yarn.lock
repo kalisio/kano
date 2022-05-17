@@ -9706,7 +9706,7 @@ polylabel@^1.1.0:
   dependencies:
     tinyqueue "^2.0.3"
 
-popper.js@^1.16.0:
+popper.js@^1.16.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
@@ -12200,22 +12200,16 @@ vue-style-loader@4.1.3:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tour@~1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/vue-tour/-/vue-tour-1.4.0.tgz#e8ef0656e98f87e55659f00c3dd64ec5853945b1"
-  integrity sha512-vsuxNLsSSKBOJpDme1ZkcY744LYk+l4TSfQz39xJZ4BE1GrioyTzS4+PT3D1nKhT/3vOZurNM66cZgzgRNZ/wA==
+vue3-tour@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vue3-tour/-/vue3-tour-0.2.0.tgz#d57e1f9a13ad152b9ff08941e0ccf9b765a9e2ee"
+  integrity sha512-E5ZFtckl1/KOtJ0Cc29thwY6x0Ui++1D+ibJGMLeBadgu7IA5ab8xkeGQhfp//qWfe9+H5e/QnBP0JifCi/Ytw==
   dependencies:
-    hash-sum "^2.0.0"
     jump.js "^1.0.2"
-    popper.js "^1.16.0"
-    vue "^2.6.10"
+    popper.js "^1.16.1"
+    vue "^3.0.5"
 
-vue@^2.6.10:
-  version "2.6.14"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
-  integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
-
-vue@^3.0.0:
+vue@^3.0.0, vue@^3.0.5:
   version "3.2.33"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.33.tgz#7867eb16a3293a28c4d190a837bc447878bd64c2"
   integrity sha512-si1ExAlDUrLSIg/V7D/GgA4twJwfsfgG+t9w10z38HhL/HA07132pUQ2KuwAo8qbCyMJ9e6OqrmWrOCr+jW7ZQ==

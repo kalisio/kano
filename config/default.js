@@ -317,20 +317,19 @@ module.exports = {
     }
   },
   screens: {
-    banner: 'kano-logo-black-256x84.png',
+    banner: 'kano-banner.png',
     login: {
-      providers: [],
-      links: [
+      actions: [
         { id: 'contextual-help', label: 'KLogin.CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
       ]
     },
     logout: {
-      links: [
+      actions: [
         { id: 'login-link', label: 'KLogout.LOG_IN_AGAIN_LINK', route: { name: 'login' } }
       ]
     },
-    changeEndpoint: {
-      links: [
+    endpoint: {
+      actions: [
         { id: 'login-link', label: 'KChangeEndpoint.LOGIN_LINK', route: { name: 'login' } }
       ]
     }

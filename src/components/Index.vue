@@ -1,7 +1,7 @@
 <template>
   <div>
-    <k-tour ref="tour" />
-    <k-welcome />
+    <KTour />
+    <kWelcome />
     <router-view></router-view>
   </div>
 </template>
@@ -17,8 +17,8 @@ import utils from '../utils'
 export default {
   name: 'index',
   components: {
-    KWelcome: import('@components/layout/KWelcome.vue'),
-    KTour: import('@components/layout/KTour.vue')
+    KWelcome: kdkCoreUtils.loadComponent('layout/KWelcome'),
+    KTour: kdkCoreUtils.loadComponent('layout/KTour')
   },
   // authorisation mixin is required to automatically update user' abilities on update
   mixins: [mixins.authentication, mixins.authorisation],

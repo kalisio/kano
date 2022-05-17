@@ -1,18 +1,17 @@
 <template>
   <q-card>
     <q-card-section>
-      <k-markdown-viewer url="statics/kapp-terms.md"></k-markdown-viewer>
+      <KMarkdownViewer url="statics/kapp-terms.md" />
     </q-card-section>
   </q-card>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import { utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
 
 export default {
-  name: 'terms',
-  created () {
-    KMarkdownViewer: import('@components/media/KMarkdownViewer.vue')
+  components: {
+    KMarkdownViewer: kdkCoreUtils.loadComponent('media/KMarkdownViewer')
   }
 }
 </script>

@@ -34,7 +34,9 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
       'i18n',
-      'kdk'
+      'kdk',
+      'plugins',
+      'tour'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -53,8 +55,8 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli-webpack/quasar-config-js#property-htmlvariables
     htmlVariables: {
       appName: 'Kano',
-      appSlug: 'kano'
-      
+      appSlug: 'kano',
+      appDescription: 'A powerful real-time Geovisualizer'
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
@@ -219,9 +221,9 @@ module.exports = configure(function (ctx) {
       },
       
       manifest: {
-        name: `Kano`,
-        short_name: `Kano`,
-        description: `A powerful geospatial viewer`,
+        name: 'Kano',
+        short_name: 'Kano',
+        description: 'A powerful real-time Geovisualizer',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
