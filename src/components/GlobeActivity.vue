@@ -83,33 +83,34 @@ export default {
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('dblclick', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
     },
-    generateHandlerForLayerEvent (event) {
-      return (layer) => utils.sendEmbedEvent(event, { layer })
+    onLayerShown (layer, leafletLayer) {
+      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer, leafletLayer)
+      utils.sendEmbedEvent('layer-shown', { layer })
+    },
+    onLayerHidden (layer, leafletLayer) {
+      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer, leafletLayer)
+      utils.sendEmbedEvent('layer-hidden', { layer })
+    },
+    onLayerAdded (layer) {
+      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer)
+      utils.sendEmbedEvent('layer-added', { layer })
+    },
+    onLayerRemoved (layer) {
+      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer)
+      utils.sendEmbedEvent('layer-removed', { layer })
     }
   },
   mounted () {
     this.$events.on('capabilities-api-changed', this.refreshActivity)
-    this.$on('click', this.onClicked)
-    this.$on('dblclick', this.onDblClicked)
-    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
-    this.$on('layer-added', this.onAddedLayerEvent)
-    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
-    this.$on('layer-shown', this.onShownLayerEvent)
-    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
-    this.$on('layer-hidden', this.onHiddenLayerEvent)
-    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
-    this.$on('layer-removed', this.onRemovedLayerEvent)
+    this.$engineEvents.on('click', this.onClicked)
+    this.$engineEvents.on('dblclick', this.onDblClicked)
   },
-  beforeDestroy () {
-    this.$events.$off('capabilities-api-changed', this.refreshActivity)
-    this.$off('click', this.onClicked)
-    this.$off('dblclick', this.onDblClicked)
-    this.$off('layer-added', this.onAddedLayerEvent)
-    this.$off('layer-shown', this.onShownLayerEvent)
-    this.$off('layer-hidden', this.onHiddenLayerEvent)
-    this.$off('layer-removed', this.onRemovedLayerEvent)
+  beforeUnmounted () {
+    this.$events.off('capabilities-api-changed', this.refreshActivity)
+    this.$engineEvents.off('click', this.onClicked)
+    this.$engineEvents.off('dblclick', this.onDblClicked)
   },
-  destroyed () {
+  unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
   }
 }

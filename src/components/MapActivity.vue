@@ -70,11 +70,13 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
     },
-    onEditStartEvent (event) {
+    onEditStart (event) {
+      kMapMixins.map.editLayers.methods.onEditStart.call(this, event)
       this.setTopPaneMode('edit-layer-data')
       utils.sendEmbedEvent('edit-start', { layer: event.layer })
     },
-    onEditStopEvent (event) {
+    onEditStop (event) {
+      kMapMixins.map.editLayers.methods.onEditStop.call(this, event)
       this.setTopPaneMode('default')
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
     },
@@ -84,11 +86,11 @@ export default {
       for (const layerEvent of layerEvents) {
         const handler = (layer) => utils.sendEmbedEvent(layerEvent, { layer })
         this.layerHandlers[layerEvent] = handler
-        this.$on(layerEvent, handler)
+        this.$engineEvents.on(layerEvent, handler)
       }
     },
     removeForwardedLayerEvents () {
-      for (const layerEvent in this.layerHandlers) { this.$off(layerEvent, this.layerHandlers[layerEvent]) }
+      for (const layerEvent in this.layerHandlers) { this.$engineEvents.off(layerEvent, this.layerHandlers[layerEvent]) }
       this.layerHandlers = {}
     },
     forwardLeafletEvents (leafletEvents) {
@@ -113,11 +115,11 @@ export default {
           utils.sendEmbedEvent(leafletEvent, { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
         }
         this.leafletHandlers[leafletEvent] = handler
-        this.$on(leafletEvent, handler)
+        this.$engineEvents.on(leafletEvent, handler)
       }
     },
     removeForwardedLeafletEvents () {
-      for (const leafletEvent in this.leafletHandlers) { this.$off(leafletEvent, this.leafletHandlers[leafletEvent]) }
+      for (const leafletEvent in this.leafletHandlers) { this.$engineEvents.off(leafletEvent, this.leafletHandlers[leafletEvent]) }
       this.leafletHandlers = {}
     },
     onMoveEnd () {
@@ -148,21 +150,17 @@ export default {
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed']
     this.forwardLayerEvents(allLayerEvents)
-    this.$on('edit-start', this.onEditStartEvent)
-    this.$on('edit-stop', this.onEditStopEvent)
     // We store some information about the current navigation state in store, initialize it
     this.$store.set(this.activityName, {})
-    this.$on('moveend', this.onMoveEnd)
+    this.$engineEvents.on('moveend', this.onMoveEnd)
   },
-  beforeDestroy () {
+  beforeUnmounted () {
     // Remove event connections
     this.removeForwardedLeafletEvents()
     this.removeForwardedLayerEvents()
-    this.$off('edit-start', this.onEditStartEvent)
-    this.$off('edit-stop', this.onEditStopEvent)
-    this.$off('moveend', this.onMoveEnd)
+    this.$engineEvents.off('moveend', this.onMoveEnd)
   },
-  destroyed () {
+  unmounted () {
     utils.sendEmbedEvent('map-destroyed')
   }
 }
