@@ -1,6 +1,5 @@
 import { createI18n } from 'vue-i18n'
 import { utils as kCoreUtils } from '@kalisio/kdk/core.client'
-import config from 'config'
 
 export default async ({ app }) => {
   // Define the locale to be used

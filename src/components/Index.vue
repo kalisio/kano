@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
 import logger from 'loglevel'
 import { Loading, Dialog } from 'quasar'
 import { mixins, beforeGuard, utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
