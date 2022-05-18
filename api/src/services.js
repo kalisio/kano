@@ -54,8 +54,8 @@ export default async function () {
       }
     })
     await app.configure(kCore)
-    app.configureService('authentication', app.getService('authentication'), servicesPath)
-    app.configureService('users', app.getService('users'), servicesPath)
+    await app.configureService('authentication', app.getService('authentication'), servicesPath)
+    await app.configureService('users', app.getService('users'), servicesPath)
     await app.configure(kMap)
   } catch (error) {
     app.logger.error(error.message)
@@ -78,8 +78,8 @@ export default async function () {
   }
 
   // Helper to register service and permissions for a layer
-  function createFeaturesServiceForLayer (options) {
-    const service = createFeaturesService.call(app, options)
+  async function createFeaturesServiceForLayer (options) {
+    const service = await createFeaturesService.call(app, options)
     // Register default permissions for it
     permissions.defineAbilities.registerHook((subject, can, cannot) => {
       can('service', options.collection)
@@ -169,6 +169,6 @@ export default async function () {
   }
 
   // Service to store user features
-  const featuresService = createFeaturesServiceForLayer({ collection: 'features' })
-  app.configureService('features', featuresService, servicesPath)
+  const featuresService = await createFeaturesServiceForLayer({ collection: 'features' })
+  await app.configureService('features', featuresService, servicesPath)
 }

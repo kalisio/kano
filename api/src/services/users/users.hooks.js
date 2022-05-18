@@ -1,15 +1,15 @@
-import { iff, disallow, isProvider, preventChanges } from 'feathers-hooks-common'
+import commonHooks from 'feathers-hooks-common'
 
-module.exports = {
+export default {
   before: {
     all: [],
     find: [],
     get: [],
     create: [],
-    update: [disallow('external')],
+    update: [commonHooks.disallow('external')],
     patch: [
-      iff(isProvider('external'), preventChanges('catalog')),
-      iff(isProvider('external'), preventChanges('layers'))
+      commonHooks.iff(commonHooks.isProvider('external'), commonHooks.preventChanges('catalog')),
+      commonHooks.iff(commonHooks.isProvider('external'), commonHooks.preventChanges('layers'))
     ],
     remove: []
   },

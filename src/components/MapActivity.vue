@@ -2,7 +2,7 @@
   <k-page :padding="false">
     <template v-slot:page-content>
       <!-- Map -->
-      <div id="map" ref="map" :style="viewStyle">
+      <div id="map" :ref="configureMap" :style="viewStyle">
         <q-resize-observer @resize="onMapResized" />
       </div>
       <!-- Child views -->
@@ -22,16 +22,6 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 export default {
   name: 'map-activity',
   mixins: [
-    kCoreMixins.refsResolver(['map']),
-    baseActivityMixin,
-    kMapMixins.activity,
-    kMapMixins.style,
-    kMapMixins.featureSelection,
-    kMapMixins.featureService,
-    kMapMixins.infobox,
-    kMapMixins.weacast,
-    kMapMixins.levels,
-    kMapMixins.context,
     kMapMixins.map.baseMap,
     kMapMixins.map.canvasLayers,
     kMapMixins.map.geojsonLayers,
@@ -47,7 +37,16 @@ export default {
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers,
-    kMapMixins.map.gsmapLayers
+    kMapMixins.map.gsmapLayers,
+    baseActivityMixin,
+    kMapMixins.activity,
+    kMapMixins.style,
+    kMapMixins.featureSelection,
+    kMapMixins.featureService,
+    kMapMixins.infobox,
+    kMapMixins.weacast,
+    kMapMixins.levels,
+    kMapMixins.context
   ],
   provide () {
     return {
@@ -56,10 +55,10 @@ export default {
     }
   },
   methods: {
-    async configureActivity () {
-      baseActivityMixin.methods.configureActivity.call(this)
+    async configureMap (container) {
+      if (!container) return
       // Wait until map is ready
-      await this.initializeMap()
+      await this.initializeMap(container)
       // Notifie the listener
       utils.sendEmbedEvent('map-ready')
     },

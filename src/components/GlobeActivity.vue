@@ -2,7 +2,7 @@
   <k-page :padding="false">
     <template v-slot:page-content>
       <!-- Globe -->
-      <div id="globe" ref="globe" :style="viewStyle">
+      <div id="globe" :ref="configureGlobe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
         <div id="globe-credit" />
       </div>
@@ -23,7 +23,6 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 export default {
   name: 'globe-activity',
   mixins: [
-    kCoreMixins.refsResolver(['globe']),
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
@@ -48,13 +47,13 @@ export default {
     }
   },
   methods: {
-    async configureActivity () {
-      baseActivityMixin.methods.configureActivity.call(this)
+    async configureGlobe (container) {
+      if (!globe) return
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
       // Wait until viewer is ready
-      await this.initializeGlobe(token)
+      await this.initializeGlobe(container, token)
       // Notifie the listener
       utils.sendEmbedEvent('globe-ready')
     },
