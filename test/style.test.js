@@ -71,14 +71,14 @@ describe(`suite:${suite}`, () => {
   })
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
-    await core.zoomToLevel(page, 13)
+    await map.zoomToLevel(page, 13)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S1_test3_Canal_Midi_z13')).beTrue()
     //await page.screenshot({ path: './test/data/style/screenrefs/S1_test3_Canal_Midi_z13_test.png' })
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
-    await core.zoomToLevel(page, 17)
+    await map.zoomToLevel(page, 17)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S1_test4_Canal_Midi_z17')).beTrue()
     //await page.screenshot({ path: './test/data/style/screenrefs/S1_test4_Canal_Midi_z17_test.png' })
@@ -125,7 +125,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#choose-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1000)
-    await core.zoomToLevel(page, 16)
+    await map.zoomToLevel(page, 16)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test3_Enjeux_Inondation')).beTrue()
     //await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })

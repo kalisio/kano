@@ -5,7 +5,7 @@
   "type": "object",
   "properties": {
     "id": {
-      "type": "serial", 
+      "type": "integer", 
       "field": {
         "component": "form/KTextField",
         "helper": "ID de l'entité"
