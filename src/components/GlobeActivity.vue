@@ -4,8 +4,8 @@
       <!-- Globe -->
       <div id="globe" :ref="configureGlobe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
-        <div id="globe-credit" />
       </div>
+      <div id="globe-credit" />
       <!-- Child views -->
       <router-view />
     </template>
@@ -23,14 +23,6 @@ const baseActivityMixin = kCoreMixins.baseActivity()
 export default {
   name: 'globe-activity',
   mixins: [
-    baseActivityMixin,
-    kMapMixins.activity,
-    kMapMixins.style,
-    kMapMixins.featureSelection,
-    kMapMixins.featureService,
-    kMapMixins.infobox,
-    kMapMixins.weacast,
-    kMapMixins.context,
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,
     kMapMixins.globe.fileLayers,
@@ -38,7 +30,15 @@ export default {
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
     kMapMixins.globe.activity,
-    kMapMixins.globe.opendapLayers
+    kMapMixins.globe.opendapLayers,
+    baseActivityMixin,
+    kMapMixins.activity,
+    kMapMixins.style,
+    kMapMixins.featureSelection,
+    kMapMixins.featureService,
+    kMapMixins.infobox,
+    kMapMixins.weacast,
+    kMapMixins.context
   ],
   provide () {
     return {
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     async configureGlobe (container) {
-      if (!globe) return
+      if (!container) return
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return

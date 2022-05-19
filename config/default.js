@@ -415,6 +415,9 @@ module.exports = {
       ]
     },
     page: {
+      sticky: {
+        zIndex: 1000 // On top of Leaflet layers
+      },
       content: [{
         id: 'color-legend', component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
       }, {
