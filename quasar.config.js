@@ -170,7 +170,8 @@ module.exports = configure(function (ctx) {
         'Notify',
         'Dialog',
         'Platform',
-        'Loading'
+        'Loading',
+        'AppFullscreen'
       ]
     },
 

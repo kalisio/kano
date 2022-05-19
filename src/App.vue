@@ -80,7 +80,7 @@ export default {
       this.nbCompletedRequests++
       this.stopProgress()
       // Forward to global error handler
-      this.$events.$emit('error', hook.error)
+      this.$events.emit('error', hook.error)
     })
     this.$events.on('error', error => {
       // Translate the message if a translation key exists
