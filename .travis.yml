@@ -19,7 +19,7 @@ jobs:
     os: linux
     language: node_js
     node_js:
-    - '12.16'
+    - '16'
     services:
     - docker
     before_script:
@@ -30,7 +30,7 @@ jobs:
   - stage: DOC
     language: node_js
     node_js:
-    - '12.16'
+    - '16'
     install: true
     script: bash .travis.doc.sh
     deploy:
