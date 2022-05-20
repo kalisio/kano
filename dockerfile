@@ -1,4 +1,4 @@
-FROM node:12.16-buster-slim
+FROM node:16-bullseye
 LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP

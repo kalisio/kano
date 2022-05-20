@@ -32,7 +32,7 @@
   "sideNav": {
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D",
-    "CONTEXTUAL_HELP": "$t(CONTEXTUAL_HELP)",
+    "CONTEXTUAL_HELP": "@:CONTEXTUAL_HELP",
     "LOGOUT": "Se déconnecter"
   },
   "Index": {
