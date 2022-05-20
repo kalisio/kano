@@ -231,7 +231,7 @@
     "@pixi/text": "5.3.10",
     "@pixi/text-bitmap": "5.3.10",
     "@pixi/ticker": "5.3.10",
-    "@pixi/utils": "5.3,.10"
+    "@pixi/utils": "5.3.10"
   },
   "engines": {
     "node": ">= 12.22.1",
