@@ -56,7 +56,9 @@ export default {
   },
   methods: {
     async configureMap (container) {
-      if (!container) return
+      // Avoid reentrance during awaited operations
+      if (!container || this.mapContainer) return
+      this.mapContainer = container
       // Wait until map is ready
       await this.initializeMap(container)
       // Notifie the listener
@@ -66,13 +68,11 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
     },
-    onEditStart (event) {
-      kMapMixins.map.editLayers.methods.onEditStart.call(this, event)
+    onEditStartEvent (event) {
       this.setTopPaneMode('edit-layer-data')
       utils.sendEmbedEvent('edit-start', { layer: event.layer })
     },
-    onEditStop (event) {
-      kMapMixins.map.editLayers.methods.onEditStop.call(this, event)
+    onEditStopEvent (event) {
       this.setTopPaneMode('default')
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
     },
@@ -146,6 +146,8 @@ export default {
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed']
     this.forwardLayerEvents(allLayerEvents)
+    this.$engineEvents.on('edit-start', this.onEditStartEvent)
+    this.$engineEvents.on('edit-stop', this.onEditStopEvent)
     // We store some information about the current navigation state in store, initialize it
     this.$store.set(this.activityName, {})
     this.$engineEvents.on('moveend', this.onMoveEnd)
@@ -154,6 +156,8 @@ export default {
     // Remove event connections
     this.removeForwardedLeafletEvents()
     this.removeForwardedLayerEvents()
+    this.$engineEvents.off('edit-start', this.onEditStartEvent)
+    this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
   },
   unmounted () {
@@ -170,6 +174,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('../statics/position-cursor.png'), auto;
+    cursor: url('/icons/kdk/position-cursor.png'), auto;
   }
 </style>

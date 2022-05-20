@@ -1,11 +1,11 @@
 <template>
+  <div id="globe-credit"/>
   <k-page :padding="false">
     <template v-slot:page-content>
       <!-- Globe -->
       <div id="globe" :ref="configureGlobe" :style="viewStyle">
         <q-resize-observer @resize="onGlobeResized" />
       </div>
-      <div id="globe-credit" />
       <!-- Child views -->
       <router-view />
     </template>
@@ -48,7 +48,9 @@ export default {
   },
   methods: {
     async configureGlobe (container) {
-      if (!container) return
+      // Avoid reentrance during awaited operations
+      if (!container || this.globeContainer) return
+      this.globeContainer = container
       const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
       if (!token) return
@@ -79,32 +81,31 @@ export default {
       const layer = (options ? this.getLayerByName(options.name) : undefined)
       utils.sendEmbedEvent('dblclick', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
     },
-    onLayerShown (layer, leafletLayer) {
-      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer, leafletLayer)
-      utils.sendEmbedEvent('layer-shown', { layer })
-    },
-    onLayerHidden (layer, leafletLayer) {
-      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer, leafletLayer)
-      utils.sendEmbedEvent('layer-hidden', { layer })
-    },
-    onLayerAdded (layer) {
-      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer)
-      utils.sendEmbedEvent('layer-added', { layer })
-    },
-    onLayerRemoved (layer) {
-      kMapMixins.globe.baseGlobe.methods.configureActivity.call(this, layer)
-      utils.sendEmbedEvent('layer-removed', { layer })
+    generateHandlerForLayerEvent (event) {
+      return (layer) => utils.sendEmbedEvent(event, { layer })
     }
   },
   mounted () {
     this.$events.on('capabilities-api-changed', this.refreshActivity)
     this.$engineEvents.on('click', this.onClicked)
     this.$engineEvents.on('dblclick', this.onDblClicked)
+    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
+    this.$engineEvents.on('layer-added', this.onAddedLayerEvent)
+    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
+    this.$engineEvents.on('layer-shown', this.onShownLayerEvent)
+    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
+    this.$engineEvents.on('layer-hidden', this.onHiddenLayerEvent)
+    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
+    this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
   },
   beforeUnmounted () {
     this.$events.off('capabilities-api-changed', this.refreshActivity)
     this.$engineEvents.off('click', this.onClicked)
     this.$engineEvents.off('dblclick', this.onDblClicked)
+    this.$engineEvents.off('layer-added', this.onAddedLayerEvent)
+    this.$engineEvents.off('layer-shown', this.onShownLayerEvent)
+    this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
+    this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
@@ -120,6 +121,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('../statics/position-cursor.png'), auto;
+    cursor: url('/icons/kdk/position-cursor.png'), auto;
   }
 </style>

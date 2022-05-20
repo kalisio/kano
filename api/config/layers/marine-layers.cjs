@@ -19,7 +19,7 @@ module.exports = function () {
     tags: [
       'business'
     ],
-    iconUrl: 'statics/OpenSeaMap-Logo-256.png',
+    iconUrl: '/OpenSeaMap-Logo-256.png',
     icon: 'marine',
     attribution: 'OpenSeaMap © <a href="http://www.openseamap.org">OpenSeaMap</a> contributors',
     type: 'OverlayLayer',
