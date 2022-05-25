@@ -46,6 +46,10 @@ postRobot.on('setConfiguration', async (event) => {
 })
 
 export default async ({ app }) => {
+  // Required to make injections reactively linked to the provider
+  // https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
+  app.config.unwrapInjectedRef = true
+
   await utils.sendEmbedEvent('kano-ready')
 
   const api = kalisio()

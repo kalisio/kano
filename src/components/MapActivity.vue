@@ -13,6 +13,7 @@
 
 <script>
 import _ from 'lodash'
+import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import utils from '../utils.js'
@@ -51,7 +52,8 @@ export default {
   provide () {
     return {
       kActivity: this,
-      kMap: this
+      kMap: this,
+      layer: computed(() => this.selectedLayer)
     }
   },
   methods: {
