@@ -64,7 +64,7 @@
     "@kalisio/kdk": "^1.6.0",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^3.0.0",
-    "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search.git",
+    "feathers-mongodb-fuzzy-search": "https://github.com/kalisio/feathers-mongodb-fuzzy-search",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
     "http-proxy-middleware": "^0.17.4",
