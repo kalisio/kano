@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://www.kalisio.xyz/schemas/saisie.json#",
+  "title": "Données",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Identifiant"
+      }
+    },
+    "toggle": {
+      "type": "toggle",
+      "field": {
+        "component": "form/KToggleField",
+        "helper": "Valide"
+      }
+    },
+    "nom": {
+      "type": "string",
+      "field": {
+        "component": "form/KTextField",
+        "helper": "Nom"
+      }
+    },
+    "information": {
+      "type": "string",
+      "field": {
+        "component": "form/KTextareaField",
+        "helper": "Informations"
+      }
+    },
+    "type": {
+      "type": "string",
+      "field": {
+        "component": "form/KSelectField",
+        "helper": "Type",
+        "options": [
+          { "label": "La réponse A", "value": "A" },
+          { "label": "La réponse B", "value": "B" }
+        ]
+      }
+    },
+    "number": {
+      "type": "number",
+      "field": {
+        "component": "form/KNumberField",
+        "helper": "Number"
+      }
+    }
+  },
+  "required": ["id"]
+}
