@@ -102,15 +102,15 @@ const mapLayerActions = [{
     { id: 'save', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
       visible: ['isLayerStorable', { name: '$can', params: ['create', 'catalog'] }] },
     { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-filter', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'map-layer-filter', params: { layerId: ':_id' } } },
     { id: 'view-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-table', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'map-layer-table', params: { layerId: ':_id' } } },
     { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-chart', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'map-layer-chart', params: { layerId: ':_id' } } },
     { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      handler: 'onSelectLayer', route: { name: 'edit-layer', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'edit-map-layer', params: { layerId: ':_id' } } },
     { id: 'edit-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
-      handler: 'onSelectLayer', route: { name: 'edit-layer-style', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'edit-map-layer-style', params: { layerId: ':_id' } } },
     { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
     { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
@@ -184,13 +184,13 @@ const globeLayerActions = [{
   content: [
     { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
     { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-filter', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'globe-layer-filter', params: { layerId: ':_id' } } },
     { id: 'view-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-table', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'globe-layer-table', params: { layerId: ':_id' } } },
     { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'layer-chart', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'globe-layer-chart', params: { layerId: ':_id' } } },
     { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      handler: 'onSelectLayer', route: { name: 'edit-layer', params: { layerId: ':_id' } } },
+      handler: 'onSelectLayer', route: { name: 'edit-globe-layer', params: { layerId: ':_id' } } },
     { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer',
       visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
   ]
@@ -446,7 +446,7 @@ module.exports = {
         { 
           id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
           visible: { name: '$can', params: ['create', 'catalog'] },
-          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
+          route: { name: 'create-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
         },
         { 
           id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
@@ -519,11 +519,6 @@ module.exports = {
     },
     fab: {
       actions: [
-        { 
-          id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
-          visible: { name: '$can', params: ['create', 'catalog'] },
-          route: { name: 'create-map-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
-        },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
       ]
     },

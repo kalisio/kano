@@ -49,32 +49,32 @@ module.exports = [{
                 }
               },
               'layer-chart/:layerId': {
-                name: 'layer-chart',
+                name: 'map-layer-chart',
                 component: 'KFeaturesChart',
                 props: true,
               },
               'layer-filter/:layerId': {
-                name: 'layer-filter',
+                name: 'map-layer-filter',
                 component: 'KFeaturesFilter',
                 props: true,
               },
               'layer-table/:layerId': {
-                name: 'layer-table',
+                name: 'map-layer-table',
                 component: 'KFeaturesTable',
                 props: true,
               },
               'edit-layer/:layerId': {
-                name: 'edit-layer',
+                name: 'edit-map-layer',
                 component: 'KLayerEditor',
                 props: true,
               },
               'edit-layer-style/:layerId': {
-                name: 'edit-layer-style',
+                name: 'edit-map-layer-style',
                 component: 'KLayerStyleEditor',
                 props: true,
               },
               'create-view': {
-                name: 'create-map-view',
+                name: 'create-view',
                 component: 'catalog/KCreateView',
                 tour: tours['create-view']
               },
@@ -96,6 +96,28 @@ module.exports = [{
               'catalog-panel': tours['catalog-panel'],
               timeline: tours.timeline,
               fab: tours.fab
+            },
+            children: {
+              'layer-chart/:layerId': {
+                name: 'globe-layer-chart',
+                component: 'KFeaturesChart',
+                props: true,
+              },
+              'layer-filter/:layerId': {
+                name: 'globe-layer-filter',
+                component: 'KFeaturesFilter',
+                props: true,
+              },
+              'layer-table/:layerId': {
+                name: 'globe-layer-table',
+                component: 'KFeaturesTable',
+                props: true,
+              },
+              'edit-layer/:layerId': {
+                name: 'edit-globe-layer',
+                component: 'KLayerEditor',
+                props: true,
+              }
             }
           }
         }
