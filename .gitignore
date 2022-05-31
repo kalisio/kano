@@ -79,7 +79,7 @@ src/tours/core
 src/tours/map
 
 #KDK icons
-public/icons/kdk/*.png
+public/icons/kdk
 
 # local layers
 local-layers.js
