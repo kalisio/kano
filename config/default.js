@@ -46,7 +46,7 @@ const leftPane = {
 // Catalog tababr
 function catalogTabbar (activeView) {
   return {
-    id: 'catalog-tabbar', component: 'frame/KPanel', class: 'q-pa-sm', actionRenderer: 'tab', content: [
+    id: 'catalog-tabbar', component: 'frame/KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
       { 
         id: 'user-layers-tab', label: 'KUserLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
         toggled: activeView === 'user-layers' ? true : false,
@@ -78,7 +78,8 @@ const catalogPanes = {
         label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
         visible: { name: '$can', params: ['create', 'catalog'] },
         route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } },
-      }]
+      }],
+      class: 'justify-center'
     }
   ],
   'user-views': [
