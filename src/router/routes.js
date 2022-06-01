@@ -48,17 +48,17 @@ module.exports = [{
                   'create-layer': tours['create-layer']
                 }
               },
-              'layer-chart/:layerId': {
+              'layer-chart/:layerId?': {
                 name: 'map-layer-chart',
                 component: 'KFeaturesChart',
                 props: true,
               },
-              'layer-filter/:layerId': {
+              'layer-filter/:layerId?': {
                 name: 'map-layer-filter',
                 component: 'KFeaturesFilter',
                 props: true,
               },
-              'layer-table/:layerId': {
+              'layer-table/:layerId?': {
                 name: 'map-layer-table',
                 component: 'KFeaturesTable',
                 props: true,
@@ -68,7 +68,7 @@ module.exports = [{
                 component: 'KLayerEditor',
                 props: true,
               },
-              'edit-layer-style/:layerId': {
+              'edit-layer-style/:layerId?': {
                 name: 'edit-map-layer-style',
                 component: 'KLayerStyleEditor',
                 props: true,
@@ -98,17 +98,17 @@ module.exports = [{
               fab: tours.fab
             },
             children: {
-              'layer-chart/:layerId': {
+              'layer-chart/:layerId?': {
                 name: 'globe-layer-chart',
                 component: 'KFeaturesChart',
                 props: true,
               },
-              'layer-filter/:layerId': {
+              'layer-filter/:layerId?': {
                 name: 'globe-layer-filter',
                 component: 'KFeaturesFilter',
                 props: true,
               },
-              'layer-table/:layerId': {
+              'layer-table/:layerId?': {
                 name: 'globe-layer-table',
                 component: 'KFeaturesTable',
                 props: true,
