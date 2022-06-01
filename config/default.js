@@ -334,12 +334,12 @@ module.exports = {
     },
     logout: {
       actions: [
-        { id: 'login-link', label: 'KLogoutScreen.LOG_IN_AGAIN_LINK', route: { name: 'login' } }
+        { id: 'login-link', label: 'KLogoutScreen.LOG_IN_AGAIN_LABEL', route: { name: 'login' } }
       ]
     },
     endpoint: {
       actions: [
-        { id: 'login-link', label: 'KEndpointScreen.LOGIN_LINK', route: { name: 'login' } }
+        { id: 'login-link', label: 'KEndpointScreen.LOG_IN_LABEL', route: { name: 'login' } }
       ]
     }
   },
