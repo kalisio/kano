@@ -143,9 +143,9 @@
     passport "^0.4.0"
     uuid "^3.1.0"
 
-"@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
+"@feathersjs/authentication@https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -181,6 +181,11 @@
   resolved "https://registry.npmjs.org/@feathersjs/commons/-/commons-4.5.12.tgz"
   integrity sha512-ss3yyk8HurmOCSD+wvENIrT9iSa8vg9SmikoP5c9JaLkbtMmKpH88jCjgRl7jiO54f2+UcjW3PqccNgUGSNSDQ==
 
+"@feathersjs/commons@^4.3.7":
+  version "4.5.15"
+  resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.15.tgz#2f9c2599fd93607206ee40ab0e5639b79c7781b8"
+  integrity sha512-eVEcLJL3GcPQBQcD77jI3fZ4MMx+iD02Px2Z1lDw+cn/iGCeQkWWAPQs4Tp+HGR1rTL5JO+unyhzN8V9X7OYmw==
+
 "@feathersjs/configuration@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@feathersjs/configuration/-/configuration-1.0.2.tgz#18da733e908fc39726233dbae867c6b0eb3920cd"
@@ -203,6 +208,13 @@
   integrity sha512-VCohY/AQU13xYyZGl6rfdUgE+2bjaI76a4aEb6reIphHKgb4mnjYlg2PzS1/hcU1qUNi515kY9yQa5HsE7J1dQ==
   dependencies:
     debug "^4.0.0"
+
+"@feathersjs/errors@^4.3.10":
+  version "4.5.15"
+  resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.5.15.tgz#ec371ca9905685e33f41e331975182f36241d1bd"
+  integrity sha512-EJAYWMsWZlUA/halbgZBc6eP2d3HPkHi5GzprYEK58GCh51KJ36VjX7VKVEnMjgBSED+PE00tpr3ZvUC4nUR+Q==
+  dependencies:
+    debug "^4.3.3"
 
 "@feathersjs/errors@^4.5.12":
   version "4.5.12"
@@ -2430,12 +2442,12 @@ feathers-blob@^1.4.0:
     mime-types "^2.1.10"
     uberproto "^1.2.0"
 
-feathers-commons@^0.8.6, feathers-commons@^0.8.7:
+feathers-commons@^0.8.6:
   version "0.8.7"
   resolved "https://registry.npmjs.org/feathers-commons/-/feathers-commons-0.8.7.tgz"
   integrity sha1-EcbyW1N3RamD6NYVUtfbiTLVN4I=
 
-feathers-errors@^2.4.0, feathers-errors@^2.9.1:
+feathers-errors@^2.4.0:
   version "2.9.2"
   resolved "https://registry.npmjs.org/feathers-errors/-/feathers-errors-2.9.2.tgz"
   integrity sha512-qwIX97bNW7+1tWVG073+omUA0rCYKJtTtwuzTrrvfrtdr8J8Dk1Fy4iaV9Fa6/YBD5AZu0lsplPE0iu4u/d4GQ==
@@ -2487,13 +2499,13 @@ feathers-mailer@^3.0.0:
     nodemailer "^6.6.3"
     uberproto "^2.0.6"
 
-"feathers-mongodb-fuzzy-search@https://github.com/kalisio/feathers-mongodb-fuzzy-search":
-  version "1.0.1"
-  resolved "https://github.com/kalisio/feathers-mongodb-fuzzy-search#6226105265104bf98c90b670236b1399442dd808"
+feathers-mongodb-fuzzy-search@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/feathers-mongodb-fuzzy-search/-/feathers-mongodb-fuzzy-search-2.0.1.tgz#0a594284a1afd9d2c9637047dbca7e862bfebaec"
+  integrity sha512-/l76aUhU2vw4OGlsASQSxcV1XvVgwmWg4muhjK12EU8LkqFqUzkCJPQ3502ew9UzJF7qxI8hQ0SCv58PUfR1Qw==
   dependencies:
-    escape-string-regexp "^1.0.5"
-    feathers-commons "^0.8.7"
-    feathers-errors "^2.9.1"
+    "@feathersjs/commons" "^4.3.7"
+    "@feathersjs/errors" "^4.3.10"
 
 feathers-mongodb-management@^1.0.0:
   version "1.0.0"
@@ -5753,9 +5765,9 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-"sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
+"sns-mobile@https://github.com/kalisio/sns-mobile":
   version "1.3.0"
-  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
