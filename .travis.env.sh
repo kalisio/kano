@@ -37,15 +37,15 @@ PROD_FLAVOR_REGEX="^prod-v[0-9]+\.[0-9]+\.[0-9]+"
 if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
 then
   export FLAVOR=prod
-  KDK_PROJECT_FILE=$APP-$VERSION.js
+  KDK_PROJECT_FILE=$APP-$VERSION
 else
   if [[ $TRAVIS_BRANCH =~ $TEST_FLAVOR_REGEX ]];
   then
     export FLAVOR=test
-    KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR.js
+    KDK_PROJECT_FILE=$APP-$MAJOR.$MINOR
   else
     export FLAVOR=dev
-    KDK_PROJECT_FILE=$APP.js
+    KDK_PROJECT_FILE=$APP
   fi
 fi
 export NODE_APP_INSTANCE=$FLAVOR
@@ -71,8 +71,16 @@ BUILD_BUCKET=${APP}-builds/$BUILD_NUMBER
 # Install the kdk
 git clone https://github.com/kalisio/kli.git kalisio && cd kalisio && yarn 
 
+# In dev flavor we can build different versions on different branches
+# so check if a specific file exists for the target branch first otherwise use default one
+if [[ -f $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js ]];
+then
+  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js $APP.js
+else
+  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE.js $APP.js
+fi
+
 # Clone the project and install the dependencies
-cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE $APP.js
 node . $APP.js --clone $TRAVIS_BRANCH
 node . $APP.js --install
 node . $APP.js --link
