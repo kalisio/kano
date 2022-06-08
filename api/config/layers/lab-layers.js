@@ -232,7 +232,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'stroke-width': 0,
       'stroke-opacity': 0,
       'fill-opacity': 0.5,
-      'fill-color': "<%= chroma.scale('RdBu').domain([127, -50])(properties.tmp_ow).hex() %>"
+      'fill-color': "<%= chroma.scale('RdBu').domain([127, -50])(properties.tmp_ow).hex() %>",
       template: ['fill-color'],
       tooltip: {
         template: `<% if (properties.tmp_ow) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
