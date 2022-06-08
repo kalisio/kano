@@ -25,176 +25,119 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      },
-      mode: 'screenshots'
+      }/* ,
+      mode: 'screenshots' */
     })
     page = await runner.start()
     await core.login(page, current_user)
   })
 
-  it('create layer', async () => {
-    await map.createLayer(page, 'saisie', runner.getDataPath('saisie.json'), 'id', 500)
-    await core.clickTopPaneAction(page, 'accept')
+  it('import geojson file', async () => {
+    await map.importLayer(page, runner.getDataPath('Castelnaudary_Hydro.geojson'), 'id')
   })
 
-  /*
-  Création 'K'
-  */
-
-  it('add line', async () => {
-    await map.goToPosition(page, 43.41735, 1.63782, 500)
-    await map.zoomToLevel(page, 9)
+  it('configure and check information box', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 500)
-    await core.clickTopPaneAction(page, 'add-lines')
-    await page.waitForTimeout(1000)
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-infobox-group')
+    await core.click(page, '#style-infobox-field')
+    await core.click(page, '#id')
+    await core.click(page, '#longueur-en-km')
+    await core.click(page, '#nom-usite')
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
     await core.click(page, '#map', 1000)
-    await map.moveMap(page, 'down', 4)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(1500)
-    await core.click(page, '#map')
-    await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t1-infobox')).beTrue()
+    await core.clickAction(page, 'close-action', 1000)
   })
 
-  it('add line', async () => {
-    await map.moveMap(page, 'up', 2)
+  it('deactive information box', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 500)
-    await core.clickTopPaneAction(page, 'add-lines')
-    await page.waitForTimeout(1000)
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-infobox-group')
+    await core.click(page, '#style-toggle-infobox')
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
     await core.click(page, '#map', 1000)
-    await map.moveMap(page, 'up', 2)
-    await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(1500)
-    await core.click(page, '#map')
-    await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
+    await core.clickAction(page, 'close-action', 1000)
   })
 
-  it('add line', async () => {
-    await map.moveMap(page, 'down', 2)
-    await map.moveMap(page, 'left', 1)
+  it('deactive selectable', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 500)
-    await core.clickTopPaneAction(page, 'add-lines')
-    await page.waitForTimeout(1000)
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-is-selectable')
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
     await core.click(page, '#map', 1000)
-    await map.moveMap(page, 'down', 2)
-    await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(1500)
-    await core.click(page, '#map')
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t3-no-empty-infobox')).beTrue()
+  })
+
+  it('configure and check popup', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    expect(await runner.captureAndMatch('t1-k-lines')).beTrue()
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-popup-group')
+    // Popup active by default (-> KDK issue 585)
+    //await core.click(page, '#style-toggle-infobox')
+    await core.click(page, '#style-popup-field')
+    await core.click(page, '#nom')
+    await core.click(page, '#longueur-en-km')
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t4-popup')).beTrue()
+    //await core.clickAction(page, 'close-action', 1000)
   })
 
-  /*
-  Fin création 'K'
-  */
-
-   it('add points', async () => {
-    await map.zoomToLevel(page, 15)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickTopPaneAction(page, 'add-points', 1000)
-    await map.moveMap(page, 'left', 2)
-    await core.click(page, '#map', 1000)
-    await core.clickTopPaneAction(page, 'accept')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
-    expect(await runner.captureAndMatch('t2-points')).beTrue()
-  })
-
-   it('save layer', async () => {
-    await map.saveLayer(page, userLayersTab, 'k', 1500)
-  })
-
-  /* it('add rectangle', async () => {
-    await map.goToPosition(page, 43.31501, 1.9547, 1500)
-    await map.zoomToLevel(page, 17)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickTopPaneAction(page, 'add-rectangles', 1000)
-    await core.click(page, '#map', 1000)
-    await map.moveMap(page, 'down', 2)
-    await map.moveMap(page, 'right', 2)
-    await core.click(page, '#map', 1000)
-    await core.clickTopPaneAction(page, 'accept')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/t3-rectangle.png' })
-    expect(await runner.captureAndMatch('t3-rectangle')).beTrue()
-  }) */
-
-  /* it('add polygon', async () => {
-    await map.goToPosition(page, 43.31359, 1.95684, 1500)
-    await map.zoomToLevel(page, 17)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickTopPaneAction(page, 'add-polygons', 1000)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'down', 1)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'down', 1)
-    await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'right', 1)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'up', 1)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'up', 1)
-    await map.moveMap(page, 'left', 1)
-    await core.click(page, '#map')
-    await map.moveMap(page, 'left', 1)
-    await core.click(page, '#map')
-    await core.click(page, '#map')
-    await core.clickTopPaneAction(page, 'accept')
-    expect(await runner.captureAndMatch('t4-polygon')).beTrue()
-  }) */
-
-  /* it('edit point', async () => {
-    await map.goToPosition(page, 43.31902, 1.94681, 1500)
-    await map.zoomToLevel(page, 17)
-    await map.moveMap(page, 'down', 1)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickTopPaneAction(page, 'edit-properties', 1500)
-    await core.click(page, '#map', 500)
-    await core.type(page, '#id-field', 'pt1', false, true)
-    await core.type(page, '#Nom-field', 'Point 1')
-    await core.type(page, '#Information-field', 'Point 1 description')
-    await core.click(page, '#apply-button', 1500)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-  }) */
-
-  /* it('edit polygon', async () => {
-    await map.goToPosition(page, 43.31379, 1.95728, 1500)
-    await map.zoomToLevel(page, 17)
-    await map.moveMap(page, 'down', 1)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-    await core.clickTopPaneAction(page, 'edit-properties', 1500)
-    await core.click(page, '#map', 500)
-    await core.type(page, '#id-field', 'pol1', false, true)
-    await core.type(page, '#Nom-field', 'Polygon 1')
-    await core.type(page, '#Information-field', 'Polygon 1 description')
-    await core.click(page, '#apply-button', 1500)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
-  }) */
-  /* /html/body/div[4]/div[2]/div[2]/div[2]/div */
-
-  it('show feature info', async () => {
+  it('deactive popup', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
     await core.clickRightPaneAction(page, 'edit-style')
     await core.click(page, '#style-popup-group')
     await core.click(page, '#style-toggle-popup')
-    // await core.click(page, '#style-popup-field', 500)
-    await page.$eval('.q-virtual-scroll__content', (el) => (el.value = 'Nom'))
-    // await page.select('#style-popup-field', 'Nom')
-    await page.waitForTimeout(3000)
+    await page.waitForTimeout(2000)
     await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t5-no-popup')).beTrue()
+  })
+
+  it('configure and check tooltip', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions')
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-tooltip-group')
+    await core.click(page, '#style-toggle-tooltip')
+    await core.click(page, '#style-tooltip-field')
+    await core.click(page, '#nom')
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t6-tooltip')).beTrue()
+  })
+
+  it('deactive tooltip', async () => {
+    await core.clickRightPaneAction(page, 'layer-actions')
+    await core.clickRightPaneAction(page, 'edit-style')
+    await core.click(page, '#style-tooltip-group')
+    await core.click(page, '#style-toggle-tooltip')
+    await page.waitForTimeout(2000)
+    await core.click(page, '#apply-button')
+    await page.waitForTimeout(2000)
+    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('t7-no-tooltip')).beTrue()
   })
 
   after(async () => {

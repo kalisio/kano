@@ -11,13 +11,6 @@
         "helper": "Identifiant"
       }
     },
-    "toggle": {
-      "type": "toggle",
-      "field": {
-        "component": "form/KToggleField",
-        "helper": "Valide"
-      }
-    },
     "nom": {
       "type": "string",
       "field": {

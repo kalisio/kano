@@ -130,7 +130,10 @@ export default {
         longitude: center.lng,
         latitude: center.lat,
         zoom,
-        south, west, north, east
+        south,
+        west,
+        north,
+        east
       })
     }
   },

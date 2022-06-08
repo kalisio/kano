@@ -37,13 +37,24 @@ describe(`suite:${suite}`, () => {
   })
 
   it('see elevation profile', async () => {
-    await map.goToPosition(page, 43.30955, 1.94464, 500)
-    await map.zoomToLevel(page, 15)
+    await map.goToPosition(page, 43.31465, 1.94985, 500)
+    await core.click(page, '#map', 1000)
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'widgets-menu-items', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)
-    //await page.waitForTimeout(5000)
+    await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('elevation-line')).beTrue()
+    await core.clickAction(page, 'close-action', 1000)
+  })
+
+  it('see mapillary view', async () => {
+    await map.goToPosition(page, 43.31465, 1.94985, 500)
+    await core.click(page, '#map', 1000)
+    await core.click(page, '#map', 1000)
+    await core.clickAction(page, 'widgets-menu-items', 1000)
+    await core.clickAction(page, 'mapillary-viewer', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('mapillary-view')).beTrue()
   })
 
   after(async () => {
