@@ -224,19 +224,23 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'geoJson',
       realtime: true,
-      tiled: true,
+      tiled: false,
       //minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'circleMarker',
       radius: 6,
-      'stroke-width': 0,
-      'stroke-opacity': 0,
+      'stroke-width': 2,
+      'stroke-opacity': 1,
+      'stroke-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).brighten().hex() %>',
       'fill-opacity': 0.5,
-      'fill-color': "<%= chroma.scale('RdBu').domain([127, -50])(properties.tmp_ow).hex() %>",
-      template: ['fill-color'],
+      'fill-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).hex() %>',
+      template: [
+          'fill-color',
+          'stroke-color'
+      ],
       tooltip: {
         template: `<% if (properties.tmp_ow) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
-                    if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
+                    if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
       }
     },
     cesium: {
@@ -247,7 +251,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#78c0f0',
       tooltip: {
         template: '<% if (properties.tmp_ow) { %> <%= properties.tmp_ow.toFixed(2) %> °C/h<% } %>\n' +
-                  'if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, \'time.long\') + ' - ' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+                  'if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, \'time.long\') + ' - ' + Time.format(feature.time.value, \'date.short\') %><% } %>'
       }
     }
   }]
