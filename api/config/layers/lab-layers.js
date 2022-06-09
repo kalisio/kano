@@ -251,7 +251,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#78c0f0',
       tooltip: {
         template: '<% if (properties.tmp_ow) { %> <%= properties.tmp_ow.toFixed(2) %> °C/h<% } %>\n' +
-                  'if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, \'time.long\') + ' - ' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+                  'if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
       }
     }
   }]
