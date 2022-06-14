@@ -31,7 +31,7 @@
     "debug:replica": "cross-env NODE_ENV=development node --inspect=localhost:9230 src/main.js",
     "prod": "cross-env NODE_ENV=production node src/main.js",
     "lint": "standard src/**/*.js test/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" SUBDOMAIN= mocha",
     "coverage": "c8 npm run mocha",
     "test": "npm run lint && npm run coverage"
   },
@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@feathersjs/client": "^3.5.3",
+    "@feathersjs/client": "^4.5.12",
     "@slack/webhook": "^5.0.2",
     "c8": "^7.11.0",
     "chai": "^4.3.4",
@@ -57,9 +57,9 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^2.1.7",
-    "@feathersjs/express": "^1.2.3",
-    "@feathersjs/feathers": "^3.3.1",
+    "@feathersjs/authentication": "^4.5.12",
+    "@feathersjs/express": "^4.5.12",
+    "@feathersjs/feathers": "^4.5.12",
     "@kalisio/feathers-distributed": "^1.0.5",
     "@kalisio/kdk": "^1.6.0",
     "containerized": "^1.0.2",

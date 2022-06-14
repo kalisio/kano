@@ -1,25 +1,29 @@
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import feathers from '@feathersjs/client'
 import io from 'socket.io-client'
 import chai, { util, expect, assert } from 'chai'
 import chailint from 'chai-lint'
-import server from '../src/main'
+import { createServer, runServer } from '../src/server.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 describe('kano', () => {
-  let expressServer, app, client, userService, authorisationService, catalogService, featuresService,
+  let server, expressServer, app, client, userService, authorisationService, catalogService, featuresService,
   measureLayer, stationsService, observationsService, userObject, managerObject
 
   before(() => {
     chailint(chai, util)
   })
 
-  it('is ES6 compatible', () => {
-    expect(typeof server).to.equal('object')
+  it('is ES module compatible', () => {
+    expect(typeof createServer).to.equal('function')
   })
 
   it('initialize the server/client', async () => {
+    server = createServer()
     expressServer = await server.run()
     app = server.app
     client = feathers()
@@ -158,9 +162,9 @@ describe('kano', () => {
     .timeout(10000)
 
   it('authorized user can feed authorized built-in layers', async () => {
-    let stations = require('./data/teleray.stations.json')
+    let stations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.stations.json'))
     await stationsService.create(stations, { user: userObject, checkAuthorisation: true })
-    let observations = require('./data/teleray.observations.json')
+    let observations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.observations.json'))
     await observationsService.create(observations, { user: userObject, checkAuthorisation: true })
   })
   // Let enough time to process
