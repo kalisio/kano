@@ -1,4 +1,4 @@
-FROM node:16-bullseye
+FROM node:16-bullseye-slim
 LABEL maintainer="contact@kalisio.xyz"
 
 ARG APP
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y install curl
 # Copy the built artefact.
 # Warning - 
 # We could do ADD and let Docker uncompress automatically the archive but we reach log limit in Travis.
-# So we copy the archive and uncompress it usin tar without the verbose mode
+# So we copy the archive and uncompress it using tar without the verbose mode
 COPY kalisio.tgz /opt/.
 WORKDIR /opt
 RUN tar zxf kalisio.tgz && rm kalisio.tgz
