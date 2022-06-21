@@ -31,7 +31,7 @@
     "debug:replica": "cross-env NODE_ENV=development node --inspect=localhost:9230 src/main.js",
     "prod": "cross-env NODE_ENV=production node src/main.js",
     "lint": "standard src/**/*.js test/**/*.js --fix",
-    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" SUBDOMAIN= mocha",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ LAYERS_FILTER=\"OSM_BRIGHT TELERAY\" SUBDOMAIN= mocha --exit",
     "coverage": "c8 npm run mocha",
     "test": "npm run lint && npm run coverage"
   },

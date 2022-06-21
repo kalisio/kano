@@ -58,6 +58,8 @@ describe('kano', () => {
     observationsService = app.getService(measureLayer.service)
     expect(observationsService).toExist()
   })
+  // Let enough time to process
+    .timeout(5000)
 
   it('creates a test user', async () => {
     userObject = await userService.create({
@@ -89,8 +91,7 @@ describe('kano', () => {
       email: 'test-user@test.org',
       password: 'Pass;word1'
     })
-    const payload = await client.passport.verifyJWT(response.accessToken)
-    expect(payload.userId).to.equal(userObject._id.toString())
+    expect(response.user._id).to.equal(userObject._id.toString())
   })
   // Let enough time to process
     .timeout(5000)
