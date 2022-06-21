@@ -81,7 +81,7 @@ else
 fi
 
 # Clone the project and install the dependencies
-node . $APP.js --clone $TRAVIS_BRANCH
+node . $APP.js --clone
 node . $APP.js --install
 node . $APP.js --link
 

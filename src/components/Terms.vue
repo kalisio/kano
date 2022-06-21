@@ -1,17 +1,25 @@
 <template>
-  <q-card>
-    <q-card-section>
-      <KMarkdownViewer url="statics/kapp-terms.md" />
-    </q-card-section>
-  </q-card>
+  <div class="q-pa-md">
+	  <q-card>
+	    <q-card-section>
+	      <KMarkdownViewer :url="`/kano-terms_${locale}.md`" />
+	    </q-card-section>
+	  </q-card>
+	</div>
 </template>
 
 <script>
-import { utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
+import { utils } from '@kalisio/kdk/core.client'
 
 export default {
+  name: 'terms',
   components: {
-    KMarkdownViewer: kdkCoreUtils.loadComponent('media/KMarkdownViewer')
+    KMarkdownViewer: utils.loadComponent('media/KMarkdownViewer')
+  },
+  data () {
+    return {
+      locale: utils.getAppLocale()
+    }
   }
 }
 </script>
