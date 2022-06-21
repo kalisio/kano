@@ -168,6 +168,7 @@
     "yallist": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-classes": "^7.18.4",
     "@intlify/vue-i18n-loader": "^1.0.0",
     "@quasar/app": "1.1.4",
     "babel-eslint": "^10.0.3",
