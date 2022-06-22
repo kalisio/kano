@@ -74,7 +74,7 @@ module.exports = [{
                 component: 'KLayerStyleEditor',
                 props: true,
               },
-              'edit-layer-feature/:layerId/:featureId': {
+              'edit-layer-feature/:layerId?/:featureId': {
                 name: 'edit-map-layer-feature',
                 component: 'KFeatureEditor',
                 props: true,
