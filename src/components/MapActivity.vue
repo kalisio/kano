@@ -53,7 +53,7 @@ export default {
     return {
       kActivity: this,
       kMap: this,
-      layer: computed(() => this.selectedLayer)
+      selectedLayer: computed(() => this.selectedLayer)
     }
   },
   methods: {

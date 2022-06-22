@@ -74,6 +74,11 @@ module.exports = [{
                 component: 'KLayerStyleEditor',
                 props: true,
               },
+              'edit-layer-feature/:layerId/:featureId': {
+                name: 'edit-map-layer-feature',
+                component: 'KFeatureEditor',
+                props: true,
+              },
               'create-view': {
                 name: 'create-view',
                 component: 'catalog/KCreateView',
