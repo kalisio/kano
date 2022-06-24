@@ -126,7 +126,7 @@
     "jquery": "^3.2.1",
     "js-yaml": "^3.13.1",
     "jsdap": "^8.1.0",
-    "leaflet": "^1.2.0",
+    "leaflet": "1.6.0",
     "leaflet-fa-markers": "^0.0.5",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-heatmap": "^1.0.0",
@@ -151,7 +151,7 @@
     "path-browserify": "^1.0.1",
     "pinch-zoom-element": "^1.1.1",
     "pixi.js": "5.3.10",
-    "post-robot": "^10.0.10",
+    "post-robot": "10.0.42",
     "quasar": "^2.6.0",
     "sanitize-html": "^2.7.0",
     "showdown": "^2.1.0",
@@ -228,7 +228,9 @@
     "@pixi/text": "5.3.10",
     "@pixi/text-bitmap": "5.3.10",
     "@pixi/ticker": "5.3.10",
-    "@pixi/utils": "5.3.10"
+    "@pixi/utils": "5.3.10",
+    "leaflet": "1.6.0",
+    "post-robot": "10.0.42"
   },
   "engines": {
     "node": ">= 16.0.0",
