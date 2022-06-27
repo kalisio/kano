@@ -9,6 +9,7 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
+// Theme
 $primary: #72448b;
 $secondary: lighten($primary, 50%);
 $accent: lighten($primary, 25%);
@@ -17,4 +18,7 @@ $info: $accent;
 $positive: #7bb946;
 $negative: #c74a4a;
 $warning: #d09931;
+
+// Layout
 $sticky-z-index: 1000;
+$left-pane-width: 300px;

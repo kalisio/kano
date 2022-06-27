@@ -4,7 +4,7 @@ import postRobot from 'post-robot'
 import utils from '../utils'
 import appHooks from '../main.hooks'
 import services from '../services'
-import { kalisio, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { api, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -51,8 +51,6 @@ export default async ({ app }) => {
   app.config.unwrapInjectedRef = true
 
   await utils.sendEmbedEvent('kano-ready')
-
-  const api = kalisio()
 
   // Setup app hooks
   api.hooks(appHooks)
