@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@feathersjs/client": "^4.5.12",
+    "@feathersjs/client": "^5.0.0-pre.22",
     "@slack/webhook": "^5.0.2",
     "c8": "^7.11.0",
     "chai": "^4.3.4",
@@ -57,18 +57,21 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^4.5.12",
-    "@feathersjs/express": "^4.5.12",
-    "@feathersjs/feathers": "^4.5.12",
-    "@kalisio/feathers-distributed": "^1.0.5",
-    "@kalisio/kdk": "^1.6.0",
+    "@feathersjs/authentication": "^5.0.0-pre.22",
+    "@feathersjs/express": "^5.0.0-pre.22",
+    "@feathersjs/feathers": "^5.0.0-pre.22",
+    "@kalisio/feathers-distributed": "^2.0.0",
+    "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
+    "@weacast/core": "^2.1.2",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^3.0.0",
     "feathers-mongodb-fuzzy-search": "^2.0.1",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
     "http-proxy-middleware": "^0.17.4",
-    "weacast-core": "^1.4.0",
+    "socket.io": "^4.5.1",
     "winston": "^3.2.1"
+  },
+  "resolutions": {
   }
 }

@@ -113,7 +113,7 @@ export default async function () {
       featuresService = app.getService(defaultLayer.service)
       // Avoid create it twice as we can share services between different layers
       if (featuresService) continue
-      featuresService = createFeaturesServiceForLayer({
+      featuresService = await createFeaturesServiceForLayer({
         collection: defaultLayer.service,
         ttl: defaultLayer.ttl,
         featureId: defaultLayer.featureId,
@@ -122,7 +122,7 @@ export default async function () {
       })
     }
     if (defaultLayer.probeService) {
-      createFeaturesServiceForLayer({
+      await createFeaturesServiceForLayer({
         collection: defaultLayer.probeService,
         db: app.db.db(defaultLayer.dbName)
       })
