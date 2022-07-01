@@ -169,5 +169,90 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         template: '<%= properties.info_bulle %>'
       }
     }
+  }, {
+    name: 'Layers.LAB_MEASUREMENTS',
+    description: 'Layers.LAB_MEASUREMENTS_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          LAB_MEASUREMENTS: 'LAB - Measurements - GSR',
+          LAB_MEASUREMENTS_DESCRIPTION: 'Little Alert Box Measurements'
+        },
+        Variables: {
+          TEMPERATURE: 'Température'
+        }
+      },
+      en: {
+        Layers: {
+          LAB_MEASUREMENTS: 'LAB - Mesures - GSR',
+          LAB_MEASUREMENTS_DESCRIPTION: 'Mesures Little Alert Box'
+        },
+        Variables: {
+          TEMPERATURE: 'Temperature'
+        }
+      }
+    },
+    tags: [
+      'measure'
+    ],
+    attribution: 'Global Smart Rescue',
+    type: 'OverlayLayer',
+    service: 'lab-measurements',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    ttl: 7 * 24 * 60 * 60,
+    featureId: 'id',
+    from: 'P-7D',
+    to: 'PT-30S',
+    every: 'PT30S',
+    queryFrom: 'PT-6H',
+    variables: [
+      {
+        name: 'tmp_ow',
+        label: 'Variables.TEMPERATURE',
+        units: [ 
+          'degC'
+        ],
+        range: [-50, 127],
+        step: 5,
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        }
+      }
+    ],
+    leaflet: {
+      type: 'geoJson',
+      realtime: true,
+      tiled: false,
+      //minZoom: 10,
+      cluster: { disableClusteringAtZoom: 18 },
+      'marker-type': 'circleMarker',
+      radius: 6,
+      'stroke-width': 2,
+      'stroke-opacity': 1,
+      'stroke-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).brighten().hex() %>',
+      'fill-opacity': 0.5,
+      'fill-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).hex() %>',
+      template: [
+          'fill-color',
+          'stroke-color'
+      ],
+      tooltip: {
+        template: `<% if (properties.tmp_ow) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
+                    if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      realtime: true,
+      cluster: { pixelRange: 50 },
+      'marker-symbol': 'marker',
+      'marker-color': '#78c0f0',
+      tooltip: {
+        template: '<% if (properties.tmp_ow) { %> <%= properties.tmp_ow.toFixed(2) %> °C/h<% } %>\n' +
+                  'if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+      }
+    }
   }]
 }

@@ -15,7 +15,9 @@
 import _ from 'lodash'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
+import { MixinStore } from '../mixin-store'
 import utils from '../utils'
+import config from 'config'
 
 const baseActivityMixin = kCoreMixins.baseActivity()
 
@@ -48,7 +50,7 @@ export default {
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers,
     kMapMixins.map.gsmapLayers
-  ],
+  ].concat(config.mapActivity.additionalMixins.map((name) => MixinStore.get(name))),
   provide () {
     return {
       kActivity: this,
