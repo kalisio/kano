@@ -88,7 +88,6 @@ export default {
     }
   },
   mounted () {
-    this.$events.on('capabilities-api-changed', this.refreshActivity)
     this.$engineEvents.on('click', this.onClicked)
     this.$engineEvents.on('dblclick', this.onDblClicked)
     this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
@@ -101,7 +100,6 @@ export default {
     this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
   },
   beforeUnmounted () {
-    this.$events.off('capabilities-api-changed', this.refreshActivity)
     this.$engineEvents.off('click', this.onClicked)
     this.$engineEvents.off('dblclick', this.onDblClicked)
     this.$engineEvents.off('layer-added', this.onAddedLayerEvent)
