@@ -1,8 +1,4 @@
-import { permissions } from '@kalisio/kdk/core.common'
-
-// FIXME: this file is duplicated in the api folder
-// Indeed, permissions files are usually isomorphic files. However, when we tried to create a common folder
-// to share it between frontend/backend but experienced problems with webpack
+import { permissions } from '@kalisio/kdk/core.common.js'
 
 // Hook computing  catalog, features, etc. abilities for a given user
 export function defineUserAbilities (subject, can, cannot, app) {

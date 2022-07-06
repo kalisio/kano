@@ -1,7 +1,7 @@
 // Application hooks that run for every service
 import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.client'
 import { permissions as mapPermissions } from '@kalisio/kdk/map.common'
-import * as permissions from './permissions'
+import * as permissions from '../common/permissions.mjs'
 
 // Register all default hooks for authorisation
 // Default rules for all users

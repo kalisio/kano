@@ -3,8 +3,9 @@ import fuzzySearch from 'feathers-mongodb-fuzzy-search'
 import commonHooks from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.api.js'
 import { permissions as mapPermissions } from '@kalisio/kdk/map.api.js'
-import * as permissions from './permissions.js'
+import * as permissions from '../../common/permissions.mjs'
 import authentication from '@feathersjs/authentication'
+
 const { authenticate } = authentication.hooks
 
 // Default rules for all users
