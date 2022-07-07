@@ -227,10 +227,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 8,
       minFeatureZoom: 12,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': '#00a9ce',
+      'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
+                          else if (properties.measureRequestIssued) { %>red<% }
+                          else { %>black<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
       'icon-x-offset': 1,
+      template: ['marker-color'],
       popup: {
         pick: [
           'name'
@@ -418,6 +421,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                               _.has(properties, 'o3') ||
                               _.has(properties, 'co') ||
                               _.has(properties, 'bc')) { %>blue<% }
+                        else if (properties.measureRequestIssued) { %>red<% }
                         else { %>dark<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-heartbeat',
@@ -537,6 +541,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === 'VA') { %>orange<% }
                           else if (properties.visibility === 'NV') { %>grey<% }
+                          else if (properties.measureRequestIssued) { %>red<% }
                           else { %>dark<% } %>`,
       'icon-classes': 'fa fa-radiation',
       'icon-x-offset': -2,
