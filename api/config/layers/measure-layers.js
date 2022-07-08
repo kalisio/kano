@@ -229,7 +229,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                           else if (properties.measureRequestIssued) { %>red<% }
-                          else { %>black<% } %>`,
+                          else { %>grey<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
       'icon-x-offset': 1,
@@ -422,7 +422,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                               _.has(properties, 'co') ||
                               _.has(properties, 'bc')) { %>blue<% }
                         else if (properties.measureRequestIssued) { %>red<% }
-                        else { %>dark<% } %>`,
+                        else { %>grey<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-heartbeat',
       'icon-x-offset': -2,
@@ -542,7 +542,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': `<% if (properties.libelle === 'VA') { %>orange<% }
                           else if (properties.visibility === 'NV') { %>grey<% }
                           else if (properties.measureRequestIssued) { %>red<% }
-                          else { %>dark<% } %>`,
+                          else { %>grey<% } %>`,
       'icon-classes': 'fa fa-radiation',
       'icon-x-offset': -2,
       'icon-color': '#FFF',
