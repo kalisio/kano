@@ -143,9 +143,12 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         type: 'geoJson',
         realtime: true,
         tiled: true,
-        minZoom: 10,
+        minZoom: 8,
+        minFeatureZoom: 10,
         cluster: { disableClusteringAtZoom: 18 },
-        'marker-color': '#444444',
+        'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
+                          else if (properties.measureRequestIssued) { %>orange<% }
+                          else { %>grey<% } %>`,
         'icon-color': `<% if (_.get(properties, 'rawOb')) {
             if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
             else if (_.get(properties, 'cloudCover') === 'SCT') { %>#DFE1B0<% }
@@ -161,7 +164,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             else { %>fas fa-sun<% } 
           } else { %>fas fa-ban<% } %>`,
         'icon-x-offset': -3,
-        template: ['icon-color', 'icon-classes'],
+        template: ['marker-color', 'icon-color', 'icon-classes'],
         popup: {
           pick: [
             'name'

@@ -3,7 +3,6 @@ import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client'
-import { zoom } from 'd3'
 
 const suite = 'style'
 
@@ -25,8 +24,8 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      },
+      mode: 'screenshots'
     })
     page = await runner.start()
     await core.login(page, user[1])
@@ -50,12 +49,12 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-maxzoom')
     await core.moveSlider(page, 'style-set-maxzoom', 'left', 5)
     await core.click(page, '#apply-button')
-    expect(await runner.captureAndMatch('S1_test1_Canal_Midi_z16_raw')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S1_test1_Canal_Midi_z16_raw_test.png' })
+    expect(await runner.captureAndMatch('S1_test1_line_min_max_zoom_z16_raw')).beTrue()
+    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test1_Canal_Midi_z16_raw_test.png' })
   })
 
   it('line: set width, color and opacity', async () => {
-    //await core.clickRightPaneAction(page, 'Canal_Midi')
+    // await core.clickRightPaneAction(page, 'Canal_Midi')
     await core.clickRightPaneAction(page, 'layer-actions')
     await core.clickRightPaneAction(page, 'edit-style')
     await core.click(page, '#style-line-group')
@@ -66,22 +65,22 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('S1_test2_Canal_Midi_z16_styled')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S1_test2_Canal_Midi_z16_styled_test.png' })
+    expect(await runner.captureAndMatch('S1_test2_line_styled_z16')).beTrue()
+    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test2_Canal_Midi_z16_styled_test.png' })
   })
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 13)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S1_test3_Canal_Midi_z13')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S1_test3_Canal_Midi_z13_test.png' })
+    expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
+    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test3_Canal_Midi_z13_test.png' })
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 17)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S1_test4_Canal_Midi_z17')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S1_test4_Canal_Midi_z17_test.png' })
+    expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
+    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test4_Canal_Midi_z17_test.png' })
   })
 
   it('line: remove layer', async () => {
@@ -91,15 +90,13 @@ describe(`suite:${suite}`, () => {
   /* Step 2:
   point clustering and styling */
 
-  it('point: import geojson file', async () => {
-    await map.dropFile(page, runner.getDataPath('Enjeux_Inondation.geojson'))
-  })
-
   it('point: default clustering', async () => {
+    await map.dropFile(page, runner.getDataPath('Enjeux_Inondation.geojson'))
+    await page.waitForTimeout(1000)
     await map.goToPosition(page, 43.30095, 1.95545)
+    await map.zoomToLevel(page, 14)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test1_Enjeux_Inondation')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S2_test1_Enjeux_Inondation_test.png' })
+    expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
   })
 
   it('point: deactive clustering', async () => {
@@ -109,7 +106,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-clustering')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test2_Enjeux_Inondation')).beTrue()
+    expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
     //await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
@@ -127,7 +124,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(1000)
     await map.zoomToLevel(page, 16)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test3_Enjeux_Inondation')).beTrue()
+    expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
     //await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
@@ -156,14 +153,14 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S3_test1_Zone_Risque_Industriel')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S3_test1_Zone_Risque_Industriel_test.png' })
+    expect(await runner.captureAndMatch('S3_test1_polygon_styling')).beTrue()
+    // await page.screenshot({ path: './test/data/style/screenrefs/S3_test1_Zone_Risque_Industriel_test.png' })
   })
-  
+
   it('polygon: remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'Zone_Risque_Industriel')
   })
-  
+
   after(async () => {
     await core.logout(page)
     await runner.stop()

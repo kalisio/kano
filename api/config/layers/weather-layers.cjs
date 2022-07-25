@@ -90,12 +90,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteo_model: {
       default: {
         dynprops: {
-          // weacast props
-          element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- windComponent %><%- lvl %>" },
-          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' },
-          // geotiff props
-          url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : '10'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- windComponent %>/<%- lvl %>/<%- file %>.cog" }
+          weacast: { // weacast props
+            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- windComponent %><%- lvl %>" },
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          },
+          geotiff: { // geotiff props
+            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : '10'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- windComponent %>/<%- lvl %>/<%- file %>.cog" }
+          }
         }
       },
       sources: [
@@ -185,12 +187,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteo_model: {
       default: {
         dynprops: {
-          // weacast props
-          element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' },
-          // geotiff props
-          url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : (model.name.startsWith('gfs-') ? 'surface' : '10'); const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          weacast: { // weacast props
+            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          },
+          geotiff: { // geotiff props
+            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : (model.name.startsWith('gfs-') ? 'surface' : '10'); const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          }
         }
       },
       sources: [
@@ -278,12 +282,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteo_model: {
       default: {
         dynprops: {
-          // weacast props
-          element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' },
-          // geotiff props
-          url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : 'surface'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          weacast: { // weacast props
+            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          },
+          geotiff: { // geotiff props
+            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : 'surface'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          }
         }
       },
       sources: [
@@ -376,12 +382,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     meteo_model: {
       default: {
         dynprops: {
-          // weacast props
-          element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-          forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-          model: { strTemplate: '<%- model.name %>' },
-          // geotiff props
-          url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : '2'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          weacast: { // weacast props
+            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
+            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
+            model: { strTemplate: '<%- model.name %>' }
+          },
+          geotiff: { // geotiff props
+            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : '2'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
+          }
         }
       },
       sources: [

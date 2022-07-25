@@ -65,7 +65,7 @@ describe(`suite:${suite}`, () => {
     await map.moveMap(page, 'right', 4)
     await core.click(page, '#map', 1000)
     await core.clickTopPaneAction(page, 'accept')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
+    // await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
     expect(await runner.captureAndMatch('t2-points')).beTrue()
   })
 
@@ -84,11 +84,10 @@ describe(`suite:${suite}`, () => {
     await map.moveMap(page, 'right', 2)
     await core.click(page, '#map', 1000)
     await core.clickTopPaneAction(page, 'accept')
-    //await page.screenshot({ path: './test/data/schema/screenrefs/t3-rectangle.png' })
+    // await page.screenshot({ path: './test/data/schema/screenrefs/t3-rectangle.png' })
     expect(await runner.captureAndMatch('t3-rectangle')).beTrue()
   })
 
-  
   it('add polygon', async () => {
     await map.goToPosition(page, 43.31359, 1.95684, 1500)
     await map.zoomToLevel(page, 17)
@@ -115,7 +114,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('t4-polygon')).beTrue()
   })
 
-  it('show all features canvas', async () => {
+  it('show all features', async () => {
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'zoom-to', 1500)
     await page.waitForTimeout(3000)
@@ -205,20 +204,10 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('t10-go-to-feature')).beTrue()
   })
 
-  /* it('show feature info', async () => {
-    await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
-    await core.click(page, '#style-popup-group')
-    await core.click(page, '#style-toggle-popup')
-    await core.click(page, '#style-popup-field', 500)
-    await core.click(page, '#Nom', 500)
-    await core.click(page, '#apply-button')
-  }) */
-
   it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'saisie')
   })
-  
+
   after(async () => {
     await page.waitForTimeout(5000)
     await core.logout(page)

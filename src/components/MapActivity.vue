@@ -16,7 +16,9 @@ import _ from 'lodash'
 import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
+import { MixinStore } from '../mixin-store.js'
 import utils from '../utils.js'
+import config from 'config'
 
 const baseActivityMixin = kCoreMixins.baseActivity()
 
@@ -48,7 +50,7 @@ export default {
     kMapMixins.weacast,
     kMapMixins.levels,
     kMapMixins.context
-  ],
+  ].concat(config.mapActivity.additionalMixins.map((name) => MixinStore.get(name))),
   provide () {
     return {
       kActivity: this,
@@ -133,7 +135,10 @@ export default {
         longitude: center.lng,
         latitude: center.lat,
         zoom,
-        south, west, north, east
+        south,
+        west,
+        north,
+        east
       })
     }
   },

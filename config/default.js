@@ -360,6 +360,7 @@ module.exports = {
     }
   },
   mapActivity: {
+    additionalMixins: [],
     topPane: {
       content: {
         default: [
@@ -462,6 +463,7 @@ module.exports = {
     featuresChunkSize: 5000 // TODO: here or in mapEngine ?
   },
   globeActivity: {
+    additionalMixins: [],
     topPane: {
       content: {
         default: [
