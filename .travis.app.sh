@@ -31,7 +31,7 @@ check_code $EXIT_CODE "Builing the client"
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
 check_code $? "Connecting to Docker"
 
-# Create an archive to speed docker build process  and build the image
+# Create an archive to speed docker build process and build the image
 cd ../..
 tar --exclude='kalisio/kano/test' -zcf kalisio.tgz kalisio
 docker build --build-arg APP=$APP --build-arg FLAVOR=$FLAVOR --build-arg BUILD_NUMBER=$BUILD_NUMBER -f dockerfile -t kalisio/$APP:$TAG . 

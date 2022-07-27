@@ -12,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 describe('kano', () => {
   let server, expressServer, app, client, userService, authorisationService, catalogService, featuresService,
-  measureLayer, stationsService, observationsService, userObject, managerObject
+    measureLayer, stationsService, observationsService, userObject, managerObject
 
   before(() => {
     chailint(chai, util)
@@ -24,7 +24,7 @@ describe('kano', () => {
 
   it('initialize the server/client', async () => {
     server = createServer()
-    expressServer = await server.run()
+    expressServer = await runServer(server)
     app = server.app
     client = feathers()
     const socket = io(app.get('domain'), {
@@ -107,7 +107,7 @@ describe('kano', () => {
 
   it('cannot update user permissions without using authorisations service', async () => {
     try {
-      const result = await client.service(app.get('apiPath') + '/users').patch(userObject._id.toString(), { catalog: { permissions: 'manager' } })
+      await client.service(app.get('apiPath') + '/users').patch(userObject._id.toString(), { catalog: { permissions: 'manager' } })
       assert.fail('error not thrown')
     } catch (error) {
       expect(error).toExist()
@@ -139,7 +139,7 @@ describe('kano', () => {
   })
 
   it('managers can authorize user on built-in layer', async () => {
-    const abilities = await authorisationService.getAbilities(managerObject)
+    await authorisationService.getAbilities(managerObject)
     const authorisation = await authorisationService.create({
       scope: 'layers',
       permissions: 'manager',
@@ -163,9 +163,9 @@ describe('kano', () => {
     .timeout(10000)
 
   it('authorized user can feed authorized built-in layers', async () => {
-    let stations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.stations.json'))
+    const stations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.stations.json'))
     await stationsService.create(stations, { user: userObject, checkAuthorisation: true })
-    let observations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.observations.json'))
+    const observations = fs.readJsonSync(path.join(__dirname, 'data', 'teleray.observations.json'))
     await observationsService.create(observations, { user: userObject, checkAuthorisation: true })
   })
   // Let enough time to process
