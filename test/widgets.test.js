@@ -1,4 +1,6 @@
 import _ from 'lodash'
+import fs from 'fs-extra'
+import moment from 'moment'
 import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
 
@@ -6,10 +8,18 @@ import { core, map } from '@kalisio/kdk/test.client'
 
 const suite = 'widgets'
 
-const userLayersTab = 'user-layers-tab'
+const catalogLayersTab = 'catalog-layers-tab'
+
+function setTime(data) {
+  const time = moment.utc()
+  data.forEach(measure => {
+    measure.time = time.format()
+    time.subtract(1, 'hours')
+  })
+}
 
 describe(`suite:${suite}`, () => {
-  let runner, page
+  let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
     { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
@@ -19,6 +29,10 @@ describe(`suite:${suite}`, () => {
   before(async () => {
     chailint(chai, util)
 
+    api = new core.Api({
+      appName: 'kano'
+    })
+    client = api.createClient()
     runner = new core.Runner(suite, {
       appName: 'kano',
       user: current_user.email,
@@ -28,15 +42,41 @@ describe(`suite:${suite}`, () => {
       }/* ,
       mode: 'screenshots' */
     })
+    // Prepare data for current run
+    await client.login(current_user)
+    let data = fs.readJsonSync(runner.getDataPath('lab-stations.geojson'))
+    await client.getService('lab-stations').create(data)
+    data = fs.readJsonSync(runner.getDataPath('lab-observations.geojson'))
+    setTime(data)
+    await client.getService('lab-observations').create(data)
+    data = fs.readJsonSync(runner.getDataPath('lab-measurements.geojson'))
+    setTime(data)
+    await client.getService('lab-measurements').create(data)
+
     page = await runner.start()
     await core.login(page, current_user)
   })
 
-  it('import geojson file', async () => {
-    await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
+  beforeEach(() => {
+    runner.clearErrors()
+  })
+
+  afterEach(() => {
+    expect(runner.hasError()).beFalse()
+  })
+
+  it('see timeseries for stations', async () => {
+    await map.clickLayer(page, catalogLayersTab, 'LAB')
+    await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
+  })
+
+  it('see timeseries for mobile measurements', async () => {
+    await map.clickLayer(page, catalogLayersTab, 'LAB_MEASUREMENTS')
+    await map.goToPosition(page, 43.54, 1.505)
   })
 
   it('see elevation profile', async () => {
+    await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
     await map.goToPosition(page, 43.31465, 1.94985, 500)
     await core.click(page, '#map', 1000)
     await core.click(page, '#map', 1000)
@@ -58,8 +98,10 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
-    await core.logout(page)
     await runner.stop()
+    // Remove test data
+    await client.getService('lab-stations').remove(null)
+    await client.getService('lab-observations').remove(null)
+    await client.getService('lab-measurements').remove(null)
   })
 })

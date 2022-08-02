@@ -189,7 +189,17 @@ module.exports = {
         email: 'admin-kano@kalisio.xyz',
         password: 'Pass;word1',
         name: 'Admin',
-        catalog: { permissions: 'owner' }
+        catalog: { permissions: 'owner' },
+        layers: [{
+          name: 'Layers.LAB',
+          permissions: 'manager',
+          probeService: 'lab-stations',
+          service: 'lab-observations'
+        }, {
+          name: 'Layers.LAB_MEASUREMENTS',
+          permissions: 'manager',
+          service: 'lab-measurements'
+        }]
       },
       {
         email: 'user-kano@kalisio.xyz',
