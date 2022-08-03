@@ -4,7 +4,7 @@ import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client'
 
-const suite = 'favorite-views'
+const suite = 'user-views'
 
 const userViewsTab = 'user-views-tab'
 const catalogLayersTab = 'catalog-layers-tab'
