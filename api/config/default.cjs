@@ -172,7 +172,7 @@ module.exports = {
     },
     jwtOptions: {
       header: {
-        typ: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
+        type: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
       },
       audience: process.env.SUBDOMAIN || 'kalisio', // The resource server where the token is processed
       issuer: 'kalisio', // The issuing server, application or resource
