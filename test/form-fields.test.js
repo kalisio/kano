@@ -25,15 +25,11 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      },
-      mode: 'screenshots'
+      }/* ,
+      mode: 'screenshots' */
     })
     page = await runner.start()
     await core.login(page, current_user)
-  })
-
-  it('remove layer', async () => {
-    await map.removeLayer(page, userLayersTab, 'saisie', 1500)
   })
 
   it('load layer', async () => {
@@ -68,10 +64,6 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button', 1500)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
     await core.clickRightPaneAction(page, 'edit-data', 1500)
-  })
-
-  it('save layer', async () => {
-    await map.saveLayer(page, userLayersTab, 'form fields', 1500)
   })
 
   after(async () => {
