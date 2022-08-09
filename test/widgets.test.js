@@ -100,8 +100,8 @@ describe(`suite:${suite}`, () => {
   after(async () => {
     await runner.stop()
     // Remove test data
-    await client.getService('lab-stations').remove(null)
+    /* await client.getService('lab-stations').remove(null)
     await client.getService('lab-observations').remove(null)
-    await client.getService('lab-measurements').remove(null)
+    await client.getService('lab-measurements').remove(null) */
   })
 })
