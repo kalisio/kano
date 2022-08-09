@@ -2170,6 +2170,17 @@
   resolved "https://registry.yarnpkg.com/@tmcw/togeojson/-/togeojson-4.5.0.tgz#9b5c7bdd8c5ad3b9c504824d3cdef9b60edbd206"
   integrity sha512-lNuuhW7nvN1T7xII9eRTi9zuPwYfFl43/1u/Xgi88tedX4ePfwJB5dqc31N7z6sWeR+7EES274ESNrK1gsW53A==
 
+"@turf/along@^6.0.1":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@turf/along/-/along-6.5.0.tgz#ab12eec58a14de60fe243a62d31a474f415c8fef"
+  integrity sha512-LLyWQ0AARqJCmMcIEAXF4GEu8usmd4Kbz3qk1Oy5HoRNpZX47+i5exQtmIWKdqJ1MMhW26fCTXgpsEs5zgJ5gw==
+  dependencies:
+    "@turf/bearing" "^6.5.0"
+    "@turf/destination" "^6.5.0"
+    "@turf/distance" "^6.5.0"
+    "@turf/helpers" "^6.5.0"
+    "@turf/invariant" "^6.5.0"
+
 "@turf/area@^6.0.1":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@turf/area/-/area-6.5.0.tgz#1d0d7aee01d8a4a3d4c91663ed35cc615f36ad56"
@@ -2201,7 +2212,7 @@
     "@turf/helpers" "6.x"
     "@turf/meta" "6.x"
 
-"@turf/bearing@^6.0.1":
+"@turf/bearing@^6.0.1", "@turf/bearing@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@turf/bearing/-/bearing-6.5.0.tgz#462a053c6c644434bdb636b39f8f43fb0cd857b0"
   integrity sha512-dxINYhIEMzgDOztyMZc20I7ssYVNEpSv04VbMo5YPQsqa80KO3TFvbuCahMsCAW5z8Tncc8dwBlEFrmRjJG33A==
@@ -2267,6 +2278,14 @@
   dependencies:
     "@turf/helpers" "^6.3.0"
     "@turf/invariant" "^6.3.0"
+
+"@turf/destination@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@turf/destination/-/destination-6.5.0.tgz#30a84702f9677d076130e0440d3223ae503fdae1"
+  integrity sha512-4cnWQlNC8d1tItOz9B4pmJdWpXqS0vEvv65bI/Pj/genJnsL7evI0/Xw42RvEGROS481MPiU80xzvwxEvhQiMQ==
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+    "@turf/invariant" "^6.5.0"
 
 "@turf/distance@^6.0.0":
   version "6.0.1"
