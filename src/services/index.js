@@ -1,14 +1,14 @@
 import logger from 'loglevel'
-import kCore from '@kalisio/kdk/core.client'
-import kMap from '@kalisio/kdk/map.client'
+import kdkCore from '@kalisio/kdk/core.client'
+import kdkMap from '@kalisio/kdk/map.client.map'
 
 export default function () {
   const api = this
 
   // Set up our plugin services
   try {
-    api.configure(kCore)
-    api.configure(kMap)
+    api.configure(kdkCore)
+    api.configure(kdkMap)
     // Restore previous settings if any
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()

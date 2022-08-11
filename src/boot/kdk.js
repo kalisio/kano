@@ -88,11 +88,7 @@ export default async ({ app }) => {
     if (_.isEmpty(key)) return key
     return this.$te(key) ? this.$t(key, param) : key
   }
-  // TODO. Is it required ? 
-  // app.config.globalProperties.$createComponent = utils.createComponent
-  // app.config.globalPropertiese.$createComponentVNode = utils.createComponentVNode
   app.config.globalProperties.$geolocation = Geolocation
-
   app.config.globalProperties.$config = function (path, defaultValue) {
     return _.get(config, path, defaultValue)
   }

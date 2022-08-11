@@ -22,6 +22,7 @@ jobs:
     - '16'
     services:
     - docker
+    install: skip
     before_script:
     - export -f travis_fold
     script:
