@@ -101,13 +101,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       sources: [
-        { model: 'gfs-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
         { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
@@ -198,13 +198,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       sources: [
-        { model: 'gfs-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
         { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
@@ -293,13 +293,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       sources: [
-        { model: 'gfs-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
         { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
@@ -393,13 +393,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       },
       sources: [
-        { model: 'gfs-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-1Y', to: 'PT-61M', geotiff: {} },
+        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
         { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
         { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
       ]
