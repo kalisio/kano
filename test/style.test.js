@@ -24,8 +24,8 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      },
-      mode: 'screenshots'
+      }/* ,
+      mode: 'screenshots' */
     })
     page = await runner.start()
     await core.login(page, user[1])

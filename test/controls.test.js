@@ -17,8 +17,8 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      },
-      modes: 'screenshots'
+      }/* ,
+      mode: 'screenshots' */
     })
     page = await runner.start()
     await core.login(page, user)
@@ -28,7 +28,7 @@ describe(`suite:${suite}`, () => {
     await core.clickTopPaneAction(page, 'locate-user')
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
-    // await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
+    //await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
     await core.clickTopPaneAction(page, 'locate-user')
   })
@@ -42,6 +42,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, selector)
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
+    //await page.screenshot({ path: './test/data/controls/screenrefs/location-test.png' })
     expect(await runner.captureAndMatch('location')).beTrue()
     await core.clickAction(page, 'back')
   })
@@ -49,6 +50,7 @@ describe(`suite:${suite}`, () => {
   it('display position', async () => {
     await core.clickTopPaneAction(page, 'tools')
     await core.clickTopPaneAction(page, 'display-position')
+    //await page.screenshot({ path: './test/data/controls/screenrefs/position-test.png' })
     expect(await runner.captureAndMatch('position')).beTrue()
     await core.clickAction(page, 'back')
   })
