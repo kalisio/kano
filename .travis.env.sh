@@ -66,7 +66,7 @@ set -a
 set +a
 
 export BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
-BUILD_BUCKET=${APP}-builds/$BUILD_NUMBER
+BUILD_BUCKET=${APP}/$BUILD_NUMBER
 
 # Install the kdk
 git clone https://github.com/kalisio/kli.git kalisio && cd kalisio && yarn 
