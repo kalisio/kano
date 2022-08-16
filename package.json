@@ -76,8 +76,9 @@
     ]
   },
   "dependencies": {
-    "@feathersjs/client": "^5.0.0-pre.22",
-    "@feathersjs/commons": "^5.0.0-pre.22",
+    "@feathersjs/client": "^5.0.0-pre.28",
+    "@feathersjs/commons": "^5.0.0-pre.28",
+    "@feathersjs/memory": "^5.0.0-pre.28",
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
     "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
     "@mapbox/geojsonhint": "^3.0.1",
@@ -116,7 +117,6 @@
     "chroma-js": "^2.4.2",
     "d3": "^4.9.1",
     "email-validator": "^2.0.4",
-    "feathers-memory": "^4.1.0",
     "feathers-reactive": "^0.10.0",
     "formatcoords": "^1.1.3",
     "georaster": "^0.4.2",

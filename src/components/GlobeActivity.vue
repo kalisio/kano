@@ -1,6 +1,6 @@
 <template>
   <div id="globe-credit"/>
-  <k-page :padding="false">
+  <KPage :padding="false">
     <template v-slot:page-content>
       <!-- Globe -->
       <div id="globe" :ref="configureGlobe" :style="viewStyle">
@@ -9,7 +9,7 @@
       <!-- Child views -->
       <router-view />
     </template>
-  </k-page>
+  </KPage>
 </template>
 
 <script>

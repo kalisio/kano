@@ -56,9 +56,9 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^5.0.0-pre.22",
-    "@feathersjs/express": "^5.0.0-pre.22",
-    "@feathersjs/feathers": "^5.0.0-pre.22",
+    "@feathersjs/authentication": "^5.0.0-pre.28",
+    "@feathersjs/express": "^5.0.0-pre.28",
+    "@feathersjs/feathers": "^5.0.0-pre.28",
     "@kalisio/feathers-distributed": "^2.0.0",
     "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
     "@weacast/core": "^2.1.2",

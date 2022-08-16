@@ -1,5 +1,5 @@
 <template>
-  <k-page :padding="false">
+  <KPage :padding="false">
     <template v-slot:page-content>
       <!-- Map -->
       <div id="map" :ref="configureMap" :style="viewStyle">
@@ -8,7 +8,7 @@
       <!-- Child views -->
       <router-view />
     </template>
-  </k-page>
+  </KPage>
 </template>
 
 <script>
