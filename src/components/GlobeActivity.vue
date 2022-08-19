@@ -101,7 +101,7 @@ export default {
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
   },
-  beforeUnmounted () {
+  beforeUnmount () {
     this.$engineEvents.off('click', this.onClicked)
     this.$engineEvents.off('dblclick', this.onDblClicked)
     this.$engineEvents.off('layer-added', this.onAddedLayerEvent)

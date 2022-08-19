@@ -159,7 +159,7 @@ export default {
     this.$store.set(this.activityName, {})
     this.$engineEvents.on('moveend', this.onMoveEnd)
   },
-  beforeUnmounted () {
+  beforeUnmount () {
     // Remove event connections
     this.removeForwardedLeafletEvents()
     this.removeForwardedLayerEvents()
