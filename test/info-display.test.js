@@ -93,7 +93,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t4-popup')).beTrue()
-    //await core.clickAction(page, 'close-action', 1000)
+    // await core.clickAction(page, 'close-action', 1000)
   })
 
   it('deactive popup', async () => {

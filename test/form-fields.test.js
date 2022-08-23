@@ -80,7 +80,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('t3-view-data')).beTrue()
     await core.click(page, '#close-button', 500)
   })
-  
+
   it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'form-fields')
   })

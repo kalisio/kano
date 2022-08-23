@@ -1,6 +1,5 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
-import _ from 'lodash'
 import routeConfig from './routes'
 import { Store } from '@kalisio/kdk/core.client'
 import utils from '../utils.js'
@@ -26,7 +25,7 @@ export default route(function (/* { store, ssrContext } */) {
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
+    history: createHistory(process.env.MODE === 'ssr' ? undefined : process.env.VUE_ROUTER_BASE)
   })
 
   Store.set('router', Router)
@@ -37,6 +36,6 @@ export default route(function (/* { store, ssrContext } */) {
       play: false
     }
   }, utils.buildTours(routeConfig)))
-  
+
   return Router
 })

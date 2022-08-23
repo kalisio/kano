@@ -107,7 +107,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
+    // await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
   it('point: deactive clustering by zoom + point styling', async () => {
@@ -125,7 +125,7 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 16)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
-    //await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
+    // await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
   it('point: remove layer', async () => {

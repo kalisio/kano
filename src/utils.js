@@ -3,21 +3,9 @@ import logger from 'loglevel'
 import postRobot from 'post-robot'
 import { Store } from '@kalisio/kdk/core.client'
 
-async function createComponent (component, options) {
-  const ComponentClass = await utils.loadComponent(component)()
-  const Component = Vue.extend(ComponentClass.default)
-  return new Component(Object.assign({ i18n: new VueI18next(i18next) }, options))
-}
-
-async function createComponentVNode (component, options) {
-  const ComponentClass = await utils.loadComponent(component)()
-  const Component = Vue.extend(ComponentClass.default)
-  return this.$createElement(Component, Object.assign({ i18n: new VueI18next(i18next) }, options))
-}
-
 function getEmbedComponent (route) {
   // The target component is the last one to be matched in hierarchy
-  let component = _.get(route, `matched[${route.matched.length - 1}]`)
+  const component = _.get(route, `matched[${route.matched.length - 1}]`)
   return _.get(component, 'instances.default')
 }
 
@@ -26,11 +14,11 @@ async function callEmbedMethod (route, data) {
   const method = (data ? data.command : undefined)
   let result
   if (method) {
-    let component = getEmbedComponent(route)
+    const component = getEmbedComponent(route)
     if (component && (typeof _.get(component, method) === 'function')) {
-      result = (Array.isArray(data.args) ?
-        await _.get(component, method)(...data.args) :
-        await _.get(component, method)(data.args))
+      result = (Array.isArray(data.args)
+        ? await _.get(component, method)(...data.args)
+        : await _.get(component, method)(data.args))
     }
   }
   return result
@@ -41,7 +29,7 @@ function getEmbedProperty (route, data) {
   const property = (data ? data.property : undefined)
   let result
   if (property) {
-    let component = getEmbedComponent(route)
+    const component = getEmbedComponent(route)
     if (component && _.has(component, property)) {
       result = _.get(component, property)
     }
@@ -101,7 +89,7 @@ function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
       // The key is always the path for the route
-      let route = {
+      const route = {
         path: key,
         name: key,
         // "Inherit" meta data on nested routes
@@ -150,7 +138,7 @@ function buildRoutes (config) {
     })
   }
 
-  let routes = []
+  const routes = []
   buildRoutesRecursively(config, routes)
   return routes
 }
@@ -180,14 +168,12 @@ function buildTours (config) {
     })
   }
 
-  let tours = {}
+  const tours = {}
   buildToursRecursively(config, tours)
   return tours
 }
 
-let utils = {
-  createComponent,
-  createComponentVNode,
+const utils = {
   sendEmbedEvent,
   buildRoutes,
   buildTours

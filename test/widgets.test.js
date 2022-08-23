@@ -10,7 +10,7 @@ const suite = 'widgets'
 
 const catalogLayersTab = 'catalog-layers-tab'
 
-function setTime(data) {
+function setTime (data) {
   const time = moment.utc()
   data.forEach(measure => {
     measure.time = time.format()

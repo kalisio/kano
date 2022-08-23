@@ -1,8 +1,8 @@
-var flightradar = {
-  "type": "Feature",
-  "geometry": {
-    "type": "LineString",
-    "coordinates": [
+const flightradar = {
+  type: 'Feature',
+  geometry: {
+    type: 'LineString',
+    coordinates: [
       [
         -38.541798,
         -3.777729
@@ -1985,7430 +1985,7430 @@ var flightradar = {
       ]
     ]
   },
-  "properties": [
+  properties: [
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 0,
-        "kts": 0,
-        "mph": 0
+      speed: {
+        kmh: 0,
+        kts: 0,
+        mph: 0
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 3.7,
-        "kts": 2,
-        "mph": 2.3
+      speed: {
+        kmh: 3.7,
+        kts: 2,
+        mph: 2.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 16.7,
-        "kts": 9,
-        "mph": 10.4
+      speed: {
+        kmh: 16.7,
+        kts: 9,
+        mph: 10.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 16.7,
-        "kts": 9,
-        "mph": 10.4
+      speed: {
+        kmh: 16.7,
+        kts: 9,
+        mph: 10.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 16.7,
-        "kts": 9,
-        "mph": 10.4
+      speed: {
+        kmh: 16.7,
+        kts: 9,
+        mph: 10.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 16.7,
-        "kts": 9,
-        "mph": 10.4
+      speed: {
+        kmh: 16.7,
+        kts: 9,
+        mph: 10.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 3.7,
-        "kts": 2,
-        "mph": 2.3
+      speed: {
+        kmh: 3.7,
+        kts: 2,
+        mph: 2.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 16.7,
-        "kts": 9,
-        "mph": 10.4
+      speed: {
+        kmh: 16.7,
+        kts: 9,
+        mph: 10.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 25.9,
-        "kts": 14,
-        "mph": 16.1
+      speed: {
+        kmh: 25.9,
+        kts: 14,
+        mph: 16.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 33.3,
-        "kts": 18,
-        "mph": 20.7
+      speed: {
+        kmh: 33.3,
+        kts: 18,
+        mph: 20.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 35.2,
-        "kts": 19,
-        "mph": 21.9
+      speed: {
+        kmh: 35.2,
+        kts: 19,
+        mph: 21.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 37,
-        "kts": 20,
-        "mph": 23
+      speed: {
+        kmh: 37,
+        kts: 20,
+        mph: 23
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 37,
-        "kts": 20,
-        "mph": 23
+      speed: {
+        kmh: 37,
+        kts: 20,
+        mph: 23
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 29.6,
-        "kts": 16,
-        "mph": 18.4
+      speed: {
+        kmh: 29.6,
+        kts: 16,
+        mph: 18.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 22.2,
-        "kts": 12,
-        "mph": 13.8
+      speed: {
+        kmh: 22.2,
+        kts: 12,
+        mph: 13.8
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 18.5,
-        "kts": 10,
-        "mph": 11.5
+      speed: {
+        kmh: 18.5,
+        kts: 10,
+        mph: 11.5
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 20.4,
-        "kts": 11,
-        "mph": 12.7
+      speed: {
+        kmh: 20.4,
+        kts: 11,
+        mph: 12.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 3.7,
-        "kts": 2,
-        "mph": 2.3
+      speed: {
+        kmh: 3.7,
+        kts: 2,
+        mph: 2.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 25.9,
-        "kts": 14,
-        "mph": 16.1
+      speed: {
+        kmh: 25.9,
+        kts: 14,
+        mph: 16.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 38.9,
-        "kts": 21,
-        "mph": 24.2
+      speed: {
+        kmh: 38.9,
+        kts: 21,
+        mph: 24.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 31.5,
-        "kts": 17,
-        "mph": 19.6
+      speed: {
+        kmh: 31.5,
+        kts: 17,
+        mph: 19.6
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 35.2,
-        "kts": 19,
-        "mph": 21.9
+      speed: {
+        kmh: 35.2,
+        kts: 19,
+        mph: 21.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 24.1,
-        "kts": 13,
-        "mph": 15
+      speed: {
+        kmh: 24.1,
+        kts: 13,
+        mph: 15
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 35.2,
-        "kts": 19,
-        "mph": 21.9
+      speed: {
+        kmh: 35.2,
+        kts: 19,
+        mph: 21.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 109.3,
-        "kts": 59,
-        "mph": 67.9
+      speed: {
+        kmh: 109.3,
+        kts: 59,
+        mph: 67.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 166.7,
-        "kts": 90,
-        "mph": 103.6
+      speed: {
+        kmh: 166.7,
+        kts: 90,
+        mph: 103.6
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 259.3,
-        "kts": 140,
-        "mph": 161.1
+      speed: {
+        kmh: 259.3,
+        kts: 140,
+        mph: 161.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 305.6,
-        "kts": 165,
-        "mph": 189.9
+      speed: {
+        kmh: 305.6,
+        kts: 165,
+        mph: 189.9
       }
     },
     {
-      "altitude": {
-        "feet": 200,
-        "meters": 61
+      altitude: {
+        feet: 200,
+        meters: 61
       },
-      "verticalSpeed": {
-        "fpm": 1728,
-        "ms": 8.8
+      verticalSpeed: {
+        fpm: 1728,
+        ms: 8.8
       },
-      "speed": {
-        "kmh": 331.5,
-        "kts": 179,
-        "mph": 206
+      speed: {
+        kmh: 331.5,
+        kts: 179,
+        mph: 206
       }
     },
     {
-      "altitude": {
-        "feet": 475,
-        "meters": 145
+      altitude: {
+        feet: 475,
+        meters: 145
       },
-      "verticalSpeed": {
-        "fpm": 2752,
-        "ms": 14
+      verticalSpeed: {
+        fpm: 2752,
+        ms: 14
       },
-      "speed": {
-        "kmh": 331.5,
-        "kts": 179,
-        "mph": 206
+      speed: {
+        kmh: 331.5,
+        kts: 179,
+        mph: 206
       }
     },
     {
-      "altitude": {
-        "feet": 775,
-        "meters": 236
+      altitude: {
+        feet: 775,
+        meters: 236
       },
-      "verticalSpeed": {
-        "fpm": 3264,
-        "ms": 16.6
+      verticalSpeed: {
+        fpm: 3264,
+        ms: 16.6
       },
-      "speed": {
-        "kmh": 327.8,
-        "kts": 177,
-        "mph": 203.7
+      speed: {
+        kmh: 327.8,
+        kts: 177,
+        mph: 203.7
       }
     },
     {
-      "altitude": {
-        "feet": 1100,
-        "meters": 335
+      altitude: {
+        feet: 1100,
+        meters: 335
       },
-      "verticalSpeed": {
-        "fpm": 3264,
-        "ms": 16.6
+      verticalSpeed: {
+        fpm: 3264,
+        ms: 16.6
       },
-      "speed": {
-        "kmh": 326,
-        "kts": 176,
-        "mph": 202.5
+      speed: {
+        kmh: 326,
+        kts: 176,
+        mph: 202.5
       }
     },
     {
-      "altitude": {
-        "feet": 1425,
-        "meters": 434
+      altitude: {
+        feet: 1425,
+        meters: 434
       },
-      "verticalSpeed": {
-        "fpm": 3200,
-        "ms": 16.3
+      verticalSpeed: {
+        fpm: 3200,
+        ms: 16.3
       },
-      "speed": {
-        "kmh": 324.1,
-        "kts": 175,
-        "mph": 201.4
+      speed: {
+        kmh: 324.1,
+        kts: 175,
+        mph: 201.4
       }
     },
     {
-      "altitude": {
-        "feet": 1750,
-        "meters": 533
+      altitude: {
+        feet: 1750,
+        meters: 533
       },
-      "verticalSpeed": {
-        "fpm": 3136,
-        "ms": 15.9
+      verticalSpeed: {
+        fpm: 3136,
+        ms: 15.9
       },
-      "speed": {
-        "kmh": 324.1,
-        "kts": 175,
-        "mph": 201.4
+      speed: {
+        kmh: 324.1,
+        kts: 175,
+        mph: 201.4
       }
     },
     {
-      "altitude": {
-        "feet": 2025,
-        "meters": 617
+      altitude: {
+        feet: 2025,
+        meters: 617
       },
-      "verticalSpeed": {
-        "fpm": 2432,
-        "ms": 12.4
+      verticalSpeed: {
+        fpm: 2432,
+        ms: 12.4
       },
-      "speed": {
-        "kmh": 327.8,
-        "kts": 177,
-        "mph": 203.7
+      speed: {
+        kmh: 327.8,
+        kts: 177,
+        mph: 203.7
       }
     },
     {
-      "altitude": {
-        "feet": 2225,
-        "meters": 678
+      altitude: {
+        feet: 2225,
+        meters: 678
       },
-      "verticalSpeed": {
-        "fpm": 2240,
-        "ms": 11.4
+      verticalSpeed: {
+        fpm: 2240,
+        ms: 11.4
       },
-      "speed": {
-        "kmh": 326,
-        "kts": 176,
-        "mph": 202.5
+      speed: {
+        kmh: 326,
+        kts: 176,
+        mph: 202.5
       }
     },
     {
-      "altitude": {
-        "feet": 2700,
-        "meters": 823
+      altitude: {
+        feet: 2700,
+        meters: 823
       },
-      "verticalSpeed": {
-        "fpm": 2240,
-        "ms": 11.4
+      verticalSpeed: {
+        fpm: 2240,
+        ms: 11.4
       },
-      "speed": {
-        "kmh": 307.4,
-        "kts": 166,
-        "mph": 191
+      speed: {
+        kmh: 307.4,
+        kts: 166,
+        mph: 191
       }
     },
     {
-      "altitude": {
-        "feet": 2875,
-        "meters": 876
+      altitude: {
+        feet: 2875,
+        meters: 876
       },
-      "verticalSpeed": {
-        "fpm": 1792,
-        "ms": 9.1
+      verticalSpeed: {
+        fpm: 1792,
+        ms: 9.1
       },
-      "speed": {
-        "kmh": 303.7,
-        "kts": 164,
-        "mph": 188.7
+      speed: {
+        kmh: 303.7,
+        kts: 164,
+        mph: 188.7
       }
     },
     {
-      "altitude": {
-        "feet": 3025,
-        "meters": 922
+      altitude: {
+        feet: 3025,
+        meters: 922
       },
-      "verticalSpeed": {
-        "fpm": 1344,
-        "ms": 6.8
+      verticalSpeed: {
+        fpm: 1344,
+        ms: 6.8
       },
-      "speed": {
-        "kmh": 301.9,
-        "kts": 163,
-        "mph": 187.6
+      speed: {
+        kmh: 301.9,
+        kts: 163,
+        mph: 187.6
       }
     },
     {
-      "altitude": {
-        "feet": 3175,
-        "meters": 968
+      altitude: {
+        feet: 3175,
+        meters: 968
       },
-      "verticalSpeed": {
-        "fpm": 1408,
-        "ms": 7.2
+      verticalSpeed: {
+        fpm: 1408,
+        ms: 7.2
       },
-      "speed": {
-        "kmh": 303.7,
-        "kts": 164,
-        "mph": 188.7
+      speed: {
+        kmh: 303.7,
+        kts: 164,
+        mph: 188.7
       }
     },
     {
-      "altitude": {
-        "feet": 3300,
-        "meters": 1006
+      altitude: {
+        feet: 3300,
+        meters: 1006
       },
-      "verticalSpeed": {
-        "fpm": 1472,
-        "ms": 7.5
+      verticalSpeed: {
+        fpm: 1472,
+        ms: 7.5
       },
-      "speed": {
-        "kmh": 303.7,
-        "kts": 164,
-        "mph": 188.7
+      speed: {
+        kmh: 303.7,
+        kts: 164,
+        mph: 188.7
       }
     },
     {
-      "altitude": {
-        "feet": 3400,
-        "meters": 1036
+      altitude: {
+        feet: 3400,
+        meters: 1036
       },
-      "verticalSpeed": {
-        "fpm": 1088,
-        "ms": 5.5
+      verticalSpeed: {
+        fpm: 1088,
+        ms: 5.5
       },
-      "speed": {
-        "kmh": 309.3,
-        "kts": 167,
-        "mph": 192.2
+      speed: {
+        kmh: 309.3,
+        kts: 167,
+        mph: 192.2
       }
     },
     {
-      "altitude": {
-        "feet": 3525,
-        "meters": 1074
+      altitude: {
+        feet: 3525,
+        meters: 1074
       },
-      "verticalSpeed": {
-        "fpm": 1152,
-        "ms": 5.9
+      verticalSpeed: {
+        fpm: 1152,
+        ms: 5.9
       },
-      "speed": {
-        "kmh": 313,
-        "kts": 169,
-        "mph": 194.5
+      speed: {
+        kmh: 313,
+        kts: 169,
+        mph: 194.5
       }
     },
     {
-      "altitude": {
-        "feet": 3625,
-        "meters": 1105
+      altitude: {
+        feet: 3625,
+        meters: 1105
       },
-      "verticalSpeed": {
-        "fpm": 1216,
-        "ms": 6.2
+      verticalSpeed: {
+        fpm: 1216,
+        ms: 6.2
       },
-      "speed": {
-        "kmh": 318.5,
-        "kts": 172,
-        "mph": 197.9
+      speed: {
+        kmh: 318.5,
+        kts: 172,
+        mph: 197.9
       }
     },
     {
-      "altitude": {
-        "feet": 3750,
-        "meters": 1143
+      altitude: {
+        feet: 3750,
+        meters: 1143
       },
-      "verticalSpeed": {
-        "fpm": 1280,
-        "ms": 6.5
+      verticalSpeed: {
+        fpm: 1280,
+        ms: 6.5
       },
-      "speed": {
-        "kmh": 322.2,
-        "kts": 174,
-        "mph": 200.2
+      speed: {
+        kmh: 322.2,
+        kts: 174,
+        mph: 200.2
       }
     },
     {
-      "altitude": {
-        "feet": 3925,
-        "meters": 1196
+      altitude: {
+        feet: 3925,
+        meters: 1196
       },
-      "verticalSpeed": {
-        "fpm": 1152,
-        "ms": 5.9
+      verticalSpeed: {
+        fpm: 1152,
+        ms: 5.9
       },
-      "speed": {
-        "kmh": 333.4,
-        "kts": 180,
-        "mph": 207.1
+      speed: {
+        kmh: 333.4,
+        kts: 180,
+        mph: 207.1
       }
     },
     {
-      "altitude": {
-        "feet": 4050,
-        "meters": 1234
+      altitude: {
+        feet: 4050,
+        meters: 1234
       },
-      "verticalSpeed": {
-        "fpm": 1280,
-        "ms": 6.5
+      verticalSpeed: {
+        fpm: 1280,
+        ms: 6.5
       },
-      "speed": {
-        "kmh": 344.5,
-        "kts": 186,
-        "mph": 214
+      speed: {
+        kmh: 344.5,
+        kts: 186,
+        mph: 214
       }
     },
     {
-      "altitude": {
-        "feet": 4175,
-        "meters": 1273
+      altitude: {
+        feet: 4175,
+        meters: 1273
       },
-      "verticalSpeed": {
-        "fpm": 1344,
-        "ms": 6.8
+      verticalSpeed: {
+        fpm: 1344,
+        ms: 6.8
       },
-      "speed": {
-        "kmh": 350,
-        "kts": 189,
-        "mph": 217.5
+      speed: {
+        kmh: 350,
+        kts: 189,
+        mph: 217.5
       }
     },
     {
-      "altitude": {
-        "feet": 4275,
-        "meters": 1303
+      altitude: {
+        feet: 4275,
+        meters: 1303
       },
-      "verticalSpeed": {
-        "fpm": 896,
-        "ms": 4.6
+      verticalSpeed: {
+        fpm: 896,
+        ms: 4.6
       },
-      "speed": {
-        "kmh": 355.6,
-        "kts": 192,
-        "mph": 220.9
+      speed: {
+        kmh: 355.6,
+        kts: 192,
+        mph: 220.9
       }
     },
     {
-      "altitude": {
-        "feet": 4375,
-        "meters": 1334
+      altitude: {
+        feet: 4375,
+        meters: 1334
       },
-      "verticalSpeed": {
-        "fpm": 1024,
-        "ms": 5.2
+      verticalSpeed: {
+        fpm: 1024,
+        ms: 5.2
       },
-      "speed": {
-        "kmh": 361.1,
-        "kts": 195,
-        "mph": 224.4
+      speed: {
+        kmh: 361.1,
+        kts: 195,
+        mph: 224.4
       }
     },
     {
-      "altitude": {
-        "feet": 4475,
-        "meters": 1364
+      altitude: {
+        feet: 4475,
+        meters: 1364
       },
-      "verticalSpeed": {
-        "fpm": 1088,
-        "ms": 5.5
+      verticalSpeed: {
+        fpm: 1088,
+        ms: 5.5
       },
-      "speed": {
-        "kmh": 368.5,
-        "kts": 199,
-        "mph": 229
+      speed: {
+        kmh: 368.5,
+        kts: 199,
+        mph: 229
       }
     },
     {
-      "altitude": {
-        "feet": 4700,
-        "meters": 1433
+      altitude: {
+        feet: 4700,
+        meters: 1433
       },
-      "verticalSpeed": {
-        "fpm": 1280,
-        "ms": 6.5
+      verticalSpeed: {
+        fpm: 1280,
+        ms: 6.5
       },
-      "speed": {
-        "kmh": 376,
-        "kts": 203,
-        "mph": 233.6
+      speed: {
+        kmh: 376,
+        kts: 203,
+        mph: 233.6
       }
     },
     {
-      "altitude": {
-        "feet": 4825,
-        "meters": 1471
+      altitude: {
+        feet: 4825,
+        meters: 1471
       },
-      "verticalSpeed": {
-        "fpm": 896,
-        "ms": 4.6
+      verticalSpeed: {
+        fpm: 896,
+        ms: 4.6
       },
-      "speed": {
-        "kmh": 381.5,
-        "kts": 206,
-        "mph": 237.1
+      speed: {
+        kmh: 381.5,
+        kts: 206,
+        mph: 237.1
       }
     },
     {
-      "altitude": {
-        "feet": 4900,
-        "meters": 1494
+      altitude: {
+        feet: 4900,
+        meters: 1494
       },
-      "verticalSpeed": {
-        "fpm": 704,
-        "ms": 3.6
+      verticalSpeed: {
+        fpm: 704,
+        ms: 3.6
       },
-      "speed": {
-        "kmh": 392.6,
-        "kts": 212,
-        "mph": 244
+      speed: {
+        kmh: 392.6,
+        kts: 212,
+        mph: 244
       }
     },
     {
-      "altitude": {
-        "feet": 4975,
-        "meters": 1516
+      altitude: {
+        feet: 4975,
+        meters: 1516
       },
-      "verticalSpeed": {
-        "fpm": 704,
-        "ms": 3.6
+      verticalSpeed: {
+        fpm: 704,
+        ms: 3.6
       },
-      "speed": {
-        "kmh": 409.3,
-        "kts": 221,
-        "mph": 254.3
+      speed: {
+        kmh: 409.3,
+        kts: 221,
+        mph: 254.3
       }
     },
     {
-      "altitude": {
-        "feet": 5050,
-        "meters": 1539
+      altitude: {
+        feet: 5050,
+        meters: 1539
       },
-      "verticalSpeed": {
-        "fpm": 960,
-        "ms": 4.9
+      verticalSpeed: {
+        fpm: 960,
+        ms: 4.9
       },
-      "speed": {
-        "kmh": 427.8,
-        "kts": 231,
-        "mph": 265.8
+      speed: {
+        kmh: 427.8,
+        kts: 231,
+        mph: 265.8
       }
     },
     {
-      "altitude": {
-        "feet": 5275,
-        "meters": 1608
+      altitude: {
+        feet: 5275,
+        meters: 1608
       },
-      "verticalSpeed": {
-        "fpm": 1152,
-        "ms": 5.9
+      verticalSpeed: {
+        fpm: 1152,
+        ms: 5.9
       },
-      "speed": {
-        "kmh": 451.9,
-        "kts": 244,
-        "mph": 280.8
+      speed: {
+        kmh: 451.9,
+        kts: 244,
+        mph: 280.8
       }
     },
     {
-      "altitude": {
-        "feet": 5500,
-        "meters": 1676
+      altitude: {
+        feet: 5500,
+        meters: 1676
       },
-      "verticalSpeed": {
-        "fpm": 1280,
-        "ms": 6.5
+      verticalSpeed: {
+        fpm: 1280,
+        ms: 6.5
       },
-      "speed": {
-        "kmh": 481.5,
-        "kts": 260,
-        "mph": 299.2
+      speed: {
+        kmh: 481.5,
+        kts: 260,
+        mph: 299.2
       }
     },
     {
-      "altitude": {
-        "feet": 5825,
-        "meters": 1775
+      altitude: {
+        feet: 5825,
+        meters: 1775
       },
-      "verticalSpeed": {
-        "fpm": 2112,
-        "ms": 10.7
+      verticalSpeed: {
+        fpm: 2112,
+        ms: 10.7
       },
-      "speed": {
-        "kmh": 501.9,
-        "kts": 271,
-        "mph": 311.9
+      speed: {
+        kmh: 501.9,
+        kts: 271,
+        mph: 311.9
       }
     },
     {
-      "altitude": {
-        "feet": 6350,
-        "meters": 1935
+      altitude: {
+        feet: 6350,
+        meters: 1935
       },
-      "verticalSpeed": {
-        "fpm": 2816,
-        "ms": 14.3
+      verticalSpeed: {
+        fpm: 2816,
+        ms: 14.3
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 6850,
-        "meters": 2088
+      altitude: {
+        feet: 6850,
+        meters: 2088
       },
-      "verticalSpeed": {
-        "fpm": 2368,
-        "ms": 12
+      verticalSpeed: {
+        fpm: 2368,
+        ms: 12
       },
-      "speed": {
-        "kmh": 507.4,
-        "kts": 274,
-        "mph": 315.3
+      speed: {
+        kmh: 507.4,
+        kts: 274,
+        mph: 315.3
       }
     },
     {
-      "altitude": {
-        "feet": 7125,
-        "meters": 2172
+      altitude: {
+        feet: 7125,
+        meters: 2172
       },
-      "verticalSpeed": {
-        "fpm": 2816,
-        "ms": 14.3
+      verticalSpeed: {
+        fpm: 2816,
+        ms: 14.3
       },
-      "speed": {
-        "kmh": 507.4,
-        "kts": 274,
-        "mph": 315.3
+      speed: {
+        kmh: 507.4,
+        kts: 274,
+        mph: 315.3
       }
     },
     {
-      "altitude": {
-        "feet": 7800,
-        "meters": 2377
+      altitude: {
+        feet: 7800,
+        meters: 2377
       },
-      "verticalSpeed": {
-        "fpm": 2688,
-        "ms": 13.7
+      verticalSpeed: {
+        fpm: 2688,
+        ms: 13.7
       },
-      "speed": {
-        "kmh": 507.4,
-        "kts": 274,
-        "mph": 315.3
+      speed: {
+        kmh: 507.4,
+        kts: 274,
+        mph: 315.3
       }
     },
     {
-      "altitude": {
-        "feet": 8350,
-        "meters": 2545
+      altitude: {
+        feet: 8350,
+        meters: 2545
       },
-      "verticalSpeed": {
-        "fpm": 2496,
-        "ms": 12.7
+      verticalSpeed: {
+        fpm: 2496,
+        ms: 12.7
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 8725,
-        "meters": 2659
+      altitude: {
+        feet: 8725,
+        meters: 2659
       },
-      "verticalSpeed": {
-        "fpm": 1536,
-        "ms": 7.8
+      verticalSpeed: {
+        fpm: 1536,
+        ms: 7.8
       },
-      "speed": {
-        "kmh": 518.6,
-        "kts": 280,
-        "mph": 322.2
+      speed: {
+        kmh: 518.6,
+        kts: 280,
+        mph: 322.2
       }
     },
     {
-      "altitude": {
-        "feet": 9125,
-        "meters": 2781
+      altitude: {
+        feet: 9125,
+        meters: 2781
       },
-      "verticalSpeed": {
-        "fpm": 2368,
-        "ms": 12
+      verticalSpeed: {
+        fpm: 2368,
+        ms: 12
       },
-      "speed": {
-        "kmh": 529.7,
-        "kts": 286,
-        "mph": 329.1
+      speed: {
+        kmh: 529.7,
+        kts: 286,
+        mph: 329.1
       }
     },
     {
-      "altitude": {
-        "feet": 9600,
-        "meters": 2926
+      altitude: {
+        feet: 9600,
+        meters: 2926
       },
-      "verticalSpeed": {
-        "fpm": 2432,
-        "ms": 12.4
+      verticalSpeed: {
+        fpm: 2432,
+        ms: 12.4
       },
-      "speed": {
-        "kmh": 535.2,
-        "kts": 289,
-        "mph": 332.6
+      speed: {
+        kmh: 535.2,
+        kts: 289,
+        mph: 332.6
       }
     },
     {
-      "altitude": {
-        "feet": 10125,
-        "meters": 3086
+      altitude: {
+        feet: 10125,
+        meters: 3086
       },
-      "verticalSpeed": {
-        "fpm": 2752,
-        "ms": 14
+      verticalSpeed: {
+        fpm: 2752,
+        ms: 14
       },
-      "speed": {
-        "kmh": 537.1,
-        "kts": 290,
-        "mph": 333.7
+      speed: {
+        kmh: 537.1,
+        kts: 290,
+        mph: 333.7
       }
     },
     {
-      "altitude": {
-        "feet": 10550,
-        "meters": 3216
+      altitude: {
+        feet: 10550,
+        meters: 3216
       },
-      "verticalSpeed": {
-        "fpm": 1344,
-        "ms": 6.8
+      verticalSpeed: {
+        fpm: 1344,
+        ms: 6.8
       },
-      "speed": {
-        "kmh": 542.6,
-        "kts": 293,
-        "mph": 337.2
+      speed: {
+        kmh: 542.6,
+        kts: 293,
+        mph: 337.2
       }
     },
     {
-      "altitude": {
-        "feet": 10725,
-        "meters": 3269
+      altitude: {
+        feet: 10725,
+        meters: 3269
       },
-      "verticalSpeed": {
-        "fpm": 896,
-        "ms": 4.6
+      verticalSpeed: {
+        fpm: 896,
+        ms: 4.6
       },
-      "speed": {
-        "kmh": 566.7,
-        "kts": 306,
-        "mph": 352.1
+      speed: {
+        kmh: 566.7,
+        kts: 306,
+        mph: 352.1
       }
     },
     {
-      "altitude": {
-        "feet": 10975,
-        "meters": 3345
+      altitude: {
+        feet: 10975,
+        meters: 3345
       },
-      "verticalSpeed": {
-        "fpm": 1536,
-        "ms": 7.8
+      verticalSpeed: {
+        fpm: 1536,
+        ms: 7.8
       },
-      "speed": {
-        "kmh": 588.9,
-        "kts": 318,
-        "mph": 365.9
+      speed: {
+        kmh: 588.9,
+        kts: 318,
+        mph: 365.9
       }
     },
     {
-      "altitude": {
-        "feet": 11350,
-        "meters": 3459
+      altitude: {
+        feet: 11350,
+        meters: 3459
       },
-      "verticalSpeed": {
-        "fpm": 2304,
-        "ms": 11.7
+      verticalSpeed: {
+        fpm: 2304,
+        ms: 11.7
       },
-      "speed": {
-        "kmh": 600,
-        "kts": 324,
-        "mph": 372.9
+      speed: {
+        kmh: 600,
+        kts: 324,
+        mph: 372.9
       }
     },
     {
-      "altitude": {
-        "feet": 11800,
-        "meters": 3597
+      altitude: {
+        feet: 11800,
+        meters: 3597
       },
-      "verticalSpeed": {
-        "fpm": 2240,
-        "ms": 11.4
+      verticalSpeed: {
+        fpm: 2240,
+        ms: 11.4
       },
-      "speed": {
-        "kmh": 603.8,
-        "kts": 326,
-        "mph": 375.2
+      speed: {
+        kmh: 603.8,
+        kts: 326,
+        mph: 375.2
       }
     },
     {
-      "altitude": {
-        "feet": 12300,
-        "meters": 3749
+      altitude: {
+        feet: 12300,
+        meters: 3749
       },
-      "verticalSpeed": {
-        "fpm": 2432,
-        "ms": 12.4
+      verticalSpeed: {
+        fpm: 2432,
+        ms: 12.4
       },
-      "speed": {
-        "kmh": 609.3,
-        "kts": 329,
-        "mph": 378.6
+      speed: {
+        kmh: 609.3,
+        kts: 329,
+        mph: 378.6
       }
     },
     {
-      "altitude": {
-        "feet": 13450,
-        "meters": 4100
+      altitude: {
+        feet: 13450,
+        meters: 4100
       },
-      "verticalSpeed": {
-        "fpm": 2240,
-        "ms": 11.4
+      verticalSpeed: {
+        fpm: 2240,
+        ms: 11.4
       },
-      "speed": {
-        "kmh": 616.7,
-        "kts": 333,
-        "mph": 383.2
+      speed: {
+        kmh: 616.7,
+        kts: 333,
+        mph: 383.2
       }
     },
     {
-      "altitude": {
-        "feet": 14425,
-        "meters": 4397
+      altitude: {
+        feet: 14425,
+        meters: 4397
       },
-      "verticalSpeed": {
-        "fpm": 2048,
-        "ms": 10.4
+      verticalSpeed: {
+        fpm: 2048,
+        ms: 10.4
       },
-      "speed": {
-        "kmh": 633.4,
-        "kts": 342,
-        "mph": 393.6
+      speed: {
+        kmh: 633.4,
+        kts: 342,
+        mph: 393.6
       }
     },
     {
-      "altitude": {
-        "feet": 15500,
-        "meters": 4724
+      altitude: {
+        feet: 15500,
+        meters: 4724
       },
-      "verticalSpeed": {
-        "fpm": 1920,
-        "ms": 9.8
+      verticalSpeed: {
+        fpm: 1920,
+        ms: 9.8
       },
-      "speed": {
-        "kmh": 642.6,
-        "kts": 347,
-        "mph": 399.3
+      speed: {
+        kmh: 642.6,
+        kts: 347,
+        mph: 399.3
       }
     },
     {
-      "altitude": {
-        "feet": 16500,
-        "meters": 5029
+      altitude: {
+        feet: 16500,
+        meters: 5029
       },
-      "verticalSpeed": {
-        "fpm": 2112,
-        "ms": 10.7
+      verticalSpeed: {
+        fpm: 2112,
+        ms: 10.7
       },
-      "speed": {
-        "kmh": 653.8,
-        "kts": 353,
-        "mph": 406.2
+      speed: {
+        kmh: 653.8,
+        kts: 353,
+        mph: 406.2
       }
     },
     {
-      "altitude": {
-        "feet": 17450,
-        "meters": 5319
+      altitude: {
+        feet: 17450,
+        meters: 5319
       },
-      "verticalSpeed": {
-        "fpm": 1920,
-        "ms": 9.8
+      verticalSpeed: {
+        fpm: 1920,
+        ms: 9.8
       },
-      "speed": {
-        "kmh": 663,
-        "kts": 358,
-        "mph": 412
+      speed: {
+        kmh: 663,
+        kts: 358,
+        mph: 412
       }
     },
     {
-      "altitude": {
-        "feet": 18275,
-        "meters": 5570
+      altitude: {
+        feet: 18275,
+        meters: 5570
       },
-      "verticalSpeed": {
-        "fpm": 1664,
-        "ms": 8.5
+      verticalSpeed: {
+        fpm: 1664,
+        ms: 8.5
       },
-      "speed": {
-        "kmh": 681.5,
-        "kts": 368,
-        "mph": 423.5
+      speed: {
+        kmh: 681.5,
+        kts: 368,
+        mph: 423.5
       }
     },
     {
-      "altitude": {
-        "feet": 20125,
-        "meters": 6134
+      altitude: {
+        feet: 20125,
+        meters: 6134
       },
-      "verticalSpeed": {
-        "fpm": 2112,
-        "ms": 10.7
+      verticalSpeed: {
+        fpm: 2112,
+        ms: 10.7
       },
-      "speed": {
-        "kmh": 694.5,
-        "kts": 375,
-        "mph": 431.5
+      speed: {
+        kmh: 694.5,
+        kts: 375,
+        mph: 431.5
       }
     },
     {
-      "altitude": {
-        "feet": 21475,
-        "meters": 6546
+      altitude: {
+        feet: 21475,
+        meters: 6546
       },
-      "verticalSpeed": {
-        "fpm": 1472,
-        "ms": 7.5
+      verticalSpeed: {
+        fpm: 1472,
+        ms: 7.5
       },
-      "speed": {
-        "kmh": 731.5,
-        "kts": 395,
-        "mph": 454.6
+      speed: {
+        kmh: 731.5,
+        kts: 395,
+        mph: 454.6
       }
     },
     {
-      "altitude": {
-        "feet": 23175,
-        "meters": 7064
+      altitude: {
+        feet: 23175,
+        meters: 7064
       },
-      "verticalSpeed": {
-        "fpm": 1792,
-        "ms": 9.1
+      verticalSpeed: {
+        fpm: 1792,
+        ms: 9.1
       },
-      "speed": {
-        "kmh": 740.8,
-        "kts": 400,
-        "mph": 460.3
+      speed: {
+        kmh: 740.8,
+        kts: 400,
+        mph: 460.3
       }
     },
     {
-      "altitude": {
-        "feet": 24675,
-        "meters": 7521
+      altitude: {
+        feet: 24675,
+        meters: 7521
       },
-      "verticalSpeed": {
-        "fpm": 768,
-        "ms": 3.9
+      verticalSpeed: {
+        fpm: 768,
+        ms: 3.9
       },
-      "speed": {
-        "kmh": 750.1,
-        "kts": 405,
-        "mph": 466.1
+      speed: {
+        kmh: 750.1,
+        kts: 405,
+        mph: 466.1
       }
     },
     {
-      "altitude": {
-        "feet": 25850,
-        "meters": 7879
+      altitude: {
+        feet: 25850,
+        meters: 7879
       },
-      "verticalSpeed": {
-        "fpm": 1472,
-        "ms": 7.5
+      verticalSpeed: {
+        fpm: 1472,
+        ms: 7.5
       },
-      "speed": {
-        "kmh": 766.7,
-        "kts": 414,
-        "mph": 476.4
+      speed: {
+        kmh: 766.7,
+        kts: 414,
+        mph: 476.4
       }
     },
     {
-      "altitude": {
-        "feet": 26800,
-        "meters": 8169
+      altitude: {
+        feet: 26800,
+        meters: 8169
       },
-      "verticalSpeed": {
-        "fpm": 960,
-        "ms": 4.9
+      verticalSpeed: {
+        fpm: 960,
+        ms: 4.9
       },
-      "speed": {
-        "kmh": 777.8,
-        "kts": 420,
-        "mph": 483.3
+      speed: {
+        kmh: 777.8,
+        kts: 420,
+        mph: 483.3
       }
     },
     {
-      "altitude": {
-        "feet": 26900,
-        "meters": 8199
+      altitude: {
+        feet: 26900,
+        meters: 8199
       },
-      "verticalSpeed": {
-        "fpm": 1152,
-        "ms": 5.9
+      verticalSpeed: {
+        fpm: 1152,
+        ms: 5.9
       },
-      "speed": {
-        "kmh": 777.8,
-        "kts": 420,
-        "mph": 483.3
+      speed: {
+        kmh: 777.8,
+        kts: 420,
+        mph: 483.3
       }
     },
     {
-      "altitude": {
-        "feet": 27025,
-        "meters": 8237
+      altitude: {
+        feet: 27025,
+        meters: 8237
       },
-      "verticalSpeed": {
-        "fpm": 1280,
-        "ms": 6.5
+      verticalSpeed: {
+        fpm: 1280,
+        ms: 6.5
       },
-      "speed": {
-        "kmh": 779.7,
-        "kts": 421,
-        "mph": 484.5
+      speed: {
+        kmh: 779.7,
+        kts: 421,
+        mph: 484.5
       }
     },
     {
-      "altitude": {
-        "feet": 27150,
-        "meters": 8275
+      altitude: {
+        feet: 27150,
+        meters: 8275
       },
-      "verticalSpeed": {
-        "fpm": 1216,
-        "ms": 6.2
+      verticalSpeed: {
+        fpm: 1216,
+        ms: 6.2
       },
-      "speed": {
-        "kmh": 779.7,
-        "kts": 421,
-        "mph": 484.5
+      speed: {
+        kmh: 779.7,
+        kts: 421,
+        mph: 484.5
       }
     },
     {
-      "altitude": {
-        "feet": 27250,
-        "meters": 8306
+      altitude: {
+        feet: 27250,
+        meters: 8306
       },
-      "verticalSpeed": {
-        "fpm": 1152,
-        "ms": 5.9
+      verticalSpeed: {
+        fpm: 1152,
+        ms: 5.9
       },
-      "speed": {
-        "kmh": 781.5,
-        "kts": 422,
-        "mph": 485.6
+      speed: {
+        kmh: 781.5,
+        kts: 422,
+        mph: 485.6
       }
     },
     {
-      "altitude": {
-        "feet": 28425,
-        "meters": 8664
+      altitude: {
+        feet: 28425,
+        meters: 8664
       },
-      "verticalSpeed": {
-        "fpm": 1088,
-        "ms": 5.5
+      verticalSpeed: {
+        fpm: 1088,
+        ms: 5.5
       },
-      "speed": {
-        "kmh": 787.1,
-        "kts": 425,
-        "mph": 489.1
+      speed: {
+        kmh: 787.1,
+        kts: 425,
+        mph: 489.1
       }
     },
     {
-      "altitude": {
-        "feet": 29125,
-        "meters": 8877
+      altitude: {
+        feet: 29125,
+        meters: 8877
       },
-      "verticalSpeed": {
-        "fpm": 448,
-        "ms": 2.3
+      verticalSpeed: {
+        fpm: 448,
+        ms: 2.3
       },
-      "speed": {
-        "kmh": 811.2,
-        "kts": 438,
-        "mph": 504
+      speed: {
+        kmh: 811.2,
+        kts: 438,
+        mph: 504
       }
     },
     {
-      "altitude": {
-        "feet": 29575,
-        "meters": 9014
+      altitude: {
+        feet: 29575,
+        meters: 9014
       },
-      "verticalSpeed": {
-        "fpm": 384,
-        "ms": 2
+      verticalSpeed: {
+        fpm: 384,
+        ms: 2
       },
-      "speed": {
-        "kmh": 844.5,
-        "kts": 456,
-        "mph": 524.8
+      speed: {
+        kmh: 844.5,
+        kts: 456,
+        mph: 524.8
       }
     },
     {
-      "altitude": {
-        "feet": 30250,
-        "meters": 9220
+      altitude: {
+        feet: 30250,
+        meters: 9220
       },
-      "verticalSpeed": {
-        "fpm": 704,
-        "ms": 3.6
+      verticalSpeed: {
+        fpm: 704,
+        ms: 3.6
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 30775,
-        "meters": 9380
+      altitude: {
+        feet: 30775,
+        meters: 9380
       },
-      "verticalSpeed": {
-        "fpm": 832,
-        "ms": 4.2
+      verticalSpeed: {
+        fpm: 832,
+        ms: 4.2
       },
-      "speed": {
-        "kmh": 874.1,
-        "kts": 472,
-        "mph": 543.2
+      speed: {
+        kmh: 874.1,
+        kts: 472,
+        mph: 543.2
       }
     },
     {
-      "altitude": {
-        "feet": 32100,
-        "meters": 9784
+      altitude: {
+        feet: 32100,
+        meters: 9784
       },
-      "verticalSpeed": {
-        "fpm": 3264,
-        "ms": 16.6
+      verticalSpeed: {
+        fpm: 3264,
+        ms: 16.6
       },
-      "speed": {
-        "kmh": 859.3,
-        "kts": 464,
-        "mph": 534
+      speed: {
+        kmh: 859.3,
+        kts: 464,
+        mph: 534
       }
     },
     {
-      "altitude": {
-        "feet": 34350,
-        "meters": 10470
+      altitude: {
+        feet: 34350,
+        meters: 10470
       },
-      "verticalSpeed": {
-        "fpm": 320,
-        "ms": 1.6
+      verticalSpeed: {
+        fpm: 320,
+        ms: 1.6
       },
-      "speed": {
-        "kmh": 785.2,
-        "kts": 424,
-        "mph": 487.9
+      speed: {
+        kmh: 785.2,
+        kts: 424,
+        mph: 487.9
       }
     },
     {
-      "altitude": {
-        "feet": 34525,
-        "meters": 10523
+      altitude: {
+        feet: 34525,
+        meters: 10523
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 813,
-        "kts": 439,
-        "mph": 505.2
+      speed: {
+        kmh: 813,
+        kts: 439,
+        mph: 505.2
       }
     },
     {
-      "altitude": {
-        "feet": 35000,
-        "meters": 10668
+      altitude: {
+        feet: 35000,
+        meters: 10668
       },
-      "verticalSpeed": {
-        "fpm": 768,
-        "ms": 3.9
+      verticalSpeed: {
+        fpm: 768,
+        ms: 3.9
       },
-      "speed": {
-        "kmh": 827.8,
-        "kts": 447,
-        "mph": 514.4
+      speed: {
+        kmh: 827.8,
+        kts: 447,
+        mph: 514.4
       }
     },
     {
-      "altitude": {
-        "feet": 35675,
-        "meters": 10874
+      altitude: {
+        feet: 35675,
+        meters: 10874
       },
-      "verticalSpeed": {
-        "fpm": 576,
-        "ms": 2.9
+      verticalSpeed: {
+        fpm: 576,
+        ms: 2.9
       },
-      "speed": {
-        "kmh": 829.7,
-        "kts": 448,
-        "mph": 515.5
+      speed: {
+        kmh: 829.7,
+        kts: 448,
+        mph: 515.5
       }
     },
     {
-      "altitude": {
-        "feet": 36050,
-        "meters": 10988
+      altitude: {
+        feet: 36050,
+        meters: 10988
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 840.8,
-        "kts": 454,
-        "mph": 522.5
+      speed: {
+        kmh: 840.8,
+        kts: 454,
+        mph: 522.5
       }
     },
     {
-      "altitude": {
-        "feet": 36200,
-        "meters": 11034
+      altitude: {
+        feet: 36200,
+        meters: 11034
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 855.6,
-        "kts": 462,
-        "mph": 531.7
+      speed: {
+        kmh: 855.6,
+        kts: 462,
+        mph: 531.7
       }
     },
     {
-      "altitude": {
-        "feet": 36625,
-        "meters": 11163
+      altitude: {
+        feet: 36625,
+        meters: 11163
       },
-      "verticalSpeed": {
-        "fpm": 576,
-        "ms": 2.9
+      verticalSpeed: {
+        fpm: 576,
+        ms: 2.9
       },
-      "speed": {
-        "kmh": 861.2,
-        "kts": 465,
-        "mph": 535.1
+      speed: {
+        kmh: 861.2,
+        kts: 465,
+        mph: 535.1
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 859.3,
-        "kts": 464,
-        "mph": 534
+      speed: {
+        kmh: 859.3,
+        kts: 464,
+        mph: 534
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 851.9,
-        "kts": 460,
-        "mph": 529.4
+      speed: {
+        kmh: 851.9,
+        kts: 460,
+        mph: 529.4
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 850.1,
-        "kts": 459,
-        "mph": 528.2
+      speed: {
+        kmh: 850.1,
+        kts: 459,
+        mph: 528.2
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 846.4,
-        "kts": 457,
-        "mph": 525.9
+      speed: {
+        kmh: 846.4,
+        kts: 457,
+        mph: 525.9
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": -128,
-        "ms": -0.7
+      verticalSpeed: {
+        fpm: -128,
+        ms: -0.7
       },
-      "speed": {
-        "kmh": 851.9,
-        "kts": 460,
-        "mph": 529.4
+      speed: {
+        kmh: 851.9,
+        kts: 460,
+        mph: 529.4
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 863,
-        "kts": 466,
-        "mph": 536.3
+      speed: {
+        kmh: 863,
+        kts: 466,
+        mph: 536.3
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 874.1,
-        "kts": 472,
-        "mph": 543.2
+      speed: {
+        kmh: 874.1,
+        kts: 472,
+        mph: 543.2
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 874.1,
-        "kts": 472,
-        "mph": 543.2
+      speed: {
+        kmh: 874.1,
+        kts: 472,
+        mph: 543.2
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 872.3,
-        "kts": 471,
-        "mph": 542
+      speed: {
+        kmh: 872.3,
+        kts: 471,
+        mph: 542
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 883.4,
-        "kts": 477,
-        "mph": 548.9
+      speed: {
+        kmh: 883.4,
+        kts: 477,
+        mph: 548.9
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 887.1,
-        "kts": 479,
-        "mph": 551.2
+      speed: {
+        kmh: 887.1,
+        kts: 479,
+        mph: 551.2
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 914.9,
-        "kts": 494,
-        "mph": 568.5
+      speed: {
+        kmh: 914.9,
+        kts: 494,
+        mph: 568.5
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 918.6,
-        "kts": 496,
-        "mph": 570.8
+      speed: {
+        kmh: 918.6,
+        kts: 496,
+        mph: 570.8
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 931.6,
-        "kts": 503,
-        "mph": 578.8
+      speed: {
+        kmh: 931.6,
+        kts: 503,
+        mph: 578.8
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 931.6,
-        "kts": 503,
-        "mph": 578.8
+      speed: {
+        kmh: 931.6,
+        kts: 503,
+        mph: 578.8
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 933.4,
-        "kts": 504,
-        "mph": 580
+      speed: {
+        kmh: 933.4,
+        kts: 504,
+        mph: 580
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 937.1,
-        "kts": 506,
-        "mph": 582.3
+      speed: {
+        kmh: 937.1,
+        kts: 506,
+        mph: 582.3
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 929.7,
-        "kts": 502,
-        "mph": 577.7
+      speed: {
+        kmh: 929.7,
+        kts: 502,
+        mph: 577.7
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 927.9,
-        "kts": 501,
-        "mph": 576.5
+      speed: {
+        kmh: 927.9,
+        kts: 501,
+        mph: 576.5
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 931.6,
-        "kts": 503,
-        "mph": 578.8
+      speed: {
+        kmh: 931.6,
+        kts: 503,
+        mph: 578.8
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 929.7,
-        "kts": 502,
-        "mph": 577.7
+      speed: {
+        kmh: 929.7,
+        kts: 502,
+        mph: 577.7
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 931.6,
-        "kts": 503,
-        "mph": 578.8
+      speed: {
+        kmh: 931.6,
+        kts: 503,
+        mph: 578.8
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 929.7,
-        "kts": 502,
-        "mph": 577.7
+      speed: {
+        kmh: 929.7,
+        kts: 502,
+        mph: 577.7
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 927.9,
-        "kts": 501,
-        "mph": 576.5
+      speed: {
+        kmh: 927.9,
+        kts: 501,
+        mph: 576.5
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 929.7,
-        "kts": 502,
-        "mph": 577.7
+      speed: {
+        kmh: 929.7,
+        kts: 502,
+        mph: 577.7
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 933.4,
-        "kts": 504,
-        "mph": 580
+      speed: {
+        kmh: 933.4,
+        kts: 504,
+        mph: 580
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 940.8,
-        "kts": 508,
-        "mph": 584.6
+      speed: {
+        kmh: 940.8,
+        kts: 508,
+        mph: 584.6
       }
     },
     {
-      "altitude": {
-        "feet": 37000,
-        "meters": 11278
+      altitude: {
+        feet: 37000,
+        meters: 11278
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 939,
-        "kts": 507,
-        "mph": 583.4
+      speed: {
+        kmh: 939,
+        kts: 507,
+        mph: 583.4
       }
     },
     {
-      "altitude": {
-        "feet": 37575,
-        "meters": 11453
+      altitude: {
+        feet: 37575,
+        meters: 11453
       },
-      "verticalSpeed": {
-        "fpm": 768,
-        "ms": 3.9
+      verticalSpeed: {
+        fpm: 768,
+        ms: 3.9
       },
-      "speed": {
-        "kmh": 937.1,
-        "kts": 506,
-        "mph": 582.3
+      speed: {
+        kmh: 937.1,
+        kts: 506,
+        mph: 582.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 940.8,
-        "kts": 508,
-        "mph": 584.6
+      speed: {
+        kmh: 940.8,
+        kts: 508,
+        mph: 584.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 944.5,
-        "kts": 510,
-        "mph": 586.9
+      speed: {
+        kmh: 944.5,
+        kts: 510,
+        mph: 586.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 948.2,
-        "kts": 512,
-        "mph": 589.2
+      speed: {
+        kmh: 948.2,
+        kts: 512,
+        mph: 589.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 950.1,
-        "kts": 513,
-        "mph": 590.3
+      speed: {
+        kmh: 950.1,
+        kts: 513,
+        mph: 590.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 950.1,
-        "kts": 513,
-        "mph": 590.3
+      speed: {
+        kmh: 950.1,
+        kts: 513,
+        mph: 590.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 881.6,
-        "kts": 476,
-        "mph": 547.8
+      speed: {
+        kmh: 881.6,
+        kts: 476,
+        mph: 547.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 885.3,
-        "kts": 478,
-        "mph": 550.1
+      speed: {
+        kmh: 885.3,
+        kts: 478,
+        mph: 550.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 892.7,
-        "kts": 482,
-        "mph": 554.7
+      speed: {
+        kmh: 892.7,
+        kts: 482,
+        mph: 554.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 896.4,
-        "kts": 484,
-        "mph": 557
+      speed: {
+        kmh: 896.4,
+        kts: 484,
+        mph: 557
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 900.1,
-        "kts": 486,
-        "mph": 559.3
+      speed: {
+        kmh: 900.1,
+        kts: 486,
+        mph: 559.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 903.8,
-        "kts": 488,
-        "mph": 561.6
+      speed: {
+        kmh: 903.8,
+        kts: 488,
+        mph: 561.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 900.1,
-        "kts": 486,
-        "mph": 559.3
+      speed: {
+        kmh: 900.1,
+        kts: 486,
+        mph: 559.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 892.7,
-        "kts": 482,
-        "mph": 554.7
+      speed: {
+        kmh: 892.7,
+        kts: 482,
+        mph: 554.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 887.1,
-        "kts": 479,
-        "mph": 551.2
+      speed: {
+        kmh: 887.1,
+        kts: 479,
+        mph: 551.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -128,
-        "ms": -0.7
+      verticalSpeed: {
+        fpm: -128,
+        ms: -0.7
       },
-      "speed": {
-        "kmh": 876,
-        "kts": 473,
-        "mph": 544.3
+      speed: {
+        kmh: 876,
+        kts: 473,
+        mph: 544.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 842.7,
-        "kts": 455,
-        "mph": 523.6
+      speed: {
+        kmh: 842.7,
+        kts: 455,
+        mph: 523.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 839,
-        "kts": 453,
-        "mph": 521.3
+      speed: {
+        kmh: 839,
+        kts: 453,
+        mph: 521.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 839,
-        "kts": 453,
-        "mph": 521.3
+      speed: {
+        kmh: 839,
+        kts: 453,
+        mph: 521.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 835.3,
-        "kts": 451,
-        "mph": 519
+      speed: {
+        kmh: 835.3,
+        kts: 451,
+        mph: 519
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 829.7,
-        "kts": 448,
-        "mph": 515.5
+      speed: {
+        kmh: 829.7,
+        kts: 448,
+        mph: 515.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 822.3,
-        "kts": 444,
-        "mph": 510.9
+      speed: {
+        kmh: 822.3,
+        kts: 444,
+        mph: 510.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 820.4,
-        "kts": 443,
-        "mph": 509.8
+      speed: {
+        kmh: 820.4,
+        kts: 443,
+        mph: 509.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -128,
-        "ms": -0.7
+      verticalSpeed: {
+        fpm: -128,
+        ms: -0.7
       },
-      "speed": {
-        "kmh": 818.6,
-        "kts": 442,
-        "mph": 508.6
+      speed: {
+        kmh: 818.6,
+        kts: 442,
+        mph: 508.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -256,
-        "ms": -1.3
+      verticalSpeed: {
+        fpm: -256,
+        ms: -1.3
       },
-      "speed": {
-        "kmh": 818.6,
-        "kts": 442,
-        "mph": 508.6
+      speed: {
+        kmh: 818.6,
+        kts: 442,
+        mph: 508.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 813,
-        "kts": 439,
-        "mph": 505.2
+      speed: {
+        kmh: 813,
+        kts: 439,
+        mph: 505.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 814.9,
-        "kts": 440,
-        "mph": 506.3
+      speed: {
+        kmh: 814.9,
+        kts: 440,
+        mph: 506.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 256,
-        "ms": 1.3
+      verticalSpeed: {
+        fpm: 256,
+        ms: 1.3
       },
-      "speed": {
-        "kmh": 820.4,
-        "kts": 443,
-        "mph": 509.8
+      speed: {
+        kmh: 820.4,
+        kts: 443,
+        mph: 509.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 826,
-        "kts": 446,
-        "mph": 513.2
+      speed: {
+        kmh: 826,
+        kts: 446,
+        mph: 513.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 827.8,
-        "kts": 447,
-        "mph": 514.4
+      speed: {
+        kmh: 827.8,
+        kts: 447,
+        mph: 514.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 827.8,
-        "kts": 447,
-        "mph": 514.4
+      speed: {
+        kmh: 827.8,
+        kts: 447,
+        mph: 514.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 831.5,
-        "kts": 449,
-        "mph": 516.7
+      speed: {
+        kmh: 831.5,
+        kts: 449,
+        mph: 516.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 835.3,
-        "kts": 451,
-        "mph": 519
+      speed: {
+        kmh: 835.3,
+        kts: 451,
+        mph: 519
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 831.5,
-        "kts": 449,
-        "mph": 516.7
+      speed: {
+        kmh: 831.5,
+        kts: 449,
+        mph: 516.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 831.5,
-        "kts": 449,
-        "mph": 516.7
+      speed: {
+        kmh: 831.5,
+        kts: 449,
+        mph: 516.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 839,
-        "kts": 453,
-        "mph": 521.3
+      speed: {
+        kmh: 839,
+        kts: 453,
+        mph: 521.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 844.5,
-        "kts": 456,
-        "mph": 524.8
+      speed: {
+        kmh: 844.5,
+        kts: 456,
+        mph: 524.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 837.1,
-        "kts": 452,
-        "mph": 520.2
+      speed: {
+        kmh: 837.1,
+        kts: 452,
+        mph: 520.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 833.4,
-        "kts": 450,
-        "mph": 517.9
+      speed: {
+        kmh: 833.4,
+        kts: 450,
+        mph: 517.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 839,
-        "kts": 453,
-        "mph": 521.3
+      speed: {
+        kmh: 839,
+        kts: 453,
+        mph: 521.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 846.4,
-        "kts": 457,
-        "mph": 525.9
+      speed: {
+        kmh: 846.4,
+        kts: 457,
+        mph: 525.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 848.2,
-        "kts": 458,
-        "mph": 527.1
+      speed: {
+        kmh: 848.2,
+        kts: 458,
+        mph: 527.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 850.1,
-        "kts": 459,
-        "mph": 528.2
+      speed: {
+        kmh: 850.1,
+        kts: 459,
+        mph: 528.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 848.2,
-        "kts": 458,
-        "mph": 527.1
+      speed: {
+        kmh: 848.2,
+        kts: 458,
+        mph: 527.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 844.5,
-        "kts": 456,
-        "mph": 524.8
+      speed: {
+        kmh: 844.5,
+        kts: 456,
+        mph: 524.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 846.4,
-        "kts": 457,
-        "mph": 525.9
+      speed: {
+        kmh: 846.4,
+        kts: 457,
+        mph: 525.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 848.2,
-        "kts": 458,
-        "mph": 527.1
+      speed: {
+        kmh: 848.2,
+        kts: 458,
+        mph: 527.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 853.8,
-        "kts": 461,
-        "mph": 530.5
+      speed: {
+        kmh: 853.8,
+        kts: 461,
+        mph: 530.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 857.5,
-        "kts": 463,
-        "mph": 532.8
+      speed: {
+        kmh: 857.5,
+        kts: 463,
+        mph: 532.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 861.2,
-        "kts": 465,
-        "mph": 535.1
+      speed: {
+        kmh: 861.2,
+        kts: 465,
+        mph: 535.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 863,
-        "kts": 466,
-        "mph": 536.3
+      speed: {
+        kmh: 863,
+        kts: 466,
+        mph: 536.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 863,
-        "kts": 466,
-        "mph": 536.3
+      speed: {
+        kmh: 863,
+        kts: 466,
+        mph: 536.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 866.7,
-        "kts": 468,
-        "mph": 538.6
+      speed: {
+        kmh: 866.7,
+        kts: 468,
+        mph: 538.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 872.3,
-        "kts": 471,
-        "mph": 542
+      speed: {
+        kmh: 872.3,
+        kts: 471,
+        mph: 542
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 874.1,
-        "kts": 472,
-        "mph": 543.2
+      speed: {
+        kmh: 874.1,
+        kts: 472,
+        mph: 543.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 876,
-        "kts": 473,
-        "mph": 544.3
+      speed: {
+        kmh: 876,
+        kts: 473,
+        mph: 544.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 877.8,
-        "kts": 474,
-        "mph": 545.5
+      speed: {
+        kmh: 877.8,
+        kts: 474,
+        mph: 545.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 876,
-        "kts": 473,
-        "mph": 544.3
+      speed: {
+        kmh: 876,
+        kts: 473,
+        mph: 544.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 890.8,
-        "kts": 481,
-        "mph": 553.5
+      speed: {
+        kmh: 890.8,
+        kts: 481,
+        mph: 553.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 898.2,
-        "kts": 485,
-        "mph": 558.1
+      speed: {
+        kmh: 898.2,
+        kts: 485,
+        mph: 558.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 907.5,
-        "kts": 490,
-        "mph": 563.9
+      speed: {
+        kmh: 907.5,
+        kts: 490,
+        mph: 563.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 907.5,
-        "kts": 490,
-        "mph": 563.9
+      speed: {
+        kmh: 907.5,
+        kts: 490,
+        mph: 563.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 905.6,
-        "kts": 489,
-        "mph": 562.7
+      speed: {
+        kmh: 905.6,
+        kts: 489,
+        mph: 562.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 905.6,
-        "kts": 489,
-        "mph": 562.7
+      speed: {
+        kmh: 905.6,
+        kts: 489,
+        mph: 562.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 909.3,
-        "kts": 491,
-        "mph": 565
+      speed: {
+        kmh: 909.3,
+        kts: 491,
+        mph: 565
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 913,
-        "kts": 493,
-        "mph": 567.3
+      speed: {
+        kmh: 913,
+        kts: 493,
+        mph: 567.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 922.3,
-        "kts": 498,
-        "mph": 573.1
+      speed: {
+        kmh: 922.3,
+        kts: 498,
+        mph: 573.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 931.6,
-        "kts": 503,
-        "mph": 578.8
+      speed: {
+        kmh: 931.6,
+        kts: 503,
+        mph: 578.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 942.7,
-        "kts": 509,
-        "mph": 585.7
+      speed: {
+        kmh: 942.7,
+        kts: 509,
+        mph: 585.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 948.2,
-        "kts": 512,
-        "mph": 589.2
+      speed: {
+        kmh: 948.2,
+        kts: 512,
+        mph: 589.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 955.6,
-        "kts": 516,
-        "mph": 593.8
+      speed: {
+        kmh: 955.6,
+        kts: 516,
+        mph: 593.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 961.2,
-        "kts": 519,
-        "mph": 597.3
+      speed: {
+        kmh: 961.2,
+        kts: 519,
+        mph: 597.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 961.2,
-        "kts": 519,
-        "mph": 597.3
+      speed: {
+        kmh: 961.2,
+        kts: 519,
+        mph: 597.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 961.2,
-        "kts": 519,
-        "mph": 597.3
+      speed: {
+        kmh: 961.2,
+        kts: 519,
+        mph: 597.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 964.9,
-        "kts": 521,
-        "mph": 599.6
+      speed: {
+        kmh: 964.9,
+        kts: 521,
+        mph: 599.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 964.9,
-        "kts": 521,
-        "mph": 599.6
+      speed: {
+        kmh: 964.9,
+        kts: 521,
+        mph: 599.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 972.3,
-        "kts": 525,
-        "mph": 604.2
+      speed: {
+        kmh: 972.3,
+        kts: 525,
+        mph: 604.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 989,
-        "kts": 534,
-        "mph": 614.5
+      speed: {
+        kmh: 989,
+        kts: 534,
+        mph: 614.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 983.4,
-        "kts": 531,
-        "mph": 611.1
+      speed: {
+        kmh: 983.4,
+        kts: 531,
+        mph: 611.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 994.5,
-        "kts": 537,
-        "mph": 618
+      speed: {
+        kmh: 994.5,
+        kts: 537,
+        mph: 618
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 996.4,
-        "kts": 538,
-        "mph": 619.1
+      speed: {
+        kmh: 996.4,
+        kts: 538,
+        mph: 619.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 990.8,
-        "kts": 535,
-        "mph": 615.7
+      speed: {
+        kmh: 990.8,
+        kts: 535,
+        mph: 615.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 989,
-        "kts": 534,
-        "mph": 614.5
+      speed: {
+        kmh: 989,
+        kts: 534,
+        mph: 614.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 983.4,
-        "kts": 531,
-        "mph": 611.1
+      speed: {
+        kmh: 983.4,
+        kts: 531,
+        mph: 611.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 985.3,
-        "kts": 532,
-        "mph": 612.2
+      speed: {
+        kmh: 985.3,
+        kts: 532,
+        mph: 612.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 990.8,
-        "kts": 535,
-        "mph": 615.7
+      speed: {
+        kmh: 990.8,
+        kts: 535,
+        mph: 615.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 996.4,
-        "kts": 538,
-        "mph": 619.1
+      speed: {
+        kmh: 996.4,
+        kts: 538,
+        mph: 619.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 992.7,
-        "kts": 536,
-        "mph": 616.8
+      speed: {
+        kmh: 992.7,
+        kts: 536,
+        mph: 616.8
       }
     },
     {
-      "altitude": {
-        "feet": 37975,
-        "meters": 11575
+      altitude: {
+        feet: 37975,
+        meters: 11575
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 996.4,
-        "kts": 538,
-        "mph": 619.1
+      speed: {
+        kmh: 996.4,
+        kts: 538,
+        mph: 619.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 994.5,
-        "kts": 537,
-        "mph": 618
+      speed: {
+        kmh: 994.5,
+        kts: 537,
+        mph: 618
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 992.7,
-        "kts": 536,
-        "mph": 616.8
+      speed: {
+        kmh: 992.7,
+        kts: 536,
+        mph: 616.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 990.8,
-        "kts": 535,
-        "mph": 615.7
+      speed: {
+        kmh: 990.8,
+        kts: 535,
+        mph: 615.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 987.1,
-        "kts": 533,
-        "mph": 613.4
+      speed: {
+        kmh: 987.1,
+        kts: 533,
+        mph: 613.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 981.6,
-        "kts": 530,
-        "mph": 609.9
+      speed: {
+        kmh: 981.6,
+        kts: 530,
+        mph: 609.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 974.2,
-        "kts": 526,
-        "mph": 605.3
+      speed: {
+        kmh: 974.2,
+        kts: 526,
+        mph: 605.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 974.2,
-        "kts": 526,
-        "mph": 605.3
+      speed: {
+        kmh: 974.2,
+        kts: 526,
+        mph: 605.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 968.6,
-        "kts": 523,
-        "mph": 601.9
+      speed: {
+        kmh: 968.6,
+        kts: 523,
+        mph: 601.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 974.2,
-        "kts": 526,
-        "mph": 605.3
+      speed: {
+        kmh: 974.2,
+        kts: 526,
+        mph: 605.3
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 974.2,
-        "kts": 526,
-        "mph": 605.3
+      speed: {
+        kmh: 974.2,
+        kts: 526,
+        mph: 605.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 979.7,
-        "kts": 529,
-        "mph": 608.8
+      speed: {
+        kmh: 979.7,
+        kts: 529,
+        mph: 608.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 977.9,
-        "kts": 528,
-        "mph": 607.6
+      speed: {
+        kmh: 977.9,
+        kts: 528,
+        mph: 607.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 968.6,
-        "kts": 523,
-        "mph": 601.9
+      speed: {
+        kmh: 968.6,
+        kts: 523,
+        mph: 601.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 966.7,
-        "kts": 522,
-        "mph": 600.7
+      speed: {
+        kmh: 966.7,
+        kts: 522,
+        mph: 600.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 959.3,
-        "kts": 518,
-        "mph": 596.1
+      speed: {
+        kmh: 959.3,
+        kts: 518,
+        mph: 596.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 957.5,
-        "kts": 517,
-        "mph": 595
+      speed: {
+        kmh: 957.5,
+        kts: 517,
+        mph: 595
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 953.8,
-        "kts": 515,
-        "mph": 592.7
+      speed: {
+        kmh: 953.8,
+        kts: 515,
+        mph: 592.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 957.5,
-        "kts": 517,
-        "mph": 595
+      speed: {
+        kmh: 957.5,
+        kts: 517,
+        mph: 595
       }
     },
     {
-      "altitude": {
-        "feet": 37975,
-        "meters": 11575
+      altitude: {
+        feet: 37975,
+        meters: 11575
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 976,
-        "kts": 527,
-        "mph": 606.5
+      speed: {
+        kmh: 976,
+        kts: 527,
+        mph: 606.5
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 970.4,
-        "kts": 524,
-        "mph": 603
+      speed: {
+        kmh: 970.4,
+        kts: 524,
+        mph: 603
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -192,
-        "ms": -1
+      verticalSpeed: {
+        fpm: -192,
+        ms: -1
       },
-      "speed": {
-        "kmh": 972.3,
-        "kts": 525,
-        "mph": 604.2
+      speed: {
+        kmh: 972.3,
+        kts: 525,
+        mph: 604.2
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 972.3,
-        "kts": 525,
-        "mph": 604.2
+      speed: {
+        kmh: 972.3,
+        kts: 525,
+        mph: 604.2
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 961.2,
-        "kts": 519,
-        "mph": 597.3
+      speed: {
+        kmh: 961.2,
+        kts: 519,
+        mph: 597.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 959.3,
-        "kts": 518,
-        "mph": 596.1
+      speed: {
+        kmh: 959.3,
+        kts: 518,
+        mph: 596.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 963,
-        "kts": 520,
-        "mph": 598.4
+      speed: {
+        kmh: 963,
+        kts: 520,
+        mph: 598.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 961.2,
-        "kts": 519,
-        "mph": 597.3
+      speed: {
+        kmh: 961.2,
+        kts: 519,
+        mph: 597.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 957.5,
-        "kts": 517,
-        "mph": 595
+      speed: {
+        kmh: 957.5,
+        kts: 517,
+        mph: 595
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 950.1,
-        "kts": 513,
-        "mph": 590.3
+      speed: {
+        kmh: 950.1,
+        kts: 513,
+        mph: 590.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 948.2,
-        "kts": 512,
-        "mph": 589.2
+      speed: {
+        kmh: 948.2,
+        kts: 512,
+        mph: 589.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 946.4,
-        "kts": 511,
-        "mph": 588
+      speed: {
+        kmh: 946.4,
+        kts: 511,
+        mph: 588
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 944.5,
-        "kts": 510,
-        "mph": 586.9
+      speed: {
+        kmh: 944.5,
+        kts: 510,
+        mph: 586.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 939,
-        "kts": 507,
-        "mph": 583.4
+      speed: {
+        kmh: 939,
+        kts: 507,
+        mph: 583.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 944.5,
-        "kts": 510,
-        "mph": 586.9
+      speed: {
+        kmh: 944.5,
+        kts: 510,
+        mph: 586.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 939,
-        "kts": 507,
-        "mph": 583.4
+      speed: {
+        kmh: 939,
+        kts: 507,
+        mph: 583.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 935.3,
-        "kts": 505,
-        "mph": 581.1
+      speed: {
+        kmh: 935.3,
+        kts: 505,
+        mph: 581.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 935.3,
-        "kts": 505,
-        "mph": 581.1
+      speed: {
+        kmh: 935.3,
+        kts: 505,
+        mph: 581.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 933.4,
-        "kts": 504,
-        "mph": 580
+      speed: {
+        kmh: 933.4,
+        kts: 504,
+        mph: 580
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -192,
-        "ms": -1
+      verticalSpeed: {
+        fpm: -192,
+        ms: -1
       },
-      "speed": {
-        "kmh": 927.9,
-        "kts": 501,
-        "mph": 576.5
+      speed: {
+        kmh: 927.9,
+        kts: 501,
+        mph: 576.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 924.1,
-        "kts": 499,
-        "mph": 574.2
+      speed: {
+        kmh: 924.1,
+        kts: 499,
+        mph: 574.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 916.7,
-        "kts": 495,
-        "mph": 569.6
+      speed: {
+        kmh: 916.7,
+        kts: 495,
+        mph: 569.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 914.9,
-        "kts": 494,
-        "mph": 568.5
+      speed: {
+        kmh: 914.9,
+        kts: 494,
+        mph: 568.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 911.2,
-        "kts": 492,
-        "mph": 566.2
+      speed: {
+        kmh: 911.2,
+        kts: 492,
+        mph: 566.2
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 907.5,
-        "kts": 490,
-        "mph": 563.9
+      speed: {
+        kmh: 907.5,
+        kts: 490,
+        mph: 563.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 905.6,
-        "kts": 489,
-        "mph": 562.7
+      speed: {
+        kmh: 905.6,
+        kts: 489,
+        mph: 562.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 901.9,
-        "kts": 487,
-        "mph": 560.4
+      speed: {
+        kmh: 901.9,
+        kts: 487,
+        mph: 560.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 894.5,
-        "kts": 483,
-        "mph": 555.8
+      speed: {
+        kmh: 894.5,
+        kts: 483,
+        mph: 555.8
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 896.4,
-        "kts": 484,
-        "mph": 557
+      speed: {
+        kmh: 896.4,
+        kts: 484,
+        mph: 557
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 900.1,
-        "kts": 486,
-        "mph": 559.3
+      speed: {
+        kmh: 900.1,
+        kts: 486,
+        mph: 559.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 901.9,
-        "kts": 487,
-        "mph": 560.4
+      speed: {
+        kmh: 901.9,
+        kts: 487,
+        mph: 560.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 905.6,
-        "kts": 489,
-        "mph": 562.7
+      speed: {
+        kmh: 905.6,
+        kts: 489,
+        mph: 562.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 909.3,
-        "kts": 491,
-        "mph": 565
+      speed: {
+        kmh: 909.3,
+        kts: 491,
+        mph: 565
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 913,
-        "kts": 493,
-        "mph": 567.3
+      speed: {
+        kmh: 913,
+        kts: 493,
+        mph: 567.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 909.3,
-        "kts": 491,
-        "mph": 565
+      speed: {
+        kmh: 909.3,
+        kts: 491,
+        mph: 565
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 911.2,
-        "kts": 492,
-        "mph": 566.2
+      speed: {
+        kmh: 911.2,
+        kts: 492,
+        mph: 566.2
       }
     },
     {
-      "altitude": {
-        "feet": 38025,
-        "meters": 11590
+      altitude: {
+        feet: 38025,
+        meters: 11590
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 907.5,
-        "kts": 490,
-        "mph": 563.9
+      speed: {
+        kmh: 907.5,
+        kts: 490,
+        mph: 563.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 901.9,
-        "kts": 487,
-        "mph": 560.4
+      speed: {
+        kmh: 901.9,
+        kts: 487,
+        mph: 560.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 909.3,
-        "kts": 491,
-        "mph": 565
+      speed: {
+        kmh: 909.3,
+        kts: 491,
+        mph: 565
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 913,
-        "kts": 493,
-        "mph": 567.3
+      speed: {
+        kmh: 913,
+        kts: 493,
+        mph: 567.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 900.1,
-        "kts": 486,
-        "mph": 559.3
+      speed: {
+        kmh: 900.1,
+        kts: 486,
+        mph: 559.3
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 885.3,
-        "kts": 478,
-        "mph": 550.1
+      speed: {
+        kmh: 885.3,
+        kts: 478,
+        mph: 550.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 868.6,
-        "kts": 469,
-        "mph": 539.7
+      speed: {
+        kmh: 868.6,
+        kts: 469,
+        mph: 539.7
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 866.7,
-        "kts": 468,
-        "mph": 538.6
+      speed: {
+        kmh: 866.7,
+        kts: 468,
+        mph: 538.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 866.7,
-        "kts": 468,
-        "mph": 538.6
+      speed: {
+        kmh: 866.7,
+        kts: 468,
+        mph: 538.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 128,
-        "ms": 0.7
+      verticalSpeed: {
+        fpm: 128,
+        ms: 0.7
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 866.7,
-        "kts": 468,
-        "mph": 538.6
+      speed: {
+        kmh: 866.7,
+        kts: 468,
+        mph: 538.6
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 861.2,
-        "kts": 465,
-        "mph": 535.1
+      speed: {
+        kmh: 861.2,
+        kts: 465,
+        mph: 535.1
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 859.3,
-        "kts": 464,
-        "mph": 534
+      speed: {
+        kmh: 859.3,
+        kts: 464,
+        mph: 534
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 853.8,
-        "kts": 461,
-        "mph": 530.5
+      speed: {
+        kmh: 853.8,
+        kts: 461,
+        mph: 530.5
       }
     },
     {
-      "altitude": {
-        "feet": 38000,
-        "meters": 11582
+      altitude: {
+        feet: 38000,
+        meters: 11582
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 857.5,
-        "kts": 463,
-        "mph": 532.8
+      speed: {
+        kmh: 857.5,
+        kts: 463,
+        mph: 532.8
       }
     },
     {
-      "altitude": {
-        "feet": 37475,
-        "meters": 11422
+      altitude: {
+        feet: 37475,
+        meters: 11422
       },
-      "verticalSpeed": {
-        "fpm": -704,
-        "ms": -3.6
+      verticalSpeed: {
+        fpm: -704,
+        ms: -3.6
       },
-      "speed": {
-        "kmh": 868.6,
-        "kts": 469,
-        "mph": 539.7
+      speed: {
+        kmh: 868.6,
+        kts: 469,
+        mph: 539.7
       }
     },
     {
-      "altitude": {
-        "feet": 36450,
-        "meters": 11110
+      altitude: {
+        feet: 36450,
+        meters: 11110
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 864.9,
-        "kts": 467,
-        "mph": 537.4
+      speed: {
+        kmh: 864.9,
+        kts: 467,
+        mph: 537.4
       }
     },
     {
-      "altitude": {
-        "feet": 35450,
-        "meters": 10805
+      altitude: {
+        feet: 35450,
+        meters: 10805
       },
-      "verticalSpeed": {
-        "fpm": -960,
-        "ms": -4.9
+      verticalSpeed: {
+        fpm: -960,
+        ms: -4.9
       },
-      "speed": {
-        "kmh": 840.8,
-        "kts": 454,
-        "mph": 522.5
+      speed: {
+        kmh: 840.8,
+        kts: 454,
+        mph: 522.5
       }
     },
     {
-      "altitude": {
-        "feet": 34325,
-        "meters": 10462
+      altitude: {
+        feet: 34325,
+        meters: 10462
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 868.6,
-        "kts": 469,
-        "mph": 539.7
+      speed: {
+        kmh: 868.6,
+        kts: 469,
+        mph: 539.7
       }
     },
     {
-      "altitude": {
-        "feet": 31525,
-        "meters": 9609
+      altitude: {
+        feet: 31525,
+        meters: 9609
       },
-      "verticalSpeed": {
-        "fpm": -1984,
-        "ms": -10.1
+      verticalSpeed: {
+        fpm: -1984,
+        ms: -10.1
       },
-      "speed": {
-        "kmh": 863,
-        "kts": 466,
-        "mph": 536.3
+      speed: {
+        kmh: 863,
+        kts: 466,
+        mph: 536.3
       }
     },
     {
-      "altitude": {
-        "feet": 29825,
-        "meters": 9091
+      altitude: {
+        feet: 29825,
+        meters: 9091
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 833.4,
-        "kts": 450,
-        "mph": 517.9
+      speed: {
+        kmh: 833.4,
+        kts: 450,
+        mph: 517.9
       }
     },
     {
-      "altitude": {
-        "feet": 29000,
-        "meters": 8839
+      altitude: {
+        feet: 29000,
+        meters: 8839
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 807.5,
-        "kts": 436,
-        "mph": 501.7
+      speed: {
+        kmh: 807.5,
+        kts: 436,
+        mph: 501.7
       }
     },
     {
-      "altitude": {
-        "feet": 29025,
-        "meters": 8847
+      altitude: {
+        feet: 29025,
+        meters: 8847
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 800.1,
-        "kts": 432,
-        "mph": 497.1
+      speed: {
+        kmh: 800.1,
+        kts: 432,
+        mph: 497.1
       }
     },
     {
-      "altitude": {
-        "feet": 29000,
-        "meters": 8839
+      altitude: {
+        feet: 29000,
+        meters: 8839
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 803.8,
-        "kts": 434,
-        "mph": 499.4
+      speed: {
+        kmh: 803.8,
+        kts: 434,
+        mph: 499.4
       }
     },
     {
-      "altitude": {
-        "feet": 28325,
-        "meters": 8633
+      altitude: {
+        feet: 28325,
+        meters: 8633
       },
-      "verticalSpeed": {
-        "fpm": -2624,
-        "ms": -13.3
+      verticalSpeed: {
+        fpm: -2624,
+        ms: -13.3
       },
-      "speed": {
-        "kmh": 876,
-        "kts": 473,
-        "mph": 544.3
+      speed: {
+        kmh: 876,
+        kts: 473,
+        mph: 544.3
       }
     },
     {
-      "altitude": {
-        "feet": 25900,
-        "meters": 7894
+      altitude: {
+        feet: 25900,
+        meters: 7894
       },
-      "verticalSpeed": {
-        "fpm": -2048,
-        "ms": -10.4
+      verticalSpeed: {
+        fpm: -2048,
+        ms: -10.4
       },
-      "speed": {
-        "kmh": 876,
-        "kts": 473,
-        "mph": 544.3
+      speed: {
+        kmh: 876,
+        kts: 473,
+        mph: 544.3
       }
     },
     {
-      "altitude": {
-        "feet": 25000,
-        "meters": 7620
+      altitude: {
+        feet: 25000,
+        meters: 7620
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 870.4,
-        "kts": 470,
-        "mph": 540.9
+      speed: {
+        kmh: 870.4,
+        kts: 470,
+        mph: 540.9
       }
     },
     {
-      "altitude": {
-        "feet": 23550,
-        "meters": 7178
+      altitude: {
+        feet: 23550,
+        meters: 7178
       },
-      "verticalSpeed": {
-        "fpm": -1856,
-        "ms": -9.4
+      verticalSpeed: {
+        fpm: -1856,
+        ms: -9.4
       },
-      "speed": {
-        "kmh": 851.9,
-        "kts": 460,
-        "mph": 529.4
+      speed: {
+        kmh: 851.9,
+        kts: 460,
+        mph: 529.4
       }
     },
     {
-      "altitude": {
-        "feet": 20800,
-        "meters": 6340
+      altitude: {
+        feet: 20800,
+        meters: 6340
       },
-      "verticalSpeed": {
-        "fpm": -1856,
-        "ms": -9.4
+      verticalSpeed: {
+        fpm: -1856,
+        ms: -9.4
       },
-      "speed": {
-        "kmh": 796.4,
-        "kts": 430,
-        "mph": 494.8
+      speed: {
+        kmh: 796.4,
+        kts: 430,
+        mph: 494.8
       }
     },
     {
-      "altitude": {
-        "feet": 19275,
-        "meters": 5875
+      altitude: {
+        feet: 19275,
+        meters: 5875
       },
-      "verticalSpeed": {
-        "fpm": -1152,
-        "ms": -5.9
+      verticalSpeed: {
+        fpm: -1152,
+        ms: -5.9
       },
-      "speed": {
-        "kmh": 735.2,
-        "kts": 397,
-        "mph": 456.9
+      speed: {
+        kmh: 735.2,
+        kts: 397,
+        mph: 456.9
       }
     },
     {
-      "altitude": {
-        "feet": 17375,
-        "meters": 5296
+      altitude: {
+        feet: 17375,
+        meters: 5296
       },
-      "verticalSpeed": {
-        "fpm": -1856,
-        "ms": -9.4
+      verticalSpeed: {
+        fpm: -1856,
+        ms: -9.4
       },
-      "speed": {
-        "kmh": 707.5,
-        "kts": 382,
-        "mph": 439.6
+      speed: {
+        kmh: 707.5,
+        kts: 382,
+        mph: 439.6
       }
     },
     {
-      "altitude": {
-        "feet": 16475,
-        "meters": 5022
+      altitude: {
+        feet: 16475,
+        meters: 5022
       },
-      "verticalSpeed": {
-        "fpm": -1536,
-        "ms": -7.8
+      verticalSpeed: {
+        fpm: -1536,
+        ms: -7.8
       },
-      "speed": {
-        "kmh": 698.2,
-        "kts": 377,
-        "mph": 433.8
+      speed: {
+        kmh: 698.2,
+        kts: 377,
+        mph: 433.8
       }
     },
     {
-      "altitude": {
-        "feet": 15525,
-        "meters": 4732
+      altitude: {
+        feet: 15525,
+        meters: 4732
       },
-      "verticalSpeed": {
-        "fpm": -1664,
-        "ms": -8.5
+      verticalSpeed: {
+        fpm: -1664,
+        ms: -8.5
       },
-      "speed": {
-        "kmh": 677.8,
-        "kts": 366,
-        "mph": 421.2
+      speed: {
+        kmh: 677.8,
+        kts: 366,
+        mph: 421.2
       }
     },
     {
-      "altitude": {
-        "feet": 14450,
-        "meters": 4404
+      altitude: {
+        feet: 14450,
+        meters: 4404
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 666.7,
-        "kts": 360,
-        "mph": 414.3
+      speed: {
+        kmh: 666.7,
+        kts: 360,
+        mph: 414.3
       }
     },
     {
-      "altitude": {
-        "feet": 13500,
-        "meters": 4115
+      altitude: {
+        feet: 13500,
+        meters: 4115
       },
-      "verticalSpeed": {
-        "fpm": -1152,
-        "ms": -5.9
+      verticalSpeed: {
+        fpm: -1152,
+        ms: -5.9
       },
-      "speed": {
-        "kmh": 653.8,
-        "kts": 353,
-        "mph": 406.2
+      speed: {
+        kmh: 653.8,
+        kts: 353,
+        mph: 406.2
       }
     },
     {
-      "altitude": {
-        "feet": 12150,
-        "meters": 3703
+      altitude: {
+        feet: 12150,
+        meters: 3703
       },
-      "verticalSpeed": {
-        "fpm": -1856,
-        "ms": -9.4
+      verticalSpeed: {
+        fpm: -1856,
+        ms: -9.4
       },
-      "speed": {
-        "kmh": 655.6,
-        "kts": 354,
-        "mph": 407.4
+      speed: {
+        kmh: 655.6,
+        kts: 354,
+        mph: 407.4
       }
     },
     {
-      "altitude": {
-        "feet": 11675,
-        "meters": 3559
+      altitude: {
+        feet: 11675,
+        meters: 3559
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 626,
-        "kts": 338,
-        "mph": 389
+      speed: {
+        kmh: 626,
+        kts: 338,
+        mph: 389
       }
     },
     {
-      "altitude": {
-        "feet": 11400,
-        "meters": 3475
+      altitude: {
+        feet: 11400,
+        meters: 3475
       },
-      "verticalSpeed": {
-        "fpm": -1024,
-        "ms": -5.2
+      verticalSpeed: {
+        fpm: -1024,
+        ms: -5.2
       },
-      "speed": {
-        "kmh": 620.4,
-        "kts": 335,
-        "mph": 385.5
+      speed: {
+        kmh: 620.4,
+        kts: 335,
+        mph: 385.5
       }
     },
     {
-      "altitude": {
-        "feet": 11000,
-        "meters": 3353
+      altitude: {
+        feet: 11000,
+        meters: 3353
       },
-      "verticalSpeed": {
-        "fpm": -1408,
-        "ms": -7.2
+      verticalSpeed: {
+        fpm: -1408,
+        ms: -7.2
       },
-      "speed": {
-        "kmh": 626,
-        "kts": 338,
-        "mph": 389
+      speed: {
+        kmh: 626,
+        kts: 338,
+        mph: 389
       }
     },
     {
-      "altitude": {
-        "feet": 10775,
-        "meters": 3284
+      altitude: {
+        feet: 10775,
+        meters: 3284
       },
-      "verticalSpeed": {
-        "fpm": -1536,
-        "ms": -7.8
+      verticalSpeed: {
+        fpm: -1536,
+        ms: -7.8
       },
-      "speed": {
-        "kmh": 609.3,
-        "kts": 329,
-        "mph": 378.6
+      speed: {
+        kmh: 609.3,
+        kts: 329,
+        mph: 378.6
       }
     },
     {
-      "altitude": {
-        "feet": 10400,
-        "meters": 3170
+      altitude: {
+        feet: 10400,
+        meters: 3170
       },
-      "verticalSpeed": {
-        "fpm": -1280,
-        "ms": -6.5
+      verticalSpeed: {
+        fpm: -1280,
+        ms: -6.5
       },
-      "speed": {
-        "kmh": 622.3,
-        "kts": 336,
-        "mph": 386.7
+      speed: {
+        kmh: 622.3,
+        kts: 336,
+        mph: 386.7
       }
     },
     {
-      "altitude": {
-        "feet": 10275,
-        "meters": 3132
+      altitude: {
+        feet: 10275,
+        meters: 3132
       },
-      "verticalSpeed": {
-        "fpm": -1408,
-        "ms": -7.2
+      verticalSpeed: {
+        fpm: -1408,
+        ms: -7.2
       },
-      "speed": {
-        "kmh": 609.3,
-        "kts": 329,
-        "mph": 378.6
+      speed: {
+        kmh: 609.3,
+        kts: 329,
+        mph: 378.6
       }
     },
     {
-      "altitude": {
-        "feet": 10025,
-        "meters": 3056
+      altitude: {
+        feet: 10025,
+        meters: 3056
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 607.5,
-        "kts": 328,
-        "mph": 377.5
+      speed: {
+        kmh: 607.5,
+        kts: 328,
+        mph: 377.5
       }
     },
     {
-      "altitude": {
-        "feet": 9900,
-        "meters": 3018
+      altitude: {
+        feet: 9900,
+        meters: 3018
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 576,
-        "kts": 311,
-        "mph": 357.9
+      speed: {
+        kmh: 576,
+        kts: 311,
+        mph: 357.9
       }
     },
     {
-      "altitude": {
-        "feet": 9900,
-        "meters": 3018
+      altitude: {
+        feet: 9900,
+        meters: 3018
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 546.3,
-        "kts": 295,
-        "mph": 339.5
+      speed: {
+        kmh: 546.3,
+        kts: 295,
+        mph: 339.5
       }
     },
     {
-      "altitude": {
-        "feet": 9900,
-        "meters": 3018
+      altitude: {
+        feet: 9900,
+        meters: 3018
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 542.6,
-        "kts": 293,
-        "mph": 337.2
+      speed: {
+        kmh: 542.6,
+        kts: 293,
+        mph: 337.2
       }
     },
     {
-      "altitude": {
-        "feet": 9900,
-        "meters": 3018
+      altitude: {
+        feet: 9900,
+        meters: 3018
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 538.9,
-        "kts": 291,
-        "mph": 334.9
+      speed: {
+        kmh: 538.9,
+        kts: 291,
+        mph: 334.9
       }
     },
     {
-      "altitude": {
-        "feet": 9750,
-        "meters": 2972
+      altitude: {
+        feet: 9750,
+        meters: 2972
       },
-      "verticalSpeed": {
-        "fpm": -1088,
-        "ms": -5.5
+      verticalSpeed: {
+        fpm: -1088,
+        ms: -5.5
       },
-      "speed": {
-        "kmh": 538.9,
-        "kts": 291,
-        "mph": 334.9
+      speed: {
+        kmh: 538.9,
+        kts: 291,
+        mph: 334.9
       }
     },
     {
-      "altitude": {
-        "feet": 9375,
-        "meters": 2858
+      altitude: {
+        feet: 9375,
+        meters: 2858
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 538.9,
-        "kts": 291,
-        "mph": 334.9
+      speed: {
+        kmh: 538.9,
+        kts: 291,
+        mph: 334.9
       }
     },
     {
-      "altitude": {
-        "feet": 9000,
-        "meters": 2743
+      altitude: {
+        feet: 9000,
+        meters: 2743
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 538.9,
-        "kts": 291,
-        "mph": 334.9
+      speed: {
+        kmh: 538.9,
+        kts: 291,
+        mph: 334.9
       }
     },
     {
-      "altitude": {
-        "feet": 8675,
-        "meters": 2644
+      altitude: {
+        feet: 8675,
+        meters: 2644
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 538.9,
-        "kts": 291,
-        "mph": 334.9
+      speed: {
+        kmh: 538.9,
+        kts: 291,
+        mph: 334.9
       }
     },
     {
-      "altitude": {
-        "feet": 8250,
-        "meters": 2515
+      altitude: {
+        feet: 8250,
+        meters: 2515
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 522.3,
-        "kts": 282,
-        "mph": 324.5
+      speed: {
+        kmh: 522.3,
+        kts: 282,
+        mph: 324.5
       }
     },
     {
-      "altitude": {
-        "feet": 8150,
-        "meters": 2484
+      altitude: {
+        feet: 8150,
+        meters: 2484
       },
-      "verticalSpeed": {
-        "fpm": -1408,
-        "ms": -7.2
+      verticalSpeed: {
+        fpm: -1408,
+        ms: -7.2
       },
-      "speed": {
-        "kmh": 533.4,
-        "kts": 288,
-        "mph": 331.4
+      speed: {
+        kmh: 533.4,
+        kts: 288,
+        mph: 331.4
       }
     },
     {
-      "altitude": {
-        "feet": 7900,
-        "meters": 2408
+      altitude: {
+        feet: 7900,
+        meters: 2408
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 514.9,
-        "kts": 278,
-        "mph": 319.9
+      speed: {
+        kmh: 514.9,
+        kts: 278,
+        mph: 319.9
       }
     },
     {
-      "altitude": {
-        "feet": 7650,
-        "meters": 2332
+      altitude: {
+        feet: 7650,
+        meters: 2332
       },
-      "verticalSpeed": {
-        "fpm": -1280,
-        "ms": -6.5
+      verticalSpeed: {
+        fpm: -1280,
+        ms: -6.5
       },
-      "speed": {
-        "kmh": 516.7,
-        "kts": 279,
-        "mph": 321.1
+      speed: {
+        kmh: 516.7,
+        kts: 279,
+        mph: 321.1
       }
     },
     {
-      "altitude": {
-        "feet": 7475,
-        "meters": 2278
+      altitude: {
+        feet: 7475,
+        meters: 2278
       },
-      "verticalSpeed": {
-        "fpm": -960,
-        "ms": -4.9
+      verticalSpeed: {
+        fpm: -960,
+        ms: -4.9
       },
-      "speed": {
-        "kmh": 511.2,
-        "kts": 276,
-        "mph": 317.6
+      speed: {
+        kmh: 511.2,
+        kts: 276,
+        mph: 317.6
       }
     },
     {
-      "altitude": {
-        "feet": 7225,
-        "meters": 2202
+      altitude: {
+        feet: 7225,
+        meters: 2202
       },
-      "verticalSpeed": {
-        "fpm": -1216,
-        "ms": -6.2
+      verticalSpeed: {
+        fpm: -1216,
+        ms: -6.2
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 7000,
-        "meters": 2134
+      altitude: {
+        feet: 7000,
+        meters: 2134
       },
-      "verticalSpeed": {
-        "fpm": -1280,
-        "ms": -6.5
+      verticalSpeed: {
+        fpm: -1280,
+        ms: -6.5
       },
-      "speed": {
-        "kmh": 514.9,
-        "kts": 278,
-        "mph": 319.9
+      speed: {
+        kmh: 514.9,
+        kts: 278,
+        mph: 319.9
       }
     },
     {
-      "altitude": {
-        "feet": 6850,
-        "meters": 2088
+      altitude: {
+        feet: 6850,
+        meters: 2088
       },
-      "verticalSpeed": {
-        "fpm": -768,
-        "ms": -3.9
+      verticalSpeed: {
+        fpm: -768,
+        ms: -3.9
       },
-      "speed": {
-        "kmh": 488.9,
-        "kts": 264,
-        "mph": 303.8
+      speed: {
+        kmh: 488.9,
+        kts: 264,
+        mph: 303.8
       }
     },
     {
-      "altitude": {
-        "feet": 6725,
-        "meters": 2050
+      altitude: {
+        feet: 6725,
+        meters: 2050
       },
-      "verticalSpeed": {
-        "fpm": -960,
-        "ms": -4.9
+      verticalSpeed: {
+        fpm: -960,
+        ms: -4.9
       },
-      "speed": {
-        "kmh": 477.8,
-        "kts": 258,
-        "mph": 296.9
+      speed: {
+        kmh: 477.8,
+        kts: 258,
+        mph: 296.9
       }
     },
     {
-      "altitude": {
-        "feet": 6225,
-        "meters": 1897
+      altitude: {
+        feet: 6225,
+        meters: 1897
       },
-      "verticalSpeed": {
-        "fpm": -2560,
-        "ms": -13
+      verticalSpeed: {
+        fpm: -2560,
+        ms: -13
       },
-      "speed": {
-        "kmh": 494.5,
-        "kts": 267,
-        "mph": 307.3
+      speed: {
+        kmh: 494.5,
+        kts: 267,
+        mph: 307.3
       }
     },
     {
-      "altitude": {
-        "feet": 5600,
-        "meters": 1707
+      altitude: {
+        feet: 5600,
+        meters: 1707
       },
-      "verticalSpeed": {
-        "fpm": -2112,
-        "ms": -10.7
+      verticalSpeed: {
+        fpm: -2112,
+        ms: -10.7
       },
-      "speed": {
-        "kmh": 501.9,
-        "kts": 271,
-        "mph": 311.9
+      speed: {
+        kmh: 501.9,
+        kts: 271,
+        mph: 311.9
       }
     },
     {
-      "altitude": {
-        "feet": 5250,
-        "meters": 1600
+      altitude: {
+        feet: 5250,
+        meters: 1600
       },
-      "verticalSpeed": {
-        "fpm": -1216,
-        "ms": -6.2
+      verticalSpeed: {
+        fpm: -1216,
+        ms: -6.2
       },
-      "speed": {
-        "kmh": 500,
-        "kts": 270,
-        "mph": 310.7
+      speed: {
+        kmh: 500,
+        kts: 270,
+        mph: 310.7
       }
     },
     {
-      "altitude": {
-        "feet": 5075,
-        "meters": 1547
+      altitude: {
+        feet: 5075,
+        meters: 1547
       },
-      "verticalSpeed": {
-        "fpm": -1152,
-        "ms": -5.9
+      verticalSpeed: {
+        fpm: -1152,
+        ms: -5.9
       },
-      "speed": {
-        "kmh": 498.2,
-        "kts": 269,
-        "mph": 309.6
+      speed: {
+        kmh: 498.2,
+        kts: 269,
+        mph: 309.6
       }
     },
     {
-      "altitude": {
-        "feet": 4775,
-        "meters": 1455
+      altitude: {
+        feet: 4775,
+        meters: 1455
       },
-      "verticalSpeed": {
-        "fpm": -1344,
-        "ms": -6.8
+      verticalSpeed: {
+        fpm: -1344,
+        ms: -6.8
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 4350,
-        "meters": 1326
+      altitude: {
+        feet: 4350,
+        meters: 1326
       },
-      "verticalSpeed": {
-        "fpm": -1536,
-        "ms": -7.8
+      verticalSpeed: {
+        fpm: -1536,
+        ms: -7.8
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 4125,
-        "meters": 1257
+      altitude: {
+        feet: 4125,
+        meters: 1257
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 3925,
-        "meters": 1196
+      altitude: {
+        feet: 3925,
+        meters: 1196
       },
-      "verticalSpeed": {
-        "fpm": -1408,
-        "ms": -7.2
+      verticalSpeed: {
+        fpm: -1408,
+        ms: -7.2
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 3725,
-        "meters": 1135
+      altitude: {
+        feet: 3725,
+        meters: 1135
       },
-      "verticalSpeed": {
-        "fpm": -1408,
-        "ms": -7.2
+      verticalSpeed: {
+        fpm: -1408,
+        ms: -7.2
       },
-      "speed": {
-        "kmh": 505.6,
-        "kts": 273,
-        "mph": 314.2
+      speed: {
+        kmh: 505.6,
+        kts: 273,
+        mph: 314.2
       }
     },
     {
-      "altitude": {
-        "feet": 3400,
-        "meters": 1036
+      altitude: {
+        feet: 3400,
+        meters: 1036
       },
-      "verticalSpeed": {
-        "fpm": -1280,
-        "ms": -6.5
+      verticalSpeed: {
+        fpm: -1280,
+        ms: -6.5
       },
-      "speed": {
-        "kmh": 503.7,
-        "kts": 272,
-        "mph": 313
+      speed: {
+        kmh: 503.7,
+        kts: 272,
+        mph: 313
       }
     },
     {
-      "altitude": {
-        "feet": 3125,
-        "meters": 953
+      altitude: {
+        feet: 3125,
+        meters: 953
       },
-      "verticalSpeed": {
-        "fpm": -1216,
-        "ms": -6.2
+      verticalSpeed: {
+        fpm: -1216,
+        ms: -6.2
       },
-      "speed": {
-        "kmh": 500,
-        "kts": 270,
-        "mph": 310.7
+      speed: {
+        kmh: 500,
+        kts: 270,
+        mph: 310.7
       }
     },
     {
-      "altitude": {
-        "feet": 2900,
-        "meters": 884
+      altitude: {
+        feet: 2900,
+        meters: 884
       },
-      "verticalSpeed": {
-        "fpm": -1472,
-        "ms": -7.5
+      verticalSpeed: {
+        fpm: -1472,
+        ms: -7.5
       },
-      "speed": {
-        "kmh": 498.2,
-        "kts": 269,
-        "mph": 309.6
+      speed: {
+        kmh: 498.2,
+        kts: 269,
+        mph: 309.6
       }
     },
     {
-      "altitude": {
-        "feet": 2775,
-        "meters": 846
+      altitude: {
+        feet: 2775,
+        meters: 846
       },
-      "verticalSpeed": {
-        "fpm": -448,
-        "ms": -2.3
+      verticalSpeed: {
+        fpm: -448,
+        ms: -2.3
       },
-      "speed": {
-        "kmh": 476,
-        "kts": 257,
-        "mph": 295.8
+      speed: {
+        kmh: 476,
+        kts: 257,
+        mph: 295.8
       }
     },
     {
-      "altitude": {
-        "feet": 2700,
-        "meters": 823
+      altitude: {
+        feet: 2700,
+        meters: 823
       },
-      "verticalSpeed": {
-        "fpm": -448,
-        "ms": -2.3
+      verticalSpeed: {
+        fpm: -448,
+        ms: -2.3
       },
-      "speed": {
-        "kmh": 463,
-        "kts": 250,
-        "mph": 287.7
+      speed: {
+        kmh: 463,
+        kts: 250,
+        mph: 287.7
       }
     },
     {
-      "altitude": {
-        "feet": 2625,
-        "meters": 800
+      altitude: {
+        feet: 2625,
+        meters: 800
       },
-      "verticalSpeed": {
-        "fpm": -384,
-        "ms": -2
+      verticalSpeed: {
+        fpm: -384,
+        ms: -2
       },
-      "speed": {
-        "kmh": 451.9,
-        "kts": 244,
-        "mph": 280.8
+      speed: {
+        kmh: 451.9,
+        kts: 244,
+        mph: 280.8
       }
     },
     {
-      "altitude": {
-        "feet": 2550,
-        "meters": 777
+      altitude: {
+        feet: 2550,
+        meters: 777
       },
-      "verticalSpeed": {
-        "fpm": -320,
-        "ms": -1.6
+      verticalSpeed: {
+        fpm: -320,
+        ms: -1.6
       },
-      "speed": {
-        "kmh": 438.9,
-        "kts": 237,
-        "mph": 272.7
+      speed: {
+        kmh: 438.9,
+        kts: 237,
+        mph: 272.7
       }
     },
     {
-      "altitude": {
-        "feet": 2475,
-        "meters": 754
+      altitude: {
+        feet: 2475,
+        meters: 754
       },
-      "verticalSpeed": {
-        "fpm": -512,
-        "ms": -2.6
+      verticalSpeed: {
+        fpm: -512,
+        ms: -2.6
       },
-      "speed": {
-        "kmh": 427.8,
-        "kts": 231,
-        "mph": 265.8
+      speed: {
+        kmh: 427.8,
+        kts: 231,
+        mph: 265.8
       }
     },
     {
-      "altitude": {
-        "feet": 2350,
-        "meters": 716
+      altitude: {
+        feet: 2350,
+        meters: 716
       },
-      "verticalSpeed": {
-        "fpm": -960,
-        "ms": -4.9
+      verticalSpeed: {
+        fpm: -960,
+        ms: -4.9
       },
-      "speed": {
-        "kmh": 424.1,
-        "kts": 229,
-        "mph": 263.5
+      speed: {
+        kmh: 424.1,
+        kts: 229,
+        mph: 263.5
       }
     },
     {
-      "altitude": {
-        "feet": 2075,
-        "meters": 632
+      altitude: {
+        feet: 2075,
+        meters: 632
       },
-      "verticalSpeed": {
-        "fpm": -1088,
-        "ms": -5.5
+      verticalSpeed: {
+        fpm: -1088,
+        ms: -5.5
       },
-      "speed": {
-        "kmh": 426,
-        "kts": 230,
-        "mph": 264.7
+      speed: {
+        kmh: 426,
+        kts: 230,
+        mph: 264.7
       }
     },
     {
-      "altitude": {
-        "feet": 1950,
-        "meters": 594
+      altitude: {
+        feet: 1950,
+        meters: 594
       },
-      "verticalSpeed": {
-        "fpm": -1088,
-        "ms": -5.5
+      verticalSpeed: {
+        fpm: -1088,
+        ms: -5.5
       },
-      "speed": {
-        "kmh": 426,
-        "kts": 230,
-        "mph": 264.7
+      speed: {
+        kmh: 426,
+        kts: 230,
+        mph: 264.7
       }
     },
     {
-      "altitude": {
-        "feet": 1875,
-        "meters": 572
+      altitude: {
+        feet: 1875,
+        meters: 572
       },
-      "verticalSpeed": {
-        "fpm": -768,
-        "ms": -3.9
+      verticalSpeed: {
+        fpm: -768,
+        ms: -3.9
       },
-      "speed": {
-        "kmh": 414.8,
-        "kts": 224,
-        "mph": 257.8
+      speed: {
+        kmh: 414.8,
+        kts: 224,
+        mph: 257.8
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": -320,
-        "ms": -1.6
+      verticalSpeed: {
+        fpm: -320,
+        ms: -1.6
       },
-      "speed": {
-        "kmh": 398.2,
-        "kts": 215,
-        "mph": 247.4
+      speed: {
+        kmh: 398.2,
+        kts: 215,
+        mph: 247.4
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 64,
-        "ms": 0.3
+      verticalSpeed: {
+        fpm: 64,
+        ms: 0.3
       },
-      "speed": {
-        "kmh": 366.7,
-        "kts": 198,
-        "mph": 227.9
+      speed: {
+        kmh: 366.7,
+        kts: 198,
+        mph: 227.9
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 368.5,
-        "kts": 199,
-        "mph": 229
+      speed: {
+        kmh: 368.5,
+        kts: 199,
+        mph: 229
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 331.5,
-        "kts": 179,
-        "mph": 206
+      speed: {
+        kmh: 331.5,
+        kts: 179,
+        mph: 206
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": -192,
-        "ms": -1
+      verticalSpeed: {
+        fpm: -192,
+        ms: -1
       },
-      "speed": {
-        "kmh": 303.7,
-        "kts": 164,
-        "mph": 188.7
+      speed: {
+        kmh: 303.7,
+        kts: 164,
+        mph: 188.7
       }
     },
     {
-      "altitude": {
-        "feet": 1800,
-        "meters": 549
+      altitude: {
+        feet: 1800,
+        meters: 549
       },
-      "verticalSpeed": {
-        "fpm": -128,
-        "ms": -0.7
+      verticalSpeed: {
+        fpm: -128,
+        ms: -0.7
       },
-      "speed": {
-        "kmh": 301.9,
-        "kts": 163,
-        "mph": 187.6
+      speed: {
+        kmh: 301.9,
+        kts: 163,
+        mph: 187.6
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 288.9,
-        "kts": 156,
-        "mph": 179.5
+      speed: {
+        kmh: 288.9,
+        kts: 156,
+        mph: 179.5
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": -64,
-        "ms": -0.3
+      verticalSpeed: {
+        fpm: -64,
+        ms: -0.3
       },
-      "speed": {
-        "kmh": 285.2,
-        "kts": 154,
-        "mph": 177.2
+      speed: {
+        kmh: 285.2,
+        kts: 154,
+        mph: 177.2
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 287.1,
-        "kts": 155,
-        "mph": 178.4
+      speed: {
+        kmh: 287.1,
+        kts: 155,
+        mph: 178.4
       }
     },
     {
-      "altitude": {
-        "feet": 1825,
-        "meters": 556
+      altitude: {
+        feet: 1825,
+        meters: 556
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 294.5,
-        "kts": 159,
-        "mph": 183
+      speed: {
+        kmh: 294.5,
+        kts: 159,
+        mph: 183
       }
     },
     {
-      "altitude": {
-        "feet": 1725,
-        "meters": 526
+      altitude: {
+        feet: 1725,
+        meters: 526
       },
-      "verticalSpeed": {
-        "fpm": -896,
-        "ms": -4.6
+      verticalSpeed: {
+        fpm: -896,
+        ms: -4.6
       },
-      "speed": {
-        "kmh": 305.6,
-        "kts": 165,
-        "mph": 189.9
+      speed: {
+        kmh: 305.6,
+        kts: 165,
+        mph: 189.9
       }
     },
     {
-      "altitude": {
-        "feet": 1425,
-        "meters": 434
+      altitude: {
+        feet: 1425,
+        meters: 434
       },
-      "verticalSpeed": {
-        "fpm": -1088,
-        "ms": -5.5
+      verticalSpeed: {
+        fpm: -1088,
+        ms: -5.5
       },
-      "speed": {
-        "kmh": 292.6,
-        "kts": 158,
-        "mph": 181.8
+      speed: {
+        kmh: 292.6,
+        kts: 158,
+        mph: 181.8
       }
     },
     {
-      "altitude": {
-        "feet": 1200,
-        "meters": 366
+      altitude: {
+        feet: 1200,
+        meters: 366
       },
-      "verticalSpeed": {
-        "fpm": -960,
-        "ms": -4.9
+      verticalSpeed: {
+        fpm: -960,
+        ms: -4.9
       },
-      "speed": {
-        "kmh": 274.1,
-        "kts": 148,
-        "mph": 170.3
+      speed: {
+        kmh: 274.1,
+        kts: 148,
+        mph: 170.3
       }
     },
     {
-      "altitude": {
-        "feet": 1025,
-        "meters": 312
+      altitude: {
+        feet: 1025,
+        meters: 312
       },
-      "verticalSpeed": {
-        "fpm": -896,
-        "ms": -4.6
+      verticalSpeed: {
+        fpm: -896,
+        ms: -4.6
       },
-      "speed": {
-        "kmh": 261.1,
-        "kts": 141,
-        "mph": 162.3
+      speed: {
+        kmh: 261.1,
+        kts: 141,
+        mph: 162.3
       }
     },
     {
-      "altitude": {
-        "feet": 900,
-        "meters": 274
+      altitude: {
+        feet: 900,
+        meters: 274
       },
-      "verticalSpeed": {
-        "fpm": -768,
-        "ms": -3.9
+      verticalSpeed: {
+        fpm: -768,
+        ms: -3.9
       },
-      "speed": {
-        "kmh": 253.7,
-        "kts": 137,
-        "mph": 157.7
+      speed: {
+        kmh: 253.7,
+        kts: 137,
+        mph: 157.7
       }
     },
     {
-      "altitude": {
-        "feet": 800,
-        "meters": 244
+      altitude: {
+        feet: 800,
+        meters: 244
       },
-      "verticalSpeed": {
-        "fpm": -512,
-        "ms": -2.6
+      verticalSpeed: {
+        fpm: -512,
+        ms: -2.6
       },
-      "speed": {
-        "kmh": 246.3,
-        "kts": 133,
-        "mph": 153.1
+      speed: {
+        kmh: 246.3,
+        kts: 133,
+        mph: 153.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 42.6,
-        "kts": 23,
-        "mph": 26.5
+      speed: {
+        kmh: 42.6,
+        kts: 23,
+        mph: 26.5
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 42.6,
-        "kts": 23,
-        "mph": 26.5
+      speed: {
+        kmh: 42.6,
+        kts: 23,
+        mph: 26.5
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 53.7,
-        "kts": 29,
-        "mph": 33.4
+      speed: {
+        kmh: 53.7,
+        kts: 29,
+        mph: 33.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 37,
-        "kts": 20,
-        "mph": 23
+      speed: {
+        kmh: 37,
+        kts: 20,
+        mph: 23
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 31.5,
-        "kts": 17,
-        "mph": 19.6
+      speed: {
+        kmh: 31.5,
+        kts: 17,
+        mph: 19.6
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 33.3,
-        "kts": 18,
-        "mph": 20.7
+      speed: {
+        kmh: 33.3,
+        kts: 18,
+        mph: 20.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 37,
-        "kts": 20,
-        "mph": 23
+      speed: {
+        kmh: 37,
+        kts: 20,
+        mph: 23
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 44.4,
-        "kts": 24,
-        "mph": 27.6
+      speed: {
+        kmh: 44.4,
+        kts: 24,
+        mph: 27.6
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 38.9,
-        "kts": 21,
-        "mph": 24.2
+      speed: {
+        kmh: 38.9,
+        kts: 21,
+        mph: 24.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 46.3,
-        "kts": 25,
-        "mph": 28.8
+      speed: {
+        kmh: 46.3,
+        kts: 25,
+        mph: 28.8
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 53.7,
-        "kts": 29,
-        "mph": 33.4
+      speed: {
+        kmh: 53.7,
+        kts: 29,
+        mph: 33.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 55.6,
-        "kts": 30,
-        "mph": 34.5
+      speed: {
+        kmh: 55.6,
+        kts: 30,
+        mph: 34.5
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 55.6,
-        "kts": 30,
-        "mph": 34.5
+      speed: {
+        kmh: 55.6,
+        kts: 30,
+        mph: 34.5
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 57.4,
-        "kts": 31,
-        "mph": 35.7
+      speed: {
+        kmh: 57.4,
+        kts: 31,
+        mph: 35.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 35.2,
-        "kts": 19,
-        "mph": 21.9
+      speed: {
+        kmh: 35.2,
+        kts: 19,
+        mph: 21.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 33.3,
-        "kts": 18,
-        "mph": 20.7
+      speed: {
+        kmh: 33.3,
+        kts: 18,
+        mph: 20.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 33.3,
-        "kts": 18,
-        "mph": 20.7
+      speed: {
+        kmh: 33.3,
+        kts: 18,
+        mph: 20.7
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 40.7,
-        "kts": 22,
-        "mph": 25.3
+      speed: {
+        kmh: 40.7,
+        kts: 22,
+        mph: 25.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 35.2,
-        "kts": 19,
-        "mph": 21.9
+      speed: {
+        kmh: 35.2,
+        kts: 19,
+        mph: 21.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 53.7,
-        "kts": 29,
-        "mph": 33.4
+      speed: {
+        kmh: 53.7,
+        kts: 29,
+        mph: 33.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 53.7,
-        "kts": 29,
-        "mph": 33.4
+      speed: {
+        kmh: 53.7,
+        kts: 29,
+        mph: 33.4
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 50,
-        "kts": 27,
-        "mph": 31.1
+      speed: {
+        kmh: 50,
+        kts: 27,
+        mph: 31.1
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 51.9,
-        "kts": 28,
-        "mph": 32.2
+      speed: {
+        kmh: 51.9,
+        kts: 28,
+        mph: 32.2
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 48.2,
-        "kts": 26,
-        "mph": 29.9
+      speed: {
+        kmh: 48.2,
+        kts: 26,
+        mph: 29.9
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 59.3,
-        "kts": 32,
-        "mph": 36.8
+      speed: {
+        kmh: 59.3,
+        kts: 32,
+        mph: 36.8
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 27.8,
-        "kts": 15,
-        "mph": 17.3
+      speed: {
+        kmh: 27.8,
+        kts: 15,
+        mph: 17.3
       }
     },
     {
-      "altitude": {
-        "feet": 0,
-        "meters": 0
+      altitude: {
+        feet: 0,
+        meters: 0
       },
-      "verticalSpeed": {
-        "fpm": 0,
-        "ms": 0
+      verticalSpeed: {
+        fpm: 0,
+        ms: 0
       },
-      "speed": {
-        "kmh": 31.5,
-        "kts": 17,
-        "mph": 19.6
+      speed: {
+        kmh: 31.5,
+        kts: 17,
+        mph: 19.6
       }
     }
   ]

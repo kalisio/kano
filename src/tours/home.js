@@ -1,6 +1,6 @@
 module.exports = [{
   target: '#left-opener',
-  title: 'tours.home.SIDENAV_LABEL',
+  content: 'tours.home.SIDENAV_LABEL',
   link: 'tours.home.SIDENAV_LINK_LABEL',
   params: {
     placement: 'right',
@@ -9,7 +9,7 @@ module.exports = [{
   }
 }, {
   target: '#top-opener',
-  title: 'tours.home.NAVIGATION_BAR_LABEL',
+  content: 'tours.home.NAVIGATION_BAR_LABEL',
   link: 'tours.home.NAVIGATION_BAR_LINK_LABEL',
   params: {
     placement: 'bottom',
@@ -17,7 +17,7 @@ module.exports = [{
   }
 }, {
   target: '#right-opener',
-  title: 'tours.home.CATALOG_LABEL',
+  content: 'tours.home.CATALOG_LABEL',
   link: 'tours.home.CATALOG_LINK_LABEL',
   params: {
     placement: 'left',
@@ -26,7 +26,7 @@ module.exports = [{
   }
 }, {
   target: '#bottom-opener',
-  title: 'tours.home.TIMELINE_LABEL',
+  content: 'tours.home.TIMELINE_LABEL',
   link: 'tours.home.TIMELINE_LINK_LABEL',
   params: {
     placement: 'top',
@@ -35,7 +35,7 @@ module.exports = [{
   }
 }, {
   target: '#fab',
-  title: 'tours.home.FAB_LABEL',
+  content: 'tours.home.FAB_LABEL',
   link: 'tours.home.FAB_LINK_LABEL',
   params: {
     placement: 'top',

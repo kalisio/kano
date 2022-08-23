@@ -11,7 +11,6 @@ import logger from 'loglevel'
 import { Loading, Dialog } from 'quasar'
 import { mixins, beforeGuard, utils as kdkCoreUtils } from '@kalisio/kdk/core.client'
 import config from 'config'
-import utils from '../utils'
 
 export default {
   name: 'index',
