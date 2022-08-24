@@ -95,7 +95,8 @@ const catalogPanes = {
 // Map layer actions
 const mapLayerActions = [{
   id: 'layer-actions',
-  component: 'frame/KPopupAction',
+  component: 'menu/KMenu',
+  dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
   content: [
     { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
@@ -179,7 +180,8 @@ const mapEngine = {
 // Globe layer actions
 const globeLayerActions = [{
   id: 'layer-actions',
-  component: 'frame/KPopupAction',
+  component: 'menu/KMenu',
+  dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
   content: [
     { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },

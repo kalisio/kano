@@ -48,15 +48,9 @@
       "ecmaVersion": 2019,
       "sourceType": "module"
     },
-    "plugins": [
-      "vue"
-    ],
-    "env": [
-      "mocha"
-    ],
-    "ignore": [
-      "public"
-    ],
+    "plugins": ["vue"],
+    "env": ["mocha"],
+    "ignore": ["public"],
     "globals": [
       "DEV",
       "PROD",

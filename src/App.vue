@@ -35,7 +35,7 @@ export default {
         // Increase timeout so that user has a chance to retry
         options.timeout = 20000
       }
-      this.$toast(options)
+      this.$notify(options)
     },
     showRouteError (route) {
       // We handle error on any page with query string

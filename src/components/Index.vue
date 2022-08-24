@@ -100,7 +100,7 @@ export default {
       // and would like to know if the mobile client is up-to-date
       else if (api.buildNumber === config.buildNumber) return
     }
-    this.$toast({ message: this.$t('Index.VERSION_MISMATCH') })
+    this.$notify({ message: this.$t('Index.VERSION_MISMATCH') })
   },
   async mounted () {
     this.$events.on('user-changed', user => {
