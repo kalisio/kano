@@ -187,7 +187,7 @@ module.exports = function ({ domain }) {
       },
       icon: 'las la-layer-group',
       component: 'catalog/KBaseLayersSelector',
-      options: { filter: { type: 'BaseLayer' } } 
+      options: { filter: { type: 'BaseLayer' } }
     },
     {
       name: 'Categories.TERRAIN_LAYERS',

@@ -33,13 +33,13 @@ module.exports = async function () {
       // Make remote services compliant with our internal app services so that permissions can be used
       if (service.key === 'weacast') {
         // Remote service are registered according to their path, ie with API prefix (but without trailing /)
-        let remoteService = app.service(service.path)
+        const remoteService = app.service(service.path)
         // Get name from service path without api prefix
         const name = service.path.replace(app.get('apiPath').substring(1) + '/', '')
         remoteService.name = name
         // As remote services have no context, from the internal point of view path = name
         // Unfortunately this property is already set and used by feathers-distributed and should not be altered
-        //remoteService.path = name
+        // remoteService.path = name
         remoteService.app = app
         remoteService.getPath = function (withApiPrefix) { return (withApiPrefix ? app.get('apiPath') + '/' + name : name) }
         // Register default permissions for it
