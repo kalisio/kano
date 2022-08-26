@@ -46,7 +46,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.31902, 1.94681, 1500)
     await map.zoomToLevel(page, 17)
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickRightPaneAction(page, 'edit-layer-data', 1500)
     await core.clickTopPaneAction(page, 'add-points', 1000)
     await map.moveMap(page, 'left', 1)
     await core.click(page, '#map', 1000)
@@ -58,7 +58,7 @@ describe(`suite:${suite}`, () => {
 
   it('edit point', async () => {
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-data', 1500)
+    await core.clickRightPaneAction(page, 'edit-layer-data', 1500)
     await core.clickTopPaneAction(page, 'edit-properties', 1500)
     await core.click(page, '#map', 500)
     await core.type(page, '#id-field', 'pt1', false, true)
@@ -75,7 +75,7 @@ describe(`suite:${suite}`, () => {
 
   it('view data', async () => {
     await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'view-data', 1500)
+    await core.clickRightPaneAction(page, 'view-layer-data', 1500)
     await page.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t3-view-data')).beTrue()
     await core.click(page, '#close-button', 500)
