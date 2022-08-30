@@ -1,14 +1,41 @@
 # Changelog
 
+## [prod-v1.6.0](https://github.com/kalisio/kano/tree/prod-v1.6.0) (2022-08-30)
+
+[Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.5.0...prod-v1.6.0)
+
+**Implemented enhancements:**
+
+- Enhance API GATEWAY jwt strategy [\#271](https://github.com/kalisio/kano/issues/271)
+- Update default catalog categories [\#265](https://github.com/kalisio/kano/issues/265)
+- Add Little Alert Box layer [\#233](https://github.com/kalisio/kano/issues/233)
+- Add METAR layer [\#215](https://github.com/kalisio/kano/issues/215)
+
+**Fixed bugs:**
+
+- Forbid the window to pop out of the screen when moving or scaling it [\#273](https://github.com/kalisio/kano/issues/273)
+- Users cannot update/remove in-memory layers [\#268](https://github.com/kalisio/kano/issues/268)
+
+**Merged pull requests:**
+
+- build\(deps\): bump terser from 4.8.0 to 4.8.1 in /docs [\#282](https://github.com/kalisio/kano/pull/282) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump moment from 2.29.1 to 2.29.2 in /docs [\#267](https://github.com/kalisio/kano/pull/267) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump minimist from 1.2.5 to 1.2.6 in /docs [\#262](https://github.com/kalisio/kano/pull/262) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.5.7 to 1.5.10 in /docs [\#261](https://github.com/kalisio/kano/pull/261) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump prismjs from 1.25.0 to 1.27.0 in /docs [\#259](https://github.com/kalisio/kano/pull/259) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.5.3 to 1.5.7 in /docs [\#255](https://github.com/kalisio/kano/pull/255) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [prod-v1.5.0](https://github.com/kalisio/kano/tree/prod-v1.5.0) (2022-02-23)
 
 [Full Changelog](https://github.com/kalisio/kano/compare/prod-v1.4.1...prod-v1.5.0)
 
 **Implemented enhancements:**
 
+- Enhance catalog layout [\#256](https://github.com/kalisio/kano/issues/256)
 - Update configuration to include units management [\#250](https://github.com/kalisio/kano/issues/250)
 - Allow to define TTL at layer level for time-based data [\#249](https://github.com/kalisio/kano/issues/249)
 - Allow to import shapefiles [\#244](https://github.com/kalisio/kano/issues/244)
+- Elevation profile widget [\#145](https://github.com/kalisio/kano/issues/145)
 
 **Merged pull requests:**
 
@@ -100,6 +127,7 @@
 - build\(deps\): bump browserslist from 4.16.0 to 4.16.6 in /docs [\#192](https://github.com/kalisio/kano/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 [\#182](https://github.com/kalisio/kano/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump lodash from 4.17.20 to 4.17.21 in /docs [\#180](https://github.com/kalisio/kano/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 in /docs [\#171](https://github.com/kalisio/kano/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump ssri from 6.0.1 to 6.0.2 [\#170](https://github.com/kalisio/kano/pull/170) ([dependabot[bot]](https://github.com/apps/dependabot))
 
@@ -153,7 +181,6 @@
 
 **Merged pull requests:**
 
-- build\(deps\): bump url-parse from 1.4.7 to 1.5.1 in /docs [\#179](https://github.com/kalisio/kano/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump y18n from 3.2.1 to 3.2.2 [\#168](https://github.com/kalisio/kano/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump elliptic from 6.5.3 to 6.5.4 in /docs [\#166](https://github.com/kalisio/kano/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump prismjs from 1.22.0 to 1.23.0 in /docs [\#157](https://github.com/kalisio/kano/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -174,7 +201,6 @@
 
 - Upgrade post-robot to latest version [\#151](https://github.com/kalisio/kano/issues/151)
 - Add an OpenRadiation layer [\#148](https://github.com/kalisio/kano/issues/148)
-- Translate tooltips in default layers [\#130](https://github.com/kalisio/kano/issues/130)
 - Enhance edition information [\#124](https://github.com/kalisio/kano/issues/124)
 - Keep track of currently activated layers [\#43](https://github.com/kalisio/kano/issues/43)
 
@@ -195,6 +221,7 @@
 - Enhance OpenAQ configuration to handle future 1.0.0 version [\#134](https://github.com/kalisio/kano/issues/134)
 - Improve documentation [\#133](https://github.com/kalisio/kano/issues/133)
 -  Getting a timeout when trying to view new Vigicrues dataset [\#131](https://github.com/kalisio/kano/issues/131)
+- Translate tooltips in default layers [\#130](https://github.com/kalisio/kano/issues/130)
 - Enhance vigicrues configuration to handle the new version of the dataset [\#129](https://github.com/kalisio/kano/issues/129)
 - Add a client function to fetch layer config for tests [\#122](https://github.com/kalisio/kano/issues/122)
 - Add steps to build script to push testcafe test artefacts to s3 [\#121](https://github.com/kalisio/kano/issues/121)
