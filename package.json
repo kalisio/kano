@@ -48,9 +48,15 @@
       "ecmaVersion": 2019,
       "sourceType": "module"
     },
-    "plugins": ["vue"],
-    "env": ["mocha"],
-    "ignore": ["public"],
+    "plugins": [
+      "vue"
+    ],
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "public"
+    ],
     "globals": [
       "DEV",
       "PROD",
@@ -105,6 +111,7 @@
     "cesium": "1.50.0",
     "chart.js": "^3.7.1",
     "chartjs-adapter-moment": "^1.0.0",
+    "chartjs-chart-matrix": "^1.1.1",
     "chartjs-plugin-annotation": "^1.4.0",
     "chartjs-plugin-datalabels": "^2.0.0",
     "chartjs-plugin-zoom": "^1.2.1",
