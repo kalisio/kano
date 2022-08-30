@@ -368,9 +368,9 @@
     passport "^0.4.0"
     uuid "^3.1.0"
 
-"@feathersjs/authentication@https://github.com/kalisio/authentication.git":
+"@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -534,10 +534,10 @@
     debug "^4.1.0"
     uuid "^8.2.0"
 
-"@kalisio/kdk@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.6.0.tgz#5ec75bec36223f471a9f1e1c46083993ff23343b"
-  integrity sha512-CBCzq+qJ/MFENpJphGk/mvjSX7sC2L7IGjTUYNSMq4CU+vBTdQeg/pMEAVAtYqhkxle5EBZQbpYjyXMNgufVPA==
+"@kalisio/kdk@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-1.7.0.tgz#5650b94629333e6ccdc545860bff1b874d81ade6"
+  integrity sha512-2K7suZgwi/Z1yreegqN/VWJoFzDXSMUb1bUs+fTRJZikYB39I2sWbzQXcw9XrRvAR3N7hOw5XRD6AIg2hd5g1g==
   dependencies:
     "@feathersjs/authentication" "https://github.com/kalisio/authentication.git"
     "@feathersjs/authentication-jwt" "^2.0.1"
@@ -6979,9 +6979,9 @@ slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
 
-"sns-mobile@https://github.com/kalisio/sns-mobile":
+"sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
   version "1.3.0"
-  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
@@ -7792,10 +7792,10 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-weacast-core@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/weacast-core/-/weacast-core-1.4.0.tgz#dc287debf3f74c59897d0ca7b1867e3094f6a29d"
-  integrity sha512-qHtfjhXMiyuQtLtTaz8YIDNH3+Nn+UG5ghE3f3yGSJQOUelwSCiLO+2QS6gvpuNwpW9KytJjOr41dX+7FMfzMw==
+weacast-core@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/weacast-core/-/weacast-core-1.5.0.tgz#a2717e02542b3c142617eb1bf81f3af99a7e51f4"
+  integrity sha512-UjMc1qkhyyhLfkYdavkwv2bTR/K61w5SfuLSonl9H0stOs6h89JMFtCMEHGDG2srNc3lY26z2TkgXxtFUERLoA==
   dependencies:
     "@feathersjs/authentication" "^2.1.16"
     "@feathersjs/authentication-jwt" "^2.0.10"

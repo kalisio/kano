@@ -32,7 +32,7 @@ describe(`suite:${suite}`, () => {
     const categoryId = await map.getLayerCategoryId(page, map.getLayerId('OSM_DARK'))
     expect(categoryId).to.equal('categories-base-layers')
     expect(await map.isLayerCategoryOpened(page, categoryId)).beFalse()
-    await map.clickLayerCategory(page, categoryId)
+    await map.clickLayerCategory(page, catalogLayersTab, categoryId)
     expect(await map.isLayerCategoryOpened(page, categoryId)).beTrue()
     await core.clickRightOpener(page)
   })
