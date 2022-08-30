@@ -143,7 +143,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         type: 'geoJson',
         realtime: true,
         tiled: true,
-        minZoom: 8,
+        minZoom: 6,
         minFeatureZoom: 10,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
