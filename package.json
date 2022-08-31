@@ -116,6 +116,7 @@
     "chartjs-plugin-datalabels": "^2.0.0",
     "chartjs-plugin-zoom": "^1.2.1",
     "chroma-js": "^2.4.2",
+    "crypto-browserify": "^3.12.0",
     "d3": "^4.9.1",
     "email-validator": "^2.0.4",
     "feathers-reactive": "^0.10.0",
