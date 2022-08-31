@@ -146,7 +146,7 @@
     "mathjs": "^10.1.1",
     "mime-types-browser": "^0.0.3",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.35",
     "node-fetch": "^2.6.7",
     "papaparse": "^4.6.1",
     "password-generator": "^2.2.0",
