@@ -92,6 +92,10 @@ const catalogPanes = {
   ]
 } 
 
+const legendWidgets = [
+  { id: 'legend-box', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendBox' }
+]
+
 // Map layer actions
 const mapLayerActions = [{
   id: 'layer-actions',
@@ -382,6 +386,8 @@ module.exports = {
             content: [
               { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-box'] } },
+              { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } }
             ]
           },
@@ -441,8 +447,9 @@ module.exports = {
         id: 'site-seeker', component: 'frame/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
       }*/]
     },
-    window: {
-      widgets: mapWidgets
+    windows: {
+      left: { widgets: legendWidgets },
+      top: { widgets: mapWidgets }
     },
     fab: {
       actions: [
@@ -483,7 +490,8 @@ module.exports = {
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
             content: [
-              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } }
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-box'] } },
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
@@ -518,8 +526,9 @@ module.exports = {
         id: 'url-legend', component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
       }]
     },
-    window: {
-      widgets: globeWidgets
+    windows: {
+      left: { widgets: legendWidgets },      
+      top: { widgets: globeWidgets }
     },
     fab: {
       actions: [
