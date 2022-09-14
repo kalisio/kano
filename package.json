@@ -76,6 +76,8 @@
     ]
   },
   "dependencies": {
+    "@casl/ability": "^6.1.1",
+    "@casl/mongoose": "^7.1.0",
     "@feathersjs/client": "^5.0.0-pre.28",
     "@feathersjs/commons": "^5.0.0-pre.28",
     "@feathersjs/memory": "^5.0.0-pre.28",
@@ -107,7 +109,6 @@
     "ajv-i18n": "^3.6.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
-    "casl": "^1.0.2",
     "cesium": "1.50.0",
     "chart.js": "^3.7.1",
     "chartjs-adapter-moment": "^1.0.0",

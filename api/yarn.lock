@@ -170,7 +170,7 @@
     long-timeout "^0.1.1"
     uuid "^8.3.2"
 
-"@feathersjs/client@^5.0.0-pre.22", "@feathersjs/client@^5.0.0-pre.23":
+"@feathersjs/client@^5.0.0-pre.23", "@feathersjs/client@^5.0.0-pre.28":
   version "5.0.0-pre.28"
   resolved "https://registry.yarnpkg.com/@feathersjs/client/-/client-5.0.0-pre.28.tgz#14083538620c924d12771a5c98712c3d5eaf3ec6"
   integrity sha512-VCq0uISJdFRLuzFxeXE3+pi9R94SvhgNmA1CSAYbURpettP1bnYk3mP9PXjLo7/6XqB63Km8hBp0lBony/7lFg==
@@ -351,14 +351,14 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@kalisio/feathers-distributed@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-2.0.1.tgz#0965edb02a6120a449e4ae5c5aab1dbfa8253c50"
-  integrity sha512-r3rJeNcHYVxdxqzgD4jQeLXAkz+2wIdHxunG8vzTNOu1qaRP27feK5K4LXOlAzEGSER7yHDkaC7fjdih4j7iVA==
+"@kalisio/feathers-distributed@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-2.0.2.tgz#bee51062d486871f42cf463c8adb95ca0fa3ae8e"
+  integrity sha512-hdZLuqS8jgJw2ITZdZn/VhStpGGCpnKpXvmp2Nf8ZbgCSRHRh7fk18pf5IlrzEw9B0oeybuuqCGlWRwVlgq2vQ==
   dependencies:
-    "@feathersjs/commons" "^5.0.0-pre.22"
-    "@feathersjs/errors" "^5.0.0-pre.22"
-    "@feathersjs/feathers" "^5.0.0-pre.22"
+    "@feathersjs/commons" "^5.0.0-pre.28"
+    "@feathersjs/errors" "^5.0.0-pre.28"
+    "@feathersjs/feathers" "^5.0.0-pre.28"
     cote "^1.0.3"
     debug "^4.3.4"
     uuid "^8.3.2"
