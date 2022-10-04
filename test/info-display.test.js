@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
 
@@ -6,22 +5,20 @@ import { core, map } from '@kalisio/kdk/test.client'
 
 const suite = 'info-display'
 
-const userLayersTab = 'user-layers-tab'
-
 describe(`suite:${suite}`, () => {
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
     { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
   ]
-  const current_user = user[1]
+  const currentUser = user[1]
 
   before(async () => {
     chailint(chai, util)
 
     runner = new core.Runner(suite, {
       appName: 'kano',
-      user: current_user.email,
+      user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
@@ -29,7 +26,7 @@ describe(`suite:${suite}`, () => {
       mode: 'screenshots' */
     })
     page = await runner.start()
-    await core.login(page, current_user)
+    await core.login(page, currentUser)
   })
 
   it('import geojson file', async () => {

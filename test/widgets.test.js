@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import fs from 'fs-extra'
 import moment from 'moment'
 import chai, { util, expect } from 'chai'
@@ -24,7 +23,7 @@ describe(`suite:${suite}`, () => {
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
     { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
   ]
-  const current_user = user[1]
+  const currentUser = user[1]
 
   before(async () => {
     chailint(chai, util)
@@ -35,7 +34,7 @@ describe(`suite:${suite}`, () => {
     client = api.createClient()
     runner = new core.Runner(suite, {
       appName: 'kano',
-      user: current_user.email,
+      user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
@@ -43,7 +42,7 @@ describe(`suite:${suite}`, () => {
       mode: 'screenshots' */
     })
     // Prepare data for current run
-    await client.login(current_user)
+    await client.login(currentUser)
     let data = fs.readJsonSync(runner.getDataPath('lab-stations.geojson'))
     await client.getService('lab-stations').create(data)
     data = fs.readJsonSync(runner.getDataPath('lab-observations.geojson'))
@@ -54,7 +53,7 @@ describe(`suite:${suite}`, () => {
     await client.getService('lab-measurements').create(data)
 
     page = await runner.start()
-    await core.login(page, current_user)
+    await core.login(page, currentUser)
   })
 
   beforeEach(() => {
