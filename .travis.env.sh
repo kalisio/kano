@@ -15,10 +15,10 @@ parse_semver()
   SEMVER=(${BASH_REMATCH[1]} ${BASH_REMATCH[2]} ${BASH_REMATCH[3]})
 }
 
-# Extract the name of the app
+# Define the application name
 APP=$(node -p -e "require('./package.json').name")
 
-# Exports addtionnal variables
+# Define the application version
 VERSION=$(node -p -e "require('./package.json').version")
 parse_semver $VERSION
 MAJOR=${SEMVER[0]}
@@ -27,11 +27,7 @@ PATCH=${SEMVER[2]}
 
 echo "Building $APP v$MAJOR.$MINOR.$PATCH"
 
-# Clone the workspace 
-echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
-git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
-
-# Define the flavor
+# Define the flavor build
 TEST_FLAVOR_REGEX="^test-*|-test$"
 PROD_FLAVOR_REGEX="^prod-v[0-9]+\.[0-9]+\.[0-9]+"
 if [[ $TRAVIS_TAG =~ $PROD_FLAVOR_REGEX ]];
@@ -53,6 +49,14 @@ TAG=$VERSION-$FLAVOR
 
 echo "Build flavor is $FLAVOR on branch $TRAVIS_BRANCH"
 
+# Leave the project directory to avoid Webpack to look for files into the project directory
+cd ..
+
+# Clone the workspace where to build the app
+echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
+git clone -b $APP https://github.com/kalisio/kdk-workspaces workspace
+export WORKSPACE_DIR=`pwd`/workspace
+
 # Read ci environement variables
 cp workspace/common/.travis.env .travis.env
 if [ -f workspace/$FLAVOR/.travis.env ]
@@ -73,11 +77,11 @@ git clone https://github.com/kalisio/kli.git kalisio && cd kalisio && yarn
 
 # In dev flavor we can build different versions on different branches
 # so check if a specific file exists for the target branch first otherwise use default one
-if [[ -f $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js ]];
+if [[ -f $WORKSPACE_DIR/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js ]];
 then
-  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js $APP.js
+  cp $WORKSPACE_DIR/$FLAVOR/$KDK_PROJECT_FILE-$TRAVIS_BRANCH.js $APP.js
 else
-  cp $TRAVIS_BUILD_DIR/workspace/$FLAVOR/$KDK_PROJECT_FILE.js $APP.js
+  cp $WORKSPACE_DIR/$FLAVOR/$KDK_PROJECT_FILE.js $APP.js
 fi
 
 # Clone the project and install the dependencies
@@ -86,4 +90,3 @@ node . $APP.js --install
 node . $APP.js --link
 
 cd $APP
-
