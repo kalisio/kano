@@ -35,7 +35,7 @@ describe(`suite:${suite}`, () => {
 
   it('configure and check information box', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-infobox-group')
     await core.click(page, '#style-infobox-field')
     await core.click(page, '#id')
@@ -52,7 +52,7 @@ describe(`suite:${suite}`, () => {
 
   it('deactive information box', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-infobox-group')
     await core.click(page, '#style-toggle-infobox')
     await core.click(page, '#apply-button')
@@ -66,7 +66,7 @@ describe(`suite:${suite}`, () => {
 
   it('deactive selectable', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-is-selectable')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
@@ -78,7 +78,7 @@ describe(`suite:${suite}`, () => {
 
   it('configure and check popup', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-popup-group')
     await core.click(page, '#style-toggle-popup')
     await core.click(page, '#style-popup-field')
@@ -95,7 +95,7 @@ describe(`suite:${suite}`, () => {
 
   it('deactive popup', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-popup-group')
     await core.click(page, '#style-toggle-popup')
     await page.waitForTimeout(2000)
@@ -109,7 +109,7 @@ describe(`suite:${suite}`, () => {
 
   it('configure and check tooltip', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-tooltip-group')
     await core.click(page, '#style-toggle-tooltip')
     await core.click(page, '#style-tooltip-field')
@@ -124,7 +124,7 @@ describe(`suite:${suite}`, () => {
 
   it('deactive tooltip', async () => {
     await core.clickRightPaneAction(page, 'layer-actions')
-    await core.clickRightPaneAction(page, 'edit-style')
+    await core.clickRightPaneAction(page, 'edit-layer-style')
     await core.click(page, '#style-tooltip-group')
     await core.click(page, '#style-toggle-tooltip')
     await page.waitForTimeout(2000)

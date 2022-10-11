@@ -103,8 +103,8 @@ const mapLayerActions = [{
   dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
   content: [
-    { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
-    { id: 'save', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
+    { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
+    { id: 'save-layer', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
       visible: ['isLayerStorable', { name: '$can', params: ['create', 'catalog'] }] },
     { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
       handler: 'onSelectLayer', route: { name: 'map-layer-filter', params: { layerId: ':_id' } } },
@@ -118,7 +118,7 @@ const mapLayerActions = [{
       handler: 'onSelectLayer', route: { name: 'edit-map-layer-style', params: { layerId: ':_id' } } },
     { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
-    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
+    { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
   ]
 }]
 

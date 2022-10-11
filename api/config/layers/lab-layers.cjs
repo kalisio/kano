@@ -50,7 +50,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'tmp_ow',
         label: 'Variables.TEMPERATURE',
-        units: [ 
+        units: [
           'degC'
         ],
         range: [-50, 127],
@@ -146,7 +146,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      //minZoom: 10,
+      // minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.flag_alert === 0) { %>green<% }
                           else if (properties.flag_alert === 1) { %>red<% }
@@ -209,7 +209,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'tmp_ow',
         label: 'Variables.TEMPERATURE',
-        units: [ 
+        units: [
           'degC'
         ],
         range: [-50, 127],
@@ -225,7 +225,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: false,
-      //minZoom: 10,
+      // minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'circleMarker',
       radius: 6,
@@ -235,8 +235,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'fill-opacity': 0.5,
       'fill-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).hex() %>',
       template: [
-          'fill-color',
-          'stroke-color'
+        'fill-color',
+        'stroke-color'
       ],
       tooltip: {
         template: `<% if (properties.tmp_ow) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
