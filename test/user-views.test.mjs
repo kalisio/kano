@@ -1,7 +1,7 @@
 import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client'
+import { core, map } from '@kalisio/kdk/test.client.js'
 
 const suite = 'user-views'
 

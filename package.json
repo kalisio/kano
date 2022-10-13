@@ -35,7 +35,7 @@
     "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
     "icons:cp": "shx cp -R node_modules/@kalisio/kdk/extras/icons/* public/icons/kdk",
     "tours:cp": "shx cp -R node_modules/@kalisio/kdk/extras/tours/* src/tours",
-    "mocha": "mocha test/**/*.test.js --timeout 30000 --require esm",
+    "mocha": "mocha test/**/*.test.mjs --timeout 30000 --require esm",
     "coverage": "c8 npm run mocha",
     "test:server": "cd api && npm run test",
     "test:client": "cd test && npm run coverage"

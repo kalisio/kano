@@ -1,6 +1,6 @@
 import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
-import { core } from '@kalisio/kdk/test.client'
+import { core } from '@kalisio/kdk/test.client.js'
 
 const suite = 'controls'
 
