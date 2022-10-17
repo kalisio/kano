@@ -93,7 +93,7 @@ const catalogPanes = {
 } 
 
 const legendWidgets = [
-  { id: 'legend-box', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendBox' }
+  { id: 'legend-widget', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendWidget' }
 ]
 
 // Map layer actions
@@ -386,7 +386,7 @@ module.exports = {
             content: [
               { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWindow', params: ['legend-box'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } }
             ]
@@ -491,7 +491,7 @@ module.exports = {
             actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWindow', params: ['legend-box'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
