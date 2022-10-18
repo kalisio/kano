@@ -164,11 +164,15 @@ module.exports = {
     entity: 'user',
     authStrategies: [
       'jwt',
-      'local'
+      'local',
+      'api'
     ],
     local: {
       usernameField: 'email',
       passwordField: 'password'
+    },
+    api: {
+      entity: null
     },
     jwtOptions: {
       header: {
