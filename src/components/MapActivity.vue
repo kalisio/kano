@@ -49,7 +49,8 @@ export default {
     kMapMixins.infobox,
     kMapMixins.weacast,
     kMapMixins.levels,
-    kMapMixins.context
+    kMapMixins.context,
+    kMapMixins.probe,
   ].concat(config.mapActivity.additionalMixins.map((name) => MixinStore.get(name))),
   provide () {
     return {

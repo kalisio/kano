@@ -75,6 +75,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         }
       ],
+      dataSources: {
+        sources: [
+          { from: 'P-60D', to: 'PT-1H', every: 'PT15M', type: 'geotiff', config: { urlTemplate: '<% const path = time.format(\'YYYY/MM/DD/HHmm\') %>https://api.test.kalisio.xyz/s3/scw/kalisio-archive-data/meteoradar/test/<%- path %>.tif?jwt=<%- testToken %>'} }
+          // { from: 'P-60D', to: 'PT-1H', every: 'PT15M', type: 'geotiff', config: { urlTemplate: '<% const path = time.format(\'YYYY/MM/DD/HHmm\') %>' + s3Url + '/scw/kalisio-archive-data/meteoradar/' + flavor + '/<%- path %>.tif?jwt=<%- jwtToken %>'} }
+        ]
+      },
       time_based: {
         sources: [{
           from: 'P-60D',

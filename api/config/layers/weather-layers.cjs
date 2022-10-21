@@ -378,6 +378,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
+    dataSources: {
+      sources: [
+        { meteoModel: 'gfs-world', from: 'P-10Y', to: 'PT-61M',
+          type: 'geotiff',
+          config: {
+            urlTemplate: "<% const lvl = '2'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- meteoModel %><%- isobaric %>/<%- folder %>/temperature/<%- lvl %>/<%- file %>.cog",
+            template: [ 'url']
+          }
+        },
+        { meteoModel: 'gfs-world', from: 'PT-1H', to: 'PT+864000S',
+          type: 'weacast'
+        },
+      ]
+    },
     meteoElements: ['temperature'],
     meteo_model: {
       default: {
