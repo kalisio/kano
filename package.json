@@ -105,7 +105,7 @@
     "@weacast/core": "^2.1.2",
     "@weacast/leaflet": "^2.1.2",
     "abort-controller": "^3.0.0",
-    "ajv": "6.0.0",
+    "ajv": "6.12.3",
     "ajv-i18n": "^3.6.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
