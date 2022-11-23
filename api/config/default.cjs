@@ -272,8 +272,15 @@ module.exports = {
     secondaries: (process.env.DATA_DB_URL ? { data: process.env.DATA_DB_URL } : undefined)
   },
   storage: (process.env.S3_BUCKET ? {
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    s3Client: {
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY || process.env.S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
+      },
+      endpoint: process.env.S3_ENDPOINT,
+      region: process.env.S3_REGION,
+      signatureVersion: 'v4'
+    },
     bucket: process.env.S3_BUCKET
   } : undefined)
 }
