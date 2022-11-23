@@ -82,6 +82,7 @@
     "@feathersjs/commons": "^5.0.0-pre.28",
     "@feathersjs/memory": "^5.0.0-pre.28",
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
+    "@kalisio/feathers-s3": "https://github.com/kalisio/feathers-s3",
     "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
     "@mapbox/geojsonhint": "^3.0.1",
     "@quasar/extras": "^1.0.0",
