@@ -34,7 +34,7 @@ const leftPane = {
     { component: 'app/KLogo' },
     { component: 'QSeparator' },
     { component: 'editor/KSettingsEditor' },
-    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT' } },
+    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
     { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
     { component: 'QSeparator' },
     { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
@@ -330,7 +330,6 @@ module.exports = {
     }
   },
   screens: {
-    banner: 'kano-banner.png',
     login: {
       actions: [
         { id: 'contextual-help', label: 'CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
