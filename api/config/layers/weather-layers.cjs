@@ -1,6 +1,35 @@
 const forecastZIndex = 300
 
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
+  const archiveUrlTempl = "https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- meteoModel %><%- isobaric %>/<%- folder %>/<%- variable %>/<%- lvl %>/<%- file %>.cog"
+  const gustArchiveUrl = `<%
+ const lvl = (level !== undefined) ? level.toString() : (meteoModel.startsWith('gfs-') ? 'surface' : '10');
+ const folder = runTime.format('YYYY/MM/DD/HH');
+ const isobaric = (level !== undefined) ? '-isobaric' : '';
+ const file = forecastTime.format('YYYY-MM-DD-HH')%>` + archiveUrlTempl
+  const precArchiveUrl = `<%
+ const lvl = (level !== undefined) ? level.toString() : 'surface';
+ const folder = runTime.format('YYYY/MM/DD/HH');
+ const isobaric = (level !== undefined) ? '-isobaric' : '';
+ const file = forecastTime.format('YYYY-MM-DD-HH')%>`+ archiveUrlTempl
+  const tempArchiveUrl = `<%
+ const lvl = (level !== undefined) ? level.toString() : '2';
+ const folder = runTime.format('YYYY/MM/DD/HH');
+ const isobaric = (level !== undefined) ? '-isobaric' : '';
+ const file = forecastTime.format('YYYY-MM-DD-HH')%>` + archiveUrlTempl
+  const genDataSources = (url) => {
+    return [
+      { meteoModel: 'gfs-world', from: 'P-10Y', to: 'PT-61M', type: 'geotiff', config: { urlTemplate: url } },
+      { meteoModel: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', type: 'weacast' },
+      { meteoModel: 'arpege-world', from: 'P-10Y', to: 'PT-61M', type: 'geotiff', config: { urlTemplate: url } },
+      { meteoModel: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', type: 'weacast' },
+      { meteoModel: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', type: 'geotiff', config: { urlTemplate: url } },
+      { meteoModel: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', type: 'weacast' },
+      { meteoModel: 'arome-france', from: 'P-10Y', to: 'PT-61M', type: 'geotiff', config: { urlTemplate: url } },
+      { meteoModel: 'arome-france', from: 'PT-1H', to: 'PT+151200S', type: 'weacast' },
+      { meteoModel: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', type: 'weacast' }
+    ]
+  }
   return [{
     name: 'Layers.WIND_TILED',
     description: 'Layers.WIND_DESCRIPTION',
@@ -183,32 +212,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
-    meteoElements: ['gust'],
-    meteo_model: {
-      default: {
-        dynprops: {
-          weacast: { // weacast props
-            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-            model: { strTemplate: '<%- model.name %>' }
-          },
-          geotiff: { // geotiff props
-            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : (model.name.startsWith('gfs-') ? 'surface' : '10'); const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
-          }
-        }
-      },
-      sources: [
-        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
-        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
-      ]
-    },
+    dataSources: genDataSources(gustArchiveUrl),
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
@@ -278,32 +282,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
-    meteoElements: ['precipitations'],
-    meteo_model: {
-      default: {
-        dynprops: {
-          weacast: { // weacast props
-            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-            model: { strTemplate: '<%- model.name %>' }
-          },
-          geotiff: { // geotiff props
-            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : 'surface'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
-          }
-        }
-      },
-      sources: [
-        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
-        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
-      ]
-    },
+    dataSources: genDataSources(precArchiveUrl),
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
@@ -378,46 +357,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
-    dataSources: {
-      sources: [
-        { meteoModel: 'gfs-world', from: 'P-10Y', to: 'PT-61M',
-          type: 'geotiff',
-          config: {
-            urlTemplate: "<% const lvl = '2'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- meteoModel %><%- isobaric %>/<%- folder %>/temperature/<%- lvl %>/<%- file %>.cog",
-            template: [ 'url']
-          }
-        },
-        { meteoModel: 'gfs-world', from: 'PT-1H', to: 'PT+864000S',
-          type: 'weacast'
-        },
-      ]
-    },
-    meteoElements: ['temperature'],
-    meteo_model: {
-      default: {
-        dynprops: {
-          weacast: { // weacast props
-            element: { strTemplate: "<% const lvl = (level !== undefined) ? ('-' + level.toString()) : '' %><%- meteoElements[0] %><%- lvl %>" },
-            forecastTime: { strTemplate: '<% const time = forecastTime.format() %><%- time %>' },
-            model: { strTemplate: '<%- model.name %>' }
-          },
-          geotiff: { // geotiff props
-            url: { strTemplate: "<% const lvl = (level !== undefined) ? level.toString() : '2'; const folder = runTime.format('YYYY/MM/DD/HH'); const isobaric = (level !== undefined) ? '-isobaric' : ''; const file = forecastTime.format('YYYY-MM-DD-HH') %>https://kargo.s3.eu-central-1.amazonaws.com/archive/<%- model.name %><%- isobaric %>/<%- folder %>/<%- meteoElements[0] %>/<%- lvl %>/<%- file %>.cog" }
-          }
-        }
-      },
-      sources: [
-        { model: 'gfs-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'gfs-world', from: 'PT-1H', to: 'PT+864000S', weacast: {} },
-        { model: 'arpege-world', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-world', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arpege-europe', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arpege-europe', from: 'PT-1H', to: 'PT+367200S', weacast: {} },
-        { model: 'arome-france', from: 'P-10Y', to: 'PT-61M', geotiff: {} },
-        { model: 'arome-france', from: 'PT-1H', to: 'PT+151200S', weacast: {} },
-        { model: 'arome-france-high', from: 'PT-1H', to: 'PT+151200S', weacast: {} }
-      ]
-    },
+    dataSources: genDataSources(tempArchiveUrl),
     leaflet: {
       type: 'tiledMeshLayer',
       resolutionScale: [2.0, 2.0],
