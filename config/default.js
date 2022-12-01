@@ -31,13 +31,11 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 // Left pane
 const leftPane = {
   content: [
-    { component: 'QImg', src: 'kano-banner.png' },
+    { component: 'app/KLogo' },
     { component: 'QSeparator' },
     { component: 'editor/KSettingsEditor' },
-    { component: 'layout/KAbout' },
+    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT' } },
     { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
-    { component: 'QSeparator' },
-    { component: 'QSpace' },
     { component: 'QSeparator' },
     { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
   ]
@@ -310,7 +308,7 @@ module.exports = {
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
-  appLogo: 'kano-icon-32x32.png',
+  appLogo: 'kano-logo.png',
   appWebsite: 'https://github.com/kalisio/kano',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
