@@ -5,7 +5,7 @@ import postRobot from 'post-robot'
 import utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
-import { api, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { api, i18n, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -57,6 +57,9 @@ export default async ({ app }) => {
   api.hooks(appHooks)
   // Then all services
   services.call(api)
+
+  // Initializes i18n
+  await i18n.initialize(app, ['core', 'map', 'app'])
 
   // Add a generic function that can be used from the iframe API
   // to access all service operations easily, eg operation 'get' on service 'catalog'
