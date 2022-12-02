@@ -88,7 +88,7 @@ export default async ({ app }) => {
   app.config.globalProperties.$api = api
   app.config.globalProperties.$can = api.can
   app.config.globalProperties.$notify = Notify.create
-  app.config.globalProperties.$tie = i18.tie.bind(i18n)
+  app.config.globalProperties.$tie = i18n.tie.bind(i18n)
   app.config.globalProperties.$geolocation = Geolocation
   app.config.globalProperties.$config = function (path, defaultValue) {
     return _.get(config, path, defaultValue)
