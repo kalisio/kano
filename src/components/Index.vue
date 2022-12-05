@@ -17,7 +17,7 @@ import { api, i18n, beforeGuard, composables } from '@kalisio/kdk/core.client'
 const router = useRouter()
 const route = useRoute()
 const $q = useQuasar()
-const { User, restoreSession } = composables.useUser()
+const { User, restoreSession, updateAbilities } = composables.useUser()
 const { Version } = composables.useVersion()
 let isInitialized = false
 let pendingReconnection = null
@@ -39,8 +39,13 @@ function redirect () {
     router.beforeEach(beforeGuard)
     isInitialized = true
   }
-} // Watch
-watch(User, () => { redirect() })
+} 
+
+// Watch
+watch(User, async () => { 
+  await updateAbilities()
+  redirect() 
+})
 
 // Hooks
 onMounted(async () => { 
