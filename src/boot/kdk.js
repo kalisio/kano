@@ -102,6 +102,9 @@ export default async ({ app }) => {
   app.component('KModal', await kdkCoreUtils.loadComponent('frame/KModal'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
+  app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
+  app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
+
 
   // Register global properties
   // FIXME: This is used for testing purpose, don't know how to access this from Puppeteer otherwise

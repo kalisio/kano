@@ -16,7 +16,7 @@ module.exports = [{
     home: {
       // The name of the route has to be set the default child
       name: '',
-      component: 'layout/KHome',
+      component: 'app/KHome',
       meta: { authenticated: true, unauthenticated: false },
       children: {
         'default-home-view': {

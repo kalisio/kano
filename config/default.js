@@ -31,7 +31,7 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 // Left pane
 const leftPane = {
   content: [
-    { component: 'app/KLogo' },
+    { component: 'foundation/KLogo' },
     { component: 'QSeparator' },
     { component: 'editor/KSettingsEditor' },
     { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
