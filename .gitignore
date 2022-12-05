@@ -74,12 +74,11 @@ config/client-config.json
 # Test
 test/run
 
-# KDK tours
+# KDK extras
+public/icons/kdk
+public/kalisio.png
 src/tours/core
 src/tours/map
-
-#KDK icons
-public/icons/kdk
 
 # local layers
 local-layers.js

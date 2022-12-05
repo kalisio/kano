@@ -5,7 +5,7 @@ import postRobot from 'post-robot'
 import utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
-import { api, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { api, i18n, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -58,6 +58,9 @@ export default async ({ app }) => {
   // Then all services
   services.call(api)
 
+  // Initializes i18n
+  await i18n.initialize(app, ['core', 'map', 'app'])
+
   // Add a generic function that can be used from the iframe API
   // to access all service operations easily, eg operation 'get' on service 'catalog'
   const serviceOperation = async (options) => {
@@ -85,22 +88,23 @@ export default async ({ app }) => {
   app.config.globalProperties.$api = api
   app.config.globalProperties.$can = api.can
   app.config.globalProperties.$notify = Notify.create
-  app.config.globalProperties.$tie = function (key, param) {
-    if (_.isEmpty(key)) return key
-    return this.$te(key) ? this.$t(key, param) : key
-  }
+  app.config.globalProperties.$tie = i18n.tie.bind(i18n)
   app.config.globalProperties.$geolocation = Geolocation
   app.config.globalProperties.$config = function (path, defaultValue) {
     return _.get(config, path, defaultValue)
   }
 
   // Register global components
+  app.component('KDialog', await kdkCoreUtils.loadComponent('modal/KDialog'))
   app.component('KAction', await kdkCoreUtils.loadComponent('frame/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('frame/KPanel'))
   app.component('KStamp', await kdkCoreUtils.loadComponent('frame/KStamp'))
   app.component('KModal', await kdkCoreUtils.loadComponent('frame/KModal'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
+  app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
+  app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
+
 
   // Register global properties
   // FIXME: This is used for testing purpose, don't know how to access this from Puppeteer otherwise

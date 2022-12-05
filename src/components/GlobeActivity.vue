@@ -21,10 +21,9 @@ import { MixinStore } from '../mixin-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
-const baseActivityMixin = kCoreMixins.baseActivity()
+const baseActivityMixin = kCoreMixins.baseActivity('globeActivity')
 
 export default {
-  name: 'globe-activity',
   mixins: [
     kMapMixins.globe.baseGlobe,
     kMapMixins.globe.geojsonLayers,

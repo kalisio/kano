@@ -31,13 +31,11 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 // Left pane
 const leftPane = {
   content: [
-    { component: 'QImg', src: 'kano-banner.png' },
+    { component: 'foundation/KLogo' },
     { component: 'QSeparator' },
     { component: 'editor/KSettingsEditor' },
-    { component: 'layout/KAbout' },
+    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
     { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
-    { component: 'QSeparator' },
-    { component: 'QSpace' },
     { component: 'QSeparator' },
     { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
   ]
@@ -93,7 +91,7 @@ const catalogPanes = {
 } 
 
 const legendWidgets = [
-  { id: 'legend-box', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendBox' }
+  { id: 'legend-widget', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendWidget' }
 ]
 
 // Map layer actions
@@ -310,7 +308,7 @@ module.exports = {
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
-  appLogo: 'kano-icon-32x32.png',
+  appLogo: 'kano-logo.png',
   appWebsite: 'https://github.com/kalisio/kano',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
@@ -332,7 +330,6 @@ module.exports = {
     }
   },
   screens: {
-    banner: 'kano-banner.png',
     login: {
       actions: [
         { id: 'contextual-help', label: 'CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
@@ -386,7 +383,7 @@ module.exports = {
             content: [
               { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWindow', params: ['legend-box'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } }
             ]
@@ -491,7 +488,7 @@ module.exports = {
             actionRenderer: 'item',
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWindow', params: ['legend-box'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },

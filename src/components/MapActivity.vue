@@ -20,10 +20,9 @@ import { MixinStore } from '../mixin-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
-const baseActivityMixin = kCoreMixins.baseActivity()
+const baseActivityMixin = kCoreMixins.baseActivity('mapActivity')
 
 export default {
-  name: 'map-activity',
   mixins: [
     kMapMixins.map.baseMap,
     kMapMixins.map.canvasLayers,
