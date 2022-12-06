@@ -198,7 +198,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                     'if (_.has(properties, \'windSpeed\')) { %>Vitesse du vent = <%= Units.format(properties.windSpeed, \'kt\') %>\n<% }' +
                     'if (_.has(properties, \'windGust\')) { %>Vitesse de rafale = <%= Units.format(properties.windGust, \'kt\') %>\n<% }' +
                     'if (_.has(properties, \'visibility\')) { %>Visibilité = <%= Units.format(properties.visibility, \'mi\') %>\n<% }' +
-                    'if (_.has(feature, \'time.temperature\')) { %><%= Time.format(feature.time.temperature, \'time.long\') + ' - ' + Time.format(feature.time.temperature, \'date.short\') %>\n<% } %>'
+                    'if (_.has(feature, \'time.temperature\')) { %><%= Time.format(feature.time.temperature, \'time.long\') + \' - \' + Time.format(feature.time.temperature, \'date.short\') %>\n<% } %>'
         }
       }
     }

@@ -259,9 +259,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: '<% if (_.has(properties, \'H\')) { %>H = <%= Units.format(properties.H, \'m\', \'m\') %>\n<% }' +
-                  'if (_.has(feature, \'time.H\')) { %><%= Time.format(feature.time.H, \'time.long\') + ' - ' + Time.format(feature.time.H, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.H\')) { %><%= Time.format(feature.time.H, \'time.long\') + \' - \' + Time.format(feature.time.H, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'Q\')) { %>Q = <%= Units.format(properties.Q, \'m^3/s\') %>\n<% }' +
-                  'if (_.has(feature, \'time.Q\')) { %><%= Time.format(feature.time.Q, \'time.long\') + ' - ' + Time.format(feature.time.Q, \'date.short\') %>\n<% } %>'
+                  'if (_.has(feature, \'time.Q\')) { %><%= Time.format(feature.time.Q, \'time.long\') + \' - \' + Time.format(feature.time.Q, \'date.short\') %>\n<% } %>'
       }
     }
   },
@@ -462,19 +462,19 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: '<% if (_.has(properties, \'pm25\')) { %>PM2.5 = <%= Units.format(properties.pm25, \'µg/m³\') %>\n<% }' +
-                  'if (_.has(feature, \'time.pm25\')) { %><%= Time.format(feature.time.pm25, \'time.long\') + ' - ' + Time.format(feature.time.pm25, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.pm25\')) { %><%= Time.format(feature.time.pm25, \'time.long\') + \' - \' + Time.format(feature.time.pm25, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'pm10\')) { %>PM10 = <%= Units.format(properties.pm10, \'µg/m³\') %>\n<% }' +
-                  'if (_.has(feature, \'time.pm10\')) { %><%= Time.format(feature.time.pm10, \'time.long\') + ' - ' + Time.format(feature.time.pm10, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.pm10\')) { %><%= Time.format(feature.time.pm10, \'time.long\') + \' - \' + Time.format(feature.time.pm10, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'so2\')) { %>SO2 = <%= Units.format(properties.so2, \'ppm\') %>\n<% }' +
-                  'if (_.has(feature, \'time.so2\')) { %></br><%= Time.format(feature.time.so2, \'time.long\') + ' - ' + Time.format(feature.time.so2, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.so2\')) { %></br><%= Time.format(feature.time.so2, \'time.long\') + \' - \' + Time.format(feature.time.so2, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'no2\')) { %>NO2 = <%= Units.format(properties.no2, \'ppm\') %>\n<% }' +
-                  'if (_.has(feature, \'time.no2\')) { %></br><%= Time.format(feature.time.no2, \'time.long\') + ' - ' + Time.format(feature.time.no2, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.no2\')) { %></br><%= Time.format(feature.time.no2, \'time.long\') + \' - \' + Time.format(feature.time.no2, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'o3\')) { %>O3 = <%= Units.format(properties.o3, \'ppm\') %>\n<% }' +
-                  'if (_.has(feature, \'time.o3\')) { %></br><%= Time.format(feature.time.o3, \'time.long\') + ' - ' + Time.format(feature.time.o3, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.o3\')) { %></br><%= Time.format(feature.time.o3, \'time.long\') + \' - \' + Time.format(feature.time.o3, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'co\')) { %>CO = <%= Units.format(properties.co, \'ppm\') %>\n<% }' +
-                  'if (_.has(feature, \'time.co\')) { %></br><%= Time.format(feature.time.co, \'time.long\') + ' - ' + Time.format(feature.time.co, \'date.short\') %>\n<% }' +
+                  'if (_.has(feature, \'time.co\')) { %></br><%= Time.format(feature.time.co, \'time.long\') + \' - \' + Time.format(feature.time.co, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'bc\')) { %>BC = <%= Units.format(properties.bc, \'µg/m³\') %>\n<% }' +
-                  'if (_.has(feature, \'time.bc\')) { %></br><%= Time.format(feature.time.bc, \'time.long\') + ' - ' + Time.format(feature.time.bc, \'date.short\') %>\n<% } %>'
+                  'if (_.has(feature, \'time.bc\')) { %></br><%= Time.format(feature.time.bc, \'time.long\') + \' - \' + Time.format(feature.time.bc, \'date.short\') %>\n<% } %>'
       }
     }
   },
@@ -570,7 +570,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'nSv/h\') %>\n' +
-                  '<%= Time.format(properties.measureDateFormatted, \'time.long\') + ' - ' + Time.format(properties.measureDateFormatted, \'date.short\') %><% } %>'
+                  '<%= Time.format(properties.measureDateFormatted, \'time.long\') + \' - \' + Time.format(properties.measureDateFormatted, \'date.short\') %><% } %>'
       }
     }
   },
@@ -659,7 +659,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% } %>\n' +
-                  'if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, \'time.long\') + ' - ' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+                  'if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
       }
     }
   }]
