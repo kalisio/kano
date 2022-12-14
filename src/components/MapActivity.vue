@@ -15,12 +15,13 @@
 import _ from 'lodash'
 import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
-import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
+import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
-const baseActivityMixin = kCoreMixins.baseActivity('mapActivity')
+const name = 'mapActivity'
+const baseActivityMixin = kCoreMixins.baseActivity(name)
 
 export default {
   mixins: [
@@ -142,6 +143,7 @@ export default {
     }
   },
   created () {
+    this.setCurrentActivity(this)
     // Setup the engine
     this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
     this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
@@ -168,6 +170,11 @@ export default {
   },
   unmounted () {
     utils.sendEmbedEvent('map-destroyed')
+  },
+  setup () {
+    return {
+      ...kMapComposables.useActivity(name, { selection: { multiple: 'ctrlKey', buffer: 10 } })
+    }
   }
 }
 </script>

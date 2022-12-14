@@ -121,9 +121,9 @@ const mapLayerActions = [{
 }]
 
 const mapWidgets = [
-  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
-  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
+  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox' },
+  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries' },
+  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile' },
   { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
 ]
 
@@ -201,9 +201,9 @@ const globeLayerActions = [{
 }]
 
 const globeWidgets = [
-  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox', bind: '$data.selection' },
-  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries', bind: '$data' },
-  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile', bind: '$data.selection' },
+  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox' },
+  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries' },
+  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile' },
   { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
 ]
 
@@ -459,7 +459,7 @@ module.exports = {
           id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
           route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
         },
-        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
+        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
     engine: mapEngine,
@@ -529,7 +529,7 @@ module.exports = {
     },
     fab: {
       actions: [
-        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'onProbeLocation' }
+        { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
     engine: globeEngine,
