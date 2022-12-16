@@ -144,9 +144,6 @@ export default {
   },
   created () {
     this.setCurrentActivity(this)
-    // Setup the engine
-    this.registerStyle('tooltip', this.getProbedLocationForecastTooltip)
-    this.registerStyle('markerStyle', this.getProbedLocationForecastMarker)
   },
   mounted () {
     // Setup event connections
@@ -173,7 +170,8 @@ export default {
   },
   setup () {
     return {
-      ...kMapComposables.useActivity(name, { selection: { multiple: 'ctrlKey', buffer: 10 } })
+      ...kMapComposables.useActivity(name),
+      ...kMapComposables.useWeather(name)
     }
   }
 }
