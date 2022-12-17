@@ -133,7 +133,7 @@ module.exports = {
     page: {
       content: [{
         id: 'my-component',
-        component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
+        component: 'layout/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
       }]
     }
   }

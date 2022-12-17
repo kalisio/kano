@@ -434,14 +434,14 @@ module.exports = {
         zIndex: 1000 // On top of Leaflet layers
       },
       content: [{
-        id: 'color-legend', component: 'frame/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
+        id: 'color-legend', component: 'layout/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
       }, {
-        id: 'url-legend', component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
+        id: 'url-legend', component: 'layout/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
       }, {
-        id: 'level-slider', component: 'frame/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
+        id: 'level-slider', component: 'layout/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
       } /* Only for example purpose
       {
-        id: 'site-seeker', component: 'frame/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
+        id: 'site-seeker', component: 'layout/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
       }*/]
     },
     windows: {
@@ -520,7 +520,7 @@ module.exports = {
     },
     page: {
       content: [{
-        id: 'url-legend', component: 'frame/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
+        id: 'url-legend', component: 'layout/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
       }]
     },
     windows: {
