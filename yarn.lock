@@ -1360,9 +1360,9 @@
     passport "^0.4.0"
     uuid "^3.1.0"
 
-"@feathersjs/authentication@git+https://github.com/kalisio/authentication.git":
+"@feathersjs/authentication@https://github.com/kalisio/authentication.git":
   version "2.1.7"
-  resolved "git+https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
+  resolved "https://github.com/kalisio/authentication.git#b730e0624b112e9be372dea168702dc740037396"
   dependencies:
     "@feathersjs/commons" "^2.0.0"
     "@feathersjs/errors" "^3.0.0"
@@ -2801,10 +2801,6 @@
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/JSV/-/JSV-4.0.2.tgz#d077f6825571f82132f9dffaed587b4029feff57"
   integrity sha1-0Hf2glVx+CEy+d/67Vh7QCn+/1c=
-
-"Leaflet.Geodesic@https://github.com/henrythasler/Leaflet.Geodesic.git":
-  version "1.1.0"
-  resolved "https://github.com/henrythasler/Leaflet.Geodesic.git#7d710dd13020efb7c9901f5b3448a4541f507c56"
 
 SimpleQueue@0.0.1:
   version "0.0.1"
@@ -9666,6 +9662,11 @@ leaflet-velocity@^1.7.0:
   resolved "https://registry.yarnpkg.com/leaflet-velocity/-/leaflet-velocity-1.7.0.tgz#bc5e66f3c900142cdbe8f590c69ed9371c3aa8e1"
   integrity sha512-8UTa1qCegsLLEOe3mw0AWeFUJabcsi7kG1m63xikBCGpBB7y1lRBAfggkONU5nmQEVN8slUOLQsFVL5GZM352w==
 
+leaflet.geodesic@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/leaflet.geodesic/-/leaflet.geodesic-2.6.1.tgz#72604259cb4a3f3991cbc287bdc0867a8d548932"
+  integrity sha512-irHHgQUCWUDqMdSdGBj66k7F1eeYhviI8OP5aGg2s/fY8SSZrPAPmdxYuRxclWaHvFkyjwtDws8uBHMG8dtuHw==
+
 leaflet.locatecontrol@^0.67.0:
   version "0.67.0"
   resolved "https://registry.yarnpkg.com/leaflet.locatecontrol/-/leaflet.locatecontrol-0.67.0.tgz#adfeebfd662f61d639a5a5fba362368579f8ac55"
@@ -14106,9 +14107,9 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-"sns-mobile@git+https://github.com/kalisio/sns-mobile.git":
+"sns-mobile@https://github.com/kalisio/sns-mobile":
   version "1.3.0"
-  resolved "git+https://github.com/kalisio/sns-mobile.git#d68d26634e22fb9052bd963c7ef8a590bf67650f"
+  resolved "https://github.com/kalisio/sns-mobile#d68d26634e22fb9052bd963c7ef8a590bf67650f"
   dependencies:
     async "^3.2.0"
     aws-sdk "^2.200.0"
