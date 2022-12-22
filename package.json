@@ -85,6 +85,7 @@
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
     "@kalisio/feathers-s3": "https://github.com/kalisio/feathers-s3",
     "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
+    "@kalisio/leaflet.donutcluster": "^1.0.0",
     "@mapbox/geojsonhint": "^3.0.1",
     "@quasar/extras": "^1.0.0",
     "@tmcw/togeojson": "^4.5.0",
