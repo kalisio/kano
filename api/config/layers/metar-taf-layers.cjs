@@ -147,7 +147,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         minFeatureZoom: 10,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
-                          else if (properties.measureRequestIssued) { %>orange<% }
+                          else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
         'icon-color': `<% if (_.get(properties, 'rawOb')) {
             if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
