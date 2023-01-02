@@ -41,6 +41,104 @@ const leftPane = {
   ]
 }
 
+// left window
+const leftWidgets =  [{ 
+  id: 'legend-widget', label: 'LegendBox.LABEL', icon: 'las la-list',
+  content: { component: 'legend/KLegend' }
+}]
+
+// top window
+const topWidgets = [{ 
+  id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', 
+  content: { component: 'widget/KInformationBox' },
+  header: [{
+    id: 'center-view',
+    icon: 'las la-eye',
+    tooltip: 'KInformationBox.CENTER_ON',
+    visible: 'hasFeature',
+    handler: 'onCenterOn'
+  }, {
+    id: 'copy-properties',
+    icon: 'las la-clipboard',
+    tooltip: 'KInformationBox.COPY_PROPERTIES',
+    visible: 'hasProperties',
+    handler: 'onCopyProperties'
+  }, {
+    id: 'export-feature',
+    icon: 'kdk:json.svg',
+    tooltip: 'KInformationBox.EXPORT_FEATURE',
+    visible: 'hasFeature',
+    handler: 'onExportFeature'
+  }] 
+}, {
+  id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', 
+  content: { component: 'widget/KTimeSeries' },
+  header: [{
+    id: 'absolute-time-range',
+    component: 'time/KAbsoluteTimeRange'
+  }, {
+    id: 'restore-time-range',
+    icon: 'las la-undo',
+    tooltip: 'KTimeSeries.RESTORE_TIME_RANGE',
+    visible: 'hasZoomHistory',
+    handler: 'onZoomRestored'
+  }, {
+    id: 'relative-time-ranges',
+    component: 'menu/KMenu',
+    icon: 'las la-history',
+    content: [{
+      component: 'time/KRelativeTimeRanges',
+      ranges: ['last-hour', 'last-2-hours', 'last-3-hours', 'last-6-hours',
+        'last-12-hours', 'last-day', 'last-2-days', 'last-3-days', 'last-week',
+        'next-12-hours', 'next-day', 'next-2-days', 'next-3-days']
+    }]
+  }, {
+    id: 'center-view',
+    icon: 'las la-eye',
+    tooltip: 'KTimeSeries.CENTER_ON',
+    visible: 'probedVariables',
+    handler: 'onCenterOn'
+  }, {
+    id: 'export-feature',
+    icon: 'las la-file-download',
+    tooltip: 'KTimeSeries.EXPORT_SERIES',
+    visible: 'probedVariables',
+    handler: 'onExportSeries'
+  }]
+}, { 
+  id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', 
+  content: { component: 'widget/KElevationProfile' },
+  header: [{
+    id: 'center-view',
+    icon: 'las la-eye',
+    tooltip: 'KElevationProfile.CENTER_ON',
+    visible: 'hasFeature',
+    handler: 'onCenterOn'
+  }, {
+    id: 'copy-properties',
+    icon: 'las la-clipboard',
+    tooltip: 'KElevationProfile.COPY_PROFILE',
+    visible: 'hasProfile',
+    handler: 'onCopyProfile'
+  }, {
+    id: 'export-feature',
+    icon: 'kdk:json.svg',
+    tooltip: 'KElevationProfile.EXPORT_PROFILE',
+    visible: 'profile',
+    handler: 'onExportProfile'
+  }]
+}, { 
+  id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  
+  content: { component: 'widget/KMapillaryViewer' },
+  header: [{
+    id: 'center',
+    icon: 'las la-eye',
+    tooltip: 'KMapillaryViewer.CENTER_ON',
+    visible: 'hasImage',
+    handler: 'centerMap'
+  }]
+}]
+
 // Catalog tababr
 function catalogTabbar (activeView) {
   return {
@@ -90,10 +188,6 @@ const catalogPanes = {
   ]
 } 
 
-const legendWidgets = [
-  { id: 'legend-widget', label: 'LegendBox.LABEL', icon: 'las la-list',  component: 'widget/KLegendWidget' }
-]
-
 // Map layer actions
 const mapLayerActions = [{
   id: 'layer-actions',
@@ -120,12 +214,6 @@ const mapLayerActions = [{
   ]
 }]
 
-const mapWidgets = [
-  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox' },
-  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries' },
-  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile' },
-  { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
-]
 
 // Map engine configuration
 const mapEngine = {
@@ -199,13 +287,6 @@ const globeLayerActions = [{
       visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
   ]
 }]
-
-const globeWidgets = [
-  { id: 'information-box', label: 'KInformationBox.LABEL', icon: 'las la-digital-tachograph', component: 'widget/KInformationBox' },
-  { id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', component: 'widget/KTimeSeries' },
-  { id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', component: 'widget/KElevationProfile' },
-  { id: 'mapillary-viewer', label: 'KMapillaryViewer.LABEL', icon: 'kdk:mapillary.png',  component: 'widget/KMapillaryViewer' }
-]
 
 // Globe engine configuration
 const globeEngine = {
@@ -445,8 +526,8 @@ module.exports = {
       }*/]
     },
     windows: {
-      left: { widgets: legendWidgets },
-      top: { widgets: mapWidgets }
+      left: leftWidgets,
+      top: topWidgets 
     },
     fab: {
       actions: [
@@ -524,8 +605,8 @@ module.exports = {
       }]
     },
     windows: {
-      left: { widgets: legendWidgets },      
-      top: { widgets: globeWidgets }
+      left: leftWidgets,      
+      top: topWidgets
     },
     fab: {
       actions: [
