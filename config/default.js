@@ -31,7 +31,7 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 // Left pane
 const leftPane = {
   content: [
-    { component: 'foundation/KLogo' },
+    { component: 'KLogo' },
     { component: 'QSeparator' },
     { component: 'editor/KSettingsEditor' },
     { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
@@ -43,7 +43,7 @@ const leftPane = {
 
 // left window
 const leftWidgets =  [{ 
-  id: 'legend-widget', label: 'LegendBox.LABEL', icon: 'las la-list',
+  id: 'legend-widget', label: 'KLegend.LABEL', icon: 'las la-list',
   content: { component: 'legend/KLegend' }
 }]
 
@@ -389,7 +389,6 @@ module.exports = {
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
-  appLogo: 'kano-logo.png',
   appWebsite: 'https://github.com/kalisio/kano',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
@@ -411,6 +410,14 @@ module.exports = {
     }
   },
   screens: {
+    actions: [{ 
+      id: 'terms-policies', 
+      label: 'screen.TERMS_AND_POLICIES', 
+      dialog: {
+        component: 'app/KTerms'
+      }
+    }],
+    // frameBackgroundColor: '#FFDC9E',
     login: {
       actions: [
         { id: 'contextual-help', label: 'CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
@@ -526,8 +533,8 @@ module.exports = {
       }*/]
     },
     windows: {
-      left: leftWidgets,
-      top: topWidgets 
+      left: { widgets: leftWidgets },
+      top: { widgets: topWidgets }
     },
     fab: {
       actions: [
@@ -605,8 +612,8 @@ module.exports = {
       }]
     },
     windows: {
-      left: leftWidgets,      
-      top: topWidgets
+      left: { widgets: leftWidgets },
+      top: { widgets: topWidgets },
     },
     fab: {
       actions: [
