@@ -142,7 +142,7 @@ const topWidgets = [{
 // Catalog tababr
 function catalogTabbar (activeView) {
   return {
-    id: 'catalog-tabbar', component: 'frame/KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
+    id: 'catalog-tabbar', component: 'KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
       { 
         id: 'user-layers-tab', label: 'KUserLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
         toggled: activeView === 'user-layers' ? true : false,
@@ -168,7 +168,7 @@ const catalogPanes = {
     catalogTabbar('user-layers'),
     { id: 'user-layers', component: 'catalog/KUserLayersPanel', bind: '$data' },
     { component: 'QSpace' },
-    { id: 'catalog-footer', component: 'frame/KPanel', content: [{
+    { id: 'catalog-footer', component: 'KPanel', content: [{
         id: 'manage-layer-categories',
         icon: 'las la-cog',
         label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',

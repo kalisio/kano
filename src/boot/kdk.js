@@ -95,11 +95,11 @@ export default async ({ app }) => {
   }
 
   // Register global components
-  app.component('KDialog', await kdkCoreUtils.loadComponent('modal/KDialog'))
-  app.component('KAction', await kdkCoreUtils.loadComponent('frame/KAction'))
-  app.component('KPanel', await kdkCoreUtils.loadComponent('frame/KPanel'))
-  app.component('KStamp', await kdkCoreUtils.loadComponent('frame/KStamp'))
-  app.component('KModal', await kdkCoreUtils.loadComponent('frame/KModal'))
+  app.component('KAction', await kdkCoreUtils.loadComponent('KAction'))
+  app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))
+  app.component('KStamp', await kdkCoreUtils.loadComponent('KStamp'))
+  app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))
+  app.component('KDialog', await kdkCoreUtils.loadComponent('KDialog'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
