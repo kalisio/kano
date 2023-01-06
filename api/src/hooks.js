@@ -39,7 +39,7 @@ export default {
         return true
       }, coreHooks.processObjectIDs),
       coreHooks.authorise],
-    find: [fuzzySearch({ fields: ['name'] }), coreHooks.marshallCollationQuery],
+    find: [fuzzySearch({ fields: ['name'] }), coreHooks.diacriticSearch(), coreHooks.marshallCollationQuery],
     get: [],
     create: [],
     update: [coreHooks.preventUpdatePerspectives],
