@@ -1701,6 +1701,11 @@
     winston-daily-rotate-file "^3.10.0"
     xml2js "^0.4.22"
 
+"@kalisio/leaflet.donutcluster@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/leaflet.donutcluster/-/leaflet.donutcluster-1.0.0.tgz#f7e2b0dc5b09010c8d536ffa91937f317cbb1100"
+  integrity sha512-FFFtehz0t08XLma3H6yjsvsGR2MdUB8DwVo4Wz6/82IwXMTKbonqSqf+kZz86aDkzFYycIHkotVPs7wHaaWjeA==
+
 "@mapbox/geojsonhint@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@mapbox/geojsonhint/-/geojsonhint-3.0.1.tgz#46eb0afbfb45915efb73650b90ac64dd8b2274ef"

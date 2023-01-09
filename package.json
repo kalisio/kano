@@ -80,6 +80,7 @@
     "@feathersjs/commons": "1.4.4",
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
     "@kalisio/kdk": "^1.7.0",
+    "@kalisio/leaflet.donutcluster": "^1.0.0",
     "@mapbox/geojsonhint": "^3.0.1",
     "@panter/vue-i18next": "^0.9.1",
     "@quasar/extras": "^1.6.0",
