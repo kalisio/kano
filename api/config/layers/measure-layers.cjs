@@ -696,7 +696,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'atmospheric', 'measure'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/icos-icon.png',
-    attribution: '',
+    attribution: '<a href='https://data.icos-cp.eu/'>ICOS</a>',
     type: 'OverlayLayer',
     service: 'icos-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
