@@ -13,6 +13,8 @@
 
 <script>
 import _ from 'lodash'
+import '@kalisio/leaflet.donutcluster/src/Leaflet.DonutCluster.css'
+import '@kalisio/leaflet.donutcluster'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store'
