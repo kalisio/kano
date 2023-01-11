@@ -59,7 +59,7 @@ export default async ({ app }) => {
   services.call(api)
 
   // Initializes i18n
-  await i18n.initialize(app, ['core', 'map', 'app'])
+  await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
 
   // Add a generic function that can be used from the iframe API
   // to access all service operations easily, eg operation 'get' on service 'catalog'
@@ -104,6 +104,7 @@ export default async ({ app }) => {
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
   app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
+  app.component('KLayersPanel', await kdkCoreUtils.loadComponent('catalog/KLayersPanel'))
 
 
   // Register global properties
