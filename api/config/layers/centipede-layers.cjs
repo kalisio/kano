@@ -35,7 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT5M',
-    queryFrom: 'PT-1H',
+    queryFrom: 'PT-12H',
     variables: [
       {
         name: 'ping',
@@ -59,9 +59,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 7,
       'icon-classes': 'fa fa-map-pin',
       'icon-x-offset': 2,
-      'marker-color': `<% if (properties.ping && properties.ping === 2 ) { %>#78b955<% } 
-        else if (properties.ping && properties.ping === 1 ) { %>#d6bf3a<% }
-        else { %>#f76454<% } %>`,
+      'marker-color': `<% if (properties.ping === 2 ) { %>#78b955<% } 
+        else if (properties.ping === 1 ) { %>#d6bf3a<% }
+        else if (properties.ping === 0 ) { %>#f76454<% }
+        else { %>grey<% } %>`,
       cluster: { disableClusteringAtZoom: 18 },
       template: ['marker-color'],
       popup: {
@@ -85,7 +86,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% } %>'
+        template: '<%= properties.name %>'
       }
     }
   },
