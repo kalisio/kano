@@ -131,11 +131,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             lon: ctx.feature.geometry.coordinates[0]
           }
           // move 50km north from feature position => buffer border
-          /*const border = ctx.turf.destination(ctx.feature.geometry, ctx.userData.radius, 0, { units: 'kilometers' })
+          //const border = ctx.turf.destination(ctx.feature.geometry, ctx.userData.radius, 0, { units: 'kilometers' })
           const coords1 = {
             lat: border.geometry.coordinates[1],
             lon: border.geometry.coordinates[0]
-          }*/
+          }
 
           // project in canvas space
           const pos0 = ctx.latLonToCanvas(coords0)
