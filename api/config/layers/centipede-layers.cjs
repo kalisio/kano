@@ -131,7 +131,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             lon: ctx.feature.geometry.coordinates[0]
           }
           // move 50km north from feature position => buffer border
-          //const border = ctx.turf.destination(ctx.feature.geometry, ctx.userData.radius, 0, { units: 'kilometers' })
+          const border = ctx.turf.destination(ctx.feature.geometry, ctx.userData.radius, 0, { units: 'kilometers' })
           const coords1 = {
             lat: border.geometry.coordinates[1],
             lon: border.geometry.coordinates[0]
@@ -151,8 +151,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ctx.canvas.arc(pos0.x, pos0.y, radius, 0, 2 * ctx.Math.PI)
           ctx.canvas.fillStyle = gradient
           ctx.canvas.fill()
-          ctx.canvas.strokeStyle = '#92AC86'
-          ctx.canvas.stroke()
+          // ctx.canvas.strokeStyle = '#92AC86'
+          // ctx.canvas.stroke()
           `
       }]
     }
