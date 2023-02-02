@@ -6,7 +6,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           RTE_GENERATION: 'Réseau RTE',
-          RTE_GENERATION_DESCRIPTION: 'Puissance injectées par les unités de production électrique'
+          RTE_GENERATION_DESCRIPTION: 'Puissance injectée par les unités de production électrique'
         },
         Variables: {
           POWER: 'Puissance'
@@ -51,6 +51,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    // If we'd like add the unit active state to features
+    processor: `<% if (_.has(properties, 'power')) properties.status = (properties.power > 50 ? 'active' : 'inactive') %>`,
     leaflet: {
       type: 'geoJson',
       realtime: true,
@@ -64,23 +66,41 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         // spiderfyOnMaxZoom: true,
         spiderfyDistanceMultiplier: 2,
         options: {
+          // If we'd like to display the ratio between total power and current generation power
+          /*
           key: 'name',
           sumField: 'power',
           totalField: 'netPower_MW',
+          //textClassName: 'donut-text',
+          textContent: 'count',
+          //legendClassName: 'donut-legend',
+          legendContent: 'value',
+          arcColorDict: ['#238b45'],
           style: {
             size: 40,
             fill: '#99d8c9',
             opacity: 1,
             weight: 7
           },
-          //textClassName: 'donut-text',
-          textContent: 'count',
-          //legendClassName: 'donut-legend',
-          legendContent: 'value',
-          arcColorDict: ['#238b45']
+          */
+          // If we'd like to display the ratio between active/inactive units
+          key: 'status',
+          textTemplate: `<%= _.get(data, 'active.value', 0) %>/<%= sum %>`,
+          hideLegend: true,
+          title: { active: 'Actif', inactive: 'Inactif' },
+          arcColorDict: { active: '#238b45', inactive: '#c61a09' },
+          style: {
+            size: 40,
+            fill: '#99c0d8',
+            opacity: 1,
+            weight: 7
+          }
         }
       },
-      'marker-color': '<%= chroma.scale(\'Greens\').domain([-1, 1])((properties.power || 0) / properties.netPower_MW).hex() %>',
+      // If we'd like to color according to the unit power
+      //'marker-color': '<%= chroma.scale(\'Greens\').domain([-1, 1])((properties.power || 0) / properties.netPower_MW).hex() %>',
+      // If we'd like to color according to the unit active state
+      'marker-color': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
       'icon-classes': 'fas fa-bolt',
       'icon-x-offset': 2,
       'icon-color': '#FFF',
