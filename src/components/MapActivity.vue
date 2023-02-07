@@ -17,6 +17,7 @@ import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
+import { ComposableStore } from '../composable-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
@@ -169,10 +170,13 @@ export default {
     utils.sendEmbedEvent('map-destroyed')
   },
   setup () {
-    return {
+    const ret = {
       ...kMapComposables.useActivity(name),
       ...kMapComposables.useWeather(name)
     }
+    for (const use of config.mapActivity.additionalComposables.map((name) => ComposableStore.get(name)))
+      Object.assign(ret, use(name))
+    return ret
   }
 }
 </script>
