@@ -42,10 +42,12 @@ const leftPane = {
 }
 
 // left window
-const leftWidgets =  [{ 
-  id: 'legend-widget', label: 'KLegend.LABEL', icon: 'las la-list',
-  content: { component: 'legend/KLegend' }
-}]
+const leftWidgets = [
+  { 
+    id: 'legend-widget', label: 'KLegend.LABEL', icon: 'las la-list',
+    content: { component: 'legend/KLegend' }
+  }
+]
 
 // top window
 const topWidgets = [{ 
@@ -436,19 +438,13 @@ module.exports = {
   },
   layout: {
     view: 'lhh LpR lff',
-    topPane: {
-      opener: true,
-      visible: true
+    panes: {
+      left: { opener: true },
+      top: { opener: true, visible: true },
+      right: { opener: true },
+      bottom: { opener: true }
     },
-    leftPane: {
-      opener: true
-    },
-    bottomPane: {
-      opener: true
-    },
-    rightPane: {
-      opener: true
-    }
+    fab: { visible: true }
   },
   mapActivity: {
     additionalMixins: [],
@@ -506,11 +502,13 @@ module.exports = {
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
-      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } }
+      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } },
+      mode: 'default'
     },
     leftPane: leftPane,
     rightPane: {
-      content: catalogPanes
+      content: catalogPanes,
+      mode: 'user-layers'
     },
     bottomPane: {
       content: [
@@ -532,12 +530,8 @@ module.exports = {
         id: 'site-seeker', component: 'layout/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
       }*/]
     },
-    windows: {
-      left: { widgets: leftWidgets },
-      top: { widgets: topWidgets }
-    },
     fab: {
-      actions: [
+      content: [
         { 
           id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
           visible: { name: '$can', params: ['create', 'catalog'] },
@@ -549,6 +543,10 @@ module.exports = {
         },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
+    },
+    windows: {
+      left: { content: leftWidgets },
+      top: { content: topWidgets }
     },
     engine: mapEngine,
     layers: {
@@ -595,11 +593,13 @@ module.exports = {
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
-      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } }
+      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } },
+      mode: 'default'
     },
     leftPane: leftPane,
     rightPane: {
-      content: catalogPanes
+      content: catalogPanes,
+      mode: 'user-layers'
     },
     bottomPane: {
       content: [
@@ -611,14 +611,14 @@ module.exports = {
         id: 'url-legend', component: 'layout/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
       }]
     },
-    windows: {
-      left: { widgets: leftWidgets },
-      top: { widgets: topWidgets },
-    },
     fab: {
-      actions: [
+      content: [
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
+    },
+    windows: {
+      left: { content: leftWidgets },
+      top: { content: topWidgets },
     },
     engine: globeEngine,
     layers: {
