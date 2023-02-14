@@ -59,6 +59,30 @@ export default {
       selectedLayer: computed(() => this.selectedLayer)
     }
   },
+  data () {
+    return {
+      leftWindow: this.$store.get('windows.left'),
+      rightWindow: this.$store.get('windows.right'),
+      topWindow: this.$store.get('windows.top'),
+      bottomWindow: this.$store.get('windows.bottom'),
+      leftPane: this.$store.get('leftPane'),
+      rightPane: this.$store.get('rightPane'),
+      topPane: this.$store.get('topPane'),
+      bottomPane: this.$store.get('bottomPane'),
+    }
+  },
+  watch: {
+    // window visiblity, to send postrobot events
+    'leftWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('left', this.leftWindow) },
+    'rightWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('right', this.rightWindow) },
+    'topWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('top', this.topWindow) },
+    'bottomWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('bottom', this.bottomWindow) },
+    // window visiblity, to send postrobot events
+    'leftPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('left', this.leftPane) },
+    'rightPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('right', this.rightPane) },
+    'topPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('top', this.topPane) },
+    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) },
+  },
   methods: {
     async configureMap (container) {
       // Avoid reentrance during awaited operations
@@ -80,6 +104,14 @@ export default {
     onEditStopEvent (event) {
       this.setTopPaneMode('default')
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
+    },
+    onWindowVisibleEvent (placement, window) {
+      const eventName = window.visible ? 'window-opened' : 'window-closed'
+      utils.sendEmbedEvent(eventName, { placement: placement, widget: window.current })
+    },
+    onPaneVisibleEvent (placement, pane) {
+      const eventName = pane.visible ? 'pane-opened' : 'pane-closed'
+      utils.sendEmbedEvent(eventName, { placement: placement })
     },
     forwardLayerEvents (layerEvents) {
       if (!_.has(this, 'layerHandlers')) { this.layerHandlers = {} }
