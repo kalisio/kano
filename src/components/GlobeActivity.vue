@@ -21,7 +21,8 @@ import { MixinStore } from '../mixin-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
-const baseActivityMixin = kCoreMixins.baseActivity('globeActivity')
+const name = 'globeActivity'
+const baseActivityMixin = kCoreMixins.baseActivity(name)
 
 export default {
   mixins: [
