@@ -148,9 +148,13 @@ export default {
     utils.sendEmbedEvent('globe-destroyed')
   },
   setup () {
-    return {
+    const ret = {
       ...kMapComposables.useActivity(name)
     }
+    const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
+    for (const use of additionalComposables.map((name) => ComposableStore.get(name)))
+      Object.assign(ret, use(name))
+    return ret
   }
 }
 </script>

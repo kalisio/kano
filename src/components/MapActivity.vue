@@ -206,7 +206,8 @@ export default {
       ...kMapComposables.useActivity(name),
       ...kMapComposables.useWeather(name)
     }
-    for (const use of config.mapActivity.additionalComposables.map((name) => ComposableStore.get(name)))
+    const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
+    for (const use of additionalComposables.map((name) => ComposableStore.get(name)))
       Object.assign(ret, use(name))
     return ret
   }
