@@ -13,6 +13,7 @@
 
 <script>
 import _ from 'lodash'
+import { getType, getGeom } from '@turf/invariant'
 import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
@@ -173,6 +174,23 @@ export default {
         north,
         east
       })
+    },
+    onFeaturesUpdated (feature) {
+      // We only support single feature edition
+      if (!getType(feature) || !getGeom(feature)) return
+      // Find related layer
+      const layer = this.getLayerById(feature.layer)
+      if (!layer || !this.isLayerVisible(layer.name) || this.isLayerEdited(layer)) return
+      // As by default we update the whole layer in fetch and replace mode force add/update only mode
+      this.updateLayer(layer.name, feature, { removeMissing: false })
+    },
+    onFeaturesRemoved (feature) {
+      // We only support single feature edition
+      if (!getType(feature) || !getGeom(feature)) return
+      // Find related layer
+      const layer = this.getLayerById(feature.layer)
+      if (!layer || !this.isLayerVisible(layer.name) || this.isLayerEdited(layer)) return
+      this.updateLayer(layer.name, feature, { remove: true })
     }
   },
   created () {
@@ -189,6 +207,11 @@ export default {
     // We store some information about the current navigation state in store, initialize it
     this.$store.set(this.activityName, {})
     this.$engineEvents.on('moveend', this.onMoveEnd)
+    // Listen to user layer changes
+    const featuresService = this.$api.getService('features')
+    featuresService.on('created', this.onFeaturesUpdated)
+    featuresService.on('patched', this.onFeaturesUpdated)
+    featuresService.on('removed', this.onFeaturesRemoved)
   },
   beforeUnmount () {
     // Remove event connections
@@ -197,6 +220,10 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
+    const featuresService = this.$api.getService('features')
+    featuresService.off('created', this.onFeaturesUpdated)
+    featuresService.off('patched', this.onFeaturesUpdated)
+    featuresService.off('removed', this.onFeaturesRemoved)
   },
   unmounted () {
     utils.sendEmbedEvent('map-destroyed')

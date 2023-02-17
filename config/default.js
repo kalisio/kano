@@ -438,6 +438,7 @@ module.exports = {
   },
   layout: {
     view: 'lhh LpR lff',
+    page: { visible: true },
     panes: {
       left: { opener: true },
       top: { opener: true, visible: true },
@@ -516,9 +517,6 @@ module.exports = {
       ]
     },
     page: {
-      sticky: {
-        zIndex: 1000 // On top of Leaflet layers
-      },
       content: [{
         id: 'color-legend', component: 'layout/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'KColorLegend' }]
       }, {
