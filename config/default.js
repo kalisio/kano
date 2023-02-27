@@ -148,7 +148,7 @@ function catalogTabbar (activeView) {
       { 
         id: 'user-layers-tab', label: 'KUserLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
         toggled: activeView === 'user-layers' ? true : false,
-        handler: { name: 'setRightPaneMode', params: ['map'] } 
+        handler: { name: 'setRightPaneMode', params: ['user-layers'] } 
       },
       { 
         id: 'user-views-tab', label: 'KViewsPanel.VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
