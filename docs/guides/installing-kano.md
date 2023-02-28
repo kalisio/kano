@@ -10,9 +10,9 @@ sidebarDepth: 3
 This requires you to [install Docker](https://docs.docker.com/engine/installation/), the world’s leading software container platform.
 ::: 
 
-We provide Docker images on the [Docker Hub](https://hub.docker.com/r/kalisio/kano/) to ease deploying your own instance. To run correctly it has to be linked with a standard [MongoDB container](https://hub.docker.com/_/mongo/) for the database. Although it's possible to directly run Docker commands we provide you with [docker-compose](https://docs.docker.com/compose/) files to ease deployment.
+We provide Docker images on the [Docker Hub](https://hub.docker.com/r/kalisio/kano/) to ease deploying your own instance. To run correctly it has to be linked with a standard [MongoDB container](https://hub.docker.com/_/mongo/) for the database. Although it's possible to directly run Docker commands we provide you with [docker-compose](https://docs.docker.com/compose/) files to ease deployment, in addition to minimalist configuration files. These files will be detailed in the following sections and are available in the [public folder](../.vuepress/public) of the documentation.
 
-The following commands should do the job:
+Jump into the folder with the docker-compose and configuration files, the following commands should do the job:
 
 ```bash
 // Run the MongoDB and Kano containers
@@ -28,6 +28,10 @@ Then point your browser to [localhost:8080](http://localhost:8080). You should s
 
 ![installation](../assets/kano-installation.png)
 
+::: tip
+Check the `local.cjs` configuration file below to find the required login information
+:::
+
 ::: warning
 If running Docker under Windows in a virtual machine first redirect the port 8080 of your virtual machine to your host
 :::
@@ -38,15 +42,15 @@ If running Docker under Windows in a virtual machine first redirect the port 808
 
 Kano comes with a default set of users but you should change this default configuration for a public deployment and avoid leaking login/passwords. Similarly, Kano comes with a default set of layers targeting geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) and you should add your own data layers instead. This is done by configuration using the following files:
 
-::: details local.js - Used to override the default backend configuration and setup a default user.
+::: details local.cjs - Used to override the default backend configuration and setup a default user.
 To be put in the `kano/api/config` directory.
 
-<<< @/.vuepress/public/local.js
+<<< @/.vuepress/public/local.cjs
 :::
-::: details my-layers.js - Used to define the available default layers.
+::: details my-layers.cjs - Used to define the available default layers.
 To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services](https://geoservices.ign.fr/services-web-experts-cartes).
 
-<<< @/.vuepress/public/my-layers.js
+<<< @/.vuepress/public/my-layers.cjs
 :::
 
 As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version but you can change it to target a production release.
@@ -61,7 +65,7 @@ If you'd like to use the 3D mode or the Mapillary layer you should provide the r
 
 ### Add weather forecasts
 
-Kano integrates smoothly with [Weacast](https://weacast.github.io/weacast-docs/) in order to display weather forecast data. You can also use Docker containers to run Weacast by following [this guide](https://weacast.github.io/weacast/guides/basics.html#the-easy-way-using-docker) and taking care of port conflicts as they use the same by default.
+Kano integrates smoothly with [Weacast](https://weacast.github.io/weacast/) in order to display weather forecast data. You can also use Docker containers to run Weacast by following [this guide](https://weacast.github.io/weacast/guides/basics.html#the-easy-way-using-docker) and taking care of port conflicts as they use the same by default.
 
 The following commands and additional docker-compose file should do the job:
 
@@ -85,7 +89,13 @@ You should activate the built-in Weacast layers like `WIND_TILED` in Kano using 
 
 ## From source code
 
-First you have to ensure the [KDK prerequisites](https://kalisio.github.io/kdk/guides/development/setup.html#prerequisites) to run Kano from source code. Then the following commands, assuming you have a MongoDB instance running on local host and default port (27017), should launch your local instance of Kano:
+First you have to ensure the [KDK prerequisites](https://kalisio.github.io/kdk/guides/development/setup.html#prerequisites) to run Kano from source code.
+
+::: warning
+At the time of writing Kano v2.x (`master` branch) is expected to work with KDK modules v2.x (`master` branch and Node.js 16.x) and Kano v1.x (`test` branches) is expected to work with KDK modules v1.x (Node.js 12.x)
+:::
+
+Then the following commands, assuming you have a MongoDB instance running on local host and default port (27017), should launch your local instance of Kano:
 
 ```bash
 // Clone KDK
@@ -93,7 +103,6 @@ git clone https://github.com/kalisio/kdk.git
 cd kdk
 yarn install
 yarn link
-yarn watch
 
 // In another terminal clone Kano
 git clone https://github.com/kalisio/kano.git

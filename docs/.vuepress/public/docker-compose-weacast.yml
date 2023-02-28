@@ -15,7 +15,7 @@ services:
     image: weacast/weacast-api:dev
     environment:
       - APP_SECRET=yyy
-      - DB_URL
+      - DB_URL=mongodb://mongodb:27017/weacast
       - LOADERS=gfs
       - LOG_LEVEL
       - DEBUG
