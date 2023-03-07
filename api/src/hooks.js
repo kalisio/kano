@@ -30,7 +30,7 @@ export default {
         if ((hook.service.name === 'users') && (hook.method === 'create')) return false
         // If not exception perform authentication
         return true
-      }, authenticate('jwt', 'api')),
+      }, authenticate('jwt')),
       // We skip processing DB IDs in some cases
       commonHooks.when(hook => {
         // First built-in Feathers services like authentication
