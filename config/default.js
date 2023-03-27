@@ -30,15 +30,15 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 
 // Left pane
 const leftPane = {
-  content: [
-    { component: 'KLogo' },
-    { component: 'QSeparator' },
-    { component: 'editor/KSettingsEditor' },
-    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
-    { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', route: { query: { tour: 'home' } }, renderer: 'item' },
-    { component: 'QSeparator' },
-    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
-  ]
+    content: [
+      { component: 'KLogo' },
+      { component: 'QSeparator' },
+      { component: 'editor/KSettingsEditor' },
+      { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
+      { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', handler: { name: 'launchTour', params: ['home'] }, renderer: 'item' },
+      { component: 'QSeparator' },
+      { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
+    ]
 }
 
 // left window
