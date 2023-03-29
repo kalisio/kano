@@ -1,6 +1,8 @@
 // Sass/SCSS variables customization
 // https://quasar.dev/style/sass-scss-variables#variables-list
 
+@import 'kdk/core.variables';
+
 // Theme
 $primary: #72448b;
 $secondary: lighten($primary, 30%);
@@ -10,7 +12,3 @@ $info: $accent;
 $positive: #7bb946;
 $negative: #c74a4a;
 $warning: #d09931;
-
-// Layout
-$sticky-z-index: 1000;
-$left-pane-width: 300px;
