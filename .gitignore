@@ -79,6 +79,7 @@ public/icons/kdk
 public/kalisio.png
 src/tours/core
 src/tours/map
+src/css/kdk
 
 # local layers
 local-layers.js
