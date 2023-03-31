@@ -28,7 +28,6 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.MODE === 'ssr' ? undefined : process.env.VUE_ROUTER_BASE)
   })
 
-  Store.set('router', Router)
   Store.set('tours', Object.assign({
     current: {
       name: '',
