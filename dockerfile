@@ -27,7 +27,9 @@ ARG BUILD_NUMBER
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 
-COPY --from=Builder /opt/kalisio /opt/kalisio
+COPY --from=Builder --chown=node:node /opt/kalisio /opt/kalisio
+# From now on, run stuff as 'node'
+USER node
 
 # Link the modules
 WORKDIR /opt/kalisio
