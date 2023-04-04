@@ -34,10 +34,5 @@
     "GLOBE": "3D View",
     "CONTEXTUAL_HELP": "@:CONTEXTUAL_HELP",
     "LOGOUT": "Logout"
-  },
-  "Index": {
-    "DISCONNECT": "The server connection has been lost, please wait until reconnection...",
-    "RECONNECT": "We are trying to reconnect...",
-    "ALERT": "Alert"
   }
 }
