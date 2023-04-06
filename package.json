@@ -84,6 +84,7 @@
     "@feathersjs/commons": "^5.0.0-pre.28",
     "@feathersjs/memory": "^5.0.0-pre.28",
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
+    "@intlify/vue-i18n-loader": "^4.2.0",
     "@kalisio/feathers-s3": "https://github.com/kalisio/feathers-s3",
     "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
     "@kalisio/leaflet.donutcluster": "^1.1.0",
