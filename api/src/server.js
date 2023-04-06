@@ -4,6 +4,7 @@ import fs from 'fs-extra'
 import _ from 'lodash'
 import https from 'https'
 import path from 'path'
+import { pathToFileURL } from 'url'
 import proxyMiddleware from 'http-proxy-middleware'
 import express from '@feathersjs/express'
 import middlewares from './middlewares.js'
@@ -55,7 +56,8 @@ export class Server {
     // Custom configuration entry point if any
     const pluginPath = app.get('pluginPath') || path.join(__dirname, 'plugin.js')
     if (fs.pathExistsSync(pluginPath)) {
-      const plugin = require(pluginPath)
+      const pluginModule = await import(pathToFileURL(pluginPath))
+      const plugin = pluginModule.default
       await app.configure(plugin)
     }
 
