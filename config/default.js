@@ -395,6 +395,7 @@ module.exports = {
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
   publisherWebsite: 'https://kalisio.com',
+  publisherContact: 'support@kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
     // default: 'en',
