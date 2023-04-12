@@ -11,6 +11,7 @@
 const path = require('path')
 const fs = require('fs')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { configure } = require('quasar/wrappers')
 
 const serverPort = process.env.PORT || process.env.HTTPS_PORT || 8081
@@ -58,6 +59,10 @@ module.exports = configure(function (ctx) {
       appDescription: 'A powerful real-time Geovisualizer'
     },
 
+    vendor: {
+      disable: false
+    },
+
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
@@ -84,6 +89,13 @@ module.exports = configure(function (ctx) {
       
       chainWebpack (chain) {
         chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
+        // Perform bundle analysis
+        if (process.env.ANALYZE_BUNDLE) {
+          chain.plugin('webpack-bundle-analyzer').use(new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: 'bundle-analyzer.html'
+          }))
+        }
       },
 
       extendWebpack (cfg) {
