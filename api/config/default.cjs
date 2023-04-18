@@ -180,7 +180,10 @@ module.exports = {
       expiresIn: '1d'
     },
     oauth: {
-      redirect: '/'
+      redirect: domain + '/',
+      defaults: {
+        origin: domain
+      }
     },
     passwordPolicy: {
       minLength: 8,
