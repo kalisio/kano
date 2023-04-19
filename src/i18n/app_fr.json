@@ -1,5 +1,8 @@
 {
   "REMOVE_LABEL": "Supprimer",
+  "VIEWS_LABEL": "Mes vues",
+  "LAYERS_LABEL": "Mes données",
+  "CATALOG_LABEL": "Catalogue",
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",

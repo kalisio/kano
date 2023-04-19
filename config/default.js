@@ -146,17 +146,17 @@ function catalogTabbar (activeView) {
   return {
     id: 'catalog-tabbar', component: 'KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
       { 
-        id: 'user-layers-tab', label: 'KUserLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
+        id: 'user-layers-tab', label: 'LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
         toggled: activeView === 'user-layers' ? true : false,
         handler: { name: 'setRightPaneMode', params: ['user-layers'] } 
       },
       { 
-        id: 'user-views-tab', label: 'KViewsPanel.VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        id: 'user-views-tab', label: 'VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'user-views' ? true : false,
         handler: { name: 'setRightPaneMode', params: ['user-views'] } 
       },
       { 
-        id: 'catalog-layers-tab', label: 'KCatalogLayersPanel.LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        id: 'catalog-layers-tab', label: 'CATALOG_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'catalog-layers' ? true : false,
         handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
       }
@@ -168,7 +168,9 @@ function catalogTabbar (activeView) {
 const catalogPanes = {
   'user-layers': [
     catalogTabbar('user-layers'),
-    { id: 'user-layers', component: 'catalog/KUserLayersPanel', bind: '$data' },
+    { id: 'user-layers', component: 'catalog/KLayersPanel',
+      layers: ':layers', layerCategories: ':layerCategories',
+      layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } } },
     { component: 'QSpace' },
     { id: 'catalog-footer', component: 'KPanel', content: [{
         id: 'manage-layer-categories',
@@ -186,7 +188,10 @@ const catalogPanes = {
   ],
   'catalog-layers': [
     catalogTabbar('catalog-layers'),
-    { id: 'catalog-layers', component: 'catalog/KCatalogLayersPanel', bind: '$data' }
+    { id: 'catalog-layers', component: 'catalog/KLayersPanel',
+      layers: ':layers', layerCategories: ':layerCategories',
+      layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
+      forecastModels: ':forecastModels', forecastModel: ':forecastModel', forecastModelHandlers: ':forecastModelHandlers' }
   ]
 } 
 
@@ -200,17 +205,17 @@ const mapLayerActions = [{
     { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer', visible: ':isVisible' },
     { id: 'save-layer', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
       visible: ['isLayerStorable', { name: '$can', params: ['create', 'catalog'] }] },
-    { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'map-layer-filter', params: { layerId: ':_id' } } },
-    { id: 'view-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'map-layer-table', params: { layerId: ':_id' } } },
-    { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'map-layer-chart', params: { layerId: ':_id' } } },
-    { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      handler: 'onSelectLayer', route: { name: 'edit-map-layer', params: { layerId: ':_id' } } },
-    { id: 'edit-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
-      handler: 'onSelectLayer', route: { name: 'edit-map-layer-style', params: { layerId: ':_id' } } },
-    { id: 'edit-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
+    { id: 'filter-layer-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-filter', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'view-layer-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-table', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'chart-layer-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-chart', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
+      route: { name: 'edit-map-layer', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
+      route: { name: 'edit-map-layer-style', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
     { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
   ]
