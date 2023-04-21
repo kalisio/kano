@@ -177,7 +177,7 @@ const catalogPanes = {
         icon: 'las la-cog',
         label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
         visible: { name: '$can', params: ['create', 'catalog'] },
-        route: { name: 'manage-layer-categories', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } },
+        route: { name: 'manage-layer-categories' },
       }],
       class: 'justify-center'
     }
@@ -281,16 +281,16 @@ const globeLayerActions = [{
   dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
   content: [
-    { id: 'zoom-to', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer' },
-    { id: 'filter-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'globe-layer-filter', params: { layerId: ':_id' } } },
-    { id: 'view-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'globe-layer-table', params: { layerId: ':_id' } } },
-    { id: 'chart-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      handler: 'onSelectLayer', route: { name: 'globe-layer-chart', params: { layerId: ':_id' } } },
-    { id: 'edit', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      handler: 'onSelectLayer', route: { name: 'edit-globe-layer', params: { layerId: ':_id' } } },
-    { id: 'remove', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer',
+    { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer', visible: ':isVisible' },
+    { id: 'filter-layer-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'globe-layer-filter', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'view-layer-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'globe-layer-table', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'chart-layer-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'globe-layer-chart', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
+      route: { name: 'edit-globe-layer', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer',
       visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
   ]
 }]
@@ -458,7 +458,8 @@ module.exports = {
     topPane: {
       content: {
         default: [
-          { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE', route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+          { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE',
+            route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
@@ -536,15 +537,9 @@ module.exports = {
     },
     fab: {
       content: [
-        { 
-          id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
-          visible: { name: '$can', params: ['create', 'catalog'] },
-          route: { name: 'create-view', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } }
-        },
-        { 
-          id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER',
-          route: { name: 'add-map-layer', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } 
-        },
+        { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
+          visible: { name: '$can', params: ['create', 'catalog'] }, route: { name: 'create-map-view' } },
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer' } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
@@ -563,7 +558,8 @@ module.exports = {
     topPane: {
       content: {
         default: [
-          { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP', route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+          { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP',
+            route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },

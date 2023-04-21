@@ -80,7 +80,7 @@ module.exports = [{
               props: true
             },
             'create-view': {
-              name: 'create-view',
+              name: 'create-map-view',
               component: 'catalog/KCreateView',
               tour: tours['create-view']
             },
