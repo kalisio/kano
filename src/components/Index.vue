@@ -1,6 +1,6 @@
 <template>
   <div>
-    <KTour />
+    <KTour v-if="isInitialized"/>
     <KWelcome />
     <router-view></router-view>
   </div>
@@ -9,5 +9,5 @@
 <script setup>
 import { composables } from '@kalisio/kdk/core.client'
 
-composables.useSession()
+const { isInitialized } = composables.useSession()
 </script>
