@@ -7,13 +7,6 @@
     "home": {
       "SIDENAV_LABEL": "Open the main menu any time using this handle.",
       "SIDENAV_LINK_LABEL": "Browse the main menu",
-      "HELP_LABEL": "Access our online help anytime",
-      "CONTEXT_HELP_LABEL": "To get contextual help whenever your are lost simply click on the following icon",
-      "ABOUT_LABEL": "Display detailed system information and send us bug reports.",
-      "BUG_LABEL": "Send us a bug report with a preformatted email containing required information.",
-      "SETTINGS_LABEL": "Update general settings of the system on your device.",
-      "LOGOUT_LABEL": "Logout in order to close your work session.",
-      "SESSION_LABEL": "Otherwise the session will remain active on your device for <b>24H</b>, you will not have to login again in this time frame.",
       "NAVIGATION_BAR_LABEL": "Open the application bar any time using this handle.",
       "NAVIGATION_BAR_LINK_LABEL": "Browse the application bar",
       "CATALOG_LABEL": "Open the catalog any time using this handle.",
@@ -22,6 +15,15 @@
       "TIMELINE_LINK_LABEL": "Browse the timeline",
       "FAB_LABEL": "Quickly execute actions related to map data using this button.",
       "FAB_LINK_LABEL": "Browse the actions"
+    },
+    "side-nav": {
+      "HELP_LABEL": "Access our online help anytime",
+      "CONTEXT_HELP_LABEL": "To get contextual help whenever your are lost simply click on the following icon",
+      "ABOUT_LABEL": "Display detailed system information and send us bug reports.",
+      "BUG_LABEL": "Send us a bug report with a preformatted email containing required information.",
+      "SETTINGS_LABEL": "Update general settings of the system on your device.",
+      "LOGOUT_LABEL": "Logout in order to close your work session.",
+      "SESSION_LABEL": "Otherwise the session will remain active on your device for <b>24H</b>, you will not have to login again in this time frame."
     },
     "navigation-bar": {
       "NAVIGATION_BAR_LABEL": "The application bar allows to quickly execute recurring actions."

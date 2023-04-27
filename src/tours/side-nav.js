@@ -1,14 +1,14 @@
 module.exports = [{
   target: '#logout',
-  title: 'tours.home.LOGOUT_LABEL',
-  content: 'tours.home.SESSION_LABEL',
+  title: 'tours.side-nav.LOGOUT_LABEL',
+  content: 'tours.side-nav.SESSION_LABEL',
   params: {
     placement: 'top',
     clickOnNext: '#left-opener',
   }
 }, {
   target: '#edit-settings',
-  content: 'tours.home.SETTINGS_LABEL',
+  content: 'tours.side-nav.SETTINGS_LABEL',
   params: {
     placement: 'top',
     clickOnPrevious: '#left-opener',
@@ -17,7 +17,7 @@ module.exports = [{
   }
 }, {
   target: '#online-help',
-  link: 'tours.home.HELP_LABEL',
+  link: 'tours.side-nav.HELP_LABEL',
   params: {
     placement: 'top',
     clickOnPrevious: '#left-opener',
@@ -26,7 +26,7 @@ module.exports = [{
   }
 }, {
   target: '#contextual-help',
-  content: 'tours.home.CONTEXT_HELP_LABEL',
+  content: 'tours.side-nav.CONTEXT_HELP_LABEL',
   params: {
     placement: 'top',
     clickOnPrevious: '#left-opener',
@@ -34,7 +34,7 @@ module.exports = [{
   }
 }, {
   target: '#about',
-  content: 'tours.home.ABOUT_LABEL',
+  content: 'tours.side-nav.ABOUT_LABEL',
   params: {
     placement: 'top',
     clickOnPrevious: '#left-opener',
@@ -43,7 +43,7 @@ module.exports = [{
   }
 }, {
   target: '#report-bug',
-  content: 'tours.home.BUG_LABEL',
+  content: 'tours.side-nav.BUG_LABEL',
   params: {
     placement: 'top',
     clickOnPrevious: ['#ok-action', '#left-opener'],

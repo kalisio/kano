@@ -7,13 +7,6 @@
     "home": {
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",
       "SIDENAV_LINK_LABEL": "Parcourir le menu principal",
-      "HELP_LABEL": "Accédez à notre aide en ligne à tout moment",
-      "CONTEXT_HELP_LABEL": "Pour obtenir de l'aide contextuelle lorsque vous êtes perdu cliquez à tout moment cette l'icône",
-      "ABOUT_LABEL": "Affichez les informations détaillées du système et signalez-nous un boggue.",
-      "BUG_LABEL": "Signalez-nous un boggue via un email contenant automatiquement les informations nécessaires.",
-      "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",
-      "LOGOUT_LABEL": "Déconnectez vous si vous souhaitez clôturer votre session de travail.",
-      "SESSION_LABEL": "Sinon la session reste active sur votre appareil pendant <b>24H</b> et vous n'aurez pas besoin de vous reconnecter durant ce laps de temps.",
       "NAVIGATION_BAR_LABEL": "Ouvrez à tout moment la barre d'application via cette poignée.",
       "NAVIGATION_BAR_LINK_LABEL": "Parcourir la barre d'application",
       "CATALOG_LABEL": "Ouvrez à tout moment le catalogue via cette poignée.",
@@ -22,6 +15,15 @@
       "TIMELINE_LINK_LABEL": "Parcourir la ligne de temps",
       "FAB_LABEL": "Accéder rapidement aux actions relatives aux données cartographiques via ce bouton.",
       "FAB_LINK_LABEL": "Voir les actions"
+    },
+    "side-nav": {
+      "HELP_LABEL": "Accédez à notre aide en ligne à tout moment",
+      "CONTEXT_HELP_LABEL": "Pour obtenir de l'aide contextuelle lorsque vous êtes perdu cliquez à tout moment cette l'icône",
+      "ABOUT_LABEL": "Affichez les informations détaillées du système et signalez-nous un boggue.",
+      "BUG_LABEL": "Signalez-nous un boggue via un email contenant automatiquement les informations nécessaires.",
+      "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",
+      "LOGOUT_LABEL": "Déconnectez vous si vous souhaitez clôturer votre session de travail.",
+      "SESSION_LABEL": "Sinon la session reste active sur votre appareil pendant <b>24H</b> et vous n'aurez pas besoin de vous reconnecter durant ce laps de temps."
     },
     "navigation-bar": {
       "NAVIGATION_BAR_LABEL": "La <b>barre d'application</b> vous permet d'accéder rapidement à certaines actions récurrentes."
