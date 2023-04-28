@@ -6,11 +6,11 @@ sidebarDepth: 3
 
 **Kano** is a powerful [geospatial visualizer](https://en.wikipedia.org/wiki/Geovisualization) which supports advanced visualization capabilities in 2D and 3D thanks to hardware acceleration with WebGL technology. Driven by today's most advanced web technologies, it also enables tracking of your geospatial assets in real-time.
 
-Although Kano is a web application for end-users, it has also been designed to be integrated in third-party business applications and customized by developers (check out [advanced usage](./advanced-usage.md)). Using a single and simple API, Kano provides developers with the capability to easily develop 2D and 3D geospatial applications (check out [the API reference](../reference/api.md)).
+Although Kano is a web application for end-users, it has also been designed to be integrated in third-party business applications and customized by developers (check out [advanced usage](./advanced-usage.md)). Using a single and simple API, Kano provides developers with the capability to easily develop 2D and 3D geospatial applications (check out [the API reference](../reference/api.md)). Last but not least, Kano comes with a built-in configuration for a set of geospatial data. However, you can complete it with your [own spatial data](./customizing-kano.md).
 
 ## Key concepts
 
-Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano.
+Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano or mapping.
 
 Kano is composed of two main activities (i.e. entry point for interacting with the user on a given type of objects):
 * a **2D activity** to visualise and interact with data on a standard *paperless* map in 2D,

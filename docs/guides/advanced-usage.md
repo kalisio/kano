@@ -124,6 +124,8 @@ Here is a simple code sample:
 
 **Kano** is powered by the [KDK](https://kalisio.github.io/kdk) and rely on its main abstractions. If you'd like to develop an application based on Kano or extend Kano we assume you are familiar with this technology. Indeed, **Kano** is based on the **KDK** and makes the best use of all the features offered by the provided [cartographic components and services](../reference/api.md).
 
+### Add components
+
 The most simple way to develop in Kano is to design and integrate your own components in the 2D or 3D activity. For this you simply have to
 1. Put you single-file component(s) in the `src/components` folder (e.g. `MyComponent.vue`)
 2. Update the [configuration](../reference/configuration.md) to declare your component(s) in the 2D/3D activity by adding a `local.js` in the `config` folder like this:
@@ -196,3 +198,23 @@ export default {
 ```
 
 It's also possible to create separated i18n files if you'd like, simply put your `plugin_en.json`, `plugin_fr.json`, etc. files in the `src/i18n` folder before building the app.
+
+### Add custom code
+
+You can update the `plugin.js` entry point in the `boot` folder in order to insert your own features (functions, mixins, etc.). If you'd like to enhance the default activities provided by kano you can register your own mixins in this file by using the **mixin store**:
+```
+import { MixinStore } from '../mixin-store'
+import myMixin from '../my-mixin.js'
+
+MixinStore.set('my-mixin', myMixin)
+```
+
+Then add it to the configuration of the target activity in order to make Kano apply it automatically:
+```js
+module.exports = {
+  mapActivity: { // Can also be globeActivity
+    additionalMixins: [ 'my-mixin' ],
+    ...
+  }
+}
+```
