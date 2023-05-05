@@ -186,8 +186,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     featureId: 'bss_id',
     from: 'P-7D',
     to: 'PT-10M',
-    every: 'PT30M',
-    queryFrom: 'PT-30M',
+    every: 'PT1H',
+    queryFrom: 'PT-2H',
     variables: [
       {
         name: 'profondeur_nappe',
@@ -234,7 +234,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       template: ['marker-color'],
       popup: {
         pick: [
-          'name'
+          'libelle_pe',
+          'bss_id'
         ]
       },
       tooltip: {
@@ -252,7 +253,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'name'
+          'libelle_pe',
+          'bss_id'
         ]
       },
       tooltip: {
