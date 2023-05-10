@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Customizing Kano
 
-This section details different approaches to integrate your own data to your Kano instance. Although you can directly use the Kano UI to add your own data layers this section provide details to do this by configuration or programmatically. When added through the UI, the different layers will be visible in the *My data* tab of the [catalog panel](../getting-started.md#catalog), while the default built-in layers will appear in the *Catalog* tab of the [catalog panel](../getting-started.md#catalog). You can also manage the **categories** (i.e. catalog sections) hosting the layers from the UI or the configuration.
+This section details different approaches to integrate your own data to your Kano instance. Although you can directly use the Kano UI to add your own data layers this section provide details to do this by configuration or programmatically. When added through the UI, the different layers will be visible in the *My data* tab of the [catalog panel](../guides/getting-started.md#catalog), while the default built-in layers will appear in the *Catalog* tab of the [catalog panel](../guides/getting-started.md#catalog). You can also manage the **categories** (i.e. catalog sections) hosting the layers from the UI or the configuration.
 
 Although names and descriptions can be hard-coded in the target user language, Kano supports internationalization through a nested structure organized by locale like this:
 ```js
