@@ -50,8 +50,15 @@ module.exports = [{
       polygon: {
         outline: false,
         extrudedHeight: '<%= 1000 * properties.taux %>',
+        material: {
+          type: 'Cesium.ColorMaterialProperty',
+          options: {
+            type: 'Cesium.Color.fromCssColorString',
+            options: '<%= chroma.scale(\'OrRd\').domain([0,50])(properties.taux).css() %>'
+          }
+        }
       },
-      template: ['polygon.extrudedHeight']
+      template: ['polygon.extrudedHeight', 'polygon.material.options.options']
     },
     tooltip: {
       template: '<%= properties.nom %>: <%= properties.hospitalisations %> hospitalisations'
