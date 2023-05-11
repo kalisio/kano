@@ -108,6 +108,10 @@ Using the bottom timeline, navigate to some dates within the data time range, yo
 
 ![covid-19 layers](../assets/kano-covid-19-layers.png)
 
+You can even do the same using the 3D activity:
+
+![covid-19 layers in 3D](../assets/kano-covid-19-layers-3D.png)
+
 ### Using the API
 
 The Kano API is particularly useful to update data continuously, a typical use case is data coming from network sensors performing measurements on the ground.
