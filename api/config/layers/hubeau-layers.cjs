@@ -185,9 +185,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     probeService: 'hubeau-piezo-stations',
     featureId: 'bss_id',
     from: 'P-7D',
-    to: 'PT-10M',
+    to: 'PT-6H',
     every: 'PT1H',
-    queryFrom: 'PT-2H',
+    queryFrom: 'PT-12H',
     variables: [
       {
         name: 'profondeur_nappe',
