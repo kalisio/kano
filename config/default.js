@@ -201,6 +201,7 @@ const mapLayerActions = [{
   component: 'menu/KMenu',
   dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
+  propagate: false,
   content: [
     { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer', visible: ':isVisible' },
     { id: 'save-layer', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
@@ -280,6 +281,7 @@ const globeLayerActions = [{
   component: 'menu/KMenu',
   dropdownIcon: 'las la-ellipsis-v',
   actionRenderer: 'item',
+  propagate: false,
   content: [
     { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer', visible: ':isVisible' },
     { id: 'filter-layer-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
