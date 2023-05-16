@@ -1,11 +1,12 @@
 // Sass/SCSS variables customization
 // https://quasar.dev/style/sass-scss-variables#variables-list
 
-@import 'kdk/core.variables';
-
 // Theme
 $primary: #72448b;
 $secondary: lighten($primary, 75%);
 $accent: lighten($primary, 25%);
 $dark: darken($primary, 25%);
 $info: $accent;
+
+// Default KDK SCSS variables
+@import 'kdk/core.variables';
