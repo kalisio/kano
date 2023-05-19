@@ -279,7 +279,7 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
+      workboxPluginMode: 'InjectManifest', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
@@ -296,6 +296,10 @@ module.exports = configure(function (ctx) {
         description: 'A powerful real-time Geovisualizer',
         display: 'standalone',
         orientation: 'portrait',
+        background_color: '#f0ecec',
+        theme_color :  '#72448b',
+        start_url: './',
+        id: './',
         icons: [
           {
             src: 'icons/kano-icon-32x32.png',
@@ -305,11 +309,6 @@ module.exports = configure(function (ctx) {
           {
             src: 'icons/kano-icon-64x64.png',
             sizes: '64x64',
-            type: 'image/png'
-          },
-          {
-            src: 'icons/kano-icon-128x128.png',
-            sizes: '128x128',
             type: 'image/png'
           },
           {

@@ -29,10 +29,12 @@
     "dev": "npm run provision && cross-env NODE_ENV=development quasar dev",
     "prod": "cd api && npm run prod",
     "build": "npm run provision && quasar build",
+    "pwa:dev": "npm run provision && cross-env NODE_ENV=development quasar dev -m pwa",
+    "pwa:build": "npm run provision && quasar build -m pwa",
     "analyze": "cross-env ANALYZE_BUNDLE=1 npm run build",
     "lint": "standard src/**/*.js src/**/*.vue test/**/*.js --fix",
     "css:cp": "shx cp -R node_modules/@kalisio/kdk/extras/css/* src/css/kdk",
-    "icons:cp": "shx cp -R node_modules/@kalisio/kdk/extras/icons/* public/icons/kdk",
+    "icons:cp": "shx mkdir -p ./public/icons/kdk && shx cp -R node_modules/@kalisio/kdk/extras/icons/* public/icons/kdk",
     "logos:cp": "shx cp -R node_modules/@kalisio/kdk/extras/logos/* public/",
     "tours:cp": "shx cp -R node_modules/@kalisio/kdk/extras/tours/* src/tours",
     "mocha": "mocha test/**/*.test.mjs --timeout 30000 --require esm",
@@ -211,7 +213,8 @@
     "shelljs": "^0.8.5",
     "shx": "^0.3.4",
     "standard": "^17.0.0",
-    "webpack-bundle-analyzer": "^4.8.0"
+    "webpack-bundle-analyzer": "^4.8.0",
+    "workbox-webpack-plugin": "^6.0.0"
   },
   "resolutions": {
     "@pixi/accessibility": "5.3.10",

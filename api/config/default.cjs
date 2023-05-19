@@ -98,6 +98,7 @@ module.exports = {
   gateway,
   host: process.env.HOSTNAME || 'localhost',
   port: serverPort,
+  distPath: fs.existsSync(path.join(__dirname, '../../dist/pwa')) ? path.join(__dirname, '../../dist/pwa') : path.join(__dirname, '../../dist/spa'),
   /* To enable HTTPS
   https: {
     key: path.join(__dirname, 'server.key'),
