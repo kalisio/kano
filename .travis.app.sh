@@ -15,6 +15,7 @@ travis_fold end "provision"
 travis_fold start "build"
 
 yarn build
+yarn pwa:build
 EXIT_CODE=$? 
 tail -n 24 build.log
 check_code $EXIT_CODE 0 "Builing the client" 
