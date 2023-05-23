@@ -1,3 +1,5 @@
+Please refer to GitHub issues for changelog starting from v2.0: https://github.com/kalisio/kano/issues.
+
 # Changelog
 
 ## [prod-v1.6.0](https://github.com/kalisio/kano/tree/prod-v1.6.0) (2022-08-30)
