@@ -1,12 +1,14 @@
 import path from 'path'
 import fs from 'fs-extra'
 import { fileURLToPath } from 'url'
+import makeDebug from 'debug'
 import kCore, { permissions, createDefaultUsers } from '@kalisio/kdk/core.api.js'
 import kMap, { createFeaturesServiceForLayer, createDefaultCatalogLayers } from '@kalisio/kdk/map.api.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const servicesPath = path.join(__dirname, 'services')
+const debug = makeDebug('kano:services')
 
 export default async function () {
   const app = this
@@ -43,6 +45,7 @@ export default async function () {
         remoteService.app = app
         remoteService.getPath = function (withApiPrefix) { return (withApiPrefix ? app.get('apiPath') + '/' + name : name) }
         // Register default permissions for it
+        debug('Registering permissions for remote service ', name)
         permissions.defineAbilities.registerHook((subject, can, cannot) => {
           can('service', name)
           can('read', name)

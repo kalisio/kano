@@ -42,7 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@feathersjs/client": "^5.0.0-pre.28",
+    "@feathersjs/client": "^5.0.5",
     "@slack/webhook": "^5.0.2",
     "c8": "^7.11.0",
     "chai": "^4.3.4",
@@ -56,12 +56,12 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^5.0.0-pre.28",
-    "@feathersjs/express": "^5.0.0-pre.28",
-    "@feathersjs/feathers": "^5.0.0-pre.28",
-    "@kalisio/feathers-distributed": "^2.0.2",
-    "@kalisio/kdk": "https://github.com/kalisio/kdk#es-modules",
-    "@weacast/core": "^2.1.2",
+    "@feathersjs/authentication": "^5.0.5",
+    "@feathersjs/express": "^5.0.5",
+    "@feathersjs/feathers": "^5.0.5",
+    "@kalisio/feathers-distributed": "^2.2.0",
+    "@kalisio/kdk": "https://github.com/kalisio/kdk",
+    "@weacast/core": "^2.1.5",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^5.0.6",
     "feathers-mongodb-fuzzy-search": "^2.0.1",

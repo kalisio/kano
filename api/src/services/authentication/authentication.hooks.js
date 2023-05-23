@@ -28,12 +28,12 @@ export default {
       let appId = config.appId
       // Check if the token contains the appId for the gateway
       // => iframe integration use case
-      if (_.has(hook, 'params.payload.appId')) {
-        appId = _.get(hook, 'params.payload.appId')
+      if (_.has(hook.params, 'payload.appId')) {
+        appId = _.get(hook.params, 'payload.appId')
       } else {
         // Loop over auth providers and select the one used to login if any
         for (const provider of hook.app.authenticationProviders) {
-          if (_.get(hook, `params.user.${provider}Id`) && _.get(config, `${provider}.appId`)) {
+          if (_.get(hook.params, `user.${provider}Id`) && _.get(config, `${provider}.appId`)) {
             appId = _.get(config, `${provider}.appId`)
             break
           }

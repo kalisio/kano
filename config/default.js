@@ -191,7 +191,7 @@ const catalogPanes = {
     { id: 'catalog-layers', component: 'catalog/KLayersPanel',
       layers: ':layers', layerCategories: ':layerCategories',
       layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
-      forecastModels: ':forecastModels', forecastModel: ':forecastModel', forecastModelHandlers: ':forecastModelHandlers' }
+      forecastModels: ':forecastModels' }
   ]
 } 
 
