@@ -40,7 +40,8 @@ function getGuidesSidebar () {
     'getting-started',
     'installing-kano',
     'customizing-kano',
-    'advanced-usage'
+    'advanced-usage',
+    'kano-api'
   ]
 }
 

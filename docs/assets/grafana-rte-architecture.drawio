@@ -1,0 +1,161 @@
+<mxfile host="app.diagrams.net" modified="2023-05-25T08:39:29.238Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0" etag="rYtasrkfAL3p_gDOBCM4" version="21.3.3" type="device">
+  <diagram name="Page-1" id="-w1pjy-mE1reuzwPaccI">
+    <mxGraphModel dx="1021" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-11" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="50" y="289" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-9" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="7kV7g_zn0Fe9AVc3Rc4T-11" vertex="1">
+          <mxGeometry width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-10" value="&lt;div&gt;Grafana&lt;/div&gt;&lt;div&gt;&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;web app&lt;/font&gt;&lt;/i&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="7kV7g_zn0Fe9AVc3Rc4T-11" vertex="1">
+          <mxGeometry x="52" y="15" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-11" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.s2DOmHobG1mv1bFg_-gsHwHaHa%26pid%3DApi&amp;f=1&amp;ipt=a1a6b3161061339eea8ebeb0c03c92228b22e54fdf92b335a32eb263354bcd4e&amp;ipo=images;aspect=fixed;" vertex="1" parent="7kV7g_zn0Fe9AVc3Rc4T-11">
+          <mxGeometry x="7" y="7.5" width="45" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-12" value="" style="group;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="320" y="289" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-7" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="7kV7g_zn0Fe9AVc3Rc4T-12" vertex="1">
+          <mxGeometry width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-8" value="&lt;div&gt;Kano&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;web app&lt;/i&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="7kV7g_zn0Fe9AVc3Rc4T-12" vertex="1">
+          <mxGeometry x="47" y="15" width="63" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-9" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-icon-256x256.png;aspect=fixed;" vertex="1" parent="7kV7g_zn0Fe9AVc3Rc4T-12">
+          <mxGeometry x="4" y="7" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-24" value="&lt;h1 style=&quot;font-size: 20px;&quot; align=&quot;right&quot;&gt;Fetch&lt;/h1&gt;&lt;p align=&quot;right&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;RTE job fetch data from the &lt;i&gt;&lt;b&gt;Open Data&lt;/b&gt;&lt;/i&gt; RTE API&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="152" y="40" width="107" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-27" value="&lt;h1 style=&quot;font-size: 20px;&quot;&gt;Push&lt;/h1&gt;&lt;p align=&quot;left&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;RTE job reshapes data and then push &lt;b&gt;&lt;i&gt;GeoJSON&lt;/i&gt;&lt;/b&gt; to our backing MongoDB instance&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=none;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="445" y="40" width="125" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-29" value="&lt;h1&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Consume&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Kano uses the MongoDB instance to lookup features service data (in the &lt;b&gt;&lt;i&gt;GeoJSON&lt;/i&gt;&lt;/b&gt; format)&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="450" y="279" width="130" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-33" value="&lt;h1&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Fetch&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Grafana uses the /api endpoint to fetch RTE data and display it in dashboards&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="279" width="110" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yhrlX3YIJh9XXCtHHCiS-3" target="7kV7g_zn0Fe9AVc3Rc4T-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-3" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://data.rte-france.com/rte-digital-theme/images/logo_header.svg;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="50" y="120" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="7kV7g_zn0Fe9AVc3Rc4T-7" edge="1" target="7kV7g_zn0Fe9AVc3Rc4T-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="295" y="439" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="440" as="sourcePoint" />
+            <mxPoint x="335" y="349" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-24" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="320" y="440" width="80" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-18" value="" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=20;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-24">
+          <mxGeometry width="80" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-20" value="&lt;div align=&quot;left&quot;&gt;RTE visualization layer definition&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-24">
+          <mxGeometry x="6" y="20" width="64" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-23" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Lucida Console&quot;&gt;{ ... }&lt;/font&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-24">
+          <mxGeometry x="8" y="77" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-25" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="60" y="440" width="80" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-26" value="" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=20;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-25">
+          <mxGeometry width="80" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-27" value="&lt;div align=&quot;left&quot;&gt;RTE dashboards definition&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-25">
+          <mxGeometry x="6" y="20" width="64" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-28" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Lucida Console&quot;&gt;{ ... }&lt;/font&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-25">
+          <mxGeometry x="8" y="77" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=30;exitDy=0;exitPerimeter=0;entryX=0.333;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="71" y="440" as="sourcePoint" />
+            <mxPoint x="70.96000000000004" y="349" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7kV7g_zn0Fe9AVc3Rc4T-1" target="yhrlX3YIJh9XXCtHHCiS-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yhrlX3YIJh9XXCtHHCiS-48" target="7kV7g_zn0Fe9AVc3Rc4T-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-53" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="269" y="40" width="166" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-1" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=27;fillColor=#fff2cc;strokeColor=#d6b656;" parent="yhrlX3YIJh9XXCtHHCiS-53" vertex="1">
+          <mxGeometry width="166" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-4" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://s3.eu-central-1.amazonaws.com/kalisioscope/krawler/krawler-icon-256x256.png;aspect=fixed;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-53">
+          <mxGeometry x="10.99666666666667" y="10" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-2" value="&lt;div&gt;RTE Krawler job&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;cronjob&lt;/i&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="yhrlX3YIJh9XXCtHHCiS-53" vertex="1">
+          <mxGeometry x="50" y="15" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-54" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="494" y="180" width="156" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-48" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-54">
+          <mxGeometry x="5" width="151" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-8" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://www.ideematic.com/wp-content/uploads/2018/02/mongodb-logo.png;aspect=fixed;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-54">
+          <mxGeometry y="5.25" width="71.47" height="49.5" as="geometry" />
+        </mxCell>
+        <mxCell id="7kV7g_zn0Fe9AVc3Rc4T-6" value="&lt;div&gt;MongoDB&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;database&lt;/i&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="yhrlX3YIJh9XXCtHHCiS-54" vertex="1">
+          <mxGeometry x="71.47000000000003" y="15" width="74.53" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-55" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;open data API&lt;/font&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="75" y="195" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-58" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="660" y="70" width="200" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-32" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-58">
+          <mxGeometry width="200" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-45" value="" style="group" vertex="1" connectable="0" parent="yhrlX3YIJh9XXCtHHCiS-58">
+          <mxGeometry x="10" y="10" width="180" height="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-33" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=default;dashed=1;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-45">
+          <mxGeometry width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-42" value="&lt;h3&gt;New components&lt;br&gt;&lt;/h3&gt;&lt;p&gt;Components using this background color were added to support the use case.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-45">
+          <mxGeometry x="40" width="140" height="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-56" value="" style="group" vertex="1" connectable="0" parent="yhrlX3YIJh9XXCtHHCiS-58">
+          <mxGeometry x="10" y="110" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-37" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-56">
+          <mxGeometry width="31" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-47" value="&lt;h3&gt;Running app&lt;br&gt;&lt;/h3&gt;&lt;p&gt;Apps or services running as part of our global infrastructure&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-56">
+          <mxGeometry x="40" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-57" value="" style="group" vertex="1" connectable="0" parent="yhrlX3YIJh9XXCtHHCiS-58">
+          <mxGeometry x="10" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-30" value="" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=10;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-57">
+          <mxGeometry width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yhrlX3YIJh9XXCtHHCiS-43" value="&lt;h3&gt;App configuration&lt;br&gt;&lt;/h3&gt;&lt;p&gt;Specific configuration made to support the use case.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="yhrlX3YIJh9XXCtHHCiS-57">
+          <mxGeometry x="40" width="140" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
