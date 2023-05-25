@@ -13,7 +13,7 @@ module.exports = {
           service: 'sensors-observations'
         }]
       }
-    ],
+    ]
   }
 }
 
