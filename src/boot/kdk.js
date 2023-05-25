@@ -108,7 +108,6 @@ export default async ({ app }) => {
   app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
   app.component('KLayersPanel', await kdkCoreUtils.loadComponent('catalog/KLayersPanel'))
 
-
   // Register global properties
   // FIXME: This is used for testing purpose, don't know how to access this from Puppeteer otherwise
   global.$store = app.config.globalProperties.$store

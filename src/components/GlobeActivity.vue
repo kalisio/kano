@@ -18,6 +18,7 @@ import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
+import { ComposableStore } from '../composable-store.js'
 import utils from '../utils.js'
 import config from 'config'
 
@@ -59,7 +60,7 @@ export default {
       leftPane: this.$store.get('leftPane'),
       rightPane: this.$store.get('rightPane'),
       topPane: this.$store.get('topPane'),
-      bottomPane: this.$store.get('bottomPane'),
+      bottomPane: this.$store.get('bottomPane')
     }
   },
   watch: {
@@ -72,7 +73,7 @@ export default {
     'leftPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('left', this.leftPane) },
     'rightPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('right', this.rightPane) },
     'topPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('top', this.topPane) },
-    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) },
+    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) }
   },
   methods: {
     async configureGlobe (container) {
@@ -114,12 +115,12 @@ export default {
     },
     onWindowVisibleEvent (placement, window) {
       const eventName = window.visible ? 'window-opened' : 'window-closed'
-      utils.sendEmbedEvent(eventName, { placement: placement, widget: window.current })
+      utils.sendEmbedEvent(eventName, { placement, widget: window.current })
     },
     onPaneVisibleEvent (placement, pane) {
       const eventName = pane.visible ? 'pane-opened' : 'pane-closed'
-      utils.sendEmbedEvent(eventName, { placement: placement })
-    },
+      utils.sendEmbedEvent(eventName, { placement })
+    }
   },
   created () {
     this.setCurrentActivity(this)
@@ -152,8 +153,7 @@ export default {
       ...kMapComposables.useActivity(name)
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
-    for (const use of additionalComposables.map((name) => ComposableStore.get(name)))
-      Object.assign(ret, use(name))
+    for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(ret, use(name)) }
     return ret
   }
 }
