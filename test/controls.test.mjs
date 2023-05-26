@@ -48,8 +48,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('display position', async () => {
-    await core.clickPaneAction(page, 'top', 'tools')
-    await core.clickPaneAction(page, 'top', 'display-position')
+    await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
     // await page.screenshot({ path: './test/data/controls/screenrefs/position-test.png' })
     expect(await runner.captureAndMatch('position')).beTrue()
     await core.clickAction(page, 'back')

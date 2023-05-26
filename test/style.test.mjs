@@ -40,8 +40,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('line: set min and max zoom', async () => {
-    await core.clickPaneAction(page, 'right', 'layer-actions')
-    await core.clickPaneAction(page, 'right', 'edit-layer-style')
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-minzoom')
     await core.moveSlider(page, 'style-set-minzoom', 'right', 11)
@@ -54,8 +53,7 @@ describe(`suite:${suite}`, () => {
 
   it('line: set width, color and opacity', async () => {
     // await core.clickPaneAction(page, 'right', 'Canal_Midi')
-    await core.clickPaneAction(page, 'right', 'layer-actions')
-    await core.clickPaneAction(page, 'right', 'edit-layer-style')
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-line-group')
     await core.moveSlider(page, 'style-line-width', 'right', 4)
     await core.moveSlider(page, 'style-line-opacity', 'left', 6)
@@ -99,8 +97,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('point: deactive clustering', async () => {
-    await core.clickPaneAction(page, 'right', 'layer-actions')
-    await core.clickPaneAction(page, 'right', 'edit-layer-style')
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-point-group')
     await core.click(page, '#style-toggle-clustering')
     await core.click(page, '#apply-button')
@@ -110,8 +107,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('point: deactive clustering by zoom + point styling', async () => {
-    await core.clickPaneAction(page, 'right', 'layer-actions')
-    await core.clickPaneAction(page, 'right', 'edit-layer-style')
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-point-group')
     await core.click(page, '#style-toggle-clustering')
     await core.moveSlider(page, 'style-point-clustering', 'left', 2)
@@ -139,8 +135,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('polygon: polygon styling', async () => {
-    await core.clickPaneAction(page, 'right', 'layer-actions')
-    await core.clickPaneAction(page, 'right', 'edit-layer-style')
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-polygon-group')
     await core.moveSlider(page, 'style-fill-opacity', 'right', 3, 500)
     await core.click(page, '#style-polygon-color')
