@@ -34,7 +34,7 @@ describe(`suite:${suite}`, () => {
     expect(await map.isLayerCategoryOpened(page, categoryId)).beFalse()
     await map.clickLayerCategory(page, catalogLayersTab, categoryId)
     expect(await map.isLayerCategoryOpened(page, categoryId)).beTrue()
-    await core.clickRightOpener(page)
+    await core.clickOpener(page, 'right')
   })
 
   it('check base layers', async () => {

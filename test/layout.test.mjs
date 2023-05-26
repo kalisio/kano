@@ -26,12 +26,12 @@ describe(`suite:${suite}`, () => {
   })
 
   it('user: check layout', async () => {
-    expect(await core.isTopPaneVisible(page)).beTrue()
-    expect(await core.isRightPaneVisible(page)).beFalse()
-    expect(await core.isBottomPaneVisible(page)).beFalse()
-    expect(await core.isLeftPaneVisible(page)).beFalse()
-    await core.clickTopOpener(page)
-    expect(await core.isTopPaneVisible(page)).beFalse()
+    expect(await core.isPaneVisible(page, 'top')).beTrue()
+    expect(await core.isPaneVisible(page, 'right')).beFalse()
+    expect(await core.isPaneVisible(page, 'bottom')).beFalse()
+    expect(await core.isPaneVisible(page, 'left')).beFalse()
+    await core.clickOpener(page, 'top')
+    expect(await core.isPaneVisible(page, 'top')).beFalse()
   })
 
   it('switch to admin', async () => {
@@ -41,12 +41,12 @@ describe(`suite:${suite}`, () => {
   })
 
   it('admin: check layout', async () => {
-    expect(await core.isTopPaneVisible(page)).beTrue()
-    expect(await core.isRightPaneVisible(page)).beFalse()
-    expect(await core.isBottomPaneVisible(page)).beFalse()
-    expect(await core.isLeftPaneVisible(page)).beFalse()
-    await core.clickTopOpener(page)
-    expect(await core.isTopPaneVisible(page)).beFalse()
+    expect(await core.isPaneVisible(page, 'top')).beTrue()
+    expect(await core.isPaneVisible(page, 'right')).beFalse()
+    expect(await core.isPaneVisible(page, 'bottom')).beFalse()
+    expect(await core.isPaneVisible(page, 'left')).beFalse()
+    await core.clickOpener(page, 'top')
+    expect(await core.isPaneVisible(page, 'top')).beFalse()
   })
 
   after(async () => {

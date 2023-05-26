@@ -33,7 +33,7 @@ describe(`suite:${suite}`, () => {
 
   it('load layer', async () => {
     await map.createLayer(page, 'form-fields', runner.getDataPath('form-fields.json'), 'id', 500)
-    await core.clickTopPaneAction(page, 'accept')
+    await core.clickPaneAction(page, 'top', 'accept')
   })
 
   it('save layer', async () => {
@@ -44,21 +44,21 @@ describe(`suite:${suite}`, () => {
   it('add point', async () => {
     await map.goToPosition(page, 43.31902, 1.94681, 1500)
     await map.zoomToLevel(page, 17)
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-layer-data', 1500)
-    await core.clickTopPaneAction(page, 'add-points', 1000)
+    await core.clickPaneAction(page, 'right', 'layer-actions', 1500)
+    await core.clickPaneAction(page, 'right', 'edit-layer-data', 1500)
+    await core.clickPaneAction(page, 'top', 'add-points', 1000)
     await map.moveMap(page, 'left', 1)
     await core.click(page, '#map', 1000)
-    await core.clickTopPaneAction(page, 'accept')
+    await core.clickPaneAction(page, 'top', 'accept')
     await page.waitForTimeout(2000)
     // await page.screenshot({ path: './test/data/schema/screenrefs/t1-point-test.png' })
     expect(await runner.captureAndMatch('t1-point')).beTrue()
   })
 
   it('edit point', async () => {
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'edit-layer-data', 1500)
-    await core.clickTopPaneAction(page, 'edit-properties', 1500)
+    await core.clickPaneAction(page, 'right', 'layer-actions', 1500)
+    await core.clickPaneAction(page, 'right', 'edit-layer-data', 1500)
+    await core.clickPaneAction(page, 'top', 'edit-properties', 1500)
     await core.click(page, '#map', 500)
     await core.type(page, '#id-field', 'pt1', false, true)
     await core.type(page, '#nom-field', 'Point 1')
@@ -73,8 +73,8 @@ describe(`suite:${suite}`, () => {
   })
 
   it('view data', async () => {
-    await core.clickRightPaneAction(page, 'layer-actions', 1500)
-    await core.clickRightPaneAction(page, 'view-layer-data', 1500)
+    await core.clickPaneAction(page, 'right', 'layer-actions', 1500)
+    await core.clickPaneAction(page, 'right', 'view-layer-data', 1500)
     await page.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t3-view-data')).beTrue()
     await core.click(page, '#close-button', 500)
