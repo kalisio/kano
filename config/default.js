@@ -33,8 +33,15 @@ const leftPane = {
     content: [
       { component: 'KLogo' },
       { component: 'QSeparator' },
-      { component: 'editor/KSettingsEditor' },
-      { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } },
+      { id: 'settings', icon: 'las la-cog', label: 'SETTINGS', renderer: 'item', dialog: {
+          component: 'app/KSettings', title: 'SETTINGS', cancelAction: 'CANCEL', okAction: {
+            id: 'apply-settings', label: 'APPLY', handler: 'apply'
+          }
+        }
+      },
+      { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { 
+          component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } 
+      },
       { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', handler: { name: 'launchTour', params: ['home'] }, renderer: 'item' },
       { component: 'QSeparator' },
       { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }

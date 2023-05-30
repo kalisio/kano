@@ -25,16 +25,16 @@ describe(`suite:${suite}`, () => {
   })
 
   it('locate user', async () => {
-    await core.clickTopPaneAction(page, 'locate-user')
+    await core.clickPaneAction(page, 'top', 'locate-user')
     await core.waitForImagesLoaded(page)
     await page.waitForTimeout(1000)
     // await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
-    await core.clickTopPaneAction(page, 'locate-user')
+    await core.clickPaneAction(page, 'top', 'locate-user')
   })
 
   it('search location', async () => {
-    await core.clickTopPaneAction(page, 'search-location')
+    await core.clickPaneAction(page, 'top', 'search-location')
     let selector = '#place-chooser input'
     await core.type(page, selector, 'place du capitole')
     await page.waitForTimeout(3000)
@@ -48,8 +48,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('display position', async () => {
-    await core.clickTopPaneAction(page, 'tools')
-    await core.clickTopPaneAction(page, 'display-position')
+    await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
     // await page.screenshot({ path: './test/data/controls/screenrefs/position-test.png' })
     expect(await runner.captureAndMatch('position')).beTrue()
     await core.clickAction(page, 'back')
