@@ -38,8 +38,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      }
     })
     // Prepare data for current run
     await client.login(currentUser)
@@ -76,21 +75,21 @@ describe(`suite:${suite}`, () => {
 
   it('see elevation profile', async () => {
     await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
-    await map.goToPosition(page, 43.31465, 1.94985, 500)
+    await map.goToPosition(page, 43.31465, 1.94985)
     await core.click(page, '#map', 1000)
     await core.click(page, '#map', 1000)
-    await core.clickAction(page, 'widgets-menu-items', 1000)
+    await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('elevation-line')).beTrue()
-    await core.clickAction(page, 'close-action', 1000)
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('see mapillary view', async () => {
-    await map.goToPosition(page, 43.31465, 1.94985, 500)
+    await map.goToPosition(page, 43.31465, 1.94985)
     await core.click(page, '#map', 1000)
     await core.click(page, '#map', 1000)
-    await core.clickAction(page, 'widgets-menu-items', 1000)
+    await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'mapillary-viewer', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('mapillary-view')).beTrue()
@@ -99,8 +98,8 @@ describe(`suite:${suite}`, () => {
   after(async () => {
     await runner.stop()
     // Remove test data
-    /* await client.getService('lab-stations').remove(null)
+    await client.getService('lab-stations').remove(null)
     await client.getService('lab-observations').remove(null)
-    await client.getService('lab-measurements').remove(null) */
+    await client.getService('lab-measurements').remove(null)
   })
 })

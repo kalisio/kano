@@ -17,8 +17,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      }
     })
     page = await runner.start()
     await core.login(page, user)
@@ -26,7 +25,7 @@ describe(`suite:${suite}`, () => {
 
   it('locate user', async () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
-    await core.waitForImagesLoaded(page)
+    await page.waitForNetworkIdle()
     await page.waitForTimeout(1000)
     // await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
@@ -35,12 +34,12 @@ describe(`suite:${suite}`, () => {
 
   it('search location', async () => {
     await core.clickPaneAction(page, 'top', 'search-location')
-    let selector = '#place-chooser input'
+    let selector = '#place-chooser'
     await core.type(page, selector, 'place du capitole')
     await page.waitForTimeout(3000)
     selector = '.q-menu .q-item'
     await core.click(page, selector)
-    await core.waitForImagesLoaded(page)
+    await page.waitForNetworkIdle()
     await page.waitForTimeout(1000)
     // await page.screenshot({ path: './test/data/controls/screenrefs/location-test.png' })
     expect(await runner.captureAndMatch('location')).beTrue()

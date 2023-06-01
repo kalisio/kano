@@ -33,7 +33,8 @@ describe(`suite:${suite}`, () => {
     const extent = [42.3915, 1.2847, 42.7051, 1.9315]
     await map.zoomToExtent(page, extent)
     await map.createView(page, 'Andorra', false)
-    expect(await map.viewExists(page, userViewsTab, 'Andorra')).beTrue()
+    const exists = await map.viewExists(page, userViewsTab, 'Andorra')
+    expect(exists).beTrue()
   })
 
   it('admin: create Toulouse view', async () => {
@@ -41,7 +42,8 @@ describe(`suite:${suite}`, () => {
     await map.zoomToExtent(page, extent)
     await map.clickLayer(page, catalogLayersTab, 'HYBRID')
     await map.createView(page, 'Toulouse', true)
-    expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beTrue()
+    const exists = await map.viewExists(page, userViewsTab, 'Toulouse')
+    expect(exists).beTrue()
   })
 
   it('switch to user', async () => {
@@ -63,11 +65,13 @@ describe(`suite:${suite}`, () => {
   })
 
   it('user: can\'t create views', async () => {
-    expect(await core.elementExists(page, 'create-view')).beFalse()
+    const exists = await core.elementExists(page, 'create-view')
+    expect(exists).beFalse()
   })
 
   it('user: can\'t remove views', async () => {
-    expect(await core.elementExists(page, 'remove-view')).beFalse()
+    const exists = await core.elementExists(page, 'remove-view')
+    expect(exists).beFalse()
   })
 
   it('switch to admin', async () => {
@@ -79,8 +83,10 @@ describe(`suite:${suite}`, () => {
   it('admin: remove views', async () => {
     await map.removeView(page, userViewsTab, 'Andorra')
     await map.removeView(page, userViewsTab, 'Toulouse')
-    expect(await map.viewExists(page, userViewsTab, 'Andorra')).beFalse()
-    expect(await map.viewExists(page, userViewsTab, 'Toulouse')).beFalse()
+    let exists = await map.viewExists(page, userViewsTab, 'Andorra')
+    expect(exists).beFalse()
+    exists = await map.viewExists(page, userViewsTab, 'Toulouse')
+    expect(exists).beFalse()
   })
 
   after(async () => {

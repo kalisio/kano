@@ -22,8 +22,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      }
     })
     page = await runner.start()
     await core.login(page, currentUser)
@@ -42,7 +41,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#nom-usite')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t1-infobox')).beTrue()
@@ -55,7 +54,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-infobox')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
@@ -67,7 +66,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-is-selectable')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t3-no-empty-infobox')).beTrue()
@@ -82,7 +81,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#longueur-en-km')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t4-popup')).beTrue()
@@ -96,7 +95,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(2000)
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t5-no-popup')).beTrue()
@@ -110,7 +109,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#nom')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t6-tooltip')).beTrue()
@@ -123,7 +122,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(2000)
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
-    await map.goToPosition(page, 43.30312, 1.95054, 500)
+    await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t7-no-tooltip')).beTrue()

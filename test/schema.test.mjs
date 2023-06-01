@@ -24,8 +24,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      }
     })
     page = await runner.start()
     await core.login(page, currentUser)
@@ -37,7 +36,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('add line', async () => {
-    await map.goToPosition(page, 43.31588, 1.95109, 500)
+    await map.goToPosition(page, 43.31588, 1.95109)
     await map.zoomToLevel(page, 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-lines')
@@ -70,7 +69,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('add rectangle', async () => {
-    await map.goToPosition(page, 43.31501, 1.9547, 1500)
+    await map.goToPosition(page, 43.31501, 1.9547)
     await map.zoomToLevel(page, 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-rectangles', 1000)
@@ -84,7 +83,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('add polygon', async () => {
-    await map.goToPosition(page, 43.31359, 1.95684, 1500)
+    await map.goToPosition(page, 43.31359, 1.95684)
     await map.zoomToLevel(page, 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-polygons', 1000)
@@ -115,7 +114,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('remove rectangle', async () => {
-    await map.goToPosition(page, 43.31523, 1.95554, 1500)
+    await map.goToPosition(page, 43.31523, 1.95554)
     await map.zoomToLevel(page, 17)
     await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
@@ -127,7 +126,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('remove point', async () => {
-    await map.goToPosition(page, 43.31904, 1.96055, 1500)
+    await map.goToPosition(page, 43.31904, 1.96055)
     await map.zoomToLevel(page, 17)
     await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
@@ -140,7 +139,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('remove line', async () => {
-    await map.goToPosition(page, 43.31652, 1.95110, 1500)
+    await map.goToPosition(page, 43.31652, 1.95110)
     await map.zoomToLevel(page, 17)
     await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
@@ -153,7 +152,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('edit point', async () => {
-    await map.goToPosition(page, 43.31902, 1.94681, 1500)
+    await map.goToPosition(page, 43.31902, 1.94681)
     await map.zoomToLevel(page, 17)
     await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
@@ -167,7 +166,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('edit polygon', async () => {
-    await map.goToPosition(page, 43.31379, 1.95728, 1500)
+    await map.goToPosition(page, 43.31379, 1.95728)
     await map.zoomToLevel(page, 17)
     await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)

@@ -24,8 +24,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
         'kano-welcome': false
-      }/* ,
-      mode: 'screenshots' */
+      }
     })
     page = await runner.start()
     await core.login(page, currentUser)
@@ -42,7 +41,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('add point', async () => {
-    await map.goToPosition(page, 43.31902, 1.94681, 1500)
+    await map.goToPosition(page, 43.31902, 1.94681)
     await map.zoomToLevel(page, 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-points', 1000)
