@@ -13,7 +13,7 @@ import utils from '../utils.js'
 * with the Router instance.
 */
 
-export const KanoRouter = {
+export const Router = {
   initialize() { this.router = null },
   get () { return this.router },
   set (router) { this.router = router }
@@ -24,7 +24,7 @@ export default route(function (/* { store, ssrContext } */) {
     ? createMemoryHistory
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
 
-  const Router = createRouter({
+  const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes: utils.buildRoutes(routeConfig),
 
@@ -42,7 +42,7 @@ export default route(function (/* { store, ssrContext } */) {
     }
   }, utils.buildTours(routeConfig)))
 
-  return Router
+  return router
 })
 
-KanoRouter.initialize()
+Router.initialize()
