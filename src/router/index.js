@@ -13,6 +13,12 @@ import utils from '../utils.js'
 * with the Router instance.
 */
 
+export const KanoRouter = {
+  initialize() { this.router = null },
+  get () { return this.router },
+  set (router) { this.router = router }
+}
+
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
@@ -38,3 +44,5 @@ export default route(function (/* { store, ssrContext } */) {
 
   return Router
 })
+
+KanoRouter.initialize()

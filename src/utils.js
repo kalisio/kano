@@ -2,6 +2,7 @@ import _ from 'lodash'
 import logger from 'loglevel'
 import postRobot from 'post-robot'
 import { Store } from '@kalisio/kdk/core.client'
+import { KanoRouter } from './router'
 
 function getEmbedComponent (route) {
   // The target component is the last one to be matched in hierarchy
@@ -41,8 +42,8 @@ function getEmbedProperty (route, data) {
 // If an event is received but the current route is not the same as the event name the new route is pushed first
 function setupEmbedApi (routeName, component) {
   const listener = async (event) => {
-    const router = Store.get('router')
-    let route = router.currentRoute
+    const router = KanoRouter.get()
+    let route = router.currentRoute.value
     const data = event.data
     let result, component, interval
     // If event received but the current route does not match the new route is pushed first
