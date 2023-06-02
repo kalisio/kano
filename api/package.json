@@ -60,7 +60,7 @@
     "@feathersjs/express": "^5.0.5",
     "@feathersjs/feathers": "^5.0.5",
     "@kalisio/feathers-distributed": "^2.2.1",
-    "@kalisio/kdk": "https://github.com/kalisio/kdk",
+    "@kalisio/kdk": "https://github.com/kalisio/kdk#v2.0",
     "@weacast/core": "^2.1.5",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^5.0.6",
