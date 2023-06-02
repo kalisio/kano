@@ -5,6 +5,7 @@ import postRobot from 'post-robot'
 import utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
+import { KanoRouter } from '../router'
 import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
@@ -46,10 +47,14 @@ postRobot.on('setConfiguration', async (event) => {
   updateThemeColors()
 })
 
-export default async ({ app }) => {
+export default async ({ app, router }) => {
   // Required to make injections reactively linked to the provider
   // https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
   app.config.unwrapInjectedRef = true
+
+  // Keep the router around since we need it to setup
+  // postrobot listeners (see. utils.js setupEmbedApi)
+  KanoRouter.set(router)
 
   await utils.sendEmbedEvent('kano-ready')
 
