@@ -14,6 +14,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             DEWPOINT: 'Point de rosée',
             WIND_SPEED: 'Vitesse',
             WIND_DIRECTION: 'Direction',
+            WIND_GUST: 'Rafales',
             VISIBILITY: 'Visiblité'
           }
         },
@@ -27,6 +28,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             DEWPOINT: 'Dew point',
             WIND_SPEED: 'Speed',
             WIND_DIRECTION: 'Direction',
+            WIND_GUST: 'Gust',
             VISIBILITY: 'Visibility'
           }
         }
