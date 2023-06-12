@@ -109,7 +109,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 8,
-      minFeatureZoom: 12,
+      minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
@@ -223,7 +223,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 8,
-      minFeatureZoom: 12,
+      minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'niveau_eau_ngf') || _.has(properties, 'profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }

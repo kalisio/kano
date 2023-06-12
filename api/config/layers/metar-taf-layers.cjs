@@ -146,7 +146,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         realtime: true,
         tiled: true,
         minZoom: 6,
-        minFeatureZoom: 10,
+        minFeatureZoom: 9,
         cluster: { disableClusteringAtZoom: 18 },
         'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
                           else if (feature.measureRequestIssued) { %>orange<% }

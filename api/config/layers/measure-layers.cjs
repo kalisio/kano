@@ -225,7 +225,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 8,
-      minFeatureZoom: 12,
+      minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
@@ -412,7 +412,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 4,
-      minFeatureZoom: 8,
+      minFeatureZoom: 7,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'pm25') ||
                               _.has(properties, 'pm10') ||
@@ -537,7 +537,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 6,
-      minFeatureZoom: 10,
+      minFeatureZoom: 9,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (properties.libelle === 'VA') { %>#138dce<% }
                           else if (properties.visibility === 'NV') { %>grey<% }
@@ -769,7 +769,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 5,
-      minFeatureZoom: 7,
+      minFeatureZoom: 6,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-color': `<% if (_.has(properties, 'rn') ||
                               _.has(properties, 'co') ||
