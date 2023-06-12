@@ -58,7 +58,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 6,
-      minFeatureZoom: 5,
+      minFeatureZoom: 6,
       cluster: {
         type: 'DonutCluster',
         maxClusterRadius: 1,
