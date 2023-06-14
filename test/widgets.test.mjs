@@ -10,6 +10,7 @@ const suite = 'widgets'
 const catalogLayersTab = 'catalog-layers-tab'
 
 function setTime (data) {
+  // TODO: we should set a pre-defined time to compare images
   const time = moment.utc()
   data.forEach(measure => {
     measure.time = time.format()
@@ -63,20 +64,29 @@ describe(`suite:${suite}`, () => {
     expect(runner.hasError()).beFalse()
   })
 
-  it('see timeseries for stations', async () => {
+  it('see timeseries for station measurements', async () => {
     await map.clickLayer(page, catalogLayersTab, 'LAB')
     await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    // TODO: we should set a pre-defined time to compare images
+    //expect(await runner.captureAndMatch('station-measurements')).beTrue()
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('see timeseries for mobile measurements', async () => {
     await map.clickLayer(page, catalogLayersTab, 'LAB_MEASUREMENTS')
     await map.goToPosition(page, 43.54, 1.505)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    // TODO: we should set a pre-defined time to compare images
+    //expect(await runner.captureAndMatch('mobile-measurements')).beTrue()
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('see elevation profile', async () => {
     await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
     await map.goToPosition(page, 43.31465, 1.94985)
-    await core.click(page, '#map', 1000)
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)

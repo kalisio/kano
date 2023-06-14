@@ -229,13 +229,13 @@ export default {
     utils.sendEmbedEvent('map-destroyed')
   },
   setup () {
-    const ret = {
+    const expose = {
       ...kMapComposables.useActivity(name),
       ...kMapComposables.useWeather(name)
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(ret, use(name)) }
-    return ret
+    return expose
   }
 }
 </script>

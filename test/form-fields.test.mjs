@@ -60,7 +60,7 @@ describe(`suite:${suite}`, () => {
     await core.type(page, '#id-field', 'pt1', false, true)
     await core.type(page, '#nom-field', 'Point 1')
     await core.type(page, '#information-field', 'Point 1 description')
-    await core.click(page, '#type-field', 500)
+    await core.click(page, '#option-field', 500)
     await core.click(page, '#a', 500)
     await core.type(page, '#number-field', '19aa09zz1978')
     await page.waitForTimeout(2000)

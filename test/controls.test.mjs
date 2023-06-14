@@ -26,7 +26,7 @@ describe(`suite:${suite}`, () => {
   it('locate user', async () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
+    await page.waitForTimeout(5000)
     // await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
     expect(await runner.captureAndMatch('geolocation')).beTrue()
     await core.clickPaneAction(page, 'top', 'locate-user')
