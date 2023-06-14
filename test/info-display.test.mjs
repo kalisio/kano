@@ -39,13 +39,15 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#id')
     await core.click(page, '#longueur-en-km')
     await core.click(page, '#nom-usite')
+    await core.click(page, '#style-infobox-field')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t1-infobox')).beTrue()
-    await core.clickAction(page, 'close-action', 1000)
+    await core.click(page, '#map', 1000)
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('deactive information box', async () => {
@@ -58,7 +60,8 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
-    await core.clickAction(page, 'close-action', 1000)
+    await core.click(page, '#map', 1000)
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('deactive selectable', async () => {
@@ -79,13 +82,15 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-popup-field')
     await core.click(page, '#nom')
     await core.click(page, '#longueur-en-km')
+    await core.click(page, '#style-popup-field')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t4-popup')).beTrue()
-    // await core.clickAction(page, 'close-action', 1000)
+    await core.click(page, '.leaflet-popup-close-button', 1000)
+    // await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('deactive popup', async () => {
@@ -107,6 +112,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-tooltip')
     await core.click(page, '#style-tooltip-field')
     await core.click(page, '#nom')
+    await core.click(page, '#style-tooltip-field')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)

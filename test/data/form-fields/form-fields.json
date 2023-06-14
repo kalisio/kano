@@ -22,14 +22,14 @@
       "type": "string",
       "field": {
         "component": "form/KTextareaField",
-        "helper": "Informations"
+        "helper": "Information"
       }
     },
-    "type": {
+    "option": {
       "type": "string",
       "field": {
         "component": "form/KSelectField",
-        "helper": "Type",
+        "helper": "Option",
         "options": [
           { "label": "La réponse A", "value": "A" },
           { "label": "La réponse B", "value": "B" }

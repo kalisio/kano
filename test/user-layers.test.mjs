@@ -75,26 +75,21 @@ describe(`suite:${suite}`, () => {
   it('user: connect wms layer', async () => {
     const service = 'https://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'geologie'
-    await map.connectLayer(page, service, layerId)
+    const layerName = 'Cartes géologiques'
+    await map.connectLayer(page, service, layerId, layerName)
     const match = await runner.captureAndMatch(layerId)
     await map.clickLayer(page, userLayersTab, _.kebabCase('Cartes géologiques'))
     expect(match).beTrue()
   })
 
-  it('switch to admin', async () => {
-    await core.logout(page)
-    await core.goToLoginScreen(page)
-    await core.login(page, user[1])
-  })
-
-  it('admin: add polygon mask', async () => {
+  it('user: add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
     const match = await runner.captureAndMatch('polygon-mask')
     expect(match).beTrue()
     await map.removeLayer(page, userLayersTab, 'ariege')
   })
 
-  it('admin: add multi-polygon mask', async () => {
+  it('user: add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
     const match = await runner.captureAndMatch('multi-polygon-mask')
     expect(match).beTrue()

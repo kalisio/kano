@@ -180,10 +180,10 @@ describe(`suite:${suite}`, () => {
   })
 
   it('view data', async () => {
-    await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
+    await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
     await page.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t9-view-data')).beTrue()
-    await core.click(page, '#item-actions', 1500)
+    await core.click(page, '#item-actions #zoom-to', 1500)
     expect(await runner.captureAndMatch('t10-go-to-feature')).beTrue()
   })
 
