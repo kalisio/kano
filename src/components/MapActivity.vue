@@ -234,7 +234,7 @@ export default {
       ...kMapComposables.useWeather(name)
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
-    for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(ret, use(name)) }
+    for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose
   }
 }
