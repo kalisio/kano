@@ -788,14 +788,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'rn')) { %>RN = <%= Units.format(properties.rn, 'Bq/m3') %></br>
-                   <%= Time.format(feature.time.rn, 'time.long') + ' - ' + Time.format(feature.time.rn, 'date.short') %></br><% } %>
-                   <% if (_.has(properties, 'co')) { %>CO = <%= Units.format(properties.co, 'ppm') %></br>
-                   <%= Time.format(feature.time.co, 'time.long') + ' - ' + Time.format(feature.time.co, 'date.short') %></br><% } %>
-                   <% if (_.has(properties, 'co2')) { %>CO2 = <%= Units.format(properties.co2, 'ppm') %></br>
-                   <%= Time.format(feature.time.co2, 'time.long') + ' - ' + Time.format(feature.time.co2, 'date.short') %></br><% } %>
-                   <% if (_.has(properties, 'ch4')) { %>CH4 =<%= Units.format(properties.ch4, 'ppm') %></br>
-                   <%= Time.format(feature.time.ch4, 'time.long') + ' - ' + Time.format(feature.time.ch4, 'date.short') %></br><% } %>`
+        template: `<% if (_.has(properties, 'rn')) { %>RN = <%= Units.format(properties.rn, 'Bq/m3') %></br><% }
+                   if (_.has(feature, 'time.rn')) { %><%= Time.format(feature.time.rn, 'time.long') + ' - ' + Time.format(feature.time.rn, 'date.short') %></br><% }
+                   if (_.has(properties, 'co')) { %>CO = <%= Units.format(properties.co, 'ppm') %></br><% }
+                   if (_.has(feature, 'time.co')) { %><%= Time.format(feature.time.co, 'time.long') + ' - ' + Time.format(feature.time.co, 'date.short') %></br><% }
+                   if (_.has(properties, 'co2')) { %>CO2 = <%= Units.format(properties.co2, 'ppm') %></br><% }
+                   if (_.has(feature, 'time.co2')) { %><%= Time.format(feature.time.co2, 'time.long') + ' - ' + Time.format(feature.time.co2, 'date.short') %></br><% }
+                   if (_.has(properties, 'ch4')) { %>CH4 =<%= Units.format(properties.ch4, 'ppm') %></br><% }
+                   if (_.has(feature, 'time.ch4')) { %><%= Time.format(feature.time.ch4, 'time.long') + ' - ' + Time.format(feature.time.ch4, 'date.short') %></br><% } %>`
       }
     },
     cesium: {
@@ -810,14 +810,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'rn\')) { %>RN = <%= Units.format(properties.rn, \'Bq/m3\') %>\n' +
-                  '<%= Time.format(feature.time.rn, \'time.long\') + \' - \' + Time.format(feature.time.rn, \'date.short\') %>\n<% } %>' +
-                  '<% if (_.has(properties, \'co\')) { %>CO = <%= Units.format(properties.co, \'ppm\') %>\n' +
-                  '<%= Time.format(feature.time.co, \'time.long\') + \' - \' + Time.format(feature.time.co, \'date.short\') %>\n<% } %>' +
-                  '<% if (_.has(properties, \'co2\')) { %>CO2 = <%= Units.format(properties.co2, \'ppm\') %>\n' +
-                  '<%= Time.format(feature.time.co2, \'time.long\') + \' - \' + Time.format(feature.time.co2, \'date.short\') %>\n<% } %>' +
-                  '<% if (_.has(properties, \'ch4\')) { %>CH4 =<%= Units.format(properties.ch4, \'ppm\') %>\n' +
-                  '<%= Time.format(feature.time.ch4, \'time.long\') + \' - \' + Time.format(feature.time.ch4, \'date.short\') %>\n<% } %>'
+        template: '<% if (_.has(properties, \'rn\')) { %>RN = <%= Units.format(properties.rn, \'Bq/m3\') %>\n<% }' +
+                  'if (_.has(feature, \'time.rn\')) { %><%= Time.format(feature.time.rn, \'time.long\') + \' - \' + Time.format(feature.time.rn, \'date.short\') %>\n<% }' +
+                  'if (_.has(properties, \'co\')) { %>CO = <%= Units.format(properties.co, \'ppm\') %>\n<% }' +
+                  'if (_.has(feature, \'time.co\')) { %><%= Time.format(feature.time.co, \'time.long\') + \' - \' + Time.format(feature.time.co, \'date.short\') %>\n<% }' +
+                  'if (_.has(properties, \'co2\')) { %>CO2 = <%= Units.format(properties.co2, \'ppm\') %>\n<% }' +
+                  'if (_.has(feature, \'time.co2\')) { %><%= Time.format(feature.time.co2, \'time.long\') + \' - \' + Time.format(feature.time.co2, \'date.short\') %>\n<% }' +
+                  'if (_.has(properties, \'ch4\')) { %>CH4 =<%= Units.format(properties.ch4, \'ppm\') %>\n<% }' +
+                  'if (_.has(feature, \'time.ch4\')) { %><%= Time.format(feature.time.ch4, \'time.long\') + \' - \' + Time.format(feature.time.ch4, \'date.short\') %>\n<% } %>'
       }
     }
   }]
