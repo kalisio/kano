@@ -102,6 +102,15 @@ const topWidgets = [{
         'next-12-hours', 'next-day', 'next-2-days', 'next-3-days']
     }]
   }, {
+    id: 'run-options',
+    component: 'input/KOptionsChooser',
+    icon: 'las la-clock',
+    tooltip: 'KTimeSeries.RUN',
+    visible: 'hasRunTimes',
+    hideSelected: false,
+    options: ':runOptions',
+    on: { event: 'option-chosen', listener: 'onUpdateRun' }
+  }, {
     id: 'center-view',
     icon: 'las la-eye',
     tooltip: 'KTimeSeries.CENTER_ON',
