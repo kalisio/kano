@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "vuepress": "^1.7.1",
-    "vuepress-theme-kalisio": "https://github.com/kalisio/vuepress-theme-kalisio#v0.1.0"
+    "vuepress-theme-kalisio": "https://github.com/kalisio/vuepress-theme-kalisio#v1.5.0"
   },
   "dependencies": {}
 }

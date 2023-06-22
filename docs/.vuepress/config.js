@@ -20,7 +20,9 @@ module.exports = {
       '/about/': getAboutSidebar(),
       '/guides/': getGuidesSidebar(),
       '/reference/': getReferenceSidebar()
-    }
+    },
+    jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.CGvJwPPkuiFvNzo3zUBb-_vwD0CKbUfm7w7TkCY-Ts4',
+    domain: 'dev.kalisio.xyz'
   }
 }
 
