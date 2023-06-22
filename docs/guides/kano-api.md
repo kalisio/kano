@@ -17,7 +17,7 @@ If your Kano instance is exposed through `https://kano.foo.xyz` then the api is 
 If for example you have the hubeau layer enabled (which instanciate both a `hubeau-stations` and a `hubeau-observations` features services), then the api will expose it's data on `https://kano.foo.xyz/api/hubeau-stations` and `https://kano.foo.xyz/api/hubeau-observations`
 :::
 
-## Authentification
+## Authentication
 
 In order to access the API, clients must authenticate themselves. We use [JWT](https://jwt.io) tokens to authenticate access to Kano. Those can be added as an HTTP query parameter, using `jwt=$your_token` or can be passed through the `Authorization` HTTP header, using the [`Bearer` scheme](https://datatracker.ietf.org/doc/html/rfc6750).
 
@@ -176,6 +176,8 @@ Typical use case is to display a timeserie for the station.
 ```
 :::
 
+#### Request latest observations at (a) station(s)
+
 Typical use case is to retrieve most recent observations for the station, or display the observations on a map if not filtering by a station ID. 
 
 <Badge text="HTTP - GET" vertical="middle" />
@@ -214,14 +216,6 @@ Typical use case is to retrieve most recent observations for the station, or dis
 }
 ```
 :::
-
-### Request available observations
-
-Typical use case is to display the observations on a map
-
-### Request observations at a station
-
-Typical use case is to display a timeserie for the station
 
 ## Use case example
 
