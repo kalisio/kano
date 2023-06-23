@@ -56,7 +56,7 @@ To be put in the `kano/api/config/layers` directory. Example based on OpenStreee
 As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version but you can change it to target a production release.
 
 ::: warning
-By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
+By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. By defining `LAYERS_FILTER=*` you will get all built-in layers but take care that a lot of them requires additional services to work correctly (read following sections below). You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
 :::
 
 ::: tip
@@ -85,6 +85,30 @@ docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
 
 ::: tip
 You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environment variable.
+:::
+
+### Add krawler jobs
+
+Kano integrates smoothly with [Krawler jobs](https://kalisio.github.io/krawler) in order to feed data for near real-time measurements/observations layers. A lot of built-in layers requires the associated job(s) to be deployed beside Kano. You can search for available jobs in our [GitHub organisation](https://github.com/orgs/kalisio/repositories?language=&q=krawler&sort=&type=all) and find more information about available layers in [Akt'n'Map catalog](https://aktnmap.com/gofurther/catalog.html).
+
+For the purpose of this documentation we will focus on the [k-hubeau](https://github.com/kalisio/k-hubeau) hydro jobs but others jobs work similarly. The following commands and additional docker-compose file should do the job:
+
+```bash
+// Run the MongoDB, Hubeau jobs and Kano containers
+docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml up -d
+
+// Stop the MongoDB, Weacast and Kano containers
+docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml down 
+// Stop the MongoDB, Weacast and Kano containers erasing DB data
+docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml down -v
+```
+
+::: details docker-compose-hubeau.yml - Used to deploy Hubeau jobs containers.
+<<< @/.vuepress/public/docker-compose-hubeau.yml
+:::
+
+::: tip
+You should activate the built-in Hub'Eau layers like `HUBEAU_HYDRO` in Kano using the `LAYERS_FILTER` environment variable.
 :::
 
 ## From source code
@@ -152,6 +176,25 @@ yarn dev
 You should activate the built-in Weacast layers like `WIND_TILED` in Kano using the `LAYERS_FILTER` environment variable.
 :::
 
+### Add krawler jobs
+
+Instead of using Docker containers you can directly install Krawler from the source code as well by following [this guide](https://kalisio.github.io/krawler/guides/installing-krawler.html) and retrieve/run required jobs manually, it's notably useful when developing new jobs:
+```bash
+git clone https://github.com/kalisio/krawler
+cd krawler
+yarn install
+yarn link
+// Now you can proceed with your jobs
+git clone https://github.com/kalisio/k-hubeau
+yarn install
+yarn link @kalisio/krawler
+// Set the most minimalist environment to run the jobs
+export DB_URL=mongodb://mongodb:27017/kano
+// Now you can launch the jobs manually using the krawler CLI
+krawler ./jobfile-hydro-stations.js
+krawler ./jobfile-hydro-observations.js
+```
+
 ## Use Kargo services
 
 You can easily connect Kano with geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) through its [API gateway](https://kalisio.github.io/kargo/guides/advanced-usage.html#using-the-api-gateway). First add the Kano application/consumer in the gateway configuration by generating a [UUID](https://www.uuidgenerator.net/):
@@ -177,3 +220,5 @@ export APP_ID="9ba09ead-23e1-4020-9994-aa9130782b09"
 yarn dev
 ```
 This will automatically generate a valid token for the gateway once you log in and add it to any request targeting a service behind the gateway.
+
+Kargo can also automatically deploy for you krawler jobs, kapture, k2, etc. as [services](https://kalisio.github.io/kargo/guides/understanding-kargo.html#service).
