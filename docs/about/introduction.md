@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Introduction
 
-**Kano** is a powerful client application that can be used to visualize geospatial data served by [Kargo](https://kalisio.github.io/kargo/).
+**Kano** is a powerful application that can be used to visualize any time-varying geospatial data, notably served by [Kargo](https://kalisio.github.io/kargo/).
 
 ![kano-screenshot](./../assets/kano-screenshot.png)
 
