@@ -3,14 +3,7 @@ version: '3.3'
 services:
   kano:
     environment:
-      - APP_SECRET=xxx
       - LAYERS_FILTER=OSM PLAN_IGN HUBEAU_HYDRO
-      - BUILD_NUMBER
-      - NODE_APP_INSTANCE
-      - DB_URL
-      - DATA_DB_URL
-      - CESIUM_TOKEN=xxx
-      - MAPILLARY_TOKEN=xxx
   hubeau-stations:
     image: kalisio/k-hubeau:hydro-stations-latest
     environment:
@@ -23,5 +16,8 @@ services:
     environment:
       - DB_URL=mongodb://mongodb:27017/kano
       - DEBUG
+    depends_on:
+      hubeau-stations:
+        condition: service_healthy
     networks:
       - kano
