@@ -85,7 +85,7 @@
     "@geoman-io/leaflet-geoman-free": "^2.11.1",
     "@intlify/vue-i18n-loader": "^4.2.0",
     "@kalisio/feathers-s3": "^1.1.0",
-    "@kalisio/kdk": "https://github.com/kalisio/kdk#v2.0",
+    "@kalisio/kdk": "^2.0.1",
     "@kalisio/leaflet.donutcluster": "^1.1.0",
     "@mapbox/geojsonhint": "^3.0.1",
     "@quasar/extras": "^1.16.3",

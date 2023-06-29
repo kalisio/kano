@@ -1481,9 +1481,10 @@
     lodash "^4.17.21"
     moment "^2.29.4"
 
-"@kalisio/kdk@https://github.com/kalisio/kdk#v2.0":
-  version "1.7.0"
-  resolved "https://github.com/kalisio/kdk#7e2f880d058cfcb785c03b91e279c532e50d090f"
+"@kalisio/kdk@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-2.0.1.tgz#8c820ad545f5562773b2d2a20c75abeb8ef25ee9"
+  integrity sha512-IBIIqBXmZK8zo+fgsTWNiS651EryfpcnAc/vfKKijNSlBkF/6PuPSNk0i/pq2RNRSrAIch5zMF4Cz9YwMrTo4Q==
   dependencies:
     "@casl/ability" "^6.1.1"
     "@casl/mongoose" "^7.1.0"
