@@ -6,7 +6,7 @@ import utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
-import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -91,6 +91,7 @@ export default async ({ app, router }) => {
   // Register global properties to the the vue app
   app.config.globalProperties.$store = Store
   app.config.globalProperties.$layout = Layout
+  app.config.globalProperties.$time = Time
   app.config.globalProperties.$events = Events
   app.config.globalProperties.$api = api
   app.config.globalProperties.$can = api.can
@@ -117,6 +118,7 @@ export default async ({ app, router }) => {
   // FIXME: This is used for testing purpose, don't know how to access this from Puppeteer otherwise
   global.$store = app.config.globalProperties.$store
   global.$layout = app.config.globalProperties.$layout
+  global.$time = app.config.globalProperties.$time
   global.$api = app.config.globalProperties.$api
 
   // Add global guard
