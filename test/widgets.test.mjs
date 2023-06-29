@@ -6,14 +6,14 @@ import chailint from 'chai-lint'
 import { core, map } from '@kalisio/kdk/test.client.js'
 
 const suite = 'widgets'
-
 const catalogLayersTab = 'catalog-layers-tab'
+// We set a pre-defined time to be able to compare images
+const now = moment('2023-06-01T09:00:00Z')
 
 function setTime (data) {
-  // TODO: we should set a pre-defined time to compare images
-  const time = moment.utc()
+  const time = now.clone().utc()
   data.forEach(measure => {
-    measure.time = time.format()
+    measure.time = time.toISOString()
     time.subtract(1, 'hours')
   })
 }
@@ -43,15 +43,8 @@ describe(`suite:${suite}`, () => {
     })
     // Prepare data for current run
     await client.login(currentUser)
-    let data = fs.readJsonSync(runner.getDataPath('lab-stations.geojson'))
+    const data = fs.readJsonSync(runner.getDataPath('lab-stations.geojson'))
     await client.getService('lab-stations').create(data)
-    data = fs.readJsonSync(runner.getDataPath('lab-observations.geojson'))
-    setTime(data)
-    await client.getService('lab-observations').create(data)
-    data = fs.readJsonSync(runner.getDataPath('lab-measurements.geojson'))
-    setTime(data)
-    await client.getService('lab-measurements').create(data)
-
     page = await runner.start()
     await core.login(page, currentUser)
   })
@@ -62,26 +55,6 @@ describe(`suite:${suite}`, () => {
 
   afterEach(() => {
     expect(runner.hasError()).beFalse()
-  })
-
-  it('see timeseries for station measurements', async () => {
-    await map.clickLayer(page, catalogLayersTab, 'LAB')
-    await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
-    // TODO: we should set a pre-defined time to compare images
-    //expect(await runner.captureAndMatch('station-measurements')).beTrue()
-    await core.clickAction(page, 'close-top-window', 1000)
-  })
-
-  it('see timeseries for mobile measurements', async () => {
-    await map.clickLayer(page, catalogLayersTab, 'LAB_MEASUREMENTS')
-    await map.goToPosition(page, 43.54, 1.505)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
-    // TODO: we should set a pre-defined time to compare images
-    //expect(await runner.captureAndMatch('mobile-measurements')).beTrue()
-    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   it('see elevation profile', async () => {
@@ -103,6 +76,40 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'mapillary-viewer', 1000)
     await page.waitForTimeout(2000)
     expect(await runner.captureAndMatch('mapillary-view')).beTrue()
+    await core.clickAction(page, 'close-top-window', 1000)
+  })
+
+  it('set time', async () => {
+    await core.setCurrentTime(page, now)
+    await map.clickTimelineHour(page, now.clone().subtract(1, 'hours').hours())
+  })
+
+  it('see timeseries for station measurements', async () => {
+    // Load data just before displaying as it has TTL and we are in a past date
+    // so that it won't be kept long in DB
+    const data = fs.readJsonSync(runner.getDataPath('lab-observations.geojson'))
+    setTime(data)
+    await client.getService('lab-observations').create(data)
+    await map.clickLayer(page, catalogLayersTab, 'LAB')
+    await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('station-measurements')).beTrue()
+    await core.clickAction(page, 'close-top-window', 1000)
+  })
+
+  it('see timeseries for mobile measurements', async () => {
+    // Load data just before displaying as it has TTL and we are in a past date
+    // so that it won't be kept long in DB
+    const data = fs.readJsonSync(runner.getDataPath('lab-measurements.geojson'))
+    setTime(data)
+    await client.getService('lab-measurements').create(data)
+    await map.clickLayer(page, catalogLayersTab, 'LAB_MEASUREMENTS')
+    await map.goToPosition(page, 43.54, 1.51)
+    await core.click(page, '#map', 1000)
+    await page.waitForTimeout(2000)
+    expect(await runner.captureAndMatch('mobile-measurements')).beTrue()
+    await core.clickAction(page, 'close-top-window', 1000)
   })
 
   after(async () => {

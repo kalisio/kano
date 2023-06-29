@@ -239,8 +239,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         'stroke-color'
       ],
       tooltip: {
-        template: `<% if (properties.tmp_ow) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
-                    if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
+        template: `<% if (_.has(properties, 'tmp_ow')) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
+                    if (_.has(feature, 'time.tmp_ow')) { %></br><%= Time.format(feature.time.tmp_ow, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
       }
     },
     cesium: {
@@ -250,8 +250,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-symbol': 'marker',
       'marker-color': '#78c0f0',
       tooltip: {
-        template: '<% if (properties.tmp_ow) { %> <%= properties.tmp_ow.toFixed(2) %> °C/h<% } %>\n' +
-                  'if (feature.time && feature.time.tmp_ow) { %></br><%= Time.format(feature.time.tmp_ow, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+        template: '<% if (_.has(properties, \'tmp_ow\')) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }' +
+                  'if (_.has(feature, \'time.tmp_ow\')) { %>\n<%= Time.format(feature.time.tmp_ow, \'time.long\') + \' - \' + Time.format(feature.time.tmp_ow, \'date.short\') %><% } %>'
       }
     }
   }]
