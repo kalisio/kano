@@ -53,7 +53,7 @@ To be put in the `kano/api/config/layers` directory. Example based on OpenStreee
 <<< @/.vuepress/public/my-layers.cjs
 :::
 
-As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version but you can change it to target a production release.
+As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version (`dev` tag) but you can change it to target either a beta (`test` tag) or a production (`prod` tag) release.
 
 ::: warning
 By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. By defining `LAYERS_FILTER=*` you will get all built-in layers but take care that a lot of them requires additional services to work correctly (read following sections below). You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
@@ -79,6 +79,10 @@ docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down
 docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
 ```
 
+Wait a couple of minutes so that Weacast feeds the database with the latest forecast then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected if you display some meteorological layers and probe a location:
+
+![installation](../assets/weacast-installation.png)
+
 ::: details docker-compose-weacast.yml - Used to deploy Weacast container.
 <<< @/.vuepress/public/docker-compose-weacast.yml
 :::
@@ -97,11 +101,15 @@ For the purpose of this documentation we will focus on the [k-hubeau](https://gi
 // Run the MongoDB, Hubeau jobs and Kano containers
 docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml up -d
 
-// Stop the MongoDB, Weacast and Kano containers
+// Stop the MongoDB, Hubeau jobs and Kano containers
 docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml down 
-// Stop the MongoDB, Weacast and Kano containers erasing DB data
+// Stop the MongoDB, Hubeau jobs and Kano containers erasing DB data
 docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml down -v
 ```
+
+Wait a couple of minutes so that the jobs feeds the database with the latest observations then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected if you display the observations layer, zoom in and pick a station:
+
+![installation](../assets/hubeau-installation.png)
 
 ::: details docker-compose-hubeau.yml - Used to deploy Hubeau jobs containers.
 <<< @/.vuepress/public/docker-compose-hubeau.yml
