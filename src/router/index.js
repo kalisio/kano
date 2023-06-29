@@ -14,7 +14,7 @@ import utils from '../utils.js'
 */
 
 export const Router = {
-  initialize() { this.router = null },
+  initialize () { this.router = null },
   get () { return this.router },
   set (router) { this.router = router }
 }
