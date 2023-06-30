@@ -10,15 +10,15 @@ Although Kano is a web application for end-users, it has also been designed to b
 
 ## Key concepts
 
-Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano or mapping.
+Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano or *geographic information system* (GIS). In a nutshell, like any other GIS tool, Kano can be used to map, analyze, and assess real-world problems based on data, which is spatial or geographical in nature.
 
-Kano is composed of two main activities (i.e. entry point for interacting with the user on a given type of objects):
+To achieve this, Kano is composed of two main activities (i.e. entry point for interacting with the user on a given type of objects):
 * a **2D activity** to visualise and interact with data on a standard *paperless* map in 2D,
 * a **3D activity** to visualise data and interact with on a [virtual globe](https://en.wikipedia.org/wiki/Virtual_globe) in 3D.
 
-The view of each activity can contain a a **basemap** (i.e. a background context), a set of data **layers** (i.e. business specific data), an **extent** (i.e. the part of the Earth currently on the screen), and navigation tools to pan and zoom. A layer specifies how a geographic dataset is portrayed on the map or the globe. The final rendering supporting your use case can usually be assembled by adding a serie of layers.
+The view of each activity can contain a **basemap** (i.e. a background context), a set of data **layers** (i.e. business specific data), an **extent** (i.e. the part of the Earth currently on the screen), and navigation tools to pan and zoom. A layer specifies how a geographic dataset is portrayed on the map or the globe. The final rendering supporting your use case can usually be assembled by adding a serie of layers.
 
-A **feature layer** is a grouping of similar geographic elements, for example, buildings, cities, roads, earthquake epicenters, etc. Features can be points, lines, or polygons (areas). Feature layers are most appropriate for visualizing your own data on top of your basemaps. Using Kano, you can view, save, edit and analyze your own features and their attributes. Moreover, you can include interactive pop-up windows with information about the features.
+A **feature layer** is a grouping of similar geographic elements, for example, buildings, cities, roads, earthquake epicenters, etc. Features can be points, lines, or polygons (i.e. *vector data*). Feature layers are most appropriate for visualizing your own data on top of your basemaps. Using Kano, you can view, save, edit and analyze your own features and their attributes. Moreover, you can include interactive pop-up windows with information about the features. *Raster data*, most commonly found in remotely sensed data, topographic data, satellite imagery, and aerial imagery, can also be visualized. For this, Kano can leverage [OGC standards](./customizing-kano.md#using-ogc-standards) that use the internet to view, edit, manage and share geospatial data.
 
 Kano manages both **space** and **time** information in order to visualize time-varying geospatial phenomena: tracking of moving objects, history of measures taken by a sensor, weather prediction over time, etc. When a layer displays a time-varying dataset you are able to navigate back and forward in time using a **timeline** to see the data at your requested date/time.
 
