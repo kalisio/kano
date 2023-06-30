@@ -97,7 +97,7 @@ If you have to ingest large datasets you should consider processing data using o
 
 One of the best feature of Kano is interactive visualisation, meaning that data can be updated in real-time according to user actions or data updates. A typical use case is the visualisation of time-varying spatial datasets. In this section we will use some data providing the number of hospitalizations by department in France during the COVID-19 (from 20-03-2020 to 20-04-2020) to perform such a visualisation.
 
-First copy the new layers file in the `kano/api/config/layers` directory. Then, add `"COVID_19"` to your `LAYERS_FILTER` environment variable and launch Kano again to make the new layers appear in your custom catalog.
+In this example there is one GeoJson file per day. First extract the [data files](/covid-19.tar.gz) to the `public` folder exposed by Kano. Then copy the new layers file in the `kano/api/config/layers` directory. Last, add `"COVID_19"` to your `LAYERS_FILTER` environment variable and launch Kano again to make the new layers appear in your custom catalog.
 
 ::: details covid-19-layers.cjs - Used to define additional time-varying layers based on file data.
 

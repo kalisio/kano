@@ -8,7 +8,7 @@ sidebarDepth: 3
 
 To avoid the burden of developing a completely new application for every mapping needs you might have, **Kano** provides you with the capabilities to be integrated in your web application as an [`<iframe/>`](https://en.wikipedia.org/wiki/HTML_element#Frames) like this:
 
-<kano token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.2oFJhEv306tbkZfzM1tTfFPFjjs5nVu3DWjo5OvGrFc" />
+<kano token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.CGvJwPPkuiFvNzo3zUBb-_vwD0CKbUfm7w7TkCY-Ts4" />
 
 This **iframe** offers an API so that you can dynamically control the behaviour and the content of Kano, as well as how the embedding application reacts in real-time to changes in Kano, a.k.a [micro frontend](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16). You can read more about the underlying concepts in this [article](https://blog.feathersjs.com/a-use-case-of-microservices-with-feathersjs-building-a-geospatial-platform-56373604db71). 
 
