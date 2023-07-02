@@ -22,7 +22,7 @@ Although names and descriptions can be hard-coded in the target user language, K
 
 ## Customizing the catalog
 
-You can add your own categories in the catalog by defining it in additional files to be put in the `kano/api/config/categories` directory. Kano will glob all files within this directory and add categories accordingly, only matching by name those in the `CATEGORIES_FILTER` (comma-separated list of category names) environment variable, if any. Categories are simple objects with a name, a description and an icon from a standard icon set among [Material Icons]https://fonts.google.com/icons?icon.set=Material+Icons), [Font Awesome](https://fontawesome.com/icons), or [Line Awesome](https://icons8.com/line-awesome).
+You can add your own categories in the catalog by defining it in additional files to be put in the `kano/api/config/categories` directory. Kano will glob all files within this directory and add categories accordingly, only matching by name those in the `CATEGORIES_FILTER` (comma-separated list of category names) environment variable, if any. Categories are simple objects with a name, a description and an icon from a standard icon set among [Material Icons](https://fonts.google.com/icons?icon.set=Material+Icons), [Font Awesome](https://fontawesome.com/icons), or [Line Awesome](https://icons8.com/line-awesome).
 
 ::: details my-categories.cjs - Used to define additional categories.
 
