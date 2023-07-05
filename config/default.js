@@ -3,14 +3,19 @@ const serverPort = process.env.PORT || 8081
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
 let domain
+let shortName
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
+  shortName = 'Kano Dev'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
+  shortName = 'Kano test'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.prod.kalisio.com'
+  shortName = 'Kano'
 } else {
+  shortName = 'Kano'
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
@@ -403,6 +408,7 @@ module.exports = {
   // If using local IP on WiFi router
   // domain: 'http://192.168.1.16:8081',
   domain,
+  shortName,
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version,
   buildNumber: process.env.BUILD_NUMBER,
