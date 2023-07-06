@@ -291,8 +291,8 @@ module.exports = configure(function (ctx) {
       },
       
       manifest: {
-        name: 'Kano',
-        short_name: clientConfig.shortName,
+        name: clientConfig.pwaName,
+        short_name: clientConfig.pwaName,
         description: 'A powerful real-time Geovisualizer',
         display: 'standalone',
         orientation: 'portrait',
