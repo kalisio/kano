@@ -7,10 +7,10 @@ let pwaName = 'Kano'
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.dev.kalisio.xyz'
-  pwaName += '(dev)'
+  pwaName += ' (dev)'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
   domain = 'https://kano.test.kalisio.xyz'
-  pwaName += '(test)'
+  pwaName += ' (test)'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
   domain = 'https://kano.prod.kalisio.com'
 } else {
