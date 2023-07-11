@@ -475,6 +475,10 @@ module.exports = {
     },
     fab: { visible: true }
   },
+  engines: {
+    leaflet: mapEngine,
+    cesium: globeEngine
+  },
   mapActivity: {
     additionalMixins: [],
     topPane: {
@@ -569,7 +573,6 @@ module.exports = {
       left: { content: leftWidgets },
       top: { content: topWidgets }
     },
-    engine: mapEngine,
     layers: {
       actions: mapLayerActions
     },
@@ -642,7 +645,6 @@ module.exports = {
       left: { content: leftWidgets },
       top: { content: topWidgets },
     },
-    engine: globeEngine,
     layers: {
       actions: globeLayerActions
     }
