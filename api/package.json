@@ -42,7 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@feathersjs/client": "^5.0.5",
+    "@feathersjs/client": "^5.0.8",
     "@slack/webhook": "^5.0.2",
     "c8": "^7.11.0",
     "chai": "^4.3.4",
@@ -56,9 +56,9 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^5.0.5",
-    "@feathersjs/express": "^5.0.5",
-    "@feathersjs/feathers": "^5.0.5",
+    "@feathersjs/authentication": "^5.0.8",
+    "@feathersjs/express": "^5.0.8",
+    "@feathersjs/feathers": "^5.0.8",
     "@kalisio/feathers-distributed": "^2.2.1",
     "@kalisio/kdk": "https://github.com/kalisio/kdk",
     "@weacast/core": "^2.1.5",
