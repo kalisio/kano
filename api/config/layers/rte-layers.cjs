@@ -31,6 +31,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'rte-units',
     featureId: 'eicCode',
+    featureLabel: 'name',
     from: 'P-2Y',
     to: 'PT-1H',
     every: 'PT1H',
