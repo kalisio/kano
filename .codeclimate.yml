@@ -1,6 +1,6 @@
 exclude_patterns:
 - "lib/"
-- "**/client/**"
+- "public/"
 plugins:
   fixme:
     enabled: true
