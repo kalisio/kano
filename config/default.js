@@ -271,9 +271,11 @@ const mapEngine = {
   },
   // Default GeoJSON layer style for points
   pointStyle: {
-    'icon-color': '#FFFFFF',
-    'marker-color': '#2196f3',
-    'icon-classes': 'fas fa-circle'
+    iconClasses: 'fas fa-circle',    
+    iconColor: '#FFFFFF',
+    markerColor: '#72448b',
+    iconXOffset: -1,
+    iconYOffset: 0
   },
   // Default GeoJSON layer style for points edition
   editPointStyle: {
@@ -490,7 +492,7 @@ module.exports = {
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
           { id: 'zoom-separator', component: 'QSeparator', vertical: true },
-          { id: 'locate-user', component: 'KLocateUser' },
+          { id: 'locate-user', component: 'tools/KGeolocateTool' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
             id: 'tools',
@@ -517,7 +519,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true },
-          { component: 'KSearchLocation' }
+          { component: 'tools/KSearchTool' }
         ],
         'edit-layer-data': [
           { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
@@ -589,7 +591,7 @@ module.exports = {
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
           { id: 'zoom-separator', component: 'QSeparator', vertical: true, inset: true },
-          { id: 'locate-user', component: 'KLocateUser' },
+          { id: 'locate-user', component: 'tools/KGeolocateTool' },
           { id: 'search-location', icon: 'las la-search-location', tooltip: 'mixins.activity.SEARCH_LOCATION', handler: { name: 'setTopPaneMode', params: ['search-location'] } },
           {
             id: 'tools',
@@ -614,7 +616,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true },
-          { component: 'KSearchLocation' }
+          { component: 'tools/KSearchTool' }
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
