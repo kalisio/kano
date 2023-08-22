@@ -42,13 +42,14 @@ export default {
     find: [fuzzySearch({ fields: ['name'] }), coreHooks.diacriticSearch(), coreHooks.marshallCollationQuery],
     get: [],
     create: [],
-    update: [coreHooks.preventUpdatePerspectives],
+    // We only use pacth in editors to avoid dumping "hidden" (ie internal) properties
+    update: [commonHooks.disallow()],
     patch: [],
     remove: []
   },
 
   after: {
-    all: [coreHooks.log, coreHooks.processPerspectives],
+    all: [coreHooks.log],
     find: [],
     get: [],
     create: [],
