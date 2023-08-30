@@ -93,7 +93,7 @@ You should activate the built-in Weacast layers like `WIND_TILED` in Kano using 
 
 ### Add krawler jobs
 
-Kano integrates smoothly with [Krawler jobs](https://kalisio.github.io/krawler) in order to feed data for near real-time measurements/observations layers. A lot of built-in layers requires the associated job(s) to be deployed beside Kano. You can search for available jobs in our [GitHub organisation](https://github.com/orgs/kalisio/repositories?language=&q=krawler&sort=&type=all) and find more information about available layers in the [Akt'n'Map catalog](https://aktnmap.com/gofurther/catalog.html).
+Kano integrates smoothly with [Krawler jobs](https://kalisio.github.io/krawler) in order to feed data for near real-time measurements/observations layers. A lot of built-in layers requires the associated job(s) to be deployed beside Kano. You can search for available jobs in our [GitHub organisation](https://github.com/orgs/kalisio/repositories?language=&q=krawler&sort=&type=all) and find more information about available layers in the [Kalisio Crisis catalog](https://crisis.com/gofurther/catalog.html).
 
 For the purpose of this documentation we will focus on the [k-hubeau](https://github.com/kalisio/k-hubeau) hydro jobs but others jobs work similarly. The following commands and additional docker-compose file should do the job:
 
