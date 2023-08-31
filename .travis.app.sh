@@ -16,7 +16,6 @@ travis_fold start "build"
 
 yarn pwa:build
 EXIT_CODE=$? 
-tail -n 24 build.log
 check_code $EXIT_CODE 0 "Builing the client" 
 
 # Log in to docker before building the app because of rate limiting
