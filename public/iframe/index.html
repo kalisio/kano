@@ -725,6 +725,7 @@
         })
         postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Layers.AIRPORTS' })
         .then((result) => { airports = result.data })
+        //postRobot.send(kano, 'map', { command: 'setTopPaneVisible', args: false })
       })
       postRobot.on('globe-ready', () => console.log('Globe component ready'))
       postRobot.on('map-destroyed', () => console.log('Map component destroyed'))
