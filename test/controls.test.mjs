@@ -34,7 +34,7 @@ describe(`suite:${suite}`, () => {
 
   it('search location', async () => {
     await core.clickPaneAction(page, 'top', 'search-location')
-    let selector = '#place-chooser'
+    let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
     await page.waitForTimeout(3000)
     selector = '.q-menu .q-item'
