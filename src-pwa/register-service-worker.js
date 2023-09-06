@@ -1,6 +1,6 @@
-import { register } from 'register-service-worker'
 import logger from 'loglevel'
-import { utils } from '@kalisio/kdk/core.client'
+import { register } from 'register-service-worker'
+import { Events } from '@kalisio/kdk/core.client'
 
 // The ready(), registered(), cached(), updatefound() and updated()
 // events passes a ServiceWorkerRegistration instance in their arguments.
@@ -31,7 +31,7 @@ register(location.origin + '/service-worker.js', {
 
   updated (registration) {
     logger.debug('New content is available; please refresh.')
-    utils.updatePwa(registration)
+    Events.emit('pwa-updated', registration)
   },
 
   offline () {
