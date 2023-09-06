@@ -39,7 +39,7 @@ export default {
         return true
       }, coreHooks.processObjectIDs),
       coreHooks.authorise],
-    find: [fuzzySearch({ fields: ['name'] }), coreHooks.diacriticSearch(), coreHooks.marshallCollationQuery],
+    find: [coreHooks.marshallCollationQuery],
     get: [],
     create: [],
     // We only use pacth in editors to avoid dumping "hidden" (ie internal) properties
