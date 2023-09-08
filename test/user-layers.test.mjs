@@ -32,7 +32,6 @@ describe(`suite:${suite}`, () => {
   it('user: drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
     const match = await runner.captureAndMatch('flight')
-    // await page.screenshot({ path: "./test/data/user-layers/screenrefs/test.png" })
     await map.clickLayer(page, userLayersTab, 'flight')
     expect(match).beTrue()
   })

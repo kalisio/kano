@@ -45,9 +45,10 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t1-infobox')).beTrue()
+    const match = await runner.captureAndMatch('t1-infobox')
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('deactive information box', async () => {
@@ -59,9 +60,10 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
+    const match = await runner.captureAndMatch('t2-no-infobox')
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('deactive selectable', async () => {
@@ -88,9 +90,10 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t4-popup')).beTrue()
+    const match = await runner.captureAndMatch('t4-popup')
     await core.click(page, '.leaflet-popup-close-button', 1000)
     // await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('deactive popup', async () => {

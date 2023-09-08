@@ -64,8 +64,9 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('elevation-line')).beTrue()
+    const match = await runner.captureAndMatch('elevation-line')
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('see mapillary view', async () => {
@@ -75,8 +76,9 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'mapillary-viewer', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('mapillary-view')).beTrue()
+    const match = await runner.captureAndMatch('mapillary-view')
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('set time', async () => {
@@ -94,8 +96,9 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('station-measurements')).beTrue()
+    const match = await runner.captureAndMatch('station-measurements')
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   it('see timeseries for mobile measurements', async () => {
@@ -108,8 +111,9 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.54, 1.51)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('mobile-measurements')).beTrue()
+    const match = await runner.captureAndMatch('mobile-measurements')
     await core.clickAction(page, 'close-top-window', 1000)
+    expect(match).beTrue()
   })
 
   after(async () => {
