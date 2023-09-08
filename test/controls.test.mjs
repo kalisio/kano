@@ -27,9 +27,9 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
     await page.waitForNetworkIdle()
     await page.waitForTimeout(5000)
-    // await page.screenshot({ path: './test/data/controls/screenrefs/geolocation-test.png' })
-    expect(await runner.captureAndMatch('geolocation')).beTrue()
+    const match = await runner.captureAndMatch('geolocation')
     await core.clickPaneAction(page, 'top', 'locate-user')
+    expect(match).beTrue()
   })
 
   it('search location', async () => {
@@ -41,16 +41,16 @@ describe(`suite:${suite}`, () => {
     await core.click(page, selector)
     await page.waitForNetworkIdle()
     await page.waitForTimeout(1000)
-    // await page.screenshot({ path: './test/data/controls/screenrefs/location-test.png' })
-    expect(await runner.captureAndMatch('location')).beTrue()
+    const match = await runner.captureAndMatch('location')
     await core.clickAction(page, 'back')
+    expect(match).beTrue()
   })
 
   it('display position', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
-    // await page.screenshot({ path: './test/data/controls/screenrefs/position-test.png' })
-    expect(await runner.captureAndMatch('position')).beTrue()
+    const match = await runner.captureAndMatch('position')
     await core.clickAction(page, 'back')
+    expect(match).beTrue()
   })
 
   after(async () => {

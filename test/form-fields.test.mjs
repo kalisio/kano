@@ -49,7 +49,6 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await core.clickPaneAction(page, 'top', 'accept')
     await page.waitForTimeout(2000)
-    // await page.screenshot({ path: './test/data/schema/screenrefs/t1-point-test.png' })
     expect(await runner.captureAndMatch('t1-point')).beTrue()
   })
 
@@ -64,16 +63,17 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#a', 500)
     await core.type(page, '#number-field', '19aa09zz1978')
     await page.waitForTimeout(2000)
-    // await page.screenshot({ path: './test/data/schema/screenrefs/t2-form.png' })
-    expect(await runner.captureAndMatch('t2-form')).beTrue()
+    const match = await runner.captureAndMatch('t2-form')
     await core.click(page, '#apply-button', 1500)
+    expect(match).beTrue()
   })
 
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
     await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t3-view-data')).beTrue()
+    const match = await runner.captureAndMatch('t3-view-data')
     await core.click(page, '#close-button', 500)
+    expect(match).beTrue()
   })
 
   it('remove layer', async () => {

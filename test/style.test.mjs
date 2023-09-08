@@ -47,7 +47,6 @@ describe(`suite:${suite}`, () => {
     await core.moveSlider(page, 'style-set-maxzoom', 'left', 5)
     await core.click(page, '#apply-button')
     expect(await runner.captureAndMatch('S1_test1_line_min_max_zoom_z16_raw')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test1_Canal_Midi_z16_raw_test.png' })
   })
 
   it('line: set width, color and opacity', async () => {
@@ -62,21 +61,18 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1500)
     expect(await runner.captureAndMatch('S1_test2_line_styled_z16')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test2_Canal_Midi_z16_styled_test.png' })
   })
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 13)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test3_Canal_Midi_z13_test.png' })
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 17)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S1_test4_Canal_Midi_z17_test.png' })
   })
 
   it('line: remove layer', async () => {
@@ -102,7 +98,6 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
   it('point: deactive clustering by zoom + point styling', async () => {
@@ -119,7 +114,6 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 16)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S2_test2_Enjeux_Inondation_test.png' })
   })
 
   it('point: remove layer', async () => {
@@ -147,7 +141,6 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S3_test1_polygon_styling')).beTrue()
-    // await page.screenshot({ path: './test/data/style/screenrefs/S3_test1_Zone_Risque_Industriel_test.png' })
   })
 
   it('polygon: remove layer', async () => {
