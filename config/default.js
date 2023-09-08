@@ -420,7 +420,7 @@ module.exports = {
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
-  appWebsite: 'https://github.com/kalisio/kano',
+  appChangelog: 'https://kalisio.github.io/kApp/about/changelog.html',
   appOnlineHelp: 'https://kalisio.github.io/kano',
   publisher: 'Kalisio',
   publisherWebsite: 'https://kalisio.com',
