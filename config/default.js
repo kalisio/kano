@@ -484,6 +484,10 @@ module.exports = {
     leaflet: mapEngine,
     cesium: globeEngine
   },
+  readers: {
+    core: ['json'],
+    map: ['geojson', 'gpx', 'kml', 'shp']
+  },
   mapActivity: {
     additionalMixins: [],
     topPane: {
