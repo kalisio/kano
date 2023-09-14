@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import logger from 'loglevel'
 import config from 'config'
 import { Notify } from 'quasar'
 import postRobot from 'post-robot'
@@ -136,4 +137,7 @@ export default async ({ app, router }) => {
     api.get('storage').removeItem(config.gatewayJwt)
     utils.sendEmbedEvent('kano-logout')
   })
+
+  // For debug purpose
+  logger.debug(`[KDK] is now ready: ${JSON.stringify(Store.get('kdk'), null, 4)}`)
 }
