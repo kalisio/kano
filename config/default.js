@@ -485,8 +485,15 @@ module.exports = {
     cesium: globeEngine
   },
   readers: {
-    core: ['json'],
-    map: ['geojson', 'gpx', 'kml', 'shp']
+    core: [
+      { mimeTypes: '.json', reader: 'JSONReader' }
+    ],
+    map: [
+      { mimeTypes: '.geojson', reader: 'GEOJSONReader' },
+      { mimeTypes: '.gpx', reader: 'GPXReader' },
+      { mimeTypes: '.kml', reader: 'KMLReader' },
+      { mimeTypes: '.shp', reader: 'SHPReader' }
+    ]
   },
   mapActivity: {
     additionalMixins: [],
