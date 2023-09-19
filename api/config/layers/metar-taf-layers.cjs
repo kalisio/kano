@@ -43,6 +43,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       probeService: 'metar-taf-stations',
       featureId: 'icao',
       featureIdType: 'string',
+      featureLabel: 'name',
       from: 'P-7D',
       to: 'PT',
       every: 'PT30M',
