@@ -32,6 +32,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     probeService: 'centipede-bases',
     featureId: 'id',
     featureIdType: 'number',
+    featureLabel: 'name',
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT5M',

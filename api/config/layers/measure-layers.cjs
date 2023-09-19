@@ -154,6 +154,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-stations',
     featureId: 'code_station',
+    featureLabel: 'name',
     from: 'P-7D',
     to: 'PT-10M',
     every: 'PT10M',
