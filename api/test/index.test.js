@@ -230,10 +230,10 @@ describe('kano', () => {
 
   it('removes test users', async () => {
     await userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
-    let users = await userService.find({ query: { name: _.get(userObject, 'profile.name') }, user: userObject, checkAuthorisation: true })
+    let users = await userService.find({ query: { 'profile.name': _.get(userObject, 'profile.name') }, user: userObject, checkAuthorisation: true })
     expect(users.data.length).to.equal(0)
     await userService.remove(managerObject._id, { user: managerObject, checkAuthorisation: true })
-    users = await userService.find({ query: { name: _.get(managerObject, 'profile.name') }, user: managerObject, checkAuthorisation: true })
+    users = await userService.find({ query: { 'profile.name': _.get(managerObject, 'profile.name') }, user: managerObject, checkAuthorisation: true })
     expect(users.data.length).to.equal(0)
   })
   // Let enough time to process
