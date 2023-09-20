@@ -533,7 +533,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true },
-          { component: 'tools/KSearchTool' }
+          { component: 'tools/KSearchTool', geocoders: null }
         ],
         'edit-layer-data': [
           { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
@@ -630,7 +630,7 @@ module.exports = {
         'search-location': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
           { component: 'QSeparator', vertical: true },
-          { component: 'tools/KSearchTool' }
+          { component: 'tools/KSearchTool', geocoders: null }
         ]
       },
       // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
