@@ -210,6 +210,7 @@
     "pixelmatch": "^5.2.0",
     "pngjs": "^5.0.0",
     "prettier": "^2.5.1",
+    "puppeteer": "~20.5.0",
     "shelljs": "^0.8.5",
     "shx": "^0.3.4",
     "standard": "^17.0.0",
