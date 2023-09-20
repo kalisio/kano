@@ -12,7 +12,7 @@ if (process.env.NODE_APP_INSTANCE === 'dev') {
   domain = 'https://kano.test.kalisio.xyz'
   pwaName += ' (test)'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kano.prod.kalisio.com'
+  domain = 'https://kano.planet.kalisio.com'
 } else {
   // Otherwise we are on a developer machine
   if (process.env.NODE_ENV === 'development') {
