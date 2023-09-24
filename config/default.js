@@ -31,6 +31,10 @@ const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : dom
 // Allow to override version number for custom build
 const version = (process.env.VERSION ? process.env.VERSION : require('../package.json').version)
 
+const website = 'https://www.kalisio.com'
+const onlineHelp = 'https://kalisio.github.io/kano'
+const changelog = onlineHelp + '/quickstart/history.html'
+
 // Left pane
 const leftPane = {
     content: [
@@ -425,10 +429,10 @@ module.exports = {
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
-  appChangelog: 'https://kalisio.github.io/kano/about/changelog.html',
-  appOnlineHelp: 'https://kalisio.github.io/kano',
+  appChangelog: changelog,
+  appOnlineHelp: onlineHelp,
   publisher: 'Kalisio',
-  publisherWebsite: 'https://kalisio.com',
+  publisherWebsite: website,
   publisherContact: 'support@kalisio.com',
   locale: {
     // If you'd like to force locale otherwise it is retrieved from browser
