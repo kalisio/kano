@@ -37,6 +37,7 @@
   "sideNav": {
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D",
+    "ONLINE_HELP": "Aide en ligne",
     "CONTEXTUAL_HELP": "@:CONTEXTUAL_HELP",
     "LOGOUT": "Se déconnecter"
   }
