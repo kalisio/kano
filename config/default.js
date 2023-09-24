@@ -50,7 +50,6 @@ const leftPane = {
           component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } 
       },
       { id: 'online-help', icon: 'las la-book', label: 'sideNav.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
-      ,
       { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', handler: { name: 'launchTour', params: ['home'] }, renderer: 'item' },
       { component: 'QSeparator' },
       { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
