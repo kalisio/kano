@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { fileURLToPath } from 'node:url'
 
 export default defineConfig({
   base: '/kano/',
@@ -25,6 +26,11 @@ export default defineConfig({
     },
     footer: {
       copyright: 'MIT Licensed | Copyright © 2017-20xx Kalisio'
+    }
+  },
+  build: {
+    rollupOptions: {
+      external: [fileURLToPath(new URL('../../.postcssrc.js', import.meta.url))],
     }
   }
 })
