@@ -8,7 +8,7 @@ Kano comes with small *tutorials* (a.k.a. **tours**) that can be directly run on
 
 Then, you can launch the main tutorial directly from the main menu through the following icon <a href=""><i class="las la-question-circle"/></a>. Follow the step by step guide <a href=""><i class="las la-chevron-right"/></a>, go back if required <a href=""><i class="las la-chevron-left"/></a> and stop anytime <a href=""><i class="las la-times"/></a> as illustrated by the following figure:
 
-![tour](../assets/kano-tour.png)
+![tour](../.vitepress/public/images/kano-tour.png)
 
 From the main tutorial you can open others tutorials dedicated to specific components (like e.g. the navigation bar) whenever you see the <i class="las la-external-link-square-alt"/> icon.
 

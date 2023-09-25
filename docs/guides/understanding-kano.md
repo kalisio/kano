@@ -26,7 +26,7 @@ Kano manages both **space** and **time** information in order to visualize time-
 
 The following figure depicts the default 2D activity and the main application components:
 
-![Components](./../assets/kano-components.png)
+![Components](./../.vitepress/public/images/kano-components.png)
 
 ::: tip
 The 3D view is pretty similar to the 2D activity except that some feature might not be yet available.

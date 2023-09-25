@@ -83,3 +83,7 @@ src/css/kdk
 
 # local layers
 local-layers.js
+
+# vitepress
+docs/.vitepress/cache
+docs/.vitepress/dist

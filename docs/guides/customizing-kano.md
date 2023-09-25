@@ -26,7 +26,7 @@ You can add your own categories in the catalog by defining it in additional file
 
 ::: details my-categories.cjs - Used to define additional categories.
 
-<<< @/.vuepress/public/my-categories.cjs
+<<< ../.vitepress/public/my-categories.cjs
 :::
 
 Layers that will be added in a given category depends on the `filter` property content, which defines a [sift filter](https://github.com/crcn/sift.js) applied to the layers list. Although any filter can be used, a `tags` property containing an array of relevent tags is often used by convention.
@@ -41,7 +41,7 @@ We will start with a really simple example by adding two different map backgroun
 
 ::: details osm-layers.cjs - Used to define base layers with OpenStreetMap data.
 
-<<< @/.vuepress/public/osm-layers.cjs
+<<< ../.vitepress/public/osm-layers.cjs
 :::
 
 Except for raster data, vector data are always converted to GeoJson upfront or as a rendering preprocessing phase in Kano.
@@ -59,12 +59,12 @@ In this section we will use OGC web services of the [French geographical institu
 
 ::: details ogc-layers.cjs - Used to define additional layers using different protocols like WMTS, WMS and WFS.
 
-<<< @/.vuepress/public/ogc-layers.cjs
+<<< ../.vitepress/public/ogc-layers.cjs
 :::
 
 You now should be able to see this after making some of the layers active:
 
-![ogc layers](../assets/kano-ogc-layers.png)
+![ogc layers](../.vitepress/public/images/kano-ogc-layers.png)
 
 Due to the possible large amount of vector data coming from the WFS the layer is configured with `minZoom` and `tiled` property so that data is only retrieved when zoom level exceed 10 for visible tiles only.
 
@@ -84,12 +84,12 @@ First copy the new layers file in the `kano/api/config/layers` directory. Then, 
 
 ::: details file-layers.cjs - Used to define additional layers using file data.
 
-<<< @/.vuepress/public/file-layers.cjs
+<<< ../.vitepress/public/file-layers.cjs
 :::
 
 You now should be able to see a map highlighting some administrative boundaries in France:
 
-![file layers](../assets/kano-file-layers.png)
+![file layers](../.vitepress/public/images/kano-file-layers.png)
 
 If you have to ingest large datasets you should consider processing data using our [ETL Krawler](https://kalisio.github.io/krawler/) or ad-hoc processors. For instance, [k-population](https://github.com/kalisio/k-population) ingest population data from a big GeoPackage into our database. You will find the associated layer definition in the built-in layers.
 
@@ -101,16 +101,16 @@ In this example there is one GeoJson file per day. First extract the [data files
 
 ::: details covid-19-layers.cjs - Used to define additional time-varying layers based on file data.
 
-<<< @/.vuepress/public/covid-19-layers.cjs
+<<< ../.vitepress/public/covid-19-layers.cjs
 :::
 
 Using the bottom timeline, navigate to some dates within the data time range, you now should be able to see a choropleth map highlighting the number of hospitalizations for each date:
 
-![covid-19 layers](../assets/kano-covid-19-layers.png)
+![covid-19 layers](../.vitepress/public/images/kano-covid-19-layers.png)
 
 You can even do the same using the 3D activity:
 
-![covid-19 layers in 3D](../assets/kano-covid-19-layers-3D.png)
+![covid-19 layers in 3D](../.vitepress/public/images/kano-covid-19-layers-3D.png)
 
 ### Using the API
 
@@ -179,7 +179,7 @@ First copy the new layers file in the `kano/api/config/layers` directory. Then, 
 
 ::: details sensors-layers.cjs - Used to define additional sensors layers based on API data feeding.
 
-<<< @/.vuepress/public/sensors-layers.cjs
+<<< ../.vitepress/public/sensors-layers.cjs
 :::
 
 Now, feed the API using the provided data in the public folder of the documentation:
@@ -196,7 +196,7 @@ For testing purpose you can get a valid token from the local storage in the deve
 
 Using the bottom timeline, navigate to a date/time with existing sensor data, you now should be able to see your sensor on the map, selecting it should open the value timeseries:
 
-![sensors layers](../assets/kano-sensors-layers.png)
+![sensors layers](../.vitepress/public/images/kano-sensors-layers.png)
 
 A data layer can contain multiple time-varying elements called *variables*. The features may contain additional properties, e.g. a status (OK/NOK), a name, etc. that can be used to customize the rendering, e.g. icon, color, tooltip, etc.
 

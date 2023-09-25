@@ -223,13 +223,13 @@ We used the Kano API to expose French nuclear power production data to a set of 
 
 We first developed a [Krawler](https://kalisio.github.io/krawler/) job whose task is to scrap power production data and to push it into Kano's backing MongoDB database. On Kano's side, we added a layer declaring a feature service pointing on the database collections the Krawler job was populating. From that time, nuclear power production data was available for display in Kano. Here's what it looks like :
 
-![Nucler power production data in Kano](./../assets/kano-rte.jpg)
+![Nucler power production data in Kano](./../.vitepress/public/images/kano-rte.jpg)
 
 Once the collections started being populated, we looked for ways to connect Grafana to Kano's API endpoint. For this we used the [Infinity Grafana datasource plugin](https://sriramajeyam.com/grafana-infinity-datasource/) allowing us to use it's JSON scrapping capabilities to feed Grafana. We created a JWT token for the datasource to be able to reach Kano's API. After creating dashboards and looking up some docs, we ended up with a set of synthetic dashboards: 
 
-![Nuclear power production overview in Grafana](./../assets/grafana-rte-overview.png)
-![Nuclear power production detail in Grafana](./../assets/grafana-rte-details.png)
+![Nuclear power production overview in Grafana](./../.vitepress/public/images/grafana-rte-overview.png)
+![Nuclear power production detail in Grafana](./../.vitepress/public/images/grafana-rte-details.png)
 
 Overall, here's the architecture of the whole solution :
 
-![Whole use case architecture](./../assets/grafana-rte-architecture.png)
+![Whole use case architecture](./../.vitepress/public/images/grafana-rte-architecture.png)

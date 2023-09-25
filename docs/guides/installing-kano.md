@@ -10,7 +10,7 @@ sidebarDepth: 3
 This requires you to [install Docker](https://docs.docker.com/engine/installation/), the world’s leading software container platform.
 ::: 
 
-We provide Docker images on the [Docker Hub](https://hub.docker.com/r/kalisio/kano/) to ease deploying your own instance. To run correctly it has to be linked with a standard [MongoDB container](https://hub.docker.com/_/mongo/) for the database. Although it's possible to directly run Docker commands we provide you with [docker-compose](https://docs.docker.com/compose/) files to ease deployment, in addition to minimalist configuration files. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vuepress/public) of the documentation.
+We provide Docker images on the [Docker Hub](https://hub.docker.com/r/kalisio/kano/) to ease deploying your own instance. To run correctly it has to be linked with a standard [MongoDB container](https://hub.docker.com/_/mongo/) for the database. Although it's possible to directly run Docker commands we provide you with [docker-compose](https://docs.docker.com/compose/) files to ease deployment, in addition to minimalist configuration files. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public) of the documentation.
 
 Jump into the folder with the docker-compose and configuration files, the following commands should do the job:
 
@@ -26,7 +26,7 @@ docker-compose down -v
 
 Then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected:
 
-![installation](../assets/kano-installation.png)
+![installation](../.vitepress/public/images/kano-installation.png)
 
 ::: tip
 Check the `local.cjs` configuration file below to find the required login information
@@ -37,7 +37,7 @@ If running Docker under Windows in a virtual machine first redirect the port 808
 :::
 
 ::: details docker-compose.yml - Used to deploy MongoDB and Kano containers.
-<<< @/.vuepress/public/docker-compose.yml
+<<< ../.vitepress/public/docker-compose.yml
 :::
 
 Kano comes with a default set of users but you should change this default configuration for a public deployment and avoid leaking login/passwords. Similarly, Kano comes with a default set of layers targeting geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) and you should add your own data layers instead. This is done by configuration using the following files:
@@ -45,12 +45,12 @@ Kano comes with a default set of users but you should change this default config
 ::: details local.cjs - Used to override the default backend configuration and setup a default user.
 To be put in the `kano/api/config` directory.
 
-<<< @/.vuepress/public/local.cjs
+<<< ../.vitepress/public/local.cjs
 :::
 ::: details my-layers.cjs - Used to define the available default layers.
 To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services](https://geoservices.ign.fr/services-web-experts-cartes).
 
-<<< @/.vuepress/public/my-layers.cjs
+<<< ../.vitepress/public/my-layers.cjs
 :::
 
 As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the docker-compose file targets the latest development version (`dev` tag) but you can change it to target either a beta (`test` tag) or a production (`prod` tag) release.
@@ -81,10 +81,10 @@ docker-compose -f docker-compose.yml -f docker-compose-weacast.yml down -v
 
 Wait a couple of minutes so that Weacast feeds the database with the latest forecast then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected if you display some meteorological layers and probe a location:
 
-![installation](../assets/weacast-installation.png)
+![installation](../.vitepress/public/images/weacast-installation.png)
 
 ::: details docker-compose-weacast.yml - Used to deploy Weacast container.
-<<< @/.vuepress/public/docker-compose-weacast.yml
+<<< ../.vitepress/public/docker-compose-weacast.yml
 :::
 
 ::: tip
@@ -109,10 +109,10 @@ docker-compose -f docker-compose.yml -f docker-compose-hubeau.yml down -v
 
 Wait a couple of minutes so that the jobs feeds the database with the latest observations then point your browser to [localhost:8080](http://localhost:8080). You should see something like this once connected if you display the observations layer, zoom in and pick a station:
 
-![installation](../assets/hubeau-installation.png)
+![installation](../.vitepress/public/images/hubeau-installation.png)
 
 ::: details docker-compose-hubeau.yml - Used to deploy Hubeau jobs containers.
-<<< @/.vuepress/public/docker-compose-hubeau.yml
+<<< ../.vitepress/public/docker-compose-hubeau.yml
 :::
 
 ::: tip
