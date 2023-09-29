@@ -42,6 +42,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'vigicrues-sections',
     featureId: 'gid',
+    featureLabel: 'name',
     featureIdType: 'number',
     from: 'P-7D',
     to: 'PT-15M',
