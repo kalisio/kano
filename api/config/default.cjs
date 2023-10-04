@@ -251,9 +251,6 @@ module.exports = {
   mapillary: {
     token: process.env.MAPILLARY_TOKEN
   },
-  geocoder: {
-    providers: [{ provider: 'opendatafrance' }, { provider: 'openstreetmap' }]
-  },
   logs: {
     Console: {
       format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
