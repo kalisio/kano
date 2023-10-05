@@ -5,7 +5,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          HUBEAU_HYDRO: 'Hub\'Eau (hydro)',
+          HUBEAU_HYDRO: 'Hub\'Eau Hydrométrie',
           HUBEAU_HYDRO_DESCRIPTION: 'Données hydrométriques'
         },
         Variables: {
@@ -17,7 +17,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          HUBEAU_HYDRO: 'Hub\'Eau (hydro)',
+          HUBEAU_HYDRO: 'Hub\'Eau Hydrometry',
           HUBEAU_HYDRO_DESCRIPTION: 'Hydrometric data'
         },
         Variables: {
@@ -31,7 +31,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'hydrography', 'measure'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
     attribution: '',
     type: 'OverlayLayer',
     service: 'hubeau-hydro-observations',
@@ -155,7 +154,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          HUBEAU_PIEZO: 'Hub\'Eau (piezo)',
+          HUBEAU_PIEZO: 'Hub\'Eau Piezométrie',
           HUBEAU_PIEZO_DESCRIPTION: 'Données piézométriques'
         },
         Variables: {
@@ -165,7 +164,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          HUBEAU_PIEZO: 'Hub\'Eau (piezo)',
+          HUBEAU_PIEZO: 'Hub\'Eau Piezometry',
           HUBEAU_PIEZO_DESCRIPTION: 'Piezometric data'
         },
         Variables: {
