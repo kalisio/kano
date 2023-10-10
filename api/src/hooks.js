@@ -28,6 +28,8 @@ export default {
         }
         // Then user creation
         if ((hook.service.name === 'users') && (hook.method === 'create')) return false
+        // verifyEmail
+        if ((hook.service.name === 'account') && (hook.method === 'verifyEmail')) return false
         // If not exception perform authentication
         return true
       }, authenticate('jwt')),
