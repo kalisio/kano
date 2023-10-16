@@ -2,19 +2,16 @@ notifications:
   email: false
   slack:
     rooms:
-    - secure: PxuIjhULoC8GEyoYWTZQwIzEori+7/N5NLTJcY01TkqjQVdIjxdf33Py6ky9DgIxWOrG0R5jIrQ8eD9Coee34s/av85HDFwJMwY2UTTtYcYUdDUIo6g1OmAGYGAcnyZxUsYknK51sh1w6C4YSjlkuKYNpryse8pSHzE26qOirONGwccPXcN9AZHHonWKRYq0mjaseMgVmp4rGQufMksP80LLt1stzDsShFvVRo5zO1gvmmK5IDUqSocPTfNYThsvqS6Wdp+a9O/uDmx3coNDgkqPm1Fj58Q1Bklmi+gEm2cHCQgOGa1bYN+EivLw+4oFGuq6Yz1qKaF3fivE/jUDgqmOx2cYpyUXUtcqvjezIx/EOjvf8heC5xZZ2NUE0RCNPr8RzGzltWwZLU09Td1PxXZlQ6II6r1kKHLLfzi4Uf7von159FK4L7+/rae3V1T7qI1Rif6sHV1uD4wdleaJVtqM1p4UUWiV7jHdRJke5C0MhM1+PUfiHJTDszm2Iv8Fkac+TM5Yya1p87/t+jgfBRlZ1i+wuJiec4EU3Ch9o9J+ptKnAhwKzvM4xab95mm6OOQ4cZaedOWLJuKTCpZ2KJJA73x0lPDUNYELXsDMB13DYbqkE7R2/XOW0oIQ+BCcviKGEqInjogjYlvrJ4y8HtOsV1vmzbCWjNGFWM2RurY=
+      secure: sP096KaVHWWlU7fJHF0A2HpovkcuiBX0vrESM3lZgzHZS01ihKwUx+PKvsLNXBUi9QHOCWeBB20ZO7gGIly8SGV/5AysLjyuhtNBTjnzxPAr54yctAdkai2u/v7eiSpAdCf2+SORljcqbsRlcgSjrRIsuCU1BtIBmIDq9qv2XzxUnOmrtiSQOxhYkwYIfhvd9QRvbLSDI3Wm4DAXjMRsrEneiWh58uHLaUTJyWIOvzCCM9bmh5rM6H9PTCx4/KZnmwI1SAsoTpTnq5f3rybf7L6gR41pMO5f7ZHipKKOzyeHxtKuRTWrgbfEw477gvVoYaEGSBBA8zFcLpNLkc5f8rGUq5AcRXdaynV4Q9JygmiKd/2SHx4ik0QKLu2iwXn0n6X05F9WANYhUzhFlYZMGd2QB2WFNh3hA9IeB5GgSmxnYvji4OjtWBzMZVUA+H3SsTaSidNb2/aEWrflI99ojr0B0aMnLFRoGKMSyxR5x5yLTDIaW/7qjjoHCkbimot/f4MKspZzehMcKWv9ZwwkNXffiUMVla7R3QGyz/9qBaduavNrT+j0Tm5xaGhDd3/Vn8MvvqHqDy7eqMcq4cdNhW3uSj0OtyyO3Jt6WpkGrQ5ewHxpQoou7q9GDVwTMIiZE+p5e0lc/zCmepV9K2zGYwo0Dp+mqR0qwr7+UFxTFqk=
     on_success: always
     on_failure: always
-
 stages:
 - name: APP
   if: commit_message !~ /(skip[ _-]app)/
 - name: DOC
   if: commit_message =~ /\[build doc\]/
-  
 jobs:
   include:
-    
   - stage: APP
     os: linux
     language: node_js
@@ -27,7 +24,6 @@ jobs:
     - export -f travis_fold
     script:
     - bash .travis.app.sh
-
   - stage: DOC
     language: node_js
     node_js:
@@ -38,7 +34,7 @@ jobs:
       provider: pages
       local-dir: docs/.vitepress/dist
       skip-cleanup: true
-      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      github-token: "$GITHUB_TOKEN"
       keep-history: true
       on:
-        branch: master      
+        branch: master
