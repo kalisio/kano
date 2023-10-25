@@ -10,6 +10,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         Variables: {
           ping: 'Status'
+        },
+        Sublegend: {
+          VERIFIED_BASES: 'Bases vérifiées',
+          BASES_BEING_VERIFIED: 'Bases en cours de vérification',
+          INACTIVE_BASES: 'Bases inactives'
         }
       },
       en: {
@@ -19,6 +24,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         Variables: {
           ping: 'Status'
+        },
+        Sublegend: {
+          VERIFIED_BASES: 'Verified bases',
+          BASES_BEING_VERIFIED: 'Bases being verified',
+          INACTIVE_BASES: 'Inactive bases'
         }
       }
     },
@@ -53,6 +63,17 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'symbols',
+      label: 'Layers.CENTIPEDE_DESCRIPTION',
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#78b955' } }, label: 'Sublegend.VERIFIED_BASES' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#d6bf3a' } }, label: 'Sublegend.BASES_BEING_VERIFIED' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#f76454' } }, label: 'Sublegend.INACTIVE_BASES' }
+        ]
+      }
+    },
     leaflet: {
       type: 'geoJson',
       realtime: true,
@@ -62,8 +83,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'icon-x-offset': 2,
       'marker-color': `<% if (properties.ping === 2 ) { %>#78b955<% } 
         else if (properties.ping === 1 ) { %>#d6bf3a<% }
-        else if (properties.ping === 0 ) { %>#f76454<% }
-        else { %>grey<% } %>`,
+        else { %>#f76454<% } %>`,
       cluster: { disableClusteringAtZoom: 18 },
       template: ['marker-color'],
       popup: {
@@ -159,3 +179,4 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }
   }]
 }
+
