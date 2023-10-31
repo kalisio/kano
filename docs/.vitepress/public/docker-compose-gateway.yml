@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  kano:
+    environment:
+      - API_GATEWAY_URL=http://localhost:8082
+  gateway:
+    image: kalisio/express-gateway:1.16.9
+    environment:
+      - KAPTURE_URL=http://kapture:3000
+      - GEOKODER_URL=http://geokoder:8080
+    volumes:
+      - type: bind
+        source: ./gateway.config.yml
+        target: /var/lib/eg/gateway.config.yml
+    ports:
+      - "8082:8080"
+    networks:
+      - kano

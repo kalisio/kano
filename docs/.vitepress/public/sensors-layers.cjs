@@ -27,6 +27,7 @@ module.exports = [{
   probeService: 'sensors-stations',
   ttl: 7 * 24 * 60 * 60,
   featureId: 'id',
+  featureLabel: 'name',
   from: 'P-7D',
   to: 'PT-1M',
   every: 'PT10M',

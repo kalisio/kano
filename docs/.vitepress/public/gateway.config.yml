@@ -1,0 +1,40 @@
+http:
+  port: ${PORT:-8080}
+apiEndpoints:
+  capture:
+    host: '*'
+    paths: '/capture'
+  geocoder:
+    host: '*'
+    paths: '/geocoder/*'
+
+serviceEndpoints:
+  capture:
+    url: '${KAPTURE_URL}/capture'
+  geocoder:
+    url: '${GEOKODER_URL}'
+
+policies:
+  - proxy
+
+pipelines:
+  capture:
+    apiEndpoints:
+      - capture
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: capture
+            changeOrigin: true
+            stripPath: true
+            timeout: 120000
+  geocoder:
+    apiEndpoints:
+      - geocoder
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: geocoder
+            changeOrigin: true
+            stripPath: true
+            timeout: 120000

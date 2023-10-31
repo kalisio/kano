@@ -45,7 +45,7 @@ Kano comes with a default set of users but you should change this default config
 ::: details local.cjs - Used to override the default backend configuration and setup a default user.
 To be put in the `kano/api/config` directory.
 
-<<< ../.vitepress/public/local.cjs
+<<< ../.vitepress/public/local-kano.cjs
 :::
 ::: details my-layers.cjs - Used to define the available default layers.
 To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services](https://geoservices.ign.fr/services-web-experts-cartes).
@@ -202,31 +202,3 @@ export DB_URL=mongodb://mongodb:27017/kano
 krawler ./jobfile-hydro-stations.js
 krawler ./jobfile-hydro-observations.js
 ```
-
-## Use Kargo services
-
-You can easily connect Kano with geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) through its [API gateway](https://kalisio.github.io/kargo/guides/advanced-usage.html#using-the-api-gateway). First add the Kano application/consumer in the gateway configuration by generating a [UUID](https://www.uuidgenerator.net/):
-```
-users: {
-  my_user: {
-    'kano': {
-      scopes: ['wms', 'wmts', 'tms', 'wfs', 'wcs', 'k2'],
-      credential: {
-        type: 'jwt',
-        keyId: '9ba09ead-23e1-4020-9994-aa9130782b09',
-        keySecret: '${APP_SECRET}'
-      }
-    }
-  }
-}
-```
-Then add the following environment variables before launching the Kano backend:
-```bash
-// Setup the target gateway
-export API_GATEWAY_URL="https://api.your.kargo.domain"
-export APP_ID="9ba09ead-23e1-4020-9994-aa9130782b09"
-yarn dev
-```
-This will automatically generate a valid token for the gateway once you log in and add it to any request targeting a service behind the gateway.
-
-Kargo can also automatically deploy for you krawler jobs, kapture, k2, etc. as [services](https://kalisio.github.io/kargo/guides/understanding-kargo.html#service).

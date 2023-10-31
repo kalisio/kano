@@ -46,7 +46,8 @@ function getGuidesSidebar () {
     { text: 'Installing Kano', link: '/guides/installing-kano' },
     { text: 'Customizing Kano', link: '/guides/customizing-kano' },
     { text: 'Advanced usage', link: '/guides/advanced-usage' },
-    { text: 'Using the Kano API', link: '/guides/kano-api' }
+    { text: 'Using the Kano API', link: '/guides/kano-api' },
+    { text: 'Installing Services', link: '/guides/installing-services' }
   ]
 }
 

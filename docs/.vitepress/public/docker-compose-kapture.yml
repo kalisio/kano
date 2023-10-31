@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  kapture:
+    image: kalisio/kapture:latest
+    environment:
+      - KANO_URL=http://kano:8081
+      - KANO_JWT=eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJhdWQiOiJrYWxpc2lvIiwiaXNzIjoia2FsaXNpbyJ9._HslaK0hTlISw_wGkUJYmpZdcNuWWGB1iHJDApeJxWk
+      - DEBUG=kapture*
+    ports:
+      - "8083:3000"
+    networks:
+      - kano

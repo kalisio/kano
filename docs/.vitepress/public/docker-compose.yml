@@ -17,7 +17,7 @@ services:
         source: ./my-layers.cjs
         target: /opt/kalisio/kano/api/config/layers/my-layers.cjs
       - type: bind
-        source: ./local.cjs
+        source: ./local-kano.cjs
         target: /opt/kalisio/kano/api/config/local.cjs
     ports:
       - "8080:8081"

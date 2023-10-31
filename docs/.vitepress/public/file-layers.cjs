@@ -65,7 +65,7 @@ module.exports = [{
   probe: 'Airports',
   url: `${baseUrl}/departments.geojson`,
   // Could also be a file path to a GeoJson or a gzipped GeoJson
-  //fileName: path.join(__dirname, '../../../docs/.vuepress/public/departements.geojson'),
+  //fileName: path.join(__dirname, '../../../docs/.vitepress/public/departements.geojson'),
   leaflet: {
     type: 'geoJson',
     source: '/api/departments',

@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  geokoder:
+    image: kalisio/geokoder:latest
+    environment:
+      - DEBUG=geokoder*
+    volumes:
+      - type: bind
+        source: ./local-geokoder.cjs
+        target: /geokoder/config/local.cjs
+    ports:
+      - "8084:8080"
+    networks:
+      - kano
