@@ -523,7 +523,7 @@ import{_ as s,o as n,c as a,Q as e}from"./chunks/framework.f7d371db.js";const l=
 <span class="line"><span style="color:#e1e4e8;">  probe: &#39;Airports&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  url: \`\${baseUrl}/departments.geojson\`,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  // Could also be a file path to a GeoJson or a gzipped GeoJson</span></span>
-<span class="line"><span style="color:#e1e4e8;">  //fileName: path.join(__dirname, &#39;../../../docs/.vuepress/public/departements.geojson&#39;),</span></span>
+<span class="line"><span style="color:#e1e4e8;">  //fileName: path.join(__dirname, &#39;../../../docs/.vitepress/public/departements.geojson&#39;),</span></span>
 <span class="line"><span style="color:#e1e4e8;">  leaflet: {</span></span>
 <span class="line"><span style="color:#e1e4e8;">    type: &#39;geoJson&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">    source: &#39;/api/departments&#39;,</span></span>
@@ -611,7 +611,7 @@ import{_ as s,o as n,c as a,Q as e}from"./chunks/framework.f7d371db.js";const l=
 <span class="line"><span style="color:#24292e;">  probe: &#39;Airports&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">  url: \`\${baseUrl}/departments.geojson\`,</span></span>
 <span class="line"><span style="color:#24292e;">  // Could also be a file path to a GeoJson or a gzipped GeoJson</span></span>
-<span class="line"><span style="color:#24292e;">  //fileName: path.join(__dirname, &#39;../../../docs/.vuepress/public/departements.geojson&#39;),</span></span>
+<span class="line"><span style="color:#24292e;">  //fileName: path.join(__dirname, &#39;../../../docs/.vitepress/public/departements.geojson&#39;),</span></span>
 <span class="line"><span style="color:#24292e;">  leaflet: {</span></span>
 <span class="line"><span style="color:#24292e;">    type: &#39;geoJson&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">    source: &#39;/api/departments&#39;,</span></span>
@@ -865,6 +865,7 @@ import{_ as s,o as n,c as a,Q as e}from"./chunks/framework.f7d371db.js";const l=
 <span class="line"><span style="color:#e1e4e8;">  probeService: &#39;sensors-stations&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  ttl: 7 * 24 * 60 * 60,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  featureId: &#39;id&#39;,</span></span>
+<span class="line"><span style="color:#e1e4e8;">  featureLabel: &#39;name&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  from: &#39;P-7D&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  to: &#39;PT-1M&#39;,</span></span>
 <span class="line"><span style="color:#e1e4e8;">  every: &#39;PT10M&#39;,</span></span>
@@ -937,6 +938,7 @@ import{_ as s,o as n,c as a,Q as e}from"./chunks/framework.f7d371db.js";const l=
 <span class="line"><span style="color:#24292e;">  probeService: &#39;sensors-stations&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">  ttl: 7 * 24 * 60 * 60,</span></span>
 <span class="line"><span style="color:#24292e;">  featureId: &#39;id&#39;,</span></span>
+<span class="line"><span style="color:#24292e;">  featureLabel: &#39;name&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">  from: &#39;P-7D&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">  to: &#39;PT-1M&#39;,</span></span>
 <span class="line"><span style="color:#24292e;">  every: &#39;PT10M&#39;,</span></span>
