@@ -467,11 +467,6 @@ module.exports = {
       actions: [
         { id: 'login-link', label: 'KLogoutScreen.LOG_IN_AGAIN_LABEL', route: { name: 'login' } }
       ]
-    },
-    endpoint: {
-      actions: [
-        { id: 'login-link', label: 'KEndpointScreen.LOG_IN_LABEL', route: { name: 'login' } }
-      ]
     }
   },
   layout: {

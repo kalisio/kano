@@ -12,7 +12,6 @@ module.exports = [{
       component: 'screen/KLogoutScreen',
       meta: { authenticated: true }
     },
-    'change-endpoint': 'screen/KEndpointScreen',
     home: {
       // The name of the route has to be set the default child
       name: '',
