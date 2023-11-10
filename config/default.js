@@ -37,23 +37,23 @@ const changelog = onlineHelp + '/quickstart/history.html'
 
 // Left pane
 const leftPane = {
-    content: [
-      { component: 'KLogo' },
-      { component: 'QSeparator' },
-      { id: 'settings', icon: 'las la-cog', label: 'SETTINGS', renderer: 'item', dialog: {
-          component: 'app/KSettings', title: 'SETTINGS', cancelAction: 'CANCEL', okAction: {
-            id: 'apply-settings', label: 'APPLY', handler: 'apply'
-          }
+  content: [
+    { component: 'KLogo' },
+    { component: 'QSeparator' },
+    { id: 'settings', icon: 'las la-cog', label: 'SETTINGS', renderer: 'item', dialog: {
+        component: 'app/KSettings', title: 'SETTINGS', cancelAction: 'CANCEL', okAction: {
+          id: 'apply-settings', label: 'APPLY', handler: 'apply'
         }
-      },
-      { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { 
-          component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } 
-      },
-      { id: 'online-help', icon: 'las la-book', label: 'sideNav.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
-      { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', handler: { name: 'launchTour', params: ['home'] }, renderer: 'item' },
-      { component: 'QSeparator' },
-      { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
-    ]
+      }
+    },
+    { id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: { 
+        component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE' } 
+    },
+    { id: 'online-help', icon: 'las la-book', label: 'sideNav.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
+    { id: 'contextual-help', icon: 'las la-question-circle', label: 'sideNav.CONTEXTUAL_HELP', handler: { name: 'launchTour', params: ['home'] }, renderer: 'item' },
+    { component: 'QSeparator' },
+    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
+  ]
 }
 
 // left window
@@ -180,6 +180,11 @@ function catalogTabbar (activeView) {
         handler: { name: 'setRightPaneMode', params: ['user-views'] } 
       },
       { 
+        id: 'user-projects-tab', label: 'PROJECTS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        toggled: activeView === 'user-projects' ? true : false,
+        handler: { name: 'setRightPaneMode', params: ['user-projects'] } 
+      },
+      { 
         id: 'catalog-layers-tab', label: 'CATALOG_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'catalog-layers' ? true : false,
         handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
@@ -209,6 +214,10 @@ const catalogPanes = {
   'user-views': [
     catalogTabbar('user-views'),
     { id: 'user-views', component: 'catalog/KViewsPanel' }
+  ],
+  'user-projects': [
+    catalogTabbar('user-projects'),
+    { id: 'user-projects', component: 'catalog/KProjectsPanel' }
   ],
   'catalog-layers': [
     catalogTabbar('catalog-layers'),
@@ -505,6 +514,7 @@ module.exports = {
     topPane: {
       content: {
         default: [
+          { component: 'KProjectMenu' },
           { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE',
             route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
@@ -587,6 +597,8 @@ module.exports = {
         { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
           visible: { name: '$can', params: ['create', 'catalog'] }, route: { name: 'create-map-view' } },
         { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer' } },
+        { id: 'create-project', icon: 'las la-project-diagram', label: 'mixins.activity.CREATE_PROJECT',
+          visible: { name: '$can', params: ['create', 'projects'] }, route: { name: 'create-map-project' } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },

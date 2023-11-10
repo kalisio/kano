@@ -84,6 +84,17 @@ module.exports = [{
               component: 'catalog/KCreateView',
               tour: tours['create-view']
             },
+            'create-project': {
+              name: 'create-map-project',
+              component: 'catalog/KProjectEditor',
+              tour: tours['create-project']
+            },
+            'edit-project/:objectId': {
+              name: 'edit-map-project',
+              component: 'catalog/KProjectEditor',
+              tour: tours['edit-project'],
+              props: true
+            },
             categories: {
               name: 'manage-layer-categories',
               component: 'catalog/KLayerCategories',

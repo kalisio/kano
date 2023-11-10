@@ -81,7 +81,14 @@ export default {
     'leftPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('left', this.leftPane) },
     'rightPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('right', this.rightPane) },
     'topPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('top', this.topPane) },
-    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) }
+    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) },
+    $route: {
+      handler (to, from) {
+        const toProject = _.get(to, 'query.project')
+        const fromProject = _.get(from, 'query.project')
+        if (toProject !== fromProject) this.refreshLayers()
+      }
+    }
   },
   methods: {
     async configureMap (container) {
