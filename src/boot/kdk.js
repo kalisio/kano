@@ -8,7 +8,7 @@ import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
 import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
-import { Geolocation, CanvasDrawContext } from '@kalisio/kdk/map.client'
+import { Geolocation, setupApi, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
 // canvas layer's draw context
@@ -60,7 +60,7 @@ export default async ({ app, router }) => {
   await utils.sendEmbedEvent('kano-ready')
 
   // Initiate the client
-  const api = initializeApi()
+  const api = initializeApi(setupApi)
   // Setup app hooks
   api.hooks(appHooks)
   // Then all services

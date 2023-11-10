@@ -245,6 +245,9 @@ module.exports = {
       max: 1000
     }
   },
+  projects: {
+
+  },
   cesium: {
     token: process.env.CESIUM_TOKEN
   },
