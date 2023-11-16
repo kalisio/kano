@@ -430,6 +430,7 @@ module.exports = {
   appName: 'Kano',
   appChangelog: changelog,
   appOnlineHelp: onlineHelp,
+  northLogo: 'north-arrow.svg',
   publisher: 'Kalisio',
   publisherWebsite: website,
   publisherContact: 'support@kalisio.com',
@@ -519,7 +520,7 @@ module.exports = {
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { component: 'QSeparator' },
-              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', handler: { name: 'setTopPaneMode', params: ['capture-map'] } }
+              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KcaptureDialog', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'capture'}  } }
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
