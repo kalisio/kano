@@ -86,7 +86,10 @@ export default {
       handler (to, from) {
         const toProject = _.get(to, 'query.project')
         const fromProject = _.get(from, 'query.project')
-        if (toProject !== fromProject) this.refreshLayers()
+        if (toProject !== fromProject) {
+          this.configureActivity()
+          this.refreshLayers()
+        }
       }
     }
   },
@@ -99,6 +102,10 @@ export default {
       await this.initializeMap(container)
       // Notifie the listener
       utils.sendEmbedEvent('map-ready')
+    },
+    configureActivity () {
+      baseActivityMixin.methods.configureActivity.call(this)
+      this.setRightPaneMode(this.hasProject() ? 'project-layers' : 'user-layers')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D

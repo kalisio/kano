@@ -1,9 +1,5 @@
 {
   "REMOVE_LABEL": "Remove",
-  "VIEWS_LABEL": "My views",
-  "PROJECTS_LABEL": "My projects",
-  "LAYERS_LABEL": "My data",
-  "CATALOG_LABEL": "Catalog",
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Open the main menu any time using this handle.",

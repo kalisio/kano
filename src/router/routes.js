@@ -38,6 +38,11 @@ module.exports = [{
             fab: tours.fab
           },
           children: {
+            'add-view': {
+              name: 'add-map-view',
+              component: 'catalog/KAddView',
+              tour: tours['add-view']
+            },
             'add-layer': {
               name: 'add-map-layer',
               component: 'catalog/KAddLayer',
@@ -77,11 +82,6 @@ module.exports = [{
               name: 'edit-map-layer-feature',
               component: 'KFeatureEditor',
               props: true
-            },
-            'create-view': {
-              name: 'create-map-view',
-              component: 'catalog/KCreateView',
-              tour: tours['create-view']
             },
             'create-project': {
               name: 'create-map-project',
