@@ -172,22 +172,38 @@ function catalogTabbar (activeView) {
       { 
         id: 'user-layers-tab', label: 'LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
         toggled: activeView === 'user-layers' ? true : false,
+        visible: '!hasProject',
         handler: { name: 'setRightPaneMode', params: ['user-layers'] } 
       },
       { 
         id: 'user-views-tab', label: 'VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'user-views' ? true : false,
+        visible: '!hasProject',
         handler: { name: 'setRightPaneMode', params: ['user-views'] } 
       },
       { 
         id: 'user-projects-tab', label: 'PROJECTS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'user-projects' ? true : false,
+        visible: '!hasProject',
         handler: { name: 'setRightPaneMode', params: ['user-projects'] } 
       },
       { 
         id: 'catalog-layers-tab', label: 'CATALOG_LABEL', color: 'grey-7', toggle: { color: 'primary' },
         toggled: activeView === 'catalog-layers' ? true : false,
+        visible: '!hasProject',
         handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
+      },
+      { 
+        id: 'project-layers-tab', label: 'PROJECT_LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
+        toggled: activeView === 'project-layers' ? true : false,
+        visible: 'hasProject',
+        handler: { name: 'setRightPaneMode', params: ['project-layers'] } 
+      },
+      { 
+        id: 'project-views-tab', label: 'PROJECT_VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
+        toggled: activeView === 'project-views' ? true : false,
+        visible: 'hasProject',
+        handler: { name: 'setRightPaneMode', params: ['project-views'] } 
       }
     ]
   }
@@ -198,10 +214,11 @@ const catalogPanes = {
   'user-layers': [
     catalogTabbar('user-layers'),
     { id: 'user-layers', component: 'catalog/KLayersPanel',
+      visible: '!hasProject',
       layers: ':layers', layerCategories: ':layerCategories',
       layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } } },
-    { component: 'QSpace' },
-    { id: 'catalog-footer', component: 'KPanel', content: [{
+    { visible: '!hasProject', component: 'QSpace' },
+    { id: 'catalog-footer', component: 'KPanel', visible: '!hasProject', content: [{
         id: 'manage-layer-categories',
         icon: 'las la-cog',
         label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
@@ -213,19 +230,30 @@ const catalogPanes = {
   ],
   'user-views': [
     catalogTabbar('user-views'),
-    { id: 'user-views', component: 'catalog/KViewsPanel' }
+    { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel' }
   ],
   'user-projects': [
     catalogTabbar('user-projects'),
-    { id: 'user-projects', component: 'catalog/KProjectsPanel' }
+    { id: 'user-projects', visible: '!hasProject', component: 'catalog/KProjectsPanel' }
   ],
   'catalog-layers': [
     catalogTabbar('catalog-layers'),
-    { id: 'catalog-layers', component: 'catalog/KLayersPanel',
+    { id: 'catalog-layers', visible: '!hasProject', component: 'catalog/KLayersPanel',
       layers: ':layers', layerCategories: ':layerCategories',
       layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
       forecastModels: ':forecastModels' }
-  ]
+  ],
+  'project-layers': [
+    catalogTabbar('project-layers'),
+    { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
+      layers: ':layers', layerCategories: ':layerCategories',
+      layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {} }
+  ],
+  'project-views': [
+    catalogTabbar('project-views'),
+    { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel' }
+  ],
+  
 } 
 
 // Map layer actions
@@ -516,7 +544,7 @@ module.exports = {
         default: [
           { component: 'KProjectMenu' },
           { id: 'toggle-globe', icon: 'las la-globe', tooltip: 'mixins.activity.TOGGLE_GLOBE',
-            route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+            route: { name: 'globe-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { project: ':project', layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
@@ -595,10 +623,12 @@ module.exports = {
     fab: {
       content: [
         { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
-          visible: { name: '$can', params: ['create', 'catalog'] }, route: { name: 'create-map-view' } },
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer' } },
-        { id: 'create-project', icon: 'las la-project-diagram', label: 'mixins.activity.CREATE_PROJECT',
-          visible: { name: '$can', params: ['create', 'projects'] }, route: { name: 'create-map-project' } },
+          visible: ['!hasProject', { name: '$can', params: ['create', 'catalog'] }], route: { name: 'add-map-view' } },
+        { id: 'add-view', visible: 'hasProject', icon: 'las la-star', label: 'mixins.activity.ADD_VIEW', route: { name: 'add-map-view', query: { project: ':project' } } },
+        { id: 'create-layer', visible: '!hasProject', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', route: { name: 'add-map-layer' } },
+        { id: 'add-layer', visible: 'hasProject', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer', query: { project: ':project' } } },
+        { id: 'create-project', visible: '!hasProject', icon: 'las la-project-diagram', label: 'mixins.activity.CREATE_PROJECT',
+          visible: ['!hasProject', { name: '$can', params: ['create', 'projects'] }], route: { name: 'create-map-project' } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
@@ -617,7 +647,7 @@ module.exports = {
       content: {
         default: [
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP',
-            route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { layers: ':layers' } } },
+            route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { project: ':project', layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
           { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
           { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
