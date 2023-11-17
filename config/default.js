@@ -520,7 +520,7 @@ module.exports = {
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { component: 'QSeparator' },
-              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCaptureDialog', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'capture'}  } }
+              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}  } }
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
@@ -540,11 +540,6 @@ module.exports = {
           { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
           { component: 'QSeparator', vertical: true },
           { component: 'KLayerEditionToolbar' }
-        ],
-        'capture-map': [ 
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'KCaptureToolbar' }
         ],
         'measure-tool': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
