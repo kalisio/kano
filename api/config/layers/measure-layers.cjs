@@ -35,7 +35,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'hydrography', 'forecast'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/vigicrues-icon.png',
+    legend: {
+      type: 'symbols',
+      label: 'Layers.VIGICRUES_DESCRIPTION',
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: 'green' } }, label: 'Layers.VIGICRUES_VIGILANCE_1' },
+          { symbol: { 'media/KShape': { type: 'rect', color: 'yellow' } }, label: 'Layers.VIGICRUES_VIGILANCE_2' },
+          { symbol: { 'media/KShape': { type: 'rect', color: 'orange' } }, label: 'Layers.VIGICRUES_VIGILANCE_3' },
+          { symbol: { 'media/KShape': { type: 'rect', color: 'red' } }, label: 'Layers.VIGICRUES_VIGILANCE_4' }
+        ]
+      }
+    },
     attribution: '',
     type: 'OverlayLayer',
     service: 'vigicrues-forecasts',
