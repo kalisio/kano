@@ -41,7 +41,7 @@ module.exports = [{
             'add-view': {
               name: 'add-map-view',
               component: 'catalog/KAddView',
-              tour: tours['add-view']
+              tour: tours['create-view']
             },
             'add-layer': {
               name: 'add-map-layer',
