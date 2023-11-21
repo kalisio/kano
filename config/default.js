@@ -230,7 +230,7 @@ const catalogPanes = {
   ],
   'user-views': [
     catalogTabbar('user-views'),
-    { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel' }
+    { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel', suspense: true }
   ],
   'user-projects': [
     catalogTabbar('user-projects'),
@@ -251,7 +251,7 @@ const catalogPanes = {
   ],
   'project-views': [
     catalogTabbar('project-views'),
-    { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel' }
+    { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
   ],
   
 } 
@@ -624,9 +624,9 @@ module.exports = {
       content: [
         { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
           visible: ['!hasProject', { name: '$can', params: ['create', 'catalog'] }], route: { name: 'add-map-view' } },
-        { id: 'add-view', visible: 'hasProject', icon: 'las la-star', label: 'mixins.activity.ADD_VIEW', route: { name: 'add-map-view', query: { project: ':project' } } },
+        { id: 'add-view', visible: 'hasProject', icon: 'las la-star', label: 'mixins.activity.MANAGE_VIEWS', route: { name: 'add-map-view', query: { project: ':project' } } },
         { id: 'create-layer', visible: '!hasProject', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', route: { name: 'add-map-layer' } },
-        { id: 'add-layer', visible: 'hasProject', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer', query: { project: ':project' } } },
+        { id: 'add-layer', visible: 'hasProject', icon: 'las la-plus', label: 'mixins.activity.MANAGE_LAYERS', route: { name: 'add-map-layer', query: { project: ':project' } } },
         { id: 'create-project', visible: '!hasProject', icon: 'las la-project-diagram', label: 'mixins.activity.CREATE_PROJECT',
           visible: ['!hasProject', { name: '$can', params: ['create', 'projects'] }], route: { name: 'create-map-project' } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
