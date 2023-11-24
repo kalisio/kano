@@ -147,7 +147,6 @@
     "jsdap": "^8.1.0",
     "jwt-decode": "^3.1.2",
     "leaflet": "1.6.0",
-    "leaflet-fa-markers": "^0.0.5",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-heatmap": "^1.0.0",
     "leaflet-pixi-overlay": "1.8.1",

@@ -17,7 +17,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'demography'
+      'demography', 'administrative'
     ],
     iconUrl: '',
     icon: 'las la-th',
@@ -63,7 +63,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'demography'
+      'demography', 'administrative'
     ],
     iconUrl: '',
     icon: 'las la-th',
@@ -109,7 +109,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'demography'
+      'demography', 'administrative'
     ],
     iconUrl: '',
     icon: 'las la-male',

@@ -149,7 +149,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         minZoom: 6,
         minFeatureZoom: 9,
         cluster: { disableClusteringAtZoom: 18 },
-        'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
+        'marker-type': 'shapeMarker',
+        'marker-fill': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
         'icon-color': `<% if (_.get(properties, 'rawOb')) {
@@ -166,8 +167,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
             else { %>fas fa-sun<% } 
           } else { %>fas fa-ban<% } %>`,
-        'icon-x-offset': -3,
-        template: ['marker-color', 'icon-color', 'icon-classes'],
+        template: ['marker-fill', 'icon-color', 'icon-classes'],
         popup: {
           pick: [
             'name'

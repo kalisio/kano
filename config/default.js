@@ -278,14 +278,8 @@ const mapEngine = {
     'fill-color': 'green'
   },
   // Default GeoJSON layer style for points
-  pointStyle: {
-    // This 
-    'icon-color': 'white',
-    'marker-color': 'purple',
-    'icon-classes': 'fas fa-circle',
-    'icon-x-offset': -1,
-    'icon-y-offset': 0
-  },
+  pointStyle: {},
+  
   // Default GeoJSON layer style for points edition
   editPointStyle: {
     'marker-type': 'circleMarker',

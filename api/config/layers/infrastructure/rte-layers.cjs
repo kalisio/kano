@@ -1,3 +1,13 @@
+function createLegendSymbol (color) {
+  return { 
+    'media/KShape': { 
+      shape: 'marker-pin', width: 20, fill: color, icon: { 
+        classes: 'fas fa-bolt', color: 'white', size: 10 
+      } 
+    } 
+  }
+}
+
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
     name: 'Layers.RTE_GENERATION',
@@ -5,26 +15,44 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          RTE_GENERATION: 'Réseau RTE',
+          RTE_GENERATION: 'Réseau RTE - Production Nucléaire',
           RTE_GENERATION_DESCRIPTION: 'Puissance injectée par les unités de production électrique'
         },
         Variables: {
           POWER: 'Puissance'
+        },
+        Sublegends: {
+          ACTIVE_REACTOR: 'Réacteur actif',
+          INACTIVE_REACTOR: 'Réacteur inactif'
         }
       },
       en: {
         Layers: {
-          RTE_GENERATION: 'RTE network',
+          RTE_GENERATION: 'RTE network - Nuclear production',
           RTE_GENERATION_DESCRIPTION: 'Power delivered by electrical production units'
         },
         Variables: {
           POWER: 'Power'
+        },
+        Sublegends: {
+          ACTIVE_REACTOR: 'Active reactor',
+          INACTIVE_REACTOR: 'Inactive reactor'
         }
       }
     },
     tags: [
       'infrastructure', 'measure'
     ],
+    legend: {
+      type: 'symbols',
+      label: 'Layers.RTE_GENERATION',
+      content: {
+        symbols: [
+          { symbol: createLegendSymbol('green'), label: 'Sublegends.ACTIVE_REACTOR' },
+          { symbol: createLegendSymbol('red'), label: 'Sublegends.INACTIVE_REACTOR' },
+        ]
+      }
+    },
     attribution: "<a href='https://data.rte-france.com/'>RTE</a>",
     type: 'OverlayLayer',
     service: 'rte-generation',
@@ -101,11 +129,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       // If we'd like to color according to the unit power
       //'marker-color': '<%= chroma.scale(\'Greens\').domain([-1, 1])((properties.power || 0) / properties.netPower_MW).hex() %>',
       // If we'd like to color according to the unit active state
-      'marker-color': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
+      'marker-type': 'shapeMarker',
+      'marker-fill': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
       'icon-classes': 'fas fa-bolt',
       'icon-x-offset': 2,
       'icon-color': '#FFF',
-      template: ['marker-color'],
+      template: ['marker-fill'],
       popup: {
         pick: [
           'name'

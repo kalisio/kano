@@ -1,19 +1,19 @@
 module.exports = function () {
   return [{
-    name: 'Sublegends.HYDROGRAPHY',
+    name: 'Sublegends.RADIOACTIVITY',
     i18n: {
       fr: {
         Sublegends: {
-          HYDROGRAPHY: 'Hydrographie'
+          RADIOACTIVITY: 'Radioactivité'
         }
       },
       en: {
         Sublegends: {
-          HYDROGRAPHY: 'Hydrography'
+          RADIOACTIVITY: 'Radioactivity'
         }
       }
     },
     headerClass: 'bg-grey-3 text-weight-regular',
-    options: { open: true, filter: { type: 'OverlayLayer' , tags: { $in: ['hydrography'] } } }
+    options: { open: true, filter: { type: 'OverlayLayer' , tags: { $in: ['radioactivity'] } } }
   }]
 }

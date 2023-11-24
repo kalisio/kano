@@ -111,13 +111,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 8,
       minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
+      'marker-type': 'shapeMarker',
+      'marker-fill': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
-      'icon-x-offset': 1,
-      template: ['marker-color'],
+      template: ['marker-fill'],
       popup: {
         pick: [
           'name'
@@ -225,13 +225,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 8,
       minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (_.has(properties, 'niveau_eau_ngf') || _.has(properties, 'profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe')) { %>#00a9ce<% }
+      'marker-type': 'shapeMarker',
+      'marker-fill': `<% if (_.has(properties, 'niveau_eau_ngf') || _.has(properties, 'profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
-      'icon-x-offset': 1,
-      template: ['marker-color'],
+      template: ['marker-fill'],
       popup: {
         pick: [
           'libelle_pe',

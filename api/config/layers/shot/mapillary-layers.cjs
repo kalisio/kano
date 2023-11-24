@@ -17,12 +17,13 @@ module.exports = function () {
       }
     },
     tags: [
-      'captured'
+      'shot'
     ],
     attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
     type: 'OverlayLayer',
     leaflet: {
-      type: 'mapillary'
+      type: 'mapillary',
+      minZoom: 13
     }
   }]
 }

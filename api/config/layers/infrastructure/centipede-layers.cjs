@@ -1,3 +1,13 @@
+function createLegendSymbol (color) {
+  return { 
+    'media/KShape': { 
+      shape: 'marker-pin', width: 20, fill: color, icon: { 
+        classes: 'fa fa-map-pin', color: 'white', size: 10 
+      } 
+    } 
+  }
+}
+
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
     name: 'Layers.CENTIPEDE',
@@ -35,6 +45,17 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'infrastructure'
     ],
+    legend: {
+      type: 'symbols',
+      label: 'Layers.CENTIPEDE',
+      content: {
+        symbols: [
+          { symbol: createLegendSymbol('#78b955'), label: 'Sublegend.VERIFIED_BASES' },
+          { symbol: createLegendSymbol('#d6bf3a'), label: 'Sublegend.BASES_BEING_VERIFIED' },
+          { symbol: createLegendSymbol('#f76454'), label: 'Sublegend.INACTIVE_BASES' }
+        ]
+      }
+    },
     attribution: "<a href='https://docs.centipede.fr/'>Centipede</a>",
     type: 'OverlayLayer',
     service: 'centipede-pings',
@@ -63,29 +84,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
-    legend: {
-      type: 'symbols',
-      label: 'Layers.CENTIPEDE_DESCRIPTION',
-      content: {
-        symbols: [
-          { symbol: { 'media/KShape': { type: 'rect', color: '#78b955' } }, label: 'Sublegend.VERIFIED_BASES' },
-          { symbol: { 'media/KShape': { type: 'rect', color: '#d6bf3a' } }, label: 'Sublegend.BASES_BEING_VERIFIED' },
-          { symbol: { 'media/KShape': { type: 'rect', color: '#f76454' } }, label: 'Sublegend.INACTIVE_BASES' }
-        ]
-      }
-    },
     leaflet: {
       type: 'geoJson',
       realtime: true,
       tiled: true,
       minZoom: 6,
-      'icon-classes': 'fa fa-map-pin',
-      'icon-x-offset': 2,
-      'marker-color': `<% if (properties.ping === 2 ) { %>#78b955<% } 
-        else if (properties.ping === 1 ) { %>#d6bf3a<% }
-        else { %>#f76454<% } %>`,
       cluster: { disableClusteringAtZoom: 18 },
-      template: ['marker-color'],
+      'marker-type': 'shapeMarker',
+      'marker-fill': `<% if (properties.ping === 2 ) { %>#78b955<% } 
+                      else if (properties.ping === 1 ) { %>#d6bf3a<% }
+                      else { %>#f76454<% } %>`,
+      'icon-classes': 'fa fa-map-pin',                      
+      template: ['marker-fill'],
       popup: {
         pick: [
           'properties.name'

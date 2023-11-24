@@ -17,7 +17,7 @@ module.exports = function () {
       }
     },
     tags: [
-      'business'
+      'marine'
     ],
     iconUrl: '/OpenSeaMap-Logo-256.png',
     icon: 'marine',

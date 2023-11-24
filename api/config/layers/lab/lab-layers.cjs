@@ -33,7 +33,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'lab', 'measure'
     ],
     attribution: 'Global Smart Rescue',
     type: 'OverlayLayer',
@@ -148,13 +148,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       // minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (properties.flag_alert === 0) { %>green<% }
+      'marker-type': 'shapeMarker',
+      'marker-fill': `<% if (properties.flag_alert === 0) { %>green<% }
                           else if (properties.flag_alert === 1) { %>red<% }
                           else { %>dark<% } %>`,
       'icon-classes': 'fa fa-wifi',
-      'icon-x-offset': -2,
-      'icon-color': '#FFF',
-      template: ['marker-color'],
+      template: ['marker-fill'],
       tooltip: {
         template: '<%= properties.info_bulle %>'
       }
@@ -193,7 +192,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: [
-      'measure'
+      'lab', 'measure'
     ],
     attribution: 'Global Smart Rescue',
     type: 'OverlayLayer',
