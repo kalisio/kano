@@ -87,9 +87,14 @@ export default {
         const toProject = _.get(to, 'query.project')
         const fromProject = _.get(from, 'query.project')
         if (toProject !== fromProject) {
+          this.loadProject()
           this.configureActivity()
-          this.refreshLayers()
         }
+      }
+    },
+    project: {
+      handler () {
+        this.refreshLayers()
       }
     }
   },
@@ -215,11 +220,13 @@ export default {
   unmounted () {
     utils.sendEmbedEvent('map-destroyed')
   },
-  setup () {
+  async setup () {
     const expose = {
       ...kMapComposables.useActivity(name),
-      ...kMapComposables.useWeather(name)
+      ...kMapComposables.useWeather(name),
+      ...kMapComposables.useProject()
     }
+    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose
