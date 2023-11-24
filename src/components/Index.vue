@@ -2,7 +2,9 @@
   <div>
     <KTour v-if="isInitialized"/>
     <KWelcome />
-    <router-view></router-view>
+    <Suspense>
+      <router-view />
+    </Suspense>
   </div>
 </template>
 
