@@ -111,13 +111,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 8,
       minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
+      'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
       'icon-color': 'white',
       'icon-classes': 'fa fa-tint',
-      template: ['marker-fill'],
+      template: ['marker-color'],
       popup: {
         pick: [
           'name'

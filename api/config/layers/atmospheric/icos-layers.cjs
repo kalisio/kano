@@ -107,15 +107,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 5,
       minFeatureZoom: 6,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (_.has(properties, 'rn') ||
+      'marker-color': `<% if (_.has(properties, 'rn') ||
                               _.has(properties, 'co') ||
                               _.has(properties, 'co2') ||
                               _.has(properties, 'ch4')) { %>#138dce<% }
                           else if (feature.measureRequestIssued) { %>orange<% }
                           else { %>grey<% } %>`,
       'icon-classes': 'fas fa-ellipsis-v',
-      template: ['marker-fill'],
+      template: ['marker-color'],
       popup: {
         pick: [
           'stationName'

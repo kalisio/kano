@@ -99,7 +99,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 6,
       minFeatureZoom: 9,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
       'marker-color': `<% if (properties.libelle === 'VA') { %>#138dce<% }
                           else if (properties.libelle === 'NVA') { %>#a7bec9<% }
                           else if (properties.libelle === 'NV') { %>grey<% }

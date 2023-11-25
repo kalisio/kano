@@ -63,9 +63,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 8,
       cluster: { disableClusteringAtZoom: 21 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': '#78c0f0',
-      'icon-color': 'white',
+      'marker-color': '#78c0f0',
       'icon-classes': 'fa fa-radiation-alt',
       popup: {
         pick: [

@@ -149,18 +149,17 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 4,
       minFeatureZoom: 7,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      fill: `<% if (_.has(properties, 'pm25') ||
-                    _.has(properties, 'pm10') ||
-                    _.has(properties, 'so2') ||
-                    _.has(properties, 'no2') ||
-                    _.has(properties, 'o3') ||
-                    _.has(properties, 'co') ||
-                    _.has(properties, 'bc')) { %>blue<% }
+      'marker-color': `<% if (_.has(properties, 'pm25') ||
+                          _.has(properties, 'pm10') ||
+                          _.has(properties, 'so2') ||
+                          _.has(properties, 'no2') ||
+                          _.has(properties, 'o3') ||
+                          _.has(properties, 'co') ||
+                          _.has(properties, 'bc')) { %>blue<% }
               else if (feature.measureRequestIssued) { %>orange<% }
               else { %>grey<% } %>`,
       'icon-classes': 'fa fa-heartbeat',
-      template: ['fill'],
+      template: ['marker-color'],
       popup: {
         pick: [
           'location'

@@ -148,8 +148,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       // minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (properties.flag_alert === 0) { %>green<% }
+      'marker-color': `<% if (properties.flag_alert === 0) { %>green<% }
                           else if (properties.flag_alert === 1) { %>red<% }
                           else { %>dark<% } %>`,
       'icon-classes': 'fa fa-wifi',
