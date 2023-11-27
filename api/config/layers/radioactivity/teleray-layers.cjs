@@ -9,16 +9,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           TELERAY_DESCRIPTION: 'Réseau Téléray'
         },
         Variables: {
-          GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
+          TELERAY_GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
         },
         Legend: {
-          MEASUREMENTS_LABEL: 'Téléray - Mesures (Débit de dose gamma ambiant)',
-          PROBES_LABEL: 'Téléray - Balises',
-          VALID_MEASUREMENT: 'Mesure validée automatiquement par rapport à la valeur moyenne',
-          AWAITING_MEASUREMENT_VALIDATION: 'Mesure non validée automatiquement, en attente d’une validation manuelle IRSN',
-          INVALID_MEASUREMENT: 'Mesure invalidée manuellement par l’IRSN (balise temporairement en panne)',
-          OLD_MEASUREMENT: 'Dernière mesure > 1 heure',
-          PROBE: 'Balise'
+          TELERAY_MEASUREMENTS_LABEL: 'Téléray - Mesures (Débit de dose gamma ambiant)',
+          TELERAY_PROBES_LABEL: 'Téléray - Balises',
+          TELERAY_VALID_MEASUREMENT: 'Mesure validée automatiquement par rapport à la valeur moyenne',
+          TELERAY_AWAITING_MEASUREMENT_VALIDATION: 'Mesure non validée automatiquement, en attente d’une validation manuelle IRSN',
+          TELERAY_INVALID_MEASUREMENT: 'Mesure invalidée manuellement par l’IRSN (balise temporairement en panne)',
+          TELERAY_OLD_MEASUREMENT: 'Mesure datée de plus de 1 heure',
+          TELERAY_PROBE: 'Balise'
         }
       },
       en: {
@@ -27,16 +27,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           TELERAY_DESCRIPTION: 'Gamma dose rate'
         },
         Variables: {
-          GAMMA_DOSE_RATE: 'Ambient gamma dose rate'
+          TELERAY_GAMMA_DOSE_RATE: 'Ambient gamma dose rate'
         },
         Legend: {
-          MEASUREMENTS_LABEL: 'Téléray - Measurements (Gamma dose rate)',
-          PROBES_LABEL: 'Téléray - Probes',
-          VALID_MEASUREMENT: 'Measurement automatically validated against the average value',
-          AWAITING_MEASUREMENT_VALIDATION: 'Measurement not validated automatically, awaiting manual validation IRSN en cours de vérification',
-          INVALID_MEASUREMENT: 'Measurement manually invalidated by IRSN (sensor temporarily broken)',
-          OLD_MEASUREMENT: 'Last measurement > 1 hour',
-          PROBE: 'Probe'
+          TELERAY_MEASUREMENTS_LABEL: 'Téléray - Measurements (Gamma dose rate)',
+          TELERAY_PROBES_LABEL: 'Téléray - Probes',
+          TELERAY_VALID_MEASUREMENT: 'Measurement automatically validated against the average value',
+          TELERAY_AWAITING_MEASUREMENT_VALIDATION: 'Measurement not validated automatically, awaiting manual validation IRSN en cours de vérification',
+          TELERAY_INVALID_MEASUREMENT: 'Measurement manually invalidated by IRSN (sensor temporarily broken)',
+          TELERAY_OLD_MEASUREMENT: 'Measurement dated more than 1 hour ago',
+          TELERAY_PROBE: 'Probe'
         }
       }
     },
@@ -45,32 +45,34 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     legend: [{
       type: 'symbols',
-      label: 'Legend.MEASUREMENTS_LABEL',
+      label: 'Legend.TELERAY_MEASUREMENTS_LABEL',
       minZoom: 9,
       content: {
-        measurements: [
+        meaments: [
           { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#138dce', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Legend.VALID_MEASUREMENT' 
+            label: 'Legend.TELERAY_VALID_MEASUREMENT' 
           },
           { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#a7bec9', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Legend.AWAITING_MEASUREMENT_VALIDATION' 
+            label: 'Legend.TELERAY_AWAITING_MEASUREMENT_VALIDATION' 
           },
           { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'grey', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Legend.INVALID_MEASUREMENT' 
-          },
+            label: 'Legend.TELERAY_INVALID_MEASUREMENT' 
+          }
+        ],
+        exceptions: [
           { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'black', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Legend.OLD_MEASUREMENT' 
+            label: 'Legend.TELERAY_OLD_MEASUREMENT' 
           }
         ],
       }
     }, {
       type: 'symbols',
-      label: 'Legend.PROBES_LABEL',
+      label: 'Legend.TELERAY_PROBES_LABEL',
       maxZoom: 8,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'white', size: [20, 24], stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
-            label: 'Legend.PROBE' 
+            label: 'Legend.TELERAY_PROBE' 
           }
         ]
       }
@@ -90,7 +92,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     variables: [
       {
         name: 'value',
-        label: 'Variables.GAMMA_DOSE_RATE',
+        label: 'Variables.TELERAY_GAMMA_DOSE_RATE',
         units: [
           'nSv/h'
         ],
