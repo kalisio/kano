@@ -73,7 +73,22 @@ export default {
     'leftPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('left', this.leftPane) },
     'rightPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('right', this.rightPane) },
     'topPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('top', this.topPane) },
-    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) }
+    'bottomPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('bottom', this.bottomPane) },
+    $route: {
+      handler (to, from) {
+        const toProject = _.get(to, 'query.project')
+        const fromProject = _.get(from, 'query.project')
+        if (toProject !== fromProject) {
+          this.loadProject()
+          this.configureActivity()
+        }
+      }
+    },
+    project: {
+      handler () {
+        this.refreshLayers()
+      }
+    }
   },
   methods: {
     async configureGlobe (container) {
@@ -148,10 +163,12 @@ export default {
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
   },
-  setup () {
+  async setup () {
     const expose = {
-      ...kMapComposables.useActivity(name)
+      ...kMapComposables.useActivity(name),
+      ...kMapComposables.useProject()
     }
+    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose

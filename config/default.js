@@ -247,7 +247,8 @@ const catalogPanes = {
     catalogTabbar('project-layers'),
     { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
       layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {} }
+      layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {},
+      forecastModels: ':forecastModels' }
   ],
   'project-views': [
     catalogTabbar('project-views'),
@@ -633,6 +634,7 @@ module.exports = {
     topPane: {
       content: {
         default: [
+          { component: 'KProjectMenu' },
           { id: 'toggle-map', icon: 'las la-map', tooltip: 'mixins.activity.TOGGLE_MAP',
             route: { name: 'map-activity', params: { south: ':south', north: ':north', west: ':west', east: ':east' }, query: { project: ':project', layers: ':layers' } } },
           { component: 'QSeparator', vertical: true },
