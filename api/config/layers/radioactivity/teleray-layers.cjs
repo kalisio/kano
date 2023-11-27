@@ -6,14 +6,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           TELERAY: 'Téléray',
-          TELERAY_DESCRIPTION: 'Débit de dose gamma ambiant'
+          TELERAY_DESCRIPTION: 'Réseau Téléray'
         },
         Variables: {
           GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
         },
-        Sublegend: {
+        Legend: {
+          MEASUREMENTS_LABEL: 'Téléray - Mesures (Débit de dose gamma ambiant)',
+          PROBES_LABEL: 'Téléray - Balises',
           VALID_MEASUREMENT: 'Mesure validée automatiquement par rapport à la valeur moyenne',
-          AWAINTING_MEASUREMENT_VALIDATION: 'Mesure non validée automatiquement, en attente d’une validation manuelle IRSN',
+          AWAITING_MEASUREMENT_VALIDATION: 'Mesure non validée automatiquement, en attente d’une validation manuelle IRSN',
           INVALID_MEASUREMENT: 'Mesure invalidée manuellement par l’IRSN (balise temporairement en panne)',
           OLD_MEASUREMENT: 'Dernière mesure > 1 heure',
           PROBE: 'Balise'
@@ -27,9 +29,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Variables: {
           GAMMA_DOSE_RATE: 'Ambient gamma dose rate'
         },
-        Sublegend: {
+        Legend: {
+          MEASUREMENTS_LABEL: 'Téléray - Measurements (Gamma dose rate)',
+          PROBES_LABEL: 'Téléray - Probes',
           VALID_MEASUREMENT: 'Measurement automatically validated against the average value',
-          AWAINTING_MEASUREMENT_VALIDATION: 'Measurement not validated automatically, awaiting manual validation IRSN en cours de vérification',
+          AWAITING_MEASUREMENT_VALIDATION: 'Measurement not validated automatically, awaiting manual validation IRSN en cours de vérification',
           INVALID_MEASUREMENT: 'Measurement manually invalidated by IRSN (sensor temporarily broken)',
           OLD_MEASUREMENT: 'Last measurement > 1 hour',
           PROBE: 'Probe'
@@ -39,31 +43,38 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'radioactivity', 'measure'
     ],
-    legend: {
+    legend: [{
       type: 'symbols',
-      label: 'Layers.TELERAY',
+      label: 'Legend.MEASUREMENTS_LABEL',
+      minZoom: 9,
       content: {
         measurements: [
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#138dce', width: 20, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Sublegend.VALID_MEASUREMENT' 
+          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#138dce', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+            label: 'Legend.VALID_MEASUREMENT' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#a7bec9', width: 20, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Sublegend.AWAINTING_MEASUREMENT_VALIDATION' 
+          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#a7bec9', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+            label: 'Legend.AWAITING_MEASUREMENT_VALIDATION' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'grey', width: 20, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Sublegend.INVALID_MEASUREMENT' 
+          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'grey', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+            label: 'Legend.INVALID_MEASUREMENT' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'black', width: 20, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Sublegend.OLD_MEASUREMENT' 
+          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'black', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+            label: 'Legend.OLD_MEASUREMENT' 
           }
         ],
+      }
+    }, {
+      type: 'symbols',
+      label: 'Legend.PROBES_LABEL',
+      maxZoom: 8,
+      content: {
         stations: [
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'white', width: 20, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
-            label: 'Sublegend.PROBE' 
+          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'white', size: [20, 24], stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
+            label: 'Legend.PROBE' 
           }
         ]
       }
-    },
+    }],
     attribution: '<a href="https://irsn.fr/">IRSN</a>',
     type: 'OverlayLayer',
     service: 'teleray-measurements',
