@@ -14,7 +14,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUMIDITY: 'Humidité',
           GAS: 'Gaz',
           LUMINOSITY: 'Luminosité',
-          ACCELERATION: 'Accélération'
+          ACCELERATION: 'Accélération',
+          RADIOACTIVITY: 'Radioactivité'
         }
       },
       en: {
@@ -28,7 +29,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUMIDITY: 'Humidity',
           GAS: 'Gas',
           LUMINOSITY: 'Luminosity',
-          ACCELERATION: 'Acceleration'
+          ACCELERATION: 'Acceleration',
+          RADIOACTIVITY: 'Radioactivity'
         }
       }
     },
@@ -140,6 +142,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             }
           }
         }
+      },
+      {
+        name: 'radioactivity_mrem',
+        label: 'Variables.RADIOACTIVITY',
+        units: [
+          'µS/h'
+        ],
+        range: [0, 1],
+        step: 0.1,
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
+          fill: false
+        }
       }
     ],
     leaflet: {
@@ -179,7 +195,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           LAB_MEASUREMENTS_DESCRIPTION: 'Little Alert Box Measurements'
         },
         Variables: {
-          TEMPERATURE: 'Température'
+          TEMPERATURE: 'Température',
+          RADIOACTIVITY: 'Radioactivité'
         }
       },
       en: {
@@ -188,7 +205,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           LAB_MEASUREMENTS_DESCRIPTION: 'Mesures Little Alert Box'
         },
         Variables: {
-          TEMPERATURE: 'Temperature'
+          TEMPERATURE: 'Temperature',
+          RADIOACTIVITY: 'Radioactivity'
         }
       }
     },
@@ -217,6 +235,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
           borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        }
+      },
+      {
+        name: 'radioactivity_mrem',
+        label: 'Variables.RADIOACTIVITY',
+        units: [
+          'µS/h'
+        ],
+        range: [0, 1],
+        step: 0.1,
+        chartjs: {
+          backgroundColor: 'rgba(11, 117, 169, 128)',
+          borderColor: 'rgb(11, 117, 169)',
           fill: false
         }
       }
