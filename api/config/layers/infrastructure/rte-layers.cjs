@@ -1,8 +1,10 @@
 function createLegendSymbol (color) {
   return { 
-    'media/KShape': { 
-      shape: 'marker-pin', width: 20, fill: color, icon: { 
-        classes: 'fas fa-bolt', color: 'white', size: 10 
+    'media/KShape': {
+      options: {
+        shape: 'circle', radius: 10, color, icon: { 
+          classes: 'fas fa-bolt', color: 'white', size: 10 
+        }
       } 
     } 
   }
@@ -129,8 +131,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       // If we'd like to color according to the unit power
       //'marker-color': '<%= chroma.scale(\'Greens\').domain([-1, 1])((properties.power || 0) / properties.netPower_MW).hex() %>',
       // If we'd like to color according to the unit active state
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
+      'marker-color': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
       'icon-classes': 'fas fa-bolt',
       'icon-x-offset': 2,
       'icon-color': '#FFF',

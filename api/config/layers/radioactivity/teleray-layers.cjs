@@ -48,19 +48,19 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       label: 'Legend.TELERAY_MEASUREMENTS_LABEL',
       minZoom: 9,
       content: {
-        meaments: [
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#138dce', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+        measurments: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#138dce', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
             label: 'Legend.TELERAY_VALID_MEASUREMENT' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: '#a7bec9', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#a7bec9', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
             label: 'Legend.TELERAY_AWAITING_MEASUREMENT_VALIDATION' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'grey', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'grey', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
             label: 'Legend.TELERAY_INVALID_MEASUREMENT' 
           }
         ],
         exceptions: [
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'black', size: [20, 24], icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
             label: 'Legend.TELERAY_OLD_MEASUREMENT' 
           }
         ],
@@ -71,7 +71,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       maxZoom: 8,
       content: {
         stations: [
-          { symbol: { 'media/KShape': { options: { shape: 'marker-pin', color: 'white', size: [20, 24], stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
             label: 'Legend.TELERAY_PROBE' 
           }
         ]
@@ -127,7 +127,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                         else if (feature.measureRequestIssued) { %>white<% }
                         else { %>black<% } %>`,
       'icon-classes': 'fa fa-radiation',
-      template: ['marker-color', 'fill-opacity', 'stroke-color', 'stroke-width', 'icon-color'],
+      template: ['marker-color', 'stroke-color', 'stroke-width', 'icon-color'],
       popup: {
         pick: [
           'name'

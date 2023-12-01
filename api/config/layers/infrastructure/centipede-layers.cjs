@@ -1,9 +1,11 @@
 function createLegendSymbol (color) {
   return { 
     'media/KShape': { 
-      shape: 'marker-pin', width: 20, fill: color, icon: { 
-        classes: 'fa fa-map-pin', color: 'white', size: 10 
-      } 
+      options: {
+        shape: 'circle', radius: 10, color, icon: { 
+          classes: 'fa fa-map-pin', color: 'white', size: 10 
+        }
+      }
     } 
   }
 }
@@ -15,47 +17,69 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          CENTIPEDE: 'Bases Centipede RTK',
-          CENTIPEDE_DESCRIPTION: 'Bases du réseau Centipede RTK'
+          CENTIPEDE: 'Centipede RTK',
+          CENTIPEDE_DESCRIPTION: 'Status du réseau Centipede RTK'
         },
         Variables: {
-          ping: 'Status'
+          CENTIPEDE_PING: 'Status'
         },
         Sublegend: {
-          VERIFIED_BASES: 'Bases vérifiées',
-          BASES_BEING_VERIFIED: 'Bases en cours de vérification',
-          INACTIVE_BASES: 'Bases inactives'
+          CENTIPEDE_PINGS_LABEL: 'Réseau Centipède RTK - Status',
+          CENTIPEDE_VERIFIED_BASES: 'Bases vérifiées',
+          CENTIPEDE_BASES_BEING_VERIFIED: 'Bases en cours de vérification',
+          CENTIPEDE_INACTIVE_BASES: 'Bases inactives',
+          CENTIPEDE_OLD_PING: 'Status daté de plus de 3 heure',
+          CENTIPEDE_BASES_LABEL: 'Réseau Centipède RTK - Bases',          
+          CENTIPEDE_BASE: 'Base'
         }
       },
       en: {
         Layers: {
-          CENTIPEDE: 'Centipede RTK\'s bases',
-          CENTIPEDE_DESCRIPTION: 'Centipede RTK network bases'
+          CENTIPEDE: 'Centipede RTK',
+          CENTIPEDE_DESCRIPTION: 'Centipede RTK network status'
         },
         Variables: {
-          ping: 'Status'
+          CENTIPEDE_PING: 'Status'
         },
         Sublegend: {
-          VERIFIED_BASES: 'Verified bases',
-          BASES_BEING_VERIFIED: 'Bases being verified',
-          INACTIVE_BASES: 'Inactive bases'
+          CENTIPEDE_PINGS_LABEL: 'Centipède RTK Network - Status',
+          CENTIPEDE_VERIFIED_BASES: 'Verified bases',
+          CENTIPEDE_BASES_BEING_VERIFIED: 'Bases being verified',
+          CENTIPEDE_INACTIVE_BASES: 'Inactive bases',
+          CENTIPEDE_OLD_PING: 'Ping dated more than 3 hours ago',
+          CENTIPEDE_BASES_LABEL: 'Centipède RTK Network - Bases',
+          CENTIPEDE_BASE: 'Base'
         }
       }
     },
     tags: [
       'infrastructure'
     ],
-    legend: {
+    legend: [{
       type: 'symbols',
-      label: 'Layers.CENTIPEDE',
+      label: 'Sublegend.CENTIPEDE_PINGS_LABEL',
+      minZoom: 9,
       content: {
-        symbols: [
-          { symbol: createLegendSymbol('#78b955'), label: 'Sublegend.VERIFIED_BASES' },
-          { symbol: createLegendSymbol('#d6bf3a'), label: 'Sublegend.BASES_BEING_VERIFIED' },
-          { symbol: createLegendSymbol('#f76454'), label: 'Sublegend.INACTIVE_BASES' }
+        pings: [
+          { symbol: createLegendSymbol('#78b955'), label: 'Sublegend.CENTIPEDE_VERIFIED_BASES' },
+          { symbol: createLegendSymbol('#d6bf3a'), label: 'Sublegend.CENTIPEDE_BASES_BEING_VERIFIED' },
+          { symbol: createLegendSymbol('#f76454'), label: 'Sublegend.CENTIPEDE_INACTIVE_BASES' }
+        ],
+        exceptions: [
+          { symbol: createLegendSymbol('black'), label: 'Sublegend.CENTIPEDE_OLD_PING' }
+        ],
+      }
+    }, {
+      type: 'symbols',
+      label: 'Sublegend.CENTIPEDE_BASES_LABEL',
+      maxZoom: 8,
+      content: {
+        bases: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-map-pin', color: 'black', size: 10 } } } },
+            label: 'Sublegend.CENTIPEDE_BASE' }
         ]
       }
-    },
+    }],
     attribution: "<a href='https://docs.centipede.fr/'>Centipede</a>",
     type: 'OverlayLayer',
     service: 'centipede-pings',
@@ -67,11 +91,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT5M',
-    queryFrom: 'PT-12H',
+    queryFrom: 'PT-3H',
     variables: [
       {
         name: 'ping',
-        label: 'Variables.ping',
+        label: 'Variables.CENTIPEDE_PING',
         units: [
           '0: nok | 1: no info | 2: ok'
         ],
@@ -89,13 +113,24 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 6,
+      minFeatureZoom: 9,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (properties.ping === 2 ) { %>#78b955<% } 
-                      else if (properties.ping === 1 ) { %>#d6bf3a<% }
-                      else { %>#f76454<% } %>`,
+      'marker-color': `<% if (properties.ping === 2 ) { %>#78b955<% } 
+                          else if (properties.ping === 1 ) { %>#d6bf3a<% }
+                          else if (properties.ping === 0 ) { %>#f76454<% }
+                          else if (feature.measureRequestIssued) { %>black<% }
+                          else { %>white<% } %>`,
+      'stroke-color': `<% if (_.has(properties, 'ping')) { %>transparent<% }
+                          else if (feature.measureRequestIssued) { %>white<% }
+                          else { %>black<% } %>`,
+      'stroke-width': `<% if (_.has(properties, 'ping')) { %>0<% }
+                          else if (feature.measureRequestIssued) { %>1<% }
+                          else { %>2<% } %>`,                          
+      'icon-color': `<% if (_.has(properties, 'ping')) { %>white<% }
+                        else if (feature.measureRequestIssued) { %>white<% }
+                        else { %>black<% } %>`,
       'icon-classes': 'fa fa-map-pin',                      
-      template: ['marker-fill'],
+      template: ['marker-color', 'stroke-color', 'stroke-width', 'icon-color'],
       popup: {
         pick: [
           'properties.name'
