@@ -14,6 +14,6 @@ module.exports = function () {
       }
     },
     headerClass: 'bg-grey-3 text-weight-regular',
-    options: { open: true, filter: { type: 'OverlayLayer' , tags: { $in: ['infrastructures'] } } }
+    options: { open: true, filter: { type: 'OverlayLayer' , tags: { $in: ['infrastructure'] } } }
   }]
 }

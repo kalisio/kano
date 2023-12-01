@@ -47,7 +47,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       from: 'P-7D',
       to: 'PT',
       every: 'PT30M',
-      queryFrom: 'PT-4H',
+      queryFrom: 'PT-5H',
       variables: [
         {
           name: 'temperature',
@@ -149,25 +149,26 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         minZoom: 6,
         minFeatureZoom: 9,
         cluster: { disableClusteringAtZoom: 18 },
-        'marker-type': 'shapeMarker',
-        'marker-fill': `<% if (_.has(properties, 'rawOb')) { %>#444444<% }
-                          else if (feature.measureRequestIssued) { %>orange<% }
-                          else { %>grey<% } %>`,
-        'icon-color': `<% if (_.get(properties, 'rawOb')) {
-            if (_.get(properties, 'cloudCover') === 'FEW') { %>#E2E73F<% }
-            else if (_.get(properties, 'cloudCover') === 'SCT') { %>#DFE1B0<% }
-            else if (_.get(properties, 'cloudCover') === 'BKN') { %>#B3B490<% }
-            else if (_.get(properties, 'cloudCover') === 'OVC') { %>#828359<% }
-            else { %>#FFBD00<% }
-         } else { %>#FFFFFF<% } %>`,
-        'icon-classes': `<% if (_.get(properties, 'rawOb')) {
-            if (_.get(properties, 'cloudCover') === 'FEW') { %>fas fa-cloud-sun<% }
-            else if (_.get(properties, 'cloudCover') === 'SCT') { %>fas fa-cloud-sun<% }
-            else if (_.get(properties, 'cloudCover') === 'BKN') { %>fas fa-cloud<% }
-            else if (_.get(properties, 'cloudCover') === 'OVC') { %>fas fa-cloud<% }
-            else { %>fas fa-sun<% } 
-          } else { %>fas fa-ban<% } %>`,
-        template: ['marker-fill', 'icon-color', 'icon-classes'],
+        'marker-color': `<% if (_.has(properties, 'rawOb')) { %>#666666<% }
+                          else if (feature.measureRequestIssued) { %>black<% }
+                          else { %>white<% } %>`,
+        'stroke-color': `<% if (_.has(properties, 'rawOb')) { %>transparent<% }
+                          else if (feature.measureRequestIssued) { %>white<% }
+                          else { %>black<% } %>`,
+        'icon-color': `<% if (_.get(properties, 'cloudCover') === 'FEW') { %>#f5e790<% }
+                          else if (_.get(properties, 'cloudCover') === 'SCT') { %>#f5edbc<% }
+                          else if (_.get(properties, 'cloudCover') === 'BKN') { %>#cfcab0<% }
+                          else if (_.get(properties, 'cloudCover') === 'OVC') { %>#d6d5cb<% }
+                          else if (_.has(properties, 'cloudCover')) { %>#f5e05b<% }
+                          else if (feature.measureRequestIssued) { %>white<% }
+                          else { %>black<% } %>`,
+        'icon-classes': `<% if (_.get(properties, 'cloudCover') === 'FEW') { %>fa fa-cloud-sun<% }
+                            else if (_.get(properties, 'cloudCover') === 'SCT') { %>fa fa-cloud-sun<% }
+                            else if (_.get(properties, 'cloudCover') === 'BKN') { %>fa fa-cloud<% }
+                            else if (_.get(properties, 'cloudCover') === 'OVC') { %>fa fa-cloud<% }
+                            else if (_.has(properties, 'cloudCover')) { %>fa fa-sun<% }
+                            else { %>fa fa-cloud-sun-rain<% } %>`,
+        template: ['marker-color', 'stroke-color', 'icon-color', 'icon-classes'],
         popup: {
           pick: [
             'name'
