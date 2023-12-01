@@ -611,12 +611,12 @@ module.exports = {
     fab: {
       content: [
         { id: 'create-view', icon: 'las la-star', label: 'mixins.activity.CREATE_VIEW',
-          visible: ['!hasProject', { name: '$can', params: ['create', 'catalog'] }], route: { name: 'add-map-view' } },
-        { id: 'add-view', visible: 'hasProject', icon: 'las la-star', label: 'mixins.activity.MANAGE_VIEWS', route: { name: 'add-map-view', query: { project: ':project' } } },
-        { id: 'create-layer', visible: '!hasProject', icon: 'las la-plus', label: 'mixins.activity.CREATE_LAYER', route: { name: 'add-map-layer' } },
-        { id: 'add-layer', visible: 'hasProject', icon: 'las la-plus', label: 'mixins.activity.MANAGE_LAYERS', route: { name: 'add-map-layer', query: { project: ':project' } } },
+          visible: [{ name: '$can', params: ['create', 'catalog'] }], route: { name: 'create-map-view', query: { project: ':project' } } },
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-map-layer', query: { project: ':project' } } },
         { id: 'create-project', visible: '!hasProject', icon: 'las la-project-diagram', label: 'mixins.activity.CREATE_PROJECT',
           visible: ['!hasProject', { name: '$can', params: ['create', 'projects'] }], route: { name: 'create-map-project' } },
+        { id: 'manage-project', icon: 'las la-project-diagram', label: 'mixins.activity.MANAGE_PROJECT',
+          visible: ['hasProject', { name: '$can', params: ['update', 'projects'] }], route: { name: 'manage-map-project', query: { project: ':project' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },

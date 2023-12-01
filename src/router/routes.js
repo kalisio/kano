@@ -38,9 +38,9 @@ module.exports = [{
             fab: tours.fab
           },
           children: {
-            'add-view': {
-              name: 'add-map-view',
-              component: 'catalog/KAddView',
+            'create-view': {
+              name: 'create-map-view',
+              component: 'catalog/KCreateView',
               tour: tours['create-view']
             },
             'add-layer': {
@@ -52,6 +52,11 @@ module.exports = [{
                 'connect-layer': tours['connect-layer'],
                 'create-layer': tours['create-layer']
               }
+            },
+            'manage-project': {
+              name: 'manage-map-project',
+              component: 'catalog/KProjectManager',
+              tour: tours['manage-project']
             },
             'layer-chart/:layerId?': {
               name: 'map-layer-chart',
