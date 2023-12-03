@@ -108,12 +108,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         else if (properties.risk === 3) { %>orange<% }
         else if (properties.risk === 4) { %>red<% }
         else { %>black<% } %>`,
-      'stroke-width': 8,
+      'stroke-width': 6,
       'stroke-opacity': 0.5,
       template: ['stroke'],
       tooltip: {
         template: `<% if (_.has(properties, 'name') && _.has(properties, 'risk')) { %>
-                    <%= properties.name %><br><%= $t('Layers.VIGICRUES_RISK_' + properties.risk) %>
+                    <%= properties.name %><br><%= $t('Legend.VIGICRUES_RISK_' + properties.risk) %>
                   <% } %>`,
         options: { permanent: false, sticky: true }
       }
@@ -136,7 +136,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: '<% if (_.has(properties, \'name\') && _.has(properties, \'risk\')) { %>' +
-                  '<%= properties.name %>\n<%= $t(\'Layers.VIGICRUES_RISK_\' + properties.risk) %>' +
+                  '<%= properties.name %>\n<%= $t(\'Legend.VIGICRUES_RISK_\' + properties.risk) %>' +
                   '<% } %>',
         options: { sticky: true }
       }

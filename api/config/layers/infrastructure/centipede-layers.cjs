@@ -21,14 +21,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           CENTIPEDE_DESCRIPTION: 'Status du réseau Centipede RTK'
         },
         Variables: {
-          CENTIPEDE_PING: 'Status'
+          CENTIPEDE_PING: 'Statut'
         },
         Sublegend: {
-          CENTIPEDE_PINGS_LABEL: 'Réseau Centipède RTK - Status',
+          CENTIPEDE_PINGS_LABEL: 'Centipède RTK - Statut des bases',
           CENTIPEDE_VERIFIED_BASES: 'Bases vérifiées',
           CENTIPEDE_BASES_BEING_VERIFIED: 'Bases en cours de vérification',
           CENTIPEDE_INACTIVE_BASES: 'Bases inactives',
-          CENTIPEDE_OLD_PING: 'Status daté de plus de 3 heure',
+          CENTIPEDE_OLD_PING: 'Status daté de plus de 6 heures',
           CENTIPEDE_BASES_LABEL: 'Réseau Centipède RTK - Bases',          
           CENTIPEDE_BASE: 'Base'
         }
@@ -42,11 +42,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           CENTIPEDE_PING: 'Status'
         },
         Sublegend: {
-          CENTIPEDE_PINGS_LABEL: 'Centipède RTK Network - Status',
+          CENTIPEDE_PINGS_LABEL: 'Centipède RTK - Status of bases',
           CENTIPEDE_VERIFIED_BASES: 'Verified bases',
           CENTIPEDE_BASES_BEING_VERIFIED: 'Bases being verified',
           CENTIPEDE_INACTIVE_BASES: 'Inactive bases',
-          CENTIPEDE_OLD_PING: 'Ping dated more than 3 hours ago',
+          CENTIPEDE_OLD_PING: 'Ping dated more than 6 hours ago',
           CENTIPEDE_BASES_LABEL: 'Centipède RTK Network - Bases',
           CENTIPEDE_BASE: 'Base'
         }
@@ -91,7 +91,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-15M',
     every: 'PT5M',
-    queryFrom: 'PT-3H',
+    queryFrom: 'PT-6H',
     variables: [
       {
         name: 'ping',
