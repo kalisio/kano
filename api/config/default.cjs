@@ -144,7 +144,10 @@ module.exports = {
                            !service.path.includes('authentication') &&
                            !service.path.includes('authorisations') &&
                            !service.path.includes('features') &&
+                           !service.path.includes('projects') &&
                            !service.path.includes('geocoder'),
+    // Distribute at least modelName for KFS to know about features services
+    remoteServiceOptions: () => ['modelName'],
     middlewares: { after: express.errorHandler() },
     // When called internally from remote service do not authenticate,
     // this assumes a gateway scenario where authentication is performed externally
