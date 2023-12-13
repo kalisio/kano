@@ -45,7 +45,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     probeService: 'lab-stations',
     featureId: 'id',
     from: 'P-7D',
-    to: 'PT-30S',
+    to: 'PT-6H',
     every: 'PT30S',
     queryFrom: 'PT-10M',
     variables: [
