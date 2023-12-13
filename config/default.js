@@ -515,6 +515,17 @@ module.exports = {
     },
     fab: { visible: true }
   },
+  capture: {
+    header: {
+      component: 'KCaptureHeader',
+      backgroundColor: '#fff',
+      color: '#000'
+    },
+    footer: {
+      backgroundColor: '#fff',
+      color: '#000'
+    }
+  },
   engines: {
     leaflet: mapEngine,
     cesium: globeEngine
