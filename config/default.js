@@ -517,7 +517,7 @@ module.exports = {
   },
   capture: {
     header: {
-      component: 'KCaptureHeader',
+      component: 'CaptureHeader',
       backgroundColor: '#fff',
       color: '#000'
     },
