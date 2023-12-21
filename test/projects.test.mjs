@@ -39,8 +39,17 @@ describe(`suite:${suite}`, () => {
     await map.createView(page, 'trace view', false)
   })
 
-  it('admin: create a project', async () => {
-    await map.createProject(page, 'trace project', ['trace'], ['trace view'])
+  it('admin: create projects', async () => {
+    await map.createProject(page, 'trace project', {
+      categories: [],
+      layers: ['trace'],
+      views: ['trace view']
+    })
+    await map.createProject(page, 'no trace project', {
+      categories: ['Fonds cartographiques'],
+      layers: ['Plan (Sombre)'],
+      views: []
+    })
   })
 
   it('switch to user', async () => {
@@ -49,7 +58,7 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user[0])
   })
 
-  it('user: select project', async () => {
+  it('user: select trace project', async () => {
     await map.clickProject(page, userProjectsTab, 'trace project')
     expect(await core.elementExists(page, '#close-project')).beTrue()
     await core.clickOpener(page, 'right')
@@ -59,7 +68,23 @@ describe(`suite:${suite}`, () => {
     expect(await core.elementExists(page, `#${catalogLayersTab}`)).beFalse()
     expect(await core.elementExists(page, `#${projectLayersTab}`)).beTrue()
     expect(await core.elementExists(page, `#${projectViewsTab}`)).beTrue()
-    await core.click(page, '#close-project')
+    const match = await runner.captureAndMatch('trace-project')
+    expect(match).beTrue()
+  })
+
+  it('user: switch to no trace project', async () => {
+    await map.switchProject(page, 'no trace project')
+    expect(await core.elementExists(page, '#close-project')).beTrue()
+    await core.clickOpener(page, 'right')
+    expect(await core.elementExists(page, `#${userLayersTab}`)).beFalse()
+    expect(await core.elementExists(page, `#${userViewsTab}`)).beFalse()
+    expect(await core.elementExists(page, `#${userProjectsTab}`)).beFalse()
+    expect(await core.elementExists(page, `#${catalogLayersTab}`)).beFalse()
+    expect(await core.elementExists(page, `#${projectLayersTab}`)).beTrue()
+    expect(await core.elementExists(page, `#${projectViewsTab}`)).beTrue()
+    const match = await runner.captureAndMatch('no-trace-project')
+    expect(match).beTrue()
+    await map.closeProject(page)
   })
 
   it('switch to admin', async () => {
@@ -68,8 +93,9 @@ describe(`suite:${suite}`, () => {
     await core.login(page, user[1])
   })
 
-  it('admin: remove project', async () => {
+  it('admin: remove projects', async () => {
     await map.removeProject(page, userProjectsTab, 'trace project')
+    await map.removeProject(page, userProjectsTab, 'no trace project')
   })
 
   it('admin: remove data', async () => {
