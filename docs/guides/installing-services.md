@@ -74,7 +74,7 @@ docker-compose -f docker-compose.yml -f docker-compose-gateway.yml -f docker-com
 
 ### Add geokoder
 
-Kano integrates smoothly with [Geokoder](https://kalisio.github.io/geokoder/) in order to perform geocoding.
+Kano integrates smoothly with [Geokoder](https://github.com/kalisio/geokoder/) in order to perform geocoding.
 
 The following commands and additional docker-compose file should do the job:
 
