@@ -69,8 +69,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     type: 'OverlayLayer',
     service: 'osm-boundaries',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    featureId: 'ref',
-    featureLabel: 'name:en',
+    /*featureId: 'name:en',
+    featureLabel: 'name:en',*/
     filters: [{
       label: 'Layers.OSM_BOUNDARIES_LEVEL_2',
       isActive: true,
@@ -112,9 +112,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       source: '/api/osm-boundaries',
       realtime: true, 
-      'marker-color': `<% if (properties.admin_level === '2') { %>#ee000066<% }
-                            else if (properties.admin_level === '3') { %>#0000ee66<% }
-                            else { %>#0000ee66<% } %>`,
+      tiled: true,
+      minZoom: 10,
+      'marker-color': `#0000ee66`,
         template: ['marker-color', 'icon-color'],
       }
     }
