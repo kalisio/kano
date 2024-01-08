@@ -19,7 +19,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       en: {
         Layers: {
           'OSM_BOUNDARIES': 'Administrative limits',
-          'OSM_BOUNDARIES_DESCRIPTION': 'Administrative limits OSM',
+          'OSM_BOUNDARIES_DESCRIPTION': 'OpenStreetMap Administrative limits',
           'OSM_BOUNDARIES_LEVEL_2': 'Level 2',
           'OSM_BOUNDARIES_LEVEL_3': 'Level 3',
           'OSM_BOUNDARIES_LEVEL_4': 'Level 4',
@@ -81,8 +81,43 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       source: '/api/osm-boundaries',
       realtime: true, 
       tiled: true,
-      minZoom: 8,
+      minZoom: 7,
       'fill-opacity': 0
+    }
+  },
+  {
+    name: `Layers.OSM_BOUNDARIES_TL`,
+    description: `Layers.OSM_BOUNDARIES_TL_DESCRIPTION`,
+    i18n: {
+    fr: {
+        Layers: {
+        [`OSM_BOUNDARIES_TL`]: `OpenStreetMap - Limites administratives`,
+        [`OSM_BOUNDARIES_TL_DESCRIPTION`]: `OpenStreetMap - Limites administratives`
+        }
+    },
+    en: {
+        Layers: {
+        [`OSM_BOUNDARIES_TL`]: `OpenStreetMap - Administratives limits`,
+        [`OSM_BOUNDARIES_TL_DESCRIPTION`]: `OpenStreetMap - Administrative limits`
+        }
+    }
+    },
+    tags: [
+    'administrative'
+    ],
+    iconUrl: `http://localhost:8080/styles/osm-dark/9/260/187.png`,
+    attribution: '© <a href="https://https://openstreetmap.org">OpenStreetMap</a>',
+    type: 'OverlayLayer',
+    leaflet: {
+        type: 'tileLayer',
+        source: `http://localhost:8080/styles/osm-dark/{z}/{x}/{y}.png`,
+        maxZoom: 21,
+        maxNativeZoom: 19,
+        tms: true
+    },
+    cesium: {
+        type: 'TileMapService',
+        url: `http://localhost:8080/styles/osm-dark`
     }
   }]
 }
