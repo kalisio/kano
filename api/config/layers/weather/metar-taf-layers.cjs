@@ -79,7 +79,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           name: 'windSpeed',
           label: 'Variables.WIND_SPEED',
           units: [
-            'kts', 'm/s', 'km/h'
+            'kt', 'm/s', 'km/h'
           ],
           range: [0, 70],
           step: 1,
@@ -98,7 +98,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           name: 'windGust',
           label: 'Variables.WIND_GUST',
           units: [
-            'kts', 'm/s', 'km/h'
+            'kt', 'm/s', 'km/h'
           ],
           range: [0, 100],
           step: 1,
