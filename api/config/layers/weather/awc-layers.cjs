@@ -1,35 +1,35 @@
 module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [
     {
-      name: 'Layers.METAR',
-      description: 'Layers.METAR_DESCRIPTION',
+      name: 'Layers.AWC_METARS',
+      description: 'Layers.AWC_METARS_DESCRIPTION',
       i18n: {
         fr: {
           Layers: {
-            METAR: 'METAR',
-            METAR_DESCRIPTION: 'Observations METAR'
+            AWC_METARS: 'Données METAR',
+            AWC_METARS_DESCRIPTION: 'Données METAR'
           },
           Variables: {
-            TEMPERATURE: 'Température',
-            DEWPOINT: 'Point de rosée',
-            WIND_SPEED: 'Vitesse',
-            WIND_DIRECTION: 'Direction',
-            WIND_GUST: 'Rafales',
-            VISIBILITY: 'Visiblité'
+            AWC_METARS_TEMPERATURE: 'Température',
+            AWC_METARS_DEWPOINT: 'Point de rosée',
+            AWC_METARS_WIND_SPEED: 'Vitesse',
+            AWC_METARS_WIND_DIRECTION: 'Direction',
+            AWC_METARS_WIND_GUST: 'Rafales',
+            AWC_METARS_VISIBILITY: 'Visiblité'
           }
         },
         en: {
           Layers: {
-            METAR: 'METAR',
-            METAR_DESCRIPTION: 'METAR Observations'
+            AWC_METARS: 'METAR Data',
+            AWC_METARS_DESCRIPTION: 'METAR Data'
           },
           Variables: {
-            TEMPERATURE: 'Temperature',
-            DEWPOINT: 'Dew point',
-            WIND_SPEED: 'Speed',
-            WIND_DIRECTION: 'Direction',
-            WIND_GUST: 'Gust',
-            VISIBILITY: 'Visibility'
+            AWC_METARS_TEMPERATURE: 'Temperature',
+            AWC_METARS_DEWPOINT: 'Dew point',
+            AWC_METARS_WIND_SPEED: 'Speed',
+            AWC_METARS_WIND_DIRECTION: 'Direction',
+            AWC_METARS_WIND_GUST: 'Gust',
+            AWC_METARS_VISIBILITY: 'Visibility'
           }
         }
       },
@@ -38,9 +38,9 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       ],
       attribution: '',
       type: 'OverlayLayer',
-      service: 'metar-taf-observations',
+      service: 'awc-metars',
       dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-      probeService: 'metar-taf-stations',
+      probeService: 'awc-stations',
       featureId: 'icao',
       featureIdType: 'string',
       featureLabel: 'name',
@@ -51,7 +51,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       variables: [
         {
           name: 'temperature',
-          label: 'Variables.TEMPERATURE',
+          label: 'Variables.AWC_METARS_TEMPERATURE',
           units: [
             'degC', 'degF', 'K'
           ],
@@ -64,7 +64,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         {
           name: 'dewpoint',
-          label: 'Variables.DEWPOINT',
+          label: 'Variables.AWC_METARS_DEWPOINT',
           units: [
             'degC', 'degF', 'K'
           ],
@@ -77,7 +77,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         {
           name: 'windSpeed',
-          label: 'Variables.WIND_SPEED',
+          label: 'Variables.AWC_METARS_WIND_SPEED',
           units: [
             'kt', 'm/s', 'km/h'
           ],
@@ -96,7 +96,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         {
           name: 'windGust',
-          label: 'Variables.WIND_GUST',
+          label: 'Variables.AWC_METARS_WIND_GUST',
           units: [
             'kt', 'm/s', 'km/h'
           ],
@@ -115,7 +115,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         {
           name: 'windDirection',
-          label: 'Variables.WIND_DIRECTION',
+          label: 'Variables.AWC_METARS_WIND_DIRECTION',
           units: [
             'deg'
           ],
@@ -129,7 +129,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         {
           name: 'visibility',
-          label: 'Variables.VISIBILITY',
+          label: 'Variables.AWC_METARS_VISIBILITY',
           units: [
             'mi', 'km', 'm'
           ],
