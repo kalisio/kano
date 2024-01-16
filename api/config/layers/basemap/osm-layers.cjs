@@ -1,5 +1,37 @@
 module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   return [{
+    name: 'Layers.OSM_BRIGHT_PMTILES',
+    description: 'Layers.OSM_BRIGHT_DESCRIPTION_PMTILES',
+    i18n: {
+      fr: {
+        Layers: {
+          OSM_BRIGHT_PMTILES: 'Plan (PMTiles)',
+          OSM_BRIGHT_DESCRIPTION_PMTILES: 'Données OpenStreetMap (style clair)'
+        }
+      },
+      en: {
+        Layers: {
+          OSM_BRIGHT_PMTILES: 'Plan',
+          OSM_BRIGHT_DESCRIPTION_PMTILES: 'OpenStreeMap data (bright style)'
+        }
+      }
+    },
+    tags: [
+      'street'
+    ],
+    iconUrl: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR/0/0/0.png`,
+    icon: 'streetview',
+    attribution: 'OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a> & OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    type: 'BaseLayer',
+    leaflet: {
+      type: 'pmtiles',
+      url: 'http://127.0.0.1:8080/planet-02-08-2023.pmtiles',
+      style: 'http://127.0.0.1:8080/osm-bright.json',
+      maxZoom: 21,
+      maxNativeZoom: 18
+    }
+  },
+  {
     name: 'Layers.OSM_BRIGHT',
     description: 'Layers.OSM_BRIGHT_DESCRIPTION',
     i18n: {

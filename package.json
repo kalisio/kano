@@ -173,6 +173,7 @@
     "pinch-zoom-element": "^1.1.1",
     "pixi.js": "5.3.10",
     "post-robot": "10.0.42",
+    "protomaps-leaflet": "^1.24.0",
     "quasar": "^2.12.0",
     "sanitize-html": "^2.7.0",
     "showdown": "^2.1.0",
