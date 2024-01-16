@@ -5,9 +5,14 @@ import { Store } from '@kalisio/kdk/core.client'
 import { Router } from './router'
 
 function getEmbedComponent (route) {
-  // The target component is the last one to be matched in hierarchy
-  const component = _.get(route, `matched[${route.matched.length - 1}]`)
-  return _.get(component, 'instances.default')
+  return _.get(route, 'instances.default')
+}
+
+function getEmbedRoute (route) {
+  // The route component information is only available in the matched ones,
+  // and is the last one to be matched in hierarchy
+  const matched = _.get(route, 'matched', [])
+  return (matched.length ? matched[matched.length - 1] : null)
 }
 
 async function callEmbedMethod (route, data) {
@@ -43,21 +48,30 @@ function getEmbedProperty (route, data) {
 function setupEmbedApi (routeName, component) {
   const listener = async (event) => {
     const router = Router.get()
-    let route = router.currentRoute.value
+    let route = getEmbedRoute(router.currentRoute.value)
     const data = event.data
     let result, component, interval
     // If event received but the current route does not match the new route is pushed first
     if (route.name !== routeName) {
-      // Need to wait until route has really changed, component has been initialized, etc.
-      await new Promise((resolve, reject) => router.push({ name: routeName, query: Object.assign({}, route.query) }, resolve))
-      await new Promise((resolve, reject) => {
-        interval = setInterval(() => {
-          route = router.currentRoute
-          component = getEmbedComponent(route)
-          if (component) resolve()
-        }, 100)
-      })
-      clearInterval(interval)
+      // Take care that we might be on a sub-route so that a reset to the parent route is not relevent
+      // eg feature edition on the map (see https://github.com/kalisio/kano/issues/339)
+      const childRoute = _.find(_.get(router.currentRoute.value, 'matched', []), { name: routeName })
+      if (!childRoute) {
+        await new Promise((resolve, reject) => router.push({ name: routeName, query: Object.assign({}, route.query) }, resolve))
+        // Need to wait until route has really changed, component has been initialized, etc.
+        // FIXME: make this more reliable than relying on a timer
+        await new Promise((resolve, reject) => {
+          interval = setInterval(() => {
+            route = getEmbedRoute(router.currentRoute.value)
+            component = getEmbedComponent(route)
+            if (component) resolve()
+          }, 100)
+        })
+        clearInterval(interval)
+      } else {
+        // In this case, the component we target is actually the one of the parent route, not the child one
+        route = childRoute
+      }
     }
     // If no payload this was just a route change
     if (data) {
