@@ -49,6 +49,16 @@ export class Server {
     await app.configure(services)
     // Register hooks
     app.hooks(hooks)
+    // Register application setup and teardown hooks here
+    app.hooks({
+      setup: [],
+      teardown: [
+        async () => {
+          await app.db.disconnect()
+          app.logger.info('Server has been shut down')
+        }
+      ]
+    })
     // Set up real-time event channels
     app.configure(channels)
     // Configure middlewares - always has to be last
@@ -95,6 +105,18 @@ export function createServer () {
   process.on('unhandledRejection', (reason, p) =>
     server.app.logger.error('Unhandled Rejection: ', reason)
   )
+
+  process.on('SIGINT', async () => {
+    server.app.logger.info('Received SIGINT signal running teardown')
+    await server.app.teardown()
+    process.exit(0)
+  })
+
+  process.on('SIGTERM', async () => {
+    server.app.logger.info('Received SIGTERM signal running teardown')
+    await server.app.teardown()
+    process.exit(0)
+  })
 
   return server
 }
