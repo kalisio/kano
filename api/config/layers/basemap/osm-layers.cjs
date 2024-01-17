@@ -26,7 +26,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'pmtiles',
       url: 'http://127.0.0.1:8080/planet-02-08-2023.pmtiles',
-      style: 'http://127.0.0.1:8080/osm-bright.json',
+      style: 'http://localhost:8086/osm-bright.json',
       maxZoom: 21,
       maxNativeZoom: 18
     }
