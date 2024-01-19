@@ -5,14 +5,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          POPULATION: 'Nombre d\'habitants',
-          POPULATION_DESCRIPTION: 'Carroyage INSEE (1Km and 200m)'
+          POPULATION: 'Population',
+          POPULATION_DESCRIPTION: 'Nombre d\'individus'
         }
       },
       en: {
         Layers: {
-          POPULATION: 'Number of inhabitants',
-          POPULATION_DESCRIPTION: 'INSEE Squaring (1Km and 200m)'
+          POPULATION: 'Population',
+          POPULATION_DESCRIPTION: 'Number of persons'
         }
       }
     },
@@ -22,20 +22,38 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: '',
     icon: 'las la-th',
     attribution: 'INSEE',
+    legend: [{
+      type: 'symbols',
+      label: 'Layers.POPULATION_DESCRIPTION',
+      maxZoom: 12,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FFFFB2' } }, label: '1 - 400' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FDD976' } }, label: '400 - 1500' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FEB554' } }, label: '1500 - 3500' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FD8D3C' } }, label: '3500 - 7000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FC4E2A' } }, label: '7000 - 12000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#E31A1C' } }, label: '12000 - 25000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#B10026' } }, label: '25000 - 110000' }
+        ]
+      }
+    }, {
+      type: 'symbols',
+      label: 'Layers.POPULATION_DESCRIPTION',
+      minZoom: 13,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FFFFB2' } }, label: '1 - 30' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FDD976' } }, label: '30 - 100' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FEB554' } }, label: '100 - 200' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FD8D3C' } }, label: '200 - 400' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FC4E2A' } }, label: '400 - 750' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#E31A1C' } }, label: '750 - 1350' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#B10026' } }, label: '1350 - 4086' }
+        ]
+      }
+    }],
     type: 'OverlayLayer',
-    chromajs: {
-      scale: [
-        '#FFFFB2',
-        '#FDD976',
-        '#FEB554',
-        '#FD8D3C',
-        '#FC4E2A',
-        '#E31A1C',
-        '#B10026'
-      ],
-      classes: [1, 30, 100, 200, 400, 750, 1350, 4086]
-    },
-    units: ['h./Km²'],
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
@@ -52,13 +70,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION_DENSITY: 'Densité de population',
-          POPULATION_DENSITY_DESCRIPTION: 'Carroyage INSEE (1Km and 200m)'
+          POPULATION_DENSITY_DESCRIPTION: `Nombre d'individus par Km²`
         }
       },
       en: {
         Layers: {
           POPULATION_DENSITY: 'Population density',
-          POPULATION_DENSITY_DESCRIPTION: 'INSEE Squaring (1Km and 200m)'
+          POPULATION_DENSITY_DESCRIPTION: 'Number of persons per Km²'
         }
       }
     },
@@ -68,20 +86,38 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: '',
     icon: 'las la-th',
     attribution: 'INSEE',
+    legend: [{
+      type: 'symbols',
+      label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
+      maxZoom: 12,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FFFFB2' } }, label: '1 - 400' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FDD976' } }, label: '400 - 1500' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FEB554' } }, label: '1500 - 3500' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FD8D3C' } }, label: '3500 - 7000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FC4E2A' } }, label: '7000 - 12000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#E31A1C' } }, label: '12000 - 25000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#B10026' } }, label: '25000 - 110000' }
+        ]
+      }
+    }, {
+      type: 'symbols',
+      label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
+      minZoom: 13,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FFFFB2' } }, label: '1 - 700' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FDD976' } }, label: '700 - 2400' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FEB554' } }, label: '2400 - 5500' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FD8D3C' } }, label: '5500 - 11000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FC4E2A' } }, label: '11000 - 20000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#E31A1C' } }, label: '20000 - 36000' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#B10026' } }, label: '36000 - 110000' }
+        ]
+      }
+    }],
     type: 'OverlayLayer',
-    chromajs: {
-      scale: [
-        '#FFFFB2',
-        '#FDD976',
-        '#FEB554',
-        '#FD8D3C',
-        '#FC4E2A',
-        '#E31A1C',
-        '#B10026'
-      ],
-      classes: [1, 700, 2400, 5500, 11000, 20000, 36000, 110000]
-    },
-    units: ['h./Km²'],
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population-density@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
@@ -98,13 +134,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION_DETAILS: 'Population par classe d\'age',
-          POPULATION_DETAILS_DESCRIPTION: 'Carroyage INSEE (200m)'
+          POPULATION_DETAILS_DESCRIPTION: 'Nombre d\'individus'
         }
       },
       en: {
         Layers: {
           POPULATION_DETAILS: 'Population per age class',
-          POPULATION_DETAILS_DESCRIPTION: 'INSEE Squaring (200m)'
+          POPULATION_DETAILS_DESCRIPTION: 'Number of persons'
         }
       }
     },
@@ -114,23 +150,26 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     iconUrl: '',
     icon: 'las la-male',
     attribution: 'INSEE',
+    legend: [{
+      type: 'symbols',
+      label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
+      minZoom: 13,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FFFFB2' } }, label: '1 - 30' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FDD976' } }, label: '30 - 100' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FEB554' } }, label: '100 - 200' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FD8D3C' } }, label: '200 - 400' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#FC4E2A' } }, label: '400 - 750' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#E31A1C' } }, label: '750 - 1350' },
+          { symbol: { 'media/KShape': { type: 'rect', color: '#B10026' } }, label: '1350 - 4086' }
+        ]
+      }
+    }],
     type: 'OverlayLayer',
     service: 'population',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'fid',
-    chromajs: {
-      scale: [
-        '#FFFFB2',
-        '#FDD976',
-        '#FEB554',
-        '#FD8D3C',
-        '#FC4E2A',
-        '#E31A1C',
-        '#B10026'
-      ],
-      classes: [1, 30, 100, 200, 400, 750, 1350, 4086]
-    },
-    units: ['h.'],
     leaflet: {
       type: 'geoJson',
       realtime: true,

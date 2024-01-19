@@ -45,9 +45,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'value',
         label: 'Variables.value',
-        units: [
-          'µSv/h'
-        ],
+        unit: 'usvh',
         range: [0, 250],
         step: 5,
         chartjs: {

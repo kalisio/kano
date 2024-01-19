@@ -42,9 +42,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'windSpeed',
         label: 'Variables.WIND_SPEED',
-        units: [
-          'm/s', 'km/h', 'kt'
-        ],
+        unit: 'm/s',
         range: [0, 70],
         step: 1,
         chartjs: {
@@ -65,9 +63,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'windDirection',
         label: 'Variables.WIND_DIRECTION',
-        units: [
-          'deg'
-        ],
+        unit: 'deg',
         range: [0, 360],
         step: 1,
         chartjs: {
@@ -77,13 +73,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     /* When available at different levels
     levels: {
       name: 'pressure',
       label: 'Levels.PRESSURE',
-      units: [
-        'mb'
-      ],
+      unit: 'mb',
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
     meteoElements: ['u-wind', 'v-wind'],
@@ -162,9 +159,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'gust',
         label: 'Variables.GUST',
-        units: [
-          'm/s', 'km/h', 'kt'
-        ],
+        unit: 'm/s',
         range: [0, 70],
         step: 1,
         chartjs: {
@@ -183,6 +178,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     meteoElements: ['gust'],
     meteo_model: {
       default: {
@@ -257,9 +255,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.PRECIPITATIONS',
-        units: [
-          'mm'
-        ],
+        unit: 'mm',
         range: [0, 300],
         step: 2,
         chartjs: {
@@ -278,6 +274,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     meteoElements: ['precipitations'],
     meteo_model: {
       default: {
@@ -352,9 +351,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'temperature',
         label: 'Variables.TEMPERATURE',
-        units: [
-          'degC', 'degF', 'K'
-        ],
+        unit: 'degC',
         range: [-20, 50],
         step: 1,
         chartjs: {
@@ -369,13 +366,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     /* When available at different levels
     levels: {
       name: 'pressure',
       label: 'Levels.PRESSURE',
-      units: [
-        'mb'
-      ],
+      unit: 'mb',
       values: [ 1000, 700, 450, 300, 200 ]
     }, */
     meteoElements: ['temperature'],

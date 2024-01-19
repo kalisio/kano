@@ -96,9 +96,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'ping',
         label: 'Variables.CENTIPEDE_PING',
-        units: [
-          '0: nok | 1: no info | 2: ok'
-        ],
+        unit: '0: nok | 1: no info | 2: ok',
         range: [0, 1],
         step: 1,
         chartjs: {

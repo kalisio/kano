@@ -52,9 +52,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'temperature',
           label: 'Variables.AWC_METARS_TEMPERATURE',
-          units: [
-            'degC', 'degF', 'K'
-          ],
+          unit: 'degC',
           range: [-50, 50],
           chartjs: {
             backgroundColor: '#510861',
@@ -65,9 +63,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'dewpoint',
           label: 'Variables.AWC_METARS_DEWPOINT',
-          units: [
-            'degC', 'degF', 'K'
-          ],
+          unit: 'degC',
           range: [-50, 50],
           chartjs: {
             backgroundColor: '#D566ed',
@@ -78,9 +74,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'windSpeed',
           label: 'Variables.AWC_METARS_WIND_SPEED',
-          units: [
-            'kt', 'm/s', 'km/h'
-          ],
+          unit: 'kt',
           range: [0, 70],
           step: 1,
           chartjs: {
@@ -97,9 +91,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'windGust',
           label: 'Variables.AWC_METARS_WIND_GUST',
-          units: [
-            'kt', 'm/s', 'km/h'
-          ],
+          unit: 'kt',
           range: [0, 100],
           step: 1,
           chartjs: {
@@ -116,9 +108,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'windDirection',
           label: 'Variables.AWC_METARS_WIND_DIRECTION',
-          units: [
-            'deg'
-          ],
+          unit: 'deg',
           range: [0, 360],
           step: 1,
           chartjs: {
@@ -130,9 +120,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'visibility',
           label: 'Variables.AWC_METARS_VISIBILITY',
-          units: [
-            'mi', 'km', 'm'
-          ],
+          unit: 'mi',
           range: [0, 10000],
           step: 1,
           chartjs: {

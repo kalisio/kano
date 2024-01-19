@@ -93,9 +93,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'value',
         label: 'Variables.TELERAY_GAMMA_DOSE_RATE',
-        units: [
-          'nSv/h'
-        ],
+        unit: 'nsvh',
         range: [0, 500],
         step: 5,
         chartjs: {

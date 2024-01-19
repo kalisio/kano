@@ -78,9 +78,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'risk',
         label: 'Variables.VIGICRUES_RISK',
-        units: [
-          'niveau'
-        ],
+        unit: 'niveau',
         range: [1, 4],
         step: 1,
         chartjs: {

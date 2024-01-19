@@ -53,9 +53,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'pm25',
         label: 'Variables.PM25',
-        units: [
-          'µg/m³'
-        ],
+        unit: 'ug/m^3',
         range: [0, 100],
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
@@ -66,9 +64,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'pm10',
         label: 'Variables.PM10',
-        units: [
-          'µg/m³'
-        ],
+        unit: 'ug/m^3',
         range: [0, 200],
         chartjs: {
           backgroundColor: 'rgba(63, 63, 191, 128)',
@@ -79,9 +75,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'co',
         label: 'Variables.CO',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 10000],
         chartjs: {
           backgroundColor: 'rgba(255, 99, 132, 128)',
@@ -92,9 +86,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'no2',
         label: 'Variables.NO2',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(81, 186, 153, 128)',
@@ -105,9 +97,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'so2',
         label: 'Variables.SO2',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 500],
         chartjs: {
           backgroundColor: 'rgba(40, 44, 32, 128)',
@@ -118,9 +108,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'o3',
         label: 'Variables.O3',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(83, 134, 106, 128)',
@@ -131,9 +119,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'bc',
         label: 'Variables.BC',
-        units: [
-          'µg/m³'
-        ],
+        unit: 'ug/m^3',
         range: [0, 400],
         chartjs: {
           backgroundColor: 'rgba(0, 0, 0, 128)',
@@ -166,9 +152,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'pm25')) { %>PM2.5 = <%= Units.format(properties.pm25, 'µg/m³') %></br><% }
+        template: `<% if (_.has(properties, 'pm25')) { %>PM2.5 = <%= Units.format(properties.pm25, 'ug/m^3') %></br><% }
                    if (_.has(feature, 'time.pm25')) { %><%= Time.format(feature.time.pm25, 'time.long') + ' - ' + Time.format(feature.time.pm25, 'date.short') %></br><% }
-                   if (_.has(properties, 'pm10')) { %>PM10 = <%= Units.format(properties.pm10, 'µg/m³') %></br><% }
+                   if (_.has(properties, 'pm10')) { %>PM10 = <%= Units.format(properties.pm10, 'ug/m^3') %></br><% }
                    if (_.has(feature, 'time.pm10')) { %><%= Time.format(feature.time.pm10, 'time.long') + ' - ' + Time.format(feature.time.pm10, 'date.short') %></br><% }
                    if (_.has(properties, 'so2')) { %>SO2 = <%= Units.format(properties.so2, 'ppm') %></br><% }
                    if (_.has(feature, 'time.so2')) { %><%= Time.format(feature.time.so2, 'time.long') + ' - ' + Time.format(feature.time.so2, 'date.short') %></br><% }
@@ -178,7 +164,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                    if (_.has(feature, 'time.o3')) { %><%= Time.format(feature.time.o3, 'time.long') + ' - ' + Time.format(feature.time.o3, 'date.short') %></br><% }
                    if (_.has(properties, 'co')) { %>CO = <%= Units.format(properties.co, 'ppm') %></br><% }
                    if (_.has(feature, 'time.co')) { %><%= Time.format(feature.time.co, 'time.long') + ' - ' + Time.format(feature.time.co, 'date.short') %></br><% }
-                   if (_.has(properties, 'bc')) { %>BC = <%= Units.format(properties.bc, 'µg/m³') %></br><% }
+                   if (_.has(properties, 'bc')) { %>BC = <%= Units.format(properties.bc, 'ug/m^3') %></br><% }
                    if (_.has(feature, 'time.bc')) { %><%= Time.format(feature.time.bc, 'time.long') + ' - ' + Time.format(feature.time.bc, 'date.short') %></br><% } %>`
       }
     },
@@ -194,9 +180,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'pm25\')) { %>PM2.5 = <%= Units.format(properties.pm25, \'µg/m³\') %>\n<% }' +
+        template: '<% if (_.has(properties, \'pm25\')) { %>PM2.5 = <%= Units.format(properties.pm25, \'ug/m^3\') %>\n<% }' +
                   'if (_.has(feature, \'time.pm25\')) { %><%= Time.format(feature.time.pm25, \'time.long\') + \' - \' + Time.format(feature.time.pm25, \'date.short\') %>\n<% }' +
-                  'if (_.has(properties, \'pm10\')) { %>PM10 = <%= Units.format(properties.pm10, \'µg/m³\') %>\n<% }' +
+                  'if (_.has(properties, \'pm10\')) { %>PM10 = <%= Units.format(properties.pm10, \'ug/m^3\') %>\n<% }' +
                   'if (_.has(feature, \'time.pm10\')) { %><%= Time.format(feature.time.pm10, \'time.long\') + \' - \' + Time.format(feature.time.pm10, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'so2\')) { %>SO2 = <%= Units.format(properties.so2, \'ppm\') %>\n<% }' +
                   'if (_.has(feature, \'time.so2\')) { %></br><%= Time.format(feature.time.so2, \'time.long\') + \' - \' + Time.format(feature.time.so2, \'date.short\') %>\n<% }' +
@@ -206,7 +192,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                   'if (_.has(feature, \'time.o3\')) { %></br><%= Time.format(feature.time.o3, \'time.long\') + \' - \' + Time.format(feature.time.o3, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'co\')) { %>CO = <%= Units.format(properties.co, \'ppm\') %>\n<% }' +
                   'if (_.has(feature, \'time.co\')) { %></br><%= Time.format(feature.time.co, \'time.long\') + \' - \' + Time.format(feature.time.co, \'date.short\') %>\n<% }' +
-                  'if (_.has(properties, \'bc\')) { %>BC = <%= Units.format(properties.bc, \'µg/m³\') %>\n<% }' +
+                  'if (_.has(properties, \'bc\')) { %>BC = <%= Units.format(properties.bc, \'ug/m^3\') %>\n<% }' +
                   'if (_.has(feature, \'time.bc\')) { %></br><%= Time.format(feature.time.bc, \'time.long\') + \' - \' + Time.format(feature.time.bc, \'date.short\') %>\n<% } %>'
       }
     }

@@ -46,9 +46,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'H',
         label: 'Variables.H',
-        units: [
-          'm'
-        ],
+        unit: 'm',
         range: [0, 10],
         step: 0.1,
         chartjs: {
@@ -60,9 +58,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'Q',
         label: 'Variables.Q',
-        units: [
-          'm3/s'
-        ],
+        unit: 'm^3/s',
         range: [0, 1000],
         step: 10,
         chartjs: {
@@ -74,9 +70,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'HP_RNN',
         label: 'Variables.HP_RNN',
-        units: [
-          'm'
-        ],
+        unit: 'm',
         range: [0, 10],
         step: 0.1,
         runTimes: true,
@@ -90,9 +84,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'HP_XGB',
         label: 'Variables.HP_XGB',
-        units: [
-          'm'
-        ],
+        unit: 'm',
         range: [0, 10],
         step: 0.1,
         runTimes: true,
@@ -191,9 +183,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'profondeur_nappe',
         label: 'Variables.PN',
-        units: [
-          'm'
-        ],
+        unit: 'm',
         range: [0, 10],
         step: 0.1,
         chartjs: {
@@ -205,9 +195,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'niveau_eau_ngf',
         label: 'Variables.NEN',
-        units: [
-          'm'
-        ],
+        unit: 'm',
         range: [0, 1000],
         step: 10,
         chartjs: {

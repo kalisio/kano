@@ -46,9 +46,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'rn',
         label: 'Variables.RADON',
-        units: [
-          'Bq/m3'
-        ],
+        unit: 'bq/m^3',
         range: [0, 500],
         step: 10,
         chartjs: {
@@ -60,9 +58,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'co',
         label: 'Variables.CO',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 10000],
         step: 100,
         chartjs: {
@@ -74,9 +70,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'co2',
         label: 'Variables.CO2',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 10000],
         step: 100,
         chartjs: {
@@ -88,9 +82,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'ch4',
         label: 'Variables.CH4',
-        units: [
-          'ppm'
-        ],
+        unit: 'ppm',
         range: [0, 10000],
         step: 100,
         chartjs: {
@@ -121,7 +113,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'rn')) { %>RN = <%= Units.format(properties.rn, 'Bq/m3') %></br><% }
+        template: `<% if (_.has(properties, 'rn')) { %>RN = <%= Units.format(properties.rn, 'bq/m^3') %></br><% }
                    if (_.has(feature, 'time.rn')) { %><%= Time.format(feature.time.rn, 'time.long') + ' - ' + Time.format(feature.time.rn, 'date.short') %></br><% }
                    if (_.has(properties, 'co')) { %>CO = <%= Units.format(properties.co, 'ppm') %></br><% }
                    if (_.has(feature, 'time.co')) { %><%= Time.format(feature.time.co, 'time.long') + ' - ' + Time.format(feature.time.co, 'date.short') %></br><% }
@@ -143,7 +135,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'rn\')) { %>RN = <%= Units.format(properties.rn, \'Bq/m3\') %>\n<% }' +
+        template: '<% if (_.has(properties, \'rn\')) { %>RN = <%= Units.format(properties.rn, \'bq/m^3\') %>\n<% }' +
                   'if (_.has(feature, \'time.rn\')) { %><%= Time.format(feature.time.rn, \'time.long\') + \' - \' + Time.format(feature.time.rn, \'date.short\') %>\n<% }' +
                   'if (_.has(properties, \'co\')) { %>CO = <%= Units.format(properties.co, \'ppm\') %>\n<% }' +
                   'if (_.has(feature, \'time.co\')) { %><%= Time.format(feature.time.co, \'time.long\') + \' - \' + Time.format(feature.time.co, \'date.short\') %>\n<% }' +

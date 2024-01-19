@@ -52,9 +52,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'tmp_ow',
         label: 'Variables.TEMPERATURE',
-        units: [
-          'degC'
-        ],
+        unit: 'degC',
         range: [-50, 127],
         step: 5,
         chartjs: {
@@ -66,9 +64,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'bme_pressure',
         label: 'Variables.PRESSURE',
-        units: [
-          'hPa'
-        ],
+        unit: 'hPa',
         range: [-940, 1050],
         step: 10,
         chartjs: {
@@ -80,9 +76,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'bme_humidity',
         label: 'Variables.HUMIDITY',
-        units: [
-          '%'
-        ],
+        unit: '%',
         range: [0, 100],
         step: 10,
         chartjs: {
@@ -99,9 +93,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'bme_gas',
         label: 'Variables.GAS',
-        units: [
-          'mohm'
-        ],
+        unit: 'ug/m^3',
         range: [5, 50000],
         step: 5000,
         chartjs: {
@@ -113,9 +105,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'luminosity',
         label: 'Variables.LUMINOSITY',
-        units: [
-          'cd'
-        ],
+        unit: 'cd',
         range: [100, 5000],
         step: 500,
         chartjs: {
@@ -127,9 +117,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'acc_module',
         label: 'Variables.ACCELERATION',
-        units: [
-          'G'
-        ],
+        unit: 'G',
         range: [0, 2],
         step: 0.2,
         chartjs: {
@@ -146,9 +134,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'radioactivity_mrem',
         label: 'Variables.RADIOACTIVITY',
-        units: [
-          'µS/h'
-        ],
+        unit: 'usvh',
         range: [0, 1],
         step: 0.1,
         chartjs: {
@@ -158,6 +144,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'geoJson',
       realtime: true,
@@ -170,7 +159,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'icon-classes': 'fa fa-wifi',
       template: ['marker-fill'],
       tooltip: {
-        template: '<%= properties.info_bulle %>'
+        template: '<%= properties.id %>: <%= properties.info_bulle %>'
       }
     },
     cesium: {
@@ -180,30 +169,28 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-symbol': 'lighthouse',
       'marker-color': '#180EF1',
       tooltip: {
-        template: '<%= properties.info_bulle %>'
+        template: '<%= properties.id %>: <%= properties.info_bulle %>'
       }
     }
   }, {
-    name: 'Layers.LAB_MEASUREMENTS',
-    description: 'Layers.LAB_MEASUREMENTS_DESCRIPTION',
+    name: 'Layers.LAB_RADIOACTIVITY_MEASUREMENTS',
+    description: 'Layers.LAB_RADIOACTIVITY_MEASUREMENTS_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
-          LAB_MEASUREMENTS: 'LAB - Measurements - GSR',
-          LAB_MEASUREMENTS_DESCRIPTION: 'Little Alert Box Measurements'
+          LAB_RADIOACTIVITY_MEASUREMENTS: 'LAB - Radioactivité - GSR',
+          LAB_RADIOACTIVITY_MEASUREMENTS_DESCRIPTION: 'Mesures de Radioactivité via Little Alert Box'
         },
         Variables: {
-          TEMPERATURE: 'Température',
           RADIOACTIVITY: 'Radioactivité'
         }
       },
       en: {
         Layers: {
-          LAB_MEASUREMENTS: 'LAB - Mesures - GSR',
-          LAB_MEASUREMENTS_DESCRIPTION: 'Mesures Little Alert Box'
+          LAB_RADIOACTIVITY_MEASUREMENTS: 'LAB - Radioactivity - GSR',
+          LAB_RADIOACTIVITY_MEASUREMENTS_DESCRIPTION: 'Little Alert Box Radioactivity Measurements'
         },
         Variables: {
-          TEMPERATURE: 'Temperature',
           RADIOACTIVITY: 'Radioactivity'
         }
       }
@@ -216,61 +203,52 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     service: 'lab-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     ttl: 7 * 24 * 60 * 60,
-    featureId: 'id',
+    featureId: 'measureUuid',
+    chronicleId: ['stationId', 'sensorId', 'sensorNumber'],
     from: 'P-7D',
     to: 'PT-30S',
     every: 'PT30S',
     queryFrom: 'PT-6H',
     variables: [
       {
-        name: 'tmp_ow',
-        label: 'Variables.TEMPERATURE',
-        units: [
-          'degC'
-        ],
-        range: [-50, 127],
-        step: 5,
-        chartjs: {
-          backgroundColor: 'rgba(255, 99, 132, 128)',
-          borderColor: 'rgb(255, 99, 132)',
-          fill: false
-        }
-      },
-      {
         name: 'radioactivity_mrem',
         label: 'Variables.RADIOACTIVITY',
-        units: [
-          'µS/h'
-        ],
+        unit: 'usvh',
         range: [0, 1],
         step: 0.1,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
           fill: false
+        },
+        chromajs: {
+          scale: 'Greens',
+          domain: [0, 0.5]
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'geoJson',
       realtime: true,
       tiled: false,
       // minZoom: 10,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'circleMarker',
+      'marker-type': 'shapeMarker',
       radius: 6,
-      'stroke-width': 2,
-      'stroke-opacity': 1,
-      'stroke-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).brighten().hex() %>',
-      'fill-opacity': 0.5,
-      'fill-color': '<%= chroma.scale(\'Spectral\').domain([20, 0])(properties.tmp_ow).hex() %>',
+      'stroke-width': 0,
+      'stroke-opacity': 0,
+      'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.radioactivity_mrem), 'hours') / 6 %>`,
+      'fill': `<%= chroma.scale('Greens').domain([0, 0.5])(properties.radioactivity_mrem).hex() %>`,
       template: [
-        'fill-color',
-        'stroke-color'
+        'fill',
+        'fill-opacity'
       ],
       tooltip: {
-        template: `<% if (_.has(properties, 'tmp_ow')) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }
-                    if (_.has(feature, 'time.tmp_ow')) { %></br><%= Time.format(feature.time.tmp_ow, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
+        template: `<%= properties.id + '/' + properties.sensorId %></br><% if (_.has(properties, 'radioactivity_mrem')) { %><%= Units.format(properties.radioactivity_mrem, 'usvh') %><% }
+                    if (_.has(feature, 'time.radioactivity_mrem')) { %></br><%= Time.format(feature.time.radioactivity_mrem, 'time.long') + ' - ' + Time.format(feature.time.radioactivity_mrem, 'date.short') %><% } %>`
       }
     },
     cesium: {
@@ -280,8 +258,98 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-symbol': 'marker',
       'marker-color': '#78c0f0',
       tooltip: {
-        template: '<% if (_.has(properties, \'tmp_ow\')) { %><%= properties.tmp_ow.toFixed(2) %> °C<% }' +
-                  'if (_.has(feature, \'time.tmp_ow\')) { %>\n<%= Time.format(feature.time.tmp_ow, \'time.long\') + \' - \' + Time.format(feature.time.tmp_ow, \'date.short\') %><% } %>'
+        template: '<%= properties.id + '/' + properties.sensorId %>\n<% if (_.has(properties, \'radioactivity_mrem\')) { %><%= Units.format(properties.radioactivity_mrem, \'usvh\') %><% }' +
+                  'if (_.has(feature, \'time.radioactivity_mrem\')) { %>\n<%= Time.format(feature.time.radioactivity_mrem, \'time.long\') + \' - \' + Time.format(feature.time.radioactivity_mrem, \'date.short\') %><% } %>'
+      }
+    }
+  }, {
+    name: 'Layers.LAB_COV_MEASUREMENTS',
+    description: 'Layers.LAB_COV_MEASUREMENTS_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          LAB_COV_MEASUREMENTS: 'LAB - C.O.V. - GSR',
+          LAB_COV_MEASUREMENTS_DESCRIPTION: 'Mesures de Température via Little Alert Box'
+        },
+        Variables: {
+          COV: 'Composés organiques volatils'
+        }
+      },
+      en: {
+        Layers: {
+          LAB_COV_MEASUREMENTS: 'LAB - V.O.C. - GSR',
+          LAB_COV_MEASUREMENTS_DESCRIPTION: 'Little Alert Box V.O.C. Measurements'
+        },
+        Variables: {
+          COV: 'Volatile organic compounds'
+        }
+      }
+    },
+    tags: [
+      'lab', 'measure'
+    ],
+    attribution: 'Global Smart Rescue',
+    type: 'OverlayLayer',
+    service: 'lab-measurements',
+    dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+    ttl: 7 * 24 * 60 * 60,
+    featureId: 'measureUuid',
+    chronicleId: ['stationId', 'sensorId', 'sensorNumber'],
+    from: 'P-7D',
+    to: 'PT-30S',
+    every: 'PT30S',
+    queryFrom: 'PT-6H',
+    variables: [
+      {
+        name: 'bme_gas',
+        label: 'Variables.COV',
+        unit: 'ug/m^3',
+        range: [0, 1000],
+        step: 5,
+        chartjs: {
+          backgroundColor: 'rgba(255, 99, 132, 128)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false
+        },
+        chromajs: {
+          scale: 'YlOrRd',
+          domain: [0, 200]
+        }
+      }
+    ],
+    legend: {
+      type: 'variable'
+    },
+    leaflet: {
+      type: 'geoJson',
+      realtime: true,
+      tiled: false,
+      // minZoom: 10,
+      cluster: { disableClusteringAtZoom: 18 },
+      'marker-type': 'circleMarker',
+      radius: 6,
+      'stroke-width': 0,
+      'stroke-opacity': 0,
+      'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.bme_gas), 'hours') / 6 %>`,
+      'fill-color': `<%= chroma.scale('YlOrRd').domain([0, 200])(properties.bme_gas).hex() %>`,
+      template: [
+        'fill-color',
+        'fill-opacity'
+      ],
+      tooltip: {
+        template: `<%= properties.id + '/' + properties.sensorId %></br><% if (_.has(properties, 'bme_gas')) { %><%= Units.format(properties.bme_gas, 'ug/m^3') %><% }
+                    if (_.has(feature, 'time.bme_gas')) { %></br><%= Time.format(feature.time.bme_gas, 'time.long') + ' - ' + Time.format(feature.time.bme_gas, 'date.short') %><% } %>`
+      }
+    },
+    cesium: {
+      type: 'geoJson',
+      realtime: true,
+      cluster: { pixelRange: 50 },
+      'marker-symbol': 'marker',
+      'marker-color': '#78c0f0',
+      tooltip: {
+        template: '<%= properties.id + '/' + properties.sensorId %>\n<% if (_.has(properties, \'bme_gas\')) { %><%= Units.format(properties.bme_gas, \'ug/m^3\') %><% }' +
+                  'if (_.has(feature, \'time.bme_gas\')) { %>\n<%= Time.format(feature.time.bme_gas, \'time.long\') + \' - \' + Time.format(feature.time.bme_gas, \'date.short\') %><% } %>'
       }
     }
   }]

@@ -35,9 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         {
           name: 'rainFall',
           label: 'Variables.RAIN_FALL',
-          units: [
-            'Force'
-          ],
+          unit: 'Force',
           chartjs: {
             backgroundColor: 'rgba(54, 162, 235, 128)',
             borderColor: 'rgb(54, 162, 235)',
@@ -75,6 +73,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         }
       ],
+      legend: {
+        type: 'variable'
+      },
       time_based: {
         sources: [{
           from: 'P-60D',
@@ -119,7 +120,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.PRECIPITATIONS',
-        units: ['mm/hr'],
+        unit: 'mm/hr',
         range: [0, 30],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
@@ -148,6 +149,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'gsmapLayer',
       opacity: 0.4,
@@ -179,7 +183,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.PRECIPITATIONS',
-        units: ['mm'],
+        unit: 'mm',
         range: [0, 300],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
@@ -208,6 +212,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'gsmapLayer',
       opacity: 0.4,
@@ -239,7 +246,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.PRECIPITATIONS',
-        units: ['mm'],
+        unit: 'mm',
         range: [0, 300],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
@@ -268,6 +275,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'gsmapLayer',
       opacity: 0.4,
@@ -299,7 +309,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.PRECIPITATIONS',
-        units: ['mm'],
+        unit: 'mm',
         range: [0, 600],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
@@ -328,6 +338,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       }
     ],
+    legend: {
+      type: 'variable'
+    },
     leaflet: {
       type: 'gsmapLayer',
       opacity: 0.4,

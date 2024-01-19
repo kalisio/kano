@@ -70,9 +70,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'power',
         label: 'Variables.POWER',
-        units: [
-          'MW'
-        ],
+        unit: 'MW',
         range: [0, 5000],
         step: 100,
         chartjs: {
