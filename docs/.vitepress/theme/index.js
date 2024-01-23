@@ -1,6 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import Maps from './components/Maps.vue'
-import HomeFooter from './components/HomeFooter.vue'
+import { Maps, HomeFooter } from './vitepress/components'
 import './style.css'
 
 export default {
