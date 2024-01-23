@@ -241,7 +241,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'stroke-width': 0,
       'stroke-opacity': 0,
       'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.radioactivity_mrem), 'hours') / 6 %>`,
-      'fill': `<%= chroma.scale('Greens').domain([0, 0.5])(properties.radioactivity_mrem).hex() %>`,
+      'fill': `<%= variables.radioactivity_mrem.colorScale(properties.radioactivity_mrem).hex() %>`,
       template: [
         'fill',
         'fill-opacity'
@@ -331,7 +331,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'stroke-width': 0,
       'stroke-opacity': 0,
       'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.bme_gas), 'hours') / 6 %>`,
-      'fill-color': `<%= chroma.scale('YlOrRd').domain([0, 200])(properties.bme_gas).hex() %>`,
+      'fill-color': `<%= variables.bme_gas.colorScale(properties.bme_gas).hex() %>`,
       template: [
         'fill-color',
         'fill-opacity'
