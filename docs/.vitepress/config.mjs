@@ -25,7 +25,11 @@ export default defineConfig({
     },
     footer: {
       copyright: 'MIT Licensed | Copyright © 2017-20xx Kalisio'
-    }
+    },
+    trustLogos: [
+      { imageLink: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/logos/airbus.png', link: 'https://www.airbus.com/' },
+      { imageLink: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/logos/irsn.png', link: 'https://www.irsn.fr/' }
+    ]
   }
 })
 

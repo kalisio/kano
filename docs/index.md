@@ -20,5 +20,5 @@ features:
 ---
 
 <ClientOnly>
-  <home-footer :irsn="true" :airbus="true"/>
+  <HomeFooter />
 </ClientOnly>
