@@ -27,7 +27,7 @@ jobs:
   - stage: DOC
     language: node_js
     node_js:
-    - '16'
+    - '18'
     install: true
     script: bash .travis.doc.sh
     deploy:
