@@ -28,7 +28,7 @@ jobs:
     language: node_js
     node_js:
     - '18'
-    install: true
+    install: skip
     script: bash .travis.doc.sh
     deploy:
       provider: pages
