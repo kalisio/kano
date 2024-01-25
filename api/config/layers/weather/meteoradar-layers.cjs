@@ -42,7 +42,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             fill: false
           },
           chromajs: {
-            scale: [
+            colors: [
               '#FFFFFF00',
               '#483D88',
               '#0000CD',
@@ -113,7 +113,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['weather', 'measure'],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
     type: 'OverlayLayer',
     variables: [
@@ -133,7 +132,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: [
+          colors: [
             '#000096',
             '#0064ff',
             '#00b4ff',
@@ -176,7 +175,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['weather', 'measure'],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation12: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
     type: 'OverlayLayer',
     variables: [
@@ -196,7 +194,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: [
+          colors: [
             '#000096',
             '#0064ff',
             '#00b4ff',
@@ -239,7 +237,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['weather', 'measure'],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation24: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
     type: 'OverlayLayer',
     variables: [
@@ -259,7 +256,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: [
+          colors: [
             '#000096',
             '#0064ff',
             '#00b4ff',
@@ -302,7 +299,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['weather', 'measure'],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Precipitation72: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
     type: 'OverlayLayer',
     variables: [
@@ -322,7 +318,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: [
+          colors: [
             '#000096',
             '#0064ff',
             '#00b4ff',
@@ -365,7 +361,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['weather', 'measure'],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gsmap-icon.png',
     attribution: "Cloud: <a href='https://sharaku.eorc.jaxa.jp/GSMaP/index.htm'>JAXA Realtime Rainfall Watch</a> (JAXA/EORC)",
     type: 'OverlayLayer',
     leaflet: {
