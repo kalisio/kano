@@ -2,7 +2,7 @@
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
     <!-- Progress bar -->
-    <q-ajax-bar 
+    <q-ajax-bar
       ref="progessBarRef" 
       position="bottom" 
       size="8px" 
@@ -59,14 +59,18 @@ function showRouteError (route) {
     showError(route.query)
   }
 }
-function addRequest () {
+function addRequest (hook) {
+  // Check if this request is a quiet one or not
+  if (hook.params.ignore) return
   nbRequests++
   if (progessBarRef.value && !isProgressBarActive && (nbRequests > nbCompletedRequests)) {
     progessBarRef.value.start()
     isProgressBarActive = true
   }
 }
-function addCompletedRequest () {
+function addCompletedRequest (hook) {
+  // Check if this request is a quiet one or not
+  if (hook.params.ignore) return
   nbCompletedRequests++
   if (progessBarRef.value && isProgressBarActive && (nbRequests <= nbCompletedRequests)) {
     isProgressBarActive = false
@@ -80,10 +84,10 @@ watch(Route, (to, from) => showRouteError(to))
 // Hooks
 onMounted(() => {
   showRouteError(Route)
-  Events.on('before-hook', hook => { addRequest() })
-  Events.on('after-hook', hook => { addCompletedRequest() })
+  Events.on('before-hook', hook => { addRequest(hook) })
+  Events.on('after-hook', hook => { addCompletedRequest(hook) })
   Events.on('error-hook', hook => {
-    addCompletedRequest()
+    addCompletedRequest(hook)
     // Forward to global error handler
     Events.emit('error', hook.error)
   })
