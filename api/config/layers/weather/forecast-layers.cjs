@@ -35,7 +35,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/wind.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
@@ -56,8 +55,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: 'RdYlBu',
-          domain: [20, 3]
+          colors:  ['#313695', '#90c3dd', '#ffffbf', '#f98e52', '#a50026'],
+          domain: [3, 20]
         }
       },
       {
@@ -152,7 +151,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/gust.jpg',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
@@ -173,7 +171,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: 'OrRd',
+          colors: 'OrRd',
           domain: [0, 50]
         }
       }
@@ -248,7 +246,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/precipitations.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
@@ -269,7 +266,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          scale: 'BuPu',
+          colors: 'BuPu',
           classes: [0, 1, 2, 4, 10, 25, 50, 100, 300]
         }
       }
@@ -344,7 +341,6 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/temperature.png',
     attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
@@ -360,8 +356,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           fill: false
         },
         chromajs: {
-          scale: 'RdBu',
-          invertScale: true,
+          colors: ['#053061', '#6bacd1', '#f7f7f7', '#e58368', '#67001f'],
           domain: [-20, 50]
         }
       }
