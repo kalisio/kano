@@ -253,8 +253,7 @@ const catalogPanes = {
   'project-views': [
     catalogTabbar('project-views'),
     { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
-  ],
-  
+  ]
 } 
 
 // Map layer actions
