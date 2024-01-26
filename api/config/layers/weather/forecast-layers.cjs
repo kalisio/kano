@@ -55,7 +55,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         },
         chromajs: {
-          colors:  ['#313695', '#90c3dd', '#ffffbf', '#f98e52', '#a50026'],
+          colors: ['#313695', '#90c3dd', '#ffffbf', '#f98e52', '#a50026'],
           domain: [3, 20]
         }
       },
