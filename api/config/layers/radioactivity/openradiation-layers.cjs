@@ -51,7 +51,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           colors: 'Greens',
-          classes: [0,0.01,0.05,0.1,0.2,0.5,1,10,20,1000]
+          classes: [0,0.1,0.2,0.5,1,2,5,10,20,1000]
         }
       }
     ],
@@ -63,9 +63,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'circleMarker',
       radius: 8,
-      'stroke-width': 0,
-      'stroke-opacity': 0,
-      'fill-opacity': 1,
+      'stroke-width': 1,
+      'stroke-color': 'black',
+      'fill-opacity': 0.8,
       'fill-color': `<%= variables.value.colorScale(properties.value).hex() %>`,
       template: [
         'fill-color'

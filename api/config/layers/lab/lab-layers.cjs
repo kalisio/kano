@@ -223,7 +223,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           colors: 'Greens',
-          domain: [0,0.01,0.05,0.1,0.2,0.5,1,10,20,1000]
+          domain: [0,0.1,0.2,0.5,1,2,5,10,20,1000]
         }
       }
     ],
@@ -238,9 +238,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'shapeMarker',
       radius: 8,
-      'stroke-width': 0,
-      'stroke-opacity': 0,
-      'fill-opacity': 1,
+      'stroke-width': 1,
+      'stroke-color': 'black',
+      'fill-opacity': 0.8,
       'fill': `<%= variables.radioactivity_mrem.colorScale(properties.radioactivity_mrem).hex() %>`,
       template: [
         'fill'
@@ -327,9 +327,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'circleMarker',
       radius: 8,
-      'stroke-width': 0,
-      'stroke-opacity': 0,
-      'fill-opacity': 1,
+      'stroke-width': 1,
+      'stroke-color': 'black',
+      'fill-opacity': 0.8,
       'fill-color': `<%= variables.bme_gas.colorScale(properties.bme_gas).hex() %>`,
       template: [
         'fill-color'
