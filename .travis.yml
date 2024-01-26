@@ -25,6 +25,7 @@ jobs:
     script:
     - bash .travis.app.sh
   - stage: DOC
+    os: linux
     language: node_js
     node_js:
     - '18.14.1'
