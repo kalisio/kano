@@ -26,11 +26,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'radioactivity', 'measure'
     ],
     legend: {
-      type: 'symbols',
-      label: 'Layers.OPENRADIATION',
-      content: {
-        
-      }
+      type: 'variable'
     },
     attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
     type: 'OverlayLayer',
@@ -38,8 +34,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     featureId: 'reportUuid',
     from: 'P-7D',
-    to: 'PT-15M',
-    every: 'PT15M',
+    to: 'PT-10M',
+    every: 'PT10M',
     queryFrom: 'PT-1H',
     variables: [
       {
@@ -52,6 +48,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           backgroundColor: 'rgba(11, 117, 169, 128)',
           borderColor: 'rgb(11, 117, 169)',
           fill: false
+        },
+        chromajs: {
+          colors: 'Greens',
+          classes: [0,0.01,0.05,0.1,0.2,0.5,1,10,20,1000]
         }
       }
     ],
@@ -60,17 +60,24 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       realtime: true,
       tiled: true,
       minZoom: 8,
-      cluster: { disableClusteringAtZoom: 21 },
-      'marker-color': '#78c0f0',
-      'icon-classes': 'fa fa-radiation-alt',
+      cluster: { disableClusteringAtZoom: 18 },
+      'marker-type': 'circleMarker',
+      radius: 8,
+      'stroke-width': 0,
+      'stroke-opacity': 0,
+      'fill-opacity': 1,
+      'fill-color': `<%= variables.value.colorScale(properties.value).hex() %>`,
+      template: [
+        'fill-color'
+      ],
       popup: {
         pick: [
           'userId'
         ]
       },
       tooltip: {
-        template: `<% if (properties.value) { %><%= properties.value.toFixed(2) %> µSv/h<% }
-                    if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
+        template: `<% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'usvh') %><% }
+                    if (_.has(feature, 'time.value')) { %></br><%= Time.format(feature.time.value, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
       }
     },
     cesium: {
@@ -85,8 +92,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (properties.value) { %>Valeur = <%= properties.value.toFixed(2) %> µSv/h<% } %>\n' +
-                  'if (feature.time && feature.time.value) { %></br><%= Time.format(feature.time.value, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
+        template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'usvh\') %><% }' +
+                  'if (_.has(feature, \'time.value\')) { %>\n<%= Time.format(feature.time.value, \'time.long\') + \' - \' + Time.format(feature.time.value, \'date.short\') %><% } %>'
       }
     }
   }]

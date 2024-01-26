@@ -222,8 +222,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           fill: false
         },
         chromajs: {
-          scale: 'Greens',
-          domain: [0, 0.5]
+          colors: 'Greens',
+          domain: [0,0.01,0.05,0.1,0.2,0.5,1,10,20,1000]
         }
       }
     ],
@@ -234,17 +234,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: false,
-      // minZoom: 10,
+      minZoom: 8,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'shapeMarker',
-      radius: 6,
+      radius: 8,
       'stroke-width': 0,
       'stroke-opacity': 0,
-      'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.radioactivity_mrem), 'hours') / 6 %>`,
+      'fill-opacity': 1,
       'fill': `<%= variables.radioactivity_mrem.colorScale(properties.radioactivity_mrem).hex() %>`,
       template: [
-        'fill',
-        'fill-opacity'
+        'fill'
       ],
       tooltip: {
         template: `<%= properties.id + '/' + properties.sensorId %></br><% if (_.has(properties, 'radioactivity_mrem')) { %><%= Units.format(properties.radioactivity_mrem, 'usvh') %><% }
@@ -324,17 +323,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: false,
-      // minZoom: 10,
+      minZoom: 8,
       cluster: { disableClusteringAtZoom: 18 },
       'marker-type': 'circleMarker',
-      radius: 6,
+      radius: 8,
       'stroke-width': 0,
       'stroke-opacity': 0,
-      'fill-opacity': `<%= 1 - Time.getCurrentTime().diff(moment.utc(feature.time.bme_gas), 'hours') / 6 %>`,
+      'fill-opacity': 1,
       'fill-color': `<%= variables.bme_gas.colorScale(properties.bme_gas).hex() %>`,
       template: [
-        'fill-color',
-        'fill-opacity'
+        'fill-color'
       ],
       tooltip: {
         template: `<%= properties.id + '/' + properties.sensorId %></br><% if (_.has(properties, 'bme_gas')) { %><%= Units.format(properties.bme_gas, 'ug/m^3') %><% }
