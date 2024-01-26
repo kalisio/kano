@@ -26,6 +26,7 @@ jobs:
     - bash .travis.app.sh
   - stage: DOC
     os: linux
+    dist: focal
     language: node_js
     node_js:
     - '18.14.1'
