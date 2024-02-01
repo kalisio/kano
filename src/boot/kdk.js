@@ -45,7 +45,6 @@ postRobot.on('setConfiguration', async (event) => {
   _.forOwn(event.data, (value, key) => {
     _.set(config, key, value)
   })
-  updateThemeColors()
 })
 
 export default async ({ app, router }) => {
@@ -65,6 +64,8 @@ export default async ({ app, router }) => {
   api.hooks(appHooks)
   // Then all services
   await services.call(api)
+  // Now KDK is ready apply theme if configured
+  updateThemeColors()
 
   // Initializes i18n
   await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
