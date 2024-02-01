@@ -6515,10 +6515,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==
 
-cesium@1.50.0:
-  version "1.50.0"
-  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.50.0.tgz#11e93cccaa55ffe305dbd2b02b5647d1eeda114d"
-  integrity sha512-x0PM2/rssASFOH8lTFec8r07iBAyh3m7wrEbY0q5Ocw2L8hhimyWSfymh+raqeBPPZ3BLa4z7V76beOwZXuQ9Q==
+cesium@1.62.0:
+  version "1.62.0"
+  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.62.0.tgz#167950d481004464f0c8ea32bafa237cd53b183a"
+  integrity sha512-KG58NG31Lp48yE66sn+hXEL9DwDVOtpxo0nF0lvd6ajHUW90yvF3Jb5m4xnYRBtYGsCxsqRNyfUE3gNkB65JKg==
   dependencies:
     requirejs "^2.3.2"
 

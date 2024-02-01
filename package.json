@@ -127,7 +127,7 @@
     "ajv-keywords": "^5.1.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
-    "cesium": "1.50.0",
+    "cesium": "1.62.0",
     "chart.js": "^3.7.1",
     "chartjs-adapter-moment": "^1.0.0",
     "chartjs-chart-matrix": "^1.1.1",
