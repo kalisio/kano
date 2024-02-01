@@ -11,7 +11,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-icon-256x256.png',
-    jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.CGvJwPPkuiFvNzo3zUBb-_vwD0CKbUfm7w7TkCY-Ts4',
+    domain: 'dev.kalisio.xyz',
     socialLinks: [{ icon: 'github', link: 'https://github.com/kalisio/kano' }],
     nav: [
       { text: 'About', link: '/about/introduction' },
@@ -29,7 +29,18 @@ export default defineConfig({
     trustLogos: [
       { imageLink: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/logos/airbus.png', link: 'https://www.airbus.com/' },
       { imageLink: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/logos/irsn.png', link: 'https://www.irsn.fr/' }
-    ]
+    ],
+    maps: {
+      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkZXYua2FsaXNpby54eXoiLCJpc3MiOiJrYWxpc2lvIn0.CGvJwPPkuiFvNzo3zUBb-_vwD0CKbUfm7w7TkCY-Ts4'
+    }
+  },
+  vite: {
+    optimizeDeps: {
+			include: ['keycloak-js', 'lodash'],
+		},
+		ssr: {
+			noExternal: ['vitepress-theme-kalisio']
+		}
   }
 })
 

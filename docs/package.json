@@ -7,10 +7,11 @@
     "preview": "vitepress preview"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue-jsx": "^3.1.0",
     "keycloak-js": "^23.0.4",
     "lodash": "^4.17.21",
-    "quasar": "^2.14.2",
-    "vitepress": "^1.0.0-rc.15"
+    "moment": "^2.30.1",
+    "quasar": "^2.14.3",
+    "vitepress": "^1.0.0-rc.40",
+    "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
   }
 }

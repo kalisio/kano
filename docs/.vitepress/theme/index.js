@@ -1,3 +1,4 @@
-import theme from './vitepress'
-
+import theme from 'vitepress-theme-kalisio'
 export default theme
+
+

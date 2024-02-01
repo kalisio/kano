@@ -54,9 +54,11 @@ Typical use case is to display the stations on a map.
 
 <Badge text="HTTP - GET" vertical="middle" />
 
-<template-url
+<TemplateUrl
   text="https://your.kano.domain/api/hubeau-hydro-stations?south=44.96479793033104&north=45.02695045318546&west=-0.17578125&east=-0.087890625&jwt=your_token"
-  url-template="https://kano.<%= domain %>/api/hubeau-hydro-stations?south=44.96479793033104&north=45.02695045318546&west=-0.17578125&east=-0.087890625&jwt=<%= jwt %>"/>
+  url-template="https://kano.<%= domain %>/api/hubeau-hydro-stations?south=44.96479793033104&north=45.02695045318546&west=-0.17578125&east=-0.087890625&jwt=<%= jwt %>"
+  jwt-path="maps.jwt"
+/>
 
 ### Request available observations
 
@@ -64,9 +66,11 @@ Typical use case is to retrieve the raw observations. You can filter spatially (
 
 <Badge text="HTTP - GET" vertical="middle" />
 
-<template-url
+<TemplateUrl
   text="https://your.kano.domain/api/hubeau-hydro-observations?south=44&north=45&west=-0.5&east=0.5&time[$gte]=start_time&time[$lte]=end_time&$sort[time]=-1&jwt=your_token"
-  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?south=44&north=45&west=-0.5&east=0.5&time[$gte]=<%= moment.utc().subtract(1, 'hours').format() %>&time[$lte]=<%= moment.utc().format() %>&$sort[time]=-1&jwt=<%= jwt %>"/>
+  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?south=44&north=45&west=-0.5&east=0.5&time[$gte]=<%= moment.utc().subtract(1, 'hours').format() %>&time[$lte]=<%= moment.utc().format() %>&$sort[time]=-1&jwt=<%= jwt %>"
+  jwt-path="maps.jwt"
+/>
 
 ::: details Result sample
 ```json
@@ -119,9 +123,11 @@ Typical use case is to display a timeserie for the station.
 
 <Badge text="HTTP - GET" vertical="middle" />
 
-<template-url
+<TemplateUrl
   text="https://your.kano.domain/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=#X331001001&time[$gte]=start_time&time[$lte]=end_time&jwt=your_token"
-  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=%23X331001001&time[$gte]=<%= moment.utc().subtract(1, 'days').format() %>&time[$lte]=<%= moment.utc().format() %>&jwt=<%= jwt %>"/>
+  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=%23X331001001&time[$gte]=<%= moment.utc().subtract(1, 'days').format() %>&time[$lte]=<%= moment.utc().format() %>&jwt=<%= jwt %>"
+  jwt-path="maps.jwt"
+/>
 
 ::: details Result sample
 ```json
@@ -182,9 +188,11 @@ Typical use case is to retrieve most recent observations for the station, or dis
 
 <Badge text="HTTP - GET" vertical="middle" />
 
-<template-url
+<TemplateUrl
   text="https://your.kano.domain/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=%23K447001001&time[$lte]=end_time&$limit=1&$sort[time]=-1&jwt=your_token"
-  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=%23K447001001&time[$lte]=<%= moment.utc().format() %>&$limit=1&$sort[time]=-1&jwt=<%= jwt %>"/>
+  url-template="https://kano.<%= domain %>/api/hubeau-hydro-observations?$groupBy=code_station&$aggregate[0]=H&$aggregate[1]=Q&properties.code_station=%23K447001001&time[$lte]=<%= moment.utc().format() %>&$limit=1&$sort[time]=-1&jwt=<%= jwt %>"
+  jwt-path="maps.jwt"
+/>
 
 ::: details Result sample
 ```json
