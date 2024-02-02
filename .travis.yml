@@ -10,7 +10,7 @@ stages:
 - name: APP
   if: commit_message !~ /(skip[ _-]app)/
 - name: DOC
-  if: commit_message =~ /\[build doc\]/
+  if: commit_message =~ /\[build[ _-]doc\]/
 jobs:
   include:
   - stage: APP
