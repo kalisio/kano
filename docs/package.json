@@ -8,10 +8,12 @@
   },
   "devDependencies": {
     "keycloak-js": "^23.0.4",
-    "lodash": "^4.17.21",
-    "moment": "^2.30.1",
     "quasar": "^2.14.3",
     "vitepress": "^1.0.0-rc.40",
     "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1"
   }
 }
