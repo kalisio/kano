@@ -101,4 +101,4 @@ import{_ as a,c as n,J as t,V as s,E as e,o as l}from"./chunks/framework.J61Sinz
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    additionalMixins: [ </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;my-mixin&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ],</span></span>
 <span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">    ...</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  }</span></span>
-<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div>`,34);function o(r,E,d,g,c,y){const i=e("KalisioMaps");return l(),n("div",null,[p,t(i),k])}const m=a(h,[["render",o]]);export{u as __pageData,m as default};
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div>`,34);function o(r,E,d,g,c,y){const i=e("kalisio-maps");return l(),n("div",null,[p,t(i),k])}const m=a(h,[["render",o]]);export{u as __pageData,m as default};
