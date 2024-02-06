@@ -32,7 +32,7 @@
   "layers": [
     {
       "id": "background",
-      "type": "fill",
+      "type": "background",
       "source": "openmaptiles",
       "source-layer": "landcover",
       "paint": {"fill-color": "#f8f4f0"}
@@ -384,7 +384,19 @@
       "source-layer": "building",
       "paint": {
         "fill-antialias": true,
-        "fill-color": {"base": 1, "stops": [[15.5, "#f2eae2"], [16, "#dfdbd7"]]}
+        "fill-color": "#dfdbd7",
+        "fill-outline-color": "#f2eae2"
+      }
+    },
+    {
+      "id": "building-outline",
+      "type": "line",
+      "metadata": {"mapbox:group": "1444849364238.8171"},
+      "source": "openmaptiles",
+      "source-layer": "building",
+      "paint": {
+        "line-color": "#cfcdca",
+        "line-width": 2
       }
     },
     {
