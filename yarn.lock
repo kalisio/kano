@@ -3474,6 +3474,11 @@
     winston-daily-rotate-file "^3.10.0"
     xml2js "^0.4.22"
 
+"@kalisio/leaflet-graphicscale@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/leaflet-graphicscale/-/leaflet-graphicscale-1.0.0.tgz#5a163e01805208b08ddafd9301e6ad0d4c603e51"
+  integrity sha512-iy42jngdr8c+9iymJ+TCRmotYjcRAHz+4V1OXhuDt4vy49dYjsCpeYOi27m6UOWrSkwNLqPkn2q0OXXYVhutUg==
+
 "@kalisio/leaflet.donutcluster@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@kalisio/leaflet.donutcluster/-/leaflet.donutcluster-1.1.0.tgz#4952a70ad594af00c009297bd0881c4ad200cc86"
