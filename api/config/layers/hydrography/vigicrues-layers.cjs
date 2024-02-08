@@ -101,14 +101,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 9,
       staticGeometry: true,
-      stroke: `<% if (properties.risk === 1) { %>green<% }
-        else if (properties.risk === 2) { %>yellow<% }
-        else if (properties.risk === 3) { %>orange<% }
-        else if (properties.risk === 4) { %>red<% }
-        else { %>black<% } %>`,
-      'stroke-width': 6,
-      'stroke-opacity': 0.5,
-      template: ['stroke'],
+      style: {
+        line: {
+          color: `<% if (properties.risk === 1) { %>green<% }
+            else if (properties.risk === 2) { %>yellow<% }
+            else if (properties.risk === 3) { %>orange<% }
+            else if (properties.risk === 4) { %>red<% }
+            else { %>black<% } %>`,
+          width: 6,
+          opcacity: 0.5
+        }
+      },
+      template: ['style.line.color'],
       tooltip: {
         template: `<% if (_.has(properties, 'name') && _.has(properties, 'risk')) { %>
                     <%= properties.name %><br><%= $t('Legend.VIGICRUES_RISK_' + properties.risk) %>

@@ -299,13 +299,37 @@ const mapEngine = {
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
   // Default GeoJSON layer style for polygons/lines
-  featureStyle: {
+  style: {
+    point: {
+      shape: 'circle',
+      color: 'red'
+    },
+    line: {
+      color: 'red',
+      width: 3
+    },
+    polygon: {
+      color: 'red',
+      opacity: 0.5,
+      stroke: {
+        color: 'red',
+        opacity: 0.5,
+      }
+    },
+    location: {
+
+    },
+    editor: {
+
+    }
+  },
+  /*featureStyle: {
     'stroke-opacity': 1,
     'stroke-color': 'red',
     'stroke-width': 3,
     'fill-opacity': 0.5,
     'fill-color': 'green'
-  },
+  },*/
   // Default GeoJSON layer style for polygons/lines edition
   editFeatureStyle: {
     'stroke-opacity': 1,

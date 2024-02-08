@@ -110,22 +110,31 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 6,
       minFeatureZoom: 9,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (properties.libelle === 'VA') { %>#138dce<% }
-                          else if (properties.libelle === 'NVA') { %>#a7bec9<% }
-                          else if (properties.libelle === 'NV') { %>grey<% }
-                          else if (feature.measureRequestIssued) { %>black<% }
-                          else { %>white<% } %>`,
-      'stroke-color': `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>transparent<% }
-                          else if (feature.measureRequestIssued) { %>white<% }
-                          else { %>black<% } %>`,
-      'stroke-width': `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>0<% }
-                          else if (feature.measureRequestIssued) { %>2<% }
-                          else { %>2<% } %>`,
-      'icon-color': `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>white<% }
-                        else if (feature.measureRequestIssued) { %>white<% }
-                        else { %>black<% } %>`,
-      'icon-classes': 'fa fa-radiation',
-      template: ['marker-color', 'stroke-color', 'stroke-width', 'icon-color'],
+      style: {
+        point: {
+          shape: 'circle',
+          color: `<% if (properties.libelle === 'VA') { %>#138dce<% }
+                    else if (properties.libelle === 'NVA') { %>#a7bec9<% }
+                    else if (properties.libelle === 'NV') { %>grey<% }
+                    else if (feature.measureRequestIssued) { %>black<% }
+                    else { %>white<% } %>`,
+          stroke: {
+            color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>transparent<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            width: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>0<% }
+                      else if (feature.measureRequestIssued) { %>2<% }
+                      else { %>2<% } %>`,
+          },
+          icon: {
+            color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>white<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            classes: 'fa fa-radiation',
+          }
+        }
+      },
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.stroke.width', 'style.point.icon.color'],
       popup: {
         pick: [
           'name'
