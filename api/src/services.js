@@ -68,4 +68,14 @@ export default async function () {
   // Service to store user features
   const featuresService = await createFeaturesServiceForLayer.call(app, { collection: 'features' })
   await app.configureService('features', featuresService, servicesPath)
+
+  // Event bus service
+  app.declareService('events', {
+      async create (data, params) {
+        this.emit('event', data)
+      }
+    }, {
+    events: ['event'],
+    methods: ['create']
+  })
 }

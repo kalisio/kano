@@ -105,7 +105,7 @@ export default {
       this.mapContainer = container
       // Wait until map is ready
       await this.initializeMap(container)
-      // Notifie the listener
+      // Notify the listener
       utils.sendEmbedEvent('map-ready')
     },
     configureActivity () {

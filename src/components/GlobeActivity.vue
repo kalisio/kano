@@ -100,7 +100,7 @@ export default {
       if (!token) return
       // Wait until viewer is ready
       await this.initializeGlobe(container, token)
-      // Notifie the listener
+      // Notify the listener
       utils.sendEmbedEvent('globe-ready')
     },
     getViewKey () {

@@ -9,6 +9,9 @@ export default async function () {
   try {
     await api.configure(kdkCore)
     await api.configure(kdkMap)
+    // TODO we use createService because of the custom methods
+    // https://github.com/kalisio/kdk/issues/781
+    api.createService('events', { methods: ['create'], events: ['event'] })
     // Restore previous settings if any
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()

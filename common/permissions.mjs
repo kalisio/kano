@@ -2,6 +2,8 @@ import { permissions } from '@kalisio/kdk/core.common.js'
 
 // Hook computing  catalog, features, etc. abilities for a given user
 export function defineUserAbilities (subject, can, cannot, app) {
+  can('service', 'events')
+  can('create', 'events')
   if (subject && subject._id) {
     if (subject.catalog) {
       const catalog = subject.catalog

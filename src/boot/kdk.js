@@ -82,13 +82,24 @@ export default async ({ app, router }) => {
     const result = await operation.bind(service)(...args)
     return result
   }
-
+  // API service operation call
   postRobot.on('api', async (event) => {
     const result = await serviceOperation(event.data)
     return result
   })
-
-  await utils.sendEmbedEvent('api-ready')
+  // Event bus dispatch
+  postRobot.on('event', async (event) => {
+    const result = await serviceOperation({
+      operation: 'create',
+      service: 'events',
+      args: [event.data]
+    })
+    return result
+  })
+  // Event bus listening
+  api.getService('events').on('event', async (event) => {
+    await utils.sendEmbedEvent(event.name, event.data)
+  })
 
   // Register global properties to the the vue app
   app.config.globalProperties.$store = Store
