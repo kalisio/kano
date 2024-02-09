@@ -306,8 +306,8 @@ const mapEngine = {
       { color: 'red', opacity: 0.5 }
     },
     location: {
-      point: { shape: 'marker-pin', color: 'primary', size: [18, 26], icon: 
-        { classes: 'fas fa-circle', color: 'white', size: 10, translation: [ '-50%', '-90%'] }
+      point: { shape: 'marker-pin', color: 'primary', size: [20, 30], icon: 
+        { classes: 'fas fa-circle', color: 'white', size: 12, translation: [ '-50%', '-90%'] } 
       },
       line: { color: 'primary', width: 3 },
       polygon: { color: 'primary', opacity: 0.5, stroke: 
@@ -321,6 +321,15 @@ const mapEngine = {
       line: { color: 'red', width: 3, dashArray: '0 5 0' },
       polygon: { color: 'yellow', opacity: 0.5, stroke: 
         { color: 'red', width: 3, dashArray: '0 5 0' } 
+      }
+    },
+    selection: {
+      point: { shape: 'circle', color: 'primary', opacity: 0.5, radius: 10, stroke: 
+        { color: 'dark', width: 1 }
+      },
+      line: { color: 'primary', opacity: 0.25, width: 10 },
+      polygon: { color: 'primary', opacity: 0.25, stroke: 
+        { color: 'primary', opacity: 0.25, width: 10 } 
       }
     }
   },
