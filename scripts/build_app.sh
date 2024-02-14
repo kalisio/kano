@@ -8,7 +8,9 @@ ROOT_PATH=$(dirname "$THIS_PATH")
 
 . "$THIS_PATH/kash/kash.sh"
 
-APP=$(node -p -e "require('./package.json').name")
+# APP=$(node -p -e "require('./package.json').name")
+# NOTE: since kano is not renamed yet
+APP=maps
 VERSION=$(node -p -e "require('./package.json').version")
 
 # MAJOR=$(grep "^([0-9]+)\..*")
