@@ -100,6 +100,9 @@ export default async ({ app, router }) => {
   api.getService('events').on('event', async (event) => {
     await utils.sendEmbedEvent(event.name, event.data)
   })
+  // Listen to websocket events
+  Events.on('disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
+  Events.on('reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
 
   // Register global properties to the the vue app
   app.config.globalProperties.$store = Store
