@@ -41,10 +41,10 @@ if [ "$CI" = true ]; then
     git clone --depth 1 https://github.com/kalisio/kli.git "$KALISIO_DEVELOPMENT_DIR/kli"
     cd "$KALISIO_DEVELOPMENT_DIR/kli" && yarn install
 
-    if [ -f "$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$FLAVOR/$KLI_FILE-$GIT_BRANCH.js" ]; then
-        KLI_FILE="$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$FLAVOR/$KLI_FILE-$GIT_BRANCH.js"
+    if [ -f "$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$BUILD_FLAVOR/$KLI_FILE-$GIT_BRANCH.js" ]; then
+        KLI_FILE="$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$BUILD_FLAVOR/$KLI_FILE-$GIT_BRANCH.js"
     else
-        KLI_FILE="$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$FLAVOR/$KLI_FILE.js"
+        KLI_FILE="$KALISIO_DEVELOPMENT_DIR/development/workspaces/apps/$APP/$BUILD_FLAVOR/$KLI_FILE.js"
     fi
 
     node "$KALISIO_DEVELOPMENT_DIR/kli" "$KLI_FILE" --clone --shallow-clone
