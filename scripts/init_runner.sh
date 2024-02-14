@@ -13,7 +13,7 @@ ROOT_PATH=$(dirname "$THIS_PATH")
 ### Github Actions
 
 init_github_build_app() {
-    install_reqs age sops
+    install_reqs age sops nvm node16
 }
 
 begin_group "Init $CI_ID for $JOB_ID"
