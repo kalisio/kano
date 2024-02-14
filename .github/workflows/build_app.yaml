@@ -1,0 +1,37 @@
+name: Build app
+on:
+  push:
+    branches:
+      - gha
+jobs:
+  build_app:
+    name: Build app
+    runs-on: ubuntu-22.04
+    # container:
+    #   image: harbor.portal.kalisio.com/kalisio/ci-kdk:latest
+    #   # Run using Github Actions specific user in our container
+    #   options: --user 1001
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      # - name: Cache requirements
+      #   uses: actions/cache@v4
+      #   with:
+      #     key: requirements
+      #     path: ${{ runner.temp }}/dl
+      # - name: Get yarn cache directory path
+      #   id: yarn-cache-dir-path
+      #   run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      # - uses: actions/cache@v4
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Init runner
+        run: bash ./scripts/init_runner.sh ${{ github.job }}
+      - name: Run tests
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+          GITHUB_DEVELOPMENT_PAT: ${{ secrets.GH_DEVELOPMENT_PAT }}
+        run: bash ./scripts/build_app.sh
