@@ -8,6 +8,8 @@ ROOT_PATH=$(dirname "$THIS_PATH")
 
 . "$THIS_PATH/kash/kash.sh"
 
+use_node 16
+
 # APP=$(node -p -e "require('./package.json').name")
 # NOTE: since kano is not renamed yet
 APP=maps
