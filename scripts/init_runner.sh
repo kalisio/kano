@@ -13,8 +13,7 @@ ROOT_PATH=$(dirname "$THIS_PATH")
 ### Github Actions
 
 init_github_build_app() {
-    install_reqs yq age sops nvm node16 node18 mongo4 mongo5 cc_test_reporter
-    sudo apt-get update && sudo apt-get --no-install-recommends --yes install default-jre
+    install_reqs age sops
 }
 
 begin_group "Init $CI_ID for $JOB_ID"
