@@ -7,22 +7,19 @@
     "id": {
       "type": "string",
       "field": {
-        "component": "form/KTextField",
-        "helper": "Identifiant"
+        "component": "form/KTextField"
       }
     },
     "nom": {
       "type": "string",
       "field": {
-        "component": "form/KTextField",
-        "helper": "Nom"
+        "component": "form/KTextField"
       }
     },
     "information": {
       "type": "string",
       "field": {
-        "component": "form/KTextareaField",
-        "helper": "Information"
+        "component": "form/KTextareaField"
       }
     },
     "option": {
@@ -39,8 +36,7 @@
     "number": {
       "type": "number",
       "field": {
-        "component": "form/KNumberField",
-        "helper": "Number"
+        "component": "form/KNumberField"
       }
     }
   },

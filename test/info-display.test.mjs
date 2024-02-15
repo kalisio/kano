@@ -35,8 +35,10 @@ describe(`suite:${suite}`, () => {
   it('configure and check information box', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-infobox-group')
+    await core.click(page, '#style-toggle-infobox')
     await core.click(page, '#style-infobox-field')
-    await core.click(page, '#id')
+    await core.click(page, '#identifiant')
+    
     await core.click(page, '#longueur-en-km')
     await core.click(page, '#nom-usite')
     await core.click(page, '#style-infobox-field')
