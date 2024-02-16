@@ -300,10 +300,10 @@ const mapEngine = {
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
   // Default GeoJSON layer style for polygons/lines
   style: {
-    point: { shape: 'circle', color: 'red' },
+    point: { shape: 'marker', color: 'red' },
     line: { color: 'red', width: 3 },
-    polygon: { color: 'red', opacity: 0.5, stroke: 
-      { color: 'red', opacity: 0.5 }
+    polygon: { color: 'red', opacity: 0.5,
+      stroke: { color: 'red', opacity: 0.5 }
     },
     location: {
       point: { shape: 'marker-pin', color: 'primary', size: [20, 30], icon: 
@@ -388,7 +388,15 @@ const globeEngine = {
     flyToOnDrop: true,
     clampToGround: true
   },
-  // Default GeoJSON layer style for points/polygons/lines in simple style spec
+  // Default GeoJSON layer style for points/polygons/lines
+  // SHOULD NOT COVER MORE THAN SIMPLE STYLE SPEC AND MAKI ICONS
+  style: {
+    point: { shape: 'marker', color: 'red' },
+    line: { color: 'red', width: 3 },
+    polygon: { color: 'red', opacity: 0.5,
+      stroke: { color: 'red', opacity: 0.5 }
+    }
+  },
   featureStyle: {
     'marker-symbol': 'marker',
     'marker-color': '#57D824',
