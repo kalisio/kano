@@ -54,7 +54,7 @@ describe(`suite:${suite}`, () => {
   })
 
   afterEach(() => {
-    // expect(runner.hasError()).beFalse()
+    expect(runner.hasError()).beFalse()
   })
 
   it('see elevation profile', async () => {
