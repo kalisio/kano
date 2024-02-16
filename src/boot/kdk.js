@@ -98,7 +98,17 @@ export default async ({ app, router }) => {
   })
   // Event bus listening
   api.getService('events').on('event', async (event) => {
-    await utils.sendEmbedEvent(event.name, event.data)
+    utils.sendEmbedEvent(event.name, event.data)
+  })
+  // Service events listening
+  const serviceEvents = ['created', 'updated', 'patched', 'removed']
+  serviceEvents.forEach(event => {
+    api.getService('catalog').on(event, data => {
+      utils.sendEmbedEvent('catalog', { serviceEvent: event, data })
+    })
+    api.getService('features').on(event, data => {
+      utils.sendEmbedEvent('features', { serviceEvent: event, data })
+    })
   })
   // Listen to websocket events
   Events.on('disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
