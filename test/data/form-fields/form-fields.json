@@ -7,26 +7,29 @@
     "id": {
       "type": "string",
       "field": {
-        "component": "form/KTextField"
+        "component": "form/KTextField",
+        "label": "Identifiant"
       }
     },
     "nom": {
       "type": "string",
       "field": {
-        "component": "form/KTextField"
+        "component": "form/KTextField",
+        "label": "Nom"
       }
     },
     "information": {
       "type": "string",
       "field": {
-        "component": "form/KTextareaField"
+        "component": "form/KTextareaField",
+        "label": "Information"
       }
     },
     "option": {
       "type": "string",
       "field": {
         "component": "form/KSelectField",
-        "helper": "Option",
+        "label": "Option",
         "options": [
           { "label": "La réponse A", "value": "A" },
           { "label": "La réponse B", "value": "B" }
@@ -36,7 +39,8 @@
     "number": {
       "type": "number",
       "field": {
-        "component": "form/KNumberField"
+        "component": "form/KNumberField",
+        "label": "Number"
       }
     }
   },

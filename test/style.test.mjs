@@ -65,13 +65,13 @@ describe(`suite:${suite}`, () => {
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 13)
-    await page.waitForTimeout(3000)
+    await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 17)
-    await page.waitForTimeout(3000)
+    await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
   })
 

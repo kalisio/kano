@@ -8,21 +8,21 @@
       "type": "string", 
       "field": {
         "component": "form/KTextField",
-        "helper": "Identifiant"
+        "label": "Identifiant"
       }
     },
     "Nom": {
       "type": "string", 
       "field": {
         "component": "form/KTextField",
-        "helper": "Nom"
+        "label": "Nom"
       }
     },
     "Information": {
       "type": "string", 
       "field": {
         "component": "form/KTextareaField",
-        "helper": "Informations"
+        "label": "Informations"
       }
     }
   },
