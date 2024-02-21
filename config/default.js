@@ -301,17 +301,18 @@ const mapEngine = {
   // Default GeoJSON layer style for polygons/lines
   style: {
     point: { 
-      shape: 'marker', color: 'red', opacity: 0.5,  stroke: { color: 'red', opacity: 0.5 }
+      shape: 'circle', color: 'red', opacity: 0.5,  stroke: { color: 'red' }
     },
     line: { 
       color: 'red', width: 3 
     },
     polygon: { 
-      color: 'red', opacity: 0.5, stroke: { color: 'red', opacity: 0.5 }
+      color: 'red', opacity: 0.5, stroke: { color: 'red' }
     },
     location: {
-      point: { shape: 'marker-pin', color: 'primary', size: [20, 30], icon: 
-        { classes: 'fas fa-circle', color: 'white', size: 12, translation: [ '-50%', '-90%'] } 
+      point: { 
+        shape: 'marker-pin', color: 'primary', opacity: 1, size: [20, 30], stroke: { color: 'primary' }, icon: 
+          { classes: 'fas fa-circle', color: 'white', size: 12, translation: [ '-50%', '-90%'] }        
       },
       line: { color: 'primary', width: 3 },
       polygon: { color: 'primary', opacity: 0.5, stroke: 
@@ -331,7 +332,7 @@ const mapEngine = {
     },
     selection: {
       point: { 
-        shape: 'circle', color: 'primary', opacity: 0.5, radius: 10, stroke: { color: 'dark', width: 1 }
+        shape: 'circle', color: 'primary', opacity: 0.25, radius: 12, stroke: { color: 'primary', opacity: 0.25, width: 3 }
       },
       line: { 
         color: 'primary', opacity: 0.25, width: 10 
@@ -399,17 +400,26 @@ const globeEngine = {
   // Default GeoJSON layer style for points/polygons/lines
   // SHOULD NOT COVER MORE THAN SIMPLE STYLE SPEC AND MAKI ICONS
   style: {
-    point: { shape: 'marker', color: 'red' },
-    line: { color: 'red', width: 3 },
-    polygon: { color: 'red', opacity: 0.5,
-      stroke: { color: 'red', opacity: 0.5 }
+    point: { 
+      shape: 'marker', color: 'red' 
+    },
+    line: { 
+      color: 'red', width: 3 
+    },
+    polygon: { 
+      color: 'red', opacity: 0.5, stroke: { color: 'red' }
+    },
+    location: {
+      point: { 
+        shape: 'marker', color: 'primary' 
+      },
+      line: { 
+        color: 'primary', width: 3 
+      },
+      polygon: { 
+        color: 'primary', opacity: 0.5, stroke: { color: 'primary' }
+      }
     }
-  },
-  featureStyle: {
-    'marker-symbol': 'marker',
-    'marker-color': '#57D824',
-    stroke: '#FF0000',
-    'fill-color': '#00FF00'
   },
   entityStyle: {
     billboard: {
