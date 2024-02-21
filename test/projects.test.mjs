@@ -118,7 +118,7 @@ describe(`suite:${suite}`, () => {
 
   it('admin: remove data', async () => {
     await map.removeView(page, userViewsTab, 'trace view')
-    await map.removeLayer(page, userLayersTab, 'trace') 
+    await map.removeLayer(page, userLayersTab, 'trace')
   })
 
   after(async () => {

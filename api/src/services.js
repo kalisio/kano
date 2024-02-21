@@ -71,10 +71,10 @@ export default async function () {
 
   // Event bus service
   app.declareService('events', {
-      async create (data, params) {
-        this.emit('event', data)
-      }
-    }, {
+    async create (data, params) {
+      this.emit('event', data)
+    }
+  }, {
     events: ['event'],
     methods: ['create']
   })
