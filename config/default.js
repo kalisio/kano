@@ -300,10 +300,14 @@ const mapEngine = {
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
   // Default GeoJSON layer style for polygons/lines
   style: {
-    point: { shape: 'marker', color: 'red' },
-    line: { color: 'red', width: 3 },
-    polygon: { color: 'red', opacity: 0.5,
-      stroke: { color: 'red', opacity: 0.5 }
+    point: { 
+      shape: 'marker', color: 'red', opacity: 0.5,  stroke: { color: 'red', opacity: 0.5 }
+    },
+    line: { 
+      color: 'red', width: 3 
+    },
+    polygon: { 
+      color: 'red', opacity: 0.5, stroke: { color: 'red', opacity: 0.5 }
     },
     location: {
       point: { shape: 'marker-pin', color: 'primary', size: [20, 30], icon: 
@@ -315,21 +319,25 @@ const mapEngine = {
       }
     },
     edition: {
-      point: { shape: 'circle', color: 'yellow', stroke:
-        { color: 'red', width: 3, dashArray: '0 5 0' }
+      point: { 
+        shape: 'circle', color: 'yellow', stroke: { color: 'red', width: 3, dashArray: '0 5 0' }
       },
-      line: { color: 'red', width: 3, dashArray: '0 5 0' },
-      polygon: { color: 'yellow', opacity: 0.5, stroke: 
-        { color: 'red', width: 3, dashArray: '0 5 0' } 
+      line: { 
+        color: 'red', width: 3, dashArray: '0 5 0' 
+      },
+      polygon: { 
+        color: 'yellow', opacity: 0.5, stroke: { color: 'red', width: 3, dashArray: '0 5 0' } 
       }
     },
     selection: {
-      point: { shape: 'circle', color: 'primary', opacity: 0.5, radius: 10, stroke: 
-        { color: 'dark', width: 1 }
+      point: { 
+        shape: 'circle', color: 'primary', opacity: 0.5, radius: 10, stroke: { color: 'dark', width: 1 }
       },
-      line: { color: 'primary', opacity: 0.25, width: 10 },
-      polygon: { color: 'primary', opacity: 0.25, stroke: 
-        { color: 'primary', opacity: 0.25, width: 10 } 
+      line: { 
+        color: 'primary', opacity: 0.25, width: 10 
+      },
+      polygon: { 
+        color: 'primary', opacity: 0.25, stroke: { color: 'primary', opacity: 0.25, width: 10 } 
       }
     }
   },

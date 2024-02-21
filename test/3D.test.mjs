@@ -31,8 +31,9 @@ describe(`suite:${suite}`, () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
     await map.saveLayer(page, userLayersTab, 'trace')
     await core.clickPaneAction(page, 'top', 'toggle-globe')
-    await map.zoomToLayer(page, userLayersTab, 'trace')
-  })
+    await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
+    expect(await runner.captureAndMatch('trace-on-ellipsoid')).beTrue()
+  }).timeout(30000)
 
   it('check terrain layer category', async () => {
     await map.clickCatalogTab(page, catalogLayersTab)
@@ -51,8 +52,8 @@ describe(`suite:${suite}`, () => {
       await map.clickLayer(page, catalogLayersTab, layer)
     }
     await core.clickOpener(page, 'right')
-    expect(await runner.captureAndMatch('terrain')).beTrue()
-  }).timeout(60000)
+    expect(await runner.captureAndMatch('trace-on-terrain')).beTrue()
+  }).timeout(30000)
 
   it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'trace')
