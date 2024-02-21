@@ -36,18 +36,18 @@
     },
     { 
       "type": "Feature", 
-      "style": { "shape": "star", "size": 48, "color": "orange", "stroke": { "color": "green", "width": 2 }, "text": { "label": "01" } },
+      "style": { "shape": "star", "size": [48, 45], "color": "orange", "stroke": { "color": "green", "width": 2 }, "text": { "label": "01" } },
       "properties": { "name": "Sydenham" }, 
       "geometry": { "type": "Point", "coordinates": [ -71.051641470913779, 47.610352336655504 ] } 
     },
     { "type": "Feature", 
-      "style": { "shape": "circle", "color": "blue", "size": 32, "stroke": { "color": "white", "width": 1 }, "icon": { "classes": "las la-home", "color": "white", "size": "20" } },
+      "style": { "shape": "circle", "color": "blue", "size": [32, 32], "stroke": { "color": "white", "width": 1 }, "icon": { "classes": "las la-home", "color": "white", "size": "20" } },
       "properties": { "name": "Saint-Luc" }, 
       "geometry": { "type": "Point", "coordinates": [ -71.110369302750115, 47.998430466372736 ] }
     },
     { 
       "type": "Feature", 
-      "style": { "color": "transparent", "size": 48, "icon": { "url": "icons/kdk/position-cursor.png" } },
+      "style": { "shape": "none", "color": "transparent", "size": [64, 64], "icon": { "url": "icons/kdk/position-cursor.png" } },
       "properties": { "name": "Loisirs du Fjord du Saguenay" }, 
       "geometry": { "type": "Point", "coordinates": [ -70.988396113551573, 48.32977780546792 ] }
     }

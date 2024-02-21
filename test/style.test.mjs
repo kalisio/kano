@@ -91,7 +91,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
   })
 
-  it('point: deactive clustering', async () => {
+  it('point: disable clustering', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
@@ -100,7 +100,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
   })
 
-  it('point: deactive clustering + point styling', async () => {
+  it('point: disable clustering and point styling', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
