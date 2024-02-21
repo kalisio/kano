@@ -113,6 +113,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       style: {
         point: {
           shape: 'circle',
+          radius: 12,
+          opacity: 1,
           color: `<% if (properties.libelle === 'VA') { %>#138dce<% }
                     else if (properties.libelle === 'NVA') { %>#a7bec9<% }
                     else if (properties.libelle === 'NV') { %>grey<% }
