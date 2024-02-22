@@ -46,7 +46,6 @@ describe(`suite:${suite}`, () => {
     await page.waitForNetworkIdle()
     await core.click(page, '#map', 2000)
     await core.click(page, '#map', 1000)
-    await core.click(page, '#map', 1000)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     expect(await runner.captureAndMatch('t1-line')).beTrue()
   })
