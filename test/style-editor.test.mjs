@@ -3,7 +3,7 @@ import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
-const suite = 'style'
+const suite = 'style-editor'
 
 const userLayersTab = 'user-layers-tab'
 
