@@ -8,8 +8,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'Mesures OpenRadiation'
         },
+        Legend: {
+          OPENRADIATION_LABEL: 'OpenRadiation - Mesures'
+        },
         Variables: {
-          value: 'Radioactivité ambiante'
+          OPENRADIATION_GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
         }
       },
       en: {
@@ -17,8 +20,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'OpenRadiation measurements'
         },
+        Legend: {
+          OPENRADIATION_LABEL: 'OpenRadiation - Measurements'
+        },
         Variables: {
-          value: 'Ambient radioactivity'
+          OPENRADIATION_GAMMA_DOSE_RATE: 'Ambient gamma dose rate'
         }
       }
     },
@@ -26,7 +32,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'radioactivity', 'measure'
     ],
     legend: {
-      type: 'variable'
+      type: 'variable',
+      label: 'Legend.OPENRADIATION_LABEL',
     },
     attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
     type: 'OverlayLayer',
@@ -40,7 +47,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     variables: [
       {
         name: 'value',
-        label: 'Variables.value',
+        label: 'Variables.OPENRADIATION_GAMMA_DOSE_RATE',
         unit: 'usvh',
         range: [0, 250],
         step: 5,
@@ -51,7 +58,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           colors: 'Greens',
-          classes: [0,0.1,0.2,0.5,1,2,5,10,20,1000]
+          classes: [0, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10]
         }
       }
     ],
