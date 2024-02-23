@@ -129,11 +129,19 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       // If we'd like to color according to the unit power
       //'marker-color': '<%= chroma.scale(\'Greens\').domain([-1, 1])((properties.power || 0) / properties.netPower_MW).hex() %>',
       // If we'd like to color according to the unit active state
-      'marker-color': `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
-      'icon-classes': 'fas fa-bolt',
-      'icon-x-offset': 2,
-      'icon-color': '#FFF',
-      template: ['marker-fill'],
+      style: {
+        point: {        
+          color: `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`,
+          opacity: 1,
+          icon: {
+            classes: 'fas fa-bolt',
+            color: '#FFF'
+          },
+          stroke: {
+            color: `<% if (properties.status === 'active') { %>green<% } else { %>red<% } %>`
+          }
+        }},
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.stroke.width', 'style.point.icon.color'],
       popup: {
         pick: [
           'name'
