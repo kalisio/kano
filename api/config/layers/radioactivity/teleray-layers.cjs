@@ -44,19 +44,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'radioactivity', 'measure'
     ],
     legend: [{
-      //type: 'symbols',
-      type: 'variable',
+      type: 'variables',
       label: 'Legend.TELERAY_MEASUREMENTS_LABEL',
       minZoom: 8,
-      /*content: {
-        measurments: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#138dce', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
-            label: 'Legend.TELERAY_VALID_MEASUREMENT' 
-          },
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#a7bec9', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+    }, {
+      type: 'symbols',
+      minZoom: 8,
+      content: {
+        measurements: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'orange', width: 2 } } } }, 
             label: 'Legend.TELERAY_AWAITING_MEASUREMENT_VALIDATION' 
           },
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'grey', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'grey', width: 2 } } } }, 
             label: 'Legend.TELERAY_INVALID_MEASUREMENT' 
           }
         ],
@@ -64,8 +63,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
             label: 'Legend.TELERAY_OLD_MEASUREMENT' 
           }
-        ],
-      }*/
+        ]
+      }
     }, {
       type: 'symbols',
       label: 'Legend.TELERAY_PROBES_LABEL',
@@ -95,7 +94,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         name: 'value',
         label: 'Variables.TELERAY_GAMMA_DOSE_RATE',
         unit: 'nsvh',
-        range: [0, 500],
+        range: [0, 5000],
         step: 5,
         chartjs: {
           backgroundColor: 'rgba(11, 117, 169, 128)',
@@ -104,7 +103,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         chromajs: {
           colors: ['#1DAFAF', '#1D8BAF', '#1D66AF', '1D41AF', '#411DAF', '#661DAF'],
-          classes: [0, 100, 200, 300, 500, 2000, 10000]
+          classes: [0, 100, 200, 300, 500, 2000, Number.MAX_VALUE]
         }
       }
     ],
@@ -114,49 +113,50 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 6,
       minFeatureZoom: 8,
-      cluster: { disableClusteringAtZoom: 18 },
+      cluster: { 
+        maxClusterRadius: 28,
+        disableClusteringAtZoom: 18 
+      },
       style: {
         point: {
           shape: 'circle',
-          radius: 12,
+          radius: 14,
           opacity: 1,
-          color: `<%= variables.value.colorScale(properties.value).hex() %>`,
-          /*color: `<% if (properties.libelle === 'VA') { %>#138dce<% }
-                    else if (properties.libelle === 'NVA') { %>#a7bec9<% }
-                    else if (properties.libelle === 'NV') { %>grey<% }
-                    else if (feature.measureRequestIssued) { %>black<% }
-                    else { %>white<% } %>`,*/
+          color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= variables.value.colorScale(properties.value).hex() %><% }
+                      else if (feature.measureRequestIssued) { %>black<% }
+                      else { %>white<% } %>`,
           stroke: {
-            color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>transparent<% }
+            color: `<% if (properties.libelle === 'VA') { %>transparent<% }
+                      else if (properties.libelle === 'NVA') { %>orange<% }
+                      else if (properties.libelle === 'NV') { %>grey<% }
                       else if (feature.measureRequestIssued) { %>white<% }
                       else { %>black<% } %>`,
-            width: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>0<% }
-                      else if (feature.measureRequestIssued) { %>2<% }
-                      else { %>2<% } %>`,
+            width: 2
           },
           icon: {
             color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %>transparent<% }
-                      else if (feature.measureRequestIssued) { %>black<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
                       else { %>black<% } %>`,
             classes: 'fa fa-radiation',
           },
           text: {
-            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { properties.value }
-                      else if (feature.measureRequestIssued) { '' }
-                      else { '' } %>`,
-            color: 'white'
+            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= Units.format(properties.value, \'nSv/h\', undefined, { symbol: false }) %><% }
+                      else { %><% } %>`,
+            color: 'white',
+            classes: 'text-caption text-weight-medium'
           }
         }
       },
-      template: ['style.point.color', 'style.point.stroke.color', 'style.point.stroke.width', 'style.point.icon.color', 'style.point.text.label'],
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
       popup: {
         pick: [
           'name'
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'nSv/h') %></br>
-                   <%= Time.format(properties.measureDateFormatted, 'time.long') + ' - ' + Time.format(properties.measureDateFormatted, 'date.short') %><% } %>`
+        template: `<%= properties.name %></br>
+                    <% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'nSv/h') %></br>
+                    <%= Time.format(properties.measureDateFormatted, 'time.long') + ' - ' + Time.format(properties.measureDateFormatted, 'date.short') %><% } %>`
       }
     },
     cesium: {
