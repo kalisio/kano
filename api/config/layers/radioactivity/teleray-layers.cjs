@@ -120,7 +120,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       style: {
         point: {
           shape: 'circle',
-          radius: 14,
+          radius: 15,
           opacity: 1,
           color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= variables.value.colorScale(properties.value).hex() %><% }
                       else if (feature.measureRequestIssued) { %>black<% }
@@ -140,7 +140,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             classes: 'fa fa-radiation',
           },
           text: {
-            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= Units.format(properties.value, \'nSv/h\', undefined, { symbol: false }) %><% }
+            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= Units.format(properties.value, 'nsvh', undefined, { symbol: false }) %><% }
                       else { %><% } %>`,
             color: 'white',
             classes: 'text-caption text-weight-medium'
@@ -155,7 +155,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: `<%= properties.name %></br>
-                    <% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'nSv/h') %></br>
+                    <% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'nsvh') %></br>
                     <%= Time.format(properties.measureDateFormatted, 'time.long') + ' - ' + Time.format(properties.measureDateFormatted, 'date.short') %><% } %>`
       }
     },
@@ -171,7 +171,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'nSv/h\') %>\n' +
+        template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'nsvh\') %>\n' +
                   '<%= Time.format(properties.measureDateFormatted, \'time.long\') + \' - \' + Time.format(properties.measureDateFormatted, \'date.short\') %><% } %>'
       }
     }

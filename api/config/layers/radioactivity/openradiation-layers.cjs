@@ -71,14 +71,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       style: {
         point: {
           shape: 'circle',
-          radius: 14,
+          radius: 15,
           opacity: 1,
           color: `<%= variables.value.colorScale(properties.value).hex() %>`,
           stroke: {
             color: 'transparent'
           },
           text: {
-            label: `<%= Units.format(properties.value, \'µSv/h\', undefined, { symbol: false }) %>`,
+            label: `<%= Units.format(properties.value, 'usvh', undefined, { symbol: false }) %>`,
             color: 'white',
             classes: 'text-caption text-weight-medium'
           }
