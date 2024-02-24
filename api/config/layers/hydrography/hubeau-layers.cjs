@@ -11,7 +11,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Legend: {
           HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
           HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
-          HUBEAU_HYDRO_MEASUREMENT: 'Dernière mesure : hauteur d\'eau (H) ou débit (Q)',
+          HUBEAU_HYDRO_MEASUREMENT: 'Dernière mesure : Hauteur d\'eau (H) / Débit (Q)',
           HUBEAU_HYDRO_OLD_MEASUREMENT: 'Mesure datée de plus de 30 minutes',
           HUBEAU_HYDRO_STATION: 'Station'
         },
@@ -30,7 +30,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Legend: {
           HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
           HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
-          HUBEAU_HYDRO_MEASUREMENT: 'Last measurement: water height (H) and/or flow rate (Q)',
+          HUBEAU_HYDRO_MEASUREMENT: 'Last measurement: Water height (H) / Flow rate (Q)',
           HUBEAU_HYDRO_OLD_MEASUREMENT: 'Measurement dated more than 30 minutes ago',
           HUBEAU_HYDRO_STATION: 'Station'
         },
