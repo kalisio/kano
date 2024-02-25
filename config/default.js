@@ -641,8 +641,6 @@ module.exports = {
     },
     page: {
       content: [{
-        id: 'url-legend', component: 'layout/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
-      }, {
         id: 'level-slider', component: 'layout/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
       } /* Only for example purpose
       {
@@ -725,9 +723,7 @@ module.exports = {
       ]
     },
     page: {
-      content: [{
-        id: 'url-legend', component: 'layout/KPageSticky', position: 'top-left', offset: [18, 18], content: [{ component: 'KUrlLegend' }]
-      }]
+      content:[]
     },
     fab: {
       content: [
