@@ -145,7 +145,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
@@ -228,7 +228,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
@@ -317,7 +317,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
