@@ -231,8 +231,8 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             icon: {
               color:  `<% if (_.get(properties, 'cloudCover') === 'FEW') { %>#FED98E<% }
                           else if (_.get(properties, 'cloudCover') === 'SCT') { %>#FFFFD4<% }
-                          else if (_.get(properties, 'cloudCover') === 'BKN') { %>#FFFFD4<% }
-                          else if (_.get(properties, 'cloudCover') === 'OVC') { %>#F1EEF6<% }
+                          else if (_.get(properties, 'cloudCover') === 'BKN') { %>#F1EEF6<% }
+                          else if (_.get(properties, 'cloudCover') === 'OVC') { %>#BDC9E1<% }
                           else if (_.has(properties, 'cloudCover')) { %>#FE9929<% }
                           else if (_.has(properties, 'rawOb') && !_.has(properties, 'cloudCover')) { %>transparent<% }
                           else if (feature.measureRequestIssued) { %>white<% }
