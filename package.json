@@ -86,7 +86,7 @@
     "@intlify/vue-i18n-loader": "^4.2.0",
     "@kalisio/feathers-s3": "^1.2.0",
     "@kalisio/feathers-webpush": "^1.0.1",
-    "@kalisio/kdk": "https://github.com/kalisio/kdk",
+    "@kalisio/kdk": "^2.2.0",
     "@kalisio/leaflet-graphicscale": "^1.0.0",
     "@kalisio/leaflet.donutcluster": "^1.1.0",
     "@mapbox/geojsonhint": "^3.0.1",
