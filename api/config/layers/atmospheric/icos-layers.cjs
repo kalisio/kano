@@ -159,7 +159,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             width: 2
           },
           icon: {
-            classes: 'fas fa-ellipsis-v'
+            classes: 'fas fa-ellipsis-v',
+            color: `<% if (_.has(properties, 'rn') || _.has(properties, 'co') || _.has(properties, 'co2') || _.has(properties, 'ch4')) { %>white<% }
+            else if (feature.measureRequestIssued) { %>white<% }
+            else { %>black<% } %>`
           }
         }
       },
