@@ -231,6 +231,8 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
+    this.unregisterStyle('point', this.getHighlightMarker)
+    this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
   unmounted () {
     utils.sendEmbedEvent('map-destroyed')
