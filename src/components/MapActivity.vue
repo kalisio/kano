@@ -116,6 +116,19 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
     },
+    getHighlightMarker (feature, options) {
+      if (this.isWeatherProbe(feature)) {
+        return {
+          icon: this.createWindBarbIcon(feature)
+        }
+      }
+    },
+    getHighlightTooltip (feature, layer) {
+      if (this.isWeatherProbe(feature)) {
+        const html = this.getForecastAsHtml(feature)
+        return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
+      }
+    },
     onEditStartEvent (event) {
       this.setTopPaneMode('edit-layer-data')
       utils.sendEmbedEvent('edit-start', { layer: event.layer })
@@ -196,6 +209,8 @@ export default {
   },
   created () {
     this.setCurrentActivity(this)
+    this.registerStyle('point', this.getHighlightMarker)
+    this.registerStyle('tooltip', this.getHighlightTooltip)
   },
   mounted () {
     // Setup event connections
