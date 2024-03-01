@@ -18,6 +18,7 @@ sidebarDepth: 3
 👉 Emit disconnect/reconnect events for iframe integration,\
 👉 Allow to show/hide window controls,\
 👉 Add a better map scale,\
+👉 New events service that can be used to dispatch messages to all connected clients,\
 👉 Added mapping projects management.
 
 **Cartographic data enhancements:**\
