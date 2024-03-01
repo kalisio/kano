@@ -117,14 +117,14 @@ export default {
       return this.geAppName().toLowerCase() + '-view'
     },
     getHighlightMarker (feature, options) {
-      if (this.isWeatherProbe(feature)) {
+      if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         return {
           icon: this.createWindBarbIcon(feature)
         }
       }
     },
-    getHighlightTooltip (feature, layer) {
-      if (this.isWeatherProbe(feature)) {
+    getHighlightTooltip (feature, layer, options) {
+      if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         const html = this.getForecastAsHtml(feature)
         return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
       }
