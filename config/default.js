@@ -409,15 +409,15 @@ const globeEngine = {
     polygon: { 
       color: 'red', opacity: 0.5, stroke: { color: 'red' }
     },
-    location: {
+    selection: {
       point: { 
-        shape: 'marker', color: 'primary' 
+        shape: 'marker', color: 'primary', opacity: 0.25
       },
       line: { 
-        color: 'primary', width: 3 
+        color: 'primary', opacity: 0.25, width: 10 
       },
       polygon: { 
-        color: 'primary', opacity: 0.5, stroke: { color: 'primary' }
+        color: 'primary', opacity: 0.25, stroke: { color: 'primary', opacity: 0.25, width: 10 } 
       }
     }
   },
