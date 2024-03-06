@@ -123,7 +123,7 @@ import{_ as s,c as a,o as n,V as p}from"./chunks/framework.J61Sinzt.js";const e=
 <span class="line"><span>  tags: [&#39;population&#39;],</span></span>
 <span class="line"><span>  cesium: {</span></span>
 <span class="line"><span>    type: &#39;WebMapTileService&#39;,</span></span>
-<span class="line"><span>    url: &#39;https://wxs.ign.fr/economie/geoportail/wmts?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER=INSEE.FILOSOFI.POPULATION&amp;STYLE=INSEE&amp;FORMAT=image/png&amp;TILEMATRIXSET=PM&amp;TILEMATRIX={TileMatrix}&amp;TILEROW={TileRow}&amp;TILECOL={TileCol}&#39;,</span></span>
+<span class="line"><span>    url: &#39;https://data.geopf.fr/wmts?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER=INSEE.FILOSOFI.POPULATION&amp;STYLE=INSEE&amp;FORMAT=image/png&amp;TILEMATRIXSET=PM&amp;TILEMATRIX={TileMatrix}&amp;TILEROW={TileRow}&amp;TILECOL={TileCol}&#39;,</span></span>
 <span class="line"><span>    format: &#39;image/png&#39;,</span></span>
 <span class="line"><span>    layer: &#39;INSEE.FILOSOFI.POPULATION&#39;,</span></span>
 <span class="line"><span>    style: &#39;INSEE&#39;,</span></span>
@@ -132,7 +132,7 @@ import{_ as s,c as a,o as n,V as p}from"./chunks/framework.J61Sinzt.js";const e=
 <span class="line"><span>  },</span></span>
 <span class="line"><span>  leaflet: {</span></span>
 <span class="line"><span>    type: &#39;tileLayer&#39;,</span></span>
-<span class="line"><span>    source: &#39;https://wxs.ign.fr/economie/geoportail/wmts?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER=INSEE.FILOSOFI.POPULATION&amp;STYLE=INSEE&amp;FORMAT=image/png&amp;TILEMATRIXSET=PM&amp;TILEMATRIX={z}&amp;TILEROW={y}&amp;TILECOL={x}&#39;,</span></span>
+<span class="line"><span>    source: &#39;https://data.geopf.fr/wmts?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER=INSEE.FILOSOFI.POPULATION&amp;STYLE=INSEE&amp;FORMAT=image/png&amp;TILEMATRIXSET=PM&amp;TILEMATRIX={z}&amp;TILEROW={y}&amp;TILECOL={x}&#39;,</span></span>
 <span class="line"><span>    bounds: [ [40, -5], [50, 10] ],</span></span>
 <span class="line"><span>    opacity: 0.5,</span></span>
 <span class="line"><span>    isVisible: false</span></span>
@@ -160,7 +160,7 @@ import{_ as s,c as a,o as n,V as p}from"./chunks/framework.J61Sinzt.js";const e=
 <span class="line"><span>  tags: [&#39;population&#39;],</span></span>
 <span class="line"><span>  cesium: {</span></span>
 <span class="line"><span>    type: &#39;WebMapService&#39;,</span></span>
-<span class="line"><span>    url: &#39;https://wxs.ign.fr/economie/geoportail/r/wms&#39;,</span></span>
+<span class="line"><span>    url: &#39;https://data.geopf.fr/wms-r/wms&#39;,</span></span>
 <span class="line"><span>    layers: &#39;INSEE.FILOSOFI.POPULATION&#39;,</span></span>
 <span class="line"><span>    parameters: {</span></span>
 <span class="line"><span>      version: &#39;1.3.0&#39;,</span></span>
@@ -172,7 +172,7 @@ import{_ as s,c as a,o as n,V as p}from"./chunks/framework.J61Sinzt.js";const e=
 <span class="line"><span>  },</span></span>
 <span class="line"><span>  leaflet: {</span></span>
 <span class="line"><span>    type: &#39;tileLayer.wms&#39;,</span></span>
-<span class="line"><span>    source: &#39;https://wxs.ign.fr/economie/geoportail/r/wms&#39;,</span></span>
+<span class="line"><span>    source: &#39;https://data.geopf.fr/wms-r/wms&#39;,</span></span>
 <span class="line"><span>    layers: &#39;INSEE.FILOSOFI.POPULATION&#39;,</span></span>
 <span class="line"><span>    version: &#39;1.3.0&#39;,</span></span>
 <span class="line"><span>    format: &#39;image/png&#39;,</span></span>
@@ -211,7 +211,7 @@ import{_ as s,c as a,o as n,V as p}from"./chunks/framework.J61Sinzt.js";const e=
 <span class="line"><span>  ],</span></span>
 <span class="line"><span>  featureId: &#39;toponyme&#39;,</span></span>
 <span class="line"><span>  wfs: {</span></span>
-<span class="line"><span>    url: &#39;https://wxs.ign.fr/cartovecto/geoportail/wfs&#39;,</span></span>
+<span class="line"><span>    url: &#39;https://data.geopf.fr/wfs/ows&#39;,</span></span>
 <span class="line"><span>    version: &#39;2.0.0&#39;,</span></span>
 <span class="line"><span>    searchParams: {},</span></span>
 <span class="line"><span>    outputFormat: &#39;json&#39;,</span></span>
