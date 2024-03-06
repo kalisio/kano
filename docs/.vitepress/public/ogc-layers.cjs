@@ -34,7 +34,7 @@ module.exports = [{
     opacity: 0.5,
     isVisible: false
   },
-  legendUrl: 'https://wxs.ign.fr/static/legends/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
+  legendUrl: 'https://data.geopf.fr/annexes/ressources/legendes/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
 }, {
   name: 'Layers.POPULATION_DENSITY_WMS',
   description: 'Layers.POPULATION_DENSITY_WMS_DESCRIPTION',
@@ -79,7 +79,7 @@ module.exports = [{
     opacity: 0.5,
     isVisible: false
   },
-  legendUrl: 'https://wxs.ign.fr/static/legends/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
+  legendUrl: 'https://data.geopf.fr/annexes/ressources/legendes/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
 }, {
   name: 'Layers.AIRPORTS_WFS',
   description: 'Layers.AIRPORTS_WFS_DESCRIPTION',
