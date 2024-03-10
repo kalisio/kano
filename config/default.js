@@ -33,7 +33,7 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 
 const website = 'https://www.kalisio.com'
 const onlineHelp = 'https://kalisio.github.io/kano'
-const changelog = onlineHelp + '/quickstart/history.html'
+const changelog = onlineHelp + '/history.html'
 
 // Left pane
 const leftPane = {
