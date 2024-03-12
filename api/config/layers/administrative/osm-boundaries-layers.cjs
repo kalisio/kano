@@ -35,44 +35,43 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     type: 'OverlayLayer',
     service: 'osm-boundaries',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    /* No unique identifier, used default generated ID
-    featureId: 'name:en',
-    featureLabel: 'name:en',
-    */
+    // No unique identifier, used default generated ID
+    //featureId: 'name:en',
+    featureLabel: ['name', 'name:en', 'name:fr'],
     filters: [{
       label: 'Layers.OSM_BOUNDARIES_LEVEL_2',
       isActive: true,
-      active: { 'properties.admin_level': '2' },
+      active: { 'properties.admin_level': 2 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_3',
       isActive: false,
-      active: { 'properties.admin_level': '3' },
+      active: { 'properties.admin_level': 3 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_4',
       isActive: false,
-      active: { 'properties.admin_level': '4' },
+      active: { 'properties.admin_level': 4 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_5',
       isActive: false,
-      active: { 'properties.admin_level': '5' },
+      active: { 'properties.admin_level': 5 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_6',
       isActive: false,
-      active: { 'properties.admin_level': '6' },
+      active: { 'properties.admin_level': 6 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_7',
       isActive: false,
-      active: { 'properties.admin_level': '7' },
+      active: { 'properties.admin_level': 7 },
       inactive: {}
     }, {
       label: 'Layers.OSM_BOUNDARIES_LEVEL_8',
       isActive: false,
-      active: { 'properties.admin_level': '8' },
+      active: { 'properties.admin_level': 8 },
       inactive: {}
     }
   ],
