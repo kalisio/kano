@@ -37,7 +37,12 @@ You must use the same version of the **post-robot** library as the one used by *
 
 In addition to the commands used to access mixin methods there are a couple of dedicated commands listened by Kano to:
 * `setLocalStorage` set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
-* `setConfiguration` set key/value pairs to override its configuration, typically useful to configure available components or actions
+* `setConfiguration` set key/value pairs to override its [default configuration](../reference/configuration.md), typically useful to configure application name, available components or actions
+
+The following keys can be set in local storage to alter the application behaviour:
+* `appName-jwt` to skip the login screen by injecting an authentication token
+* `appName-welcome` as `false` to avoid displaying the welcome screen on first login
+* `appName-install` as `false` to avoid displaying the PWA installation screen
 
 There are also some dedicated events to be listened by integrating application:
 * `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
@@ -72,7 +77,7 @@ Here is a simple code sample:
 	  	postRobot.send(kano, 'setConfiguration', { 'appName': 'xxx' })
 	  	.then(function() {
 		  // Optionnaly set a valid token to avoid authentication
-		  return postRobot.send(kano, 'setLocalStorage', { 'kano-jwt': 'xxx' })
+		  return postRobot.send(kano, 'setLocalStorage', { 'xxx-jwt': 'yyy' })
 		})
 	  	.then(function() {
 		  // Show and zoom to a layer
