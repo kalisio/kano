@@ -61,14 +61,14 @@ export default {
   },
   data () {
     return {
-      leftWindow: this.$store.get('windows.left'),
-      rightWindow: this.$store.get('windows.right'),
-      topWindow: this.$store.get('windows.top'),
-      bottomWindow: this.$store.get('windows.bottom'),
-      leftPane: this.$store.get('leftPane'),
-      rightPane: this.$store.get('rightPane'),
-      topPane: this.$store.get('topPane'),
-      bottomPane: this.$store.get('bottomPane')
+      leftWindow: this.$store.get('layout.windows.left'),
+      rightWindow: this.$store.get('layout.windows.right'),
+      topWindow: this.$store.get('layout.windows.top'),
+      bottomWindow: this.$store.get('layout.windows.bottom'),
+      leftPane: this.$store.get('layout.panes.left'),
+      rightPane: this.$store.get('layout.panes.right'),
+      topPane: this.$store.get('layout.panes.top'),
+      bottomPane: this.$store.get('layout.panes.bottom')
     }
   },
   watch: {

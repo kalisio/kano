@@ -739,6 +739,11 @@
       postRobot.on('layer-hidden', (event) => console.log(event.data.layer.name + ' has been hidden'))
       postRobot.on('layer-added', (event) => console.log(event.data.layer.name + ' has been added'))
       postRobot.on('layer-removed', (event) => console.log(event.data.layer.name + ' has been removed'))
+      // Layouts related events
+      postRobot.on('pane-opened', (event) => console.log(event.data.placement + ' pane has been opened'))
+      postRobot.on('pane-closed', (event) => console.log(event.data.placement + ' pane has been closed'))
+      postRobot.on('window-opened', (event) => console.log(event.data.placement + ' window has been opened'))
+      postRobot.on('window-opened', (event) => console.log(event.data.placement + ' window has been closed'))
       // Extract FR24 data
       var coords = flightradar.geometry.coordinates
       var heights = []
