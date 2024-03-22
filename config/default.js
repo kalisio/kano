@@ -516,6 +516,36 @@ module.exports = {
       // Nothing specific, use defaults
     }
   },
+  about: {
+    actions: [
+      {
+        id: 'platform-info',
+        icon: 'las la-desktop',
+        label: 'KAbout.PLATFORM_INFO',
+        stack: true,
+        dialog: {
+          title: 'KAbout.PLATFORM_INFO',
+          component: 'app/KPlatform',
+          okAction: 'CLOSE',
+          widthPolicy: 'narrow'
+        }
+      },
+      { 
+        id: 'report-bug',
+        icon: 'las la-bug',
+        label: 'KAbout.BUG_REPORT',
+        stack: true,
+        component: 'action/KBugReportAction'
+      },
+      {
+        id: 'view-changelog',
+        icon: 'las la-history',
+        label: 'KAbout.VIEW_CHANGELOG',
+        stack: true,
+        url: changelog
+      }
+    ]
+  },
   screens: {
     actions: [{ 
       id: 'terms-policies', 
