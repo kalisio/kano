@@ -26,7 +26,7 @@ setInterval(async () => {
 // Preload and cache all resources defined in the manifest
 precacheAndRoute(self.__WB_MANIFEST)
 // Register the `NetworkFirst` caching strategy for offline data
-// targetting 
+// targetting layers data
 registerRoute(
   ({url}) => {
     const isCached = cachedUrls && cachedUrls[url.href]
@@ -39,7 +39,7 @@ registerRoute(
     cacheName: 'layers'
   })
 )
-// Register the `NetworkFirst` caching strategy for all HTTP requests
+// Register the `NetworkFirst` caching strategy for all others HTTP requests
 registerRoute(
   ({url}) => {
     return url.href.startsWith('http')
