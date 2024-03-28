@@ -232,11 +232,11 @@ module.exports = {
       name: 'kano-jwt',
       httpOnly: false,
       secure: (process.env.NODE_ENV !== 'development')
-    },
-    authorisation: {
-      cache: {
-        maxUsers: 1000
-      }
+    }
+  },
+  authorisation: {
+    cache: {
+      maxUsers: 1000
     }
   },
   catalog: {
