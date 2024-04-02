@@ -59,7 +59,7 @@
     "@feathersjs/authentication": "^5.0.8",
     "@feathersjs/express": "^5.0.8",
     "@feathersjs/feathers": "^5.0.8",
-    "@kalisio/feathers-distributed": "^2.3.0",
+    "@kalisio/feathers-distributed": "^2.4.0",
     "@kalisio/kdk": "^2.2.0",
     "@weacast/core": "^2.1.5",
     "containerized": "^1.0.2",
