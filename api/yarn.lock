@@ -1699,10 +1699,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@kalisio/feathers-distributed@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-2.3.0.tgz#e4ea8caef5fe13390a1d822a6b09eb505a915938"
-  integrity sha512-hpAwI9qi5lbi78TP+o3SnOeKO+ch5mt0IavgLG7t4+MWCh3S+OLsF88oXHKgDQlmykFwT4uftcJaufSn0sVGEQ==
+"@kalisio/feathers-distributed@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-distributed/-/feathers-distributed-2.4.0.tgz#68943672c0940702c457a3d32c67f09d831a8e0f"
+  integrity sha512-rWGiF9gl7YD8rvJWd7HfEou9125YnT6jnIKSrae7WtY+QXSOyA2BH2m8XtGnFC1yUxxT1jtQx4sxWR2Ri+s16A==
   dependencies:
     "@feathersjs/commons" "^5.0.8"
     "@feathersjs/errors" "^5.0.8"
