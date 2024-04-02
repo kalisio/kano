@@ -15,7 +15,7 @@ module.exports = function ({ domain }) {
     },
     icon: 'las la-layer-group',
     order: 100,
-    component: 'catalog/KBaseLayersSelector',
+    // component: 'catalog/KBaseLayersSelector',
     options: { filter: { type: 'BaseLayer' } }
   },
   {

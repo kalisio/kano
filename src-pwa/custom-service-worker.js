@@ -25,18 +25,28 @@ setInterval(async () => {
 // Caching for offline mode
 // Preload and cache all resources defined in the manifest
 precacheAndRoute(self.__WB_MANIFEST)
+
+async function cacheKeyWillBeUsed({request, mode}) {
+  const url = new URL(request.url)
+    url.searchParams.delete('jwt')
+    return url.href
+}
+
 // Register the `NetworkFirst` caching strategy for offline data
 // targetting layers data
 registerRoute(
   ({url}) => {
-    const isCached = cachedUrls && cachedUrls[url.href]
+    const key = new URL(url.href)
+    key.searchParams.delete('jwt')
+    const isCached = cachedUrls && cachedUrls[key.href]
     if (isCached) {
       logger.debug(`[Kano] Return response for ${url.href} from layers cache`)
     }
     return isCached
   },
   new NetworkFirst({
-    cacheName: 'layers'
+    cacheName: 'layers',
+    plugins : [{cacheKeyWillBeUsed}]
   })
 )
 // Register the `NetworkFirst` caching strategy for all others HTTP requests
