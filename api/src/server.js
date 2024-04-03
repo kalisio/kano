@@ -1,5 +1,5 @@
 import { kdk } from '@kalisio/kdk/core.api.js'
-import distribution from '@kalisio/feathers-distributed'
+import distribution, { finalize } from '@kalisio/feathers-distributed'
 import fs from 'fs-extra'
 import _ from 'lodash'
 import https from 'https'
@@ -87,7 +87,7 @@ export class Server {
       app.logger.info('Configuring HTTP server at port ' + port.toString())
       expressServer = await app.listen(port)
     }
-    expressServer.on('close', () => distribution.finalize(app))
+    expressServer.on('close', () => finalize(app))
     return expressServer
   }
 }
