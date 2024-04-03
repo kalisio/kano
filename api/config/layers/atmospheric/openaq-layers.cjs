@@ -57,12 +57,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 6,
       content: {
         observations: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#0B75A9', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'black',  size: 10} } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#0B75A9', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'white',  size: 10} } } }, 
             label: 'Legend.OPENAQ_MEASUREMENT' 
           }
         ],
         exceptions: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'orange', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'black', size: 10 } } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'white', size: 10 } } } }, 
             label: 'Legend.OPENAQ_OLD_MEASUREMENT' 
           }
         ]
@@ -73,7 +73,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       maxZoom: 5,
       content: {
         stations: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'grey', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'black',  size: 10} } } }, 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10,  stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-heartbeat', color: 'black',  size: 10} } } }, 
             label: 'Legend.OPENAQ_STATION' 
           }
         ]
@@ -188,16 +188,32 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                           _.has(properties, 'no2') ||
                           _.has(properties, 'o3') ||
                           _.has(properties, 'co') ||
-                          _.has(properties, 'bc')) { %>#0B75A9<% }
-                else if (feature.measureRequestIssued) { %>orange<% }
-                else { %>grey<% } %>`,
+                          _.has(properties, 'bc')) { %>#138dce<% }
+                else if (feature.measureRequestIssued) { %>black<% }
+                else { %>white<% } %>`,
           stroke: {
-            color: 'transparent',
+            color:  `<% if (_.has(properties, 'pm25') ||
+                            _.has(properties, 'pm10') ||
+                            _.has(properties, 'so2') ||
+                            _.has(properties, 'no2') ||
+                            _.has(properties, 'o3') ||
+                            _.has(properties, 'co') ||
+                            _.has(properties, 'bc')) { %>transparent<% }
+                  else if (feature.measureRequestIssued) { %>white<% }
+                  else { %>black<% } %>`,
             width: 0
           },
           icon: {
             classes: 'fa fa-heartbeat',
-            color: 'black'
+            color:  `<% if (_.has(properties, 'pm25') ||
+                            _.has(properties, 'pm10') ||
+                            _.has(properties, 'so2') ||
+                            _.has(properties, 'no2') ||
+                            _.has(properties, 'o3') ||
+                            _.has(properties, 'co') ||
+                            _.has(properties, 'bc')) { %>white<% }
+                  else if (feature.measureRequestIssued) { %>white<% }
+                  else { %>black<% } %>`
           }
         }
       },
