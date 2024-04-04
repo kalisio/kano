@@ -9,8 +9,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENAQ_DESCRIPTION: 'Données de Qualité de l\'air',
         },
         Legend: {
-          OPENAQ_STATIONS_LABEL: 'Stations - OpenAQ',
-          OPENAQ_MEASUREMENTS_LABEL: 'Observations - OpenAQ',
+          OPENAQ_STATIONS_LABEL: 'OpenAQ - Stations',
+          OPENAQ_MEASUREMENTS_LABEL: 'OpenAQ - Observations',
           OPENAQ_STATION: 'Station',
           OPENAQ_MEASUREMENT: 'Dernière mesure: Particules fines (PM10, PM2.5), Dioxyde de souffre, Monoxyde de carbone, Dioxyde d\'azote, Ozone, Noir de carbone',
           OPENAQ_OLD_MEASUREMENT: 'Mesure datée de plus de 1 jour'
@@ -31,8 +31,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENAQ_DESCRIPTION: 'Air quality data',
         },
         Legend: {
-          OPENAQ_STATIONS_LABEL: 'Stations - OpenAQ',
-          OPENAQ_MEASUREMENTS_LABEL: 'Observations - OpenAQ',
+          OPENAQ_STATIONS_LABEL: 'OpenAQ - Stations',
+          OPENAQ_MEASUREMENTS_LABEL: 'OpenAQ - Observations',
           OPENAQ_STATION: 'Station',
           OPENAQ_MEASUREMENT: 'Last measurement: Particulate matter (PM10, PM2.5), Sulfur dioxide, Carbon monoxide, Nitrogen dioxide, Ozone, Black carbon',
           OPENAQ_OLD_MEASUREMENT: 'Measurement dated more than 1 day ago'
