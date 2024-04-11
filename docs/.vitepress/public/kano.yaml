@@ -1,0 +1,67 @@
+#############################################################################
+# Kano chart values for the Kano tutoriel
+# cf. https://kalisio.github.io/kano/guides/installing-kano.html
+# minimum configuration to run Kano
+#############################################################################
+
+global:
+  # subdomain to be used when computing the ingress host
+  subdomain: ""
+  # certIssuer to assign to the ingress cert-manager annotation
+  certIssuer: ""
+  # secret where to share sentitive environment variables
+  secret: ""
+
+# commonAnnotations are annotations to be added to all resources (sub-charts are not considered). Evaluated as a template
+commonAnnotations: {}
+
+# commoneLabels are labels to be added to all resources (sub-charts are not considered). Evaluated as a template
+commonLabel: {}
+
+# replicatCount is the number of replicas
+replicaCount: 1
+
+
+image:
+  repository: kalisio/kano
+  tag: "test"
+  pullPolicy: IfNotPresent
+  
+# expose the service on a node port 8081
+service:
+  enabled: true
+  type: NodePort
+  port: 8081                                                           
+  annotations: {}
+
+ingress:
+  enabled: false
+
+distribution:
+  # not external services as consumer for this tutorial
+  enabled: false
+ 
+env:
+  # appId specifies the application id for the API gateway if used
+  appId: "myId"   
+  # String to define the layers to be integrated into the catalog
+  layersFilter: "*"
+  # logLevel specifies the level of frontend log
+  logLevel: ""
+  # debug specified the list of backend modules for which the debug output is enabled
+  debug: ""
+
+# resources are resource requests and limits to be applied
+resources: {}
+
+# default security context, run as non root uid 1000
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+
+# override the configuration of Kano with config map
+additionalConfig:
+  configMap: 'kano-config'
+  fileMapping:
+    local.cjs: /opt/kalisio/kano/api/config/local.cjs
+    my-layers.cjs: /opt/kalisio/kano/api/config/layers/my-layers.cjs
