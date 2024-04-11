@@ -207,21 +207,21 @@ krawler ./jobfile-hydro-observations.js
 
 ::: warning 
 This requires you to install [Minikube](https://minikube.sigs.k8s.io/docs/), a popular implementation of local K8s cluster. 
-The kub packet manager [Helm](https://helm.sh/) is also required.
+The Kubernetes packet manager [Helm](https://helm.sh/) is also required.
 ::: 
 
-  * This tutorial use a docker image from the [Docker Hub](https://hub.docker.com/r/kalisio/kano/). Kalisio provide a helm char for Kano, hosted
-in the [Kargo repository](https://github.com/kalisio/kargo), a collection of Chart written by Kalisio.
-  * Kano requires using the database [Mongodb](https://www.mongodb.com/). MongoDB will be installed with the famous charts collection
+  * This tutorial use a docker image from the [Docker Hub](https://hub.docker.com/r/kalisio/kano/). Kalisio also provides a helm char for Kano, hosted
+in the [Kargo repository](https://github.com/kalisio/kargo), a collection of charts written by Kalisio.
+  * Kano requires the [Mongodb](https://www.mongodb.com/) database. MongoDB will be installed with the famous charts collection from
    [Bitnami](https://github.com/bitnami/charts).
 
-The installation described here come with **minimalist configuration files**. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public) of the documentation.
+The installation described here contains a **minimalist set of configuration files** to run Kano. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public) of the documentation.
 
 All the files needed from installation are available in [public folder/minikube](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public/minikube).
-All the resources will be created in `tutorial` namespace of your Kubernetes cluster.
+All the resources will be created in a `tutorial` namespace of your Kubernetes cluster.
 
-The Kano chart read values like database Url connexion from a secret. So the first step is to create the secret. After we install MongoDb and Kano chart.
-Copy the following lines:
+The Kano chart reads values like database Url connexion from Kubernetes secrets. So the first step is to create the secrets. After that we install the MongoDb and Kano chart.
+Run the following commands to perform the required actions:
 
 ```bash
 kubectl create namespace tutorial
@@ -243,7 +243,7 @@ kubectl create -n tutorial configmap kano-config \
 helm -n tutorial install -f docs/.vitepress/public/kano.yaml kano  oci://harbor.portal.kalisio.com/kalisio/helm/kano
 ```
 
-To access to Kano, we are asking to Minikube to open a web brower on the Kalo URL:
+To access to Kano, we are asking Minikube to open a web brower on the Kano URL:
 ```bash
 minikube -n tutorial service kano
 ```
@@ -257,14 +257,14 @@ Check the `local.cjs` configuration file below to find the required login inform
 :::
 
 ::: warning
-To simplify the tutorial we do not configure the ingress resources of Minikube.
+To simplify the tutorial we do not configure the ingress ressources of Minikube.
 :::
 
-::: details kano.yaml - Provide values to configure the Kano helm chart.
+::: details kano.yaml - Provided values to configure the Kano helm chart.
 <<< ../.vitepress/public/kano.yaml
 :::
 
-Kano comes with a default set of users but you should change this default configuration for a public deployment and avoid leaking login/passwords. Similarly, Kano comes with a default set of layers targeting geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) and you should add your own data layers instead. This is done by configuration using the following files:
+Kano comes with a default set of users but you should change this default configuration for a public deployment to avoid leaking login/passwords. Similarly, Kano comes with a default set of layers targeting geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) and you should add your own data layers instead. This is done by configuration using the following files:
 
 ::: details local.cjs - Used to override the default backend configuration and setup a default user.
 To be put in the `kano/api/config` directory.
@@ -277,7 +277,7 @@ To be put in the `kano/api/config/layers` directory. Example based on OpenStreee
 <<< ../.vitepress/public/my-layers.cjs
 :::
 
-As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the helm chart targets the latest development version (`test` tag) but you can change it to target either a development (`dev` tag) or a production (`prod` tag) release using the command line switch `--set image.tag=prod`.
+As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the helm chart targets the latest preproduction version (`test` tag) but you can change it to target either a development (`dev` tag) or a production (`prod` tag) release using the command line switch `--set image.tag=prod`.
 
 ::: warning
 By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. By defining `LAYERS_FILTER=*` you will get all built-in layers but take care that a lot of them requires additional services to work correctly (read following sections below). You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
