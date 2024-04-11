@@ -1,7 +1,7 @@
 #############################################################################
 # Kano chart values for the Kano tutoriel
 # cf. https://kalisio.github.io/kano/guides/installing-kano.html
-# minimum configuration to test Kano
+# minimum configuration to run Kano
 #############################################################################
 
 global:
@@ -42,13 +42,13 @@ distribution:
   enabled: false
  
 env:
-  # appId specifies the application id
+  # appId specifies the application id for the API gateway if used
   appId: "myId"   
   # String to define the layers to be integrated into the catalog
   layersFilter: "*"
   # logLevel specifies the level of frontend log
   logLevel: ""
-  # debug specified the list of backend modules for which the output is enabled
+  # debug specified the list of backend modules for which the debug output is enabled
   debug: ""
 
 # resources are resource requests and limits to be applied
