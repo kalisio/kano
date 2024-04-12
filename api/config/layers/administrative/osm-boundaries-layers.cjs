@@ -5,28 +5,28 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          'OSM_BOUNDARIES': 'Limites administratives OSM',
-          'OSM_BOUNDARIES_DESCRIPTION': 'Limites administratives OSM',
-          'OSM_BOUNDARIES_LEVEL_2': 'Niveau 2',
-          'OSM_BOUNDARIES_LEVEL_3': 'Niveau 3',
-          'OSM_BOUNDARIES_LEVEL_4': 'Niveau 4',
-          'OSM_BOUNDARIES_LEVEL_5': 'Niveau 5',
-          'OSM_BOUNDARIES_LEVEL_6': 'Niveau 6',
-          'OSM_BOUNDARIES_LEVEL_7': 'Niveau 7',
-          'OSM_BOUNDARIES_LEVEL_8': 'Niveau 8'
+          OSM_BOUNDARIES: 'Limites administratives - OpenStreetMap (filtrées)',
+          OSM_BOUNDARIES_DESCRIPTION: 'Limites administratives - OpenStreetMap (filtrées)',
+          OSM_BOUNDARIES_LEVEL_2: 'Niveau 2',
+          OSM_BOUNDARIES_LEVEL_3: 'Niveau 3',
+          OSM_BOUNDARIES_LEVEL_4: 'Niveau 4',
+          OSM_BOUNDARIES_LEVEL_5: 'Niveau 5',
+          OSM_BOUNDARIES_LEVEL_6: 'Niveau 6',
+          OSM_BOUNDARIES_LEVEL_7: 'Niveau 7',
+          OSM_BOUNDARIES_LEVEL_8: 'Niveau 8'
         }
       },
       en: {
         Layers: {
-          'OSM_BOUNDARIES': 'Administrative limits',
-          'OSM_BOUNDARIES_DESCRIPTION': 'OpenStreetMap Administrative limits',
-          'OSM_BOUNDARIES_LEVEL_2': 'Level 2',
-          'OSM_BOUNDARIES_LEVEL_3': 'Level 3',
-          'OSM_BOUNDARIES_LEVEL_4': 'Level 4',
-          'OSM_BOUNDARIES_LEVEL_5': 'Level 5',
-          'OSM_BOUNDARIES_LEVEL_6': 'Level 6',
-          'OSM_BOUNDARIES_LEVEL_7': 'Level 7',
-          'OSM_BOUNDARIES_LEVEL_8': 'Level 8'
+          OSM_BOUNDARIES: 'Administrative limits - OpenStreetMap (filtered)',
+          OSM_BOUNDARIES_DESCRIPTION: 'Administrative limits - OpenStreetMap (filtered)',
+          OSM_BOUNDARIES_LEVEL_2: 'Level 2',
+          OSM_BOUNDARIES_LEVEL_3: 'Level 3',
+          OSM_BOUNDARIES_LEVEL_4: 'Level 4',
+          OSM_BOUNDARIES_LEVEL_5: 'Level 5',
+          OSM_BOUNDARIES_LEVEL_6: 'Level 6',
+          OSM_BOUNDARIES_LEVEL_7: 'Level 7',
+          OSM_BOUNDARIES_LEVEL_8: 'Level 8'
         }
       }
     },
