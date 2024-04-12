@@ -19,7 +19,7 @@ self.addEventListener('message', event => {
 // As route function cannot be async and localforage is we retrieve
 // the cached layer list on a reccurent basis to be able to respond synchronously
 setInterval(async () => {
-  cachedUrls = await localforage.getItem('layers')
+  cachedUrls = await localforage.keys()
 }, 1000)
 
 // Caching for offline mode
@@ -38,7 +38,7 @@ registerRoute(
   ({url}) => {
     const key = new URL(url.href)
     key.searchParams.delete('jwt')
-    const isCached = cachedUrls && cachedUrls[key.href]
+    const isCached = cachedUrls && cachedUrls.includes(key.href)
     if (isCached) {
       logger.debug(`[Kano] Return response for ${url.href} from layers cache`)
     }
