@@ -5,10 +5,10 @@ set -euo pipefail
 JOB_ID=$1
 
 THIS_FILE=$(readlink -f "${BASH_SOURCE[0]}")
-THIS_PATH=$(dirname "$THIS_FILE")
-ROOT_PATH=$(dirname "$THIS_PATH")
+THIS_DIR=$(dirname "$THIS_FILE")
+# ROOT_DIR=$(dirname "$THIS_DIR")
 
-. "$THIS_PATH/kash/kash.sh"
+. "$THIS_DIR/kash/kash.sh"
 
 ### Github Actions
 
