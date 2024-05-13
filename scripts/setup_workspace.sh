@@ -41,8 +41,9 @@ if [ "$CI" = true ]; then
     WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
     # workaround since repo is named 'kano' and in kli file it's 'maps'
-    # mv "$WORKSPACE_DIR/kano" "$WORKSPACE_DIR/maps"
-    # ln -s "$WORKSPACE_DIR/maps" "$WORKSPACE_DIR/kano"
+    cd "$WORKSPACE_DIR"
+    mv "kano" "maps" && ln -s "maps" "kano"
+    cd ~-
 
     DEVELOPMENT_REPO_URL="https://$GITHUB_DEVELOPMENT_PAT@github.com/kalisio/development.git"
 else
