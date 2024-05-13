@@ -74,7 +74,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         }
       ],
       legend: {
-        type: 'variable'
+        type: 'variables'
       },
       time_based: {
         sources: [{
@@ -149,7 +149,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'gsmapLayer',
@@ -211,7 +211,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'gsmapLayer',
@@ -273,7 +273,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'gsmapLayer',
@@ -335,7 +335,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'gsmapLayer',

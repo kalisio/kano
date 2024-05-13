@@ -6,7 +6,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           OPENAQ: 'OpenAQ',
-          OPENAQ_DESCRIPTION: 'Données de Qualité de l\'air'
+          OPENAQ_DESCRIPTION: 'Données de Qualité de l\'air',
+        },
+        Legend: {
+          OPENAQ_STATIONS_LABEL: 'OpenAQ - Stations',
+          OPENAQ_MEASUREMENTS_LABEL: 'OpenAQ - Observations',
+          OPENAQ_STATION: 'Station',
+          OPENAQ_MEASUREMENT: 'Dernière mesure: Particules fines (PM10, PM2.5), Dioxyde de souffre, Monoxyde de carbone, Dioxyde d\'azote, Ozone, Noir de carbone',
+          OPENAQ_OLD_MEASUREMENT: 'Mesure datée de plus de 1 jour'
         },
         Variables: {
           PM10: 'Particules fines (< 10µm, PM10)',
@@ -21,7 +28,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       en: {
         Layers: {
           OPENAQ: 'OpenAQ',
-          OPENAQ_DESCRIPTION: 'Air quality data'
+          OPENAQ_DESCRIPTION: 'Air quality data',
+        },
+        Legend: {
+          OPENAQ_STATIONS_LABEL: 'OpenAQ - Stations',
+          OPENAQ_MEASUREMENTS_LABEL: 'OpenAQ - Observations',
+          OPENAQ_STATION: 'Station',
+          OPENAQ_MEASUREMENT: 'Last measurement: Particulate matter (PM10, PM2.5), Sulfur dioxide, Carbon monoxide, Nitrogen dioxide, Ozone, Black carbon',
+          OPENAQ_OLD_MEASUREMENT: 'Measurement dated more than 1 day ago'
         },
         Variables: {
           PM10: 'Particulate matter (< 10µm, PM10)',
@@ -37,6 +51,34 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'atmospheric', 'measure'
     ],
+    legend: [{
+      type: 'symbols',
+      label: 'Legend.OPENAQ_MEASUREMENTS_LABEL',
+      minZoom: 6,
+      content: {
+        observations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#0B75A9', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'white',  size: 10} } } }, 
+            label: 'Legend.OPENAQ_MEASUREMENT' 
+          }
+        ],
+        exceptions: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'white', size: 10 } } } }, 
+            label: 'Legend.OPENAQ_OLD_MEASUREMENT' 
+          }
+        ]
+      }
+    }, {
+      type: 'symbols',
+      label: 'Legend.OPENAQ_STATIONS_LABEL',
+      maxZoom: 5,
+      content: {
+        stations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10,  stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-heartbeat', color: 'black',  size: 10} } } }, 
+            label: 'Legend.OPENAQ_STATION' 
+          }
+        ]
+      }
+    }],  
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
     attribution: '',
     type: 'OverlayLayer',
@@ -135,17 +177,47 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 4,
       minFeatureZoom: 7,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (_.has(properties, 'pm25') ||
+      style: {
+        point: {
+          shape: 'circle',
+          radius: 15,
+          opacity: 1,
+          color:  `<% if (_.has(properties, 'pm25') ||
                           _.has(properties, 'pm10') ||
                           _.has(properties, 'so2') ||
                           _.has(properties, 'no2') ||
                           _.has(properties, 'o3') ||
                           _.has(properties, 'co') ||
-                          _.has(properties, 'bc')) { %>blue<% }
-              else if (feature.measureRequestIssued) { %>orange<% }
-              else { %>grey<% } %>`,
-      'icon-classes': 'fa fa-heartbeat',
-      template: ['marker-color'],
+                          _.has(properties, 'bc')) { %>#138dce<% }
+                else if (feature.measureRequestIssued) { %>black<% }
+                else { %>white<% } %>`,
+          stroke: {
+            color:  `<% if (_.has(properties, 'pm25') ||
+                            _.has(properties, 'pm10') ||
+                            _.has(properties, 'so2') ||
+                            _.has(properties, 'no2') ||
+                            _.has(properties, 'o3') ||
+                            _.has(properties, 'co') ||
+                            _.has(properties, 'bc')) { %>transparent<% }
+                  else if (feature.measureRequestIssued) { %>white<% }
+                  else { %>black<% } %>`,
+            width: 0
+          },
+          icon: {
+            classes: 'fa fa-heartbeat',
+            color:  `<% if (_.has(properties, 'pm25') ||
+                            _.has(properties, 'pm10') ||
+                            _.has(properties, 'so2') ||
+                            _.has(properties, 'no2') ||
+                            _.has(properties, 'o3') ||
+                            _.has(properties, 'co') ||
+                            _.has(properties, 'bc')) { %>white<% }
+                  else if (feature.measureRequestIssued) { %>white<% }
+                  else { %>black<% } %>`
+          }
+        }
+      },
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color'],
       popup: {
         pick: [
           'location'

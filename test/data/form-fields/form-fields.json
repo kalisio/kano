@@ -8,28 +8,28 @@
       "type": "string",
       "field": {
         "component": "form/KTextField",
-        "helper": "Identifiant"
+        "label": "Identifiant"
       }
     },
     "nom": {
       "type": "string",
       "field": {
         "component": "form/KTextField",
-        "helper": "Nom"
+        "label": "Nom"
       }
     },
     "information": {
       "type": "string",
       "field": {
         "component": "form/KTextareaField",
-        "helper": "Information"
+        "label": "Information"
       }
     },
     "option": {
       "type": "string",
       "field": {
         "component": "form/KSelectField",
-        "helper": "Option",
+        "label": "Option",
         "options": [
           { "label": "La réponse A", "value": "A" },
           { "label": "La réponse B", "value": "B" }
@@ -40,7 +40,7 @@
       "type": "number",
       "field": {
         "component": "form/KNumberField",
-        "helper": "Number"
+        "label": "Number"
       }
     }
   },

@@ -12,7 +12,7 @@ This requires you to [install Docker](https://docs.docker.com/engine/installatio
 
 We provide Docker images on the [Docker Hub](https://hub.docker.com/r/kalisio/kano/) to ease deploying your own instance. To run correctly it has to be linked with a standard [MongoDB container](https://hub.docker.com/_/mongo/) for the database. Although it's possible to directly run Docker commands we provide you with [docker-compose](https://docs.docker.com/compose/) files to ease deployment, in addition to minimalist configuration files. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public) of the documentation.
 
-Jump into the folder with the docker-compose and configuration files, the following commands should do the job:
+Once you have retrieved the required docker-compose and configuration files, jump into the folder with the docker-compose and configuration files, the following commands should do the job:
 
 ```bash
 // Run the MongoDB and Kano containers
@@ -202,3 +202,98 @@ export DB_URL=mongodb://mongodb:27017/kano
 krawler ./jobfile-hydro-stations.js
 krawler ./jobfile-hydro-observations.js
 ```
+
+## Using Minikube
+
+::: warning 
+This requires you to install [Minikube](https://minikube.sigs.k8s.io/docs/), a popular implementation of local K8s cluster. 
+The Kubernetes packet manager [Helm](https://helm.sh/) is also required.
+::: 
+
+  * This tutorial use a docker image from the [Docker Hub](https://hub.docker.com/r/kalisio/kano/). Kalisio also provides a helm char for Kano, hosted
+in the [Kargo repository](https://github.com/kalisio/kargo), a collection of charts written by Kalisio.
+  * Kano requires the [Mongodb](https://www.mongodb.com/) database. MongoDB will be installed with the famous charts collection from
+   [Bitnami](https://github.com/bitnami/charts).
+
+The installation described here contains a **minimalist set of configuration files** to run Kano. These files will be detailed in the following sections and are available in the [public folder](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public) of the documentation.
+
+All the files needed from installation are available in [public folder/minikube](https://github.com/kalisio/kano/tree/master/docs/.vitepress/public/minikube).
+All the resources will be created in a `tutorial` namespace of your Kubernetes cluster.
+
+The Kano chart reads values like database Url connexion from Kubernetes secrets. So the first step is to create the secrets. After that we install the MongoDb and Kano chart.
+Run the following commands to perform the required actions:
+
+```bash
+kubectl create namespace tutorial
+kubectl -n tutorial create secret generic kano \
+    --from-literal=db-url='mongodb://kano:kano@mongodb/kano' \
+    --from-literal=data-db-url='mongodb://kano:kano@mongodb/kano' \
+    --from-literal=app-secret='MySecret!' \
+    --from-literal=cesium-token='' \
+    --from-literal=mapillary-token=''
+helm -n tutorial install \
+    --version 15.1.1 \
+    --set useStatefulSet=true \
+    --set 'auth.rootPassword=R33T!,auth.usernames={kano}' \
+    --set 'auth.passwords={kano},auth.databases={kano}' \
+    mongodb  oci://registry-1.docker.io/bitnamicharts/mongodb
+kubectl create -n tutorial configmap kano-config \
+    --from-file=local.cjs=./docs/.vitepress/public/local-kano.cjs \
+    --from-file=my-layers.cjs=./docs/.vitepress/public/my-layers.cjs
+helm -n tutorial install -f docs/.vitepress/public/kano.yaml kano  oci://harbor.portal.kalisio.com/kalisio/helm/kano
+```
+
+To access to Kano, we are asking Minikube to open a web brower on the Kano URL:
+```bash
+minikube -n tutorial service kano
+```
+
+You should see something like this once connected:
+
+![installation](../.vitepress/public/images/kano-installation.png)
+
+::: tip
+Check the `local.cjs` configuration file below to find the required login information
+:::
+
+::: warning
+To simplify the tutorial we do not configure the ingress ressources of Minikube.
+:::
+
+::: details kano.yaml - Provided values to configure the Kano helm chart.
+<<< ../.vitepress/public/kano.yaml
+:::
+
+Kano comes with a default set of users but you should change this default configuration for a public deployment to avoid leaking login/passwords. Similarly, Kano comes with a default set of layers targeting geospatial services deployed by [Kargo](https://kalisio.github.io/kargo/) and you should add your own data layers instead. This is done by configuration using the following files:
+
+::: details local.cjs - Used to override the default backend configuration and setup a default user.
+To be put in the `kano/api/config` directory.
+
+<<< ../.vitepress/public/local-kano.cjs
+:::
+::: details my-layers.cjs - Used to define the available default layers.
+To be put in the `kano/api/config/layers` directory. Example based on OpenStreeetMap [tile servers](https://wiki.openstreetmap.org/wiki/Tile_servers) and [IGN web services](https://geoservices.ign.fr/services-web-experts-cartes).
+
+<<< ../.vitepress/public/my-layers.cjs
+:::
+
+As detailed in the [KDK documentation](https://kalisio.github.io/kdk/guides/development/deploy.html#deployment-flavors) Kano comes into three different flavors. By default the helm chart targets the latest preproduction version (`test` tag) but you can change it to target either a development (`dev` tag) or a production (`prod` tag) release using the command line switch `--set image.tag=prod`.
+
+::: warning
+By default no built-in layers are available in Kano unless you specify their names using the `LAYERS_FILTER` environment variable. By defining `LAYERS_FILTER=*` you will get all built-in layers but take care that a lot of them requires additional services to work correctly (read following sections below). You can however directly add new layers using the Kano GUI (through the add layer button or by drag'n'drop on the map).
+:::
+
+::: tip
+If you'd like to use the 3D mode or the Mapillary layer you should provide the required tokens to access their respective APIs on the backend side by setting the following environment variables: `CESIUM_TOKEN`, `MAPILLARY_TOKEN`.
+:::
+
+To uninstall the Kano environment:
+```shell
+kubectl delete all --all -n tutorial
+kubectl delete namespace tutorial
+
+```
+
+::: warning
+Please note that it will not delete the associate PVC. If you want to remove it, use `kubectl delete pvc <the_PVC_of_mongoDB_in_tutorial>`.
+:::

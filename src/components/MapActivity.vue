@@ -61,14 +61,14 @@ export default {
   },
   data () {
     return {
-      leftWindow: this.$store.get('windows.left'),
-      rightWindow: this.$store.get('windows.right'),
-      topWindow: this.$store.get('windows.top'),
-      bottomWindow: this.$store.get('windows.bottom'),
-      leftPane: this.$store.get('leftPane'),
-      rightPane: this.$store.get('rightPane'),
-      topPane: this.$store.get('topPane'),
-      bottomPane: this.$store.get('bottomPane')
+      leftWindow: this.$store.get('layout.windows.left'),
+      rightWindow: this.$store.get('layout.windows.right'),
+      topWindow: this.$store.get('layout.windows.top'),
+      bottomWindow: this.$store.get('layout.windows.bottom'),
+      leftPane: this.$store.get('layout.panes.left'),
+      rightPane: this.$store.get('layout.panes.right'),
+      topPane: this.$store.get('layout.panes.top'),
+      bottomPane: this.$store.get('layout.panes.bottom')
     }
   },
   watch: {
@@ -115,6 +115,19 @@ export default {
     getViewKey () {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
+    },
+    getHighlightMarker (feature, options) {
+      if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
+        return {
+          icon: this.createWindBarbIcon(feature)
+        }
+      }
+    },
+    getHighlightTooltip (feature, layer, options) {
+      if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
+        const html = this.getForecastAsHtml(feature)
+        return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
+      }
     },
     onEditStartEvent (event) {
       this.setTopPaneMode('edit-layer-data')
@@ -196,6 +209,8 @@ export default {
   },
   created () {
     this.setCurrentActivity(this)
+    this.registerStyle('point', this.getHighlightMarker)
+    this.registerStyle('tooltip', this.getHighlightTooltip)
   },
   mounted () {
     // Setup event connections
@@ -216,6 +231,8 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
+    this.unregisterStyle('point', this.getHighlightMarker)
+    this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
   unmounted () {
     utils.sendEmbedEvent('map-destroyed')

@@ -3,7 +3,7 @@ import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
-const suite = 'style'
+const suite = 'style-editor'
 
 const userLayersTab = 'user-layers-tab'
 
@@ -65,13 +65,13 @@ describe(`suite:${suite}`, () => {
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 13)
-    await page.waitForTimeout(3000)
+    await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 17)
-    await page.waitForTimeout(3000)
+    await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
   })
 
@@ -91,24 +91,28 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
   })
 
-  it('point: deactive clustering', async () => {
+  it('point: disable clustering', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
-    await core.click(page, '#style-point-group')
+    await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
   })
 
-  it('point: deactive clustering by zoom + point styling', async () => {
+  it('point: disable clustering and point styling', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
-    await core.click(page, '#style-point-group')
+    await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
-    await core.moveSlider(page, 'style-point-clustering', 'left', 2)
-    await core.click(page, '#style-point-icons')
-    await core.click(page, '#fas-fa-check-circle')
-    await core.click(page, '#style-color-teal')
+    await core.moveSlider(page, 'style-set-clustering', 'left', 2)
+    await core.click(page, '#style-point-group')
+    await core.click(page, '#style-point-icon')
+    await core.click(page, '#fab-fa-apple')
+    await core.click(page, '#style-color-white')
     await core.click(page, '#choose-button')
+    await core.click(page, '#style-point-color')
+    await core.click(page, '#style-color-teal')
+    await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1000)
     await map.zoomToLevel(page, 16)
@@ -130,12 +134,11 @@ describe(`suite:${suite}`, () => {
   it('polygon: polygon styling', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-polygon-group')
-    await core.moveSlider(page, 'style-fill-opacity', 'right', 3, 500)
+    await core.moveSlider(page, 'style-polygon-opacity', 'right', 3, 500)
     await core.click(page, '#style-polygon-color')
     await core.click(page, '#style-color-deep-orange')
     await core.click(page, '#done-button')
-    await core.click(page, '#style-line-group')
-    await core.click(page, '#style-line-color')
+    await core.click(page, '#style-polygon-line-color')
     await core.click(page, '#style-color-teal')
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')

@@ -20,7 +20,7 @@ module.exports = [{
   tags: ['population'],
   cesium: {
     type: 'WebMapTileService',
-    url: 'https://wxs.ign.fr/economie/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=INSEE.FILOSOFI.POPULATION&STYLE=INSEE&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={TileMatrix}&TILEROW={TileRow}&TILECOL={TileCol}',
+    url: 'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=INSEE.FILOSOFI.POPULATION&STYLE=INSEE&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={TileMatrix}&TILEROW={TileRow}&TILECOL={TileCol}',
     format: 'image/png',
     layer: 'INSEE.FILOSOFI.POPULATION',
     style: 'INSEE',
@@ -29,12 +29,12 @@ module.exports = [{
   },
   leaflet: {
     type: 'tileLayer',
-    source: 'https://wxs.ign.fr/economie/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=INSEE.FILOSOFI.POPULATION&STYLE=INSEE&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
+    source: 'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=INSEE.FILOSOFI.POPULATION&STYLE=INSEE&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
     bounds: [ [40, -5], [50, 10] ],
     opacity: 0.5,
     isVisible: false
   },
-  legendUrl: 'https://wxs.ign.fr/static/legends/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
+  legendUrl: 'https://data.geopf.fr/annexes/ressources/legendes/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
 }, {
   name: 'Layers.POPULATION_DENSITY_WMS',
   description: 'Layers.POPULATION_DENSITY_WMS_DESCRIPTION',
@@ -57,7 +57,7 @@ module.exports = [{
   tags: ['population'],
   cesium: {
     type: 'WebMapService',
-    url: 'https://wxs.ign.fr/economie/geoportail/r/wms',
+    url: 'https://data.geopf.fr/wms-r/wms',
     layers: 'INSEE.FILOSOFI.POPULATION',
     parameters: {
       version: '1.3.0',
@@ -69,7 +69,7 @@ module.exports = [{
   },
   leaflet: {
     type: 'tileLayer.wms',
-    source: 'https://wxs.ign.fr/economie/geoportail/r/wms',
+    source: 'https://data.geopf.fr/wms-r/wms',
     layers: 'INSEE.FILOSOFI.POPULATION',
     version: '1.3.0',
     format: 'image/png',
@@ -79,7 +79,7 @@ module.exports = [{
     opacity: 0.5,
     isVisible: false
   },
-  legendUrl: 'https://wxs.ign.fr/static/legends/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
+  legendUrl: 'https://data.geopf.fr/annexes/ressources/legendes/INSEE.FILOSOFI.POPULATION-tot-legend-2017.png'
 }, {
   name: 'Layers.AIRPORTS_WFS',
   description: 'Layers.AIRPORTS_WFS_DESCRIPTION',
@@ -108,7 +108,7 @@ module.exports = [{
   ],
   featureId: 'toponyme',
   wfs: {
-    url: 'https://wxs.ign.fr/cartovecto/geoportail/wfs',
+    url: 'https://data.geopf.fr/wfs/ows',
     version: '2.0.0',
     searchParams: {},
     outputFormat: 'json',

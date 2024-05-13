@@ -98,8 +98,21 @@ export default async ({ app, router }) => {
   })
   // Event bus listening
   api.getService('events').on('event', async (event) => {
-    await utils.sendEmbedEvent(event.name, event.data)
+    utils.sendEmbedEvent(event.name, event.data)
   })
+  // Service events listening
+  const serviceEvents = ['created', 'updated', 'patched', 'removed']
+  serviceEvents.forEach(event => {
+    api.getService('catalog').on(event, data => {
+      utils.sendEmbedEvent('catalog', { serviceEvent: event, data })
+    })
+    api.getService('features').on(event, data => {
+      utils.sendEmbedEvent('features', { serviceEvent: event, data })
+    })
+  })
+  // Listen to websocket events
+  Events.on('disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
+  Events.on('reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
 
   // Register global properties to the the vue app
   app.config.globalProperties.$store = Store
@@ -116,7 +129,7 @@ export default async ({ app, router }) => {
   }
 
   // Register global components
-  app.component('KAction', await kdkCoreUtils.loadComponent('KAction'))
+  app.component('KAction', await kdkCoreUtils.loadComponent('action/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))
   app.component('KStamp', await kdkCoreUtils.loadComponent('KStamp'))
   app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))

@@ -6,7 +6,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           HUBEAU_HYDRO: 'Hub\'Eau Hydrométrie',
-          HUBEAU_HYDRO_DESCRIPTION: 'Données hydrométriques'
+          HUBEAU_HYDRO_DESCRIPTION: 'Observations hydrométriques'
+        },
+        Legend: {
+          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
+          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
+          HUBEAU_HYDRO_MEASUREMENT: 'Dernière mesure : Hauteur d\'eau (H) / Débit (Q)',
+          HUBEAU_HYDRO_OLD_MEASUREMENT: 'Mesure datée de plus de 30 minutes',
+          HUBEAU_HYDRO_STATION: 'Station'
         },
         Variables: {
           H: 'Niveau d\'eau',
@@ -18,11 +25,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       en: {
         Layers: {
           HUBEAU_HYDRO: 'Hub\'Eau Hydrometry',
-          HUBEAU_HYDRO_DESCRIPTION: 'Hydrometric data'
+          HUBEAU_HYDRO_DESCRIPTION: 'Hydrometric observations'
+        },
+        Legend: {
+          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
+          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
+          HUBEAU_HYDRO_MEASUREMENT: 'Last measurement: Water height (H) / Flow rate (Q)',
+          HUBEAU_HYDRO_OLD_MEASUREMENT: 'Measurement dated more than 30 minutes ago',
+          HUBEAU_HYDRO_STATION: 'Station'
         },
         Variables: {
           H: 'Water level',
-          Q: 'Water rate',
+          Q: 'Water flow rate',
           HP_RNN: 'Water level - RNN prediction',
           HP_XGB: 'Water level - XGB prediction'
         }
@@ -31,6 +45,34 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'hydrography', 'measure'
     ],
+    legend: [{
+      type: 'symbols',
+      label: 'Legend.HUBEAU_HYDRO_OBSERVATIONS_LABEL',
+      minZoom: 11,
+      content: {
+        observations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#00a9ce', radius: 10, icon: { classes: 'fa fa-tint', color: 'white',  size: 10} } } }, 
+            label: 'Legend.HUBEAU_HYDRO_MEASUREMENT' 
+          }
+        ],
+        exceptions: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-tint', color: 'white', size: 10 } } } }, 
+            label: 'Legend.HUBEAU_HYDRO_OLD_MEASUREMENT' 
+          }
+        ]
+      }
+    }, {
+      type: 'symbols',
+      label: 'Legend.HUBEAU_HYDRO_STATIONS_LABEL',
+      maxZoom: 10,
+      content: {
+        stations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-tint', color: 'black', size: 10 } } } }, 
+            label: 'Legend.HUBEAU_HYDRO_STATION' 
+          }
+        ]
+      }
+    }],
     attribution: '',
     type: 'OverlayLayer',
     service: 'hubeau-hydro-observations',
@@ -102,13 +144,33 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 8,
       minFeatureZoom: 11,
-      cluster: { disableClusteringAtZoom: 18 },
-      'marker-color': `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
-                          else if (feature.measureRequestIssued) { %>orange<% }
-                          else { %>grey<% } %>`,
-      'icon-color': 'white',
-      'icon-classes': 'fa fa-tint',
-      template: ['marker-color'],
+      cluster: { 
+        maxClusterRadius: 40,
+        disableClusteringAtZoom: 18 
+      },
+      style: {
+        point: {
+          marker: 'circle',
+          radius: 15,
+          opacity: 1,
+          color: `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
+                    else if (feature.measureRequestIssued) { %>black<% }
+                    else { %>white<% } %>`,
+          stroke: {
+            color: `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>transparent<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            width: 2
+          },
+          icon: {
+            color: `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q'))  { %>white<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            classes: 'fas fa-tint',
+          }
+        }
+      },
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
       popup: {
         pick: [
           'name'

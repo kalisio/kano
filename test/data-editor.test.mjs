@@ -3,7 +3,7 @@ import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
-const suite = 'schema'
+const suite = 'data-editor'
 
 const userLayersTab = 'user-layers-tab'
 
@@ -40,13 +40,12 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-lines')
-    await page.waitForTimeout(1000)
     await core.click(page, '#map', 1000)
     await map.moveMap(page, 'up', 4)
     await map.moveMap(page, 'right', 3)
+    await page.waitForNetworkIdle()
+    await core.click(page, '#map', 2000)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(1500)
-    await core.click(page, '#map')
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     expect(await runner.captureAndMatch('t1-line')).beTrue()
   })
@@ -56,9 +55,11 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-points', 1000)
     await map.moveMap(page, 'left', 2)
+    await page.waitForNetworkIdle()
     await core.click(page, '#map', 1000)
     await map.moveMap(page, 'right', 4)
     await core.click(page, '#map', 1000)
+    await page.waitForNetworkIdle()
     await core.clickPaneAction(page, 'top', 'accept')
     // await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
     expect(await runner.captureAndMatch('t2-points')).beTrue()

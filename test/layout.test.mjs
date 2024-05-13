@@ -4,6 +4,27 @@ import { core } from '@kalisio/kdk/test.client.js'
 
 const suite = 'layout'
 
+async function checkLayout (page, fabActionsCount) {
+  expect(await core.isPaneVisible(page, 'top')).beTrue()
+  expect(await core.isPaneVisible(page, 'right')).beFalse()
+  expect(await core.isPaneVisible(page, 'bottom')).beFalse()
+  expect(await core.isPaneVisible(page, 'left')).beFalse()
+  await core.clickOpener(page, 'top')
+  expect(await core.isPaneVisible(page, 'top')).beFalse()
+  await core.clickOpener(page, 'top')
+  expect(await core.isPaneVisible(page, 'top')).beTrue()
+  await core.clickOpener(page, 'right')
+  expect(await core.isPaneVisible(page, 'top')).beTrue()
+  await core.clickOpener(page, 'right')
+  expect(await core.isPaneVisible(page, 'right')).beFalse()
+  await core.clickOpener(page, 'bottom')
+  expect(await core.isPaneVisible(page, 'bottom')).beTrue()
+  await core.clickOpener(page, 'bottom')
+  expect(await core.isPaneVisible(page, 'bottom')).beFalse()
+  await core.clickFab(page)
+  expect(await await core.countFabActions(page)).to.equal(fabActionsCount)
+}
+
 describe(`suite:${suite}`, () => {
   let runner, page
   const user = [
@@ -26,12 +47,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('user: check layout', async () => {
-    expect(await core.isPaneVisible(page, 'top')).beTrue()
-    expect(await core.isPaneVisible(page, 'right')).beFalse()
-    expect(await core.isPaneVisible(page, 'bottom')).beFalse()
-    expect(await core.isPaneVisible(page, 'left')).beFalse()
-    await core.clickOpener(page, 'top')
-    expect(await core.isPaneVisible(page, 'top')).beFalse()
+    await checkLayout(page, 2)
   })
 
   it('switch to admin', async () => {
@@ -41,12 +57,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('admin: check layout', async () => {
-    expect(await core.isPaneVisible(page, 'top')).beTrue()
-    expect(await core.isPaneVisible(page, 'right')).beFalse()
-    expect(await core.isPaneVisible(page, 'bottom')).beFalse()
-    expect(await core.isPaneVisible(page, 'left')).beFalse()
-    await core.clickOpener(page, 'top')
-    expect(await core.isPaneVisible(page, 'top')).beFalse()
+    await checkLayout(page, 4)
   })
 
   after(async () => {

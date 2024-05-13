@@ -26,7 +26,7 @@ describe(`suite:${suite}`, () => {
   it('locate user', async () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(5000)
+    await page.waitForTimeout(1000)
     const match = await runner.captureAndMatch('geolocation')
     await core.clickPaneAction(page, 'top', 'locate-user')
     expect(match).beTrue()
@@ -36,7 +36,8 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneAction(page, 'top', 'search-location')
     let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
-    await page.waitForTimeout(3000)
+    await page.waitForNetworkIdle()
+    await page.waitForTimeout(1000)
     selector = '.q-menu .q-item'
     await core.click(page, selector)
     await page.waitForNetworkIdle()

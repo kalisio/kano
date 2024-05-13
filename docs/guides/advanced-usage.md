@@ -35,22 +35,31 @@ In-memory data exchange is Json and more specifically GeoJson for map features. 
 You must use the same version of the **post-robot** library as the one used by **Kano**. For now, **Kano** relies on the `10.0.42` version of **post-robot**.
 :::
 
-In addition to the events used to access mixin methods there are a couple of dedicated events:
-* `kano-ready`: to be listened by integrating application to know when the Kano application has been initialized in the iframe so that you can safely use the iframe API
-* `api-ready`: to be listened by integrating application to know when the Kano backend connection has been initialized in the iframe so that you can safely call the backend API
-* `setLocalStorage`: listened by Kano to set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
-* `setConfiguration`: listened by Kano to set key/value pairs to override its configuration, typically useful to configure available components or actions
-* `kano-login`: to be listened by integrating application to know when the user has been authenticated in the Kano application
-* `kano-logout`: to be listened by integrating application to know when the user has been unauthenticated in the Kano application
-* `map-ready`: to be listened by integrating application to know when the 2D map component has been initialized in the Kano application so that you can safely use the underlying API
-* `map-destroyed`: to be listened by integrating application to know when the 2D map component has been destroyed in the Kano application before switching to another route
-* `globe-ready`: to be listened by integrating application to know when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
-* `globe-destroyed`: to be listened by integrating application to know when the 3D globe component has been destroyed in the Kano application before switching to another route
-* `layer-added`: to be listened by integrating application to know whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
-* `layer-removed`: to be listened by integrating application to know whenever a layer has been removed from the 2D/3D map
-* `layer-shown`: to be listened by integrating application to know whenever a layer has been shown in the 2D/3D map
-* `layer-hidden`: to be listened by integrating application to know whenever a new layer has been hidden in the 2D/3D map
-* `click`: to be listened by integrating application to know whenever a feature has been clicked on a layer in the 2D/3D map, will provide the `feature` and `layer` (descriptor) as data payload properties
+In addition to the commands used to access mixin methods there are a couple of dedicated commands listened by Kano to:
+* `setLocalStorage` set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
+* `setConfiguration` set key/value pairs to override its [default configuration](../reference/configuration.md), typically useful to configure application name, available components or actions
+
+The following keys can be set in local storage to alter the application behaviour:
+* `appName-jwt` to skip the login screen by injecting an authentication token
+* `appName-welcome` as `false` to avoid displaying the welcome screen on first login
+* `appName-install` as `false` to avoid displaying the PWA installation screen
+
+There are also some dedicated events to be listened by integrating application:
+* `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
+* `api-ready` when the Kano backend connection has been initialized in the iframe so that you can safely call the backend API
+* `kano-login` when the user has been authenticated in the Kano application
+* `kano-logout` when the user has been unauthenticated in the Kano application
+* `kano-disconnected` when the Kano application has been disconnected from the websocket
+* `kano-reconnected` when the Kano application has been reconnected to the websocket
+* `map-ready` when the 2D map component has been initialized in the Kano application so that you can safely use the underlying API
+* `map-destroyed` when the 2D map component has been destroyed in the Kano application before switching to another route
+* `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
+* `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
+* `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
+* `layer-removed` whenever a layer has been removed from the 2D/3D map
+* `layer-shown` whenever a layer has been shown in the 2D/3D map
+* `layer-hidden` whenever a new layer has been hidden in the 2D/3D map
+* `click` whenever a feature has been clicked on a layer in the 2D/3D map, will provide the `feature` and `layer` (descriptor) as data payload properties
 
 ::: warning
 You should add a listener for each of the above events in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
@@ -68,7 +77,7 @@ Here is a simple code sample:
 	  	postRobot.send(kano, 'setConfiguration', { 'appName': 'xxx' })
 	  	.then(function() {
 		  // Optionnaly set a valid token to avoid authentication
-		  return postRobot.send(kano, 'setLocalStorage', { 'kano-jwt': 'xxx' })
+		  return postRobot.send(kano, 'setLocalStorage', { 'xxx-jwt': 'yyy' })
 		})
 	  	.then(function() {
 		  // Show and zoom to a layer
@@ -118,6 +127,36 @@ Here is a simple code sample:
       })
     })
   </script>
+```
+
+### Managing events
+
+Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
+* `catalog` whenever a service event is emitted on the `catalog` service
+* `features` whenever a service event is emitted on the `features` service
+
+For instance, you can listen to changes in the catalog service like this:
+```js
+  postRobot.on('catalog', (event) => {
+    const { serviceEvent, data } = event.data
+    console.log(`Received ${serviceEvent} catalog event`)
+  })
+```
+
+Kano also provides you with an internal event bus service called `events` that can be used to dispatch custom events to all connected clients. This service internally has only a `create` method to send events, you can send a custom event named `item-selected` through this service like this:
+```js
+  // Tell others clients selection changed
+  await postRobot.send(kano, 'event', {
+    name: 'item-selected', data: { id: item.id }
+  })
+```
+Others clients can listen to this custom event like this:
+```js
+  // Listen to selection change
+  postRobot.on('item-selected', (event) => {
+    const { id } = event.data
+    ...
+  })
 ```
 
 ## Developing in Kano

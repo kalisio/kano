@@ -16,7 +16,8 @@ export default defineConfig({
     nav: [
       { text: 'About', link: '/about/introduction' },
       { text: 'Guides', link: '/guides/understanding-kano' },
-      { text: 'Reference', link: '/reference/configuration' }
+      { text: 'Reference', link: '/reference/configuration' },
+      { text: 'History', link: '/history' }
     ],
     sidebar: {
       '/about/': getAboutSidebar(),

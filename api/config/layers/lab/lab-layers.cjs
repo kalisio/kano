@@ -145,7 +145,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
@@ -228,7 +228,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
@@ -257,7 +257,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-symbol': 'marker',
       'marker-color': '#78c0f0',
       tooltip: {
-        template: '<%= properties.id + '/' + properties.sensorId %>\n<% if (_.has(properties, \'radioactivity_mrem\')) { %><%= Units.format(properties.radioactivity_mrem, \'usvh\') %><% }' +
+        template: '<%= properties.id + \'/\' + properties.sensorId %>\n<% if (_.has(properties, \'radioactivity_mrem\')) { %><%= Units.format(properties.radioactivity_mrem, \'usvh\') %><% }' +
                   'if (_.has(feature, \'time.radioactivity_mrem\')) { %>\n<%= Time.format(feature.time.radioactivity_mrem, \'time.long\') + \' - \' + Time.format(feature.time.radioactivity_mrem, \'date.short\') %><% } %>'
       }
     }
@@ -317,7 +317,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     leaflet: {
       type: 'geoJson',
@@ -346,7 +346,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-symbol': 'marker',
       'marker-color': '#78c0f0',
       tooltip: {
-        template: '<%= properties.id + '/' + properties.sensorId %>\n<% if (_.has(properties, \'bme_gas\')) { %><%= Units.format(properties.bme_gas, \'ug/m^3\') %><% }' +
+        template: '<%= properties.id + \'/\' + properties.sensorId %>\n<% if (_.has(properties, \'bme_gas\')) { %><%= Units.format(properties.bme_gas, \'ug/m^3\') %><% }' +
                   'if (_.has(feature, \'time.bme_gas\')) { %>\n<%= Time.format(feature.time.bme_gas, \'time.long\') + \' - \' + Time.format(feature.time.bme_gas, \'date.short\') %><% } %>'
       }
     }

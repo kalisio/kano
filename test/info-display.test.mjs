@@ -43,30 +43,24 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('t1-infobox')
-    await core.click(page, '#map', 1000)
-    await core.clickAction(page, 'close-top-window', 1000)
-    expect(match).beTrue()
+    await core.click(page, '#map', 2000)
+    expect(await runner.captureAndMatch('t1-infobox')).beTrue()
+    await core.closeWindow(page, 'top')
   })
 
-  it('deactive information box', async () => {
+  it('disable information box', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-infobox-group')
     await core.click(page, '#style-toggle-infobox')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
-    await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('t2-no-infobox')
-    await core.click(page, '#map', 1000)
-    await core.clickAction(page, 'close-top-window', 1000)
-    expect(match).beTrue()
+    await core.click(page, '#map', 2000)
+    expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
+    await core.closeWindow(page, 'top')
   })
 
-  it('deactive selectable', async () => {
+  it('disable selectable', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-is-selectable')
     await core.click(page, '#apply-button')
@@ -91,12 +85,11 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
     const match = await runner.captureAndMatch('t4-popup')
-    await core.click(page, '.leaflet-popup-close-button', 1000)
-    // await core.clickAction(page, 'close-top-window', 1000)
     expect(match).beTrue()
+    await core.click(page, '.leaflet-popup-close-button', 1000)
   })
 
-  it('deactive popup', async () => {
+  it('disable popup', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-popup-group')
     await core.click(page, '#style-toggle-popup')
@@ -124,7 +117,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('t6-tooltip')).beTrue()
   })
 
-  it('deactive tooltip', async () => {
+  it('disable tooltip', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-tooltip-group')
     await core.click(page, '#style-toggle-tooltip')

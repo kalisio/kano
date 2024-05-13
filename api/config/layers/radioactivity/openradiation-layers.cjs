@@ -8,8 +8,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'Mesures OpenRadiation'
         },
+        Legend: {
+          OPENRADIATION_LABEL: 'OpenRadiation - Mesures'
+        },
         Variables: {
-          value: 'Radioactivité ambiante'
+          OPENRADIATION_GAMMA_DOSE_RATE: 'Débit de dose gamma ambiant'
         }
       },
       en: {
@@ -17,8 +20,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           OPENRADIATION: 'OpenRadiation',
           OPENRADIATION_DESCRIPTION: 'OpenRadiation measurements'
         },
+        Legend: {
+          OPENRADIATION_LABEL: 'OpenRadiation - Measurements'
+        },
         Variables: {
-          value: 'Ambient radioactivity'
+          OPENRADIATION_GAMMA_DOSE_RATE: 'Ambient gamma dose rate'
         }
       }
     },
@@ -26,7 +32,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'radioactivity', 'measure'
     ],
     legend: {
-      type: 'variable'
+      type: 'variables',
+      label: 'Legend.OPENRADIATION_LABEL',
     },
     attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
     type: 'OverlayLayer',
@@ -40,7 +47,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     variables: [
       {
         name: 'value',
-        label: 'Variables.value',
+        label: 'Variables.OPENRADIATION_GAMMA_DOSE_RATE',
         unit: 'usvh',
         range: [0, 250],
         step: 5,
@@ -50,8 +57,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           fill: false
         },
         chromajs: {
-          colors: 'Greens',
-          classes: [0,0.1,0.2,0.5,1,2,5,10,20,1000]
+          colors: ['#1DAFAF', '#1D8BAF', '#1D66AF', '1D41AF', '#411DAF', '#661DAF'],
+          classes: [0, 0.1, 0.2, 0.3, 0.5, 2, Number.MAX_VALUE]
         }
       }
     ],
@@ -61,22 +68,31 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 8,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'circleMarker',
-      radius: 8,
-      'stroke-width': 1,
-      'stroke-color': 'black',
-      'fill-opacity': 0.8,
-      'fill-color': `<%= variables.value.colorScale(properties.value).hex() %>`,
-      template: [
-        'fill-color'
-      ],
+      style: {
+        point: {
+          shape: 'circle',
+          radius: 15,
+          opacity: 1,
+          color: `<%= variables.value.colorScale(properties.value).hex() %>`,
+          stroke: {
+            color: 'transparent'
+          },
+          text: {
+            label: `<%= Units.format(properties.value, 'usvh', undefined, { symbol: false }) %>`,
+            color: 'white',
+            classes: 'text-caption text-weight-medium'
+          }
+        }
+      },
+      template: ['style.point.color', 'style.point.text.label'],
       popup: {
         pick: [
           'userId'
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'usvh') %><% }
+        template: `<%= properties.userId %></br>
+                    <% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'usvh') %><% }
                     if (_.has(feature, 'time.value')) { %></br><%= Time.format(feature.time.value, 'time.long') + ' - ' + Time.format(feature.time.value, 'date.short') %><% } %>`
       }
     },

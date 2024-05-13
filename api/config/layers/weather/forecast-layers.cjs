@@ -73,7 +73,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     /* When available at different levels
     levels: {
@@ -177,7 +177,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     meteoElements: ['gust'],
     meteo_model: {
@@ -272,7 +272,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     meteoElements: ['precipitations'],
     meteo_model: {
@@ -362,7 +362,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     ],
     legend: {
-      type: 'variable'
+      type: 'variables'
     },
     /* When available at different levels
     levels: {
