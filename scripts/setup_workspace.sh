@@ -40,9 +40,9 @@ begin_group "Setting up workspace ..."
 if [ "$CI" = true ]; then
     WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
-    # workaround since repo is kApp with a 'A' and in kli file it's kapp with a 'a'
-    # mv "$WORKSPACE_DIR/kApp" "$WORKSPACE_DIR/kapp"
-    # ln -s "$WORKSPACE_DIR/kapp" "$WORKSPACE_DIR/kApp"
+    # workaround since repo is named 'kano' and in kli file it's 'maps'
+    mv "$WORKSPACE_DIR/kano" "$WORKSPACE_DIR/maps"
+    ln -s "$WORKSPACE_DIR/maps" "$WORKSPACE_DIR/kano"
 
     DEVELOPMENT_REPO_URL="https://$GITHUB_DEVELOPMENT_PAT@github.com/kalisio/development.git"
 else
