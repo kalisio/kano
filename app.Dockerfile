@@ -4,11 +4,11 @@
 FROM node:16-bookworm-slim as Builder
 LABEL maintainer="contact@kalisio.xyz"
 
-# # git is required to pull some node packages from github
-# RUN DEBIAN_FRONTEND=noninteractive && \
-#   apt-get update && \
-#   apt-get --no-install-recommends --yes install \
-#     ca-certificates git
+# git is required to pull some node packages from github
+RUN DEBIAN_FRONTEND=noninteractive && \
+  apt-get update && \
+  apt-get --no-install-recommends --yes install \
+    ca-certificates git
 
 COPY . /opt/kalisio
 
