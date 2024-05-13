@@ -1,0 +1,15 @@
+# This is the dockerignore used by app.Dockerfile, it filters out
+# everything we don't want in the 'COPY . /opt/kalisio' step where
+# '.' is the workspace folder.
+# Since we expect the workspace to be clean, we don't allowlist
+# specific folders, we copy everyhting but the following :
+
+# Ignore all these
+development/*
+**/node_modules
+**/npm-debug.log
+**/*Dockerfile
+**/docker-compose*
+**/*dockerignore
+**/.git
+**/.gitignore
