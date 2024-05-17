@@ -36,7 +36,7 @@ module.exports = [{
     {
       name: 'temperature',
       label: 'Variables.TEMPERATURE',
-      units: ['degC'],
+      unit: 'degC',
       range: [-50, 127],
       step: 5,
       chartjs: {
