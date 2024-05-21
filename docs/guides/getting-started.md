@@ -90,6 +90,6 @@ More actions are available on user-defined feature layers:
 
 ## Projects
 
-Users with permissions to manage the catalog (i.e. create, update, remove layers) can also create **projects**. A project is a set of layers and views useful to cover a specific use case of your users.
+Users with permissions to manage the catalog (i.e. create, update, remove layers) can also create, update and remove **projects**. A project is a set of layers and views useful to cover a specific use case of your users.
 
 When a user activates or opens a project by selecting it in the catalog, the current activity context will switch to only display layers and views available in the projects. A user can deactivate or close the current project using the <i class="las la-times"/> icon in the application bar. He can also open another project using the dropdown project menu in the application bar.
