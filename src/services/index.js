@@ -1,6 +1,19 @@
 import logger from 'loglevel'
 import kdkCore from '@kalisio/kdk/core.client'
 import kdkMap from '@kalisio/kdk/map.client.map'
+import localforage from 'localforage'
+import service from '@kalisio/feathers-localforage'
+
+async function createOfflineServices(api) {
+  const services = await localforage.getItem('services')
+  for (let serviceName in services) {
+    api.createService(serviceName + '-offline', {service: service({
+      id: '_id',
+      name: serviceName,
+      storage: ['IndexedDB']
+    })})
+  }
+}
 
 export default async function () {
   const api = this
@@ -29,6 +42,8 @@ export default async function () {
     // Restore previous settings if any
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
+
+    createOfflineServices(api)
   } catch (error) {
     logger.error(error.message)
   }
