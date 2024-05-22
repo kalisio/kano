@@ -1,8 +1,12 @@
 import logger from 'loglevel'
+import feathers from '@feathersjs/client'
 import kdkCore from '@kalisio/kdk/core.client'
 import kdkMap from '@kalisio/kdk/map.client.map'
 import localforage from 'localforage'
 import service from '@kalisio/feathers-localforage'
+
+// Disable default feathers behaviour of reauthenticating on disconnect
+feathers.authentication.AuthenticationClient.prototype.handleSocket = () => {}
 
 async function createOfflineServices(api) {
   const services = await localforage.getItem('services')
@@ -36,6 +40,12 @@ export default async function () {
         return getServiceBase(name, context)
       }
     }
+    // Disable default socketio behaviour of buffering messages when disconnected
+    api.socket.io.on('reconnect', function() {
+      socket.sendBuffer = []
+      // Reauthenticate on reconnect
+      api.reAuthenticate(true)
+    })
     // TODO we use createService because of the custom methods
     // https://github.com/kalisio/kdk/issues/781
     api.createService('events', { methods: ['create'], events: ['event'] })
