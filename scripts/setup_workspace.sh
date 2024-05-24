@@ -39,13 +39,12 @@ begin_group "Setting up workspace ..."
 
 if [ "$CI" = true ]; then
     WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
-    DEVELOPMENT_REPO_URL="https://$GITHUB_DEVELOPMENT_PAT@github.com/kalisio/development.git"
+    DEVELOPMENT_REPO_URL="https://$GITHUB_DEVELOPMENT_TOKEN@github.com/kalisio/development.git"
 
     # workaround since repo is named 'kano' and in kli file it's 'maps'
     cd "$WORKSPACE_DIR"
     mv "kano" "maps" && ln -s "maps" "kano"
     cd ~-
-
 else
     shift $((OPTIND-1))
     WORKSPACE_DIR="$1"
