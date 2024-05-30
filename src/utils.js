@@ -4,6 +4,21 @@ import postRobot from 'post-robot'
 import { Store } from '@kalisio/kdk/core.client'
 import { Router } from './router'
 
+function getItems(hook) {
+  const items = (hook.type === 'before' ? hook.data : hook.result)
+  return items && (hook.method === 'find' ? items.data || items : items)
+}
+
+function replaceItems(hook, items) {
+  if (hook.type === 'before') {
+    hook.data = items
+  } else if (hook.method === 'find' && hook.result && hook.result.data) {
+    hook.result.data = Array.isArray(items) ? items : [items]
+  } else {
+    hook.result = items
+  }
+}
+
 function getEmbedComponent (route) {
   return _.get(route, 'instances.default')
 }
@@ -92,7 +107,8 @@ async function sendEmbedEvent (...args) {
   if (window.parent !== window) {
     // If no listener post-robot raises an error
     try {
-      await postRobot.send(window.parent, ...args)
+      const response = await postRobot.send(window.parent, ...args)
+      return response
     } catch (error) {
       logger.debug(error.message)
     }
@@ -189,6 +205,8 @@ function buildTours (config) {
 }
 
 const utils = {
+  getItems,
+  replaceItems,
   sendEmbedEvent,
   buildRoutes,
   buildTours
