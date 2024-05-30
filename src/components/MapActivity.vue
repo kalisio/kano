@@ -13,6 +13,7 @@
 
 <script>
 import _ from 'lodash'
+import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'

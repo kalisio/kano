@@ -209,6 +209,7 @@
     "esm": "^3.2.25",
     "express": "^4.15.4",
     "glob": "^7.1.2",
+    "leaflet-rotate": "^0.2.8",
     "mocha": "^10.0.0",
     "pixelmatch": "^5.2.0",
     "pngjs": "^5.0.0",
