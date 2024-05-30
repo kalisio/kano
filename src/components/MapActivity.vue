@@ -117,6 +117,11 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
     },
+    async updateLayer (name, geoJson, options = {}) {
+      // We let any embedding iframe process features if required
+      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+      kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, response.data || geoJson, options)
+    },
     getHighlightMarker (feature, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         return {
