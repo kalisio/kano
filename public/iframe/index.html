@@ -755,7 +755,7 @@
       postRobot.on('pane-opened', (event) => console.log(event.data.placement + ' pane has been opened'))
       postRobot.on('pane-closed', (event) => console.log(event.data.placement + ' pane has been closed'))
       postRobot.on('window-opened', (event) => console.log(event.data.placement + ' window has been opened'))
-      postRobot.on('window-opened', (event) => console.log(event.data.placement + ' window has been closed'))
+      postRobot.on('window-closed', (event) => console.log(event.data.placement + ' window has been closed'))
       // Extract FR24 data
       var coords = flightradar.geometry.coordinates
       var heights = []
