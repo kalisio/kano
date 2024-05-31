@@ -660,6 +660,14 @@
           return postRobot.send(kano, component, { command: 'setSelectedLevel', args: [level] })
         })
       }
+      function updateBearing() {
+        postRobot.send(kano, component, { command: 'getCenter' })
+        .then(function (result) {
+          const { longitude, latitude, zoomLevel, altitude } = result.data
+          if (component === 'map') postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 360 * Math.random()] })
+          else postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 360 * Math.random()] })
+        })
+      }
     </script>
   </head>
   <body style="background-color: grey">
@@ -685,6 +693,7 @@
           <button type="button" onclick="updateGradientFlightpathLayer('GradientFlightpath')">Update gradient flightpath</button></br>
           <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button></br>
           <button type="button" onclick="updateForecastLevel()">Update forecast level</button></br>
+          <button type="button" onclick="updateBearing()">Update map bearing</button></br>
         </td>
         <td>
           <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
@@ -705,7 +714,10 @@
           'layout.leftPane.filter': { id: { $ne: 'logout' } },
           'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } }, // No fullscreen mode
           'mapActivity.fab.filter': { id: { $in: ['import-layer', 'probe-location'] } },
-          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } } // No import in globe
+          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } }, // No import in globe
+          // Activate rotation in 2D
+          'engines.leaflet.viewer.rotate': true,
+          'engines.leaflet.viewer.rotateControl': false
         })
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrYWxpc2lvIiwiaXNzIjoia2FsaXNpbyJ9.qwOZjkIcAqo6HPGESu0_5-f6g9VkN6y6pN1HJKJF6Sg'
