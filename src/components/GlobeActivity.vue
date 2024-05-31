@@ -107,6 +107,11 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName.toLowerCase() + '-view'
     },
+    async updateLayer (name, geoJson, options = {}) {
+      // We let any embedding iframe process features if required
+      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+      kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
     async onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
       const pickedPosition = _.get(event, 'pickedPosition')
@@ -151,6 +156,8 @@ export default {
     this.$engineEvents.on('layer-hidden', this.onHiddenLayerEvent)
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
+    this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
+    this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
   },
   beforeUnmount () {
     this.$engineEvents.off('click', this.onClicked)
@@ -159,6 +166,7 @@ export default {
     this.$engineEvents.off('layer-shown', this.onShownLayerEvent)
     this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
     this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
+    this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')

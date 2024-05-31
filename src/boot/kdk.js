@@ -85,7 +85,7 @@ export default async ({ app, router }) => {
         feathersHooks[stage][operation] = async (hook) => {
           const items = utils.getItems(hook)
           const response = await utils.sendEmbedEvent(hookDefinition.name || `${service}-${hook.type}-${hook.method}-hook`, { items })
-          if (response.data) utils.replaceItems(hook, response.data)
+          if (response && response.data) utils.replaceItems(hook, response.data)
         }
       })
     })
