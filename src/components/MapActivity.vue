@@ -15,6 +15,7 @@
 import _ from 'lodash'
 import L from 'leaflet'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
+import 'leaflet-arrowheads'
 import { computed } from 'vue'
 import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
@@ -25,6 +26,14 @@ import config from 'config'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
+
+const buildVectorHats = L.Polyline.prototype.buildVectorHats
+L.Polyline.prototype.buildVectorHats = function (options) {
+  const rotate = this._map._rotate
+  this._map._rotate = false
+  buildVectorHats.bind(this)(options)
+  this._map._rotate = rotate
+}
 
 export default {
   mixins: [
