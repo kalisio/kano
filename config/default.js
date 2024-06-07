@@ -294,7 +294,8 @@ const mapEngine = {
     zoom: 6,
     maxBounds: [[-90, -180], [90, 180]],
     maxBoundsViscosity: 0.25,
-    timeDimension: true
+    timeDimension: true,
+    rotateControl: false
   },
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
