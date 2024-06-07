@@ -15,7 +15,7 @@ jobs:
         run: bash ./scripts/init_runner.sh ${{ github.job }}
       - name: Setup workspace
         env:
-          GITHUB_DEVELOPMENT_TOKEN: ${{ secrets.GH_DEVELOPMENT_TOKEN }}
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
         run: bash ./scripts/setup_workspace.sh -k kli
       - name: Build app
         env:
@@ -36,7 +36,7 @@ jobs:
         run: bash ./scripts/init_runner.sh ${{ github.job }}
       - name: Setup workspace
         env:
-          GITHUB_DEVELOPMENT_TOKEN: ${{ secrets.GH_DEVELOPMENT_TOKEN }}
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
         run: bash ./scripts/setup_workspace.sh -k nokli
       - name: Build docs
         env:
