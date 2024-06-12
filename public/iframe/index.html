@@ -301,7 +301,7 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                'marker-type': 'circleMarker',
+                'marker-symbol' : 'circle',
                 'radius': 6,
                 'stroke-width': 0,
                 'fill-opacity': 0.75,
@@ -547,14 +547,14 @@
         // Departure/Arrival airports
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'TOULOUSE BLAGNAC', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+          properties: { name: 'TOULOUSE BLAGNAC', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#33c137',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.368333, 43.635, 499.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'WILEY POST-WILL ROGERS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+          properties: { name: 'WILEY POST-WILL ROGERS', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#33c137',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -156.763333, 71.286667, 44.0 ] }
@@ -562,14 +562,14 @@
         // Alternative Departure/Arrival airports
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+          properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#f9b40f',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.473333, 43.568333, 0.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'BARTER ISLAND LRRS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+          properties: { name: 'BARTER ISLAND LRRS', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#f9b40f',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -143.578333, 70.135, 0.0 ] }
@@ -642,7 +642,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
+          properties: { name: 'KEFLAVIK AIRPORT', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#0000ff',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#0000ff', 'fill-opacity': 0.5,
                         tooltip: { property: 'name' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }

@@ -103,6 +103,7 @@ module.exports = configure(function (ctx) {
           timers: require.resolve('timers-browserify'),
           zlib: require.resolve('browserify-zlib')
         },
+        cfg.resolve.mainFiles = ['index', 'Cesium'],
         // Required for old dependencies, i.e. feathers.js
         cfg.resolve.modules = [
           path.resolve(__dirname, 'node_modules')

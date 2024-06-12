@@ -24,7 +24,7 @@
     "release:minor": "cd api && npm run release:minor && cd .. && npm version --no-git-tag-version --force minor",
     "release:major": "cd api && npm run release:major && cd .. && npm version --no-git-tag-version --force major",
     "clean": "quasar clean",
-    "provision": "npm run css:cp && npm run icons:cp && npm run logos:cp && npm run tours:cp",
+    "provision": "npm run cesium:cp && npm run css:cp && npm run icons:cp && npm run logos:cp && npm run tours:cp",
     "dev": "npm run provision && cross-env NODE_ENV=development quasar dev",
     "prod": "cd api && npm run prod",
     "build": "npm run provision && quasar build",
@@ -32,6 +32,11 @@
     "pwa:build": "npm run provision && quasar build -m pwa",
     "analyze": "cross-env ANALYZE_BUNDLE=1 npm run build",
     "lint": "standard src/**/*.js src/**/*.vue test/**/*.mjs --fix",
+    "cesium:cp:Assets": "shx cp -R node_modules/cesium/Build/Cesium/Assets public/Cesium",
+    "cesium:cp:ThirdParty": "shx cp -R node_modules/cesium/Build/Cesium/ThirdParty public/Cesium",
+    "cesium:cp:Widgets": "shx cp -R node_modules/cesium/Build/Cesium/Widgets public/Cesium",
+    "cesium:cp:Workers": "shx cp -R node_modules/cesium/Build/Cesium/Workers public/Cesium",
+    "cesium:cp": "shx mkdir -p public/Cesium && npm-run-all cesium:cp:**",
     "css:cp": "shx cp -R node_modules/@kalisio/kdk/extras/css/* src/css/kdk",
     "icons:cp": "shx mkdir -p ./public/icons/kdk && shx cp -R node_modules/@kalisio/kdk/extras/icons/* public/icons/kdk",
     "logos:cp": "shx cp -R node_modules/@kalisio/kdk/extras/logos/* public/",
@@ -128,7 +133,7 @@
     "ajv-keywords": "^5.1.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
-    "cesium": "1.62.0",
+    "cesium": "1.117.0",
     "chart.js": "^3.7.1",
     "chartjs-adapter-moment": "^1.0.0",
     "chartjs-chart-matrix": "^1.1.1",
@@ -212,6 +217,7 @@
     "glob": "^7.1.2",
     "leaflet-rotate": "^0.2.8",
     "mocha": "^10.0.0",
+    "npm-run-all": "^4.1.5",
     "pixelmatch": "^5.2.0",
     "pngjs": "^5.0.0",
     "prettier": "^2.5.1",
@@ -223,6 +229,7 @@
     "workbox-webpack-plugin": "^6.0.0"
   },
   "resolutions": {
+    "@cesium/engine": "9.1.0",
     "@pixi/accessibility": "5.3.10",
     "@pixi/app": "5.3.10",
     "@pixi/constants": "5.3.10",
@@ -258,7 +265,8 @@
     "@pixi/ticker": "5.3.10",
     "@pixi/utils": "5.3.10",
     "leaflet": "1.6.0",
-    "post-robot": "10.0.42"
+    "post-robot": "10.0.42",
+    "protobufjs": "7.1.0"
   },
   "engines": {
     "node": ">= 16.0.0",
