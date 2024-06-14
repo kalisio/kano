@@ -2,13 +2,38 @@ import logger from 'loglevel'
 import kdkCore from '@kalisio/kdk/core.client'
 import kdkMap from '@kalisio/kdk/map.client.map'
 import localforage from 'localforage'
+import { removeServerSideParameters, referenceCountCreateHook, referenceCountRemoveHook, geoJsonPaginationHook, tiledLayerHook } from '@kalisio/kdk/core/client/hooks/hooks.offline.js'
 
 async function createOfflineServices (api) {
   const services = await localforage.getItem('services')
+  
   for (const serviceName in services) {
-    api.createOfflineService(serviceName, {
-      snapshot: false
-    })
+    const service = services[serviceName]
+    if (service.layerService) {
+      let afterFindHooks = [geoJsonPaginationHook]
+      if (service.tiled) {
+        afterFindHooks.push(tiledLayerHook)
+      }
+      let hooks = {
+        before: {
+          all: removeServerSideParameters,
+          create: referenceCountCreateHook,
+          remove: referenceCountRemoveHook
+        },
+        after: {
+          find: afterFindHooks
+        }
+      }
+      api.createOfflineService(service, {
+        snapshot: false,
+        hooks: hooks
+      })
+    } else {
+      api.createOfflineService(service, {
+        snapshot: false
+      })
+    }
+    
   }
 }
 
