@@ -6,8 +6,9 @@ import { removeServerSideParameters, referenceCountCreateHook, referenceCountRem
 
 async function createOfflineServices (api) {
   const services = await localforage.getItem('services')
-  
-  for (const serviceName in services) {
+  const serviceNames = Object.keys(services)
+  for (let i = 0; i < serviceNames.length; i++) {
+    const serviceName = serviceNames[i]
     const service = services[serviceName]
     if (service.layerService) {
       let afterFindHooks = [geoJsonPaginationHook]
@@ -24,13 +25,18 @@ async function createOfflineServices (api) {
           find: afterFindHooks
         }
       }
-      api.createOfflineService(service, {
+      await api.createOfflineService(serviceName, {
         snapshot: false,
         hooks: hooks
       })
     } else {
-      api.createOfflineService(service, {
-        snapshot: false
+      await api.createOfflineService(serviceName, {
+        snapshot: false,
+        hooks: {
+          before: {
+            all: removeServerSideParameters
+          }
+        }
       })
     }
     
