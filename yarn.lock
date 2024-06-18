@@ -3466,10 +3466,10 @@
     lodash "^4.17.21"
     web-push "^3.6.1"
 
-"@kalisio/kdk@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-2.2.1.tgz#507bf6d5093abd04ffe04897ec9a607c40535a26"
-  integrity sha512-BDus6isFCCc7gl6p5r6BFhWxN81HJdeD+/zSS84VhriHuxcLNFpbJlfHa9oEJcO39m0LPVaU0bW9/vPt/pOd8A==
+"@kalisio/kdk@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@kalisio/kdk/-/kdk-2.2.2.tgz#40a8761053511dc44abd97a7b387e1e731ed6b9b"
+  integrity sha512-XZ6v7K+grKHeBAqo+/gvvpd9FZP3H1tNKMFHV5coq2+kM9cliGjtDbXCn+xnTKgVKKZhVrNdas0Gn/uJpcc8FA==
   dependencies:
     "@casl/ability" "^6.1.1"
     "@casl/mongoose" "^7.1.0"
