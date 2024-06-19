@@ -20,8 +20,7 @@ jobs:
       - name: Build app
         env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        # run: bash ./scripts/build_app.sh -p -r ${{ github.job }}
-        run: bash ./scripts/build_app.sh -r ${{ github.job }}
+        run: bash ./scripts/build_app.sh -p -r ${{ github.job }}
 
   build_docs:
     name: Build docs
