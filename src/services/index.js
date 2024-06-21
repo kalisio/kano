@@ -5,41 +5,46 @@ import localforage from 'localforage'
 import { removeServerSideParameters, referenceCountCreateHook, referenceCountRemoveHook, geoJsonPaginationHook, tiledLayerHook } from '@kalisio/kdk/core/client/hooks/hooks.offline.js'
 
 async function createOfflineServices (api) {
+  localforage.config({
+    name: 'offline_views',
+    storeName: 'cache_entries'
+  })
   const services = await localforage.getItem('services')
-  const serviceNames = Object.keys(services)
-  for (let i = 0; i < serviceNames.length; i++) {
-    const serviceName = serviceNames[i]
-    const service = services[serviceName]
-    if (service.layerService) {
-      let afterFindHooks = [geoJsonPaginationHook]
-      if (service.tiled) {
-        afterFindHooks.push(tiledLayerHook)
-      }
-      let hooks = {
-        before: {
-          all: removeServerSideParameters,
-          create: referenceCountCreateHook,
-          remove: referenceCountRemoveHook
-        },
-        after: {
-          find: afterFindHooks
+  if (services) {
+    const serviceNames = Object.keys(services)
+    for (let i = 0; i < serviceNames.length; i++) {
+      const serviceName = serviceNames[i]
+      const service = services[serviceName]
+      if (service.layerService) {
+        let afterFindHooks = [geoJsonPaginationHook]
+        if (service.tiled) {
+          afterFindHooks.push(tiledLayerHook)
         }
-      }
-      await api.createOfflineService(serviceName, {
-        snapshot: false,
-        hooks: hooks
-      })
-    } else {
-      await api.createOfflineService(serviceName, {
-        snapshot: false,
-        hooks: {
+        let hooks = {
           before: {
-            all: removeServerSideParameters
+            all: removeServerSideParameters,
+            create: referenceCountCreateHook,
+            remove: referenceCountRemoveHook
+          },
+          after: {
+            find: afterFindHooks
           }
         }
-      })
+        await api.createOfflineService(serviceName, {
+          snapshot: false,
+          hooks: hooks
+        })
+      } else {
+        await api.createOfflineService(serviceName, {
+          snapshot: false,
+          hooks: {
+            before: {
+              all: removeServerSideParameters
+            }
+          }
+        })
+      }
     }
-    
   }
 }
 
