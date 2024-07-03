@@ -402,21 +402,39 @@
       function updateFlightpathLayer(name) {
         // Setup random path
         let coordinates = flightpath.map(function(point) {
-          return [ point[0] + 0.05 * (Math.random() - 0.5),
-                   point[1] + 0.05 * (Math.random() - 0.5),
-                   10000 * Math.random() ] // Random altitude
+          return [ point[0] + 0.01 * (Math.random() - 0.5),
+                   point[1] + 0.01 * (Math.random() - 0.5),
+                   1000 * Math.random() ] // Random altitude
         })
         let path = { type: 'FeatureCollection', features: [] }
-        var middle = parseInt(coordinates.length / 2)
+        let middle = parseInt(coordinates.length / 2)
+        let random = Math.random()
         path.features.push({
           type: 'Feature',
-          properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
+          properties: { id: 0, message: 'ADS-B KO', stroke: random > 0.5 ? '#000000' : '#00FF00', weight: 1 + 5 * random, offset: -5,
+            entityStyle: { polyline: { clampToGround: true } } },
           geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
         })
+        // Same with offset
         path.features.push({
           type: 'Feature',
-          properties: { id: 1, message: 'ADS-B OK', stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20', entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: Math.random() > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(middle, flightpath.length)}
+          properties: { id: 1, message: 'ADS-B KO', stroke: random > 0.5 ? '#00FF00' : '#000000', weight: 10, 'dash-array': '3, 20', 'line-cap': 'round', 'line-join': 'round', offset: 5,
+            entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: random > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
+        })
+        const weight = 5 + 5 * random
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 2, message: 'ADS-B OK', stroke: random > 0.5 ? '#00FFFF' : '#FF00FF', weight,
+            entityStyle: { polyline: { clampToGround: true, zIndex: 0 } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
+        })
+        // Same but thiner
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 3, message: 'ADS-B OK', stroke: random > 0.5 ? '#FF00FF' : '#00FFFF', weight: weight - 4,
+            entityStyle: { polyline: { clampToGround: true, zIndex: 1 } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
         })
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
