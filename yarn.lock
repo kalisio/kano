@@ -4469,6 +4469,15 @@
     "@turf/meta" "^6.5.0"
     geojson-rbush "3.x"
 
+"@turf/line-offset@^6.0.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@turf/line-offset/-/line-offset-6.5.0.tgz#2bbd8fcf9ff82009b72890863da444b190e53689"
+  integrity sha512-CEXZbKgyz8r72qRvPchK0dxqsq8IQBdH275FE6o4MrBkzMcoZsfSjghtXzKaz9vvro+HfIXal0sTk2mqV1lQTw==
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+    "@turf/invariant" "^6.5.0"
+    "@turf/meta" "^6.5.0"
+
 "@turf/line-segment@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@turf/line-segment/-/line-segment-6.5.0.tgz#ee73f3ffcb7c956203b64ed966d96af380a4dd65"
