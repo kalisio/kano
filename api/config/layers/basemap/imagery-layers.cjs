@@ -33,7 +33,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     cesium: {
       type: 'TileMapService',
       url: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR`,
-      fileExtension: 'jpeg'
+      fileExtension: 'jpeg',
+      maximumLevel: 19
     }
   },
   {
@@ -70,7 +71,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     cesium: {
       type: 'TileMapService',
       url: `${tmsUrl}/hybrid@GLOBAL_WEBMERCATOR`,
-      fileExtension: 'jpeg'
+      fileExtension: 'jpeg',
+      maximumLevel: 18
     }
   }]
 }

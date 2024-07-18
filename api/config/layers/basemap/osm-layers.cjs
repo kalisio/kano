@@ -33,7 +33,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
     }
   },
   {
@@ -69,7 +70,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
     }
   },
   {
@@ -106,7 +108,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
     }
   },
   {
