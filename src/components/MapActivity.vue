@@ -53,6 +53,7 @@ export default {
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers,
     kMapMixins.map.gsmapLayers,
+    kMapMixins.map.pmtilesLayers,
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
