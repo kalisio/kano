@@ -12,10 +12,19 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 ## Parse options
 ##
 
+DEFAULT_NODE_VER=20
+DEFAULT_DEBIAN_VER=bookworm
+NODE_VER=$DEFAULT_NODE_VER
+DEBIAN_VER=$DEFAULT_DEBIAN_VER
 PUBLISH=false
-CI_STEP_NAME="Build app"
-while getopts "pr:" option; do
+while getopts "d:n:pr:" option; do
     case $option in
+        d) # defines debian version
+            DEBIAN_VER=$OPTARG
+            ;;
+        n) # defines node version
+            NODE_VER=$OPTARG
+             ;;
         p) # define to publish container to registry
             PUBLISH=true
             ;;
@@ -53,7 +62,7 @@ cp "$KLI_FILE" "$WORKSPACE_DIR/kli.js"
 echo "Will use kli file $KLI_FILE to install and link modules ..."
 
 IMAGE_NAME="$KALISIO_DOCKERHUB_URL/kalisio/$APP"
-IMAGE_TAG="$VERSION-$FLAVOR"
+IMAGE_TAG="$VERSION-$FLAVOR-node$NODE_VER-$DEBIAN_VER"
 
 case "$FLAVOR" in
      "prod")
@@ -75,6 +84,8 @@ DOCKER_BUILDKIT=1 docker build \
     --build-arg FLAVOR="$FLAVOR" \
     --build-arg DEBUG="$DEBUG" \
     --build-arg BUILD_NUMBER="$(get_git_commit_short_sha "$ROOT_DIR")" \
+    --build-arg NODE_VERSION="$NODE_VER" \
+    --build-arg DEBIAN_VERSION="$DEBIAN_VER" \
     -f app.Dockerfile \
     -t "$IMAGE_NAME:$IMAGE_TAG" \
     "$WORKSPACE_DIR"
@@ -82,7 +93,12 @@ docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$FLAVOR"
 
 if [ "$PUBLISH" = true ]; then
     docker push "$IMAGE_NAME:$IMAGE_TAG"
-    docker push "$IMAGE_NAME:$FLAVOR"
+    if [ "$NODE_VER" = "$DEFAULT_NODE_VER" ] && [ "$DEBIAN_VER" = "$DEFAULT_DEBIAN_VER" ]; then
+        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$VERSION-$FLAVOR"
+        docker push "$IMAGE_NAME:$VERSION-$FLAVOR"
+        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$FLAVOR"
+        docker push "$IMAGE_NAME:$FLAVOR"
+    fi
 fi
 
 docker logout "$KALISIO_DOCKERHUB_URL"
