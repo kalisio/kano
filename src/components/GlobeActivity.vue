@@ -107,10 +107,18 @@ export default {
       // We'd like to share view settings between 2D/3D
       return this.geAppName.toLowerCase() + '-view'
     },
+    async addLayer (layer) {
+      // We let any embedding iframe process layer if required
+      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
+      // Do not erase with returned object as some internals might have been lost in serialization
+      if (response && response.data) _.merge(layer, response.data)
+      layer = await kMapMixins.globe.baseGlobe.methods.addLayer.call(this, layer)
+      return layer
+    },
     async updateLayer (name, geoJson, options = {}) {
       // We let any embedding iframe process features if required
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
-      kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
     },
     async onClicked (options, event) {
       const latlng = _.get(event, 'latlng')

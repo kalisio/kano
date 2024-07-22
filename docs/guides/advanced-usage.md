@@ -57,6 +57,7 @@ There are also some dedicated events to be listened by integrating application:
 * `map-destroyed` when the 2D map component has been destroyed in the Kano application before switching to another route
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
 * `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
+* `layer-add` whenever a new layer will be added to the 2D/3D map
 * `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
 * `layer-removed` whenever a layer has been removed from the 2D/3D map
 * `layer-shown` whenever a layer has been shown in the 2D/3D map
@@ -100,8 +101,16 @@ Here is a simple code sample:
 	</script>
 ```
 
-The `layer-update` event is particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
+The `layer-add` and `layer-update` events are particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
 ```js
+postRobot.on('layer-add', (event) => {
+    const layer = event.data
+    if (layer.name === 'MyLayer') {
+      // Update the layer, eg change the data filter
+      Object.assign(layer.baseQuery, { 'properties.user': 'MyUser' })
+      return layer
+    }
+  })
 postRobot.on('layer-update', (event) => {
     const { name, geoJson } = event.data
     if (name === 'MyLayer') {
