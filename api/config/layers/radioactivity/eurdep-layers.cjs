@@ -5,7 +5,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            EURDEP: 'EURDEP',
+            EURDEP: 'EURDEP - Mesures',
             EURDEP_DESCRIPTION: 'Mesures du Réseau de détection de la radioactivité en Europe',
             EURDEP_AT: 'Autriche',  
             EURDEP_BE: 'Belgique',  
@@ -62,7 +62,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            EURDEP: 'EURDEP',
+            EURDEP: 'EURDEP - Measurements',
             EURDEP_DESCRIPTION: 'Radioactivity detection networks in Europe measurements',
             EURDEP_AT: 'Austria',  
             EURDEP_BE: 'Belgium',  
@@ -179,10 +179,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         }
       ],
-      filters: [{
+      /*filters: [{
         label: 'Layers.EURDEP_AT',
         isActive: true,
-        active: { 'properties.country': 'AT'},
+        active: { 'properties.country': 'AT' },
         inactive: {}
       }, {
         label: 'Layers.EURDEP_BE',
@@ -384,7 +384,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         isActive: true,
         active: { 'properties.country': 'UA' },
         inactive: {}
-      }],
+      }],*/
       leaflet: {
         type: 'geoJson',
         realtime: true,
@@ -447,6 +447,246 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         tooltip: {
           template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'nsvh\') %>\n' +
                     '<%= Time.format(properties.begin, \'time.long\') + \' - \' + Time.format(properties.begin, \'date.short\') %><% } %>'
+        }
+      }
+    }, 
+    {
+      name: 'Layers.EURDEP_STATISTICS',
+      description: 'Layers.EURDEP_STATISTICS_DESCRIPTION',
+      i18n: {
+        fr: {
+          Layers: {
+            EURDEP_STATISTICS: 'EURDEP - Stastistiques',
+            EURDEP_STATISTICS_DESCRIPTION: 'Statistiques hebdomadaires sur les mesures du Réseau de détection de la radioactivité en Europe',
+          },
+          Legend: {
+            EURDEP_STATISTICS_MEASUREMENTS_LABEL: 'EURDEP - Statistiques',
+            EURDEP_STATISTICS_PROBES_LABEL: 'EURDEP - Balises',
+            EURDEP_STATISTICS_OLD_MEASUREMENT: 'Mesure datée de plus de 1 semaine',
+            EURDEP_STATISTICS_PROBE: 'Balise'
+          },
+          Variables: {
+            EURDEP_STATISTICS_AVG: 'Débit de dose gamma ambiant moyen',
+            EURDEP_STATISTICS_MIN: 'Débit de dose gamma ambiant minimum',
+            EURDEP_STATISTICS_MAX: 'Débit de dose gamma ambiant maximum',
+            EURDEP_STATISTICS_P5: '5e centile du débit de dose gamma ambiant',
+            EURDEP_STATISTICS_P50: '50e centile du débit de dose gamma ambiant',
+            EURDEP_STATISTICS_P95: '95e centile du débit de dose gamma ambiant'
+          }
+        },
+        en: {
+          Layers: {
+            EURDEP: 'EURDEP - Statistics',
+            EURDEP_DESCRIPTION: 'Weekly statistics on radioactivity detection networks in Europe measurements',
+          },
+          Legend: {
+            EURDEP_STATISTICS_MEASUREMENTS_LABEL: 'EURDEP - Statistics',
+            EURDEP_STATISTICS_PROBES_LABEL: 'EURDEP - Probes',
+            EURDEP_STATISTICS_OLD_MEASUREMENT: 'Measurement dated more than 1 week ago',
+            EURDEP_STATISTICS_PROBE: 'Probe'
+          },
+          Variables: {
+            EURDEP_STATISTICS_AVG: 'Average ambient gamma dose rate',
+            EURDEP_STATISTICS_MIN: 'Minimum ambient gamma dose rate minimum',
+            EURDEP_STATISTICS_MAX: 'Maximum ambient gamma dose rate maximum',
+            EURDEP_STATISTICS_P5: '5th percentile of ambient gamma dose rate',
+            EURDEP_STATISTICS_P50: '50th percentile of ambient gamma dose rate',
+            EURDEP_STATISTICS_P95: '95th percentile of Ambient gamma dose rate'        
+          }
+        }
+      },      
+      tags: [
+        'radioactivity', 'measure'
+      ],
+      legend: [{
+        type: 'variables',
+        label: 'Legend.EURDEP_STATISTICS_MEASUREMENTS_LABEL',
+        minZoom: 8
+      }, {
+        type: 'symbols',
+        minZoom: 8,
+        content: {
+          measurements: [
+          ],
+          exceptions: [
+            { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-radiation', color: 'white', size: 10 } } } }, 
+              label: 'Legend.EURDEP_STATISTICS_OLD_MEASUREMENT' 
+            }
+          ]
+        }
+      }, {
+        type: 'symbols',
+        label: 'Legend.EURDEP_STATISTICS_PROBES_LABEL',
+        maxZoom: 7,
+        content: {
+          stations: [
+            { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
+              label: 'Legend.EURDEP_STATISTICS_PROBE' 
+            }
+          ]
+        }
+      }],
+      attribution: "<a href='https://remon.jrc.ec.europa.eu/About/Rad-Data-Exchange'></a>",
+      type: 'OverlayLayer',
+      dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
+      probeService: 'eurdep-stations',
+      service: 'eurdep-statistics',
+      featureId: 'code',
+      featureLabel: 'name',
+      from: 'P-7D',
+      to: 'PT-10M',
+      every: 'PT10M',
+      queryFrom: 'P-7D',
+      variables: [
+        {
+          name: 'avg',
+          label: 'Variables.EURDEP_STATISTICS_AVG',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgba(11, 117, 169, 128)',
+            borderColor: 'rgb(11, 117, 169)',
+            fill: false
+          },
+          chromajs: {
+            colors: ['#1DAFAF', '#1D8BAF', '#1D66AF', '1D41AF', '#411DAF', '#661DAF'],
+            classes: [0, 100, 200, 300, 500, 2000, Number.MAX_VALUE]
+          }
+        },
+        {
+          name: 'min',
+          label: 'Variables.EURDEP_STATISTICS_MIN',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgb(11, 190, 169, 128)',
+            borderColor: 'rgb(11, 190, 169)',
+            fill: false
+          }
+        },
+        {
+          name: 'max',
+          label: 'Variables.EURDEP_STATISTICS_MAX',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgb(11, 190, 169, 128)',
+            borderColor: 'rgb(11, 190, 169)',
+            fill: false
+          }
+        },
+        {
+          name: 'p5',
+          label: 'Variables.EURDEP_STATISTICS_P5',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgb(241, 203, 76, 128)',
+            borderColor: 'rgb(241, 203, 76)',
+            fill: false
+          }
+        },
+        {
+          name: 'p50',
+          label: 'Variables.EURDEP_STATISTICS_P50',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgb(252, 116, 67, 128)',
+            borderColor: 'rgb(252, 116, 67)',
+            fill: false
+          }
+        },
+        {
+          name: 'p95',
+          label: 'Variables.EURDEP_STATISTICS_P95',
+          unit: 'nsvh',
+          range: [0, 2500],
+          step: 100,
+          chartjs: {
+            backgroundColor: 'rgb(252, 24, 67, 128)',
+            borderColor: 'rgb(252, 24, 67)',
+            fill: false
+          }
+        },
+      ],
+      leaflet: {
+        type: 'geoJson',
+        realtime: true,
+        tiled: true,
+        minFeatureZoom: 8,
+        cluster: { 
+          maxClusterRadius: 28,
+          disableClusteringAtZoom: 18 },
+        style: {
+          point: {
+            shape: 'circle',
+            radius: 15,
+            opacity: 1,
+            color: `<% if (_.has(properties, 'avg')) { %><%= variables.avg.colorScale(properties.avg).hex() %><% }
+                      else if (feature.measureRequestIssued) { %>black<% }
+                      else { %>white<% } %>`,
+            stroke: {
+              color: `<% if (_.has(properties, 'avg')) { %>transparent<% }
+                        else if (feature.measureRequestIssued) { %>white<% }
+                        else { %>black<% } %>`,
+              width: 2
+            },
+            icon: {
+              color: `<% if (_.has(properties, 'avg')) { %>transparent<% }
+                        else if (feature.measureRequestIssued) { %>white<% }
+                        else { %>black<% } %>`,
+              classes: 'fa fa-radiation',
+            },
+            text: {
+              label: `<% if (_.has(properties, 'avg')) { %><%= Units.format(properties.avg, 'nsvh', undefined, { symbol: false }) %><% }
+                        else { %><% } %>`,
+              color: 'white',
+              classes: 'text-caption text-weight-medium'
+            }
+          }
+        },       
+        template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
+        popup: {
+          pick: [
+            'name'
+          ]
+        },
+        tooltip: {
+          template: `<%= properties.name %></br>
+                    <% if (!_.isNil(_.get(properties, 'avg'))) { %> avg = <%= Units.format(properties.avg, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(properties, 'min'))) { %> min = <%= Units.format(properties.min, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(properties, 'max'))) { %> max = <%= Units.format(properties.max, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(properties, 'p5'))) { %> p5 = <%= Units.format(properties.p5, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(properties, 'p50'))) { %> p50 = <%= Units.format(properties.p50, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(properties, 'p95'))) { %> p95 = <%= Units.format(properties.p95, 'nsvh') %></br><% }
+                    if (!_.isNil(_.get(feature, 'time'))) { %><%= Time.format(feature.time, 'time.long') + ' - ' + Time.format(feature.time, 'date.short') %></br><% } %>`
+        }           
+      },
+      cesium: {
+        type: 'geoJson',
+        realtime: true,
+        cluster: { pixelRange: 50 },
+        'marker-symbol': 'lighthouse',
+        'marker-color': '#180EF1',
+        popup: {
+          pick: [
+            'name'
+          ]
+        },
+        tooltip: {
+          template: '<% if (_.has(properties, \'avg\')) { %><%= Units.format(properties.avg, \'nsvh\') %>\n' +
+                    'if (_.has(properties, \'min\')) { %>Point de rosée = <%= Units.format(properties.min, \'nsvh\') %>\n<% }' +
+                    'if (_.has(properties, \'max\')) { %>Direction du vent = <%= Units.format(properties.max, \'nsvh\') %>\n<% }' +
+                    'if (_.has(properties, \'p5\')) { %>Vitesse du vent = <%= Units.format(properties.p5, \'nsvh\') %>\n<% }' +
+                    'if (_.has(properties, \'p50\')) { %>Vitesse de rafale = <%= Units.format(properties.p50, \'nsvh\') %>\n<% }' +
+                    'if (_.has(properties, \'p95\')) { %>Visibilité = <%= Units.format(properties.p95, \'nsvh\') %>\n<% }' +
+                    'if (_.has(feature, \'time\')) { %><%= Time.format(feature.time, \'time.long\') + \' - \' + Time.format(feature.time, \'date.short\') %>\n<% } %>'
         }
       }
     }
