@@ -35,6 +35,11 @@ const website = 'https://www.kalisio.com'
 const onlineHelp = 'https://kalisio.github.io/kano'
 const changelog = onlineHelp + '/history.html'
 
+// Common actions
+const toggleFullScreenAction = {
+  component: 'action/KToggleFullscreenAction', id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' } 
+}
+
 // Left pane
 const leftPane = {
   content: [
@@ -632,7 +637,7 @@ module.exports = {
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
+          toggleFullScreenAction
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -662,7 +667,7 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers'
+      mode: 'user-layers',
     },
     bottomPane: {
       content: [
@@ -725,7 +730,7 @@ module.exports = {
           },
           { component: 'QSeparator', vertical: true, inset: true },
           { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.ENTER_VR', toggle: { tooltip: 'mixins.activity.EXIT_VR' }, handler: { name: 'onToggleVr' } },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
+          toggleFullScreenAction
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -745,7 +750,8 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers'
+      mode: 'user-layers',
+      state: 'responsive'
     },
     bottomPane: {
       content: [
