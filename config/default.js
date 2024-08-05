@@ -170,96 +170,59 @@ const topWidgets = [{
   }]
 }]
 
-// Catalog tababr
-function catalogTabbar (activeView) {
-  return {
-    id: 'catalog-tabbar', component: 'KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
-      { 
-        id: 'user-layers-tab', label: 'LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
-        toggled: activeView === 'user-layers' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-layers'] } 
-      },
-      { 
-        id: 'user-views-tab', label: 'VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'user-views' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-views'] } 
-      },
-      { 
-        id: 'user-projects-tab', label: 'PROJECTS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'user-projects' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-projects'] } 
-      },
-      { 
-        id: 'catalog-layers-tab', label: 'CATALOG_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'catalog-layers' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
-      },
-      { 
-        id: 'project-layers-tab', label: 'PROJECT_LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
-        toggled: activeView === 'project-layers' ? true : false,
-        visible: 'hasProject',
-        handler: { name: 'setRightPaneMode', params: ['project-layers'] } 
-      },
-      { 
-        id: 'project-views-tab', label: 'PROJECT_VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'project-views' ? true : false,
-        visible: 'hasProject',
-        handler: { name: 'setRightPaneMode', params: ['project-views'] } 
-      }
-    ]
-  }
-}
-
 // Catalog panes
 const catalogPanes = {
-  'user-layers': [
-    catalogTabbar('user-layers'),
-    { id: 'user-layers', component: 'catalog/KLayersPanel',
-      visible: '!hasProject',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } } },
-    { visible: '!hasProject', component: 'QSpace' },
-    { id: 'catalog-footer', component: 'KPanel', visible: '!hasProject', content: [{
-        id: 'manage-layer-categories',
-        icon: 'las la-cog',
-        label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-        visible: { name: '$can', params: ['create', 'catalog'] },
-        route: { name: 'manage-layer-categories' },
-      }],
-      class: 'justify-center'
-    }
-  ],
-  'user-views': [
-    catalogTabbar('user-views'),
-    { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel', suspense: true }
-  ],
-  'user-projects': [
-    catalogTabbar('user-projects'),
-    { id: 'user-projects', visible: '!hasProject', component: 'catalog/KProjectsPanel' }
-  ],
-  'catalog-layers': [
-    catalogTabbar('catalog-layers'),
-    { id: 'catalog-layers', visible: '!hasProject', component: 'catalog/KLayersPanel',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
-      forecastModels: ':forecastModels' }
-  ],
-  'project-layers': [
-    catalogTabbar('project-layers'),
-    { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {},
-      forecastModels: ':forecastModels' }
-  ],
-  'project-views': [
-    catalogTabbar('project-views'),
-    { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
-  ]
-} 
+  default: [{
+    component: 'KTab',
+    content: {
+      'user-layers': [
+        { id: 'user-layers', component: 'catalog/KLayersPanel',
+          visible: '!hasProject',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } },
+          footer: [{
+            id: 'manage-layer-categories',
+            icon: 'las la-cog',
+            label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+            visible: { name: '$can', params: ['create', 'catalog'] },
+            route: { name: 'manage-layer-categories' },
+          }],
+          footerClass: 'justify-center',
+        }
+      ],
+      'user-views': [
+        { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel', suspense: true }
+      ],
+      'user-projects': [
+        { id: 'user-projects', visible: '!hasProject', component: 'catalog/KProjectsPanel' }
+      ],
+      'catalog-layers': [
+        { id: 'catalog-layers', visible: '!hasProject', component: 'catalog/KLayersPanel',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
+          forecastModels: ':forecastModels' }
+      ]
+    },
+    labels: ['LAYERS_LABEL', 'VIEWS_LABEL', 'PROJECTS_LABEL', 'CATALOG_LABEL'],
+    mode: 'user-layers'
+  }],
+  project: [{
+    component: 'KTab',
+    content: {
+      'project-layers': [
+        { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {},
+          forecastModels: ':forecastModels' }
+      ],
+      'project-views': [
+        { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
+      ]
+    },
+    labels: ['PROJECT_LAYERS_LABEL', 'PROJECT_VIEWS_LABEL'],
+    mode: 'project-layers'
+  }]
+}
 
 // Map layer actions
 const mapLayerActions = [{
@@ -288,7 +251,6 @@ const mapLayerActions = [{
     { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
   ]
 }]
-
 
 // Map engine configuration
 const mapEngine = {
@@ -572,7 +534,6 @@ module.exports = {
     }
   },
   layout: {
-    view: 'lhh LpR lff',
     page: { visible: true },
     panes: {
       left: { opener: true },
@@ -667,7 +628,8 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers',
+      mode: 'default',
+      state: 'responsive'
     },
     bottomPane: {
       content: [
@@ -750,7 +712,7 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers',
+      mode: 'default',
       state: 'responsive'
     },
     bottomPane: {

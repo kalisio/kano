@@ -122,7 +122,7 @@ export default {
     },
     configureActivity () {
       baseActivityMixin.methods.configureActivity.call(this)
-      this.setRightPaneMode(this.hasProject() ? 'project-layers' : 'user-layers')
+      this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
