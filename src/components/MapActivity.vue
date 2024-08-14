@@ -1,13 +1,11 @@
 <template>
   <KPage :padding="false">
-    <template v-slot:page-content>
-      <!-- Map -->
-      <div id="map" :ref="configureMap" :style="viewStyle">
-        <q-resize-observer @resize="onMapResized" />
-      </div>
-      <!-- Child views -->
-      <router-view />
-    </template>
+    <!-- Map -->
+    <div id="map" :ref="configureMap" :style="viewStyle">
+      <q-resize-observer @resize="onMapResized" />
+    </div>
+    <!-- Child views -->
+    <router-view />
   </KPage>
 </template>
 

@@ -216,7 +216,7 @@ Others clients can listen to this custom event like this:
 
 **Kano** is powered by the [KDK](https://kalisio.github.io/kdk) and rely on its main abstractions. If you'd like to develop an application based on Kano or extend Kano we assume you are familiar with this technology. Indeed, **Kano** is based on the **KDK** and makes the best use of all the features offered by the provided [cartographic components and services](../reference/api.md).
 
-### Add components
+### Add stickies
 
 The most simple way to develop in Kano is to design and integrate your own components in the 2D or 3D activity. For this you simply have to
 1. Put you single-file component(s) in the `src/components` folder (e.g. `MyComponent.vue`)
@@ -224,10 +224,9 @@ The most simple way to develop in Kano is to design and integrate your own compo
 ```js
 module.exports = {
   mapActivity: { // Can also be globeActivity
-    page: {
+    stickies: {
       content: [{
-        id: 'my-component',
-        component: 'layout/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
+        id: 'my-component', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
       }]
     }
   }

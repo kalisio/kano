@@ -1,14 +1,12 @@
 <template>
   <div id="globe-credit"/>
   <KPage :padding="false">
-    <template v-slot:page-content>
-      <!-- Globe -->
-      <div id="globe" :ref="configureGlobe" :style="viewStyle">
-        <q-resize-observer @resize="onGlobeResized" />
-      </div>
-      <!-- Child views -->
-      <router-view />
-    </template>
+    <!-- Globe -->
+    <div id="globe" :ref="configureGlobe" :style="viewStyle">
+      <q-resize-observer @resize="onGlobeResized" />
+    </div>
+    <!-- Child views -->
+    <router-view />
   </KPage>
 </template>
 

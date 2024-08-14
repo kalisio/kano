@@ -636,12 +636,12 @@ module.exports = {
         { component: 'time/KTimeControl' }
       ]
     },
-    page: {
+    stickies: {
       content: [{
-        id: 'level-slider', component: 'layout/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
+        id: 'level-slider', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
       } /* Only for example purpose
       {
-        id: 'site-seeker', component: 'layout/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
+        id: 'site-seeker', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
       }*/]
     },
     fab: {
