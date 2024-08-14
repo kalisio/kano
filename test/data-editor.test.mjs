@@ -5,7 +5,7 @@ import { core, map } from '@kalisio/kdk/test.client.js'
 
 const suite = 'data-editor'
 
-const userLayersTab = 'user-layers-tab'
+const userLayersTab = 'user-layers'
 
 describe(`suite:${suite}`, () => {
   let runner, page

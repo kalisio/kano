@@ -6,7 +6,7 @@ import chailint from 'chai-lint'
 import { core, map } from '@kalisio/kdk/test.client.js'
 
 const suite = 'widgets'
-const catalogLayersTab = 'catalog-layers-tab'
+const catalogLayersTab = 'catalog-layers'
 // We set a pre-defined time to be able to compare images
 const now = moment('2023-06-01T09:00:00Z')
 
