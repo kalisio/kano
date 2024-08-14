@@ -637,12 +637,11 @@ module.exports = {
       ]
     },
     stickies: {
-      content: [{
-        id: 'level-slider', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
-      } /* Only for example purpose
-      {
-        id: 'site-seeker', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
-      }*/]
+      content: [
+        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'KLevelSlider' },
+        // Only for example purpose
+        // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
+      ]
     },
     fab: {
       content: [
