@@ -2,31 +2,18 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
-let domain
 let pwaName = 'Kano'
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kano.dev.kalisio.xyz'
   pwaName += ' (dev)'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kano.test.kalisio.xyz'
   pwaName += ' (test)'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kano.planet.kalisio.com'
+  // Nothing todo
 } else {
   // Otherwise we are on a developer machine
-  if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
-  } else {
-    domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
-  }
+  pwaName += ' (localhost)'
 }
-// Override defaults if env provided at build time
-if (process.env.SUBDOMAIN) {
-  domain = 'https://kano.' + process.env.SUBDOMAIN
-}
-// On a developer machine will do domain = gateway = localhost
-const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
 
 // Allow to override version number for custom build
 const version = (process.env.VERSION ? process.env.VERSION : require('../package.json').version)
@@ -443,13 +430,6 @@ const globeEngine = {
 }
 
 module.exports = {
-  // Special alias to host loopback interface in cordova
-  // domain: 'http://10.0.2.2:8081',
-  // If using port forwarding
-  // domain: 'http://localhost:8081',
-  // If using local IP on WiFi router
-  // domain: 'http://192.168.1.16:8081',
-  domain,
   pwaName,
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version,
@@ -458,7 +438,6 @@ module.exports = {
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  gateway,
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
