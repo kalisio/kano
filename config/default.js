@@ -607,8 +607,7 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'default',
-      sizes: { xs: 80, sm: 600, md: 600, lg: 600, xl: 600 },
+      mode: 'default'
     },
     bottomPane: {
       content: [
