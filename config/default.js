@@ -608,7 +608,7 @@ module.exports = {
     rightPane: {
       content: catalogPanes,
       mode: 'default',
-      state: 'responsive'
+      sizes: { xs: 80, sm: 600, md: 600, lg: 600, xl: 600 },
     },
     bottomPane: {
       content: [
@@ -691,7 +691,6 @@ module.exports = {
     rightPane: {
       content: catalogPanes,
       mode: 'default',
-      state: 'responsive'
     },
     bottomPane: {
       content: [
