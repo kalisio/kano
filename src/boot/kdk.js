@@ -3,7 +3,7 @@ import logger from 'loglevel'
 import config from 'config'
 import { Notify } from 'quasar'
 import postRobot from 'post-robot'
-import utils from '../utils'
+import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
@@ -162,6 +162,7 @@ export default async ({ app, router }) => {
   app.component('KStamp', await kdkCoreUtils.loadComponent('KStamp'))
   app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))
   app.component('KDialog', await kdkCoreUtils.loadComponent('KDialog'))
+  app.component('KMenu', await kdkCoreUtils.loadComponent('menu/KMenu'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))

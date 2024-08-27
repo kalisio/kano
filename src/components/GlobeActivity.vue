@@ -12,12 +12,13 @@
 
 <script>
 import _ from 'lodash'
+import moment from 'moment'
 import { computed } from 'vue'
-import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Time, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
-import utils from '../utils.js'
+import * as utils from '../utils'
 import config from 'config'
 
 const name = 'globeActivity'
@@ -36,7 +37,6 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
-    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -86,6 +86,17 @@ export default {
       handler () {
         this.refreshLayers()
       }
+    },
+    'selection.items': {
+      handler () {
+        this.updateSelection()
+      },
+      deep: true
+    },
+    'probe.item': {
+      handler () {
+        this.updateSelection()
+      }
     }
   },
   methods: {
@@ -117,6 +128,30 @@ export default {
       // We let any embedding iframe process features if required
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    handleWidget (widget) {
+      // If window already open on another widget keep it
+      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
+    },
+    async updateTimeSeries () {
+      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
+    },
+    updateHighlights () {
+      this.clearHighlights()
+      this.getSelectedItems().forEach(item => {
+        this.highlight(item.feature || item.location, item.layer)
+      })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
+    },
+    async updateSelection () {
+      this.updateHighlights()
+      await this.updateTimeSeries()
+      if (this.hasProbedLocation() || this.hasSelectedItems()) {
+        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
+      } else {
+        // Hide the window
+        Layout.setWindowVisible('top', false)
+      }
     },
     async onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
@@ -164,6 +199,12 @@ export default {
     this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
     this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
     this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
+    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
+    // Initialize the time range
+    const span = Store.get('timeseries.span')
+    const start = moment(Time.getCurrentTime()).subtract(span, 'm')
+    const end = moment(Time.getCurrentTime()).add(span, 'm')
+    Time.patchRange({ start, end })
   },
   beforeUnmount () {
     this.$engineEvents.off('click', this.onClicked)
@@ -173,16 +214,24 @@ export default {
     this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
     this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
     this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
+    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
   },
   async setup () {
+    const activity = kMapComposables.useActivity(name)
+    const project = kMapComposables.useProject()
+    // Initialize state and project
+    Object.assign(activity.state, {
+      timeSeries: []
+    })
+    await project.loadProject()
+    activity.setSelectionMode('multiple')
     const expose = {
-      ...kMapComposables.useActivity(name),
-      ...kMapComposables.useProject()
+      ...activity,
+      ...project
     }
-    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose

@@ -79,51 +79,11 @@ const topWidgets = [{
     visible: 'hasFeature',
     handler: 'onExportFeature'
   }] 
-}, {
-  id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', 
-  content: { component: 'widget/KTimeSeries' },
-  header: [{
-    id: 'absolute-time-range',
-    component: 'time/KAbsoluteTimeRange'
-  }, {
-    id: 'restore-time-range',
-    icon: 'las la-undo',
-    tooltip: 'KTimeSeries.RESTORE_TIME_RANGE',
-    visible: 'hasZoomHistory',
-    handler: 'onZoomRestored'
-  }, {
-    id: 'relative-time-ranges',
-    component: 'menu/KMenu',
-    icon: 'las la-history',
-    content: [{
-      component: 'time/KRelativeTimeRanges',
-      ranges: ['last-hour', 'last-2-hours', 'last-3-hours', 'last-6-hours',
-        'last-12-hours', 'last-day', 'last-2-days', 'last-3-days', 'last-week',
-        'next-12-hours', 'next-day', 'next-2-days', 'next-3-days']
-    }]
-  }, {
-    id: 'run-options',
-    component: 'input/KOptionsChooser',
-    icon: 'las la-clock',
-    tooltip: 'KTimeSeries.RUN',
-    visible: 'hasRunTimes',
-    hideSelected: false,
-    options: ':runOptions',
-    on: { event: 'option-chosen', listener: 'onUpdateRun' }
-  }, {
-    id: 'center-view',
-    icon: 'las la-eye',
-    tooltip: 'KTimeSeries.CENTER_ON',
-    visible: 'probedVariables',
-    handler: 'onCenterOn'
-  }, {
-    id: 'export-feature',
-    icon: 'las la-file-download',
-    tooltip: 'KTimeSeries.EXPORT_SERIES',
-    visible: 'probedVariables',
-    handler: 'onExportSeries'
-  }]
 }, { 
+    id: 'time-series', label: 'TimeSeries.LABEL', icon: 'las la-chart-line', 
+    content: { component: 'TimeSeries' },
+    header: [{ component: 'TimeSeriesToolbar' }]
+  }, { 
   id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', 
   content: { component: 'widget/KElevationProfile' },
   header: [{
@@ -640,6 +600,7 @@ module.exports = {
     layers: {
       actions: mapLayerActions
     },
+    selection: { multiple: 'ctrlKey' },
     featuresChunkSize: 5000 // TODO: here or in mapEngine ?
   },
   globeActivity: {

@@ -70,7 +70,7 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, userLayersTab, 'espaces-naturels')
     expect(match).beTrue()
   })
-  
+
   it('user: add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
     const match = await runner.captureAndMatch('polygon-mask')

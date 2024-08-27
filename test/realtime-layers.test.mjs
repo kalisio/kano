@@ -85,7 +85,7 @@ let polygon = [
 ]
 const coordinateOffset = 0.0005
 // Helper function to offset geometry depending on geometry type
-function offset(coordinates) {
+function offset (coordinates) {
   if (Array.isArray(coordinates[0])) {
     if (Array.isArray(coordinates[0][0])) {
       return coordinates.map(coordinates => coordinates.map(coordinates => coordinates.map(coordinate => coordinate + coordinateOffset)))

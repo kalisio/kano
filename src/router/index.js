@@ -2,7 +2,7 @@ import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routeConfig from './routes'
 import { Store } from '@kalisio/kdk/core.client'
-import utils from '../utils.js'
+import * as utils from '../utils'
 
 /*
 * If not building with SSR mode, you can

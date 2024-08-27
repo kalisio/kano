@@ -1,15 +1,16 @@
 import _ from 'lodash'
 import logger from 'loglevel'
 import postRobot from 'post-robot'
-import { Store } from '@kalisio/kdk/core.client'
-import { Router } from './router'
+import { Router } from '../router'
 
-function getItems(hook) {
+export * from './utils.time-series.js'
+
+export function getItems (hook) {
   const items = (hook.type === 'before' ? hook.data : hook.result)
   return items && (hook.method === 'find' ? items.data || items : items)
 }
 
-function replaceItems(hook, items) {
+export function replaceItems (hook, items) {
   if (hook.type === 'before') {
     hook.data = items
   } else if (hook.method === 'find' && hook.result && hook.result.data) {
@@ -102,7 +103,7 @@ function setupEmbedApi (routeName, component) {
   if (routeName.endsWith('-activity')) postRobot.on(routeName.replace('-activity', ''), listener)
 }
 
-async function sendEmbedEvent (...args) {
+export async function sendEmbedEvent (...args) {
   // Will fail if not integrated as iframe so check
   if (window.parent !== window) {
     // If no listener post-robot raises an error
@@ -116,7 +117,7 @@ async function sendEmbedEvent (...args) {
 }
 
 // Build vue router config from our config file
-function buildRoutes (config) {
+export function buildRoutes (config) {
   function buildRoutesRecursively (config, routes, parentRoute) {
     _.forOwn(config, (value, key) => {
       // The key is always the path for the route
@@ -174,7 +175,7 @@ function buildRoutes (config) {
   return routes
 }
 
-function buildTours (config) {
+export function buildTours (config) {
   function buildToursRecursively (config, tours) {
     _.forOwn(config, (value, key) => {
       const name = _.get(value, 'name', _.get(value, 'path', key))
@@ -203,13 +204,3 @@ function buildTours (config) {
   buildToursRecursively(config, tours)
   return tours
 }
-
-const utils = {
-  getItems,
-  replaceItems,
-  sendEmbedEvent,
-  buildRoutes,
-  buildTours
-}
-
-export default utils

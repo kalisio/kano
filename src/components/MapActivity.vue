@@ -12,14 +12,15 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import moment from 'moment'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Time, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
-import utils from '../utils.js'
+import * as utils from '../utils'
 import config from 'config'
 
 const name = 'mapActivity'
@@ -55,7 +56,6 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
-    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -106,6 +106,17 @@ export default {
       handler () {
         this.refreshLayers()
       }
+    },
+    'selection.items': {
+      handler () {
+        this.updateSelection()
+      },
+      deep: true
+    },
+    'probe.item': {
+      handler () {
+        this.updateSelection()
+      }
     }
   },
   methods: {
@@ -139,6 +150,30 @@ export default {
       // We let any embedding iframe process features if required
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    handleWidget (widget) {
+      // If window already open on another widget keep it
+      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
+    },
+    async updateTimeSeries () {
+      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
+    },
+    updateHighlights () {
+      this.clearHighlights()
+      this.getSelectedItems().forEach(item => {
+        this.highlight(item.feature || item.location, item.layer)
+      })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
+    },
+    async updateSelection () {
+      this.updateHighlights()
+      await this.updateTimeSeries()
+      if (this.hasProbedLocation() || this.hasSelectedItems()) {
+        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
+      } else {
+        // Hide the window
+        Layout.setWindowVisible('top', false)
+      }
     },
     getHighlightMarker (feature, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
@@ -219,7 +254,7 @@ export default {
       this.leafletHandlers = {}
     },
     onMoveEnd () {
-      // Update navigation information in store
+      // Update navigation information in store, this is useful eg in test to be able to retrieve current state
       const center = this.map.getCenter()
       const zoom = this.map.getZoom()
       const bounds = this.map.getBounds()
@@ -227,7 +262,7 @@ export default {
       const west = bounds.getWest()
       const north = bounds.getNorth()
       const east = bounds.getEast()
-      this.$store.patch(this.activityName, {
+      Object.assign(this.state, {
         longitude: center.lng,
         latitude: center.lat,
         zoom,
@@ -251,9 +286,14 @@ export default {
     this.forwardLayerEvents(allLayerEvents)
     this.$engineEvents.on('edit-start', this.onEditStartEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
-    // We store some information about the current navigation state in store, initialize it
-    this.$store.set(this.activityName, {})
     this.$engineEvents.on('moveend', this.onMoveEnd)
+    this.$engineEvents.on('forecast-model-changed', this.updateTimeSeries)
+    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
+    // Initialize the time range
+    const span = Store.get('timeseries.span')
+    const start = moment(Time.getCurrentTime()).subtract(span, 'm')
+    const end = moment(Time.getCurrentTime()).add(span, 'm')
+    Time.patchRange({ start, end })
   },
   beforeUnmount () {
     // Remove event connections
@@ -262,6 +302,8 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
+    this.$engineEvents.off('forecast-model-changed', this.updateTimeSeries)
+    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
@@ -269,12 +311,20 @@ export default {
     utils.sendEmbedEvent('map-destroyed')
   },
   async setup () {
+    const activity = kMapComposables.useActivity(name)
+    const weather = kMapComposables.useWeather(name)
+    const project = kMapComposables.useProject()
+    // Initialize state and project
+    Object.assign(activity.state, {
+      timeSeries: []
+    })
+    await project.loadProject()
+    activity.setSelectionMode('multiple')
     const expose = {
-      ...kMapComposables.useActivity(name),
-      ...kMapComposables.useWeather(name),
-      ...kMapComposables.useProject()
+      ...activity,
+      ...weather,
+      ...project
     }
-    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose

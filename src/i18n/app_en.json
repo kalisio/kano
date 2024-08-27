@@ -1,5 +1,18 @@
 {
   "REMOVE_LABEL": "Remove",
+  "TimeSeries": {
+    "LABEL": "Time series",
+    "CHART_SERIE_TOOLTIP": "View graph",
+    "TABLE_SERIE_TOOLTIP": "View table",
+    "LOGARITHMIC_SERIE_TOOLTIP": "Logarithmic scale",
+    "LINEAR_SERIE_TOOLTIP": "Linear scale",
+    "PIN_SERIE_TOOLTIP": "Pin graph",
+    "UNPIN_SERIE_TOOLTIP": "Unpin graph",
+    "EXPORT_SERIE_TOOLTIP": "Export data",
+    "RESTORE_ZOOM": "Restore previous view",
+    "RUN": "Forecast run",
+    "CENTER_ON": "Center the view on the probed location"
+  },
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Open the main menu any time using this handle.",
