@@ -42,7 +42,7 @@ describe(`suite:${suite}`, () => {
 
   it('add point', async () => {
     await map.goToPosition(page, 43.31902, 1.94681)
-    await map.zoomToLevel(page, 17)
+    await map.zoomToLevel(page, 'mapActivity.state.zoom', 17)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'add-points', 1000)
     await map.moveMap(page, 'left', 1)

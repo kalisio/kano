@@ -127,7 +127,7 @@ describe(`suite:${suite}`, () => {
 
   it('create layer', async () => {
     await map.goToPosition(page, 43.31588, 1.95109)
-    await map.zoomToLevel(page, 17)
+    await map.zoomToLevel(page, 'mapActivity.state.zoom', 17)
     layer = await client.getService('catalog').create(layer)
     expect(await map.layerExists(page, userLayersTab, 'realtime')).beTrue()
   })
