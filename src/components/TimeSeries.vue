@@ -163,8 +163,6 @@ function onZoomEnd ({ chart, start, end }) {
 }
 function onRestoreZoom () {
   isZoomed.value = (chartRef.value ? chartRef.value.restorePreviousZoom() : false)
-  const zoom = (chartRef.value ? chartRef.value.getZoom() : null)
-  if (zoom) Time.patchRange(zoom)
 }
 function onResized (size) {
   height.value = size.height
