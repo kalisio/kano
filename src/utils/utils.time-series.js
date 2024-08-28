@@ -61,12 +61,13 @@ export async function updateTimeSeries (previousTimeSeries) {
   let timeSeries = []
   if (hasProbedLocation()) {
     const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
+    const layers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
     timeSeries.push({
       id: 'probe',
-      label: `(${getProbedLocation().lng.toFixed(2)}°, ${getProbedLocation().lat.toFixed(2)}°)` + featureLevel,
+      label: `${activity.forecastModel.label} (${getProbedLocation().lng.toFixed(2)}°, ${getProbedLocation().lat.toFixed(2)}°)` + featureLevel,
       series: kMapUtils.getTimeSeries({
         location: getProbedLocation(),
-        layers: _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] })),
+        layers,
         level: activity.selectedLevel,
         forecastModel: activity.forecastModel,
         forecastLevel: activity.forecastLevel,
