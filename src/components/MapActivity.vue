@@ -170,6 +170,19 @@ export default {
       await this.updateTimeSeries()
       if (this.hasProbedLocation() || this.hasSelectedItems()) {
         this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
+        // After probing update highlight to use specific weather wind barb
+        if (this.hasProbedLocation()) {
+          this.unhighlight(this.getProbedLocation(), this.getProbedLayer())
+          // Find time serie for probe
+          const probeTimeSerie = _.find(this.state.timeSeries, { id: 'probe' })
+          // Probed location is shared by all series
+          const probedLocation = await _.get(probeTimeSerie, 'series[0].probedLocation')
+          const isWeatherProbe = this.isWeatherProbe(probedLocation)
+          const feature = (isWeatherProbe
+            ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
+            : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
+          this.highlight(feature, this.getProbedLayer())
+        }
       } else {
         // Hide the window
         Layout.setWindowVisible('top', false)
