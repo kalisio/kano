@@ -57,17 +57,20 @@ export function getChartOptions (title) {
 export async function updateTimeSeries (previousTimeSeries) {
   const { CurrentActivity, hasSelectedItems, getSelectedItems, hasProbedLocation, getProbedLocation } = kMapComposables.useCurrentActivity()
   const activity = unref(CurrentActivity)
-
+  // Weather probe targets variables coming from multiple layers
+  const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+  const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
+  
   let timeSeries = []
   if (hasProbedLocation()) {
-    const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
-    const layers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+    const coordinates = kMapUtils.formatUserCoordinates(getProbedLocation().lat, getProbedLocation().lng, Store.get('locationFormat', 'FFf'))
+    const label = `${activity.forecastModel.label} (${coordinates})` + featureLevel
     timeSeries.push({
       id: 'probe',
-      label: `${activity.forecastModel.label} (${getProbedLocation().lng.toFixed(2)}°, ${getProbedLocation().lat.toFixed(2)}°)` + featureLevel,
+      label,
       series: kMapUtils.getTimeSeries({
         location: getProbedLocation(),
-        layers,
+        layers: forecastLayers,
         level: activity.selectedLevel,
         forecastModel: activity.forecastModel,
         forecastLevel: activity.forecastLevel,
@@ -79,13 +82,16 @@ export async function updateTimeSeries (previousTimeSeries) {
     getSelectedItems().forEach(item => {
       const featureLabel = _.get(item, `feature.properties.${item.layer.featureLabel || 'name'}`)
       const featureId = kMapUtils.getFeatureId(item.feature, item.layer)
-      const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
+      const label = (_.has(item, 'layer.probe') ?
+        `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel})` + featureLevel :
+        `${item.layer.label} - ${featureLabel}` + featureLevel)
       timeSeries.push({
         id: `${item.layer.name}-${featureId}`,
-        label: `${item.layer.label} - ${featureLabel}` + featureLevel,
+        label,
         series: kMapUtils.getTimeSeries({
           feature: item.feature,
           layer: item.layer,
+          layers: _.has(item, 'layer.probe') ? forecastLayers : [],
           level: activity.selectedLevel,
           forecastModel: activity.forecastModel,
           forecastLevel: activity.forecastLevel,

@@ -12,6 +12,7 @@
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import sift from 'sift'
 import moment from 'moment'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
@@ -197,7 +198,16 @@ export default {
     },
     getHighlightTooltip (feature, layer, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
-        const html = this.getForecastAsHtml(feature)
+        // Get labels from forecast layers
+        const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+        const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
+        const fields = this.getProbedLocationForecastFields()
+        _.forOwn(fields, (value, key) => {
+          // Take care that weather fields are prefixed by 'properties.' because they target feature
+          const variable = _.find(variables, { name: `${value.property.replace('properties.', '')}` })
+          if (variable) value.label = variable.label
+        })
+        const html = this.getForecastAsHtml(feature, fields)
         return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
       }
     },
