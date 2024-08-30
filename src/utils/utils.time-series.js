@@ -64,7 +64,7 @@ export async function updateTimeSeries (previousTimeSeries) {
   let timeSeries = []
   if (hasProbedLocation()) {
     const coordinates = kMapUtils.formatUserCoordinates(getProbedLocation().lat, getProbedLocation().lng, Store.get('locationFormat', 'FFf'))
-    const label = `${activity.forecastModel.label} (${coordinates})` + featureLevel
+    const label = `${activity.forecastModel.label} (${coordinates})` + (activity.forecastLevel ? featureLevel : '')
     timeSeries.push({
       id: 'probe',
       label,

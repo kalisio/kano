@@ -201,12 +201,7 @@ export default {
         // Get labels from forecast layers
         const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
         const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
-        const fields = this.getProbedLocationForecastFields()
-        _.forOwn(fields, (value, key) => {
-          // Take care that weather fields are prefixed by 'properties.' because they target feature
-          const variable = _.find(variables, { name: `${value.property.replace('properties.', '')}` })
-          if (variable) value.label = variable.label
-        })
+        const fields = this.getProbedLocationForecastFields(variables)
         const html = this.getForecastAsHtml(feature, fields)
         return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
       }
