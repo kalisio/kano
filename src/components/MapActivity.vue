@@ -199,7 +199,7 @@ export default {
     getHighlightTooltip (feature, layer, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         // Get labels from forecast layers
-        const layers = _.uniqBy(_.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] })), 'name')
+        const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
         const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
         const fields = this.getProbedLocationForecastFields(variables)
         const html = this.getForecastAsHtml(feature, fields)
