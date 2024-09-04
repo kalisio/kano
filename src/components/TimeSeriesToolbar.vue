@@ -7,10 +7,11 @@
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed, inject, unref } from 'vue'
 import { Store, composables as kCoreComposables } from '@kalisio/kdk/core.client'
+import { composables as kMapComposables } from '@kalisio/kdk/map.client'
 
-const { state } = kCoreComposables.useCurrentActivity()
+const { state, centerOnSelection, hasProbedLocation, centerOnProbe } = kMapComposables.useCurrentActivity()
 
 // Props
 const props = defineProps({
@@ -55,8 +56,17 @@ const content = computed(() => {
         'last-12-hours', 'last-day', 'last-2-days', 'last-3-days', 'last-week',
         'next-12-hours', 'next-day', 'next-2-days', 'next-3-days']
     }]
+  }, {
+    id: 'center-view',
+    icon: 'las la-eye',
+    tooltip: 'TimeSeries.CENTER_ON',
+    visible: 'probedVariables',
+    handler: () => {
+      if (hasProbedLocation()) centerOnProbe()
+      else centerOnSelection()
+    }
   }]
-  /* TODO: actions previously available on KTimeSeries
+  /* TODO: action previously available on KTimeSeries
   {
     id: 'run-options',
     component: 'input/KOptionsChooser',
@@ -66,13 +76,8 @@ const content = computed(() => {
     hideSelected: false,
     options: ':runOptions',
     on: { event: 'option-chosen', listener: 'onUpdateRun' }
-  }, {
-    id: 'center-view',
-    icon: 'las la-eye',
-    tooltip: 'TimeSeries.CENTER_ON',
-    visible: 'probedVariables',
-    handler: 'onCenterOn'
   }
   */
 })
+
 </script>
