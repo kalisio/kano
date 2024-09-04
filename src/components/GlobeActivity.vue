@@ -200,6 +200,7 @@ export default {
     this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
     this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
     this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
+    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
     // Initialize the time range
     const span = Store.get('timeseries.span')
     const start = moment(Time.getCurrentTime()).subtract(span, 'm')
@@ -215,6 +216,7 @@ export default {
     this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
     this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
     this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
+    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')

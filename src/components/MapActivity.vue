@@ -307,6 +307,7 @@ export default {
     this.$engineEvents.on('moveend', this.onMoveEnd)
     this.$engineEvents.on('forecast-model-changed', this.updateSelection)
     this.$engineEvents.on('selected-level-changed', this.updateSelection)
+    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
     // Initialize the time range
     const span = Store.get('timeseries.span')
     const start = moment(Time.getCurrentTime()).subtract(span, 'm')
@@ -322,6 +323,7 @@ export default {
     this.$engineEvents.off('moveend', this.onMoveEnd)
     this.$engineEvents.off('forecast-model-changed', this.updateSelection)
     this.$engineEvents.off('selected-level-changed', this.updateSelection)
+    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
