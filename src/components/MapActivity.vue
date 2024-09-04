@@ -164,7 +164,7 @@ export default {
       this.getSelectedItems().forEach(item => {
         this.highlight(item.feature || item.location, item.layer)
       })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
     },
     async updateSelection () {
       this.updateHighlights()
@@ -173,7 +173,7 @@ export default {
         this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
         // After probing update highlight to use specific weather wind barb
         if (this.hasProbedLocation()) {
-          this.unhighlight(this.getProbedLocation(), this.getProbedLayer())
+          this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
           // Find time serie for probe
           const probeTimeSerie = _.find(this.state.timeSeries, { id: 'probe' })
           // Probed location is shared by all series
@@ -182,7 +182,7 @@ export default {
           const feature = (isWeatherProbe
             ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
             : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
-          this.highlight(feature, this.getProbedLayer())
+          this.highlight(feature, this.getProbedLayer() || { name: 'probe' })
         }
       } else {
         // Hide the window
@@ -199,7 +199,7 @@ export default {
     getHighlightTooltip (feature, layer, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         // Get labels from forecast layers
-        const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+        const layers = _.uniqBy(_.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] })), 'name')
         const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
         const fields = this.getProbedLocationForecastFields(variables)
         const html = this.getForecastAsHtml(feature, fields)
@@ -305,8 +305,8 @@ export default {
     this.$engineEvents.on('edit-start', this.onEditStartEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
     this.$engineEvents.on('moveend', this.onMoveEnd)
-    this.$engineEvents.on('forecast-model-changed', this.updateTimeSeries)
-    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
+    this.$engineEvents.on('forecast-model-changed', this.updateSelection)
+    this.$engineEvents.on('selected-level-changed', this.updateSelection)
     // Initialize the time range
     const span = Store.get('timeseries.span')
     const start = moment(Time.getCurrentTime()).subtract(span, 'm')
@@ -320,8 +320,8 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
-    this.$engineEvents.off('forecast-model-changed', this.updateTimeSeries)
-    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
+    this.$engineEvents.off('forecast-model-changed', this.updateSelection)
+    this.$engineEvents.off('selected-level-changed', this.updateSelection)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
@@ -330,7 +330,8 @@ export default {
   },
   async setup () {
     const activity = kMapComposables.useActivity(name)
-    const weather = kMapComposables.useWeather(name)
+    const weather = kMapComposables.useWeather()
+    const measure = kMapComposables.useMeasure()
     const project = kMapComposables.useProject()
     // Initialize state and project
     Object.assign(activity.state, {
@@ -341,6 +342,7 @@ export default {
     const expose = {
       ...activity,
       ...weather,
+      ...measure,
       ...project
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])

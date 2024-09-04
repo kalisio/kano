@@ -58,7 +58,7 @@ export async function updateTimeSeries (previousTimeSeries) {
   const { CurrentActivity, hasSelectedItems, getSelectedItems, hasProbedLocation, getProbedLocation } = kMapComposables.useCurrentActivity()
   const activity = unref(CurrentActivity)
   // Weather probe targets variables coming from multiple layers
-  const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+  const forecastLayers = _.uniqBy(_.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] })), 'name')
   const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
   
   let timeSeries = []
