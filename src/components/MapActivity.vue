@@ -13,11 +13,10 @@
 import _ from 'lodash'
 import L from 'leaflet'
 import sift from 'sift'
-import moment from 'moment'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { Store, Time, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -308,11 +307,6 @@ export default {
     this.$engineEvents.on('forecast-model-changed', this.updateSelection)
     this.$engineEvents.on('selected-level-changed', this.updateSelection)
     this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
-    // Initialize the time range
-    const span = Store.get('timeseries.span')
-    const start = moment(Time.getCurrentTime()).subtract(span, 'm')
-    const end = moment(Time.getCurrentTime()).add(span, 'm')
-    Time.patchRange({ start, end })
   },
   beforeUnmount () {
     // Remove event connections

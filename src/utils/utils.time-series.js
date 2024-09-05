@@ -1,8 +1,9 @@
 import _ from 'lodash'
+import moment from 'moment'
 import { unref } from 'vue'
 import sift from 'sift'
 import chroma from 'chroma-js'
-import { Store } from '@kalisio/kdk/core.client'
+import { Time, Store } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, utils as kMapUtils } from '@kalisio/kdk/map.client.map'
 
 // When organizing time series by feature the dataset color is the variable color as given in the layer
@@ -57,6 +58,11 @@ export function getChartOptions (title) {
 export async function updateTimeSeries (previousTimeSeries) {
   const { CurrentActivity, hasSelectedItems, getSelectedItems, hasProbedLocation, getProbedLocation } = kMapComposables.useCurrentActivity()
   const activity = unref(CurrentActivity)
+  // Initialize the time range
+  const span = Store.get('timeseries.span')
+  const start = moment(Time.getCurrentTime()).subtract(span, 'm')
+  const end = moment(Time.getCurrentTime()).add(span, 'm')
+  Time.patchRange({ start, end })
   // Weather probe targets variables coming from multiple layers
   const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
   const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
