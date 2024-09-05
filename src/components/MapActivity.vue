@@ -171,20 +171,23 @@ export default {
       if (this.hasProbedLocation() || this.hasSelectedItems()) {
         this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
         // After probing update highlight to use specific weather wind barb
-        if (this.hasProbedLocation()) {
-          this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
-          // Find time serie for probe, probed location is shared by all series
-          const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocation')
-          if (!probedLocation) return
-          const isWeatherProbe = this.isWeatherProbe(probedLocation)
-          const feature = (isWeatherProbe
-            ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
-            : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
-          this.highlight(feature, this.getProbedLayer() || { name: 'probe' })
-        }
+        await this.updateProbedLocationHighlight()
       } else {
         // Hide the window
         Layout.setWindowVisible('top', false)
+      }
+    },
+    async updateProbedLocationHighlight () {
+      if (this.hasProbedLocation()) {
+        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
+        // Find time serie for probe, probed location is shared by all series
+        const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocation')
+        if (!probedLocation) return
+        const isWeatherProbe = this.isWeatherProbe(probedLocation)
+        const feature = (isWeatherProbe
+          ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
+          : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
+        this.highlight(feature, this.getProbedLayer() || { name: 'probe' })
       }
     },
     getHighlightMarker (feature, options) {
@@ -306,6 +309,7 @@ export default {
     this.$engineEvents.on('forecast-model-changed', this.updateSelection)
     this.$engineEvents.on('selected-level-changed', this.updateSelection)
     this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
+    this.$events.on('time-current-time-changed', this.updateProbedLocationHighlight)
   },
   beforeUnmount () {
     // Remove event connections
@@ -317,6 +321,7 @@ export default {
     this.$engineEvents.off('forecast-model-changed', this.updateSelection)
     this.$engineEvents.off('selected-level-changed', this.updateSelection)
     this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
+    this.$events.off('time-current-time-changed', this.updateProbedLocationHighlight)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
