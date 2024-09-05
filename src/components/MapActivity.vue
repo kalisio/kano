@@ -173,10 +173,9 @@ export default {
         // After probing update highlight to use specific weather wind barb
         if (this.hasProbedLocation()) {
           this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
-          // Find time serie for probe
-          const probeTimeSerie = _.find(this.state.timeSeries, { id: 'probe' })
-          // Probed location is shared by all series
-          const probedLocation = await _.get(probeTimeSerie, 'series[0].probedLocation')
+          // Find time serie for probe, probed location is shared by all series
+          const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocation')
+          if (!probedLocation) return
           const isWeatherProbe = this.isWeatherProbe(probedLocation)
           const feature = (isWeatherProbe
             ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
