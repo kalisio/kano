@@ -74,6 +74,7 @@ export async function updateTimeSeries (previousTimeSeries) {
         level: activity.selectedLevel,
         forecastModel: activity.forecastModel,
         forecastLevel: activity.forecastLevel,
+        probeFunction: activity.probeLocation,
         weacastApi: activity.getWeacastApi()
       })
     })
