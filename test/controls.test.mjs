@@ -54,6 +54,13 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
+  it('display legend', async () => {
+    await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
+    const match = await runner.captureAndMatch('legend')
+    await core.clickAction(page, 'back')
+    expect(match).beTrue()
+  })
+
   after(async () => {
     await core.logout(page)
     await runner.stop()

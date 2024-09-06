@@ -2,31 +2,18 @@ const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
 const API_PREFIX = '/api'
-let domain
 let pwaName = 'Kano'
 // If we build a specific staging instance
 if (process.env.NODE_APP_INSTANCE === 'dev') {
-  domain = 'https://kano.dev.kalisio.xyz'
   pwaName += ' (dev)'
 } else if (process.env.NODE_APP_INSTANCE === 'test') {
-  domain = 'https://kano.test.kalisio.xyz'
   pwaName += ' (test)'
 } else if (process.env.NODE_APP_INSTANCE === 'prod') {
-  domain = 'https://kano.planet.kalisio.com'
+  // Nothing todo
 } else {
   // Otherwise we are on a developer machine
-  if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:' + clientPort // Kano app client/server port = 8080/8081
-  } else {
-    domain = 'http://localhost:' + serverPort // Kano app client/server port = 8081
-  }
+  pwaName += ' (localhost)'
 }
-// Override defaults if env provided at build time
-if (process.env.SUBDOMAIN) {
-  domain = 'https://kano.' + process.env.SUBDOMAIN
-}
-// On a developer machine will do domain = gateway = localhost
-const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
 
 // Allow to override version number for custom build
 const version = (process.env.VERSION ? process.env.VERSION : require('../package.json').version)
@@ -34,6 +21,11 @@ const version = (process.env.VERSION ? process.env.VERSION : require('../package
 const website = 'https://www.kalisio.com'
 const onlineHelp = 'https://kalisio.github.io/kano'
 const changelog = onlineHelp + '/history.html'
+
+// Common actions
+const toggleFullScreenAction = {
+  component: 'action/KToggleFullscreenAction', id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' } 
+}
 
 // Left pane
 const leftPane = {
@@ -87,51 +79,11 @@ const topWidgets = [{
     visible: 'hasFeature',
     handler: 'onExportFeature'
   }] 
-}, {
-  id: 'time-series', label: 'KTimeSeries.LABEL', icon: 'las la-chart-line', 
-  content: { component: 'widget/KTimeSeries' },
-  header: [{
-    id: 'absolute-time-range',
-    component: 'time/KAbsoluteTimeRange'
-  }, {
-    id: 'restore-time-range',
-    icon: 'las la-undo',
-    tooltip: 'KTimeSeries.RESTORE_TIME_RANGE',
-    visible: 'hasZoomHistory',
-    handler: 'onZoomRestored'
-  }, {
-    id: 'relative-time-ranges',
-    component: 'menu/KMenu',
-    icon: 'las la-history',
-    content: [{
-      component: 'time/KRelativeTimeRanges',
-      ranges: ['last-hour', 'last-2-hours', 'last-3-hours', 'last-6-hours',
-        'last-12-hours', 'last-day', 'last-2-days', 'last-3-days', 'last-week',
-        'next-12-hours', 'next-day', 'next-2-days', 'next-3-days']
-    }]
-  }, {
-    id: 'run-options',
-    component: 'input/KOptionsChooser',
-    icon: 'las la-clock',
-    tooltip: 'KTimeSeries.RUN',
-    visible: 'hasRunTimes',
-    hideSelected: false,
-    options: ':runOptions',
-    on: { event: 'option-chosen', listener: 'onUpdateRun' }
-  }, {
-    id: 'center-view',
-    icon: 'las la-eye',
-    tooltip: 'KTimeSeries.CENTER_ON',
-    visible: 'probedVariables',
-    handler: 'onCenterOn'
-  }, {
-    id: 'export-feature',
-    icon: 'las la-file-download',
-    tooltip: 'KTimeSeries.EXPORT_SERIES',
-    visible: 'probedVariables',
-    handler: 'onExportSeries'
-  }]
 }, { 
+    id: 'time-series', label: 'TimeSeries.LABEL', icon: 'las la-chart-line', 
+    content: { component: 'TimeSeries' },
+    header: [{ component: 'TimeSeriesToolbar' }]
+  }, { 
   id: 'elevation-profile', label: 'KElevationProfile.LABEL', icon: 'las la-mountain', 
   content: { component: 'widget/KElevationProfile' },
   header: [{
@@ -165,96 +117,59 @@ const topWidgets = [{
   }]
 }]
 
-// Catalog tababr
-function catalogTabbar (activeView) {
-  return {
-    id: 'catalog-tabbar', component: 'KPanel', class: 'q-pa-sm justify-center', actionRenderer: 'tab', content: [
-      { 
-        id: 'user-layers-tab', label: 'LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
-        toggled: activeView === 'user-layers' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-layers'] } 
-      },
-      { 
-        id: 'user-views-tab', label: 'VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'user-views' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-views'] } 
-      },
-      { 
-        id: 'user-projects-tab', label: 'PROJECTS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'user-projects' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['user-projects'] } 
-      },
-      { 
-        id: 'catalog-layers-tab', label: 'CATALOG_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'catalog-layers' ? true : false,
-        visible: '!hasProject',
-        handler: { name: 'setRightPaneMode', params: ['catalog-layers'] } 
-      },
-      { 
-        id: 'project-layers-tab', label: 'PROJECT_LAYERS_LABEL', color: 'grey-7', toggle: { color: 'primary' }, 
-        toggled: activeView === 'project-layers' ? true : false,
-        visible: 'hasProject',
-        handler: { name: 'setRightPaneMode', params: ['project-layers'] } 
-      },
-      { 
-        id: 'project-views-tab', label: 'PROJECT_VIEWS_LABEL', color: 'grey-7', toggle: { color: 'primary' },
-        toggled: activeView === 'project-views' ? true : false,
-        visible: 'hasProject',
-        handler: { name: 'setRightPaneMode', params: ['project-views'] } 
-      }
-    ]
-  }
-}
-
 // Catalog panes
 const catalogPanes = {
-  'user-layers': [
-    catalogTabbar('user-layers'),
-    { id: 'user-layers', component: 'catalog/KLayersPanel',
-      visible: '!hasProject',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } } },
-    { visible: '!hasProject', component: 'QSpace' },
-    { id: 'catalog-footer', component: 'KPanel', visible: '!hasProject', content: [{
-        id: 'manage-layer-categories',
-        icon: 'las la-cog',
-        label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
-        visible: { name: '$can', params: ['create', 'catalog'] },
-        route: { name: 'manage-layer-categories' },
-      }],
-      class: 'justify-center'
-    }
-  ],
-  'user-views': [
-    catalogTabbar('user-views'),
-    { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel', suspense: true }
-  ],
-  'user-projects': [
-    catalogTabbar('user-projects'),
-    { id: 'user-projects', visible: '!hasProject', component: 'catalog/KProjectsPanel' }
-  ],
-  'catalog-layers': [
-    catalogTabbar('catalog-layers'),
-    { id: 'catalog-layers', visible: '!hasProject', component: 'catalog/KLayersPanel',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
-      forecastModels: ':forecastModels' }
-  ],
-  'project-layers': [
-    catalogTabbar('project-layers'),
-    { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
-      layers: ':layers', layerCategories: ':layerCategories',
-      layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {},
-      forecastModels: ':forecastModels' }
-  ],
-  'project-views': [
-    catalogTabbar('project-views'),
-    { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
-  ]
-} 
+  default: [{
+    component: 'KTab',
+    content: {
+      'user-layers': [
+        { id: 'user-layers', component: 'catalog/KLayersPanel',
+          visible: '!hasProject',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $in: ['user', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: true } },
+          footer: [{
+            id: 'manage-layer-categories',
+            icon: 'las la-cog',
+            label: 'KLayerCategories.LAYER_CATEGORIES_LABEL',
+            visible: { name: '$can', params: ['create', 'catalog'] },
+            route: { name: 'manage-layer-categories' },
+          }],
+          footerClass: 'justify-center',
+        }
+      ],
+      'user-views': [
+        { id: 'user-views', visible: '!hasProject', component: 'catalog/KViewsPanel', suspense: true }
+      ],
+      'user-projects': [
+        { id: 'user-projects', visible: '!hasProject', component: 'catalog/KProjectsPanel' }
+      ],
+      'catalog-layers': [
+        { id: 'catalog-layers', visible: '!hasProject', component: 'catalog/KLayersPanel',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $nin: ['user', 'system', 'activity'] } }, layerCategoriesFilter: { _id: { $exists: false } },
+          forecastModels: ':forecastModels' }
+      ]
+    },
+    labels: ['LAYERS_LABEL', 'VIEWS_LABEL', 'PROJECTS_LABEL', 'CATALOG_LABEL'],
+    mode: 'user-layers'
+  }],
+  project: [{
+    component: 'KTab',
+    content: {
+      'project-layers': [
+        { id: 'project-layers', visible: 'hasProject', component: 'catalog/KLayersPanel',
+          layers: ':layers', layerCategories: ':layerCategories',
+          layersFilter: { scope: { $ne: 'system' } }, layerCategoriesFilter: {},
+          forecastModels: ':forecastModels' }
+      ],
+      'project-views': [
+        { id: 'project-views', visible: 'hasProject', component: 'catalog/KViewsPanel', suspense: true }
+      ]
+    },
+    labels: ['PROJECT_LAYERS_LABEL', 'PROJECT_VIEWS_LABEL'],
+    mode: 'project-layers'
+  }]
+}
 
 // Map layer actions
 const mapLayerActions = [{
@@ -284,7 +199,6 @@ const mapLayerActions = [{
   ]
 }]
 
-
 // Map engine configuration
 const mapEngine = {
   viewer: {
@@ -294,7 +208,8 @@ const mapEngine = {
     zoom: 6,
     maxBounds: [[-90, -180], [90, 180]],
     maxBoundsViscosity: 0.25,
-    timeDimension: true
+    timeDimension: true,
+    rotateControl: false
   },
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
@@ -475,13 +390,6 @@ const globeEngine = {
 }
 
 module.exports = {
-  // Special alias to host loopback interface in cordova
-  // domain: 'http://10.0.2.2:8081',
-  // If using port forwarding
-  // domain: 'http://localhost:8081',
-  // If using local IP on WiFi router
-  // domain: 'http://192.168.1.16:8081',
-  domain,
   pwaName,
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version,
@@ -490,7 +398,6 @@ module.exports = {
   apiJwt: 'kano-jwt',
   apiTimeout: 30000,
   transport: 'websocket', // Could be 'http' or 'websocket',
-  gateway,
   gatewayJwtField: 'jwt',
   gatewayJwt: 'kano-gateway-jwt',
   appName: 'Kano',
@@ -512,16 +419,45 @@ module.exports = {
     // Nothing specific, use defaults
   },
   settings: {
-    propertyMapping: {
-      // Nothing specific, use defaults
-    }
+    // Nothing specific, use defaults
+  },
+  about: {
+    actions: [
+      {
+        id: 'platform-info',
+        icon: 'las la-desktop',
+        label: 'KAbout.PLATFORM_INFO',
+        stack: true,
+        dialog: {
+          title: 'KAbout.PLATFORM_INFO',
+          component: 'app/KPlatform',
+          okAction: 'CLOSE',
+          widthPolicy: 'narrow'
+        }
+      },
+      { 
+        id: 'report-bug',
+        icon: 'las la-bug',
+        label: 'KAbout.BUG_REPORT',
+        stack: true,
+        component: 'action/KBugReportAction'
+      },
+      {
+        id: 'view-changelog',
+        icon: 'las la-history',
+        label: 'KAbout.VIEW_CHANGELOG',
+        stack: true,
+        url: changelog
+      }
+    ]
   },
   screens: {
     actions: [{ 
       id: 'terms-policies', 
       label: 'screen.TERMS_AND_POLICIES', 
       dialog: {
-        component: 'app/KTerms'
+        component: 'document/KDocument',
+        url: 'kano-terms.md'
       }
     }],
     // frameBackgroundColor: '#FFDC9E',
@@ -537,7 +473,6 @@ module.exports = {
     }
   },
   layout: {
-    view: 'lhh LpR lff',
     page: { visible: true },
     panes: {
       left: { opener: true },
@@ -602,7 +537,7 @@ module.exports = {
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
+          toggleFullScreenAction
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -632,20 +567,19 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers'
+      mode: 'default'
     },
     bottomPane: {
       content: [
         { component: 'time/KTimeControl' }
       ]
     },
-    page: {
-      content: [{
-        id: 'level-slider', component: 'layout/KPageSticky', position: 'right', offset: [40, 0], content: [{ component: 'KLevelSlider' }]
-      } /* Only for example purpose
-      {
-        id: 'site-seeker', component: 'layout/KPageSticky', position: 'bottom-right', offset: [16, 16], content: [{ component: 'SiteSeeker' }]
-      }*/]
+    stickies: {
+      content: [
+        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'KLevelSlider' },
+        // Only for example purpose
+        // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
+      ]
     },
     fab: {
       content: [
@@ -666,6 +600,7 @@ module.exports = {
     layers: {
       actions: mapLayerActions
     },
+    selection: { multiple: 'ctrlKey' },
     featuresChunkSize: 5000 // TODO: here or in mapEngine ?
   },
   globeActivity: {
@@ -695,7 +630,7 @@ module.exports = {
           },
           { component: 'QSeparator', vertical: true, inset: true },
           { id: 'toggle-vr', icon: 'las la-vr-cardboard', tooltip: 'mixins.activity.ENTER_VR', toggle: { tooltip: 'mixins.activity.EXIT_VR' }, handler: { name: 'onToggleVr' } },
-          { id: 'toggle-fullscreen', icon: 'las la-expand', tooltip: 'mixins.activity.ENTER_FULLSCREEN', toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }, handler: { name: 'onToggleFullscreen' } }
+          toggleFullScreenAction
         ],
         'display-position': [
           { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
@@ -715,7 +650,7 @@ module.exports = {
     leftPane: leftPane,
     rightPane: {
       content: catalogPanes,
-      mode: 'user-layers'
+      mode: 'default',
     },
     bottomPane: {
       content: [

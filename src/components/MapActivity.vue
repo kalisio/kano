@@ -1,29 +1,38 @@
 <template>
   <KPage :padding="false">
-    <template v-slot:page-content>
-      <!-- Map -->
-      <div id="map" :ref="configureMap" :style="viewStyle">
-        <q-resize-observer @resize="onMapResized" />
-      </div>
-      <!-- Child views -->
-      <router-view />
-    </template>
+    <!-- Map -->
+    <div id="map" :ref="configureMap" :style="viewStyle">
+      <q-resize-observer @resize="onMapResized" />
+    </div>
+    <!-- Child views -->
+    <router-view />
   </KPage>
 </template>
 
 <script>
 import _ from 'lodash'
 import L from 'leaflet'
+import sift from 'sift'
+import 'leaflet-rotate/dist/leaflet-rotate-src.js'
+import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
-import utils from '../utils.js'
+import * as utils from '../utils'
 import config from 'config'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
+
+const buildVectorHats = L.Polyline.prototype.buildVectorHats
+L.Polyline.prototype.buildVectorHats = function (options) {
+  const rotate = this._map._rotate
+  this._map._rotate = false
+  buildVectorHats.bind(this)(options)
+  this._map._rotate = rotate
+}
 
 export default {
   mixins: [
@@ -43,10 +52,10 @@ export default {
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers,
     kMapMixins.map.gsmapLayers,
+    kMapMixins.map.pmtilesLayers,
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
-    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -62,14 +71,14 @@ export default {
   },
   data () {
     return {
-      leftWindow: this.$store.get('windows.left'),
-      rightWindow: this.$store.get('windows.right'),
-      topWindow: this.$store.get('windows.top'),
-      bottomWindow: this.$store.get('windows.bottom'),
-      leftPane: this.$store.get('leftPane'),
-      rightPane: this.$store.get('rightPane'),
-      topPane: this.$store.get('topPane'),
-      bottomPane: this.$store.get('bottomPane')
+      leftWindow: this.$store.get('layout.windows.left'),
+      rightWindow: this.$store.get('layout.windows.right'),
+      topWindow: this.$store.get('layout.windows.top'),
+      bottomWindow: this.$store.get('layout.windows.bottom'),
+      leftPane: this.$store.get('layout.panes.left'),
+      rightPane: this.$store.get('layout.panes.right'),
+      topPane: this.$store.get('layout.panes.top'),
+      bottomPane: this.$store.get('layout.panes.bottom')
     }
   },
   watch: {
@@ -97,6 +106,17 @@ export default {
       handler () {
         this.refreshLayers()
       }
+    },
+    'selection.items': {
+      handler () {
+        this.updateSelection()
+      },
+      deep: true
+    },
+    'probe.item': {
+      handler () {
+        this.updateSelection()
+      }
     }
   },
   methods: {
@@ -111,11 +131,64 @@ export default {
     },
     configureActivity () {
       baseActivityMixin.methods.configureActivity.call(this)
-      this.setRightPaneMode(this.hasProject() ? 'project-layers' : 'user-layers')
+      this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
+    },
+    async addLayer (layer) {
+      // We let any embedding iframe process layer if required
+      // Take care that post-robot serialize functions
+      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
+      // Do not erase with returned object as some internals might have been lost in serialization
+      if (response && response.data) _.merge(layer, response.data)
+      layer = await kMapMixins.map.baseMap.methods.addLayer.call(this, layer)
+      return layer
+    },
+    async updateLayer (name, geoJson, options = {}) {
+      // We let any embedding iframe process features if required
+      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+      await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    handleWidget (widget) {
+      // If window already open on another widget keep it
+      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
+    },
+    async updateTimeSeries () {
+      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
+    },
+    updateHighlights () {
+      this.clearHighlights()
+      this.getSelectedItems().forEach(item => {
+        this.highlight(item.feature || item.location, item.layer)
+      })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
+    },
+    async updateSelection () {
+      this.updateHighlights()
+      await this.updateTimeSeries()
+      if (this.hasProbedLocation() || this.hasSelectedItems()) {
+        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
+        // After probing update highlight to use specific weather wind barb
+        await this.updateProbedLocationHighlight()
+      } else {
+        // Hide the window
+        Layout.setWindowVisible('top', false)
+      }
+    },
+    async updateProbedLocationHighlight () {
+      if (this.hasProbedLocation()) {
+        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
+        // Find time serie for probe, probed location is shared by all series
+        const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocation')
+        if (!probedLocation) return
+        const isWeatherProbe = this.isWeatherProbe(probedLocation)
+        const feature = (isWeatherProbe
+          ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
+          : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
+        this.highlight(feature, this.getProbedLayer() || { name: 'probe' })
+      }
     },
     getHighlightMarker (feature, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
@@ -126,7 +199,11 @@ export default {
     },
     getHighlightTooltip (feature, layer, options) {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
-        const html = this.getForecastAsHtml(feature)
+        // Get labels from forecast layers
+        const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
+        const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
+        const fields = this.getProbedLocationForecastFields(variables)
+        const html = this.getForecastAsHtml(feature, fields)
         return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
       }
     },
@@ -150,7 +227,14 @@ export default {
       if (!_.has(this, 'layerHandlers')) { this.layerHandlers = {} }
 
       for (const layerEvent of layerEvents) {
-        const handler = (layer) => utils.sendEmbedEvent(layerEvent, { layer })
+        const handler = (layer) => {
+          // Take care to not serialize internal Leaflet structures that might contain circular references
+          utils.sendEmbedEvent(layerEvent, {
+            layer: Object.assign(_.omit(layer, ['leaflet']), {
+              leaflet: _.mapValues(layer.leaflet, value => (value instanceof L.Class) ? null : value)
+            })
+          })
+        }
         this.layerHandlers[layerEvent] = handler
         this.$engineEvents.on(layerEvent, handler)
       }
@@ -189,7 +273,7 @@ export default {
       this.leafletHandlers = {}
     },
     onMoveEnd () {
-      // Update navigation information in store
+      // Update navigation information in store, this is useful eg in test to be able to retrieve current state
       const center = this.map.getCenter()
       const zoom = this.map.getZoom()
       const bounds = this.map.getBounds()
@@ -197,7 +281,7 @@ export default {
       const west = bounds.getWest()
       const north = bounds.getNorth()
       const east = bounds.getEast()
-      this.$store.patch(this.activityName, {
+      Object.assign(this.state, {
         longitude: center.lng,
         latitude: center.lat,
         zoom,
@@ -217,13 +301,15 @@ export default {
     // Setup event connections
     const allLeafletEvents = ['click', 'dblclick', 'mouseover']
     this.forwardLeafletEvents(allLeafletEvents)
-    const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed']
+    const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
     this.$engineEvents.on('edit-start', this.onEditStartEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
-    // We store some information about the current navigation state in store, initialize it
-    this.$store.set(this.activityName, {})
     this.$engineEvents.on('moveend', this.onMoveEnd)
+    this.$engineEvents.on('forecast-model-changed', this.updateSelection)
+    this.$engineEvents.on('selected-level-changed', this.updateSelection)
+    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
+    this.$events.on('time-current-time-changed', this.updateProbedLocationHighlight)
   },
   beforeUnmount () {
     // Remove event connections
@@ -232,6 +318,10 @@ export default {
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
+    this.$engineEvents.off('forecast-model-changed', this.updateSelection)
+    this.$engineEvents.off('selected-level-changed', this.updateSelection)
+    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
+    this.$events.off('time-current-time-changed', this.updateProbedLocationHighlight)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
@@ -239,12 +329,22 @@ export default {
     utils.sendEmbedEvent('map-destroyed')
   },
   async setup () {
+    const activity = kMapComposables.useActivity(name)
+    const weather = kMapComposables.useWeather()
+    const measure = kMapComposables.useMeasure()
+    const project = kMapComposables.useProject()
+    // Initialize state and project
+    Object.assign(activity.state, {
+      timeSeries: []
+    })
+    await project.loadProject()
+    activity.setSelectionMode('multiple')
     const expose = {
-      ...kMapComposables.useActivity(name),
-      ...kMapComposables.useWeather(name),
-      ...kMapComposables.useProject()
+      ...activity,
+      ...weather,
+      ...measure,
+      ...project
     }
-    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose

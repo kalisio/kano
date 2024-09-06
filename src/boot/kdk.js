@@ -3,7 +3,7 @@ import logger from 'loglevel'
 import config from 'config'
 import { Notify } from 'quasar'
 import postRobot from 'post-robot'
-import utils from '../utils'
+import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
@@ -71,6 +71,32 @@ export default async ({ app, router }) => {
   await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
 
   // Add a generic function that can be used from the iframe API
+  // to setup hooks on all service operations easily, eg 'after get' hook on service 'catalog'
+  const serviceHooks = async (options) => {
+    // Extract service/operation from options
+    let { hooks, service } = options
+    service = api.getService(service)
+    if (!service) throw new Error(`Cannot find service ${service}`)
+    const feathersHooks = {}
+    // Iterate over hook types (before, after)
+    _.forOwn(hooks, (hooksDefinition, stage) => {
+      feathersHooks[stage] = {}
+      _.forOwn(hooksDefinition, (hookDefinition, operation) => {
+        feathersHooks[stage][operation] = async (hook) => {
+          const items = utils.getItems(hook)
+          const response = await utils.sendEmbedEvent(hookDefinition.name || `${service}-${hook.type}-${hook.method}-hook`, { items })
+          if (response && response.data) utils.replaceItems(hook, response.data)
+        }
+      })
+    })
+    // Setup hooks on client service
+    service.hooks(feathersHooks)
+  }
+  // API service hook call
+  postRobot.on('hooks', async (event) => {
+    await serviceHooks(event.data)
+  })
+  // Add a generic function that can be used from the iframe API
   // to access all service operations easily, eg operation 'get' on service 'catalog'
   const serviceOperation = async (options) => {
     // Extract service/operation from options
@@ -114,6 +140,8 @@ export default async ({ app, router }) => {
   Events.on('disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
   Events.on('reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
 
+  await utils.sendEmbedEvent('api-ready')
+
   // Register global properties to the the vue app
   app.config.globalProperties.$store = Store
   app.config.globalProperties.$layout = Layout
@@ -129,11 +157,12 @@ export default async ({ app, router }) => {
   }
 
   // Register global components
-  app.component('KAction', await kdkCoreUtils.loadComponent('KAction'))
+  app.component('KAction', await kdkCoreUtils.loadComponent('action/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))
   app.component('KStamp', await kdkCoreUtils.loadComponent('KStamp'))
   app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))
   app.component('KDialog', await kdkCoreUtils.loadComponent('KDialog'))
+  app.component('KMenu', await kdkCoreUtils.loadComponent('menu/KMenu'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))

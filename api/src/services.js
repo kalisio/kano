@@ -51,6 +51,9 @@ export default async function () {
           can('read', name)
           if (name === 'probes') can('create', name)
         })
+        // We then need to update abilities cache
+        const authorisationService = app.getService('authorisations')
+        if (authorisationService) authorisationService.clearAbilities()
       }
     })
     await app.configure(kCore)

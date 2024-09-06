@@ -31,7 +31,8 @@ sidebarDepth: 3
 
 **Major breaking changes for customized versions or iframe integration use cases:**\
 💥 changed layer variable unit from `units` to `unit`,\
-💥 local storage keys now automatically prefixed by configured application name in kebab case,\
+💥 local storage keys now automatically prefixed by configured application name in kebab case (e.g. `my-app-jwt` for `MyApp` name),\
+💥 layout elements in client config are now prefixed by `layout` (e.g. `layout.windows` or `layout.panes`),
 💥 simple style cannot be defined anymore in feature `style` property,\
 💥 engine/layer style definition ([details](https://github.com/kalisio/kdk/issues/816)).
 

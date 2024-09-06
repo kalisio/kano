@@ -37,7 +37,14 @@ You must use the same version of the **post-robot** library as the one used by *
 
 In addition to the commands used to access mixin methods there are a couple of dedicated commands listened by Kano to:
 * `setLocalStorage` set key/value pairs (provided as event data payload) in its local storage, typically useful to inject access tokens
-* `setConfiguration` set key/value pairs to override its configuration, typically useful to configure available components or actions
+* `setConfiguration` set key/value pairs to override its [default configuration](../reference/configuration.md), typically useful to configure application name, available components or actions
+
+The following keys can be set in local storage to alter the application behaviour:
+* `appName-jwt` to skip the login screen by injecting an authentication token
+* `appName-welcome` as `false` to avoid displaying the welcome screen on first login
+* `appName-install` as `false` to avoid displaying the PWA installation screen
+* `appName-disconnect-dialog` as `false` to avoid displaying the disconnection screen when server connection is lost
+* `appName-reconnect-dialog` as `false` to avoid displaying the reconnection screen when server connection is restaured
 
 There are also some dedicated events to be listened by integrating application:
 * `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
@@ -50,10 +57,13 @@ There are also some dedicated events to be listened by integrating application:
 * `map-destroyed` when the 2D map component has been destroyed in the Kano application before switching to another route
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
 * `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
+* `layer-add` whenever a new layer will be added to the 2D/3D map
 * `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
 * `layer-removed` whenever a layer has been removed from the 2D/3D map
 * `layer-shown` whenever a layer has been shown in the 2D/3D map
 * `layer-hidden` whenever a new layer has been hidden in the 2D/3D map
+* `layer-update` whenever a real-time GeoJson layer will be updated in the 2D/3D map
+* `layer-updated` whenever a real-time GeoJson layer has been updated in the 2D/3D map
 * `click` whenever a feature has been clicked on a layer in the 2D/3D map, will provide the `feature` and `layer` (descriptor) as data payload properties
 
 ::: warning
@@ -72,7 +82,7 @@ Here is a simple code sample:
 	  	postRobot.send(kano, 'setConfiguration', { 'appName': 'xxx' })
 	  	.then(function() {
 		  // Optionnaly set a valid token to avoid authentication
-		  return postRobot.send(kano, 'setLocalStorage', { 'kano-jwt': 'xxx' })
+		  return postRobot.send(kano, 'setLocalStorage', { 'xxx-jwt': 'yyy' })
 		})
 	  	.then(function() {
 		  // Show and zoom to a layer
@@ -89,6 +99,31 @@ Here is a simple code sample:
 	    })
 	  })
 	</script>
+```
+
+The `layer-add` and `layer-update` events are particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
+```js
+postRobot.on('layer-add', (event) => {
+    const layer = event.data
+    if (layer.name === 'MyLayer') {
+      // Update the layer, eg change the data filter
+      Object.assign(layer.baseQuery, { 'properties.user': 'MyUser' })
+      return layer
+    }
+  })
+postRobot.on('layer-update', (event) => {
+    const { name, geoJson } = event.data
+    if (name === 'MyLayer') {
+      const features = geoJson.features || [geoJson]
+      return {
+        type: 'FeatureCollection',
+        features: features.map(feature => {
+          // Update the features
+          ...
+        })
+      }
+    }
+  })
 ```
 
 A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
@@ -122,6 +157,29 @@ Here is a simple code sample:
       })
     })
   </script>
+```
+
+### Client-side hooks
+
+As you cannot directly access the underlying Feathers services from the iframe, the API allows you to setup events to be sent whenever a hook is run. Upon event reception you will get hook **items** as input, can alter it and send it back as output. This way the original hook items will be altered as usual in Kano.
+
+```js
+await postRobot.send(kano, 'hooks', {
+  service: 'catalog',
+  // Emitted event names can be changed, by default it will look like eg 'catalog-after-find-hook'
+  hooks: { after: { find: { name: 'catalog-loaded' } } }
+})
+```
+
+```js
+postRobot.on('catalog-loaded', (event) => {
+  const { items } = event.data
+  // Update items
+  items.forEach(item => {
+    ...
+  })
+  return items
+})
 ```
 
 ### Managing events
@@ -158,7 +216,7 @@ Others clients can listen to this custom event like this:
 
 **Kano** is powered by the [KDK](https://kalisio.github.io/kdk) and rely on its main abstractions. If you'd like to develop an application based on Kano or extend Kano we assume you are familiar with this technology. Indeed, **Kano** is based on the **KDK** and makes the best use of all the features offered by the provided [cartographic components and services](../reference/api.md).
 
-### Add components
+### Add stickies
 
 The most simple way to develop in Kano is to design and integrate your own components in the 2D or 3D activity. For this you simply have to
 1. Put you single-file component(s) in the `src/components` folder (e.g. `MyComponent.vue`)
@@ -166,10 +224,9 @@ The most simple way to develop in Kano is to design and integrate your own compo
 ```js
 module.exports = {
   mapActivity: { // Can also be globeActivity
-    page: {
+    stickies: {
       content: [{
-        id: 'my-component',
-        component: 'layout/KPageSticky', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
+        id: 'my-component', position: 'left', offset: [18, 0], content: [{ component: 'MyComponent' }]
       }]
     }
   }

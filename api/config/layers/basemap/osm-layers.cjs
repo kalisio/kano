@@ -33,7 +33,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-bright@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
     }
   },
   {
@@ -69,7 +70,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-dark@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
     }
   },
   {
@@ -106,7 +108,36 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     },
     cesium: {
       type: 'TileMapService',
-      url: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR`
+      url: `${tmsUrl}/osm-terrain-bright@GLOBAL_WEBMERCATOR`,
+      maximumLevel: 18
+    }
+  },
+  {
+    name: 'Layers.OSM_BUILDINGS',
+    description: 'Layers.OSM_BUILDINGS_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          OSM_BUILDINGS: 'Bâtiments',
+          OSM_BUILDINGS_DESCRIPTION: 'Données OSM Buildings'
+        }
+      },
+      en: {
+        Layers: {
+          OSM_BUILDINGS: 'Buildings',
+          OSM_BUILDINGS_DESCRIPTION: 'OSM Buildings data'
+        }
+      }
+    },
+    tags: [
+      'street',
+      'buildings'
+    ],
+    icon: 'terrain',
+    attribution: 'OSM Buildings © <a href="https://osmbuildings.org/">OSMBuildings</a> contributors',
+    type: 'OverlayLayer',
+    cesium: {
+      type: 'OsmBuildings'
     }
   }]
 }

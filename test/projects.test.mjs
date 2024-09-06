@@ -5,12 +5,12 @@ import { core, map } from '@kalisio/kdk/test.client.js'
 
 const suite = 'projects'
 
-const catalogLayersTab = 'catalog-layers-tab'
-const userLayersTab = 'user-layers-tab'
-const userViewsTab = 'user-views-tab'
-const userProjectsTab = 'user-projects-tab'
-const projectLayersTab = 'project-layers-tab'
-const projectViewsTab = 'project-views-tab'
+const catalogLayersTab = 'catalog-layers'
+const userLayersTab = 'user-layers'
+const userViewsTab = 'user-views'
+const userProjectsTab = 'user-projects'
+const projectLayersTab = 'project-layers'
+const projectViewsTab = 'project-views'
 
 describe(`suite:${suite}`, () => {
   let runner, page

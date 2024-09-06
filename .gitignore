@@ -74,6 +74,9 @@ config/client-config.json
 # Test
 test/run
 
+#Cesium assets
+public/Cesium
+
 # KDK extras
 public/icons/kdk
 public/kalisio.png

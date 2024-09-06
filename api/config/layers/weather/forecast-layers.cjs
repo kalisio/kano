@@ -7,12 +7,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          WIND_TILED: 'Vent',
+          WIND_TILED: 'Vent à 10m',
           WIND_DESCRIPTION: 'Vitesse et direction'
         },
         Variables: {
-          WIND_SPEED: 'Vitesse',
-          WIND_DIRECTION: 'Direction'
+          WIND_SPEED: 'Vitesse à 10m',
+          WIND_DIRECTION: 'Direction à 10m'
         },
         Levels: {
           PRESSURE: 'Pression'
@@ -20,12 +20,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          WIND_TILED: 'Wind',
+          WIND_TILED: 'Wind at 10m',
           WIND_DESCRIPTION: 'Speed and direction'
         },
         Variables: {
-          WIND_SPEED: 'Speed',
-          WIND_DIRECTION: 'Direction'
+          WIND_SPEED: 'Speed at 10m',
+          WIND_DIRECTION: 'Direction at 10m'
         },
         Levels: {
           PRESSURE: 'Pressure'
@@ -131,20 +131,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          GUST_TILED: 'Rafales',
+          GUST_TILED: 'Rafales à 10m',
           GUST_DESCRIPTION: 'Vitesse maximale du vent'
         },
         Variables: {
-          GUST: 'Rafales'
+          GUST: 'Rafales à 10m'
         }
       },
       en: {
         Layers: {
-          GUST_TILED: 'Gust',
+          GUST_TILED: 'Gust at 10m',
           GUST_DESCRIPTION: 'Maximum wind speed'
         },
         Variables: {
-          GUST: 'Gust'
+          GUST: 'Gust at 10m'
         }
       }
     },
@@ -321,20 +321,20 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          TEMPERATURE_TILED: 'Température',
+          TEMPERATURE_TILED: 'Température à 2m',
           TEMPERATURE_DESCRIPTION: 'Température moyenne'
         },
         Variables: {
-          TEMPERATURE: 'Température'
+          TEMPERATURE: 'Température à 2m'
         }
       },
       en: {
         Layers: {
-          TEMPERATURE_TILED: 'Temperature',
+          TEMPERATURE_TILED: 'Temperature at 2m',
           TEMPERATURE_DESCRIPTION: 'Mean temperature'
         },
         Variables: {
-          TEMPERATURE: 'Temperature'
+          TEMPERATURE: 'Temperature at 2m'
         }
       }
     },

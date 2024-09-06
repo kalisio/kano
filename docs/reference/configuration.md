@@ -4,13 +4,13 @@ sidebarDepth: 3
 
 # Configuration
 
-The default backend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/api/config/default.js).
+The default backend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/api/config/default.cjs).
 
-Most options come from the "standard" backend [configuration](https://kalisio.github.io/kdk/guides/basics/step-by-step.html#configuring-a-kapp) of **KDK** based app.
+Most options come from the "standard" backend [configuration](https://kalisio.github.io/kApp/reference/configuration.html#backend-side) of **KDK** based app.
 
 The default frontend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/config/default.js).
 
-Most options come from the "standard" frontend [configuration](https://kalisio.github.io/kdk/guides/basics/step-by-step.html#configuring-a-kapp) of **KDK** based app, here are the main ones:
+Most options come from the "standard" frontend [configuration](https://kalisio.github.io/kApp/reference/configuration.html#frontend-side) of **KDK** based app, here are the main ones:
 * **appName**: displayed application name,
 * **appLogo**: displayed application logo,
 * **theme**: the theme to be used,
@@ -46,7 +46,7 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
   * **rightPane**: right pane components configuration
     * **content**: list of components to be displayed,
     * **filter**: component filter using any expression supported by [sift](https://github.com/crcn/sift.js),
-  * **page**: page components configuration (can be used to add your [own components](./advanced-usage.md#developing-in-kano))
+  * **page**: page components configuration (can be used to add your [own components](../guides/advanced-usage.md#developing-in-kano))
     * **content**: list of components to be displayed,
     * **filter**: component filter using any expression supported by [sift](https://github.com/crcn/sift.js),
   * **window**: window (i.e. widgets) configuration
@@ -66,12 +66,12 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
     * **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
   * **engine**: 2D map view configuration
     * **viewer**: 2D map initialization [options](https://leafletjs.com/reference.html#map-option),
-    * **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style) for polygons/lines,
-    * **pointStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style) for points,
-    * **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.html#map-popup),
-    * **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.html#map-tooltip),
-    * **cluster**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.html#map-style),
-    * **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
+    * **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) for polygons/lines,
+    * **pointStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) for points,
+    * **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-popup),
+    * **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-tooltip),
+    * **cluster**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style),
+    * **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/map-mixins.html#file-layer),
 * **globeActivity**: 3D globe activity configuration
   * **topPane**: application bar components configuration
     * **content**: list of components to be displayed according to current mode,
@@ -85,7 +85,7 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
   * **rightPane**: right pane components configuration
     * **content**: list of components to be displayed,
     * **filter**: component filter using any expression supported by [sift](https://github.com/crcn/sift.js),
-  * **page**: page components configuration (can be used to add your [own components](./advanced-usage.md#developing-in-kano))
+  * **page**: page components configuration (can be used to add your [own components](../guides/advanced-usage.md#developing-in-kano))
     * **content**: list of components to be displayed,
     * **filter**: component filter using any expression supported by [sift](https://github.com/crcn/sift.js),
   * **window**: window (i.e. widgets) configuration
@@ -108,10 +108,10 @@ Most options come from the "standard" frontend [configuration](https://kalisio.g
     * **layers**: set it to `true` (`false` by default) in order to restore the current visible layers on page refresh
   * **engine**: 3D globe view configuration
   	* **viewer**: 3D globe initialization [options](https://cesiumjs.org/Cesium/Build/Documentation/Viewer.html#Viewer)
-  	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/mixins.html#file-layer),
-  	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style) for polygons/lines/points,
-  	* **entityStyle**: default [entity style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style),
-  	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-tooltip),
-  	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-popup),
-  	* **clusterStyle**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style),
-  	* **cluster**: default GeoJSON [cluster options](https://kalisio.github.io/kdk/api/map/mixins.html#globe-style)
+  	* **fileLayers**: default file layer [options](https://kalisio.github.io/kdk/api/map/globe-mixins.html#file-layer),
+  	* **featureStyle**: default GeoJSON [layer style](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-style) for polygons/lines/points,
+  	* **entityStyle**: default [entity style](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-style),
+  	* **tooltip**: default GeoJSON [tooltip style](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-tooltip),
+  	* **popup**: default GeoJSON [popup style](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-popup),
+  	* **clusterStyle**: default GeoJSON [clustering style](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-style),
+  	* **cluster**: default GeoJSON [cluster options](https://kalisio.github.io/kdk/api/map/globe-mixins.html#globe-style)

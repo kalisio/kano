@@ -1,25 +1,23 @@
 <template>
   <div id="globe-credit"/>
   <KPage :padding="false">
-    <template v-slot:page-content>
-      <!-- Globe -->
-      <div id="globe" :ref="configureGlobe" :style="viewStyle">
-        <q-resize-observer @resize="onGlobeResized" />
-      </div>
-      <!-- Child views -->
-      <router-view />
-    </template>
+    <!-- Globe -->
+    <div id="globe" :ref="configureGlobe" :style="viewStyle">
+      <q-resize-observer @resize="onGlobeResized" />
+    </div>
+    <!-- Child views -->
+    <router-view />
   </KPage>
 </template>
 
 <script>
 import _ from 'lodash'
 import { computed } from 'vue'
-import { mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
-import utils from '../utils.js'
+import * as utils from '../utils'
 import config from 'config'
 
 const name = 'globeActivity'
@@ -38,7 +36,6 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
-    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -53,14 +50,14 @@ export default {
   },
   data () {
     return {
-      leftWindow: this.$store.get('windows.left'),
-      rightWindow: this.$store.get('windows.right'),
-      topWindow: this.$store.get('windows.top'),
-      bottomWindow: this.$store.get('windows.bottom'),
-      leftPane: this.$store.get('leftPane'),
-      rightPane: this.$store.get('rightPane'),
-      topPane: this.$store.get('topPane'),
-      bottomPane: this.$store.get('bottomPane')
+      leftWindow: this.$store.get('layout.windows.left'),
+      rightWindow: this.$store.get('layout.windows.right'),
+      topWindow: this.$store.get('layout.windows.top'),
+      bottomWindow: this.$store.get('layout.windows.bottom'),
+      leftPane: this.$store.get('layout.panes.left'),
+      rightPane: this.$store.get('layout.panes.right'),
+      topPane: this.$store.get('layout.panes.top'),
+      bottomPane: this.$store.get('layout.panes.bottom')
     }
   },
   watch: {
@@ -88,6 +85,17 @@ export default {
       handler () {
         this.refreshLayers()
       }
+    },
+    'selection.items': {
+      handler () {
+        this.updateSelection()
+      },
+      deep: true
+    },
+    'probe.item': {
+      handler () {
+        this.updateSelection()
+      }
     }
   },
   methods: {
@@ -106,6 +114,43 @@ export default {
     getViewKey () {
       // We'd like to share view settings between 2D/3D
       return this.geAppName.toLowerCase() + '-view'
+    },
+    async addLayer (layer) {
+      // We let any embedding iframe process layer if required
+      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
+      // Do not erase with returned object as some internals might have been lost in serialization
+      if (response && response.data) _.merge(layer, response.data)
+      layer = await kMapMixins.globe.baseGlobe.methods.addLayer.call(this, layer)
+      return layer
+    },
+    async updateLayer (name, geoJson, options = {}) {
+      // We let any embedding iframe process features if required
+      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    handleWidget (widget) {
+      // If window already open on another widget keep it
+      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
+    },
+    async updateTimeSeries () {
+      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
+    },
+    updateHighlights () {
+      this.clearHighlights()
+      this.getSelectedItems().forEach(item => {
+        this.highlight(item.feature || item.location, item.layer)
+      })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
+    },
+    async updateSelection () {
+      this.updateHighlights()
+      await this.updateTimeSeries()
+      if (this.hasProbedLocation() || this.hasSelectedItems()) {
+        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
+      } else {
+        // Hide the window
+        Layout.setWindowVisible('top', false)
+      }
     },
     async onClicked (options, event) {
       const latlng = _.get(event, 'latlng')
@@ -151,6 +196,10 @@ export default {
     this.$engineEvents.on('layer-hidden', this.onHiddenLayerEvent)
     this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
     this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
+    this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
+    this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
+    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
+    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
   },
   beforeUnmount () {
     this.$engineEvents.off('click', this.onClicked)
@@ -159,16 +208,26 @@ export default {
     this.$engineEvents.off('layer-shown', this.onShownLayerEvent)
     this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
     this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
+    this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
+    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
+    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
   },
   async setup () {
+    const activity = kMapComposables.useActivity(name)
+    const project = kMapComposables.useProject()
+    // Initialize state and project
+    Object.assign(activity.state, {
+      timeSeries: []
+    })
+    await project.loadProject()
+    activity.setSelectionMode('multiple')
     const expose = {
-      ...kMapComposables.useActivity(name),
-      ...kMapComposables.useProject()
+      ...activity,
+      ...project
     }
-    await expose.loadProject()
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
     return expose

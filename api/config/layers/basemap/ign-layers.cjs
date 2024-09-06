@@ -35,7 +35,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       format: 'image/png',
       layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
       style: 'normal',
-      tileMatrixSetID: 'PM'
+      tileMatrixSetID: 'PM',
+      maximumLevel: 19
     }
   }, {
     name: 'Layers.IGN_IMAGERY',
@@ -73,7 +74,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       format: 'image/png',
       layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
       style: 'normal',
-      tileMatrixSetID: 'PM'
+      tileMatrixSetID: 'PM',
+      maximumLevel: 19
     }
   }]
 }

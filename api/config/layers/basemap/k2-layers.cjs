@@ -19,7 +19,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'terrain'
     ],
-    iconUrl: 'statics/Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
+    iconUrl: 'Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
     icon: 'terrain',
     attribution: 'High-resolution, mesh-based terrain for the entire globe.\nBy http://www.kalisio.com',
     type: 'TerrainLayer',

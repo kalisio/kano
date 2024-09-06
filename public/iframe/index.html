@@ -301,7 +301,7 @@
                 type: 'geoJson',
                 realtime: true,
                 isVisible: true,
-                'marker-type': 'circleMarker',
+                'marker-symbol' : 'circle',
                 'radius': 6,
                 'stroke-width': 0,
                 'fill-opacity': 0.75,
@@ -402,21 +402,39 @@
       function updateFlightpathLayer(name) {
         // Setup random path
         let coordinates = flightpath.map(function(point) {
-          return [ point[0] + 0.05 * (Math.random() - 0.5),
-                   point[1] + 0.05 * (Math.random() - 0.5),
-                   10000 * Math.random() ] // Random altitude
+          return [ point[0] + 0.01 * (Math.random() - 0.5),
+                   point[1] + 0.01 * (Math.random() - 0.5),
+                   1000 * Math.random() ] // Random altitude
         })
         let path = { type: 'FeatureCollection', features: [] }
-        var middle = parseInt(coordinates.length / 2)
+        let middle = parseInt(coordinates.length / 2)
+        let random = Math.random()
         path.features.push({
           type: 'Feature',
-          properties: { id: 0, message: 'ADS-B KO', stroke: Math.random() > 0.5 ? '#000000' : '#FFFF00', weight: 1 + 5 * Math.random() },
+          properties: { id: 0, message: 'ADS-B KO', stroke: random > 0.5 ? '#000000' : '#00FF00', weight: 1 + 5 * random, offset: -5,
+            entityStyle: { polyline: { clampToGround: true } } },
           geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
         })
+        // Same with offset
         path.features.push({
           type: 'Feature',
-          properties: { id: 1, message: 'ADS-B OK', stroke: Math.random() > 0.5 ? '#FF00FF' : '#00FFFF', weight: 1 + 5 * Math.random(), 'dash-array': '20, 20', entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: Math.random() > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(middle, flightpath.length)}
+          properties: { id: 1, message: 'ADS-B KO', stroke: random > 0.5 ? '#00FF00' : '#000000', weight: 10, 'dash-array': '3, 20', 'line-cap': 'round', 'line-join': 'round', offset: 5,
+            entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: random > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
+        })
+        const weight = 5 + 5 * random
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 2, message: 'ADS-B OK', stroke: random > 0.5 ? '#00FFFF' : '#FF00FF', weight,
+            entityStyle: { polyline: { clampToGround: true, zIndex: 0 } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
+        })
+        // Same but thiner
+        path.features.push({
+          type: 'Feature',
+          properties: { id: 3, message: 'ADS-B OK', stroke: random > 0.5 ? '#FF00FF' : '#00FFFF', weight: weight - 4,
+            entityStyle: { polyline: { clampToGround: true, zIndex: 1 } } },
+          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
         })
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
@@ -547,14 +565,14 @@
         // Departure/Arrival airports
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'TOULOUSE BLAGNAC', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+          properties: { name: 'TOULOUSE BLAGNAC', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#33c137',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.368333, 43.635, 499.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'WILEY POST-WILL ROGERS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#33c137',
+          properties: { name: 'WILEY POST-WILL ROGERS', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#33c137',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#33c137', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -156.763333, 71.286667, 44.0 ] }
@@ -562,14 +580,14 @@
         // Alternative Departure/Arrival airports
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+          properties: { name: 'TOULOUSE MONTAUDRAN', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#f9b40f',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ 1.473333, 43.568333, 0.0 ] }
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'BARTER ISLAND LRRS', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#f9b40f',
+          properties: { name: 'BARTER ISLAND LRRS', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#f9b40f',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#f9b40f', 'fill-opacity': 0.5,
                         tooltip: { property: ['name'] } },
           geometry: { type: 'Point', coordinates: [ -143.578333, 70.135, 0.0 ] }
@@ -642,7 +660,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'KEFLAVIK AIRPORT', 'marker-type': 'circleMarker', 'radius': 10, 'stroke': '#0000ff',
+          properties: { name: 'KEFLAVIK AIRPORT', 'marker-symbol' : 'circle', 'radius': 10, 'stroke': '#0000ff',
                         'stroke-opacity': 1, 'stroke-width': 0, 'fill': '#0000ff', 'fill-opacity': 0.5,
                         tooltip: { property: 'name' } },
           geometry: { type: 'Point', coordinates: [ -22.6055, 63.985, 171.0 ] }
@@ -660,40 +678,85 @@
           return postRobot.send(kano, component, { command: 'setSelectedLevel', args: [level] })
         })
       }
+      function updateBearing() {
+        postRobot.send(kano, component, { command: 'getCenter' })
+        .then(function (result) {
+          const { longitude, latitude, zoomLevel, altitude } = result.data
+          if (component === 'map') postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 360 * Math.random()] })
+          else postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 360 * Math.random()] })
+        })
+      }
     </script>
+    <style>
+      html, body {
+          margin: 0;
+          height: 100%;
+          min-height: 100%;
+          background: grey;
+      }
+      .toplevel-container {
+          display: flex;
+          flex-direction: row;
+          min-height: 100%;
+      }
+      .button-container {
+          flex: 0 1 auto;
+          gap: 10px;
+          grid-auto-rows: min-content;
+      }
+      .packed-grid {
+          display: grid;
+      }
+      .iframe-container {
+          flex: 1 1 auto;
+      }
+      .iframe-container iframe {
+          border: 0;
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+      }
+    </style>
   </head>
-  <body style="background-color: grey">
-    <table style="margin-left:auto;margin-right:auto;">
-      <thead>
-        <tr><th colspan="2"><h1>Kano IFrame Integration Sample</h1></th></tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td style="text-align:center;">
-          <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button></br>
-          <button type="button" onclick="toggleBackground()">Switch background</button></br>
-          <button type="button" onclick="toggleStaticLayer('Layers.AIRPORTS')">Switch airports</button></br>
-          <button type="button" onclick="toggleMetarTafLayer('METAR')">Switch METAR</button></br>
-          <button type="button" onclick="updateMetarTafLayer('METAR')">Update METAR</button></br>
-          <button type="button" onclick="toggleAircraftLayer('Aircraft')">Switch aircraft</button></br>
-          <button type="button" onclick="updateAircraftLayer('Aircraft')">Update aircraft</button></br>
-          <button type="button" onclick="toggleAcarsLayer('ACARS')">Switch ACARS</button></br>
-          <button type="button" onclick="updateAcarsLayer('ACARS')">Update ACARS</button></br>
-          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button></br>
-          <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button></br>
-          <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button></br>
-          <button type="button" onclick="updateGradientFlightpathLayer('GradientFlightpath')">Update gradient flightpath</button></br>
-          <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button></br>
-          <button type="button" onclick="updateForecastLevel()">Update forecast level</button></br>
-        </td>
-        <td>
-          <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
-          <iframe id="kano" title="Kano" allow="geolocation *; clipboard-write" allowfullscreen style="width: 1024px; height: 768px;" src="/">
-          </iframe>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <body>
+    <div class="toplevel-container">
+      <div class="button-container packed-grid">
+        <div class="packed-grid">
+          <button type="button" onclick="toggleGlobe()">Switch 2D/3D</button>
+          <button type="button" onclick="toggleBackground()">Switch background</button>
+        </div>
+        <button type="button" onclick="toggleStaticLayer('Layers.AIRPORTS')">Switch airports</button>
+        <div class="packed-grid">
+          <button type="button" onclick="toggleMetarTafLayer('METAR')">Switch METAR</button>
+          <button type="button" onclick="updateMetarTafLayer('METAR')">Update METAR</button>
+        </div>
+        <div class="packed-grid">
+          <button type="button" onclick="toggleAircraftLayer('Aircraft')">Switch aircraft</button>
+          <button type="button" onclick="updateAircraftLayer('Aircraft')">Update aircraft</button>
+        </div>
+        <div class="packed-grid">
+          <button type="button" onclick="toggleAcarsLayer('ACARS')">Switch ACARS</button>
+          <button type="button" onclick="updateAcarsLayer('ACARS')">Update ACARS</button>
+        </div>
+        <div class="packed-grid">
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button>
+          <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button>
+        </div>
+        <div class="packed-grid">
+          <button type="button" onclick="toggleGradientFlightpathLayer('GradientFlightpath')">Switch gradient flightpath</button>
+          <button type="button" onclick="updateGradientFlightpathLayer('GradientFlightpath')">Update gradient flightpath</button>
+        </div>
+        <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button>
+        <button type="button" onclick="updateForecastLevel()">Update forecast level</button>
+        <button type="button" onclick="updateBearing()">Update map bearing</button>
+      </div>
+      <div class="iframe-container">
+        <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
+        <iframe id="kano" title="Kano" allow="geolocation *; clipboard-write" allowfullscreen src="/">
+        </iframe>
+      </div>
+    </div>
     <script>
       var kano = document.getElementById('kano').contentWindow
       postRobot.on('kano-ready', () => {
@@ -705,7 +768,10 @@
           'layout.leftPane.filter': { id: { $ne: 'logout' } },
           'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } }, // No fullscreen mode
           'mapActivity.fab.filter': { id: { $in: ['import-layer', 'probe-location'] } },
-          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } } // No import in globe
+          'globeActivity.fab.filter': { id: { $in: ['probe-location'] } }, // No import in globe
+          // Activate rotation in 2D
+          'engines.leaflet.viewer.rotate': true,
+          'engines.leaflet.viewer.rotateControl': false
         })
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrYWxpc2lvIiwiaXNzIjoia2FsaXNpbyJ9.qwOZjkIcAqo6HPGESu0_5-f6g9VkN6y6pN1HJKJF6Sg'
@@ -739,6 +805,11 @@
       postRobot.on('layer-hidden', (event) => console.log(event.data.layer.name + ' has been hidden'))
       postRobot.on('layer-added', (event) => console.log(event.data.layer.name + ' has been added'))
       postRobot.on('layer-removed', (event) => console.log(event.data.layer.name + ' has been removed'))
+      // Layouts related events
+      postRobot.on('pane-opened', (event) => console.log(event.data.placement + ' pane has been opened'))
+      postRobot.on('pane-closed', (event) => console.log(event.data.placement + ' pane has been closed'))
+      postRobot.on('window-opened', (event) => console.log(event.data.placement + ' window has been opened'))
+      postRobot.on('window-closed', (event) => console.log(event.data.placement + ' window has been closed'))
       // Extract FR24 data
       var coords = flightradar.geometry.coordinates
       var heights = []
