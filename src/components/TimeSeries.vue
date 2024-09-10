@@ -94,22 +94,15 @@ const isSelectorVisible = computed(() => {
   return visible && !hasSingleSerie.value
 })
 
-function fetchData () {
-  if (!chartRef.value) return
-  _.forEach(timeSeries.value, timeSerie => {
-    _.forEach(timeSerie.series, serie => {
-      serie.fetch()
-    })
-  })
-}
-function updateChart () {
-  if (!chartRef.value) return
-  chartRef.value.update()
-}
 // Watch change in time series driavers like time range, format, ...
-watch(Store.get('time.range'), () => {
+watch(Store.get('time.range'), async () => {
+  if (chartRef.value) {
+    // Reset any zoom
+    chartRef.value.resetZoom()
+    isZoomed.value = true
+  }
   // Update underlying data
-  fetchData()
+  await fetchData()
   // Then graphics
   updateChart()
 })
@@ -119,6 +112,21 @@ watch([Store.get('time.format'), Store.get('units.default')], () => {
 })
 
 // Functions
+async function fetchData () {
+  if (!chartRef.value) return
+  const promises = []
+  _.forEach(timeSeries.value, timeSerie => {
+    _.forEach(timeSerie.series, serie => {
+      promises.push(serie.fetch())
+    })
+  })
+  // Need to wait for data before updating
+  await Promise.all(promises)
+}
+function updateChart () {
+  if (!chartRef.value) return
+  chartRef.value.update()
+}
 function isPinned (timeSerie) {
   timeSerie = _.find(state.timeSeries, { id: timeSerie.id })
   return timeSerie && timeSerie.pinned
