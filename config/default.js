@@ -413,7 +413,7 @@ module.exports = {
     fallback: 'en'
   },
   logs: {
-    level: (process.env.NODE_ENV === 'development' ? 'debug' : 'info')
+    level: ((process.env.NODE_ENV === 'development') || process.env.DEBUG) ? 'debug' : 'info')
   },
   units: {
     // Nothing specific, use defaults
