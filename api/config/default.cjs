@@ -142,6 +142,7 @@ module.exports = {
   distribution: { // Distribute data services only
     services: (service) => !service.path.includes('users') &&
                            !service.path.includes('authentication') &&
+                           !service.path.includes(':provider') &&
                            !service.path.includes('authorisations') &&
                            !service.path.includes('features') &&
                            !service.path.includes('projects') &&

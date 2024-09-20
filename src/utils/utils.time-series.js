@@ -70,7 +70,7 @@ export async function updateTimeSeries (previousTimeSeries) {
   let timeSeries = []
   if (hasProbedLocation()) {
     const coordinates = kMapUtils.formatUserCoordinates(getProbedLocation().lat, getProbedLocation().lng, Store.get('locationFormat', 'FFf'))
-    const label = `${activity.forecastModel.label} (${coordinates})` + (activity.forecastLevel ? featureLevel : '')
+    const label = (activity.forecastModel ? activity.forecastModel.label : '') + `(${coordinates})` + (activity.forecastLevel ? featureLevel : '')
     // Due to a possible custom probe function we provide possible visible layers as input
     const variableLayers = (activity.probeLocation ? _.values(activity.layers).filter(sift({ variables: { $exists: true }, isVisible: true })) : [])
     timeSeries.push({
