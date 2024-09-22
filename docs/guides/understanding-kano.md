@@ -8,6 +8,8 @@ sidebarDepth: 3
 
 Although Kano is a web application for end-users, it has also been designed to be integrated in third-party business applications and customized by developers (check out [advanced usage](./advanced-usage.md)). Using a single and simple API, Kano provides developers with the capability to easily develop 2D and 3D geospatial applications (check out [the API reference](../reference/api.md)). Last but not least, Kano comes with a built-in configuration for a set of geospatial data (check out [installation guide](./installing-kano.md)). However, you can complete it with your [own spatial data](./customizing-kano.md).
 
+You can read an [introductory article](https://medium.com/@claustres/kano-geospatial-visualizer-v2-is-out-4009f0fc94ea) and one about how you can [extend its capabilities](https://medium.com/@claustres/extending-kano-capabilities-ba83ce43f0df).
+
 ## Key concepts
 
 Here is a quick rundown of the *key concepts* to handle when you're just getting started with Kano or *geographic information system* (GIS). In a nutshell, like any other GIS tool, Kano can be used to map, analyze, and assess real-world problems based on data, which is spatial or geographical in nature.
