@@ -4,6 +4,16 @@ sidebarDepth: 3
 
 # Changelog
 
+## v2.3.0 - Unreleased {#v2.3.0}
+
+**Major enhancements:**\
+👉 Bumped NodeJS to v20,\
+👉 Added `visibility` [style property](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) that can be templated.
+
+**Cartographic data enhancements:**\
+👉 Enhanced rendering and legend of various data layer,\
+👉 Bumped CesiumJS to v1.117 (3d rendering engine).
+
 ## v2.2.0 - March 1st, 2024
 
 **Major enhancements:**\
