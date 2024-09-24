@@ -30,6 +30,8 @@ sidebarDepth: 3
 ✅ Right opener not accessible when opening the right pane on mobile device,\
 ✅ `layer-updated` event was missing in globe activities.
 
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/12) and [KDK](https://github.com/kalisio/kdk/milestone/11).
+
 ## v2.2.0 - March 1st, 2024
 
 **Major enhancements:**\
