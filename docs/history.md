@@ -8,11 +8,11 @@ sidebarDepth: 3
 
 **Major enhancements:**\
 👉 Bumped NodeJS to v20,\
+👉 Bumped CesiumJS to v1.117 (3d rendering engine),\
 👉 Added `visibility` [style property](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) that can be templated.
 
 **Cartographic data enhancements:**\
-👉 Enhanced rendering and legend of various data layer,\
-👉 Bumped CesiumJS to v1.117 (3d rendering engine).
+👉 Enhanced rendering and legend of various data layer.
 
 ## v2.2.0 - March 1st, 2024
 
