@@ -60,7 +60,6 @@ const content = computed(() => {
     id: 'center-view',
     icon: 'las la-eye',
     tooltip: 'TimeSeries.CENTER_ON',
-    visible: 'probedVariables',
     handler: () => {
       if (hasProbedLocation()) centerOnProbe()
       else centerOnSelection()
