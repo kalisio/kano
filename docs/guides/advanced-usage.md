@@ -21,6 +21,7 @@ The [API](../reference/api.md) is a subset of the internal Kano components and u
 3. retrieve internal method call result externally
     * event response `data` is the method result object
 4. retrieve internal property externally
+    * the `property` property is the internal property name (e.g. `layers`)
     * event response `data` is the returned property value
 
 ::: tip
@@ -46,7 +47,44 @@ The following keys can be set in local storage to alter the application behaviou
 * `appName-disconnect-dialog` as `false` to avoid displaying the disconnection screen when server connection is lost
 * `appName-reconnect-dialog` as `false` to avoid displaying the reconnection screen when server connection is restaured
 
-There are also some dedicated events to be listened by integrating application:
+Here is a simple code sample:
+```html
+  <script src="https://cdn.jsdelivr.net/npm/post-robot@10.0.10/dist/post-robot.min.js"></script>
+  <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="kano.kalisio.com">
+  <script>
+    var kano = document.getElementById('kano').contentWindow
+    // Wait for Kano to be initialized
+    postRobot.on('kano-ready', function() {
+      // Optionnaly overrides default setup of Kano
+      postRobot.send(kano, 'setConfiguration', { 'appName': 'xxx' })
+      .then(function() {
+      // Optionnaly set a valid token to avoid authentication
+      return postRobot.send(kano, 'setLocalStorage', { 'xxx-jwt': 'yyy' })
+    })
+      .then(function() {
+      // Show and zoom to a layer
+      return postRobot.send(kano, 'map', { command: 'showLayer', args: 'Layer name' })
+    })
+    .then(function() {
+        return postRobot.send(kano, 'map', { command: 'zoomToLayer', args: 'Layer name' })
+      })
+    .then(function() {
+        return postRobot.send(kano, 'map', { property: 'layers' })
+      })
+    .then(function(result) {
+        console.log('Layer list', result.data)
+      })
+    })
+  </script>
+```
+
+There are also a lot of events to be listened by integrating application to be aware of Kano internal states or user behaviour.
+
+::: warning
+You should add a listener for each event in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
+:::
+
+The following ones are related to Kano states:
 * `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
 * `api-ready` when the Kano backend connection has been initialized in the iframe so that you can safely call the backend API
 * `kano-login` when the user has been authenticated in the Kano application
@@ -57,6 +95,8 @@ There are also some dedicated events to be listened by integrating application:
 * `map-destroyed` when the 2D map component has been destroyed in the Kano application before switching to another route
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
 * `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
+
+The following ones are related to layers management:
 * `layer-add` whenever a new layer will be added to the 2D/3D map
 * `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
 * `layer-removed` whenever a layer has been removed from the 2D/3D map
@@ -64,42 +104,6 @@ There are also some dedicated events to be listened by integrating application:
 * `layer-hidden` whenever a new layer has been hidden in the 2D/3D map
 * `layer-update` whenever a real-time GeoJson layer will be updated in the 2D/3D map
 * `layer-updated` whenever a real-time GeoJson layer has been updated in the 2D/3D map
-* `click` whenever a feature has been clicked on a layer in the 2D/3D map, will provide the `feature` and `layer` (descriptor) as data payload properties
-
-::: warning
-You should add a listener for each of the above events in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
-:::
-
-Here is a simple code sample:
-```html
-  <script src="https://cdn.jsdelivr.net/npm/post-robot@10.0.10/dist/post-robot.min.js"></script>
-  <iframe id="kano" title="Kano" allow="geolocation *" style="width: 1024px; height: 768px;" src="kano.kalisio.com">
-	<script>
-	  var kano = document.getElementById('kano').contentWindow
-	  // Wait for Kano to be initialized
-	  postRobot.on('kano-ready', function() {
-	  	// Optionnaly overrides default setup of Kano
-	  	postRobot.send(kano, 'setConfiguration', { 'appName': 'xxx' })
-	  	.then(function() {
-		  // Optionnaly set a valid token to avoid authentication
-		  return postRobot.send(kano, 'setLocalStorage', { 'xxx-jwt': 'yyy' })
-		})
-	  	.then(function() {
-		  // Show and zoom to a layer
-		  return postRobot.send(kano, 'map', { command: 'showLayer', args: 'Layer name' })
-		})
-		.then(function() {
-	      return postRobot.send(kano, 'map', { command: 'zoomToLayer', args: 'Layer name' })
-	    })
-		.then(function() {
-	      return postRobot.send(kano, 'map', { property: 'layers' })
-	    })
-		.then(function(result) {
-	      console.log('Layer list', result.data)
-	    })
-	  })
-	</script>
-```
 
 The `layer-add` and `layer-update` events are particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
 ```js
@@ -124,6 +128,34 @@ postRobot.on('layer-update', (event) => {
       }
     }
   })
+```
+
+The following ones are related to user interaction (mouse or gesture):
+* `click` whenever map or a feature from a layer has been clicked (or tapped) in the 2D/3D map, 
+* `dbclick` whenever map or a feature from a layer has been double-clicked (or tapped) in the 2D/3D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+* `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+* `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+* `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+* `mousemove` whenever the mouse moves on the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+
+User interaction events will provide you with at least `longitude`/`latitude` as data payload properties, as well as `feature` and `layer` (descriptor) when the target element is a feature from a layer.
+By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
+```js
+postRobot.send(kano, 'setConfiguration', {
+  // Allow more events to be emitted
+  'mapActivity.allowForwardEvents': ['mouseover', 'mouseout', 'mousemove', 'contextmenu']
+  // Do not receive these events
+  'mapActivity.disallowForwardEvents': ['mousemove']
+})
+// React to right-click (similar for others events like mouseover, mouseout, mousemove)
+postRobot.on('contextmenu', (event) => {
+  const { latitude, longitude, feature, layer } = event.data
+  if (feature) {
+    // The event targets a feature from a layer
+  } else {
+    // Otherwise the event targets the map background
+  }
+})
 ```
 
 A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
