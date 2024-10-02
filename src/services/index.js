@@ -15,23 +15,18 @@ async function createOfflineServices (api) {
       const serviceName = serviceNames[i]
       const service = services[serviceName]
       if (service.layerService) {
-        let afterFindHooks = [kMapHooks.geoJsonPaginationHook]
-        if (service.tiled) {
-          afterFindHooks.push(kMapHooks.tiledLayerHook)
-        }
-        let hooks = {
-          before: {
-            all: [kCoreHooks.removeServerSideParameters, kMapHooks.removeServerSideParameters],
-            create: kMapHooks.referenceCountCreateHook,
-            remove: kMapHooks.referenceCountRemoveHook
-          },
-          after: {
-            find: afterFindHooks
-          }
-        }
         await api.createOfflineService(serviceName, {
           snapshot: false,
-          hooks: hooks
+          hooks: {
+            before: {
+              all: [kCoreHooks.removeServerSideParameters, kMapHooks.removeServerSideParameters],
+              create: kMapHooks.referenceCountCreateHook,
+              remove: kMapHooks.referenceCountRemoveHook
+            },
+            after: {
+              find: [kMapHooks.geoJsonPaginationHook, kMapHooks.intersectBBoxHook]
+            }
+          }
         })
       } else {
         await api.createOfflineService(serviceName, {
