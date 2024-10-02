@@ -131,12 +131,12 @@ postRobot.on('layer-update', (event) => {
 ```
 
 The following ones are related to user interaction (mouse or gesture):
-* `click` whenever map or a feature from a layer has been clicked (or tapped) in the 2D/3D map, 
-* `dbclick` whenever map or a feature from a layer has been double-clicked (or tapped) in the 2D/3D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
-* `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
-* `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
-* `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
-* `mousemove` whenever the mouse moves on the 2D map, will provide `longitude`, `latitude`, `feature` and `layer` (descriptor) as data payload properties
+* `click` whenever map or a feature from a layer has been clicked (left button or tapped) in the 2D/3D map, 
+* `dbclick` whenever map or a feature from a layer has been double-clicked (left button or tapped) in the 2D/3D map,
+* `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map,
+* `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map,
+* `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
+* `mousemove` whenever the mouse moves on the 2D map.
 
 User interaction events will provide you with at least `longitude`/`latitude` as data payload properties, as well as `feature` and `layer` (descriptor) when the target element is a feature from a layer.
 By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
