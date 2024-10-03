@@ -261,7 +261,10 @@ export default {
           // Retrieve original layer options not processed ones
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
-          utils.sendEmbedEvent(leafletEvent, { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
+          utils.sendEmbedEvent(leafletEvent, {
+            longitude: latlng.lng, latitude: latlng.lat, feature, layer,
+            containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
+          })
         }
         this.leafletHandlers[leafletEvent] = handler
         this.$engineEvents.on(leafletEvent, handler)
