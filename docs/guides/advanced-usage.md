@@ -138,7 +138,12 @@ The following ones are related to user interaction (mouse or gesture):
 * `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
 * `mousemove` whenever the mouse moves on the 2D map.
 
-User interaction events will provide you with at least `longitude`/`latitude` as data payload properties, as well as `feature` and `layer` (descriptor) when the target element is a feature from a layer.
+User interaction events will provide you with the following properties as data payload:
+* `longitude` and `latitude` coordinates of the interaction,
+* `feature` and `layer` (descriptor) when the target element is a feature from a layer,
+* `containerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map сontainer,
+* `layerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map layer.
+
 By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
 ```js
 postRobot.send(kano, 'setConfiguration', {
@@ -149,7 +154,8 @@ postRobot.send(kano, 'setConfiguration', {
 })
 // React to right-click (similar for others events like mouseover, mouseout, mousemove)
 postRobot.on('contextmenu', (event) => {
-  const { latitude, longitude, feature, layer } = event.data
+  const { latitude, longitude, feature, layer, containerPoint } = event.data
+  const { x, y } = containerPoint
   if (feature) {
     // The event targets a feature from a layer
   } else {
