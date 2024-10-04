@@ -137,8 +137,10 @@ export default async ({ app, router }) => {
     })
   })
   // Listen to websocket events
-  Events.on('disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
-  Events.on('reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
+  Events.on('navigator-disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
+  Events.on('navigator-reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
+  Events.on('websocket-disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
+  Events.on('websocket-reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
 
   await utils.sendEmbedEvent('api-ready')
 
