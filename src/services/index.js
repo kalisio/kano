@@ -1,14 +1,10 @@
 import logger from 'loglevel'
 import kdkCore, { hooks as kCoreHooks } from '@kalisio/kdk/core.client'
 import kdkMap, { hooks as kMapHooks } from '@kalisio/kdk/map.client.map'
-import localforage from 'localforage'
+import { LocalForage } from '@kalisio/feathers-localforage'
 
 async function createOfflineServices (api) {
-  localforage.config({
-    name: 'offline_views',
-    storeName: 'cache_entries'
-  })
-  const services = await localforage.getItem('services')
+  const services = await LocalForage.getItem('services')
   if (services) {
     const serviceNames = Object.keys(services)
     for (let i = 0; i < serviceNames.length; i++) {

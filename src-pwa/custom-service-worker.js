@@ -3,9 +3,15 @@ import { registerRoute } from 'workbox-routing'
 import { NetworkFirst, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import logger from 'loglevel'
-import localforage from 'localforage'
+import { LocalForage } from '@kalisio/feathers-localforage'
+// Ensure same underlying configuration as we are in another process and instance may differ
+LocalForage.config({
+  name: 'offline_views',
+  storeName: 'cache_entries'
+})
 
 let cachedUrls
+let updatingCachedUrls = false
 // Disable workbox logs 
 self.__WB_DISABLE_DEV_LOGS = true
 
@@ -16,10 +22,17 @@ self.addEventListener('message', event => {
   }
 })
 
-// As route function cannot be async and localforage is we retrieve
+// As route function cannot be async and localforage is, we have to retrieve
 // the cached layer list on a reccurent basis to be able to respond synchronously
 setInterval(async () => {
-  cachedUrls = await localforage.keys()
+  // Avoid reentrance in any case
+  if (updatingCachedUrls) return
+  updatingCachedUrls = true
+  cachedUrls = new Map()
+  await LocalForage.iterate((value, key) => {
+    cachedUrls.set(key, value)
+  })
+  updatingCachedUrls = false
 }, 1000)
 
 // Caching for offline mode
@@ -38,7 +51,7 @@ registerRoute(
   ({url}) => {
     const key = new URL(url.href)
     key.searchParams.delete('jwt')
-    const isCached = cachedUrls && cachedUrls.includes(key.href)
+    const isCached = cachedUrls && cachedUrls.has(key.href)
     if (isCached) {
       logger.debug(`[Kano] Return response for ${url.href} from layers cache`)
     }
@@ -46,7 +59,7 @@ registerRoute(
   },
   new NetworkFirst({
     cacheName: 'layers',
-    plugins : [{cacheKeyWillBeUsed}]
+    plugins : [{ cacheKeyWillBeUsed }]
   })
 )
 // Register the `NetworkFirst` caching strategy for all others HTTP requests
