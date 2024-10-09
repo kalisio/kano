@@ -115,6 +115,8 @@ export default async ({ app, router }) => {
   })
   // Event bus dispatch
   postRobot.on('event', async (event) => {
+    // Does not make any sense in disconnected mode
+    if (api.isDisconnected) return
     const result = await serviceOperation({
       operation: 'create',
       service: 'events',
