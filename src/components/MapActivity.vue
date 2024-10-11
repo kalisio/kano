@@ -262,7 +262,7 @@ export default {
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
           utils.sendEmbedEvent(leafletEvent, {
-            longitude: latlng.lng, latitude: latlng.lat, feature, layer,
+            longitude: _.get(latlng, 'lng'), latitude: _.get(latlng, 'lat'), feature, layer,
             containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
           })
         }
@@ -301,7 +301,8 @@ export default {
   },
   mounted () {
     // Setup event connections
-    const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove']
+    const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
+      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'dragstart', 'dragend', 'drag']
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)

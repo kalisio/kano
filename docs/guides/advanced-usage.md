@@ -134,11 +134,16 @@ The following ones are related to user interaction (mouse or gesture):
 * `click` whenever map or a feature from a layer has been clicked (left button or tapped) in the 2D/3D map, 
 * `dbclick` whenever map or a feature from a layer has been double-clicked (left button or tapped) in the 2D/3D map,
 * `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map,
+* `mousedown` whenever the user pushes the mouse button on the 2D map,
+* `mouseup` whenever the user releases the mouse button on the 2D map,
 * `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map,
 * `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
-* `mousemove` whenever the mouse moves on the 2D map.
+* `mousemove` whenever the mouse moves on the 2D map,
+* `dragstart` whenever the user starts dragging a 2D marker,
+* `dragend` whenever the user stops dragging a 2D marker,
+* `drag` while the user drags a 2D marker.
 
-User interaction events will provide you with the following properties as data payload:
+Most user interaction events will provide you with the following properties as data payload:
 * `longitude` and `latitude` coordinates of the interaction,
 * `feature` and `layer` (descriptor) when the target element is a feature from a layer,
 * `containerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map сontainer,
@@ -163,6 +168,14 @@ postRobot.on('contextmenu', (event) => {
   }
 })
 ```
+
+The following events are related to map state changes and do not provide additional properties like interaction events:
+* `movestart` whenever the view of the 2D map starts changing (e.g. user starts dragging the map),
+* `moveend` whenever the center of the 2D map stops changing (e.g. user stopped dragging the map),
+* `move` during any movement of the 2D map (including pan and fly animations),
+* `zoomstart` whenever the 2D map zoom is about to change (e.g. before zoom animation),
+* `zoomend` whenever the 2D map zoom changed (after any animations),
+* `zoom` during any change in zoom level, including zoom and fly animations.
 
 A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
 
