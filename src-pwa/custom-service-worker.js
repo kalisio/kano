@@ -39,10 +39,14 @@ setInterval(async () => {
 // Preload and cache all resources defined in the manifest
 precacheAndRoute(self.__WB_MANIFEST)
 
-async function cacheKeyWillBeUsed({request, mode}) {
+async function cacheKeyWillBeUsed({ request, mode }) {
   const url = new URL(request.url)
-    url.searchParams.delete('jwt')
-    return url.href
+  url.searchParams.delete('jwt')
+  return url.href
+}
+
+async function fetchDidFail({ error, request }) {
+  logger.debug(`[Kano] Fetching ${request.url} from layers cache failed`)
 }
 
 // Register the `NetworkFirst` caching strategy for offline data
@@ -59,7 +63,7 @@ registerRoute(
   },
   new NetworkFirst({
     cacheName: 'layers',
-    plugins : [{ cacheKeyWillBeUsed }]
+    plugins : [{ cacheKeyWillBeUsed, fetchDidFail }]
   })
 )
 // Register the `NetworkFirst` caching strategy for all others HTTP requests
