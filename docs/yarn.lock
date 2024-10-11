@@ -713,8 +713,8 @@ vite@^5.0.12:
     fsevents "~2.3.3"
 
 "vitepress-theme-kalisio@https://github.com/kalisio/vitepress-theme-kalisio":
-  version "0.1.0"
-  resolved "https://github.com/kalisio/vitepress-theme-kalisio#095fe82c8b8b71244db46a1c6d32805168dcf8fd"
+  version "1.0.0"
+  resolved "https://github.com/kalisio/vitepress-theme-kalisio#096ffded88d0aabf98d925f24ecc1cfc7bbf6795"
 
 vitepress@^1.0.0-rc.40:
   version "1.0.0-rc.40"

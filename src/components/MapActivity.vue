@@ -250,19 +250,21 @@ export default {
         const handler = (options, event) => {
           // event may be disabled by config
           const opts = this.activityOptions
-          let okForward = leafletEvent === 'click' || leafletEvent === 'dblclick'
-          if (opts.allowForwardEvents) okForward = okForward || opts.allowForwardEvents.indexOf(leafletEvent) !== -1
-          if (opts.disallowForwardEvents) okForward = okForward && opts.disallowForwardEvents.indexOf(leafletEvent) === -1
+          const defaultLeafletEvents = ['click', 'dblclick', 'contextmenu']
+          let okForward = (defaultLeafletEvents.indexOf(leafletEvent) !== -1 )
+          if (opts.allowForwardEvents) okForward = okForward || (opts.allowForwardEvents.indexOf(leafletEvent) !== -1)
+          if (opts.disallowForwardEvents) okForward = okForward && (opts.disallowForwardEvents.indexOf(leafletEvent) === -1)
           if (!okForward) return
 
           const latlng = _.get(event, 'latlng')
           const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
-          // feature required for those events
-          if (leafletEvent === 'mouseover' && !feature) return
           // Retrieve original layer options not processed ones
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
-          utils.sendEmbedEvent(leafletEvent, { longitude: latlng.lng, latitude: latlng.lat, feature, layer })
+          utils.sendEmbedEvent(leafletEvent, {
+            longitude: latlng.lng, latitude: latlng.lat, feature, layer,
+            containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
+          })
         }
         this.leafletHandlers[leafletEvent] = handler
         this.$engineEvents.on(leafletEvent, handler)
@@ -299,7 +301,7 @@ export default {
   },
   mounted () {
     // Setup event connections
-    const allLeafletEvents = ['click', 'dblclick', 'mouseover']
+    const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove']
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)

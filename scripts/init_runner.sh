@@ -16,7 +16,7 @@ init_github_build_app() {
 }
 
 init_github_build_docs() {
-    install_reqs age sops nvm node20
+    install_reqs age sops nvm node18
 }
 
 begin_group "Init $CI_ID for $JOB_ID"

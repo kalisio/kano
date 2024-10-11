@@ -4,6 +4,34 @@ sidebarDepth: 3
 
 # Changelog
 
+## v2.3.0 - Unreleased {#v2.3.0}
+
+**Major enhancements:**\
+👉 Bumped NodeJS to v20,\
+👉 Bumped CI to GitHub Actions,\
+👉 Bumped CesiumJS to v1.117 (3D rendering engine),\
+👉 Added `visibility` [style property](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) that can be templated,\
+👉 Added [leaflet-arrowheads](https://github.com/slutske22/leaflet-arrowheads) plugin to be able to create layers with related options,\
+👉 Added ability to rotate the map with still some restrictions (weather, canvas and gradient path layers),\
+👉 iframe integration can now register client-side hooks on services,\
+👉 iframe integration can now register a handler to manage real-time feature updates,\
+👉 Selecting features does not clean current probe anymore,\
+👉 Now possible to avoid opening a widget on feature selection,\
+👉 Now possible to configure pane z-index directly in layer definition,\
+👉 Now possible to configure custom content in about box,\
+👉 Imported GeoJson files can now include panes information,\
+👉 (Dis)Connection popup can be deactivated by configuration,\
+👉 Simplified domain management in client configuration.
+
+**Cartographic data enhancements:**\
+👉 Enhanced rendering and legend of various data layer.
+
+**Major bug fixes:**\
+✅ Right opener not accessible when opening the right pane on mobile device,\
+✅ `layer-updated` event was missing in globe activities.
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/12) and [KDK](https://github.com/kalisio/kdk/milestone/11).
+
 ## v2.2.0 - March 1st, 2024
 
 **Major enhancements:**\
