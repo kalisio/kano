@@ -391,6 +391,7 @@ const globeEngine = {
 
 module.exports = {
   pwaName,
+  buildMode: process.env.BUILD_MODE === 'pwa' ? 'pwa' : 'spa',
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version,
   buildNumber: process.env.BUILD_NUMBER,
