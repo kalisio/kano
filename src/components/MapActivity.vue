@@ -16,7 +16,7 @@ import sift from 'sift'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -150,6 +150,10 @@ export default {
       // We let any embedding iframe process features if required
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    setBearing(bearing) {
+      kMapMixins.map.baseMap.methods.setBearing.call(this, bearing)
+      TemplateContext.get().bearing = bearing
     },
     handleWidget (widget) {
       // If window already open on another widget keep it

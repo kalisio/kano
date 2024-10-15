@@ -16,11 +16,11 @@
     <script>
       var layerIsShown = false
       var component = 'map'
-      var airports
+      var airports, aircraft
 
       function getGeoJsonAircraftFeature () {
-        var long = 1.444209 + 0.5 * (Math.random() - 0.5)
-        var lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        var long = 1.444209 + 0.1 * (Math.random() - 0.5)
+        var lat = 43.604652 + 0.1 * (Math.random() - 0.5)
         var alt = 8519.16 + 1000 * (Math.random() - 0.5)
         var track = 360 * Math.random()
         var speed = 300 // miles / h
@@ -48,7 +48,7 @@
           })
         }
         */
-        return {
+        aircraft = {
           type: 'FeatureCollection',
           features: [
             {
@@ -66,6 +66,7 @@
             }
           ]//.concat(speedVectors)
         }
+        return aircraft
       }
       function getGeoJsonAcarsFeature (id) {
         var type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
@@ -114,9 +115,9 @@
               type: 'geoJson',
               realtime: true,
               isVisible: true,
-              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></svg></span>',
+              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></span>',
               /* We can also use SVG
-              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
+              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
               */
               'icon-anchor': [16, 16],
               'marker-size': 32,
@@ -661,8 +662,22 @@
       async function updateBearing() {
         const result = await postRobot.send(kano, component, { command: 'getCenter' })
         const { longitude, latitude, zoomLevel, altitude } = result.data
-        if (component === 'map') await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 360 * Math.random()] })
-        else await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 360 * Math.random()] })
+        if (component === 'map') {
+          await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, -360 * Math.random()] })
+          await postRobot.send(kano, 'map', { command: 'setTouchRotateEnabled', args: true })
+        } else await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, -360 * Math.random()] })
+        // Refresh A/C orientation
+        await postRobot.send(kano, component, { command: 'updateLayer', args: ['Aircraft', aircraft] })
+      }
+      async function resetBearing() {
+        const result = await postRobot.send(kano, component, { command: 'getCenter' })
+        const { longitude, latitude, zoomLevel, altitude } = result.data
+        if (component === 'map') {
+          await postRobot.send(kano, 'map', { command: 'setTouchRotateEnabled', args: false })
+          await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 0] })
+        } else await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 0] })
+        // Refresh A/C orientation
+        await postRobot.send(kano, component, { command: 'updateLayer', args: ['Aircraft', aircraft] })
       }
     </script>
     <style>
@@ -727,7 +742,10 @@
         </div>
         <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button>
         <button type="button" onclick="updateForecastLevel()">Update forecast level</button>
-        <button type="button" onclick="updateBearing()">Update map bearing</button>
+        <div class="packed-grid">
+          <button type="button" onclick="updateBearing()">Update map bearing</button>
+          <button type="button" onclick="resetBearing()">Reset map bearing</button>
+        </div>
         <b>Onetime interaction event</b><p id="onetime-interaction"></p>
         <b>Continuous interaction event</b><p id="continuous-interaction"></p>
         <b>Onetime animation event</b><p id="onetime-animation"></p>
@@ -746,7 +764,7 @@
         const { x, y } = containerPoint || {}
         let message = type + ' received'
         if (latitude && longitude) message += '<br/>Lat/Long = ' +  latitude.toFixed(2) + ',' + longitude.toFixed(2)
-        if (x && y) message += '<br/>X/Y = ' +  x + ',' + y
+        if (x && y) message += '<br/>X/Y = ' +  x.toFixed(2) + ',' + y.toFixed(2)
         if (layer) message += '<br/>Layer ' + (layer.label || layer.name)
         if (feature) {
           const id = (layer.featureId ? feature.properties[layer.featureId] : feature._id)

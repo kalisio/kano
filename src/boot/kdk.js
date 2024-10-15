@@ -7,7 +7,7 @@ import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
-import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, setupApi, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -23,6 +23,8 @@ const kanoLib = {
   }
 }
 
+// Inject a bearing value in lodash template evaluation context
+TemplateContext.merge({ bearing: 0 })
 CanvasDrawContext.merge(kanoLib)
 
 function updateThemeColors () {
