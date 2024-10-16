@@ -78,11 +78,21 @@ Here is a simple code sample:
   </script>
 ```
 
-There are also a lot of events to be listened by integrating application to be aware of Kano internal states or user behaviour.
+A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
+
+::: warning
+Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
+:::
+
+### Listening to events
+
+There are a lot of events to be listened by integrating application to be aware of Kano internal states or user behaviour.
 
 ::: warning
 You should add a listener for each event in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
 :::
+
+### Frontend events
 
 The following ones are related to Kano states:
 * `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
@@ -177,11 +187,35 @@ The following events are related to map state changes and do not provide additio
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations.
 
-A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
+#### Backend events
 
-::: warning
-Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
-:::
+Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
+* `catalog` whenever a service event is emitted on the `catalog` service
+* `features` whenever a service event is emitted on the `features` service
+
+For instance, you can listen to changes in the catalog service like this:
+```js
+  postRobot.on('catalog', (event) => {
+    const { serviceEvent, data } = event.data
+    console.log(`Received ${serviceEvent} catalog event`)
+  })
+```
+
+Kano also provides you with an internal event bus service called `events` that can be used to dispatch custom events to all connected clients. This service internally has only a `create` method to send events, you can send a custom event named `item-selected` through this service like this:
+```js
+  // Tell others clients selection changed
+  await postRobot.send(kano, 'event', {
+    name: 'item-selected', data: { id: item.id }
+  })
+```
+Others clients can listen to this custom event like this:
+```js
+  // Listen to selection change
+  postRobot.on('item-selected', (event) => {
+    const { id } = event.data
+    ...
+  })
+```
 
 ### Accessing the underlying API
 
@@ -231,36 +265,6 @@ postRobot.on('catalog-loaded', (event) => {
   })
   return items
 })
-```
-
-### Managing events
-
-Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
-* `catalog` whenever a service event is emitted on the `catalog` service
-* `features` whenever a service event is emitted on the `features` service
-
-For instance, you can listen to changes in the catalog service like this:
-```js
-  postRobot.on('catalog', (event) => {
-    const { serviceEvent, data } = event.data
-    console.log(`Received ${serviceEvent} catalog event`)
-  })
-```
-
-Kano also provides you with an internal event bus service called `events` that can be used to dispatch custom events to all connected clients. This service internally has only a `create` method to send events, you can send a custom event named `item-selected` through this service like this:
-```js
-  // Tell others clients selection changed
-  await postRobot.send(kano, 'event', {
-    name: 'item-selected', data: { id: item.id }
-  })
-```
-Others clients can listen to this custom event like this:
-```js
-  // Listen to selection change
-  postRobot.on('item-selected', (event) => {
-    const { id } = event.data
-    ...
-  })
 ```
 
 ## Developing in Kano
