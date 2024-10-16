@@ -209,7 +209,8 @@ const mapEngine = {
     maxBounds: [[-90, -180], [90, 180]],
     maxBoundsViscosity: 0.25,
     timeDimension: true,
-    rotateControl: false
+    rotateControl: false,
+    attributionControl: false
   },
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
