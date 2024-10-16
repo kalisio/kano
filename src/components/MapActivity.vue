@@ -260,15 +260,21 @@ export default {
           if (opts.disallowForwardEvents) okForward = okForward && (opts.disallowForwardEvents.indexOf(leafletEvent) === -1)
           if (!okForward) return
 
-          const latlng = _.get(event, 'latlng')
+          let latlng = _.get(event, 'latlng')
+          // For some events like marker drag we get the new position fro mthe target
+          if (!latlng && _.has(event, 'target') && (typeof event.target.getLatLng === 'function')) latlng = event.target.getLatLng()
           const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
           // Retrieve original layer options not processed ones
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
-          utils.sendEmbedEvent(leafletEvent, {
+          const payload = {
             longitude: _.get(latlng, 'lng'), latitude: _.get(latlng, 'lat'), feature, layer,
             containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
-          })
+          }
+          if (leafletEvent === 'rotate') {
+            payload.bearing = this.getBearing()
+          }
+          utils.sendEmbedEvent(leafletEvent, payload)
         }
         this.leafletHandlers[leafletEvent] = handler
         this.$engineEvents.on(leafletEvent, handler)
@@ -306,7 +312,7 @@ export default {
   mounted () {
     // Setup event connections
     const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
-      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'dragstart', 'dragend', 'drag']
+      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag']
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
