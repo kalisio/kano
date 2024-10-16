@@ -187,7 +187,7 @@ The following events are related to map state changes and do not provide additio
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations.
 
-#### Backend events
+### Backend events
 
 Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
 * `catalog` whenever a service event is emitted on the `catalog` service
