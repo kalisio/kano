@@ -140,7 +140,7 @@ postRobot.on('layer-update', (event) => {
   })
 ```
 
-The following ones are related to user interaction (mouse or gesture):
+The following ones are related to [user interaction](https://leafletjs.com/reference.html#map-event) (mouse or gesture):
 * `click` whenever map or a feature from a layer has been clicked (left button or tapped) in the 2D/3D map, 
 * `dbclick` whenever map or a feature from a layer has been double-clicked (left button or tapped) in the 2D/3D map,
 * `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map,
@@ -179,13 +179,14 @@ postRobot.on('contextmenu', (event) => {
 })
 ```
 
-The following events are related to map state changes and do not provide additional properties like interaction events:
+The following events are related to [map state changes](https://leafletjs.com/reference.html#map-event) and do not provide additional properties like interaction events:
 * `movestart` whenever the view of the 2D map starts changing (e.g. user starts dragging the map),
 * `moveend` whenever the center of the 2D map stops changing (e.g. user stopped dragging the map),
 * `move` during any movement of the 2D map (including pan and fly animations),
 * `zoomstart` whenever the 2D map zoom is about to change (e.g. before zoom animation),
 * `zoomend` whenever the 2D map zoom changed (after any animations),
-* `zoom` during any change in zoom level, including zoom and fly animations.
+* `zoom` during any change in zoom level, including zoom and fly animations,
+* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload). 
 
 ### Backend events
 
