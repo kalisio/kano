@@ -32,6 +32,7 @@ describe(`suite:${suite}`, () => {
     await map.saveLayer(page, userLayersTab, 'trace')
     await core.clickPaneAction(page, 'top', 'toggle-globe')
     await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
+    await page.waitForNetworkIdle()
     expect(await runner.captureAndMatch('trace-on-ellipsoid')).beTrue()
   }).timeout(30000)
 
@@ -52,6 +53,7 @@ describe(`suite:${suite}`, () => {
       await map.clickLayer(page, catalogLayersTab, layer)
     }
     await core.clickOpener(page, 'right')
+    await page.waitForNetworkIdle()
     expect(await runner.captureAndMatch('trace-on-terrain')).beTrue()
   }).timeout(30000)
 
