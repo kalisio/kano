@@ -74,15 +74,15 @@ describe(`suite:${suite}`, () => {
   it('user: add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
     const match = await runner.captureAndMatch('polygon-mask')
-    expect(match).beTrue()
     await map.removeLayer(page, userLayersTab, 'ariege')
+    expect(match).beTrue()
   })
 
   it('user: add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
     const match = await runner.captureAndMatch('multi-polygon-mask')
-    expect(match).beTrue()
     await map.removeLayer(page, userLayersTab, 'occitanie')
+    expect(match).beTrue()
   })
 
   it('user: connect wms layer', async () => {
@@ -100,7 +100,7 @@ describe(`suite:${suite}`, () => {
   })
   it('user: connect wfs layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
-    const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
+    const service = 'https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
     const layerId = 'bdcarto-v-5-region'
     const layerName = 'region'
     await map.connectLayer(page, service, layerId, layerName, 'code-insee')
