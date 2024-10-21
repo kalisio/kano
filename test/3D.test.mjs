@@ -15,13 +15,21 @@ describe(`suite:${suite}`, () => {
   before(async () => {
     chailint(chai, util)
 
+    // NOTE: chrome 113 is bundled with puppeteer 20.5
+    // When running on a wayland session use --ozone-platform=wayland browser args
+    // otherwise the test fails to initialize a webgl context with
+    // powerPreference = 'high-performance' as requested by cesium 1.117
+    // This might not be needed in later chrome versions ...
+    const waylandArg = 'WAYLAND_DISPLAY' in process.env ? '--ozone-platform=wayland' : ''
+
     runner = new core.Runner(suite, {
       appName: 'kano',
       user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      }
+      },
+      browser: { args: [ waylandArg ] }
     })
     page = await runner.start()
     await core.login(page, user)
