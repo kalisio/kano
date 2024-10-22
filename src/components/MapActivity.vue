@@ -109,9 +109,9 @@ export default {
     },
     'selection.items': {
       handler () {
+        console.log(this.getSelectedItems())
         this.updateSelection()
-      },
-      deep: true
+      }
     },
     'probe.item': {
       handler () {
