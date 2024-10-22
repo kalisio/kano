@@ -579,7 +579,7 @@ module.exports = {
     stickies: {
       content: [
         { id: 'level-slider', position: 'right', offset: [40, 0], component: 'KLevelSlider' },
-        { id: 'attribution', position: 'bottom-right', offset: [74, 14], component: 'KAttribution' },
+        { id: 'attribution', position: 'bottom-right', offset: [74, 24], component: 'KAttribution' },
         // Only for example purpose
         // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
       ]
@@ -662,6 +662,11 @@ module.exports = {
     },
     page: {
       content:[]
+    },
+    stickies: {
+      content: [
+        { id: 'attribution', position: 'bottom-right', offset: [74, 24], component: 'KAttribution' }
+      ]
     },
     fab: {
       content: [
