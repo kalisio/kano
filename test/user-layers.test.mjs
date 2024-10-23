@@ -74,21 +74,21 @@ describe(`suite:${suite}`, () => {
   it('user: add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
     const match = await runner.captureAndMatch('polygon-mask')
-    expect(match).beTrue()
     await map.removeLayer(page, userLayersTab, 'ariege')
+    expect(match).beTrue()
   })
 
   it('user: add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
     const match = await runner.captureAndMatch('multi-polygon-mask')
-    expect(match).beTrue()
     await map.removeLayer(page, userLayersTab, 'occitanie')
+    expect(match).beTrue()
   })
 
   it('user: connect wms layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
     await map.goToPosition(page, 46.62681, 2.59277)
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 7)
+    await map.zoomToLevel(page, 'mapActivity', 7)
     const service = 'https://geoservices.brgm.fr/geologie?service=wms&request=getcapabilities'
     const layerId = 'litho-1-m-simplifiee'
     const layerName = 'Carte lithologique'
@@ -100,7 +100,7 @@ describe(`suite:${suite}`, () => {
   })
   it('user: connect wfs layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
-    const service = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
+    const service = 'https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
     const layerId = 'bdcarto-v-5-region'
     const layerName = 'region'
     await map.connectLayer(page, service, layerId, layerName, 'code-insee')
@@ -112,7 +112,7 @@ describe(`suite:${suite}`, () => {
   it('user: connect wmts layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
     await map.goToPosition(page, 46.83201, 8.31116)
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 8)
+    await map.zoomToLevel(page, 'mapActivity', 8)
     const service = 'https://wmts.geo.admin.ch/EPSG/3857/1.0.0/WMTSCapabilities.xml'
     const layerId = 'ch-bakom-notruf-112-zentral'
     const layerName = '112 Alarmzentralen'

@@ -1,0 +1,1676 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -68.2955,
+                    -54.843333,
+                    102
+                ]
+            },
+            "properties": {
+                "ID": "127",
+                "ALTITUDE": "102",
+                "COUNTRY": "Argentina",
+                "IATA": "USH",
+                "ICAO": "SAWH",
+                "LATITUDE": "-54.843333",
+                "LOCATION": "USHUAIA",
+                "LONGITUDE": "-68.2955",
+                "NAME": "USHUAIA T.DE F..ARGENTINA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3649"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -62.998333,
+                    -40.868333,
+                    20
+                ]
+            },
+            "properties": {
+                "ID": "128",
+                "ALTITUDE": "20",
+                "COUNTRY": "Argentina",
+                "IATA": "VDM",
+                "ICAO": "SAVV",
+                "LATITUDE": "-40.868333",
+                "LOCATION": "VIEDMA",
+                "LONGITUDE": "-62.998333",
+                "NAME": "VIEDMA/GOBERNADOR CASTELLO   R.ARGENTINA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364a"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -57.023333,
+                    -37.235,
+                    33
+                ]
+            },
+            "properties": {
+                "ID": "129",
+                "ALTITUDE": "33",
+                "COUNTRY": "Argentina",
+                "IATA": "VLG",
+                "ICAO": "SAZV",
+                "LATITUDE": "-37.235",
+                "LOCATION": "VILLA GESELL",
+                "LONGITUDE": "-57.023333",
+                "NAME": "VILLA GESELL  BA.ARGENTINA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364b"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -65.386667,
+                    -33.731667,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "130",
+                "ALTITUDE": "0",
+                "COUNTRY": "Argentina",
+                "IATA": "VME",
+                "ICAO": "SAOR",
+                "LATITUDE": "-33.731667",
+                "LOCATION": "VILLA REYNOLDS",
+                "LONGITUDE": "-65.386667",
+                "NAME": "VILLA REYNOLDS SL.ARGENTINA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364c"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.015,
+                    12.501667,
+                    60
+                ]
+            },
+            "properties": {
+                "ID": "131",
+                "ALTITUDE": "60",
+                "COUNTRY": "Aruba (Netherlands)",
+                "IATA": "AUA",
+                "ICAO": "TNCA",
+                "LATITUDE": "12.501667",
+                "LOCATION": "ARUBA",
+                "LONGITUDE": "-70.015",
+                "NAME": "ORANJESTAD/REINA BEATRIX  ARUB.ARUBA (NETHERLANDS KINGDOM OF",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364d"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -68.276667,
+                    12.14,
+                    20
+                ]
+            },
+            "properties": {
+                "ID": "132",
+                "ALTITUDE": "20",
+                "COUNTRY": "Aruba (Netherlands)",
+                "IATA": "BON",
+                "ICAO": "TNCB",
+                "LATITUDE": "12.14",
+                "LOCATION": "BONAIRE",
+                "LONGITUDE": "-68.276667",
+                "NAME": "BONAIRE/FLAMINGO.NETHERLANDS ANTILLES",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364e"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -68.96,
+                    12.188333,
+                    29
+                ]
+            },
+            "properties": {
+                "ID": "133",
+                "ALTITUDE": "29",
+                "COUNTRY": "Aruba (Netherlands)",
+                "IATA": "CUR",
+                "ICAO": "TNCC",
+                "LATITUDE": "12.188333",
+                "LOCATION": "CURACAO (WILLEMSTAD/HATO)",
+                "LONGITUDE": "-68.96",
+                "NAME": "CURACAO/AEROPUERTO HATO.NETHERLANDS ANTILLES",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c364f"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -62.972,
+                    17.488333,
+                    129
+                ]
+            },
+            "properties": {
+                "ID": "134",
+                "ALTITUDE": "129",
+                "COUNTRY": "Aruba (Netherlands)",
+                "IATA": "EUX",
+                "ICAO": "TNCE",
+                "LATITUDE": "17.488333",
+                "LOCATION": "ST EUSTATIUS/FD ROOSEVELT",
+                "LONGITUDE": "-62.972",
+                "NAME": "ST. EUSTATIUS/F.D ROOSEVELT.NETHERLANDS ANTILLES",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3650"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -63.111933,
+                    18.039717,
+                    13
+                ]
+            },
+            "properties": {
+                "ID": "135",
+                "ALTITUDE": "13",
+                "COUNTRY": "Aruba (Netherlands)",
+                "IATA": "SXM",
+                "ICAO": "TNCM",
+                "LATITUDE": "18.039717",
+                "LOCATION": "ST MAARTEN",
+                "LONGITUDE": "-63.111933",
+                "NAME": "ST. MAARTEN/PRINCESS JULIANA.NETHERLANDS ANTILLES",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3651"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.46,
+                    -10.95,
+                    34
+                ]
+            },
+            "properties": {
+                "ID": "136",
+                "ALTITUDE": "34",
+                "COUNTRY": "Australia",
+                "IATA": "ABM",
+                "ICAO": "YBAM",
+                "LATITUDE": "-10.95",
+                "LOCATION": "BAMAGA",
+                "LONGITUDE": "142.46",
+                "NAME": "BAMAGA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3652"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    146.958333,
+                    -36.068333,
+                    539
+                ]
+            },
+            "properties": {
+                "ID": "137",
+                "ALTITUDE": "539",
+                "COUNTRY": "Australia",
+                "IATA": "ABX",
+                "ICAO": "YMAY",
+                "LATITUDE": "-36.068333",
+                "LOCATION": "ALBURY",
+                "LONGITUDE": "146.958333",
+                "NAME": "ALBURY.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3653"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    138.53,
+                    -34.945,
+                    20
+                ]
+            },
+            "properties": {
+                "ID": "138",
+                "ALTITUDE": "20",
+                "COUNTRY": "Australia",
+                "IATA": "ADL",
+                "ICAO": "YPAD",
+                "LATITUDE": "-34.945",
+                "LOCATION": "ADELAIDE",
+                "LONGITUDE": "138.53",
+                "NAME": "ADELAIDE (FIC/ACC).AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "TAF YPAD 081719Z 0818/0924 05008KT CAVOK"
+            },
+            "_id": "64a68e3e35b3a700249c3654"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.616667,
+                    -30.528333,
+                    3556
+                ]
+            },
+            "properties": {
+                "ID": "139",
+                "ALTITUDE": "3556",
+                "COUNTRY": "Australia",
+                "IATA": "ARM",
+                "ICAO": "YARM",
+                "LATITUDE": "-30.528333",
+                "LOCATION": "ARMIDALE",
+                "LONGITUDE": "151.616667",
+                "NAME": "ARMIDALE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3655"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    133.901667,
+                    -23.806667,
+                    1789
+                ]
+            },
+            "properties": {
+                "ID": "140",
+                "ALTITUDE": "1789",
+                "COUNTRY": "Australia",
+                "IATA": "ASP",
+                "ICAO": "YBAS",
+                "LATITUDE": "-23.806667",
+                "LOCATION": "ALICE SPRINGS",
+                "LONGITUDE": "133.901667",
+                "NAME": "ALICE SPRINGS.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3656"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.47,
+                    -38.04,
+                    35
+                ]
+            },
+            "properties": {
+                "ID": "141",
+                "ALTITUDE": "35",
+                "COUNTRY": "Australia",
+                "IATA": "AVV",
+                "ICAO": "YMAV",
+                "LATITUDE": "-38.04",
+                "LOCATION": "AVALON",
+                "LONGITUDE": "144.47",
+                "NAME": "AVALON.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3657"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    130.975,
+                    -25.186667,
+                    1626
+                ]
+            },
+            "properties": {
+                "ID": "142",
+                "ALTITUDE": "1626",
+                "COUNTRY": "Australia",
+                "IATA": "AYQ",
+                "ICAO": "YAYE",
+                "LATITUDE": "-25.186667",
+                "LOCATION": "AYERS ROCK",
+                "LONGITUDE": "130.975",
+                "NAME": "AYERS ROCK.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3658"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    152.318333,
+                    -24.903333,
+                    107
+                ]
+            },
+            "properties": {
+                "ID": "143",
+                "ALTITUDE": "107",
+                "COUNTRY": "Australia",
+                "IATA": "BDB",
+                "ICAO": "YBUD",
+                "LATITUDE": "-24.903333",
+                "LOCATION": "BUNDABERG",
+                "LONGITUDE": "152.318333",
+                "NAME": "BUNDABERG.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3659"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    141.471667,
+                    -32.000017,
+                    959
+                ]
+            },
+            "properties": {
+                "ID": "144",
+                "ALTITUDE": "959",
+                "COUNTRY": "Australia",
+                "IATA": "BHQ",
+                "ICAO": "YBHI",
+                "LATITUDE": "-32.000017",
+                "LOCATION": "BROKEN HILL",
+                "LONGITUDE": "141.471667",
+                "NAME": "BROKEN HILL.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c365a"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    145.421667,
+                    -24.435,
+                    928
+                ]
+            },
+            "properties": {
+                "ID": "145",
+                "ALTITUDE": "928",
+                "COUNTRY": "Australia",
+                "IATA": "BKQ",
+                "ICAO": "YBCK",
+                "LATITUDE": "-24.435",
+                "LOCATION": "BLACKALL",
+                "LONGITUDE": "145.421667",
+                "NAME": "BLACKALL.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c365b"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    122.231667,
+                    -17.945,
+                    56
+                ]
+            },
+            "properties": {
+                "ID": "146",
+                "ALTITUDE": "56",
+                "COUNTRY": "Australia",
+                "IATA": "BME",
+                "ICAO": "YBRM",
+                "LATITUDE": "-17.945",
+                "LOCATION": "BROOME",
+                "LONGITUDE": "122.231667",
+                "NAME": "BROOME.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c365c"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.118333,
+                    -27.383333,
+                    13
+                ]
+            },
+            "properties": {
+                "ID": "147",
+                "ALTITUDE": "13",
+                "COUNTRY": "Australia",
+                "IATA": "BNE",
+                "ICAO": "YBBN",
+                "LATITUDE": "-27.383333",
+                "LOCATION": "BRISBANE",
+                "LONGITUDE": "153.118333",
+                "NAME": "BRISBANE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "TAF YBBN 080524Z 0806/0912 07012KT 9999 SCT030 SCT060"
+            },
+            "_id": "64a68e3e35b3a700249c365d"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    139.901667,
+                    -22.911667,
+                    542
+                ]
+            },
+            "properties": {
+                "ID": "148",
+                "ALTITUDE": "542",
+                "COUNTRY": "Australia",
+                "IATA": "BQL",
+                "ICAO": "YBOU",
+                "LATITUDE": "-22.911667",
+                "LOCATION": "BOULIA",
+                "LONGITUDE": "139.901667",
+                "NAME": "BOULIA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c365e"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    149.195,
+                    -35.306667,
+                    1886
+                ]
+            },
+            "properties": {
+                "ID": "149",
+                "ALTITUDE": "1886",
+                "COUNTRY": "Australia",
+                "IATA": "CBR",
+                "ICAO": "YSCB",
+                "LATITUDE": "-35.306667",
+                "LOCATION": "CANBERRA",
+                "LONGITUDE": "149.195",
+                "NAME": "CANBERRA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c365f"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    96.83,
+                    -12.188333,
+                    10
+                ]
+            },
+            "properties": {
+                "ID": "150",
+                "ALTITUDE": "10",
+                "COUNTRY": "Australia",
+                "IATA": "CCK",
+                "ICAO": "YPCC",
+                "LATITUDE": "-12.188333",
+                "LOCATION": "COCOS IS",
+                "LONGITUDE": "96.83",
+                "NAME": "COCOS (KEELING) ISLAND INTL.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3660"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.116667,
+                    -30.32,
+                    18
+                ]
+            },
+            "properties": {
+                "ID": "151",
+                "ALTITUDE": "18",
+                "COUNTRY": "Australia",
+                "IATA": "CFS",
+                "ICAO": "YSCH",
+                "LATITUDE": "-30.32",
+                "LOCATION": "COFFS HARBOUR NSW",
+                "LONGITUDE": "153.116667",
+                "NAME": "COFFS HARBOUR.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3661"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    145.621667,
+                    -28.03,
+                    630
+                ]
+            },
+            "properties": {
+                "ID": "152",
+                "ALTITUDE": "630",
+                "COUNTRY": "Australia",
+                "IATA": "CMA",
+                "ICAO": "YCMU",
+                "LATITUDE": "-28.03",
+                "LOCATION": "CUNNAMULA",
+                "LONGITUDE": "145.621667",
+                "NAME": "CUNNAMULLA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3662"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    140.505,
+                    -20.668333,
+                    622
+                ]
+            },
+            "properties": {
+                "ID": "153",
+                "ALTITUDE": "622",
+                "COUNTRY": "Australia",
+                "IATA": "CNJ",
+                "ICAO": "YCCY",
+                "LATITUDE": "-20.668333",
+                "LOCATION": "CLONCURRY",
+                "LONGITUDE": "140.505",
+                "NAME": "CLONCURRY.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3663"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    145.755,
+                    -16.886667,
+                    10
+                ]
+            },
+            "properties": {
+                "ID": "154",
+                "ALTITUDE": "10",
+                "COUNTRY": "Australia",
+                "IATA": "CNS",
+                "ICAO": "YBCS",
+                "LATITUDE": "-16.886667",
+                "LOCATION": "CAIRNS",
+                "LONGITUDE": "145.755",
+                "NAME": "CAIRNS.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3664"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    148.973333,
+                    -36.303333,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "155",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "COM",
+                "ICAO": "YCOM",
+                "LATITUDE": "-36.303333",
+                "LOCATION": "COOMA",
+                "LONGITUDE": "148.973333",
+                "NAME": "COOMA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3665"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    146.351667,
+                    -35.99,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "156",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "COW",
+                "ICAO": "YCOR",
+                "LATITUDE": "-35.99",
+                "LOCATION": "COROWA",
+                "LONGITUDE": "146.351667",
+                "NAME": "COROWA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3666"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    146.263333,
+                    -26.413333,
+                    1003
+                ]
+            },
+            "properties": {
+                "ID": "157",
+                "ALTITUDE": "1003",
+                "COUNTRY": "Australia",
+                "IATA": "CTL",
+                "ICAO": "YBCV",
+                "LATITUDE": "-26.413333",
+                "LOCATION": "CHARLEVILLE",
+                "LONGITUDE": "146.263333",
+                "NAME": "CHARLEVILLE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3667"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    145.185,
+                    -15.445,
+                    26
+                ]
+            },
+            "properties": {
+                "ID": "158",
+                "ALTITUDE": "26",
+                "COUNTRY": "Australia",
+                "IATA": "CTN",
+                "ICAO": "YCKN",
+                "LATITUDE": "-15.445",
+                "LOCATION": "COOKTOWN",
+                "LONGITUDE": "145.185",
+                "NAME": "COOKTOWN.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3668"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    113.671667,
+                    -24.88,
+                    13
+                ]
+            },
+            "properties": {
+                "ID": "159",
+                "ALTITUDE": "13",
+                "COUNTRY": "Australia",
+                "IATA": "CVQ",
+                "ICAO": "YCAR",
+                "LATITUDE": "-24.88",
+                "LOCATION": "CARNARRVON",
+                "LONGITUDE": "113.671667",
+                "NAME": "CARNARVON.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3669"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    148.575,
+                    -32.216667,
+                    935
+                ]
+            },
+            "properties": {
+                "ID": "160",
+                "ALTITUDE": "935",
+                "COUNTRY": "Australia",
+                "IATA": "DBO",
+                "ICAO": "YSDU",
+                "LATITUDE": "-32.216667",
+                "LOCATION": "DUBBO",
+                "LONGITUDE": "148.575",
+                "NAME": "DUBBO.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366a"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    149.611667,
+                    -32.561667,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "161",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "DGE",
+                "ICAO": "YMDG",
+                "LATITUDE": "-32.561667",
+                "LOCATION": "MUDGEE",
+                "LONGITUDE": "149.611667",
+                "NAME": "MUDGEE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366b"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    146.428333,
+                    -41.171667,
+                    33
+                ]
+            },
+            "properties": {
+                "ID": "162",
+                "ALTITUDE": "33",
+                "COUNTRY": "Australia",
+                "IATA": "DPO",
+                "ICAO": "YDPO",
+                "LATITUDE": "-41.171667",
+                "LOCATION": "DEVONPORT",
+                "LONGITUDE": "146.428333",
+                "NAME": "DEVONPORT.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366c"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    123.66,
+                    -17.371667,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "163",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "DRB",
+                "ICAO": "YDBY",
+                "LATITUDE": "-17.371667",
+                "LOCATION": "DERBY W A",
+                "LONGITUDE": "123.66",
+                "NAME": "DERBY.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366d"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    130.876667,
+                    -12.415,
+                    103
+                ]
+            },
+            "properties": {
+                "ID": "164",
+                "ALTITUDE": "103",
+                "COUNTRY": "Australia",
+                "IATA": "DRW",
+                "ICAO": "YPDN",
+                "LATITUDE": "-12.415",
+                "LOCATION": "DARWIN",
+                "LONGITUDE": "130.876667",
+                "NAME": "DARWIN (FIC/ACC).AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366e"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    128.115,
+                    -30.838333,
+                    511
+                ]
+            },
+            "properties": {
+                "ID": "165",
+                "ALTITUDE": "511",
+                "COUNTRY": "Australia",
+                "IATA": "FOS",
+                "ICAO": "YFRT",
+                "LATITUDE": "-30.838333",
+                "LOCATION": "FORREST",
+                "LONGITUDE": "128.115",
+                "NAME": "FORREST.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c366f"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    114.708333,
+                    -28.796667,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "166",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "GET",
+                "ICAO": "YGEL",
+                "LATITUDE": "-28.796667",
+                "LOCATION": "GERALDTON",
+                "LONGITUDE": "114.708333",
+                "NAME": "GERALDTON.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3670"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.223333,
+                    -23.87,
+                    64
+                ]
+            },
+            "properties": {
+                "ID": "167",
+                "ALTITUDE": "64",
+                "COUNTRY": "Australia",
+                "IATA": "GLT",
+                "ICAO": "YGLA",
+                "LATITUDE": "-23.87",
+                "LOCATION": "GLADSTONE",
+                "LONGITUDE": "151.223333",
+                "NAME": "GLADSTONE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3671"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.818333,
+                    -12.27,
+                    192
+                ]
+            },
+            "properties": {
+                "ID": "168",
+                "ALTITUDE": "192",
+                "COUNTRY": "Australia",
+                "IATA": "GOV",
+                "ICAO": "YPGV",
+                "LATITUDE": "-12.27",
+                "LOCATION": "GOVE",
+                "LONGITUDE": "136.818333",
+                "NAME": "GOVE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3672"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    128.451667,
+                    -16.636667,
+                    522
+                ]
+            },
+            "properties": {
+                "ID": "169",
+                "ALTITUDE": "522",
+                "COUNTRY": "Australia",
+                "IATA": "GYL",
+                "ICAO": "YARG",
+                "LATITUDE": "-16.636667",
+                "LOCATION": "ARGYLE",
+                "LONGITUDE": "128.451667",
+                "NAME": "ARGYLE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3673"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    147.51,
+                    -42.836667,
+                    13
+                ]
+            },
+            "properties": {
+                "ID": "170",
+                "ALTITUDE": "13",
+                "COUNTRY": "Australia",
+                "IATA": "HBA",
+                "ICAO": "YMHB",
+                "LATITUDE": "-42.836667",
+                "LOCATION": "HOBART",
+                "LONGITUDE": "147.51",
+                "NAME": "HOBART.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3674"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    148.951667,
+                    -20.358333,
+                    15
+                ]
+            },
+            "properties": {
+                "ID": "171",
+                "ALTITUDE": "15",
+                "COUNTRY": "Australia",
+                "IATA": "HTI",
+                "ICAO": "YBHM",
+                "LATITUDE": "-20.358333",
+                "LOCATION": "HAMILTON ISLAND",
+                "LONGITUDE": "148.951667",
+                "NAME": "HAMILTON ISLAND.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3675"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    152.88,
+                    -25.318333,
+                    60
+                ]
+            },
+            "properties": {
+                "ID": "172",
+                "ALTITUDE": "60",
+                "COUNTRY": "Australia",
+                "IATA": "HVB",
+                "ICAO": "YHBA",
+                "LATITUDE": "-25.318333",
+                "LOCATION": "HERVEY BAY",
+                "LONGITUDE": "152.88",
+                "NAME": "HERVEY BAY.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3676"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    139.488333,
+                    -20.663333,
+                    1121
+                ]
+            },
+            "properties": {
+                "ID": "173",
+                "ALTITUDE": "1121",
+                "COUNTRY": "Australia",
+                "IATA": "ISA",
+                "ICAO": "YBMA",
+                "LATITUDE": "-20.663333",
+                "LOCATION": "MT ISA",
+                "LONGITUDE": "139.488333",
+                "NAME": "MOUNT ISA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3677"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.461667,
+                    -30.79,
+                    1203
+                ]
+            },
+            "properties": {
+                "ID": "174",
+                "ALTITUDE": "1203",
+                "COUNTRY": "Australia",
+                "IATA": "KGI",
+                "ICAO": "YPKG",
+                "LATITUDE": "-30.79",
+                "LOCATION": "KALGOORLIE",
+                "LONGITUDE": "121.461667",
+                "NAME": "KALGOORLIE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3678"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    128.706667,
+                    -15.778333,
+                    145
+                ]
+            },
+            "properties": {
+                "ID": "175",
+                "ALTITUDE": "145",
+                "COUNTRY": "Australia",
+                "IATA": "KNX",
+                "ICAO": "YPKU",
+                "LATITUDE": "-15.778333",
+                "LOCATION": "KUNUNURRA",
+                "LONGITUDE": "128.706667",
+                "NAME": "KUNUNURRA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3679"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.773333,
+                    -20.711667,
+                    30
+                ]
+            },
+            "properties": {
+                "ID": "176",
+                "ALTITUDE": "30",
+                "COUNTRY": "Australia",
+                "IATA": "KTA",
+                "ICAO": "YPKA",
+                "LATITUDE": "-20.711667",
+                "LOCATION": "KARRATHA",
+                "LONGITUDE": "116.773333",
+                "NAME": "KARRATHA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367a"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    132.378333,
+                    -14.521667,
+                    443
+                ]
+            },
+            "properties": {
+                "ID": "177",
+                "ALTITUDE": "443",
+                "COUNTRY": "Australia",
+                "IATA": "KTR",
+                "ICAO": "YPTN",
+                "LATITUDE": "-14.521667",
+                "LOCATION": "KATHERINE",
+                "LONGITUDE": "132.378333",
+                "NAME": "TINDAL/KATHERINE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367b"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    114.088333,
+                    -22.235,
+                    19
+                ]
+            },
+            "properties": {
+                "ID": "178",
+                "ALTITUDE": "19",
+                "COUNTRY": "Australia",
+                "IATA": "LEA",
+                "ICAO": "YPLM",
+                "LATITUDE": "-22.235",
+                "LOCATION": "LEARMONTH",
+                "LONGITUDE": "114.088333",
+                "NAME": "LEARMOUTH.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367c"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    159.076667,
+                    -31.538333,
+                    0
+                ]
+            },
+            "properties": {
+                "ID": "179",
+                "ALTITUDE": "0",
+                "COUNTRY": "Australia",
+                "IATA": "LHI",
+                "ICAO": "YLHI",
+                "LATITUDE": "-31.538333",
+                "LOCATION": "LORD HOWE ISLAND",
+                "LONGITUDE": "159.076667",
+                "NAME": "LORD HOWE ISLAND.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367d"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.28,
+                    -23.435,
+                    627
+                ]
+            },
+            "properties": {
+                "ID": "180",
+                "ALTITUDE": "627",
+                "COUNTRY": "Australia",
+                "IATA": "LRE",
+                "ICAO": "YLRE",
+                "LATITUDE": "-23.435",
+                "LOCATION": "LONGREACH",
+                "LONGITUDE": "144.28",
+                "NAME": "LONGREACH.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367e"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    147.215,
+                    -41.545,
+                    562
+                ]
+            },
+            "properties": {
+                "ID": "181",
+                "ALTITUDE": "562",
+                "COUNTRY": "Australia",
+                "IATA": "LST",
+                "ICAO": "YMLT",
+                "LATITUDE": "-41.545",
+                "LOCATION": "LAUNCESTON",
+                "LONGITUDE": "147.215",
+                "NAME": "LAUNCESTON.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c367f"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.091667,
+                    -26.603333,
+                    15
+                ]
+            },
+            "properties": {
+                "ID": "182",
+                "ALTITUDE": "15",
+                "COUNTRY": "Australia",
+                "IATA": "MCY",
+                "ICAO": "YBMC",
+                "LATITUDE": "-26.603333",
+                "LOCATION": "MAROOCHYDORE",
+                "LONGITUDE": "153.091667",
+                "NAME": "MAROOCHYDORE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3680"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.901667,
+                    -37.728333,
+                    282
+                ]
+            },
+            "properties": {
+                "ID": "183",
+                "ALTITUDE": "282",
+                "COUNTRY": "Australia",
+                "IATA": "MEB",
+                "ICAO": "YMEN",
+                "LATITUDE": "-37.728333",
+                "LOCATION": "MELBOURNE(ESS)",
+                "LONGITUDE": "144.901667",
+                "NAME": "ESSENDON.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "METAR YMEN 081500Z AUTO 00000KT 9999 // NCD 18/10 Q1015="
+            },
+            "_id": "64a68e3e35b3a700249c3681"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.843333,
+                    -37.673333,
+                    434
+                ]
+            },
+            "properties": {
+                "ID": "184",
+                "ALTITUDE": "434",
+                "COUNTRY": "Australia",
+                "IATA": "MEL",
+                "ICAO": "YMML",
+                "LATITUDE": "-37.673333",
+                "LOCATION": "MELBOURNE",
+                "LONGITUDE": "144.843333",
+                "NAME": "MELBOURNE.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "TAF YMML 081102Z 0812/0918 VRB05KT CAVOK"
+            },
+            "_id": "64a68e3e35b3a700249c3682"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    118.548333,
+                    -26.611667,
+                    1713
+                ]
+            },
+            "properties": {
+                "ID": "185",
+                "ALTITUDE": "1713",
+                "COUNTRY": "Australia",
+                "IATA": "MKR",
+                "ICAO": "YMEK",
+                "LATITUDE": "-26.611667",
+                "LOCATION": "MEEKATHARRA",
+                "LONGITUDE": "118.548333",
+                "NAME": "MEEKATHARRA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3683"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    149.18,
+                    -21.171667,
+                    19
+                ]
+            },
+            "properties": {
+                "ID": "186",
+                "ALTITUDE": "19",
+                "COUNTRY": "Australia",
+                "IATA": "MKY",
+                "ICAO": "YBMK",
+                "LATITUDE": "-21.171667",
+                "LOCATION": "MACKAY",
+                "LONGITUDE": "149.18",
+                "NAME": "MACKAY.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3684"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    167.938333,
+                    -29.043333,
+                    371
+                ]
+            },
+            "properties": {
+                "ID": "187",
+                "ALTITUDE": "371",
+                "COUNTRY": "Australia",
+                "IATA": "NLK",
+                "ICAO": "YSNF",
+                "LATITUDE": "-29.043333",
+                "LOCATION": "NORFOLK ISLAND",
+                "LONGITUDE": "167.938333",
+                "NAME": "NORFOLK ISLAND.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3685"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    150.536667,
+                    -34.948333,
+                    400
+                ]
+            },
+            "properties": {
+                "ID": "188",
+                "ALTITUDE": "400",
+                "COUNTRY": "Australia",
+                "IATA": "NOA",
+                "ICAO": "YSNW",
+                "LATITUDE": "-34.948333",
+                "LOCATION": "NOWRA",
+                "LONGITUDE": "150.536667",
+                "NAME": "NOWRA.AUSTRALIA",
+                "METEO_ACQUISITION_END_DATE": "NULL",
+                "METEO_ACQUISITION_STATUS": "OFF",
+                "TAF": "NULL",
+                "METAR": "NULL"
+            },
+            "_id": "64a68e3e35b3a700249c3686"
+        }
+    ]
+}

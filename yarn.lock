@@ -3362,10 +3362,10 @@
     encodeurl "^1.0.2"
     lodash "^4.17.21"
 
-"@geoman-io/leaflet-geoman-free@^2.11.1":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@geoman-io/leaflet-geoman-free/-/leaflet-geoman-free-2.13.0.tgz#df0834485d5852419d9c51014ff4589b1fdf0197"
-  integrity sha512-8uVVcRSAgZLQPfaEIAGitZEoG1v++tmPJlJYVCbGx7FbJYP9jmErsamECO0dz4eMkWLusIaEDgADY9WzAapcEQ==
+"@geoman-io/leaflet-geoman-free@2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@geoman-io/leaflet-geoman-free/-/leaflet-geoman-free-2.15.0.tgz#fc15b53eab1cba0de75b14406d06a6a47d6d0c86"
+  integrity sha512-esann1pQ8cCX3pMR7XkXuf1vwwJLz1mAbkeyRWOfoLMKA8LBnbRxChIBZzzwzyGIxybNO93Bl6LaK8wEj8uzlA==
   dependencies:
     "@turf/boolean-contains" "^6.5.0"
     "@turf/kinks" "^6.5.0"

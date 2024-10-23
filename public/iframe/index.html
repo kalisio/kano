@@ -16,11 +16,11 @@
     <script>
       var layerIsShown = false
       var component = 'map'
-      var airports
+      var airports, aircraft
 
       function getGeoJsonAircraftFeature () {
-        var long = 1.444209 + 0.5 * (Math.random() - 0.5)
-        var lat = 43.604652 + 0.5 * (Math.random() - 0.5)
+        var long = 1.444209 + 0.1 * (Math.random() - 0.5)
+        var lat = 43.604652 + 0.1 * (Math.random() - 0.5)
         var alt = 8519.16 + 1000 * (Math.random() - 0.5)
         var track = 360 * Math.random()
         var speed = 300 // miles / h
@@ -48,7 +48,7 @@
           })
         }
         */
-        return {
+        aircraft = {
           type: 'FeatureCollection',
           features: [
             {
@@ -66,6 +66,7 @@
             }
           ]//.concat(speedVectors)
         }
+        return aircraft
       }
       function getGeoJsonAcarsFeature (id) {
         var type = (Math.random() < 0.3 ? 'ATC' : (Math.random() > 0.7 ? 'AOC' : 'AAC'))
@@ -85,194 +86,185 @@
         }
         return feature
       }
-
       function toggleGlobe() {
         component = (component === 'globe' ? 'map' : 'globe')
         return postRobot.send(kano, component)
       }
-      function toggleStaticLayer(name) {
-        return postRobot.send(kano, component, { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
-        .then(function () {
-          layerIsShown = !layerIsShown
-          if (layerIsShown) postRobot.send(kano, component, { command: 'zoomToLayer', args: name })
-        })
+      async function toggleStaticLayer(name) {
+        await postRobot.send(kano, component, { command: (layerIsShown ? 'hideLayer' : 'showLayer'), args: name })
+        layerIsShown = !layerIsShown
+        if (layerIsShown) await postRobot.send(kano, component, { command: 'zoomToLayer', args: name })
       }
-      function toggleBackground() {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: 'Layers.OSM_DARK' })
-        .then(function (result) {
-          // Switch between Satellite/OSM
-          postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
-          return postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
-        })
+      async function toggleBackground() {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: 'Layers.OSM_DARK' })
+        // Switch between Satellite/OSM
+        await postRobot.send(kano, component, { command: 'showLayer', args: (result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
+        await postRobot.send(kano, component, { command: 'hideLayer', args: (!result.data ? 'Layers.OSM_BRIGHT' : 'Layers.OSM_DARK') })
       }
-      function toggleAircraftLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'local_airport',
-              featureId: 'callsign',
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></svg></span>',
-                /* We can also use SVG
-                'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
-                */
-                'icon-anchor': [16, 16],
-                'marker-size': 32,
-                template: ['icon-html'],
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.callsign %>'
-                }
-              },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                'marker-symbol': 'airport',
-                'marker-color': '#57D824',
-                entityStyle: {
-                  model: {
-                    type: 'Cesium.ModelGraphics',
-                    options: {
-                      uri: '/iframe/<%= properties.type %>.glb',
-                      minimumPixelSize: 64,
-                      scale: 0.1
-                    },
-                  },
-                  // Orientation as heading, pitch, roll
-                  orientation: '<%= properties.track %>,0,0',
-                  localFrameAxes: ['east', 'north'],
-                  template: ['model.options.uri', 'orientation']
-                },
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.callsign %>'
-                }
+      async function toggleAircraftLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          return postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'local_airport',
+            featureId: 'callsign',
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></span>',
+              /* We can also use SVG
+              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
+              */
+              'icon-anchor': [16, 16],
+              'marker-size': 32,
+              'marker-symbol': 'none',
+              template: ['icon-html'],
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.callsign %>'
               }
-            }})
-            .then(function () { updateAircraftLayer(name) })
-          }
-        })
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              'marker-symbol': 'airport',
+              'marker-color': '#57D824',
+              entityStyle: {
+                model: {
+                  type: 'Cesium.ModelGraphics',
+                  options: {
+                    uri: '/iframe/<%= properties.type %>.glb',
+                    minimumPixelSize: 64,
+                    scale: 0.1
+                  },
+                },
+                // Orientation as heading, pitch, roll
+                orientation: '<%= properties.track %>,0,0',
+                localFrameAxes: ['east', 'north'],
+                template: ['model.options.uri', 'orientation']
+              },
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.callsign %>'
+              }
+            }
+          }})
+          await updateAircraftLayer(name)
+        }
       }
-      function updateAircraftLayer(name) {
+      async function updateAircraftLayer(name) {
         var geoJson = getGeoJsonAircraftFeature()
         var long = geoJson.features[0].geometry.coordinates[0]
         var lat = geoJson.features[0].geometry.coordinates[1]
-        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
-        .then(function () {
-          // Use zoom level or altitude depending on mode
-          return postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
-        })
+        await postRobot.send(kano, component, { command: 'updateLayer', args: [name, geoJson] })
+        // Use zoom level or altitude depending on mode
+        await postRobot.send(kano, component, { command: 'center', args: [long, lat, (component === 'globe' ? 10000 : 12)] })
       }
-      function toggleMetarTafLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'wb_sunny',
-              featureId: 'ICAO',
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                container: 'markerClusterGroup',
-                /* We can use SVG
-                'icon-html': '<svg height="16" width="16"><circle cx="8" cy="8" r="6" fill-opacity="0.5" stroke-width="0"\
-                                fill="<% if (properties.visibility < 75) { %>#000000<% }\
-                                      else if (properties.visibility < 300) { %>#d20200<% }\
-                                      else if (properties.visibility < 1500) { %>#f9b40f<% }\
-                                      else if (properties.visibility < 3000) { %>#eef52f<% }\
-                                      else { %>#33c137<% } %>"/>\
-                              </svg>',
-                'icon-anchor': [8, 8],
-                'marker-size': 16,
-                template: ['icon-html'],
-                */
-                /* We can use font-awesome icons
-                'icon-classes': 'fa fa-sun-o',
-                'icon-color': '#000000',
-                'icon-x-offset' : -2,
-                'icon-y-offset' : 0,
-                'marker-color': `<% if (properties.visibility < 75) { %>#000000<% }
-                                    else if (properties.visibility < 300) { %>#d20200<% }
-                                    else if (properties.visibility < 1500) { %>#f9b40f<% }
-                                    else if (properties.visibility < 3000) { %>#eef52f<% }
-                                    else { %>#33c137<% } %>`,
-                template: ['marker-color'],
-                */
-                /* We can use images
-                'marker-symbol': `<% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
-                                    else if (properties.visibility < 300) { %>/iframe/windyred.png<% }
-                                    else if (properties.visibility < 1500) { %>/iframe/windyorange.png<% }
-                                    else if (properties.visibility < 3000) { %>/iframe/windyyellow.png<% }
-                                    else { %>/iframe/windygreen.png<% } %>`,
-                'marker-size': [24, 30],
-                template: ['marker-symbol'],
-                */
-                /* We can use HTML */
-                'icon-html': `<b style="display: inline-block; color:#000;
-                                text-shadow:-1px -1px 0 #FFF,1px -1px 0 #FFF,-1px 1px 0 #FFF,1px 1px 0 #FFF;">
-                                <%= properties.ICAO %>
-                              </b>
-                              <img style="display: inline-block;" width="24px" height="30px" src="
-                                <% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
+      async function toggleMetarTafLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'wb_sunny',
+            featureId: 'ICAO',
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              container: 'markerClusterGroup',
+              /* We can use SVG
+              'icon-html': '<svg height="16" width="16"><circle cx="8" cy="8" r="6" fill-opacity="0.5" stroke-width="0"\
+                              fill="<% if (properties.visibility < 75) { %>#000000<% }\
+                                    else if (properties.visibility < 300) { %>#d20200<% }\
+                                    else if (properties.visibility < 1500) { %>#f9b40f<% }\
+                                    else if (properties.visibility < 3000) { %>#eef52f<% }\
+                                    else { %>#33c137<% } %>"/>\
+                            </svg>',
+              'icon-anchor': [8, 8],
+              'marker-size': 16,
+              template: ['icon-html'],
+              */
+              /* We can use font-awesome icons
+              'icon-classes': 'fa fa-sun-o',
+              'icon-color': '#000000',
+              'icon-x-offset' : -2,
+              'icon-y-offset' : 0,
+              'marker-color': `<% if (properties.visibility < 75) { %>#000000<% }
+                                  else if (properties.visibility < 300) { %>#d20200<% }
+                                  else if (properties.visibility < 1500) { %>#f9b40f<% }
+                                  else if (properties.visibility < 3000) { %>#eef52f<% }
+                                  else { %>#33c137<% } %>`,
+              template: ['marker-color'],
+              */
+              /* We can use images
+              'marker-symbol': `<% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
                                   else if (properties.visibility < 300) { %>/iframe/windyred.png<% }
                                   else if (properties.visibility < 1500) { %>/iframe/windyorange.png<% }
                                   else if (properties.visibility < 3000) { %>/iframe/windyyellow.png<% }
-                                  else { %>/iframe/windygreen.png<% } %>"/>
-                              `,
-                'icon-anchor': [12, 32],
-                template: ['icon-html'],
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
-                }
-              },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                cluster: {
-                  pixelRange: 50
-                },
-                entityStyle: {
-                  billboard: {
-                    scale: 0.5,
-                    image: `<% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
-                              else if (properties.visibility < 300) { %>/iframe/windyred.png<% }
-                              else if (properties.visibility < 1500) { %>/iframe/windyorange.png<% }
-                              else if (properties.visibility < 3000) { %>/iframe/windyyellow.png<% }
-                              else { %>/iframe/windygreen.png<% } %>`,
-                    color: `Cesium.Color.<% if (properties.visibility < 75) { %>BLACK<% }
-                              else if (properties.visibility < 300) { %>ORANGERED<% }
-                              else if (properties.visibility < 1500) { %>GOLD<% }
-                              else if (properties.visibility < 3000) { %>YELLOW<% }
-                              else { %>LIMEGREEN<% } %>`
-                  },
-                  template: ['billboard.image', 'billboard.color']
-                },
-                popup: { pick: [] },
-                tooltip: {
-                  template: 'METAR\n<%= properties.metar %>\nTAF\n<%= properties.taf %>'
-                }
+                                  else { %>/iframe/windygreen.png<% } %>`,
+              'marker-size': [24, 30],
+              template: ['marker-symbol'],
+              */
+              /* We can use HTML */
+              'icon-html': `<b style="display: inline-block; color:#000;
+                              text-shadow:-1px -1px 0 #FFF,1px -1px 0 #FFF,-1px 1px 0 #FFF,1px 1px 0 #FFF;">
+                              <%= properties.ICAO %>
+                            </b>
+                            <img style="display: inline-block;" width="24px" height="30px" src="
+                              <% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
+                                else if (properties.visibility < 300) { %>/iframe/windyred.png<% }
+                                else if (properties.visibility < 1500) { %>/iframe/windyorange.png<% }
+                                else if (properties.visibility < 3000) { %>/iframe/windyyellow.png<% }
+                                else { %>/iframe/windygreen.png<% } %>"/>
+                            `,
+              'icon-anchor': [12, 32],
+              'marker-symbol': 'none',
+              template: ['icon-html'],
+              popup: { pick: [] },
+              tooltip: {
+                template: '<b>METAR</b></br><%= properties.metar %></br><b>TAF</b></br><%= properties.taf %>'
               }
-            }})
-            .then(function () { return updateMetarTafLayer(name) })
-            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
-          }
-        })
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              cluster: {
+                pixelRange: 50
+              },
+              entityStyle: {
+                billboard: {
+                  scale: 0.5,
+                  image: `<% if (properties.visibility < 75) { %>/iframe/windyblack.png<% }
+                            else if (properties.visibility < 300) { %>/iframe/windyred.png<% }
+                            else if (properties.visibility < 1500) { %>/iframe/windyorange.png<% }
+                            else if (properties.visibility < 3000) { %>/iframe/windyyellow.png<% }
+                            else { %>/iframe/windygreen.png<% } %>`,
+                  color: `Cesium.Color.<% if (properties.visibility < 75) { %>BLACK<% }
+                            else if (properties.visibility < 300) { %>ORANGERED<% }
+                            else if (properties.visibility < 1500) { %>GOLD<% }
+                            else if (properties.visibility < 3000) { %>YELLOW<% }
+                            else { %>LIMEGREEN<% } %>`
+                },
+                template: ['billboard.image', 'billboard.color']
+              },
+              popup: { pick: [] },
+              tooltip: {
+                template: 'METAR\n<%= properties.metar %>\nTAF\n<%= properties.taf %>'
+              }
+            }
+          }})
+          await updateMetarTafLayer(name)
+          setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
+        }
       }
       function updateMetarTafLayer(name) {
         // Setup random visibility on some airports
@@ -285,66 +277,64 @@
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, { type: 'FeatureCollection', features: airports.features.slice(0, 100) }] })
       }
-      function toggleAcarsLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'message',
-              featureId: 'id',
-              isSelectable: false,
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                'marker-symbol' : 'circle',
-                'radius': 6,
-                'stroke-width': 0,
-                'fill-opacity': 0.75,
-                'fill': `<% if (properties.type === 'ATC') { %>#000000<% }
-                                else if (properties.type === 'AOC') { %>#f9b40f<% }
-                                else { %>#33c137<% } %>`,
-                template: ['fill'],
-                cluster: null,
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
-                },
-                // Use higher value than default overlays to ensure messages are always on top of flightpath
-                // (see https://leafletjs.com/reference-1.4.0.html#map-overlaypane)
-                zIndex: 401
+      async function toggleAcarsLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'message',
+            featureId: 'id',
+            isSelectable: false,
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              'marker-symbol' : 'circle',
+              'radius': 6,
+              'stroke-width': 0,
+              'fill-opacity': 0.75,
+              'fill': `<% if (properties.type === 'ATC') { %>#000000<% }
+                              else if (properties.type === 'AOC') { %>#f9b40f<% }
+                              else { %>#33c137<% } %>`,
+              template: ['fill'],
+              cluster: null,
+              popup: { pick: [] },
+              tooltip: {
+                template: '<b><%= properties.timestamp.toISOString() %></b></br><%= properties.message %>'
               },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                'marker-symbol' : 'circle',
-                entityStyle: {
-                  billboard: {
-                    image: `<% if (properties.type === 'ATC') { %>/iframe/ACMS.png<% }
-                              else if (properties.type === 'AOC') { %>/iframe/AOC.png<% }
-                              else { %>/iframe/ADS.png<% } %>`,
-                    color: `Cesium.Color.<% if (properties.type === 'ATC') { %>BLACK<% }
-                              else if (properties.type === 'AOC') { %>ORANGE<% }
-                              else { %>LIMEGREEN<% } %>`,
-                    heightReference : 'Cesium.HeightReference.RELATIVE_TO_GROUND'
-                  },
-                  template: ['billboard.image', 'billboard.color']
+              // Use higher value than default overlays to ensure messages are always on top of flightpath
+              // (see https://leafletjs.com/reference-1.4.0.html#map-overlaypane)
+              zIndex: 401
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              'marker-symbol' : 'circle',
+              entityStyle: {
+                billboard: {
+                  image: `<% if (properties.type === 'ATC') { %>/iframe/ACMS.png<% }
+                            else if (properties.type === 'AOC') { %>/iframe/AOC.png<% }
+                            else { %>/iframe/ADS.png<% } %>`,
+                  color: `Cesium.Color.<% if (properties.type === 'ATC') { %>BLACK<% }
+                            else if (properties.type === 'AOC') { %>ORANGE<% }
+                            else { %>LIMEGREEN<% } %>`,
+                  heightReference : 'Cesium.HeightReference.RELATIVE_TO_GROUND'
                 },
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.timestamp.toISOString() %>\n<%= properties.message %>'
-                }
+                template: ['billboard.image', 'billboard.color']
+              },
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.timestamp.toISOString() %>\n<%= properties.message %>'
               }
-            }})
-            .then(function () { return updateAcarsLayer(name) })
-            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
-          }
-        })
+            }
+          }})
+          await updateAcarsLayer(name)
+          setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
+        }
       }
       function updateAcarsLayer(name) {
         // Setup random messages
@@ -352,52 +342,51 @@
         for (let i = 0; i < flightpath.length; i++) {
           let feature = getGeoJsonAcarsFeature(i)
           feature.geometry.coordinates = flightpath[i].concat(10000 * Math.random()) // Random altitude
+          feature.style = { draggable: true }
           acars.features.push(feature)
         }
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, acars] })
       }
-      function toggleFlightpathLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'timeline',
-              featureId: 'id',
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.message %>',
-                  options: { sticky: true }
-                }
+      async function toggleFlightpathLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'timeline',
+            featureId: 'id',
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.message %>',
+                options: { sticky: true }
+              }
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.message %>',
+                options: { sticky: true }
               },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.message %>',
-                  options: { sticky: true }
-                },
-                entityStyle: {
-                  polyline: {
-                    clampToGround: false
-                  }
+              entityStyle: {
+                polyline: {
+                  clampToGround: false
                 }
               }
-            }})
-            .then(function () { return updateFlightpathLayer(name) })
-            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
-          }
-        })
+            }
+          }})
+          await updateFlightpathLayer(name)
+          setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
+        }
       }
       function updateFlightpathLayer(name) {
         // Setup random path
@@ -439,42 +428,40 @@
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
-      function toggleGradientFlightpathLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'timeline',
-              featureId: 'id',
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: ['message'] },
-                tooltip: {
-                  template: '<%= properties.message %>',
-                  options: { sticky: true }
-                }
-              },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: [] },
-                tooltip: {
-                  template: '<%= properties.message %>',
-                  options: { sticky: true }
-                }
+      async function toggleGradientFlightpathLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'timeline',
+            featureId: 'id',
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: ['message'] },
+              tooltip: {
+                template: '<%= properties.message %>',
+                options: { sticky: true }
               }
-            }})
-            .then(function () { return updateGradientFlightpathLayer(name) })
-            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
-          }
-        })
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: [] },
+              tooltip: {
+                template: '<%= properties.message %>',
+                options: { sticky: true }
+              }
+            }
+          }})
+          await updateGradientFlightpathLayer(name)
+          setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
+        }
       }
       function updateGradientFlightpathLayer(name) {
         // Filter according to current batch
@@ -514,51 +501,49 @@
         if (split > 1) split = 1.0 / 3.0
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
       }
-      function toggleFlightplanLayer(name) {
-        return postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
-        .then(function (result) {
-          if (result.data) {
-            return postRobot.send(kano, component, { command: 'removeLayer', args: name })
-          } else {
-            return postRobot.send(kano, component, { command: 'addLayer', args: {
-              name,
-              type: 'OverlayLayer',
-              icon: 'multiline_chart',
-              featureId: 'name',
-              leaflet: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: [] },
-                cluster: false,
-                panes: [{
-                  name: 'waypoints',
-                  minZoom: 7,
-                  //maxZoom: 14
-                }]
-              },
-              cesium: {
-                type: 'geoJson',
-                realtime: true,
-                isVisible: true,
-                popup: { pick: [] },
-                entityStyle: {
-                  billboard: {
-                    heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
-                  },
-                  label: {
-                    heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
-                  },
-                  polyline: {
-                    clampToGround: false
-                  }
+      async function toggleFlightplanLayer(name) {
+        const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
+        if (result.data) {
+          await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+        } else {
+          await postRobot.send(kano, component, { command: 'addLayer', args: {
+            name,
+            type: 'OverlayLayer',
+            icon: 'multiline_chart',
+            featureId: 'name',
+            leaflet: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: [] },
+              cluster: false,
+              panes: [{
+                name: 'waypoints',
+                minZoom: 7,
+                //maxZoom: 14
+              }]
+            },
+            cesium: {
+              type: 'geoJson',
+              realtime: true,
+              isVisible: true,
+              popup: { pick: [] },
+              entityStyle: {
+                billboard: {
+                  heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
+                },
+                label: {
+                  heightReference: 'Cesium.HeightReference.RELATIVE_TO_GROUND'
+                },
+                polyline: {
+                  clampToGround: false
                 }
               }
-            }})
-            .then(function () { return updateFlightplanLayer(name) })
-            .then(function () { setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000) })
-          }
-        })
+            }
+          }})
+          await updateFlightplanLayer(name)
+          setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
+        }
       }
       function updateFlightplanLayer(name) {
         let plan = { type: 'FeatureCollection', features: [] }
@@ -612,7 +597,7 @@
         // Waypoints
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
+          properties: { name: 'PARIS-WAYPOINT', 'marker-symbol': 'none', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
             entityStyle: {
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
@@ -621,7 +606,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'PARIS-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', 'fill': '#33c137', 'stroke': '#33c137', 'icon-text': 'PARIS', pane: 'waypoints',
+          properties: { name: 'PARIS-WAYPOINT-LABEL', 'marker-symbol': 'none', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">PARIS</b>', 'fill': '#33c137', 'stroke': '#33c137', 'icon-text': 'PARIS', pane: 'waypoints',
             entityStyle: {
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } },
               label: { font: '18px sans-serif', pixelOffset : { type: 'Cesium.Cartesian2', options: [32, 0] },
@@ -632,7 +617,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
+          properties: { name: 'DUBLIN-WAYPOINT', 'marker-symbol': 'none', 'icon-anchor': [4, 8], 'icon-html': '<div style="display: inline-block; height: 8px; width: 8px; background: #33c13799; transform: rotate(45deg);">', pane: 'waypoints',
             entityStyle: {
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } }
             }
@@ -641,7 +626,7 @@
         })
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', 'icon-text': 'DUBLIN', pane: 'waypoints',
+          properties: { name: 'DUBLIN-WAYPOINT-LABEL', 'marker-symbol': 'none', 'icon-anchor': [-8, 8], 'icon-html': '<b style="display: inline-block; color:#33c137;">DUBLIN</b>', 'icon-text': 'DUBLIN', pane: 'waypoints',
             entityStyle: {
               billboard: { distanceDisplayCondition: { type: 'Cesium.DistanceDisplayCondition', options: [0.0, 1000000.0] } },
               label: { font: '18px sans-serif', pixelOffset : { type: 'Cesium.Cartesian2', options: [32, 0] },
@@ -667,24 +652,32 @@
         })
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, plan] })
       }
-      function updateForecastLevel() {
-        return postRobot.send(kano, component, { command: 'showLayer', args: 'Wind (isobaric)' })
-        .then(function (result) {
-          return postRobot.send(kano, component, { property: 'selectableLevels' })
-        })
-        .then(function (result) {
-          const index = Math.floor(Math.random() * result.data.values.length)
-          const level = result.data.values[index]
-          return postRobot.send(kano, component, { command: 'setSelectedLevel', args: [level] })
-        })
+      async function updateForecastLevel() {
+        let result = await postRobot.send(kano, component, { command: 'showLayer', args: 'Wind (isobaric)' })
+        result = await postRobot.send(kano, component, { property: 'selectableLevels' })
+        const index = Math.floor(Math.random() * result.data.values.length)
+        const level = result.data.values[index]
+        await postRobot.send(kano, component, { command: 'setSelectedLevel', args: [level] })
       }
-      function updateBearing() {
-        postRobot.send(kano, component, { command: 'getCenter' })
-        .then(function (result) {
-          const { longitude, latitude, zoomLevel, altitude } = result.data
-          if (component === 'map') postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 360 * Math.random()] })
-          else postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 360 * Math.random()] })
-        })
+      async function updateBearing() {
+        const result = await postRobot.send(kano, component, { command: 'getCenter' })
+        const { longitude, latitude, zoomLevel, altitude } = result.data
+        if (component === 'map') {
+          await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, -360 * Math.random()] })
+          await postRobot.send(kano, 'map', { command: 'setTouchRotateEnabled', args: true })
+        } else await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, -360 * Math.random()] })
+        // Refresh A/C orientation
+        await postRobot.send(kano, component, { command: 'updateLayer', args: ['Aircraft', aircraft] })
+      }
+      async function resetBearing() {
+        const result = await postRobot.send(kano, component, { command: 'getCenter' })
+        const { longitude, latitude, zoomLevel, altitude } = result.data
+        if (component === 'map') {
+          await postRobot.send(kano, 'map', { command: 'setTouchRotateEnabled', args: false })
+          await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, zoomLevel, 0] })
+        } else await postRobot.send(kano, component, { command: 'center', args: [longitude, latitude, altitude, 0, -90, 0] })
+        // Refresh A/C orientation
+        await postRobot.send(kano, component, { command: 'updateLayer', args: ['Aircraft', aircraft] })
       }
     </script>
     <style>
@@ -749,7 +742,14 @@
         </div>
         <button type="button" onclick="toggleFlightplanLayer('Flightplan')">Switch flightplan</button>
         <button type="button" onclick="updateForecastLevel()">Update forecast level</button>
-        <button type="button" onclick="updateBearing()">Update map bearing</button>
+        <div class="packed-grid">
+          <button type="button" onclick="updateBearing()">Update map bearing</button>
+          <button type="button" onclick="resetBearing()">Reset map bearing</button>
+        </div>
+        <b>Onetime interaction event</b><p id="onetime-interaction"></p>
+        <b>Continuous interaction event</b><p id="continuous-interaction"></p>
+        <b>Onetime animation event</b><p id="onetime-animation"></p>
+        <b>Continuous animation event</b><p id="continuous-animation"></p>
       </div>
       <div class="iframe-container">
         <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
@@ -759,6 +759,27 @@
     </div>
     <script>
       var kano = document.getElementById('kano').contentWindow
+      function getEventMessage(type, event) {
+        const { latitude, longitude, feature, layer, containerPoint } = event
+        const { x, y } = containerPoint || {}
+        let message = type + ' received'
+        if (latitude && longitude) message += '<br/>Lat/Long = ' +  latitude.toFixed(2) + ',' + longitude.toFixed(2)
+        if (x && y) message += '<br/>X/Y = ' +  x.toFixed(2) + ',' + y.toFixed(2)
+        if (layer) message += '<br/>Layer ' + (layer.label || layer.name)
+        if (feature) {
+          const id = (layer.featureId ? feature.properties[layer.featureId] : feature._id)
+          message += '<br/>Feature ' + id
+        }
+        return message
+      }
+      function updateInteraction(type, event) {
+        const message = getEventMessage(type, event)
+        document.getElementById(type === 'mousemove' || type === 'drag' ? 'continuous-interaction' :  'onetime-interaction').innerHTML = message
+      }
+      function updateAnimation(type, event) {
+        const message = getEventMessage(type, event)
+        document.getElementById(type === 'zoom' || type === 'move' ? 'continuous-animation' :  'onetime-animation').innerHTML = message
+      }
       postRobot.on('kano-ready', () => {
         // configuration example
         postRobot.send(kano, 'setConfiguration', {
@@ -771,7 +792,12 @@
           'globeActivity.fab.filter': { id: { $in: ['probe-location'] } }, // No import in globe
           // Activate rotation in 2D
           'engines.leaflet.viewer.rotate': true,
-          'engines.leaflet.viewer.rotateControl': false
+          'engines.leaflet.viewer.rotateControl': false,
+          // Allow more events to be emitted
+          'mapActivity.allowForwardEvents': ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
+            'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'dragstart', 'dragend', 'drag']
+          // Do not receive these events
+          //'mapActivity.disallowForwardEvents': ['mousemove']
         })
         postRobot.send(kano, 'setLocalStorage', {
           'kano-jwt': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrYWxpc2lvIiwiaXNzIjoia2FsaXNpbyJ9.qwOZjkIcAqo6HPGESu0_5-f6g9VkN6y6pN1HJKJF6Sg'
@@ -780,26 +806,71 @@
       postRobot.on('api-ready', () => console.log('Kano API ready'))
       postRobot.on('kano-login', () => console.log('User logged in'))
       postRobot.on('kano-logout', () => console.log('User logged out'))
-      postRobot.on('map-ready', () => {
+      postRobot.on('map-ready', async () => {
         console.log('Map component ready')
         // check acces to a service by requesting saved user contexts
-        postRobot.send(kano, 'api', { service: 'catalog', operation: 'find', args: [{ query: { type: 'Context' } }] })
-        .then((result) => {
-          // Activate first context if any
-          const response = result.data
-          if (response.total > 0) postRobot.send(kano, component, { command: 'loadContext', args: response.data[0] })
-        })
-        postRobot.send(kano, component, { command: 'getFeaturesFromLayer', args: 'Layers.AIRPORTS' })
-        .then((result) => { airports = result.data })
+        let result = await postRobot.send(kano, 'api', { service: 'catalog', operation: 'find', args: [{ query: { type: 'Context' } }] })
+        // Activate first context if any
+        let response = result.data
+        if (response.total > 0) postRobot.send(kano, component, { command: 'loadContext', args: response.data[0] })
+        
+        response = await fetch('./airports.geojson')
+        airports = await response.json()
         //postRobot.send(kano, 'map', { command: 'setTopPaneVisible', args: false })
       })
       postRobot.on('globe-ready', () => console.log('Globe component ready'))
       postRobot.on('map-destroyed', () => console.log('Map component destroyed'))
       postRobot.on('globe-destroyed', () => console.log('Globe component destroyed'))
       postRobot.on('click', (event) => {
-        if (event.data.layer.name === 'ACARS') {
-          alert('ACARS message clicked')
-        }
+        updateInteraction('click', event.data)
+      })
+      postRobot.on('dbclick', (event) => {
+        updateInteraction('dbclick', event.data)
+      })
+      postRobot.on('contextmenu', (event) => {
+        updateInteraction('contextmenu', event.data)
+      })
+      postRobot.on('mouseover', (event) => {
+        updateInteraction('mouseover', event.data)
+      })
+      postRobot.on('mouseout', (event) => {
+        updateInteraction('mouseout', event.data)
+      })
+      postRobot.on('mousemove', (event) => {
+        updateInteraction('mousemove', event.data)
+      })
+      postRobot.on('mouseup', (event) => {
+        updateInteraction('mouseup', event.data)
+      })
+      postRobot.on('mousedown', (event) => {
+        updateInteraction('mousedown', event.data)
+      })
+      postRobot.on('dragstart', (event) => {
+        updateInteraction('dragstart', event.data)
+      })
+      postRobot.on('dragend', (event) => {
+        updateInteraction('dragend', event.data)
+      })
+      postRobot.on('drag', (event) => {
+        updateInteraction('drag', event.data)
+      })
+      postRobot.on('movestart', (event) => {
+        updateAnimation('movestart', event.data)
+      })
+      postRobot.on('moveend', (event) => {
+        updateAnimation('moveend', event.data)
+      })
+      postRobot.on('move', (event) => {
+        updateAnimation('move', event.data)
+      })
+      postRobot.on('zoomstart', (event) => {
+        updateAnimation('zoomstart', event.data)
+      })
+      postRobot.on('zoomend', (event) => {
+        updateAnimation('zoomend', event.data)
+      })
+      postRobot.on('zoom', (event) => {
+        updateAnimation('zoom', event.data)
       })
       postRobot.on('layer-shown', (event) => console.log(event.data.layer.name + ' has been shown'))
       postRobot.on('layer-hidden', (event) => console.log(event.data.layer.name + ' has been hidden'))

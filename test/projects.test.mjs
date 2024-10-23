@@ -48,8 +48,8 @@ describe(`suite:${suite}`, () => {
     let exists = await map.projectExists(page, userProjectsTab, 'project-with-trace')
     expect(exists).beTrue()
     await map.createProject(page, 'project-without-trace', {
-      categories: ['Fonds cartographiques'],
-      layers: ['Plan (Sombre)'],
+      categories: ['Map backgrounds'],
+      layers: ['Plan (Dark)'],
       views: []
     })
     exists = await map.projectExists(page, userProjectsTab, 'project-without-trace')

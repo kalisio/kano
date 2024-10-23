@@ -79,8 +79,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     }],  
-    iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/openaq-icon.png',
-    attribution: '',
+    attribution: 'OpenAQ, Inc. (202X). OpenAQ API Available from: <a href="https://openaq.org">https://openaq.org</a>',
     type: 'OverlayLayer',
     service: 'openaq-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

@@ -89,8 +89,7 @@ export default {
     'selection.items': {
       handler () {
         this.updateSelection()
-      },
-      deep: true
+      }
     },
     'probe.item': {
       handler () {

@@ -64,13 +64,13 @@ describe(`suite:${suite}`, () => {
   })
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 13)
+    await map.zoomToLevel(page, 'mapActivity', 13)
     await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 17)
+    await map.zoomToLevel(page, 'mapActivity', 17)
     await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
   })
@@ -86,7 +86,7 @@ describe(`suite:${suite}`, () => {
     await map.dropFile(page, runner.getDataPath('Enjeux_Inondation.geojson'))
     await page.waitForTimeout(1000)
     await map.goToPosition(page, 43.30095, 1.95545)
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 14)
+    await map.zoomToLevel(page, 'mapActivity', 14)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
   })
@@ -115,7 +115,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1000)
-    await map.zoomToLevel(page, 'mapActivity.state.zoom', 16)
+    await map.zoomToLevel(page, 'mapActivity', 16)
     await page.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
   })

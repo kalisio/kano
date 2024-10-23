@@ -3,7 +3,8 @@
     "type": "Feature",
     "properties": {
       "id": "174412d9e-f230-4127-af36-75654e265f56",
-      "tmp_ow": -20
+      "sensorId": "0",
+      "radioactivity_mrem": 0
     },
     "geometry": {
       "type": "Point",
@@ -18,7 +19,8 @@
     "type": "Feature",
     "properties": {
       "id": "174412d9e-f230-4127-af36-75654e265f56",
-      "tmp_ow": 0
+      "sensorId": "0",
+      "radioactivity_mrem": 0.2
     },
     "geometry": {
       "type": "Point",
@@ -33,7 +35,8 @@
     "type": "Feature",
     "properties": {
       "id": "174412d9e-f230-4127-af36-75654e265f56",
-      "tmp_ow": 20
+      "sensorId": "0",
+      "radioactivity_mrem": 0.9
     },
     "geometry": {
       "type": "Point",

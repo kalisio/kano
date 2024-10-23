@@ -16,7 +16,7 @@ import sift from 'sift'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Store, Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -109,9 +109,9 @@ export default {
     },
     'selection.items': {
       handler () {
+        console.log(this.getSelectedItems())
         this.updateSelection()
-      },
-      deep: true
+      }
     },
     'probe.item': {
       handler () {
@@ -150,6 +150,10 @@ export default {
       // We let any embedding iframe process features if required
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+    },
+    setBearing(bearing) {
+      kMapMixins.map.baseMap.methods.setBearing.call(this, bearing)
+      TemplateContext.get().bearing = bearing
     },
     handleWidget (widget) {
       // If window already open on another widget keep it
@@ -256,15 +260,21 @@ export default {
           if (opts.disallowForwardEvents) okForward = okForward && (opts.disallowForwardEvents.indexOf(leafletEvent) === -1)
           if (!okForward) return
 
-          const latlng = _.get(event, 'latlng')
+          let latlng = _.get(event, 'latlng')
+          // For some events like marker drag we get the new position fro mthe target
+          if (!latlng && _.has(event, 'target') && (typeof event.target.getLatLng === 'function')) latlng = event.target.getLatLng()
           const feature = _.get(event, 'target.feature') || _.get(event, 'feature')
           // Retrieve original layer options not processed ones
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
-          utils.sendEmbedEvent(leafletEvent, {
-            longitude: latlng.lng, latitude: latlng.lat, feature, layer,
+          const payload = {
+            longitude: _.get(latlng, 'lng'), latitude: _.get(latlng, 'lat'), feature, layer,
             containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
-          })
+          }
+          if (leafletEvent === 'rotate') {
+            payload.bearing = this.getBearing()
+          }
+          utils.sendEmbedEvent(leafletEvent, payload)
         }
         this.leafletHandlers[leafletEvent] = handler
         this.$engineEvents.on(leafletEvent, handler)
@@ -301,7 +311,8 @@ export default {
   },
   mounted () {
     // Setup event connections
-    const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove']
+    const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
+      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag']
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)

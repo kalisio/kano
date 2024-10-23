@@ -78,11 +78,21 @@ Here is a simple code sample:
   </script>
 ```
 
-There are also a lot of events to be listened by integrating application to be aware of Kano internal states or user behaviour.
+A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
+
+::: warning
+Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
+:::
+
+### Listening to events
+
+There are a lot of events to be listened by integrating application to be aware of Kano internal states or user behaviour.
 
 ::: warning
 You should add a listener for each event in your application, even if you don't need to do any processing, otherwise the **post-robot** library will raise a warning.
 :::
+
+### Frontend events
 
 The following ones are related to Kano states:
 * `kano-ready` when the Kano application has been initialized in the iframe so that you can safely use the iframe API
@@ -130,15 +140,20 @@ postRobot.on('layer-update', (event) => {
   })
 ```
 
-The following ones are related to user interaction (mouse or gesture):
+The following ones are related to [user interaction](https://leafletjs.com/reference.html#map-event) (mouse or gesture):
 * `click` whenever map or a feature from a layer has been clicked (left button or tapped) in the 2D/3D map, 
 * `dbclick` whenever map or a feature from a layer has been double-clicked (left button or tapped) in the 2D/3D map,
 * `contextmenu` whenever map or a feature from a layer has been right-clicked (or long tapped) in the 2D map,
+* `mousedown` whenever the user pushes the mouse button on the 2D map,
+* `mouseup` whenever the user releases the mouse button on the 2D map,
 * `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map,
 * `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
-* `mousemove` whenever the mouse moves on the 2D map.
+* `mousemove` whenever the mouse moves on the 2D map,
+* `dragstart` whenever the user starts dragging a 2D marker,
+* `dragend` whenever the user stops dragging a 2D marker,
+* `drag` while the user drags a 2D marker.
 
-User interaction events will provide you with the following properties as data payload:
+Most user interaction events will provide you with the following properties as data payload:
 * `longitude` and `latitude` coordinates of the interaction,
 * `feature` and `layer` (descriptor) when the target element is a feature from a layer,
 * `containerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map сontainer,
@@ -164,11 +179,44 @@ postRobot.on('contextmenu', (event) => {
 })
 ```
 
-A full sample exploring the different ways to interact with the API is provided [here](https://github.com/kalisio/kano/blob/master/src/statics/iframe.html). When running the demo you can dynamically call API methods when toggling the different buttons on the left.
+The following events are related to [map state changes](https://leafletjs.com/reference.html#map-event) and do not provide additional properties like interaction events:
+* `movestart` whenever the view of the 2D map starts changing (e.g. user starts dragging the map),
+* `moveend` whenever the center of the 2D map stops changing (e.g. user stopped dragging the map),
+* `move` during any movement of the 2D map (including pan and fly animations),
+* `zoomstart` whenever the 2D map zoom is about to change (e.g. before zoom animation),
+* `zoomend` whenever the 2D map zoom changed (after any animations),
+* `zoom` during any change in zoom level, including zoom and fly animations,
+* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload). 
 
-::: warning
-Depending on the configuration of your Kano instance some features might not work as expected in the sample as it relies on some specific layers to exist.
-:::
+### Backend events
+
+Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
+* `catalog` whenever a service event is emitted on the `catalog` service
+* `features` whenever a service event is emitted on the `features` service
+
+For instance, you can listen to changes in the catalog service like this:
+```js
+  postRobot.on('catalog', (event) => {
+    const { serviceEvent, data } = event.data
+    console.log(`Received ${serviceEvent} catalog event`)
+  })
+```
+
+Kano also provides you with an internal event bus service called `events` that can be used to dispatch custom events to all connected clients. This service internally has only a `create` method to send events, you can send a custom event named `item-selected` through this service like this:
+```js
+  // Tell others clients selection changed
+  await postRobot.send(kano, 'event', {
+    name: 'item-selected', data: { id: item.id }
+  })
+```
+Others clients can listen to this custom event like this:
+```js
+  // Listen to selection change
+  postRobot.on('item-selected', (event) => {
+    const { id } = event.data
+    ...
+  })
+```
 
 ### Accessing the underlying API
 
@@ -218,36 +266,6 @@ postRobot.on('catalog-loaded', (event) => {
   })
   return items
 })
-```
-
-### Managing events
-
-Backend [service events](https://feathersjs.com/api/events.html) can be listened by integrating application, in this case the `serviceEvent` property, respectively the `data` property, contains the service event name, respectively service event data, in the post-robot event payload:
-* `catalog` whenever a service event is emitted on the `catalog` service
-* `features` whenever a service event is emitted on the `features` service
-
-For instance, you can listen to changes in the catalog service like this:
-```js
-  postRobot.on('catalog', (event) => {
-    const { serviceEvent, data } = event.data
-    console.log(`Received ${serviceEvent} catalog event`)
-  })
-```
-
-Kano also provides you with an internal event bus service called `events` that can be used to dispatch custom events to all connected clients. This service internally has only a `create` method to send events, you can send a custom event named `item-selected` through this service like this:
-```js
-  // Tell others clients selection changed
-  await postRobot.send(kano, 'event', {
-    name: 'item-selected', data: { id: item.id }
-  })
-```
-Others clients can listen to this custom event like this:
-```js
-  // Listen to selection change
-  postRobot.on('item-selected', (event) => {
-    const { id } = event.data
-    ...
-  })
 ```
 
 ## Developing in Kano

@@ -209,7 +209,8 @@ const mapEngine = {
     maxBounds: [[-90, -180], [90, 180]],
     maxBoundsViscosity: 0.25,
     timeDimension: true,
-    rotateControl: false
+    rotateControl: false,
+    attributionControl: false
   },
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
   // THIS IS DUE TO KDK EDITING COMPONENTS ONLY SUPPORTING COLORS FROM PALETTE NOW
@@ -391,6 +392,7 @@ const globeEngine = {
 
 module.exports = {
   pwaName,
+  buildMode: process.env.BUILD_MODE === 'pwa' ? 'pwa' : 'spa',
   flavor: process.env.NODE_APP_INSTANCE || 'dev',
   version,
   buildNumber: process.env.BUILD_NUMBER,
@@ -577,6 +579,7 @@ module.exports = {
     stickies: {
       content: [
         { id: 'level-slider', position: 'right', offset: [40, 0], component: 'KLevelSlider' },
+        { id: 'attribution', position: 'bottom-right', offset: [74, 24], component: 'KAttribution' },
         // Only for example purpose
         // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
       ]
@@ -659,6 +662,11 @@ module.exports = {
     },
     page: {
       content:[]
+    },
+    stickies: {
+      content: [
+        { id: 'attribution', position: 'bottom-right', offset: [74, 24], component: 'KAttribution' }
+      ]
     },
     fab: {
       content: [
