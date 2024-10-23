@@ -110,7 +110,7 @@ describe(`suite:${suite}`, () => {
     const data = fs.readJsonSync(runner.getDataPath('lab-measurements.geojson'))
     setTime(data)
     await client.getService('lab-measurements').create(data)
-    await map.clickLayer(page, catalogLayersTab, 'LAB_MEASUREMENTS')
+    await map.clickLayer(page, catalogLayersTab, 'LAB_RADIOACTIVITY_MEASUREMENTS')
     await map.goToPosition(page, 43.54, 1.51)
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
