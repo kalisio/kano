@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: 'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX=9&TILEROW=187&TILECOL=260',
     icon: 'streetview',
-    attribution: 'IGN Plan © <a href="https://ign.fr">IGN</a> contributors, <a href="https://www.ign.fr/conditions-generales-utilisation">CC BY 4.0</a> license',
+    attribution: 'IGN Plan © <a href="https://ign.fr">IGN</a>, <a href="https://www.ign.fr/conditions-generales-utilisation">CC BY 4.0</a> license',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
@@ -60,7 +60,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: 'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX=9&TILEROW=187&TILECOL=260',
     icon: 'satellite',
-    attribution: 'IGN Imagery © <a href="https://ign.fr">IGN</a> contributors, <a href="https://www.ign.fr/conditions-generales-utilisation">CC BY 4.0</a> license',
+    attribution: 'IGN Imagery © <a href="https://ign.fr">IGN</a>, <a href="https://www.ign.fr/conditions-generales-utilisation">CC BY 4.0</a> license',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',

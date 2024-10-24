@@ -77,7 +77,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     }],
-    attribution: 'Teleray © <a href="https://irsn.fr/">IRSN</a> contributors',
+    attribution: 'Teleray © <a href="https://irsn.fr/">IRSN</a>',
     type: 'OverlayLayer',
     service: 'teleray-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

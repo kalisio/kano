@@ -35,7 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'GFS © <a href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs">NOAA</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=130&id_rubrique=51">ARPEGE</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=131&id_rubrique=51">AROME</a> © <a href="https://donneespubliques.meteofrance.fr/">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -151,7 +151,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'GFS © <a href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs">NOAA</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=130&id_rubrique=51">ARPEGE</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=131&id_rubrique=51">AROME</a> © <a href="https://donneespubliques.meteofrance.fr/">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -246,7 +246,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'GFS © <a href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs">NOAA</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=130&id_rubrique=51">ARPEGE</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=131&id_rubrique=51">AROME</a> © <a href="https://donneespubliques.meteofrance.fr/">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -341,7 +341,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'GFS © <a href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs">NOAA</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=130&id_rubrique=51">ARPEGE</a>, <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=131&id_rubrique=51">AROME</a> © <a href="https://donneespubliques.meteofrance.fr/">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {

@@ -55,7 +55,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     },
-    attribution: "RTE © <a href='https://opendata.reseaux-energies.fr/'>ODRÉ</a> contributors",
+    attribution: "RTE © <a href='https://opendata.reseaux-energies.fr/'>ODRÉ</a>",
     type: 'OverlayLayer',
     service: 'rte-generation',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
