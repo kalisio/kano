@@ -14062,6 +14062,14 @@ pmtiles@^3.0.3:
     "@types/leaflet" "^1.9.8"
     fflate "^0.8.0"
 
+pmtiles@^3.0.7:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/pmtiles/-/pmtiles-3.2.0.tgz#502258d49b6956c6be801dec535ee19fde59eb2b"
+  integrity sha512-4v3Nw5xeMxaUReLZQTz3PyM4VM/Lx/Xp/rc2GGEWMl0nqAmcb+gjyi+eOTwfPu8LnB0ash36hz0dV76uYvih5A==
+  dependencies:
+    "@types/leaflet" "^1.9.8"
+    fflate "^0.8.0"
+
 pngjs@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-5.0.0.tgz#e79dd2b215767fd9c04561c01236df960bce7fbb"

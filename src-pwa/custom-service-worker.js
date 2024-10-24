@@ -6,7 +6,7 @@ import logger from 'loglevel'
 import { LocalForage } from '@kalisio/feathers-localforage'
 // Ensure same underlying configuration as we are in another process and instance may differ
 LocalForage.config({
-  name: 'offline_views',
+  name: 'offline_cache',
   storeName: 'cache_entries'
 })
 
@@ -42,7 +42,13 @@ precacheAndRoute(self.__WB_MANIFEST)
 async function cacheKeyWillBeUsed({ request, mode }) {
   const url = new URL(request.url)
   url.searchParams.delete('jwt')
-  return url.href
+  const key = url.href
+  // Need to add range request in key as it is ignored by cache otherwise
+  if (request.headers && request.headers.Range) {
+    const range = request.headers.Range.replace('bytes=', '').split('-')
+    key += `/${range[0]}/${range[1]}`
+  }
+  return key
 }
 
 async function fetchDidFail({ error, request }) {
@@ -52,10 +58,15 @@ async function fetchDidFail({ error, request }) {
 // Register the `NetworkFirst` caching strategy for offline data
 // targetting layers data
 registerRoute(
-  ({url}) => {
-    const key = new URL(url.href)
+  ({url, request}) => {
+    let key = new URL(url.href)
     key.searchParams.delete('jwt')
-    const isCached = cachedUrls && cachedUrls.has(key.href)
+    key = key.href
+    if (request.headers && request.headers.Range) {
+      const range = request.headers.Range.replace('bytes=', '').split('-')
+      key += `/${range[0]}/${range[1]}`
+    }
+    const isCached = cachedUrls && cachedUrls.has(key)
     if (isCached) {
       logger.debug(`[Kano] Return response for ${url.href} from layers cache`)
     }
