@@ -31,7 +31,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }
     },
     tags: ['administrative'],
-    attribution: 'OpenStreetMap © <a href="https://www.geofabrik.de/">Geofabrik</a> contributors',
+    attribution: 'OSM Boundaries © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, distributed by <a href="https://www.geofabrik.de/">Geofabrik</a>, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a> license.',
     type: 'OverlayLayer',
     service: 'osm-boundaries',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

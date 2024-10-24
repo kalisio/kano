@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-th',
-    attribution: 'INSEE',
+    attribution: 'Population © INSEE – données disponibles sous <a href="https://catalogue-donnees.insee.fr/">licence ouverte</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION',
@@ -85,7 +85,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-th',
-    attribution: 'INSEE',
+    attribution: '© INSEE – données disponibles sous <a href="https://catalogue-donnees.insee.fr/">licence ouverte</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
@@ -149,7 +149,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-male',
-    attribution: 'INSEE',
+    attribution: '© INSEE – données disponibles sous <a href="https://catalogue-donnees.insee.fr/">licence ouverte</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',

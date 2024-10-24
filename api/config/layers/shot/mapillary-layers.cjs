@@ -19,7 +19,7 @@ module.exports = function () {
     tags: [
       'shot'
     ],
-    attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>, CC BY-SA',
+    attribution: 'Images from <a href="https://www.mapillary.com">Mapillary</a>',
     type: 'OverlayLayer',
     leaflet: {
       type: 'mapillary',

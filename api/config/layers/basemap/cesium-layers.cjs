@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: 'Cesium/Widgets/Images/TerrainProviders/Ellipsoid.png',
     icon: 'fiber_manual_record',
-    attribution: '',
+    attribution: 'CESIUM Ellipsoid © <a href="https://cesium.com/">Cesium</a> contributors.',
     default: true,
     type: 'TerrainLayer',
     cesium: {
@@ -51,7 +51,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: 'Cesium/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
     icon: 'terrain',
-    attribution: 'High-resolution, mesh-based terrain for the entire globe.\nBy https://cesiumjs.org',
+    attribution: 'CESIUM Terrain © <a href="https://cesium.com/">Cesium</a> contributors.',
     type: 'TerrainLayer',
     cesium: {
       type: 'Cesium',

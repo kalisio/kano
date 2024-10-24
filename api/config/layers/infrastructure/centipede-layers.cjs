@@ -80,7 +80,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     }],
-    attribution: '<a href="https://docs.centipede.fr/">Réseau Centipede RTK</a>',
+    attribution: 'CENTIPEDE Base © <a href="https://docs.centipede.fr/">Réseau Centipede RTK</a>',
     type: 'OverlayLayer',
     service: 'centipede-pings',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
@@ -208,7 +208,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     }],
-    attribution: "<a href='https://docs.centipede.fr/'>Centipeded/a>",
+    attribution: "CENTIPEDE Buffer © <a href='https://docs.centipede.fr/'>Centipede</a>",
     type: 'OverlayLayer',
     leaflet: {
       type: 'kanvasLayer',

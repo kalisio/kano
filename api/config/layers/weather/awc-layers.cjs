@@ -83,7 +83,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
               label: 'Legend.AWC_METARS_CLOUDCOVER_SCT' 
             },
             { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#666666', radius: 10, icon: { classes: 'fa fa-cloud', color: '#F1EEF6' } } } },
-               label: 'Legend.AWC_METARS_CLOUDCOVER_BKN' 
+              label: 'Legend.AWC_METARS_CLOUDCOVER_BKN' 
             },
             { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#666666', radius: 10, icon: { classes: 'fa fa-cloud', color: '#BDC9E1' } } } }, 
               label: 'Legend.AWC_METARS_CLOUDCOVER_OVC' 
@@ -110,7 +110,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ]
         }
       }],
-      attribution: '',
+      attribution: 'METAR © <a href="https://aviationweather.gov/metar">NOAA Aviation Weather Center</a>',
       type: 'OverlayLayer',
       service: 'awc-metars',
       dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

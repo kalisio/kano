@@ -37,7 +37,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'lab', 'measure'
     ],
-    attribution: 'Global Smart Rescue',
+    attribution: 'Global Smart Rescue © <a href="https://globalsmartrescue.com/">Global Smart Rescue</a> contributors',
     type: 'OverlayLayer',
     service: 'lab-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

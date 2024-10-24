@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: `${tmsUrl}/imagery@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'PlanetSAT by <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO by <a href="http://www.ign.fr/">IGN</a>',
+    attribution: 'PlanetSAT by <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO by <a href="http://www.ign.fr/">IGN</a>, <a href="https://www.ign.fr/conditions-generales-utilisation">CC BY 4.0</a> license',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',
@@ -59,7 +59,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: `${tmsUrl}/hybrid@GLOBAL_WEBMERCATOR/0/0/0.jpeg`,
     icon: 'terrain',
-    attribution: 'PlanetSAT © <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO © <a href="http://www.ign.fr/">IGN</a>, OpenMapTiles © <a href="https://openmaptiles.com">OpenMapTiles</a>, OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    attribution: 'PlanetSAT © <a href="https://planetobserver.com/">PlanetObserver</a>, BDORTHO © <a href="http://www.ign.fr/">IGN</a>, OpenStreetMap © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a> license',
     type: 'BaseLayer',
     leaflet: {
       type: 'tileLayer',

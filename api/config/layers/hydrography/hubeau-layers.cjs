@@ -73,7 +73,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     }],
-    attribution: '',
+    attribution: 'HUB\'EAU Hydro © <a href="https://www.hubeau.eaufrance.fr">Hub\'Eau</a>',
     type: 'OverlayLayer',
     service: 'hubeau-hydro-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
@@ -231,7 +231,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'hydrography', 'measure'
     ],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
-    attribution: '',
+    attribution: 'HUB\'EAU Piezo © <a href="https://www.hubeau.eaufrance.fr">Hub\'Eau</a>',
     type: 'OverlayLayer',
     service: 'hubeau-piezo-observations',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

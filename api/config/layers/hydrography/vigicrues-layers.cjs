@@ -62,7 +62,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       }
     },
-    attribution: '',
+    attribution: 'Vigicrues © <a href="https://www.vigicrues.gouv.fr">VIGICRUES</a>',
     type: 'OverlayLayer',
     service: 'vigicrues-forecasts',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

@@ -35,7 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -151,7 +151,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -246,7 +246,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {
@@ -341,7 +341,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'weather', 'forecast'
     ],
-    attribution: 'Forecast data from <a href="http://www.meteofrance.com">Météo-France</a>',
+    attribution: 'Forecast © <a href="http://www.meteofrance.com">Météo-France</a>',
     type: 'OverlayLayer',
     variables: [
       {

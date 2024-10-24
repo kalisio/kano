@@ -35,7 +35,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'variables',
       label: 'Legend.OPENRADIATION_LABEL',
     },
-    attribution: "<a href='https://openradiation.org'>OpenRadiation</a>",
+    attribution: 'OpenRadiation © <a href="https://openradiation.org">OpenRadiation</a>, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a> license',
     type: 'OverlayLayer',
     service: 'openradiation',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),

@@ -21,7 +21,7 @@ module.exports = function () {
     ],
     iconUrl: '/OpenSeaMap-Logo-256.png',
     icon: 'marine',
-    attribution: 'OpenSeaMap © <a href="http://www.openseamap.org">OpenSeaMap</a> contributors',
+    attribution: 'OpenSeaMap © <a href="http://www.openseamap.org">OpenSeaMap</a> contributors, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a> license',
     type: 'OverlayLayer',
     leaflet: {
       type: 'tileLayer',
