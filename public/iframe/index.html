@@ -746,10 +746,10 @@
           <button type="button" onclick="updateBearing()">Update map bearing</button>
           <button type="button" onclick="resetBearing()">Reset map bearing</button>
         </div>
-        <b>Onetime interaction event</b><p id="onetime-interaction"></p>
-        <b>Continuous interaction event</b><p id="continuous-interaction"></p>
-        <b>Onetime animation event</b><p id="onetime-animation"></p>
-        <b>Continuous animation event</b><p id="continuous-animation"></p>
+        <b>Onetime interaction event</b><div id="onetime-interaction"></div>
+        <b>Continuous interaction event</b><div id="continuous-interaction"></div>
+        <b>Onetime animation event</b><div id="onetime-animation-zoom"></div><div id="onetime-animation-move"></div><div id="onetime-animation-rotate"></div>
+        <b>Continuous animation event</b><div id="continuous-animation-zoom"></div><div id="continuous-animation-move"></div>
       </div>
       <div class="iframe-container">
         <!-- clipboard-write is required to be able to copy location coordinates using the KPositionIndicator  -->
@@ -760,11 +760,12 @@
     <script>
       var kano = document.getElementById('kano').contentWindow
       function getEventMessage(type, event) {
-        const { latitude, longitude, feature, layer, containerPoint } = event
+        const { latitude, longitude, feature, layer, containerPoint, bearing } = event
         const { x, y } = containerPoint || {}
         let message = type + ' received'
         if (latitude && longitude) message += '<br/>Lat/Long = ' +  latitude.toFixed(2) + ',' + longitude.toFixed(2)
-        if (x && y) message += '<br/>X/Y = ' +  x.toFixed(2) + ',' + y.toFixed(2)
+        if (x && y) message += '<br/>X/Y = ' +  x.toFixed(0) + ',' + y.toFixed(0)
+        if (bearing !== undefined) message += '<br/>Bearing = ' +  bearing.toFixed(2)
         if (layer) message += '<br/>Layer ' + (layer.label || layer.name)
         if (feature) {
           const id = (layer.featureId ? feature.properties[layer.featureId] : feature._id)
@@ -778,7 +779,9 @@
       }
       function updateAnimation(type, event) {
         const message = getEventMessage(type, event)
-        document.getElementById(type === 'zoom' || type === 'move' ? 'continuous-animation' :  'onetime-animation').innerHTML = message
+        let id = (type === 'zoom' || type === 'move' ? 'continuous-animation-' + type :  'onetime-animation-')
+        if (id === 'onetime-animation-') id += (type.includes('zoom') ? 'zoom' : type.includes('move') ? 'move' : 'rotate')
+        document.getElementById(id).innerHTML = message
       }
       postRobot.on('kano-ready', () => {
         // configuration example
@@ -795,7 +798,7 @@
           'engines.leaflet.viewer.rotateControl': false,
           // Allow more events to be emitted
           'mapActivity.allowForwardEvents': ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
-            'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'dragstart', 'dragend', 'drag']
+            'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag']
           // Do not receive these events
           //'mapActivity.disallowForwardEvents': ['mousemove']
         })
@@ -871,6 +874,9 @@
       })
       postRobot.on('zoom', (event) => {
         updateAnimation('zoom', event.data)
+      })
+      postRobot.on('rotate', (event) => {
+        updateAnimation('rotate', event.data)
       })
       postRobot.on('layer-shown', (event) => console.log(event.data.layer.name + ' has been shown'))
       postRobot.on('layer-hidden', (event) => console.log(event.data.layer.name + ' has been hidden'))
