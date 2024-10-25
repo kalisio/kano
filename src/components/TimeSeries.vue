@@ -94,7 +94,7 @@ const isSelectorVisible = computed(() => {
   return visible && !hasSingleSerie.value
 })
 
-// Watch change in time series driavers like time range, format, ...
+// Watch change in time series drivers like time range, format, ...
 watch(Store.get('time.range'), async () => {
   if (chartRef.value) {
     // Reset any zoom
@@ -125,7 +125,7 @@ async function fetchData () {
 }
 function updateChart () {
   if (!chartRef.value) return
-  chartRef.value.update()
+  chartRef.value.requestUpdate()
 }
 function isPinned (timeSerie) {
   timeSerie = _.find(state.timeSeries, { id: timeSerie.id })

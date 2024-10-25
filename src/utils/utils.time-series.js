@@ -58,6 +58,7 @@ export function getChartOptions (title) {
 export async function updateTimeSeries (previousTimeSeries) {
   const { CurrentActivity, hasSelectedItems, getSelectedItems, hasProbedLocation, getProbedLocation } = kMapComposables.useCurrentActivity()
   const activity = unref(CurrentActivity)
+  if (!activity) return
   // Initialize the time range
   const span = Store.get('timeseries.span')
   const start = moment(Time.getCurrentTime()).subtract(span, 'm')
