@@ -117,7 +117,7 @@ Typical use case is to retrieve the raw observations. You can filter spatially (
 ```
 :::
 
-#### Request observations at a station
+### Request observations at a station
 
 Typical use case is to display a timeserie for the station.
 
@@ -182,7 +182,7 @@ Typical use case is to display a timeserie for the station.
 ```
 :::
 
-#### Request latest observations at (a) station(s)
+### Request latest observations at (a) station(s)
 
 Typical use case is to retrieve most recent observations for the station, or display the observations on a map if not filtering by a station ID. 
 

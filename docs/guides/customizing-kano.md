@@ -93,7 +93,7 @@ You now should be able to see a map highlighting some administrative boundaries 
 
 If you have to ingest large datasets you should consider processing data using our [ETL Krawler](https://kalisio.github.io/krawler/) or ad-hoc processors. For instance, [k-population](https://github.com/kalisio/k-population) ingest population data from a big GeoPackage into our database. You will find the associated layer definition in the built-in layers.
 
-#### Time-varying data
+### Time-varying data
 
 One of the best feature of Kano is interactive visualisation, meaning that data can be updated in real-time according to user actions or data updates. A typical use case is the visualisation of time-varying spatial datasets. In this section we will use some data providing the number of hospitalizations by department in France during the COVID-19 (from 20-03-2020 to 20-04-2020) to perform such a visualisation.
 
