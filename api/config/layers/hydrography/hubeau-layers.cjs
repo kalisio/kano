@@ -156,7 +156,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           color: `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>#00a9ce<% }
                     else if (feature.measureRequestIssued) { %>black<% }
                     else { %>white<% } %>`,
-          stroke: {
+          stroke: {
             color: `<% if (_.has(properties, 'H') || _.has(properties, 'Q') || _.has(feature, 'time.H') || _.has(feature, 'time.Q')) { %>transparent<% }
                       else if (feature.measureRequestIssued) { %>white<% }
                       else { %>black<% } %>`,
@@ -170,7 +170,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         }
       },
-      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color'],
       popup: {
         pick: [
           'name'
