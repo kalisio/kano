@@ -55,7 +55,7 @@ async function fetchDidFail({ error, request }) {
   logger.debug(`[Kano] Fetching ${request.url} from layers cache failed`)
 }
 
-// Register the `NetworkFirst` caching strategy for offline data
+// Register the `CacheFirst` caching strategy for offline data
 // targetting layers data
 registerRoute(
   ({url, request}) => {
@@ -72,7 +72,7 @@ registerRoute(
     }
     return isCached
   },
-  new NetworkFirst({
+  new CacheFirst({
     cacheName: 'layers',
     plugins : [{ cacheKeyWillBeUsed, fetchDidFail }]
   })
