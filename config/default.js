@@ -453,6 +453,18 @@ module.exports = {
       }
     ]
   },
+  attribution: {
+    header: [
+      //For example purpose
+      //  { id: 'attribution-header', component: 'KStamp', text: 'header text' }
+    ],
+    headerClass: [''],
+    footer: [
+      // For example purpose
+      //  { id: 'attribution-footer', component: 'KStamp', text: 'footer text' }
+    ],
+    footerClass: [''],
+  },
   screens: {
     actions: [{ 
       id: 'terms-policies', 
