@@ -63,6 +63,7 @@ echo "Will use kli file $KLI_FILE to install and link modules ..."
 
 IMAGE_NAME="$KALISIO_DOCKERHUB_URL/kalisio/$APP"
 IMAGE_TAG="$VERSION-$FLAVOR-node$NODE_VER-$DEBIAN_VER"
+DEBUG=
 
 case "$FLAVOR" in
      "prod")
