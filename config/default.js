@@ -458,12 +458,12 @@ module.exports = {
       //For example purpose
       //  { id: 'attribution-header', component: 'KStamp', text: 'header text' }
     ],
-    headerClass: [''],
+    headerClass: '',
     footer: [
       // For example purpose
       //  { id: 'attribution-footer', component: 'KStamp', text: 'footer text' }
     ],
-    footerClass: [''],
+    footerClass: '',
   },
   screens: {
     actions: [{ 
