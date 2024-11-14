@@ -13,8 +13,13 @@ sidebarDepth: 3
 👉 Added `visibility` [style property](https://kalisio.github.io/kdk/api/map/map-mixins.html#map-style) that can be templated,\
 👉 Added [leaflet-arrowheads](https://github.com/slutske22/leaflet-arrowheads) plugin to be able to create layers with related options,\
 👉 Added ability to rotate the map with still some restrictions (weather, canvas and gradient path layers),\
+👉 Added support for layers targetting PMTiles,\
+👉 Added `highlightable` flag on layers,\
 👉 iframe integration can now register client-side hooks on services,\
 👉 iframe integration can now register a handler to manage real-time feature updates,\
+👉 iframe integration can now track an entity in globe,\
+👉 New map attribution component,\
+👉 Ability to stack multiple timeseries with multi-selection,\
 👉 Selecting features does not clean current probe anymore,\
 👉 Now possible to avoid opening a widget on feature selection,\
 👉 Now possible to configure pane z-index directly in layer definition,\
@@ -28,6 +33,7 @@ sidebarDepth: 3
 
 **Major bug fixes:**\
 ✅ Right opener not accessible when opening the right pane on mobile device,\
+✅ PWA installation prompt visible in Firefox even if not built as a PWA,\
 ✅ `layer-updated` event was missing in globe activities.
 
 More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/12) and [KDK](https://github.com/kalisio/kdk/milestone/11).
