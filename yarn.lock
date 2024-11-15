@@ -3525,6 +3525,18 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@kalisio/feathers-localforage@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/feathers-localforage/-/feathers-localforage-1.2.0.tgz#5235933863195a6aed6a923ebb46b9c85c748c40"
+  integrity sha512-m/kWRRgNQQoB4V2EP83lD0WgWlSvFseQGYEZiIDwsY6Jzc56D5HSeF+T+qfWisFj8j0MxoQ4IhB24Xzme7LYvA==
+  dependencies:
+    "@feathersjs/adapter-commons" "^5.0.8"
+    "@feathersjs/commons" "^5.0.8"
+    "@feathersjs/errors" "^5.0.8"
+    debug "^4.3.2"
+    localforage "^1.10.0"
+    sift "^16.0.0"
+
 "@kalisio/feathers-s3@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@kalisio/feathers-s3/-/feathers-s3-1.0.0.tgz#ffafeaf8f201eaa06f7b5f95933acef55d498a9d"
