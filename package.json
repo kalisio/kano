@@ -2,14 +2,14 @@
   "name": "kano",
   "description": "Kalisio Kano Application",
   "version": "2.4.0",
-  "homepage": "https://github.com/kalisio/kapp",
+  "homepage": "https://github.com/kalisio/kano",
   "keywords": [
     "kalisio"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kalisio/kapp.git"
+    "url": "git://github.com/kalisio/kano.git"
   },
   "author": {
     "name": "Kalisio contributors",
@@ -17,7 +17,7 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kalisio/kapp/issues"
+    "url": "https://github.com/kalisio/kano/issues"
   },
   "scripts": {
     "release:patch": "cd api && npm run release:patch && cd .. && npm version --no-git-tag-version --force patch",
@@ -91,7 +91,7 @@
     "@geoman-io/leaflet-geoman-free": "2.15.0",
     "@intlify/vue-i18n-loader": "^4.2.0",
     "@kalisio/feathers-localforage": "^1.2.0",
-    "@kalisio/feathers-s3": "^1.2.0",
+    "@kalisio/feathers-s3": "^1.4.0",
     "@kalisio/feathers-webpush": "^1.0.1",
     "@kalisio/kdk": "https://github.com/kalisio/kdk",
     "@kalisio/leaflet-graphicscale": "^1.0.0",
@@ -131,8 +131,8 @@
     "@turf/transform-rotate": "^6.0.0",
     "@turf/transform-scale": "^6.0.0",
     "@turf/transform-translate": "^6.0.0",
-    "@weacast/core": "^2.1.5",
-    "@weacast/leaflet": "^2.1.5",
+    "@weacast/core": "^2.2.1",
+    "@weacast/leaflet": "^2.2.1",
     "abort-controller": "^3.0.0",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
