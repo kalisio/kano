@@ -36,7 +36,7 @@ sidebarDepth: 3
 ✅ PWA installation prompt visible in Firefox even if not built as a PWA,\
 ✅ `layer-updated` event was missing in globe activities.
 
-More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/12) and [KDK](https://github.com/kalisio/kdk/milestone/11).
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/12) and [KDK](https://github.com/kalisio/kdk/milestone/12).
 
 ## v2.2.0 - March 1st, 2024
 
