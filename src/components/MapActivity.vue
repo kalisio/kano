@@ -274,6 +274,15 @@ export default {
           if (leafletEvent === 'rotate') {
             payload.bearing = this.getBearing()
           }
+          // Check if we need to stop propagation, should be done before sending event to postrobot
+          // as it's an async operation and if we do it after others event listeners will have been already processed
+          const stopMethods = ['stopPropagation', 'stopImmediatePropagation']
+          stopMethods.forEach(stopMethod => {
+            const stopEvents = _.get(feature, `style.${stopMethod}`)
+            if (Array.isArray(stopEvents) && (stopEvents.indexOf(leafletEvent) !== -1)) {
+              event.originalEvent[stopMethod]()
+            }
+          })
           utils.sendEmbedEvent(leafletEvent, payload)
         }
         this.leafletHandlers[leafletEvent] = handler
