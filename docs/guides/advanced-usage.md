@@ -153,6 +153,17 @@ The following ones are related to [user interaction](https://leafletjs.com/refer
 * `dragend` whenever the user stops dragging a 2D marker,
 * `drag` while the user drags a 2D marker.
 
+::: tip
+A feature can be tagged as `draggable` by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { draggable: true }
+}
+```
+:::
+
 Most user interaction events will provide you with the following properties as data payload:
 * `longitude` and `latitude` coordinates of the interaction,
 * `feature` and `layer` (descriptor) when the target element is a feature from a layer,
@@ -186,7 +197,18 @@ The following events are related to [map state changes](https://leafletjs.com/re
 * `zoomstart` whenever the 2D map zoom is about to change (e.g. before zoom animation),
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations,
-* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload). 
+* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload).
+
+::: tip
+A feature can be tagged to stop events propagation, either [immediate](https://developer.mozilla.org/fr/docs/Web/API/Event/stopImmediatePropagation) or [not](https://developer.mozilla.org/fr/docs/Web/API/Event/stopPropagation), by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { stopImmediatePropagation: ['mousedown'] }
+}
+```
+:::
 
 ### Backend events
 
