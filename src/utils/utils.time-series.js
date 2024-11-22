@@ -90,8 +90,8 @@ export async function updateTimeSeries (previousTimeSeries) {
   }
   if (hasSelectedItems()) {
     getSelectedItems().forEach(item => {
-      const featureLabel = _.get(item, `feature.properties.${item.layer.featureLabel || 'name'}`)
       const featureId = kMapUtils.getFeatureId(item.feature, item.layer)
+      const featureLabel = kMapUtils.getFeatureLabel(item.feature, item.layer)
       const label = (_.has(item, 'layer.probe') ?
         `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel})` + featureLevel :
         `${item.layer.label} - ${featureLabel}` + featureLevel)
