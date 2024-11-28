@@ -167,7 +167,7 @@ export default {
       this.getSelectedItems().forEach(item => {
         this.highlight(item.feature || item.location, item.layer)
       })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
     },
     async updateSelection () {
       this.updateHighlights()
@@ -183,15 +183,15 @@ export default {
     },
     async updateProbedLocationHighlight () {
       if (this.hasProbedLocation()) {
-        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: 'probe' })
+        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
         // Find time serie for probe, probed location is shared by all series
-        const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocation')
+        const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocationData')
         if (!probedLocation) return
         const isWeatherProbe = this.isWeatherProbe(probedLocation)
         const feature = (isWeatherProbe
           ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
           : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
-        this.highlight(feature, this.getProbedLayer() || { name: 'probe' })
+        this.highlight(feature, this.getProbedLayer() || { name: utils.ForecastProbeId })
       }
     },
     getHighlightMarker (feature, options) {

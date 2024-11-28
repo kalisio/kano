@@ -18,6 +18,9 @@ const Colors = chroma.scale('Set1').colors(nbColors)
 // and points on on the left/right side are not cut
 const TimeRangeDelta = 2
 
+// ID of weather forecast probe timeseries
+export const ForecastProbeId = 'forecast-probe'
+
 export function getChartOptions (title) {
   return {
     title: {
@@ -67,47 +70,78 @@ export async function updateTimeSeries (previousTimeSeries) {
   // Weather probe targets variables coming from multiple layers
   const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
   const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
+  const forecastLevel = activity.forecastLevel ? ` - ${activity.forecastLevel} ${activity.forecastLevels.unit}` : ''
   
   let timeSeries = []
   if (hasProbedLocation()) {
     const coordinates = kMapUtils.formatUserCoordinates(getProbedLocation().lat, getProbedLocation().lng, Store.get('locationFormat', 'FFf'))
-    const label = (activity.forecastModel ? activity.forecastModel.label : '') + `(${coordinates})` + (activity.forecastLevel ? featureLevel : '')
-    // Due to a possible custom probe function we provide possible visible layers as input
-    const variableLayers = (activity.probeLocation ? _.values(activity.layers).filter(sift({ variables: { $exists: true }, isVisible: true })) : [])
-    timeSeries.push({
-      id: 'probe',
-      label,
-      series: kMapUtils.getTimeSeries({
+    // When custom probe function we provide visible layers as input
+    if (activity.probeLocation) {
+      let variableLayers = _.difference(_.values(activity.layers).filter(sift({ variables: { $exists: true }, isVisible: true })), forecastLayers)
+      variableLayers = variableLayers.filter(layer => activity.canProbeLocation({ location: getProbedLocation(), layer, level: activity.selectedLevel }))
+      variableLayers.forEach(layer => {
+        const series = kMapUtils.getMeasureTimeSeries({
+          location: getProbedLocation(),
+          layer,
+          level: activity.selectedLevel,
+          probeFunction: activity.probeLocation
+        })
+        if (!_.isEmpty(series)) timeSeries.push({
+          id: `${layer.name}-measure-probe`,
+          label: `${layer.label} (${coordinates})` + featureLevel,
+          series
+        })
+      })
+    }
+    // Or weather forecast probe
+    if (_.isEmpty(timeSeries) && activity.forecastModel) {
+      const series = kMapUtils.getForecastTimeSeries({
         location: getProbedLocation(),
-        layers: forecastLayers.concat(variableLayers),
-        level: activity.selectedLevel,
+        forecastLayers,
         forecastModel: activity.forecastModel,
         forecastLevel: activity.forecastLevel,
-        probeFunction: activity.probeLocation,
         weacastApi: activity.getWeacastApi()
       })
-    })
+      if (!_.isEmpty(series)) timeSeries.push({
+        id: ForecastProbeId,
+        label: `${activity.forecastModel.label} (${coordinates})` + forecastLevel,
+        series
+      })
+    }
   }
   if (hasSelectedItems()) {
     getSelectedItems().forEach(item => {
       const featureId = kMapUtils.getFeatureId(item.feature, item.layer)
       const featureLabel = kMapUtils.getFeatureLabel(item.feature, item.layer)
-      const label = (_.has(item, 'layer.probe') ?
-        `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel})` + featureLevel :
-        `${item.layer.label} - ${featureLabel}` + featureLevel)
-      timeSeries.push({
-        id: `${item.layer.name}-${featureId}`,
-        label,
-        series: kMapUtils.getTimeSeries({
+      // Measure
+      if (kMapUtils.isMeasureLayer(item.layer)) {
+        const series = kMapUtils.getMeasureTimeSeries({
           feature: item.feature,
           layer: item.layer,
-          layers: _.has(item, 'layer.probe') ? forecastLayers : [],
-          level: activity.selectedLevel,
+          level: activity.selectedLevel
+        })
+        if (!_.isEmpty(series)) timeSeries.push({
+          id: `${item.layer.name}-${featureId}-measure`,
+          label: `${item.layer.label} - ${featureLabel || featureId}` + featureLevel,
+          series
+        })
+      }
+      // Or weather forecast probe
+      if (_.isEmpty(timeSeries) && activity.forecastModel) {
+        const series = kMapUtils.getForecastTimeSeries({
+          feature: item.feature,
+          layer: item.layer,
+          forecastLayers,
           forecastModel: activity.forecastModel,
           forecastLevel: activity.forecastLevel,
           weacastApi: activity.getWeacastApi()
         })
-      })
+        if (!_.isEmpty(series)) timeSeries.push({
+          id: `${item.layer.name}-${featureId}-probe`,
+          label: `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel || featureId})` + forecastLevel,
+          series
+        })
+      }
     })
   }
 
@@ -148,7 +182,10 @@ export async function updateTimeSeries (previousTimeSeries) {
       if (previousTimeSerie) Object.assign(timeSerie, _.pick(previousTimeSerie, ['visible', 'pinned', 'logarithmic']))
     })
   }
-  // Make first serie visible if required
-  if (!_.isEmpty(timeSeries) && !_.find(timeSeries, { visible: true })) timeSeries[0].visible = true
+  // Make first serie visible if required, always measure first if any
+  if (!_.isEmpty(timeSeries) && !_.find(timeSeries, { visible: true })) {
+    const timeSerie = _.find(timeSeries, timeSerie => timeSerie.label.includes('measure')) || timeSeries[0]
+    timeSerie.visible = true
+  }
   return timeSeries
 }
