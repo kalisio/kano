@@ -178,7 +178,7 @@ Most user interaction events will provide you with the following properties as d
 For touch events the former properties at root level of the data payload are related to the first touch point (ie single-touch gesture).
 If you'd like to get information about all touch points for multi-touch gesture you will similarly get `longitude`, `latitude`, `containerPoint` and `layerPoint` values
 for all touch points in [`touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches), [`changedTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches)
-and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) array relating to the same original touch event properties.
+and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) arrays relating to the same original touch event properties.
 :::
 
 By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
