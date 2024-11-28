@@ -151,7 +151,11 @@ The following ones are related to [user interaction](https://leafletjs.com/refer
 * `mousemove` whenever the mouse moves on the 2D map,
 * `dragstart` whenever the user starts dragging a 2D marker,
 * `dragend` whenever the user stops dragging a 2D marker,
-* `drag` while the user drags a 2D marker.
+* `drag` while the user drags a 2D marker,
+* `touchstart` whenever a touch point is placed on the map or a feature from a layer in the 2D map,
+* `touchend` whenever a touch point is removed from the map or a feature from a layer in the 2D map,
+* `touchcancel` whenever a touch point has been disrupted in the 2D map,
+* `touchmove` whenever a touch point is moved in the 2D map.
 
 ::: tip
 A feature can be tagged as `draggable` by specifying it in style:
@@ -169,6 +173,13 @@ Most user interaction events will provide you with the following properties as d
 * `feature` and `layer` (descriptor) when the target element is a feature from a layer,
 * `containerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map сontainer,
 * `layerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map layer.
+
+::: tip
+For touch events the former properties at root level of the data payload are related to the first touch point (ie single-touch gesture).
+If you'd like to get information about all touch points for multi-touch gesture you will similarly get `longitude`, `latitude`, `containerPoint` and `layerPoint` values
+for all touch points in [`touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches), [`changedTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches)
+and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) array relating to the same original touch event properties.
+:::
 
 By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
 ```js

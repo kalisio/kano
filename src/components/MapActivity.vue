@@ -17,7 +17,7 @@ import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
 import { Store, Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
-import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
+import { mixins as kMapMixins, composables as kMapComposables, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
 import * as utils from '../utils'
@@ -109,7 +109,6 @@ export default {
     },
     'selection.items': {
       handler () {
-        console.log(this.getSelectedItems())
         this.updateSelection()
       }
     },
@@ -126,6 +125,8 @@ export default {
       this.mapContainer = container
       // Wait until map is ready
       await this.initializeMap(container)
+      // Need to disable for reentrance when using touch emulator
+      if (window.TouchEmulator) this.map.tap.disable()
       // Notify the listener
       utils.sendEmbedEvent('map-ready')
     },
@@ -321,7 +322,7 @@ export default {
   mounted () {
     // Setup event connections
     const allLeafletEvents = ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
-      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag']
+      'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag'].concat(kMapUtils.TouchEvents)
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
