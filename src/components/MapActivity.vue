@@ -216,6 +216,9 @@ export default {
       this.setTopPaneMode('edit-layer-data')
       utils.sendEmbedEvent('edit-start', { layer: event.layer })
     },
+    onEditPointMovedEvent (event) {
+      utils.sendEmbedEvent('edit-point-moved', event)
+    },
     onEditStopEvent (event) {
       this.setTopPaneMode('default')
       utils.sendEmbedEvent('edit-stop', { layer: event.layer, status: event.status, geojson: this.toGeoJson(event.layer.name) })
@@ -327,6 +330,7 @@ export default {
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
     this.$engineEvents.on('edit-start', this.onEditStartEvent)
+    this.$engineEvents.on('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
     this.$engineEvents.on('moveend', this.onMoveEnd)
     this.$engineEvents.on('forecast-model-changed', this.updateSelection)
@@ -342,6 +346,7 @@ export default {
     this.removeForwardedLeafletEvents()
     this.removeForwardedLayerEvents()
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
+    this.$engineEvents.off('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
     this.$engineEvents.off('forecast-model-changed', this.updateSelection)
