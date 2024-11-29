@@ -149,24 +149,10 @@ The following ones are related to [user interaction](https://leafletjs.com/refer
 * `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map,
 * `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
 * `mousemove` whenever the mouse moves on the 2D map,
-* `dragstart` whenever the user starts dragging a 2D marker,
-* `dragend` whenever the user stops dragging a 2D marker,
-* `drag` while the user drags a 2D marker,
 * `touchstart` whenever a touch point is placed on the map or a feature from a layer in the 2D map,
 * `touchend` whenever a touch point is removed from the map or a feature from a layer in the 2D map,
 * `touchcancel` whenever a touch point has been disrupted in the 2D map,
 * `touchmove` whenever a touch point is moved in the 2D map.
-
-::: tip
-A feature can be tagged as `draggable` by specifying it in style:
-```js
-{
-    type: 'Feature',
-    …
-    style: { draggable: true }
-}
-```
-:::
 
 Most user interaction events will provide you with the following properties as data payload:
 * `longitude` and `latitude` coordinates of the interaction,
@@ -175,7 +161,7 @@ Most user interaction events will provide you with the following properties as d
 * `layerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map layer.
 
 ::: tip
-For touch events the former properties at root level of the data payload are related to the first touch point (ie single-touch gesture).
+For [touch events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) the former properties at root level of the data payload are related to the first touch point (ie single-touch gesture).
 If you'd like to get information about all touch points for multi-touch gesture you will similarly get `longitude`, `latitude`, `containerPoint` and `layerPoint` values
 for all touch points in [`touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches), [`changedTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches)
 and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) arrays relating to the same original touch event properties.
@@ -201,6 +187,38 @@ postRobot.on('contextmenu', (event) => {
 })
 ```
 
+::: tip
+A feature can be tagged to stop events propagation, either [immediate](https://developer.mozilla.org/fr/docs/Web/API/Event/stopImmediatePropagation) or [not](https://developer.mozilla.org/fr/docs/Web/API/Event/stopPropagation), by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { stopImmediatePropagation: ['mousedown', 'touchmove'] }
+}
+```
+This can be used to e.g. prevent the map to be dragged when touching a specific fetaure. 
+:::
+
+The following events are related to geometry editing:
+* `dragstart` whenever the user starts dragging a 2D marker,
+* `dragend` whenever the user stops dragging a 2D marker,
+* `drag` while the user drags a 2D marker,
+* `edit-start` whenever the user starts using the geometry editor,
+* `edit-stop` whenever the user ends using the geometry editor,
+* `edit-point-moved` whenever a point is edited using the geometry editor,
+
+::: tip
+A point feature can be tagged as `draggable` by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { draggable: true }
+}
+```
+To drag line or polygon vertices you should use the geometry editor.
+:::
+
 The following events are related to [map state changes](https://leafletjs.com/reference.html#map-event) and do not provide additional properties like interaction events:
 * `movestart` whenever the view of the 2D map starts changing (e.g. user starts dragging the map),
 * `moveend` whenever the center of the 2D map stops changing (e.g. user stopped dragging the map),
@@ -209,17 +227,6 @@ The following events are related to [map state changes](https://leafletjs.com/re
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations,
 * `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload).
-
-::: tip
-A feature can be tagged to stop events propagation, either [immediate](https://developer.mozilla.org/fr/docs/Web/API/Event/stopImmediatePropagation) or [not](https://developer.mozilla.org/fr/docs/Web/API/Event/stopPropagation), by specifying it in style:
-```js
-{
-    type: 'Feature',
-    …
-    style: { stopImmediatePropagation: ['mousedown'] }
-}
-```
-:::
 
 ### Backend events
 
