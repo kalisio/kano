@@ -51,3 +51,6 @@ p.caption {
 p.caption:not(:first-child) {
   margin-top: 2rem;
 }
+
+// allow custom builds to inject custom css through plugin.scss
+@import 'plugin'
