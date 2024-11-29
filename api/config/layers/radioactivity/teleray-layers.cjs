@@ -119,6 +119,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       style: {
         point: {
+          id: '<%= properties.irsnId %>',
           shape: 'circle',
           radius: 15,
           opacity: 1,
@@ -147,7 +148,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           }
         }
       },
-      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
+      template: ['style.point.id', 'style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
       popup: {
         pick: [
           'name'
