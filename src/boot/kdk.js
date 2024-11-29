@@ -48,6 +48,13 @@ postRobot.on('setConfiguration', async (event) => {
     _.set(config, key, value)
   })
 })
+// Add data to lodash string evaluation context
+postRobot.on('setTemplateContext', async (event) => {
+  const ctx = TemplateContext.get()
+  _.forOwn(event.data, (value, key) => {
+    _.set(ctx, key, value)
+  })
+})
 
 export default async ({ app, router }) => {
   // Required to make injections reactively linked to the provider
