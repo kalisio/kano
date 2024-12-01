@@ -119,7 +119,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       style: {
         point: {
-          id: '<%= properties.irsnId %>',
+          id: 'irsnid-<%= properties.irsnId %>',
           shape: 'circle',
           radius: 15,
           opacity: 1,
