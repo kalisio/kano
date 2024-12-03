@@ -154,7 +154,7 @@ export default {
     },
     setBearing(bearing) {
       kMapMixins.map.baseMap.methods.setBearing.call(this, bearing)
-      TemplateContext.get().bearing = bearing
+      TemplateContext.set('bearing', bearing)
     },
     handleWidget (widget) {
       // If window already open on another widget keep it

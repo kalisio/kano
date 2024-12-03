@@ -24,7 +24,7 @@ const kanoLib = {
 }
 
 // Inject a bearing value in lodash template evaluation context
-TemplateContext.merge({ bearing: 0 })
+TemplateContext.set('bearing', 0)
 CanvasDrawContext.merge(kanoLib)
 
 function updateThemeColors () {
