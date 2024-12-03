@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Changelog
 
-## v2.3.0 - Unreleased {#v2.3.0}
+## v2.3.0 - December 3rd, 2024
 
 **Major enhancements:**\
 👉 Bumped NodeJS to v20,\
