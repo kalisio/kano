@@ -206,5 +206,5 @@ export default async ({ app, router }) => {
   })
 
   // For debug purpose
-  logger.debug(`[KDK] is now ready: ${JSON.stringify(Store.get('kdk'), null, 4)}`)
+  logger.debug(`[KANO] is now ready: ${JSON.stringify(Store.get('kdk'), null, 4)}`)
 }

@@ -111,7 +111,7 @@ export async function sendEmbedEvent (...args) {
       const response = await postRobot.send(window.parent, ...args)
       return response
     } catch (error) {
-      logger.debug(error.message)
+      logger.debug('[KANO] ' + error.message)
     }
   }
 }
