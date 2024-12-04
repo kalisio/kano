@@ -118,6 +118,14 @@ module.exports = [{
             fab: tours.fab
           },
           children: {
+            'add-layer': {
+              name: 'add-globe-layer',
+              component: 'catalog/KAddLayer',
+              tour: {
+                'import-layer': tours['import-layer'],
+              },
+              props: { modes: ['import'] }
+            },
             'layer-chart/:layerId?': {
               name: 'globe-layer-chart',
               component: 'KFeaturesChart',

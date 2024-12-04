@@ -306,7 +306,8 @@ const globeEngine = {
     fullscreenButton: false,
     animation: false,
     timeline: false,
-    creditContainer: 'globe-credit'
+    creditContainer: 'globe-credit',
+    depthTestAgainstTerrain: true
   },
   fileLayers: {
     clearOnDrop: false,
@@ -682,6 +683,7 @@ module.exports = {
     },
     fab: {
       content: [
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', modes: ['import'], route: { name: 'add-globe-layer', query: { project: ':project' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
