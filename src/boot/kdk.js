@@ -67,7 +67,7 @@ export default async ({ app, router }) => {
 
   await utils.sendEmbedEvent('kano-ready')
 
-  // Initializes i18n
+  // Initializes i18n first to avoid any browser translation
   await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
   // Initiate the client
   const api = initializeApi(setupApi)
