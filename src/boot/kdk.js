@@ -67,6 +67,8 @@ export default async ({ app, router }) => {
 
   await utils.sendEmbedEvent('kano-ready')
 
+  // Initializes i18n
+  await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
   // Initiate the client
   const api = initializeApi(setupApi)
   // Setup app hooks
@@ -75,9 +77,6 @@ export default async ({ app, router }) => {
   await services.call(api)
   // Now KDK is ready apply theme if configured
   updateThemeColors()
-
-  // Initializes i18n
-  await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
 
   // Add a generic function that can be used from the iframe API
   // to setup hooks on all service operations easily, eg 'after get' hook on service 'catalog'
