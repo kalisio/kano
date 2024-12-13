@@ -145,6 +145,11 @@ module.exports = [{
               name: 'edit-globe-layer',
               component: 'KLayerEditor',
               props: true
+            },
+            'edit-layer-style/:layerId?': {
+              name: 'edit-globe-layer-style',
+              component: 'KLayerStyleEditor',
+              props: true
             }
           }
         }

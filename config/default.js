@@ -286,6 +286,8 @@ const globeLayerActions = [{
       route: { name: 'globe-layer-chart', params: { layerId: ':_id', layerName: ':name' } } },
     { id: 'edit-layer', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
       route: { name: 'edit-globe-layer', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
+      route: { name: 'edit-globe-layer-style', params: { layerId: ':_id', layerName: ':name' } } },
     { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-minus-circle', handler: 'onRemoveLayer',
       visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }] }
   ]
@@ -683,7 +685,7 @@ module.exports = {
     },
     fab: {
       content: [
-        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', modes: ['import'], route: { name: 'add-globe-layer', query: { project: ':project' } } },
+        { id: 'add-layer', icon: 'las la-plus', label: 'mixins.activity.ADD_LAYER', route: { name: 'add-globe-layer', query: { project: ':project' } } },
         { id: 'probe-location', icon: 'las la-eye-dropper', label: 'mixins.activity.PROBE', handler: 'probeAtLocation' }
       ]
     },
