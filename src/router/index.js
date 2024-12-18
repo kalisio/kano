@@ -1,6 +1,6 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
-import routeConfig from './routes'
+import config from 'config'
 import { Store } from '@kalisio/kdk/core.client'
 import * as utils from '../utils'
 
@@ -26,7 +26,7 @@ export default route(function (/* { store, ssrContext } */) {
 
   const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
-    routes: utils.buildRoutes(routeConfig),
+    routes: utils.buildRoutes(config.routes),
 
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
@@ -40,7 +40,7 @@ export default route(function (/* { store, ssrContext } */) {
       step: 0,
       play: false
     }
-  }, utils.buildTours(routeConfig)))
+  }, utils.buildTours(config.routes)))
 
   return router
 })
