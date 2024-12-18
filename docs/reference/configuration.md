@@ -6,11 +6,11 @@ sidebarDepth: 3
 
 The default backend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/api/config/default.cjs).
 
-Most options come from the "standard" backend [configuration](https://kalisio.github.io/kApp/reference/configuration.html#backend-side) of **KDK** based app.
+Most options come from the "standard" backend [configuration](https://kalisio.github.io/skeleton/guides/development/configure.html#backend-side) of **KDK** based app.
 
 The default frontend configuration file can be found [here](https://github.com/kalisio/kano/blob/master/config/default.js).
 
-Most options come from the "standard" frontend [configuration](https://kalisio.github.io/kApp/reference/configuration.html#frontend-side) of **KDK** based app, here are the main ones:
+Most options come from the "standard" frontend [configuration](https://kalisio.github.io/skeleton/guides/development/configure.html#frontend-side) of **KDK** based app, here are the main ones:
 * **appName**: displayed application name,
 * **appLogo**: displayed application logo,
 * **theme**: the theme to be used,
