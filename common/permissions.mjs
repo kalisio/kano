@@ -25,12 +25,12 @@ export function defineUserAbilities (subject, can, cannot, app) {
       subject.projects.forEach(project => {
         const role = permissions.Roles[project.permissions]
         if (role >= permissions.Roles.manager) {
-          can('update', { _id: project._id })
+          can('update', 'projects', { _id: project._id })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'member' })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'manager' })
         }
         if (role >= permissions.Roles.owner) {
-          can('remove', { _id: project._id })
+          can('remove', 'projects', { _id: project._id })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'owner' })
         }
       })
