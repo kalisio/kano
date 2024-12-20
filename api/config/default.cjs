@@ -66,6 +66,8 @@ if (process.env.SUBDOMAIN) {
 }
 // On a developer machine will do domain = gateway = localhost
 const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
+// Keycloak base url
+const keycloakBaseUrl = `${process.env.KEYCLOAK_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect`
 
 // Just used for testing purpose now
 apiLimiter = null
@@ -189,7 +191,17 @@ module.exports = {
       redirect: domain + '/',
       defaults: {
         origin: domain
-      }
+      },
+      keycloak: (process.env.KEYCLOAK_CLIENT_ID ? {
+        key: process.env.KEYCLOAK_CLIENT_ID,
+        secret: process.env.KEYCLOAK_CLIENT_SECRET,
+        oauth: 2,
+        scope: ['openid'],
+        authorize_url: `${keycloakBaseUrl}/auth`,
+        access_url: `${keycloakBaseUrl}/token`,
+        profile_url: `${keycloakBaseUrl}/userinfo`,
+        nonce: true
+      } : undefined)
     },
     passwordPolicy: {
       minLength: 8,

@@ -40,6 +40,7 @@
     }
   },
   "screen": {
+    "LOGIN_WITH_KEYCLOAK": "Se connecter avec Keycloak",
     "ABOUT_KALISIO": "A propos",
     "CONTACT": "Contact",
     "TERMS_AND_POLICIES": "Conditions générales"

@@ -40,6 +40,7 @@
     }
   },
   "screen": {
+    "LOGIN_WITH_KEYCLOAK": "Login with Keycloak",
     "ABOUT_KALISIO": "About",
     "CONTACT": "Contact",
     "TERMS_AND_POLICIES": "Terms and Policies"

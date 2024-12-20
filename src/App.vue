@@ -41,7 +41,7 @@ function showError (error) {
     logger.error(error)
     return
   }
-  const notification = { type: 'negative', message: error.message || error.error_message, html: true }
+  const notification = { type: 'negative', message: error.message || error.error_message || error.error, html: true }
   // Check if user can retry to avoid this error
   if (error.retryHandler) {
     notification.actions = [{
@@ -55,8 +55,13 @@ function showError (error) {
 }
 function showRouteError (route) {
   // We handle error on any page with query string
-  if (route.query && route.query.error_message) {
+  if (route.query && (route.query.error_message || route.query.error)) {
     showError(route.query)
+  }
+  // OAuth login is using token set as route param like 'access_token=jwt'.
+  // However in case of error it will be like 'error=message' instead.
+  else if (route.params && route.params.token && route.params.token.startsWith('error=')) {
+    showError({ message: route.params.token.split('=')[1] })
   }
 }
 function addRequest (hook) {
