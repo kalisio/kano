@@ -5,7 +5,7 @@ import { ExpirationPlugin } from 'workbox-expiration'
 import logger from 'loglevel'
 import { LocalForage } from '@kalisio/feathers-localforage'
 // Ensure same underlying configuration as we are in another process and instance may differ
-LocalForage.config({
+const storage = LocalForage.createInstance({
   name: 'offline_cache',
   storeName: 'cache_entries'
 })
@@ -29,7 +29,7 @@ setInterval(async () => {
   if (updatingCachedUrls) return
   updatingCachedUrls = true
   cachedUrls = new Map()
-  await LocalForage.iterate((value, key) => {
+  await storage.iterate((value, key) => {
     cachedUrls.set(key, value)
   })
   updatingCachedUrls = false
