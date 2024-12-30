@@ -527,6 +527,7 @@ module.exports = {
   },
   mapActivity: {
     additionalMixins: [],
+    padding: false,
     topPane: {
       content: {
         default: [
@@ -623,6 +624,7 @@ module.exports = {
   },
   globeActivity: {
     additionalMixins: [],
+    padding: false,
     topPane: {
       content: {
         default: [

@@ -1,5 +1,5 @@
 <template>
-  <KPage :padding="false">
+  <KPage>
     <!-- Map -->
     <div id="map" :ref="configureMap" :style="viewStyle">
       <q-resize-observer @resize="onMapResized" />

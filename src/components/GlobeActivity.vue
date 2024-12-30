@@ -1,6 +1,6 @@
 <template>
   <div id="globe-credit"/>
-  <KPage :padding="false">
+  <KPage>
     <!-- Globe -->
     <div id="globe" :ref="configureGlobe" :style="viewStyle">
       <q-resize-observer @resize="onGlobeResized" />
