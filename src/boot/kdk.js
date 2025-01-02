@@ -70,7 +70,7 @@ export default async ({ app, router }) => {
   // Initializes i18n first to avoid any browser translation
   await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
   // Initiate the client
-  const api = initializeApi(setupApi)
+  const api = await initializeApi(setupApi)
   // Setup app hooks
   api.hooks(appHooks)
   // Then all services
