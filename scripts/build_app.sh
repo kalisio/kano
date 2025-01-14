@@ -49,7 +49,7 @@ FLAVOR=$(get_app_flavor)
 CUSTOM=$(get_app_custom)
 [[ "$CUSTOM" != "" ]] && CUSTOM="-$CUSTOM"
 
-echo "About to build $APP v$VERSION-$FLAVOR$CUSTOM..."
+echo "About to build $APP v$VERSION-$FLAVOR$CUSTOM ..."
 
 load_env_files "$WORKSPACE_DIR/development/common/kalisio_dockerhub.enc.env"
 load_value_files "$WORKSPACE_DIR/development/common/KALISIO_DOCKERHUB_PASSWORD.enc.value"
