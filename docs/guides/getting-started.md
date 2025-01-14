@@ -16,6 +16,18 @@ From the main tutorial you can open others tutorials dedicated to specific compo
 Kano look and features are ever-evolving, moreover it can be configured according to your specific use case. As a consequence, your screen probably looks a little different than what you can read and see in this documentation but the key concepts remain the same.
 :::
 
+## Navigation
+
+The following table details the way you can navigate the map in 2D or the globe in 3D:
+
+Mouse navigation |  Touch navigation
+:-------------------------:|:-------------------------:
+![mouse navigation](../.vitepress/public/images/kano-mouse-navigation.png) |  ![touch navigation](../.vitepress/public/images/kano-touch-navigation.png)
+
+::: warning Note
+Rotating or tilting the map is not possible in 2D.
+:::
+
 ## Main menu
 
 The main menu allows to open the documentation, manage your settings and logout from Kano.
