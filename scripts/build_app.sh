@@ -46,8 +46,10 @@ init_app_infos "$ROOT_DIR" "$WORKSPACE_DIR/development/workspaces/apps"
 APP=$(get_app_name)
 VERSION=$(get_app_version)
 FLAVOR=$(get_app_flavor)
+CUSTOM=$(get_app_custom)
+[[ "$CUSTOM" != "" ]] && CUSTOM="-$CUSTOM"
 
-echo "About to build $APP v$VERSION-$FLAVOR ..."
+echo "About to build $APP v$VERSION-$FLAVOR$CUSTOM..."
 
 load_env_files "$WORKSPACE_DIR/development/common/kalisio_dockerhub.enc.env"
 load_value_files "$WORKSPACE_DIR/development/common/KALISIO_DOCKERHUB_PASSWORD.enc.value"
@@ -62,7 +64,7 @@ cp "$KLI_FILE" "$WORKSPACE_DIR/kli.js"
 echo "Will use kli file $KLI_FILE to install and link modules ..."
 
 IMAGE_NAME="$KALISIO_DOCKERHUB_URL/kalisio/$APP"
-IMAGE_TAG="$VERSION-$FLAVOR-node$NODE_VER-$DEBIAN_VER"
+IMAGE_TAG="$VERSION-$FLAVOR$CUSTOM-node$NODE_VER-$DEBIAN_VER"
 DEBUG=
 
 case "$FLAVOR" in
@@ -90,15 +92,14 @@ DOCKER_BUILDKIT=1 docker build \
     -f app.Dockerfile \
     -t "$IMAGE_NAME:$IMAGE_TAG" \
     "$WORKSPACE_DIR"
-docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$FLAVOR"
 
 if [ "$PUBLISH" = true ]; then
     docker push "$IMAGE_NAME:$IMAGE_TAG"
     if [ "$NODE_VER" = "$DEFAULT_NODE_VER" ] && [ "$DEBIAN_VER" = "$DEFAULT_DEBIAN_VER" ]; then
-        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$VERSION-$FLAVOR"
-        docker push "$IMAGE_NAME:$VERSION-$FLAVOR"
-        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$FLAVOR"
-        docker push "$IMAGE_NAME:$FLAVOR"
+        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$VERSION-$FLAVOR$CUSTOM"
+        docker push "$IMAGE_NAME:$VERSION-$FLAVOR$CUSTOM"
+        docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$FLAVOR$CUSTOM"
+        docker push "$IMAGE_NAME:$FLAVOR$CUSTOM"
     fi
 fi
 
