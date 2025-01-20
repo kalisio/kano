@@ -159,6 +159,7 @@ export default {
       if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
     },
     async updateTimeSeries () {
+      if (!this.state) return
       this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
     },
     updateHighlights () {
@@ -367,8 +368,8 @@ export default {
     await project.loadProject()
     activity.setSelectionMode('multiple')
     const expose = {
+      ...activity,
       ...activity.CurrentActivityContext,
-      setCurrentActivity: activity.setCurrentActivity,
       ...weather,
       ...measure,
       ...project

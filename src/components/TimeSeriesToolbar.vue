@@ -11,7 +11,8 @@ import { computed, inject, unref } from 'vue'
 import { Store, composables as kCoreComposables } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables } from '@kalisio/kdk/map.client'
 
-const { state, centerOnSelection, hasProbedLocation, centerOnProbe } = kMapComposables.useCurrentActivity()
+const { CurrentActivityContext, centerOnSelection, hasProbedLocation, centerOnProbe } = kMapComposables.useCurrentActivity()
+const { state } = CurrentActivityContext
 
 // Props
 const props = defineProps({

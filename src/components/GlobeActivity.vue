@@ -220,8 +220,8 @@ export default {
     await project.loadProject()
     activity.setSelectionMode('multiple')
     const expose = {
+      ...activity,
       ...activity.CurrentActivityContext,
-      setCurrentActivity: activity.setCurrentActivity,
       ...project
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])

@@ -35,7 +35,8 @@ defineProps({
 })
 
 // Data
-const { state } = kCoreComposables.useCurrentActivity()
+const { CurrentActivityContext } = kCoreComposables.useCurrentActivity()
+const { state } = CurrentActivityContext
 
 // Computed
 const actions = computed(() => {

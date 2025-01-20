@@ -47,7 +47,8 @@ const chartOptions = ref(getChartOptions())
 const splitterModel = ref(25)
 const isZoomed = ref(false)
 const height = ref(0)
-const { state } = kCoreComposables.useCurrentActivity()
+const { CurrentActivityContext } = kCoreComposables.useCurrentActivity()
+const { state } = CurrentActivityContext
 
 // Computed
 const hasSingleSerie = computed(() => {
