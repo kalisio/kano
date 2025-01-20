@@ -296,6 +296,7 @@ export default {
       this.leafletHandlers = {}
     },
     onMoveEnd () {
+      if (!this.state) return
       // Update navigation information in store, this is useful eg in test to be able to retrieve current state
       const center = this.map.getCenter()
       const zoom = this.map.getZoom()
@@ -359,18 +360,15 @@ export default {
     utils.sendEmbedEvent('map-destroyed')
   },
   async setup () {
-    const activity = kMapComposables.useActivity(name)
+    const activity = kMapComposables.useActivity(name, { state: { timeSeries: [] } })
     const weather = kMapComposables.useWeather()
     const measure = kMapComposables.useMeasure()
     const project = kMapComposables.useProject()
-    // Initialize state and project
-    Object.assign(activity.state, {
-      timeSeries: []
-    })
     await project.loadProject()
     activity.setSelectionMode('multiple')
     const expose = {
-      ...activity,
+      ...activity.CurrentActivityContext,
+      setCurrentActivity: activity.setCurrentActivity,
       ...weather,
       ...measure,
       ...project

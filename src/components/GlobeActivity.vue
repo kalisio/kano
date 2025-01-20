@@ -215,16 +215,13 @@ export default {
     utils.sendEmbedEvent('globe-destroyed')
   },
   async setup () {
-    const activity = kMapComposables.useActivity(name)
+    const activity = kMapComposables.useActivity(name, { state: { timeSeries: [] } })
     const project = kMapComposables.useProject()
-    // Initialize state and project
-    Object.assign(activity.state, {
-      timeSeries: []
-    })
     await project.loadProject()
     activity.setSelectionMode('multiple')
     const expose = {
-      ...activity,
+      ...activity.CurrentActivityContext,
+      setCurrentActivity: activity.setCurrentActivity,
       ...project
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
