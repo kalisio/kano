@@ -45,7 +45,7 @@ export default {
           jwt: user => ({
             subject: appId,
             // Audience is target subdomain
-            audience: process.env.API_GATEWAY_URL.replace('https://api.', '')
+            audience: process.env.API_GATEWAY_URL.replace(/https?:\/\/api\./, '')
           }),
           payload: user => ({
             userId: (user ? user._id : undefined)
