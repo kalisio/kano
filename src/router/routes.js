@@ -7,8 +7,9 @@ module.exports = [{
   meta: { unauthenticated: true },
   children: {
     login: 'screen/KLoginScreen',
-    logout: {
-      component: 'screen/KLogoutScreen',
+    'logout/:provider?': {
+      name: 'logout',
+      component: 'screen/KOAuthLogoutScreen',
       meta: { authenticated: true }
     },
     home: {
