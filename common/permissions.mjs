@@ -18,6 +18,8 @@ export function defineUserAbilities (subject, can, cannot, app) {
         can('all', 'features')
         // Can authorize users on specific layers
         can(['create', 'remove'], 'authorisations')
+        // Can manage styles
+        can('all', 'styles')
       }
     }
     if (subject.projects) {
