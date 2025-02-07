@@ -14,7 +14,7 @@ export default async function () {
     api.createService('catalog')
     api.createService('projects')
     api.createService('features')
-    api.createService('events', { methods: ['create'], events: ['event'] })
+    api.createService('events', { methods: ['create'] })
     // Restore previous settings if any
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
