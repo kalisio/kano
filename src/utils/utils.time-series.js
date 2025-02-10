@@ -71,7 +71,7 @@ export async function updateTimeSeries (previousTimeSeries) {
   const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
   const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
   const forecastLevel = activity.forecastLevel ? ` - ${activity.forecastLevel} ${activity.forecastLevels.unit}` : ''
-  
+
   let timeSeries = []
   if (hasProbedLocation()) {
     const coordinates = kMapUtils.formatUserCoordinates(getProbedLocation().lat, getProbedLocation().lng, Store.get('locationFormat', 'FFf'))
@@ -86,11 +86,13 @@ export async function updateTimeSeries (previousTimeSeries) {
           level: activity.selectedLevel,
           probeFunction: activity.probeLocation
         })
-        if (!_.isEmpty(series)) timeSeries.push({
-          id: `${layer.name}-measure-probe`,
-          label: `${layer.label} (${coordinates})` + featureLevel,
-          series
-        })
+        if (!_.isEmpty(series)) {
+          timeSeries.push({
+            id: `${layer.name}-measure-probe`,
+            label: `${layer.label} (${coordinates})` + featureLevel,
+            series
+          })
+        }
       })
     }
     // Or weather forecast probe
@@ -102,11 +104,13 @@ export async function updateTimeSeries (previousTimeSeries) {
         forecastLevel: activity.forecastLevel,
         weacastApi: activity.getWeacastApi()
       })
-      if (!_.isEmpty(series)) timeSeries.push({
-        id: ForecastProbeId,
-        label: `${activity.forecastModel.label} (${coordinates})` + forecastLevel,
-        series
-      })
+      if (!_.isEmpty(series)) {
+        timeSeries.push({
+          id: ForecastProbeId,
+          label: `${activity.forecastModel.label} (${coordinates})` + forecastLevel,
+          series
+        })
+      }
     }
   }
   if (hasSelectedItems()) {
@@ -120,11 +124,13 @@ export async function updateTimeSeries (previousTimeSeries) {
           layer: item.layer,
           level: activity.selectedLevel
         })
-        if (!_.isEmpty(series)) timeSeries.push({
-          id: `${item.layer.name}-${featureId}-measure`,
-          label: `${item.layer.label} - ${featureLabel || featureId}` + featureLevel,
-          series
-        })
+        if (!_.isEmpty(series)) {
+          timeSeries.push({
+            id: `${item.layer.name}-${featureId}-measure`,
+            label: `${item.layer.label} - ${featureLabel || featureId}` + featureLevel,
+            series
+          })
+        }
       }
       // Or weather forecast probe
       if (_.isEmpty(timeSeries) && activity.forecastModel) {
@@ -136,11 +142,13 @@ export async function updateTimeSeries (previousTimeSeries) {
           forecastLevel: activity.forecastLevel,
           weacastApi: activity.getWeacastApi()
         })
-        if (!_.isEmpty(series)) timeSeries.push({
-          id: `${item.layer.name}-${featureId}-probe`,
-          label: `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel || featureId})` + forecastLevel,
-          series
-        })
+        if (!_.isEmpty(series)) {
+          timeSeries.push({
+            id: `${item.layer.name}-${featureId}-probe`,
+            label: `${activity.forecastModel.label} (${item.layer.label} - ${featureLabel || featureId})` + forecastLevel,
+            series
+          })
+        }
       }
     })
   }

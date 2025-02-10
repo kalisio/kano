@@ -36,7 +36,7 @@
 <script setup>
 import _ from 'lodash'
 import { ref, computed, watch } from 'vue'
-import { Store, Time, composables as kCoreComposables } from '@kalisio/kdk/core.client'
+import { Store, composables as kCoreComposables } from '@kalisio/kdk/core.client'
 import KStackableTimeSeries from '@kalisio/kdk/map/client/components/widget/KStackableTimeSeries.vue'
 import TimeSeriesSelector from './TimeSeriesSelector.vue'
 import { getChartOptions } from '../utils'

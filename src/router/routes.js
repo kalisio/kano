@@ -123,7 +123,7 @@ module.exports = [{
               name: 'add-globe-layer',
               component: 'catalog/KAddLayer',
               tour: {
-                'import-layer': tours['import-layer'],
+                'import-layer': tours['import-layer']
               },
               props: { modes: ['import'] }
             },

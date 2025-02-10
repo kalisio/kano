@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import commonHooks from 'feathers-hooks-common'
 
 export default {
