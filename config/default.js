@@ -45,7 +45,7 @@ const leftPane = {
     },
     {
       id: 'style-editor', icon: 'las la-paint-brush', label: 'KStyleManager.MANAGER', renderer: 'item', dialog: {
-        component: 'tools/KStyleManager', title: 'KStyleManager.MANAGER', okAction: 'CLOSE'
+        component: 'styles/KStyleManager', title: 'KStyleManager.MANAGER', okAction: 'CLOSE'
       }
     },
     {
