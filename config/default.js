@@ -53,6 +53,10 @@ const leftWidgets = [
   { 
     id: 'legend-widget', label: 'KLegend.LABEL', icon: 'las la-list', scrollable: true,
     content: { component: 'legend/KLegend' }
+  },
+  { 
+    id: 'selection-widget', label: 'KFeaturesSelection.LABEL', icon: 'las la-object-group', scrollable: true,
+    content: { component: 'selection/KFeaturesSelection' }
   }
 ]
 
@@ -550,6 +554,7 @@ module.exports = {
               { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
+              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
               { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}  } }
             ]
@@ -646,6 +651,7 @@ module.exports = {
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
+              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } }
             ]
           },
           { component: 'QSeparator', vertical: true, inset: true },
