@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import { fileURLToPath } from 'url'
 import makeDebug from 'debug'
 import kCore, { permissions, createDefaultUsers, decorateDistributedService } from '@kalisio/kdk/core.api.js'
-import kMap, { createFeaturesServiceForLayer, createDefaultCatalogLayers } from '@kalisio/kdk/map.api.js'
+import kMap, { createFeaturesService, createCatalogFeaturesServices, createDefaultCatalogLayers } from '@kalisio/kdk/map.api.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -56,13 +56,19 @@ export default async function () {
     app.logger.error(error.message)
   }
 
+  // Configure app hooks on the built-in catalog service
+  const catalogService = app.getService('catalog')
+  await app.configureService('catalog', catalogService, servicesPath)
+  
+  // Service to store user features first as catalog layers use it
+  const featuresService = await createFeaturesService.call(app, { collection: 'features' })
+  await app.configureService('features', featuresService, servicesPath)
+  // Restore also any service used by layers
+  await createCatalogFeaturesServices.call(app)
+  
   // Initialize defaults
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
-
-  // Service to store user features
-  const featuresService = await createFeaturesServiceForLayer.call(app, { collection: 'features' })
-  await app.configureService('features', featuresService, servicesPath)
 
   // Event bus service
   app.declareService('events', {
