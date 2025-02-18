@@ -2,7 +2,7 @@ import common from 'feathers-hooks-common'
 import makeDebug from 'debug'
 import { createFeaturesServiceForLayer, removeFeaturesServiceForLayer } from '@kalisio/kdk/map.api.js'
 
-const { getItems, replaceItems } = common
+const { getItems } = common
 const debug = makeDebug('kano:hooks:catalog')
 
 // Create required features service when adding a layer that requires one
