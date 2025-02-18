@@ -7,7 +7,7 @@ import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
-import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { initializeApi, i18n, utils as kdkCoreUtils, directives as kdkCoreDirectives, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, setupApi, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -168,6 +168,9 @@ export default async ({ app, router }) => {
     return _.get(config, path, defaultValue)
   }
 
+  // Register global directives
+  app.directive('hover', kdkCoreDirectives.vHover)
+  
   // Register global components
   app.component('KAction', await kdkCoreUtils.loadComponent('action/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))
@@ -175,6 +178,7 @@ export default async ({ app, router }) => {
   app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))
   app.component('KDialog', await kdkCoreUtils.loadComponent('KDialog'))
   app.component('KMenu', await kdkCoreUtils.loadComponent('menu/KMenu'))
+  app.component('KSubMenu', await kdkCoreUtils.loadComponent('menu/KSubMenu'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
