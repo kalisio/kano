@@ -204,14 +204,14 @@ const mapLayerActions = [{
     { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-caret-left', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       component: 'menu/KSubMenu', content: [
         { id: 'edit-layer-points', label: 'mixins.activity.EDIT_POINTS_DATA_LABEL', icon: 'las la-map-marker',
-          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-points', allowedEditModes: ['add-points', 'edit-properties', 'drag', 'rotate', 'remove'] }] } },
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-points', allowedEditModes: ['add-points', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Point', 'MultiPoint'] }] } },
         { id: 'edit-layer-lines', label: 'mixins.activity.EDIT_LINES_DATA_LABEL', icon: 'las la-project-diagram',
-          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-lines', allowedEditModes: ['add-lines', 'edit-properties', 'drag', 'rotate', 'remove'] }] } },
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-lines', allowedEditModes: ['add-lines', 'edit-properties', 'edit-geometry', 'drag', 'rotate', 'remove'], geometryTypes: ['LineString', 'MultiLineString'] }] } },
         { id: 'edit-layer-polygons', label: 'mixins.activity.EDIT_POLYGONS_DATA_LABEL', icon: 'las la-draw-polygon',
-          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-polygons', allowedEditModes: ['add-polygons', 'add-rectangles', 'edit-properties', 'drag', 'rotate', 'remove'] }] } },
-        { id: 'edit-layer-geometry', label: 'mixins.activity.UPDATE_PROPERTIES_LABEL', icon: 'las la-edit',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-polygons', allowedEditModes: ['add-polygons', 'add-rectangles', 'edit-geometry', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Polygon', 'MultiPolygon'] }] } },
+        { id: 'edit-layer-geometry', label: 'mixins.activity.EDIT_PROPERTIES_LABEL', icon: 'las la-edit',
           handler: { name: 'startEditLayer', params: [':0', { editMode: 'edit-properties', allowedEditModes: ['edit-properties'] }] } },
-        { id: 'edit-layer-geometry', label: 'mixins.activity.UPDATE_GEOMETRIES_LABEL', icon: 'las la-vector-square',
+        { id: 'edit-layer-geometry', label: 'mixins.activity.EDIT_GEOMETRIES_LABEL', icon: 'las la-vector-square',
           handler: { name: 'startEditLayer', params: [':0', { editMode: 'edit-geometry', allowedEditModes: ['edit-geometry', 'drag', 'rotate', 'remove'] }] } }
       ]
     },
