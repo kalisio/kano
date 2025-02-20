@@ -44,11 +44,6 @@ const leftPane = {
       }
     },
     {
-      id: 'style-editor', icon: 'las la-paint-brush', label: 'KStyleManager.MANAGER', renderer: 'item', dialog: {
-        component: 'styles/KStyleManager', title: 'KStyleManager.MANAGER', okAction: 'CLOSE'
-      }
-    },
-    {
       id: 'about', icon: 'las la-info', label: 'ABOUT', renderer: 'item', dialog: {
         component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE'
       }
@@ -75,6 +70,10 @@ const leftWidgets = [
   { 
     id: 'selection-widget', label: 'KFeaturesSelection.LABEL', icon: 'las la-object-group', scrollable: true,
     content: { component: 'selection/KFeaturesSelection' }
+  },
+  {
+    id: 'style-manager', label: 'KStyleManager.TITLE', icon: 'las la-paint-brush', scrollable: true,
+    content: { component: 'styles/KStyleManager' }
   }
 ]
 
@@ -643,6 +642,7 @@ module.exports = {
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
+              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLE_MANAGER', handler: { name: 'openWidget', params: ['style-manager'] } },
               { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}  } }
             ]
@@ -771,7 +771,8 @@ module.exports = {
             content: [
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
-              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } }
+              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
+              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLE_MANAGER', handler: { name: 'openWidget', params: ['style-manager'] } },
             ]
           },
           {component: 'QSeparator', vertical: true, inset: true},
