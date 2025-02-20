@@ -7,8 +7,9 @@ module.exports = [{
   meta: { unauthenticated: true },
   children: {
     login: 'screen/KLoginScreen',
-    logout: {
-      component: 'screen/KLogoutScreen',
+    'logout/:provider?': {
+      name: 'logout',
+      component: 'screen/KOAuthLogoutScreen',
       meta: { authenticated: true }
     },
     home: {
@@ -122,7 +123,7 @@ module.exports = [{
               name: 'add-globe-layer',
               component: 'catalog/KAddLayer',
               tour: {
-                'import-layer': tours['import-layer'],
+                'import-layer': tours['import-layer']
               },
               props: { modes: ['import'] }
             },

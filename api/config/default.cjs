@@ -180,7 +180,7 @@ module.exports = {
     },
     jwtOptions: {
       header: {
-        type: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
+        typ: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
       },
       audience: process.env.SUBDOMAIN || 'kalisio', // The resource server where the token is processed
       issuer: 'kalisio', // The issuing server, application or resource
@@ -188,7 +188,7 @@ module.exports = {
       expiresIn: '1d'
     },
     oauth: {
-      redirect: domain + '/',
+      redirect: domain,
       defaults: {
         origin: domain
       },
@@ -200,6 +200,7 @@ module.exports = {
         authorize_url: `${keycloakBaseUrl}/auth`,
         access_url: `${keycloakBaseUrl}/token`,
         profile_url: `${keycloakBaseUrl}/userinfo`,
+        logout_url: `${keycloakBaseUrl}/logout`,
         nonce: true
       } : undefined)
     },

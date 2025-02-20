@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import { computed, inject, unref } from 'vue'
-import { Store, composables as kCoreComposables } from '@kalisio/kdk/core.client'
+import { computed, inject } from 'vue'
+import { Store } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables } from '@kalisio/kdk/map.client'
 
 const { CurrentActivityContext, centerOnSelection, hasProbedLocation, centerOnProbe } = kMapComposables.useCurrentActivity()

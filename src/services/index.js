@@ -10,14 +10,16 @@ export default async function () {
     await api.configure(kdkCore)
     await api.configure(kdkMap)
 
-    // TODO we use createService because of the custom methods
-    // https://github.com/kalisio/kdk/issues/781
-    api.createService('events', { methods: ['create'], events: ['event'] })
+    // Declare additional services for the app
+    api.createService('catalog')
+    api.createService('projects')
+    api.createService('features')
+    api.createService('events', { methods: ['create'] })
     // Restore previous settings if any
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
     // Create required services for offline mode
-    kMapUtils.createOfflineServices()
+    await kMapUtils.createOfflineServices()
   } catch (error) {
     logger.error(error.message)
   }

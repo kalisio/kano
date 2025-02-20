@@ -70,7 +70,11 @@ const leftPane = {
 const leftWidgets = [
   {
     id: 'legend-widget', label: 'KLegend.LABEL', icon: 'las la-list', scrollable: true,
-    content: {component: 'legend/KLegend'}
+    content: { component: 'legend/KLegend' }
+  },
+  { 
+    id: 'selection-widget', label: 'KFeaturesSelection.LABEL', icon: 'las la-object-group', scrollable: true,
+    content: { component: 'selection/KFeaturesSelection' }
   }
 ]
 
@@ -203,68 +207,38 @@ const mapLayerActions = [{
   propagate: false,
   dense: true,
   content: [
-    {
-      id: 'zoom-to-layer',
-      label: 'mixins.activity.ZOOM_TO_LABEL',
-      icon: 'las la-search-location',
-      handler: 'onZoomToLayer',
-      visible: ':isVisible'
+    { id: 'zoom-to-layer', label: 'mixins.activity.ZOOM_TO_LABEL', icon: 'las la-search-location', handler: 'onZoomToLayer', visible: ':isVisible' },
+    { id: 'save-layer', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
+      visible: ['isLayerStorable', { name: '$can', params: ['create', 'catalog'] }] },
+    { id: 'filter-layer-data', label: 'mixins.activity.FILTER_DATA_LABEL', icon: 'las la-filter', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-filter', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'view-layer-data', label: 'mixins.activity.VIEW_DATA_LABEL', icon: 'las la-th-list', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-table', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'chart-layer-data', label: 'mixins.activity.CHART_DATA_LABEL', icon: 'las la-chart-pie', visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      route: { name: 'map-layer-chart', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
+      route: { name: 'edit-map-layer', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'edit-layer-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
+      route: { name: 'edit-map-layer-style', params: { layerId: ':_id', layerName: ':name' } } },
+    /* Actio to edit all-at-once, now replaced by a submenu with more specific actions
+    { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
+      toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
+    */
+    { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-caret-left', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
+      component: 'menu/KSubMenu', content: [
+        { id: 'edit-layer-points', label: 'mixins.activity.EDIT_POINTS_DATA_LABEL', icon: 'las la-map-marker',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-points', allowedEditModes: ['add-points', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Point', 'MultiPoint'] }] } },
+        { id: 'edit-layer-lines', label: 'mixins.activity.EDIT_LINES_DATA_LABEL', icon: 'las la-project-diagram',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-lines', allowedEditModes: ['add-lines', 'edit-properties', 'edit-geometry', 'drag', 'rotate', 'remove'], geometryTypes: ['LineString', 'MultiLineString'] }] } },
+        { id: 'edit-layer-polygons', label: 'mixins.activity.EDIT_POLYGONS_DATA_LABEL', icon: 'las la-draw-polygon',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-polygons', allowedEditModes: ['add-polygons', 'add-rectangles', 'edit-geometry', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Polygon', 'MultiPolygon'] }] } },
+        { id: 'edit-layer-geometry', label: 'mixins.activity.EDIT_PROPERTIES_LABEL', icon: 'las la-edit',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'edit-properties', allowedEditModes: ['edit-properties'] }] } },
+        { id: 'edit-layer-geometry', label: 'mixins.activity.EDIT_GEOMETRIES_LABEL', icon: 'las la-vector-square',
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'edit-geometry', allowedEditModes: ['edit-geometry', 'drag', 'rotate', 'remove'] }] } }
+      ]
     },
-    {
-      id: 'save-layer', label: 'mixins.activity.SAVE_LABEL', icon: 'las la-save', handler: 'onSaveLayer',
-      visible: ['isLayerStorable', {name: '$can', params: ['create', 'catalog']}]
-    },
-    {
-      id: 'filter-layer-data',
-      label: 'mixins.activity.FILTER_DATA_LABEL',
-      icon: 'las la-filter',
-      visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      route: {name: 'map-layer-filter', params: {layerId: ':_id', layerName: ':name'}}
-    },
-    {
-      id: 'view-layer-data',
-      label: 'mixins.activity.VIEW_DATA_LABEL',
-      icon: 'las la-th-list',
-      visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      route: {name: 'map-layer-table', params: {layerId: ':_id', layerName: ':name'}}
-    },
-    {
-      id: 'chart-layer-data',
-      label: 'mixins.activity.CHART_DATA_LABEL',
-      icon: 'las la-chart-pie',
-      visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      route: {name: 'map-layer-chart', params: {layerId: ':_id', layerName: ':name'}}
-    },
-    {
-      id: 'edit-layer',
-      label: 'mixins.activity.EDIT_LABEL',
-      icon: 'las la-file-alt',
-      visible: ['isLayerEditable', {name: '$can', params: ['update', 'catalog']}],
-      route: {name: 'edit-map-layer', params: {layerId: ':_id', layerName: ':name'}}
-    },
-    {
-      id: 'edit-layer-style',
-      label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL',
-      icon: 'las la-border-style',
-      visible: 'isLayerStyleEditable',
-      route: {name: 'edit-map-layer-style', params: {layerId: ':_id', layerName: ':name'}}
-    },
-    {
-      id: 'edit-layer-data',
-      label: 'mixins.activity.START_EDIT_DATA_LABEL',
-      icon: 'las la-edit',
-      handler: 'onEditLayerData',
-      visible: 'isLayerDataEditable',
-      toggle: {icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL'},
-      component: 'KEditLayerData'
-    },
-    {
-      id: 'remove-layer',
-      label: 'mixins.activity.REMOVE_LABEL',
-      icon: 'las la-trash',
-      handler: 'onRemoveLayer',
-      visible: 'isLayerRemovable'
-    }
+    { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
   ]
 }]
 
@@ -665,36 +639,12 @@ module.exports = {
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
             content: [
-              {
-                id: 'measure-tool',
-                icon: 'las la-ruler-combined',
-                label: 'KMeasureTool.TOOL_BUTTON_LABEL',
-                handler: {name: 'setTopPaneMode', params: ['measure-tool']}
-              },
-              {
-                id: 'display-position',
-                icon: 'las la-plus',
-                label: 'mixins.activity.DISPLAY_POSITION',
-                handler: {name: 'setTopPaneMode', params: ['display-position']}
-              },
-              {
-                id: 'display-legend',
-                icon: 'las la-list',
-                label: 'mixins.activity.DISPLAY_LEGEND',
-                handler: {name: 'openWidget', params: ['legend-widget']}
-              },
-              {component: 'QSeparator'},
-              {
-                id: 'capture-map',
-                icon: 'las la-camera',
-                label: 'mixins.activity.CAPTURE_VIEW',
-                dialog: {
-                  component: 'KCapture',
-                  title: 'mixins.activity.CAPTURE_VIEW',
-                  cancelAction: 'CANCEL',
-                  okAction: {id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}
-                }
-              }
+              { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
+              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
+              { component: 'QSeparator' },
+              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}  } }
             ]
           },
           {component: 'QSeparator', vertical: true, inset: true},
@@ -819,18 +769,9 @@ module.exports = {
             tooltip: 'mixins.activity.TOOLS',
             actionRenderer: 'item',
             content: [
-              {
-                id: 'display-position',
-                icon: 'las la-plus',
-                label: 'mixins.activity.DISPLAY_POSITION',
-                handler: {name: 'setTopPaneMode', params: ['display-position']}
-              },
-              {
-                id: 'display-legend',
-                icon: 'las la-list',
-                label: 'mixins.activity.DISPLAY_LEGEND',
-                handler: {name: 'openWidget', params: ['legend-widget']}
-              },
+              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
+              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
+              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } }
             ]
           },
           {component: 'QSeparator', vertical: true, inset: true},

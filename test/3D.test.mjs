@@ -29,7 +29,7 @@ describe(`suite:${suite}`, () => {
       localStorage: {
         'kano-welcome': false
       },
-      browser: { args: [ waylandArg ] }
+      browser: { args: [waylandArg] }
     })
     page = await runner.start()
     await core.login(page, user)

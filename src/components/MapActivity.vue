@@ -16,7 +16,7 @@ import sift from 'sift'
 import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
-import { Store, Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -150,7 +150,7 @@ export default {
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
     },
-    setBearing(bearing) {
+    setBearing (bearing) {
       kMapMixins.map.baseMap.methods.setBearing.call(this, bearing)
       TemplateContext.set('bearing', bearing)
     },
@@ -205,7 +205,7 @@ export default {
       if ((options.name === kMapComposables.HighlightsLayerName) && this.isWeatherProbe(feature)) {
         // Get labels from forecast layers
         const layers = _.values(this.layers).filter(sift({ tags: ['weather', 'forecast'] }))
-        const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), []) 
+        const variables = _.reduce(layers, (result, layer) => result.concat(_.get(layer, 'variables', [])), [])
         const fields = this.getProbedLocationForecastFields(variables)
         const html = this.getForecastAsHtml(feature, fields)
         return L.tooltip({ permanent: false }, layer).setContent(`<b>${html}</b>`)
@@ -258,7 +258,7 @@ export default {
           // event may be disabled by config
           const opts = this.activityOptions
           const defaultLeafletEvents = ['click', 'dblclick', 'contextmenu']
-          let okForward = (defaultLeafletEvents.indexOf(leafletEvent) !== -1 )
+          let okForward = (defaultLeafletEvents.indexOf(leafletEvent) !== -1)
           if (opts.allowForwardEvents) okForward = okForward || (opts.allowForwardEvents.indexOf(leafletEvent) !== -1)
           if (opts.disallowForwardEvents) okForward = okForward && (opts.disallowForwardEvents.indexOf(leafletEvent) === -1)
           if (!okForward) return
@@ -271,8 +271,12 @@ export default {
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
           const payload = {
-            longitude: _.get(latlng, 'lng'), latitude: _.get(latlng, 'lat'), feature, layer,
-            containerPoint: _.get(event, 'containerPoint'), layerPoint: _.get(event, 'layerPoint')
+            longitude: _.get(latlng, 'lng'),
+            latitude: _.get(latlng, 'lat'),
+            feature,
+            layer,
+            containerPoint: _.get(event, 'containerPoint'),
+            layerPoint: _.get(event, 'layerPoint')
           }
           if (leafletEvent === 'rotate') {
             payload.bearing = this.getBearing()
