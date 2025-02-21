@@ -642,7 +642,7 @@ module.exports = {
               { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
               { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
               { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
-              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLE_MANAGER', handler: { name: 'openWidget', params: ['style-manager'] } },
+              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLES', handler: { name: 'openWidget', params: ['style-manager'] } },
               { component: 'QSeparator' },
               { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply'}  } }
             ]
