@@ -217,8 +217,9 @@ const mapLayerActions = [{
       route: { name: 'map-layer-chart', params: { layerId: ':_id', layerName: ':name' } } },
     { id: 'edit-layer', label: 'mixins.activity.EDIT_LABEL', icon: 'las la-file-alt', visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
       route: { name: 'edit-map-layer', params: { layerId: ':_id', layerName: ':name' } } },
-    { id: 'edit-layer-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-border-style', visible: 'isLayerStyleEditable',
+    { id: 'edit-layer-style', label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL', icon: 'las la-paint-brush', visible: 'isLayerStyleEditable',
       route: { name: 'edit-map-layer-style', params: { layerId: ':_id', layerName: ':name' } } },
+    { id: 'reset-layer-style', label: 'mixins.activity.RESET_LAYER_STYLE_LABEL', icon: 'las la-ban', handler: 'onResetLayerStyle', visible: 'isLayerStyleEditable' },
     /* Actio to edit all-at-once, now replaced by a submenu with more specific actions
     { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },

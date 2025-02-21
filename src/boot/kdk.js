@@ -170,7 +170,7 @@ export default async ({ app, router }) => {
 
   // Register global directives
   app.directive('hover', kdkCoreDirectives.vHover)
-  
+
   // Register global components
   app.component('KAction', await kdkCoreUtils.loadComponent('action/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))

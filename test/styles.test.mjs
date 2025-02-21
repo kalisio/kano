@@ -14,7 +14,7 @@ describe(`suite:${suite}`, () => {
     { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
   ]
   const currentUser = user[1]
-  
+
   before(async () => {
     chailint(chai, util)
 
