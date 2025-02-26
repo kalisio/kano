@@ -6,6 +6,9 @@
 *.njsproj
 *.sln
 
+# Local configurations
+local.cjs
+
 # Quasar build
 .quasar
 
