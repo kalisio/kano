@@ -1,10 +1,36 @@
 name: ci
-on: [ push, workflow_dispatch ]
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: "Run tests"
+        default: false
+        required: false
+        type: boolean
+      build_e2e_tests:
+        description: "Build end-to-end tests"
+        default: false
+        required: false
+        type: boolean
+      build_app:
+        description: "Build app"
+        default: false
+        required: false
+        type: boolean
+      build_docs:
+        description: "Build docs"
+        default: false
+        required: false
+        type: boolean
 
 jobs:
   run_tests:
     name: Run tests
-    if: ${{ !contains(github.event.head_commit.message, 'skip tests') }}
+    if: ${{
+      github.event_name == 'workflow_dispatch' && inputs.run_tests ||
+      github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip tests')
+      }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repo
@@ -22,9 +48,35 @@ jobs:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: bash ./scripts/run_tests.sh -c -r ${{ github.job }}
 
+  build_e2e_tests:
+    name: Build e2e tests
+    if: ${{
+      github.event_name == 'workflow_dispatch' && inputs.build_e2e_tests ||
+      github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip e2e tests')
+      }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init runner
+        run: bash ./scripts/init_runner.sh ${{ github.job }}
+      - name: Setup workspace
+        env:
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
+        run: bash ./scripts/setup_workspace.sh -k kli
+      - name: Build e2e tests
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: bash ./scripts/build_e2e_tests.sh -p -r ${{ github.job }}
+
   build_app:
     name: Build app
-    if: ${{ !contains(github.event.head_commit.message, 'skip app') }}
+    if: ${{
+      github.event_name == 'workflow_dispatch' && inputs.build_app ||
+      github.event_name == 'push' && (startsWith(github.event.head_commit.message, 'app:') || contains(github.event.head_commit.message, 'build app'))
+      }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -49,7 +101,10 @@ jobs:
 
   build_docs:
     name: Build docs
-    if: ${{ startsWith(github.event.head_commit.message, 'docs:') || contains(github.event.head_commit.message, 'build doc') }}
+    if: ${{
+      github.event_name == 'workflow_dispatch' && inputs.build_docs ||
+      github.event_name == 'push' && (startsWith(github.event.head_commit.message, 'docs:') || contains(github.event.head_commit.message, 'build doc'))
+      }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repo

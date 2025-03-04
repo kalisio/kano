@@ -11,7 +11,7 @@ ARG NODE_VERSION=20
 FROM node:${NODE_VERSION}-${DEBIAN_VERSION}-slim as builder
 LABEL maintainer="contact@kalisio.xyz"
 
-COPY . /opt/kalisio
+COPY . /opt/kalisio 
 
 # Setting environment variables
 ARG APP
@@ -26,6 +26,9 @@ ENV HEADLESS=$HEADLESS
 
 # Development environment setup
 WORKDIR /opt/kalisio/
+
+# Install git (because some dependencies are not available on npm)
+RUN apt-get update && apt-get install -y git
 RUN \
   cd /opt/kalisio/kdk && yarn && yarn link --link-folder /opt/kalisio/yarn-links && \
   cd /opt/kalisio/$APP && yarn && yarn link "@kalisio/kdk" --link-folder /opt/kalisio/yarn-links

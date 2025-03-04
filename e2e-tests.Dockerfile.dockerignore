@@ -1,9 +1,3 @@
-# Ignore verything
-*
-
-# Except these
-!kdk/*
-!kano/*
 
 # But ignore these anyway
 **/node_modules

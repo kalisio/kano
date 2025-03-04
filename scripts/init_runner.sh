@@ -19,8 +19,16 @@ init_github_build_app() {
     install_reqs age sops nvm node20
 }
 
+init_github_build_e2e_tests() {
+    install_reqs age sops nvm node20
+}
+
 init_github_build_docs() {
     install_reqs age sops nvm node18
+}
+
+init_github_additional_tests() {
+    install_reqs age sops nvm node22 mongo7
 }
 
 begin_group "Init $CI_ID for $JOB_ID"
