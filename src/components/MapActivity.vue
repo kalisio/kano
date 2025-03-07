@@ -13,7 +13,6 @@
 import _ from 'lodash'
 import L from 'leaflet'
 import sift from 'sift'
-import 'leaflet-rotate/dist/leaflet-rotate-src.js'
 import 'leaflet-arrowheads'
 import { computed } from 'vue'
 import { Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
