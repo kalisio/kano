@@ -794,8 +794,9 @@ module.exports = {
     },
     stickies: {
       content: [
-        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'KLevelSlider' },
-        { id: 'attribution', position: 'bottom-right', offset: [80, 24], component: 'KAttribution' }
+        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: false },
+        { id: 'attribution', position: 'bottom-right', offset: [80, 24], component: 'stickies/KAttribution', visible: true },
+        { id: 'north-sticky', position: 'bottom-left', offset: [40, 24], component: 'stickies/KNorth', visible: false }
         // Only for example purpose
         // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
       ]
