@@ -75,7 +75,7 @@ jobs:
     name: Build app
     if: ${{
       github.event_name == 'workflow_dispatch' && inputs.build_app ||
-      github.event_name == 'push' && (startsWith(github.event.head_commit.message, 'app:') || contains(github.event.head_commit.message, 'build app'))
+      github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip app')
       }}
     runs-on: ubuntu-22.04
     strategy:
