@@ -47,9 +47,6 @@
   },
   "sideNav": {
     "MAP": "2D View",
-    "GLOBE": "3D View",
-    "ONLINE_HELP": "Online help",
-    "CONTEXTUAL_HELP": "@:CONTEXTUAL_HELP",
-    "LOGOUT": "Logout"
+    "GLOBE": "3D View"
   }
 }

@@ -39,11 +39,11 @@ const leftPane = {
     {
       id: 'settings',
       icon: 'las la-cog',
-      label: 'SETTINGS',
+      label: 'layout.SETTINGS',
       renderer: 'item',
       dialog: {
         component: 'app/KSettings',
-        title: 'SETTINGS',
+        title: 'layout.SETTINGS',
         cancelAction: 'CANCEL',
         okAction: {
           id: 'apply-settings', label: 'APPLY', handler: 'apply'
@@ -53,22 +53,22 @@ const leftPane = {
     {
       id: 'about',
       icon: 'las la-info',
-      label: 'ABOUT',
+      label: 'layout.ABOUT',
       renderer: 'item',
       dialog: {
-        component: 'app/KAbout', title: 'ABOUT', okAction: 'CLOSE'
+        component: 'app/KAbout', title: 'layout.ABOUT', okAction: 'CLOSE'
       }
     },
-    { id: 'online-help', icon: 'las la-book', label: 'sideNav.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
+    { id: 'online-help', icon: 'las la-book', label: 'layout.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
     {
       id: 'contextual-help',
       icon: 'las la-question-circle',
-      label: 'sideNav.CONTEXTUAL_HELP',
+      label: 'layout.CONTEXTUAL_HELP',
       handler: { name: 'launchTour', params: ['home'] },
       renderer: 'item'
     },
     { component: 'QSeparator' },
-    { id: 'logout', icon: 'las la-sign-out-alt', label: 'sideNav.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
+    { id: 'logout', icon: 'las la-sign-out-alt', label: 'layout.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
   ]
 }
 
@@ -665,7 +665,7 @@ module.exports = {
     // frameBackgroundColor: '#FFDC9E',
     login: {
       actions: [
-        { id: 'contextual-help', label: 'CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
+        { id: 'contextual-help', label: 'layout.CONTEXTUAL_HELP', route: { name: 'login', query: { tour: true } } }
       ]
     },
     logout: {
