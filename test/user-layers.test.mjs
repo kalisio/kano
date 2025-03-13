@@ -1,6 +1,6 @@
-import _ from 'lodash'
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
+import _ from 'lodash'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
@@ -114,12 +114,12 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 46.83201, 8.31116)
     await map.zoomToLevel(page, 'mapActivity', 8)
     const service = 'https://wmts.geo.admin.ch/EPSG/3857/1.0.0/WMTSCapabilities.xml'
-    const layerId = 'ch-bakom-notruf-112-zentral'
-    const layerName = '112 Alarmzentralen'
+    const layerId = 'ch-bakom-notruf-112-festnetz'
+    const layerName = '112 Festnetz'
     await map.connectLayer(page, service, layerId, layerName)
     const match = await runner.captureAndMatch(layerId)
     await core.closeWindow(page, 'left')
-    await map.clickLayer(page, userLayersTab, _.kebabCase('112 Alarmzentralen'))
+    await map.clickLayer(page, userLayersTab, _.kebabCase('112 Festnetz'))
     expect(match).beTrue()
   })
 
