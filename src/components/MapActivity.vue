@@ -253,15 +253,15 @@ export default {
       if (!_.has(this, 'leafletHandlers')) { this.leafletHandlers = {} }
 
       for (const leafletEvent of leafletEvents) {
-        const handler = (options, event) => {
-          // event may be disabled by config
-          const opts = this.activityOptions
-          const defaultLeafletEvents = ['click', 'dblclick', 'contextmenu']
-          let okForward = (defaultLeafletEvents.indexOf(leafletEvent) !== -1)
-          if (opts.allowForwardEvents) okForward = okForward || (opts.allowForwardEvents.indexOf(leafletEvent) !== -1)
-          if (opts.disallowForwardEvents) okForward = okForward && (opts.disallowForwardEvents.indexOf(leafletEvent) === -1)
-          if (!okForward) return
+        // Event may be disabled by config
+        const options = this.activityOptions
+        const defaultLeafletEvents = ['click', 'dblclick', 'contextmenu']
+        let okForward = (defaultLeafletEvents.indexOf(leafletEvent) !== -1)
+        if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(leafletEvent) !== -1)
+        if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(leafletEvent) === -1)
+        if (!okForward) continue
 
+        const handler = (options, event) => {
           let latlng = _.get(event, 'latlng')
           // For some events like marker drag we get the new position fro mthe target
           if (!latlng && _.has(event, 'target') && (typeof event.target.getLatLng === 'function')) latlng = event.target.getLatLng()
