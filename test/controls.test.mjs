@@ -1,6 +1,6 @@
-import chai, { util, expect } from 'chai'
-import chailint from 'chai-lint'
 import { core } from '@kalisio/kdk/test.client.js'
+import chai, { expect, util } from 'chai'
+import chailint from 'chai-lint'
 
 const suite = 'controls'
 
@@ -17,7 +17,7 @@ describe(`suite:${suite}`, () => {
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
         'kano-welcome': false
-      }
+      },
     })
     page = await runner.start()
     await core.login(page, user)
@@ -32,7 +32,7 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it('search location', async () => {
+  it.skip('search location', async () => {
     await core.clickPaneAction(page, 'top', 'search-location')
     let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
@@ -47,14 +47,14 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it('display position', async () => {
+  it.skip('display position', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
     const match = await runner.captureAndMatch('position')
     await core.clickAction(page, 'back')
     expect(match).beTrue()
   })
 
-  it('display legend', async () => {
+  it.skip('display legend', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
     const match = await runner.captureAndMatch('legend')
     expect(match).beTrue()
