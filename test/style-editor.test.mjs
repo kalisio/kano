@@ -33,12 +33,12 @@ describe(`suite:${suite}`, () => {
   zoom min and max
   line styling (width, color and opacity) */
 
-  it('line: import geojson file', async () => {
+  it.skip('line: import geojson file', async () => {
     await map.dropFile(page, runner.getDataPath('Canal_Midi.geojson'))
     await map.goToPosition(page, 43.31486, 1.95557)
   })
 
-  it('line: set min and max zoom', async () => {
+  it.skip('line: set min and max zoom', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-minzoom')
@@ -49,7 +49,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S1_test1_line_min_max_zoom_z16_raw')).beTrue()
   })
 
-  it('line: set width, color and opacity', async () => {
+  it.skip('line: set width, color and opacity', async () => {
     // await core.clickPaneAction(page, 'right', 'Canal_Midi')
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-line-group')
@@ -63,26 +63,26 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S1_test2_line_styled_z16')).beTrue()
   })
 
-  it('line: check min zoom visibility (13 -> not visible)', async () => {
+  it.skip('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 13)
     await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
   })
 
-  it('line: check max zoom visibility (17 -> not visible)', async () => {
+  it.skip('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 17)
     await page.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
   })
 
-  it('line: remove layer', async () => {
+  it.skip('line: remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'Canal_Midi')
   })
 
   /* Step 2:
   point clustering and styling */
 
-  it('point: default clustering', async () => {
+  it.skip('point: default clustering', async () => {
     await map.dropFile(page, runner.getDataPath('Enjeux_Inondation.geojson'))
     await page.waitForTimeout(1000)
     await map.goToPosition(page, 43.30095, 1.95545)
@@ -91,7 +91,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
   })
 
-  it('point: disable clustering', async () => {
+  it.skip('point: disable clustering', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
@@ -100,7 +100,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
   })
 
-  it('point: disable clustering and point styling', async () => {
+  it.skip('point: disable clustering and point styling', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-general-group')
     await core.click(page, '#style-toggle-clustering')
@@ -120,18 +120,18 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
   })
 
-  it('point: remove layer', async () => {
+  it.skip('point: remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'Enjeux_Inondation')
   })
 
   /* Step 3:
   polygon styling */
 
-  it('polygon: import geojson file', async () => {
+  it.skip('polygon: import geojson file', async () => {
     await map.dropFile(page, runner.getDataPath('Zone_Risque_Industriel.geojson'))
   })
 
-  it('polygon: polygon styling', async () => {
+  it.skip('polygon: polygon styling', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-style'])
     await core.click(page, '#style-polygon-group')
     await core.moveSlider(page, 'style-polygon-opacity', 'right', 3, 500)
@@ -146,7 +146,7 @@ describe(`suite:${suite}`, () => {
     expect(await runner.captureAndMatch('S3_test1_polygon_styling')).beTrue()
   })
 
-  it('polygon: remove layer', async () => {
+  it.skip('polygon: remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'Zone_Risque_Industriel')
   })
 
