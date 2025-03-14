@@ -279,8 +279,13 @@ const mapLayerActions = [{
       id: 'edit-layer',
       label: 'mixins.activity.EDIT_LABEL',
       icon: 'las la-file-alt',
-      visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      route: { name: 'edit-map-layer', params: { layerId: ':_id', layerName: ':name' } }
+      dialog: {
+        title: ':name',
+        component: 'KLayerEditor',
+        layerName: ':name',
+        cancelAction: 'CANCEL',
+        okAction: { id: 'apply-edit-layer', label: 'APPLY', handler: 'apply' }
+      }
     },
     {
       id: 'edit-layer-style',
@@ -458,8 +463,13 @@ const globeLayerActions = [{
       id: 'edit-layer',
       label: 'mixins.activity.EDIT_LABEL',
       icon: 'las la-file-alt',
-      visible: ['isLayerEditable', { name: '$can', params: ['update', 'catalog'] }],
-      route: { name: 'edit-globe-layer', params: { layerId: ':_id', layerName: ':name' } }
+      dialog: {
+        title: ':name',
+        component: 'KLayerEditor',
+        layerName: ':name',
+        cancelAction: 'CANCEL',
+        okAction: { id: 'apply-edit-layer', label: 'APPLY', handler: 'apply' }
+      }
     },
     {
       id: 'edit-layer-style',

@@ -73,11 +73,6 @@ module.exports = [{
               component: 'KFeaturesTable',
               props: true
             },
-            'edit-layer/:layerId': {
-              name: 'edit-map-layer',
-              component: 'KLayerEditor',
-              props: true
-            },
             'edit-layer-style/:layerId?': {
               name: 'edit-map-layer-style',
               component: 'KLayerStyleEditor',
@@ -140,11 +135,6 @@ module.exports = [{
             'layer-table/:layerId?': {
               name: 'globe-layer-table',
               component: 'KFeaturesTable',
-              props: true
-            },
-            'edit-layer/:layerId': {
-              name: 'edit-globe-layer',
-              component: 'KLayerEditor',
               props: true
             },
             'edit-layer-style/:layerId?': {
