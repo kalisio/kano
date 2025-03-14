@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -44,7 +44,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 2000)
-    expect(await runner.captureAndMatch('t1-infobox')).beTrue()
+    expect(await runner.captureAndMatch('t1-infobox', null, 3)).beTrue()
     await core.closeWindow(page, 'top')
   })
 
@@ -56,7 +56,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 2000)
-    expect(await runner.captureAndMatch('t2-no-infobox')).beTrue()
+    expect(await runner.captureAndMatch('t2-no-infobox', null, 3)).beTrue()
     await core.closeWindow(page, 'top')
   })
 
@@ -68,7 +68,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t3-no-empty-infobox')).beTrue()
+    expect(await runner.captureAndMatch('t3-no-empty-infobox', null, 3)).beTrue()
   })
 
   it('configure and check popup', async () => {
@@ -84,7 +84,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('t4-popup')
+    const match = await runner.captureAndMatch('t4-popup', null, 3)
     expect(match).beTrue()
     await core.click(page, '.leaflet-popup-close-button', 1000)
   })
@@ -99,7 +99,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t5-no-popup')).beTrue()
+    expect(await runner.captureAndMatch('t5-no-popup', null, 3)).beTrue()
   })
 
   it('configure and check tooltip', async () => {
@@ -114,7 +114,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t6-tooltip')).beTrue()
+    expect(await runner.captureAndMatch('t6-tooltip', null, 3)).beTrue()
   })
 
   it('disable tooltip', async () => {
@@ -127,7 +127,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t7-no-tooltip')).beTrue()
+    expect(await runner.captureAndMatch('t7-no-tooltip', null, 3)).beTrue()
   })
 
   after(async () => {

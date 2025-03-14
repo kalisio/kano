@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -64,7 +64,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: select project with trace', async () => {
     await map.clickProject(page, userProjectsTab, 'project-with-trace')
-    const match = await runner.captureAndMatch('project-with-trace')
+    const match = await runner.captureAndMatch('project-with-trace', null, 3)
     expect(await core.elementExists(page, '#close-project')).beTrue()
     await core.clickOpener(page, 'right')
     expect(await core.elementExists(page, `#${userLayersTab}`)).beFalse()
@@ -83,7 +83,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: switch to project without trace', async () => {
     await map.switchProject(page, 'project-without-trace')
-    const match = await runner.captureAndMatch('project-without-trace')
+    const match = await runner.captureAndMatch('project-without-trace', null, 3)
     expect(await core.elementExists(page, '#close-project')).beTrue()
     await core.clickOpener(page, 'right')
     expect(await core.elementExists(page, `#${userLayersTab}`)).beFalse()

@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -41,7 +41,7 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneAction(page, 'top', 'toggle-globe')
     await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
     await page.waitForNetworkIdle()
-    expect(await runner.captureAndMatch('trace-on-ellipsoid')).beTrue()
+    expect(await runner.captureAndMatch('trace-on-ellipsoid', null, 3)).beTrue()
   }).timeout(30000)
 
   it('check terrain layer category', async () => {
@@ -62,7 +62,7 @@ describe(`suite:${suite}`, () => {
     }
     await core.clickOpener(page, 'right')
     await page.waitForNetworkIdle()
-    expect(await runner.captureAndMatch('trace-on-terrain')).beTrue()
+    expect(await runner.captureAndMatch('trace-on-terrain', null, 3)).beTrue()
   }).timeout(30000)
 
   it('remove layer', async () => {

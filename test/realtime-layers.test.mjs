@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -85,7 +85,7 @@ let polygon = [
 ]
 const coordinateOffset = 0.0005
 // Helper function to offset geometry depending on geometry type
-function offset (coordinates) {
+function offset(coordinates) {
   if (Array.isArray(coordinates[0])) {
     if (Array.isArray(coordinates[0][0])) {
       return coordinates.map(coordinates => coordinates.map(coordinates => coordinates.map(coordinate => coordinate + coordinateOffset)))
@@ -134,17 +134,17 @@ describe(`suite:${suite}`, () => {
 
   it('add point', async () => {
     point = await client.createGeoJsonFeature(layer._id, point, { properties: { id: 'point' } })
-    expect(await runner.captureAndMatch('add-point')).beTrue()
+    expect(await runner.captureAndMatch('add-point', null, 3)).beTrue()
   })
 
   it('add line', async () => {
     line = await client.createGeoJsonFeature(layer._id, line, { properties: { id: 'line' } })
-    expect(await runner.captureAndMatch('add-line')).beTrue()
+    expect(await runner.captureAndMatch('add-line', null, 3)).beTrue()
   })
 
   it('add polygon', async () => {
     polygon = await client.createGeoJsonFeature(layer._id, polygon, { properties: { id: 'polygon' } })
-    expect(await runner.captureAndMatch('add-polygon')).beTrue()
+    expect(await runner.captureAndMatch('add-polygon', null, 3)).beTrue()
   })
 
   it('edit point', async () => {
@@ -153,7 +153,7 @@ describe(`suite:${suite}`, () => {
       offset(point.geometry.coordinates),
       { style: { shape: 'circle', color: 'blue', size: [32, 32], stroke: { color: 'white', width: 1 }, icon: { classes: 'las la-home', color: 'white', size: 20 } } }
     )
-    expect(await runner.captureAndMatch('edit-point')).beTrue()
+    expect(await runner.captureAndMatch('edit-point', null, 3)).beTrue()
   })
 
   it('edit line', async () => {
@@ -162,7 +162,7 @@ describe(`suite:${suite}`, () => {
       offset(line.geometry.coordinates),
       { style: { color: 'blue', opacity: 0.5, width: 3, dashArray: '0 8 0' } }
     )
-    expect(await runner.captureAndMatch('edit-line')).beTrue()
+    expect(await runner.captureAndMatch('edit-line', null, 3)).beTrue()
   })
 
   it('edit polygon', async () => {
@@ -171,22 +171,22 @@ describe(`suite:${suite}`, () => {
       offset(polygon.geometry.coordinates),
       { style: { color: 'magenta', opacity: 0.5, stroke: { color: 'yellow', width: 3 } } }
     )
-    expect(await runner.captureAndMatch('edit-polygon')).beTrue()
+    expect(await runner.captureAndMatch('edit-polygon', null, 3)).beTrue()
   })
 
   it('remove point', async () => {
     point = await client.getService('features').remove(point._id)
-    expect(await runner.captureAndMatch('remove-point')).beTrue()
+    expect(await runner.captureAndMatch('remove-point', null, 3)).beTrue()
   })
 
   it('remove line', async () => {
     line = await client.getService('features').remove(line._id)
-    expect(await runner.captureAndMatch('remove-line')).beTrue()
+    expect(await runner.captureAndMatch('remove-line', null, 3)).beTrue()
   })
 
   it('remove polygon', async () => {
     polygon = await client.getService('features').remove(polygon._id)
-    expect(await runner.captureAndMatch('remove-polygon')).beTrue()
+    expect(await runner.captureAndMatch('remove-polygon', null, 3)).beTrue()
   })
 
   it('remove layer', async () => {

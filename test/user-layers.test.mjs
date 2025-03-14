@@ -31,56 +31,56 @@ describe(`suite:${suite}`, () => {
 
   it('user: drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
-    const match = await runner.captureAndMatch('flight')
+    const match = await runner.captureAndMatch('flight', null, 3)
     await map.clickLayer(page, userLayersTab, 'flight')
     expect(match).beTrue()
   })
 
   it('user: import geojson file with bbox', async () => {
     await map.importLayer(page, runner.getDataPath('landing.geojson'))
-    const match = await runner.captureAndMatch('landing')
+    const match = await runner.captureAndMatch('landing', null, 3)
     await map.clickLayer(page, userLayersTab, 'landing')
     expect(match).beTrue()
   })
 
   it('user: import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('departements.geojson'), 'code')
-    const match = await runner.captureAndMatch('departements')
+    const match = await runner.captureAndMatch('departements', null, 3)
     await map.clickLayer(page, userLayersTab, 'departements')
     expect(match).beTrue()
   })
 
   it('user: import kml file', async () => {
     await map.importLayer(page, runner.getDataPath('regions.kml'))
-    const match = await runner.captureAndMatch('regions')
+    const match = await runner.captureAndMatch('regions', null, 3)
     await map.clickLayer(page, userLayersTab, 'regions')
     expect(match).beTrue()
   })
 
   it('user: import gpx file', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
-    const match = await runner.captureAndMatch('trace')
+    const match = await runner.captureAndMatch('trace', null, 3)
     await map.clickLayer(page, userLayersTab, 'trace')
     expect(match).beTrue()
   })
 
   it('user: import shp file', async () => {
     await map.dropFile(page, runner.getDataPath('espaces-naturels.shp'))
-    const match = await runner.captureAndMatch('espaces-naturels')
+    const match = await runner.captureAndMatch('espaces-naturels', null, 3)
     await map.clickLayer(page, userLayersTab, 'espaces-naturels')
     expect(match).beTrue()
   })
 
   it('user: add polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('ariege.geojson'))
-    const match = await runner.captureAndMatch('polygon-mask')
+    const match = await runner.captureAndMatch('polygon-mask', null, 3)
     await map.removeLayer(page, userLayersTab, 'ariege')
     expect(match).beTrue()
   })
 
   it('user: add multi-polygon mask', async () => {
     await map.dropFile(page, runner.getDataPath('occitanie.geojson'))
-    const match = await runner.captureAndMatch('multi-polygon-mask')
+    const match = await runner.captureAndMatch('multi-polygon-mask', null, 3)
     await map.removeLayer(page, userLayersTab, 'occitanie')
     expect(match).beTrue()
   })
@@ -93,7 +93,7 @@ describe(`suite:${suite}`, () => {
     const layerId = 'litho-1-m-simplifiee'
     const layerName = 'Carte lithologique'
     await map.connectLayer(page, service, layerId, layerName)
-    const match = await runner.captureAndMatch(layerId)
+    const match = await runner.captureAndMatch(layerId, null, 3)
     await core.closeWindow(page, 'left')
     await map.clickLayer(page, userLayersTab, _.kebabCase('Carte lithologique simplifiée au 1/1 000 000'))
     expect(match).beTrue()
@@ -104,7 +104,7 @@ describe(`suite:${suite}`, () => {
     const layerId = 'bdcarto-v-5-region'
     const layerName = 'region'
     await map.connectLayer(page, service, layerId, layerName, 'code-insee')
-    const match = await runner.captureAndMatch(layerId)
+    const match = await runner.captureAndMatch(layerId, null, 3)
     await core.closeWindow(page, 'left')
     await map.clickLayer(page, userLayersTab, _.kebabCase('region'))
     expect(match).beTrue()
@@ -117,7 +117,7 @@ describe(`suite:${suite}`, () => {
     const layerId = 'ch-bakom-notruf-112-festnetz'
     const layerName = '112 Festnetz'
     await map.connectLayer(page, service, layerId, layerName)
-    const match = await runner.captureAndMatch(layerId)
+    const match = await runner.captureAndMatch(layerId, null, 3)
     await core.closeWindow(page, 'left')
     await map.clickLayer(page, userLayersTab, _.kebabCase('112 Festnetz'))
     expect(match).beTrue()

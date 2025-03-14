@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -54,13 +54,13 @@ describe(`suite:${suite}`, () => {
 
   it('user: restore andorra view', async () => {
     await map.clickView(page, userViewsTab, 'Andorra')
-    const match = await runner.captureAndMatch('andorra')
+    const match = await runner.captureAndMatch('andorra', null, 3)
     expect(match).beTrue()
   })
 
   it('user: restore toulouse view', async () => {
     await map.clickView(page, userViewsTab, 'Toulouse')
-    const match = await runner.captureAndMatch('toulouse')
+    const match = await runner.captureAndMatch('toulouse', null, 3)
     expect(match).beTrue()
   })
 

@@ -49,7 +49,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await core.clickPaneAction(page, 'top', 'accept')
     await page.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('t1-point')).beTrue()
+    expect(await runner.captureAndMatch('t1-point', null, 3)).beTrue()
   })
 
   it('edit point', async () => {
@@ -63,7 +63,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#a', 500)
     await core.type(page, '#number-field', '19aa09zz1978')
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('t2-form')
+    const match = await runner.captureAndMatch('t2-form', null, 3)
     await core.click(page, '#apply-button', 1500)
     expect(match).beTrue()
   })
@@ -71,7 +71,7 @@ describe(`suite:${suite}`, () => {
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
     await page.waitForTimeout(1500)
-    const match = await runner.captureAndMatch('t3-view-data')
+    const match = await runner.captureAndMatch('t3-view-data', null, 3)
     await core.click(page, '#close-button', 500)
     expect(match).beTrue()
   })

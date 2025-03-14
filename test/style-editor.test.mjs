@@ -1,4 +1,4 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
@@ -46,7 +46,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-maxzoom')
     await core.moveSlider(page, 'style-set-maxzoom', 'left', 5)
     await core.click(page, '#apply-button')
-    expect(await runner.captureAndMatch('S1_test1_line_min_max_zoom_z16_raw')).beTrue()
+    expect(await runner.captureAndMatch('S1_test1_line_min_max_zoom_z16_raw', null, 3)).beTrue()
   })
 
   it.skip('line: set width, color and opacity', async () => {
@@ -60,19 +60,19 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('S1_test2_line_styled_z16')).beTrue()
+    expect(await runner.captureAndMatch('S1_test2_line_styled_z16', null, 3)).beTrue()
   })
 
   it.skip('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 13)
     await page.waitForTimeout(4000)
-    expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13')).beTrue()
+    expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13', null, 3)).beTrue()
   })
 
   it.skip('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 17)
     await page.waitForTimeout(4000)
-    expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17')).beTrue()
+    expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17', null, 3)).beTrue()
   })
 
   it.skip('line: remove layer', async () => {
@@ -88,7 +88,7 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.30095, 1.95545)
     await map.zoomToLevel(page, 'mapActivity', 14)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test1_point_default_clustering')).beTrue()
+    expect(await runner.captureAndMatch('S2_test1_point_default_clustering', null, 3)).beTrue()
   })
 
   it.skip('point: disable clustering', async () => {
@@ -97,7 +97,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-toggle-clustering')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test2_point_no_clustering')).beTrue()
+    expect(await runner.captureAndMatch('S2_test2_point_no_clustering', null, 3)).beTrue()
   })
 
   it.skip('point: disable clustering and point styling', async () => {
@@ -117,7 +117,7 @@ describe(`suite:${suite}`, () => {
     await page.waitForTimeout(1000)
     await map.zoomToLevel(page, 'mapActivity', 16)
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom')).beTrue()
+    expect(await runner.captureAndMatch('S2_test3_point_style_clustering_by_zoom', null, 3)).beTrue()
   })
 
   it.skip('point: remove layer', async () => {
@@ -143,7 +143,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#done-button')
     await core.click(page, '#apply-button')
     await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('S3_test1_polygon_styling')).beTrue()
+    expect(await runner.captureAndMatch('S3_test1_polygon_styling', null, 3)).beTrue()
   })
 
   it.skip('polygon: remove layer', async () => {

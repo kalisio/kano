@@ -1,6 +1,6 @@
-import _ from 'lodash'
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
+import _ from 'lodash'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
@@ -41,10 +41,10 @@ describe(`suite:${suite}`, () => {
     const layers = ['OSM_DARK', 'OSMT_BRIGHT', 'IMAGERY', 'HYBRID', 'IGN_PLAN']
     for (const layer of layers) {
       await map.clickLayer(page, catalogLayersTab, layer)
-      expect(await runner.captureAndMatch(_.kebabCase(layer))).beTrue()
+      expect(await runner.captureAndMatch(_.kebabCase(layer), null, 3)).beTrue()
     }
     await map.clickLayer(page, catalogLayersTab, 'IGN_PLAN')
-    const match = await runner.captureAndMatch('empty')
+    const match = await runner.captureAndMatch('empty', null, 3)
     await map.clickLayer(page, catalogLayersTab, 'OSM_BRIGHT')
     expect(match).beTrue()
   }).timeout(60000)

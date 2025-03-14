@@ -1,7 +1,7 @@
+import chai, { expect, util } from 'chai'
+import chailint from 'chai-lint'
 import fs from 'fs-extra'
 import moment from 'moment'
-import chai, { util, expect } from 'chai'
-import chailint from 'chai-lint'
 
 import { core, map } from '@kalisio/kdk/test.client.js'
 
@@ -10,7 +10,7 @@ const catalogLayersTab = 'catalog-layers'
 // We set a pre-defined time to be able to compare images
 const now = moment('2023-06-01T09:00:00Z')
 
-function setTime (data) {
+function setTime(data) {
   const time = now.clone().utc()
   data.forEach(measure => {
     measure.time = time.toISOString()
@@ -65,7 +65,7 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'elevation-profile', 1000)
     await page.waitForNetworkIdle()
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('elevation-line')
+    const match = await runner.captureAndMatch('elevation-line', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -78,7 +78,7 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'mapillary-viewer', 1000)
     await page.waitForNetworkIdle()
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('mapillary-view')
+    const match = await runner.captureAndMatch('mapillary-view', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -99,7 +99,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('station-measurements')
+    const match = await runner.captureAndMatch('station-measurements', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -115,7 +115,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
     await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('mobile-measurements')
+    const match = await runner.captureAndMatch('mobile-measurements', null, 3)
     expect(match).beTrue()
   })
 
