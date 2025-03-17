@@ -804,7 +804,7 @@ module.exports = {
     },
     stickies: {
       content: [
-        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: false },
+        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: true, vertical: true },
         { id: 'attribution', position: 'bottom-right', offset: [80, 24], component: 'stickies/KAttribution', visible: true },
         { id: 'north-sticky', position: 'bottom-left', offset: [40, 24], component: 'stickies/KNorth', visible: false }
         // Only for example purpose
