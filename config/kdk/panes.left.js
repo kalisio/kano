@@ -107,7 +107,8 @@ module.exports = {
       icon: 'las la-sign-out-alt',
       label: 'layout.LOGOUT',
       route: {
-        name: 'logout', ...(provider && { params: { provider } })
+        name: 'logout',
+        ...(provider && { params: { provider } })
       },
       renderer: 'item'
     }, options)

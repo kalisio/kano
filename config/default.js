@@ -48,25 +48,9 @@ const TOP_PANE = (activity) => {
     content: {
       default: [
         { component: 'KProjectMenu' },
-        (activity === 'globe' ? {
-          id: 'toggle-map',
-          icon: 'las la-map',
-          tooltip: 'mixins.activity.TOGGLE_MAP',
-          route: {
-            name: 'map-activity',
-            params: { south: ':south', north: ':north', west: ':west', east: ':east' },
-            query: { project: ':project', layers: ':layers' }
-          }
-        } : {
-          id: 'toggle-globe',
-          icon: 'las la-globe',
-          tooltip: 'mixins.activity.TOGGLE_GLOBE',
-          route: {
-            name: 'globe-activity',
-            params: { south: ':south', north: ':north', west: ':west', east: ':east' },
-            query: { project: ':project', layers: ':layers' }
-          }
-        }),
+        (activity === 'globe' ? topPane.activityLink('map', 'las la-map', 'mixins.activity.TOGGLE_MAP', { south: ':south', north: ':north', west: ':west', east: ':east' }, { project: ':project', layers: ':layers' })
+          : topPane.activityLink('globe', 'las la-globe', 'mixins.activity.TOGGLE_GLOBE', { south: ':south', north: ':north', west: ':west', east: ':east' }, { project: ':project', layers: ':layers' })
+        ),
         helpers.verticalSeparator(),
         { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
         { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
@@ -107,22 +91,22 @@ const TOP_PANE = (activity) => {
         }] : [],
       ], 'display-position': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true },
+        helpers.verticalSeparator(),
         { component: 'KPositionIndicator' }
       ],
       'search-location': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true },
+        helpers.verticalSeparator(),
         { component: 'tools/KSearchTool', autofocus: true }
       ],
       'edit-layer-data': [
         { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
-        { component: 'QSeparator', vertical: true },
+        helpers.verticalSeparator(),
         { component: 'KLayerEditionToolbar' }
       ],
       'measure-tool': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-        { component: 'QSeparator', vertical: true },
+        helpers.verticalSeparator(),
         { component: 'KMeasureTool' }
       ]
     },

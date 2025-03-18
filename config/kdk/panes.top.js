@@ -1,12 +1,12 @@
 const helpers = require('./helpers.js')
 
 module.exports = {
-  activityLink: (name, icon, tooltip, params = null) => {
+  activityLink: (name, icon, tooltip, params = null, query = null) => {
     return {
       id: `${name}-activity-action`,
       icon,
       tooltip,
-      route: { name: `${name}-activity`, params }
+      route: { name: `${name}-activity`, params, query }
     }
   },
   activityStamp: (name, icon, label) => {
