@@ -1,3 +1,9 @@
+const helpers = require('./kdk/helpers.js')
+const topPane = require('./kdk/panes.top.js')
+const leftPane = require('./kdk/panes.left.js')
+const widgetsLeft = require('./kdk/widgets.left.js')
+const widgetsTop = require('./kdk/widgets.top.js')
+
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
@@ -22,150 +28,119 @@ const website = 'https://www.kalisio.com'
 const onlineHelp = 'https://kalisio.github.io/kano'
 const changelog = onlineHelp + '/history.html'
 
-// Common actions
-const toggleFullScreenAction = {
-  component: 'action/KToggleFullscreenAction',
-  id: 'toggle-fullscreen',
-  icon: 'las la-expand',
-  tooltip: 'mixins.activity.ENTER_FULLSCREEN',
-  toggle: { icon: 'las la-compress', tooltip: 'mixins.activity.EXIT_FULLSCREEN' }
-}
-
 // Left pane
-const leftPane = {
+const LEFT_PANE = {
   content: [
     { component: 'KLogo' },
-    { component: 'QSeparator' },
-    {
-      id: 'settings',
-      icon: 'las la-cog',
-      label: 'layout.SETTINGS',
-      renderer: 'item',
-      dialog: {
-        component: 'app/KSettings',
-        title: 'layout.SETTINGS',
-        cancelAction: 'CANCEL',
-        okAction: {
-          id: 'apply-settings', label: 'APPLY', handler: 'apply'
-        }
-      }
-    },
-    {
-      id: 'about',
-      icon: 'las la-info',
-      label: 'layout.ABOUT',
-      renderer: 'item',
-      dialog: {
-        component: 'app/KAbout', title: 'layout.ABOUT', okAction: 'CLOSE'
-      }
-    },
-    { id: 'online-help', icon: 'las la-book', label: 'layout.ONLINE_HELP', url: onlineHelp, renderer: 'item' },
-    {
-      id: 'contextual-help',
-      icon: 'las la-question-circle',
-      label: 'layout.CONTEXTUAL_HELP',
-      handler: { name: 'launchTour', params: ['home'] },
-      renderer: 'item'
-    },
-    { component: 'QSeparator' },
-    { id: 'logout', icon: 'las la-sign-out-alt', label: 'layout.LOGOUT', route: { name: 'logout' }, renderer: 'item' }
+    helpers.horizontalSeparator(),
+    leftPane.settings(),
+    leftPane.about(),
+    leftPane.onlineHelp({ url: onlineHelp }),
+    leftPane.contextualHelp(),
+    helpers.horizontalSeparator(),
+    leftPane.logout()
   ]
 }
 
-// left window
-const leftWidgets = [
-  {
-    id: 'legend-widget',
-    label: 'KLegend.LABEL',
-    icon: 'las la-list',
-    scrollable: true,
-    content: { component: 'legend/KLegend' }
-  },
-  {
-    id: 'selection-widget',
-    label: 'KFeaturesSelection.LABEL',
-    icon: 'las la-object-group',
-    scrollable: true,
-    content: { component: 'selection/KFeaturesSelection' }
-  },
-  {
-    id: 'style-manager',
-    label: 'KStyleManager.TITLE',
-    icon: 'las la-paint-brush',
-    scrollable: true,
-    content: { component: 'styles/KStyleManager' }
+// top pane
+const TOP_PANE = (activity) => {
+  return {
+    content: {
+      default: [
+        { component: 'KProjectMenu' },
+        (activity === 'globe' ? {
+          id: 'toggle-map',
+          icon: 'las la-map',
+          tooltip: 'mixins.activity.TOGGLE_MAP',
+          route: {
+            name: 'map-activity',
+            params: { south: ':south', north: ':north', west: ':west', east: ':east' },
+            query: { project: ':project', layers: ':layers' }
+          }
+        } : {
+          id: 'toggle-globe',
+          icon: 'las la-globe',
+          tooltip: 'mixins.activity.TOGGLE_GLOBE',
+          route: {
+            name: 'globe-activity',
+            params: { south: ':south', north: ':north', west: ':west', east: ':east' },
+            query: { project: ':project', layers: ':layers' }
+          }
+        }),
+        helpers.verticalSeparator(),
+        { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
+        { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
+        { id: 'zoom-separator', component: 'QSeparator', vertical: true },
+        topPane.locateUser(),
+        topPane.activeLocationSearchMode({ mode: `search-location` }),
+        {
+          id: 'tools',
+          component: 'menu/KMenu',
+          icon: 'las la-wrench',
+          tooltip: 'mixins.activity.TOOLS',
+          actionRenderer: 'item',
+          dense: true,
+          content: activity === 'map' ? [
+            topPane.activeMeasureToolMode({ mode: `measure-tool` }),
+            topPane.togglePosition(),
+            topPane.toggleLegend(),
+            topPane.toggleSelection(),
+            topPane.toggleStyleManager(),
+            // helpers.visible(topPane.toggleNorthArrow(), false),
+            helpers.horizontalSeparator(),
+            { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply' } } }
+          ] : activity === 'globe' ? [
+            topPane.togglePosition(),
+            topPane.toggleLegend(),
+            topPane.toggleSelection(),
+            topPane.toggleStyleManager(),
+            helpers.horizontalSeparator(),
+            topPane.toggleFullscreen()
+          ] : []
+        },
+        ...(activity === 'globe') ? [helpers.verticalSeparator(), {
+          id: 'toggle-vr',
+          icon: 'las la-vr-cardboard',
+          tooltip: 'mixins.activity.ENTER_VR',
+          toggle: { tooltip: 'mixins.activity.EXIT_VR' },
+          handler: { name: 'onToggleVr' }
+        }] : [],
+      ], 'display-position': [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true },
+        { component: 'KPositionIndicator' }
+      ],
+      'search-location': [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true },
+        { component: 'tools/KSearchTool', autofocus: true }
+      ],
+      'edit-layer-data': [
+        { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
+        { component: 'QSeparator', vertical: true },
+        { component: 'KLayerEditionToolbar' }
+      ],
+      'measure-tool': [
+        { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
+        { component: 'QSeparator', vertical: true },
+        { component: 'KMeasureTool' }
+      ]
+    },
+    // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
+    filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } },
+    mode: 'default'
   }
+}
+
+// left window
+const LEFT_WIDGETS = [
+  widgetsLeft.LEGEND,
+  widgetsLeft.FEATURES_SELECTION,
+  widgetsLeft.STYLE_MANAGER
 ]
 
 // top window
-const topWidgets = [{
-  id: 'information-box',
-  label: 'KInformationBox.LABEL',
-  icon: 'las la-digital-tachograph',
-  scrollable: true,
-  content: { component: 'widget/KInformationBox' },
-  header: [{
-    id: 'center-view',
-    icon: 'las la-eye',
-    tooltip: 'KInformationBox.CENTER_ON',
-    visible: 'hasFeature',
-    handler: 'onCenterOn'
-  }, {
-    id: 'copy-properties',
-    icon: 'las la-clipboard',
-    tooltip: 'KInformationBox.COPY_PROPERTIES',
-    visible: 'hasProperties',
-    handler: 'onCopyProperties'
-  }, {
-    id: 'export-feature',
-    icon: 'kdk:json.svg',
-    tooltip: 'KInformationBox.EXPORT_FEATURE',
-    visible: 'hasFeature',
-    handler: 'onExportFeature'
-  }]
-}, {
-  id: 'time-series',
-  label: 'TimeSeries.LABEL',
-  icon: 'las la-chart-line',
-  content: { component: 'TimeSeries' },
-  header: [{ component: 'TimeSeriesToolbar' }]
-}, {
-  id: 'elevation-profile',
-  label: 'KElevationProfile.LABEL',
-  icon: 'las la-mountain',
-  content: { component: 'widget/KElevationProfile' },
-  header: [{
-    id: 'center-view',
-    icon: 'las la-eye',
-    tooltip: 'KElevationProfile.CENTER_ON',
-    visible: 'hasFeature',
-    handler: 'onCenterOn'
-  }, {
-    id: 'copy-properties',
-    icon: 'las la-clipboard',
-    tooltip: 'KElevationProfile.COPY_PROFILE',
-    visible: 'hasProfile',
-    handler: 'onCopyProfile'
-  }, {
-    id: 'export-feature',
-    icon: 'kdk:json.svg',
-    tooltip: 'KElevationProfile.EXPORT_PROFILE',
-    visible: 'profile',
-    handler: 'onExportProfile'
-  }]
-}, {
-  id: 'mapillary-viewer',
-  label: 'KMapillaryViewer.LABEL',
-  icon: 'kdk:mapillary.png',
-  content: { component: 'widget/KMapillaryViewer' },
-  header: [{
-    id: 'center',
-    icon: 'las la-eye',
-    tooltip: 'KMapillaryViewer.CENTER_ON',
-    visible: 'hasImage',
-    handler: 'centerMap'
-  }]
-}]
+const TOP_WIDGETS = [widgetsTop.INFORMATION_BOX, widgetsTop.TIME_SERIES, widgetsTop.ELEVATION_PROFILE, widgetsTop.MAPILLARY_VIEWER]
 
 // Catalog panes
 const catalogPanes = {
@@ -723,76 +698,8 @@ module.exports = {
   mapActivity: {
     additionalMixins: [],
     padding: false,
-    topPane: {
-      content: {
-        default: [
-          { component: 'KProjectMenu' },
-          {
-            id: 'toggle-globe',
-            icon: 'las la-globe',
-            tooltip: 'mixins.activity.TOGGLE_GLOBE',
-            route: {
-              name: 'globe-activity',
-              params: { south: ':south', north: ':north', west: ':west', east: ':east' },
-              query: { project: ':project', layers: ':layers' }
-            }
-          },
-          { component: 'QSeparator', vertical: true },
-          { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
-          { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
-          { id: 'zoom-separator', component: 'QSeparator', vertical: true },
-          { id: 'locate-user', component: 'tools/KGeolocateTool' },
-          {
-            id: 'search-location',
-            icon: 'las la-search-location',
-            tooltip: 'mixins.activity.SEARCH_LOCATION',
-            handler: { name: 'setTopPaneMode', params: ['search-location'] }
-          },
-          {
-            id: 'tools',
-            component: 'menu/KMenu',
-            icon: 'las la-wrench',
-            tooltip: 'mixins.activity.TOOLS',
-            actionRenderer: 'item',
-            content: [
-              { id: 'measure-tool', icon: 'las la-ruler-combined', label: 'KMeasureTool.TOOL_BUTTON_LABEL', handler: { name: 'setTopPaneMode', params: ['measure-tool'] } },
-              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
-              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
-              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLES', handler: { name: 'openWidget', params: ['style-manager'] } },
-              { component: 'QSeparator' },
-              { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply' } } }
-            ]
-          },
-          { component: 'QSeparator', vertical: true, inset: true },
-          toggleFullScreenAction
-        ],
-        'display-position': [
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'KPositionIndicator' }
-        ],
-        'search-location': [
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'tools/KSearchTool', autofocus: true }
-        ],
-        'edit-layer-data': [
-          { id: 'accept', icon: 'las la-arrow-left', handler: { name: 'onEndLayerEdition', params: ['accept'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'KLayerEditionToolbar' }
-        ],
-        'measure-tool': [
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'KMeasureTool' }
-        ]
-      },
-      // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
-      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } },
-      mode: 'default'
-    },
-    leftPane: leftPane,
+    topPane: TOP_PANE('map'),
+    leftPane: LEFT_PANE,
     rightPane: {
       content: catalogPanes,
       mode: 'default'
@@ -845,8 +752,8 @@ module.exports = {
       ]
     },
     windows: {
-      left: { content: leftWidgets },
-      top: { content: topWidgets }
+      left: { content: LEFT_WIDGETS },
+      top: { content: TOP_WIDGETS }
     },
     layers: {
       actions: mapLayerActions
@@ -857,70 +764,8 @@ module.exports = {
   globeActivity: {
     additionalMixins: [],
     padding: false,
-    topPane: {
-      content: {
-        default: [
-          { component: 'KProjectMenu' },
-          {
-            id: 'toggle-map',
-            icon: 'las la-map',
-            tooltip: 'mixins.activity.TOGGLE_MAP',
-            route: {
-              name: 'map-activity',
-              params: { south: ':south', north: ':north', west: ':west', east: ':east' },
-              query: { project: ':project', layers: ':layers' }
-            }
-          },
-          { component: 'QSeparator', vertical: true },
-          { id: 'zoom-in', icon: 'add', tooltip: 'mixins.activity.ZOOM_IN', handler: { name: 'onZoomIn' } },
-          { id: 'zoom-out', icon: 'remove', tooltip: 'mixins.activity.ZOOM_OUT', handler: { name: 'onZoomOut' } },
-          { id: 'zoom-separator', component: 'QSeparator', vertical: true, inset: true },
-          { id: 'locate-user', component: 'tools/KGeolocateTool' },
-          {
-            id: 'search-location',
-            icon: 'las la-search-location',
-            tooltip: 'mixins.activity.SEARCH_LOCATION',
-            handler: { name: 'setTopPaneMode', params: ['search-location'] }
-          },
-          {
-            id: 'tools',
-            component: 'menu/KMenu',
-            icon: 'las la-wrench',
-            tooltip: 'mixins.activity.TOOLS',
-            actionRenderer: 'item',
-            content: [
-              { id: 'display-position', icon: 'las la-plus', label: 'mixins.activity.DISPLAY_POSITION', handler: { name: 'setTopPaneMode', params: ['display-position'] } },
-              { id: 'display-legend', icon: 'las la-list', label: 'mixins.activity.DISPLAY_LEGEND', handler: { name: 'openWidget', params: ['legend-widget'] } },
-              { id: 'display-selection', icon: 'las la-object-group', label: 'mixins.activity.DISPLAY_SELECTION', handler: { name: 'openWidget', params: ['selection-widget'] } },
-              { id: 'display-style-manager', icon: 'las la-paint-brush', label: 'mixins.activity.DISPLAY_STYLES', handler: { name: 'openWidget', params: ['style-manager'] } }
-            ]
-          },
-          { component: 'QSeparator', vertical: true, inset: true },
-          {
-            id: 'toggle-vr',
-            icon: 'las la-vr-cardboard',
-            tooltip: 'mixins.activity.ENTER_VR',
-            toggle: { tooltip: 'mixins.activity.EXIT_VR' },
-            handler: { name: 'onToggleVr' }
-          },
-          toggleFullScreenAction
-        ],
-        'display-position': [
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'KPositionIndicator' }
-        ],
-        'search-location': [
-          { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
-          { component: 'QSeparator', vertical: true },
-          { component: 'tools/KSearchTool', autofocus: true }
-        ]
-      },
-      // Hide zoom by default but keep it in config so that it can be easily shown by configuring the filter
-      filter: { id: { $nin: ['zoom-in', 'zoom-out', 'zoom-separator'] } },
-      mode: 'default'
-    },
-    leftPane: leftPane,
+    topPane: TOP_PANE('globe'),
+    leftPane: LEFT_PANE,
     rightPane: {
       content: catalogPanes,
       mode: 'default'
@@ -950,8 +795,8 @@ module.exports = {
       ]
     },
     windows: {
-      left: { content: leftWidgets },
-      top: { content: topWidgets }
+      left: { content: LEFT_WIDGETS },
+      top: { content: TOP_WIDGETS }
     },
     layers: {
       actions: globeLayerActions
