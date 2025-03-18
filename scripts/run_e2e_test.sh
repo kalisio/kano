@@ -10,8 +10,12 @@ ROOT_DIR=$(dirname "$THIS_DIR")
 
 . "$THIS_DIR/kash/kash.sh"
 
-## Run e2e tests
-##
+# We expect the following to be defined as environment variables:
+# - S3_BUCKET
+# - RCLONE_CONF
+# - SLACK_WEBHOOK
 
-# SLACK_WEBHOOK is set upon Kubernetes container startup
-run_e2e_tests "$ROOT_DIR" "$APP" "$SLACK_WEBHOOK"
+run_and_publish_e2e_tests_to_slack \
+    "$ROOT_DIR" "$APP" \
+    "$S3_BUCKET" "$RCLONE_CONF" \
+    "$SLACK_WEBHOOK"

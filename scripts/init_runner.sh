@@ -31,6 +31,12 @@ init_github_additional_tests() {
     install_reqs age sops nvm node22 mongo7
 }
 
+### e2e tests runner (dedicated container, outside any CI system)
+
+init__run_e2e_tests() {
+    install_reqs yq
+}
+
 begin_group "Init $CI_ID for $JOB_ID"
 
 init_"${CI_ID}_${JOB_ID}"
