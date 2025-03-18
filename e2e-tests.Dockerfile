@@ -17,6 +17,9 @@ ARG APP
 
 # Development environment setup
 WORKDIR /opt/kalisio/
+
+# Install git (because some dependencies are not available on npm)
+RUN apt-get update && apt-get install -y git
 RUN \
   cd /opt/kalisio/kdk && yarn && yarn link --link-folder /opt/kalisio/yarn-links && \
   cd /opt/kalisio/$APP && yarn && yarn link "@kalisio/kdk" --link-folder /opt/kalisio/yarn-links
