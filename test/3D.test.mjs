@@ -38,7 +38,7 @@ describe(`suite:${suite}`, () => {
   it('import data and switch to 3D mode', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
     await map.saveLayer(page, userLayersTab, 'trace')
-    await core.clickPaneAction(page, 'top', 'toggle-globe')
+    await core.clickPaneAction(page, 'top', 'globe-activity-action')
     await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
     await page.waitForNetworkIdle()
     expect(await runner.captureAndMatch('trace-on-ellipsoid', null, 3)).beTrue()
