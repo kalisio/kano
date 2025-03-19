@@ -129,7 +129,7 @@ const LEFT_WIDGETS = [
 const TOP_WIDGETS = [widgetsTop.INFORMATION_BOX, widgetsTop.TIME_SERIES, widgetsTop.ELEVATION_PROFILE, widgetsTop.MAPILLARY_VIEWER]
 
 const MAP_STICKIES = [
-  stickies.position(),
+  stickies.position({ offset: [0, 80] }),
   stickies.target(),
   stickies.northArrow({ visible: false }),
   stickies.attribution()
