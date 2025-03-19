@@ -3,6 +3,7 @@ const topPane = require('./kdk/panes.top.js')
 const leftPane = require('./kdk/panes.left.js')
 const widgetsLeft = require('./kdk/widgets.left.js')
 const widgetsTop = require('./kdk/widgets.top.js')
+const stickies = require('./kdk/stickies.js')
 
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
@@ -70,7 +71,7 @@ const TOP_PANE = (activity) => {
             topPane.toggleLegend(),
             topPane.toggleSelection(),
             topPane.toggleStyleManager(),
-            // helpers.visible(topPane.toggleNorthArrow(), false),
+            topPane.toggleNorthArrow(),
             helpers.horizontalSeparator(),
             { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply' } } }
           ] : activity === 'globe' ? [
@@ -126,6 +127,13 @@ const LEFT_WIDGETS = [
 
 // top window
 const TOP_WIDGETS = [widgetsTop.INFORMATION_BOX, widgetsTop.TIME_SERIES, widgetsTop.ELEVATION_PROFILE, widgetsTop.MAPILLARY_VIEWER]
+
+const MAP_STICKIES = [
+  stickies.position(),
+  stickies.target(),
+  stickies.northArrow({ visible: false }),
+  stickies.attribution()
+]
 
 // Catalog panes
 const catalogPanes = {
@@ -696,9 +704,8 @@ module.exports = {
     },
     stickies: {
       content: [
-        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: true, vertical: true },
-        { id: 'attribution', position: 'bottom-right', offset: [80, 24], component: 'stickies/KAttribution', visible: true },
-        { id: 'north-sticky', position: 'bottom-left', offset: [40, 24], component: 'stickies/KNorth', visible: false }
+        ...MAP_STICKIES,
+        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: true, vertical: true }
         // Only for example purpose
         // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
       ]
