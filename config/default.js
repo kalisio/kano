@@ -79,16 +79,17 @@ const TOP_PANE = (activity) => {
             topPane.toggleSelection(),
             topPane.toggleStyleManager(),
             helpers.horizontalSeparator(),
-            topPane.toggleFullscreen()
           ] : []
         },
-        ...(activity === 'globe') ? [helpers.verticalSeparator(), {
+        helpers.verticalSeparator(),
+        ...(activity === 'globe') ? [{
           id: 'toggle-vr',
           icon: 'las la-vr-cardboard',
           tooltip: 'mixins.activity.ENTER_VR',
           toggle: { tooltip: 'mixins.activity.EXIT_VR' },
           handler: { name: 'onToggleVr' }
         }] : [],
+        topPane.toggleFullscreen({ renderer: 'button' })
       ], 'display-position': [
         { id: 'back', icon: 'las la-arrow-left', handler: { name: 'setTopPaneMode', params: ['default'] } },
         helpers.verticalSeparator(),
