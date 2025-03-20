@@ -79,8 +79,7 @@ RUN mkdir -p /home/node/.config/rclone \
   && chmod -R 777 /home/node/.config/rclone
 
 # Make sure runner is properly setup
-WORKDIR /opt/kalisio/$APP/scripts
-RUN ./init_runner.sh run_e2e_tests
+RUN mkdir -p /home/node/.local/bin && /opt/kalisio/$APP/scripts/init_runner.sh run_e2e_tests
 
 # Run tests
 WORKDIR /opt/kalisio/$APP
