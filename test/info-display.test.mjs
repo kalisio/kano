@@ -21,7 +21,8 @@ describe(`suite:${suite}`, () => {
       user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()
