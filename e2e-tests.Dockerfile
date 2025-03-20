@@ -78,11 +78,6 @@ RUN mkdir -p /home/node/.config/rclone \
   && chown -R node:node /home/node/.config/rclone \
   && chmod -R 777 /home/node/.config/rclone
 
-# Create /home/node/.local/bin/cc-test-reporter and set the necessary permissions
-RUN mkdir -p /home/node/.local/bin/ \
-  && touch /home/node/.local/bin/cc-test-reporter \
-  && chmod 755 /home/node/.local/bin/cc-test-reporter
-
 # Make sure runner is properly setup
 WORKDIR /opt/kalisio/$APP/scripts
 RUN ./init_runner.sh run_e2e_tests
@@ -90,4 +85,4 @@ RUN ./init_runner.sh run_e2e_tests
 # Run tests
 WORKDIR /opt/kalisio/$APP
 ENV PATH="$PATH:/home/node/.local/bin"
-CMD ["bash", "-c", "/opt/kalisio/$APP/scripts/run_e2e_test.sh $APP"]
+CMD ["bash", "-c", "/opt/kalisio/$APP/scripts/run_e2e_tests.sh $APP"]
