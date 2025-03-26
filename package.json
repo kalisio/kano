@@ -179,7 +179,6 @@
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.0-beta.35",
     "vue-router": "^4.0.0",
-    "vue-slider-component": "next",
     "vue3-tour": "^0.3.3",
     "whatwg-fetch": "^2.0.3",
     "xml2js": "^0.4.23",
