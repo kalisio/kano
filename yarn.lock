@@ -14428,9 +14428,10 @@ leaflet-realtime@^2.2.0:
   resolved "https://registry.yarnpkg.com/leaflet-realtime/-/leaflet-realtime-2.2.0.tgz#d3e0c8631cbb9615bb07c457ab34902a62c91b80"
   integrity sha512-Z7xbUNdhvwngJUf3plG9Zw3SaGHzcOzi59tVS3jD0GcS6cOWbRNNfP2biwmtHbufM5VYTIWLATrQ4vrlGI23WA==
 
-"leaflet-rotate@https://github.com/rphlo/leaflet-rotate#touch-fix":
+leaflet-rotate@^0.2.8:
   version "0.2.8"
-  resolved "https://github.com/rphlo/leaflet-rotate#bb3e6d9e556c2e7505100a8bb282a9037bb37cf3"
+  resolved "https://registry.yarnpkg.com/leaflet-rotate/-/leaflet-rotate-0.2.8.tgz#41a2e6c33857af93944d1337a06c6c90cd6d9ba0"
+  integrity sha512-BHtkn35DuJ377yBNn/7XVuV0oIfwJtmqv/wFQ0Lvh7QuVCAD2wfCK0/m9oA3k/LVOnJG8VEGyf3Duf/wTVzeKQ==
 
 leaflet-timedimension@^1.1.0:
   version "1.1.1"
