@@ -239,14 +239,7 @@ module.exports = {
         name: 'User'
       }
     ],
-    disallowRegistration: true,
-    // Required for OAuth2 to work correctly
-    cookie: {
-      enabled: true,
-      name: 'kano-jwt',
-      httpOnly: false,
-      secure: (process.env.NODE_ENV !== 'development')
-    }
+    disallowRegistration: true
   },
   authorisation: {
     cache: {
