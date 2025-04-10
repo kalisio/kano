@@ -178,19 +178,15 @@ export default {
         if (!okForward) continue
 
         const handler = (options, event) => {
-          const latlng = _.get(event, 'latlng')
-          const altitude = _.get(event, 'altitude')
-
           const pickedPosition = _.get(event, 'pickedPosition')
-          const feature = _.get(event, 'target.feature')
           // Retrieve original layer options not processed ones
           // as they can include internal objects not to be serialized
           const layer = (options ? this.getLayerByName(options.name) : undefined)
           const payload = Object.assign({
-            longitude: latlng.lng,
-            latitude: latlng.lat,
-            altitude,
-            feature,
+            longitude: _.get(event, 'latlng.lng'),
+            latitude: _.get(event, 'latlng.lat'),
+            altitude: _.get(event, 'altitude'),
+            feature: _.get(event, 'target.feature'),
             layer
           }, pickedPosition)
 
