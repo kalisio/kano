@@ -151,23 +151,61 @@ export default {
         Layout.setWindowVisible('top', false)
       }
     },
-    async onClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const pickedPosition = _.get(event, 'pickedPosition')
-      const feature = _.get(event, 'target.feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('click', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
+    forwardLayerEvents (layerEvents) {
+      if (!_.has(this, 'layerHandlers')) this.layerHandlers = {}
+
+      for (const layerEvent of layerEvents) {
+        const handler = this.generateHandlerForLayerEvent(layerEvent)
+        this.layerHandlers[layerEvent] = handler
+        this.$engineEvents.on(layerEvent, handler)
+      }
     },
-    async onDblClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const pickedPosition = _.get(event, 'pickedPosition')
-      const feature = _.get(event, 'target.feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('dblclick', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
+    removeForwardedLayerEvents () {
+      for (const layerEvent in this.layerHandlers) {
+        this.$engineEvents.off(layerEvent, this.layerHandlers[layerEvent])
+      }
+      this.layerHandlers = {}
+    },
+    forwardCesiumEvents (cesiumEvents) {
+      if (!_.has(this, 'cesiumHandlers')) this.cesiumHandlers = {}
+
+      const options = this.activityOptions
+      const defaultCesiumEvents = ['click', 'dblclick']
+      for (const cesiumEvent of cesiumEvents) {
+        let okForward = (defaultCesiumEvents.indexOf(cesiumEvent) !== -1)
+        if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(cesiumEvent) !== -1)
+        if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(cesiumEvent) === -1)
+        if (!okForward) continue
+
+        const handler = (options, event) => {
+          const latlng = _.get(event, 'latlng')
+          const altitude = _.get(event, 'altitude')
+
+          const pickedPosition = _.get(event, 'pickedPosition')
+          const feature = _.get(event, 'target.feature')
+          // Retrieve original layer options not processed ones
+          // as they can include internal objects not to be serialized
+          const layer = (options ? this.getLayerByName(options.name) : undefined)
+          const payload = Object.assign({
+            longitude: latlng.lng,
+            latitude: latlng.lat,
+            altitude,
+            feature,
+            layer
+          }, pickedPosition)
+
+          utils.sendEmbedEvent(cesiumEvent, payload)
+        }
+
+        this.cesiumHandlers[cesiumEvent] = handler
+        this.$engineEvents.on(cesiumEvent, handler)
+      }
+    },
+    removeForwardedCesiumEvents () {
+      for (const cesiumEvent in this.cesiumHandlers) {
+        this.$engineEvents.off(cesiumEvent, this.cesiumHandlers[cesiumEvent])
+      }
+      this.cesiumHandlers = {}
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -185,29 +223,16 @@ export default {
     this.setCurrentActivity(this)
   },
   mounted () {
-    this.$engineEvents.on('click', this.onClicked)
-    this.$engineEvents.on('dblclick', this.onDblClicked)
-    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
-    this.$engineEvents.on('layer-added', this.onAddedLayerEvent)
-    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
-    this.$engineEvents.on('layer-shown', this.onShownLayerEvent)
-    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
-    this.$engineEvents.on('layer-hidden', this.onHiddenLayerEvent)
-    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
-    this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
-    this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
-    this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
+    const allCesiumEvents = ['click', 'dblclick', 'movestart', 'moveend', 'move']
+    this.forwardCesiumEvents(allCesiumEvents)
+    const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
+    this.forwardLayerEvents(allLayerEvents)
     this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
     this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
   },
   beforeUnmount () {
-    this.$engineEvents.off('click', this.onClicked)
-    this.$engineEvents.off('dblclick', this.onDblClicked)
-    this.$engineEvents.off('layer-added', this.onAddedLayerEvent)
-    this.$engineEvents.off('layer-shown', this.onShownLayerEvent)
-    this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
-    this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
-    this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
+    this.removeForwardedCesiumEvents()
+    this.removeForwardedLayerEvents()
     this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
     this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
   },
