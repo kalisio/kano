@@ -102,9 +102,9 @@ export default {
       // Avoid reentrance during awaited operations
       if (!container || this.globeContainer) return
       this.globeContainer = container
-      const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
-      if (!token) return
+      if (!this.$store.get('capabilities.api')) return
+      const token = this.$store.get('capabilities.api.cesium.token')
       // Wait until viewer is ready
       await this.initializeGlobe(container, token)
       // Notify the listener
