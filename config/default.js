@@ -227,7 +227,13 @@ const mapLayerActions = [{
       label: 'mixins.activity.FILTER_DATA_LABEL',
       icon: 'las la-filter',
       visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      route: { name: 'map-layer-filter', params: { layerId: ':_id', layerName: ':name' } }
+      dialog: {
+        component: 'KFeaturesFilterManager',
+        layerId: ':_id',
+        layerName: ':name',
+        cancelAction: 'CANCEL',
+        okAction: { id: 'apply-edit-filter', label: 'APPLY', handler: 'apply' }
+      }
     },
     {
       id: 'view-layer-data',
@@ -411,7 +417,13 @@ const globeLayerActions = [{
       label: 'mixins.activity.FILTER_DATA_LABEL',
       icon: 'las la-filter',
       visible: ['isFeatureLayer', 'hasFeatureSchema'],
-      route: { name: 'globe-layer-filter', params: { layerId: ':_id', layerName: ':name' } }
+      dialog: {
+        component: 'KFeaturesFilterManager',
+        layerId: ':_id',
+        layerName: ':name',
+        cancelAction: 'CANCEL',
+        okAction: { id: 'apply-edit-filter', label: 'APPLY', handler: 'apply' }
+      }
     },
     {
       id: 'view-layer-data',
@@ -472,7 +484,8 @@ const globeEngine = {
     animation: false,
     timeline: false,
     creditContainer: 'globe-credit',
-    depthTestAgainstTerrain: true
+    depthTestAgainstTerrain: true,
+    cameraChangedEventPercentage: 0.2
   },
   fileLayers: {
     clearOnDrop: false,

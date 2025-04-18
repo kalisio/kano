@@ -63,19 +63,9 @@ module.exports = [{
               component: 'KFeaturesChart',
               props: true
             },
-            'layer-filter/:layerId?': {
-              name: 'map-layer-filter',
-              component: 'KFeaturesFilter',
-              props: true
-            },
             'layer-table/:layerId?': {
               name: 'map-layer-table',
               component: 'KFeaturesTable',
-              props: true
-            },
-            'edit-layer-style/:layerId?': {
-              name: 'edit-map-layer-style',
-              component: 'KLayerStyleEditor',
               props: true
             },
             'edit-layer-feature/:layerId?/:featureId': {
@@ -127,21 +117,11 @@ module.exports = [{
               component: 'KFeaturesChart',
               props: true
             },
-            'layer-filter/:layerId?': {
-              name: 'globe-layer-filter',
-              component: 'KFeaturesFilter',
-              props: true
-            },
             'layer-table/:layerId?': {
               name: 'globe-layer-table',
               component: 'KFeaturesTable',
               props: true
             },
-            'edit-layer-style/:layerId?': {
-              name: 'edit-globe-layer-style',
-              component: 'KLayerStyleEditor',
-              props: true
-            }
           }
         }
       }
