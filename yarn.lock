@@ -4300,7 +4300,7 @@
 
 "@kalisio/leaflet-pmtiles@https://github.com/kalisio/leaflet-pmtiles":
   version "0.0.1"
-  resolved "https://github.com/kalisio/leaflet-pmtiles#d977acdbb7e7d360273c0e6955b2c12f5bda0dc6"
+  resolved "https://github.com/kalisio/leaflet-pmtiles#53a65efd67a1db7b9e1df8010be9288f7a935686"
   dependencies:
     protomaps-leaflet "^3.1.1"
 
