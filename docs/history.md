@@ -4,6 +4,31 @@ sidebarDepth: 3
 
 # Changelog
 
+## v2.4.0 - Not yet released
+
+**Major enhancements:**\
+👉 New style manager for layer styling,\
+👉 New selection manager to launch actions on selected features,\
+👉 Application can now run offline with project data available in a zone,\
+👉 Keycloak provider can be easily added for OAuth,\
+👉 Import layer capabilities now available in globe,\
+👉 Enhanced style support when importing KML or GeoJson,\
+👉 Template context now available from iframe API,\
+👉 Allow to stop map event propagation from iframe API,\
+👉 More events emitted from iframe (touch events for map, move events for globe),\
+👉 Realtime layers targeting any service can now be created/removed dynamically,\
+👉 Automated focus on input controller when opening search tool,\
+👉 Layers targetting OGC Web Services can send an additional header for authentication,\
+👉 New position indicator,\
+👉 Specific actions available to edit features of a layer,\
+
+**Major bug fixes:**\
+✅ Map rotation using touch gesture can be costly,\
+✅ Per-project permissions were not working correctly,\
+✅ Globa activity cannot be initialized without a Cesium ion token.
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/13) and [KDK](https://github.com/kalisio/kdk/milestone/13).
+
 ## v2.3.0 - December 3rd, 2024
 
 **Major enhancements:**\
