@@ -20,7 +20,7 @@ sidebarDepth: 3
 👉 Automated focus on input controller when opening search tool,\
 👉 Layers targetting OGC Web Services can send an additional header for authentication,\
 👉 New position indicator,\
-👉 Specific actions available to edit features of a layer,\
+👉 Specific actions available to edit features of a layer.
 
 **Major bug fixes:**\
 ✅ Map rotation using touch gesture can be costly,\
