@@ -135,6 +135,12 @@ const MAP_STICKIES = [
   stickies.attribution()
 ]
 
+const GLOBE_STICKIES = [
+  stickies.position({ offset: [0, 80] }),
+  stickies.target(),
+  stickies.attribution()
+]
+
 // Catalog panes
 const catalogPanes = {
   default: [{
@@ -777,9 +783,7 @@ module.exports = {
       content: []
     },
     stickies: {
-      content: [
-        { id: 'attribution', position: 'bottom-right', offset: [80, 24], component: 'KAttribution' }
-      ]
+      content: GLOBE_STICKIES,
     },
     fab: {
       content: [
