@@ -66,20 +66,21 @@ const TOP_PANE = (activity) => {
           actionRenderer: 'item',
           dense: true,
           content: activity === 'map' ? [
-            topPane.activeMeasureToolMode({ mode: `measure-tool` }),
-            topPane.togglePosition(),
             topPane.toggleLegend(),
-            topPane.toggleSelection(),
-            topPane.toggleStyleManager(),
+            topPane.toggleSelectionManager(),
+            topPane.toggleStylesManager(),
+            helpers.horizontalSeparator(),
+            topPane.togglePosition(),
             topPane.toggleNorthArrow(),
             helpers.horizontalSeparator(),
-            { id: 'capture-map', icon: 'las la-camera', label: 'mixins.activity.CAPTURE_VIEW', dialog: { component: 'KCapture', title: 'mixins.activity.CAPTURE_VIEW', cancelAction: 'CANCEL', okAction: { id: 'capture-button', label: 'mixins.activity.CAPTURE_VIEW', handler: 'apply' } } }
+            topPane.activeMeasureToolMode({ mode: `measure-tool` }),
+            topPane.printTool()
           ] : activity === 'globe' ? [
+            topPane.toggleSelectionManager(),
+            topPane.toggleStylesManager(),
+            helpers.horizontalSeparator(),
             topPane.togglePosition(),
             topPane.toggleLegend(),
-            topPane.toggleSelection(),
-            topPane.toggleStyleManager(),
-            helpers.horizontalSeparator(),
           ] : []
         },
         helpers.verticalSeparator(),
