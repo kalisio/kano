@@ -133,6 +133,7 @@ const MAP_STICKIES = [
   stickies.position({ offset: [0, 80] }),
   stickies.target(),
   stickies.northArrow({ visible: false }),
+  stickies.levelSlider(),
   stickies.attribution()
 ]
 
@@ -718,7 +719,6 @@ module.exports = {
     stickies: {
       content: [
         ...MAP_STICKIES,
-        { id: 'level-slider', position: 'right', offset: [40, 0], component: 'stickies/KLevelSlider', visible: true, vertical: true }
         // Only for example purpose
         // { id: 'site-seeker', position: 'bottom-right', offset: [16, 16], component: 'SiteSeeker' }
       ]
