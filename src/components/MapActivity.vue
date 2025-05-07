@@ -249,6 +249,24 @@ export default {
       for (const layerEvent in this.layerHandlers) { this.$engineEvents.off(layerEvent, this.layerHandlers[layerEvent]) }
       this.layerHandlers = {}
     },
+    forwardPaneEvents (paneEvents) {
+      if (!_.has(this, 'paneHandlers')) { this.paneHandlers = {} }
+
+      for (const paneEvent of paneEvents) {
+        const handler = (pane) => {
+          // Take care to not serialize internal Leaflet structures that might contain circular references
+          utils.sendEmbedEvent(paneEvent, {
+            pane
+          })
+        }
+        this.paneHandlers[paneEvent] = handler
+        this.$engineEvents.on(paneEvent, handler)
+      }
+    },
+    removeForwardedPaneEvents () {
+      for (const paneEvent in this.paneHandlers) { this.$engineEvents.off(paneEvent, this.paneHandlers[paneEvent]) }
+      this.paneHandlers = {}
+    },
     forwardLeafletEvents (leafletEvents) {
       if (!_.has(this, 'leafletHandlers')) { this.leafletHandlers = {} }
 
@@ -332,6 +350,8 @@ export default {
     this.forwardLeafletEvents(allLeafletEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
+    const allPaneEvents = ['pane-added', 'pane-shown', 'pane-hidden', 'pane-removed']
+    this.forwardPaneEvents(allPaneEvents)
     this.$engineEvents.on('edit-start', this.onEditStartEvent)
     this.$engineEvents.on('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
@@ -348,6 +368,7 @@ export default {
     // Remove event connections
     this.removeForwardedLeafletEvents()
     this.removeForwardedLayerEvents()
+    this.removeForwardedPaneEvents()
     this.$engineEvents.off('edit-start', this.onEditStartEvent)
     this.$engineEvents.off('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
