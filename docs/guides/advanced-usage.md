@@ -106,7 +106,7 @@ The following ones are related to Kano states:
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
 * `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
 
-The following ones are related to layers management:
+The following ones are related to layers management with the layer definition as `layer` payload property:
 * `layer-add` whenever a new layer will be added to the 2D/3D map
 * `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
 * `layer-removed` whenever a layer has been removed from the 2D/3D map
@@ -114,6 +114,12 @@ The following ones are related to layers management:
 * `layer-hidden` whenever a new layer has been hidden in the 2D/3D map
 * `layer-update` whenever a real-time GeoJson layer will be updated in the 2D/3D map
 * `layer-updated` whenever a real-time GeoJson layer has been updated in the 2D/3D map
+
+The following ones are related to 2D panes management with the pane name as `pane` payload property:
+* `pane-added` whenever a new pane has been added to the 2D map (from the internal catalog or externally)
+* `pane-removed` whenever a pane has been removed from the 2D map
+* `pane-shown` whenever a pane has been shown in the 2D map
+* `pane-hidden` whenever a new pane has been hidden in the 2D map
 
 The `layer-add` and `layer-update` events are particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
 ```js
