@@ -462,9 +462,9 @@ const globeLayerActions = [{
     {
       id: 'remove-layer',
       label: 'mixins.activity.REMOVE_LABEL',
-      icon: 'las la-minus-circle',
+      icon: 'las la-trash',
       handler: 'onRemoveLayer',
-      visible: ['isLayerRemovable', { name: '$can', params: ['remove', 'catalog'] }]
+      visible: 'isLayerRemovable'
     }
   ]
 }]
