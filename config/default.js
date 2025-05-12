@@ -452,13 +452,7 @@ const globeLayerActions = [{
         okAction: { id: 'apply-edit-layer', label: 'APPLY', handler: 'apply' }
       }
     },
-    {
-      id: 'edit-layer-style',
-      label: 'mixins.activity.EDIT_LAYER_STYLE_LABEL',
-      icon: 'las la-border-style',
-      visible: 'isLayerStyleEditable',
-      route: { name: 'edit-globe-layer-style', params: { layerId: ':_id', layerName: ':name' } }
-    },
+    { id: 'reset-layer-style', label: 'mixins.activity.RESET_LAYER_STYLE_LABEL', icon: 'las la-ban', handler: 'onResetLayerStyle', visible: 'isLayerStyleEditable' },
     {
       id: 'remove-layer',
       label: 'mixins.activity.REMOVE_LABEL',
