@@ -33,12 +33,13 @@ const changelog = onlineHelp + '/history.html'
 const LEFT_PANE = {
   content: [
     { component: 'KLogo' },
-    { component: 'account/KProfile', manageable: false, editable: false, avatar: false, class: 'bg-grey-3' },
+    helpers.horizontalSeparator(),
+    { component: 'account/KProfile', manageable: false, editable: false, avatar: false, class: 'bg-grey-2' },
     helpers.horizontalSeparator(),
     leftPane.settings(),
-    leftPane.about(),
     leftPane.onlineHelp({ url: onlineHelp }),
     leftPane.contextualHelp(),
+    leftPane.about(),
     helpers.horizontalSeparator(),
     leftPane.logout()
   ]
