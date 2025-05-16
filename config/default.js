@@ -236,7 +236,7 @@ const mapLayerActions = [{
       id: 'filter-layer-data',
       label: 'mixins.activity.FILTER_DATA_LABEL',
       icon: 'las la-filter',
-      visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      visible: 'isLayerFilterEditable',
       dialog: {
         component: 'KFeaturesFilterManager',
         layerId: ':_id',
@@ -419,7 +419,7 @@ const globeLayerActions = [{
       id: 'filter-layer-data',
       label: 'mixins.activity.FILTER_DATA_LABEL',
       icon: 'las la-filter',
-      visible: ['isFeatureLayer', 'hasFeatureSchema'],
+      visible: 'isLayerFilterEditable',
       dialog: {
         component: 'KFeaturesFilterManager',
         layerId: ':_id',
