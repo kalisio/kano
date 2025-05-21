@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Changelog
 
-## v2.4.0 - Not yet released
+## v2.4.0 - May 21th, 2025
 
 **Major enhancements:**\
 👉 New style manager for layer styling,\
