@@ -18,7 +18,7 @@ describe(`suite:${suite}`, () => {
       localStorage: {
         'kano-welcome': false,
         'kano-install': false
-      },
+      }
     })
     page = await runner.start()
     await core.login(page, user)

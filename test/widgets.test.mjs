@@ -10,7 +10,7 @@ const catalogLayersTab = 'catalog-layers'
 // We set a pre-defined time to be able to compare images
 const now = moment('2023-06-01T09:00:00Z')
 
-function setTime(data) {
+function setTime (data) {
   const time = now.clone().utc()
   data.forEach(measure => {
     measure.time = time.toISOString()

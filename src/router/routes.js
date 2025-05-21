@@ -121,7 +121,7 @@ module.exports = [{
               name: 'globe-layer-table',
               component: 'KFeaturesTable',
               props: true
-            },
+            }
           }
         }
       }
