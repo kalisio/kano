@@ -2,23 +2,25 @@ const navigationBar = require('./map/navigation-bar')
 
 module.exports = [
   navigationBar.toggleMap(),
-  navigationBar.toggleGlobe(),
+  navigationBar.toggleGlobe({ target: '#globe-activity-action' }),
   navigationBar.zoomIn(),
   navigationBar.locateUser(),
   navigationBar.searchLocation(),
   navigationBar.searchTool(),
-  navigationBar.restoreDefault(),
+  navigationBar.restoreDefault({
+    target: '#back',
+    params: {
+      placement: 'bottom',
+      clickOnNext: '#back',
+      nextDelay: 500
+    }
+  }),
   navigationBar.tools(),
   navigationBar.togglePosition(),
   navigationBar.positionIndicator(),
   navigationBar.copyPosition(),
-  navigationBar.restoreDefault({
-    params: {
-      placement: 'bottom',
-      clickOnNext: ['#back', '#restore-default', '#tools'],
-      nextDelay: 500
-    }
-  }),
+  navigationBar.closePosition(),
+  navigationBar.toggleNorthArrow({ params: { clickOnNext: '#tools' } }),
   navigationBar.measureTool(),
   navigationBar.measureDistance(),
   navigationBar.measureArea(),
@@ -26,9 +28,10 @@ module.exports = [
   navigationBar.measureCircle(),
   navigationBar.clearMeasurements(),
   navigationBar.restoreDefault({
+    target: '#back',
     params: {
       placement: 'bottom',
-      clickOnNext: ['#back', '#restore-default', '#tools'],
+      clickOnNext: '#back',
       nextDelay: 500
     }
   }),
