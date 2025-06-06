@@ -149,10 +149,6 @@ export default {
       const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
     },
-    setBearing (bearing) {
-      kMapMixins.map.baseMap.methods.setBearing.call(this, bearing)
-      TemplateContext.set('bearing', bearing)
-    },
     handleWidget (widget) {
       // If window already open on another widget keep it
       if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
@@ -228,6 +224,9 @@ export default {
     onPaneVisibleEvent (placement, pane) {
       const eventName = pane.visible ? 'pane-opened' : 'pane-closed'
       utils.sendEmbedEvent(eventName, { placement })
+    },
+    onUpdateBearing () {
+      TemplateContext.set('bearing', this.map.getBearing())
     },
     forwardLayerEvents (layerEvents) {
       if (!_.has(this, 'layerHandlers')) { this.layerHandlers = {} }
@@ -358,6 +357,7 @@ export default {
     this.$engineEvents.on('moveend', this.onMoveEnd)
     this.$engineEvents.on('forecast-model-changed', this.updateSelection)
     this.$engineEvents.on('selected-level-changed', this.updateSelection)
+    this.$engineEvents.on('rotate', this.onUpdateBearing)
     // We use debounce here to avoid multiple refresh when editing settings for instance
     this.requestTimeSeriesUpdate = _.debounce(this.updateTimeSeries, 250)
     this.$events.on('timeseries-group-by-changed', this.requestTimeSeriesUpdate)
@@ -375,6 +375,7 @@ export default {
     this.$engineEvents.off('moveend', this.onMoveEnd)
     this.$engineEvents.off('forecast-model-changed', this.updateSelection)
     this.$engineEvents.off('selected-level-changed', this.updateSelection)
+    this.$engineEvents.off('rotate', this.onUpdateBearing)
     this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
     this.$events.off('units-changed', this.requestTimeSeriesUpdate)
     this.$events.off('time-current-time-changed', this.requestTimeSeriesUpdate)
