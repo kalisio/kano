@@ -173,7 +173,7 @@ for all touch points in [`touches`](https://developer.mozilla.org/en-US/docs/Web
 and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) arrays relating to the same original touch event properties.
 :::
 
-By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
+By default only `layer-added`, `layer-shown`, `layer-hidden`, `layer-removed`, `pane-added`, `pane-shown`, `pane-hidden`, `pane-removed`, `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
 ```js
 postRobot.send(kano, 'setConfiguration', {
   // Allow more events to be emitted
@@ -202,7 +202,7 @@ A feature can be tagged to stop events propagation, either [immediate](https://d
     style: { stopImmediatePropagation: ['mousedown', 'touchmove'] }
 }
 ```
-This can be used to e.g. prevent the map to be dragged when touching a specific fetaure. 
+This can be used to e.g. prevent the map to be dragged when touching a specific feature. 
 :::
 
 The following events are related to geometry editing:
@@ -233,6 +233,13 @@ The following events are related to [map state changes](https://leafletjs.com/re
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations,
 * `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload).
+
+::: tip
+When using animations with `center()` or `updateLayer()` a large number of map state change events can be sent, which can overflow the embedding application. Similarly, user interaction events during a drag or mouse move can be numerous. For this reason, these events are subject to a limitation and are sent no more than every configured number of milliseconds (i.e. throttle) in the activity configuration object `eventsThrottle`:
+* `state` throttle value for map state change events,
+* `mouse` throttle value for map mouse interaction events,
+* `touch` throttle value for map touch interaction events.
+:::
 
 ### Backend events
 
