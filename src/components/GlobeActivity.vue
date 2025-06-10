@@ -116,16 +116,23 @@ export default {
     },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
-      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
-      // Do not erase with returned object as some internals might have been lost in serialization
-      if (response && response.data) _.merge(layer, response.data)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-add') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-add', utils.serializeLayerForEmbedEvent(layer))
+        // Do not erase with returned object as some internals might have been lost in serialization
+        if (response && response.data) _.merge(layer, response.data)
+      }
       layer = await kMapMixins.globe.baseGlobe.methods.addLayer.call(this, layer)
       return layer
     },
     async updateLayer (name, geoJson, options = {}) {
       // We let any embedding iframe process features if required
-      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
-      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-update') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+        if (response && response.data) geoJson = response.data
+      }
+      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
     },
     handleWidget (widget) {
       // If window already open on another widget keep it
@@ -187,7 +194,7 @@ export default {
             latitude: _.get(event, 'latlng.lat'),
             altitude: _.get(event, 'altitude'),
             feature: _.get(event, 'target.feature'),
-            layer
+            layer: utils.serializeLayerForEmbedEvent(layer),
           }, pickedPosition)
 
           utils.sendEmbedEvent(cesiumEvent, payload)
