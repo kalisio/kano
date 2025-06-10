@@ -103,11 +103,22 @@ function setupEmbedApi (routeName, component) {
   if (routeName.endsWith('-activity')) postRobot.on(routeName.replace('-activity', ''), listener)
 }
 
+export function serializeLayerForEmbedEvent (layer) {
+  if (!layer) return
+  // Take care to not serialize unecessary data and that post-robot serializes functions
+  // Take care to not serialize internal Leaflet structures that might contain circular references
+  return Object.assign(_.omit(layer, ['leaflet', 'getPlanetApi', 'actions']), {
+    leaflet: (layer.leaflet ? _.mapValues(layer.leaflet, value => (typeof value === 'function') || (value instanceof L.Class) ? undefined : value) : undefined)
+  })
+}
+
 export async function sendEmbedEvent (...args) {
   // Will fail if not integrated as iframe so check
   if (window.parent !== window) {
     // If no listener post-robot raises an error
     try {
+      // For debug purpose only, avoid flooding the browser
+      //logger.debug('Sending embed event with', ...args)
       const response = await postRobot.send(window.parent, ...args)
       return response
     } catch (error) {

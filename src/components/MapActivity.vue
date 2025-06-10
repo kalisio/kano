@@ -137,17 +137,28 @@ export default {
     },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
-      // Take care that post-robot serialize functions
-      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
-      // Do not erase with returned object as some internals might have been lost in serialization
-      if (response && response.data) _.merge(layer, response.data)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-add') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-add', utils.serializeLayerForEmbedEvent(layer))
+        // Do not erase with returned object as some internals might have been lost in serialization
+        if (response && response.data) _.merge(layer, response.data)
+      }
       layer = await kMapMixins.map.baseMap.methods.addLayer.call(this, layer)
       return layer
     },
     async updateLayer (name, geoJson, options = {}) {
       // We let any embedding iframe process features if required
-      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
-      await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-update') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+        if (response && response.data) geoJson = response.data
+      }
+      await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
+    },
+    onLayerUpdated (layer, leafletLayer, data) {
+      // Do not send update event at each frame for animated layers
+      if (_.has(this.updateAnimations, `${layer.name}.id`)) return
+      kMapMixins.map.geojsonLayers.methods.onLayerUpdated.call(this, layer, leafletLayer, data)
     },
     handleWidget (widget) {
       // If window already open on another widget keep it
@@ -232,13 +243,16 @@ export default {
       if (!_.has(this, 'layerHandlers')) { this.layerHandlers = {} }
 
       for (const layerEvent of layerEvents) {
+        // Event may be disabled by config
+        const options = this.activityOptions
+        const defaultLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed']
+        let okForward = (defaultLayerEvents.indexOf(layerEvent) !== -1)
+        if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(layerEvent) !== -1)
+        if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(layerEvent) === -1)
+        if (!okForward) continue
+
         const handler = (layer) => {
-          // Take care to not serialize internal Leaflet structures that might contain circular references
-          utils.sendEmbedEvent(layerEvent, {
-            layer: Object.assign(_.omit(layer, ['leaflet']), {
-              leaflet: _.mapValues(layer.leaflet, value => (value instanceof L.Class) ? null : value)
-            })
-          })
+          utils.sendEmbedEvent(layerEvent, { layer: utils.serializeLayerForEmbedEvent(layer) })
         }
         this.layerHandlers[layerEvent] = handler
         this.$engineEvents.on(layerEvent, handler)
@@ -252,11 +266,16 @@ export default {
       if (!_.has(this, 'paneHandlers')) { this.paneHandlers = {} }
 
       for (const paneEvent of paneEvents) {
+        // Event may be disabled by config
+        const options = this.activityOptions
+        const defaultPaneEvents = ['pane-added', 'pane-shown', 'pane-hidden', 'pane-removed']
+        let okForward = (defaultPaneEvents.indexOf(paneEvent) !== -1)
+        if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(paneEvent) !== -1)
+        if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(paneEvent) === -1)
+        if (!okForward) continue
+
         const handler = (pane) => {
-          // Take care to not serialize internal Leaflet structures that might contain circular references
-          utils.sendEmbedEvent(paneEvent, {
-            pane
-          })
+          utils.sendEmbedEvent(paneEvent, { pane })
         }
         this.paneHandlers[paneEvent] = handler
         this.$engineEvents.on(paneEvent, handler)
@@ -277,8 +296,19 @@ export default {
         if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(leafletEvent) !== -1)
         if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(leafletEvent) === -1)
         if (!okForward) continue
+        const isMoveEvent = leafletEvent.startsWith('move')
+        const isZoomEvent = leafletEvent.startsWith('zoom')
+        const isRotateEvent = (leafletEvent === 'rotate')
+        const isStateEvent = (isMoveEvent || isZoomEvent || isRotateEvent)
+        const isMouseEvent = leafletEvent.startsWith('mouse') || leafletEvent.startsWith('drag')
+        const isTouchEvent = leafletEvent.startsWith('touch')
+        const hasThrottle = (isStateEvent || isMouseEvent || isTouchEvent)
+        const throttle = (isStateEvent ?
+          _.get(this.activityOptions, 'eventsThrottle.state', 1000) : isMouseEvent ?
+          _.get(this.activityOptions, 'eventsThrottle.mouse', 1000) :
+          _.get(this.activityOptions, 'eventsThrottle.touch', 1000))
 
-        const handler = (options, event) => {
+        let handler = (options, event) => {
           let latlng = _.get(event, 'latlng')
           // For some events like marker drag we get the new position fro mthe target
           if (!latlng && _.has(event, 'target') && (typeof event.target.getLatLng === 'function')) latlng = event.target.getLatLng()
@@ -290,11 +320,11 @@ export default {
             longitude: _.get(latlng, 'lng'),
             latitude: _.get(latlng, 'lat'),
             feature,
-            layer,
+            layer: utils.serializeLayerForEmbedEvent(layer),
             containerPoint: _.get(event, 'containerPoint'),
             layerPoint: _.get(event, 'layerPoint')
           }
-          if (leafletEvent === 'rotate') {
+          if (isRotateEvent) {
             payload.bearing = this.getBearing()
           }
           // Check if we need to stop propagation, should be done before sending event to postrobot
@@ -308,6 +338,9 @@ export default {
           })
           utils.sendEmbedEvent(leafletEvent, payload)
         }
+        // Some events might be numerous, notably when using animations,
+        // as a consequence we only trigger it as a configured throttle
+        handler = (hasThrottle ? _.throttle(handler, throttle) : handler)
         this.leafletHandlers[leafletEvent] = handler
         this.$engineEvents.on(leafletEvent, handler)
       }
