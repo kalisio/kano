@@ -6,6 +6,12 @@ sidebarDepth: 3
 
 ## v2.5.0 - Not yet released
 
+**Major breaking changes for customized versions or iframe integration use cases:**\
+💥 some events are [not emitted anymore](https://kalisio.github.io/kano/guides/advanced-usage.html#frontend-events) by default in iframe,\
+💥 some events are now emitted with a [limited frequency](https://kalisio.github.io/kano/guides/advanced-usage.html#frontend-events).
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/14) and [KDK](https://github.com/kalisio/kdk/milestone/14).
+
 ## v2.4.0 - May 21th, 2025
 
 **Major enhancements:**\
@@ -27,7 +33,7 @@ sidebarDepth: 3
 **Major bug fixes:**\
 ✅ Map rotation using touch gesture can be costly,\
 ✅ Per-project permissions were not working correctly,\
-✅ Globa activity cannot be initialized without a Cesium ion token.
+✅ Globe activity cannot be initialized without a Cesium ion token.
 
 More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/13) and [KDK](https://github.com/kalisio/kdk/milestone/13).
 
