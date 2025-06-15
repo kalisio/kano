@@ -72,7 +72,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
               label: 'Legend.AWC_METARS_OBSERVATION' 
             }
           ],
-          symobology: [
+          symbology: [
             { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#666666', radius: 10, icon: { classes: 'fa fa-sun', color: '#FE9929' } } } },
               label: 'Legend.AWC_METARS_CLOUDCOVER_CAVOK' 
             },
