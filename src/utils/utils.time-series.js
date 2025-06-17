@@ -70,7 +70,7 @@ export async function updateTimeSeries (previousTimeSeries) {
   // Weather probe targets variables coming from multiple layers
   const forecastLayers = _.values(activity.layers).filter(sift({ tags: ['weather', 'forecast'] }))
   const featureLevel = activity.selectableLevelsLayer ? ` - ${activity.selectedLevel} ${activity.selectableLevels.unit}` : ''
-  const forecastLevel = activity.forecastLevel ? ` - ${activity.forecastLevel} ${activity.forecastLevels.unit}` : ''
+  const forecastLevel = activity.forecastLevel ? ` - ${activity.forecastLevel} ${activity.selectableLevels.unit}` : ''
 
   let timeSeries = []
   if (hasProbedLocation()) {
