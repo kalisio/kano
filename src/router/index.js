@@ -3,7 +3,7 @@ import { createRouter, createMemoryHistory, createWebHistory, createWebHashHisto
 import config from 'config'
 import { Store } from '@kalisio/kdk/core.client'
 import * as utils from '../utils'
-import buildTours from '@kalisio/kdk/core/client/utils/utils.buildTours'
+import buildTours from '@kalisio/kdk/core/client/utils/utils.tours'
 
 /*
 * If not building with SSR mode, you can
