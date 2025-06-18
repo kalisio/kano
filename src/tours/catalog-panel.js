@@ -1,4 +1,4 @@
-const catalogPanel = require('./map/catalog-panel')
+const catalogPanel = require('./kdk/pane.right')
 
 module.exports = [
   catalogPanel.catalogTabBar(),

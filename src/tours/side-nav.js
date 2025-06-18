@@ -1,4 +1,4 @@
-const sideNav = require('./map/side-nav')
+const sideNav = require('./kdk/pane.left')
 
 module.exports = [
   sideNav.logout(),

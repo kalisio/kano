@@ -1,4 +1,4 @@
-const navigationBar = require('./map/navigation-bar')
+const navigationBar = require('./kdk/pane.top')
 
 module.exports = [
   navigationBar.toggleMap(),

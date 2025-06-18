@@ -1,4 +1,4 @@
-const home = require('./map/home')
+const home = require('./kdk/layout')
 
 module.exports = [
   home.leftOpener(),

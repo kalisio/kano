@@ -83,8 +83,7 @@ public/Cesium
 # KDK extras
 config/kdk
 public/kdk
-src/tours/core
-src/tours/map
+src/tours/kdk
 src/css/kdk
 
 # local layers
