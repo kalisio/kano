@@ -230,7 +230,7 @@ const mapLayerActions = [{
       label: 'mixins.activity.SAVE_LABEL',
       icon: 'las la-save',
       handler: 'onSaveLayer',
-      visible: ['isLayerStorable', { name: '$can', params: ['create', 'catalog'] }]
+      visible: ['isLayerStorable', 'canCreateLayer']
     },
     {
       id: 'filter-layer-data',
@@ -263,6 +263,7 @@ const mapLayerActions = [{
       id: 'edit-layer',
       label: 'mixins.activity.EDIT_LABEL',
       icon: 'las la-file-alt',
+      visible: ['isLayerEditable', 'canUpdateLayer'],
       dialog: {
         title: ':name',
         component: 'KLayerEditor',
@@ -271,7 +272,7 @@ const mapLayerActions = [{
         okAction: { id: 'apply-edit-layer', label: 'APPLY', handler: 'apply' }
       }
     },
-    { id: 'reset-layer-style', label: 'mixins.activity.RESET_LAYER_STYLE_LABEL', icon: 'las la-ban', handler: 'onResetLayerStyle', visible: 'isLayerStyleEditable' },
+    { id: 'reset-layer-style', label: 'mixins.activity.RESET_LAYER_STYLE_LABEL', icon: 'las la-ban', handler: 'onResetLayerStyle', visible: ['isLayerStyleEditable', 'canUpdateLayer'] },
     /* Action to edit all-at-once, now replaced by a submenu with more specific actions
     { id: 'edit-layer-data', label: 'mixins.activity.START_EDIT_DATA_LABEL', icon: 'las la-edit', handler: 'onEditLayerData', visible: 'isLayerDataEditable',
       toggle: { icon: 'las la-edit', tooltip: 'mixins.activity.STOP_EDIT_DATA_LABEL' }, component: 'KEditLayerData' },
@@ -281,7 +282,7 @@ const mapLayerActions = [{
       label: 'mixins.activity.START_EDIT_DATA_LABEL',
       icon: 'las la-caret-left',
       handler: 'onEditLayerData',
-      visible: 'isLayerDataEditable',
+      visible: ['isLayerDataEditable', 'canUpdateLayer'],
       component: 'menu/KSubMenu',
       content: [
         {
@@ -316,7 +317,7 @@ const mapLayerActions = [{
         }
       ]
     },
-    { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: 'isLayerRemovable' }
+    { id: 'remove-layer', label: 'mixins.activity.REMOVE_LABEL', icon: 'las la-trash', handler: 'onRemoveLayer', visible: ['isLayerRemovable', 'canRemoveLayer'] }
   ]
 }]
 
