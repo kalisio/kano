@@ -105,3 +105,30 @@ More actions are available on user-defined feature layers:
 Users with permissions to manage the catalog (i.e. create, update, remove layers) can also create, update and remove **projects**. A project is a set of layers and views useful to cover a specific use case of your users.
 
 When a user activates or opens a project by selecting it in the catalog, the current activity context will switch to only display layers and views available in the projects. A user can deactivate or close the current project using the <i class="las la-times"/> icon in the application bar. He can also open another project using the dropdown project menu in the application bar.
+
+## Styling data
+
+### Create styles
+
+Firstly, you need to create your styles, by accessing the **style manager**, from the **application bar** (top panel), under the **tools menu**. This new window allow you to create styles, by defining each property, for each type of feature (point, line, polygon).
+
+### Apply styles
+
+Once you have created your different styles, you can apply them in different ways :
+* Back to the style manager, the button <i class="las la-layer-group"></i> let you choose to apply the style to a layer (if the button is not displayed, you may not have any layer on which you can use this action)
+* Still in the style manager, the button <i class="las la-object-group"></i> allow you to apply the style to selected features (you can show selected features either by clicking on the top left corner of this window then **Selection**, or from the **application bar** (top panel), under the **tools menu**, by clicking **Selection manager**)
+* By using filters. You can follow the steps described in the next section [Filter data](./getting-started.md#filter-data)
+
+### Reset styles
+
+To reset layer style, access to your **layer actions** on the **right panel**, and click on **Reset style**
+
+To reset features style, access to the **selection manager** from the **application bar** (top panel), under the **tools menu**, by clicking **Selection manager**. You can then select the features you want to reset the style, and open the **features actions** menu by clicking the **three dots icon** and then **Reset style**
+
+## Filter data
+
+Filters allow you to create sublayers than can be enabled/disabled independently of others, by grouping data that meets conditions.
+
+You can access to the filter editing interface from the **layer actions** (layer should be saved, see [Layer actions](./getting-started.md#layer-actions) section), by clicking **Filter data** in the menu.
+
+When creating a filter, you have the option to apply a style to the data. This style if linked, so any changes made to it in the style manager will automatically update the data's appearance
