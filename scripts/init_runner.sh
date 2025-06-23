@@ -24,7 +24,7 @@ init_github_build_e2e_tests() {
 }
 
 init_github_build_docs() {
-    install_reqs age sops nvm node18
+    install_reqs age sops nvm node20
 }
 
 init_github_additional_tests() {
