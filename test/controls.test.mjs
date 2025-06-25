@@ -1,4 +1,4 @@
-import { core } from '@kalisio/kdk/test.client.js'
+import { core } from './kdk/index.mjs'
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
@@ -18,7 +18,7 @@ describe(`suite:${suite}`, () => {
       localStorage: {
         'kano-welcome': false,
         'kano-install': false
-      },
+      }
     })
     page = await runner.start()
     await core.login(page, user)
@@ -27,7 +27,7 @@ describe(`suite:${suite}`, () => {
   it('locate user', async () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     const match = await runner.captureAndMatch('geolocation', null, 3)
     await core.clickPaneAction(page, 'top', 'locate-user')
     expect(match).beTrue()
@@ -38,11 +38,11 @@ describe(`suite:${suite}`, () => {
     let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     selector = '.q-menu .q-item'
     await core.click(page, selector)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     const match = await runner.captureAndMatch('location', null, 3)
     await core.clickAction(page, 'back')
     expect(match).beTrue()

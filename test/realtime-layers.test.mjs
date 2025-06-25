@@ -1,7 +1,7 @@
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'realtime-layers'
 
@@ -85,7 +85,7 @@ let polygon = [
 ]
 const coordinateOffset = 0.0005
 // Helper function to offset geometry depending on geometry type
-function offset(coordinates) {
+function offset (coordinates) {
   if (Array.isArray(coordinates[0])) {
     if (Array.isArray(coordinates[0][0])) {
       return coordinates.map(coordinates => coordinates.map(coordinates => coordinates.map(coordinate => coordinate + coordinateOffset)))
@@ -197,7 +197,7 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
     // Remove remaining test data if any

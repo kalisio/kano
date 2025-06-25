@@ -1,7 +1,7 @@
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'style-manager-2D'
 
@@ -49,7 +49,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-point-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#A65CCC')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await core.click(page, '#style-point-size .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 8)
     await core.click(page, '#style-point-opacity .q-btn')
@@ -59,14 +59,14 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-point-stroke-color #color-picker', 1000)
     await core.type(page, '.q-color-picker .fit', '#0804d4')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
 
     // Line section
     await core.click(page, '#style-editor-line-section')
     await core.click(page, '#style-line-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#ff8000')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await core.click(page, '#style-line-width .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 5)
     await core.click(page, '#style-line-opacity .q-btn')
@@ -77,13 +77,13 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-polygon-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#00ff00')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await core.click(page, '#style-polygon-opacity .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 50)
     await core.click(page, '#style-polygon-stroke-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#000000')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
 
     await core.click(page, '#apply-style', 1000)
     expect(await runner.captureAndMatch('S1_edit_style', null, 3)).beTrue()
@@ -115,7 +115,7 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer'])
     await core.type(page, '#featureLabel-field', 'name')
     await core.click(page, '#apply-edit-layer', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
 
     await map.goToPosition(page, 47.87870, -71.51716)
     await core.click(page, '#map', 4000)
@@ -192,13 +192,13 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-polygon-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#A65CCC')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await core.click(page, '#style-polygon-opacity .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 50)
     await core.click(page, '#style-polygon-stroke-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#F05F40')
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
 
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
@@ -234,11 +234,11 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-polygon-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#F05F40', false, true)
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await core.click(page, '#style-polygon-stroke-color #color-picker')
     await core.type(page, '.q-color-picker .fit', '#A65CCC', false, true)
     await page.keyboard.press('Escape')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
 
     await core.click(page, '#apply-style', 1000)
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])

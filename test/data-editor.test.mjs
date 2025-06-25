@@ -1,7 +1,7 @@
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'data-editor'
 
@@ -25,7 +25,7 @@ describe(`suite:${suite}`, () => {
       localStorage: {
         'kano-welcome': false,
         'kano-install': false
-      },
+      }
     })
     page = await runner.start()
     await core.login(page, currentUser)
@@ -62,7 +62,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     // await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
     expect(await runner.captureAndMatch('t2-points', null, 3)).beTrue()
   })
@@ -112,7 +112,7 @@ describe(`suite:${suite}`, () => {
 
   it('show all features', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'zoom-to-layer'], 1500)
-    await page.waitForTimeout(3000)
+    await core.waitForTimeout(3000)
     expect(await runner.captureAndMatch('t5-zoom-to', null, 3)).beTrue()
   })
 
@@ -124,7 +124,7 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneAction(page, 'top', 'remove', 1000)
     await core.click(page, '#map', 1500)
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(1500)
+    await core.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t6-remove-rectangle', null, 3)).beTrue()
   })
 
@@ -137,7 +137,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1500)
     // stop editing using 'accept' arrow
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(1500)
+    await core.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t7-remove-point', null, 3)).beTrue()
   })
 
@@ -150,7 +150,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1500)
     // stop editing using layer menu link
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
-    await page.waitForTimeout(1500)
+    await core.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t8-remove-line', null, 3)).beTrue()
   })
 
@@ -184,7 +184,7 @@ describe(`suite:${suite}`, () => {
 
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
-    await page.waitForTimeout(1500)
+    await core.waitForTimeout(1500)
     expect(await runner.captureAndMatch('t9-view-data', null, 3)).beTrue()
     await core.click(page, '#item-actions #zoom-to', 1500)
     expect(await runner.captureAndMatch('t10-go-to-feature', null, 3)).beTrue()
@@ -195,7 +195,7 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
   })

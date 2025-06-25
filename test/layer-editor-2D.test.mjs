@@ -1,7 +1,7 @@
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'layer-editor-2D'
 
@@ -50,13 +50,13 @@ describe(`suite:${suite}`, () => {
 
   it('line: check min zoom visibility (13 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 13)
-    await page.waitForTimeout(4000)
+    await core.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test3_line_min_zoom_z13', null, 3)).beTrue()
   })
 
   it('line: check max zoom visibility (17 -> not visible)', async () => {
     await map.zoomToLevel(page, 'mapActivity', 17)
-    await page.waitForTimeout(4000)
+    await core.waitForTimeout(4000)
     expect(await runner.captureAndMatch('S1_test4_line_max_zoom_z17', null, 3)).beTrue()
   })
 
@@ -69,10 +69,10 @@ describe(`suite:${suite}`, () => {
 
   it('point: default clustering', async () => {
     await map.dropFile(page, runner.getDataPath('Enjeux_Inondation.geojson'))
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     await map.goToPosition(page, 43.30095, 1.95545)
     await map.zoomToLevel(page, 'mapActivity', 14)
-    await page.waitForTimeout(3000)
+    await core.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test1_point_default_clustering', null, 3)).beTrue()
   })
 
@@ -81,7 +81,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#layer-display-group')
     await core.click(page, '#layer-display-toggle-clustering')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(3000)
+    await core.waitForTimeout(3000)
     expect(await runner.captureAndMatch('S2_test2_point_no_clustering', null, 3)).beTrue()
   })
 
@@ -109,7 +109,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#importance')
     await core.click(page, '#layer-infobox-field')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 2000)
     expect(await runner.captureAndMatch('t1-infobox', null, 3)).beTrue()
@@ -121,7 +121,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#layer-infobox-group')
     await core.click(page, '#layer-infobox-toggle')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 2000)
     expect(await runner.captureAndMatch('t2-no-infobox', null, 3)).beTrue()
@@ -133,10 +133,10 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#layer-display-group')
     await core.click(page, '#layer-display-toggle-selectable')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t3-no-empty-infobox', null, 3)).beTrue()
   })
 
@@ -153,10 +153,10 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#longueur-en-km')
     await core.click(page, '#layer-popup-field')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     const match = await runner.captureAndMatch('t4-popup', null, 3)
     expect(match).beTrue()
     await core.click(page, '.leaflet-popup-close-button', 1000)
@@ -166,12 +166,12 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer'])
     await core.click(page, '#layer-popup-group')
     await core.click(page, '#layer-popup-toggle')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t5-no-popup', null, 3)).beTrue()
   })
 
@@ -186,10 +186,10 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#nom')
     await core.click(page, '#layer-tooltip-field')
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t6-tooltip', null, 3)).beTrue()
   })
 
@@ -197,12 +197,12 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer'])
     await core.click(page, '#layer-tooltip-group')
     await core.click(page, '#layer-tooltip-toggle')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await core.click(page, '#apply-edit-layer')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.goToPosition(page, 43.30312, 1.95054)
     await core.click(page, '#map', 1000)
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t7-no-tooltip', null, 3)).beTrue()
   })
 
@@ -211,7 +211,7 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
   })

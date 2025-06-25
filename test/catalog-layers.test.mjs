@@ -2,7 +2,7 @@ import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 import _ from 'lodash'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'catalog-layers'
 

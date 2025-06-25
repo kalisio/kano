@@ -1,7 +1,7 @@
 import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'form-fields'
 
@@ -25,7 +25,7 @@ describe(`suite:${suite}`, () => {
       localStorage: {
         'kano-welcome': false,
         'kano-install': false
-      },
+      }
     })
     page = await runner.start()
     await core.login(page, currentUser)
@@ -37,7 +37,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('save layer', async () => {
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     await map.saveLayer(page, userLayersTab, 'form-fields', 1500)
   })
 
@@ -49,7 +49,7 @@ describe(`suite:${suite}`, () => {
     await map.moveMap(page, 'left', 1)
     await core.click(page, '#map', 1000)
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     expect(await runner.captureAndMatch('t1-point', null, 3)).beTrue()
   })
 
@@ -63,7 +63,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#option-field', 500)
     await core.click(page, '#a', 500)
     await core.type(page, '#number-field', '19aa09zz1978')
-    await page.waitForTimeout(2000)
+    await core.waitForTimeout(2000)
     const match = await runner.captureAndMatch('t2-form', null, 3)
     await core.click(page, '#apply-button', 1500)
     expect(match).beTrue()
@@ -71,7 +71,7 @@ describe(`suite:${suite}`, () => {
 
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
-    await page.waitForTimeout(1500)
+    await core.waitForTimeout(1500)
     const match = await runner.captureAndMatch('t3-view-data', null, 3)
     await core.click(page, '#close-button', 500)
     expect(match).beTrue()
@@ -82,7 +82,7 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
   })

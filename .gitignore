@@ -85,6 +85,7 @@ config/kdk
 public/kdk
 src/tours/kdk
 src/css/kdk
+test/kdk
 
 # local layers
 local-layers.js
