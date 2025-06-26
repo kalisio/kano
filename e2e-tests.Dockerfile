@@ -7,7 +7,7 @@ ARG NODE_VERSION=20
 ## Use a builder
 ##
 
-FROM node:${NODE_VERSION}-${DEBIAN_VERSION}-slim as builder
+FROM node:${NODE_VERSION}-${DEBIAN_VERSION}-slim AS builder
 LABEL maintainer="contact@kalisio.xyz"
 
 COPY . /opt/kalisio
@@ -55,12 +55,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     fonts-thai-tlwg \
     fonts-kacst \
     fonts-freefont-ttf \
-    libxss1  \
-    xorg \
-    xserver-xorg \
-    xvfb \
-    libx11-dev \
-    libxext-dev \
+    libxss1 \
     --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
