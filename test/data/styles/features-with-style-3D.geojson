@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },                                                                              
+  "features": [
+    { 
+      "type": "Feature", 
+      "style": { "color": "magenta", "opacity": 0.5, "width": 3 },
+      "properties": { "name": "Parc de la Colline",
+        "entityStyle": { "polyline": { "material": { "type": "Cesium.PolylineDashMaterialProperty", "options": { "dashPattern": 255, "color": "Cesium.Color.DARKVIOLET" }  } } } }, 
+      "geometry": { "type": "Polygon", "coordinates": [ [ [ -72.357206347890767, 47.72858763003908 ], [ -71.86027854004486, 47.527648291638172 ], [ -72.37075892446839, 47.539848426151735 ], [ -72.357206347890767, 47.72858763003908 ] ] ] } 
+    },
+    { 
+      "type": "Feature", 
+      "properties": { "name": "Centre Paul-Étienne Simard", "fill-color": "orange", "stroke-color": "green", "stroke-width": 3 }, 
+      "geometry": { "type": "Polygon", "coordinates": [ [ [ -72.357206347890767, 48.013440900213297 ], [ -72.239750684218109, 48.013440900213297 ], [ -72.253303260795718, 47.856056000888501 ], [ -72.027426984502114, 47.856056000888501 ], [ -72.036462035553868, 48.013440900213297 ], [ -71.905453795303586, 48.01646283861713 ], [ -71.891901218725963, 47.801464984333364 ], [ -72.361723873416651, 47.810567474765456 ], [ -72.357206347890767, 48.013440900213297 ] ] ] } 
+    },
+    { 
+      "type": "Feature", 
+      "properties": { "name": "Loisirs Rivière du Moulin" }, 
+      "geometry": { "type": "Polygon", "coordinates": [ [ [ -72.194575428959382, 48.33278115872843 ], [ -72.018391933450374, 48.33278115872843 ], [ -71.846725963467236, 48.251628525276693 ], [ -71.950629050562299, 48.107038644740094 ], [ -72.203610480011122, 48.107038644740094 ], [ -72.397864077623623, 48.221539261269051 ], [ -72.194575428959382, 48.33278115872843 ] ] ] } 
+    },
+    { 
+      "type": "Feature",
+      "style": { "opacity": 0.5, "width": 3 }, 
+      "properties": { "name": "Saint-Remy-en-Bouzemont-Saint-Genest-et-Isson",
+        "entityStyle": { "polyline": { "material": { "type": "Cesium.PolylineDashMaterialProperty", "options": { "dashPattern": 255, "color": "Cesium.Color.BLUEVIOLET" }  } } } }, 
+      "geometry": { "type": "LineString", "coordinates": [ [ -73.839785615317746, 47.564240180362376 ], [ -73.627461915601779, 47.716431476953346 ], [ -73.455795945618627, 47.552045722357249 ], [ -73.279612450109633, 47.710352336655504 ] ] } 
+    },
+    { 
+      "type": "Feature",
+      "properties": { "name": "Sainte-Geneviève", "stroke-color": "orange", "stroke-width": 6 }, 
+      "geometry": { "type": "LineString", "coordinates": [ [ -73.716981531178234, 47.889388912080449 ], [ -73.423342371996569, 48.091953743979651 ], [ -73.242641350961676, 47.883329977544491 ], [ -73.685358852497131, 47.862118125007399 ] ] } 
+    },
+    { 
+      "type": "Feature", 
+      "properties": { "name": "Saint-Anicet" }, 
+      "geometry": { "type": "LineString", "coordinates": [ [ -73.485142395986983, 48.338787334581873 ], [ -73.480624870461128, 48.161307640513321 ], [ -73.385756834417805, 48.164320903012829 ], [ -73.394791885469544, 48.338787334581873 ] ] } 
+    },
+    { 
+      "type": "Feature", 
+      "style": { "color": "black", "text": { "label": "01", "size": "36" } },
+      "properties": { "name": "Sydenham" }, 
+      "geometry": { "type": "Point", "coordinates": [ -71.051641470913779, 47.610352336655504 ] } 
+    },
+    { "type": "Feature", 
+      "style": { "shape": "airport", "color": "blue", "radius": 16 },
+      "properties": { "name": "Saint-Luc" }, 
+      "geometry": { "type": "Point", "coordinates": [ -71.110369302750115, 47.998430466372736 ] }
+    },
+    { 
+      "type": "Feature", 
+      "style": { "color": "transparent", "radius": 24, "icon": { "url": "kdk/position-cursor.png" } },
+      "properties": { "name": "Loisirs du Fjord du Saguenay" }, 
+      "geometry": { "type": "Point", "coordinates": [ -70.988396113551573, 48.32977780546792 ] }
+    }
+  ]
+}
