@@ -10,17 +10,18 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import L from 'leaflet'
-import sift from 'sift'
-import 'leaflet-arrowheads'
-import { computed } from 'vue'
 import { Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
-import { mixins as kMapMixins, composables as kMapComposables, utils as kMapUtils } from '@kalisio/kdk/map.client'
-import { MixinStore } from '../mixin-store.js'
-import { ComposableStore } from '../composable-store.js'
-import * as utils from '../utils'
+import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
+import { getCategories } from '@kalisio/kdk/map/client/utils.map.js'
 import config from 'config'
+import L from 'leaflet'
+import 'leaflet-arrowheads'
+import _ from 'lodash'
+import sift from 'sift'
+import { computed } from 'vue'
+import { ComposableStore } from '../composable-store.js'
+import { MixinStore } from '../mixin-store.js'
+import * as utils from '../utils'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
@@ -130,6 +131,45 @@ export default {
     configureActivity () {
       baseActivityMixin.methods.configureActivity.call(this)
       this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
+    },
+    async getCatalogCategories () {
+      // We get categories coming from global catalog first if any
+      let categories = await getCategories()
+      const configurationsService = this.$api.getService('configurations')
+      // Then we get categories coming from contextual catalog if any
+      const context = this.$store.get('context')
+      if (context) categories = categories.concat(await getCategories({ context }))
+
+      const userCategoriesOrder = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0].value
+      const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
+
+      if (defaultCategoriesOrder.length > 0) {
+        for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
+          const categoryName = defaultCategoriesOrder[i]
+          const category = categories.find(c => c.name === categoryName)
+          if (!category) throw new Error('Invalid category')
+          // move category to beginning of array
+          categories.unshift(categories.splice(categories.findIndex(c => c.name === categoryName), 1)[0])
+        }
+      }
+
+      if (userCategoriesOrder.length > 0) {
+        const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c.name))
+        for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
+          const category = unorderedUserCategories[i]
+          // move category to beginning of array
+          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
+        }
+        for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
+          const categoryName = userCategoriesOrder[i]
+          const category = categories.find(c => c.name === categoryName)
+          if (!category) throw new Error('Invalid category')
+          // move category to beginning of array
+          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
+        }
+      }
+
+      return categories
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
@@ -303,10 +343,11 @@ export default {
         const isMouseEvent = leafletEvent.startsWith('mouse') || leafletEvent.startsWith('drag')
         const isTouchEvent = leafletEvent.startsWith('touch')
         const hasThrottle = (isStateEvent || isMouseEvent || isTouchEvent)
-        const throttle = (isStateEvent ?
-          _.get(this.activityOptions, 'eventsThrottle.state', 1000) : isMouseEvent ?
-          _.get(this.activityOptions, 'eventsThrottle.mouse', 1000) :
-          _.get(this.activityOptions, 'eventsThrottle.touch', 1000))
+        const throttle = (isStateEvent
+          ? _.get(this.activityOptions, 'eventsThrottle.state', 1000)
+          : isMouseEvent
+            ? _.get(this.activityOptions, 'eventsThrottle.mouse', 1000)
+            : _.get(this.activityOptions, 'eventsThrottle.touch', 1000))
 
         let handler = (options, event) => {
           let latlng = _.get(event, 'latlng')

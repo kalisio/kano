@@ -4,6 +4,8 @@ import { permissions } from '@kalisio/kdk/core.common.js'
 export function defineUserAbilities (subject, can, cannot, app) {
   can('service', 'events')
   can('create', 'events')
+  can('service', 'configurations')
+  can(['find', 'get'], 'configurations')
   if (subject && subject._id) {
     if (subject.catalog) {
       const catalog = subject.catalog
@@ -20,6 +22,11 @@ export function defineUserAbilities (subject, can, cannot, app) {
         can(['create', 'remove'], 'authorisations')
         // Can manage styles
         can('all', 'styles')
+      }
+      if (role >= permissions.Roles.owner) {
+        // Can update configurations
+        can('service', 'configurations')
+        can('all', 'configurations')
       }
     }
     if (subject.projects) {

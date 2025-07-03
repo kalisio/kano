@@ -14,7 +14,6 @@ module.exports = function ({ domain }) {
       }
     },
     icon: 'las la-cloud-sun-rain',
-    order: 80,
     component: 'catalog/KWeatherLayersSelector',
     options: { exclusive: true, filter: { type: 'OverlayLayer', tags: { $all: ['weather', 'forecast'] } } }
   },

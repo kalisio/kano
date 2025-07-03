@@ -280,6 +280,27 @@ module.exports = {
       maxFiles: '30d'
     }
   },
+  defaultConfigurations: [{
+    name: 'userCategoriesOrder',
+    value: []
+  }, {
+    name: 'defaultCategoriesOrder',
+    value: [
+      "Categories.LAB_LAYERS",
+      "Categories.ADMINISTRATIVE_LAYERS",
+      "Categories.ATMOSPHERIC_LAYERS",
+      "Categories.BUSINESS_LAYERS",
+      "Categories.HYDROGRAPHY_LAYERS",
+      "Categories.INFRASTRUCTURE_LAYERS",
+      "Categories.RADIOACTIVITY_LAYERS",
+      "Categories.SENSOR_LAYERS",
+      "Categories.SHOT_LAYERS",
+      "Categories.WEATHER_MEASURE_LAYERS",
+      "Categories.WEATHER_FORECAST_LAYERS",
+      "Categories.TERRAIN_LAYERS",
+      "Categories.BASE_LAYERS",
+    ],
+  }],
   db: {
     adapter: 'mongodb',
     url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),

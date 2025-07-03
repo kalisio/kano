@@ -1,12 +1,13 @@
-import path from 'path'
-import fs from 'fs-extra'
-import { fileURLToPath } from 'url'
+import kCore, { createDefaultUsers, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
+import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService } from '@kalisio/kdk/map.api.js'
 import makeDebug from 'debug'
-import kCore, { permissions, createDefaultUsers, decorateDistributedService } from '@kalisio/kdk/core.api.js'
-import kMap, { createFeaturesService, createCatalogFeaturesServices, createDefaultCatalogLayers } from '@kalisio/kdk/map.api.js'
+import fs from 'fs-extra'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const modelsPath = path.join(__dirname, 'models')
 const servicesPath = path.join(__dirname, 'services')
 const debug = makeDebug('kano:services')
 
@@ -56,17 +57,21 @@ export default async function () {
     app.logger.error(error.message)
   }
 
+  // Create app services
+  const configurationsService = await app.createService('configurations', { modelsPath, servicesPath })
+
   // Configure app hooks on the built-in catalog service
   const catalogService = app.getService('catalog')
   await app.configureService('catalog', catalogService, servicesPath)
-  
+
   // Service to store user features first as catalog layers use it
   const featuresService = await createFeaturesService.call(app, { collection: 'features' })
   await app.configureService('features', featuresService, servicesPath)
   // Restore also any service used by layers
   await createCatalogFeaturesServices.call(app)
-  
+
   // Initialize defaults
+  await configurationsService.createDefaultConfigurations(app)
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
 
