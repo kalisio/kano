@@ -139,9 +139,15 @@ export default {
       // Then we get categories coming from contextual catalog if any
       const context = this.$store.get('context')
       if (context) categories = categories.concat(await getCategories({ context }))
-
-      const userCategoriesOrder = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0].value
+      // Then we order the categories using the configuration objects
+      const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
+      const userCategoriesOrder = userCategoriesOrderObject.value
       const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
+
+      if (userCategoriesOrder.length < categories.filter(c => c._id).length) {
+        // give every single user category object its order in the configuration (needed for drag&drop)
+        await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
+      }
 
       if (defaultCategoriesOrder.length > 0) {
         for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
@@ -154,15 +160,15 @@ export default {
       }
 
       if (userCategoriesOrder.length > 0) {
-        const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c.name))
+        const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c._id))
         for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
           const category = unorderedUserCategories[i]
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
         }
         for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
-          const categoryName = userCategoriesOrder[i]
-          const category = categories.find(c => c.name === categoryName)
+          const categoryId = userCategoriesOrder[i]
+          const category = categories.find(c => c._id === categoryId)
           if (!category) throw new Error('Invalid category')
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
