@@ -149,6 +149,7 @@ export default {
         await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
       }
 
+      // reorder default categories
       if (defaultCategoriesOrder.length > 0) {
         for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryName = defaultCategoriesOrder[i]
@@ -159,6 +160,7 @@ export default {
         }
       }
 
+      // reorder user categories
       if (userCategoriesOrder.length > 0) {
         const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c._id))
         for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
@@ -172,6 +174,18 @@ export default {
           if (!category) throw new Error('Invalid category')
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
+        }
+      }
+
+      // reorganize leaflet layers
+      if (this.leafletLayers && !_.isEmpty(this.leafletLayers)) {
+        for (let i = categories.length - 1; i >= 0; i--) {
+          const category = categories[i]
+          if (!category?.layers) continue
+          for (let j = category.layers.length - 1; j >= 0; j--) {
+            const layer = category.layers[j]
+            this.bringLayerToFront(layer)
+          }
         }
       }
 
