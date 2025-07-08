@@ -155,8 +155,10 @@ const catalogPanes = {
           id: 'user-layers',
           component: 'catalog/KLayersPanel',
           visible: '!hasProject',
+          categoriesDraggable: true,
           layers: ':layers',
           layerCategories: ':layerCategories',
+          layersDraggable: true,
           layersFilter: { scope: { $in: ['user', 'activity'] } },
           layerCategoriesFilter: { _id: { $exists: true } },
           footer: [{

@@ -175,25 +175,18 @@ export default {
 
       return categories
     },
-    async refreshLayerCategories () {
-      this.layerCategories.splice(0, this.layerCategories.length)
-      const layerCategories = await this.getCatalogCategories()
-      for (let i = 0; i < layerCategories.length; i++) {
-        this.addCatalogCategory(layerCategories[i])
-      }
-      kMapMixins.map.baseMap.methods.reorganizeLayers.call(this, layerCategories)
-    },
-    async onTriggerLayer (layer) {
-      if (!this.isLayerVisible(layer.name)) {
-        await this.showLayer(layer.name)
-        const layerCategories = await this.getCatalogCategories()
-        kMapMixins.map.baseMap.methods.reorganizeLayers.call(this, layerCategories)
-      } else {
-        await this.hideLayer(layer.name)
-      }
-      // Check if the activity is using context restoration
-      const hasContext = (typeof this.storeContext === 'function')
-      if (hasContext) this.storeContext('layers')
+    async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
+      const configurationsService = this.$api.getService('configurations')
+      if (configurationsService && sourceCategoryId && targetCategoryId) {
+        const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
+        const userCategoriesOrder = userCategoriesOrderObject.value
+        const sourceCategoryIndex = userCategoriesOrder.findIndex(c => c === sourceCategoryId)
+        const targetCategoryIndex = userCategoriesOrder.findIndex(c => c === targetCategoryId)
+        userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
+        const res = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
+        this.refreshLayerCategories()
+        return res
+      } else return
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
