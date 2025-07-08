@@ -14,6 +14,7 @@ module.exports = function ({ domain }) {
       }
     },
     icon: 'las la-layer-group',
+    order: 100,
     component: 'catalog/KBaseLayersSelector',
     options: { filter: { type: 'BaseLayer' } }
   },
@@ -32,6 +33,7 @@ module.exports = function ({ domain }) {
       }
     },
     icon: 'las la-mountain',
+    order: 90,
     options: { exclusive: true, filter: { type: 'TerrainLayer' } },
   }]
 }

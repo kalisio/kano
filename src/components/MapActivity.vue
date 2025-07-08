@@ -12,7 +12,6 @@
 <script>
 import { Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
-import { getCategories } from '@kalisio/kdk/map/client/utils.map.js'
 import config from 'config'
 import L from 'leaflet'
 import 'leaflet-arrowheads'
@@ -133,13 +132,10 @@ export default {
       this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
     async getCatalogCategories () {
-      // We get categories coming from global catalog first if any
-      let categories = await getCategories()
+      const categories = await kMapMixins.activity.methods.getCatalogCategories()
       const configurationsService = this.$api.getService('configurations')
-      // Then we get categories coming from contextual catalog if any
-      const context = this.$store.get('context')
-      if (context) categories = categories.concat(await getCategories({ context }))
-      // Then we order the categories using the configuration objects
+
+      // order categories using the configuration objects
       const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
       const userCategoriesOrder = userCategoriesOrderObject.value
       const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
@@ -177,19 +173,27 @@ export default {
         }
       }
 
-      // reorganize leaflet layers
-      if (this.leafletLayers && !_.isEmpty(this.leafletLayers)) {
-        for (let i = categories.length - 1; i >= 0; i--) {
-          const category = categories[i]
-          if (!category?.layers) continue
-          for (let j = category.layers.length - 1; j >= 0; j--) {
-            const layer = category.layers[j]
-            this.bringLayerToFront(layer)
-          }
-        }
-      }
-
       return categories
+    },
+    async refreshLayerCategories () {
+      this.layerCategories.splice(0, this.layerCategories.length)
+      const layerCategories = await this.getCatalogCategories()
+      for (let i = 0; i < layerCategories.length; i++) {
+        this.addCatalogCategory(layerCategories[i])
+      }
+      kMapMixins.map.baseMap.methods.reorganizeLayers.call(this, layerCategories)
+    },
+    async onTriggerLayer (layer) {
+      if (!this.isLayerVisible(layer.name)) {
+        await this.showLayer(layer.name)
+        const layerCategories = await this.getCatalogCategories()
+        kMapMixins.map.baseMap.methods.reorganizeLayers.call(this, layerCategories)
+      } else {
+        await this.hideLayer(layer.name)
+      }
+      // Check if the activity is using context restoration
+      const hasContext = (typeof this.storeContext === 'function')
+      if (hasContext) this.storeContext('layers')
     },
     getViewKey () {
       // We'd like to share view settings between 2D/3D

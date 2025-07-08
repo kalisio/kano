@@ -14,6 +14,7 @@ module.exports = function ({ domain }) {
       }
     },
     icon: 'las la-wifi',
+    order: 10,
     options: { exclusive: false, filter: { type: 'OverlayLayer', tags: { $in: ['lab'] } } }
   }]
 }
