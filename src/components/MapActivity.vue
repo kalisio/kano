@@ -188,6 +188,13 @@ export default {
         return res
       } else return
     },
+    async updateLayersOrder (sourceCategoryId, data) {
+      const catalogService = this.$api.getService('catalog')
+      if (catalogService && sourceCategoryId && data) {
+        const response = await catalogService.patch(sourceCategoryId, data)
+        return response
+      }
+    },
     getViewKey () {
       // We'd like to share view settings between 2D/3D
       return this.geAppName().toLowerCase() + '-view'
