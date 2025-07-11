@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Layout, TemplateContext, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Layout, TemplateContext, api, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import config from 'config'
 import L from 'leaflet'
@@ -490,12 +490,16 @@ export default {
     const project = kMapComposables.useProject()
     await project.loadProject()
     activity.setSelectionMode('multiple')
+    const layersDraggable = api.can('update', 'catalog')
+    const categoriesDraggable = api.can('update', 'catalog')
     const expose = {
       ...activity,
       ...activity.CurrentActivityContext,
       ...weather,
       ...measure,
-      ...project
+      ...project,
+      layersDraggable,
+      categoriesDraggable
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
