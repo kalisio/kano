@@ -132,7 +132,8 @@ export default {
       this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
     layersDraggable (category) {
-      return api.can('update', 'catalog')
+      return true
+      // return api.can('update', 'catalog')
     },
     categoriesDraggable (category) {
       return api.can('update', 'catalog')
@@ -195,10 +196,15 @@ export default {
       } else return
     },
     async updateLayersOrder (sourceCategoryId, data) {
-      const catalogService = this.$api.getService('catalog')
-      if (catalogService && sourceCategoryId && data) {
-        const response = await catalogService.patch(sourceCategoryId, data)
-        return response
+      if (api.can('update', 'catalog')) {
+        const catalogService = this.$api.getService('catalog')
+        if (catalogService && sourceCategoryId && data) {
+          const response = await catalogService.patch(sourceCategoryId, data)
+          return response
+        }
+      } else {
+        this.layerCategories.find(c => c._id === sourceCategoryId).layers = data.layers
+        this.reorganizeLayers()
       }
     },
     getViewKey () {
