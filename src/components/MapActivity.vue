@@ -131,6 +131,12 @@ export default {
       baseActivityMixin.methods.configureActivity.call(this)
       this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
+    layersDraggable (category) {
+      return api.can('update', 'catalog')
+    },
+    categoriesDraggable (category) {
+      return api.can('update', 'catalog')
+    },
     async getCatalogCategories () {
       const categories = await kMapMixins.activity.methods.getCatalogCategories()
       const configurationsService = this.$api.getService('configurations')
@@ -223,6 +229,11 @@ export default {
       // Do not send update event at each frame for animated layers
       if (_.has(this.updateAnimations, `${layer.name}.id`)) return
       kMapMixins.map.geojsonLayers.methods.onLayerUpdated.call(this, layer, leafletLayer, data)
+    },
+    onLayerShown (layer, leafletLayer) {
+      // As we'd like to manage layer ordering we force to refresh it
+      if (this.isUserLayer(layer)) this.reorganizeLayers()
+      kMapMixins.map.baseMap.methods.onLayerShown.call(this, layer, leafletLayer)
     },
     handleWidget (widget) {
       // If window already open on another widget keep it
@@ -490,16 +501,12 @@ export default {
     const project = kMapComposables.useProject()
     await project.loadProject()
     activity.setSelectionMode('multiple')
-    const layersDraggable = api.can('update', 'catalog')
-    const categoriesDraggable = api.can('update', 'catalog')
     const expose = {
       ...activity,
       ...activity.CurrentActivityContext,
       ...weather,
       ...measure,
-      ...project,
-      layersDraggable,
-      categoriesDraggable
+      ...project
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
     for (const use of additionalComposables.map((name) => ComposableStore.get(name))) { Object.assign(expose, use(name)) }
