@@ -1,5 +1,5 @@
 <template>
-  <div id="globe-credit"/>
+  <div v-show="false" id="globe-credit"/>
   <KPage>
     <!-- Globe -->
     <div id="globe" :ref="configureGlobe" :style="viewStyle">
