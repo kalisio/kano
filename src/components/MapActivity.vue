@@ -183,8 +183,9 @@ export default {
       return categories
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
-      const configurationsService = this.$api.getService('configurations')
-      if (configurationsService && sourceCategoryId && targetCategoryId) {
+      if (api.can('update', 'catalog')) {
+        const configurationsService = this.$api.getService('configurations')
+        if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
         const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
         const userCategoriesOrder = userCategoriesOrderObject.value
         const sourceCategoryIndex = userCategoriesOrder.findIndex(c => c === sourceCategoryId)
@@ -193,7 +194,10 @@ export default {
         const res = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
         this.refreshLayerCategories()
         return res
-      } else return
+      } else {
+        // user implementation (nothing here yet)
+      }
+      
     },
     async updateLayersOrder (sourceCategoryId, data) {
       if (api.can('update', 'catalog')) {
