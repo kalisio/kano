@@ -261,6 +261,9 @@ module.exports = {
   styles: {
 
   },
+  tags: {
+
+  },
   cesium: {
     token: process.env.CESIUM_TOKEN
   },

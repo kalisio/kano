@@ -71,6 +71,7 @@ const TOP_PANE = (activity) => {
             topPane.toggleLegend(),
             topPane.toggleSelectionManager(),
             topPane.toggleStylesManager(),
+            topPane.toggleTagsManager(),
             helpers.horizontalSeparator(),
             topPane.togglePosition(),
             topPane.toggleNorthArrow(),
@@ -80,6 +81,7 @@ const TOP_PANE = (activity) => {
           ] : activity === 'globe' ? [
             topPane.toggleSelectionManager(),
             topPane.toggleStylesManager(),
+            topPane.toggleTagsManager(),
             helpers.horizontalSeparator(),
             topPane.togglePosition(),
             topPane.toggleLegend(),
@@ -125,7 +127,8 @@ const TOP_PANE = (activity) => {
 const LEFT_WIDGETS = [
   widgetsLeft.LEGEND,
   widgetsLeft.FEATURES_SELECTION,
-  widgetsLeft.STYLE_MANAGER
+  widgetsLeft.STYLE_MANAGER,
+  widgetsLeft.TAG_MANAGER
 ]
 
 // top window

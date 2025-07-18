@@ -1,5 +1,5 @@
-import kCore, { createDefaultUsers, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
-import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService } from '@kalisio/kdk/map.api.js'
+import kCore, { createDefaultUsers, createDefaultTags, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
+import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService, createDefaultStyles } from '@kalisio/kdk/map.api.js'
 import makeDebug from 'debug'
 import fs from 'fs-extra'
 import path from 'path'
@@ -74,6 +74,8 @@ export default async function () {
   await configurationsService.createDefaultConfigurations(app)
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
+  await createDefaultStyles.call(app)
+  await createDefaultTags.call(app)
 
   // Event bus service
   app.declareService('events', {
