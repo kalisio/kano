@@ -158,6 +158,12 @@ module.exports = {
     key: 'kano',
     healthcheckPath: API_PREFIX + '/distribution/'
   },
+  automerge: {
+    syncServerUrl: process.env.AUTOMERGE_SYNC_SERVER_URL,
+    directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
+    serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
+    syncServicePath: API_PREFIX + '/offline'
+  },
   paginate: {
     default: 10,
     max: 50

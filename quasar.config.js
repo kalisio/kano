@@ -127,7 +127,11 @@ module.exports = configure(function (ctx) {
           ],
           config: path.resolve(__dirname, 'config/client-config.json')
         },
-        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
+        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize,
+        cfg.experiments = {
+          ...cfg.experiments,
+          asyncWebAssembly: true
+        }
       }
     },
 

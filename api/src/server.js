@@ -1,8 +1,11 @@
 import { kdk } from '@kalisio/kdk/core.api.js'
 import distribution, { finalize } from '@kalisio/feathers-distributed'
+import { automergeServer, createRootDocument } from '@kalisio/feathers-automerge-server'
 import fs from 'fs-extra'
 import _ from 'lodash'
+import siftModule from 'sift'
 import https from 'https'
+import makeDebug from 'debug'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import proxyMiddleware from 'http-proxy-middleware'
@@ -12,14 +15,42 @@ import services from './services.js'
 import hooks from './hooks.js'
 import channels from './channels.js'
 
+const sift = siftModule.default
+const debug = makeDebug('kano:server')
+
+async function initializeAutomergeDocument(servicePath, query) {
+  debug(`Initializing automerge document for ${servicePath} with query ${query}`)
+  // Check if any query target this service
+  if (query[servicePath]) {
+    return app.getService(servicePath).find({
+      paginate: false,
+      query: query[servicePath]
+    })
+  } else {
+    return []
+  }
+}
+async function getAutomergeDocumentsForData(servicePath, data, documents) {
+  debug(`Checking automerge documents for ${servicePath} with data ${data}`)
+  // Check if any query target this service
+  if (query[servicePath]) {
+    return documents.filter(document => {
+      const result = [data].filter(sift(document.query[servicePath]))
+      return result.length > 0
+    })
+  } else {
+    return []
+  }
+}
+
 export class Server {
   constructor () {
     this.app = kdk()
     const app = this.app
 
     // Distribute services
-    const distConfig = app.get('distribution')
-    if (distConfig) app.configure(distribution(distConfig))
+    const distributionConfig = app.get('distribution')
+  if (distributionConfig) app.configure(distribution(distributionConfig))
 
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
@@ -47,6 +78,29 @@ export class Server {
     await app.db.connect()
     // Set up our services
     await app.configure(services)
+    // Synchronize services
+    const automergeConfig = app.get('automerge')
+    if (automergeConfig) {
+      // Check for existing root document or initialize it
+      const documentFilepath = path.join(automergeConfig.directory, 'document.automerge')
+      try {
+        if (fs.existsSync(documentFilepath)) {
+          automergeConfig.rootDocumentId = fs.readFileSync(documentFilepath)
+        } else {
+          const document = await createRootDocument(automergeConfig.directory)
+          fs.writeFileSync(documentFilepath, document.url)
+          automergeConfig.rootDocumentId = document.url
+        }
+        Object.assign(automergeConfig, {
+          initializeDocument: initializeAutomergeDocument,
+          getDocumentsForData: getAutomergeDocumentsForData
+        })
+        debug('Initializing automerge with config', automergeConfig)
+        await app.configure(automergeServer(automergeConfig))
+      } catch (error) {
+        app.logger.error('Unable to initialize automerge', error)
+      }
+    }
     // Register hooks
     app.hooks(hooks)
     // Register application setup and teardown hooks here
