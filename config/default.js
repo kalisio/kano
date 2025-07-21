@@ -606,6 +606,7 @@ module.exports = {
     // Nothing specific, use defaults
   },
   automerge: {
+    syncServerWsPath: 'offline',
     syncServicePath: API_PREFIX + '/offline'
   },
   about: {

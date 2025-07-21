@@ -19,28 +19,37 @@ const sift = siftModule.default
 const debug = makeDebug('kano:server')
 
 async function initializeAutomergeDocument(servicePath, query) {
-  debug(`Initializing automerge document for ${servicePath} with query ${query}`)
+  const app = this
+  // Take care that feathers strip slashes, go from /api to api/
+  const apiPath = app.get('apiPath').substr(1) + '/'
+  const serviceName = servicePath.replace(apiPath, '')
+  query = _.get(query, serviceName)
+  debug(`Initializing automerge document for ${serviceName} with query`, query)
+  let data = []
   // Check if any query target this service
-  if (query[servicePath]) {
-    return app.getService(servicePath).find({
-      paginate: false,
-      query: query[servicePath]
-    })
-  } else {
-    return []
+  if (query) {
+    data = await app.getService(serviceName).find({ paginate: false, query })
+    // Take care of features service sending back GeoJson
+    if (data.type === 'FeatureCollection') data = data.features
   }
+  return data
 }
 async function getAutomergeDocumentsForData(servicePath, data, documents) {
-  debug(`Checking automerge documents for ${servicePath} with data ${data}`)
-  // Check if any query target this service
-  if (query[servicePath]) {
-    return documents.filter(document => {
-      const result = [data].filter(sift(document.query[servicePath]))
+  const app = this
+  // Take care that feathers strip slashes, go from /api to api/
+  const apiPath = app.get('apiPath').substr(1) + '/'
+  const serviceName = servicePath.replace(apiPath, '')
+  debug(`Checking automerge documents for ${serviceName} with data`, data)
+  return documents.filter(document => {
+    // Check if any query target this service
+    const query = _.get(document, `query.${serviceName}`)
+    if (query) {
+      const result = [data].filter(sift(query))
       return result.length > 0
-    })
-  } else {
-    return []
-  }
+    } else {
+      return false
+    }
+  })
 }
 
 export class Server {
@@ -50,7 +59,7 @@ export class Server {
 
     // Distribute services
     const distributionConfig = app.get('distribution')
-  if (distributionConfig) app.configure(distribution(distributionConfig))
+    if (distributionConfig) app.configure(distribution(distributionConfig))
 
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
@@ -85,15 +94,15 @@ export class Server {
       const documentFilepath = path.join(automergeConfig.directory, 'document.automerge')
       try {
         if (fs.existsSync(documentFilepath)) {
-          automergeConfig.rootDocumentId = fs.readFileSync(documentFilepath)
+          automergeConfig.rootDocumentId = fs.readFileSync(documentFilepath).toString()
         } else {
           const document = await createRootDocument(automergeConfig.directory)
           fs.writeFileSync(documentFilepath, document.url)
           automergeConfig.rootDocumentId = document.url
         }
         Object.assign(automergeConfig, {
-          initializeDocument: initializeAutomergeDocument,
-          getDocumentsForData: getAutomergeDocumentsForData
+          initializeDocument: initializeAutomergeDocument.bind(app),
+          getDocumentsForData: getAutomergeDocumentsForData.bind(app)
         })
         debug('Initializing automerge with config', automergeConfig)
         await app.configure(automergeServer(automergeConfig))

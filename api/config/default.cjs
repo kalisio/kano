@@ -160,6 +160,7 @@ module.exports = {
   },
   automerge: {
     syncServerUrl: process.env.AUTOMERGE_SYNC_SERVER_URL,
+    syncServerWsPath: process.env.AUTOMERGE_SYNC_SERVER_PATH || 'offline',
     directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
     serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
     syncServicePath: API_PREFIX + '/offline'

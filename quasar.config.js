@@ -150,6 +150,12 @@ module.exports = configure(function (ctx) {
           ws: true,
           logLevel: 'debug'
         },
+        '/offline': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          ws: true,
+          logLevel: 'debug'
+        },
         // The auth endpoints are not easy to prefix so we manage it manually
         '/oauth': {
           target: 'http://localhost:' + serverPort,
