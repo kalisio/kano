@@ -110,10 +110,6 @@ export default {
       // Notify the listener
       utils.sendEmbedEvent('globe-ready')
     },
-    getViewKey () {
-      // We'd like to share view settings between 2D/3D
-      return this.geAppName.toLowerCase() + '-view'
-    },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
       // Event is disabled by config by default however (as it can be costly)

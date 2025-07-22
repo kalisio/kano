@@ -310,6 +310,9 @@ module.exports = {
       "Categories.TERRAIN_LAYERS",
       "Categories.BASE_LAYERS",
     ],
+  }, {
+    name: 'userOrphanLayersOrder',
+    value: []
   }],
   db: {
     adapter: 'mongodb',

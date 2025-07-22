@@ -21,6 +21,7 @@ import { computed } from 'vue'
 import { ComposableStore } from '../composable-store.js'
 import { MixinStore } from '../mixin-store.js'
 import * as utils from '../utils'
+import { getLayersByCategory } from '@kalisio/kdk/map/client/utils.map.js'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
@@ -147,7 +148,7 @@ export default {
       const userCategoriesOrder = userCategoriesOrderObject.value
       const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
 
-      if (userCategoriesOrder.length < categories.filter(c => c._id).length) {
+      if (userCategoriesOrder.length < categories.filter(c => c._id).length && api.can('update', 'configurations')) {
         // give every single user category object its order in the configuration (needed for drag&drop)
         await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
       }
@@ -182,6 +183,18 @@ export default {
 
       return categories
     },
+    async getCatalogLayers () {
+      let layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
+      const configurationsService = this.$api.getService('configurations')
+      const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
+      if (userOrphanLayersObject && userOrphanLayersObject.value.length > 0) {
+        for (let i = userOrphanLayersObject.value.length; i >= 0; i--) {
+          const layerId = userOrphanLayersObject.value[i];
+          layers.unshift(layers.splice(layers.findIndex(l => l?._id === layerId), 1)[0])
+        }
+      }
+      return layers
+    },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
       if (api.can('update', 'catalog')) {
         const configurationsService = this.$api.getService('configurations')
@@ -192,12 +205,14 @@ export default {
         const targetCategoryIndex = userCategoriesOrder.findIndex(c => c === targetCategoryId)
         userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
         const res = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
-        this.refreshLayerCategories()
+        const sourceIndex = this.layerCategories.findIndex(c => c?._id === sourceCategoryId)
+        const targetIndex = this.layerCategories.findIndex(c => c?._id === targetCategoryId)
+        this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
+        this.reorganizeLayers()
         return res
       } else {
         // user implementation (nothing here yet)
       }
-      
     },
     async updateLayersOrder (sourceCategoryId, data) {
       if (api.can('update', 'catalog')) {
@@ -211,9 +226,27 @@ export default {
         this.reorganizeLayers()
       }
     },
-    getViewKey () {
-      // We'd like to share view settings between 2D/3D
-      return this.geAppName().toLowerCase() + '-view'
+    async updateOrphanLayersOrder (orphanLayers) {
+      const configurationsService = this.$api.getService('configurations')
+      const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
+      if (api.can('update', 'configurations') && userOrphanLayersObject._id) {
+        await configurationsService.patch(userOrphanLayersObject._id, { value: orphanLayers })
+      }
+      this.reorganizeLayers()
+    },
+    async refreshLayers () {
+      await kMapMixins.activity.methods.refreshLayers.call(this)
+      await this.refreshOrphanLayers()
+    },
+    async refreshOrphanLayers () {
+      const layersFilter = sift({ scope: { $in: ['user', 'activity'] } })
+      const categoriesFilter = sift({ _id: { $exists: true } })
+      const filteredLayers = _.filter(this.layers, layersFilter)
+      const filteredCategories = _.filter(this.layerCategories, categoriesFilter)
+      const layersByCategory = getLayersByCategory(filteredLayers, filteredCategories)
+      const categories = _.flatten(_.values(layersByCategory))
+      this.orphanLayers = _.difference(filteredLayers, categories)
+      this.reorganizeLayers()
     },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
