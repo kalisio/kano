@@ -1,6 +1,6 @@
 import logger from 'loglevel'
-import kdkCore from '@kalisio/kdk/core.client'
-import kdkMap, { utils as kMapUtils } from '@kalisio/kdk/map.client.map'
+import kdkCore, { utils as kCoreUtils } from '@kalisio/kdk/core.client'
+import kdkMap from '@kalisio/kdk/map.client.map'
 
 export default async function () {
   const api = this
@@ -19,7 +19,7 @@ export default async function () {
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
     // Create required services for offline mode
-    await kMapUtils.createOfflineServices()
+    await kCoreUtils.createOfflineServices()
   } catch (error) {
     logger.error(error.message)
   }
