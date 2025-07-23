@@ -144,10 +144,11 @@ export default {
       const configurationsService = this.$api.getService('configurations')
 
       // order categories using the configuration objects
-      const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
-      const userCategoriesOrder = userCategoriesOrderObject.value
-      const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
-
+      let userCategoriesOrderObject = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
+      userCategoriesOrderObject = _.get(userCategoriesOrderObject, 'data[0]')
+      const userCategoriesOrder = (userCategoriesOrderObject ? userCategoriesOrderObject.value : [])
+      const defaultCategoriesOrderObject = await configurationsService.find({ query: { name: 'defaultCategoriesOrder' } })
+      const defaultCategoriesOrder = _.get(defaultCategoriesOrderObject, 'data[0].value', [])
       if (userCategoriesOrder.length < categories.filter(c => c._id).length && api.can('update', 'configurations')) {
         // give every single user category object its order in the configuration (needed for drag&drop)
         await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
@@ -158,7 +159,7 @@ export default {
         for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryName = defaultCategoriesOrder[i]
           const category = categories.find(c => c.name === categoryName)
-          if (!category) throw new Error('Invalid category')
+          if (!category) throw new Error(`Invalid default category ${categoryName}`)
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c.name === categoryName), 1)[0])
         }
@@ -175,7 +176,7 @@ export default {
         for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryId = userCategoriesOrder[i]
           const category = categories.find(c => c._id === categoryId)
-          if (!category) throw new Error('Invalid category')
+          if (!category) throw new Error(`Invalid category ${categoryId}`)
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
         }
@@ -186,10 +187,12 @@ export default {
     async getCatalogLayers () {
       let layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
       const configurationsService = this.$api.getService('configurations')
-      const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
-      if (userOrphanLayersObject && userOrphanLayersObject.value.length > 0) {
-        for (let i = userOrphanLayersObject.value.length; i >= 0; i--) {
-          const layerId = userOrphanLayersObject.value[i];
+      let userOrphanLayersObject = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
+      userOrphanLayersObject = _.get(userOrphanLayersObject, 'data[0]')
+      const userOrphanLayersOrder = (userOrphanLayersObject ? userOrphanLayersObject.value : [])
+      if (userOrphanLayersOrder.length > 0) {
+        for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
+          const layerId = userOrphanLayersOrder[i];
           layers.unshift(layers.splice(layers.findIndex(l => l?._id === layerId), 1)[0])
         }
       }
@@ -494,10 +497,12 @@ export default {
       // Generate offline document for views in cache
       const query = await kMapUtils.getOfflineDocumentQueryForViews()
       query.configurations = {}
-      await kCoreUtils.createOfflineDocument(query)
+      const offlineDocument = await kCoreUtils.createOfflineDocument(query)
+      await kCoreUtils.getOfflineDocumentContent(offlineDocument)
       // Then offline services
-      await kCoreUtils.addServiceToCache('configurations', {})
-      await kMapUtils.createOfflineServicesForViews()
+      const { metadata } = offlineDocument
+      await kCoreUtils.addServiceToCache('configurations', Object.assign({}, _.get(metadata, 'configurations')))
+      await kMapUtils.createOfflineServicesForViews(offlineDocument)
       // Then data layer
       await kMapUtils.cacheLayersForView(view, layers, options)
     }
