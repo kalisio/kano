@@ -278,6 +278,10 @@ export default {
       if (this.isUserLayer(layer)) this.reorganizeLayers()
       kMapMixins.map.baseMap.methods.onLayerShown.call(this, layer, leafletLayer)
     },
+    async onSaveLayer (layer) {
+      await kMapMixins.activity.methods.onSaveLayer.call(this, layer)
+      if (this.isOrphanLayer(layer)) await this.refreshOrphanLayers()
+    },
     handleWidget (widget) {
       // If window already open on another widget keep it
       if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
