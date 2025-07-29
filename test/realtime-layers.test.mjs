@@ -202,6 +202,6 @@ describe(`suite:${suite}`, () => {
     await runner.stop()
     // Remove remaining test data if any
     if (layer) await client.getService('catalog').remove(layer._id)
-    await client.getService('features').remove(null)
+    await client.getService('features').remove(null, { query: { layer: layer._id } })
   })
 })
