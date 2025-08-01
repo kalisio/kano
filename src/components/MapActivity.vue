@@ -145,6 +145,7 @@ export default {
 
       // order categories using the configuration objects
       const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
+      if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
       const userCategoriesOrder = userCategoriesOrderObject.value
       const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
 
@@ -158,7 +159,7 @@ export default {
         for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryName = defaultCategoriesOrder[i]
           const category = categories.find(c => c.name === categoryName)
-          if (!category) throw new Error('Invalid category')
+          if (!category) continue
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c.name === categoryName), 1)[0])
         }
@@ -175,7 +176,7 @@ export default {
         for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryId = userCategoriesOrder[i]
           const category = categories.find(c => c._id === categoryId)
-          if (!category) throw new Error('Invalid category')
+          if (!category) continue
           // move category to beginning of array
           categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
         }
@@ -200,6 +201,7 @@ export default {
         const configurationsService = this.$api.getService('configurations')
         if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
         const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
+        if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
         const userCategoriesOrder = userCategoriesOrderObject.value
         const sourceCategoryIndex = userCategoriesOrder.findIndex(c => c === sourceCategoryId)
         const targetCategoryIndex = userCategoriesOrder.findIndex(c => c === targetCategoryId)
@@ -268,6 +270,30 @@ export default {
       }
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
     },
+    async onCatalogUpdated (object, event) {
+      if (object.type === 'Category' && event === 'removed') await this.onRemoveCategory(object)
+      await kMapMixins.activity.methods.onCatalogUpdated.call(this, object, event)
+    },
+    async onRemoveCategory (category) {
+      const configurationsService = this.$api.getService('configurations')
+      if (!configurationsService || !category) return
+      const userCategoriesOrderObject = await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })
+      const oldUserCategoriesOrder = userCategoriesOrderObject.data[0]
+      if (!oldUserCategoriesOrder._id) throw new Error('User categories order object not found')
+      const newUserCategoriesOrder = oldUserCategoriesOrder.value.filter(id => id !== category._id)
+      await configurationsService.patch(userCategoriesOrderObject._id, { value: newUserCategoriesOrder })
+    },
+    async addCatalogLayer (layer) {
+      await kMapMixins.activity.methods.addCatalogLayer.call(this, layer)
+      if (!this.isOrphanLayer(layer)) {
+        this.orphanLayers.push(layer)
+        await this.refreshOrphanLayers()
+      }
+    },
+    async removeCatalogLayer (layer) {
+      await kMapMixins.activity.methods.removeCatalogLayer.call(this, layer)
+      if (this.isOrphanLayer(layer)) this.orphanLayers.splice(this.orphanLayers.findIndex(l => l._id === layer._id), 1)
+    },
     onLayerUpdated (layer, leafletLayer, data) {
       // Do not send update event at each frame for animated layers
       if (_.has(this.updateAnimations, `${layer.name}.id`)) return
@@ -280,7 +306,6 @@ export default {
     },
     async onSaveLayer (layer) {
       await kMapMixins.activity.methods.onSaveLayer.call(this, layer)
-      if (this.isOrphanLayer(layer)) await this.refreshOrphanLayers()
     },
     handleWidget (widget) {
       // If window already open on another widget keep it
