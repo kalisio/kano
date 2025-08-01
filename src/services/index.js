@@ -1,6 +1,6 @@
 import logger from 'loglevel'
 import kdkCore from '@kalisio/kdk/core.client'
-import kdkMap, { utils as kMapUtils } from '@kalisio/kdk/map.client.map'
+import kdkMap, { utils as kMapUtils } from '@kalisio/kdk/map.client'
 
 export default async function () {
   const api = this
