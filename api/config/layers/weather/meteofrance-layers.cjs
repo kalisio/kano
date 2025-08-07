@@ -159,7 +159,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       {
         name: 'precipitations',
         label: 'Variables.MF_PAQUETOBS_PRECIPITATIONS',
-        unit: 'mm',
+        unit: 'mm/h',
         range: [0, 50],
         chartjs: {
           backgroundColor: 'rgba(54, 162, 235, 128)',
