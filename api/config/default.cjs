@@ -259,7 +259,10 @@ module.exports = {
 
   },
   styles: {
-
+    paginate: {
+      default: 20,
+      max: 250
+    }
   },
   tags: {
 

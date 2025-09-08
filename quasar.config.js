@@ -125,7 +125,8 @@ module.exports = configure(function (ctx) {
             path.resolve(__dirname, 'node_modules/@kalisio/kdk/core/client/i18n'),
             path.resolve(__dirname, 'node_modules/@kalisio/kdk/map/client/i18n')
           ],
-          config: path.resolve(__dirname, 'config/client-config.json')
+          config: path.resolve(__dirname, 'config/client-config.json'),
+          jsts: path.resolve(__dirname, 'src/assets/kdk/jsts.min.js')
         },
         cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
       }
