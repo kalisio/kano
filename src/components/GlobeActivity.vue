@@ -19,8 +19,6 @@ import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
 import * as utils from '../utils'
 import config from 'config'
-import { getLayersByCategory } from '@kalisio/kdk/map/client/utils.map.js'
-import sift from 'sift'
 
 const name = 'globeActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
@@ -131,19 +129,6 @@ export default {
         if (response && response.data) geoJson = response.data
       }
       await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
-    },
-    async refreshLayers () {
-      await kMapMixins.activity.methods.refreshLayers.call(this)
-      await this.refreshOrphanLayers()
-    },
-    async refreshOrphanLayers () {
-      const layersFilter = sift({ scope: { $in: ['user', 'activity'] } })
-      const categoriesFilter = sift({ _id: { $exists: true } })
-      const filteredLayers = _.filter(this.layers, layersFilter)
-      const filteredCategories = _.filter(this.layerCategories, categoriesFilter)
-      const layersByCategory = getLayersByCategory(filteredLayers, filteredCategories)
-      const categories = _.flatten(_.values(layersByCategory))
-      this.orphanLayers = _.difference(filteredLayers, categories)
     },
     handleWidget (widget) {
       // If window already open on another widget keep it

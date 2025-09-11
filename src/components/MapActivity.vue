@@ -21,7 +21,6 @@ import { computed } from 'vue'
 import { ComposableStore } from '../composable-store.js'
 import { MixinStore } from '../mixin-store.js'
 import * as utils from '../utils'
-import { getLayersByCategory } from '@kalisio/kdk/map/client/utils.map.js'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
@@ -132,11 +131,12 @@ export default {
       baseActivityMixin.methods.configureActivity.call(this)
       this.setRightPaneMode(this.hasProject() ? 'project' : 'default')
     },
-    layersDraggable (category) {
+    layersDraggable () {
+      // Event if not authorized the user can temporarily change the layer order locally
       return true
-      // return api.can('update', 'catalog')
     },
-    categoriesDraggable (category) {
+    categoriesDraggable () {
+      // Authorized for users allowed to update the catalog
       return api.can('update', 'catalog')
     },
     async getCatalogCategories () {
@@ -197,6 +197,7 @@ export default {
       return layers
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
+      // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       if (api.can('update', 'catalog')) {
         const configurationsService = this.$api.getService('configurations')
         if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
@@ -206,17 +207,16 @@ export default {
         const sourceCategoryIndex = userCategoriesOrder.findIndex(c => c === sourceCategoryId)
         const targetCategoryIndex = userCategoriesOrder.findIndex(c => c === targetCategoryId)
         userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
-        const res = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
+        const response = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
         const sourceIndex = this.layerCategories.findIndex(c => c?._id === sourceCategoryId)
         const targetIndex = this.layerCategories.findIndex(c => c?._id === targetCategoryId)
         this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
-        this.reorganizeLayers()
-        return res
-      } else {
-        // user implementation (nothing here yet)
+        await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
+        return response
       }
     },
     async updateLayersOrder (sourceCategoryId, data) {
+      // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       if (api.can('update', 'catalog')) {
         const catalogService = this.$api.getService('catalog')
         if (catalogService && sourceCategoryId && data) {
@@ -225,30 +225,19 @@ export default {
         }
       } else {
         this.layerCategories.find(c => c._id === sourceCategoryId).layers = data.layers
-        this.reorganizeLayers()
       }
+      await kMapMixins.activity.methods.updateLayersOrder.call(this, sourceCategoryId, data)
     },
     async updateOrphanLayersOrder (orphanLayers) {
-      const configurationsService = this.$api.getService('configurations')
-      const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
-      if (api.can('update', 'configurations') && userOrphanLayersObject._id) {
+      // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
+      if (api.can('update', 'configurations')) {
+        const configurationsService = this.$api.getService('configurations')
+        const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
+        const userOrphanLayersObject = _.get(response, 'data[0]')
+        if (!userOrphanLayersObject || !userOrphanLayersObject._id) return
         await configurationsService.patch(userOrphanLayersObject._id, { value: orphanLayers })
       }
-      this.reorganizeLayers()
-    },
-    async refreshLayers () {
-      await kMapMixins.activity.methods.refreshLayers.call(this)
-      await this.refreshOrphanLayers()
-    },
-    async refreshOrphanLayers () {
-      const layersFilter = sift({ scope: { $in: ['user', 'activity'] } })
-      const categoriesFilter = sift({ _id: { $exists: true } })
-      const filteredLayers = _.filter(this.layers, layersFilter)
-      const filteredCategories = _.filter(this.layerCategories, categoriesFilter)
-      const layersByCategory = getLayersByCategory(filteredLayers, filteredCategories)
-      const categories = _.flatten(_.values(layersByCategory))
-      this.orphanLayers = _.difference(filteredLayers, categories)
-      this.reorganizeLayers()
+      await kMapMixins.activity.methods.updateOrphanLayersOrder.call(this, orphanLayers)
     },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
@@ -283,17 +272,6 @@ export default {
       const newUserCategoriesOrder = oldUserCategoriesOrder.value.filter(id => id !== category._id)
       await configurationsService.patch(userCategoriesOrderObject._id, { value: newUserCategoriesOrder })
     },
-    async addCatalogLayer (layer) {
-      await kMapMixins.activity.methods.addCatalogLayer.call(this, layer)
-      if (!this.isOrphanLayer(layer)) {
-        this.orphanLayers.push(layer)
-        await this.refreshOrphanLayers()
-      }
-    },
-    async removeCatalogLayer (layer) {
-      await kMapMixins.activity.methods.removeCatalogLayer.call(this, layer)
-      if (this.isOrphanLayer(layer)) this.orphanLayers.splice(this.orphanLayers.findIndex(l => l._id === layer._id), 1)
-    },
     onLayerUpdated (layer, leafletLayer, data) {
       // Do not send update event at each frame for animated layers
       if (_.has(this.updateAnimations, `${layer.name}.id`)) return
@@ -301,7 +279,10 @@ export default {
     },
     onLayerShown (layer, leafletLayer) {
       // As we'd like to manage layer ordering we force to refresh it
-      if (this.isUserLayer(layer)) this.reorganizeLayers()
+      // because by default Leaflet will put new elements at the end of the DOM child list.
+      // This is a problem for layers not having their own pane as they will be all put
+      // into a shared pane like the overlay pane with a specific z-index
+      if (this.isUserLayer(layer)) this.reorderLayers()
       kMapMixins.map.baseMap.methods.onLayerShown.call(this, layer, leafletLayer)
     },
     async onSaveLayer (layer) {
