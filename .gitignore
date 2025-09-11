@@ -83,6 +83,7 @@ public/Cesium
 # KDK extras
 config/kdk
 public/kdk
+src/assets/kdk
 src/tours/kdk
 src/css/kdk
 test/kdk
