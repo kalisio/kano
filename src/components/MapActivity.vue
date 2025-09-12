@@ -220,8 +220,7 @@ export default {
       if (api.can('update', 'catalog')) {
         const catalogService = this.$api.getService('catalog')
         if (catalogService && sourceCategoryId && data) {
-          const response = await catalogService.patch(sourceCategoryId, data)
-          return response
+          await catalogService.patch(sourceCategoryId, data)
         }
       } else {
         this.layerCategories.find(c => c._id === sourceCategoryId).layers = data.layers
