@@ -79,12 +79,12 @@ export default {
     }
   },
   watch: {
-    // window visiblity, to send postrobot events
+    // window visibility, to send postrobot events
     'leftWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('left', this.leftWindow) },
     'rightWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('right', this.rightWindow) },
     'topWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('top', this.topWindow) },
     'bottomWindow.visible': function (newValue, oldValue) { this.onWindowVisibleEvent('bottom', this.bottomWindow) },
-    // window visiblity, to send postrobot events
+    // window visibility, to send postrobot events
     'leftPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('left', this.leftPane) },
     'rightPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('right', this.rightPane) },
     'topPane.visible': function (newValue, oldValue) { this.onPaneVisibleEvent('top', this.topPane) },
