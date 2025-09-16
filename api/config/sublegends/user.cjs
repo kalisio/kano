@@ -13,6 +13,7 @@ module.exports = function () {
         }
       }
     },
+    order: 10,
     headerClass: 'bg-grey-3 text-weight-regular',
     options: { open: true, filter: { type: 'OverlayLayer' , scope: 'user' } }
   }]
