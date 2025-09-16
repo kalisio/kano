@@ -64,7 +64,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.HUBEAU_HYDRO_STATIONS_LABEL',
-      maxZoom: 10,
+      maxZoom: 11,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-tint', color: 'black', size: 10 } } } }, 

@@ -90,7 +90,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.MF_PAQUETOBS_STATIONS_LABEL',
-      maxZoom: 7,
+      maxZoom: 8,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-thermometer-half', color: 'black',  size: 10} } } }, 
