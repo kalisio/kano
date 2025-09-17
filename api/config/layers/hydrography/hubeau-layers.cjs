@@ -9,11 +9,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUBEAU_HYDRO_DESCRIPTION: 'Observations hydrométriques'
         },
         Legend: {
-          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
-          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
+          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations hydrométriques',
+          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations hydrométriques',
           HUBEAU_HYDRO_MEASUREMENT: 'Dernière mesure : Hauteur d\'eau (H) / Débit (Q)',
           HUBEAU_HYDRO_OLD_MEASUREMENT: 'Mesure datée de plus de 30 minutes',
-          HUBEAU_HYDRO_STATION: 'Station'
+          HUBEAU_HYDRO_STATION: 'Station de mesure'
         },
         Variables: {
           H: 'Niveau d\'eau',
@@ -28,8 +28,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUBEAU_HYDRO_DESCRIPTION: 'Hydrometric observations'
         },
         Legend: {
-          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations',
-          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Stations',
+          HUBEAU_HYDRO_OBSERVATIONS_LABEL: 'Hub\'Eau - Hydrometric observations',
+          HUBEAU_HYDRO_STATIONS_LABEL: 'Hub\'Eau - Hydrometric stations',
           HUBEAU_HYDRO_MEASUREMENT: 'Last measurement: Water height (H) / Flow rate (Q)',
           HUBEAU_HYDRO_OLD_MEASUREMENT: 'Measurement dated more than 30 minutes ago',
           HUBEAU_HYDRO_STATION: 'Station'
@@ -211,6 +211,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUBEAU_PIEZO: 'Hub\'Eau Piezométrie',
           HUBEAU_PIEZO_DESCRIPTION: 'Données piézométriques'
         },
+        Legend: {
+          HUBEAU_PIEZO_OBSERVATIONS_LABEL: 'Hub\'Eau - Observations piézométriques',
+          HUBEAU_PIEZO_STATIONS_LABEL: 'Hub\'Eau - Stations piézométriques',
+          HUBEAU_PIEZO_MEASUREMENT: 'Dernière mesure: Profondeur de la nappe (PN) / Niveau de la nappe (NEN)',
+          HUBEAU_PIEZO_OLD_MEASUREMENT: 'Mesure datée de plus de 30 minutes',
+          HUBEAU_PIEZO_STATION: 'Station de mesure'
+        },
         Variables: {
           PN: 'Profondeur de la nappe',
           NEN: 'Niveau de la nappe (cote NGF)'
@@ -221,6 +228,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           HUBEAU_PIEZO: 'Hub\'Eau Piezometry',
           HUBEAU_PIEZO_DESCRIPTION: 'Piezometric data'
         },
+        Legend: {
+          HUBEAU_PIEZO_OBSERVATIONS_LABEL: 'Hub\'Eau - Piezometric observations',
+          HUBEAU_PIEZO_STATIONS_LABEL: 'Hub\'Eau - Piezometric stations',
+          HUBEAU_PIEZO_MEASUREMENT: 'Last measurement: Phreatic zone depth (PN) / Zone height (NEN)',
+          HUBEAU_PIEZO_OLD_MEASUREMENT: 'Measurement dated more than 30 minutes',
+          HUBEAU_PIEZO_STATION: 'Station'
+        },
         Variables: {
           PN: 'Phreatic zone depth',
           NEN: 'Zone height (NGF)'
@@ -230,6 +244,34 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     tags: [
       'hydrography', 'measure'
     ],
+    legend: [{
+      type: 'symbols',
+      label: 'Legend.HUBEAU_PIEZO_OBSERVATIONS_LABEL',
+      minZoom: 11,
+      content: {
+        observations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#00a9ce', radius: 10, icon: { classes: 'fa fa-tint', color: 'white',  size: 10} } } },
+            label: 'Legend.HUBEAU_PIEZO_MEASUREMENT'
+          }
+        ],
+        exceptions: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-tint', color: 'white', size: 10 } } } },
+            label: 'Legend.HUBEAU_PIEZO_OLD_MEASUREMENT'
+          }
+        ]
+      }
+    }, {
+      type: 'symbols',
+      label: 'Legend.HUBEAU_PIEZO_STATIONS_LABEL',
+      maxZoom: 11,
+      content: {
+        stations: [
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-tint', color: 'black', size: 10 } } } },
+            label: 'Legend.HUBEAU_PIEZO_STATION'
+          }
+        ]
+      }
+    }],
     iconUrl: 'https://s3.eu-central-1.amazonaws.com/kalisioscope/assets/hubeau-hydrometrie-icon.png',
     attribution: 'HUB\'EAU Piezo © <a href="https://www.hubeau.eaufrance.fr">Hub\'Eau</a>',
     type: 'OverlayLayer',
@@ -275,13 +317,29 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 8,
       minFeatureZoom: 11,
       cluster: { disableClusteringAtZoom: 18 },
-      'marker-type': 'shapeMarker',
-      'marker-fill': `<% if (_.has(properties, 'niveau_eau_ngf') || _.has(properties, 'profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe')) { %>#00a9ce<% }
-                          else if (feature.measureRequestIssued) { %>orange<% }
-                          else { %>grey<% } %>`,
-      'icon-color': 'white',
-      'icon-classes': 'fa fa-tint',
-      template: ['marker-fill'],
+      style: {
+        point: {
+          marker: 'circle',
+          radius: 15,
+          opacity: 1,
+          color: `<% if (_.has(properties, 'profondeur_nappe') || _.has(properties, 'niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf')) { %>#00a9ce<% }
+                    else if (feature.measureRequestIssued) { %>black<% }
+                    else { %>white<% } %>`,
+          stroke: {
+            color: `<% if (_.has(properties, 'profondeur_nappe') || _.has(properties, 'niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf')) { %>transparent<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            width: 2
+          },
+          icon: {
+            color: `<% if (_.has(properties, 'profondeur_nappe') || _.has(properties, 'niveau_eau_ngf') || _.has(feature, 'time.profondeur_nappe') || _.has(feature, 'time.niveau_eau_ngf'))  { %>white<% }
+                      else if (feature.measureRequestIssued) { %>white<% }
+                      else { %>black<% } %>`,
+            classes: 'fas fa-tint',
+          }
+        }
+      },
+      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color'],
       popup: {
         pick: [
           'libelle_pe',
