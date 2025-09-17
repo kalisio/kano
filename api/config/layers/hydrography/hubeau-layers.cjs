@@ -281,9 +281,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     featureId: 'bss_id',
     featureLabel: ['bss_id', 'libelle_pe'],
     from: 'P-7D',
-    to: 'PT-6H',
-    every: 'PT1H',
-    queryFrom: 'PT-12H',
+    to: 'PT-10M',
+    every: 'PT10M',
+    queryFrom: 'PT-30M',
     variables: [
       {
         name: 'profondeur_nappe',
