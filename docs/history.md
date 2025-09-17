@@ -6,6 +6,23 @@ sidebarDepth: 3
 
 ## v2.5.0 - Not yet released
 
+**Major enhancements:**\
+👉 Improved layer styling management,\
+👉 Added a tag manager to classify styles,\
+👉 Enhance coordinates parsing to support more formats in search tool,\
+👉 Allow to manage layers and categories display order by drag'n'drop,\
+👉 Ability to animate moving/rotating objects in globe from iframe API.
+
+**Cartographic data enhancements:**\
+👉 French weather stations data layer linked to [new krawler job](https://github.com/kalisio/k-meteofrance),\
+👉 Move to OpenAQ v3 API linked to [upgraded krawler job](https://github.com/kalisio/k-openaq).
+
+**Major bug fixes:**\
+✅ Filtering/Sorting in style manager affects filtering/sorting in the projects/views panels,\
+✅ Improved animation performances,\
+✅ Bearing not correctly taken into account in template context when using touch rotate,\
+✅ Generated gateway token now takes appId into account.
+
 **Major breaking changes for customized versions or iframe integration use cases:**\
 💥 some events are [not emitted anymore](https://kalisio.github.io/kano/guides/advanced-usage.html#frontend-events) by default in iframe,\
 💥 some events are now emitted with a [limited frequency](https://kalisio.github.io/kano/guides/advanced-usage.html#frontend-events).
@@ -22,6 +39,8 @@ More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/14) 
 👉 Import layer capabilities now available in globe,\
 👉 Enhanced style support when importing KML or GeoJson,\
 👉 Template context now available from iframe API,\
+👉 Ability to animate moving/rotating objects in map from iframe API,\
+👉 Ability to animate map move/rotation from iframe API,\
 👉 Allow to stop map event propagation from iframe API,\
 👉 More events emitted from iframe (touch events for map, move events for globe),\
 👉 Realtime layers targeting any service can now be created/removed dynamically,\
@@ -133,7 +152,7 @@ More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/10) 
 
 **Cartographic data enhancements:**\
 👉 RTE generation data layer linked to [new krawler job](https://github.com/kalisio/k-rte),\
-👉 ICOS atmosphjeric data layer linked to [new krawler job](https://github.com/kalisio/k-icos).
+👉 ICOS atmospheric data layer linked to [new krawler job](https://github.com/kalisio/k-icos).
 
 **Major bug fixes:**\
 ✅ Token without user ID not valid anymore to be used by iframe.
