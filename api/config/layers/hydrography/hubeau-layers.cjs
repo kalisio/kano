@@ -237,6 +237,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-piezo-stations',
     featureId: 'bss_id',
+    featureLabel: ['bss_id', 'libelle_pe'],
     from: 'P-7D',
     to: 'PT-6H',
     every: 'PT1H',
