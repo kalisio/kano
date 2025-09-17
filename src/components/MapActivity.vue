@@ -190,8 +190,12 @@ export default {
       const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
       if (userOrphanLayersObject && userOrphanLayersObject.value.length > 0) {
         for (let i = userOrphanLayersObject.value.length; i >= 0; i--) {
-          const layerId = userOrphanLayersObject.value[i];
-          layers.unshift(layers.splice(layers.findIndex(l => l?._id === layerId), 1)[0])
+          const layerId = userOrphanLayersObject.value[i]
+          const layerIndex = layers.findIndex(layer => layer?._id === layerId)
+          if (layerIndex >= 0) {
+            const removedLayers = layers.splice(layerIndex, 1)
+            if (removedLayers.length > 0) layers.unshift(removedLayers[0])
+          }
         }
       }
       return layers
@@ -204,32 +208,32 @@ export default {
         const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
         if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
         const userCategoriesOrder = userCategoriesOrderObject.value
-        const sourceCategoryIndex = userCategoriesOrder.findIndex(c => c === sourceCategoryId)
-        const targetCategoryIndex = userCategoriesOrder.findIndex(c => c === targetCategoryId)
+        const sourceCategoryIndex = userCategoriesOrder.findIndex(category => category === sourceCategoryId)
+        const targetCategoryIndex = userCategoriesOrder.findIndex(category => category === targetCategoryId)
         userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
         const response = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
-        const sourceIndex = this.layerCategories.findIndex(c => c?._id === sourceCategoryId)
-        const targetIndex = this.layerCategories.findIndex(c => c?._id === targetCategoryId)
+        const sourceIndex = this.layerCategories.findIndex(category => category?._id === sourceCategoryId)
+        const targetIndex = this.layerCategories.findIndex(category => category?._id === targetCategoryId)
         this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
         await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
         return response
       }
     },
-    async updateLayersOrder (sourceCategoryId, data) {
+    async updateLayersOrder (sourceCategoryId, data, movedLayer) {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
-      if (api.can('update', 'catalog')) {
+      // Also check for in-memory layer
+      if (api.can('update', 'catalog') && movedLayer?._id) {
         const catalogService = this.$api.getService('catalog')
         if (catalogService && sourceCategoryId && data) {
           await catalogService.patch(sourceCategoryId, data)
         }
-      } else {
-        this.layerCategories.find(c => c._id === sourceCategoryId).layers = data.layers
       }
       await kMapMixins.activity.methods.updateLayersOrder.call(this, sourceCategoryId, data)
     },
-    async updateOrphanLayersOrder (orphanLayers) {
+    async updateOrphanLayersOrder (orphanLayers, movedLayer) {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
-      if (api.can('update', 'configurations')) {
+      // Also check for in-memory layer
+      if (api.can('update', 'configurations') && movedLayer?._id) {
         const configurationsService = this.$api.getService('configurations')
         const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
         const userOrphanLayersObject = _.get(response, 'data[0]')
@@ -275,14 +279,6 @@ export default {
       // Do not send update event at each frame for animated layers
       if (_.has(this.updateAnimations, `${layer.name}.id`)) return
       kMapMixins.map.geojsonLayers.methods.onLayerUpdated.call(this, layer, leafletLayer, data)
-    },
-    onLayerShown (layer, leafletLayer) {
-      // As we'd like to manage layer ordering we force to refresh it
-      // because by default Leaflet will put new elements at the end of the DOM child list.
-      // This is a problem for layers not having their own pane as they will be all put
-      // into a shared pane like the overlay pane with a specific z-index
-      if (this.isUserLayer(layer)) this.reorderLayers()
-      kMapMixins.map.baseMap.methods.onLayerShown.call(this, layer, leafletLayer)
     },
     async onSaveLayer (layer) {
       await kMapMixins.activity.methods.onSaveLayer.call(this, layer)
