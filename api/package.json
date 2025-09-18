@@ -62,7 +62,6 @@
     "@kalisio/feathers-distributed": "^2.4.0",
     "@kalisio/kdk": "https://github.com/kalisio/kdk",
     "@turf/turf": "^6.5.0",
-    "@weacast/core": "^2.2.1",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "^5.0.6",
     "feathers-mongodb-fuzzy-search": "^2.0.1",
