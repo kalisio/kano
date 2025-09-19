@@ -32,8 +32,8 @@ ENV DEBUG=$DEBUG
 # Setup app & cleanup workspace
 WORKDIR /opt/kalisio/
 RUN \
-  node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --install --fail-on-error && \
-  node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --link --link-folder /opt/kalisio/yarn-links --fail-on-error && \
+  node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --install && \
+  node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --link --link-folder /opt/kalisio/yarn-links && \
   cd /opt/kalisio/$APP && yarn pwa:build && \
   rm -fR /opt/kalisio/kli /opt/kalisio/kli.js
 
