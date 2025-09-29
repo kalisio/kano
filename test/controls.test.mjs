@@ -33,7 +33,7 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it.skip('search location', async () => {
+  it('search location', async () => {
     await core.clickPaneAction(page, 'top', 'search-location')
     let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
@@ -48,15 +48,15 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it.skip('display position', async () => {
-    await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
+  it('display position', async () => {
+    await core.clickPaneActions(page, 'top', ['tools', 'toggle-position-sticky'])
     const match = await runner.captureAndMatch('position', null, 3)
-    await core.clickAction(page, 'back')
+    await core.clickAction(page, 'close-position')
     expect(match).beTrue()
   })
 
-  it.skip('display legend', async () => {
-    await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
+  it('display legend', async () => {
+    await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     const match = await runner.captureAndMatch('legend', null, 3)
     expect(match).beTrue()
   })
