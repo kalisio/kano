@@ -51,13 +51,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 11,
       content: {
         observations: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#00a9ce', radius: 10, icon: { classes: 'fa fa-tint', color: 'white',  size: 10} } } }, 
-            label: 'Legend.HUBEAU_HYDRO_MEASUREMENT' 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#00a9ce', radius: 10, icon: { classes: 'fa fa-tint', color: 'white',  size: 10} } } },
+            label: 'Legend.HUBEAU_HYDRO_MEASUREMENT'
           }
         ],
         exceptions: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-tint', color: 'white', size: 10 } } } }, 
-            label: 'Legend.HUBEAU_HYDRO_OLD_MEASUREMENT' 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'black', radius: 10, icon: { classes: 'fa fa-tint', color: 'white', size: 10 } } } },
+            label: 'Legend.HUBEAU_HYDRO_OLD_MEASUREMENT'
           }
         ]
       }
@@ -67,8 +67,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       maxZoom: 11,
       content: {
         stations: [
-          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-tint', color: 'black', size: 10 } } } }, 
-            label: 'Legend.HUBEAU_HYDRO_STATION' 
+          { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-tint', color: 'black', size: 10 } } } },
+            label: 'Legend.HUBEAU_HYDRO_STATION'
           }
         ]
       }
@@ -76,6 +76,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     attribution: 'HUB\'EAU Hydro © <a href="https://www.hubeau.eaufrance.fr">Hub\'Eau</a>',
     type: 'OverlayLayer',
     service: 'hubeau-hydro-observations',
+    baseQuery: { 'properties.en_service': true },
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-hydro-stations',
     featureId: 'code_station',
@@ -144,9 +145,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       tiled: true,
       minZoom: 8,
       minFeatureZoom: 11,
-      cluster: { 
+      cluster: {
         maxClusterRadius: 40,
-        disableClusteringAtZoom: 18 
+        disableClusteringAtZoom: 18
       },
       style: {
         point: {
@@ -276,6 +277,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     attribution: 'HUB\'EAU Piezo © <a href="https://www.hubeau.eaufrance.fr">Hub\'Eau</a>',
     type: 'OverlayLayer',
     service: 'hubeau-piezo-observations',
+    baseQuery: { 'properties.en_service': true },
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
     probeService: 'hubeau-piezo-stations',
     featureId: 'bss_id',
