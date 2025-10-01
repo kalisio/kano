@@ -86,7 +86,10 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it('user: connect wms layer', async () => {
+  it('user: connect wms layer', async function () {
+    // Give this test more time to finish, it needs to scroll back
+    // a lot to get to zoom level 7, and it takes time
+    this.timeout(60000)
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     await map.goToPosition(page, 46.62681, 2.59277)
     await map.zoomToLevel(page, 'mapActivity', 7)
@@ -107,10 +110,13 @@ describe(`suite:${suite}`, () => {
     await map.connectLayer(page, service, layerId, layerName, 'code-insee')
     const match = await runner.captureAndMatch(layerId, null, 3)
     await core.closeWindow(page, 'left')
-    await map.clickLayer(page, userLayersTab, _.kebabCase('region'))
+    await map.clickLayer(page, userLayersTab, _.kebabCase('BD CARTO® region'))
     expect(match).beTrue()
   })
-  it('user: connect wmts layer', async () => {
+  it('user: connect wmts layer', async function () {
+    // Give this test more time to finish, it needs to scroll back
+    // a lot to get to zoom level 7, and it takes time
+    this.timeout(60000)
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     await map.goToPosition(page, 46.83201, 8.31116)
     await map.zoomToLevel(page, 'mapActivity', 8)
