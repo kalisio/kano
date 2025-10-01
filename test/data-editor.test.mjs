@@ -142,9 +142,8 @@ describe(`suite:${suite}`, () => {
   })
 
   it('remove line', async () => {
-    await map.goToPosition(page, 43.31652, 1.95110)
+    await map.goToPosition(page, 43.31588, 1.95109)
     await map.zoomToLevel(page, 'mapActivity', 17)
-    await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'remove', 1000)
     await core.click(page, '#map', 1500)
@@ -185,9 +184,11 @@ describe(`suite:${suite}`, () => {
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
     await core.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t9-view-data', null, 3)).beTrue()
+    const captureMatch9 = await runner.captureAndMatch('t9-view-data', null, 3)
     await core.click(page, '#item-actions #zoom-to', 1500)
-    expect(await runner.captureAndMatch('t10-go-to-feature', null, 3)).beTrue()
+    const captureMatch10 = await runner.captureAndMatch('t10-go-to-feature', null, 3)
+    expect(captureMatch9).beTrue()
+    expect(captureMatch10).beTrue()
   })
 
   it('remove layer', async () => {
