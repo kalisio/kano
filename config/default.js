@@ -339,7 +339,7 @@ const mapEngine = {
     rotateControl: false,
     attributionControl: false,
     zoomDelta: 0.25,
-    zoomSnap: 0,
+    zoomSnap: 0.25,
     wheelPxPerZoomLevel: 250
   },
   // COLORS USED IN STYLES SHOULD BE PART OF THE QUASAR PALETTE NOT RANDOM RGB COLORS
