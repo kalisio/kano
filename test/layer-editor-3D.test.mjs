@@ -68,12 +68,14 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 1000)
     await core.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('S3-no-empty-infobox', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S3-no-empty-infobox', null, 3)
 
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer'])
     await core.click(page, '#layer-display-group')
     await core.click(page, '#layer-display-toggle-selectable')
     await core.click(page, '#apply-edit-layer')
+
+    expect(match).beTrue()
   })
 
   /**
@@ -92,6 +94,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#globe', 1000)
     await core.waitForTimeout(2000)
     const match = await runner.captureAndMatch('S4-popup', null, 3)
+    await core.click(page, '#globe', 1000)
     expect(match).beTrue()
   })
 
@@ -105,7 +108,9 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 1000)
     await core.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('S4-no-popup', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S4-no-popup', null, 3)
+    await core.click(page, '#globe', 1000)
+    expect(match).beTrue()
   })
 
   /**
@@ -122,7 +127,9 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 1000)
     await core.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('S5-tooltip', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S5-tooltip', null, 3)
+    await core.click(page, '#globe', 1000)
+    expect(match).beTrue()
   })
 
   it('disable tooltip', async () => {
@@ -135,7 +142,9 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 1000)
     await core.waitForTimeout(2000)
-    expect(await runner.captureAndMatch('S5-no-tooltip', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S5-no-tooltip', null, 3)
+    await core.click(page, '#globe', 1000)
+    expect(match).beTrue()
   })
 
   /**
@@ -151,8 +160,10 @@ describe(`suite:${suite}`, () => {
     await core.waitForTimeout(2000)
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 2000)
-    expect(await runner.captureAndMatch('S7-infobox', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S7-infobox', null, 3)
     await core.closeWindow(page, 'top')
+    await core.click(page, '#globe', 1000)
+    expect(match).beTrue()
   })
 
   it('disable information box', async () => {
@@ -163,8 +174,10 @@ describe(`suite:${suite}`, () => {
     await core.waitForTimeout(2000)
     await map.goToPosition(page, 47.89793, -71.51550)
     await core.click(page, '#globe', 2000)
-    expect(await runner.captureAndMatch('S7-no-infobox', null, 3)).beTrue()
+    const match = await runner.captureAndMatch('S7-no-infobox', null, 3)
     await core.closeWindow(page, 'top')
+    await core.click(page, '#globe', 1000)
+    expect(match).beTrue()
   })
 
   it('remove geojson file', async () => {
