@@ -36,12 +36,12 @@ describe(`suite:${suite}`, () => {
   it('line: import geojson file', async () => {
     await map.dropFile(page, runner.getDataPath('Canal_Midi.geojson'))
     await map.goToPosition(page, 43.31486, 1.95557)
+    await map.zoomToLevel(page, 'mapActivity', 16)
   })
 
   it('line: set min and max zoom', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer'])
     await core.click(page, '#layer-display-group')
-    await core.click(page, '#layer-display-toggle-zoom')
     await core.moveRange(page, 'layer-display-zoom', 'leftThumb', 'right', 11)
     await core.moveRange(page, 'layer-display-zoom', 'rightThumb', 'left', 5)
     await core.click(page, '#apply-edit-layer')
