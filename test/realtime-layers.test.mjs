@@ -206,4 +206,4 @@ describe(`suite:${suite}`, () => {
       await client.getService('features').remove(null, { query: { layer: layer._id } })
     }
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)

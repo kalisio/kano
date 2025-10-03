@@ -128,4 +128,4 @@ describe(`suite:${suite}`, () => {
     await client.getService('lab-observations').remove(null)
     await client.getService('lab-measurements').remove(null)
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)

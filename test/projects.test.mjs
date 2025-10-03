@@ -127,4 +127,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
