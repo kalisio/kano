@@ -32,6 +32,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
+    await map.zoomToLevel(page, 'mapActivity', 4)
     const match = await runner.captureAndMatch('flight', null, 3)
     await map.clickLayer(page, userLayersTab, 'flight')
     expect(match).beTrue()
@@ -46,6 +47,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('departements.geojson'), 'code')
+    await map.zoomToLevel(page, 'mapActivity', 6)
     const match = await runner.captureAndMatch('departements', null, 3)
     await map.clickLayer(page, userLayersTab, 'departements')
     expect(match).beTrue()
@@ -53,6 +55,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import kml file', async () => {
     await map.importLayer(page, runner.getDataPath('regions.kml'))
+    await map.zoomToLevel(page, 'mapActivity', 6)
     const match = await runner.captureAndMatch('regions', null, 3)
     await map.clickLayer(page, userLayersTab, 'regions')
     expect(match).beTrue()
@@ -60,6 +63,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import gpx file', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    await map.zoomToLevel(page, 'mapActivity', 14)
     const match = await runner.captureAndMatch('trace', null, 3)
     await map.clickLayer(page, userLayersTab, 'trace')
     expect(match).beTrue()
@@ -67,6 +71,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import shp file', async () => {
     await map.dropFile(page, runner.getDataPath('espaces-naturels.shp'))
+    await map.zoomToLevel(page, 'mapActivity', 9)
     const match = await runner.captureAndMatch('espaces-naturels', null, 3)
     await map.clickLayer(page, userLayersTab, 'espaces-naturels')
     expect(match).beTrue()
