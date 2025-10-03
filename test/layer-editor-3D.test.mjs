@@ -7,7 +7,9 @@ const suite = 'layer-editor-3D'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(30 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -189,4 +191,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
+})

@@ -97,7 +97,9 @@ function offset (coordinates) {
   }
 }
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -206,4 +208,4 @@ describe(`suite:${suite}`, () => {
       await client.getService('features').remove(null, { query: { layer: layer._id } })
     }
   })
-}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
+})
