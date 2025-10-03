@@ -61,6 +61,7 @@ describe(`suite:${suite}`, () => {
   it('see elevation profile', async () => {
     await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
     await map.goToPosition(page, 43.31465, 1.94985)
+    await map.zoomToLevel(page, 'mapActivity', 16)
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)
