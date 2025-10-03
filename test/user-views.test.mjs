@@ -31,16 +31,22 @@ describe(`suite:${suite}`, () => {
   })
 
   it('admin: create Andorra view', async () => {
-    const extent = [42.3915, 1.2847, 42.7051, 1.9315]
-    await map.zoomToExtent(page, extent)
+    // const extent = [42.3915, 1.2847, 42.7051, 1.9315]
+    // await map.zoomToExtent(page, extent)
+    // Use alternative as zoom to extent, as it is currently broken
+    await map.goToPosition(page, 42.54419, 1.59070)
+    await map.zoomToLevel(page, 'mapActivity', 11)
     await map.createView(page, 'Andorra', false)
     const exists = await map.viewExists(page, userViewsTab, 'Andorra')
     expect(exists).beTrue()
   })
 
   it('admin: create Toulouse view', async () => {
-    const extent = [43.5895, 1.41584, 43.6087, 1.4562]
-    await map.zoomToExtent(page, extent)
+    // const extent = [43.5895, 1.41584, 43.6087, 1.4562]
+    // await map.zoomToExtent(page, extent)
+    // Use alternative as zoom to extent, as it is currently broken
+    await map.goToPosition(page, 43.60234, 1.44159)
+    await map.zoomToLevel(page, 'mapActivity', 15)
     await map.clickLayer(page, catalogLayersTab, 'HYBRID')
     await map.createView(page, 'Toulouse', true)
     const exists = await map.viewExists(page, userViewsTab, 'Toulouse')
