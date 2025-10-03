@@ -201,7 +201,9 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
     // Remove remaining test data if any
-    if (layer) await client.getService('catalog').remove(layer._id)
-    await client.getService('features').remove(null)
+    if (layer) {
+      await client.getService('catalog').remove(layer._id)
+      await client.getService('features').remove(null, { query: { layer: layer._id } })
+    }
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)

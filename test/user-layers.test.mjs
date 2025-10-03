@@ -32,6 +32,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: drop geojson gradient file', async () => {
     await map.dropFile(page, runner.getDataPath('flight.geojson'))
+    await map.zoomToLevel(page, 'mapActivity', 4)
     const match = await runner.captureAndMatch('flight', null, 3)
     await map.clickLayer(page, userLayersTab, 'flight')
     expect(match).beTrue()
@@ -46,6 +47,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('departements.geojson'), 'code')
+    await map.zoomToLevel(page, 'mapActivity', 6)
     const match = await runner.captureAndMatch('departements', null, 3)
     await map.clickLayer(page, userLayersTab, 'departements')
     expect(match).beTrue()
@@ -53,6 +55,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import kml file', async () => {
     await map.importLayer(page, runner.getDataPath('regions.kml'))
+    await map.zoomToLevel(page, 'mapActivity', 6)
     const match = await runner.captureAndMatch('regions', null, 3)
     await map.clickLayer(page, userLayersTab, 'regions')
     expect(match).beTrue()
@@ -60,6 +63,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import gpx file', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    await map.zoomToLevel(page, 'mapActivity', 14)
     const match = await runner.captureAndMatch('trace', null, 3)
     await map.clickLayer(page, userLayersTab, 'trace')
     expect(match).beTrue()
@@ -67,6 +71,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: import shp file', async () => {
     await map.dropFile(page, runner.getDataPath('espaces-naturels.shp'))
+    await map.zoomToLevel(page, 'mapActivity', 9)
     const match = await runner.captureAndMatch('espaces-naturels', null, 3)
     await map.clickLayer(page, userLayersTab, 'espaces-naturels')
     expect(match).beTrue()
@@ -99,6 +104,7 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, userLayersTab, _.kebabCase('Carte lithologique simplifiée au 1/1 000 000'))
     expect(match).beTrue()
   })
+
   it('user: connect wfs layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     const service = 'https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
@@ -107,9 +113,10 @@ describe(`suite:${suite}`, () => {
     await map.connectLayer(page, service, layerId, layerName, 'code-insee')
     const match = await runner.captureAndMatch(layerId, null, 3)
     await core.closeWindow(page, 'left')
-    await map.clickLayer(page, userLayersTab, _.kebabCase('region'))
+    await map.clickLayer(page, userLayersTab, _.kebabCase('BD CARTO® region'))
     expect(match).beTrue()
   })
+
   it('user: connect wmts layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     await map.goToPosition(page, 46.83201, 8.31116)
@@ -128,4 +135,6 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+    // min timeout is 60s because some tests needs to scroll back a
+    // lot to get to low zoom levels (7/6) and it takes time
+}).timeout(60 * 1000 * core.TestTimeoutMultiplier)

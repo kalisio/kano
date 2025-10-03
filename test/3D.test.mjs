@@ -43,7 +43,7 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
     await page.waitForNetworkIdle()
     expect(await runner.captureAndMatch('trace-on-ellipsoid', null, 3)).beTrue()
-  }).timeout(30000)
+  })
 
   it('check terrain layer category', async () => {
     await map.clickCatalogTab(page, catalogLayersTab)
@@ -64,7 +64,7 @@ describe(`suite:${suite}`, () => {
     await core.clickOpener(page, 'right')
     await page.waitForNetworkIdle()
     expect(await runner.captureAndMatch('trace-on-terrain', null, 3)).beTrue()
-  }).timeout(30000)
+  })
 
   it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'trace')
@@ -74,4 +74,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(30 * 1000 * core.TestTimeoutMultiplier)

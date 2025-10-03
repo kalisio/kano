@@ -38,6 +38,7 @@ describe(`suite:${suite}`, () => {
 
   it('2D styles: import styled geojson file', async () => {
     await map.dropFile(page, runner.getDataPath('features-with-style.geojson'))
+    await map.zoomToLevel(page, 'mapActivity', 8)
     const match = await runner.captureAndMatch('2D-features-with-style', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-style')
   })
@@ -55,6 +56,7 @@ describe(`suite:${suite}`, () => {
 
   it('2D styles: import geojson file with panes', async () => {
     await map.dropFile(page, runner.getDataPath('features-with-panes.geojson'))
+    await map.zoomToLevel(page, 'mapActivity', 10)
     const match = await runner.captureAndMatch('2D-features-with-panes', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-panes')
   })
@@ -72,4 +74,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)

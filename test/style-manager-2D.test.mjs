@@ -35,19 +35,21 @@ describe(`suite:${suite}`, () => {
     // Show style manager
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
     // Create a new style with default style and "test-style" as name
-    await core.click(page, '#add-style')
+    await core.click(page, '#create-style')
     await core.type(page, '#name-field', 'test-style')
     await core.click(page, '#apply-style', 1000)
     expect(await runner.captureAndMatch('S1_create_style', null, 3)).beTrue()
   })
 
   it('edit a style', async () => {
+    await core.waitForTimeout(1000)
     // Edit the style created in the previous step
+    await core.click(page, '#style-menu')
     await core.click(page, '#edit-style')
     // Point section
     await core.click(page, '#style-editor-point-section')
     await core.click(page, '#style-point-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#A65CCC')
+    await core.type(page, '.q-color-picker .fit', '#A65CCC', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
     await core.click(page, '#style-point-size .q-btn')
@@ -57,14 +59,14 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#style-point-shape #icon-picker', 1000)
     await core.click(page, '.q-menu .q-btn:nth-child(9)', 1000)
     await core.click(page, '#style-point-stroke-color #color-picker', 1000)
-    await core.type(page, '.q-color-picker .fit', '#0804d4')
+    await core.type(page, '.q-color-picker .fit', '#0804d4', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
 
     // Line section
     await core.click(page, '#style-editor-line-section')
     await core.click(page, '#style-line-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#ff8000')
+    await core.type(page, '.q-color-picker .fit', '#ff8000', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
     await core.click(page, '#style-line-width .q-btn')
@@ -75,13 +77,13 @@ describe(`suite:${suite}`, () => {
     // Polygon section
     await core.click(page, '#style-editor-polygon-section')
     await core.click(page, '#style-polygon-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#00ff00')
+    await core.type(page, '.q-color-picker .fit', '#00ff00', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
     await core.click(page, '#style-polygon-opacity .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 50)
     await core.click(page, '#style-polygon-stroke-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#000000')
+    await core.type(page, '.q-color-picker .fit', '#000000', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
 
@@ -93,6 +95,7 @@ describe(`suite:${suite}`, () => {
 
   it('import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('samples.geojson'), 'name')
+    await map.zoomToLevel(page, 'mapActivity', 8)
     await map.saveLayer(page, userLayersTab, 'samples')
   })
 
@@ -190,13 +193,13 @@ describe(`suite:${suite}`, () => {
     await core.type(page, '#style-editor #name-field', 'filter-style')
     await core.click(page, '#style-editor-polygon-section')
     await core.click(page, '#style-polygon-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#A65CCC')
+    await core.type(page, '.q-color-picker .fit', '#A65CCC', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
     await core.click(page, '#style-polygon-opacity .q-btn')
     await core.moveSlider(page, 'style-property-slider', 'right', 50)
     await core.click(page, '#style-polygon-stroke-color #color-picker')
-    await core.type(page, '.q-color-picker .fit', '#F05F40')
+    await core.type(page, '.q-color-picker .fit', '#F05F40', false, true)
     await page.keyboard.press('Escape')
     await core.waitForTimeout(1000)
 
@@ -229,6 +232,7 @@ describe(`suite:${suite}`, () => {
 
   it('update style linked to a filter', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
+    await core.click(page, '#style-menu')
     await core.click(page, '#edit-style')
     await core.click(page, '#style-editor-polygon-section')
     await core.click(page, '#style-polygon-color #color-picker')
@@ -263,6 +267,7 @@ describe(`suite:${suite}`, () => {
   it('delete a style', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
     for (let i = 0; i < 2; i++) {
+      await core.click(page, '#style-menu')
       await core.click(page, '#delete-style')
       await core.click(page, '.q-dialog button:nth-child(2)', 1000)
     }
@@ -273,4 +278,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)

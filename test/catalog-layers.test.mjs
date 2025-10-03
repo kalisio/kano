@@ -48,10 +48,10 @@ describe(`suite:${suite}`, () => {
     const match = await runner.captureAndMatch('empty', null, 3)
     await map.clickLayer(page, catalogLayersTab, 'OSM_BRIGHT')
     expect(match).beTrue()
-  }).timeout(60000)
+  })
 
   after(async () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(30 * 1000 * core.TestTimeoutMultiplier)

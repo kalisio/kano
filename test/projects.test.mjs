@@ -36,6 +36,7 @@ describe(`suite:${suite}`, () => {
 
   it('admin: create layer and view', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    await map.zoomToLevel(page, 'mapActivity', 14)
     await map.saveLayer(page, userLayersTab, 'trace')
     await map.createView(page, 'trace view', false)
   })
@@ -126,4 +127,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-})
+}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
