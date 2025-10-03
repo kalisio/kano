@@ -19,6 +19,12 @@ export default async function () {
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
     // Create required services for offline mode
+    // Need to wait for authentication in this case before initializing
+    /* This causes an async problem
+    api.on('login', async () => {
+      await kCoreUtils.createOfflineServices()
+    })
+    */
     await kCoreUtils.createOfflineServices()
   } catch (error) {
     logger.error(error.message)

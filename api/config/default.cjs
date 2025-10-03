@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const makeDebug = require('debug')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
@@ -7,6 +8,7 @@ const layers = require('./layers.cjs')
 const categories = require('./categories.cjs')
 const sublegends = require('./sublegends.cjs')
 
+const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
@@ -164,6 +166,16 @@ module.exports = {
     directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
     serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
     syncServicePath: API_PREFIX + '/offline'
+    /* Authentication cause a problem now
+    authenticate: async (app, accessToken) => {
+      try {
+        await app.getService('authentication').verifyAccessToken(accessToken)
+      } catch(error) {
+        debug('Peer authentication failed with', error)
+        return false
+      }
+      return true
+    }*/
   },
   paginate: {
     default: 10,
