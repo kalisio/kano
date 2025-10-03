@@ -91,7 +91,7 @@ describe(`suite:${suite}`, () => {
     expect(match).beTrue()
   })
 
-  it('user: connect wms layer', async () {
+  it('user: connect wms layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     await map.goToPosition(page, 46.62681, 2.59277)
     await map.zoomToLevel(page, 'mapActivity', 7)
@@ -104,6 +104,7 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, userLayersTab, _.kebabCase('Carte lithologique simplifiée au 1/1 000 000'))
     expect(match).beTrue()
   })
+
   it('user: connect wfs layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     const service = 'https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities'
@@ -115,7 +116,8 @@ describe(`suite:${suite}`, () => {
     await map.clickLayer(page, userLayersTab, _.kebabCase('BD CARTO® region'))
     expect(match).beTrue()
   })
-  it('user: connect wmts layer', async () {
+
+  it('user: connect wmts layer', async () => {
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
     await map.goToPosition(page, 46.83201, 8.31116)
     await map.zoomToLevel(page, 'mapActivity', 8)
