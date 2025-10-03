@@ -8,7 +8,11 @@ const suite = 'user-layers'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  // min timeout is 60s because some tests needs to scroll back a
+  // lot to get to low zoom levels (7/6) and it takes time
+  this.timeout(60 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -135,6 +139,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-    // min timeout is 60s because some tests needs to scroll back a
-    // lot to get to low zoom levels (7/6) and it takes time
-}).timeout(60 * 1000 * core.TestTimeoutMultiplier)
+})
