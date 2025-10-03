@@ -42,6 +42,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('edit a style', async () => {
+    await core.waitForTimeout(1000)
     // Edit the style created in the previous step
     await core.click(page, '#style-menu')
     await core.click(page, '#edit-style')
@@ -94,6 +95,7 @@ describe(`suite:${suite}`, () => {
 
   it('import geojson file', async () => {
     await map.importLayer(page, runner.getDataPath('samples.geojson'), 'name')
+    await map.zoomToLevel(page, 'mapActivity', 8)
     await map.saveLayer(page, userLayersTab, 'samples')
   })
 
