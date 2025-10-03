@@ -39,7 +39,7 @@ describe(`suite:${suite}`, () => {
   })
 
   it('import geojson file', async () => {
-    await map.importLayer(page, runner.getDataPath('samples.geojson'), 'name')
+    await map.importLayer(page, runner.getDataPath('samples.geojson'))
     await map.saveLayer(page, userLayersTab, 'samples')
   })
 
