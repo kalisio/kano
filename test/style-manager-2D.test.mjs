@@ -155,6 +155,7 @@ describe(`suite:${suite}`, function () {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
@@ -171,6 +172,7 @@ describe(`suite:${suite}`, function () {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
     await core.click(page, '#apply-edit-filter', 1000)
@@ -189,6 +191,7 @@ describe(`suite:${suite}`, function () {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
 
@@ -225,6 +228,7 @@ describe(`suite:${suite}`, function () {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#filter-editor-rule .q-list .q-item:nth-child(3) #condition-value')
 
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
