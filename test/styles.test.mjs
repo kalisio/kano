@@ -1,4 +1,4 @@
-import chai, { util } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from './kdk/index.mjs'
