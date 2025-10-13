@@ -28,10 +28,10 @@ let layer = {
   },
   schema: {
     name: 'realtime.json',
-    content: '{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"$id\":\"http://www.kalisio.xyz/schemas/realtime.json#\",\"title\":\"Données\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"field\":{\"component\":\"form/KTextField\",\"label\":\"Identifiant\"}}},\"required\":[\"id\"]}'
+    content: '{"$schema":"http://json-schema.org/draft-07/schema#","$id":"http://www.kalisio.xyz/schemas/realtime.json#","title":"Données","type":"object","properties":{"id":{"type":"string","field":{"component":"form/KTextField","label":"Identifiant"}}},"required":["id"]}'
   },
   service: 'features',
-  baseQuery: '{\"layer\":\"66bccb23e9525b0882c3ba1d\"}'
+  baseQuery: '{"layer":"66bccb23e9525b0882c3ba1d"}'
 }
 let point = [
   1.951086,

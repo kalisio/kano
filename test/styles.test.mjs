@@ -43,6 +43,7 @@ describe(`suite:${suite}`, function () {
     await map.zoomToLevel(page, 'mapActivity', 8)
     const match = await runner.captureAndMatch('2D-features-with-style', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-style')
+    expect(match).beTrue()
   })
 
   it('2D styles: realtime pane update', async () => {
@@ -50,6 +51,7 @@ describe(`suite:${suite}`, function () {
     await client.getService('features').patch(null, { style: { color: 'blue', opacity: 1, stroke: { color: '#000000' } } }, { query: { 'properties.name': 'Parc de la Colline' } })
     await client.getService('features').patch(null, { 'style.shape': 'star', 'style.radius': 32, 'style.stroke.color': 'black', 'style.icon.color': 'black', 'style.icon.size': 32 }, { query: { 'properties.name': 'Saint-Luc' } })
     const match = await runner.captureAndMatch('2D-features-updated-style', null, 3)
+    expect(match).beTrue()
   })
 
   it('2D styles: remove styled geojson layer', async () => {
@@ -61,11 +63,13 @@ describe(`suite:${suite}`, function () {
     await map.zoomToLevel(page, 'mapActivity', 10)
     const match = await runner.captureAndMatch('2D-features-with-panes', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-panes')
+    expect(match).beTrue()
   })
 
   it('2D styles: realtime pane update', async () => {
     await client.getService('features').patch(null, { 'style.pane': '501' }, { query: { 'style.pane': '503' } })
     const match = await runner.captureAndMatch('2D-features-updated-pane', null, 3)
+    expect(match).beTrue()
   })
 
   it('2D styles: remove geojson with panes layer', async () => {

@@ -42,7 +42,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 async function cacheKeyWillBeUsed({ request, mode }) {
   const url = new URL(request.url)
   url.searchParams.delete('jwt')
-  const key = url.href
+  let key = url.href
   // Need to add range request in key as it is ignored by cache otherwise
   if (request.headers && request.headers.Range) {
     const range = request.headers.Range.replace('bytes=', '').split('-')
