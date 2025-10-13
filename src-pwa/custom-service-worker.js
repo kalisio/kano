@@ -52,7 +52,7 @@ async function cacheKeyWillBeUsed({ request, mode }) {
 }
 
 async function fetchDidFail({ error, request }) {
-  logger.debug(`[Kano] Fetching ${request.url} from layers cache failed`)
+  logger.debug(`[Kano] Fetching ${request.url} from layers cache failed with error ${error.message}`)
 }
 
 // Register the `CacheFirst` caching strategy for offline data
