@@ -190,7 +190,7 @@ export default {
             latitude: _.get(event, 'latlng.lat'),
             altitude: _.get(event, 'altitude'),
             feature: _.get(event, 'target.feature'),
-            layer: utils.serializeLayerForEmbedEvent(layer),
+            layer: utils.serializeLayerForEmbedEvent(layer)
           }, pickedPosition)
 
           utils.sendEmbedEvent(cesiumEvent, payload)

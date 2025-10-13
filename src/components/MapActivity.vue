@@ -185,7 +185,7 @@ export default {
       return categories
     },
     async getCatalogLayers () {
-      let layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
+      const layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
       const configurationsService = this.$api.getService('configurations')
       const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
       if (userOrphanLayersObject && userOrphanLayersObject.value.length > 0) {
