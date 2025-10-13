@@ -10,7 +10,6 @@
 
 const path = require('path')
 const fs = require('fs')
-const ESLintPlugin = require('eslint-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { configure } = require('quasar/wrappers')
 
@@ -74,7 +73,6 @@ module.exports = configure(function (ctx) {
       },
       
       chainWebpack (chain) {
-        chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
         // Perform bundle analysis
         if (process.env.ANALYZE_BUNDLE) {
           chain.plugin('webpack-bundle-analyzer').use(new BundleAnalyzerPlugin({
@@ -248,11 +246,6 @@ module.exports = configure(function (ctx) {
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
-      
-      chainWebpackCustomSW (chain) {
-        chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: [ 'js' ] }])
-      },
       
       manifest: {
         name: clientConfig.pwaName,
