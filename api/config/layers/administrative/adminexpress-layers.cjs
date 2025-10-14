@@ -43,7 +43,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Niveau des arrondissements',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Niveau départemental',
           ADMINEXPRESS_FILTERED_CANTON: 'Niveau cantonal',
-          ADMINEXPRESS_FILTERED_EPCI: 'Niveau des ECPI',
+          ADMINEXPRESS_FILTERED_EPCI: 'Niveau des EPCI',
           ADMINEXPRESS_FILTERED_COLLECTIVITE_TERRITORIALE: 'Niveau des collectivités territoriales',
           ADMINEXPRESS_FILTERED_REGION: 'Niveau régional',
           ADMINEXPRESS_FILTERED_COMMUNE: 'Niveau communal'
@@ -56,7 +56,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Disctrict level',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Departemental level',
           ADMINEXPRESS_FILTERED_CANTON: 'Cantonal level',
-          ADMINEXPRESS_FILTERED_EPCI: 'ECPI level',
+          ADMINEXPRESS_FILTERED_EPCI: 'EPCI level',
           ADMINEXPRESS_FILTERED_COLLECTIVITE_TERRITORIALE: 'Territorial collectivities level',
           ADMINEXPRESS_FILTERED_REGION: 'Regional level',
           ADMINEXPRESS_FILTERED_COMMUNE: 'Municipal level'
