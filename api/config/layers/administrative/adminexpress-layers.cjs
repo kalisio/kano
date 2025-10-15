@@ -34,7 +34,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }
   }, {
     name: 'Layers.ADMINEXPRESS_FILTERED',
-    description: 'Layers.ADMINEXPRESS_FILTERED__DESCRIPTION',
+    description: 'Layers.ADMINEXPRESS_FILTERED_DESCRIPTION',
     i18n: {
       fr: {
         Layers: {
