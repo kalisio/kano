@@ -39,7 +39,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           ADMINEXPRESS_FILTERED: 'Limites administratives (filtrées)',
-          ADMINEXPRESS_FILTERED_DESCRIPTION: 'Limites administratives (Admin Express COG, ING)',
+          ADMINEXPRESS_FILTERED_DESCRIPTION: 'Limites administratives (Admin Express COG, IGN)',
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Niveau des arrondissements',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Niveau départemental',
           ADMINEXPRESS_FILTERED_CANTON: 'Niveau cantonal',
@@ -52,7 +52,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       en: {
         Layers: {
           ADMINEXPRESS_FILTERED: 'Administrative limits (filtered)',
-          ADMINEXPRESS_FILTERED_DESCRIPTION: 'Administrative limits (Admin Express COG, ING)',
+          ADMINEXPRESS_FILTERED_DESCRIPTION: 'Administrative limits (Admin Express COG, IGN)',
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Disctrict level',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Departemental level',
           ADMINEXPRESS_FILTERED_CANTON: 'Cantonal level',
