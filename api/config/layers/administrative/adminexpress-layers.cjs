@@ -6,13 +6,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           ADMINEXPRESS: 'Limites administratives',
-          ADMINEXPRESS_DESCRIPTION: 'Limites administratives (Admin Express COG, ING)'
+          ADMINEXPRESS_DESCRIPTION: 'Limites administratives (Admin Express COG, IGN)'
         }
       },
       en: {
         Layers: {
           ADMINEXPRESS: 'Administrative limits',
-          ADMINEXPRESS_DESCRIPTION: 'Administrative limits (Admin Express COG, ING)'
+          ADMINEXPRESS_DESCRIPTION: 'Administrative limits (Admin Express COG, IGN)'
         }
       }
     },
