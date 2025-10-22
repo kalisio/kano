@@ -19,13 +19,15 @@ export default async function () {
     const settingsService = api.getService('settings')
     if (settingsService) settingsService.restoreSettings()
     // Create required services for offline mode
-    // Need to wait for authentication in this case before initializing
-    /* This causes an async problem
+    await kCoreUtils.createOfflineServices()
+    // Need to wait for authentication before initializing offline document
+    // FIXME: Do it based on the 'login' event does not work fine due to interleaved async operations,
+    // we now do this in the KDK session management to be sure of the operation order
+    /*
     api.on('login', async () => {
-      await kCoreUtils.createOfflineServices()
+      await kCoreUtils.setOfflineServicesDocumentHandle()
     })
     */
-    await kCoreUtils.createOfflineServices()
   } catch (error) {
     logger.error(error.message)
   }

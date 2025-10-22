@@ -166,16 +166,6 @@ module.exports = {
     directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
     serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
     syncServicePath: API_PREFIX + '/offline'
-    /* Authentication cause a problem now
-    authenticate: async (app, accessToken) => {
-      try {
-        await app.getService('authentication').verifyAccessToken(accessToken)
-      } catch(error) {
-        debug('Peer authentication failed with', error)
-        return false
-      }
-      return true
-    }*/
   },
   paginate: {
     default: 10,

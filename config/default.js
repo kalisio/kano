@@ -610,10 +610,8 @@ module.exports = {
   },
   automerge: {
     syncServerWsPath: 'offline',
-    syncServicePath: API_PREFIX + '/offline'
-    /* Authentication cause a problem now
+    syncServicePath: API_PREFIX + '/offline',
     authenticate: true
-    */
   },
   about: {
     actions: [

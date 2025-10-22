@@ -1,6 +1,6 @@
 import { kdk } from '@kalisio/kdk/core.api.js'
 import distribution, { finalize } from '@kalisio/feathers-distributed'
-import { automergeServer, createRootDocument } from '@kalisio/feathers-automerge-server'
+import { automergeServer } from '@kalisio/feathers-automerge-server'
 import fs from 'fs-extra'
 import _ from 'lodash'
 import siftModule from 'sift'
@@ -18,6 +18,19 @@ import channels from './channels.js'
 const sift = siftModule.default
 const debug = makeDebug('kano:server')
 
+async function authenticateAutomerge(app, accessToken) {
+  try {
+    await app.getService('authentication').verifyAccessToken(accessToken)
+  } catch(error) {
+    debug('Peer authentication failed with', error)
+    return false
+  }
+  return true
+}
+async function canAccessAutomerge(query, user) {
+  // Not used for now
+  return true
+}
 async function initializeAutomergeDocument(servicePath, query) {
   const app = this
   // Take care that feathers strip slashes, go from /api to api/
@@ -93,14 +106,9 @@ export class Server {
       // Check for existing root document or initialize it
       const documentFilepath = path.join(automergeConfig.directory, 'document.automerge')
       try {
-        if (fs.existsSync(documentFilepath)) {
-          automergeConfig.rootDocumentId = fs.readFileSync(documentFilepath).toString()
-        } else {
-          const document = await createRootDocument(automergeConfig.directory)
-          fs.writeFileSync(documentFilepath, document.url)
-          automergeConfig.rootDocumentId = document.url
-        }
         Object.assign(automergeConfig, {
+          authenticate: authenticateAutomerge,
+          canAccess: canAccessAutomerge.bind(app),
           initializeDocument: initializeAutomergeDocument.bind(app),
           getDocumentsForData: getAutomergeDocumentsForData.bind(app)
         })
