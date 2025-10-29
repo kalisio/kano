@@ -75,16 +75,18 @@ const TOP_PANE = (activity) => {
             helpers.horizontalSeparator(),
             topPane.togglePosition(),
             topPane.toggleNorthArrow(),
+            topPane.toggleZoomControl(),
             helpers.horizontalSeparator(),
             topPane.activeMeasureToolMode({ mode: `measure-tool` }),
             topPane.printTool()
           ] : activity === 'globe' ? [
+            topPane.toggleLegend(),
             topPane.toggleSelectionManager(),
             topPane.toggleStylesManager(),
             topPane.toggleTagsManager(),
             helpers.horizontalSeparator(),
             topPane.togglePosition(),
-            topPane.toggleLegend(),
+            topPane.toggleZoomControl()
           ] : []
         },
         helpers.verticalSeparator(),
@@ -138,6 +140,7 @@ const MAP_STICKIES = [
   stickies.position({ offset: [0, 80] }),
   stickies.target(),
   stickies.northArrow({ visible: false }),
+  stickies.zoomControl(),
   stickies.levelSlider(),
   stickies.attribution()
 ]
