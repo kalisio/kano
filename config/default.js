@@ -148,7 +148,8 @@ const MAP_STICKIES = [
 const GLOBE_STICKIES = [
   stickies.position({ offset: [0, 80] }),
   stickies.target(),
-  stickies.attribution()
+  stickies.attribution(),
+  stickies.zoomControl()
 ]
 
 // Catalog panes
