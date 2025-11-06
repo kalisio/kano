@@ -273,7 +273,7 @@ export default {
       const oldUserCategoriesOrder = userCategoriesOrderObject.data[0]
       if (!oldUserCategoriesOrder._id) throw new Error('User categories order object not found')
       const newUserCategoriesOrder = oldUserCategoriesOrder.value.filter(id => id !== category._id)
-      await configurationsService.patch(userCategoriesOrderObject._id, { value: newUserCategoriesOrder })
+      await configurationsService.patch(oldUserCategoriesOrder._id, { value: newUserCategoriesOrder })
     },
     onLayerUpdated (layer, leafletLayer, data) {
       // Do not send update event at each frame for animated layers
