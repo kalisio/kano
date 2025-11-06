@@ -16,8 +16,6 @@ export default async function (name, app, options) {
           if (_.isEmpty(existingConfiguration)) {
             await configurationsService.create(configuration)
             debug('Creating default configuration: ' + configuration.name)
-          } else {
-            await configurationsService.patch(existingConfiguration[0]._id, { value: configuration.value })
           }
         }
       } catch (error) {
