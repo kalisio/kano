@@ -34,7 +34,7 @@ export default async function () {
     })
     app.on('service', service => {
       // Make remote services compliant with our internal app services so that permissions can be used
-      if (service.key === 'weacast') {
+      if (service.key && (service.key !== 'kano')) {
         // Jump from remote service descriptor to actual service instance
         service = decorateDistributedService.call(app, service)
         // Register default permissions for it
@@ -42,6 +42,7 @@ export default async function () {
         permissions.defineAbilities.registerHook((subject, can, cannot) => {
           can('service', service.name)
           can('read', service.name)
+          // Specific case of weacast probe service that requires create permissions for probing
           if (service.name === 'probes') can('create', service.name)
         })
         // We then need to update abilities cache

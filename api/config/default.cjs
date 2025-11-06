@@ -149,6 +149,7 @@ module.exports = {
                            !service.path.includes('features') &&
                            !service.path.includes('projects') &&
                            !service.path.includes('geocoder'),
+    remoteServices: (service) => (service.key === 'weacast') || (service.key === 'crisis'),
     // Distribute at least modelName and pagination for KFS to know about features services
     remoteServiceOptions: () => ['modelName', 'paginate'],
     middlewares: { after: express.errorHandler() },
@@ -156,7 +157,9 @@ module.exports = {
     // this assumes a gateway scenario where authentication is performed externally
     authentication: false,
     key: 'kano',
-    healthcheckPath: API_PREFIX + '/distribution/'
+    healthcheckPath: API_PREFIX + '/distribution/',
+    // Increase default timeout due to possible large data volume
+    timeout: 60000
   },
   paginate: {
     default: 10,

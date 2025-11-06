@@ -612,6 +612,9 @@ module.exports = {
   settings: {
     // Nothing specific, use defaults
   },
+  context: {
+    service: 'organisations'
+  },
   about: {
     actions: [
       {

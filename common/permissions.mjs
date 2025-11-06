@@ -2,6 +2,9 @@ import { permissions } from '@kalisio/kdk/core.common.js'
 
 // Hook computing  catalog, features, etc. abilities for a given user
 export function defineUserAbilities (subject, can, cannot, app) {
+  // Contextual services distributed by other apps
+  can('service', '*/catalog')
+  can('service', '*/features')
   can('service', 'events')
   can('create', 'events')
   can('service', 'configurations')
