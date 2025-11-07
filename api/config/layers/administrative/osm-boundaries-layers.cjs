@@ -5,8 +5,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          OSM_BOUNDARIES: 'Limites administratives - OpenStreetMap (filtrées)',
-          OSM_BOUNDARIES_DESCRIPTION: 'Limites administratives - OpenStreetMap (filtrées)',
+          OSM_BOUNDARIES: 'Limites administratives - OpenStreetMap (par niveau)',
+          OSM_BOUNDARIES_DESCRIPTION: 'Limites administratives - OpenStreetMap (par niveau)',
           OSM_BOUNDARIES_LEVEL_2: 'Niveau 2',
           OSM_BOUNDARIES_LEVEL_3: 'Niveau 3',
           OSM_BOUNDARIES_LEVEL_4: 'Niveau 4',
@@ -18,8 +18,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       en: {
         Layers: {
-          OSM_BOUNDARIES: 'Administrative limits - OpenStreetMap (filtered)',
-          OSM_BOUNDARIES_DESCRIPTION: 'Administrative limits - OpenStreetMap (filtered)',
+          OSM_BOUNDARIES: 'Administrative limits - OpenStreetMap (by level)',
+          OSM_BOUNDARIES_DESCRIPTION: 'Administrative limits - OpenStreetMap (by level)',
           OSM_BOUNDARIES_LEVEL_2: 'Level 2',
           OSM_BOUNDARIES_LEVEL_3: 'Level 3',
           OSM_BOUNDARIES_LEVEL_4: 'Level 4',
