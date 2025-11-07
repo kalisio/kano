@@ -8,7 +8,7 @@ import { watch, onUnmounted } from 'vue'
 import { composables as kdkCoreComposables } from '@kalisio/kdk/core.client'
 
 // Data
-const { Context, setContext, clearContext } = kdkCoreComposables.useContext({ fallbackRoute: 'map-activity' })
+const { setContext, clearContext } = kdkCoreComposables.useContext({ fallbackRoute: 'map-activity' })
 
 // Props
 const props = defineProps({
