@@ -159,7 +159,7 @@ module.exports = {
     key: 'kano',
     healthcheckPath: API_PREFIX + '/distribution/',
     // Increase default timeout due to possible large data volume
-    timeout: 60000
+    timeout: process.env.DISTRIBUTION_TIMEOUT ? parseInt(process.env.DISTRIBUTION_TIMEOUT) : 60000
   },
   paginate: {
     default: 10,
