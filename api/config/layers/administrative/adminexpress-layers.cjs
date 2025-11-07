@@ -108,8 +108,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       isActive: false,
       active: { 'properties.layer': 'COMMUNE' },
       inactive: {}
-    }  
-    ],
+    }],
     leaflet: {
       type: 'geoJson',
       source: '/api/admin-express',
