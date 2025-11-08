@@ -211,7 +211,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           filter: `<%= (properties.layer === 'REGION') %>`
         }
       },
-      template: ['style.line.symbolizer.color', 'style.line.filter'],
+      template: ['style.line.symbolizer.color', 'style.line.filter']
     }
   }]
 }
