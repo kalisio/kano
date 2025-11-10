@@ -4,8 +4,6 @@ import postRobot from 'post-robot'
 import L from 'leaflet'
 import { Router } from '../router'
 
-export * from './utils.time-series.js'
-
 export function getItems (hook) {
   const items = (hook.type === 'before' ? hook.data : hook.result)
   return items && (hook.method === 'find' ? items.data || items : items)

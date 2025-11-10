@@ -289,14 +289,14 @@ export default {
     },
     async updateTimeSeries () {
       if (!this.state) return
-      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
+      this.state.timeSeries = await kMapUtils.updateTimeSeries(this.state.timeSeries)
     },
     updateHighlights () {
       this.clearHighlights()
       this.getSelectedItems().forEach(item => {
         this.highlight(item.feature || item.location, item.layer)
       })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
+      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
     },
     async updateSelection () {
       this.updateHighlights()
@@ -312,7 +312,7 @@ export default {
     },
     async updateProbedLocationHighlight () {
       if (this.hasProbedLocation()) {
-        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
+        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
         // Find time serie for probe, probed location is shared by all series
         const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocationData')
         if (!probedLocation) return
@@ -320,7 +320,7 @@ export default {
         const feature = (isWeatherProbe
           ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
           : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
-        this.highlight(feature, this.getProbedLayer() || { name: utils.ForecastProbeId })
+        this.highlight(feature, this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
       }
     },
     getHighlightMarker (feature, options) {
