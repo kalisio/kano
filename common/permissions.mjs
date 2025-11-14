@@ -25,12 +25,8 @@ export function defineUserAbilities (subject, can, cannot, app) {
         can(['create', 'remove'], 'authorisations')
         // Can manage styles
         can('all', 'styles')
-        // Can manage tags
         can('all', 'tags')
-      }
-      if (role >= permissions.Roles.owner) {
-        // Can update configurations
-        can('service', 'configurations')
+        // Can manage configurations for layer order
         can('all', 'configurations')
       }
     }

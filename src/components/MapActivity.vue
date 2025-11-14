@@ -149,7 +149,7 @@ export default {
       const userCategoriesOrder = userCategoriesOrderObject.value
       const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
 
-      if (userCategoriesOrder.length < categories.filter(c => c._id).length && api.can('update', 'configurations')) {
+      if (api.can('update', 'configurations') && (userCategoriesOrder.length < categories.filter(c => c._id).length)) {
         // give every single user category object its order in the configuration (needed for drag&drop)
         await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
       }
@@ -202,7 +202,7 @@ export default {
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
-      if (api.can('update', 'catalog')) {
+      if (api.can('update', 'configurations')) {
         const configurationsService = this.$api.getService('configurations')
         if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
         const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
@@ -261,19 +261,6 @@ export default {
         if (response && response.data) geoJson = response.data
       }
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
-    },
-    async onCatalogUpdated (object, event) {
-      if (object.type === 'Category' && event === 'removed') await this.onRemoveCategory(object)
-      await kMapMixins.activity.methods.onCatalogUpdated.call(this, object, event)
-    },
-    async onRemoveCategory (category) {
-      const configurationsService = this.$api.getService('configurations')
-      if (!configurationsService || !category) return
-      const userCategoriesOrderObject = await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })
-      const oldUserCategoriesOrder = userCategoriesOrderObject.data[0]
-      if (!oldUserCategoriesOrder._id) throw new Error('User categories order object not found')
-      const newUserCategoriesOrder = oldUserCategoriesOrder.value.filter(id => id !== category._id)
-      await configurationsService.patch(oldUserCategoriesOrder._id, { value: newUserCategoriesOrder })
     },
     onLayerUpdated (layer, leafletLayer, data) {
       // Do not send update event at each frame for animated layers
