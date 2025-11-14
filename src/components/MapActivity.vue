@@ -143,19 +143,14 @@ export default {
       const categories = await kMapMixins.activity.methods.getCatalogCategories()
       const configurationsService = this.$api.getService('configurations')
 
-      // order categories using the configuration objects
-      const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
-      if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
-      const userCategoriesOrder = userCategoriesOrderObject.value
-      const defaultCategoriesOrder = (await configurationsService.find({ query: { name: 'defaultCategoriesOrder' }, paginate: false })).data[0].value
-
-      if (api.can('update', 'configurations') && (userCategoriesOrder.length < categories.filter(c => c._id).length)) {
-        // give every single user category object its order in the configuration (needed for drag&drop)
-        await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
-      }
-
-      // reorder default categories
-      if (defaultCategoriesOrder.length > 0) {
+      // Order categories using the configuration objects
+      let response = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
+      const userCategoriesOrder = _.get(response, 'data[0].value', [])
+      response = await configurationsService.find({ query: { name: 'defaultCategoriesOrder' } })
+      const defaultCategoriesOrder = _.get(response, 'data[0].value', [])
+      
+      // Reorder default categories
+      if (!_.isEmpty(defaultCategoriesOrder)) {
         for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
           const categoryName = defaultCategoriesOrder[i]
           const category = categories.find(c => c.name === categoryName)
@@ -165,8 +160,8 @@ export default {
         }
       }
 
-      // reorder user categories
-      if (userCategoriesOrder.length > 0) {
+      // Reorder user categories
+      if (!_.isEmpty(userCategoriesOrder)) {
         const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c._id))
         for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
           const category = unorderedUserCategories[i]
@@ -186,11 +181,16 @@ export default {
     },
     async getCatalogLayers () {
       const layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
+      return layers
+    },
+    async getOrphanLayers () {
+      const layers = await kMapMixins.activity.methods.getOrphanLayers.call(this)
       const configurationsService = this.$api.getService('configurations')
-      const userOrphanLayersObject = (await configurationsService.find({ query: { name: 'userOrphanLayersOrder' }, paginate: false })).data[0]
-      if (userOrphanLayersObject && userOrphanLayersObject.value.length > 0) {
-        for (let i = userOrphanLayersObject.value.length; i >= 0; i--) {
-          const layerId = userOrphanLayersObject.value[i]
+      const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
+      const userOrphanLayersOrder = _.get(response, 'data[0].value', [])
+      if (!_.isEmpty(userOrphanLayersOrder)) {
+        for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
+          const layerId = userOrphanLayersOrder[i]
           const layerIndex = layers.findIndex(layer => layer?._id === layerId)
           if (layerIndex >= 0) {
             const removedLayers = layers.splice(layerIndex, 1)
@@ -201,22 +201,23 @@ export default {
       return layers
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
+      if (!sourceCategoryId || !targetCategoryId) return
+      // Update frontend structure
+      const sourceIndex = this.layerCategories.findIndex(category => category?._id === sourceCategoryId)
+      const targetIndex = this.layerCategories.findIndex(category => category?._id === targetCategoryId)
+      this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
+      await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       if (api.can('update', 'configurations')) {
         const configurationsService = this.$api.getService('configurations')
-        if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
-        const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
-        if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
-        const userCategoriesOrder = userCategoriesOrderObject.value
-        const sourceCategoryIndex = userCategoriesOrder.findIndex(category => category === sourceCategoryId)
-        const targetCategoryIndex = userCategoriesOrder.findIndex(category => category === targetCategoryId)
-        userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
-        const response = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
-        const sourceIndex = this.layerCategories.findIndex(category => category?._id === sourceCategoryId)
-        const targetIndex = this.layerCategories.findIndex(category => category?._id === targetCategoryId)
-        this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
-        await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
-        return response
+        if (!configurationsService) return
+        // Update backend configuration
+        const response = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
+        const userCategoriesOrderObject = _.get(response, 'data[0]')
+        if (!userCategoriesOrderObject || !userCategoriesOrderObject._id) return
+        // We only reorder user defined categories
+        const userCategories = this.layerCategories.filter(category => category._id).map(category => category._id)
+        await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategories })
       }
     },
     async updateLayersOrder (sourceCategoryId, data, movedLayer) {
