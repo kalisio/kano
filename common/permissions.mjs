@@ -5,6 +5,10 @@ export function defineUserAbilities (subject, can, cannot, app) {
   // Contextual services distributed by other apps
   can('service', '*/catalog')
   can('service', '*/features')
+  can('service', '*/projects')
+  can('service', '*/styles')
+  can('service', '*/tags')
+  can('service', '*/alerts')
   can('service', 'events')
   can('create', 'events')
   can('service', 'configurations')
