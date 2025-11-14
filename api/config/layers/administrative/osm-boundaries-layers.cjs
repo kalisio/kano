@@ -172,12 +172,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                       else { %>rgba(0, 0, 255, 1)<% } %>`,
             width: 2,
             opacity: 1
-          },
-          // Default filter, will be dynamically updated based on active filters
-          filter: `<%= (properties.admin_level === 2) %>`
+          }
         }
       },
-      template: ['style.line.symbolizer.color', 'style.line.filter']
+      template: ['style.line.symbolizer.color']
     }
   }]
 }
