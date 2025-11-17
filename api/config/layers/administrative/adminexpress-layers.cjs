@@ -40,6 +40,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           ADMINEXPRESS_FILTERED: 'Limites administratives (par niveau)',
           ADMINEXPRESS_FILTERED_DESCRIPTION: 'Limites administratives (Admin Express COG, IGN)',
+          ADMINEXPRESS_FILTERED_PAYS: 'Niveau des pays',
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Niveau des arrondissements',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Niveau départemental',
           ADMINEXPRESS_FILTERED_CANTON: 'Niveau cantonal',
@@ -53,6 +54,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           ADMINEXPRESS_FILTERED: 'Administrative limits (by level)',
           ADMINEXPRESS_FILTERED_DESCRIPTION: 'Administrative limits (Admin Express COG, IGN)',
+          ADMINEXPRESS_FILTERED_PAYS: 'Country level',
           ADMINEXPRESS_FILTERED_ARRONDISSEMENT: 'Disctrict level',
           ADMINEXPRESS_FILTERED_DEPARTEMENT: 'Departemental level',
           ADMINEXPRESS_FILTERED_CANTON: 'Cantonal level',
@@ -74,6 +76,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     //featureId: 'name:en',
     featureLabel: ['NOM', 'NOM_M'],
     filters: [{
+      label: 'Layers.ADMINEXPRESS_FILTERED_PAYS',
+      isActive: false,
+      active: { 'properties.layer': 'PAYS' },
+      inactive: {}
+    },{
       label: 'Layers.ADMINEXPRESS_FILTERED_REGION',
       isActive: true,
       active: { 'properties.layer': 'REGION' },
@@ -125,6 +132,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           ADMINEXPRESS_FILTERED_PMTILES: 'Limites administratives (par niveau) - Vectoriel',
           ADMINEXPRESS_FILTERED_PMTILES_DESCRIPTION: 'Limites administratives (Admin Express COG, IGN)',
+          ADMINEXPRESS_FILTERED_PMTILES_PAYS: 'Niveau des pays',
           ADMINEXPRESS_FILTERED_PMTILES_ARRONDISSEMENT: 'Niveau des arrondissements',
           ADMINEXPRESS_FILTERED_PMTILES_DEPARTEMENT: 'Niveau départemental',
           ADMINEXPRESS_FILTERED_PMTILES_CANTON: 'Niveau cantonal',
@@ -138,6 +146,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         Layers: {
           ADMINEXPRESS_FILTERED_PMTILES: 'Administrative limits (by level) - Vector',
           ADMINEXPRESS_FILTERED_PMTILES_DESCRIPTION: 'Administrative limits (Admin Express COG, IGN)',
+          ADMINEXPRESS_FILTERED_PMTILES_PAYS: 'Country level',
           ADMINEXPRESS_FILTERED_PMTILES_ARRONDISSEMENT: 'Disctrict level',
           ADMINEXPRESS_FILTERED_PMTILES_DEPARTEMENT: 'Departemental level',
           ADMINEXPRESS_FILTERED_PMTILES_CANTON: 'Cantonal level',
@@ -153,6 +162,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     type: 'OverlayLayer',
     filters: [{
+      label: 'Layers.ADMINEXPRESS_FILTERED_PMTILES_PAYS',
+      isActive: false,
+      active: { 'properties.layer': 'PAYS' },
+      inactive: {}
+    },{
       label: 'Layers.ADMINEXPRESS_FILTERED_PMTILES_REGION',
       isActive: true,
       active: { 'properties.layer': 'REGION' },
@@ -197,12 +211,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           dataLayer: 'admin-express',
           symbolizer: {
             type: 'LineSymbolizer',
-            color: `<% if (properties.layer === 'REGION') { %>rgba(255, 0, 0, 1)<% }
+            color: `<% if     (properties.layer === 'REGION') { %>rgba(255, 0, 0, 1)<% }
                       else if (properties.layer === 'COLLECTIVITE_TERRITORIALE') { %>rgba(255, 0, 255, 1)<% }
                       else if (properties.layer === 'EPCI') { %>rgba(255, 255, 0, 1)<% }
                       else if (properties.layer === 'CANTON') { %>rgba(0, 255, 255, 1)<% }
                       else if (properties.layer === 'DEPARTEMENT') { %>rgba(0, 255, 0, 1)<% }
                       else if (properties.layer === 'ARRONDISSEMENT') { %>rgba(255, 255, 255, 153)<% }
+                      else if (properties.layer === 'PAYS') { %>rgba(128, 128, 128, 1)<% }
                       else { %>rgba(0, 0, 255, 1)<% } %>`,
             width: 2,
             opacity: 1
