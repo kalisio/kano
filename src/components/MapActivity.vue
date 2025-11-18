@@ -21,6 +21,7 @@ import { computed } from 'vue'
 import { ComposableStore } from '../composable-store.js'
 import { MixinStore } from '../mixin-store.js'
 import * as utils from '../utils'
+import { Configurations } from '../configurations.js'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)
@@ -141,13 +142,10 @@ export default {
     },
     async getCatalogCategories () {
       const categories = await kMapMixins.activity.methods.getCatalogCategories()
-      const configurationsService = this.$api.getService('configurations')
-
+      
       // Order categories using the configuration objects
-      let response = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
-      const userCategoriesOrder = _.get(response, 'data[0].value', [])
-      response = await configurationsService.find({ query: { name: 'defaultCategoriesOrder' } })
-      const defaultCategoriesOrder = _.get(response, 'data[0].value', [])
+      const userCategoriesOrder = await Configurations.getOrder('userCategories')
+      const defaultCategoriesOrder = await Configurations.getOrder('defaultCategories')
       
       // Reorder default categories
       if (!_.isEmpty(defaultCategoriesOrder)) {
@@ -185,9 +183,7 @@ export default {
     },
     async getOrphanLayers () {
       const layers = await kMapMixins.activity.methods.getOrphanLayers.call(this)
-      const configurationsService = this.$api.getService('configurations')
-      const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
-      const userOrphanLayersOrder = _.get(response, 'data[0].value', [])
+      const userOrphanLayersOrder = await Configurations.getOrder('userOrphanLayers')
       if (!_.isEmpty(userOrphanLayersOrder)) {
         for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
           const layerId = userOrphanLayersOrder[i]
@@ -209,15 +205,10 @@ export default {
       await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       if (api.can('update', 'configurations')) {
-        const configurationsService = this.$api.getService('configurations')
-        if (!configurationsService) return
-        // Update backend configuration
-        const response = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
-        const userCategoriesOrderObject = _.get(response, 'data[0]')
-        if (!userCategoriesOrderObject || !userCategoriesOrderObject._id) return
         // We only reorder user defined categories
         const userCategories = this.layerCategories.filter(category => category._id).map(category => category._id)
-        await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategories })
+        // Update backend configuration
+        await Configurations.updateOrder('userCategories', userCategories)
       }
     },
     async updateLayersOrder (sourceCategoryId, data, movedLayer) {
@@ -235,11 +226,7 @@ export default {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       // Also check for in-memory layer
       if (api.can('update', 'configurations') && movedLayer?._id) {
-        const configurationsService = this.$api.getService('configurations')
-        const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
-        const userOrphanLayersObject = _.get(response, 'data[0]')
-        if (!userOrphanLayersObject || !userOrphanLayersObject._id) return
-        await configurationsService.patch(userOrphanLayersObject._id, { value: orphanLayers })
+        await Configurations.updateOrder('userOrphanLayers', orphanLayers)
       }
       await kMapMixins.activity.methods.updateOrphanLayersOrder.call(this, orphanLayers)
     },
