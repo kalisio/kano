@@ -144,8 +144,8 @@ export default {
       const categories = await kMapMixins.activity.methods.getCatalogCategories()
       
       // Order categories using the configuration objects
-      const userCategoriesOrder = await Configurations.getOrder('userCategories')
-      const defaultCategoriesOrder = await Configurations.getOrder('defaultCategories')
+      const userCategoriesOrder = await Configurations.getValue('userCategoriesOrder')
+      const defaultCategoriesOrder = await Configurations.getValue('defaultCategoriesOrder')
       
       // Reorder default categories
       if (!_.isEmpty(defaultCategoriesOrder)) {
@@ -183,7 +183,7 @@ export default {
     },
     async getOrphanLayers () {
       const layers = await kMapMixins.activity.methods.getOrphanLayers.call(this)
-      const userOrphanLayersOrder = await Configurations.getOrder('userOrphanLayers')
+      const userOrphanLayersOrder = await Configurations.getValue('userOrphanLayersOrder')
       if (!_.isEmpty(userOrphanLayersOrder)) {
         for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
           const layerId = userOrphanLayersOrder[i]
@@ -208,7 +208,7 @@ export default {
         // We only reorder user defined categories
         const userCategories = this.layerCategories.filter(category => category._id).map(category => category._id)
         // Update backend configuration
-        await Configurations.updateOrder('userCategories', userCategories)
+        await Configurations.update('userCategoriesOrder', userCategories)
       }
     },
     async updateLayersOrder (sourceCategoryId, data, movedLayer) {
@@ -226,7 +226,7 @@ export default {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       // Also check for in-memory layer
       if (api.can('update', 'configurations') && movedLayer?._id) {
-        await Configurations.updateOrder('userOrphanLayers', orphanLayers)
+        await Configurations.update('userOrphanLayersOrder', orphanLayers)
       }
       await kMapMixins.activity.methods.updateOrphanLayersOrder.call(this, orphanLayers)
     },

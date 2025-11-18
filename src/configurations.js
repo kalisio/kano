@@ -1,10 +1,12 @@
 import _ from 'lodash'
 import { api } from '@kalisio/kdk/core.client'
 
+// Helper singleton to access configuration options stored in the database.
+// Each configuration in an object like: { name, value }.
 export const Configurations = {
   initialize () {
     if (!this.service) return
-    // We use a cache as the configuration is not updated often but can be read a lots of times
+    // We use a cache as the configuration is not updated often but can be read a lot of times
     this.cache = {}
     this.updateCache = (object) => {
       if (object.name && this.cache[object.name]) this.cache[object.name] = object
@@ -23,8 +25,8 @@ export const Configurations = {
     }
     return this.service
   },
-  async getOrderObject (name) {
-    name = `${name}Order`
+  // Get a configuration object by its name
+  async get (name) {
     const service = this.getService()
     if (!service) return
     // Update or return cache
@@ -34,13 +36,15 @@ export const Configurations = {
     if (object) this.cache[name] = object
     return object
   },
-  async getOrder (name) {
-    const orderObject = await this.getOrderObject(name)
-    return _.get(orderObject, 'value', [])
+  // Get the value associated to a configuration object by its name
+  async getValue (name, defaultValue = {}) {
+    const object = await this.get(name)
+    return _.get(object, 'value', defaultValue)
   },
-  async updateOrder (name, value) {
-    const orderObject = await this.getOrderObject(name)
-    if (!orderObject || !orderObject._id) return
-    await this.getService().patch(orderObject._id, { value })
+  // Update the value associated to a configuration object by its name
+  async update (name, value) {
+    const object = await this.get(name)
+    if (!object || !object._id) return
+    await this.getService().patch(object._id, { value })
   }
 }
