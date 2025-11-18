@@ -31,6 +31,7 @@ onBeforeMount(() => {
   const catalogService = api.getServiceInstance('catalog', props.contextId, { create: false })
   if (catalogService) return
   // Declare the organisation services if not already done
+  api.createService('configurations', { context: props.contextId })
   api.createService('catalog', { context: props.contextId })
   api.createService('features', { context: props.contextId })
   api.createService('styles', { context: props.contextId })
