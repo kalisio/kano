@@ -54,6 +54,7 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -103,16 +104,6 @@ export default {
     project: {
       handler () {
         this.refreshLayers()
-      }
-    },
-    'selection.items': {
-      handler () {
-        this.updateSelection()
-      }
-    },
-    'probe.item': {
-      handler () {
-        this.updateSelection()
       }
     }
   },
@@ -258,34 +249,15 @@ export default {
     async onSaveLayer (layer) {
       await kMapMixins.activity.methods.onSaveLayer.call(this, layer)
     },
-    handleWidget (widget) {
-      // If window already open on another widget keep it
-      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
-    },
-    async updateTimeSeries () {
-      if (!this.state) return
-      this.state.timeSeries = await kMapUtils.updateTimeSeries(this.state.timeSeries)
-    },
-    updateHighlights () {
-      this.clearHighlights()
-      this.getSelectedItems().forEach(item => {
-        this.highlight(item.feature || item.location, item.layer)
-      })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
-    },
     async updateSelection () {
-      this.updateHighlights()
-      await this.updateTimeSeries()
-      if (this.hasProbedLocation() || this.hasSelectedItems()) {
-        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
-        // After probing update highlight to use specific weather wind barb
-        await this.updateProbedLocationHighlight()
-      } else {
+      await kMapMixins.featureSelection.methods.updateSelection.call(this)
+      if (!this.hasProbedLocation() && !this.hasSelectedItems()) {
         // Hide the window
         Layout.setWindowVisible('top', false)
       }
     },
     async updateProbedLocationHighlight () {
+      await kMapMixins.featureSelection.methods.updateProbedLocationHighlight.call(this)
       if (this.hasProbedLocation()) {
         this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
         // Find time serie for probe, probed location is shared by all series
@@ -487,14 +459,7 @@ export default {
     this.$engineEvents.on('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
     this.$engineEvents.on('moveend', this.onMoveEnd)
-    this.$engineEvents.on('forecast-model-changed', this.updateSelection)
-    this.$engineEvents.on('selected-level-changed', this.updateSelection)
     this.$engineEvents.on('rotate', this.onUpdateBearing)
-    // We use debounce here to avoid multiple refresh when editing settings for instance
-    this.requestTimeSeriesUpdate = _.debounce(this.updateTimeSeries, 250)
-    this.$events.on('timeseries-group-by-changed', this.requestTimeSeriesUpdate)
-    this.$events.on('units-changed', this.requestTimeSeriesUpdate)
-    this.$events.on('time-current-time-changed', this.updateProbedLocationHighlight)
   },
   beforeUnmount () {
     // Remove event connections
@@ -505,12 +470,7 @@ export default {
     this.$engineEvents.off('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
-    this.$engineEvents.off('forecast-model-changed', this.updateSelection)
-    this.$engineEvents.off('selected-level-changed', this.updateSelection)
     this.$engineEvents.off('rotate', this.onUpdateBearing)
-    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
-    this.$events.off('units-changed', this.requestTimeSeriesUpdate)
-    this.$events.off('time-current-time-changed', this.requestTimeSeriesUpdate)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
