@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Layout, TemplateContext, api, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Configurations, Layout, TemplateContext, api, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import config from 'config'
 import L from 'leaflet'
@@ -21,7 +21,6 @@ import { computed } from 'vue'
 import { ComposableStore } from '../composable-store.js'
 import { MixinStore } from '../mixin-store.js'
 import * as utils from '../utils'
-import { Configurations } from '../configurations.js'
 
 const name = 'mapActivity'
 const baseActivityMixin = kCoreMixins.baseActivity(name)

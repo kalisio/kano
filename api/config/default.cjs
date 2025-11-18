@@ -249,45 +249,8 @@ module.exports = {
       maxUsers: 1000
     }
   },
-  catalog: {
-    layers,
-    categories,
-    sublegends,
-    paginate: {
-      default: 100,
-      max: 1000
-    }
-  },
-  projects: {
-
-  },
-  styles: {
-    paginate: {
-      default: 20,
-      max: 250
-    }
-  },
-  tags: {
-
-  },
-  cesium: {
-    token: process.env.CESIUM_TOKEN
-  },
-  mapillary: {
-    token: process.env.MAPILLARY_TOKEN
-  },
-  logs: {
-    Console: {
-      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
-      level: (process.env.NODE_ENV === 'development' ? 'verbose' : 'info')
-    },
-    DailyRotateFile: {
-      format: winston.format.json(),
-      dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kano-%DATE%.log',
-      datePattern: 'YYYY-MM-DD',
-      maxFiles: '30d'
-    }
+  configurations: {
+    // Nothing specific here
   },
   defaultConfigurations: [{
     name: 'userCategoriesOrder',
@@ -313,6 +276,46 @@ module.exports = {
     name: 'userOrphanLayersOrder',
     value: []
   }],
+  catalog: {
+    layers,
+    categories,
+    sublegends,
+    paginate: {
+      default: 100,
+      max: 1000
+    }
+  },
+  projects: {
+    // Nothing specific here
+  },
+  styles: {
+    paginate: {
+      default: 20,
+      max: 250
+    }
+  },
+  tags: {
+    // Nothing specific here
+  },
+  cesium: {
+    token: process.env.CESIUM_TOKEN
+  },
+  mapillary: {
+    token: process.env.MAPILLARY_TOKEN
+  },
+  logs: {
+    Console: {
+      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
+      level: (process.env.NODE_ENV === 'development' ? 'verbose' : 'info')
+    },
+    DailyRotateFile: {
+      format: winston.format.json(),
+      dirname: path.join(__dirname, '..', 'logs'),
+      filename: 'kano-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      maxFiles: '30d'
+    }
+  },
   db: {
     adapter: 'mongodb',
     url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),

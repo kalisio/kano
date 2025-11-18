@@ -1,4 +1,4 @@
-import kCore, { createDefaultUsers, createDefaultTags, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
+import kCore, { createDefaultUsers, createDefaultTags, createDefaultConfigurations, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
 import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService, createDefaultStyles } from '@kalisio/kdk/map.api.js'
 import makeDebug from 'debug'
 import fs from 'fs-extra'
@@ -59,8 +59,7 @@ export default async function () {
   }
 
   // Create app services
-  const configurationsService = await app.createService('configurations', { modelsPath, servicesPath })
-
+  
   // Configure app hooks on the built-in catalog service
   const catalogService = app.getService('catalog')
   await app.configureService('catalog', catalogService, servicesPath)
@@ -72,7 +71,7 @@ export default async function () {
   await createCatalogFeaturesServices.call(app)
 
   // Initialize defaults
-  await configurationsService.createDefaultConfigurations(app)
+  await createDefaultConfigurations.call(app)
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
   await createDefaultStyles.call(app)
