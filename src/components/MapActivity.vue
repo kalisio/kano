@@ -138,52 +138,20 @@ export default {
       const defaultCategoriesOrder = await Configurations.getValue('defaultCategoriesOrder')
       
       // Reorder default categories
-      if (!_.isEmpty(defaultCategoriesOrder)) {
-        for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
-          const categoryName = defaultCategoriesOrder[i]
-          const category = categories.find(c => c.name === categoryName)
-          if (!category) continue
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c.name === categoryName), 1)[0])
-        }
-      }
+      kMapUtils.orderCatalogItemsBy(categories, defaultCategoriesOrder)
 
-      // Reorder user categories
-      if (!_.isEmpty(userCategoriesOrder)) {
-        const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c._id))
-        for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
-          const category = unorderedUserCategories[i]
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
-        }
-        for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
-          const categoryId = userCategoriesOrder[i]
-          const category = categories.find(c => c._id === categoryId)
-          if (!category) continue
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
-        }
-      }
+      // Reorder user categories, unordered first
+      const unorderedUserCategoriesOrder = categories.filter(category => category._id && !userCategoriesOrder.includes(category._id)).map(category => category._id)
+      kMapUtils.orderCatalogItemsBy(categories, unorderedUserCategoriesOrder)
+      // Then ordered ones
+      kMapUtils.orderCatalogItemsBy(categories, userCategoriesOrder)
 
       return categories
-    },
-    async getCatalogLayers () {
-      const layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
-      return layers
     },
     async getOrphanLayers () {
       const layers = await kMapMixins.activity.methods.getOrphanLayers.call(this)
       const userOrphanLayersOrder = await Configurations.getValue('userOrphanLayersOrder')
-      if (!_.isEmpty(userOrphanLayersOrder)) {
-        for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
-          const layerId = userOrphanLayersOrder[i]
-          const layerIndex = layers.findIndex(layer => layer?._id === layerId)
-          if (layerIndex >= 0) {
-            const removedLayers = layers.splice(layerIndex, 1)
-            if (removedLayers.length > 0) layers.unshift(removedLayers[0])
-          }
-        }
-      }
+      kMapUtils.orderCatalogItemsBy(layers, userOrphanLayersOrder)
       return layers
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
