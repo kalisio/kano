@@ -4,7 +4,29 @@ sidebarDepth: 3
 
 # Changelog
 
+## v2.7.0 - Not yet released
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/16) and [KDK](https://github.com/kalisio/kdk/milestone/16).
+
 ## v2.6.0 - Not yet released
+
+**Major enhancements:**\
+👉 Enhanced zoom control,\
+👉 More options now available for geodesic objects,\
+👉 Ability to use distributed contextual services.
+
+**Cartographic data enhancements:**\
+👉 Move to new Téléray public API linked to [upgraded krawler job](https://github.com/kalisio/k-teleray).
+
+**Major bug fixes:**\
+✅ Possible XSS when editing objects or with error messages as query parameter,\
+✅ Timezone/Location map now uses global catalog when a contextual one is available,\
+✅ Layers and categories display order not correctly updated when removed,\
+✅ Window pin coordinates now accounts for header or footer.
+
+**No major breaking changes reported for customized versions or iframe integration use cases.**.
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/15) and [KDK](https://github.com/kalisio/kdk/milestone/15).
 
 ## v2.5.0 - October 10th, 2025
 
