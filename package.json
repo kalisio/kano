@@ -97,7 +97,7 @@
     "@kalisio/feathers-localforage": "^1.2.0",
     "@kalisio/feathers-s3": "^1.4.0",
     "@kalisio/feathers-webpush": "^1.0.1",
-    "@kalisio/kdk": "https://github.com/kalisio/kdk",
+    "@kalisio/kdk": "https://github.com/kalisio/kdk#v2.6",
     "@kalisio/leaflet-graphicscale": "^1.0.0",
     "@kalisio/leaflet-pmtiles": "https://github.com/kalisio/leaflet-pmtiles",
     "@kalisio/leaflet.donutcluster": "^1.1.0",
