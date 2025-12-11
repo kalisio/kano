@@ -284,8 +284,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     featureLabel: 'libelle_pe',
     from: 'P-7D',
     to: 'PT-10M',
-    every: 'PT10M',
-    queryFrom: 'PT-30M',
+    every: 'PT1H',
+    queryFrom: 'PT-12H',
     variables: [
       {
         name: 'profondeur_nappe',
@@ -344,14 +344,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color'],
       popup: {
         pick: [
-          'libelle_pe',
-          'bss_id'
+          'libelle_pe'
         ]
       },
       tooltip: {
-        template: `<% if (_.has(properties, 'profondeur_nappe')) { %>H = <%= Units.format(properties.profondeur_nappe, 'm', 'm') %></br><% }
+        template: `<% if (_.has(properties, 'profondeur_nappe')) { %>PN = <%= Units.format(properties.profondeur_nappe, 'm', 'm') %></br><% }
                    if (_.has(feature, 'time.profondeur_nappe')) { %><%= Time.format(feature.time.profondeur_nappe, 'time.long') + ' - ' + Time.format(feature.time.profondeur_nappe, 'date.short') %></br><% }
-                   if (_.has(properties, 'niveau_eau_ngf')) { %>Q = <%= Units.format(properties.niveau_eau_ngf, 'm') %></br><% }
+                   if (_.has(properties, 'niveau_eau_ngf')) { %>NEN = <%= Units.format(properties.niveau_eau_ngf, 'm') %></br><% }
                    if (_.has(feature, 'time.niveau_eau_ngf')) { %><%= Time.format(feature.time.niveau_eau_ngf, 'time.long') + ' - ' + Time.format(feature.time.niveau_eau_ngf, 'date.short') %></br><% } %>`
       }
     },
@@ -363,14 +362,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       'marker-color': '#00a9ce',
       popup: {
         pick: [
-          'libelle_pe',
-          'bss_id'
+          'libelle_pe'
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'profondeur_nappe\')) { %>H = <%= Units.format(properties.profondeur_nappe, \'m\', \'m\') %>\n<% }' +
+        template: '<% if (_.has(properties, \'profondeur_nappe\')) { %>PN = <%= Units.format(properties.profondeur_nappe, \'m\', \'m\') %>\n<% }' +
                   'if (_.has(feature, \'time.profondeur_nappe\')) { %><%= Time.format(feature.time.profondeur_nappe, \'time.long\') + \' - \' + Time.format(feature.time.profondeur_nappe, \'date.short\') %>\n<% }' +
-                  'if (_.has(properties, \'niveau_eau_ngf\')) { %>Q = <%= Units.format(properties.niveau_eau_ngf, \'m\') %>\n<% }' +
+                  'if (_.has(properties, \'niveau_eau_ngf\')) { %>NEN = <%= Units.format(properties.niveau_eau_ngf, \'m\') %>\n<% }' +
                   'if (_.has(feature, \'time.niveau_eau_ngf\')) { %><%= Time.format(feature.time.niveau_eau_ngf, \'time.long\') + \' - \' + Time.format(feature.time.niveau_eau_ngf, \'date.short\') %>\n<% } %>'
       }
     }
