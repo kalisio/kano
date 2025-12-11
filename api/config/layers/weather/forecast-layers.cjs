@@ -11,8 +11,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           WIND_DESCRIPTION: 'Vitesse et direction'
         },
         Variables: {
-          WIND_SPEED: 'Vitesse à 10m',
-          WIND_DIRECTION: 'Direction à 10m'
+          WIND_SPEED: `Vitesse à <%= level ? level + levelUnit : '10m' %>`,
+          WIND_DIRECTION: `Direction à <%= level ? level + levelUnit : '10m' %>`
         },
         Levels: {
           PRESSURE: 'Pression'
@@ -24,8 +24,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           WIND_DESCRIPTION: 'Speed and direction'
         },
         Variables: {
-          WIND_SPEED: 'Speed at 10m',
-          WIND_DIRECTION: 'Direction at 10m'
+          WIND_SPEED: `Speed at <%= level ? level + levelUnit : '10m' %>`,
+          WIND_DIRECTION: `Direction at <%= level ? level + levelUnit : '10m' %>`
         },
         Levels: {
           PRESSURE: 'Pressure'
@@ -135,7 +135,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           GUST_DESCRIPTION: 'Vitesse maximale du vent'
         },
         Variables: {
-          GUST: 'Rafales à 10m'
+          GUST: `Rafales à <%= level ? level + levelUnit : '10m' %>`
         }
       },
       en: {
@@ -144,7 +144,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           GUST_DESCRIPTION: 'Maximum wind speed'
         },
         Variables: {
-          GUST: 'Gust at 10m'
+          GUST: `Gust at <%= level ? level + levelUnit : '10m' %>`
         }
       }
     },
@@ -325,7 +325,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           TEMPERATURE_DESCRIPTION: 'Température moyenne'
         },
         Variables: {
-          TEMPERATURE: 'Température à 2m'
+          TEMPERATURE: `Température à <%= level ? level + levelUnit : '2m' %>`
         }
       },
       en: {
@@ -334,7 +334,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           TEMPERATURE_DESCRIPTION: 'Mean temperature'
         },
         Variables: {
-          TEMPERATURE: 'Temperature at 2m'
+          TEMPERATURE: `Temperature at <%= level ? level + levelUnit : '2m' %>`
         }
       }
     },
