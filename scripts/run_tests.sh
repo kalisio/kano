@@ -47,3 +47,5 @@ done
 ##
 
 run_app_tests "$ROOT_DIR" "workspaces/apps" "$CODE_COVERAGE" "$NODE_VER" "$MONGO_VER"
+
+cd "$ROOT_DIR" && sonar-scanner
