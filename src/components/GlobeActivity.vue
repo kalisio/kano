@@ -13,8 +13,8 @@
 <script>
 import _ from 'lodash'
 import { computed } from 'vue'
-import { Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
-import { mixins as kMapMixins, composables as kMapComposables, utils as kMapUtils } from '@kalisio/kdk/map.client'
+import {  mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
 import * as utils from '../utils'
