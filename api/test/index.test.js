@@ -99,6 +99,7 @@ describe('kano', () => {
   it('cannot update users from external clients', async () => {
     try {
       await client.service(app.get('apiPath') + '/users').update(userObject._id.toString(), { name: 'new name' })
+      assert.fail('unauthorized user update should raise on error')
     } catch (error) {
       expect(error).toExist()
       expect(error.name).to.equal('MethodNotAllowed')
@@ -108,7 +109,7 @@ describe('kano', () => {
   it('cannot update user permissions without using authorisations service', async () => {
     try {
       await client.service(app.get('apiPath') + '/users').patch(userObject._id.toString(), { catalog: { permissions: 'manager' } })
-      assert.fail('error not thrown')
+      assert.fail('unauthorized user permission update should raise on error')
     } catch (error) {
       expect(error).toExist()
       expect(error.name).to.equal('BadRequest')
@@ -171,6 +172,34 @@ describe('kano', () => {
   // Let enough time to process
     .timeout(5000)
 
+  it('cannot disclose user information', async () => {
+    // Should not retrieve internal user secret information like password in any case
+    let user = await client.service(app.get('apiPath') + '/users').get(userObject._id.toString())
+    expect(user._id).to.equal(userObject._id.toString())
+    expect(user.password).beUndefined()
+    expect(user.previousPasswords).beUndefined()
+    expect(user.catalog).beUndefined()
+    expect(user.layers).toExist()
+    // Should not list others users in case of requests with identified user
+    const response = await client.service(app.get('apiPath') + '/users').find({ query: {} })
+    let users = response.data
+    expect(users.length).to.equal(1)
+    user = users[0]
+    expect(user._id).to.equal(userObject._id.toString())
+    expect(user.password).beUndefined()
+    expect(user.previousPasswords).beUndefined()
+    expect(user.catalog).beUndefined()
+    expect(user.layers).toExist()
+    // Should not get others users in case of requests with identified user
+    try {
+      user = await client.service(app.get('apiPath') + '/users').get(managerObject._id.toString())
+      assert.fail('unauthorized user information disclosure should raise on error')
+    } catch (error) {
+      expect(error).toExist()
+      expect(error.name).to.equal('MethodNotAllowed')
+    }
+  })
+
   it('managers can remove user authorisation on built-in layer', async () => {
     const authorisation = await authorisationService.remove('Layers.TELERAY', {
       query: {
@@ -194,6 +223,7 @@ describe('kano', () => {
   it('unauthorized user cannot feed built-in layers', async () => {
     try {
       await stationsService.create({}, { user: userObject, checkAuthorisation: true })
+      assert.fail('unauthorized user create should raise on error')
     } catch (error) {
       expect(error).toExist()
       expect(error.name).to.equal('Forbidden')
@@ -208,6 +238,7 @@ describe('kano', () => {
   it('users cannot update catalog', async () => {
     try {
       await catalogService.create({}, { user: userObject, checkAuthorisation: true })
+      assert.fail('unauthorized user create should raise on error')
     } catch (error) {
       expect(error).toExist()
       expect(error.name).to.equal('Forbidden')
