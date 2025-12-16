@@ -473,6 +473,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('/icons/kdk/position-cursor.png'), auto;
+    cursor: url('/kdk/position-cursor.png'), auto;
   }
 </style>
