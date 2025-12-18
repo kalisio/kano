@@ -1,5 +1,5 @@
 {
         "all": true,
-        "include": ["api/src/**/*.js"],
+        "include": ["api/src"],
         "reporter": ["text", "lcovonly"]
 }
