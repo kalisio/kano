@@ -53,7 +53,7 @@ jobs:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: bash ./scripts/run_tests.sh -s -r ${{ github.job }}
 
-    additional_tests:
+  additional_tests:
     strategy:
       fail-fast: false
       matrix:
