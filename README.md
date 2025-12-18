@@ -4,8 +4,8 @@
 
 [![Latest Release](https://img.shields.io/github/v/tag/kalisio/kano?sort=semver&label=latest)](https://github.com/kalisio/kano/releases)
 [![Build Status](https://app.travis-ci.com/kalisio/kano.svg?branch=master)](https://app.travis-ci.com/kalisio/kano)
-[![Code Climate](https://codeclimate.com/github/kalisio/kano/badges/gpa.svg)](https://codeclimate.com/github/kalisio/kano)
-[![Test Coverage](https://codeclimate.com/github/kalisio/kano/badges/coverage.svg)](https://codeclimate.com/github/kalisio/kano/coverage)
+[![Maintainability Issues](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-kano&metric=software_quality_maintainability_issues&token=sqb_a4fd6b20cd67bf0553c3c1b5c5ffa316f4aab0d2)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-kano)
+[![Coverage](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-kano&metric=coverage&token=sqb_a4fd6b20cd67bf0553c3c1b5c5ffa316f4aab0d2)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-kano)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://kalisio.github.io/kano/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kalisio/kano.svg)](https://hub.docker.com/r/kalisio/kano/)

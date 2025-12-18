@@ -15,8 +15,8 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 NODE_VER=20
 MONGO_VER=7
 CI_STEP_NAME="Run tests"
-CODE_COVERAGE=false
-while getopts "m:n:cr:" option; do
+RUN_SONAR=false
+while getopts "m:n:sr:" option; do
     case $option in
         m) # defines mongo version
             MONGO_VER=$OPTARG
@@ -24,8 +24,8 @@ while getopts "m:n:cr:" option; do
         n) # defines node version
             NODE_VER=$OPTARG
              ;;
-        c) # publish code coverage
-            CODE_COVERAGE=true
+        s) # enable SonarQube analysis and publish code quality & coverage results
+            RUN_SONAR=true
             ;;
         r) # report outcome to slack
             CI_STEP_NAME=$OPTARG
@@ -46,6 +46,4 @@ done
 ## Run tests
 ##
 
-run_app_tests "$ROOT_DIR" "workspaces/apps" "$CODE_COVERAGE" "$NODE_VER" "$MONGO_VER"
-
-cd "$ROOT_DIR" && sonar-scanner
+run_app_tests "$ROOT_DIR" "workspaces/apps" "$RUN_SONAR" "$NODE_VER" "$MONGO_VER"
