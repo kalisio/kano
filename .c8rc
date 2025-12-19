@@ -1,5 +1,26 @@
 {
         "all": true,
-        "include": ["api/**/**/*.js"],
+        "exclude": [
+        "node_modules/**",
+        "scripts/**",
+        "config/**",
+        "dockerfile/**",
+
+        "src/**",
+        "src-pwa/**",
+        "public/**",
+        "docs/**",
+        "tutorials/**",
+
+        "test/**",
+        "**/*.test.js",
+        "**/*.spec.js",
+
+        "**/*.config.js",
+        "**/*.conf.js",
+        "**/index.template.html",
+
+        "api/src/**/index.js"
+        ],
         "reporter": ["text", "lcovonly"]
 }
