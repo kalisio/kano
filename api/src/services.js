@@ -25,7 +25,8 @@ export default async function () {
         // Allow to override version number for custom build
         version: (process.env.VERSION ? process.env.VERSION : packageInfo.version),
         cesium: app.get('cesium'),
-        mapillary: app.get('mapillary')
+        mapillary: app.get('mapillary'),
+        panoramax: app.get('panoramax')
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER

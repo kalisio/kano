@@ -48,6 +48,7 @@ export default {
     kMapMixins.map.tiledMeshLayers,
     kMapMixins.map.tiledWindLayers,
     kMapMixins.map.mapillaryLayers,
+    kMapMixins.map.panoramaxLayers,
     kMapMixins.map.gsmapLayers,
     kMapMixins.map.pmtilesLayers,
     baseActivityMixin,

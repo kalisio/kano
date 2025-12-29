@@ -134,7 +134,7 @@ const LEFT_WIDGETS = [
 ]
 
 // top window
-const TOP_WIDGETS = [widgetsTop.INFORMATION_BOX, widgetsTop.TIME_SERIES, widgetsTop.ELEVATION_PROFILE, widgetsTop.MAPILLARY_VIEWER]
+const TOP_WIDGETS = [widgetsTop.INFORMATION_BOX, widgetsTop.TIME_SERIES, widgetsTop.ELEVATION_PROFILE, widgetsTop.MAPILLARY_VIEWER, widgetsTop.PANORAMAX_VIEWER]
 
 const MAP_STICKIES = [
   stickies.position({ offset: [0, 80] }),

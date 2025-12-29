@@ -303,6 +303,9 @@ module.exports = {
   mapillary: {
     token: process.env.MAPILLARY_TOKEN
   },
+  panoramax: {
+    // empty for now
+  },
   logs: {
     Console: {
       format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
