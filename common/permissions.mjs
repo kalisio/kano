@@ -9,29 +9,32 @@ export function defineUserAbilities (subject, can, cannot, app) {
   can('service', '*/styles')
   can('service', '*/tags')
   can('service', '*/alerts')
+  can('service', '*/configurations')
+
   can('service', 'events')
   can('create', 'events')
-  can('service', '*/configurations')
   can(['find', 'get'], 'configurations')
   if (subject && subject._id) {
     if (subject.catalog) {
       const catalog = subject.catalog
       const role = permissions.Roles[catalog.permissions]
       if (role >= permissions.Roles.manager) {
+        // This can work for contextual services distributed by other apps
+        const context = catalog.context
         // Can manage layers, projects and alerts
-        can('all', 'catalog')
-        can('all', 'projects')
-        can(['create', 'remove'], 'authorisations', { resourcesService: 'projects', scope: 'projects' })
-        can('all', 'alerts')
+        can('all', 'catalog', { context })
+        can('all', 'projects', { context })
+        can(['create', 'remove'], 'authorisations', { resourcesService: context ? context.toString() + '/projects' : 'projects', scope: 'projects' })
+        can('all', 'alerts', { context })
         // Can manage features on user-defined layers
-        can('all', 'features')
+        can('all', 'features', { context })
         // Can authorize users on specific layers
         can(['create', 'remove'], 'authorisations')
         // Can manage styles
-        can('all', 'styles')
-        can('all', 'tags')
+        can('all', 'styles', { context })
+        can('all', 'tags', { context })
         // Can manage configurations for layer order
-        can('all', 'configurations')
+        can('all', 'configurations', { context })
       }
     }
     if (subject.projects) {
