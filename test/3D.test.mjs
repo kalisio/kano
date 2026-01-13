@@ -8,7 +8,9 @@ const suite = '3D'
 const catalogLayersTab = 'catalog-layers'
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(30 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
 
@@ -74,4 +76,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-}).timeout(30 * 1000 * core.TestTimeoutMultiplier)
+})

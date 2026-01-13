@@ -8,6 +8,11 @@ on:
         default: false
         required: false
         type: boolean
+      run_additional_tests:
+        description: "Run additional tests"
+        default: false
+        required: false
+        type: boolean
       build_e2e_tests:
         description: "Build end-to-end tests"
         default: false
@@ -46,8 +51,35 @@ jobs:
       - name: Run tests
         env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        # run: bash ./scripts/run_tests.sh -c -r ${{ github.job }}
-        run: bash ./scripts/run_tests.sh -r ${{ github.job }}
+        run: bash ./scripts/run_tests.sh -s -r ${{ github.job }}
+
+  additional_tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+        mongo: [7, 8]
+    name: Additional tests
+    if: ${{
+      github.event_name == 'workflow_dispatch' && inputs.run_additional_tests ||
+      github.event_name == 'push' && contains(github.event.head_commit.message, 'additional tests')
+      }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Init runner
+        run: bash ./scripts/init_runner.sh ${{ github.job }}
+      - name: Setup workspace
+        env:
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
+        run: bash ./scripts/setup_workspace.sh -k klifull -n ${{ matrix.node }}
+      - name: Run tests
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: bash ./scripts/run_tests.sh -n ${{ matrix.node }} -m ${{ matrix.mongo }}
 
   build_e2e_tests:
     name: Build e2e tests

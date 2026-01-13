@@ -4275,18 +4275,6 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@kalisio/feathers-localforage@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@kalisio/feathers-localforage/-/feathers-localforage-1.2.0.tgz#5235933863195a6aed6a923ebb46b9c85c748c40"
-  integrity sha512-m/kWRRgNQQoB4V2EP83lD0WgWlSvFseQGYEZiIDwsY6Jzc56D5HSeF+T+qfWisFj8j0MxoQ4IhB24Xzme7LYvA==
-  dependencies:
-    "@feathersjs/adapter-commons" "^5.0.8"
-    "@feathersjs/commons" "^5.0.8"
-    "@feathersjs/errors" "^5.0.8"
-    debug "^4.3.2"
-    localforage "^1.10.0"
-    sift "^16.0.0"
-
 "@kalisio/feathers-s3@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@kalisio/feathers-s3/-/feathers-s3-1.0.0.tgz#ffafeaf8f201eaa06f7b5f95933acef55d498a9d"
@@ -4387,7 +4375,7 @@
 
 "@kalisio/leaflet-pmtiles@https://github.com/kalisio/leaflet-pmtiles":
   version "0.0.1"
-  resolved "https://github.com/kalisio/leaflet-pmtiles#53a65efd67a1db7b9e1df8010be9288f7a935686"
+  resolved "https://github.com/kalisio/leaflet-pmtiles#e842493901dc7dc307c644222ffe13a4456c3fd0"
   dependencies:
     protomaps-leaflet "^3.1.1"
 
@@ -14726,6 +14714,11 @@ leaflet-geometryutil@^0.10.0:
   integrity sha512-Qeas+KsnenE0Km/ydt8km3AqFe7kJhVwuLdbCYM2xe2epsxv5UFEaVJiagvP9fnxS8QvBNbm7DJlDA0tkKo9VA==
   dependencies:
     leaflet "^1.6.0"
+
+leaflet-gesture-handling@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/leaflet-gesture-handling/-/leaflet-gesture-handling-1.2.2.tgz#ea10afb94f2d477d77d47beb21e409ed327df07a"
+  integrity sha512-Blf5V4PoNphWkzL7Y1qge+Spkd4OCQ2atjwUNhMhLIcjKzPcBH++x/lwOinaR9jSqLWqJ6oKYO8d0XdTffy4hQ==
 
 leaflet-heatmap@^1.0.0:
   version "1.0.0"

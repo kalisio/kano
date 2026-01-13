@@ -1,18 +1,5 @@
 {
   "REMOVE_LABEL": "Supprimer",
-  "TimeSeries": {
-    "LABEL": "Séries chronologiques",
-    "CHART_SERIE_TOOLTIP": "Voir le graphe",
-    "TABLE_SERIE_TOOLTIP": "Voir la table",
-    "LOGARITHMIC_SERIE_TOOLTIP": "Echelle logarithmique",
-    "LINEAR_SERIE_TOOLTIP": "Echelle linéaire",
-    "PIN_SERIE_TOOLTIP": "Epingler le graphe",
-    "UNPIN_SERIE_TOOLTIP": "Désépingler le graphe",
-    "EXPORT_SERIE_TOOLTIP": "Exporter les données",
-    "RESTORE_ZOOM": "Restaurer la vue précédente",
-    "RUN": "Réseau de prévision",
-    "CENTER_ON": "Centrer la vue sur la sonde"
-  },
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",

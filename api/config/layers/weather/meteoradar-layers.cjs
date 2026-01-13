@@ -82,7 +82,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
           to: 'PT-1H',
           every: 'PT15M',
           dynprops: {
-            url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + s3Url + '/ovh/meteo-archives/meteoradar/' + flavor + '/<%- folder %>/<%- file %>.tif?jwt=<%- jwtToken %>' }
+            url: { strTemplate: '<% const folder = stepTime.format(\'YYYY/MM/DD\'); const file = stepTime.format(\'HHmm\') %>' + s3Url + '/ovh/meteo-archives/meteoradar/' + flavor + '/<%- folder %>/<%- file %>.tif?jwt=<%- gatewayJwt %>' }
           },
           geotiff: {}
         }]

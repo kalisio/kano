@@ -13,7 +13,7 @@
 <script>
 import _ from 'lodash'
 import { computed } from 'vue'
-import { Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import {  mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -36,6 +36,7 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -85,16 +86,6 @@ export default {
       handler () {
         this.refreshLayers()
       }
-    },
-    'selection.items': {
-      handler () {
-        this.updateSelection()
-      }
-    },
-    'probe.item': {
-      handler () {
-        this.updateSelection()
-      }
     }
   },
   methods: {
@@ -129,30 +120,6 @@ export default {
         if (response && response.data) geoJson = response.data
       }
       await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
-    },
-    handleWidget (widget) {
-      // If window already open on another widget keep it
-      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
-    },
-    async updateTimeSeries () {
-      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
-    },
-    updateHighlights () {
-      this.clearHighlights()
-      this.getSelectedItems().forEach(item => {
-        this.highlight(item.feature || item.location, item.layer)
-      })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
-    },
-    async updateSelection () {
-      this.updateHighlights()
-      await this.updateTimeSeries()
-      if (this.hasProbedLocation() || this.hasSelectedItems()) {
-        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
-      } else {
-        // Hide the window
-        Layout.setWindowVisible('top', false)
-      }
     },
     forwardLayerEvents (layerEvents) {
       if (!_.has(this, 'layerHandlers')) this.layerHandlers = {}
@@ -190,7 +157,7 @@ export default {
             latitude: _.get(event, 'latlng.lat'),
             altitude: _.get(event, 'altitude'),
             feature: _.get(event, 'target.feature'),
-            layer: utils.serializeLayerForEmbedEvent(layer),
+            layer: utils.serializeLayerForEmbedEvent(layer)
           }, pickedPosition)
 
           utils.sendEmbedEvent(cesiumEvent, payload)
@@ -226,14 +193,10 @@ export default {
     this.forwardCesiumEvents(allCesiumEvents)
     const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
     this.forwardLayerEvents(allLayerEvents)
-    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
-    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
   },
   beforeUnmount () {
     this.removeForwardedCesiumEvents()
     this.removeForwardedLayerEvents()
-    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
-    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
@@ -263,6 +226,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('/icons/kdk/position-cursor.png'), auto;
+    cursor: url('/kdk/position-cursor.png'), auto;
   }
 </style>

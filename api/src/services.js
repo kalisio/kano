@@ -1,4 +1,4 @@
-import kCore, { createDefaultUsers, createDefaultTags, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
+import kCore, { createDefaultUsers, createDefaultTags, createDefaultConfigurations, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
 import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService, createDefaultStyles } from '@kalisio/kdk/map.api.js'
 import makeDebug from 'debug'
 import fs from 'fs-extra'
@@ -34,7 +34,7 @@ export default async function () {
     })
     app.on('service', service => {
       // Make remote services compliant with our internal app services so that permissions can be used
-      if (service.key === 'weacast') {
+      if (service.key && (service.key !== 'kano')) {
         // Jump from remote service descriptor to actual service instance
         service = decorateDistributedService.call(app, service)
         // Register default permissions for it
@@ -42,6 +42,7 @@ export default async function () {
         permissions.defineAbilities.registerHook((subject, can, cannot) => {
           can('service', service.name)
           can('read', service.name)
+          // Specific case of weacast probe service that requires create permissions for probing
           if (service.name === 'probes') can('create', service.name)
         })
         // We then need to update abilities cache
@@ -58,8 +59,7 @@ export default async function () {
   }
 
   // Create app services
-  const configurationsService = await app.createService('configurations', { modelsPath, servicesPath })
-
+  
   // Configure app hooks on the built-in catalog service
   const catalogService = app.getService('catalog')
   await app.configureService('catalog', catalogService, servicesPath)
@@ -71,7 +71,7 @@ export default async function () {
   await createCatalogFeaturesServices.call(app)
 
   // Initialize defaults
-  await configurationsService.createDefaultConfigurations(app)
+  await createDefaultConfigurations.call(app)
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
   await createDefaultStyles.call(app)

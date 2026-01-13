@@ -25,103 +25,111 @@ module.exports = [{
           redirect: { name: 'map-activity' },
           tour: tours.home
         },
-        'map/:south?/:west?/:north?/:east?': {
-          name: 'map-activity',
-          component: 'MapActivity',
-          embedApi: true,
-          tour: {
-            'side-nav': tours['side-nav'],
-            'navigation-bar': tours['navigation-bar'],
-            'favorite-views': tours['favorite-views'],
-            'catalog-panel': tours['catalog-panel'],
-            timeline: tours.timeline,
-            fab: tours.fab
-          },
+        ':contextId?': {
+          // The name of the route has to be set the default child
+          name: '',
+          component: 'Context',
+          props: true,
           children: {
-            'create-view': {
-              name: 'create-map-view',
-              component: 'catalog/KCreateView',
-              tour: tours['create-view']
-            },
-            'add-layer': {
-              name: 'add-map-layer',
-              component: 'catalog/KAddLayer',
+            'map/:south?/:west?/:north?/:east?': {
+              name: 'map-activity',
+              component: 'MapActivity',
+              embedApi: true,
               tour: {
-                'add-layer': tours['add-layer'],
-                'import-layer': tours['import-layer'],
-                'connect-layer': tours['connect-layer'],
-                'create-layer': tours['create-layer']
+                'side-nav': tours['side-nav'],
+                'navigation-bar': tours['navigation-bar'],
+                'favorite-views': tours['favorite-views'],
+                'catalog-panel': tours['catalog-panel'],
+                timeline: tours.timeline,
+                fab: tours.fab
+              },
+              children: {
+                'create-view': {
+                  name: 'create-map-view',
+                  component: 'catalog/KCreateView',
+                  tour: tours['create-view']
+                },
+                'add-layer': {
+                  name: 'add-map-layer',
+                  component: 'catalog/KAddLayer',
+                  tour: {
+                    'add-layer': tours['add-layer'],
+                    'import-layer': tours['import-layer'],
+                    'connect-layer': tours['connect-layer'],
+                    'create-layer': tours['create-layer']
+                  }
+                },
+                'manage-project': {
+                  name: 'manage-map-project',
+                  component: 'catalog/KProjectManager',
+                  tour: tours['manage-project']
+                },
+                'layer-chart/:layerId?': {
+                  name: 'map-layer-chart',
+                  component: 'KFeaturesChart',
+                  props: true
+                },
+                'layer-table/:layerId?': {
+                  name: 'map-layer-table',
+                  component: 'KFeaturesTable',
+                  props: true
+                },
+                'edit-layer-feature/:layerId?/:featureId': {
+                  name: 'edit-map-layer-feature',
+                  component: 'KFeatureEditor',
+                  props: true
+                },
+                'create-project': {
+                  name: 'create-map-project',
+                  component: 'catalog/KProjectEditor',
+                  tour: tours['create-project']
+                },
+                'edit-project/:objectId': {
+                  name: 'edit-map-project',
+                  component: 'catalog/KProjectEditor',
+                  tour: tours['edit-project'],
+                  props: true
+                },
+                categories: {
+                  name: 'manage-layer-categories',
+                  component: 'catalog/KLayerCategories',
+                  tour: tours['catalog-categories']
+                }
               }
             },
-            'manage-project': {
-              name: 'manage-map-project',
-              component: 'catalog/KProjectManager',
-              tour: tours['manage-project']
-            },
-            'layer-chart/:layerId?': {
-              name: 'map-layer-chart',
-              component: 'KFeaturesChart',
-              props: true
-            },
-            'layer-table/:layerId?': {
-              name: 'map-layer-table',
-              component: 'KFeaturesTable',
-              props: true
-            },
-            'edit-layer-feature/:layerId?/:featureId': {
-              name: 'edit-map-layer-feature',
-              component: 'KFeatureEditor',
-              props: true
-            },
-            'create-project': {
-              name: 'create-map-project',
-              component: 'catalog/KProjectEditor',
-              tour: tours['create-project']
-            },
-            'edit-project/:objectId': {
-              name: 'edit-map-project',
-              component: 'catalog/KProjectEditor',
-              tour: tours['edit-project'],
-              props: true
-            },
-            categories: {
-              name: 'manage-layer-categories',
-              component: 'catalog/KLayerCategories',
-              tour: tours['catalog-categories']
-            }
-          }
-        },
-        'globe/:south?/:west?/:north?/:east?': {
-          name: 'globe-activity',
-          component: 'GlobeActivity',
-          embedApi: true,
-          tour: {
-            'side-nav': tours['side-nav'],
-            'navigation-bar': tours['navigation-bar'],
-            'favorite-views': tours['favorite-views'],
-            'catalog-panel': tours['catalog-panel'],
-            timeline: tours.timeline,
-            fab: tours.fab
-          },
-          children: {
-            'add-layer': {
-              name: 'add-globe-layer',
-              component: 'catalog/KAddLayer',
+            'globe/:south?/:west?/:north?/:east?': {
+              name: 'globe-activity',
+              component: 'GlobeActivity',
+              embedApi: true,
               tour: {
-                'import-layer': tours['import-layer']
+                'side-nav': tours['side-nav'],
+                'navigation-bar': tours['navigation-bar'],
+                'favorite-views': tours['favorite-views'],
+                'catalog-panel': tours['catalog-panel'],
+                timeline: tours.timeline,
+                fab: tours.fab
               },
-              props: { modes: ['import'] }
-            },
-            'layer-chart/:layerId?': {
-              name: 'globe-layer-chart',
-              component: 'KFeaturesChart',
-              props: true
-            },
-            'layer-table/:layerId?': {
-              name: 'globe-layer-table',
-              component: 'KFeaturesTable',
-              props: true
-            },
+              children: {
+                'add-layer': {
+                  name: 'add-globe-layer',
+                  component: 'catalog/KAddLayer',
+                  tour: {
+                    'import-layer': tours['import-layer']
+                  },
+                  props: { modes: ['import'] }
+                },
+                'layer-chart/:layerId?': {
+                  name: 'globe-layer-chart',
+                  component: 'KFeaturesChart',
+                  props: true
+                },
+                'layer-table/:layerId?': {
+                  name: 'globe-layer-table',
+                  component: 'KFeaturesTable',
+                  props: true
+                }
+              }
+            }
           }
         }
       }

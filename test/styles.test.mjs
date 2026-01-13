@@ -1,4 +1,4 @@
-import chai, { util } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
 import { core, map } from './kdk/index.mjs'
@@ -7,7 +7,9 @@ const suite = 'styles'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -41,6 +43,7 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 'mapActivity', 8)
     const match = await runner.captureAndMatch('2D-features-with-style', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-style')
+    expect(match).beTrue()
   })
 
   it('2D styles: realtime pane update', async () => {
@@ -48,6 +51,7 @@ describe(`suite:${suite}`, () => {
     await client.getService('features').patch(null, { style: { color: 'blue', opacity: 1, stroke: { color: '#000000' } } }, { query: { 'properties.name': 'Parc de la Colline' } })
     await client.getService('features').patch(null, { 'style.shape': 'star', 'style.radius': 32, 'style.stroke.color': 'black', 'style.icon.color': 'black', 'style.icon.size': 32 }, { query: { 'properties.name': 'Saint-Luc' } })
     const match = await runner.captureAndMatch('2D-features-updated-style', null, 3)
+    expect(match).beTrue()
   })
 
   it('2D styles: remove styled geojson layer', async () => {
@@ -59,11 +63,13 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLevel(page, 'mapActivity', 10)
     const match = await runner.captureAndMatch('2D-features-with-panes', null, 3)
     await map.saveLayer(page, userLayersTab, 'features-with-panes')
+    expect(match).beTrue()
   })
 
   it('2D styles: realtime pane update', async () => {
     await client.getService('features').patch(null, { 'style.pane': '501' }, { query: { 'style.pane': '503' } })
     const match = await runner.captureAndMatch('2D-features-updated-pane', null, 3)
+    expect(match).beTrue()
   })
 
   it('2D styles: remove geojson with panes layer', async () => {
@@ -74,4 +80,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
+})

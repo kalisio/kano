@@ -28,10 +28,10 @@ let layer = {
   },
   schema: {
     name: 'realtime.json',
-    content: '{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"$id\":\"http://www.kalisio.xyz/schemas/realtime.json#\",\"title\":\"Données\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"field\":{\"component\":\"form/KTextField\",\"label\":\"Identifiant\"}}},\"required\":[\"id\"]}'
+    content: '{"$schema":"http://json-schema.org/draft-07/schema#","$id":"http://www.kalisio.xyz/schemas/realtime.json#","title":"Données","type":"object","properties":{"id":{"type":"string","field":{"component":"form/KTextField","label":"Identifiant"}}},"required":["id"]}'
   },
   service: 'features',
-  baseQuery: '{\"layer\":\"66bccb23e9525b0882c3ba1d\"}'
+  baseQuery: '{"layer":"66bccb23e9525b0882c3ba1d"}'
 }
 let point = [
   1.951086,
@@ -97,7 +97,9 @@ function offset (coordinates) {
   }
 }
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -206,4 +208,4 @@ describe(`suite:${suite}`, () => {
       await client.getService('features').remove(null, { query: { layer: layer._id } })
     }
   })
-}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
+})

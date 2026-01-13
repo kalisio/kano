@@ -151,6 +151,7 @@ module.exports = {
                            !service.path.includes('features') &&
                            !service.path.includes('projects') &&
                            !service.path.includes('geocoder'),
+    remoteServices: (service) => (service.key === 'weacast') || (service.key === 'crisis'),
     // Distribute at least modelName and pagination for KFS to know about features services
     remoteServiceOptions: () => ['modelName', 'paginate'],
     middlewares: { after: express.errorHandler() },
@@ -158,7 +159,9 @@ module.exports = {
     // this assumes a gateway scenario where authentication is performed externally
     authentication: false,
     key: 'kano',
-    healthcheckPath: API_PREFIX + '/distribution/'
+    healthcheckPath: API_PREFIX + '/distribution/',
+    // Increase default timeout due to possible large data volume
+    timeout: process.env.DISTRIBUTION_TIMEOUT ? parseInt(process.env.DISTRIBUTION_TIMEOUT) : 60000
   },
   automerge: {
     syncServerUrl: process.env.AUTOMERGE_SYNC_SERVER_URL,
@@ -255,45 +258,8 @@ module.exports = {
       maxUsers: 1000
     }
   },
-  catalog: {
-    layers,
-    categories,
-    sublegends,
-    paginate: {
-      default: 100,
-      max: 1000
-    }
-  },
-  projects: {
-
-  },
-  styles: {
-    paginate: {
-      default: 20,
-      max: 250
-    }
-  },
-  tags: {
-
-  },
-  cesium: {
-    token: process.env.CESIUM_TOKEN
-  },
-  mapillary: {
-    token: process.env.MAPILLARY_TOKEN
-  },
-  logs: {
-    Console: {
-      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
-      level: (process.env.NODE_ENV === 'development' ? 'verbose' : 'info')
-    },
-    DailyRotateFile: {
-      format: winston.format.json(),
-      dirname: path.join(__dirname, '..', 'logs'),
-      filename: 'kano-%DATE%.log',
-      datePattern: 'YYYY-MM-DD',
-      maxFiles: '30d'
-    }
+  configurations: {
+    // Nothing specific here
   },
   defaultConfigurations: [{
     name: 'userCategoriesOrder',
@@ -319,6 +285,46 @@ module.exports = {
     name: 'userOrphanLayersOrder',
     value: []
   }],
+  catalog: {
+    layers,
+    categories,
+    sublegends,
+    paginate: {
+      default: 100,
+      max: 1000
+    }
+  },
+  projects: {
+    // Nothing specific here
+  },
+  styles: {
+    paginate: {
+      default: 20,
+      max: 250
+    }
+  },
+  tags: {
+    // Nothing specific here
+  },
+  cesium: {
+    token: process.env.CESIUM_TOKEN
+  },
+  mapillary: {
+    token: process.env.MAPILLARY_TOKEN
+  },
+  logs: {
+    Console: {
+      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
+      level: (process.env.NODE_ENV === 'development' ? 'verbose' : 'info')
+    },
+    DailyRotateFile: {
+      format: winston.format.json(),
+      dirname: path.join(__dirname, '..', 'logs'),
+      filename: 'kano-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      maxFiles: '30d'
+    }
+  },
   db: {
     adapter: 'mongodb',
     url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),

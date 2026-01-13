@@ -7,7 +7,9 @@ const suite = 'style-manager-3D'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(30 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -53,10 +55,13 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#create-style')
     await core.type(page, '#name-field', 'test-style')
     await core.click(page, '#apply-style', 1000)
+
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S1_create_style', null, 3)).beTrue()
   })
 
   it('edit a style', async () => {
+    await core.waitForTimeout(1000)
     // Edit the style created in the previous step
     await core.click(page, '#style-menu')
     await core.click(page, '#edit-style')
@@ -112,11 +117,15 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-menu #menu-entries .q-item', 1000)
     // Hide style manager
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
+
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S1_apply_style_layer', null, 3)).beTrue()
   })
 
   it('reset layer style', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'reset-layer-style'])
+
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S1_reset_style_layer', null, 3)).beTrue()
   })
 
@@ -134,6 +143,7 @@ describe(`suite:${suite}`, () => {
     await map.zoomToLayer(page, userLayersTab, 'samples', 5000)
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S1_apply_style_selection', null, 3)).beTrue()
   })
 
@@ -143,6 +153,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#reset-style-selected-feature')
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-selection-widget'])
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S1_reset_style_selection', null, 3)).beTrue()
   })
 
@@ -159,9 +170,11 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_create_filter_without_style', null, 3)).beTrue()
   })
 
@@ -175,11 +188,13 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_create_filter_with_existing_style', null, 3)).beTrue()
   })
 
@@ -193,6 +208,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
 
@@ -212,6 +228,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_create_filter_with_new_style', null, 3)).beTrue()
   })
 
@@ -229,10 +246,12 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#filter-editor-rule .q-list .q-item:nth-child(3) #condition-value')
 
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_edit_filter', null, 3)).beTrue()
   })
 
@@ -253,6 +272,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#apply-style', 1000)
     await core.clickPaneActions(page, 'top', ['tools', 'toggle-style-manager'])
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_update_style', null, 3)).beTrue()
   })
 
@@ -263,6 +283,7 @@ describe(`suite:${suite}`, () => {
     }
     await core.click(page, '#apply-edit-filter', 1000)
 
+    await core.waitForTimeout(1000)
     expect(await runner.captureAndMatch('S2_remove_filters', null, 3)).beTrue()
   })
 
@@ -284,4 +305,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-}).timeout(30 * 1000 * core.TestTimeoutMultiplier)
+})

@@ -7,7 +7,9 @@ const suite = 'style-manager-2D'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -153,6 +155,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
 
@@ -169,6 +172,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
     await core.click(page, '#apply-edit-filter', 1000)
@@ -187,6 +191,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '#condition-value')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#condition-value')
     await core.click(page, '#filter-style-field')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
 
@@ -223,6 +228,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(1)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(2)')
     await core.click(page, '.q-virtual-scroll__content .q-item:nth-child(3)')
+    await core.click(page, '#filter-editor-rule .q-list .q-item:nth-child(3) #condition-value')
 
     await core.click(page, '#apply-edit-filter', 1000)
     await core.click(page, '#apply-edit-filter', 1000)
@@ -278,4 +284,4 @@ describe(`suite:${suite}`, () => {
     await core.logout(page)
     await runner.stop()
   })
-}).timeout(2 * 1000 * core.TestTimeoutMultiplier)
+})

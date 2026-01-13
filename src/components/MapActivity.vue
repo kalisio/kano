@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Layout, TemplateContext, api, mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
+import { Configurations, Layout, TemplateContext, api, mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import config from 'config'
 import L from 'leaflet'
@@ -53,6 +53,7 @@ export default {
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -103,16 +104,6 @@ export default {
       handler () {
         this.refreshLayers()
       }
-    },
-    'selection.items': {
-      handler () {
-        this.updateSelection()
-      }
-    },
-    'probe.item': {
-      handler () {
-        this.updateSelection()
-      }
     }
   },
   methods: {
@@ -141,81 +132,41 @@ export default {
     },
     async getCatalogCategories () {
       const categories = await kMapMixins.activity.methods.getCatalogCategories()
-      const configurationsService = this.$api.getService('configurations')
+      
+      // Order categories using the configuration objects
+      const userCategoriesOrder = await Configurations.getValue('userCategoriesOrder')
+      const defaultCategoriesOrder = await Configurations.getValue('defaultCategoriesOrder')
+      
+      // Reorder default categories
+      kMapUtils.orderCatalogItemsBy(categories, defaultCategoriesOrder)
 
-      // order categories using the configuration objects
-      const userCategoriesOrderObject = await configurationsService.find({ query: { name: 'userCategoriesOrder' } })
-      const userCategoriesOrder = _.get(userCategoriesOrderObject, 'data[0].value', [])
-      const defaultCategoriesOrderObject = await configurationsService.find({ query: { name: 'defaultCategoriesOrder' } })
-      const defaultCategoriesOrder = _.get(defaultCategoriesOrderObject, 'data[0].value', [])
-
-      if (userCategoriesOrder.length < categories.filter(c => c._id).length && api.can('update', 'configurations')) {
-        // give every single user category object its order in the configuration (needed for drag&drop)
-        await configurationsService.patch(userCategoriesOrderObject._id, { value: categories.filter(c => c._id).map(c => c._id) })
-      }
-
-      // reorder default categories
-      if (defaultCategoriesOrder.length > 0) {
-        for (let i = defaultCategoriesOrder.length - 1; i >= 0; i--) {
-          const categoryName = defaultCategoriesOrder[i]
-          const category = categories.find(c => c.name === categoryName)
-          if (!category) continue
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c.name === categoryName), 1)[0])
-        }
-      }
-
-      // reorder user categories
-      if (userCategoriesOrder.length > 0) {
-        const unorderedUserCategories = categories.filter(c => c._id && !userCategoriesOrder.includes(c._id))
-        for (let i = unorderedUserCategories.length - 1; i >= 0; i--) {
-          const category = unorderedUserCategories[i]
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
-        }
-        for (let i = userCategoriesOrder.length - 1; i >= 0; i--) {
-          const categoryId = userCategoriesOrder[i]
-          const category = categories.find(c => c._id === categoryId)
-          if (!category) continue
-          // move category to beginning of array
-          categories.unshift(categories.splice(categories.findIndex(c => c?._id === category._id), 1)[0])
-        }
-      }
+      // Reorder user categories, unordered first
+      const unorderedUserCategoriesOrder = categories.filter(category => category._id && !userCategoriesOrder.includes(category._id)).map(category => category._id)
+      kMapUtils.orderCatalogItemsBy(categories, unorderedUserCategoriesOrder)
+      // Then ordered ones
+      kMapUtils.orderCatalogItemsBy(categories, userCategoriesOrder)
 
       return categories
     },
-    async getCatalogLayers () {
-      let layers = await kMapMixins.activity.methods.getCatalogLayers.call(this)
-      const configurationsService = this.$api.getService('configurations')
-      const userOrphanLayersObject = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
-      const userOrphanLayersOrder = _.get(userOrphanLayersObject, 'data[0].value', [])
-      for (let i = userOrphanLayersOrder.length; i >= 0; i--) {
-        const layerId = userOrphanLayersOrder[i]
-        const layerIndex = layers.findIndex(layer => layer?._id === layerId)
-        if (layerIndex >= 0) {
-          const removedLayers = layers.splice(layerIndex, 1)
-          if (removedLayers.length > 0) layers.unshift(removedLayers[0])
-        }
-      }
+    async getOrphanLayers () {
+      const layers = await kMapMixins.activity.methods.getOrphanLayers.call(this)
+      const userOrphanLayersOrder = await Configurations.getValue('userOrphanLayersOrder')
+      kMapUtils.orderCatalogItemsBy(layers, userOrphanLayersOrder)
       return layers
     },
     async updateCategoriesOrder (sourceCategoryId, targetCategoryId) {
+      if (!sourceCategoryId || !targetCategoryId) return
+      // Update frontend structure
+      const sourceIndex = this.layerCategories.findIndex(category => category?._id === sourceCategoryId)
+      const targetIndex = this.layerCategories.findIndex(category => category?._id === targetCategoryId)
+      this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
+      await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
-      if (api.can('update', 'catalog')) {
-        const configurationsService = this.$api.getService('configurations')
-        if (!configurationsService || !sourceCategoryId || !targetCategoryId) return
-        const userCategoriesOrderObject = (await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })).data[0]
-        if (!userCategoriesOrderObject._id) throw new Error('User categories order object not found')
-        const userCategoriesOrder = userCategoriesOrderObject.value
-        const sourceCategoryIndex = userCategoriesOrder.findIndex(category => category === sourceCategoryId)
-        const targetCategoryIndex = userCategoriesOrder.findIndex(category => category === targetCategoryId)
-        userCategoriesOrder.splice(targetCategoryIndex, 0, userCategoriesOrder.splice(sourceCategoryIndex, 1)[0])
-        const response = await configurationsService.patch(userCategoriesOrderObject._id, { value: userCategoriesOrder })
-        const sourceIndex = this.layerCategories.findIndex(category => category?._id === sourceCategoryId)
-        const targetIndex = this.layerCategories.findIndex(category => category?._id === targetCategoryId)
-        this.layerCategories.splice(targetIndex, 0, this.layerCategories.splice(sourceIndex, 1)[0])
-        await kMapMixins.activity.methods.updateCategoriesOrder.call(this, sourceCategoryId, targetCategoryId)
-        return response
+      if (api.can('update', 'configurations')) {
+        // We only reorder user defined categories
+        const userCategories = this.layerCategories.filter(category => category._id).map(category => category._id)
+        // Update backend configuration
+        await Configurations.update('userCategoriesOrder', userCategories)
       }
     },
     async updateLayersOrder (sourceCategoryId, data, movedLayer) {
@@ -233,11 +184,7 @@ export default {
       // Serialize the change only if the user is authorized, otherwise this will only be a temporary local change
       // Also check for in-memory layer
       if (api.can('update', 'configurations') && movedLayer?._id) {
-        const configurationsService = this.$api.getService('configurations')
-        const response = await configurationsService.find({ query: { name: 'userOrphanLayersOrder' } })
-        const userOrphanLayersObject = _.get(response, 'data[0]')
-        if (!userOrphanLayersObject || !userOrphanLayersObject._id) return
-        await configurationsService.patch(userOrphanLayersObject._id, { value: orphanLayers })
+        await Configurations.update('userOrphanLayersOrder', orphanLayers)
       }
       await kMapMixins.activity.methods.updateOrphanLayersOrder.call(this, orphanLayers)
     },
@@ -261,19 +208,6 @@ export default {
       }
       await kMapMixins.map.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
     },
-    async onCatalogUpdated (object, event) {
-      if (object.type === 'Category' && event === 'removed') await this.onRemoveCategory(object)
-      await kMapMixins.activity.methods.onCatalogUpdated.call(this, object, event)
-    },
-    async onRemoveCategory (category) {
-      const configurationsService = this.$api.getService('configurations')
-      if (!configurationsService || !category) return
-      const userCategoriesOrderObject = await configurationsService.find({ query: { name: 'userCategoriesOrder' }, paginate: false })
-      const oldUserCategoriesOrder = userCategoriesOrderObject.data[0]
-      if (!oldUserCategoriesOrder._id) throw new Error('User categories order object not found')
-      const newUserCategoriesOrder = oldUserCategoriesOrder.value.filter(id => id !== category._id)
-      await configurationsService.patch(userCategoriesOrderObject._id, { value: newUserCategoriesOrder })
-    },
     onLayerUpdated (layer, leafletLayer, data) {
       // Do not send update event at each frame for animated layers
       if (_.has(this.updateAnimations, `${layer.name}.id`)) return
@@ -282,36 +216,17 @@ export default {
     async onSaveLayer (layer) {
       await kMapMixins.activity.methods.onSaveLayer.call(this, layer)
     },
-    handleWidget (widget) {
-      // If window already open on another widget keep it
-      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
-    },
-    async updateTimeSeries () {
-      if (!this.state) return
-      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
-    },
-    updateHighlights () {
-      this.clearHighlights()
-      this.getSelectedItems().forEach(item => {
-        this.highlight(item.feature || item.location, item.layer)
-      })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
-    },
     async updateSelection () {
-      this.updateHighlights()
-      await this.updateTimeSeries()
-      if (this.hasProbedLocation() || this.hasSelectedItems()) {
-        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
-        // After probing update highlight to use specific weather wind barb
-        await this.updateProbedLocationHighlight()
-      } else {
+      await kMapMixins.featureSelection.methods.updateSelection.call(this)
+      if (!this.hasProbedLocation() && !this.hasSelectedItems()) {
         // Hide the window
         Layout.setWindowVisible('top', false)
       }
     },
     async updateProbedLocationHighlight () {
+      await kMapMixins.featureSelection.methods.updateProbedLocationHighlight.call(this)
       if (this.hasProbedLocation()) {
-        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: utils.ForecastProbeId })
+        this.unhighlight(this.getProbedLocation(), this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
         // Find time serie for probe, probed location is shared by all series
         const probedLocation = await _.get(this.state.timeSeries, '[0].series[0].probedLocationData')
         if (!probedLocation) return
@@ -319,7 +234,7 @@ export default {
         const feature = (isWeatherProbe
           ? this.getProbedLocationForecastAtCurrentTime(probedLocation)
           : this.getProbedLocationMeasureAtCurrentTime(probedLocation))
-        this.highlight(feature, this.getProbedLayer() || { name: utils.ForecastProbeId })
+        this.highlight(feature, this.getProbedLayer() || { name: kMapUtils.ForecastProbeId })
       }
     },
     getHighlightMarker (feature, options) {
@@ -526,14 +441,7 @@ export default {
     this.$engineEvents.on('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.on('edit-stop', this.onEditStopEvent)
     this.$engineEvents.on('moveend', this.onMoveEnd)
-    this.$engineEvents.on('forecast-model-changed', this.updateSelection)
-    this.$engineEvents.on('selected-level-changed', this.updateSelection)
     this.$engineEvents.on('rotate', this.onUpdateBearing)
-    // We use debounce here to avoid multiple refresh when editing settings for instance
-    this.requestTimeSeriesUpdate = _.debounce(this.updateTimeSeries, 250)
-    this.$events.on('timeseries-group-by-changed', this.requestTimeSeriesUpdate)
-    this.$events.on('units-changed', this.requestTimeSeriesUpdate)
-    this.$events.on('time-current-time-changed', this.updateProbedLocationHighlight)
   },
   beforeUnmount () {
     // Remove event connections
@@ -544,12 +452,7 @@ export default {
     this.$engineEvents.off('edit-point-moved', this.onEditPointMovedEvent)
     this.$engineEvents.off('edit-stop', this.onEditStopEvent)
     this.$engineEvents.off('moveend', this.onMoveEnd)
-    this.$engineEvents.off('forecast-model-changed', this.updateSelection)
-    this.$engineEvents.off('selected-level-changed', this.updateSelection)
     this.$engineEvents.off('rotate', this.onUpdateBearing)
-    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
-    this.$events.off('units-changed', this.requestTimeSeriesUpdate)
-    this.$events.off('time-current-time-changed', this.requestTimeSeriesUpdate)
     this.unregisterStyle('point', this.getHighlightMarker)
     this.unregisterStyle('tooltip', this.getHighlightTooltip)
   },
@@ -585,6 +488,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('/icons/kdk/position-cursor.png'), auto;
+    cursor: url('/kdk/position-cursor.png'), auto;
   }
 </style>
