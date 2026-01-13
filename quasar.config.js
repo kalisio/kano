@@ -126,7 +126,11 @@ module.exports = configure(function (ctx) {
           config: path.resolve(__dirname, 'config/client-config.json'),
           jsts: path.resolve(__dirname, 'src/assets/kdk/jsts.min.js')
         },
-        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
+        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize,
+        cfg.experiments = {
+          ...cfg.experiments,
+          asyncWebAssembly: true
+        }
       }
     },
 
@@ -140,6 +144,12 @@ module.exports = configure(function (ctx) {
           logLevel: 'debug'
         },
         '/apiws': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          ws: true,
+          logLevel: 'debug'
+        },
+        '/offline': {
           target: 'http://localhost:' + serverPort,
           changeOrigin: true,
           ws: true,

@@ -612,6 +612,11 @@ module.exports = {
   settings: {
     // Nothing specific, use defaults
   },
+  automerge: {
+    syncServerWsPath: 'offline',
+    syncServicePath: API_PREFIX + '/offline',
+    authenticate: true
+  },
   context: {
     service: 'organisations'
   },

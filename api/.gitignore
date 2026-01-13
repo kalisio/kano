@@ -60,3 +60,5 @@ typings/
 # Distribution files
 dist
 
+# Automerge data
+automerge

@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const makeDebug = require('debug')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
@@ -7,6 +8,7 @@ const layers = require('./layers.cjs')
 const categories = require('./categories.cjs')
 const sublegends = require('./sublegends.cjs')
 
+const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
@@ -160,6 +162,13 @@ module.exports = {
     healthcheckPath: API_PREFIX + '/distribution/',
     // Increase default timeout due to possible large data volume
     timeout: process.env.DISTRIBUTION_TIMEOUT ? parseInt(process.env.DISTRIBUTION_TIMEOUT) : 60000
+  },
+  automerge: {
+    syncServerUrl: process.env.AUTOMERGE_SYNC_SERVER_URL,
+    syncServerWsPath: process.env.AUTOMERGE_SYNC_SERVER_PATH || 'offline',
+    directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
+    serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
+    syncServicePath: API_PREFIX + '/offline'
   },
   paginate: {
     default: 10,
