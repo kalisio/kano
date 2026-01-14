@@ -3,7 +3,7 @@ import { registerRoute } from 'workbox-routing'
 import { NetworkFirst, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import logger from 'loglevel'
-import { LocalForage } from '@kalisio/feathers-localforage'
+import LocalForage from 'localforage'
 // Ensure same underlying configuration as we are in another process and instance may differ
 const storage = LocalForage.createInstance({
   name: 'offline_cache',

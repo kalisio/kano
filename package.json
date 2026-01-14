@@ -97,6 +97,7 @@
     "@feathersjs/memory": "^5.0.8",
     "@geoman-io/leaflet-geoman-free": "2.18.3",
     "@intlify/vue-i18n-loader": "^4.2.0",
+    "@kalisio/feathers-automerge": "^0.3.8",
     "@kalisio/feathers-s3": "^1.4.0",
     "@kalisio/feathers-webpush": "^1.0.1",
     "@kalisio/kdk": "https://github.com/kalisio/kdk",
