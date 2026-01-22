@@ -68,7 +68,7 @@ module.exports = configure(function (ctx) {
 
       vueLoaderOptions: {
         compilerOptions: {
-          isCustomElement: tag => ['pinch-zoom'].includes(tag)        
+          isCustomElement: tag => ['pinch-zoom', 'pnx-photo-viewer'].includes(tag)        
         }
       },
       
