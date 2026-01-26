@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Configurations, Layout, TemplateContext, api, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import { Configurations, Layout, TemplateContext, api, mixins as kCoreMixins, utils as kCoreUtils } from '@kalisio/kdk/core.client'
 import { composables as kMapComposables, mixins as kMapMixins, utils as kMapUtils } from '@kalisio/kdk/map.client'
 import config from 'config'
 import L from 'leaflet'
@@ -407,6 +407,21 @@ export default {
         north,
         east
       })
+    },
+    async cacheView (view, layers, options = {}) {
+      // Override to add configurations in cache as well
+      await kMapUtils.addViewToCache(view, options)
+      // Generate offline document for views in cache
+      const query = await kMapUtils.getOfflineDocumentQueryForViews()
+      query.configurations = {}
+      const offlineDocument = await kCoreUtils.createOfflineDocument(query)
+      await kCoreUtils.getOfflineDocumentContent(offlineDocument)
+      // Then offline services
+      const { metadata } = offlineDocument
+      await kCoreUtils.addServiceToCache('configurations', Object.assign({}, _.get(metadata, 'configurations')))
+      await kMapUtils.createOfflineServicesForViews(offlineDocument)
+      // Then data layer
+      await kMapUtils.cacheLayersForView(view, layers, options)
     }
   },
   created () {

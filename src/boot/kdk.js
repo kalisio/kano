@@ -182,7 +182,6 @@ export default async ({ app, router }) => {
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
-  app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
   app.component('KLayersPanel', await kdkCoreUtils.loadComponent('catalog/KLayersPanel'))
 
   // Register global properties
