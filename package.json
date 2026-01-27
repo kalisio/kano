@@ -106,6 +106,7 @@
     "@kalisio/leaflet.donutcluster": "^1.1.0",
     "@mapbox/geojsonhint": "^3.0.1",
     "@mapbox/sphericalmercator": "^1.2.0",
+    "@panoramax/web-viewer": "^4.3.1",
     "@pdfme/common": "^4.1.0",
     "@pdfme/generator": "^4.1.0",
     "@pdfme/schemas": "^4.1.0",
