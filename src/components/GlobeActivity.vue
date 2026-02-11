@@ -32,7 +32,6 @@ export default {
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
     kMapMixins.globe.activity,
-    kMapMixins.globe.opendapLayers,
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
