@@ -4451,7 +4451,7 @@
 
 "@kalisio/leaflet-pmtiles@https://github.com/kalisio/leaflet-pmtiles":
   version "0.0.1"
-  resolved "https://github.com/kalisio/leaflet-pmtiles#e842493901dc7dc307c644222ffe13a4456c3fd0"
+  resolved "https://github.com/kalisio/leaflet-pmtiles#07b94a5984b07ef19514addfde8f344c6511fe2a"
   dependencies:
     protomaps-leaflet "^3.1.1"
 
@@ -7437,9 +7437,9 @@
     "@types/koa" "*"
 
 "@types/leaflet@^1.9.8":
-  version "1.9.17"
-  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.17.tgz#f7f12f9306029df48801cd830f66597d614a2e08"
-  integrity sha512-IJ4K6t7I3Fh5qXbQ1uwL3CFVbCi6haW9+53oLWgdKlLP7EaS21byWFJxxqOx9y8I0AP0actXSJLVMbyvxhkUTA==
+  version "1.9.21"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.21.tgz#542e8f91250bc444f8a1416d472f5b518d83e979"
+  integrity sha512-TbAd9DaPGSnzp6QvtYngntMZgcRk+igFELwR2N99XZn7RXUdKgsXMR+28bUO0rPsWp8MIu/f47luLIQuSLYv/w==
   dependencies:
     "@types/geojson" "*"
 
