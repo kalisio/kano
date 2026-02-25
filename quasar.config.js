@@ -10,7 +10,6 @@
 
 const path = require('path')
 const fs = require('fs')
-const ESLintPlugin = require('eslint-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { configure } = require('quasar/wrappers')
 
@@ -69,12 +68,11 @@ module.exports = configure(function (ctx) {
 
       vueLoaderOptions: {
         compilerOptions: {
-          isCustomElement: tag => ['pinch-zoom'].includes(tag)        
+          isCustomElement: tag => ['pinch-zoom', 'pnx-photo-viewer'].includes(tag)        
         }
       },
       
       chainWebpack (chain) {
-        chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
         // Perform bundle analysis
         if (process.env.ANALYZE_BUNDLE) {
           chain.plugin('webpack-bundle-analyzer').use(new BundleAnalyzerPlugin({
@@ -125,9 +123,14 @@ module.exports = configure(function (ctx) {
             path.resolve(__dirname, 'node_modules/@kalisio/kdk/core/client/i18n'),
             path.resolve(__dirname, 'node_modules/@kalisio/kdk/map/client/i18n')
           ],
-          config: path.resolve(__dirname, 'config/client-config.json')
+          config: path.resolve(__dirname, 'config/client-config.json'),
+          jsts: path.resolve(__dirname, 'src/assets/kdk/jsts.min.js')
         },
-        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize
+        cfg.optimization.minimize = process.env.DEBUG ? false : cfg.optimization.minimize,
+        cfg.experiments = {
+          ...cfg.experiments,
+          asyncWebAssembly: true
+        }
       }
     },
 
@@ -141,6 +144,12 @@ module.exports = configure(function (ctx) {
           logLevel: 'debug'
         },
         '/apiws': {
+          target: 'http://localhost:' + serverPort,
+          changeOrigin: true,
+          ws: true,
+          logLevel: 'debug'
+        },
+        '/offline': {
           target: 'http://localhost:' + serverPort,
           changeOrigin: true,
           ws: true,
@@ -248,11 +257,6 @@ module.exports = configure(function (ctx) {
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
       
-      chainWebpackCustomSW (chain) {
-        chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: [ 'js' ] }])
-      },
-      
       manifest: {
         name: clientConfig.pwaName,
         short_name: clientConfig.pwaName,
@@ -265,22 +269,22 @@ module.exports = configure(function (ctx) {
         id: './',
         icons: [
           {
-            src: 'icons/kano-icon-32x32.png',
+            src: 'kano-icon-32x32.png',
             sizes: '32x32',
             type: 'image/png'
           },
           {
-            src: 'icons/kano-icon-64x64.png',
+            src: 'kano-icon-64x64.png',
             sizes: '64x64',
             type: 'image/png'
           },
           {
-            src: 'icons/kano-icon-256x256.png',
+            src: 'kano-icon-256x256.png',
             sizes: '256x256',
             type: 'image/png'
           },
           {
-            src: 'icons/kano-icon-512x512.png',
+            src: 'kano-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }

@@ -3,9 +3,9 @@ import { registerRoute } from 'workbox-routing'
 import { NetworkFirst, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import logger from 'loglevel'
-import { LocalForage } from '@kalisio/feathers-localforage'
+import LocalForage from 'localforage'
 // Ensure same underlying configuration as we are in another process and instance may differ
-LocalForage.config({
+const storage = LocalForage.createInstance({
   name: 'offline_cache',
   storeName: 'cache_entries'
 })
@@ -29,7 +29,7 @@ setInterval(async () => {
   if (updatingCachedUrls) return
   updatingCachedUrls = true
   cachedUrls = new Map()
-  await LocalForage.iterate((value, key) => {
+  await storage.iterate((value, key) => {
     cachedUrls.set(key, value)
   })
   updatingCachedUrls = false
@@ -42,7 +42,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 async function cacheKeyWillBeUsed({ request, mode }) {
   const url = new URL(request.url)
   url.searchParams.delete('jwt')
-  const key = url.href
+  let key = url.href
   // Need to add range request in key as it is ignored by cache otherwise
   if (request.headers && request.headers.Range) {
     const range = request.headers.Range.replace('bytes=', '').split('-')
@@ -52,7 +52,7 @@ async function cacheKeyWillBeUsed({ request, mode }) {
 }
 
 async function fetchDidFail({ error, request }) {
-  logger.debug(`[Kano] Fetching ${request.url} from layers cache failed`)
+  logger.debug(`[Kano] Fetching ${request.url} from layers cache failed with error ${error.message}`)
 }
 
 // Register the `CacheFirst` caching strategy for offline data

@@ -72,7 +72,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.CENTIPEDE_BASES_LABEL',
-      maxZoom: 8,
+      maxZoom: 9,
       content: {
         bases: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-map-pin', color: 'black', size: 10 } } } },

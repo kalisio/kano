@@ -1,12 +1,13 @@
-import path from 'path'
-import fs from 'fs-extra'
-import { fileURLToPath } from 'url'
+import kCore, { createDefaultUsers, createDefaultTags, createDefaultConfigurations, decorateDistributedService, permissions } from '@kalisio/kdk/core.api.js'
+import kMap, { createCatalogFeaturesServices, createDefaultCatalogLayers, createFeaturesService, createDefaultStyles } from '@kalisio/kdk/map.api.js'
 import makeDebug from 'debug'
-import kCore, { permissions, createDefaultUsers } from '@kalisio/kdk/core.api.js'
-import kMap, { createFeaturesServiceForLayer, createDefaultCatalogLayers } from '@kalisio/kdk/map.api.js'
+import fs from 'fs-extra'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const modelsPath = path.join(__dirname, 'models')
 const servicesPath = path.join(__dirname, 'services')
 const debug = makeDebug('kano:services')
 
@@ -24,7 +25,8 @@ export default async function () {
         // Allow to override version number for custom build
         version: (process.env.VERSION ? process.env.VERSION : packageInfo.version),
         cesium: app.get('cesium'),
-        mapillary: app.get('mapillary')
+        mapillary: app.get('mapillary'),
+        panoramax: app.get('panoramax')
       }
       if (process.env.BUILD_NUMBER) {
         response.buildNumber = process.env.BUILD_NUMBER
@@ -33,23 +35,16 @@ export default async function () {
     })
     app.on('service', service => {
       // Make remote services compliant with our internal app services so that permissions can be used
-      if (service.key === 'weacast') {
-        // Remote service are registered according to their path, ie with API prefix (but without trailing /)
-        const remoteService = app.service(service.path)
-        // Get name from service path without api prefix
-        const name = service.path.replace(app.get('apiPath').substring(1) + '/', '')
-        remoteService.name = name
-        // As remote services have no context, from the internal point of view path = name
-        // Unfortunately this property is already set and used by feathers-distributed and should not be altered
-        // remoteService.path = name
-        remoteService.app = app
-        remoteService.getPath = function (withApiPrefix) { return (withApiPrefix ? app.get('apiPath') + '/' + name : name) }
+      if (service.key && (service.key !== 'kano')) {
+        // Jump from remote service descriptor to actual service instance
+        service = decorateDistributedService.call(app, service)
         // Register default permissions for it
-        debug('Registering permissions for remote service ', name)
+        debug('Registering permissions for remote service ', service.name)
         permissions.defineAbilities.registerHook((subject, can, cannot) => {
-          can('service', name)
-          can('read', name)
-          if (name === 'probes') can('create', name)
+          can('service', service.name)
+          can('read', service.name)
+          // Specific case of weacast probe service that requires create permissions for probing
+          if (service.name === 'probes') can('create', service.name)
         })
         // We then need to update abilities cache
         const authorisationService = app.getService('authorisations')
@@ -64,13 +59,24 @@ export default async function () {
     app.logger.error(error.message)
   }
 
+  // Create app services
+  
+  // Configure app hooks on the built-in catalog service
+  const catalogService = app.getService('catalog')
+  await app.configureService('catalog', catalogService, servicesPath)
+
+  // Service to store user features first as catalog layers use it
+  const featuresService = await createFeaturesService.call(app, { collection: 'features' })
+  await app.configureService('features', featuresService, servicesPath)
+  // Restore also any service used by layers
+  await createCatalogFeaturesServices.call(app)
+
   // Initialize defaults
+  await createDefaultConfigurations.call(app)
   await createDefaultUsers.call(app)
   await createDefaultCatalogLayers.call(app)
-
-  // Service to store user features
-  const featuresService = await createFeaturesServiceForLayer.call(app, { collection: 'features' })
-  await app.configureService('features', featuresService, servicesPath)
+  await createDefaultStyles.call(app)
+  await createDefaultTags.call(app)
 
   // Event bus service
   app.declareService('events', {

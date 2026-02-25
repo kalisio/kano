@@ -72,7 +72,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
               label: 'Legend.AWC_METARS_OBSERVATION' 
             }
           ],
-          symobology: [
+          symbology: [
             { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#666666', radius: 10, icon: { classes: 'fa fa-sun', color: '#FE9929' } } } },
               label: 'Legend.AWC_METARS_CLOUDCOVER_CAVOK' 
             },
@@ -101,7 +101,7 @@ module.exports = function ({ wmtsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       }, {
         type: 'symbols',
         label: 'Legend.AWC_METARS_STATIONS',
-        maxZoom: 7,
+        maxZoom: 8,
         content: {
           stations: [
             { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-cloud-sun-rain', color: 'black', size: 10 } } } }, 

@@ -1,8 +1,11 @@
 import { kdk } from '@kalisio/kdk/core.api.js'
 import distribution, { finalize } from '@kalisio/feathers-distributed'
+import { automergeServer } from '@kalisio/feathers-automerge-server'
 import fs from 'fs-extra'
 import _ from 'lodash'
+import siftModule from 'sift'
 import https from 'https'
+import makeDebug from 'debug'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import proxyMiddleware from 'http-proxy-middleware'
@@ -12,14 +15,64 @@ import services from './services.js'
 import hooks from './hooks.js'
 import channels from './channels.js'
 
+const sift = siftModule.default
+const debug = makeDebug('kano:server')
+
+async function authenticateAutomerge(app, accessToken) {
+  try {
+    await app.getService('authentication').verifyAccessToken(accessToken)
+  } catch(error) {
+    debug('Peer authentication failed with', error)
+    return false
+  }
+  return true
+}
+async function canAccessAutomerge(query, user) {
+  // Not used for now
+  return true
+}
+async function initializeAutomergeDocument(servicePath, query) {
+  const app = this
+  // Take care that feathers strip slashes, go from /api to api/
+  const apiPath = app.get('apiPath').substr(1) + '/'
+  const serviceName = servicePath.replace(apiPath, '')
+  query = _.get(query, serviceName)
+  debug(`Initializing automerge document for ${serviceName} with query`, query)
+  let data = []
+  // Check if any query target this service
+  if (query) {
+    data = await app.getService(serviceName).find({ paginate: false, query })
+    // Take care of features service sending back GeoJson
+    if (data.type === 'FeatureCollection') data = data.features
+  }
+  return data
+}
+async function getAutomergeDocumentsForData(servicePath, data, documents) {
+  const app = this
+  // Take care that feathers strip slashes, go from /api to api/
+  const apiPath = app.get('apiPath').substr(1) + '/'
+  const serviceName = servicePath.replace(apiPath, '')
+  debug(`Checking automerge documents for ${serviceName} with data`, data)
+  return documents.filter(document => {
+    // Check if any query target this service
+    const query = _.get(document, `query.${serviceName}`)
+    if (query) {
+      const result = [data].filter(sift(query))
+      return result.length > 0
+    } else {
+      return false
+    }
+  })
+}
+
 export class Server {
   constructor () {
     this.app = kdk()
     const app = this.app
 
     // Distribute services
-    const distConfig = app.get('distribution')
-    if (distConfig) app.configure(distribution(distConfig))
+    const distributionConfig = app.get('distribution')
+    if (distributionConfig) app.configure(distribution(distributionConfig))
 
     // Serve pure static assets
     if (process.env.NODE_ENV === 'production') {
@@ -47,6 +100,24 @@ export class Server {
     await app.db.connect()
     // Set up our services
     await app.configure(services)
+    // Synchronize services
+    const automergeConfig = app.get('automerge')
+    if (automergeConfig) {
+      // Check for existing root document or initialize it
+      const documentFilepath = path.join(automergeConfig.directory, 'document.automerge')
+      try {
+        Object.assign(automergeConfig, {
+          authenticate: authenticateAutomerge,
+          canAccess: canAccessAutomerge.bind(app),
+          initializeDocument: initializeAutomergeDocument.bind(app),
+          getDocumentsForData: getAutomergeDocumentsForData.bind(app)
+        })
+        debug('Initializing automerge with config', automergeConfig)
+        await app.configure(automergeServer(automergeConfig))
+      } catch (error) {
+        app.logger.error('Unable to initialize automerge', error)
+      }
+    }
     // Register hooks
     app.hooks(hooks)
     // Register application setup and teardown hooks here

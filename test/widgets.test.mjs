@@ -1,9 +1,9 @@
+import chai, { expect, util } from 'chai'
+import chailint from 'chai-lint'
 import fs from 'fs-extra'
 import moment from 'moment'
-import chai, { util, expect } from 'chai'
-import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'widgets'
 const catalogLayersTab = 'catalog-layers'
@@ -18,7 +18,9 @@ function setTime (data) {
   })
 }
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -38,7 +40,8 @@ describe(`suite:${suite}`, () => {
       user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     // Prepare data for current run
@@ -60,12 +63,13 @@ describe(`suite:${suite}`, () => {
   it('see elevation profile', async () => {
     await map.importLayer(page, runner.getDataPath('elevation-line.geojson'), 'id')
     await map.goToPosition(page, 43.31465, 1.94985)
+    await map.zoomToLevel(page, 'mapActivity', 16)
     await core.click(page, '#map', 1000)
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'elevation-profile', 1000)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('elevation-line')
+    await core.waitForTimeout(2000)
+    const match = await runner.captureAndMatch('elevation-line', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -77,8 +81,8 @@ describe(`suite:${suite}`, () => {
     await core.clickAction(page, 'top-window-menu', 1000)
     await core.clickAction(page, 'mapillary-viewer', 1000)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('mapillary-view')
+    await core.waitForTimeout(2000)
+    const match = await runner.captureAndMatch('mapillary-view', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -98,8 +102,8 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.547168883180966, 1.5059948323127268)
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('station-measurements')
+    await core.waitForTimeout(2000)
+    const match = await runner.captureAndMatch('station-measurements', null, 3)
     await core.closeWindow(page, 'top')
     expect(match).beTrue()
   })
@@ -114,8 +118,8 @@ describe(`suite:${suite}`, () => {
     await map.goToPosition(page, 43.54, 1.51)
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(2000)
-    const match = await runner.captureAndMatch('mobile-measurements')
+    await core.waitForTimeout(2000)
+    const match = await runner.captureAndMatch('mobile-measurements', null, 3)
     expect(match).beTrue()
   })
 

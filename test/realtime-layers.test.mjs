@@ -1,7 +1,7 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'realtime-layers'
 
@@ -28,10 +28,10 @@ let layer = {
   },
   schema: {
     name: 'realtime.json',
-    content: '{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"$id\":\"http://www.kalisio.xyz/schemas/realtime.json#\",\"title\":\"Données\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"field\":{\"component\":\"form/KTextField\",\"label\":\"Identifiant\"}}},\"required\":[\"id\"]}'
+    content: '{"$schema":"http://json-schema.org/draft-07/schema#","$id":"http://www.kalisio.xyz/schemas/realtime.json#","title":"Données","type":"object","properties":{"id":{"type":"string","field":{"component":"form/KTextField","label":"Identifiant"}}},"required":["id"]}'
   },
   service: 'features',
-  baseQuery: '{\"layer\":\"66bccb23e9525b0882c3ba1d\"}'
+  baseQuery: '{"layer":"66bccb23e9525b0882c3ba1d"}'
 }
 let point = [
   1.951086,
@@ -97,7 +97,9 @@ function offset (coordinates) {
   }
 }
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, api, client, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -117,7 +119,8 @@ describe(`suite:${suite}`, () => {
       user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()
@@ -134,17 +137,17 @@ describe(`suite:${suite}`, () => {
 
   it('add point', async () => {
     point = await client.createGeoJsonFeature(layer._id, point, { properties: { id: 'point' } })
-    expect(await runner.captureAndMatch('add-point')).beTrue()
+    expect(await runner.captureAndMatch('add-point', null, 3)).beTrue()
   })
 
   it('add line', async () => {
     line = await client.createGeoJsonFeature(layer._id, line, { properties: { id: 'line' } })
-    expect(await runner.captureAndMatch('add-line')).beTrue()
+    expect(await runner.captureAndMatch('add-line', null, 3)).beTrue()
   })
 
   it('add polygon', async () => {
     polygon = await client.createGeoJsonFeature(layer._id, polygon, { properties: { id: 'polygon' } })
-    expect(await runner.captureAndMatch('add-polygon')).beTrue()
+    expect(await runner.captureAndMatch('add-polygon', null, 3)).beTrue()
   })
 
   it('edit point', async () => {
@@ -153,7 +156,7 @@ describe(`suite:${suite}`, () => {
       offset(point.geometry.coordinates),
       { style: { shape: 'circle', color: 'blue', size: [32, 32], stroke: { color: 'white', width: 1 }, icon: { classes: 'las la-home', color: 'white', size: 20 } } }
     )
-    expect(await runner.captureAndMatch('edit-point')).beTrue()
+    expect(await runner.captureAndMatch('edit-point', null, 3)).beTrue()
   })
 
   it('edit line', async () => {
@@ -162,7 +165,7 @@ describe(`suite:${suite}`, () => {
       offset(line.geometry.coordinates),
       { style: { color: 'blue', opacity: 0.5, width: 3, dashArray: '0 8 0' } }
     )
-    expect(await runner.captureAndMatch('edit-line')).beTrue()
+    expect(await runner.captureAndMatch('edit-line', null, 3)).beTrue()
   })
 
   it('edit polygon', async () => {
@@ -171,22 +174,22 @@ describe(`suite:${suite}`, () => {
       offset(polygon.geometry.coordinates),
       { style: { color: 'magenta', opacity: 0.5, stroke: { color: 'yellow', width: 3 } } }
     )
-    expect(await runner.captureAndMatch('edit-polygon')).beTrue()
+    expect(await runner.captureAndMatch('edit-polygon', null, 3)).beTrue()
   })
 
   it('remove point', async () => {
     point = await client.getService('features').remove(point._id)
-    expect(await runner.captureAndMatch('remove-point')).beTrue()
+    expect(await runner.captureAndMatch('remove-point', null, 3)).beTrue()
   })
 
   it('remove line', async () => {
     line = await client.getService('features').remove(line._id)
-    expect(await runner.captureAndMatch('remove-line')).beTrue()
+    expect(await runner.captureAndMatch('remove-line', null, 3)).beTrue()
   })
 
   it('remove polygon', async () => {
     polygon = await client.getService('features').remove(polygon._id)
-    expect(await runner.captureAndMatch('remove-polygon')).beTrue()
+    expect(await runner.captureAndMatch('remove-polygon', null, 3)).beTrue()
   })
 
   it('remove layer', async () => {
@@ -196,11 +199,13 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
     // Remove remaining test data if any
-    if (layer) await client.getService('catalog').remove(layer._id)
-    await client.getService('features').remove(null)
+    if (layer) {
+      await client.getService('catalog').remove(layer._id)
+      await client.getService('features').remove(null, { query: { layer: layer._id } })
+    }
   })
 })

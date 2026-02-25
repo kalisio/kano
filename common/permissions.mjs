@@ -2,22 +2,39 @@ import { permissions } from '@kalisio/kdk/core.common.js'
 
 // Hook computing  catalog, features, etc. abilities for a given user
 export function defineUserAbilities (subject, can, cannot, app) {
+  // Contextual services distributed by other apps
+  can('service', '*/catalog')
+  can('service', '*/features')
+  can('service', '*/projects')
+  can('service', '*/styles')
+  can('service', '*/tags')
+  can('service', '*/alerts')
+  can('service', '*/configurations')
+
   can('service', 'events')
   can('create', 'events')
+  can(['find', 'get'], 'configurations')
   if (subject && subject._id) {
     if (subject.catalog) {
       const catalog = subject.catalog
       const role = permissions.Roles[catalog.permissions]
       if (role >= permissions.Roles.manager) {
+        // This can work for contextual services distributed by other apps
+        const context = catalog.context
         // Can manage layers, projects and alerts
-        can('all', 'catalog')
-        can('all', 'projects')
-        can(['create', 'remove'], 'authorisations', { resourcesService: 'projects', scope: 'projects' })
-        can('all', 'alerts')
+        can('all', 'catalog', { context })
+        can('all', 'projects', { context })
+        can(['create', 'remove'], 'authorisations', { resourcesService: context ? context.toString() + '/projects' : 'projects', scope: 'projects' })
+        can('all', 'alerts', { context })
         // Can manage features on user-defined layers
-        can('all', 'features')
+        can('all', 'features', { context })
         // Can authorize users on specific layers
         can(['create', 'remove'], 'authorisations')
+        // Can manage styles
+        can('all', 'styles', { context })
+        can('all', 'tags', { context })
+        // Can manage configurations for layer order
+        can('all', 'configurations', { context })
       }
     }
     if (subject.projects) {
@@ -25,12 +42,12 @@ export function defineUserAbilities (subject, can, cannot, app) {
       subject.projects.forEach(project => {
         const role = permissions.Roles[project.permissions]
         if (role >= permissions.Roles.manager) {
-          can('update', { _id: project._id })
+          can('update', 'projects', { _id: project._id })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'member' })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'manager' })
         }
         if (role >= permissions.Roles.owner) {
-          can('remove', { _id: project._id })
+          can('remove', 'projects', { _id: project._id })
           can(['create', 'remove'], 'authorisations', { resource: project._id, permissions: 'owner' })
         }
       })

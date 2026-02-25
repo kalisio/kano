@@ -1,6 +1,6 @@
 import chai, { util, expect } from 'chai'
 import chailint from 'chai-lint'
-import { core } from '@kalisio/kdk/test.client.js'
+import { core } from './kdk/index.mjs'
 
 const suite = 'layout'
 
@@ -25,7 +25,9 @@ async function checkLayout (page, fabActionsCount) {
   expect(await await core.countFabActions(page)).to.equal(fabActionsCount)
 }
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -39,7 +41,8 @@ describe(`suite:${suite}`, () => {
       appName: 'kano',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()

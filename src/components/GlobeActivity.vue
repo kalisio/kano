@@ -1,6 +1,6 @@
 <template>
-  <div id="globe-credit"/>
-  <KPage :padding="false">
+  <div v-show="false" id="globe-credit"/>
+  <KPage>
     <!-- Globe -->
     <div id="globe" :ref="configureGlobe" :style="viewStyle">
       <q-resize-observer @resize="onGlobeResized" />
@@ -13,7 +13,7 @@
 <script>
 import _ from 'lodash'
 import { computed } from 'vue'
-import { Store, Layout, mixins as kCoreMixins } from '@kalisio/kdk/core.client'
+import {  mixins as kCoreMixins } from '@kalisio/kdk/core.client'
 import { mixins as kMapMixins, composables as kMapComposables } from '@kalisio/kdk/map.client'
 import { MixinStore } from '../mixin-store.js'
 import { ComposableStore } from '../composable-store.js'
@@ -32,10 +32,10 @@ export default {
     kMapMixins.globe.tooltip,
     kMapMixins.globe.popup,
     kMapMixins.globe.activity,
-    kMapMixins.globe.opendapLayers,
     baseActivityMixin,
     kMapMixins.activity,
     kMapMixins.style,
+    kMapMixins.featureSelection,
     kMapMixins.featureService,
     kMapMixins.infobox,
     kMapMixins.weacast,
@@ -85,16 +85,6 @@ export default {
       handler () {
         this.refreshLayers()
       }
-    },
-    'selection.items': {
-      handler () {
-        this.updateSelection()
-      }
-    },
-    'probe.item': {
-      handler () {
-        this.updateSelection()
-      }
     }
   },
   methods: {
@@ -102,72 +92,85 @@ export default {
       // Avoid reentrance during awaited operations
       if (!container || this.globeContainer) return
       this.globeContainer = container
-      const token = this.$store.get('capabilities.api.cesium.token')
       // Not yet ready wait for capabilities to be there
-      if (!token) return
+      if (!this.$store.get('capabilities.api')) return
+      const token = this.$store.get('capabilities.api.cesium.token')
       // Wait until viewer is ready
       await this.initializeGlobe(container, token)
       // Notify the listener
       utils.sendEmbedEvent('globe-ready')
     },
-    getViewKey () {
-      // We'd like to share view settings between 2D/3D
-      return this.geAppName.toLowerCase() + '-view'
-    },
     async addLayer (layer) {
       // We let any embedding iframe process layer if required
-      const response = await utils.sendEmbedEvent('layer-add', _.omit(layer, ['getPlanetApi']))
-      // Do not erase with returned object as some internals might have been lost in serialization
-      if (response && response.data) _.merge(layer, response.data)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-add') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-add', utils.serializeLayerForEmbedEvent(layer))
+        // Do not erase with returned object as some internals might have been lost in serialization
+        if (response && response.data) _.merge(layer, response.data)
+      }
       layer = await kMapMixins.globe.baseGlobe.methods.addLayer.call(this, layer)
       return layer
     },
     async updateLayer (name, geoJson, options = {}) {
       // We let any embedding iframe process features if required
-      const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
-      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, (response && response.data) || geoJson, options)
+      // Event is disabled by config by default however (as it can be costly)
+      if (this.activityOptions.allowForwardEvents && this.activityOptions.allowForwardEvents.indexOf('layer-update') !== -1) {
+        const response = await utils.sendEmbedEvent('layer-update', { name, geoJson, options })
+        if (response && response.data) geoJson = response.data
+      }
+      await kMapMixins.globe.geojsonLayers.methods.updateLayer.call(this, name, geoJson, options)
     },
-    handleWidget (widget) {
-      // If window already open on another widget keep it
-      if (widget && (widget !== 'none') && !this.isWidgetWindowVisible(widget)) this.openWidget(widget)
-    },
-    async updateTimeSeries () {
-      this.state.timeSeries = await utils.updateTimeSeries(this.state.timeSeries)
-    },
-    updateHighlights () {
-      this.clearHighlights()
-      this.getSelectedItems().forEach(item => {
-        this.highlight(item.feature || item.location, item.layer)
-      })
-      if (this.hasProbedLocation()) this.highlight(this.getProbedLocation(), this.getProbedLayer())
-    },
-    async updateSelection () {
-      this.updateHighlights()
-      await this.updateTimeSeries()
-      if (this.hasProbedLocation() || this.hasSelectedItems()) {
-        this.handleWidget(this.getWidgetForProbe() || this.getWidgetForSelection())
-      } else {
-        // Hide the window
-        Layout.setWindowVisible('top', false)
+    forwardLayerEvents (layerEvents) {
+      if (!_.has(this, 'layerHandlers')) this.layerHandlers = {}
+
+      for (const layerEvent of layerEvents) {
+        const handler = this.generateHandlerForLayerEvent(layerEvent)
+        this.layerHandlers[layerEvent] = handler
+        this.$engineEvents.on(layerEvent, handler)
       }
     },
-    async onClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const pickedPosition = _.get(event, 'pickedPosition')
-      const feature = _.get(event, 'target.feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('click', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
+    removeForwardedLayerEvents () {
+      for (const layerEvent in this.layerHandlers) {
+        this.$engineEvents.off(layerEvent, this.layerHandlers[layerEvent])
+      }
+      this.layerHandlers = {}
     },
-    async onDblClicked (options, event) {
-      const latlng = _.get(event, 'latlng')
-      const pickedPosition = _.get(event, 'pickedPosition')
-      const feature = _.get(event, 'target.feature')
-      // Retrieve original layer options not processed ones
-      // as they can include internal objects not to be serialized
-      const layer = (options ? this.getLayerByName(options.name) : undefined)
-      utils.sendEmbedEvent('dblclick', Object.assign({ longitude: latlng.lng, latitude: latlng.lat, feature, layer }, pickedPosition))
+    forwardCesiumEvents (cesiumEvents) {
+      if (!_.has(this, 'cesiumHandlers')) this.cesiumHandlers = {}
+
+      const options = this.activityOptions
+      const defaultCesiumEvents = ['click', 'dblclick']
+      for (const cesiumEvent of cesiumEvents) {
+        let okForward = (defaultCesiumEvents.indexOf(cesiumEvent) !== -1)
+        if (options.allowForwardEvents) okForward = okForward || (options.allowForwardEvents.indexOf(cesiumEvent) !== -1)
+        if (options.disallowForwardEvents) okForward = okForward && (options.disallowForwardEvents.indexOf(cesiumEvent) === -1)
+        if (!okForward) continue
+
+        const handler = (options, event) => {
+          const pickedPosition = _.get(event, 'pickedPosition')
+          // Retrieve original layer options not processed ones
+          // as they can include internal objects not to be serialized
+          const layer = (options ? this.getLayerByName(options.name) : undefined)
+          const payload = Object.assign({
+            longitude: _.get(event, 'latlng.lng'),
+            latitude: _.get(event, 'latlng.lat'),
+            altitude: _.get(event, 'altitude'),
+            feature: _.get(event, 'target.feature'),
+            layer: utils.serializeLayerForEmbedEvent(layer)
+          }, pickedPosition)
+
+          utils.sendEmbedEvent(cesiumEvent, payload)
+        }
+
+        this.cesiumHandlers[cesiumEvent] = handler
+        this.$engineEvents.on(cesiumEvent, handler)
+      }
+    },
+    removeForwardedCesiumEvents () {
+      for (const cesiumEvent in this.cesiumHandlers) {
+        this.$engineEvents.off(cesiumEvent, this.cesiumHandlers[cesiumEvent])
+      }
+      this.cesiumHandlers = {}
     },
     generateHandlerForLayerEvent (event) {
       return (layer) => utils.sendEmbedEvent(event, { layer })
@@ -185,46 +188,26 @@ export default {
     this.setCurrentActivity(this)
   },
   mounted () {
-    this.$engineEvents.on('click', this.onClicked)
-    this.$engineEvents.on('dblclick', this.onDblClicked)
-    this.onAddedLayerEvent = this.generateHandlerForLayerEvent('layer-added')
-    this.$engineEvents.on('layer-added', this.onAddedLayerEvent)
-    this.onShownLayerEvent = this.generateHandlerForLayerEvent('layer-shown')
-    this.$engineEvents.on('layer-shown', this.onShownLayerEvent)
-    this.onHiddenLayerEvent = this.generateHandlerForLayerEvent('layer-hidden')
-    this.$engineEvents.on('layer-hidden', this.onHiddenLayerEvent)
-    this.onRemovedLayerEvent = this.generateHandlerForLayerEvent('layer-removed')
-    this.$engineEvents.on('layer-removed', this.onRemovedLayerEvent)
-    this.onUpdatedLayerEvent = this.generateHandlerForLayerEvent('layer-updated')
-    this.$engineEvents.on('layer-updated', this.onUpdatedLayerEvent)
-    this.$engineEvents.on('selected-level-changed', this.updateTimeSeries)
-    this.$events.on('timeseries-group-by-changed', this.updateTimeSeries)
+    const allCesiumEvents = ['click', 'dblclick', 'movestart', 'moveend', 'move']
+    this.forwardCesiumEvents(allCesiumEvents)
+    const allLayerEvents = ['layer-added', 'layer-shown', 'layer-hidden', 'layer-removed', 'layer-updated']
+    this.forwardLayerEvents(allLayerEvents)
   },
   beforeUnmount () {
-    this.$engineEvents.off('click', this.onClicked)
-    this.$engineEvents.off('dblclick', this.onDblClicked)
-    this.$engineEvents.off('layer-added', this.onAddedLayerEvent)
-    this.$engineEvents.off('layer-shown', this.onShownLayerEvent)
-    this.$engineEvents.off('layer-hidden', this.onHiddenLayerEvent)
-    this.$engineEvents.off('layer-removed', this.onRemovedLayerEvent)
-    this.$engineEvents.off('layer-updated', this.onUpdatedLayerEvent)
-    this.$engineEvents.off('selected-level-changed', this.updateTimeSeries)
-    this.$events.off('timeseries-group-by-changed', this.updateTimeSeries)
+    this.removeForwardedCesiumEvents()
+    this.removeForwardedLayerEvents()
   },
   unmounted () {
     utils.sendEmbedEvent('globe-destroyed')
   },
   async setup () {
-    const activity = kMapComposables.useActivity(name)
+    const activity = kMapComposables.useActivity(name, { state: { timeSeries: [] } })
     const project = kMapComposables.useProject()
-    // Initialize state and project
-    Object.assign(activity.state, {
-      timeSeries: []
-    })
     await project.loadProject()
     activity.setSelectionMode('multiple')
     const expose = {
       ...activity,
+      ...activity.CurrentActivityContext,
       ...project
     }
     const additionalComposables = _.get(config, `${name}.additionalComposables`, [])
@@ -242,6 +225,6 @@ export default {
     cursor: wait;
   }
   .position-cursor {
-    cursor: url('/icons/kdk/position-cursor.png'), auto;
+    cursor: url('/kdk/position-cursor.png'), auto;
   }
 </style>

@@ -106,7 +106,7 @@ The following ones are related to Kano states:
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API
 * `globe-destroyed` when the 3D globe component has been destroyed in the Kano application before switching to another route
 
-The following ones are related to layers management:
+The following ones are related to layers management with the layer definition as `layer` payload property:
 * `layer-add` whenever a new layer will be added to the 2D/3D map
 * `layer-added` whenever a new layer has been added to the 2D/3D map (from the internal catalog or externally)
 * `layer-removed` whenever a layer has been removed from the 2D/3D map
@@ -114,6 +114,12 @@ The following ones are related to layers management:
 * `layer-hidden` whenever a new layer has been hidden in the 2D/3D map
 * `layer-update` whenever a real-time GeoJson layer will be updated in the 2D/3D map
 * `layer-updated` whenever a real-time GeoJson layer has been updated in the 2D/3D map
+
+The following ones are related to 2D panes management with the pane name as `pane` payload property:
+* `pane-added` whenever a new pane has been added to the 2D map (from the internal catalog or externally)
+* `pane-removed` whenever a pane has been removed from the 2D map
+* `pane-shown` whenever a pane has been shown in the 2D map
+* `pane-hidden` whenever a new pane has been hidden in the 2D map
 
 The `layer-add` and `layer-update` events are particular as it might expect a response, in this case the altered data will be taken into account instead of the original data when updating the layer:
 ```js
@@ -149,9 +155,10 @@ The following ones are related to [user interaction](https://leafletjs.com/refer
 * `mouseover` whenever the mouse enters the map or a feature from a layer in the 2D map,
 * `mouseout` whenever the mouse leaves the map or a feature from a layer in the 2D map,
 * `mousemove` whenever the mouse moves on the 2D map,
-* `dragstart` whenever the user starts dragging a 2D marker,
-* `dragend` whenever the user stops dragging a 2D marker,
-* `drag` while the user drags a 2D marker.
+* `touchstart` whenever a touch point is placed on the map or a feature from a layer in the 2D map,
+* `touchend` whenever a touch point is removed from the map or a feature from a layer in the 2D map,
+* `touchcancel` whenever a touch point has been disrupted in the 2D map,
+* `touchmove` whenever a touch point is moved in the 2D map.
 
 Most user interaction events will provide you with the following properties as data payload:
 * `longitude` and `latitude` coordinates of the interaction,
@@ -159,7 +166,14 @@ Most user interaction events will provide you with the following properties as d
 * `containerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map сontainer,
 * `layerPoint` with `x` and `y` coordinates of the point where the interaction occurred relative to the map layer.
 
-By default only `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
+::: tip
+For [touch events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) the former properties at root level of the data payload are related to the first touch point (ie single-touch gesture).
+If you'd like to get information about all touch points for multi-touch gesture you will similarly get `longitude`, `latitude`, `containerPoint` and `layerPoint` values
+for all touch points in [`touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches), [`changedTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches)
+and [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches) arrays relating to the same original touch event properties.
+:::
+
+By default only `layer-added`, `layer-shown`, `layer-hidden`, `layer-removed`, `pane-added`, `pane-shown`, `pane-hidden`, `pane-removed`, `click`, `dbclick` and `contextmenu` events are sent and you should enable more (respectively disable), using the `allowForwardEvents` (respectively `disallowForwardEvents`) configuration option:
 ```js
 postRobot.send(kano, 'setConfiguration', {
   // Allow more events to be emitted
@@ -179,6 +193,38 @@ postRobot.on('contextmenu', (event) => {
 })
 ```
 
+::: tip
+A feature can be tagged to stop events propagation, either [immediate](https://developer.mozilla.org/fr/docs/Web/API/Event/stopImmediatePropagation) or [not](https://developer.mozilla.org/fr/docs/Web/API/Event/stopPropagation), by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { stopImmediatePropagation: ['mousedown', 'touchmove'] }
+}
+```
+This can be used to e.g. prevent the map to be dragged when touching a specific feature. 
+:::
+
+The following events are related to geometry editing:
+* `dragstart` whenever the user starts dragging a 2D marker,
+* `dragend` whenever the user stops dragging a 2D marker,
+* `drag` while the user drags a 2D marker,
+* `edit-start` whenever the user starts using the geometry editor,
+* `edit-stop` whenever the user ends using the geometry editor,
+* `edit-point-moved` whenever a point is edited using the geometry editor,
+
+::: tip
+A point feature can be tagged as `draggable` by specifying it in style:
+```js
+{
+    type: 'Feature',
+    …
+    style: { draggable: true }
+}
+```
+To drag line or polygon vertices you should use the geometry editor.
+:::
+
 The following events are related to [map state changes](https://leafletjs.com/reference.html#map-event) and do not provide additional properties like interaction events:
 * `movestart` whenever the view of the 2D map starts changing (e.g. user starts dragging the map),
 * `moveend` whenever the center of the 2D map stops changing (e.g. user stopped dragging the map),
@@ -186,7 +232,14 @@ The following events are related to [map state changes](https://leafletjs.com/re
 * `zoomstart` whenever the 2D map zoom is about to change (e.g. before zoom animation),
 * `zoomend` whenever the 2D map zoom changed (after any animations),
 * `zoom` during any change in zoom level, including zoom and fly animations,
-* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload). 
+* `rotate` whenever the map bearing is changed (will provide an additional `bearing` property as data payload).
+
+::: tip
+When using animations with `center()` or `updateLayer()` a large number of map state change events can be sent, which can overflow the embedding application. Similarly, user interaction events during a drag or mouse move can be numerous. For this reason, these events are subject to a limitation and are sent no more than every configured number of milliseconds (i.e. throttle) in the activity configuration object `eventsThrottle`:
+* `state` throttle value for map state change events,
+* `mouse` throttle value for map mouse interaction events,
+* `touch` throttle value for map touch interaction events.
+:::
 
 ### Backend events
 

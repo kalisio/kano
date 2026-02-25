@@ -1,7 +1,6 @@
 <template>
   <div>
     <KTour v-if="isInitialized"/>
-    <KWelcome />
     <Suspense>
       <router-view />
     </Suspense>
@@ -15,6 +14,7 @@ import { composables } from '@kalisio/kdk/core.client'
 // Data
 const { isInitialized } = composables.useSession()
 const { installPwa } = composables.usePwa()
+composables.useWelcome()
 
 // Hooks
 onMounted(() => {

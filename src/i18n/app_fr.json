@@ -1,18 +1,5 @@
 {
   "REMOVE_LABEL": "Supprimer",
-  "TimeSeries": {
-    "LABEL": "Séries chronologiques",
-    "CHART_SERIE_TOOLTIP": "Voir le graphe",
-    "TABLE_SERIE_TOOLTIP": "Voir la table",
-    "LOGARITHMIC_SERIE_TOOLTIP": "Echelle logarithmique",
-    "LINEAR_SERIE_TOOLTIP": "Echelle linéaire",
-    "PIN_SERIE_TOOLTIP": "Epingler le graphe",
-    "UNPIN_SERIE_TOOLTIP": "Désépingler le graphe",
-    "EXPORT_SERIE_TOOLTIP": "Exporter les données",
-    "RESTORE_ZOOM": "Restaurer la vue précédente",
-    "RUN": "Réseau de prévision",
-    "CENTER_ON": "Centrer la vue sur la sonde"
-  },
   "tours": {
     "home": {
       "SIDENAV_LABEL": "Ouvrez à tout moment le menu principal via cette poignée.",
@@ -28,7 +15,7 @@
     },
     "side-nav": {
       "HELP_LABEL": "Accédez à notre aide en ligne à tout moment",
-      "CONTEXT_HELP_LABEL": "Pour obtenir de l'aide contextuelle lorsque vous êtes perdu cliquez à tout moment cette l'icône",
+      "CONTEXT_HELP_LABEL": "Pour obtenir de l'aide contextuelle lorsque vous êtes perdu cliquez à tout moment cette icône",
       "ABOUT_LABEL": "Affichez les informations détaillées du système et signalez-nous un boggue.",
       "BUG_LABEL": "Signalez-nous un boggue via un email contenant automatiquement les informations nécessaires.",
       "SETTINGS_LABEL": "Modifiez les paramètres généraux du système sur votre appareil.",
@@ -40,15 +27,13 @@
     }
   },
   "screen": {
+    "LOGIN_WITH_KEYCLOAK": "Se connecter avec Keycloak",
     "ABOUT_KALISIO": "A propos",
     "CONTACT": "Contact",
     "TERMS_AND_POLICIES": "Conditions générales"
   },
   "sideNav": {
     "MAP": "Vue 2D",
-    "GLOBE": "Vue 3D",
-    "ONLINE_HELP": "Aide en ligne",
-    "CONTEXTUAL_HELP": "@:CONTEXTUAL_HELP",
-    "LOGOUT": "Se déconnecter"
+    "GLOBE": "Vue 3D"
   }
 }

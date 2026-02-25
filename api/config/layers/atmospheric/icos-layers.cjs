@@ -64,7 +64,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.ICOS_STATIONS_LABEL',
-      maxZoom: 5,
+      maxZoom: 6,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fas fa-ellipsis-v', color: 'black', size: 10 } } } }, 

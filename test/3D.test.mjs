@@ -1,14 +1,16 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = '3D'
 
 const catalogLayersTab = 'catalog-layers'
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(30 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = { email: 'admin-kano@kalisio.xyz', password: 'Pass;word1' }
 
@@ -27,9 +29,10 @@ describe(`suite:${suite}`, () => {
       user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       },
-      browser: { args: [ waylandArg ] }
+      browser: { args: [waylandArg] }
     })
     page = await runner.start()
     await core.login(page, user)
@@ -38,11 +41,11 @@ describe(`suite:${suite}`, () => {
   it('import data and switch to 3D mode', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
     await map.saveLayer(page, userLayersTab, 'trace')
-    await core.clickPaneAction(page, 'top', 'toggle-globe')
+    await core.clickPaneAction(page, 'top', 'globe-activity-action')
     await map.zoomToLayer(page, userLayersTab, 'trace', 5000)
     await page.waitForNetworkIdle()
-    expect(await runner.captureAndMatch('trace-on-ellipsoid')).beTrue()
-  }).timeout(30000)
+    expect(await runner.captureAndMatch('trace-on-ellipsoid', null, 3)).beTrue()
+  })
 
   it('check terrain layer category', async () => {
     await map.clickCatalogTab(page, catalogLayersTab)
@@ -62,8 +65,8 @@ describe(`suite:${suite}`, () => {
     }
     await core.clickOpener(page, 'right')
     await page.waitForNetworkIdle()
-    expect(await runner.captureAndMatch('trace-on-terrain')).beTrue()
-  }).timeout(30000)
+    expect(await runner.captureAndMatch('trace-on-terrain', null, 3)).beTrue()
+  })
 
   it('remove layer', async () => {
     await map.removeLayer(page, userLayersTab, 'trace')

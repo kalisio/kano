@@ -68,7 +68,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.TELERAY_PROBES_LABEL',
-      maxZoom: 7,
+      maxZoom: 8,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10, stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-radiation', color: 'black', size: 10 } } } }, 
@@ -79,9 +79,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }],
     attribution: 'Teleray © <a href="https://irsn.fr/">IRSN</a>',
     type: 'OverlayLayer',
-    service: 'teleray-measurements',
+    service: 'teleray-measures',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    probeService: 'teleray-sensors',
+    probeService: 'teleray-stations',
     featureId: 'irsnId',
     featureIdType: 'number',
     featureLabel: 'name',
@@ -91,7 +91,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     queryFrom: 'PT-1H',
     variables: [
       {
-        name: 'value',
+        name: 'doseRateRaw',
         label: 'Variables.TELERAY_GAMMA_DOSE_RATE',
         unit: 'nsvh',
         range: [0, 5000],
@@ -119,10 +119,11 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       style: {
         point: {
+          id: 'irsnid-<%= properties.irsnId %>',
           shape: 'circle',
           radius: 15,
           opacity: 1,
-          color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= variables.value.colorScale(properties.value).hex() %><% }
+          color: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= variables.doseRateRaw.colorScale(properties.doseRateRaw).hex() %><% }
                       else if (feature.measureRequestIssued) { %>black<% }
                       else { %>white<% } %>`,
           stroke: {
@@ -140,14 +141,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             classes: 'fa fa-radiation',
           },
           text: {
-            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= Units.format(properties.value, 'nsvh', undefined, { symbol: false }) %><% }
+            label: `<% if (['VA', 'NV', 'NVA'].includes(properties.libelle)) { %><%= Units.format(properties.doseRateRaw, 'nsvh', undefined, { symbol: false }) %><% }
                       else { %><% } %>`,
             color: 'white',
             classes: 'text-caption text-weight-medium'
           }
         }
       },
-      template: ['style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
+      template: ['style.point.id', 'style.point.color', 'style.point.stroke.color', 'style.point.icon.color', 'style.point.text.label'],
       popup: {
         pick: [
           'name'
@@ -155,7 +156,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       },
       tooltip: {
         template: `<%= properties.name %></br>
-                    <% if (_.has(properties, 'value')) { %><%= Units.format(properties.value, 'nsvh') %></br>
+                    <% if (_.has(properties, 'doseRateRaw')) { %><%= Units.format(properties.doseRateRaw, 'nsvh') %></br>
                     <%= Time.format(properties.measureDateFormatted, 'time.long') + ' - ' + Time.format(properties.measureDateFormatted, 'date.short') %><% } %>`
       }
     },
@@ -171,7 +172,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         ]
       },
       tooltip: {
-        template: '<% if (_.has(properties, \'value\')) { %><%= Units.format(properties.value, \'nsvh\') %>\n' +
+        template: '<% if (_.has(properties, \'doseRateRaw\')) { %><%= Units.format(properties.doseRateRaw, \'nsvh\') %>\n' +
                   '<%= Time.format(properties.measureDateFormatted, \'time.long\') + \' - \' + Time.format(properties.measureDateFormatted, \'date.short\') %><% } %>'
       }
     }

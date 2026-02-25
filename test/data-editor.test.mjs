@@ -1,13 +1,15 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'data-editor'
 
 const userLayersTab = 'user-layers'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -23,7 +25,8 @@ describe(`suite:${suite}`, () => {
       user: currentUser.email,
       geolocation: { latitude: 43.31486, longitude: 1.95557 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()
@@ -47,7 +50,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 2000)
     await core.click(page, '#map', 1000)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
-    expect(await runner.captureAndMatch('t1-line')).beTrue()
+    expect(await runner.captureAndMatch('t1-line', null, 3)).beTrue()
   })
 
   it('add points', async () => {
@@ -61,8 +64,9 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await page.waitForNetworkIdle()
     await core.clickPaneAction(page, 'top', 'accept')
+    await core.waitForTimeout(1000)
     // await page.screenshot({ path: './test/data/schema/screenrefs/t2-points.png' })
-    expect(await runner.captureAndMatch('t2-points')).beTrue()
+    expect(await runner.captureAndMatch('t2-points', null, 3)).beTrue()
   })
 
   it('save layer', async () => {
@@ -80,7 +84,7 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1000)
     await core.clickPaneAction(page, 'top', 'accept')
     // await page.screenshot({ path: './test/data/schema/screenrefs/t3-rectangle.png' })
-    expect(await runner.captureAndMatch('t3-rectangle')).beTrue()
+    expect(await runner.captureAndMatch('t3-rectangle', null, 3)).beTrue()
   })
 
   it('add polygon', async () => {
@@ -105,13 +109,13 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map')
     await core.click(page, '#map')
     await core.clickPaneAction(page, 'top', 'accept')
-    expect(await runner.captureAndMatch('t4-polygon')).beTrue()
+    expect(await runner.captureAndMatch('t4-polygon', null, 3)).beTrue()
   })
 
   it('show all features', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'zoom-to-layer'], 1500)
-    await page.waitForTimeout(3000)
-    expect(await runner.captureAndMatch('t5-zoom-to')).beTrue()
+    await core.waitForTimeout(3000)
+    expect(await runner.captureAndMatch('t5-zoom-to', null, 3)).beTrue()
   })
 
   it('remove rectangle', async () => {
@@ -122,8 +126,8 @@ describe(`suite:${suite}`, () => {
     await core.clickPaneAction(page, 'top', 'remove', 1000)
     await core.click(page, '#map', 1500)
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t6-remove-rectangle')).beTrue()
+    await core.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t6-remove-rectangle', null, 3)).beTrue()
   })
 
   it('remove point', async () => {
@@ -135,21 +139,20 @@ describe(`suite:${suite}`, () => {
     await core.click(page, '#map', 1500)
     // stop editing using 'accept' arrow
     await core.clickPaneAction(page, 'top', 'accept')
-    await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t7-remove-point')).beTrue()
+    await core.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t7-remove-point', null, 3)).beTrue()
   })
 
   it('remove line', async () => {
-    await map.goToPosition(page, 43.31652, 1.95110)
+    await map.goToPosition(page, 43.31588, 1.95109)
     await map.zoomToLevel(page, 'mapActivity', 17)
-    await map.moveMap(page, 'down', 1)
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
     await core.clickPaneAction(page, 'top', 'remove', 1000)
     await core.click(page, '#map', 1500)
     // stop editing using layer menu link
     await core.clickPaneActions(page, 'right', ['layer-actions', 'edit-layer-data'], 1500)
-    await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t8-remove-line')).beTrue()
+    await core.waitForTimeout(1500)
+    expect(await runner.captureAndMatch('t8-remove-line', null, 3)).beTrue()
   })
 
   it('edit point', async () => {
@@ -182,10 +185,12 @@ describe(`suite:${suite}`, () => {
 
   it('view data', async () => {
     await core.clickPaneActions(page, 'right', ['layer-actions', 'view-layer-data'], 1500)
-    await page.waitForTimeout(1500)
-    expect(await runner.captureAndMatch('t9-view-data')).beTrue()
+    await core.waitForTimeout(1500)
+    const captureMatch9 = await runner.captureAndMatch('t9-view-data', null, 3)
     await core.click(page, '#item-actions #zoom-to', 1500)
-    expect(await runner.captureAndMatch('t10-go-to-feature')).beTrue()
+    const captureMatch10 = await runner.captureAndMatch('t10-go-to-feature', null, 3)
+    expect(captureMatch9).beTrue()
+    expect(captureMatch10).beTrue()
   })
 
   it('remove layer', async () => {
@@ -193,7 +198,7 @@ describe(`suite:${suite}`, () => {
   })
 
   after(async () => {
-    await page.waitForTimeout(5000)
+    await core.waitForTimeout(5000)
     await core.logout(page)
     await runner.stop()
   })

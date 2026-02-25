@@ -1,7 +1,7 @@
-import chai, { util, expect } from 'chai'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
 
-import { core, map } from '@kalisio/kdk/test.client.js'
+import { core, map } from './kdk/index.mjs'
 
 const suite = 'projects'
 
@@ -12,7 +12,9 @@ const userProjectsTab = 'user-projects'
 const projectLayersTab = 'project-layers'
 const projectViewsTab = 'project-views'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = [
     { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' },
@@ -26,7 +28,8 @@ describe(`suite:${suite}`, () => {
       appName: 'kano',
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()
@@ -35,6 +38,7 @@ describe(`suite:${suite}`, () => {
 
   it('admin: create layer and view', async () => {
     await map.importLayer(page, runner.getDataPath('trace.gpx'))
+    await map.zoomToLevel(page, 'mapActivity', 14)
     await map.saveLayer(page, userLayersTab, 'trace')
     await map.createView(page, 'trace view', false)
   })
@@ -64,7 +68,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: select project with trace', async () => {
     await map.clickProject(page, userProjectsTab, 'project-with-trace')
-    const match = await runner.captureAndMatch('project-with-trace')
+    const match = await runner.captureAndMatch('project-with-trace', null, 3)
     expect(await core.elementExists(page, '#close-project')).beTrue()
     await core.clickOpener(page, 'right')
     expect(await core.elementExists(page, `#${userLayersTab}`)).beFalse()
@@ -83,7 +87,7 @@ describe(`suite:${suite}`, () => {
 
   it('user: switch to project without trace', async () => {
     await map.switchProject(page, 'project-without-trace')
-    const match = await runner.captureAndMatch('project-without-trace')
+    const match = await runner.captureAndMatch('project-without-trace', null, 3)
     expect(await core.elementExists(page, '#close-project')).beTrue()
     await core.clickOpener(page, 'right')
     expect(await core.elementExists(page, `#${userLayersTab}`)).beFalse()

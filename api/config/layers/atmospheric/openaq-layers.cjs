@@ -54,7 +54,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Legend.OPENAQ_MEASUREMENTS_LABEL',
-      minZoom: 6,
+      minZoom: 8,
       content: {
         observations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: '#0B75A9', radius: 10, icon: { classes: 'fa fa-heartbeat', color: 'white',  size: 10} } } }, 
@@ -70,7 +70,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Legend.OPENAQ_STATIONS_LABEL',
-      maxZoom: 5,
+      maxZoom: 8,
       content: {
         stations: [
           { symbol: { 'media/KShape': { options: { shape: 'circle', color: 'white', radius: 10,  stroke: { color: 'black', width: 2 }, icon: { classes: 'fa fa-heartbeat', color: 'black',  size: 10} } } }, 
@@ -83,12 +83,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     type: 'OverlayLayer',
     service: 'openaq-measurements',
     dbName: (process.env.DATA_DB_URL ? 'data' : undefined),
-    probeService: 'openaq-stations',
-    featureId: 'location',
+    probeService: 'openaq-locations',
+    featureId: 'locationId',
     featureLabel: 'name',
     from: 'P-7D',
-    to: 'PT-15M',
-    every: 'PT15M',
+    to: 'PT',
+    every: 'PT3H',
     queryFrom: 'P-1D',
     variables: [
       {
@@ -173,9 +173,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'geoJson',
       realtime: true,
       tiled: true,
-      minZoom: 4,
-      minFeatureZoom: 7,
-      cluster: { disableClusteringAtZoom: 18 },
+      minZoom: 6,
+      minFeatureZoom: 8,
+      cluster: { 
+        maxClusterRadius: 50,
+        disableClusteringAtZoom: 16 
+      },
       style: {
         point: {
           shape: 'circle',

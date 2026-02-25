@@ -1,10 +1,12 @@
-import chai, { util, expect } from 'chai'
+import { core } from './kdk/index.mjs'
+import chai, { expect, util } from 'chai'
 import chailint from 'chai-lint'
-import { core } from '@kalisio/kdk/test.client.js'
 
 const suite = 'controls'
 
-describe(`suite:${suite}`, () => {
+describe(`suite:${suite}`, function () {
+  this.timeout(2 * 1000 * core.TestTimeoutMultiplier)
+
   let runner, page
   const user = { email: 'user-kano@kalisio.xyz', password: 'Pass;word1' }
 
@@ -16,7 +18,8 @@ describe(`suite:${suite}`, () => {
       user: user.email,
       geolocation: { latitude: 43.10, longitude: 1.71 },
       localStorage: {
-        'kano-welcome': false
+        'kano-welcome': false,
+        'kano-install': false
       }
     })
     page = await runner.start()
@@ -26,8 +29,8 @@ describe(`suite:${suite}`, () => {
   it('locate user', async () => {
     await core.clickPaneAction(page, 'top', 'locate-user')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
-    const match = await runner.captureAndMatch('geolocation')
+    await core.waitForTimeout(1000)
+    const match = await runner.captureAndMatch('geolocation', null, 3)
     await core.clickPaneAction(page, 'top', 'locate-user')
     expect(match).beTrue()
   })
@@ -37,26 +40,26 @@ describe(`suite:${suite}`, () => {
     let selector = '#location-search'
     await core.type(page, selector, 'place du capitole')
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
+    await core.waitForTimeout(1000)
     selector = '.q-menu .q-item'
     await core.click(page, selector)
     await page.waitForNetworkIdle()
-    await page.waitForTimeout(1000)
-    const match = await runner.captureAndMatch('location')
+    await core.waitForTimeout(1000)
+    const match = await runner.captureAndMatch('location', null, 3)
     await core.clickAction(page, 'back')
     expect(match).beTrue()
   })
 
   it('display position', async () => {
-    await core.clickPaneActions(page, 'top', ['tools', 'display-position'])
-    const match = await runner.captureAndMatch('position')
-    await core.clickAction(page, 'back')
+    await core.clickPaneActions(page, 'top', ['tools', 'toggle-position-sticky'])
+    const match = await runner.captureAndMatch('position', null, 3)
+    await core.clickAction(page, 'close-position')
     expect(match).beTrue()
   })
 
   it('display legend', async () => {
-    await core.clickPaneActions(page, 'top', ['tools', 'display-legend'])
-    const match = await runner.captureAndMatch('legend')
+    await core.clickPaneActions(page, 'top', ['tools', 'toggle-legend-widget'])
+    const match = await runner.captureAndMatch('legend', null, 3)
     expect(match).beTrue()
   })
 

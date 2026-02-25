@@ -7,7 +7,7 @@ import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
-import { initializeApi, i18n, utils as kdkCoreUtils, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { initializeApi, i18n, utils as kdkCoreUtils, directives as kdkCoreDirectives, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, setupApi, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -24,7 +24,7 @@ const kanoLib = {
 }
 
 // Inject a bearing value in lodash template evaluation context
-TemplateContext.merge({ bearing: 0 })
+TemplateContext.set('bearing', 0)
 CanvasDrawContext.merge(kanoLib)
 
 function updateThemeColors () {
@@ -48,6 +48,13 @@ postRobot.on('setConfiguration', async (event) => {
     _.set(config, key, value)
   })
 })
+// Add data to lodash string evaluation context
+postRobot.on('setTemplateContext', async (event) => {
+  const ctx = TemplateContext.get()
+  _.forOwn(event.data, (value, key) => {
+    _.set(ctx, key, value)
+  })
+})
 
 export default async ({ app, router }) => {
   // Required to make injections reactively linked to the provider
@@ -60,17 +67,16 @@ export default async ({ app, router }) => {
 
   await utils.sendEmbedEvent('kano-ready')
 
+  // Initializes i18n first to avoid any browser translation
+  await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
   // Initiate the client
-  const api = initializeApi(setupApi)
+  const api = await initializeApi(setupApi)
   // Setup app hooks
   api.hooks(appHooks)
   // Then all services
   await services.call(api)
   // Now KDK is ready apply theme if configured
   updateThemeColors()
-
-  // Initializes i18n
-  await i18n.initialize(app, ['core', 'map', 'app', 'plugin'])
 
   // Add a generic function that can be used from the iframe API
   // to setup hooks on all service operations easily, eg 'after get' hook on service 'catalog'
@@ -162,6 +168,9 @@ export default async ({ app, router }) => {
     return _.get(config, path, defaultValue)
   }
 
+  // Register global directives
+  app.directive('hover', kdkCoreDirectives.vHover)
+
   // Register global components
   app.component('KAction', await kdkCoreUtils.loadComponent('action/KAction'))
   app.component('KPanel', await kdkCoreUtils.loadComponent('KPanel'))
@@ -169,10 +178,10 @@ export default async ({ app, router }) => {
   app.component('KModal', await kdkCoreUtils.loadComponent('KModal'))
   app.component('KDialog', await kdkCoreUtils.loadComponent('KDialog'))
   app.component('KMenu', await kdkCoreUtils.loadComponent('menu/KMenu'))
+  app.component('KSubMenu', await kdkCoreUtils.loadComponent('menu/KSubMenu'))
   app.component('KForm', await kdkCoreUtils.loadComponent('form/KForm'))
   app.component('KPage', await kdkCoreUtils.loadComponent('layout/KPage'))
   app.component('KTour', await kdkCoreUtils.loadComponent('app/KTour'))
-  app.component('KWelcome', await kdkCoreUtils.loadComponent('app/KWelcome'))
   app.component('KLayersPanel', await kdkCoreUtils.loadComponent('catalog/KLayersPanel'))
 
   // Register global properties
@@ -199,5 +208,5 @@ export default async ({ app, router }) => {
   })
 
   // For debug purpose
-  logger.debug(`[KDK] is now ready: ${JSON.stringify(Store.get('kdk'), null, 4)}`)
+  logger.debug(`[KANO] is now ready: ${JSON.stringify(Store.get('kdk'), null, 4)}`)
 }

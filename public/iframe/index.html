@@ -115,7 +115,7 @@
               type: 'geoJson',
               realtime: true,
               isVisible: true,
-              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></span>',
+              'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= properties.track + bearing %>deg)"><img width="32px" height="32px" src="/iframe/<%= properties.type %>.png"/></span>',
               /* We can also use SVG
               'icon-html': '<span style="display: inline-block; transformOrigin: 16px 16px; transform: rotateZ(<%= bearing ? bearing - properties.track : properties.track %>deg)"><svg width="32px" height="32px" viewBox="0 0 512 512"><path fill="green" d="M281.7 311.9c.4-6.9 8.3-4.5 8.3-4.5l62 12.6 128 48.7c0-24-3.8-26.5-9.4-30.7L288 207s-4.9-60-4.9-112.9c0-24.5-11.8-78.1-27.1-78.1s-27.1 54.4-27.1 78.1c0 50.2-4.9 112.9-4.9 112.9L41.4 338c-7.1 5-9.4 7.7-9.4 30.7L160 320l61.9-12.6s7.9-2.4 8.3 4.5c.4 6.9-1.2 69.1 5.9 102.1.9 4.4-2.5 4.7-4.8 7.4l-51.9 32.8c-1.7 1.9-2.5 7.3-2.5 7.3l-1 18.5 68-16 12 32 12-32 68 16-1-18.5c.1 0-.7-5.4-2.4-7.3l-51.9-32.8c-2.3-2.7-5.7-3-4.8-7.4 6.9-33 5.5-95.2 5.9-102.1z"/></svg></span>',
               */
@@ -580,7 +580,7 @@
         // Path
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'FLIGHTPATH', geodesic: true, wall: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 5,
+          properties: { name: 'FLIGHTPATH', geodesic: true, wrap: false, wall: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 5,
             'fill': '#f9b40f', 'fill-opacity': 0.5,
             entityStyle: {
               polyline: { arcType: 'Cesium.ArcType.GEODESIC' },
@@ -591,7 +591,10 @@
             [ 1.368333, 43.635, 49900.0 ], // TOULOUSE
             [ 2.548333, 49.01, 39000.0 ], // PARIS
             [ -6.27, 53.421667, 24200.0 ], // DUBLIN
-            [ -156.763333, 71.286667, 4400.0 ] // WILEY POST-WILL ROGERS
+            //[ 105.1, 61.523112, 12000.0 ], // MOSCOU
+            [ -156.763333, 71.286667, 4400.0 ], // WILEY POST-WILL ROGERS
+            [ 144.84332, -37.673336, 30000.0 ], // YM
+            [ -73.778694, 40.63993, 49900.0 ] // KJFK
           ] }
         })
         // Waypoints
@@ -787,7 +790,7 @@
         // configuration example
         postRobot.send(kano, 'setConfiguration', {
           theme: '#448aff', // Change theme color
-          'locale.default': 'en',
+          'locale.default': 'en-GB',
           'layout.welcome' : false, // No welcome screen
           'layout.leftPane.filter': { id: { $ne: 'logout' } },
           'mapActivity.topPane.filter': { id: { $nin: ['toggle-fullscreen'] } }, // No fullscreen mode
@@ -796,6 +799,9 @@
           // Activate rotation in 2D
           'engines.leaflet.viewer.rotate': true,
           'engines.leaflet.viewer.rotateControl': false,
+          // Allow for cyclic scroll
+          'engines.leaflet.viewer.minZoom': 1,
+          'engines.leaflet.viewer.maxBounds': null,
           // Allow more events to be emitted
           'mapActivity.allowForwardEvents': ['click', 'dblclick', 'contextmenu', 'mouseover', 'mouseout', 'mousemove', 'mousedown', 'mouseup',
             'movestart', 'moveend', 'move', 'zoomstart', 'zoomend', 'zoom', 'rotate', 'dragstart', 'dragend', 'drag']

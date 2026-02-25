@@ -6,6 +6,9 @@
 *.njsproj
 *.sln
 
+# Local configurations
+local.cjs
+
 # Quasar build
 .quasar
 
@@ -78,11 +81,12 @@ test/run
 public/Cesium
 
 # KDK extras
-public/icons/kdk
-public/kalisio.png
-src/tours/core
-src/tours/map
+config/kdk
+public/kdk
+src/assets/kdk
+src/tours/kdk
 src/css/kdk
+test/kdk
 
 # local layers
 local-layers.js

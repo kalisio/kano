@@ -5,7 +5,7 @@ ARG NODE_VERSION=20
 ## Use a builder
 ##
 
-FROM node:${NODE_VERSION}-${DEBIAN_VERSION}-slim as Builder
+FROM node:${NODE_VERSION}-${DEBIAN_VERSION}-slim AS builder
 LABEL maintainer="contact@kalisio.xyz"
 
 # git is required to pull some node packages from github
@@ -51,7 +51,7 @@ ARG BUILD_NUMBER
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 
-COPY --from=Builder --chown=node:node /opt/kalisio /opt/kalisio
+COPY --from=builder --chown=node:node /opt/kalisio /opt/kalisio
 # From now on, run stuff as 'node'
 USER node
 

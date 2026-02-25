@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const makeDebug = require('debug')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
@@ -7,6 +8,7 @@ const layers = require('./layers.cjs')
 const categories = require('./categories.cjs')
 const sublegends = require('./sublegends.cjs')
 
+const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080
@@ -66,6 +68,8 @@ if (process.env.SUBDOMAIN) {
 }
 // On a developer machine will do domain = gateway = localhost
 const gateway = (process.env.API_GATEWAY_URL ? process.env.API_GATEWAY_URL : domain.replace('kano', 'api'))
+// Keycloak base url
+const keycloakBaseUrl = `${process.env.KEYCLOAK_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect`
 
 // Just used for testing purpose now
 apiLimiter = null
@@ -147,6 +151,7 @@ module.exports = {
                            !service.path.includes('features') &&
                            !service.path.includes('projects') &&
                            !service.path.includes('geocoder'),
+    remoteServices: (service) => (service.key === 'weacast') || (service.key === 'crisis'),
     // Distribute at least modelName and pagination for KFS to know about features services
     remoteServiceOptions: () => ['modelName', 'paginate'],
     middlewares: { after: express.errorHandler() },
@@ -154,7 +159,16 @@ module.exports = {
     // this assumes a gateway scenario where authentication is performed externally
     authentication: false,
     key: 'kano',
-    healthcheckPath: API_PREFIX + '/distribution/'
+    healthcheckPath: API_PREFIX + '/distribution/',
+    // Increase default timeout due to possible large data volume
+    timeout: process.env.DISTRIBUTION_TIMEOUT ? parseInt(process.env.DISTRIBUTION_TIMEOUT) : 60000
+  },
+  automerge: {
+    syncServerUrl: process.env.AUTOMERGE_SYNC_SERVER_URL,
+    syncServerWsPath: process.env.AUTOMERGE_SYNC_SERVER_PATH || 'offline',
+    directory: process.env.AUTOMERGE_DIRECTORY || path.join(__dirname, '../automerge'),
+    serverId: process.env.AUTOMERGE_SERVER_ID || 'kano',
+    syncServicePath: API_PREFIX + '/offline'
   },
   paginate: {
     default: 10,
@@ -178,7 +192,7 @@ module.exports = {
     },
     jwtOptions: {
       header: {
-        type: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
+        typ: 'access' // See https://tools.ietf.org/html/rfc7519#section-5.1
       },
       audience: process.env.SUBDOMAIN || 'kalisio', // The resource server where the token is processed
       issuer: 'kalisio', // The issuing server, application or resource
@@ -186,10 +200,21 @@ module.exports = {
       expiresIn: '1d'
     },
     oauth: {
-      redirect: domain + '/',
+      redirect: domain,
       defaults: {
         origin: domain
-      }
+      },
+      keycloak: (process.env.KEYCLOAK_CLIENT_ID ? {
+        key: process.env.KEYCLOAK_CLIENT_ID,
+        secret: process.env.KEYCLOAK_CLIENT_SECRET,
+        oauth: 2,
+        scope: ['openid'],
+        authorize_url: `${keycloakBaseUrl}/auth`,
+        access_url: `${keycloakBaseUrl}/token`,
+        profile_url: `${keycloakBaseUrl}/userinfo`,
+        logout_url: `${keycloakBaseUrl}/logout`,
+        nonce: true
+      } : undefined)
     },
     passwordPolicy: {
       minLength: 8,
@@ -226,20 +251,40 @@ module.exports = {
         name: 'User'
       }
     ],
-    disallowRegistration: true,
-    // Required for OAuth2 to work correctly
-    cookie: {
-      enabled: true,
-      name: 'kano-jwt',
-      httpOnly: false,
-      secure: (process.env.NODE_ENV !== 'development')
-    }
+    disallowRegistration: true
   },
   authorisation: {
     cache: {
       maxUsers: 1000
     }
   },
+  configurations: {
+    // Nothing specific here
+  },
+  defaultConfigurations: [{
+    name: 'userCategoriesOrder',
+    value: []
+  }, {
+    name: 'defaultCategoriesOrder',
+    value: [
+      "Categories.LAB_LAYERS",
+      "Categories.ADMINISTRATIVE_LAYERS",
+      "Categories.ATMOSPHERIC_LAYERS",
+      "Categories.BUSINESS_LAYERS",
+      "Categories.HYDROGRAPHY_LAYERS",
+      "Categories.INFRASTRUCTURE_LAYERS",
+      "Categories.RADIOACTIVITY_LAYERS",
+      "Categories.SENSOR_LAYERS",
+      "Categories.SHOT_LAYERS",
+      "Categories.WEATHER_MEASURE_LAYERS",
+      "Categories.WEATHER_FORECAST_LAYERS",
+      "Categories.TERRAIN_LAYERS",
+      "Categories.BASE_LAYERS",
+    ],
+  }, {
+    name: 'userOrphanLayersOrder',
+    value: []
+  }],
   catalog: {
     layers,
     categories,
@@ -250,13 +295,25 @@ module.exports = {
     }
   },
   projects: {
-
+    // Nothing specific here
+  },
+  styles: {
+    paginate: {
+      default: 20,
+      max: 250
+    }
+  },
+  tags: {
+    // Nothing specific here
   },
   cesium: {
     token: process.env.CESIUM_TOKEN
   },
   mapillary: {
     token: process.env.MAPILLARY_TOKEN
+  },
+  panoramax: {
+    // empty for now
   },
   logs: {
     Console: {

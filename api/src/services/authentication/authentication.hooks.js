@@ -28,8 +28,8 @@ export default {
       let appId = config.appId
       // Check if the token contains the appId for the gateway
       // => iframe / third-party application integration use case
-      if (_.has(hook.params, 'payload.appId')) {
-        appId = _.get(hook.params, 'payload.appId')
+      if (_.has(hook.result, 'authentication.payload.appId')) {
+        appId = _.get(hook.result, 'authentication.payload.appId')
       } else {
         // Loop over auth providers and select the one used to login if any
         for (const provider of hook.app.authenticationProviders) {
@@ -45,7 +45,7 @@ export default {
           jwt: user => ({
             subject: appId,
             // Audience is target subdomain
-            audience: process.env.API_GATEWAY_URL.replace('https://api.', '')
+            audience: process.env.API_GATEWAY_URL.replace(/https?:\/\/api\./, '')
           }),
           payload: user => ({
             userId: (user ? user._id : undefined)

@@ -1,9 +1,9 @@
-const _ = require('lodash')
-const tour = require('./map/side-nav')
+const sideNav = require('./kdk/pane.left')
 
 module.exports = [
-  _.find(tour, { target: '#logout' }), {
-    target: '#edit-settings',
+  sideNav.logout(),
+  {
+    target: '#settings-action',
     content: 'tours.side-nav.SETTINGS_LABEL',
     params: {
       placement: 'top',
@@ -12,7 +12,15 @@ module.exports = [
       previousDelay: 500
     }
   },
-  _.find(tour, { target: '#contextual-help' }),
-  _.find(tour, { target: '#about' }),
-  _.find(tour, { target: '#report-bug' })
+  sideNav.contextualHelp({ target: '#contextual-help-action' }),
+  sideNav.about({
+    target: '#about-action',
+    params: {
+      placement: 'top',
+      clickOnPrevious: '#left-opener',
+      clickOnNext: ['#left-opener', '#about-action', '#left-opener'],
+      nextDelay: 500
+    }
+  }),
+  sideNav.reportBug({ target: '#report-bug' })
 ]
