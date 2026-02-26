@@ -109,6 +109,52 @@ function parseSchema (schema) {
   return { title, properties }
 }
 
+// Flatten nested objects using dot notation (mirrors KDK's dotify)
+function dotify (obj, prefix, result) {
+  prefix = prefix || ''
+  result = result || {}
+  for (const [key, value] of Object.entries(obj)) {
+    const fullKey = prefix ? `${prefix}.${key}` : key
+    if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+      dotify(value, fullKey, result)
+    } else {
+      result[fullKey] = value
+    }
+  }
+  return result
+}
+
+function getGeoJsonFeatures (geoJson) {
+  if (geoJson.type === 'FeatureCollection') return geoJson.features || []
+  if (geoJson.type === 'Feature') return [geoJson]
+  return []
+}
+
+function isGeoJson (obj) {
+  return obj.type === 'FeatureCollection' || obj.type === 'Feature'
+}
+
+// Infer properties from GeoJSON features, mirroring KDK's generatePropertiesSchema
+function parseGeoJson (geoJson) {
+  const features = getGeoJsonFeatures(geoJson)
+  // Collect first non-null value seen for each key across all features
+  const propValues = {}
+  for (const feature of features) {
+    const props = feature.properties ? dotify(feature.properties) : {}
+    for (const [key, value] of Object.entries(props)) {
+      if (propValues[key] !== undefined && propValues[key] !== null) continue
+      propValues[key] = value
+    }
+  }
+  const properties = []
+  for (const [key, value] of Object.entries(propValues)) {
+    let type = typeof value
+    if (type === 'object' || type === 'undefined') type = 'string'
+    properties.push({ name: key, type })
+  }
+  return properties
+}
+
 const App = {
   template: `
 <q-layout view="hHh lpR fFf">
@@ -143,9 +189,10 @@ const App = {
               >
                 <q-icon name="upload_file" size="48px" color="grey-6" />
                 <div class="q-mt-sm text-grey-7">
-                  Drop a JSON schema file here or <strong>click to browse</strong>
+                  Drop a <strong>JSON schema</strong> or <strong>GeoJSON</strong> file here, or <strong>click to browse</strong>
                 </div>
-                <input ref="fileInput" type="file" accept=".json" style="display:none" @change="onFileChange" />
+                <div class="text-caption text-grey-5 q-mt-xs">Schema properties will be induced automatically from GeoJSON feature properties</div>
+                <input ref="fileInput" type="file" accept=".json,.geojson" style="display:none" @change="onFileChange" />
               </div>
               <div class="row q-mt-sm q-gutter-sm">
                 <q-btn outline color="negative" icon="restart_alt" label="Start from scratch" @click="resetSchema" />
@@ -325,6 +372,10 @@ const App = {
             <q-item-section>Drop or select an existing Layer JSON schema file to edit it.</q-item-section>
           </q-item>
           <q-item>
+            <q-item-section avatar><q-icon name="map" color="primary" /></q-item-section>
+            <q-item-section>Drop a GeoJSON file to automatically induce the schema from its feature properties.</q-item-section>
+          </q-item>
+          <q-item>
             <q-item-section avatar><q-icon name="add_circle" color="primary" /></q-item-section>
             <q-item-section>Add properties by entering a name, choosing a type (string / number / boolean) and clicking +.</q-item-section>
           </q-item>
@@ -426,7 +477,7 @@ const App = {
       $q.notify({ type: 'info', message: 'Schema cleared.' })
     }
 
-    function loadFromObject (obj) {
+    function loadFromSchema (obj) {
       try {
         const parsed = parseSchema(obj)
         schemaTitle.value = parsed.title
@@ -438,13 +489,32 @@ const App = {
       }
     }
 
+    function loadFromGeoJson (obj, filename) {
+      try {
+        const inferred = parseGeoJson(obj)
+        properties.value = inferred
+        // Suggest a title from filename if none set yet
+        if (!schemaTitle.value && filename) {
+          schemaTitle.value = filename.replace(/\.(geo)?json$/i, '')
+        }
+        cancelEdit()
+        $q.notify({ type: 'positive', message: `Induced ${inferred.length} properties from GeoJSON.` })
+      } catch (e) {
+        $q.notify({ type: 'negative', message: 'Failed to parse GeoJSON: ' + e.message })
+      }
+    }
+
     function readFile (file) {
       if (!file) return
       const reader = new FileReader()
       reader.onload = (e) => {
         try {
           const obj = JSON.parse(e.target.result)
-          loadFromObject(obj)
+          if (isGeoJson(obj)) {
+            loadFromGeoJson(obj, file.name)
+          } else {
+            loadFromSchema(obj)
+          }
         } catch {
           $q.notify({ type: 'negative', message: 'Invalid JSON file.' })
         }
@@ -460,10 +530,10 @@ const App = {
     function onDrop (event) {
       dragging.value = false
       const file = event.dataTransfer.files[0]
-      if (file && file.name.endsWith('.json')) {
+      if (file && (file.name.endsWith('.json') || file.name.endsWith('.geojson'))) {
         readFile(file)
       } else {
-        $q.notify({ type: 'warning', message: 'Please drop a .json file.' })
+        $q.notify({ type: 'warning', message: 'Please drop a .json or .geojson file.' })
       }
     }
 
@@ -498,7 +568,8 @@ const App = {
       typeOptions, dragging, showHelp, editingIdx, editingName,
       schemaPreview, canExport,
       addProperty, removeProperty, startEdit, saveEdit, cancelEdit,
-      resetSchema, onFileChange, onDrop, exportSchema, copySchema
+      resetSchema, onFileChange, onDrop, exportSchema, copySchema,
+      loadFromGeoJson
     }
   }
 }
