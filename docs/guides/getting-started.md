@@ -100,6 +100,15 @@ More actions are available on user-defined feature layers:
 * <i class="las la-chart-pie"></i> create charts,
 * <i class="las la-minus-circle"></i> delete the layer.
 
+When updating the properties of a layer you will be able to update the associated [JSON Schema](https://json-schema.org/) so that you can edit the metadata you want on each feature of your layer.
+
+:::tip
+To avoid the burden of writing a schema by yourself Kano comes with an embedded tool to create a schema file from either an existing schema or a GeoJson file with a sample of your features (to induce the schema from).
+Note that you can export a feature sample from Kano, after importing your GeoJson file, once a feature has been selected with the <i>Export object</i> button.
+
+The tool to create a schema is located at https://kano.your.domain.com/layer-json-schema-editor.html.
+:::
+
 ## Projects
 
 Users with permissions to manage the catalog (i.e. create, update, remove layers) can also create, update and remove **projects**. A project is a set of layers and views useful to cover a specific use case of your users.
