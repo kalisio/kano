@@ -1268,7 +1268,7 @@
     debug "^4.3.4"
     uuid "^8.3.2"
 
-"@kalisio/feathers-import-export@^1.4.0":
+"@kalisio/feathers-import-export@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@kalisio/feathers-import-export/-/feathers-import-export-1.4.1.tgz#7b9e92b2b0bd80cd13a6f6d7c876bfeaaea067e8"
   integrity sha512-OYLhB9Fys6hK/U9jkfdZO9atpBvYve+fMns/1vTGZpGbt6mJIp5a+whNE6UhIPnp6MWGYOit4Z/N1F1wY5F6jw==
@@ -1283,7 +1283,7 @@
     papaparse "^5.5.3"
     sift "^17.0.1"
 
-"@kalisio/feathers-s3@^1.5.0":
+"@kalisio/feathers-s3@^1.5.0", "@kalisio/feathers-s3@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@kalisio/feathers-s3/-/feathers-s3-1.6.0.tgz#68cdb5b9487b7e1d26ca50e41d94fb7ae19e462d"
   integrity sha512-+E18cspVXqh3zvl1UluE5H/8QYftApcOagNFz5/jYqxnT86tLRTSIaL9l4Tl1U69iR4J1eXCoe2O46vu5y0RDA==
@@ -1306,9 +1306,9 @@
     lodash "^4.17.21"
     web-push "^3.6.1"
 
-"@kalisio/kdk@https://github.com/kalisio/kdk#v2.6":
-  version "2.6.2"
-  resolved "https://github.com/kalisio/kdk#96558e442f98243d93fa1df607669f4a5b615693"
+"@kalisio/kdk@https://github.com/kalisio/kdk#v2.7":
+  version "2.7.0"
+  resolved "https://github.com/kalisio/kdk#d4fd13f9f34d9bdb2a4b6ea42b1b57f05305e913"
   dependencies:
     "@casl/ability" "^6.1.1"
     "@casl/mongoose" "^7.1.0"
@@ -1321,8 +1321,8 @@
     "@feathersjs/feathers" "^5.0.8"
     "@feathersjs/schema" "^5.0.8"
     "@feathersjs/socketio" "^5.0.8"
-    "@kalisio/feathers-import-export" "^1.4.0"
-    "@kalisio/feathers-s3" "^1.5.0"
+    "@kalisio/feathers-import-export" "^1.4.1"
+    "@kalisio/feathers-s3" "^1.6.0"
     "@kalisio/feathers-webpush" "^1.0.2"
     "@turf/bbox" "^6.0.1"
     "@weacast/core" "^2.2.1"
