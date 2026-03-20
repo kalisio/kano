@@ -8,7 +8,7 @@ sidebarDepth: 3
 
 More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/16) and [KDK](https://github.com/kalisio/kdk/milestone/16).
 
-## v2.6.0 - Not yet released
+## v2.6.0 - March 10th, 2026
 
 **Major enhancements:**\
 👉 Enhanced zoom control,\
