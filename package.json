@@ -107,7 +107,7 @@
     "@mapbox/geojsonhint": "^3.0.1",
     "@mapbox/sphericalmercator": "^1.2.0",
     "@panoramax/web-viewer": "^4.3.1",
-    "@pdfme/common": "^4.1.0",
+    "@pdfme/common": "^5.5.10",
     "@pdfme/generator": "^4.1.0",
     "@pdfme/schemas": "^4.1.0",
     "@pdfme/ui": "^4.1.0",

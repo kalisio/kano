@@ -4622,14 +4622,15 @@
   dependencies:
     pako "^1.0.10"
 
-"@pdfme/common@^4.1.0":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@pdfme/common/-/common-4.3.2.tgz#02675457abf37448c42eefa6683c30fd2dd63450"
-  integrity sha512-OqjluARzWkSV/mC1REUUGrncniE2MGWqtPrRqpBXiU//NQxd25c9b0cPDpCtOoLvR5FwIdL7VVEsYqziYcNdiQ==
+"@pdfme/common@^5.5.10":
+  version "5.5.10"
+  resolved "https://registry.yarnpkg.com/@pdfme/common/-/common-5.5.10.tgz#d8a03983324be2883b87eca53bd1f412103fb651"
+  integrity sha512-UP4Fm6pT50CwqqAYPO1Dxe7eWfZYAdRo84N0weYMP0NFIwBRUTHaY4/yTbUVNLyXeUi5w0AYJbzKcxflvauKmw==
   dependencies:
-    "@pdfme/pdf-lib" "^1.18.3"
+    "@pdfme/pdf-lib" "*"
+    acorn "^8.16.0"
     buffer "^6.0.3"
-    zod "^3.20.2"
+    zod "^4.3.6"
 
 "@pdfme/generator@^4.1.0":
   version "4.3.2"
@@ -4639,6 +4640,17 @@
     "@pdfme/pdf-lib" "^1.18.3"
     atob "^2.1.2"
     fontkit "^2.0.2"
+
+"@pdfme/pdf-lib@*":
+  version "5.5.10"
+  resolved "https://registry.yarnpkg.com/@pdfme/pdf-lib/-/pdf-lib-5.5.10.tgz#3b54aa765282d372b0fd48f5dad6ea18889b797e"
+  integrity sha512-5Cj3COAo2GbM+Jp8FK+lAlapKq4+/3gsXx6zqndOob+gdt3CPqqrR8nd35NRF7SpsO6qIVU+4+Q3UFbU7GBHbA==
+  dependencies:
+    "@pdf-lib/standard-fonts" "^1.0.0"
+    "@pdf-lib/upng" "^1.0.1"
+    color "^4.2.3"
+    node-html-better-parser "^1.5.8"
+    pako "^2.1.0"
 
 "@pdfme/pdf-lib@^1.18.3":
   version "1.18.3"
@@ -8204,15 +8216,10 @@ acorn@^7.1.1, acorn@^7.4.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.0.4, acorn@^8.5.0, acorn@^8.7.1, acorn@^8.8.0:
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.0.tgz#88c0187620435c7f6015803f5539dae05a9dbea8"
-  integrity sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==
-
-acorn@^8.14.0, acorn@^8.8.2:
-  version "8.14.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.14.0.tgz#063e2c70cac5fb4f6467f0b11152e04c682795b0"
-  integrity sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==
+acorn@^8.0.4, acorn@^8.14.0, acorn@^8.16.0, acorn@^8.5.0, acorn@^8.7.1, acorn@^8.8.0, acorn@^8.8.2:
+  version "8.16.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.16.0.tgz#4ce79c89be40afe7afe8f3adb902a1f1ce9ac08a"
+  integrity sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==
 
 add-dom-event-listener@^1.1.0:
   version "1.1.0"
@@ -16047,6 +16054,13 @@ node-html-better-parser@^1.4.0:
   dependencies:
     html-entities "^2.3.2"
 
+node-html-better-parser@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/node-html-better-parser/-/node-html-better-parser-1.5.8.tgz#dda3d7f4f13af3d3132c62cb5ee6dc6f43e04ce1"
+  integrity sha512-t/wAKvaTSKco43X+yf9+76RiMt18MtMmzd4wc7rKj+fWav6DV4ajDEKdWlLzSE8USDF5zr/06uGj0Wr/dGAFtw==
+  dependencies:
+    html-entities "^2.3.2"
+
 node-loader@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/node-loader/-/node-loader-2.0.0.tgz#9109a6d828703fd3e0aa03c1baec12a798071562"
@@ -16481,6 +16495,11 @@ pako@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.4.tgz#6cebc4bbb0b6c73b0d5b8d7e8476e2b2fbea576d"
   integrity sha512-v8tweI900AUkZN6heMU/4Uy4cXRc2AYNRggVmTR+dEncawDJgCdLMximOVA2p4qO57WMynangsfGRb5WD6L1Bg==
+
+pako@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-2.1.0.tgz#266cc37f98c7d883545d11335c00fbd4062c9a86"
+  integrity sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==
 
 papaparse@^5.3.2:
   version "5.3.2"
@@ -21599,20 +21618,15 @@ zip-stream@^4.1.0:
     compress-commons "^4.1.0"
     readable-stream "^3.6.0"
 
-zod@^3.19.1:
-  version "3.21.4"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.21.4.tgz#10882231d992519f0a10b5dd58a38c9dabbb64db"
-  integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==
-
-zod@^3.20.2:
-  version "3.22.4"
-  resolved "https://registry.npmjs.org/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
-  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
-
-zod@^3.24.1:
+zod@^3.19.1, zod@^3.24.1:
   version "3.25.76"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.25.76.tgz#26841c3f6fd22a6a2760e7ccb719179768471e34"
   integrity sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==
+
+zod@^4.3.6:
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.3.6.tgz#89c56e0aa7d2b05107d894412227087885ab112a"
+  integrity sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==
 
 zstddec@^0.1.0:
   version "0.1.0"
