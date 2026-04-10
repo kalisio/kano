@@ -163,7 +163,7 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.8.0",
     "mapillary-js": "^4.0.0",
-    "mathjs": "^10.5.0",
+    "mathjs": "^15.2.0",
     "mime": "^3.0.0",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.35",
