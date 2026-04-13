@@ -114,7 +114,7 @@
     "@quasar/extras": "1.16.3",
     "@thumbmarkjs/thumbmarkjs": "^0.16.1",
     "@tmcw/togeojson": "^4.5.0",
-    "@turf/turf": "^6.5.0",
+    "@turf/turf": "^7.3.0",
     "@weacast/core": "^2.2.1",
     "abort-controller": "^3.0.0",
     "ajv": "^8.12.0",
