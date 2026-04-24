@@ -6,13 +6,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION: 'Population',
-          POPULATION_DESCRIPTION: 'Nombre d\'individus'
+          POPULATION_DESCRIPTION: "Nombre d'individus - édition 2021 (Filosofi)"
         }
       },
       en: {
         Layers: {
           POPULATION: 'Population',
-          POPULATION_DESCRIPTION: 'Number of persons'
+          POPULATION_DESCRIPTION: 'Number of persons – 2021 edition (Filosofi)'
         }
       }
     },
@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-th',
-    attribution: 'Population © INSEE – données disponibles sous <a href="https://catalogue-donnees.insee.fr/">licence ouverte</a>',
+    attribution: '© INSEE – données disponibles sous <a href="https://www.insee.fr/fr/statistiques/8735162?sommaire=8735243/">licence ouverte</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION',
