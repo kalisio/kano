@@ -21,7 +21,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-th',
-    attribution: '© INSEE – données disponibles sous <a href="https://www.insee.fr/fr/statistiques/8735162?sommaire=8735243/">licence ouverte</a>',
+    attribution: '© <a href="https://insee.fr">INSEE</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION',
@@ -70,13 +70,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION_DENSITY: 'Densité de population',
-          POPULATION_DENSITY_DESCRIPTION: "Nombre d'individus - édition 2021 (Filosofi)"
+          POPULATION_DENSITY_DESCRIPTION: "Densité de population - nombre d'individus par km² - édition 2021 (Filosofi)"
         }
       },
       en: {
         Layers: {
           POPULATION_DENSITY: 'Population density',
-          POPULATION_DENSITY_DESCRIPTION: 'Number of persons – 2021 edition (Filosofi)'
+          POPULATION_DENSITY_DESCRIPTION: 'Population density - number of inhabitants per km² - 2021 edition (Filosofi)'
         }
       }
     },
@@ -85,7 +85,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     ],
     iconUrl: '',
     icon: 'las la-th',
-    attribution: '© INSEE – données disponibles sous <a href="https://www.insee.fr/fr/statistiques/8735162?sommaire=8735243/">licence ouverte</a>',
+    attribution: '© <a href="https://insee.fr">INSEE</a>',
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
