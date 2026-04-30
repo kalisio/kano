@@ -76,7 +76,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       en: {
         Layers: {
           POPULATION_DENSITY: 'Population density',
-          POPULATION_DENSITY_DESCRIPTION: 'Population density - number of inhabitants per km² - 2021 edition (Filosofi)'
+          POPULATION_DENSITY_DESCRIPTION: 'Population density - number of habitants per km² - 2021 edition (Filosofi)'
         }
       }
     },
@@ -127,7 +127,57 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       maxNativeZoom: 14,
       tms: true
     }
-  }, {
+  },
+  {
+    name: 'Layers.POPULATION_DENSITY_EUROPE',
+    description: 'Layers.POPULATION_DENSITY_EUROPE_DESCRIPTION',
+    i18n: {
+      fr: {
+        Layers: {
+          POPULATION_DENSITY_EUROPE: 'Densité de population Europe',
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: "Densité de population - Europe - nombre d'individus par km² - Eurostats édition 2021"
+        }
+      },
+      en: {
+        Layers: {
+          POPULATION_DENSITY_EUROPE: 'Population density Europe',
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: 'Population density - Europe - number of habitants per km² - Eurostats 2021 edition'
+        }
+      }
+    },
+    tags: [
+      'demography', 'administrative'
+    ],
+    iconUrl: '',
+    icon: 'las la-th',
+    attribution: '© <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/population-grids">Eurostats</a>',
+    legend: [{
+      type: 'symbols',
+      label: 'Layers.POPULATION_DENSITY_EUROPE_DESCRIPTION',
+      minZoom: 6,
+      content: {
+        symbols: [
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 25' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FDD976' } } }, label: '25 - 100' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FEB554' } } }, label: '100 - 250' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FD8D3C' } } }, label: '250 - 600' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FC4E2A' } } }, label: '600 - 1000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#E31A1C' } } }, label: '1000 - 4000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#A50026' } } }, label: '4000 - 10000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#8B0000' } } }, label: '> 10000' }
+        ]
+      }
+    }],
+    type: 'OverlayLayer',
+    leaflet: {
+      type: 'tileLayer',
+      source: `${tmsUrl}/population-density-europe@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      minZoom: 6,
+      maxZoom: 18,
+      tms: true
+    }
+  },
+  {
     name: 'Layers.POPULATION_DETAILS',
     description: 'Layers.POPULATION_DETAILS_DESCRIPTION',
     i18n: {
