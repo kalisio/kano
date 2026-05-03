@@ -13,7 +13,7 @@
     "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "moment": "^2.30.1"
   }
 }
