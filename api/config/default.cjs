@@ -269,6 +269,7 @@ module.exports = {
     value: [
       "Categories.LAB_LAYERS",
       "Categories.ADMINISTRATIVE_LAYERS",
+      "Categories.POPULATION_LAYERS",
       "Categories.ATMOSPHERIC_LAYERS",
       "Categories.BUSINESS_LAYERS",
       "Categories.HYDROGRAPHY_LAYERS",
