@@ -172,8 +172,10 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population-density-europe@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      minZoom: 6,
+      minZoom: 4,
       maxZoom: 18,
+      minNativeZoom: 9,
+      maxNativeZoom: 11,
       tms: true
     }
   },
