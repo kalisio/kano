@@ -29,7 +29,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_1km',
-      maxZoom: 12,
+      maxZoom: 12.5,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -44,7 +44,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_200m',
-      minZoom: 12,
+      minZoom: 12.5,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 30' },
@@ -95,7 +95,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
-      maxZoom: 12,
+      maxZoom: 12.5,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -110,7 +110,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION_200',
-      minZoom: 12,
+      minZoom: 12.5,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 700' },
@@ -178,7 +178,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population-density-europe@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
-      opacity: 0.4,
+      opacity: 0.5,
       minZoom: 4,
       maxZoom: 18,
       minNativeZoom: 10,
