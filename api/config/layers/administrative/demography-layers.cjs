@@ -163,14 +163,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       minZoom: 6,
       content: {
         symbols: [
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 25' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FDD976' } } }, label: '25 - 100' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FEB554' } } }, label: '100 - 250' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FD8D3C' } } }, label: '250 - 600' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FC4E2A' } } }, label: '600 - 1000' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#E31A1C' } } }, label: '1000 - 4000' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#A50026' } } }, label: '4000 - 10000' },
-          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#8B0000' } } }, label: '> 10000' }
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FDD976' } } }, label: '400 - 1500' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FEB554' } } }, label: '1500 - 3500' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FD8D3C' } } }, label: '3500 - 7000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FC4E2A' } } }, label: '7000 - 12000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#E31A1C' } } }, label: '12000 - 25000' },
+          { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#B10026' } } }, label: '25000 - 110000' }
         ]
       }
     }],
