@@ -6,9 +6,9 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION: 'Population',
-          POPULATION_DESCRIPTION: "Nombre d'individus - édition 2021 (Filosofi)",
-          POPULATION_DESCRIPTION_1km: "Nombre d'individus par km² - édition 2021 (Filosofi)",
-          POPULATION_DESCRIPTION_200m: "Nombre d'individus par 200m² - édition 2021 (Filosofi)"
+          POPULATION_DESCRIPTION: "Nombre d'individus - Edition 2021 (Filosofi)",
+          POPULATION_DESCRIPTION_1km: "Nombre d'individus par km² - Edition 2021 (Filosofi)",
+          POPULATION_DESCRIPTION_200m: "Nombre d'individus par 200m² - Edition 2021 (Filosofi)"
         }
       },
       en: {
@@ -29,7 +29,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_1km',
-      maxZoom: 12.5,
+      maxZoom: 12,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -44,7 +44,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_200m',
-      minZoom: 12.5,
+      minZoom: 12,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 30' },
@@ -74,8 +74,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION_DENSITY: 'Densité de population',
-          POPULATION_DENSITY_DESCRIPTION: "Densité de population - nombre d'individus par km² - édition 2021 (Filosofi)",
-          POPULATION_DENSITY_DESCRIPTION_200: "Densité de population - nombre d'individus par 200m² - édition 2021 (Filosofi)"
+          POPULATION_DENSITY_DESCRIPTION: "Densité de population - nombre d'individus par km² - Edition 2021 (Filosofi)",
+          POPULATION_DENSITY_DESCRIPTION_200: "Densité de population - nombre d'individus par 200m² - Edition 2021 (Filosofi)"
         }
       },
       en: {
@@ -95,7 +95,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
-      maxZoom: 12.5,
+      maxZoom: 12,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -110,7 +110,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION_200',
-      minZoom: 12.5,
+      minZoom: 12,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 700' },
@@ -141,13 +141,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       fr: {
         Layers: {
           POPULATION_DENSITY_EUROPE: 'Densité de population Europe',
-          POPULATION_DENSITY_EUROPE_DESCRIPTION: "Densité de population - Europe - nombre d'individus par km² - Eurostats édition 2021"
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: "Densité de population - Europe - nombre d'individus par km² - Edition 2021 (Eurostats)"
         }
       },
       en: {
         Layers: {
           POPULATION_DENSITY_EUROPE: 'Population density Europe',
-          POPULATION_DENSITY_EUROPE_DESCRIPTION: 'Population density - Europe - number of habitants per km² - Eurostats 2021 edition'
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: 'Population density - Europe - number of habitants per km² - 2021 edition (Eurostats)'
         }
       }
     },
