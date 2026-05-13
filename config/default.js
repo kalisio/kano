@@ -244,15 +244,36 @@ const mapLayerActions = [{
     {
       id: 'filter-layer-data',
       label: 'mixins.activity.FILTER_DATA_LABEL',
-      icon: 'las la-filter',
-      visible: 'isLayerFilterEditable',
-      dialog: {
-        component: 'KFeaturesFilterManager',
-        layerId: ':_id',
-        layerName: ':name',
-        cancelAction: 'CANCEL',
-        okAction: { id: 'apply-edit-filter', label: 'APPLY', handler: 'apply' }
-      }
+      icon: 'las la-caret-left',
+      visible: 'isLayerFilterable',
+      component: 'menu/KSubMenu',
+      content: [
+        {
+          id: 'edit-layer-filters',
+          label: 'mixins.activity.EDIT_FILTERS_LABEL',
+          icon: 'las la-filter',
+          visible: 'isLayerFilterEditable',
+          dialog: {
+            component: 'KFeaturesFilterManager',
+            layerId: ':_id',
+            layerName: ':name',
+            cancelAction: 'CANCEL',
+            okAction: { id: 'apply-edit-filter', label: 'APPLY', handler: 'apply' }
+          }
+        },
+        {
+          id: 'activate-layer-filters',
+          label: 'mixins.activity.TOGGLE_FILTERS_ON_LABEL',
+          icon: 'las la-toggle-on',
+          handler: { name: 'onToggleLayerFilters', params: [':0', true] }
+        },
+        {
+          id: 'deactivate-layer-filters',
+          label: 'mixins.activity.TOGGLE_FILTERS_OFF_LABEL',
+          icon: 'las la-toggle-off',
+          handler: { name: 'onToggleLayerFilters', params: [':0', false] }
+        }
+      ]
     },
     {
       id: 'view-layer-data',
