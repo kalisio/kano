@@ -29,7 +29,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_1km',
-      maxZoom: 12,
+      maxZoom: 13,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -44,7 +44,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DESCRIPTION_200m',
-      minZoom: 12,
+      minZoom: 13,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 30' },
@@ -95,7 +95,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     legend: [{
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION',
-      maxZoom: 12,
+      maxZoom: 13,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 400' },
@@ -110,7 +110,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }, {
       type: 'symbols',
       label: 'Layers.POPULATION_DENSITY_DESCRIPTION_200',
-      minZoom: 12,
+      minZoom: 13,
       content: {
         symbols: [
           { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFFFB2' } } }, label: '1 - 700' },
