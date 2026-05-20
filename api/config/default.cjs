@@ -4,9 +4,6 @@ const makeDebug = require('debug')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const containerized = require('containerized')()
-const layers = require('./layers.cjs')
-const categories = require('./categories.cjs')
-const sublegends = require('./sublegends.cjs')
 
 const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
@@ -151,7 +148,7 @@ module.exports = {
                            !service.path.includes('features') &&
                            !service.path.includes('projects') &&
                            !service.path.includes('geocoder'),
-    remoteServices: (service) => (service.key === 'weacast') || (service.key === 'crisis'),
+    remoteServices: (service) => (service.key === 'weacast') || (service.key === 'crisis') || (service.key === 'katalog'),
     // Distribute at least modelName and pagination for KFS to know about features services
     remoteServiceOptions: () => ['modelName', 'paginate'],
     middlewares: { after: express.errorHandler() },
@@ -286,15 +283,6 @@ module.exports = {
     name: 'userOrphanLayersOrder',
     value: []
   }],
-  catalog: {
-    layers,
-    categories,
-    sublegends,
-    paginate: {
-      default: 100,
-      max: 1000
-    }
-  },
   projects: {
     // Nothing specific here
   },
