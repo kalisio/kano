@@ -92,13 +92,12 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         label: 'Layers.DELIMITATIONS_MARITIMES_DESCRIPTION',
         content: {
           symbols: [
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#e74c3c', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_LIGNE_BASE' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#2980b9', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_MER_TERRITORIALE' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#27ae60', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZONE_CONTIGUE' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#f39c12', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZEE' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#8e44ad', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_PLATEAU_CONTINENTAL' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#16a085', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_EAUX_INTERIEURES' },
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#d35400', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZPE' }
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#e74c3c', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_LIGNE_BASE' },        // STSLNE
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#2980b9', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_MER_TERRITORIALE' },   // marlim_12M
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#27ae60', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZONE_CONTIGUE' },      // marlim_24M
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#f39c12', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZEE' },                // marbdy_accord
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#d35400', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZPE' },                // marbdy_revendiquee
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#8e44ad', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_PLATEAU_CONTINENTAL' } // marlim_pc
           ]
         }
       }],
@@ -112,14 +111,13 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             dataLayer: 'delmar',
             symbolizer: {
               type: 'LineSymbolizer',
-              color: `<% if      (properties.nature === 'Ligne de base droite')           { %>rgba(231, 76,  60,  1)<%
-                } else if (properties.nature === 'Mer territoriale')               { %>rgba( 41, 128, 185, 1)<%
-                } else if (properties.nature === 'Zone contiguë')             { %>rgba( 39, 174,  96, 1)<%
-                } else if (properties.nature === 'Zone économique exclusive') { %>rgba(243, 156,  18, 1)<%
-                } else if (properties.nature === 'Plateau continental')            { %>rgba(142,  68, 173, 1)<%
-                } else if (properties.nature === 'Eaux intérieures')          { %>rgba( 22, 160, 133, 1)<%
-                } else if (properties.nature === 'Zone de protection écologique') { %>rgba(211,  84,   0, 1)<%
-                } else                                                              { %>rgba(153, 153, 153, 1)<% } %>`,
+              color: `<% if      (properties.type === 'STSLNE')              { %>rgba(231,  76,  60, 1)<%
+                      } else if (properties.type === 'marlim_12M')           { %>rgba( 41, 128, 185, 1)<%
+                      } else if (properties.type === 'marlim_24M')           { %>rgba( 39, 174,  96, 1)<%
+                      } else if (properties.type === 'marbdy_accord')        { %>rgba(243, 156,  18, 1)<%
+                      } else if (properties.type === 'marbdy_revendiquee')   { %>rgba(211,  84,   0, 1)<%
+                      } else if (properties.type === 'marlim_pc')            { %>rgba(142,  68, 173, 1)<%
+                      } else                                                  { %>rgba(153, 153, 153, 1)<% } %>`,
               width: 2,
               opacity: 1
             }
