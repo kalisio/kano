@@ -104,7 +104,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       type: 'OverlayLayer',
       leaflet: {
         type: 'pmtiles',
-        url: `${s3Url}/kargo/data/PMTiles/delmar.pmtiles`,
+        url: `${s3Url}/ovh/kargo/data/PMTiles/delmar.pmtiles`,
         devicePixelRatio: 3,
         style: {
           line: {
