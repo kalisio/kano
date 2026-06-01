@@ -63,8 +63,6 @@ export default async function () {
     app.logger.error(error.message)
   }
 
-  // Create app services
-
   // Service to store user features first as catalog layers use it
   const featuresService = await createFeaturesService.call(app, { collection: 'features' })
   await app.configureService('features', featuresService, servicesPath)
