@@ -2,79 +2,37 @@ import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { setTimeout as delay } from 'timers/promises'
+import express from '@feathersjs/express'
 import chai, { util, expect, assert } from 'chai'
 import chailint from 'chai-lint'
 import { createServer, runServer } from '../src/server.js'
-import { updateConfigurations } from '../src/hooks/hooks.catalog.js'
+import { createServer as createKatalogServer } from '../../../services-ekosystem/packages/katalog/src/server.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// Build an in-memory feathers-compatible service backed by a plain array.
-// The find() handles basic equality queries and paginate:false so kano's
-// internal hooks (populateResource, updateConfigurations, …) can look things up.
-function makeMemoryService (key) {
-  const store = []
-  return {
-    key,
-    remote: true,
-    async find (params) {
-      const query = params?.query || {}
-      const paginate = params?.paginate
-      let result = [...store]
-      for (const [k, v] of Object.entries(query)) {
-        if (k.startsWith('$')) continue
-        result = result.filter(doc => doc[k] === v)
-      }
-      if (paginate === false) return result
-      return { data: result, total: result.length, skip: 0, limit: 1000 }
-    },
-    async get (id, params) {
-      const doc = store.find(d => String(d._id) === String(id))
-      if (!doc) throw Object.assign(new Error(`Not found: ${id}`), { name: 'NotFound' })
-      return doc
-    },
-    async create (data, params) {
-      const doc = { _id: String(Date.now() + store.length), ...data }
-      store.push(doc)
-      return doc
-    },
-    async patch (id, data, params) {
-      const doc = store.find(d => String(d._id) === String(id))
-      if (!doc) throw Object.assign(new Error(`Not found: ${id}`), { name: 'NotFound' })
-      Object.assign(doc, data)
-      return doc
-    },
-    async update (id, data, params) {
-      const idx = store.findIndex(d => String(d._id) === String(id))
-      if (idx === -1) throw Object.assign(new Error(`Not found: ${id}`), { name: 'NotFound' })
-      store[idx] = { _id: String(id), ...data }
-      return store[idx]
-    },
-    async remove (id, params) {
-      const idx = store.findIndex(d => String(d._id) === String(id))
-      if (idx === -1) throw Object.assign(new Error(`Not found: ${id}`), { name: 'NotFound' })
-      const [doc] = store.splice(idx, 1)
-      return doc
-    },
-    // Expose raw store for test introspection
-    _store: store
-  }
+// Fast cote settings so feathers-distributed discovers services quickly in tests
+const distributionConfig = {
+  cote: { helloInterval: 2000, checkInterval: 4000, nodeTimeout: 5000, masterTimeout: 6000 },
+  publicationDelay: 3000
 }
 
-// Register a mock service in kano and emit the feathers-distributed 'service' event.
-// path must be strip-slashes form (e.g. 'api/catalog') to match publishService() output.
-function registerRemote (app, { name, key, strippedPath }) {
-  const apiPath = app.get('apiPath')
-  const mockSvc = makeMemoryService(key)
-  app.use(apiPath + '/' + name, mockSvc)
-  app.emit('service', { key, name, path: strippedPath })
-  return mockSvc
+// feathers-distributed discovery is asynchronous (cote hello/publication cycles), so we
+// poll until the remote service shows up rather than relying on a fixed delay.
+async function waitForService (app, name, timeout = 25000, interval = 500) {
+  const deadline = Date.now() + timeout
+  let service = app.getService(name)
+  while (!service && Date.now() < deadline) {
+    await delay(interval)
+    service = app.getService(name)
+  }
+  return service
 }
 
 describe('katalog distribution integration', () => {
   let server, expressServer, app
+  let katalogServer, katalogApp
   let userService, authorisationService, configurationsService
-  let catalogMock, stationsMock, observationsMock
   let catalogService, stationsService, observationsService
   let userObject, managerObject, measureLayer
 
@@ -84,6 +42,7 @@ describe('katalog distribution integration', () => {
 
   it('is ES module compatible', () => {
     expect(typeof createServer).to.equal('function')
+    expect(typeof createKatalogServer).to.equal('function')
   })
 
   it('initialize the server', async () => {
@@ -99,11 +58,9 @@ describe('katalog distribution integration', () => {
     expect(authorisationService).toExist()
     configurationsService = app.getService('configurations')
     expect(configurationsService).toExist()
-    // catalog is provided by katalog — must not exist as a local service
+    // catalog is not yet available — katalog hasn't started yet
     expect(app.getService('catalog')).beNull()
   })
-
-  // ── User setup (needed for later auth tests) ──────────────────────────────
 
   it('creates a test user', async () => {
     userObject = await userService.create({
@@ -125,74 +82,40 @@ describe('katalog distribution integration', () => {
     expect(users.data.length).to.equal(1)
   }).timeout(5000)
 
-  // ── Katalog service discovery ─────────────────────────────────────────────
-
-  it('discovers katalog catalog service and applies kano hooks', async () => {
-    const apiPath = app.get('apiPath')
-    // feathers-distributed strips leading slashes from paths (see publishService)
-    const strippedBase = apiPath.substring(1)
-
-    // Catalog — kano applies catalog.hooks.js to this service
-    catalogMock = registerRemote(app, {
-      name: 'catalog',
+  it('initialize the katalog server', async () => {
+    katalogServer = createKatalogServer()
+    katalogServer.app.set('port', 9100)
+    katalogServer.app.set('db', { adapter: 'mongodb', url: 'mongodb://127.0.0.1:27017/katalog-test' })
+    const inheritedAuth = katalogServer.app.get('authentication')
+    if (inheritedAuth) katalogServer.app.set('authentication', Object.assign({}, inheritedAuth, { entity: null }))
+    katalogServer.app.set('distribution', Object.assign({
       key: 'katalog',
-      strippedPath: strippedBase + '/catalog'
-    })
+      authentication: false,
+      services: () => true,
+      distributedMethods: ['find', 'get', 'create', 'update', 'patch', 'remove'],
+      distributedEvents: ['created', 'updated', 'patched', 'removed'],
+      middlewares: { after: express.errorHandler() }
+    }, distributionConfig))
+    await katalogServer.run()
+    katalogApp = katalogServer.app
+  }).timeout(30000)
 
-    // Seed a TELERAY-like measure layer so later tests can use it
-    catalogMock._store.push({
-      _id: 'layer-teleray',
-      name: 'Layers.TELERAY',
-      type: 'OverlayLayer',
-      service: 'teleray-observations',
-      probeService: 'teleray-stations'
-    })
-
-    // Features services — katalog creates these dynamically from the catalog layers
-    stationsMock = registerRemote(app, {
-      name: 'teleray-stations',
-      key: 'katalog',
-      strippedPath: strippedBase + '/teleray-stations'
-    })
-    observationsMock = registerRemote(app, {
-      name: 'teleray-observations',
-      key: 'katalog',
-      strippedPath: strippedBase + '/teleray-observations'
-    })
-
-    // Give the async event handlers time to finish
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    catalogService = app.getService('catalog')
+  it('kano discovers the katalog catalog service', async () => {
+    catalogService = await waitForService(app, 'catalog')
     expect(catalogService).toExist()
-    stationsService = app.getService('teleray-stations')
-    expect(stationsService).toExist()
-    observationsService = app.getService('teleray-observations')
-    expect(observationsService).toExist()
-
-    // decorateDistributedService stamps name and key
     expect(catalogService.key).to.equal('katalog')
-    expect(catalogService.name).to.equal('catalog')
-
-    // kano catalog hook (updateConfigurations) must be in after.remove
-    const afterRemoveHooks = catalogService.__hooks?.after?.remove || []
-    expect(afterRemoveHooks.length).to.be.above(0)
-    const hasUpdateConfigurations = afterRemoveHooks.some(
-      h => h === updateConfigurations || h.name === 'updateConfigurations'
-    )
-    expect(hasUpdateConfigurations).to.equal(true)
-  }).timeout(5000)
+  }).timeout(30000)
 
   it('retrieves built-in layers and features services from katalog', async () => {
     const result = await catalogService.find({ query: {} })
     expect(result.data.length).to.be.above(0)
     measureLayer = _.find(result.data, layer => layer.service)
     expect(measureLayer).toExist()
-    expect(app.getService(measureLayer.probeService)).toExist()
-    expect(app.getService(measureLayer.service)).toExist()
-  }).timeout(5000)
-
-  // ── Catalog access control ────────────────────────────────────────────────
+    stationsService = await waitForService(app, measureLayer.probeService)
+    expect(stationsService).toExist()
+    observationsService = await waitForService(app, measureLayer.service)
+    expect(observationsService).toExist()
+  }).timeout(30000)
 
   it('users can read catalog', async () => {
     const layers = await catalogService.find({ query: {}, user: userObject, checkAuthorisation: true })
@@ -216,17 +139,14 @@ describe('katalog distribution integration', () => {
     expect(layer.name).to.equal('My Renamed Layer')
     await catalogService.remove(layer._id, { user: managerObject, checkAuthorisation: true })
     const layers = await catalogService.find({ query: {}, user: managerObject, checkAuthorisation: true })
-    // The seeded TELERAY layer should still be there
     expect(layers.data.length).to.be.above(0)
   }).timeout(5000)
 
-  // ── Layer-level authorization ─────────────────────────────────────────────
-
   it('users can read features services from katalog', async () => {
     const stations = await stationsService.find({ query: {}, user: userObject, checkAuthorisation: true })
-    expect(stations.data).to.exist
+    expect(stations).toExist()
     const observations = await observationsService.find({ query: {}, user: userObject, checkAuthorisation: true })
-    expect(observations.data).to.exist
+    expect(observations).toExist()
   }).timeout(5000)
 
   it('users cannot write to features services by default', async () => {
@@ -246,14 +166,14 @@ describe('katalog distribution integration', () => {
       permissions: 'manager',
       subjects: userObject._id.toString(),
       subjectsService: 'users',
-      resource: 'Layers.TELERAY',
+      resource: measureLayer.name,
       resourcesService: 'catalog'
     }, { user: managerObject, checkAuthorisation: true })
     expect(authorisation).toExist()
     userObject = await userService.get(userObject._id.toString(), { checkAuthorisation: true, user: userObject })
     expect(userObject.layers).toExist()
     expect(userObject.layers.length).to.equal(1)
-    expect(userObject.layers[0].name).to.equal('Layers.TELERAY')
+    expect(userObject.layers[0].name).to.equal(measureLayer.name)
     expect(userObject.layers[0].permissions).to.equal('manager')
   }).timeout(10000)
 
@@ -273,7 +193,7 @@ describe('katalog distribution integration', () => {
   }).timeout(5000)
 
   it('managers can remove user authorisation on a layer', async () => {
-    const authorisation = await authorisationService.remove('Layers.TELERAY', {
+    const authorisation = await authorisationService.remove(measureLayer.name, {
       query: {
         scope: 'layers',
         subjects: userObject._id.toString(),
@@ -299,25 +219,15 @@ describe('katalog distribution integration', () => {
     }
   })
 
-  // ── updateConfigurations hook ─────────────────────────────────────────────
-
   it('updateConfigurations hook scrubs layer references from configurations on layer removal', async () => {
     const layer = await catalogService.create({ name: 'TempLayer', type: 'OverlayLayer' }, { user: managerObject, checkAuthorisation: true })
     expect(layer).toExist()
-
-    const config = await configurationsService.create({
-      name: 'test-view',
-      value: [layer._id.toString()]
-    })
+    const config = await configurationsService.create({ name: 'test-view', value: [layer._id.toString()] })
     expect(config.value).to.include(layer._id.toString())
-
     await catalogService.remove(layer._id, { user: managerObject, checkAuthorisation: true })
-
     const updated = await configurationsService.get(config._id.toString())
     expect(updated.value).to.not.include(layer._id.toString())
   }).timeout(5000)
-
-  // ── Cleanup ───────────────────────────────────────────────────────────────
 
   it('removes test users', async () => {
     await userService.remove(userObject._id, { user: userObject, checkAuthorisation: true })
@@ -331,8 +241,14 @@ describe('katalog distribution integration', () => {
   after(async () => {
     if (expressServer) await expressServer.close()
     fs.emptyDirSync(path.join(__dirname, 'logs'))
-    await app.db.instance.dropDatabase()
-    if (app.db.db('data')) await app.db.db('data').dropDatabase()
-    await app.db.disconnect()
+    if (app) {
+      await app.db.instance.dropDatabase()
+      if (app.db.db('data')) await app.db.db('data').dropDatabase()
+      await app.db.disconnect()
+    }
+    if (katalogApp) {
+      await katalogApp.db.instance.dropDatabase()
+      await katalogApp.db.disconnect()
+    }
   })
 })
