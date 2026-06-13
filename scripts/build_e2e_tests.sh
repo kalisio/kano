@@ -9,6 +9,10 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 . "$THIS_DIR/kash/kash.sh"
 
+slack_report() {
+    slack_ci_report "$ROOT_DIR" "$CI_STEP_NAME" "$KASH_EXIT_CODE" "$SLACK_WEBHOOK_APPS"
+}
+
 ## Parse options
 ##
 
@@ -21,7 +25,7 @@ while getopts "pr:" option; do
         r) # report outcome to slack
             load_env_files "$WORKSPACE_DIR/development/common/SLACK_WEBHOOK_APPS.enc.env"
             CI_STEP_NAME=$OPTARG
-            trap 'slack_ci_report "$ROOT_DIR" "$CI_STEP_NAME" "$?" "$SLACK_WEBHOOK_APPS"' EXIT
+            add_function_to_trap slack_report
             ;;
         *)
             ;;
@@ -38,7 +42,8 @@ VERSION=$(get_app_version)
 FLAVOR=$(get_app_flavor)
 
 load_env_files "$WORKSPACE_DIR/development/common/kalisio_harbor.enc.env"
-load_value_files "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value"
+#load_value_files "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value"
+KALISIO_HARBOR_PASSWORD=$(decrypt_file "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value")
 
 IMAGE_NAME="kalisio/$APP-e2e-tests"
 IMAGE_TAG="$VERSION-$FLAVOR"
