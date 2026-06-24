@@ -71,8 +71,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            DELIMITATIONS_MARITIMES: 'Maritime delimitations',
-            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Delimitation of maritime areas under French jurisdiction - 2022 edition (SHOM)',
+            DELIMITATIONS_MARITIMES: 'Maritime boundaries',
+            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Boundaries of maritime areas under French jurisdiction - 2022 edition (SHOM)',
             DELIMITATIONS_MARITIMES_LIGNE_BASE: 'Straight baseline',
             DELIMITATIONS_MARITIMES_MER_TERRITORIALE: 'Territorial sea',
             DELIMITATIONS_MARITIMES_ZONE_CONTIGUE: 'Contiguous zone',
