@@ -6,8 +6,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            ESPACES_MARITIMES: 'Espaces Maritimes',
-            ESPACES_MARITIMES_DESCRIPTION: 'Délimitation des espaces maritimes (ZEE, mer territoriale, zone contiguë...)',
+            ESPACES_MARITIMES: 'Espaces maritimes sous juridiction française',
+            ESPACES_MARITIMES_DESCRIPTION: 'Espaces maritimes sous juridiction française - édition 2022 (SHOM)',
             ESPACES_MARITIMES_ZEE: 'Zone Économique Exclusive (ZEE)',
             ESPACES_MARITIMES_MER_TERRITORIALE: 'Mer territoriale (12 nm)',
             ESPACES_MARITIMES_ZONE_CONTIGUE: 'Zone contiguë (24 nm)',
@@ -16,8 +16,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            ESPACES_MARITIMES: 'Maritime Spaces',
-            ESPACES_MARITIMES_DESCRIPTION: 'Delimitation of maritime spaces (EEZ, territorial sea, contiguous zone...)',
+            ESPACES_MARITIMES: 'Maritime areas under French jurisdiction',
+            ESPACES_MARITIMES_DESCRIPTION: 'Maritime areas under French jurisdiction - 2022 edition (SHOM)',
             ESPACES_MARITIMES_ZEE: 'Exclusive Economic Zone (EEZ)',
             ESPACES_MARITIMES_MER_TERRITORIALE: 'Territorial sea (12 nm)',
             ESPACES_MARITIMES_ZONE_CONTIGUE: 'Contiguous zone (24 nm)',
@@ -58,8 +58,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            DELIMITATIONS_MARITIMES: 'Délimitations Maritimes',
-            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Lignes de délimitation des espaces maritimes (ligne de base, mer territoriale, ZEE...)',
+            DELIMITATIONS_MARITIMES: 'Délimitations des espaces maritimes sous juridiction française',
+            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Délimitations des espaces maritimes sous juridiction française - édition 2022 (SHOM)',
             DELIMITATIONS_MARITIMES_LIGNE_BASE: 'Ligne de base droite',
             DELIMITATIONS_MARITIMES_MER_TERRITORIALE: 'Mer territoriale',
             DELIMITATIONS_MARITIMES_ZONE_CONTIGUE: 'Zone contiguë',
@@ -71,8 +71,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            DELIMITATIONS_MARITIMES: 'Maritime Boundaries',
-            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Maritime boundary lines (baseline, territorial sea, EEZ...)',
+            DELIMITATIONS_MARITIMES: 'Delimitation of maritime areas under French jurisdiction',
+            DELIMITATIONS_MARITIMES_DESCRIPTION: 'Delimitation of Maritime Areas under French Jurisdiction - 2022 edition (SHOM)',
             DELIMITATIONS_MARITIMES_LIGNE_BASE: 'Straight baseline',
             DELIMITATIONS_MARITIMES_MER_TERRITORIALE: 'Territorial sea',
             DELIMITATIONS_MARITIMES_ZONE_CONTIGUE: 'Contiguous zone',
