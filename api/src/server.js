@@ -37,7 +37,7 @@ async function initializeAutomergeDocument(servicePath, query) {
   const apiPath = app.get('apiPath').substr(1) + '/'
   const serviceName = servicePath.replace(apiPath, '')
   query = _.get(query, serviceName)
-  debug(`Initializing automerge document for ${serviceName} with query`, query)
+  debug(`Initializing automerge data for ${serviceName} with query`, query)
   let data = []
   // Check if any query target this service
   if (query) {
