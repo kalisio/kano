@@ -6,7 +6,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            ESPACES_MARITIMES: 'Espaces maritimes',
+            ESPACES_MARITIMES: 'Espaces maritimes France',
             ESPACES_MARITIMES_DESCRIPTION: 'Espaces maritimes sous juridiction française - édition 2022 (SHOM)',
             ESPACES_MARITIMES_ZEE: 'Zone Économique Exclusive (ZEE)',
             ESPACES_MARITIMES_MER_TERRITORIALE: 'Mer territoriale (12 nm)',
@@ -16,7 +16,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            ESPACES_MARITIMES: 'Maritime areas',
+            ESPACES_MARITIMES: 'French maritime areas',
             ESPACES_MARITIMES_DESCRIPTION: 'Maritime areas under French jurisdiction - 2022 edition (SHOM)',
             ESPACES_MARITIMES_ZEE: 'Exclusive Economic Zone (EEZ)',
             ESPACES_MARITIMES_MER_TERRITORIALE: 'Territorial sea (12 nm)',
@@ -58,7 +58,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
       i18n: {
         fr: {
           Layers: {
-            DELIMITATIONS_MARITIMES: 'Délimitations maritimes',
+            DELIMITATIONS_MARITIMES: 'Délimitations maritimes France',
             DELIMITATIONS_MARITIMES_DESCRIPTION: 'Délimitations des espaces maritimes sous juridiction française - édition 2022 (SHOM)',
             DELIMITATIONS_MARITIMES_LIGNE_BASE: 'Ligne de base droite',
             DELIMITATIONS_MARITIMES_MER_TERRITORIALE: 'Mer territoriale',
@@ -71,7 +71,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         },
         en: {
           Layers: {
-            DELIMITATIONS_MARITIMES: 'Maritime boundaries',
+            DELIMITATIONS_MARITIMES: 'French maritime boundaries',
             DELIMITATIONS_MARITIMES_DESCRIPTION: 'Boundaries of maritime areas under French jurisdiction - 2022 edition (SHOM)',
             DELIMITATIONS_MARITIMES_LIGNE_BASE: 'Straight baseline',
             DELIMITATIONS_MARITIMES_MER_TERRITORIALE: 'Territorial sea',
