@@ -96,7 +96,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             { symbol: { 'media/KShape': { options: { shape: 'line', color: '#2980b9', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_MER_TERRITORIALE' },   // marlim_12M
             { symbol: { 'media/KShape': { options: { shape: 'line', color: '#27ae60', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZONE_CONTIGUE' },      // marlim_24M
             { symbol: { 'media/KShape': { options: { shape: 'line', color: '#f39c12', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ZEE' },                // marlim_200M
-            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#16a085', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ACCORD' },             // marbdy_accord
+            { symbol: { 'media/KShape': { options: { shape: 'line', color: '#434364', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_ACCORD' },             // marbdy_accord
             { symbol: { 'media/KShape': { options: { shape: 'line', color: '#d35400', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_REVENDIQUEE' },        // marbdy_revendiquee
             { symbol: { 'media/KShape': { options: { shape: 'line', color: '#8e44ad', opacity: 1 } } }, label: 'Layers.DELIMITATIONS_MARITIMES_PLATEAU_CONTINENTAL' } // marlim_pc
           ]
@@ -116,7 +116,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
                       } else if (properties.type === 'marlim_12M')           { %>#2980b9<%
                       } else if (properties.type === 'marlim_24M')           { %>#27ae60<%
                       } else if (properties.type === 'marlim_200M')          { %>#f39c12<%
-                      } else if (properties.type === 'marbdy_accord')        { %>#16a085<%
+                      } else if (properties.type === 'marbdy_accord')        { %>#434364<%
                       } else if (properties.type === 'marbdy_revendiquee')   { %>#d35400<%
                       } else if (properties.type === 'marlim_pc')            { %>#8e44ad<%
                       } else                                                 { %>#999999<% } %>`,
