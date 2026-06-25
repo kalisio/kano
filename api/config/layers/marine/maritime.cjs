@@ -35,8 +35,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         content: {
           symbols: [
             { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#6A0DAD', opacity: 0.5 } } }, label: 'Layers.ESPACES_MARITIMES_MER_TERRITORIALE' },
-            { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#1565C0', opacity: 0.5 } } }, label: 'Layers.ESPACES_MARITIMES_ZEE' },
             { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#0D1B6E', opacity: 0.5 } } }, label: 'Layers.ESPACES_MARITIMES_ZONE_CONTIGUE' },
+            { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#1565C0', opacity: 0.5 } } }, label: 'Layers.ESPACES_MARITIMES_ZEE' },
             { symbol: { 'media/KShape': { options: { shape: 'rect', color: '#FFD600', opacity: 0.5 } } }, label: 'Layers.ESPACES_MARITIMES_PLATEAU_CONTINENTAL' }
           ]
         }
