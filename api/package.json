@@ -52,7 +52,6 @@
     "cross-env": "^5.2.0",
     "mocha": "^9.1.1",
     "nodemon": "^1.11.0",
-    "lerna": "^9.0.0",
     "shelljs": "^0.8.5",
     "standard": "^16.0.4"
   },
@@ -60,7 +59,6 @@
     "@feathersjs/authentication": "^5.0.8",
     "@feathersjs/express": "^5.0.8",
     "@feathersjs/feathers": "^5.0.8",
-    "@kalisio/feathers-automerge-server": "https://github.com/kalisio/feathers-automerge",
     "@kalisio/feathers-distributed": "^2.4.0",
     "@kalisio/kdk": "https://github.com/kalisio/kdk",
     "@turf/turf": "^6.5.0",
