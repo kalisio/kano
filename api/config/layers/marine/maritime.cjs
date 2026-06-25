@@ -65,7 +65,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             DELIMITATIONS_MARITIMES_ZONE_CONTIGUE: 'Zone contiguë',
             DELIMITATIONS_MARITIMES_ZEE: 'Zone économique exclusive',
             DELIMITATIONS_MARITIMES_ACCORD: 'Délimitations établies par un accord entre Etats',
-            DELIMITATIONS_MARITIMES_REVENDIQUEE: 'Délimitations revendiquées'
+            DELIMITATIONS_MARITIMES_REVENDIQUEE: 'Délimitations revendiquées',
             DELIMITATIONS_MARITIMES_PLATEAU_CONTINENTAL: 'Plateau continental'
           }
         },
@@ -78,7 +78,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
             DELIMITATIONS_MARITIMES_ZONE_CONTIGUE: 'Contiguous zone',
             DELIMITATIONS_MARITIMES_ZEE: 'Exclusive Economic Zone',
             DELIMITATIONS_MARITIMES_ACCORD: 'Boundaries established by agreement between States',
-            DELIMITATIONS_MARITIMES_REVENDIQUEE: 'Claimed boundaries'
+            DELIMITATIONS_MARITIMES_REVENDIQUEE: 'Claimed boundaries',
             DELIMITATIONS_MARITIMES_PLATEAU_CONTINENTAL: 'Continental shelf'
           }
         }
