@@ -5,18 +5,18 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          POPULATION: 'Population',
-          POPULATION_DESCRIPTION: "Nombre d'individus - Edition 2021 (Filosofi)",
-          POPULATION_DESCRIPTION_1km: "Nombre d'individus par km² - Edition 2021 (Filosofi)",
-          POPULATION_DESCRIPTION_200m: "Nombre d'individus par 200m² - Edition 2021 (Filosofi)"
+          POPULATION: 'Population (INSEE)',
+          POPULATION_DESCRIPTION: "Nombre d'individus - édition 2021 (INSEE/Filosofi)",
+          POPULATION_DESCRIPTION_1km: "Nombre d'individus par km² - édition 2021 (INSEE/Filosofi)",
+          POPULATION_DESCRIPTION_200m: "Nombre d'individus par 200m² - édition 2021 (INSEE/Filosofi)"
         }
       },
       en: {
         Layers: {
-          POPULATION: 'Population',
-          POPULATION_DESCRIPTION: 'Number of persons – 2021 edition (Filosofi)',
-          POPULATION_DESCRIPTION_1km: 'Number of persons – 2021 edition (Filosofi)',
-          POPULATION_DESCRIPTION_200m: 'Number of persons – 2021 edition (Filosofi)'
+          POPULATION: 'Population (INSEE)',
+          POPULATION_DESCRIPTION: 'Number of persons – 2021 edition (INSEE/Filosofi)',
+          POPULATION_DESCRIPTION_1km: 'Number of persons – 2021 edition (INSEE/Filosofi)',
+          POPULATION_DESCRIPTION_200m: 'Number of persons – 2021 edition (INSEE/Filosofi)'
         }
       }
     },
@@ -73,16 +73,16 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          POPULATION_DENSITY: 'Densité de population',
-          POPULATION_DENSITY_DESCRIPTION: "Densité de population - nombre d'individus par km² - Edition 2021 (Filosofi)",
-          POPULATION_DENSITY_DESCRIPTION_200: "Densité de population - nombre d'individus par 200m² - Edition 2021 (Filosofi)"
+          POPULATION_DENSITY: 'Densité de population (INSEE)',
+          POPULATION_DENSITY_DESCRIPTION: "Densité de population - nombre d'individus par km² - édition 2021 (INSEE/Filosofi)",
+          POPULATION_DENSITY_DESCRIPTION_200: "Densité de population - nombre d'individus par 200m² - édition 2021 (INSEE/Filosofi)"
         }
       },
       en: {
         Layers: {
-          POPULATION_DENSITY: 'Population density',
-          POPULATION_DENSITY_DESCRIPTION: 'Population density - number of habitants per km² - 2021 edition (Filosofi)',
-          POPULATION_DENSITY_DESCRIPTION_200: 'Population density - number of habitants per 200m² - 2021 edition (Filosofi)'
+          POPULATION_DENSITY: 'Population density (INSEE)',
+          POPULATION_DENSITY_DESCRIPTION: 'Population density - number of habitants per km² - 2021 edition (INSEE/Filosofi)',
+          POPULATION_DENSITY_DESCRIPTION_200: 'Population density - number of habitants per 200m² - 2021 edition (INSEE/Filosofi)'
         }
       }
     },
@@ -140,14 +140,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          POPULATION_DENSITY_EUROPE: 'Densité de population Europe',
-          POPULATION_DENSITY_EUROPE_DESCRIPTION: "Densité de population - Europe - nombre d'individus par km² - Edition 2021 (Eurostats)"
+          POPULATION_DENSITY_EUROPE: 'Densité de population Europe (EUROSTAT)',
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: "Densité de population Europe - nombre d'individus par km² - édition 2021 (EUROSTAT)"
         }
       },
       en: {
         Layers: {
-          POPULATION_DENSITY_EUROPE: 'Population density Europe',
-          POPULATION_DENSITY_EUROPE_DESCRIPTION: 'Population density - Europe - number of habitants per km² - 2021 edition (Eurostats)'
+          POPULATION_DENSITY_EUROPE: 'Population density Europe (EUROSTAT)',
+          POPULATION_DENSITY_EUROPE_DESCRIPTION: 'Population density Europe - number of habitants per km² - 2021 edition (EUROSTAT)'
         }
       }
     },
@@ -191,14 +191,14 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     i18n: {
       fr: {
         Layers: {
-          POPULATION_DETAILS: 'Population par classe d\'age',
-          POPULATION_DETAILS_DESCRIPTION: 'Nombre d\'individus'
+          POPULATION_DETAILS: 'Population par classe d\'âge (INSEE)',
+          POPULATION_DETAILS_DESCRIPTION: 'Nombre d\'individus (INSEE)'
         }
       },
       en: {
         Layers: {
-          POPULATION_DETAILS: 'Population per age class',
-          POPULATION_DETAILS_DESCRIPTION: 'Number of persons'
+          POPULATION_DETAILS: 'Population per age class (INSEE)',
+          POPULATION_DETAILS_DESCRIPTION: 'Number of persons (INSEE)'
         }
       }
     },
