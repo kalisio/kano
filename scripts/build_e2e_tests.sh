@@ -42,8 +42,9 @@ VERSION=$(get_app_version)
 FLAVOR=$(get_app_flavor)
 
 load_env_files "$WORKSPACE_DIR/development/common/kalisio_harbor.enc.env"
-#load_value_files "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value"
-KALISIO_HARBOR_PASSWORD=$(decrypt_file "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value")
+KALISIO_HARBOR_PASSWORD=$(mktemp)
+decrypt_file "$WORKSPACE_DIR/development/common/KALISIO_HARBOR_PASSWORD.enc.value" \
+             "$KALISIO_HARBOR_PASSWORD" > /dev/null
 
 IMAGE_NAME="kalisio/$APP-e2e-tests"
 IMAGE_TAG="$VERSION-$FLAVOR"
