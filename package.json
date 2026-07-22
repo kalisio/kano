@@ -146,6 +146,7 @@
     "jwt-decode": "^3.1.2",
     "leaflet": "1.6.0",
     "leaflet-arrowheads": "^1.4.0",
+    "leaflet-freedraw": "2.15.0",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-gesture-handling": "^1.2.2",
     "leaflet-heatmap": "^1.0.0",

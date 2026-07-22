@@ -491,4 +491,7 @@ export default {
   .position-cursor {
     cursor: url('/kdk/position-cursor.png'), auto;
   }
+  .freehand-cursor {
+    cursor: crosshair;
+  }
 </style>

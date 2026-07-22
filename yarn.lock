@@ -6486,6 +6486,14 @@
     "@types/geojson" "^7946.0.10"
     tslib "^2.8.1"
 
+"@turf/helpers@7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-7.3.5.tgz#051928c03cdf9ffcc7ae36581c317afc49bfd999"
+  integrity sha512-E/NMGV5MwbjjP7AJXBtsanC3yY8N2MQ87IGdIgkB2ji5AtBpwnH4L3gEqpYN4RlCJJWbLbzO91BbKv2waUd0eg==
+  dependencies:
+    "@types/geojson" "^7946.0.10"
+    tslib "^2.8.1"
+
 "@turf/hex-grid@7.3.4":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@turf/hex-grid/-/hex-grid-7.3.4.tgz#850e4b135550f5890790f58c9c10dbfa5774987c"
@@ -6524,6 +6532,17 @@
   dependencies:
     "@turf/helpers" "7.3.4"
     "@turf/meta" "7.3.4"
+    "@types/geojson" "^7946.0.10"
+    polyclip-ts "^0.16.8"
+    tslib "^2.8.1"
+
+"@turf/intersect@^7.2.0":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@turf/intersect/-/intersect-7.3.5.tgz#2380ba9bd289cf4e7bc48015dfca9003584914ef"
+  integrity sha512-v11Do9ySbsE08ffiwboQeFKvYByyxzvAz0ls837A9T3rSC+8vKMmK815S+C5v8CBMLNhuBCSgqnOIV3zonNICQ==
+  dependencies:
+    "@turf/helpers" "7.3.5"
+    "@turf/meta" "7.3.5"
     "@types/geojson" "^7946.0.10"
     polyclip-ts "^0.16.8"
     tslib "^2.8.1"
@@ -6788,6 +6807,15 @@
   integrity sha512-tlmw9/Hs1p2n0uoHVm1w3ugw1I6L8jv9YZrcdQa4SH5FX5UY0ATrKeIvfA55FlL//PGuYppJp+eyg/0eb4goqw==
   dependencies:
     "@turf/helpers" "7.3.4"
+    "@types/geojson" "^7946.0.10"
+    tslib "^2.8.1"
+
+"@turf/meta@7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-7.3.5.tgz#c498a6f1e8603e014e8bfbc9a4b2760b6219edb9"
+  integrity sha512-r+ohqxoyqeigFB0oFrQx/YEHIkOKqcKpCjvZkvZs7Tkv+IFco5MezAd2zd4rzK+0DfFgDP3KpJc7HqrYjvEjhg==
+  dependencies:
+    "@turf/helpers" "7.3.5"
     "@types/geojson" "^7946.0.10"
     tslib "^2.8.1"
 
@@ -10184,6 +10212,11 @@ cli-width@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-3.0.0.tgz#a2f48437a2caa9a22436e794bf071ec9e61cedf6"
   integrity sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==
+
+clipper-lib@~6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/clipper-lib/-/clipper-lib-6.2.1.tgz#266d8ec7575c589f05f23e9cd003de50e23117b6"
+  integrity sha512-pHDucJlK6ajsqfFpNEPz8SG63thjlQEqzPM0P+s1WM6pfPxeL47F2XfV2aS9+j4MZPlsU2wGCfo6jgxHNN13SA==
 
 cliui@^7.0.2:
   version "7.0.4"
@@ -15424,6 +15457,16 @@ leaflet-arrowheads@^1.4.0:
     leaflet "^1.7.1"
     leaflet-geometryutil "^0.10.0"
 
+leaflet-freedraw@2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/leaflet-freedraw/-/leaflet-freedraw-2.15.0.tgz#a51b4a837e7d7dc45dba8b1cabe1eb21cbb40369"
+  integrity sha512-6/crBo+gBL3ORtod+sDjtKzD3Gw0ynnDrtf0KtMo6sN4Fq9O352+34cyW2MMHt6yxYYYHtY6bL2uTAPjKVey9g==
+  dependencies:
+    "@turf/intersect" "^7.2.0"
+    clipper-lib "~6.2.1"
+    regenerator-runtime "^0.13.2"
+    turf-polygon "~1.0.3"
+
 leaflet-fullscreen@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/leaflet-fullscreen/-/leaflet-fullscreen-1.0.2.tgz#09c61c4bac45f63b2ee126afd87e5cd97650fc1b"
@@ -18598,7 +18641,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.11:
+regenerator-runtime@^0.13.11, regenerator-runtime@^0.13.2:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
@@ -20648,6 +20691,11 @@ tunnel-agent@^0.6.0:
   integrity sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==
   dependencies:
     safe-buffer "^5.0.1"
+
+turf-polygon@~1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/turf-polygon/-/turf-polygon-1.0.3.tgz#671dd34849864509281af18e236f67a7448c6363"
+  integrity sha512-zpyHEUcnhGI02QjL/OJapQXkZSTCCbY5aErWt5P40iF5lbVAof+fZJKL9XJVAmTbrJ4FK2yH0gsxox99VSu7cQ==
 
 tween.js@^16.6.0:
   version "16.6.0"
