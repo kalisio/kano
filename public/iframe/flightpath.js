@@ -164,3 +164,51 @@ var flightpath = [
   [1.3654,43.6194],
   [1.3637,43.6193]
 ]
+
+// Route deliberately routed east across the Pacific to force a crossing
+const antimeridian_flightpath = [
+  [1.4442, 43.6047],   // Toulouse
+  [-9.5,   39.5],       // off Portugal
+  [-30.0,  40.0],       // mid Atlantic
+  [-75.0,  40.0],       // near New York
+  [-120.0, 30.0],       // eastern Pacific
+  [-155.0, 10.0],       // central Pacific
+  [-178.5, -12.0],      // approaching dateline (west side, negative)
+  [178.5,  -22.0],      // just crossed dateline (positive side)
+  [160.0,  -30.0],      // Coral Sea
+  [144.9631, -37.8136]  // Melbourne
+]
+
+// Route deliberately routed east across the Pacific to force a crossing without wrapping coordinates
+const unwrapped_antimeridian_flightpath = [
+  [1.4442,    43.6047],
+  [-9.5,      39.5],
+  [-30.0,     40.0],
+  [-75.0,     40.0],
+  [-120.0,    30.0],
+  [-155.0,    10.0],
+  [-178.5,   -12.0],
+  [-181.5,   -22.0],   // = 178.5 - 360, instead of wrapping to +178.5
+  [-200.0,   -30.0],   // = 160.0 - 360
+  [-215.0371, -37.8136] // = 144.9631 - 360  (Melbourne, unwrapped)
+]
+
+// Route deliberately routed east across the Pacific to force a crossing but manually split at antimeridian line
+const split_antimeridian_flightpath = [
+  [
+    [1.4442, 43.6047],
+    [-9.5, 39.5],
+    [-30.0, 40.0],
+    [-75.0, 40.0],
+    [-120.0, 30.0],
+    [-155.0, 10.0],
+    [-178.5, -12.0],
+    [-180.0, -14.9691]
+  ],
+  [
+    [180.0, -14.9691],
+    [178.5, -22.0],
+    [160.0, -30.0],
+    [144.9631, -37.8136]
+  ]
+]

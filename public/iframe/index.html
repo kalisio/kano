@@ -348,7 +348,9 @@
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, acars] })
       }
-      async function toggleFlightpathLayer(name) {
+      var currentPath
+      async function toggleFlightpathLayer(name, flightpath) {
+        currentPath = flightpath
         const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         if (result.data) {
           await postRobot.send(kano, component, { command: 'removeLayer', args: name })
@@ -389,41 +391,54 @@
         }
       }
       function updateFlightpathLayer(name) {
-        // Setup random path
-        let coordinates = flightpath.map(function(point) {
-          return [ point[0] + 0.01 * (Math.random() - 0.5),
-                   point[1] + 0.01 * (Math.random() - 0.5),
-                   1000 * Math.random() ] // Random altitude
-        })
         let path = { type: 'FeatureCollection', features: [] }
-        let middle = parseInt(coordinates.length / 2)
+        // We split the path into two parts with different rendering options
+        let coordinates1, coordinates2
+        // In this case cut naturally at the plit
+        if (currentPath === split_antimeridian_flightpath) {
+          coordinates1 = currentPath[0]
+          coordinates2 = currentPath[1]
+        } else { // Otherwise cut at the middle point
+          let middle = parseInt(currentPath.length / 2)
+          coordinates1 = currentPath.slice(0, middle + Math.ceil(currentPath.length % 2))
+          coordinates2 = currentPath.slice(middle - 1, currentPath.length)
+        }
+        // Apply random variations depending on the flighpath extent
+        let offset = (currentPath === flightpath ? 0.01 : 1)
+        function movePoint(point) {
+          return [ point[0] + offset * (Math.random() - 0.5),
+                   point[1] + offset * (Math.random() - 0.5),
+                   1000 * Math.random() ] // Random altitude
+        }
+        coordinates1 = coordinates1.map(movePoint)
+        coordinates2 = coordinates2.map(movePoint)
         let random = Math.random()
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: random > 0.5 ? '#000000' : '#00FF00', weight: 1 + 5 * random, offset: -5,
             entityStyle: { polyline: { clampToGround: true } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
+          geometry: { type: 'LineString', coordinates: coordinates1 }
         })
         // Same with offset
         path.features.push({
           type: 'Feature',
           properties: { id: 1, message: 'ADS-B KO', stroke: random > 0.5 ? '#00FF00' : '#000000', weight: 10, 'dash-array': '3, 20', 'line-cap': 'round', 'line-join': 'round', offset: 5,
             entityStyle: { polyline: { clampToGround: true, material: { type: 'Cesium.PolylineDashMaterialProperty', options: { dashPattern: 255, color: random > 0.5 ? 'Cesium.Color.BLUEVIOLET' : 'Cesium.Color.AQUA' }  } } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(0, middle + Math.ceil(flightpath.length % 2))}
+          geometry: { type: 'LineString', coordinates: coordinates1 }
         })
         const weight = 5 + 5 * random
         path.features.push({
           type: 'Feature',
           properties: { id: 2, message: 'ADS-B OK', stroke: random > 0.5 ? '#00FFFF' : '#FF00FF', weight,
             entityStyle: { polyline: { clampToGround: true, zIndex: 0 } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
+          geometry: { type: 'LineString', coordinates: coordinates2 }
         })
         // Same but thiner
         path.features.push({
           type: 'Feature',
           properties: { id: 3, message: 'ADS-B OK', stroke: random > 0.5 ? '#FF00FF' : '#00FFFF', weight: weight - 4,
             entityStyle: { polyline: { clampToGround: true, zIndex: 1 } } },
-          geometry: { type: 'LineString', coordinates: coordinates.slice(middle - 1, flightpath.length)}
+          geometry: { type: 'LineString', coordinates: coordinates2 }
         })
         // Filter airports as all don't have METAR/TAF information
         return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
@@ -580,7 +595,7 @@
         // Path
         plan.features.push({
           type: 'Feature',
-          properties: { name: 'FLIGHTPATH', geodesic: true, wrap: false, wall: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 5,
+          properties: { name: 'FLIGHTPATH', geodesic: true, wrap: true, wall: true, 'stroke': '#33c137', 'stroke-opacity': 1, 'stroke-width': 5,
             'fill': '#f9b40f', 'fill-opacity': 0.5,
             entityStyle: {
               polyline: { arcType: 'Cesium.ArcType.GEODESIC' },
@@ -736,7 +751,10 @@
           <button type="button" onclick="updateAcarsLayer('ACARS')">Update ACARS</button>
         </div>
         <div class="packed-grid">
-          <button type="button" onclick="toggleFlightpathLayer('Flightpath')">Switch flightpath</button>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath', flightpath)">Switch flightpath</button>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath', antimeridian_flightpath)">Switch crossing flightpath</button>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath', unwrapped_antimeridian_flightpath)">Switch unwrapped crossing flightpath</button>
+          <button type="button" onclick="toggleFlightpathLayer('Flightpath', split_antimeridian_flightpath)">Switch split crossing flightpath</button>
           <button type="button" onclick="updateFlightpathLayer('Flightpath')">Update flightpath</button>
         </div>
         <div class="packed-grid">
