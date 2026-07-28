@@ -61,6 +61,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      zIndex: 201, // setting zIndex is a workaround for a leaflet bug (https://github.com/Leaflet/Leaflet/issues/8300).
+                   // 201 is just above regular leaflet overlay layers. Without this it'll flicker when zooming outside defined range.
       opacity: 0.5,
       minZoom: 10,
       maxZoom: 21,
@@ -127,6 +129,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population-density@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      zIndex: 201, // setting zIndex is a workaround for a leaflet bug (https://github.com/Leaflet/Leaflet/issues/8300).
+                   // 201 is just above regular leaflet overlay layers. Without this it'll flicker when zooming outside defined range.
       opacity: 0.5,
       minZoom: 10,
       maxZoom: 21,
@@ -177,6 +181,8 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     leaflet: {
       type: 'tileLayer',
       source: `${tmsUrl}/population-density-europe@GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png`,
+      zIndex: 201, // setting zIndex is a workaround for a leaflet bug (https://github.com/Leaflet/Leaflet/issues/8300).
+                   // 201 is just above regular leaflet overlay layers. Without this it'll flicker when zooming outside defined range.
       opacity: 0.5,
       minZoom: 10,
       maxZoom: 21,
