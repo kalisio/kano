@@ -109,7 +109,7 @@
     "@panoramax/web-viewer": "^4.3.1",
     "@pdfme/common": "^4.1.0",
     "@pdfme/generator": "^4.1.0",
-    "@pdfme/schemas": "^4.1.0",
+    "@pdfme/schemas": "^5.5.10",
     "@pdfme/ui": "^4.1.0",
     "@quasar/extras": "1.16.3",
     "@thumbmarkjs/thumbmarkjs": "^0.16.1",
