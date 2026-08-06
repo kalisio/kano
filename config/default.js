@@ -310,7 +310,7 @@ const mapLayerActions = [{
           id: 'edit-layer-polygons',
           label: 'mixins.activity.EDIT_POLYGONS_DATA_LABEL',
           icon: 'las la-draw-polygon',
-          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-polygons', allowedEditModes: ['add-polygons', 'add-rectangles', 'edit-geometry', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Polygon', 'MultiPolygon'] }] }
+          handler: { name: 'startEditLayer', params: [':0', { editMode: 'add-polygons', allowedEditModes: ['add-polygons', 'add-rectangles', 'add-circles', 'edit-geometry', 'edit-properties', 'drag', 'rotate', 'remove'], geometryTypes: ['Polygon', 'MultiPolygon'] }] }
         },
         {
           id: 'edit-layer-geometry',
@@ -351,13 +351,13 @@ const mapEngine = {
   // Default GeoJSON layer style for polygons/lines
   style: {
     point: {
-      shape: 'circle', color: 'red', opacity: 0.5, stroke: { color: 'red' }
+      shape: 'circle', color: 'red', opacity: 0.5, stroke: { color: 'blue' }
     },
     line: {
       color: 'red', width: 3
     },
     polygon: {
-      color: 'red', opacity: 0.5, stroke: { color: 'red' }
+      color: 'red', opacity: 0.5, stroke: { color: 'blue' }
     },
     location: {
       point: {
