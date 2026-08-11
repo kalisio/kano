@@ -53,7 +53,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     from: 'P-7D',
     to: 'PT-1H',
     every: 'PT1H',
-    queryFrom: 'PT-12H',
+    queryFrom: 'PT-24H',
     leaflet: {
       type: 'geoJson',
       realtime: true,
@@ -64,13 +64,19 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
         point: {
           shape: 'none',
           icon: {
-            color: `<%= variables.frp.colorScale(properties.frp).hex() %>`,
+            color: `<%= variables.frp.colorScale(properties.frp[0]).hex() %>`,
+            // In order to make it more transparent as older (should be coherent with queryFrom)
+            opacity: `<%= 1 - moment.utc(Time.getCurrentTime()).diff(feature.time.frp[0], 'hours') / 24 %>`,
             classes: 'fa fa-fire',
             size: 12
           }
         }
       },
-      template: ['style.point.icon.color']
+      template: [
+        // In order to make it more transparent as older
+        'style.point.icon.opacity',
+        'style.point.icon.color'
+      ]
       /*
       type: 'heatmap',
       cfg: {
