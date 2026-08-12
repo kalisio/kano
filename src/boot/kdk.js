@@ -7,7 +7,7 @@ import * as utils from '../utils'
 import appHooks from '../app.hooks'
 import services from '../services'
 import { Router } from '../router'
-import { initializeApi, i18n, utils as kdkCoreUtils, directives as kdkCoreDirectives, Store, Layout, Time, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
+import { initializeApi, i18n, utils as kdkCoreUtils, directives as kdkCoreDirectives, Store, Layout, Time, Units, Events, Theme, TemplateContext, beforeGuard, authenticationGuard } from '@kalisio/kdk/core.client'
 import { Geolocation, setupApi, CanvasDrawContext } from '@kalisio/kdk/map.client'
 
 // those are imported to make them available in
@@ -158,6 +158,7 @@ export default async ({ app, router }) => {
   app.config.globalProperties.$store = Store
   app.config.globalProperties.$layout = Layout
   app.config.globalProperties.$time = Time
+  app.config.globalProperties.$units = Units
   app.config.globalProperties.$events = Events
   app.config.globalProperties.$api = api
   app.config.globalProperties.$can = api.can
@@ -191,6 +192,7 @@ export default async ({ app, router }) => {
   global.$store = app.config.globalProperties.$store
   global.$layout = app.config.globalProperties.$layout
   global.$time = app.config.globalProperties.$time
+  global.$units = app.config.globalProperties.$units
   global.$api = app.config.globalProperties.$api
 
   // Add global guard
