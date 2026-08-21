@@ -10,6 +10,7 @@
 
 const path = require('path')
 const fs = require('fs')
+const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { configure } = require('quasar/wrappers')
 
@@ -91,6 +92,8 @@ module.exports = configure(function (ctx) {
         }),
         cfg.resolve.fallback = {
           fs: false,
+          'fs/promises': false,
+          sharp: false,
           'dom-serializer': false,
           assert: require.resolve('assert'),
           crypto: require.resolve('crypto-browserify'),
@@ -102,8 +105,14 @@ module.exports = configure(function (ctx) {
           zlib: require.resolve('browserify-zlib')
         },
         cfg.resolve.mainFiles = ['index', 'Cesium'],
-        // Required for old dependencies, i.e. feathers.js
+        // 'node_modules' (relative) restores webpack's default ancestor-walk lookup, required so
+        // that packages with their own private nested dependency (eg. shpjs's own lru-cache@2,
+        // incompatible with the lru-cache@11 pulled in at the top level by common-graphics) keep
+        // resolving their own copy instead of the top-level one. The absolute path is additionally
+        // required for old dependencies, i.e. feathers.js, and for kdk itself since it's yarn-linked
+        // from outside kano's tree and its files can't reach kano's node_modules via ancestor walk.
         cfg.resolve.modules = [
+          'node_modules',
           path.resolve(__dirname, 'node_modules')
         ],
         cfg.resolve.alias = {
@@ -130,7 +139,13 @@ module.exports = configure(function (ctx) {
         cfg.experiments = {
           ...cfg.experiments,
           asyncWebAssembly: true
-        }
+        },
+        // @kalisio/common-graphics dynamically imports these Node-only modules behind a runtime
+        // browser check (toPNG() is server-only), but webpack still statically resolves the
+        // dynamic import() calls regardless - the 'node:' URI scheme is detected before alias/
+        // fallback substitution ever applies, so IgnorePlugin (which runs on the raw request,
+        // before resolution) is required to actually drop them from the client bundle
+        cfg.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^node:fs\/promises$|^sharp$/ }))
       }
     },
 

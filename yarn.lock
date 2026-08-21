@@ -4292,6 +4292,16 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kalisio/common-core@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/common-core/-/common-core-0.9.0.tgz#97a0e4104d5294057d2a12342109d34a386b8505"
+  integrity sha512-lLOOpZIw3mXN4ne9c1FrCAdI11FesjZ/0IFworod8htxiOv6I9bwAI2b6gj3kyRK3pTu+SjI3X4B0ZtV5gS+cQ==
+
+"@kalisio/common-graphics@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/common-graphics/-/common-graphics-0.9.0.tgz#0bf10f28ec492e0dce9ed42cdee6310a4669efe9"
+  integrity sha512-RVkbExL3tvFhr+h45MJ6c4IP8l6/9AkoEWPtdcjmvYTyyCcfP+tdVbjelSZpF8UeuGo/01J4SxbJ6MfzsKmbvg==
+
 "@kalisio/feathers-automerge@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@kalisio/feathers-automerge/-/feathers-automerge-0.4.0.tgz#7a589edbfb7d1d51839fa1dd6be046a442b4ba87"
@@ -4436,6 +4446,11 @@
   integrity sha512-pbCDiVMnne1lYUIaYNN5wrwQXDtHaYtg7YEFPeW+hws6U47WeFvISGUWekPGKWOP1ygrs0ef0o1VJMk1exos5A==
   dependencies:
     "@lit-labs/ssr-dom-shim" "^1.5.0"
+
+"@logtape/logtape@~0.7.0":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@logtape/logtape/-/logtape-0.7.2.tgz#413c7073e3caf37dd4acd30c948d840e7f4f7397"
+  integrity sha512-3iL71YEiJ8GM6HzeW4eCG2pS8/F9EX6tYfVVCp/oWhzYjQ5FY/QMesSPMtAYdAGG4Evac23ugOSXZJp592zg0A==
 
 "@mapbox/geojson-rewind@^0.5.2":
   version "0.5.2"
@@ -16023,6 +16038,11 @@ lru-cache@^7.14.1:
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
+
+lru-cache@~11.3.5:
+  version "11.3.6"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-11.3.6.tgz#f0306ad6e9f0a5dc25b16aeba4e8f57b7ec2df55"
+  integrity sha512-Gf/KoL3C/MlI7Bt0PGI9I+TeTC/I6r/csU58N4BSNc4lppLBeKsOdFYkK+dX0ABDUMJNfCHTyPpzwwO21Awd3A==
 
 luxon@^1.23.x:
   version "1.28.1"
