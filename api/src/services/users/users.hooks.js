@@ -1,17 +1,17 @@
-import commonHooks from 'feathers-hooks-common'
+import { iff, isProvider, disallow, preventChanges } from 'feathers-hooks-common'
 import { hooks as coreHooks } from '@kalisio/kdk/core.api.js'
 
 export default {
   before: {
     all: [],
-    find: [commonHooks.iff(commonHooks.isProvider('external'), coreHooks.onlyMe())],
-    get: [commonHooks.iff(coreHooks.isNotMe(), commonHooks.disallow('external'))],
+    find: [iff(isProvider('external'), coreHooks.onlyMe())],
+    get: [iff(coreHooks.isNotMe(), disallow('external'))],
     create: [], // Registration already disallowed by configuration
     update: [commonHooks.disallow('external')],
     patch: [
-      commonHooks.iff(commonHooks.isProvider('external'), coreHooks.onlyMe(), commonHooks.preventChanges('catalog'), commonHooks.preventChanges('layers'))
+      iff(isProvider('external'), coreHooks.onlyMe(), preventChanges('catalog'), preventChanges('layers'))
     ],
-    remove: [commonHooks.disallow('external')]
+    remove: [disallow('external')]
   },
 
   after: {

@@ -1,5 +1,5 @@
 // Application hooks that run for every service
-import commonHooks from 'feathers-hooks-common'
+import { when, disallow } from 'feathers-hooks-common'
 import { permissions as corePermissions, hooks as coreHooks } from '@kalisio/kdk/core.api.js'
 import { permissions as mapPermissions } from '@kalisio/kdk/map.api.js'
 import * as permissions from '../../common/permissions.mjs'
@@ -17,7 +17,7 @@ export default {
   before: {
     all: [coreHooks.log,
       // We skip authentication in some cases
-      commonHooks.when(hook => {
+      when(hook => {
         // First built-in Feathers services like authentication
         if (typeof hook.service.getPath !== 'function') return false
         // Second distributed service calls
@@ -33,7 +33,7 @@ export default {
         return true
       }, authenticate('jwt')),
       // We skip processing DB IDs in some cases
-      commonHooks.when(hook => {
+      when(hook => {
         // First built-in Feathers services like authentication
         if (typeof hook.service.getPath !== 'function') return false
         // If not exception process IDs
@@ -44,7 +44,7 @@ export default {
     get: [],
     create: [],
     // We only use pacth in editors to avoid dumping "hidden" (ie internal) properties
-    update: [commonHooks.disallow()],
+    update: [disallow()],
     patch: [],
     remove: []
   },

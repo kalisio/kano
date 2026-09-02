@@ -1,4 +1,4 @@
-import commonHooks from 'feathers-hooks-common'
+import { setNow, discard } from 'feathers-hooks-common'
 
 export default {
   before: {
@@ -6,15 +6,15 @@ export default {
     find: [],
     get: [],
     create: [
-      commonHooks.setNow('createdAt', 'updatedAt')
+      setNow('createdAt', 'updatedAt')
     ],
     update: [
-      commonHooks.discard('createdAt', 'updatedAt'),
-      commonHooks.setNow('updatedAt')
+      discard('createdAt', 'updatedAt'),
+      setNow('updatedAt')
     ],
     patch: [
-      commonHooks.discard('createdAt', 'updatedAt'),
-      commonHooks.setNow('updatedAt')
+      discard('createdAt', 'updatedAt'),
+      setNow('updatedAt')
     ],
     remove: []
   },
@@ -27,7 +27,7 @@ export default {
     update: [],
     patch: [],
     remove: [
-      commonHooks.setNow('updatedAt')
+      setNow('updatedAt')
     ]
   },
 

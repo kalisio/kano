@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import commonHooks from 'feathers-hooks-common'
+import { iff } from 'feathers-hooks-common'
 import { hooks as coreHooks } from '@kalisio/kdk/core.api.js'
 
 export default {
@@ -17,7 +17,7 @@ export default {
     all: [],
     find: [],
     get: [],
-    create: [commonHooks.iff(hook => process.env.API_GATEWAY_URL, async hook => {
+    create: [iff(hook => process.env.API_GATEWAY_URL, async hook => {
       if (process.env.API_GATEWAY_JWT) {
         hook.result.gatewayToken = process.env.API_GATEWAY_JWT
         return hook
