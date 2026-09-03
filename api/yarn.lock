@@ -923,9 +923,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@kalisio/common-core@link:../../common-ekosystem/packages/common-core":
-  version "0.0.0"
-  uid ""
+"@kalisio/common-core@~0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@kalisio/common-core/-/common-core-0.11.0.tgz#576807ce37906c2e5d7f308ccbc72befce057b98"
+  integrity sha512-iHKzdDxHdnSh0LPoQlG9vmEIAG0z/ey6jg73SJtGKc3A3aQzge82OrF5q8AOBdrafiE6QXDrHneiDUrLEjmT+A==
 
 "@kalisio/feathers-automerge-server@^0.4.0":
   version "0.4.0"

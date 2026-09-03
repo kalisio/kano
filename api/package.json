@@ -59,7 +59,7 @@
     "@feathersjs/authentication": "~5.0.44",
     "@feathersjs/express": "~5.0.44",
     "@feathersjs/feathers": "~5.0.44",
-    "@kalisio/common-core": "link:../../common-ekosystem/packages/common-core",
+    "@kalisio/common-core": "~0.11.0",
     "@kalisio/feathers-automerge-server": "^0.4.0",
     "@kalisio/feathers-distributed": "^2.4.0",
     "@kalisio/kdk": "link:../../kdk",
