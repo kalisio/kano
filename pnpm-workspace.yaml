@@ -1,0 +1,13 @@
+packages:
+  - '.'
+  - '!api/**'
+  - '!docs/**'
+allowBuilds:
+  cbor-extract: true
+  core-js: true
+  protobufjs: true
+  puppeteer: true
+overrides:
+  '@kalisio/kdk': link:../kdk
+  vue: 3.4.14
+shamefullyHoist: true

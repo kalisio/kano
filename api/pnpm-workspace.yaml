@@ -1,0 +1,6 @@
+allowBuilds:
+  cbor-extract: true
+  fsevents: true
+  nodemon: true
+overrides:
+  '@kalisio/kdk': link:../../kdk

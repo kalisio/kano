@@ -69,10 +69,10 @@ module.exports = configure(function (ctx) {
 
       vueLoaderOptions: {
         compilerOptions: {
-          isCustomElement: tag => ['pinch-zoom', 'pnx-photo-viewer'].includes(tag)        
+          isCustomElement: tag => ['pinch-zoom', 'pnx-photo-viewer'].includes(tag)
         }
       },
-      
+
       chainWebpack (chain) {
         // Perform bundle analysis
         if (process.env.ANALYZE_BUNDLE) {
@@ -105,16 +105,6 @@ module.exports = configure(function (ctx) {
           zlib: require.resolve('browserify-zlib')
         },
         cfg.resolve.mainFiles = ['index', 'Cesium'],
-        // 'node_modules' (relative) restores webpack's default ancestor-walk lookup, required so
-        // that packages with their own private nested dependency (eg. shpjs's own lru-cache@2,
-        // incompatible with the lru-cache@11 pulled in at the top level by common-graphics) keep
-        // resolving their own copy instead of the top-level one. The absolute path is additionally
-        // required for old dependencies, i.e. feathers.js, and for kdk itself since it's yarn-linked
-        // from outside kano's tree and its files can't reach kano's node_modules via ancestor walk.
-        cfg.resolve.modules = [
-          'node_modules',
-          path.resolve(__dirname, 'node_modules')
-        ],
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing aliases
           '@components': [
@@ -183,7 +173,7 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-framework
     framework: {
       config: {},
-      
+
       // lang: 'en-US', // Quasar language pack
 
       components: [
@@ -237,7 +227,7 @@ module.exports = configure(function (ctx) {
         'QToggle',
         'QTooltip'
       ],
-      
+
       directives: [
         'ClosePopup',
         'Ripple',
@@ -271,7 +261,7 @@ module.exports = configure(function (ctx) {
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
-      
+
       manifest: {
         name: clientConfig.pwaName,
         short_name: clientConfig.pwaName,

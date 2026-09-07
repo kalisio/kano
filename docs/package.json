@@ -1,19 +1,18 @@
 {
   "name": "docs",
+  "description": "kano docs",
+  "packageManager": "pnpm@10.34.5",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "build": "vitepress build"
   },
   "devDependencies": {
-    "keycloak-js": "^23.0.4",
-    "quasar": "^2.14.3",
-    "vitepress": "^1.0.0-rc.40",
-    "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "moment": "^2.30.1"
+    "@kalisio/vitepress-theme": "~2.1.0",
+    "mermaid": "~10.8.0",
+    "quasar": "~2.14.3",
+    "vitepress": "~1.6.3",
+    "vitepress-plugin-mermaid": "~2.0.16",
+    "vue": "~3.5.30"
   }
 }
