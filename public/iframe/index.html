@@ -452,7 +452,7 @@
           points.features.push({
             type: 'Feature',
             properties: { id: 100+index, message: 'ADS-B KO' },
-            style: { radius: 8, color: random > 0.5 ? '#000000' : '#00FF00', stroke: { color: random > 0.5 ? '#00FF00' : '#000000' } },
+            style: { shape: 'circle', radius: 8, color: random > 0.5 ? '#000000' : '#00FF00', stroke: { color: random > 0.5 ? '#00FF00' : '#000000' } },
             geometry: { type: 'Point', coordinates: coordinate }
           })
         })
@@ -460,7 +460,7 @@
           points.features.push({
             type: 'Feature',
             properties: { id: 200+index, message: 'ADS-B OK' },
-            style: { radius: 8, color: random > 0.5 ? '#FF00FF' : '#00FFFF', stroke: { color: random > 0.5 ? '#00FFFF' : '#FF00FF' } },
+            style: { shape: 'circle', radius: 8, color: random > 0.5 ? '#FF00FF' : '#00FFFF', stroke: { color: random > 0.5 ? '#00FFFF' : '#FF00FF' } },
             geometry: { type: 'Point', coordinates: coordinate }
           })
         })
