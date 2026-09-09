@@ -354,8 +354,9 @@
         const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
         if (result.data) {
           await postRobot.send(kano, component, { command: 'removeLayer', args: name })
+          await postRobot.send(kano, component, { command: 'removeLayer', args: `${name}-points` })
         } else {
-          await postRobot.send(kano, component, { command: 'addLayer', args: {
+          const layer = {
             name,
             type: 'OverlayLayer',
             icon: 'timeline',
@@ -364,6 +365,7 @@
               type: 'geoJson',
               realtime: true,
               isVisible: true,
+              cluster: false,
               popup: { pick: [] },
               tooltip: {
                 template: '<%= properties.message %>',
@@ -385,13 +387,17 @@
                 }
               }
             }
-          }})
+          }
+          await postRobot.send(kano, component, { command: 'addLayer', args: layer })
+          await postRobot.send(kano, component, { command: 'addLayer', args: Object.assign(layer, { name: `${name}-points` }) })
           await updateFlightpathLayer(name)
           setTimeout(() => postRobot.send(kano, component, { command: 'zoomToLayer', args: name }), 1000)
         }
       }
       function updateFlightpathLayer(name) {
         let path = { type: 'FeatureCollection', features: [] }
+        // By default geodesic flag is set on points collection so that antimeridian crossing is detected and points correctly displayed on the "right" side
+        let points = { type: 'FeatureCollection', features: [], properties: { geodesic: (currentPath !== split_antimeridian_flightpath) } }
         // We split the path into two parts with different rendering options
         let coordinates1, coordinates2
         // In this case cut naturally at the plit
@@ -413,6 +419,7 @@
         coordinates1 = coordinates1.map(movePoint)
         coordinates2 = coordinates2.map(movePoint)
         let random = Math.random()
+        // Then path
         path.features.push({
           type: 'Feature',
           properties: { id: 0, message: 'ADS-B KO', stroke: random > 0.5 ? '#000000' : '#00FF00', weight: 1 + 5 * random, offset: -5,
@@ -440,8 +447,27 @@
             entityStyle: { polyline: { clampToGround: true, zIndex: 1 } } },
           geometry: { type: 'LineString', coordinates: coordinates2 }
         })
-        // Filter airports as all don't have METAR/TAF information
-        return postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] })
+        // Add path points as well
+        coordinates1.forEach((coordinate, index) => {
+          points.features.push({
+            type: 'Feature',
+            properties: { id: 100+index, message: 'ADS-B KO' },
+            style: { radius: 8, color: random > 0.5 ? '#000000' : '#00FF00', stroke: { color: random > 0.5 ? '#00FF00' : '#000000' } },
+            geometry: { type: 'Point', coordinates: coordinate }
+          })
+        })
+        coordinates2.forEach((coordinate, index) => {
+          points.features.push({
+            type: 'Feature',
+            properties: { id: 200+index, message: 'ADS-B OK' },
+            style: { radius: 8, color: random > 0.5 ? '#FF00FF' : '#00FFFF', stroke: { color: random > 0.5 ? '#00FFFF' : '#FF00FF' } },
+            geometry: { type: 'Point', coordinates: coordinate }
+          })
+        })
+        return Promise.all([
+          postRobot.send(kano, component, { command: 'updateLayer', args: [name, path] }),
+          postRobot.send(kano, component, { command: 'updateLayer', args: [`${name}-points`, points] })
+        ])
       }
       async function toggleGradientFlightpathLayer(name) {
         const result = await postRobot.send(kano, component, { command: 'isLayerVisible', args: name })
