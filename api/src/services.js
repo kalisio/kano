@@ -78,6 +78,16 @@ export default async function () {
   await createDefaultStyles.call(app)
   await createDefaultTags.call(app)
 
+  // NL chat: any authenticated user can talk to the LLM
+  permissions.defineAbilities.registerHook((subject, can, cannot) => {
+    if (subject && subject._id) {
+      can('service', 'nl-command')
+      can('create', 'nl-command')
+    }
+  })
+  // NL command service for natural language map interaction
+  await app.createService('nl-command', { servicesPath })
+
   // Event bus service
   app.declareService('events', {
     async create (data, params) {

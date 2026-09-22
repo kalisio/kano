@@ -78,7 +78,13 @@ const TOP_PANE = (activity) => {
             topPane.toggleZoomControl(),
             helpers.horizontalSeparator(),
             topPane.activeMeasureToolMode({ mode: `measure-tool` }),
-            topPane.printTool()
+            topPane.printTool(),
+            helpers.horizontalSeparator(),
+            helpers.toggleWidget({
+              widgetId: 'nl-chat-widget',
+              icon: 'las la-robot',
+              message: 'KNLChat.TOGGLE'
+            })
           ] : activity === 'globe' ? [
             topPane.toggleLegend(),
             topPane.toggleSelectionManager(),
@@ -86,7 +92,13 @@ const TOP_PANE = (activity) => {
             topPane.toggleTagsManager(),
             helpers.horizontalSeparator(),
             topPane.togglePosition(),
-            topPane.toggleZoomControl()
+            topPane.toggleZoomControl(),
+            helpers.horizontalSeparator(),
+            helpers.toggleWidget({
+              widgetId: 'nl-chat-widget',
+              icon: 'las la-robot',
+              message: 'KNLChat.TOGGLE'
+            })
           ] : []
         },
         helpers.verticalSeparator(),
@@ -125,12 +137,22 @@ const TOP_PANE = (activity) => {
   }
 }
 
+// NL Chat widget
+const NL_CHAT_WIDGET = {
+  id: 'nl-chat-widget',
+  label: 'KNLChat.LABEL',
+  icon: 'las la-robot',
+  scrollable: false,
+  content: { component: 'KNLChat' }
+}
+
 // left window
 const LEFT_WIDGETS = [
   widgetsLeft.LEGEND,
   widgetsLeft.FEATURES_SELECTION,
   widgetsLeft.STYLE_MANAGER,
-  widgetsLeft.TAG_MANAGER
+  widgetsLeft.TAG_MANAGER,
+  NL_CHAT_WIDGET
 ]
 
 // top window

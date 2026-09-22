@@ -35,5 +35,14 @@
   "sideNav": {
     "MAP": "Vue 2D",
     "GLOBE": "Vue 3D"
+  },
+  "KNLChat": {
+    "LABEL": "Chat IA",
+    "TOGGLE": "Chat IA",
+    "PLACEHOLDER": "Posez une question sur la carte...",
+    "ERROR": "Impossible de traiter votre demande",
+    "READY": "Chat IA prêt. Posez une question sur la carte.",
+    "STATION": "Station",
+    "MORE_STATIONS": "+ {count} autre(s) station(s)"
   }
 }

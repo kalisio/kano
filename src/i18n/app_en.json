@@ -35,5 +35,14 @@
   "sideNav": {
     "MAP": "2D View",
     "GLOBE": "3D View"
+  },
+  "KNLChat": {
+    "LABEL": "AI Chat",
+    "TOGGLE": "AI Chat",
+    "PLACEHOLDER": "Ask about the map...",
+    "ERROR": "Failed to process your request",
+    "READY": "AI Chat ready. Ask me anything about the map.",
+    "STATION": "Station",
+    "MORE_STATIONS": "+ {count} more station(s)"
   }
 }

@@ -346,7 +346,17 @@ module.exports = {
       signatureVersion: 'v4'
     },
     bucket: process.env.S3_BUCKET
-  } : undefined)
+  } : undefined),
+  nlCommand: {
+    provider: process.env.NL_PROVIDER || 'ollama',
+    anthropicApiKey: process.env.NL_ANTHROPIC_API_KEY || '',
+    openaiApiKey: process.env.NL_OPENAI_API_KEY || '',
+    ollamaUrl: process.env.NL_OLLAMA_URL || 'http://localhost:11434',
+    ollamaModel: process.env.NL_OLLAMA_MODEL || 'qwen2.5:7b',
+    geocoderUrl: process.env.API_GATEWAY_URL || gateway || '',
+    // true = the answer is phrased by a second (small) LLM call instead of a fixed sentence
+    verbalize: process.env.NL_VERBALIZE === 'true'
+  }
 }
 
 /*
