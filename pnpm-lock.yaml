@@ -12,6 +12,8 @@ overrides:
   protobufjs: 7.1.0
   vue: 3.2.37
 
+pnpmfileChecksum: sha256-eBG2ARi0dZhuBb/Y0FMcS6Cxla93idHuK6r0TBZ09+I=
+
 importers:
 
   .:
@@ -1737,7 +1739,7 @@ packages:
     resolution: {integrity: sha512-iy42jngdr8c+9iymJ+TCRmotYjcRAHz+4V1OXhuDt4vy49dYjsCpeYOi27m6UOWrSkwNLqPkn2q0OXXYVhutUg==}
 
   '@kalisio/leaflet-pmtiles@https://codeload.github.com/kalisio/leaflet-pmtiles/tar.gz/07b94a5984b07ef19514addfde8f344c6511fe2a':
-    resolution: {tarball: https://codeload.github.com/kalisio/leaflet-pmtiles/tar.gz/07b94a5984b07ef19514addfde8f344c6511fe2a}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/kalisio/leaflet-pmtiles/tar.gz/07b94a5984b07ef19514addfde8f344c6511fe2a}
     version: 0.0.1
 
   '@kalisio/leaflet.donutcluster@1.1.0':
@@ -6278,7 +6280,7 @@ packages:
     resolution: {integrity: sha512-Z7xbUNdhvwngJUf3plG9Zw3SaGHzcOzi59tVS3jD0GcS6cOWbRNNfP2biwmtHbufM5VYTIWLATrQ4vrlGI23WA==}
 
   leaflet-rotate@https://codeload.github.com/kalisio/leaflet-rotate/tar.gz/7372b93e73475d295349b4a802691a0745ef5c58:
-    resolution: {tarball: https://codeload.github.com/kalisio/leaflet-rotate/tar.gz/7372b93e73475d295349b4a802691a0745ef5c58}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/kalisio/leaflet-rotate/tar.gz/7372b93e73475d295349b4a802691a0745ef5c58}
     version: 0.2.8
     peerDependencies:
       leaflet: 1.6.0

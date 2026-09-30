@@ -63,7 +63,7 @@
     "@kalisio/common-core": "~0.11.0",
     "@kalisio/feathers-automerge-server": "^0.4.0",
     "@kalisio/feathers-distributed": "~3.0.0",
-    "@kalisio/kdk": "link:../../kdk",
+    "@kalisio/kdk": "~2.9.0",
     "@turf/turf": "^6.5.0",
     "containerized": "^1.0.2",
     "feathers-hooks-common": "~8.2.1",
