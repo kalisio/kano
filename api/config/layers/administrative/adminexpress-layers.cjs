@@ -204,7 +204,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
     }],
     leaflet: {
       type: 'pmtiles',
-      url: `${s3Url}/kargo/data/PMTiles/admin-express.pmtiles`,
+      url: `${s3Url}/ovh/kargo/data/PMTiles/admin-express.pmtiles`,
       devicePixelRatio: 3,
       style: {
         line: {

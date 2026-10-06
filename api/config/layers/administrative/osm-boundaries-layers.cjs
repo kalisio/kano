@@ -156,7 +156,7 @@ module.exports = function ({ wmtsUrl, tmsUrl, wmsUrl, wcsUrl, k2Url, s3Url }) {
   ],
     leaflet: {
       type: 'pmtiles',
-      url: `${s3Url}/kargo/data/PMTiles/osm-boundaries.pmtiles`,
+      url: `${s3Url}/ovh/kargo/data/PMTiles/osm-boundaries.pmtiles`,
       devicePixelRatio: 3,
       style: {
         line: {
