@@ -2,6 +2,7 @@
   "name": "kano",
   "description": "Kalisio Kano Application",
   "version": "2.8.0",
+  "packageManager": "pnpm@10.34.5",
   "homepage": "https://github.com/kalisio/kano",
   "keywords": [
     "kalisio"
