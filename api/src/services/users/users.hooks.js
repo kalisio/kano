@@ -7,7 +7,7 @@ export default {
     find: [iff(isProvider('external'), coreHooks.onlyMe())],
     get: [iff(coreHooks.isNotMe(), disallow('external'))],
     create: [], // Registration already disallowed by configuration
-    update: [commonHooks.disallow('external')],
+    update: [disallow('external')],
     patch: [
       iff(isProvider('external'), coreHooks.onlyMe(), preventChanges('catalog'), preventChanges('layers'))
     ],
