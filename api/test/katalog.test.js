@@ -7,7 +7,7 @@ import express from '@feathersjs/express'
 import chai, { util, expect, assert } from 'chai'
 import chailint from 'chai-lint'
 import { createServer, runServer } from '../src/server.js'
-import { createServer as createKatalogServer } from '../../../services-ekosystem/packages/katalog/src/server.js'
+import { createServer as createKatalogServer } from '../../../service-ekosystem/packages/service-katalog/src/server.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -83,20 +83,22 @@ describe('katalog distribution integration', () => {
   }).timeout(5000)
 
   it('initialize the katalog server', async () => {
-    katalogServer = createKatalogServer()
-    katalogServer.app.set('port', 9100)
-    katalogServer.app.set('db', { adapter: 'mongodb', url: 'mongodb://127.0.0.1:27017/katalog-test' })
-    const inheritedAuth = katalogServer.app.get('authentication')
-    if (inheritedAuth) katalogServer.app.set('authentication', Object.assign({}, inheritedAuth, { entity: null }))
-    katalogServer.app.set('distribution', Object.assign({
-      key: 'katalog',
-      authentication: false,
-      services: () => true,
-      distributedMethods: ['find', 'get', 'create', 'update', 'patch', 'remove'],
-      distributedEvents: ['created', 'updated', 'patched', 'removed'],
-      middlewares: { after: express.errorHandler() }
-    }, distributionConfig))
-    await katalogServer.run()
+    // Both servers run in the same process, so katalog inherits the kano test configuration:
+    // override what must differ, createServer() now starts listening by itself
+    katalogServer = await createKatalogServer({
+      port: 9100,
+      db: { adapter: 'mongodb', url: 'mongodb://127.0.0.1:27017/katalog-test' },
+      authentication: null,
+      distribution: Object.assign({
+        key: 'katalog',
+        authentication: false,
+        services: () => true,
+        remoteServices: () => false,
+        distributedMethods: ['find', 'get', 'create', 'update', 'patch', 'remove'],
+        distributedEvents: ['created', 'updated', 'patched', 'removed'],
+        middlewares: { after: express.errorHandler() }
+      }, distributionConfig)
+    })
     katalogApp = katalogServer.app
   }).timeout(30000)
 
@@ -246,6 +248,7 @@ describe('katalog distribution integration', () => {
       if (app.db.db('data')) await app.db.db('data').dropDatabase()
       await app.db.disconnect()
     }
+    if (katalogServer) await katalogServer.close()
     if (katalogApp) {
       await katalogApp.db.instance.dropDatabase()
       await katalogApp.db.disconnect()
