@@ -101,6 +101,7 @@ The following ones are related to Kano states:
 * `kano-logout` when the user has been unauthenticated in the Kano application
 * `kano-disconnected` when the Kano application has been disconnected from the websocket
 * `kano-reconnected` when the Kano application has been reconnected to the websocket
+* `kano-current-time-changed` whenever the current time has been changed in the Kano application (e.g. using the timeline), with the new time as ISO 8601 string in the `time` payload property
 * `map-ready` when the 2D map component has been initialized in the Kano application so that you can safely use the underlying API
 * `map-destroyed` when the 2D map component has been destroyed in the Kano application before switching to another route
 * `globe-ready` when the 3D globe component has been initialized in the Kano application so that you can safely use the underlying API

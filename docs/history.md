@@ -4,9 +4,28 @@ sidebarDepth: 3
 
 # Changelog
 
-## v2.7.0 - Not yet released
+## v2.7.0 - September 3rd, 2026
 
-More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/16) and [KDK](https://github.com/kalisio/kdk/milestone/16).
+**Major enhancements:**\
+👉 *Reverse geocoding* is now available in the location search tool,\
+👉 *Enhanced layer filter controls*, including the ability to quickly activate or deactivate all filters,\
+👉 *Performance improvements and bug fixes* for GeoTIFF data.
+
+**Cartographic data enhancements:**\
+👉 *PMTiles layers* can now be created directly from a URL,\
+👉 *ZARR data* can now be visualized through the [kazarr](https://github.com/kalisio/kazarr) service,\
+👉 *Dynamic legends* now only display items corresponding to features currently visible in the map viewport,\
+👉 Added support for *[Panoramax](https://panoramax.fr/) layers*, enabling the display of geolocated street-level imagery.
+
+**Major bug fixes:**\
+✅ Fixed *flickering and display artefacts* when visualizing tiled data,\
+✅ *Sublegends* now correctly respect their zoom-level visibility constraints,\
+✅ The *installation popup* is no longer displayed once the user is logged in,\
+✅ Fixed several potential *XSS vulnerabilities* in custom dialogs and aggregation queries.
+
+**No major breaking changes have been identified for customized versions or iframe integration use cases.**
+
+More details on GitHub for [Kano](https://github.com/kalisio/kano/milestone/16), [KDK v2.8](https://github.com/kalisio/kdk/milestone/16) and [KDK v2.9](https://github.com/kalisio/kdk/milestone/17).
 
 ## v2.6.0 - March 10th, 2026
 

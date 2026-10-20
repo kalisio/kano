@@ -182,7 +182,7 @@
     "post-robot": "10.0.42",
     "protomaps-leaflet": "^3.1.2",
     "quasar": "2.12.0",
-    "sanitize-html": "^2.7.0",
+    "sanitize-html": "2.17.4",
     "showdown": "^2.1.0",
     "shpjs": "^4.0.2",
     "sift": "^16.0.0",

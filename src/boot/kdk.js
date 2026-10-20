@@ -151,6 +151,8 @@ export default async ({ app, router }) => {
   Events.on('navigator-reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
   Events.on('websocket-disconnected', () => utils.sendEmbedEvent('kano-disconnected'))
   Events.on('websocket-reconnected', () => utils.sendEmbedEvent('kano-reconnected'))
+  // Listen to time changes, current time is a moment object so that we send it as ISO string
+  Events.on('time-current-time-changed', (time) => utils.sendEmbedEvent('kano-current-time-changed', { time: time.toISOString() }))
 
   await utils.sendEmbedEvent('api-ready')
 
