@@ -231,6 +231,7 @@
   },
   "resolutions": {
     "@cesium/engine": "9.1.0",
+    "@zip.js/zip.js": "2.7.52",
     "leaflet": "1.6.0",
     "moment": "2.29.4",
     "post-robot": "10.0.42",
