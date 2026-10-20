@@ -129,7 +129,12 @@ module.exports = {
     }
     */
     contentSecurityPolicy: {
+      // Since helmet v4 default directives (eg script-src 'self') are added unless disabled,
+      // they would block WebAssembly (automerge), map tiles or API calls on other domains.
+      // A default-src is required since helmet v5, keep it permissive to only restrict frame ancestors.
+      useDefaults: false,
       directives: {
+        defaultSrc: ['*', 'data:', 'blob:', "'unsafe-inline'", "'unsafe-eval'"],
         frameAncestors: [
           'http://localhost:*',
           'https://*.kalisio.xyz',

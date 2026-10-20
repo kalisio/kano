@@ -1,5 +1,5 @@
 ARG DEBIAN_VERSION=bookworm
-ARG NODE_VERSION=20
+ARG NODE_VERSION=24
 
 
 ## Use a builder
@@ -24,6 +24,7 @@ ARG DEBUG
 ENV BUILD_NUMBER=$BUILD_NUMBER
 ENV NODE_APP_INSTANCE=$FLAVOR
 ENV DEBUG=$DEBUG
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Use the pnpm version required by the app (packageManager field)
 RUN npm install -g pnpm@$(node -p "require('/opt/kalisio/$APP/package.json').packageManager.split('@')[1]")
@@ -36,7 +37,7 @@ RUN yarn install
 WORKDIR /opt/kalisio/
 RUN \
   LINK=1 KLI_FILE=/opt/kalisio/kli.js KALISIO_DEVELOPMENT_DIR=/opt/kalisio \
-    node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --install && \
+    node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --install --fail-on-error && \
   cd /opt/kalisio/common-ekosystem && pnpm build && \
   cd /opt/kalisio/kdk-ekosystem && pnpm -r --filter './packages/*' --filter '!@kalisio/kdk-core-ui' build && \
   cd /opt/kalisio/$APP && pnpm pwa:build && \
