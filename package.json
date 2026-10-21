@@ -34,6 +34,7 @@
     "pwa:build": "pnpm provision && cross-env BUILD_MODE=pwa quasar build -m pwa",
     "analyze": "cross-env ANALYZE_BUNDLE=1 pnpm build",
     "lint": "standard src/**/*.js src-pwa/**/*.js src/**/*.vue test/**/*.mjs --fix",
+    "docs:build": "cd docs && pnpm install --ignore-workspace && pnpm build",
     "cesium:cp:Assets": "shx cp -R node_modules/cesium/Build/Cesium/Assets public/Cesium",
     "cesium:cp:ThirdParty": "shx cp -R node_modules/cesium/Build/Cesium/ThirdParty public/Cesium",
     "cesium:cp:Widgets": "shx cp -R node_modules/cesium/Build/Cesium/Widgets public/Cesium",

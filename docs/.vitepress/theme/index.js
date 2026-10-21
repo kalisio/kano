@@ -1,4 +1,4 @@
-import theme from 'vitepress-theme-kalisio'
+import theme from '@kalisio/vitepress-theme'
 import './custom.css'
 export default theme
 
