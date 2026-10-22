@@ -3,7 +3,7 @@ const fs = require('fs')
 const makeDebug = require('debug')
 var winston = require('winston')
 const express = require('@feathersjs/express')
-const containerized = require('containerized')()
+const isDocker = require('is-docker')
 
 const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
@@ -324,7 +324,7 @@ module.exports = {
   },
   db: {
     adapter: 'mongodb',
-    url: process.env.DB_URL || (containerized ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),
+    url: process.env.DB_URL || (isDocker() ? 'mongodb://mongodb:27017/kano' : 'mongodb://127.0.0.1:27017/kano'),
     // We allow for a separate DB to hold shared data
     secondaries: (process.env.DATA_DB_URL ? { data: process.env.DATA_DB_URL } : undefined)
   },
