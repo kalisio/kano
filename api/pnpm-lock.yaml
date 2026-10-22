@@ -34,9 +34,6 @@ importers:
       '@turf/turf':
         specifier: ^6.5.0
         version: 6.5.0
-      containerized:
-        specifier: ^1.0.2
-        version: 1.0.2
       feathers-hooks-common:
         specifier: ~8.2.1
         version: 8.2.1(@feathersjs/feathers@5.0.49)
@@ -52,6 +49,9 @@ importers:
       http-proxy-middleware:
         specifier: ^0.17.4
         version: 0.17.4
+      is-docker:
+        specifier: 2.2.1
+        version: 2.2.1
       winston:
         specifier: ^3.2.1
         version: 3.8.1
@@ -2266,10 +2266,6 @@ packages:
       whiskers:
         optional: true
 
-  containerized@1.0.2:
-    resolution: {integrity: sha512-iSeP1Le1eRhwYIeBYHBw4rB9lYIwR1f9PsPweoItSDaB7B/6aLKgeU9Fomio/53nSni6YdSrGBjE+xwqrbzM3w==}
-    deprecated: 'Containerized - DEPRECATED (You can use following package instead: https://www.npmjs.com/package/is-docker)'
-
   content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
     engines: {node: '>= 0.6'}
@@ -3611,6 +3607,11 @@ packages:
   is-descriptor@1.0.2:
     resolution: {integrity: sha512-2eis5WqQGV7peooDyLmNEPUrps9+SXX5c9pL3xEB+4e9HnGuDa7mB7kHxHw4CbqS9k1T2hOH3miL8n8WtiYVtg==}
     engines: {node: '>=0.10.0'}
+
+  is-docker@2.2.1:
+    resolution: {integrity: sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==}
+    engines: {node: '>=8'}
+    hasBin: true
 
   is-dotfile@1.0.3:
     resolution: {integrity: sha512-9YclgOGtN/f8zx0Pr4FQYMdibBiTaH3sn52vjYip4ZSf6C4/6RfTEZ+MR4GvKhCxdPh21Bg42/WL55f6KSnKpg==}
@@ -9331,8 +9332,6 @@ snapshots:
       ejs: 2.7.4
       lodash: 4.17.21
 
-  containerized@1.0.2: {}
-
   content-disposition@0.5.4:
     dependencies:
       safe-buffer: 5.2.1
@@ -11005,6 +11004,8 @@ snapshots:
       is-accessor-descriptor: 1.0.0
       is-data-descriptor: 1.0.0
       kind-of: 6.0.3
+
+  is-docker@2.2.1: {}
 
   is-dotfile@1.0.3: {}
 

@@ -65,12 +65,12 @@
     "@kalisio/feathers-distributed": "~3.0.0",
     "@kalisio/kdk": "~2.9.0",
     "@turf/turf": "^6.5.0",
-    "containerized": "^1.0.2",
     "feathers-hooks-common": "~8.2.1",
     "feathers-mongodb-fuzzy-search": "~2.0.1",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
     "http-proxy-middleware": "^0.17.4",
+    "is-docker": "2.2.1",
     "winston": "^3.2.1"
   }
 }
