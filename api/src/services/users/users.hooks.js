@@ -9,7 +9,7 @@ export default {
     create: [], // Registration already disallowed by configuration
     update: [disallow('external')],
     patch: [
-      iff(isProvider('external'), coreHooks.onlyMe(), preventChanges('catalog'), preventChanges('layers'))
+      iff(isProvider('external'), coreHooks.onlyMe(), preventChanges(true, 'catalog', 'layers'))
     ],
     remove: [disallow('external')]
   },

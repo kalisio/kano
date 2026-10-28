@@ -17,6 +17,12 @@ importers:
       '@feathersjs/feathers':
         specifier: 5.0.50
         version: 5.0.50
+      '@kalisio/common-core':
+        specifier: 1.0.1
+        version: 1.0.1(ajv@8.20.0)(moment@2.30.1)(papaparse@5.7.0)(sanitize-html@2.18.1)(sift@8.5.1)
+      '@kalisio/common-graphics':
+        specifier: 1.0.1
+        version: 1.0.1(@kalisio/common-core@1.0.1(ajv@8.20.0)(moment@2.30.1)(papaparse@5.7.0)(sanitize-html@2.18.1)(sift@8.5.1))(chroma-js@3.2.0)(lru-cache@11.5.2)
       '@kalisio/feathers-automerge-server':
         specifier: ^0.4.0
         version: 0.4.0
@@ -637,6 +643,54 @@ packages:
       sanitize-html:
         optional: true
       sift:
+        optional: true
+
+  '@kalisio/common-core@1.0.1':
+    resolution: {integrity: sha512-ZYPJKoLNUek1bHWK1J7+cucVPsSg8T/Fy+hO7CZh1KZKsn+9eyA/Ob1tNKes0MdcAEdXBEUL2NfNTI6aXYcrLg==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@xmldom/xmldom': 0.9.12
+      ajv: 8.20.0
+      fast-xml-parser: 5.11.1
+      js-yaml: 5.4.3
+      lodash-es: 4.18.1
+      mathjs: 15.2.0
+      moment: 2.30.1
+      papaparse: 5.7.0
+      sanitize-html: 2.17.4
+      sift: 17.1.3
+    peerDependenciesMeta:
+      '@xmldom/xmldom':
+        optional: true
+      ajv:
+        optional: true
+      fast-xml-parser:
+        optional: true
+      js-yaml:
+        optional: true
+      lodash-es:
+        optional: true
+      mathjs:
+        optional: true
+      moment:
+        optional: true
+      papaparse:
+        optional: true
+      sanitize-html:
+        optional: true
+      sift:
+        optional: true
+
+  '@kalisio/common-graphics@1.0.1':
+    resolution: {integrity: sha512-uP1k303zphsV0lRQiFuANd9Emjopp1A/g2wjncPs3lH+864BjiuwdvTKRGf4MVuE74Nf27gN4DRXf2/P6Yawgg==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kalisio/common-core': 1.0.1
+      chroma-js: 3.2.0
+      lru-cache: 11.5.2
+      sharp: 0.34.5
+    peerDependenciesMeta:
+      sharp:
         optional: true
 
   '@kalisio/feathers-automerge-server@0.4.0':
@@ -1927,6 +1981,9 @@ packages:
 
   chroma-js@2.4.2:
     resolution: {integrity: sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==}
+
+  chroma-js@3.2.0:
+    resolution: {integrity: sha512-os/OippSlX1RlWWr+QDPcGUZs0uoqr32urfxESG9U93lhUfbnlyckte84Q8P1UQY/qth983AS1JONKmLS4T0nw==}
 
   cliui@7.0.4:
     resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
@@ -3908,6 +3965,10 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
+  lru-cache@11.5.2:
+    resolution: {integrity: sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g==}
+    engines: {node: 20 || >=22}
 
   lru-cache@4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
@@ -6450,6 +6511,20 @@ snapshots:
       sanitize-html: 2.18.1
       sift: 8.5.1
 
+  '@kalisio/common-core@1.0.1(ajv@8.20.0)(moment@2.30.1)(papaparse@5.7.0)(sanitize-html@2.18.1)(sift@8.5.1)':
+    optionalDependencies:
+      ajv: 8.20.0
+      moment: 2.30.1
+      papaparse: 5.7.0
+      sanitize-html: 2.18.1
+      sift: 8.5.1
+
+  '@kalisio/common-graphics@1.0.1(@kalisio/common-core@1.0.1(ajv@8.20.0)(moment@2.30.1)(papaparse@5.7.0)(sanitize-html@2.18.1)(sift@8.5.1))(chroma-js@3.2.0)(lru-cache@11.5.2)':
+    dependencies:
+      '@kalisio/common-core': 1.0.1(ajv@8.20.0)(moment@2.30.1)(papaparse@5.7.0)(sanitize-html@2.18.1)(sift@8.5.1)
+      chroma-js: 3.2.0
+      lru-cache: 11.5.2
+
   '@kalisio/feathers-automerge-server@0.4.0':
     dependencies:
       '@automerge/automerge-repo': 2.5.6
@@ -8567,6 +8642,8 @@ snapshots:
       fsevents: 2.3.2
 
   chroma-js@2.4.2: {}
+
+  chroma-js@3.2.0: {}
 
   cliui@7.0.4:
     dependencies:
@@ -10813,6 +10890,8 @@ snapshots:
       get-func-name: 2.0.2
 
   lru-cache@10.4.3: {}
+
+  lru-cache@11.5.2: {}
 
   lru-cache@4.1.5:
     dependencies:

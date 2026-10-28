@@ -46,6 +46,8 @@
     "@feathersjs/authentication": "5.0.50",
     "@feathersjs/express": "5.0.50",
     "@feathersjs/feathers": "5.0.50",
+    "@kalisio/common-core": "1.0.1",
+    "@kalisio/common-graphics": "1.0.1",
     "@kalisio/feathers-automerge-server": "^0.4.0",
     "@kalisio/feathers-distributed": "3.1.0",
     "@kalisio/kdk": "~2.9.1",
