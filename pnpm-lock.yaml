@@ -13,8 +13,6 @@ overrides:
   protobufjs: 7.1.0
   vue: 3.2.37
 
-pnpmfileChecksum: sha256-7NE8L2PLhmPmk0FKv4YG0jHlpraQOL4EPWr4x5zFIwI=
-
 importers:
 
   .:
@@ -20405,7 +20403,7 @@ snapshots:
     dependencies:
       bson: 4.7.2
       mongodb-connection-string-url: 2.6.0
-      socks: 2.8.6
+      socks: 2.8.9
     optionalDependencies:
       '@aws-sdk/credential-providers': 3.1154.0
       '@mongodb-js/saslprep': 1.6.1

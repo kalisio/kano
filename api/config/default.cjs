@@ -1,11 +1,9 @@
-const path = require('path')
-const fs = require('fs')
-const makeDebug = require('debug')
+const path = require('node:path')
+const fs = require('node:fs')
 var winston = require('winston')
 const express = require('@feathersjs/express')
 const isDocker = require('is-docker')
 
-const debug = makeDebug('kano:config')
 const serverPort = process.env.PORT || 8081
 // Required to know webpack port so that in dev we can build correct URLs
 const clientPort = process.env.CLIENT_PORT || 8080

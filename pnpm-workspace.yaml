@@ -5,6 +5,7 @@ packages:
 allowBuilds:
   cbor-extract: true
   core-js: true
+  ejs: true
   protobufjs: true
   puppeteer: true
   vue: 3.4.14
