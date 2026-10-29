@@ -27,7 +27,7 @@
     "clean": "quasar clean",
     "provision": "pnpm configs:cp && pnpm cesium:cp && pnpm css:cp && pnpm libs:cp && pnpm icons:cp && pnpm images:cp && pnpm tours:cp && pnpm fix-protomaps-leaflet",
     "fix-protomaps-leaflet": "fix-esm-import-path node_modules/protomaps-leaflet/dist/index.js",
-    "dev": "pnpm provision && cross-env NODE_ENV=development quasar dev",
+    "dev": "pnpm provision && cross-env NODE_ENV=development NODE_OPTIONS=--trace-deprecation quasar dev",
     "prod": "cd api && pnpm prod",
     "build": "pnpm provision && quasar build",
     "pwa:dev": "pnpm provision && cross-env NODE_ENV=development BUILD_MODE=pwa quasar dev -m pwa",

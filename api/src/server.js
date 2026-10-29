@@ -8,7 +8,7 @@ import https from 'https'
 import makeDebug from 'debug'
 import path from 'path'
 import { pathToFileURL } from 'url'
-import proxyMiddleware from 'http-proxy-middleware'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 import express from '@feathersjs/express'
 import middlewares from './middlewares.js'
 import services from './services.js'
@@ -82,16 +82,11 @@ export class Server {
 
     // Define HTTP proxies to your custom API backend. See /config/index.js -> proxyTable
     // https://github.com/chimurai/http-proxy-middleware
-    const proxyTable = app.get('proxyTable') || {}
-    if (proxyTable) {
-      Object.keys(proxyTable).forEach(context => {
-        let options = proxyTable[context]
-        if (typeof options === 'string') {
-          options = { target: options }
-        }
-        app.use(proxyMiddleware(context, options))
-      })
-    }
+    const proxyTable = this.app.get('proxyTable') || {}
+    Object.entries(proxyTable).forEach(([context, config]) => {
+      const options = typeof config === 'string' ? { target: config } : config
+      this.app.use(createProxyMiddleware({ ...options, pathFilter: context }))
+    })
   }
 
   async run () {
