@@ -237,7 +237,7 @@
     "moment": "2.29.4",
     "post-robot": "10.0.42",
     "protobufjs": "7.1.0",
-     "vue": "3.2.37"
+    "vue": "3.2.37"
   },
   "engines": {
     "node": ">= 16.0.0",
@@ -254,5 +254,9 @@
     "last 8 FirefoxAndroid versions",
     "last 10 iOS versions",
     "last 5 Opera versions"
-  ]
+  ],
+  "metaWorkspace": {
+    "version": "0.11.0",
+    "syncedAt": "2026-10-30T14:32:41.870Z"
+  }
 }

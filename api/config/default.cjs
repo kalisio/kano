@@ -132,7 +132,9 @@ module.exports = {
       // A default-src is required since helmet v5, keep it permissive to only restrict frame ancestors.
       useDefaults: false,
       directives: {
-        defaultSrc: ['*', 'data:', 'blob:', "'unsafe-inline'", "'unsafe-eval'"],
+        defaultSrc: ['*', 'data:', 'blob:'],
+        scriptSrc: ['*', 'data:', 'blob:', "'unsafe-inline'", "'unsafe-eval'"],
+        styleSrc: ['*', 'data:', 'blob:', "'unsafe-inline'"],
         frameAncestors: [
           'http://localhost:*',
           'https://*.kalisio.xyz',
