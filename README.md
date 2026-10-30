@@ -1,6 +1,4 @@
-[![Kalisio](https://s3.eu-central-1.amazonaws.com/kalisioscope/kano/kano-logo-black-512x168.png)](https://kalisio.com)
-
-## kano
+# kano
 
 [![CI](https://github.com/kalisio/skeleton/actions/workflows/main.yaml/badge.svg)](https://github.com/kalisio/skeleton/actions/workflows/main.yaml)
 [![Quality Gate Status](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-kano&metric=alert_status&token=sqb_a4fd6b20cd67bf0553c3c1b5c5ffa316f4aab0d2)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-kano)
