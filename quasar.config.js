@@ -84,6 +84,10 @@ module.exports = configure(function (ctx) {
       },
 
       extendWebpack (cfg) {
+        const flavor = process.env.NODE_APP_INSTANCE?.toLowerCase()
+        if (flavor !== 'prod') {
+          cfg.resolve.conditionNames = ['development', '...']
+        }
         cfg.module.rules.push({
           // for i18n custom block
           resourceQuery: /blockType=i18n/,
