@@ -68,9 +68,5 @@
     "cross-env": "catalog:",
     "mocha": "^9.1.1",
     "standard": "catalog:"
-  },
-  "metaWorkspace": {
-    "version": "0.11.0",
-    "syncedAt": "2026-10-30T14:35:26.797Z"
   }
 }

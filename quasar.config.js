@@ -97,10 +97,8 @@ module.exports = configure(function (ctx) {
         cfg.resolve.fallback = {
           fs: false,
           'fs/promises': false,
-          sharp: false,
           'dom-serializer': false,
           assert: require.resolve('assert'),
-          crypto: require.resolve('crypto-browserify'),
           http: require.resolve('stream-http'),
           https: require.resolve('https-browserify'),
           path: require.resolve('path-browserify'),

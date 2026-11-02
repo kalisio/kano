@@ -94,3 +94,6 @@ local-layers.js
 # vitepress
 docs/.vitepress/cache
 docs/.vitepress/dist
+
+# PNPM Hooks
+.pnpmfile.cjs
