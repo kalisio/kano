@@ -100,7 +100,6 @@ module.exports = configure(function (ctx) {
           'dom-serializer': false,
           assert: require.resolve('assert'),
           http: require.resolve('stream-http'),
-          crypto: require.resolve('crypto-browserify'),
           https: require.resolve('https-browserify'),
           path: require.resolve('path-browserify'),
           stream: require.resolve('stream-browserify'),
