@@ -68,5 +68,8 @@
     "cross-env": "catalog:",
     "mocha": "^9.1.1",
     "standard": "catalog:"
+  },
+  "engines": {
+    "node": ">= 24.0.0"
   }
 }
