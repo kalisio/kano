@@ -13,19 +13,19 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 ###
 
-KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL:-}/kalisio/meta-ekosystem.git"
-
 # Install Kalisio's meta cli
 # Expected environnment variables:
-#  1. KALISIO_META_CLI_URL => the url where to clone the meta-ekosystem repository
-#  2. WORKSPACE_DIR => a writable folder where the meta-ekosystem will be cloned
+#  - KALISIO_META_CLI_GIT_URL the url where to clone the meta-ekosystem repository
+#  - or KALISIO_GITHUB_URL the base url to clone private repositories in the kalisio org
+#  - KALISIO_METAèCLI_GIT_REF the git tag/branch/commit to pull when cloning the repo
 install_meta_cli() {
-    local META_CLI_URL=${KALISIO_META_CLI_URL:-}
-    local TARGET_DIR="${WORKSPACE_DIR:-}/meta-ekosystem"
+    local REPO_URL="${KALISIO_META_CLI_GIT_URL:-${KALISIO_GITHUB_URL:-}/kalisio/meta-ekosystem.git}"
+    local REPO_DIR="$1/meta-ekosystem"
+    local REPO_REF="${KALISIO_META_CLI_GIT_REF:-}"
 
-    git_shallow_clone "$META_CLI_URL" "$TARGET_DIR"
+    git_shallow_clone "$REPO_URL" "$REPO_DIR" "$REPO_REF"
 
-    cd "$TARGET_DIR"
+    cd "$REPO_DIR"
     pnpm install
     cd packages/meta-cli
     PNPM_HOME=~/.local/bin pnpm link
@@ -37,13 +37,11 @@ install_meta_cli() {
 ### Github Actions
 
 init_github_run_tests() {
-    install_reqs age sops nvm node24 mongo7 sonar_scanner_cli
-
-    install_meta_cli
+    install_reqs age sops nvm node24 mongo7 sonar_scanner_cli meta_cli
 }
 
 init_github_build_app() {
-    install_reqs age sops nvm node24
+    install_reqs age sops nvm node24 meta_cli
 }
 
 init_github_build_e2e_tests() {
@@ -55,9 +53,7 @@ init_github_build_docs() {
 }
 
 init_github_additional_tests() {
-    install_reqs age sops nvm node20 node22 mongo7 mongo8
-
-    install_meta_cli
+    install_reqs age sops nvm node20 node22 mongo7 mongo8 meta_cli
 }
 
 ### e2e tests runner (dedicated container, outside any CI system)
