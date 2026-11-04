@@ -36,7 +36,7 @@ RUN pnpm install
 # Setup app & cleanup workspace
 WORKDIR /opt/kalisio/
 RUN \
-  node /opt/kalisio/meta-ekosystem/packages/meta-cli/index.js /opt/kalisio/kli.js --install --fail-on-error --production && \
+  node /opt/kalisio/meta-ekosystem/packages/meta-cli/bin/kli.js /opt/kalisio/kli.js --install --fail-on-error --production && \
   cd /opt/kalisio/$APP && pnpm pwa:build && \
   rm -fR /opt/kalisio/kli /opt/kalisio/kli.js
 
