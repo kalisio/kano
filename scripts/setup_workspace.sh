@@ -86,7 +86,7 @@ if [[ "$WORKSPACE_KIND" = kli ]] || [[ "$WORKSPACE_KIND" = klifull ]]; then
     KLI_FILE=$(get_kli_file "$WORKSPACE_DIR/development/workspaces/apps" "kano" "$ROOT_DIR" "${WORKSPACE_TAG:-$WORKSPACE_BRANCH}")
     KLI_OPTS="--clone"
     [[ "$WORKSPACE_KIND" = klifull ]] && KLI_OPTS="$KLI_OPTS --install"
-    cd "$WORKSPACE_DIR" && kli "$KLI_FILE" "$KLI_OPTS"
+    cd "$WORKSPACE_DIR" && kli "$KLI_FILE" $KLI_OPTS
 fi
 
 end_group "Setting up workspace ..."

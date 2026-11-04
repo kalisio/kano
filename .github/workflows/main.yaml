@@ -126,11 +126,13 @@ jobs:
         with:
           submodules: true
       - name: Init runner
+        env:
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
         run: bash ./scripts/init_runner.sh ${{ github.job }}
       - name: Setup workspace
         env:
           KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
-        run: bash ./scripts/setup_workspace.sh -k nokli
+        run: bash ./scripts/setup_workspace.sh -k kli
       - name: Build app
         env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
