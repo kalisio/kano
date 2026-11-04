@@ -20,7 +20,7 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 #  - KALISIO_METAèCLI_GIT_REF the git tag/branch/commit to pull when cloning the repo
 install_meta_cli() {
     local REPO_URL="${KALISIO_META_CLI_GIT_URL:-${KALISIO_GITHUB_URL:-}/kalisio/meta-ekosystem.git}"
-    local REPO_DIR="$1/meta-ekosystem"
+    local REPO_DIR="${WORKSPACE_DIR}/meta-ekosystem"
     local REPO_REF="${KALISIO_META_CLI_GIT_REF:-}"
 
     git_shallow_clone "$REPO_URL" "$REPO_DIR" "$REPO_REF"

@@ -30,14 +30,13 @@ ENV PUPPETEER_SKIP_DOWNLOAD=true
 RUN npm install -g pnpm@$(node -p "require('/opt/kalisio/$APP/package.json').packageManager.split('@')[1]")
 
 # Setup kli
-WORKDIR /opt/kalisio/kli
-RUN yarn install
+WORKDIR /opt/kalisio/meta-ekosystem
+RUN pnpm install
 
 # Setup app & cleanup workspace
 WORKDIR /opt/kalisio/
 RUN \
-  KLI_FILE=/opt/kalisio/kli.js KALISIO_DEVELOPMENT_DIR=/opt/kalisio \
-    node /opt/kalisio/kli/index.js /opt/kalisio/kli.js --install --fail-on-error --production && \
+  node /opt/kalisio/meta-ekosystem/packages/meta-cli/index.js /opt/kalisio/kli.js --install --fail-on-error --production && \
   cd /opt/kalisio/$APP && pnpm pwa:build && \
   rm -fR /opt/kalisio/kli /opt/kalisio/kli.js
 
