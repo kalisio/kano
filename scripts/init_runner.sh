@@ -6,19 +6,17 @@ JOB_ID=$1
 
 THIS_FILE=$(readlink -f "${BASH_SOURCE[0]}")
 THIS_DIR=$(dirname "$THIS_FILE")
-ROOT_DIR=$(dirname "$THIS_DIR")
-WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 . "$THIS_DIR/kash/kash.sh"
 
 ### Github Actions
 
 init_github_run_tests() {
-    install_reqs age sops nvm node24 mongo7 sonar_scanner_cli meta_cli
+    install_reqs age sops nvm node24 mongo7 sonar_scanner_cli
 }
 
 init_github_build_app() {
-    install_reqs age sops nvm node24 meta_cli
+    install_reqs age sops nvm node24
 }
 
 init_github_build_e2e_tests() {
@@ -30,7 +28,7 @@ init_github_build_docs() {
 }
 
 init_github_additional_tests() {
-    install_reqs age sops nvm node20 node22 mongo7 mongo8 meta_cli
+    install_reqs age sops nvm node20 node22 mongo7 mongo8
 }
 
 ### e2e tests runner (dedicated container, outside any CI system)
