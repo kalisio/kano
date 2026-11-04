@@ -13,7 +13,7 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 ###
 
-KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL}/meta-ekosystem.git"
+KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL}/kalisio/meta-ekosystem.git"
 
 # Install Kalisio's meta cli
 # Expected environnment variables:
