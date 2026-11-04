@@ -11,29 +11,6 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 . "$THIS_DIR/kash/kash.sh"
 
-###
-
-# Install Kalisio's meta cli
-# Expected environnment variables:
-#  - KALISIO_META_CLI_GIT_URL the url where to clone the meta-ekosystem repository
-#  - or KALISIO_GITHUB_URL the base url to clone private repositories in the kalisio org
-#  - KALISIO_METAèCLI_GIT_REF the git tag/branch/commit to pull when cloning the repo
-install_meta_cli() {
-    local REPO_URL="${KALISIO_META_CLI_GIT_URL:-${KALISIO_GITHUB_URL:-}/kalisio/meta-ekosystem.git}"
-    local REPO_DIR="${WORKSPACE_DIR}/meta-ekosystem"
-    local REPO_REF="${KALISIO_META_CLI_GIT_REF:-}"
-
-    git_shallow_clone "$REPO_URL" "$REPO_DIR" "$REPO_REF"
-
-    cd "$REPO_DIR"
-    pnpm install
-    cd packages/meta-cli
-    PNPM_HOME=~/.local/bin pnpm link
-    cd ~-
-}
-
-###
-
 ### Github Actions
 
 init_github_run_tests() {

@@ -12,35 +12,6 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 ## Parse options
 ##
 
-get_kli_file() {
-    local KLI_BASE="$1"
-    local KLI_NAME="$2"
-    local REPO_DIR="$3"
-    local OVERRIDE_GIT_REF="${4:-}"
-
-    local GIT_REF="$OVERRIDE_GIT_REF"
-    if [[ "$GIT_REF" = "" ]]; then
-        local GIT_TAG
-        local GIT_BRANCH
-        GIT_TAG=$(get_git_tag "$REPO_DIR")
-        GIT_BRANCH=$(get_git_branch "$REPO_DIR")
-        GIT_REF="${GIT_TAG:-$GIT_BRANCH}"
-    fi
-
-    local APP_FLAVOR
-    local APP_VERSION
-    local APP_CUSTOM
-    APP_FLAVOR=$(get_flavor_from_git_ref "$GIT_REF")
-    APP_VERSION=$(get_version_from_git_ref "$GIT_REF")
-    APP_CUSTOM=$(get_custom_from_git_ref "$GIT_REF")
-
-    local KLI_FILE="$KLI_NAME"
-    [[ "$APP_VERSION" != "" ]] && KLI_FILE="$KLI_FILE-$APP_VERSION"
-    [[ "$APP_CUSTOM" != "" ]] && KLI_FILE="$KLI_FILE-$APP_CUSTOM"
-
-    printf "%s/%s/%s/%s.js" "$KLI_BASE" "$KLI_NAME" "$APP_FLAVOR" "$KLI_FILE"
-}
-
 WORKSPACE_BRANCH=
 WORKSPACE_TAG=
 WORKSPACE_NODE=24
