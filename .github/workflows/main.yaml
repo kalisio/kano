@@ -43,6 +43,8 @@ jobs:
         with:
           submodules: true
       - name: Init runner
+        env:
+          KALISIO_GITHUB_URL: ${{ secrets.KALISIO_GITHUB_URL }}
         run: bash ./scripts/init_runner.sh ${{ github.job }}
       - name: Setup workspace
         env:

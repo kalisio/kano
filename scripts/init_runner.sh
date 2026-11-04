@@ -6,13 +6,38 @@ JOB_ID=$1
 
 THIS_FILE=$(readlink -f "${BASH_SOURCE[0]}")
 THIS_DIR=$(dirname "$THIS_FILE")
+ROOT_DIR=$(dirname "$THIS_DIR")
+WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 . "$THIS_DIR/kash/kash.sh"
+
+###
+
+KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL}/meta-ekosystem.git"
+
+# Install Kalisio's meta cli
+# Expected environnment variables:
+#  1. KALISIO_META_CLI_URL => the url where to clone the meta-ekosystem repository
+#  2. WORKSPACE_DIR => a writable folder where the meta-ekosystem will be cloned
+install_meta_cli() {
+    local META_CLI_URL=${KALISIO_META_CLI_URL:-}
+    local TARGET_DIR=${WORKSPACE_DIR:-}
+
+    git_shallow_clone "$META_CLI_URL" "$TARGET_DIR"
+
+    cd "$TARGET_DIR"
+    pnpm install
+    cd ~-
+}
+
+###
 
 ### Github Actions
 
 init_github_run_tests() {
     install_reqs age sops nvm node24 mongo7 sonar_scanner_cli
+
+    install_meta_cli
 }
 
 init_github_build_app() {
