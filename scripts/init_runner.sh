@@ -13,7 +13,7 @@ WORKSPACE_DIR="$(dirname "$ROOT_DIR")"
 
 ###
 
-KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL}/kalisio/meta-ekosystem.git"
+KALISIO_META_CLI_URL="${KALISIO_GITHUB_URL:-}/kalisio/meta-ekosystem.git"
 
 # Install Kalisio's meta cli
 # Expected environnment variables:
@@ -56,6 +56,8 @@ init_github_build_docs() {
 
 init_github_additional_tests() {
     install_reqs age sops nvm node20 node22 mongo7 mongo8
+
+    install_meta_cli
 }
 
 ### e2e tests runner (dedicated container, outside any CI system)
