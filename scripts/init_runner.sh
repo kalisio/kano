@@ -27,6 +27,8 @@ install_meta_cli() {
 
     cd "$TARGET_DIR"
     pnpm install
+    cd packages/meta-cli
+    PNPM_HOME=~/.local/bin pnpm link
     cd ~-
 }
 
