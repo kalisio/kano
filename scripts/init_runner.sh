@@ -23,7 +23,7 @@ install_meta_cli() {
     local META_CLI_URL=${KALISIO_META_CLI_URL:-}
     local TARGET_DIR=${WORKSPACE_DIR:-}
 
-    git_shallow_clone "$META_CLI_URL" "$TARGET_DIR"
+    git_shallow_clone "$META_CLI_URL" "$TARGET_DIR/meta-ekosystem"
 
     cd "$TARGET_DIR"
     pnpm install
